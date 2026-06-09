@@ -46,7 +46,9 @@ public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjec
     private String travelerName;
     private Date bankPostDate;
 
-    private transient CreditCardStagingData creditCardStagingData;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CC_STG_DAT_ID", insertable = false, updatable = false)
+    private CreditCardStagingData creditCardStagingData;
 
     @Override
     public String getDocumentNumber() {
@@ -143,7 +145,6 @@ public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjec
      */
 
     public CreditCardStagingData getCreditCardStagingData() {
-        this.refreshReferenceObject("creditCardStagingData");
         return creditCardStagingData;
     }
 
