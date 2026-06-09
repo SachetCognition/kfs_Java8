@@ -19,6 +19,15 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.sql.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -43,31 +52,71 @@ import org.kuali.rice.krad.util.MessageMap;
 /**
  * CollectorDetail Business Object.
  */
+@Entity
+@Table(name = "GL_ID_BILL_T")
+@IdClass(CollectorDetail.PK.class)
 public class CollectorDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "CREATE_DT")
     private Date createDate;
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     private Integer transactionLedgerEntrySequenceNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Id
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String financialObjectTypeCode;
+    @Id
+    @Column(name = "FDOC_IDBIL_SEQ_NBR")
     private String collectorDetailSequenceNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "FDOC_IDBIL_ITM_AMT")
     private KualiDecimal collectorDetailItemAmount;
+    @Column(name = "FDOC_IDBIL_NTE_TXT")
     private String collectorDetailNoteText;
     private String glCreditCode;
     
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private Account account;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private ObjectType objectType;
+    @Transient
     private BalanceType balanceType;
 
     private static CollectorDetailFieldUtil collectorDetailFieldUtil;
@@ -653,5 +702,39 @@ public class CollectorDetail extends PersistableBusinessObjectBase {
             .append(getFinancialObjectCode()).append("|")
             .append(StringUtils.replace(getFinancialSubObjectCode(), "-", ""));
         return builder.toString();
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String universityFiscalPeriodCode;
+        private Integer universityFiscalYear;
+        private java.sql.Date createDate;
+        private Integer transactionLedgerEntrySequenceNumber;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String financialObjectCode;
+        private String financialSubObjectCode;
+        private String collectorDetailSequenceNumber;
+        private String financialBalanceTypeCode;
+        private String financialObjectTypeCode;
+        private String financialDocumentTypeCode;
+        private String financialSystemOriginationCode;
+        private String documentNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalPeriodCode, that.universityFiscalPeriodCode) && java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(createDate, that.createDate) && java.util.Objects.equals(transactionLedgerEntrySequenceNumber, that.transactionLedgerEntrySequenceNumber) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(financialObjectCode, that.financialObjectCode) && java.util.Objects.equals(financialSubObjectCode, that.financialSubObjectCode) && java.util.Objects.equals(collectorDetailSequenceNumber, that.collectorDetailSequenceNumber) && java.util.Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode) && java.util.Objects.equals(financialObjectTypeCode, that.financialObjectTypeCode) && java.util.Objects.equals(financialDocumentTypeCode, that.financialDocumentTypeCode) && java.util.Objects.equals(financialSystemOriginationCode, that.financialSystemOriginationCode) && java.util.Objects.equals(documentNumber, that.documentNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalPeriodCode, universityFiscalYear, createDate, transactionLedgerEntrySequenceNumber, chartOfAccountsCode, accountNumber, subAccountNumber, financialObjectCode, financialSubObjectCode, collectorDetailSequenceNumber, financialBalanceTypeCode, financialObjectTypeCode, financialDocumentTypeCode, financialSystemOriginationCode, documentNumber);
+        }
     }
 }

@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.LinkedHashMap;
@@ -43,28 +51,56 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Just as Balance is a summarization of Entry, so AccountBalance is a summarization of Balance.
  * Specifically, it stores the current budget, actual, and encumbrance totals in one record.
  */
+@Entity
+@Table(name = "GL_ACCT_BALANCES_T")
+@IdClass(AccountBalance.PK.class)
 public class AccountBalance extends PersistableBusinessObjectBase implements ReportBusinessObject{
     static final long serialVersionUID = 6873573726961704771L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Column(name = "CURR_BDLN_BAL_AMT")
     private KualiDecimal currentBudgetLineBalanceAmount;
+    @Column(name = "ACLN_ACTLS_BAL_AMT")
     private KualiDecimal accountLineActualsBalanceAmount;
+    @Column(name = "ACLN_ENCUM_BAL_AMT")
     private KualiDecimal accountLineEncumbranceBalanceAmount;
+    @Column(name = "TIMESTAMP")
     private Date timestamp;
 
+    @Transient
     private Chart chart;
+    @Transient
     private Account account;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private A21SubAccount a21SubAccount;
+    @Transient
     private TransientBalanceInquiryAttributes dummyBusinessObject;
+    @Transient
     private SystemOptions option;
+    @Transient
     private String title;
 
     public static final String TYPE_CONSOLIDATION = "Consolidation";
@@ -452,4 +488,29 @@ public class AccountBalance extends PersistableBusinessObjectBase implements Rep
         this.financialSubObject = financialSubObject;
     }
 
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String objectCode;
+        private String subObjectCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(objectCode, that.objectCode) && java.util.Objects.equals(subObjectCode, that.subObjectCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, objectCode, subObjectCode);
+        }
+    }
 }

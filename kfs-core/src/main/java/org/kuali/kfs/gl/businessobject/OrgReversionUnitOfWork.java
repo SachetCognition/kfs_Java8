@@ -18,6 +18,15 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -32,14 +41,21 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents a unit of work for the organization reversion
  */
+@Entity
+@Table(name = "GL_ORG_RVRSN_UNIT_WRK_T")
+@IdClass(OrgReversionUnitOfWork.PK.class)
 public class OrgReversionUnitOfWork extends PersistableBusinessObjectBase {
     public String chartOfAccountsCode = "";
     public String accountNumber = "";
     public String subAccountNumber = "";
     public Map<String, OrgReversionUnitOfWorkCategoryAmount> amounts;
+    @Column(name = "ORG_TOT_RVRSN_AMT")
     private KualiDecimal totalReversion;
+    @Column(name = "ORG_TOT_CF_AMT")
     private KualiDecimal totalCarryForward;
+    @Column(name = "ORG_TOT_AVAIL_AMT")
     private KualiDecimal totalAvailable;
+    @Column(name = "ORG_TOT_CSH_AMT")
     private KualiDecimal totalCash;
 
     public OrgReversionUnitOfWork() {
@@ -297,4 +313,26 @@ public class OrgReversionUnitOfWork extends PersistableBusinessObjectBase {
         this.subAccountNumber = subAccountNumber;
     }
 
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(chartOfAccountsCode, accountNumber, subAccountNumber);
+        }
+    }
 }

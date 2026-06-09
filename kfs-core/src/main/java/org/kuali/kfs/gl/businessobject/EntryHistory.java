@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -27,8 +35,12 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 /**
  * General Ledger business object for LedgerEntryHistory
  */
+@Entity
+@Table(name = "GL_ENTRY_HIST_T")
+@IdClass(EntryHistory.PK.class)
 public class EntryHistory extends Entry implements LedgerEntryHistory {
 
+    @Column(name = "ROW_CNT")
     private Integer rowCount;
 
     /**
@@ -441,5 +453,30 @@ public class EntryHistory extends Entry implements LedgerEntryHistory {
     @Override
     public void setTransactionDateTimeStamp(Timestamp transactionDateTimeStamp) {
         throw new UnsupportedOperationException();
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String financialObjectCode;
+        private String financialBalanceTypeCode;
+        private String universityFiscalPeriodCode;
+        private String transactionDebitCreditCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(financialObjectCode, that.financialObjectCode) && java.util.Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode) && java.util.Objects.equals(universityFiscalPeriodCode, that.universityFiscalPeriodCode) && java.util.Objects.equals(transactionDebitCreditCode, that.transactionDebitCreditCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, financialObjectCode, financialBalanceTypeCode, universityFiscalPeriodCode, transactionDebitCreditCode);
+        }
     }
 }

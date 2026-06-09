@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.sql.Date;
 
 import org.kuali.rice.krad.util.ObjectUtils;
@@ -26,6 +34,9 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * General Ledger business object for BalanceHistory.
  */
+@Entity
+@Table(name = "GL_BALANCE_HIST_T")
+@IdClass(BalanceHistory.PK.class)
 public class BalanceHistory extends Balance implements LedgerBalanceHistory {
     /**
      * Default constructor.
@@ -170,5 +181,32 @@ public class BalanceHistory extends Balance implements LedgerBalanceHistory {
      */
     public void setFinancialSubObjectCode(String financialSubObjectCode) {
         this.setSubObjectCode(financialSubObjectCode);
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String objectCode;
+        private String subObjectCode;
+        private String balanceTypeCode;
+        private String objectTypeCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(objectCode, that.objectCode) && java.util.Objects.equals(subObjectCode, that.subObjectCode) && java.util.Objects.equals(balanceTypeCode, that.balanceTypeCode) && java.util.Objects.equals(objectTypeCode, that.objectTypeCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, objectCode, subObjectCode, balanceTypeCode, objectTypeCode);
+        }
     }
 }

@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -28,14 +36,24 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents a sufficient fund rebuild
  */
+@Entity
+@Table(name = "GL_SF_REBUILD_T")
+@IdClass(SufficientFundRebuild.PK.class)
 public class SufficientFundRebuild extends PersistableBusinessObjectBase {
 
     public static final String REBUILD_ACCOUNT = "A";
     public static final String REBUILD_OBJECT = "O";
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCT_FOBJ_TYP_CD")
     private String accountFinancialObjectTypeCode;
+    @Id
+    @Column(name = "ACCT_NBR_FOBJ_CD")
     private String accountNumberFinancialObjectCode;
+    @Transient
     private Chart chart;
 
     /**
@@ -184,5 +202,27 @@ public class SufficientFundRebuild extends PersistableBusinessObjectBase {
         m.put("accountFinancialObjectTypeCode", this.accountFinancialObjectTypeCode);
         m.put("accountNumberFinancialObjectCode", this.accountNumberFinancialObjectCode);
         return m;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String chartOfAccountsCode;
+        private String accountFinancialObjectTypeCode;
+        private String accountNumberFinancialObjectCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountFinancialObjectTypeCode, that.accountFinancialObjectTypeCode) && java.util.Objects.equals(accountNumberFinancialObjectCode, that.accountNumberFinancialObjectCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(chartOfAccountsCode, accountFinancialObjectTypeCode, accountNumberFinancialObjectCode);
+        }
     }
 }
