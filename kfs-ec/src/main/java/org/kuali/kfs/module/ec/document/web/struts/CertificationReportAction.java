@@ -526,7 +526,7 @@ public class CertificationReportAction extends EffortCertificationAction {
      */
     protected void resetPersistedFields(EffortCertificationDetail detailLine) {
         int persistedEffortPercent = detailLine.getEffortCertificationUpdatedOverallPercent();
-        detailLine.setPersistedEffortPercent(new Integer(persistedEffortPercent));
+        detailLine.setPersistedEffortPercent(Integer.valueOf(persistedEffortPercent));
 
         BigDecimal persistedPayrollAmount = detailLine.getEffortCertificationPayrollAmount().bigDecimalValue();
         detailLine.setPersistedPayrollAmount(new KualiDecimal(persistedPayrollAmount));

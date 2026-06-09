@@ -39,7 +39,7 @@ public class BudgetConstructionSubFundPick extends PersistableBusinessObjectBase
      * Default constructor.
      */
     public BudgetConstructionSubFundPick() {
-        reportFlag = new Integer(0);
+        reportFlag = Integer.valueOf(0);
     }
 
     /**

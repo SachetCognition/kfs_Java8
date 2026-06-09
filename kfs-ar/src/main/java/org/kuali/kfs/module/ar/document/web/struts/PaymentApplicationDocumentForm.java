@@ -570,7 +570,7 @@ public class PaymentApplicationDocumentForm extends FinancialSystemTransactional
      * @return
      */
     public Integer getNonInvoicedAddLineItemNumber() {
-        Integer number = new Integer(0);
+        Integer number = Integer.valueOf(0);
         if (null != getPaymentApplicationDocument()) {
             Collection<NonInvoiced> items = getPaymentApplicationDocument().getNonInvoiceds();
             for (NonInvoiced item : items) {

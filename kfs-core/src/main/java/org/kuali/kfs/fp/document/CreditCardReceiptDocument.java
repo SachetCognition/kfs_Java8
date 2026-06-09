@@ -58,7 +58,7 @@ public class CreditCardReceiptDocument extends CashReceiptFamilyBase implements 
     protected List<CreditCardDetail> creditCardReceipts = new ArrayList<CreditCardDetail>();
 
     // incrementers for detail lines
-    protected Integer nextCcCrLineNumber = new Integer(1);
+    protected Integer nextCcCrLineNumber = Integer.valueOf(1);
 
     // monetary attributes
     protected KualiDecimal totalCreditCardAmount = KualiDecimal.ZERO;
@@ -149,7 +149,7 @@ public class CreditCardReceiptDocument extends CashReceiptFamilyBase implements 
         this.creditCardReceipts.add(creditCardReceiptDetail);
 
         // increment line number
-        this.nextCcCrLineNumber = new Integer(this.nextCcCrLineNumber.intValue() + 1);
+        this.nextCcCrLineNumber = Integer.valueOf(this.nextCcCrLineNumber.intValue() + 1);
 
         // update the overall amount
         this.totalCreditCardAmount = this.totalCreditCardAmount.add(creditCardReceiptDetail.getCreditCardAdvanceDepositAmount());
@@ -374,7 +374,7 @@ public class CreditCardReceiptDocument extends CashReceiptFamilyBase implements 
      */
     protected void correctCreditCardReceipts() {
         for (CreditCardDetail receipt: creditCardReceipts) {
-            receipt.setVersionNumber(new Long(1));
+            receipt.setVersionNumber(Long.valueOf(1));
             receipt.setDocumentNumber(documentNumber);
             receipt.setCreditCardAdvanceDepositAmount(receipt.getCreditCardAdvanceDepositAmount().negated());
         }

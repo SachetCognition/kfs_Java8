@@ -466,7 +466,7 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
             int daysOffsetInt = 0; // default to 0
 
             if (!org.apache.commons.lang.StringUtils.isBlank(daysOffset)) {
-                daysOffsetInt = new Integer(daysOffset).intValue();
+                daysOffsetInt = Integer.valueOf(daysOffset).intValue();
             }
 
             Calendar tempCal = Calendar.getInstance();

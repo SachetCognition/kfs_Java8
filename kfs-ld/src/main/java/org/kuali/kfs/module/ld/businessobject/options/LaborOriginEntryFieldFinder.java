@@ -170,7 +170,7 @@ public class LaborOriginEntryFieldFinder extends KeyValuesBase {
         }
         else if ("Integer".equals(fieldType)) {
             try {
-                Integer d = new Integer(value);
+                Integer d = Integer.valueOf(value);
                 return true;
             }
             catch (NumberFormatException nfe) {

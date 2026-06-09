@@ -87,7 +87,7 @@ public class AssetPaymentAction extends KualiAccountingDocumentActionBase {
 
 			AssetPaymentAssetDetail assetPaymentAssetDetail = new AssetPaymentAssetDetail();
 			assetPaymentAssetDetail.setDocumentNumber(assetPaymentForm.getAssetPaymentDocument().getDocumentNumber());
-			assetPaymentAssetDetail.setCapitalAssetNumber(new Long(assetPaymentForm.getCapitalAssetNumber()));
+			assetPaymentAssetDetail.setCapitalAssetNumber(Long.valueOf(assetPaymentForm.getCapitalAssetNumber()));
 			assetPaymentAssetDetail.refreshReferenceObject(CamsPropertyConstants.AssetPaymentDocument.ASSET);
 			assetPaymentAssetDetail.setPreviousTotalCostAmount(assetPaymentAssetDetail.getAsset().getTotalCostAmount());
 

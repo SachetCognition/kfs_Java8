@@ -109,7 +109,7 @@ public class LedgerEntryLookupableHelperServiceImpl extends AbstractLookupableHe
         }
 
         // get the actual size of all qualified search results
-        Long actualSize = new Long(ledgerEntries.size());
+        Long actualSize = Long.valueOf(ledgerEntries.size());
         return this.buildSearchResultList(ledgerEntries, actualSize);
     }
 

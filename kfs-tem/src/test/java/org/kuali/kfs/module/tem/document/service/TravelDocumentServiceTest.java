@@ -336,7 +336,7 @@ public class TravelDocumentServiceTest extends KualiTestBase {
         td.setPrimaryDestinationId(23242);
 
         setDocumentHeader(td);
-        travelDocumentService.updatePerDiemItemsFor(td, perDiemExpenses, new Integer(1), startDate, endDate);
+        travelDocumentService.updatePerDiemItemsFor(td, perDiemExpenses, Integer.valueOf(1), startDate, endDate);
 
         assertEquals(4, perDiemExpenses.size());
     }
@@ -561,7 +561,7 @@ public class TravelDocumentServiceTest extends KualiTestBase {
             assertEquals(new KualiDecimal(50), mileages.get(1).getLodging());
             assertEquals(testDate1, mileages.get(1).getMileageDate());
             assertEquals(KualiDecimal.ZERO, mileages.get(2).getLodging());
-            assertEquals(new Integer(20), mileages.get(2).getMiles());
+            assertEquals(Integer.valueOf(20), mileages.get(2).getMiles());
             assertEquals(testDate2, mileages.get(2).getMileageDate());
         } else {
             assertTrue( true ); // couldn't actually run test because there aren't primary destinations
@@ -597,7 +597,7 @@ public class TravelDocumentServiceTest extends KualiTestBase {
             assertEquals(new KualiDecimal(50), mileages.get(1).getLodging());
             assertEquals(testDate1, mileages.get(1).getMileageDate());
             assertEquals(new KualiDecimal(30), mileages.get(2).getLodging());
-            assertEquals(new Integer(10), mileages.get(2).getMiles());
+            assertEquals(Integer.valueOf(10), mileages.get(2).getMiles());
             assertEquals(testDate2, mileages.get(2).getMileageDate());
         } else {
             assertTrue( true ); // couldn't actually run test because there aren't primary destinations

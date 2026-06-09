@@ -30,9 +30,9 @@ public enum ElectronicInvoiceLoadSummaryFixture {
             1000, // vendorHeaderGeneratedIdentifier
             0, // vendorDetailAssignedIdentifier
             "Test Vendor", //vendorName
-            new Integer(1), // invoiceLoadSuccessCount
+            Integer.valueOf(1), // invoiceLoadSuccessCount
             new KualiDecimal(10.00), // invoiceLoadSuccessAmount
-            new Integer(0), // invoiceLoadFailCount
+            Integer.valueOf(0), // invoiceLoadFailCount
             new KualiDecimal(0.00), // invoiceLoadFailAmount
             Boolean.TRUE, // isEmpty
             new Timestamp(new java.util.Date().getTime()) // fileProcessTimestamp
@@ -42,9 +42,9 @@ public enum ElectronicInvoiceLoadSummaryFixture {
             1001, // vendorHeaderGeneratedIdentifier
             0, // vendorDetailAssignedIdentifier
             "Kuali University", //vendorName
-            new Integer(1), // invoiceLoadSuccessCount
+            Integer.valueOf(1), // invoiceLoadSuccessCount
             new KualiDecimal(10.00), // invoiceLoadSuccessAmount
-            new Integer(0), // invoiceLoadFailCount
+            Integer.valueOf(0), // invoiceLoadFailCount
             new KualiDecimal(0.00), // invoiceLoadFailAmount
             Boolean.TRUE, // isEmpty
             new Timestamp(new java.util.Date().getTime()) // fileProcessTimestamp
@@ -56,9 +56,9 @@ public enum ElectronicInvoiceLoadSummaryFixture {
     private Integer vendorHeaderGeneratedIdentifier;
     private Integer vendorDetailAssignedIdentifier;
     private String vendorName;
-    private Integer invoiceLoadSuccessCount = new Integer(0);
+    private Integer invoiceLoadSuccessCount = Integer.valueOf(0);
     private KualiDecimal invoiceLoadSuccessAmount = new KualiDecimal(0.00);
-    private Integer invoiceLoadFailCount = new Integer(0);
+    private Integer invoiceLoadFailCount = Integer.valueOf(0);
     private KualiDecimal invoiceLoadFailAmount = new KualiDecimal(0.00);
     private Boolean isEmpty = Boolean.TRUE;
     private Timestamp fileProcessTimestamp;

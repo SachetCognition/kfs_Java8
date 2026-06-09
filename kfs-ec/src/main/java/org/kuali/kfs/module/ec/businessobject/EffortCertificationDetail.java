@@ -101,8 +101,8 @@ public class EffortCertificationDetail extends PersistableBusinessObjectBase {
 
         effortCertificationPayrollAmount = KualiDecimal.ZERO;
         effortCertificationOriginalPayrollAmount = KualiDecimal.ZERO;
-        effortCertificationCalculatedOverallPercent = new Integer(0);
-        effortCertificationUpdatedOverallPercent = new Integer(0);
+        effortCertificationCalculatedOverallPercent = Integer.valueOf(0);
+        effortCertificationUpdatedOverallPercent = Integer.valueOf(0);
         originalFringeBenefitAmount = KualiDecimal.ZERO;
         effectiveDate = KFSConstants.EMPTY_STRING;
     }

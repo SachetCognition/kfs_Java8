@@ -75,7 +75,7 @@ public class LockMonitorLookupableHelperServiceImpl extends KualiLookupableHelpe
         getPositionFundingLocks(results, lockUnivId);
         getOrphanPositionLocks(results, lockUnivId);
 
-        return new CollectionIncomplete(results, new Long(0));
+        return new CollectionIncomplete(results, Long.valueOf(0));
     }
 
     /**

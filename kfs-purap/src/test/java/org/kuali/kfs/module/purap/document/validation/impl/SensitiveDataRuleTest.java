@@ -130,7 +130,7 @@ public class SensitiveDataRuleTest extends PurapRuleTestBase {
         
         Integer poId = po.getPurapDocumentIdentifier();
         if (poId == null) {
-            poId = new Integer(1000);
+            poId = Integer.valueOf(1000);
         }
         
         // update table SensitiveDataAssignment

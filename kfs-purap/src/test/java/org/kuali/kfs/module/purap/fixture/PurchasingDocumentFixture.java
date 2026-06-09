@@ -383,7 +383,7 @@ public enum PurchasingDocumentFixture {
             null, // vendorRestrictedIndicator
             null, // vendorPhoneNumber
             null, // vendorFaxNumber
-            new Integer(4005), // vendorContractGeneratedIdentifier
+            Integer.valueOf(4005), // vendorContractGeneratedIdentifier
             null, // vendorNoteText
             "RENFROW,ROBERTA G", // requestorPersonName
             "test@email.com", // requestorPersonEmailAddress
@@ -892,7 +892,7 @@ public enum PurchasingDocumentFixture {
             null, // vendorRestrictedIndicator
             null, // vendorPhoneNumber
             null, // vendorFaxNumber
-            new Integer(1021), // vendorContractGeneratedIdentifier
+            Integer.valueOf(1021), // vendorContractGeneratedIdentifier
             null, // vendorNoteText
             "RENFROW,ROBERTA G", // requestorPersonName
             "test@email.com", // requestorPersonEmailAddress
@@ -929,7 +929,7 @@ public enum PurchasingDocumentFixture {
             "US", // billingCountryCode
             "111-111-1111", // billingPhoneNumber
             null, // externalOrganizationB2bSupplierIdentifier
-            new Integer(10), // contractManagerCode
+            Integer.valueOf(10), // contractManagerCode
             false, // purchaseOrderAutomaticIndicator
             null, // vendorPaymentTermsCode
             null, // vendorShippingTitleCode

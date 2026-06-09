@@ -279,7 +279,7 @@ public class BudgetConstructionHumanResourcesPayrollInterfaceDaoJdbc extends Bud
     protected void setAcademicDefaultObjectClass(Integer fiscalYear)
     {
         // build constants for DB independence
-        Integer monthConstant = new Integer(10);
+        Integer monthConstant = Integer.valueOf(10);
         String positionType  = new String("AC");
         String defaultObject = new String("2000");
         String salaryPlan    = new String("AC1");
@@ -297,7 +297,7 @@ public class BudgetConstructionHumanResourcesPayrollInterfaceDaoJdbc extends Bud
     protected void setMonthlyStaffOvertimeEligibleDefaultObjectClass(Integer fiscalYear)
     {
         // build constants for DB independence
-        Integer monthConstant = new Integer(12);
+        Integer monthConstant = Integer.valueOf(12);
         String positionType  = new String("SM");
         String defaultObject = new String("2480");
         String[] salaryPlan = {new String("PAO"), new String("PAU")};
@@ -318,7 +318,7 @@ public class BudgetConstructionHumanResourcesPayrollInterfaceDaoJdbc extends Bud
         // build constants for DB independence
         // (note that this uses a pattern, and therefore assumes that any specific position types beginning with 'P' that go to
         //  a different default object class have already been assigned)
-        Integer monthConstant = new Integer(12);
+        Integer monthConstant = Integer.valueOf(12);
         String  positionType  = new String("SM");
         String  defaultObject = new String("2400");
         String  salaryPlan    = new String("P%");
@@ -340,7 +340,7 @@ public class BudgetConstructionHumanResourcesPayrollInterfaceDaoJdbc extends Bud
         // build constants for DB independence
         // (note that we are only assigning default object codes to positions not yet assigned a default.  so, this method must
         //  be called last.  In particular, there is no check on salary plan.)
-        Integer monthConstant    = new Integer(12);
+        Integer monthConstant    = Integer.valueOf(12);
         String  positionType     = new String("SB");
         String  defaultObject    = new String("2500");
         String  defaultUnionCode = new String("B1");

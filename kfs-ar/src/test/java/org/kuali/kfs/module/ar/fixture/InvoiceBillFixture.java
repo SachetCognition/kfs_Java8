@@ -28,9 +28,9 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 public enum InvoiceBillFixture {
 
-    INV_BILL_1("5030", new Long(1), "Bill 1", new Long(1), null, new KualiDecimal(1)),
-    INV_BILL_2("5030", new Long(2), "Bill 2", new Long(2), new Date(System.currentTimeMillis()), new KualiDecimal(1)),
-    INV_BILL_3("5030", new Long(1), "Bill 1", new Long(1), null, new KualiDecimal(5));
+    INV_BILL_1("5030", Long.valueOf(1), "Bill 1", Long.valueOf(1), null, new KualiDecimal(1)),
+    INV_BILL_2("5030", Long.valueOf(2), "Bill 2", Long.valueOf(2), new Date(System.currentTimeMillis()), new KualiDecimal(1)),
+    INV_BILL_3("5030", Long.valueOf(1), "Bill 1", Long.valueOf(1), null, new KualiDecimal(5));
 
     private String documentNumber;
     private Long billNumber;

@@ -48,7 +48,7 @@ public class CheckBase extends PersistableBusinessObjectBase implements Check {
      */
     public CheckBase() {
         super();
-        this.sequenceId = new Integer(1);
+        this.sequenceId = Integer.valueOf(1);
         this.amount = KualiDecimal.ZERO;
     }
 

@@ -59,14 +59,14 @@ public class LockboxDaoOjb extends PlatformAwareDaoBaseOjb implements LockboxDao
             BigDecimal max = (BigDecimal) data[0]; // Don't know why OJB returns a BigDecimal, but it does
 
             if (max == null) {
-                return new Long(0);
+                return Long.valueOf(0);
             }
             else {
-                return new Long(max.longValue());
+                return Long.valueOf(max.longValue());
             }
         }
         else {
-            return new Long(0);
+            return Long.valueOf(0);
         }
     }
 

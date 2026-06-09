@@ -47,8 +47,8 @@ public class CorrectionChangeGroup extends PersistableBusinessObjectBase impleme
 
         correctionCriteria = new ArrayList();
         correctionChange = new ArrayList();
-        correctionCriteriaNextLineNumber = new Integer(0);
-        correctionChangeNextLineNumber = new Integer(0);
+        correctionCriteriaNextLineNumber = Integer.valueOf(0);
+        correctionChangeNextLineNumber = Integer.valueOf(0);
 
         setDocumentNumber(documentNumber);
     }
@@ -57,8 +57,8 @@ public class CorrectionChangeGroup extends PersistableBusinessObjectBase impleme
         super();
         correctionCriteria = new ArrayList();
         correctionChange = new ArrayList();
-        correctionCriteriaNextLineNumber = new Integer(0);
-        correctionChangeNextLineNumber = new Integer(0);
+        correctionCriteriaNextLineNumber = Integer.valueOf(0);
+        correctionChangeNextLineNumber = Integer.valueOf(0);
     }
 
     /**

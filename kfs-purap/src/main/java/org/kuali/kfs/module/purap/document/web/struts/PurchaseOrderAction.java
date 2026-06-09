@@ -154,7 +154,7 @@ public class PurchaseOrderAction extends PurchasingActionBase {
         String newVendorDetailAssignedIdentifier = request.getParameter("newPurchaseOrderVendorQuote.vendorDetailAssignedIdentifier");
         if (newVendorHeaderGeneratedIdentifier != null && newVendorDetailAssignedIdentifier != null) {
 
-            PurchaseOrderVendorQuote newPOVendorQuote = SpringContext.getBean(PurchaseOrderService.class).populateQuoteWithVendor(new Integer(newVendorHeaderGeneratedIdentifier), new Integer(newVendorDetailAssignedIdentifier), document.getDocumentNumber());
+            PurchaseOrderVendorQuote newPOVendorQuote = SpringContext.getBean(PurchaseOrderService.class).populateQuoteWithVendor(Integer.valueOf(newVendorHeaderGeneratedIdentifier), Integer.valueOf(newVendorDetailAssignedIdentifier), document.getDocumentNumber());
 
             poForm.setNewPurchaseOrderVendorQuote(newPOVendorQuote);
         }
@@ -270,7 +270,7 @@ public class PurchaseOrderAction extends PurchasingActionBase {
                         String key = kualiConfiguration.getPropertyValueAsString(PurapKeyConstants.PURCHASE_ORDER_QUESTION_DOCUMENT);
                         message = StringUtils.replace(key, "{0}", operation);
 
-                        return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, questionType, message, KFSConstants.CONFIRMATION_QUESTION, questionType, "", reason, PurapKeyConstants.ERROR_PURCHASE_ORDER_REASON_REQUIRED, KFSConstants.QUESTION_REASON_ATTRIBUTE_NAME, new Integer(reasonLimit).toString());
+                        return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, questionType, message, KFSConstants.CONFIRMATION_QUESTION, questionType, "", reason, PurapKeyConstants.ERROR_PURCHASE_ORDER_REASON_REQUIRED, KFSConstants.QUESTION_REASON_ATTRIBUTE_NAME, Integer.valueOf(reasonLimit).toString());
                     }
                 }
             }
@@ -927,7 +927,7 @@ public class PurchaseOrderAction extends PurchasingActionBase {
         // String poDocId = request.getParameter("docId");
         // PurchaseOrderDocument po = (PurchaseOrderDocument)
         // SpringContext.getBean(DocumentService.class).getByDocumentHeaderId(poDocId);
-        // Integer poSelectedVendorId = new Integer(request.getParameter("quoteVendorId"));
+        // Integer poSelectedVendorId = Integer.valueOf(request.getParameter("quoteVendorId"));
         KualiDocumentFormBase kualiDocumentFormBase = (KualiDocumentFormBase) form;
         PurchaseOrderDocument po = (PurchaseOrderDocument) kualiDocumentFormBase.getDocument();
         PurchaseOrderVendorQuote poVendorQuote = po.getPurchaseOrderVendorQuotes().get(getSelectedLine(request));
@@ -1229,7 +1229,7 @@ public class PurchaseOrderAction extends PurchasingActionBase {
         request.setAttribute("displayPOTabbedPageUrl", displayPOTabbedPageUrl);
         String label = SpringContext.getBean(DataDictionaryService.class).getDocumentLabelByTypeName(KFSConstants.FinancialDocumentTypeCodes.PURCHASE_ORDER);
         request.setAttribute("purchaseOrderLabel", label);
-        GlobalVariables.getUserSession().addObject("isPreview", new Boolean(true));
+        GlobalVariables.getUserSession().addObject("isPreview", Boolean.valueOf(true));
 
         return mapping.findForward("printPurchaseOrderPDF");
     }
@@ -1844,7 +1844,7 @@ public class PurchaseOrderAction extends PurchasingActionBase {
                     // figure out exact number of characters that the user can enter
                     int reasonLimit = noteTextMaxLength - cancelNoteTextLength;
 
-                    return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, KRADConstants.DOCUMENT_CANCEL_QUESTION, questionText, KRADConstants.CONFIRMATION_QUESTION, KRADConstants.MAPPING_CANCEL, "", reason, RiceKeyConstants.ERROR_DOCUMENT_DISAPPROVE_REASON_REQUIRED, KRADConstants.QUESTION_REASON_ATTRIBUTE_NAME, new Integer(reasonLimit).toString());
+                    return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, KRADConstants.DOCUMENT_CANCEL_QUESTION, questionText, KRADConstants.CONFIRMATION_QUESTION, KRADConstants.MAPPING_CANCEL, "", reason, RiceKeyConstants.ERROR_DOCUMENT_DISAPPROVE_REASON_REQUIRED, KRADConstants.QUESTION_REASON_ATTRIBUTE_NAME, Integer.valueOf(reasonLimit).toString());
                 }
 
 
@@ -1948,7 +1948,7 @@ public class PurchaseOrderAction extends PurchasingActionBase {
                 try {
                     if (StringUtils.equals(questionType, PODocumentsStrings.MANUAL_STATUS_CHANGE_QUESTION)) {
 
-                        return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, questionType, kualiConfiguration.getPropertyValueAsString(PurapKeyConstants.PURCHASE_ORDER_QUESTION_MANUAL_STATUS_CHANGE), KFSConstants.CONFIRMATION_QUESTION, questionType, "", reason, PurapKeyConstants.ERROR_PURCHASE_ORDER_REASON_REQUIRED, KFSConstants.QUESTION_REASON_ATTRIBUTE_NAME, new Integer(reasonLimit).toString());
+                        return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, questionType, kualiConfiguration.getPropertyValueAsString(PurapKeyConstants.PURCHASE_ORDER_QUESTION_MANUAL_STATUS_CHANGE), KFSConstants.CONFIRMATION_QUESTION, questionType, "", reason, PurapKeyConstants.ERROR_PURCHASE_ORDER_REASON_REQUIRED, KFSConstants.QUESTION_REASON_ATTRIBUTE_NAME, Integer.valueOf(reasonLimit).toString());
                     }
                 }
                 catch (Exception e) {

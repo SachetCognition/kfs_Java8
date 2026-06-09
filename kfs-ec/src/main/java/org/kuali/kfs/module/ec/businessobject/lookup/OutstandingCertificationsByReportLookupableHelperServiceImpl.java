@@ -92,7 +92,7 @@ public class OutstandingCertificationsByReportLookupableHelperServiceImpl extend
         setDocFormKey(fieldValues.get(KRADConstants.DOC_FORM_KEY));
         setReferencesToRefresh(fieldValues.get(KRADConstants.REFERENCES_TO_REFRESH));
         
-        return new CollectionIncomplete(returnResults, new Long(0));
+        return new CollectionIncomplete(returnResults, Long.valueOf(0));
     }
     
     /**

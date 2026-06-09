@@ -25,7 +25,7 @@ public class DepositWizardCashieringCheckHelper {
     private Integer sequenceId;
 
     public DepositWizardCashieringCheckHelper() {
-        sequenceId = new Integer(-1);
+        sequenceId = Integer.valueOf(-1);
     }
 
     /**

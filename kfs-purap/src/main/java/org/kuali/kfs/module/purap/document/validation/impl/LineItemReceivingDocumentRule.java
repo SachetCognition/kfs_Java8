@@ -187,8 +187,8 @@ public class LineItemReceivingDocumentRule extends DocumentRuleBase implements C
         //  test that the amount entered in the QuantityReturned and/or QuantityDamaged fields dont 
         // either equal more than the QuantityReceived.  In other words, you can only return or mark as 
         // damaged those that are received.  It doesnt make sense to receive 2 but return 3.  
-        valid &= validateQuantityReturnedNotMoreThanReceived(document, item, errorPathPrefix, new Integer(0));
-        valid &= validateQuantityDamagedNotMoreThanReceived(document, item, errorPathPrefix, new Integer(0));
+        valid &= validateQuantityReturnedNotMoreThanReceived(document, item, errorPathPrefix, Integer.valueOf(0));
+        valid &= validateQuantityDamagedNotMoreThanReceived(document, item, errorPathPrefix, Integer.valueOf(0));
         
         return valid;
     }
@@ -219,8 +219,8 @@ public class LineItemReceivingDocumentRule extends DocumentRuleBase implements C
         for (int i = 0; i < document.getItems().size(); i++) {
             LineItemReceivingItem item = (LineItemReceivingItem) document.getItems().get(i);
             
-            valid &= validateQuantityReturnedNotMoreThanReceived(document, item, "", new Integer(i + 1));
-            valid &= validateQuantityDamagedNotMoreThanReceived(document, item, "", new Integer(i + 1));
+            valid &= validateQuantityReturnedNotMoreThanReceived(document, item, "", Integer.valueOf(i + 1));
+            valid &= validateQuantityDamagedNotMoreThanReceived(document, item, "", Integer.valueOf(i + 1));
         }
         return valid;
     }

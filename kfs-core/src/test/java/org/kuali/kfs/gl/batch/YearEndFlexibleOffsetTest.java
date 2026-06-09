@@ -305,7 +305,7 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
         super.setUp();
 
         this.boService = SpringContext.getBean(BusinessObjectService.class);
-        this.fiscalYear = new Integer((SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear()).intValue() - 1);
+        this.fiscalYear = Integer.valueOf((SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear()).intValue() - 1);
         this.transactionDate = new java.sql.Date(new java.util.Date().getTime());
         this.parameterService = SpringContext.getBean(ParameterService.class);
         this.objectTypeService = SpringContext.getBean(ObjectTypeService.class);
@@ -472,7 +472,7 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
 //        flexibleBalances.add(ORG_REVERSION_BALANCE_FIXTURE.INFLEXIBLE_ORG_REVERSION_BALANCE.convertToBalance());
 //
 //        List<OriginEntryFull> resultingEntries = runOrganizationReversion(flexibleBalances);
-//        assertEquals("Number of generated OriginEntries ", new Integer(8), new Integer(resultingEntries.size()));
+//        assertEquals("Number of generated OriginEntries ", Integer.valueOf(8), Integer.valueOf(resultingEntries.size()));
 //        // 1. when flexible offsets are turned on, cash reversion activity entries do not get flexible offsets
 //        assertChartAndAccount(resultingEntries.get(0), DEFAULT_FLEXIBLE_BALANCE_CHART, DEFAULT_FLEXIBLE_BALANCE_ACCOUNT_NBR);
 //        assertChartAndAccount(resultingEntries.get(2), OrganizationReversionMockServiceImpl.DEFAULT_CASH_REVERSION_CHART, OrganizationReversionMockServiceImpl.DEFAULT_CASH_REVERSION_ACCOUNT);
@@ -498,7 +498,7 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
 //        flexibleBalances.add(ORG_REVERSION_BALANCE_FIXTURE.FLEXIBLE_ORG_REVERSION_BALANCE.convertToBalance());
 //
 //        List<OriginEntryFull> resultingEntries = runOrganizationReversion(flexibleBalances);
-//        assertEquals("Number of generated OriginEntries ", new Integer(4), new Integer(resultingEntries.size()));
+//        assertEquals("Number of generated OriginEntries ", Integer.valueOf(4), Integer.valueOf(resultingEntries.size()));
 //        assertChartAndAccount(resultingEntries.get(1), DEFAULT_FLEXIBLE_BALANCE_CHART, DEFAULT_FLEXIBLE_BALANCE_ACCOUNT_NBR);
 //        assertChartAndAccount(resultingEntries.get(3), OrganizationReversionMockServiceImpl.DEFAULT_CASH_REVERSION_CHART, OrganizationReversionMockServiceImpl.DEFAULT_CASH_REVERSION_ACCOUNT);
     }
@@ -518,8 +518,8 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
         OrganizationReversionProcessService organizationReversionProcessService = SpringContext.getBean(OrganizationReversionProcessService.class);
 
         Map jobParameters = organizationReversionProcessService.getJobParameters();
-        Integer currentFiscalYear = new Integer(((Number)jobParameters.get(KFSConstants.UNIV_FISCAL_YR)).intValue() + 1);
-        Integer previousFiscalYear = new Integer(((Number)jobParameters.get(KFSConstants.UNIV_FISCAL_YR)).intValue());
+        Integer currentFiscalYear = Integer.valueOf(((Number)jobParameters.get(KFSConstants.UNIV_FISCAL_YR)).intValue() + 1);
+        Integer previousFiscalYear = Integer.valueOf(((Number)jobParameters.get(KFSConstants.UNIV_FISCAL_YR)).intValue());
         Map<String, Integer> organizationReversionCounts = new HashMap<String, Integer>();
 
         OrganizationReversionProcess orgRevProcess = SpringContext.getBean(OrganizationReversionProcess.class,"glOrganizationReversionTestProcess");
@@ -542,12 +542,12 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
         orgRevProcess.organizationReversionProcess(jobParameters, organizationReversionCounts);
 
         // ye olde sanity check
-        assertEquals("Balances Read", new Integer(balancesToTest.size()), new Integer(orgRevProcess.getBalancesRead()));
+        assertEquals("Balances Read", Integer.valueOf(balancesToTest.size()), Integer.valueOf(orgRevProcess.getBalancesRead()));
 
         // make sure this resulted in one Org Rev origin entry group
         //TODO:- commented out
 //        Collection groups = originEntryGroupService.getAllOriginEntryGroup();
-//        assertEquals("Origin Entries Group Size", new Integer(1), new Integer(groups.size()));
+//        assertEquals("Origin Entries Group Size", Integer.valueOf(1), Integer.valueOf(groups.size()));
 //
 //        OriginEntryGroup group = (OriginEntryGroup) groups.iterator().next();
 //        assertEquals("Origin Entry Group Source Code", OriginEntrySource.YEAR_END_ORG_REVERSION, group.getSourceCode());

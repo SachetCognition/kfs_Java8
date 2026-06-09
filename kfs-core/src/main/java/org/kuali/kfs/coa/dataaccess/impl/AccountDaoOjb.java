@@ -389,7 +389,7 @@ public class AccountDaoOjb extends PlatformAwareDaoBaseOjb implements AccountDao
         Iterator iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         while (iter.hasNext()) {
             final Object[] results = (Object[]) iter.next();
-            resultCount = (results[0] instanceof Number) ? ((Number) results[0]).intValue() : new Integer(results[0].toString()).intValue();
+            resultCount = (results[0] instanceof Number) ? ((Number) results[0]).intValue() : Integer.valueOf(results[0].toString()).intValue();
         }
         return resultCount > 0;
     }

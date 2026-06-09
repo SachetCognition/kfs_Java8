@@ -86,7 +86,7 @@ public class DuplicateCertificationsLookupableHelperServiceImpl extends KualiLoo
             
         }
         
-        return new CollectionIncomplete(returnResults, new Long(0));
+        return new CollectionIncomplete(returnResults, Long.valueOf(0));
     }
     
     /**

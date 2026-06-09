@@ -35,10 +35,10 @@ public class AccountingPeriodTest extends KualiTestBase {
     public static final String GUID = "123456789012345678901234567890123456";
     public static final String UNIV_FISC_PERD_CODE = "BB";
     public static Date univFiscPerdEndDate;
-    public static final Integer UNIV_FISC_YEAR = new Integer(2005);
+    public static final Integer UNIV_FISC_YEAR = Integer.valueOf(2005);
     public static final String UNIV_FISC_PRD_NAME = "JAN. 1776";
     public static final boolean UNIV_FISC_PRD_ACTIVE_INDICATOR = false;
-    public static final Long VER_NBR = new Long(1);
+    public static final Long VER_NBR = Long.valueOf(1);
 
     @Override
     protected void setUp() throws Exception {

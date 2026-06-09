@@ -247,7 +247,7 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
 
                 PurchasingAccountsPayableProcessingReport newReport = new PurchasingAccountsPayableProcessingReport();
 
-                newReport.setUniversityFiscalYear(new Integer(columnValues[i++].toString()));
+                newReport.setUniversityFiscalYear(Integer.valueOf(columnValues[i++].toString()));
                 newReport.setUniversityFiscalPeriodCode(columnValues[i++].toString());
                 newReport.setChartOfAccountsCode(columnValues[i++].toString());
                 newReport.setAccountNumber(columnValues[i++].toString());

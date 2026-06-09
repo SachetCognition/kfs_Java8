@@ -48,7 +48,7 @@ public class TaxNumberServiceImpl implements TaxNumberService {
     public String formatToDefaultFormat(String taxNbr) throws FormatException {
         String digits = taxNbr.replaceAll("\\D", "");
 
-        Integer defaultTaxNumberDigits = new Integer(parameterService.getParameterValueAsString(VendorDetail.class, VendorParameterConstants.DEFAULT_TAX_NUMBER_DIGITS));
+        Integer defaultTaxNumberDigits = Integer.valueOf(parameterService.getParameterValueAsString(VendorDetail.class, VendorParameterConstants.DEFAULT_TAX_NUMBER_DIGITS));
 
         if (digits.length() < defaultTaxNumberDigits) {
             throw new FormatException("Tax number has fewer than " + defaultTaxNumberDigits + " digits.", KFSKeyConstants.ERROR_CUSTOM, taxNbr);
@@ -109,7 +109,7 @@ public class TaxNumberServiceImpl implements TaxNumberService {
     public boolean isValidTaxNumber(String taxNbr, String taxType) {
         String[] ssnFormats = parseSSNFormats();
         String[] feinFormats = parseFEINFormats();
-        Integer defaultTaxNumberDigits = new Integer(parameterService.getParameterValueAsString(VendorDetail.class, "DEFAULT_TAX_NUMBER_DIGITS"));
+        Integer defaultTaxNumberDigits = Integer.valueOf(parameterService.getParameterValueAsString(VendorDetail.class, "DEFAULT_TAX_NUMBER_DIGITS"));
 
         if (taxNbr.length() != defaultTaxNumberDigits || !isStringAllNumbers(taxNbr)) {
             return false;

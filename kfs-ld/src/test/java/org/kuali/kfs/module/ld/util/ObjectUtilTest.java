@@ -145,7 +145,7 @@ public class ObjectUtilTest extends TestCase {
         assertEquals(address.getStreet(), "1000 Main Street");
         assertEquals(address.getCity(), "Source City");
         assertEquals(address.getState(), "Kuali");
-        assertEquals(address.getZip(), new Integer(10000));
+        assertEquals(address.getZip(), Integer.valueOf(10000));
     }
 
     public void testConvertLineToBusinessObjectBasedOnDeliminatorAndKeyString() throws Exception {
@@ -159,7 +159,7 @@ public class ObjectUtilTest extends TestCase {
         assertEquals("1000 Main Street", address.getStreet());
         assertEquals("Source City", address.getCity());
         assertEquals("Kuali", address.getState());
-        assertEquals(new Integer(10000), address.getZip());
+        assertEquals(Integer.valueOf(10000), address.getZip());
     }
 
     public void testConvertLineToBusinessObjectAtCompressedFormat() throws Exception {
@@ -192,7 +192,7 @@ public class ObjectUtilTest extends TestCase {
         assertEquals("Street", address.getStreet());
         assertEquals("City", address.getCity());
         assertEquals("State", address.getState());
-        assertEquals(new Integer(10000), address.getZip());
+        assertEquals(Integer.valueOf(10000), address.getZip());
     }
 
     public void testConvertLineToBusinessObjectBasedOnFieldLength_WithWhiteSpace() throws Exception {
@@ -211,7 +211,7 @@ public class ObjectUtilTest extends TestCase {
         assertEquals("Street", address.getStreet());
         assertEquals("City", address.getCity());
         assertEquals("State", address.getState());
-        assertEquals(new Integer(10000), address.getZip());
+        assertEquals(Integer.valueOf(10000), address.getZip());
     }
 
     public void testSplit() throws Exception {

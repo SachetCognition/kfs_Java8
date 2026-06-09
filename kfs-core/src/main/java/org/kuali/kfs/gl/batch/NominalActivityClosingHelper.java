@@ -249,7 +249,7 @@ public class NominalActivityClosingHelper {
         offsetEntry.setFinancialDocumentTypeCode(parameterService.getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, KFSConstants.SystemGroupParameterNames.GL_ANNUAL_CLOSING_DOC_TYPE));
         offsetEntry.setFinancialSystemOriginationCode(parameterService.getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, KFSConstants.SystemGroupParameterNames.GL_ORIGINATION_CODE));
         offsetEntry.setDocumentNumber(new StringBuffer(balance.getOption().getActualFinancialBalanceTypeCd()).append(balance.getAccountNumber()).toString());
-        offsetEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceNumber.intValue()));
+        offsetEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceNumber.intValue()));
         offsetEntry.setTransactionLedgerEntryDescription(this.createTransactionLedgerEntryDescription(configurationService.getPropertyValueAsString(KFSKeyConstants.MSG_CLOSE_ENTRY_TO_FUND_BALANCE), balance));
         offsetEntry.setTransactionLedgerEntryAmount(balance.getAccountLineAnnualBalanceAmount());
         offsetEntry.setTransactionDebitCreditCode(debitCreditCode);
@@ -336,7 +336,7 @@ public class NominalActivityClosingHelper {
      * @return the count of non-fatal errors
      */
     public Integer getNonFatalErrorCount() {
-        return new Integer(this.nonFatalErrorCount);
+        return Integer.valueOf(this.nonFatalErrorCount);
     }
 
     /**

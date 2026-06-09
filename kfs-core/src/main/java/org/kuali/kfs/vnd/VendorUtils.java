@@ -92,7 +92,7 @@ public class VendorUtils {
 
         // return the headerId, everything before the dash (-)
         String[] vendorNumberParts = vendorNumber.split("-");
-        return new Integer(Integer.parseInt(vendorNumberParts[0]));
+        return Integer.valueOf(Integer.parseInt(vendorNumberParts[0]));
     }
 
     /**
@@ -109,7 +109,7 @@ public class VendorUtils {
 
         // return the headerId, everything before the dash (-)
         String[] vendorNumberParts = vendorNumber.split("-");
-        return new Integer(Integer.parseInt(vendorNumberParts[1]));
+        return Integer.valueOf(Integer.parseInt(vendorNumberParts[1]));
     }
 
     /**

@@ -87,7 +87,7 @@ public class LaborPendingEntryLookupableHelperServiceImpl extends AbstractLookup
         boolean isApprovedPendingSelected = Constant.APPROVED_PENDING_ENTRY.equals(pendingEntryOption) ? true : false;
 
         Collection<LaborLedgerPendingEntry> searchResults = laborLedgerPendingEntryService.findPendingEntries(fieldValues, isApprovedPendingSelected);
-        Long resultSize = searchResults == null ? 0 : new Long(searchResults.size());
+        Long resultSize = searchResults == null ? 0 : Long.valueOf(searchResults.size());
 
         return this.buildSearchResultList(searchResults, resultSize);
     }

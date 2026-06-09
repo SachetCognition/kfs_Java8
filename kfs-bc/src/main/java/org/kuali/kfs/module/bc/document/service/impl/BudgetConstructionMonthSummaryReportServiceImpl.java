@@ -321,19 +321,19 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
      */
     public List calculateLevelTotal(List<BudgetConstructionMonthSummary> bcmsList, Collection<BudgetConstructionMonthSummary> monthSummaryList) {
         List returnList = new ArrayList();
-        Integer levelAccountLineAnnualBalanceAmount = new Integer(0);
-        Integer levelMonth1LineAmount = new Integer(0);
-        Integer levelMonth2LineAmount = new Integer(0);
-        Integer levelMonth3LineAmount = new Integer(0);
-        Integer levelMonth4LineAmount = new Integer(0);
-        Integer levelMonth5LineAmount = new Integer(0);
-        Integer levelMonth6LineAmount = new Integer(0);
-        Integer levelMonth7LineAmount = new Integer(0);
-        Integer levelMonth8LineAmount = new Integer(0);
-        Integer levelMonth9LineAmount = new Integer(0);
-        Integer levelMonth10LineAmount = new Integer(0);
-        Integer levelMonth11LineAmount = new Integer(0);
-        Integer levelMonth12LineAmount = new Integer(0);
+        Integer levelAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+        Integer levelMonth1LineAmount = Integer.valueOf(0);
+        Integer levelMonth2LineAmount = Integer.valueOf(0);
+        Integer levelMonth3LineAmount = Integer.valueOf(0);
+        Integer levelMonth4LineAmount = Integer.valueOf(0);
+        Integer levelMonth5LineAmount = Integer.valueOf(0);
+        Integer levelMonth6LineAmount = Integer.valueOf(0);
+        Integer levelMonth7LineAmount = Integer.valueOf(0);
+        Integer levelMonth8LineAmount = Integer.valueOf(0);
+        Integer levelMonth9LineAmount = Integer.valueOf(0);
+        Integer levelMonth10LineAmount = Integer.valueOf(0);
+        Integer levelMonth11LineAmount = Integer.valueOf(0);
+        Integer levelMonth12LineAmount = Integer.valueOf(0);
 
         List<BudgetConstructionMonthSummary> listForCalculateLevel = BudgetConstructionReportHelper.deleteDuplicated((List) monthSummaryList, fieldsForLevel());
         for (BudgetConstructionMonthSummary levelEntry : listForCalculateLevel) {
@@ -370,19 +370,19 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
             bcMonthTotal.setLevelMonth11LineAmount(levelMonth11LineAmount);
             bcMonthTotal.setLevelMonth12LineAmount(levelMonth12LineAmount);
             returnList.add(bcMonthTotal);
-            levelAccountLineAnnualBalanceAmount = new Integer(0);
-            levelMonth1LineAmount = new Integer(0);
-            levelMonth2LineAmount = new Integer(0);
-            levelMonth3LineAmount = new Integer(0);
-            levelMonth4LineAmount = new Integer(0);
-            levelMonth5LineAmount = new Integer(0);
-            levelMonth6LineAmount = new Integer(0);
-            levelMonth7LineAmount = new Integer(0);
-            levelMonth8LineAmount = new Integer(0);
-            levelMonth9LineAmount = new Integer(0);
-            levelMonth10LineAmount = new Integer(0);
-            levelMonth11LineAmount = new Integer(0);
-            levelMonth12LineAmount = new Integer(0);
+            levelAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+            levelMonth1LineAmount = Integer.valueOf(0);
+            levelMonth2LineAmount = Integer.valueOf(0);
+            levelMonth3LineAmount = Integer.valueOf(0);
+            levelMonth4LineAmount = Integer.valueOf(0);
+            levelMonth5LineAmount = Integer.valueOf(0);
+            levelMonth6LineAmount = Integer.valueOf(0);
+            levelMonth7LineAmount = Integer.valueOf(0);
+            levelMonth8LineAmount = Integer.valueOf(0);
+            levelMonth9LineAmount = Integer.valueOf(0);
+            levelMonth10LineAmount = Integer.valueOf(0);
+            levelMonth11LineAmount = Integer.valueOf(0);
+            levelMonth12LineAmount = Integer.valueOf(0);
         }
         return returnList;
     }
@@ -396,19 +396,19 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
      */
     public List calculateConsTotal(List<BudgetConstructionMonthSummary> bcmsList, Collection<BudgetConstructionMonthSummary> monthSummaryList) {
         List returnList = new ArrayList();
-        Integer consAccountLineAnnualBalanceAmount = new Integer(0);
-        Integer consMonth1LineAmount = new Integer(0);
-        Integer consMonth2LineAmount = new Integer(0);
-        Integer consMonth3LineAmount = new Integer(0);
-        Integer consMonth4LineAmount = new Integer(0);
-        Integer consMonth5LineAmount = new Integer(0);
-        Integer consMonth6LineAmount = new Integer(0);
-        Integer consMonth7LineAmount = new Integer(0);
-        Integer consMonth8LineAmount = new Integer(0);
-        Integer consMonth9LineAmount = new Integer(0);
-        Integer consMonth10LineAmount = new Integer(0);
-        Integer consMonth11LineAmount = new Integer(0);
-        Integer consMonth12LineAmount = new Integer(0);
+        Integer consAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+        Integer consMonth1LineAmount = Integer.valueOf(0);
+        Integer consMonth2LineAmount = Integer.valueOf(0);
+        Integer consMonth3LineAmount = Integer.valueOf(0);
+        Integer consMonth4LineAmount = Integer.valueOf(0);
+        Integer consMonth5LineAmount = Integer.valueOf(0);
+        Integer consMonth6LineAmount = Integer.valueOf(0);
+        Integer consMonth7LineAmount = Integer.valueOf(0);
+        Integer consMonth8LineAmount = Integer.valueOf(0);
+        Integer consMonth9LineAmount = Integer.valueOf(0);
+        Integer consMonth10LineAmount = Integer.valueOf(0);
+        Integer consMonth11LineAmount = Integer.valueOf(0);
+        Integer consMonth12LineAmount = Integer.valueOf(0);
 
         List<BudgetConstructionMonthSummary> listForCalculateCons = BudgetConstructionReportHelper.deleteDuplicated((List) monthSummaryList, fieldsForCons());
         for (BudgetConstructionMonthSummary consEntry : listForCalculateCons) {
@@ -446,19 +446,19 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
             bcMonthTotal.setConsMonth12LineAmount(consMonth12LineAmount);
             returnList.add(bcMonthTotal);
 
-            consAccountLineAnnualBalanceAmount = new Integer(0);
-            consMonth1LineAmount = new Integer(0);
-            consMonth2LineAmount = new Integer(0);
-            consMonth3LineAmount = new Integer(0);
-            consMonth4LineAmount = new Integer(0);
-            consMonth5LineAmount = new Integer(0);
-            consMonth6LineAmount = new Integer(0);
-            consMonth7LineAmount = new Integer(0);
-            consMonth8LineAmount = new Integer(0);
-            consMonth9LineAmount = new Integer(0);
-            consMonth10LineAmount = new Integer(0);
-            consMonth11LineAmount = new Integer(0);
-            consMonth12LineAmount = new Integer(0);
+            consAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+            consMonth1LineAmount = Integer.valueOf(0);
+            consMonth2LineAmount = Integer.valueOf(0);
+            consMonth3LineAmount = Integer.valueOf(0);
+            consMonth4LineAmount = Integer.valueOf(0);
+            consMonth5LineAmount = Integer.valueOf(0);
+            consMonth6LineAmount = Integer.valueOf(0);
+            consMonth7LineAmount = Integer.valueOf(0);
+            consMonth8LineAmount = Integer.valueOf(0);
+            consMonth9LineAmount = Integer.valueOf(0);
+            consMonth10LineAmount = Integer.valueOf(0);
+            consMonth11LineAmount = Integer.valueOf(0);
+            consMonth12LineAmount = Integer.valueOf(0);
         }
         return returnList;
     }
@@ -472,19 +472,19 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
      */
     public List calculateTypeTotal(List<BudgetConstructionMonthSummary> bcmsList, Collection<BudgetConstructionMonthSummary> monthSummaryList) {
         List returnList = new ArrayList();
-        Integer typeAccountLineAnnualBalanceAmount = new Integer(0);
-        Integer typeMonth1LineAmount = new Integer(0);
-        Integer typeMonth2LineAmount = new Integer(0);
-        Integer typeMonth3LineAmount = new Integer(0);
-        Integer typeMonth4LineAmount = new Integer(0);
-        Integer typeMonth5LineAmount = new Integer(0);
-        Integer typeMonth6LineAmount = new Integer(0);
-        Integer typeMonth7LineAmount = new Integer(0);
-        Integer typeMonth8LineAmount = new Integer(0);
-        Integer typeMonth9LineAmount = new Integer(0);
-        Integer typeMonth10LineAmount = new Integer(0);
-        Integer typeMonth11LineAmount = new Integer(0);
-        Integer typeMonth12LineAmount = new Integer(0);
+        Integer typeAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+        Integer typeMonth1LineAmount = Integer.valueOf(0);
+        Integer typeMonth2LineAmount = Integer.valueOf(0);
+        Integer typeMonth3LineAmount = Integer.valueOf(0);
+        Integer typeMonth4LineAmount = Integer.valueOf(0);
+        Integer typeMonth5LineAmount = Integer.valueOf(0);
+        Integer typeMonth6LineAmount = Integer.valueOf(0);
+        Integer typeMonth7LineAmount = Integer.valueOf(0);
+        Integer typeMonth8LineAmount = Integer.valueOf(0);
+        Integer typeMonth9LineAmount = Integer.valueOf(0);
+        Integer typeMonth10LineAmount = Integer.valueOf(0);
+        Integer typeMonth11LineAmount = Integer.valueOf(0);
+        Integer typeMonth12LineAmount = Integer.valueOf(0);
 
         List<BudgetConstructionMonthSummary> listForCalculateType = BudgetConstructionReportHelper.deleteDuplicated((List) monthSummaryList, fieldsForType());
         for (BudgetConstructionMonthSummary typeEntry : listForCalculateType) {
@@ -522,19 +522,19 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
             bcMonthTotal.setTypeMonth12LineAmount(typeMonth12LineAmount);
             returnList.add(bcMonthTotal);
 
-            typeAccountLineAnnualBalanceAmount = new Integer(0);
-            typeMonth1LineAmount = new Integer(0);
-            typeMonth2LineAmount = new Integer(0);
-            typeMonth3LineAmount = new Integer(0);
-            typeMonth4LineAmount = new Integer(0);
-            typeMonth5LineAmount = new Integer(0);
-            typeMonth6LineAmount = new Integer(0);
-            typeMonth7LineAmount = new Integer(0);
-            typeMonth8LineAmount = new Integer(0);
-            typeMonth9LineAmount = new Integer(0);
-            typeMonth10LineAmount = new Integer(0);
-            typeMonth11LineAmount = new Integer(0);
-            typeMonth12LineAmount = new Integer(0);
+            typeAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+            typeMonth1LineAmount = Integer.valueOf(0);
+            typeMonth2LineAmount = Integer.valueOf(0);
+            typeMonth3LineAmount = Integer.valueOf(0);
+            typeMonth4LineAmount = Integer.valueOf(0);
+            typeMonth5LineAmount = Integer.valueOf(0);
+            typeMonth6LineAmount = Integer.valueOf(0);
+            typeMonth7LineAmount = Integer.valueOf(0);
+            typeMonth8LineAmount = Integer.valueOf(0);
+            typeMonth9LineAmount = Integer.valueOf(0);
+            typeMonth10LineAmount = Integer.valueOf(0);
+            typeMonth11LineAmount = Integer.valueOf(0);
+            typeMonth12LineAmount = Integer.valueOf(0);
         }
         return returnList;
     }
@@ -548,33 +548,33 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
      */
     public List calculateIncexpTotal(List<BudgetConstructionMonthSummary> bcmsList, Collection<BudgetConstructionMonthSummary> monthSummaryList) {
         List returnList = new ArrayList();
-        Integer revAccountLineAnnualBalanceAmount = new Integer(0);
-        Integer revMonth1LineAmount = new Integer(0);
-        Integer revMonth2LineAmount = new Integer(0);
-        Integer revMonth3LineAmount = new Integer(0);
-        Integer revMonth4LineAmount = new Integer(0);
-        Integer revMonth5LineAmount = new Integer(0);
-        Integer revMonth6LineAmount = new Integer(0);
-        Integer revMonth7LineAmount = new Integer(0);
-        Integer revMonth8LineAmount = new Integer(0);
-        Integer revMonth9LineAmount = new Integer(0);
-        Integer revMonth10LineAmount = new Integer(0);
-        Integer revMonth11LineAmount = new Integer(0);
-        Integer revMonth12LineAmount = new Integer(0);
+        Integer revAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+        Integer revMonth1LineAmount = Integer.valueOf(0);
+        Integer revMonth2LineAmount = Integer.valueOf(0);
+        Integer revMonth3LineAmount = Integer.valueOf(0);
+        Integer revMonth4LineAmount = Integer.valueOf(0);
+        Integer revMonth5LineAmount = Integer.valueOf(0);
+        Integer revMonth6LineAmount = Integer.valueOf(0);
+        Integer revMonth7LineAmount = Integer.valueOf(0);
+        Integer revMonth8LineAmount = Integer.valueOf(0);
+        Integer revMonth9LineAmount = Integer.valueOf(0);
+        Integer revMonth10LineAmount = Integer.valueOf(0);
+        Integer revMonth11LineAmount = Integer.valueOf(0);
+        Integer revMonth12LineAmount = Integer.valueOf(0);
 
-        Integer expAccountLineAnnualBalanceAmount = new Integer(0);
-        Integer expMonth1LineAmount = new Integer(0);
-        Integer expMonth2LineAmount = new Integer(0);
-        Integer expMonth3LineAmount = new Integer(0);
-        Integer expMonth4LineAmount = new Integer(0);
-        Integer expMonth5LineAmount = new Integer(0);
-        Integer expMonth6LineAmount = new Integer(0);
-        Integer expMonth7LineAmount = new Integer(0);
-        Integer expMonth8LineAmount = new Integer(0);
-        Integer expMonth9LineAmount = new Integer(0);
-        Integer expMonth10LineAmount = new Integer(0);
-        Integer expMonth11LineAmount = new Integer(0);
-        Integer expMonth12LineAmount = new Integer(0);
+        Integer expAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+        Integer expMonth1LineAmount = Integer.valueOf(0);
+        Integer expMonth2LineAmount = Integer.valueOf(0);
+        Integer expMonth3LineAmount = Integer.valueOf(0);
+        Integer expMonth4LineAmount = Integer.valueOf(0);
+        Integer expMonth5LineAmount = Integer.valueOf(0);
+        Integer expMonth6LineAmount = Integer.valueOf(0);
+        Integer expMonth7LineAmount = Integer.valueOf(0);
+        Integer expMonth8LineAmount = Integer.valueOf(0);
+        Integer expMonth9LineAmount = Integer.valueOf(0);
+        Integer expMonth10LineAmount = Integer.valueOf(0);
+        Integer expMonth11LineAmount = Integer.valueOf(0);
+        Integer expMonth12LineAmount = Integer.valueOf(0);
 
         List<BudgetConstructionMonthSummary> listForCalculateIncexp = BudgetConstructionReportHelper.deleteDuplicated((List) monthSummaryList, fieldsForIncexp());
         for (BudgetConstructionMonthSummary incexpEntry : listForCalculateIncexp) {
@@ -644,33 +644,33 @@ public class BudgetConstructionMonthSummaryReportServiceImpl implements BudgetCo
             bcMonthTotal.setExpMonth12LineAmount(expMonth12LineAmount);
             returnList.add(bcMonthTotal);
 
-            revAccountLineAnnualBalanceAmount = new Integer(0);
-            revMonth1LineAmount = new Integer(0);
-            revMonth2LineAmount = new Integer(0);
-            revMonth3LineAmount = new Integer(0);
-            revMonth4LineAmount = new Integer(0);
-            revMonth5LineAmount = new Integer(0);
-            revMonth6LineAmount = new Integer(0);
-            revMonth7LineAmount = new Integer(0);
-            revMonth8LineAmount = new Integer(0);
-            revMonth9LineAmount = new Integer(0);
-            revMonth10LineAmount = new Integer(0);
-            revMonth11LineAmount = new Integer(0);
-            revMonth12LineAmount = new Integer(0);
+            revAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+            revMonth1LineAmount = Integer.valueOf(0);
+            revMonth2LineAmount = Integer.valueOf(0);
+            revMonth3LineAmount = Integer.valueOf(0);
+            revMonth4LineAmount = Integer.valueOf(0);
+            revMonth5LineAmount = Integer.valueOf(0);
+            revMonth6LineAmount = Integer.valueOf(0);
+            revMonth7LineAmount = Integer.valueOf(0);
+            revMonth8LineAmount = Integer.valueOf(0);
+            revMonth9LineAmount = Integer.valueOf(0);
+            revMonth10LineAmount = Integer.valueOf(0);
+            revMonth11LineAmount = Integer.valueOf(0);
+            revMonth12LineAmount = Integer.valueOf(0);
 
-            expAccountLineAnnualBalanceAmount = new Integer(0);
-            expMonth1LineAmount = new Integer(0);
-            expMonth2LineAmount = new Integer(0);
-            expMonth3LineAmount = new Integer(0);
-            expMonth4LineAmount = new Integer(0);
-            expMonth5LineAmount = new Integer(0);
-            expMonth6LineAmount = new Integer(0);
-            expMonth7LineAmount = new Integer(0);
-            expMonth8LineAmount = new Integer(0);
-            expMonth9LineAmount = new Integer(0);
-            expMonth10LineAmount = new Integer(0);
-            expMonth11LineAmount = new Integer(0);
-            expMonth12LineAmount = new Integer(0);
+            expAccountLineAnnualBalanceAmount = Integer.valueOf(0);
+            expMonth1LineAmount = Integer.valueOf(0);
+            expMonth2LineAmount = Integer.valueOf(0);
+            expMonth3LineAmount = Integer.valueOf(0);
+            expMonth4LineAmount = Integer.valueOf(0);
+            expMonth5LineAmount = Integer.valueOf(0);
+            expMonth6LineAmount = Integer.valueOf(0);
+            expMonth7LineAmount = Integer.valueOf(0);
+            expMonth8LineAmount = Integer.valueOf(0);
+            expMonth9LineAmount = Integer.valueOf(0);
+            expMonth10LineAmount = Integer.valueOf(0);
+            expMonth11LineAmount = Integer.valueOf(0);
+            expMonth12LineAmount = Integer.valueOf(0);
         }
         return returnList;
     }

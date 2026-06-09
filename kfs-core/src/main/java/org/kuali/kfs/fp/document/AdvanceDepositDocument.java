@@ -285,7 +285,7 @@ public class AdvanceDepositDocument extends CashReceiptFamilyBase implements Cop
      */
     protected void correctAdvanceDepositDetails() {
         for (AdvanceDepositDetail deposit: advanceDeposits) {
-            deposit.setVersionNumber(new Long(1));
+            deposit.setVersionNumber(Long.valueOf(1));
             deposit.setDocumentNumber(documentNumber);
             deposit.setFinancialDocumentAdvanceDepositAmount(deposit.getFinancialDocumentAdvanceDepositAmount().negated());
         }

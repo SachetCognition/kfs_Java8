@@ -726,7 +726,7 @@ public class DisbursementVoucherAction extends KualiAccountingDocumentActionBase
         VendorAddress vendorAddress = new VendorAddress();
         if (StringUtils.isNotBlank(payeeAddressIdentifier)) {
             try {
-                vendorAddress.setVendorAddressGeneratedIdentifier(new Integer(payeeAddressIdentifier));
+                vendorAddress.setVendorAddressGeneratedIdentifier(Integer.valueOf(payeeAddressIdentifier));
                 vendorAddress = (VendorAddress) SpringContext.getBean(BusinessObjectService.class).retrieve(vendorAddress);
                 dvForm.setTempPayeeIdNumber(payeeIdNumber);
                 dvForm.setOldPayeeType(KFSConstants.PaymentPayeeTypes.VENDOR);

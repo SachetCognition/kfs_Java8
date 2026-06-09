@@ -67,7 +67,7 @@ public class BalanceForwardStep extends AbstractWrappedBatchStep {
                     throw new IllegalArgumentException("Unable to parse transaction date");
                 }
 
-                Integer varFiscalYear = new Integer(getParameterService().getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
+                Integer varFiscalYear = Integer.valueOf(getParameterService().getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
 
                 String balanceForwardsUnclosedFileName = GeneralLedgerConstants.BatchFileSystem.BALANCE_FORWARDS_FILE + GeneralLedgerConstants.BatchFileSystem.EXTENSION;
                 String balanceForwardsclosedFileName = GeneralLedgerConstants.BatchFileSystem.BALANCE_FORWARDS_CLOSED_FILE + GeneralLedgerConstants.BatchFileSystem.EXTENSION;

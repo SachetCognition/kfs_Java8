@@ -189,7 +189,7 @@ public class LedgerPostingDocumentBase extends FinancialSystemTransactionalDocum
     public void setAccountingPeriodCompositeString(String accountingPeriodString) {
         if (StringUtils.isNotBlank(accountingPeriodString)) {
             String period = StringUtils.left(accountingPeriodString, 2);
-            Integer year = new Integer(StringUtils.right(accountingPeriodString, 4));
+            Integer year = Integer.valueOf(StringUtils.right(accountingPeriodString, 4));
             AccountingPeriod accountingPeriod = getAccountingPeriodService().getByPeriod(period, year);
             setAccountingPeriod(accountingPeriod);
         }

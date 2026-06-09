@@ -424,7 +424,7 @@ public class PaymentRequestDocumentTest extends KualiTestBase {
         poi.setItemUnitPrice(BigDecimal.valueOf(100));
         poi.setItemTypeCode("ITEM");
         poi.setItemQuantity(new KualiDecimal(2));
-        poi.setItemLineNumber(new Integer(1));
+        poi.setItemLineNumber(Integer.valueOf(1));
         poi.setItemUnitPrice(BigDecimal.valueOf(100));
 
         poi.setTotalAmount(new KualiDecimal(5000));

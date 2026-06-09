@@ -155,22 +155,22 @@ public class DisbursementVoucherTravelServiceTest extends KualiTestBase {
     public void testCalculateMileageAmount() throws Exception {
         Timestamp effectiveDate = new Timestamp( DateTime.parse("2004-01-01").toDateMidnight().toDate().getTime() );
 
-        runMileageAmountTest(new Integer(0), KualiDecimal.ZERO, effectiveDate);
-        runMileageAmountTest(new Integer(1), new KualiDecimal(.38), effectiveDate);
-        runMileageAmountTest(new Integer(10), new KualiDecimal(3.75), effectiveDate);
-        runMileageAmountTest(new Integer(15), new KualiDecimal(5.63), effectiveDate);
-        runMileageAmountTest(new Integer(100), new KualiDecimal(37.5), effectiveDate);
-        runMileageAmountTest(new Integer(200), new KualiDecimal(75.00), effectiveDate);
-        runMileageAmountTest(new Integer(380), new KualiDecimal(142.5), effectiveDate);
-        runMileageAmountTest(new Integer(500), new KualiDecimal(187.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(0), KualiDecimal.ZERO, effectiveDate);
+        runMileageAmountTest(Integer.valueOf(1), new KualiDecimal(.38), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(10), new KualiDecimal(3.75), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(15), new KualiDecimal(5.63), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(100), new KualiDecimal(37.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(200), new KualiDecimal(75.00), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(380), new KualiDecimal(142.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(500), new KualiDecimal(187.5), effectiveDate);
 
-        runMileageAmountTest(new Integer(501), new KualiDecimal(187.68), effectiveDate);
-        runMileageAmountTest(new Integer(600), new KualiDecimal(205.5), effectiveDate);
-        runMileageAmountTest(new Integer(2500), new KualiDecimal(547.5), effectiveDate);
-        runMileageAmountTest(new Integer(3000), new KualiDecimal(637.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(501), new KualiDecimal(187.68), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(600), new KualiDecimal(205.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(2500), new KualiDecimal(547.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(3000), new KualiDecimal(637.5), effectiveDate);
 
-        runMileageAmountTest(new Integer(3001), new KualiDecimal(637.5), effectiveDate);
-        runMileageAmountTest(new Integer(8000), new KualiDecimal(637.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(3001), new KualiDecimal(637.5), effectiveDate);
+        runMileageAmountTest(Integer.valueOf(8000), new KualiDecimal(637.5), effectiveDate);
     }
 
     public void testCalculateMileageAmount_2012_100miles() throws Exception {

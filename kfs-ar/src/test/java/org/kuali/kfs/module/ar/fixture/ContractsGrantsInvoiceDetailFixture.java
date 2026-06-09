@@ -26,15 +26,15 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  * Fixture class for ContractsGrantsInvoiceDetail
  */
 public enum ContractsGrantsInvoiceDetailFixture {
-    INV_DTL1(new Long(2341), "6320", "SAL", KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
-    INV_DTL2(new Long(2350), "6321", "SAL", KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
-    INV_DTL3(new Long(2350), "6322", "EMPB", KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
-    INV_DTL4(new Long(2355), "6324", "SAL", new KualiDecimal(320.00), KualiDecimal.ZERO, new KualiDecimal(340.00), new KualiDecimal(-20.00), KualiDecimal.ZERO, false),
-    INV_DTL5(new Long(2356), "6325", "EMPB", new KualiDecimal(320.00), KualiDecimal.ZERO, new KualiDecimal(340.00), new KualiDecimal(-20.00), KualiDecimal.ZERO, false),
-    INV_DTL6(new Long(2357), "6326", "OIC", new KualiDecimal(320.00), KualiDecimal.ZERO, new KualiDecimal(340.00), new KualiDecimal(-20.00), KualiDecimal.ZERO, true),
-    INV_DTL7(new Long(2357), "6326", null, new KualiDecimal(300.00), KualiDecimal.ZERO, new KualiDecimal(300.00), new KualiDecimal(0.00), KualiDecimal.ZERO, true),
-    INV_DTL8(new Long(2358), "6367", "SAL", KualiDecimal.ZERO, new KualiDecimal(5.0), KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
-    INV_DTL9(new Long(2359), "6328", "EMPB", KualiDecimal.ZERO, new KualiDecimal(7.0), KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),;
+    INV_DTL1(Long.valueOf(2341), "6320", "SAL", KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
+    INV_DTL2(Long.valueOf(2350), "6321", "SAL", KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
+    INV_DTL3(Long.valueOf(2350), "6322", "EMPB", KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
+    INV_DTL4(Long.valueOf(2355), "6324", "SAL", new KualiDecimal(320.00), KualiDecimal.ZERO, new KualiDecimal(340.00), new KualiDecimal(-20.00), KualiDecimal.ZERO, false),
+    INV_DTL5(Long.valueOf(2356), "6325", "EMPB", new KualiDecimal(320.00), KualiDecimal.ZERO, new KualiDecimal(340.00), new KualiDecimal(-20.00), KualiDecimal.ZERO, false),
+    INV_DTL6(Long.valueOf(2357), "6326", "OIC", new KualiDecimal(320.00), KualiDecimal.ZERO, new KualiDecimal(340.00), new KualiDecimal(-20.00), KualiDecimal.ZERO, true),
+    INV_DTL7(Long.valueOf(2357), "6326", null, new KualiDecimal(300.00), KualiDecimal.ZERO, new KualiDecimal(300.00), new KualiDecimal(0.00), KualiDecimal.ZERO, true),
+    INV_DTL8(Long.valueOf(2358), "6367", "SAL", KualiDecimal.ZERO, new KualiDecimal(5.0), KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),
+    INV_DTL9(Long.valueOf(2359), "6328", "EMPB", KualiDecimal.ZERO, new KualiDecimal(7.0), KualiDecimal.ZERO, KualiDecimal.ZERO, KualiDecimal.ZERO, false),;
 
     private Long invoiceDetailIdentifier;
     private String documentNumber;

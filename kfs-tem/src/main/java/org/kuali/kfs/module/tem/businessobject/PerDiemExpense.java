@@ -75,7 +75,7 @@ public class PerDiemExpense extends PersistableBusinessObjectBase {
     private PrimaryDestination primaryDest;
     private PerDiem perDiem;
 
-    private Integer miles = new Integer(0);
+    private Integer miles = Integer.valueOf(0);
     private Timestamp mileageDate;
     private ExpenseType mileageRateExpenseType;
     private String mileageRateExpenseTypeCode;

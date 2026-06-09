@@ -69,7 +69,7 @@ public class BaseFundsLookupableHelperServiceImpl extends AbstractLookupableHelp
         Collection searchResultsCollection = laborBaseFundsService.findAccountStatusBaseFundsWithCSFTracker(fieldValues, isConsolidated);
 
         // get the actual size of all qualified search results
-        Long actualSize = new Long(searchResultsCollection.size());
+        Long actualSize = Long.valueOf(searchResultsCollection.size());
 
         return this.buildSearchResultList(searchResultsCollection, actualSize);
     }

@@ -100,7 +100,7 @@ public class AccountBalanceByLevelLookupableHelperServiceImpl extends AbstractLo
         String ufy = (String) fieldValues.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR);
 
         // TODO Deal with invalid numbers
-        Integer universityFiscalYear = new Integer(Integer.parseInt(ufy));
+        Integer universityFiscalYear = Integer.valueOf(Integer.parseInt(ufy));
 
         List results = accountBalanceService.findAccountBalanceByLevel(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, financialConsolidationObjectCode, isCostShareExcluded, isConsolidated, pendingEntryCode);
 
@@ -114,6 +114,6 @@ public class AccountBalanceByLevelLookupableHelperServiceImpl extends AbstractLo
             dbo.setPendingEntryOption(pendingEntryOption);
             dbo.setLinkButtonOption(Constant.LOOKUP_BUTTON_VALUE);
         }
-        return new CollectionIncomplete(results, new Long(results.size()));
+        return new CollectionIncomplete(results, Long.valueOf(results.size()));
     }
 }

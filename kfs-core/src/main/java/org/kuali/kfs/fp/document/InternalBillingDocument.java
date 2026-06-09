@@ -57,7 +57,7 @@ public class InternalBillingDocument extends CapitalAccountingLinesDocumentBase 
     public InternalBillingDocument() {
         super();
         setItems(new ArrayList());
-        this.nextItemLineNumber = new Integer(1);
+        this.nextItemLineNumber = Integer.valueOf(1);
     }
 
     /**
@@ -84,7 +84,7 @@ public class InternalBillingDocument extends CapitalAccountingLinesDocumentBase 
     public void addItem(InternalBillingItem item) {
         item.setItemSequenceId(this.nextItemLineNumber);
         this.items.add(item);
-        this.nextItemLineNumber = new Integer(this.nextItemLineNumber.intValue() + 1);
+        this.nextItemLineNumber = Integer.valueOf(this.nextItemLineNumber.intValue() + 1);
     }
 
     /**

@@ -29,7 +29,7 @@ public class VendorTaxChangeTest extends KualiTestBase {
     public void testToString() {
         VendorTaxChange vendorTaxChange = new VendorTaxChange();
 
-        vendorTaxChange.setVendorTaxChangeGeneratedIdentifier(new Integer(1010101010));
+        vendorTaxChange.setVendorTaxChangeGeneratedIdentifier(Integer.valueOf(1010101010));
         vendorTaxChange.setVendorPreviousTaxNumber("999999999");
         vendorTaxChange.setVendorPreviousTaxTypeCode("XXX");
         vendorTaxChange.setVendorTaxChangePersonIdentifier("username");

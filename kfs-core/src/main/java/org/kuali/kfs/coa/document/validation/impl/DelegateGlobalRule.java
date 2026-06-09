@@ -270,7 +270,7 @@ public class DelegateGlobalRule extends GlobalDocumentRuleBase {
         boolean success = true;
         int i = 0;
         for (AccountDelegateGlobalDetail newDelegateGlobalDetail : newDelegateGlobal.getDelegateGlobals()) {
-            success &= checkPrimaryRouteRules(newDelegateGlobal.getDelegateGlobals(), newDelegateGlobalDetail, new Integer(i), false);
+            success &= checkPrimaryRouteRules(newDelegateGlobal.getDelegateGlobals(), newDelegateGlobalDetail, Integer.valueOf(i), false);
             i++;
         }
         return success;
@@ -397,10 +397,10 @@ public class DelegateGlobalRule extends GlobalDocumentRuleBase {
             if (delegateGlobal.getAccountDelegatePrimaryRoutingIndicator()) {
                 if (docType.equalsIgnoreCase(delegateGlobal.getFinancialDocumentTypeCode())) {
                     if (testLineNum == null) {
-                        return new Integer(lineNumber);
+                        return Integer.valueOf(lineNumber);
                     }
                     else if (!(testLineNum.intValue() == lineNumber)) {
-                        return new Integer(lineNumber);
+                        return Integer.valueOf(lineNumber);
                     }
                 }
             }

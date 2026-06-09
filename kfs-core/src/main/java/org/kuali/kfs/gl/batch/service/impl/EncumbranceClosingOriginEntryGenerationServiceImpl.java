@@ -115,7 +115,7 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
         // SpringContext is used because this method is static.
         A21SubAccount a21SubAccount = getA21SubAccountService().getByPrimaryKey(encumbrance.getChartOfAccountsCode(), encumbrance.getAccountNumber(), encumbrance.getSubAccountNumber());
 
-        entry.setUniversityFiscalYear(new Integer(encumbrance.getUniversityFiscalYear().intValue() + 1));
+        entry.setUniversityFiscalYear(Integer.valueOf(encumbrance.getUniversityFiscalYear().intValue() + 1));
         entry.setChartOfAccountsCode(a21SubAccount.getCostShareChartOfAccountCode());
         entry.setAccountNumber(a21SubAccount.getCostShareSourceAccountNumber());
         entry.setSubAccountNumber(a21SubAccount.getCostShareSourceSubAccountNumber());
@@ -173,7 +173,7 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
         entry.setFinancialBalanceTypeCode(KFSConstants.BALANCE_TYPE_COST_SHARE_ENCUMBRANCE);
 
         entry.setUniversityFiscalPeriodCode(KFSConstants.PERIOD_CODE_BEGINNING_BALANCE);
-        entry.setTransactionLedgerEntrySequenceNumber(new Integer(0));
+        entry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(0));
         entry.setDocumentNumber(encumbrance.getDocumentNumber());
         entry.setFinancialBalanceTypeCode(KFSConstants.BALANCE_TYPE_COST_SHARE_ENCUMBRANCE);
 
@@ -198,7 +198,7 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
         final String GENERATED_TRANSACTION_LEDGER_ENTRY_DESCRIPTION = getParameterService().getParameterValueAsString(EncumbranceForwardStep.class, GeneralLedgerConstants.EncumbranceClosingOriginEntry.GENERATED_TRANSACTION_LEDGER_ENTRY_DESCRIPTION);
         offset.setTransactionLedgerEntryDescription(GENERATED_TRANSACTION_LEDGER_ENTRY_DESCRIPTION);
 
-        offset.setUniversityFiscalYear(new Integer(encumbrance.getUniversityFiscalYear().intValue() + 1));
+        offset.setUniversityFiscalYear(Integer.valueOf(encumbrance.getUniversityFiscalYear().intValue() + 1));
         offset.setChartOfAccountsCode(a21SubAccount.getCostShareChartOfAccountCode());
         offset.setAccountNumber(a21SubAccount.getCostShareSourceAccountNumber());
         offset.setSubAccountNumber(a21SubAccount.getCostShareSourceSubAccountNumber());
@@ -233,7 +233,7 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
         }
         offset.setUniversityFiscalPeriodCode(KFSConstants.PERIOD_CODE_BEGINNING_BALANCE);
         offset.setDocumentNumber(encumbrance.getDocumentNumber());
-        offset.setTransactionLedgerEntrySequenceNumber(new Integer(0));
+        offset.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(0));
         if (delta.isPositive()) {
             offset.setTransactionDebitCreditCode(KFSConstants.GL_CREDIT_CODE);
             offset.setTransactionLedgerEntryAmount(delta);
@@ -270,7 +270,7 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
         // Build the entry ...
         OriginEntryFull entry = new OriginEntryFull(encumbrance.getDocumentTypeCode(), encumbrance.getOriginCode());
 
-        Integer thisFiscalYear = new Integer(closingFiscalYear.intValue() + 1);
+        Integer thisFiscalYear = Integer.valueOf(closingFiscalYear.intValue() + 1);
         entry.setUniversityFiscalYear(thisFiscalYear);
         entry.setChartOfAccountsCode(encumbrance.getChartOfAccountsCode());
         entry.setAccountNumber(encumbrance.getAccountNumber());
@@ -320,7 +320,7 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
         entry.setFinancialBalanceTypeCode(encumbrance.getBalanceTypeCode());
         entry.setUniversityFiscalPeriodCode(KFSConstants.PERIOD_CODE_BEGINNING_BALANCE);
         entry.setDocumentNumber(encumbrance.getDocumentNumber());
-        entry.setTransactionLedgerEntrySequenceNumber(new Integer(1));
+        entry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(1));
         entry.setTransactionLedgerEntryDescription(encumbrance.getTransactionEncumbranceDescription());
         entry.setTransactionLedgerEntryAmount(encumbrance.getAccountLineEncumbranceAmount().subtract(encumbrance.getAccountLineEncumbranceClosedAmount()));
 

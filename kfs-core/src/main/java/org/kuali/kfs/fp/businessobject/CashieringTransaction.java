@@ -81,7 +81,7 @@ public class CashieringTransaction extends TransientBusinessObjectBase {
         newCheck = new CheckBase();
         baselineChecks = new ArrayList<Check>();
         openItemsInProcess = new ArrayList<CashieringItemInProcess>();
-        nextCheckSequenceId = new Integer(1);
+        nextCheckSequenceId = Integer.valueOf(1);
     }
 
     /**
@@ -417,7 +417,7 @@ public class CashieringTransaction extends TransientBusinessObjectBase {
 
         this.moneyInChecks.add(check);
 
-        this.nextCheckSequenceId = new Integer(this.nextCheckSequenceId.intValue() + 1);
+        this.nextCheckSequenceId = Integer.valueOf(this.nextCheckSequenceId.intValue() + 1);
     }
 
     /**

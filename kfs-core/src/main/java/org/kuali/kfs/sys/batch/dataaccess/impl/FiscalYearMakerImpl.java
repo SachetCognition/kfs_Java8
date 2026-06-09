@@ -48,7 +48,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 public class FiscalYearMakerImpl extends PlatformAwareDaoBaseOjb implements FiscalYearMaker {
     private static final Logger LOG = org.apache.log4j.Logger.getLogger(FiscalYearMakerImpl.class);
 
-    protected static final Long ONE = new Long(1);
+    protected static final Long ONE = Long.valueOf(1);
 
     protected PersistenceStructureService persistenceStructureService;
     protected BusinessObjectService businessObjectService;

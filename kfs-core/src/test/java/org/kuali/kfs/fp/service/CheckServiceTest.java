@@ -69,8 +69,8 @@ public class CheckServiceTest extends KualiTestBase {
         check.setCheckDate(SpringContext.getBean(DateTimeService.class).getCurrentSqlDate());
         check.setCheckNumber("2112");
         check.setDescription("test check");
-        check.setFinancialDocumentDepositLineNumber(new Integer(2001));
-        check.setSequenceId(new Integer(2001));
+        check.setFinancialDocumentDepositLineNumber(Integer.valueOf(2001));
+        check.setSequenceId(Integer.valueOf(2001));
         check.setFinancialDocumentTypeCode("CR");
         check.setCashieringStatus("C");//change
 

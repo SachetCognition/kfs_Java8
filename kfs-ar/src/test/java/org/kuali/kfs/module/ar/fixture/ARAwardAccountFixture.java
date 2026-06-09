@@ -27,14 +27,14 @@ import org.kuali.kfs.module.cg.businessobject.AwardAccount;
  */
 public enum ARAwardAccountFixture {
 
-    AWD_ACCT_1(new Long(11), "BL", "2336320", false, null, null),
-    AWD_ACCT_2(new Long(11), "IN", "1292016", false, null, null),
-    AWD_ACCT_3(new Long(11), "BL", "1024697", false, null, null),
-    AWD_ACCT_4(new Long(11), "BA", "6044901", false, null, null),
-    AWD_ACCT_WITH_CCA_1(new Long(11), "BL", "1020087", false, null, null),
-    AWD_ACCT_WITH_CCA_2(new Long(11), "BL", "1021887", false, null, null),
-    AWD_ACCT_WITH_CCA_3(new Long(11), "BL", "2424704", false, null, null),
-    AWD_ACCT_WITH_CCA_4(new Long(11), "BL", "0211707", false, null, null);
+    AWD_ACCT_1(Long.valueOf(11), "BL", "2336320", false, null, null),
+    AWD_ACCT_2(Long.valueOf(11), "IN", "1292016", false, null, null),
+    AWD_ACCT_3(Long.valueOf(11), "BL", "1024697", false, null, null),
+    AWD_ACCT_4(Long.valueOf(11), "BA", "6044901", false, null, null),
+    AWD_ACCT_WITH_CCA_1(Long.valueOf(11), "BL", "1020087", false, null, null),
+    AWD_ACCT_WITH_CCA_2(Long.valueOf(11), "BL", "1021887", false, null, null),
+    AWD_ACCT_WITH_CCA_3(Long.valueOf(11), "BL", "2424704", false, null, null),
+    AWD_ACCT_WITH_CCA_4(Long.valueOf(11), "BL", "0211707", false, null, null);
 
     private Long proposalNumber;
     private String chartOfAccountsCode;

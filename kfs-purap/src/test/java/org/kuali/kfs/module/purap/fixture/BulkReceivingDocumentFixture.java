@@ -38,10 +38,10 @@ public enum BulkReceivingDocumentFixture {
         "456",//shipmentBillOfLadingNumber
         "789",//shipmentReferenceNumber
         "10 lb",//shipmentWeight
-        new Integer("10"),//noOfCartons
+        Integer.valueOf("10"),//noOfCartons
         "10",//trackingNumber
-        new Integer("1000"),//vendorHeaderGeneratedIdentifier
-        new Integer("0"),//vendorDetailAssignedIdentifier
+        Integer.valueOf("1000"),//vendorHeaderGeneratedIdentifier
+        Integer.valueOf("0"),//vendorDetailAssignedIdentifier
         "ABC CLEANING SERVICES",//vendorName
         "123456 BROAD ST",//vendorLine1Address
         null,//vendorLine2Address
@@ -83,7 +83,7 @@ public enum BulkReceivingDocumentFixture {
         "456",//shipmentBillOfLadingNumber
         "789",//shipmentReferenceNumber
         "10 lb",//shipmentWeight
-        new Integer("10"),//noOfCartons
+        Integer.valueOf("10"),//noOfCartons
         "10",//trackingNumber
         null,//vendorHeaderGeneratedIdentifier
         null,//vendorDetailAssignedIdentifier

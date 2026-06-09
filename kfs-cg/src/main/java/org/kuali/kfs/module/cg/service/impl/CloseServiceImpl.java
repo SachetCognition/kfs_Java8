@@ -84,14 +84,14 @@ public class CloseServiceImpl implements CloseService {
            try {
 
                 Collection<Proposal> proposals = closeDao.getProposalsToClose(max);
-                Long proposalCloseCount = new Long(proposals.size());
+                Long proposalCloseCount = Long.valueOf(proposals.size());
                 for (Proposal p : proposals) {
                     p.setProposalClosingDate(today);
                     businessObjectService.save(p);
                 }
 
                 Collection<Award> awards = closeDao.getAwardsToClose(max);
-                Long awardCloseCount = new Long(awards.size());
+                Long awardCloseCount = Long.valueOf(awards.size());
                 for (Award a : awards) {
                     a.setAwardClosingDate(today);
                     businessObjectService.save(a);

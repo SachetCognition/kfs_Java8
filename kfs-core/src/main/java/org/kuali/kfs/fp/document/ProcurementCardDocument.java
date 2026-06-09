@@ -133,7 +133,7 @@ public class ProcurementCardDocument extends CapitalAccountingLinesDocumentBase 
             }
         }
 
-        this.nextSourceLineNumber = new Integer(this.getNextSourceLineNumber().intValue() + 1);
+        this.nextSourceLineNumber = Integer.valueOf(this.getNextSourceLineNumber().intValue() + 1);
     }
 
     /**
@@ -154,7 +154,7 @@ public class ProcurementCardDocument extends CapitalAccountingLinesDocumentBase 
             }
         }
 
-        this.nextTargetLineNumber = new Integer(this.getNextTargetLineNumber().intValue() + 1);
+        this.nextTargetLineNumber = Integer.valueOf(this.getNextTargetLineNumber().intValue() + 1);
     }
 
     /**

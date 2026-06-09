@@ -192,7 +192,7 @@ public class NegativeAPOTest extends KualiTestBase {
          //TestUtils.setSystemParameter(RequisitionDocument.class, PurapRuleConstants.ALLOW_APO_NEXT_FY_DAYS, "366");
          RequisitionDocument requisitionDocument = RequisitionDocumentFixture.REQ_APO_INVALID_APPROVAL_OUTSIDE_ALLOWED_DATE_RANGE.createRequisitionDocument();
          int currentYear = (new GregorianCalendar()).get(Calendar.YEAR);
-         requisitionDocument.setPostingYear(new Integer(currentYear + 1));
+         requisitionDocument.setPostingYear(Integer.valueOf(currentYear + 1));
          boolean apoAllowed = reqService.isAutomaticPurchaseOrderAllowed(requisitionDocument);
          // This should only give a negative result when the current date in the next fiscal year is outside the acceptable 
          // range of dates during which the next fiscal year is acceptable.

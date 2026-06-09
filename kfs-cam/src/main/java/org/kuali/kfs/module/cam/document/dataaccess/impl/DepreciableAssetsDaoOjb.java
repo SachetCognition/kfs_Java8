@@ -220,7 +220,7 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
 
             LOG.info(CamsConstants.Depreciation.DEPRECIATION_BATCH + "Getting asset payment row count , depreciation base amount, accumulated depreciation amount, and every months depreciation amount.");
             data = depreciationBatchDao.getAssetAndPaymentCount(fiscalYear, fiscalMonth, depreciationDate, true);
-            int eligibleAssetPaymentCount = new Integer(data[1].toString());
+            int eligibleAssetPaymentCount = Integer.valueOf(data[1].toString());
 
             int totalAssetPayments = (eligibleAssetPaymentCount + federallyOwnedAssetPaymentCount);
 
@@ -233,7 +233,7 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
             reportLine.add(columns.clone());
 
             data = depreciationBatchDao.getAssetAndPaymentCount(fiscalYear, fiscalMonth, depreciationDate, false);
-            eligibleAssetPaymentCount = new Integer(data[1].toString());
+            eligibleAssetPaymentCount = Integer.valueOf(data[1].toString());
             columns[0] = "Asset payments eligible for depreciation - After excluding AR and AT";
             columns[1] = "" + (eligibleAssetPaymentCount + federallyOwnedAssetPaymentCount);
             reportLine.add(columns.clone());

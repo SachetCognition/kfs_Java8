@@ -165,7 +165,7 @@ public class FilePurgeServiceImpl implements FilePurgeService {
     protected int retrieveDaysBeforePurgeParameterValue(String parameterName) {
         final String parameterValue = getParameterService().getParameterValueAsString(FilePurgeStep.class, parameterName);
         Integer parameterValueAsInteger = null;
-        parameterValueAsInteger = new Integer(parameterValue);
+        parameterValueAsInteger = Integer.valueOf(parameterValue);
         return (parameterValueAsInteger == null ? Integer.MAX_VALUE : parameterValueAsInteger.intValue());
     }
 

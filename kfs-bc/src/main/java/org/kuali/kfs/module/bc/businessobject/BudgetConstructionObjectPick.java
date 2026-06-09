@@ -45,7 +45,7 @@ public class BudgetConstructionObjectPick extends PersistableBusinessObjectBase 
      * Default constructor.
      */
     public BudgetConstructionObjectPick() {
-        selectFlag = new Integer(0);
+        selectFlag = Integer.valueOf(0);
     }
 
     /**

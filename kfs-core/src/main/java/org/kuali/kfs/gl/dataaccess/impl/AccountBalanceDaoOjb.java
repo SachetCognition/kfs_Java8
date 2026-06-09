@@ -187,7 +187,7 @@ public class AccountBalanceDaoOjb extends PlatformAwareDaoBaseOjb implements Acc
 
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
-        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
+        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, Integer.valueOf(year));
 
         getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(AccountBalance.class, criteria));
 

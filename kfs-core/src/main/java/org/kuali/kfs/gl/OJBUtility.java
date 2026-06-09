@@ -140,11 +140,11 @@ public class OJBUtility {
     public static Long getResultActualSize(Collection result, Integer recordCount, Map fieldValues, Object businessObject) {
         int resultSize = result.size();
         Integer limit = getResultLimit();
-        Long resultActualSize = new Long(resultSize);
+        Long resultActualSize = Long.valueOf(resultSize);
 
         if (recordCount > limit) {
             long actualCount = recordCount.longValue() + resultSize - limit.longValue();
-            resultActualSize = new Long(actualCount);
+            resultActualSize = Long.valueOf(actualCount);
         }
         return resultActualSize;
     }

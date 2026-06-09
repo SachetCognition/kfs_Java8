@@ -1019,7 +1019,7 @@ public class CorrectionAction extends KualiDocumentActionBase implements KualiTa
             // new entryId is always 0, so give it a unique Id, SequenceAccessorService is used.
             //Long newEntryId = SpringContext.getBean(SequenceAccessorService.class).getNextAvailableSequenceNumber("GL_ORIGIN_ENTRY_T_SEQ");
             int newEntryId = getMaxEntryId(correctionForm.getAllEntries()) + 1;
-            correctionForm.getEntryForManualEdit().setEntryId(new Integer(newEntryId));
+            correctionForm.getEntryForManualEdit().setEntryId(Integer.valueOf(newEntryId));
 
             correctionForm.getAllEntries().add(correctionForm.getEntryForManualEdit());
 

@@ -308,7 +308,7 @@ public class BalanceForwardRuleHelper {
      */
     public OriginEntryFull generateCumulativeForwardOriginEntry(Balance balance) {
         OriginEntryFull activeEntry = new OriginEntryFull();
-        activeEntry.setUniversityFiscalYear(new Integer(closingFiscalYear.intValue() + 1));
+        activeEntry.setUniversityFiscalYear(Integer.valueOf(closingFiscalYear.intValue() + 1));
         activeEntry.setChartOfAccountsCode(balance.getChartOfAccountsCode());
         activeEntry.setAccountNumber(balance.getAccountNumber());
         activeEntry.setSubAccountNumber(balance.getSubAccountNumber());
@@ -329,7 +329,7 @@ public class BalanceForwardRuleHelper {
         activeEntry.setFinancialDocumentTypeCode(this.annualClosingDocType);
         activeEntry.setFinancialSystemOriginationCode(this.glOriginationCode);
         activeEntry.setDocumentNumber(new StringBuffer(KFSConstants.BALANCE_TYPE_ACTUAL).append(balance.getAccountNumber()).toString());
-        activeEntry.setTransactionLedgerEntrySequenceNumber(new Integer(state.getSequenceNumber()));
+        activeEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(state.getSequenceNumber()));
         activeEntry.setTransactionLedgerEntryDescription(new StringBuffer("BEG C & G BAL BROUGHT FORWARD FROM ").append(closingFiscalYear).toString());
         activeEntry.setTransactionLedgerEntryAmount(balance.getAccountLineAnnualBalanceAmount().add(balance.getContractsGrantsBeginningBalanceAmount()));
         if (KFSConstants.BALANCE_TYPE_CURRENT_BUDGET.equals(balance.getBalanceTypeCode())
@@ -400,7 +400,7 @@ public class BalanceForwardRuleHelper {
     public OriginEntryFull generateGeneralForwardOriginEntry(Balance balance) {
 
         OriginEntryFull entry = new OriginEntryFull();
-        entry.setUniversityFiscalYear(new Integer(closingFiscalYear.intValue() + 1));
+        entry.setUniversityFiscalYear(Integer.valueOf(closingFiscalYear.intValue() + 1));
         entry.setChartOfAccountsCode(balance.getChartOfAccountsCode());
         entry.setAccountNumber(balance.getAccountNumber());
         entry.setSubAccountNumber(balance.getSubAccountNumber());
@@ -421,7 +421,7 @@ public class BalanceForwardRuleHelper {
         // chartOfAccountsCode in the document number. It will cause the tests to
         // break given the current framework but is desired as an enhancement for Kuali.
         entry.setDocumentNumber(new StringBuffer(KFSConstants.BALANCE_TYPE_ACTUAL).append(balance.getAccountNumber())/* .append(balance.getChartOfAccountsCode()) */.toString());
-        entry.setTransactionLedgerEntrySequenceNumber(new Integer(state.getSequenceNumber()));
+        entry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(state.getSequenceNumber()));
         entry.setTransactionLedgerEntryDescription(new StringBuffer("BEG BAL BROUGHT FORWARD FROM ").append(closingFiscalYear).toString());
 
         String transactionEncumbranceUpdateCode = null;

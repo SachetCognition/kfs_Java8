@@ -194,7 +194,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of hundred dollar bills present in the drawer
      */
     public Integer getHundredDollarCount() {
-        return (financialDocumentHundredDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentHundredDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.HUNDRED_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentHundredDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentHundredDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.HUNDRED_DOLLAR_AMOUNT).intValue());
     }
 
     /**
@@ -232,7 +232,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of fifty dollar bills present in the drawer
      */
     public Integer getFiftyDollarCount() {
-        return (financialDocumentFiftyDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentFiftyDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.FIFTY_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentFiftyDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentFiftyDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.FIFTY_DOLLAR_AMOUNT).intValue());
     }
 
     /**
@@ -270,7 +270,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of twenty dollar bills present in the drawer
      */
     public Integer getTwentyDollarCount() {
-        return (financialDocumentTwentyDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentTwentyDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.TWENTY_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentTwentyDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentTwentyDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.TWENTY_DOLLAR_AMOUNT).intValue());
     }
 
     /**
@@ -308,7 +308,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of ten dollar bills present in the drawer
      */
     public Integer getTenDollarCount() {
-        return (financialDocumentTenDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentTenDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.TEN_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentTenDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentTenDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.TEN_DOLLAR_AMOUNT).intValue());
     }
 
     /**
@@ -346,7 +346,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of five dollar bills present in the drawer
      */
     public Integer getFiveDollarCount() {
-        return (financialDocumentFiveDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentFiveDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.FIVE_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentFiveDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentFiveDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.FIVE_DOLLAR_AMOUNT).intValue());
     }
 
     /**
@@ -384,7 +384,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of two dollar bills present in the drawer
      */
     public Integer getTwoDollarCount() {
-        return (financialDocumentTwoDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentTwoDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.TWO_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentTwoDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentTwoDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.TWO_DOLLAR_AMOUNT).intValue());
     }
 
     /**
@@ -422,7 +422,7 @@ public class CurrencyDetail extends PersistableBusinessObjectBase {
      * @return the number of one dollar bills present in the drawer
      */
     public Integer getOneDollarCount() {
-        return (financialDocumentOneDollarAmount == null) ? new Integer(0) : new Integer(financialDocumentOneDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.ONE_DOLLAR_AMOUNT).intValue());
+        return (financialDocumentOneDollarAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentOneDollarAmount.divide(KFSConstants.CurrencyTypeAmounts.ONE_DOLLAR_AMOUNT).intValue());
     }
 
     /**

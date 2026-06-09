@@ -124,7 +124,7 @@ public class OriginEntryServiceImpl implements OriginEntryService {
         Object oAmount = entrySummary[5];
         Object oCount = entrySummary[6];
 
-        Integer fiscalYear = oFiscalYear != null ? new Integer(oFiscalYear.toString()) : null;
+        Integer fiscalYear = oFiscalYear != null ? Integer.valueOf(oFiscalYear.toString()) : null;
         String periodCode = oPeriodCode != null ? oPeriodCode.toString() : GeneralLedgerConstants.getSpaceUniversityFiscalPeriodCode();
         String balanceType = oBalanceType != null ? oBalanceType.toString() : GeneralLedgerConstants.getSpaceBalanceTypeCode();
         String originCode = oOriginCode != null ? oOriginCode.toString() : GeneralLedgerConstants.getSpaceFinancialSystemOriginationCode();
@@ -209,7 +209,7 @@ public class OriginEntryServiceImpl implements OriginEntryService {
                 tmperrors = originEntry.setFromTextFileForBatch(line, lineNumber);
                 originEntry.setEntryId(lineNumber);
                 if (tmperrors.size() > 0){
-                    returnMessageMap.put(new Integer(lineNumber), tmperrors);
+                    returnMessageMap.put(Integer.valueOf(lineNumber), tmperrors);
                 } else {
                     originEntryList.add(originEntry);
                 }

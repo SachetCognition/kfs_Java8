@@ -93,8 +93,8 @@ public class Summary implements Comparable {
     public int compareTo(Object arg0) {
         if (arg0 instanceof Summary) {
             Summary otherObject = (Summary) arg0;
-            Integer otherSort = new Integer(otherObject.getSortOrder());
-            Integer thisSort = new Integer(sortOrder);
+            Integer otherSort = Integer.valueOf(otherObject.getSortOrder());
+            Integer thisSort = Integer.valueOf(sortOrder);
             return thisSort.compareTo(otherSort);
         }
         else {

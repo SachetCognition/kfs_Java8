@@ -50,8 +50,8 @@ public class PurchasingAccountsPayableModuleServiceTest extends KualiTestBase {
             purchaseOrderNumber = result.getPurapDocumentIdentifier();
 
         List<Long> assetNumbers = new ArrayList<Long>();
-        assetNumbers.add(new Long("12345"));
-        assetNumbers.add(new Long("12346"));
+        assetNumbers.add(Long.valueOf("12345"));
+        assetNumbers.add(Long.valueOf("12346"));
         String authorId = "khuntley";
         StringBuffer noteText = new StringBuffer("Asset Numbers have been created for this document: ");
         for (int i = 0; i<assetNumbers.size(); i++) {

@@ -91,7 +91,7 @@ public class BatchStepExecutor implements Runnable {
     public void run() {
 	    Date stepRunDate = dateTimeService.getCurrentDate();
 	    batchStepFile.setStartedDate(stepRunDate);
-	    batchStepFile.setStepIndex(new Integer(stepIndex));
+	    batchStepFile.setStepIndex(Integer.valueOf(stepIndex));
 
 		setupNDCLogging();
 		notifyStepStarted();
@@ -208,7 +208,7 @@ public class BatchStepExecutor implements Runnable {
 	private void notifyStepFinished() {
 	    BatchStepFileDescriptor resultFile = batchContainerDirectory.getResultFile(batchStepFile);
 	    resultFile.setCompletedDate(dateTimeService.getCurrentDate());
-	    resultFile.setStepIndex(new Integer(stepIndex));
+	    resultFile.setStepIndex(Integer.valueOf(stepIndex));
 
         String shortLogFileName = getShortLogFileName();
 

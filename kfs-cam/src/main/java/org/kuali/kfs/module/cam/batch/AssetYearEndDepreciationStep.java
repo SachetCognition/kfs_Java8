@@ -38,7 +38,7 @@ public class AssetYearEndDepreciationStep extends AbstractStep {
     public boolean execute(String jobName, Date jobRunDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         String date = sdf.format(new java.util.Date());
-        assetDepreciationService.runYearEndDepreciation(new Integer(date));
+        assetDepreciationService.runYearEndDepreciation(Integer.valueOf(date));
         return true;
     }
 

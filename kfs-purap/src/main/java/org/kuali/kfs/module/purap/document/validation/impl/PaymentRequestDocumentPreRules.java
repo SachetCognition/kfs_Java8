@@ -126,7 +126,7 @@ public class PaymentRequestDocumentPreRules extends AccountsPayableDocumentPreRu
      */
     protected String prepareQuestionText(String questionType, String questionText) {
         if (StringUtils.equals(questionType, PREQDocumentsStrings.THRESHOLD_DAYS_OVERRIDE_QUESTION)) {
-            questionText = StringUtils.replace(questionText, "{0}", new Integer(PurapConstants.PREQ_PAY_DATE_DAYS_BEFORE_WARNING).toString());
+            questionText = StringUtils.replace(questionText, "{0}", Integer.valueOf(PurapConstants.PREQ_PAY_DATE_DAYS_BEFORE_WARNING).toString());
         }
         return questionText;
     }

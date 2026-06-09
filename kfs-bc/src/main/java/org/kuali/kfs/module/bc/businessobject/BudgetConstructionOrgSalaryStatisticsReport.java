@@ -40,7 +40,7 @@ public class BudgetConstructionOrgSalaryStatisticsReport {
     // Body parts
     private BigDecimal initialRequestedFteQuantity;
     private Integer totalInitialRequestedAmount;
-    private Integer totalAverageAmount = new Integer(0);
+    private Integer totalAverageAmount = Integer.valueOf(0);
     private BigDecimal appointmentRequestedFteQuantity;
     private Integer totalCsfAmount;
     private Integer totalAppointmentRequestedAmount;

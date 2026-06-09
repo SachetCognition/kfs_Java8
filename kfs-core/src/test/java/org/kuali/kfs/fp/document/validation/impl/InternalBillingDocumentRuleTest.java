@@ -745,7 +745,7 @@ public class InternalBillingDocumentRuleTest extends KualiTestBase {
      * addFixture( KualiRuleTestCase.ACCOUNT, "1912610" ); addFixture( KualiRuleTestCase.BALANCE_TYPE,
      * AccountingDocumentRuleBase.BALANCE_TYPE_CODE.ACTUAL ); addFixture( KualiRuleTestCase.CHART, "UA" ); addFixture(
      * KualiRuleTestCase.OBJECT_TYPE_CODE, AccountingDocumentRuleBase.OBJECT_TYPE_CODE.CASH_NOT_INCOME ); addFixture(
-     * KualiRuleTestCase.POSTING_YEAR, new Integer( 2005 ) ); addFixture( KualiRuleTestCase.PROJECT, "BOB" ); addFixture(
+     * KualiRuleTestCase.POSTING_YEAR, Integer.valueOf( 2005 ) ); addFixture( KualiRuleTestCase.PROJECT, "BOB" ); addFixture(
      * KualiRuleTestCase.SUBACCOUNT, "BEER" ); } public void
      * fixturesApplyAddAccountingLineBusinessRulesInvalidStudentFeeContinueEduc() throws Exception { List sourceLines = new
      * ArrayList(); List targetLines = new ArrayList(); addFixture( KualiRuleTestCase.DOCUMENT_DESCRIPTION, "test" ); addFixture(

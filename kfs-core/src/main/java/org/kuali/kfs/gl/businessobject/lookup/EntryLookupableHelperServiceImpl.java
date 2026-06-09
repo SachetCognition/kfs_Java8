@@ -153,7 +153,7 @@ public class EntryLookupableHelperServiceImpl extends AbstractGeneralLedgerLooku
         updateByPendingLedgerEntry(searchResultsCollection, fieldValues, pendingEntryOption, false, false);
 
         // get the actual size of all qualified search results
-        Long actualSize = new Long(entryService.getEntryRecordCount(fieldValues));
+        Long actualSize = Long.valueOf(entryService.getEntryRecordCount(fieldValues));
         
         // calculate how many pending entries were included in the original results
         int numPendingEntriesAdded = searchResultsCollection.size() - searchResultsCollectionSize;

@@ -50,7 +50,7 @@ public class BalanceHistoryDaoOjb extends PlatformAwareDaoBaseOjb implements Led
         
         while (years != null && years.hasNext()) {
             Object[] year = years.next();
-            yearList.add(new Integer(year[0].toString()));
+            yearList.add(Integer.valueOf(year[0].toString()));
         }
         
         return yearList;

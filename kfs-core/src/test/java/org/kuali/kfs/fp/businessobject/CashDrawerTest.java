@@ -84,7 +84,7 @@ public class CashDrawerTest extends KualiTestBase {
     }
 
     public enum CashDrawerCountFixture {
-        GOOD_CASH_DRAWER(new Integer(5), new Integer(10), new Integer(25), new Integer(50), new Integer(100), new Integer(250), new Integer(500), new Integer(5), new Integer(10), new Integer(20), new Integer(50), new Integer(100), new Integer(500)), ALL_FIVES_CASH_DRAWER(new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5)), ZERO_CASH_DRAWER(new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0)), NULL_CASH_DRAWER;
+        GOOD_CASH_DRAWER(Integer.valueOf(5), Integer.valueOf(10), Integer.valueOf(25), Integer.valueOf(50), Integer.valueOf(100), Integer.valueOf(250), Integer.valueOf(500), Integer.valueOf(5), Integer.valueOf(10), Integer.valueOf(20), Integer.valueOf(50), Integer.valueOf(100), Integer.valueOf(500)), ALL_FIVES_CASH_DRAWER(Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5)), ZERO_CASH_DRAWER(Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0)), NULL_CASH_DRAWER;
 
         private Integer hundredDollarCount;
         private Integer fiftyDollarCount;
@@ -140,19 +140,19 @@ public class CashDrawerTest extends KualiTestBase {
 
     public void testAmountToCount() {
         CashDrawer drawer = CashDrawerAmountFixture.ALL_FIVES_CASH_DRAWER.convertToCashDrawer();
-        assertEquals(drawer.getHundredDollarCount(), new Integer(5));
-        assertEquals(drawer.getFiftyDollarCount(), new Integer(10));
-        assertEquals(drawer.getTwentyDollarCount(), new Integer(25));
-        assertEquals(drawer.getTenDollarCount(), new Integer(50));
-        assertEquals(drawer.getFiveDollarCount(), new Integer(100));
-        assertEquals(drawer.getTwoDollarCount(), new Integer(250));
-        assertEquals(drawer.getOneDollarCount(), new Integer(500));
-        assertEquals(drawer.getHundredCentCount(), new Integer(5));
-        assertEquals(drawer.getFiftyCentCount(), new Integer(10));
-        assertEquals(drawer.getTwentyFiveCentCount(), new Integer(20));
-        assertEquals(drawer.getTenCentCount(), new Integer(50));
-        assertEquals(drawer.getFiveCentCount(), new Integer(100));
-        assertEquals(drawer.getOneCentCount(), new Integer(500));
+        assertEquals(drawer.getHundredDollarCount(), Integer.valueOf(5));
+        assertEquals(drawer.getFiftyDollarCount(), Integer.valueOf(10));
+        assertEquals(drawer.getTwentyDollarCount(), Integer.valueOf(25));
+        assertEquals(drawer.getTenDollarCount(), Integer.valueOf(50));
+        assertEquals(drawer.getFiveDollarCount(), Integer.valueOf(100));
+        assertEquals(drawer.getTwoDollarCount(), Integer.valueOf(250));
+        assertEquals(drawer.getOneDollarCount(), Integer.valueOf(500));
+        assertEquals(drawer.getHundredCentCount(), Integer.valueOf(5));
+        assertEquals(drawer.getFiftyCentCount(), Integer.valueOf(10));
+        assertEquals(drawer.getTwentyFiveCentCount(), Integer.valueOf(20));
+        assertEquals(drawer.getTenCentCount(), Integer.valueOf(50));
+        assertEquals(drawer.getFiveCentCount(), Integer.valueOf(100));
+        assertEquals(drawer.getOneCentCount(), Integer.valueOf(500));
     }
 
     public void testCountToAmount() {

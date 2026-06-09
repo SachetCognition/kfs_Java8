@@ -53,7 +53,7 @@ public class DistributeAccountingLinesEvent implements Observer {
                 wrapper.getTravelDocument().addSourceAccountingLine(newLine);
             }
             wrapper.setAccountDistributionsourceAccountingLines(new ArrayList<TemDistributionAccountingLine>());
-            wrapper.setAccountDistributionnextSourceLineNumber(new Integer(1));
+            wrapper.setAccountDistributionnextSourceLineNumber(Integer.valueOf(1));
         }
 
     }

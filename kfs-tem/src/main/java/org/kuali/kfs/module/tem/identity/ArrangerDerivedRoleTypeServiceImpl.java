@@ -55,7 +55,7 @@ public class ArrangerDerivedRoleTypeServiceImpl extends DerivedRoleTypeServiceBa
             final String documentType = qualification.get(KimConstants.AttributeConstants.DOCUMENT_TYPE_NAME);
             if(!StringUtils.isBlank(profileId)) {
 
-                final Integer profIdAsInt = new Integer(profileId);
+                final Integer profIdAsInt = Integer.valueOf(profileId);
                 final TemProfileArranger arranger = getArrangerDocumentService().findTemProfileArranger(principalId, profIdAsInt);
                 if (arranger != null){
                     if (!StringUtils.isBlank(documentType)) {

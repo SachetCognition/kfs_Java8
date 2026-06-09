@@ -124,7 +124,7 @@ public class VoucherForm extends KualiAccountingDocumentFormBase {
     protected Integer getSelectedPostingYear() {
         Integer postingYear = null;
         if (StringUtils.isNotBlank(getSelectedAccountingPeriod())) {
-            postingYear = new Integer(StringUtils.right(getSelectedAccountingPeriod(), 4));
+            postingYear = Integer.valueOf(StringUtils.right(getSelectedAccountingPeriod(), 4));
         }
         return postingYear;
     }

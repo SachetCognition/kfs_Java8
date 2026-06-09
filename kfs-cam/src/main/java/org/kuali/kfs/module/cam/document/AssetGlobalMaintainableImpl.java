@@ -165,7 +165,7 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
         ParameterEvaluatorService parameterEvaluatorService = SpringContext.getBean(ParameterEvaluatorService.class);
         ParameterEvaluator evaluator = parameterEvaluatorService.getParameterEvaluator(KFSConstants.CoreModuleNamespaces.KFS, KfsParameterConstants.YEAR_END_ACCOUNTING_PERIOD_PARAMETER_NAMES.DETAIL_PARAMETER_TYPE,  KfsParameterConstants.YEAR_END_ACCOUNTING_PERIOD_PARAMETER_NAMES.FISCAL_PERIOD_SELECTION_DOCUMENT_TYPES, docType);
         if (evaluator.evaluationSucceeds() && isPeriod13(assetGlobal) ) {
-            Integer closingYear = new Integer(SpringContext.getBean(ParameterService.class).getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
+            Integer closingYear = Integer.valueOf(SpringContext.getBean(ParameterService.class).getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
             String closingDate = getClosingDate(closingYear);
             try {
                 updateAssetGlobalForPeriod13(assetGlobal, closingYear, closingDate);
@@ -464,7 +464,7 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
         //we need to set the posting period and posting year from the value of the drop-down box...
         if (StringUtils.isNotBlank(assetGlobal.getUniversityFiscalPeriodName())) {
             assetGlobal.setFinancialDocumentPostingPeriodCode(StringUtils.left(assetGlobal.getUniversityFiscalPeriodName(), 2));
-            assetGlobal.setFinancialDocumentPostingYear(new Integer(StringUtils.right(assetGlobal.getUniversityFiscalPeriodName(), 4)));
+            assetGlobal.setFinancialDocumentPostingYear(Integer.valueOf(StringUtils.right(assetGlobal.getUniversityFiscalPeriodName(), 4)));
         }
 
         List<AssetGlobalDetail> assetSharedDetails = assetGlobal.getAssetSharedDetails();
@@ -809,7 +809,7 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
      */
     private void doPeriod13Changes(AssetGlobal assetGlobal) {
         if (isPeriod13(assetGlobal)) {
-            Integer closingYear = new Integer(SpringContext.getBean(ParameterService.class).getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
+            Integer closingYear = Integer.valueOf(SpringContext.getBean(ParameterService.class).getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
             String closingDate = getClosingDate(closingYear);
             try {
                 updateAssetGlobalForPeriod13(assetGlobal, closingYear, closingDate);

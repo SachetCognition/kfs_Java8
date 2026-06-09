@@ -1642,7 +1642,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
             int count = 0;
             while (count < getGroupTravelerColumns().size()) {
                 List<Integer> countArray = new ArrayList<Integer>(2);
-                countArray.add(new Integer(count));
+                countArray.add(Integer.valueOf(count));
                 final String columnName = getGroupTravelerColumns().get(count);
                 headers.put(columnName, countArray);
                 count += 1;
@@ -1663,7 +1663,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
                 GroupTraveler newGroupTraveler = new GroupTraveler();
                 BeanUtils.copyProperties(groupTraveler, newGroupTraveler);
                 newGroupTraveler.setDocumentNumber(documentNumber);
-                newGroupTraveler.setVersionNumber(new Long(1));
+                newGroupTraveler.setVersionNumber(Long.valueOf(1));
                 newGroupTraveler.setObjectId(null);
                 newGroupTraveler.setId(null);
                 newGroupTravelers.add(newGroupTraveler);
@@ -1698,7 +1698,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
                 List<TemExpense> newDetails = (List<TemExpense>) this.copyActualExpenses(actualExpense.getExpenseDetails(), documentNumber);
                 newActualExpense.setExpenseDetails(newDetails);
                 newActualExpense.setDocumentNumber(documentNumber);
-                newActualExpense.setVersionNumber(new Long(1));
+                newActualExpense.setVersionNumber(Long.valueOf(1));
                 newActualExpense.setId(null);
                 newActualExpense.setObjectId(null);
                 newActualExpenses.add(newActualExpense);
@@ -1727,7 +1727,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
                 newExpense.setDinnerValue(expense.getDinnerValue());
                 newExpense.setIncidentalsValue(expense.getIncidentalsValue());
                 newExpense.setDocumentNumber(documentNumber);
-                newExpense.setVersionNumber(new Long(1));
+                newExpense.setVersionNumber(Long.valueOf(1));
                 newExpense.setObjectId(null);
                 newExpense.setId(null);
                 newPerDiemExpenses.add(newExpense);
@@ -1747,7 +1747,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
             for (TravelAdvance travelAdvance : travelAdvances){
                 TravelAdvance newTravelAdvance = (TravelAdvance) ObjectUtils.deepCopy(travelAdvance);
                 newTravelAdvance.setDocumentNumber(documentNumber);
-                newTravelAdvance.setVersionNumber(new Long(1));
+                newTravelAdvance.setVersionNumber(Long.valueOf(1));
                 newTravelAdvance.setObjectId(null);
                 newTravelAdvance.setTravelDocumentIdentifier(travelAdvance.getTravelDocumentIdentifier());
                 newTravelAdvances.add(newTravelAdvance);
@@ -1768,7 +1768,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
                 SpecialCircumstances newSpecialCircumstances = new SpecialCircumstances();
                 BeanUtils.copyProperties(specialCircumstances, newSpecialCircumstances);
                 newSpecialCircumstances.setDocumentNumber(documentNumber);
-                newSpecialCircumstances.setVersionNumber(new Long(1));
+                newSpecialCircumstances.setVersionNumber(Long.valueOf(1));
                 newSpecialCircumstances.setObjectId(null);
                 newSpecialCircumstances.setId(null);
                 newSpecialCircumstancesList.add(newSpecialCircumstances);
@@ -1788,7 +1788,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
                 TransportationModeDetail newDetail = new TransportationModeDetail();
                 BeanUtils.copyProperties(detail, newDetail);
                 newDetail.setDocumentNumber(documentNumber);
-                newDetail.setVersionNumber(new Long(1));
+                newDetail.setVersionNumber(Long.valueOf(1));
                 newDetail.setObjectId(null);
                 newTransportationModeDetails.add(newDetail);
             }
@@ -2495,7 +2495,7 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
     public TravelDocument getRootTravelDocumentWithoutWorkflowDocument(String travelDocumentIdentifier) {
         Map<String, Object> fieldValues = new HashMap<String, Object>();
         fieldValues.put(TemPropertyConstants.TRAVEL_DOCUMENT_IDENTIFIER, travelDocumentIdentifier);
-        fieldValues.put(TemPropertyConstants.TRIP_PROGENITOR, new Boolean(true));
+        fieldValues.put(TemPropertyConstants.TRIP_PROGENITOR, Boolean.valueOf(true));
         for (String documentType : getTravelDocumentTypesToCheck()) {
             final Class<? extends TravelDocument> docClazz = getTravelDocumentForType(documentType);
             Collection<TravelDocument> matchingDocs = (Collection<TravelDocument>)getBusinessObjectService().findMatching(docClazz, fieldValues);

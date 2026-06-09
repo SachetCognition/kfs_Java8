@@ -61,7 +61,7 @@ public class ReturnToFiscalOfficerQuestionHandler implements QuestionHandler<Tra
         if (StringUtils.isBlank(asker.getReason())) {
             return (T) asker.confirm(RETURN_TO_FO_QUESTION, question, true, ERROR_TA_REASON_REQUIRED, QUESTION_REASON_ATTRIBUTE_NAME, RETURN_TO_FO_TEXT);
         }else if(noteStr.length() > noteTextMaxLength){
-            return (T) asker.confirm(RETURN_TO_FO_QUESTION, question, true, ERROR_TA_REASON_PASTLIMIT, QUESTION_REASON_ATTRIBUTE_NAME, new Integer(noteStr.length() - noteTextMaxLength).toString());
+            return (T) asker.confirm(RETURN_TO_FO_QUESTION, question, true, ERROR_TA_REASON_PASTLIMIT, QUESTION_REASON_ATTRIBUTE_NAME, Integer.valueOf(noteStr.length() - noteTextMaxLength).toString());
         }
 
         final TravelDocument document = asker.getDocument();

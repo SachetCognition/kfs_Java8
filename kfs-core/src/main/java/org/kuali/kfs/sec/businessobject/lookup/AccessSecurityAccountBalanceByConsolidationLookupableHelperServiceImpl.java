@@ -76,7 +76,7 @@ public class AccessSecurityAccountBalanceByConsolidationLookupableHelperServiceI
             if (resultSizeBeforeRestrictions != details.size()) {
                 String subAccountNumber = (String) fieldValues.get(KFSPropertyConstants.SUB_ACCOUNT_NUMBER);
                 String fiscalYear = (String) fieldValues.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR);
-                Integer universityFiscalYear = new Integer(Integer.parseInt(fiscalYear));
+                Integer universityFiscalYear = Integer.valueOf(Integer.parseInt(fiscalYear));
 
                 // Dashes means no sub account number
                 if (KFSConstants.getDashSubAccountNumber().equals(subAccountNumber)) {
@@ -88,7 +88,7 @@ public class AccessSecurityAccountBalanceByConsolidationLookupableHelperServiceI
                 List totals = buildAccountBalanceTotals(details, universityFiscalYear, subAccountNumber, dbo);
                 totals.addAll(details);
 
-                return new CollectionIncomplete(totals, new Long(totals.size()));
+                return new CollectionIncomplete(totals, Long.valueOf(totals.size()));
             }
         }
 

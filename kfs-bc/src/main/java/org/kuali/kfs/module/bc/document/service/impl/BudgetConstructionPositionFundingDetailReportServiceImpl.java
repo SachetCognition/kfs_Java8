@@ -177,16 +177,16 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
         }
 
         BudgetConstructionCalculatedSalaryFoundationTracker csfTracker = appointmentFundingEntry.getEffectiveCSFTracker();
-        detailReportEntry.setAmountChange(new Integer(0));
+        detailReportEntry.setAmountChange(Integer.valueOf(0));
         detailReportEntry.setPercentChange(BigDecimal.ZERO);
         if (csfTracker != null) {
             detailReportEntry.setCsfFundingStatusCode(csfTracker.getCsfFundingStatusCode());
             detailReportEntry.setCsfTimePercent(BudgetConstructionReportHelper.setDecimalDigit(csfTracker.getCsfTimePercent(), 2, false));
-            detailReportEntry.setCsfAmount(new Integer(csfTracker.getCsfAmount().intValue()));
+            detailReportEntry.setCsfAmount(Integer.valueOf(csfTracker.getCsfAmount().intValue()));
             detailReportEntry.setCsfFullTimeEmploymentQuantity(BudgetConstructionReportHelper.setDecimalDigit(csfTracker.getCsfFullTimeEmploymentQuantity(), 5, false));
 
             // calculate amountChange and percentChange
-            Integer amountChange = new Integer(0);
+            Integer amountChange = Integer.valueOf(0);
             BigDecimal percentChange = BigDecimal.ZERO;
             BigDecimal csfFte = BudgetConstructionReportHelper.setDecimalDigit(csfTracker.getCsfFullTimeEmploymentQuantity(), 5, false);
             BigDecimal reqFte = BudgetConstructionReportHelper.setDecimalDigit(appointmentFundingEntry.getAppointmentRequestedFteQuantity(), 5, false);
@@ -202,7 +202,7 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
             detailReportEntry.setFinancialSubObjectCode(appointmentFundingEntry.getFinancialSubObjectCode());
 
             detailReportEntry.setAppointmentFundingMonth(appointmentFundingEntry.getAppointmentFundingMonth());
-            detailReportEntry.setAppointmentRequestedAmount(new Integer(appointmentFundingEntry.getAppointmentRequestedAmount().intValue()));
+            detailReportEntry.setAppointmentRequestedAmount(Integer.valueOf(appointmentFundingEntry.getAppointmentRequestedAmount().intValue()));
             detailReportEntry.setAppointmentRequestedTimePercent(BudgetConstructionReportHelper.setDecimalDigit(appointmentFundingEntry.getAppointmentRequestedTimePercent(), 2, false));
             detailReportEntry.setAppointmentRequestedFteQuantity(BudgetConstructionReportHelper.setDecimalDigit(appointmentFundingEntry.getAppointmentRequestedFteQuantity(), 5, false));
             if (salarySettingService.isHourlyPaidObject(appointmentFundingEntry.getUniversityFiscalYear(), appointmentFundingEntry.getChartOfAccountsCode(), appointmentFundingEntry.getFinancialObjectCode())){
@@ -247,7 +247,7 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
                 orgPositionFundingDetailReportEntry.setTotalPersonAppointmentRequestedFteQuantity(BudgetConstructionReportHelper.setDecimalDigit(fundingDetailTotalPersonEntry.getTotalPersonAppointmentRequestedFteQuantity(), 5, false));
 
                 // calculate amountChange and percentChange
-                orgPositionFundingDetailReportEntry.setTotalPersonAmountChange(new Integer(0));
+                orgPositionFundingDetailReportEntry.setTotalPersonAmountChange(Integer.valueOf(0));
                 orgPositionFundingDetailReportEntry.setTotalPersonPercentChange(BigDecimal.ZERO);
                 BigDecimal csfFte = BudgetConstructionReportHelper.setDecimalDigit(fundingDetailTotalPersonEntry.getTotalPersonPositionCsfFteQuantity(), 5, false);
                 BigDecimal reqFte = BudgetConstructionReportHelper.setDecimalDigit(fundingDetailTotalPersonEntry.getTotalPersonAppointmentRequestedFteQuantity(), 5, false);
@@ -255,7 +255,7 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
                     Integer amountChange = fundingDetailTotalPersonEntry.getTotalPersonAppointmentRequestedAmount() - fundingDetailTotalPersonEntry.getTotalPersonPositionCsfAmount();
                     BigDecimal percentChange = BigDecimal.ZERO;
                     orgPositionFundingDetailReportEntry.setTotalPersonAmountChange(amountChange);
-                    if (!fundingDetailTotalPersonEntry.getTotalPersonPositionCsfAmount().equals(new Integer(0))) {
+                    if (!fundingDetailTotalPersonEntry.getTotalPersonPositionCsfAmount().equals(Integer.valueOf(0))) {
                         percentChange = BudgetConstructionReportHelper.calculatePercent(amountChange, fundingDetailTotalPersonEntry.getTotalPersonPositionCsfAmount().intValue());
                     }
                     orgPositionFundingDetailReportEntry.setTotalPersonPercentChange(percentChange);
@@ -290,11 +290,11 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
      */
     protected Collection<BudgetConstructionOrgPositionFundingDetailReportTotal> calculatePersonTotal(Collection<BudgetConstructionPositionFunding> positionFundingDetailList, List<BudgetConstructionPositionFunding> listForCalculateTotalPerson) {
         Collection<BudgetConstructionOrgPositionFundingDetailReportTotal> returnCollection = new ArrayList();
-        Integer totalPersonPositionCsfAmount = new Integer(0);
-        Integer totalPersonAppointmentRequestedAmount = new Integer(0);
+        Integer totalPersonPositionCsfAmount = Integer.valueOf(0);
+        Integer totalPersonAppointmentRequestedAmount = Integer.valueOf(0);
         BigDecimal totalPersonPositionCsfFteQuantity = BigDecimal.ZERO;
         BigDecimal totalPersonAppointmentRequestedFteQuantity = BigDecimal.ZERO;
-        Integer personSortCode = new Integer(0);
+        Integer personSortCode = Integer.valueOf(0);
         PendingBudgetConstructionAppointmentFunding pendingAppointmentFunding = null;
         for (BudgetConstructionPositionFunding budgetConstructionPositionFunding : listForCalculateTotalPerson) {
             for (BudgetConstructionPositionFunding positionFundingEntry : positionFundingDetailList) {
@@ -302,11 +302,11 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
                     pendingAppointmentFunding = positionFundingEntry.getPendingAppointmentFunding();
                     if (pendingAppointmentFunding.getBcnCalculatedSalaryFoundationTracker().size() > 0) {
                         BudgetConstructionCalculatedSalaryFoundationTracker calculatedSalaryFoundationTracker = pendingAppointmentFunding.getBcnCalculatedSalaryFoundationTracker().get(0);
-                        totalPersonPositionCsfAmount = totalPersonPositionCsfAmount + new Integer(calculatedSalaryFoundationTracker.getCsfAmount().intValue());
+                        totalPersonPositionCsfAmount = totalPersonPositionCsfAmount + Integer.valueOf(calculatedSalaryFoundationTracker.getCsfAmount().intValue());
                         totalPersonPositionCsfFteQuantity = totalPersonPositionCsfFteQuantity.add(calculatedSalaryFoundationTracker.getCsfFullTimeEmploymentQuantity());
                     }
                     if (pendingAppointmentFunding != null) {
-                        totalPersonAppointmentRequestedAmount = totalPersonAppointmentRequestedAmount + new Integer(pendingAppointmentFunding.getAppointmentRequestedAmount().intValue());
+                        totalPersonAppointmentRequestedAmount = totalPersonAppointmentRequestedAmount + Integer.valueOf(pendingAppointmentFunding.getAppointmentRequestedAmount().intValue());
                         totalPersonAppointmentRequestedFteQuantity = totalPersonAppointmentRequestedFteQuantity.add(pendingAppointmentFunding.getAppointmentRequestedFteQuantity());
                     }
                     // sort code for person - display total part of person, when person have more than one info
@@ -320,15 +320,15 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
             budgetConstructionOrgPositionFundingDetailReportTotal.setTotalPersonAppointmentRequestedAmount(totalPersonAppointmentRequestedAmount);
             budgetConstructionOrgPositionFundingDetailReportTotal.setTotalPersonAppointmentRequestedFteQuantity(totalPersonAppointmentRequestedFteQuantity);
             if (personSortCode.intValue() > 1) {
-                budgetConstructionOrgPositionFundingDetailReportTotal.setPersonSortCode(new Integer(1));
+                budgetConstructionOrgPositionFundingDetailReportTotal.setPersonSortCode(Integer.valueOf(1));
             }
             returnCollection.add(budgetConstructionOrgPositionFundingDetailReportTotal);
             // set all values to zero, after the entry was added to collection
-            totalPersonPositionCsfAmount = new Integer(0);
-            totalPersonAppointmentRequestedAmount = new Integer(0);
+            totalPersonPositionCsfAmount = Integer.valueOf(0);
+            totalPersonAppointmentRequestedAmount = Integer.valueOf(0);
             totalPersonPositionCsfFteQuantity = BigDecimal.ZERO;
             totalPersonAppointmentRequestedFteQuantity = BigDecimal.ZERO;
-            personSortCode = new Integer(0);
+            personSortCode = Integer.valueOf(0);
         }
         return returnCollection;
     }
@@ -342,8 +342,8 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
      */
     protected Collection<BudgetConstructionOrgPositionFundingDetailReportTotal> calculateOrgTotal(Collection<BudgetConstructionPositionFunding> positionFundingDetailList, List<BudgetConstructionPositionFunding> listForCalculateTotalOrg) {
         Collection<BudgetConstructionOrgPositionFundingDetailReportTotal> returnCollection = new ArrayList();
-        Integer totalOrgPositionCsfAmount = new Integer(0);
-        Integer totalOrgAppointmentRequestedAmount = new Integer(0);
+        Integer totalOrgPositionCsfAmount = Integer.valueOf(0);
+        Integer totalOrgAppointmentRequestedAmount = Integer.valueOf(0);
         BigDecimal totalOrgPositionCsfFteQuantity = BigDecimal.ZERO;
         BigDecimal totalOrgAppointmentRequestedFteQuantity = BigDecimal.ZERO;
         PendingBudgetConstructionAppointmentFunding pendingAppointmentFunding = null;
@@ -353,11 +353,11 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
                     pendingAppointmentFunding = positionFundingEntry.getPendingAppointmentFunding();
                     if (pendingAppointmentFunding.getBcnCalculatedSalaryFoundationTracker().size() > 0) {
                         BudgetConstructionCalculatedSalaryFoundationTracker calculatedSalaryFoundationTracker = pendingAppointmentFunding.getBcnCalculatedSalaryFoundationTracker().get(0);
-                        totalOrgPositionCsfAmount = totalOrgPositionCsfAmount + new Integer(calculatedSalaryFoundationTracker.getCsfAmount().intValue());
+                        totalOrgPositionCsfAmount = totalOrgPositionCsfAmount + Integer.valueOf(calculatedSalaryFoundationTracker.getCsfAmount().intValue());
                         totalOrgPositionCsfFteQuantity = totalOrgPositionCsfFteQuantity.add(calculatedSalaryFoundationTracker.getCsfFullTimeEmploymentQuantity());
                     }
                     if (pendingAppointmentFunding != null) {
-                        totalOrgAppointmentRequestedAmount = totalOrgAppointmentRequestedAmount + new Integer(pendingAppointmentFunding.getAppointmentRequestedAmount().intValue());
+                        totalOrgAppointmentRequestedAmount = totalOrgAppointmentRequestedAmount + Integer.valueOf(pendingAppointmentFunding.getAppointmentRequestedAmount().intValue());
                         totalOrgAppointmentRequestedFteQuantity = totalOrgAppointmentRequestedFteQuantity.add(pendingAppointmentFunding.getAppointmentRequestedFteQuantity());
                     }
                 }
@@ -370,8 +370,8 @@ public class BudgetConstructionPositionFundingDetailReportServiceImpl implements
             budgetConstructionOrgOrgFundingDetailReportTotal.setTotalOrgAppointmentRequestedFteQuantity(totalOrgAppointmentRequestedFteQuantity);
             returnCollection.add(budgetConstructionOrgOrgFundingDetailReportTotal);
             // set all values to zero, after the entry was added to collection
-            totalOrgPositionCsfAmount = new Integer(0);
-            totalOrgAppointmentRequestedAmount = new Integer(0);
+            totalOrgPositionCsfAmount = Integer.valueOf(0);
+            totalOrgAppointmentRequestedAmount = Integer.valueOf(0);
             totalOrgPositionCsfFteQuantity = BigDecimal.ZERO;
             totalOrgAppointmentRequestedFteQuantity = BigDecimal.ZERO;
         }

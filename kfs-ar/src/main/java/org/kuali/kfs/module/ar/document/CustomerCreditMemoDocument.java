@@ -257,7 +257,7 @@ public class CustomerCreditMemoDocument extends GeneralLedgerPostingDocumentBase
         Timestamp invBillingDateTimestamp = new Timestamp(invoice.getBillingDate().getTime());
         Timestamp todayDateTimestamp = new Timestamp(SpringContext.getBean(DateTimeService.class).getCurrentSqlDate().getTime());
         double diffInDays = KfsDateUtils.getDifferenceInDays(invBillingDateTimestamp, todayDateTimestamp);
-        invOutstandingDays = new Integer(new KualiDecimal(diffInDays).intValue());
+        invOutstandingDays = Integer.valueOf(new KualiDecimal(diffInDays).intValue());
 
         return invOutstandingDays;
     }

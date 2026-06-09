@@ -395,7 +395,7 @@ public class GlLineServiceImpl implements GlLineService {
         String docType = DocumentTypeName.ASSET_ADD_GLOBAL;
         ParameterEvaluator evaluator = parameterEvaluatorService.getParameterEvaluator(KFSConstants.CoreModuleNamespaces.KFS, KfsParameterConstants.YEAR_END_ACCOUNTING_PERIOD_PARAMETER_NAMES.DETAIL_PARAMETER_TYPE, KfsParameterConstants.YEAR_END_ACCOUNTING_PERIOD_PARAMETER_NAMES.FISCAL_PERIOD_SELECTION_DOCUMENT_TYPES, docType);
         if (evaluator.evaluationSucceeds()) {
-            Integer closingYear = new Integer(parameterService.getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
+            Integer closingYear = Integer.valueOf(parameterService.getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
             if (entry.getUniversityFiscalYear().equals(closingYear + 1)) {
                 //default asset global year end accounting period drop down to current period instead of closing period(period 13)
                 assetGlobal.setUniversityFiscalPeriodName("");

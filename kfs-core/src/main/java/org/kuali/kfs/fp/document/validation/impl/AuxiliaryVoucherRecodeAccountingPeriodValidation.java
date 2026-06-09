@@ -56,7 +56,7 @@ public class AuxiliaryVoucherRecodeAccountingPeriodValidation extends GenericVal
             boolean numericPeriod = true;
             Integer period = null;
             try {
-                period = new Integer(auxiliaryVoucherDocumentForValidation.getPostingPeriodCode());
+                period = Integer.valueOf(auxiliaryVoucherDocumentForValidation.getPostingPeriodCode());
             }
             catch (NumberFormatException nfe) {
                 numericPeriod = false;

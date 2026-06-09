@@ -163,7 +163,7 @@ public class CorrectionDocumentUtils {
     public static void setSequentialEntryIds(Collection<OriginEntryFull> originEntries) {
         int index = 0;
         for (OriginEntryFull entry : originEntries) {
-            entry.setEntryId(new Integer(index));
+            entry.setEntryId(Integer.valueOf(index));
             index++;
         }
     }

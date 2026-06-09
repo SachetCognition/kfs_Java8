@@ -346,7 +346,7 @@ public class BalanceServiceImpl implements BalanceService {
     public Integer getCashBalanceRecordCount(Map fieldValues, boolean isConsolidated) {
         LOG.debug("getCashBalanceRecordCount() started");
 
-        Integer recordCount = new Integer(0);
+        Integer recordCount = Integer.valueOf(0);
         if (!isConsolidated) {
             recordCount = balanceDao.getDetailedCashBalanceRecordCount(fieldValues, getEncumbranceBalanceTypes(fieldValues));
         }
@@ -680,7 +680,7 @@ public class BalanceServiceImpl implements BalanceService {
         if (fieldValues.containsKey(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR)) {
             // the year should be part of the results for both the cash balance and regular balance lookupables
             String universityFiscalYearStr = (String) fieldValues.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR);
-            Integer universityFiscalYear = new Integer(universityFiscalYearStr);
+            Integer universityFiscalYear = Integer.valueOf(universityFiscalYearStr);
             encumbranceBalanceTypes = balanceTypService.getEncumbranceBalanceTypes(universityFiscalYear);
         }
         return encumbranceBalanceTypes;

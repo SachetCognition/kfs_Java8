@@ -193,7 +193,7 @@ public class PaymentGroupServiceImpl implements PaymentGroupService {
             }           
         }
         
-        return new Integer(parameterService.getParameterValueAsString(PaymentGroup.class, DEFAULT_SORT_GROUP_ID_PARAMETER));            
+        return Integer.valueOf(parameterService.getParameterValueAsString(PaymentGroup.class, DEFAULT_SORT_GROUP_ID_PARAMETER));            
     }       
        
     /**

@@ -524,7 +524,7 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
             PurchaseOrderDocument po = null;
 
             if (NumberUtils.isDigits(StringUtils.defaultString(poID))){
-                po = purchaseOrderService.getCurrentPurchaseOrder(new Integer(poID));
+                po = purchaseOrderService.getCurrentPurchaseOrder(Integer.valueOf(poID));
                 if (po != null){
                     order.setInvoicePurchaseOrderID(poID);
                     order.setPurchaseOrderID(po.getPurapDocumentIdentifier());

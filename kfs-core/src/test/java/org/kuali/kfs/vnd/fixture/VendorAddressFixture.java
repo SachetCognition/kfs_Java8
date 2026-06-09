@@ -30,13 +30,13 @@ import org.kuali.kfs.vnd.businessobject.VendorDefaultAddress;
 
 public enum VendorAddressFixture {
 
-    address1(new Integer(1), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, null),
-    address2(new Integer(2), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", false,true, new VendorDefaultAddressFixture[] { campusKO, campusIN }),
-    address3(new Integer(3), "RM", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, null),
-    address4(new Integer(4), "RM", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", false,false, new VendorDefaultAddressFixture[] { campusSB }),
-    address5(new Integer(5), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", false,true, null),
-    address6(new Integer(6), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, new VendorDefaultAddressFixture[] { campusKO, campusIN }),
-    address7(new Integer(7), "RM", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, new VendorDefaultAddressFixture[] { campusSB }), ;
+    address1(Integer.valueOf(1), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, null),
+    address2(Integer.valueOf(2), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", false,true, new VendorDefaultAddressFixture[] { campusKO, campusIN }),
+    address3(Integer.valueOf(3), "RM", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, null),
+    address4(Integer.valueOf(4), "RM", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", false,false, new VendorDefaultAddressFixture[] { campusSB }),
+    address5(Integer.valueOf(5), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", false,true, null),
+    address6(Integer.valueOf(6), "PO", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, new VendorDefaultAddressFixture[] { campusKO, campusIN }),
+    address7(Integer.valueOf(7), "RM", "line1", "line2", "thisCity", "IN", "44444", "US", "attentionTo", "", "knoreceipt-l@indiana.edu", "", "555-555-5555", true,true, new VendorDefaultAddressFixture[] { campusSB }), ;
 
     public final Integer vendorAddressGeneratedIdentifier;
     public final String vendorAddressTypeCode;

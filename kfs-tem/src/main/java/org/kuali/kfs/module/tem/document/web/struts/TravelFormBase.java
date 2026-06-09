@@ -133,7 +133,7 @@ public abstract class TravelFormBase extends KualiAccountingDocumentFormBase imp
     protected boolean perDiemCreatable = true;
 
     protected TravelFormBase() {
-        this.accountDistributionnextSourceLineNumber = new Integer(1);
+        this.accountDistributionnextSourceLineNumber = Integer.valueOf(1);
         this.setAccountDistributionnewSourceLine(setupNewAccountDistributionAccountingLine());
         this.setNewActualExpenseLine(new ActualExpense());
         this.setNewActualExpenseLines(new ArrayList<ActualExpense>());
@@ -141,7 +141,7 @@ public abstract class TravelFormBase extends KualiAccountingDocumentFormBase imp
 
     protected TemDistributionAccountingLine setupNewAccountDistributionAccountingLine() {
         TemDistributionAccountingLine accountingLine = new TemDistributionAccountingLine();
-        accountingLine.setSequenceNumber(new Integer(0));
+        accountingLine.setSequenceNumber(Integer.valueOf(0));
         return accountingLine;
     }
 
@@ -869,7 +869,7 @@ public abstract class TravelFormBase extends KualiAccountingDocumentFormBase imp
     public void addAccountDistributionsourceAccountingLine(TemDistributionAccountingLine line) {
         line.setSequenceNumber(this.getAccountDistributionnextSourceLineNumber());
         this.getAccountDistributionsourceAccountingLines().add(line);
-        this.accountDistributionnextSourceLineNumber = new Integer(this.getAccountDistributionnextSourceLineNumber().intValue() + 1);
+        this.accountDistributionnextSourceLineNumber = Integer.valueOf(this.getAccountDistributionnextSourceLineNumber().intValue() + 1);
         this.setAccountDistributionnewSourceLine(setupNewAccountDistributionAccountingLine());
     }
 

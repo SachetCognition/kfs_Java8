@@ -309,7 +309,7 @@ public class CollectorFlatFileInputType extends BatchInputFileTypeBase {
             }
             
             if ( null == originEntry.getTransactionLedgerEntrySequenceNumber() ) {
-                originEntry.setTransactionLedgerEntrySequenceNumber(new Integer(1));
+                originEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(1));
             }
                 
             if (StringUtils.isBlank(originEntry.getSubAccountNumber())) {

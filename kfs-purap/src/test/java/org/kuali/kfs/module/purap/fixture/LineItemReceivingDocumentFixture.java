@@ -35,8 +35,8 @@ public enum LineItemReceivingDocumentFixture {
             "",//shipmentReferenceNumber,
             "",//shipmentBillOfLadingNumber,
             new Date(108, 7, 11),//shipmentReceivedDate,
-            new Integer(0),//vendorHeaderGeneratedIdentifier,
-            new Integer(0),//vendorDetailAssignedIdentifier,
+            Integer.valueOf(0),//vendorHeaderGeneratedIdentifier,
+            Integer.valueOf(0),//vendorDetailAssignedIdentifier,
             "",//vendorName,
             "",//vendorLine1Address,
             "",//vendorLine2Address,
@@ -60,14 +60,14 @@ public enum LineItemReceivingDocumentFixture {
             new Date(108, 7, 11),//deliveryRequiredDate,
             "",//deliveryInstructionText,
             null,//deliveryRequiredDateReasonCode,    
-            new Integer(0),//alternateVendorHeaderGeneratedIdentifier,
-            new Integer(0),//alternateVendorDetailAssignedIdentifier,
+            Integer.valueOf(0),//alternateVendorHeaderGeneratedIdentifier,
+            Integer.valueOf(0),//alternateVendorDetailAssignedIdentifier,
             "",//alternateVendorName,        
             false,//deliveryBuildingOther,
             null,//vendorNumber,
-            new Integer(0),//vendorAddressGeneratedIdentifier,
+            Integer.valueOf(0),//vendorAddressGeneratedIdentifier,
             null,//alternateVendorNumber
-            new Integer(0),//purchaseOrderIdentifier
+            Integer.valueOf(0),//purchaseOrderIdentifier
             new LineItemReceivingItemFixture[] {} //lineItemReceivingItemFixtures
         ),    
     REQUIRED_FIELDS(
@@ -76,8 +76,8 @@ public enum LineItemReceivingDocumentFixture {
         "",//shipmentReferenceNumber,
         "",//shipmentBillOfLadingNumber,
         new Date(108, 7, 11),//shipmentReceivedDate,
-        new Integer(1000),//vendorHeaderGeneratedIdentifier,
-        new Integer(0),//vendorDetailAssignedIdentifier,
+        Integer.valueOf(1000),//vendorHeaderGeneratedIdentifier,
+        Integer.valueOf(0),//vendorDetailAssignedIdentifier,
         "ABC CLEANING SERVICES",//vendorName,
         "123456 BROAD ST",//vendorLine1Address,
         "",//vendorLine2Address,
@@ -101,14 +101,14 @@ public enum LineItemReceivingDocumentFixture {
         new Date(108, 7, 11),//deliveryRequiredDate,
         "",//deliveryInstructionText,
         "",//deliveryRequiredDateReasonCode,    
-        new Integer(0),//alternateVendorHeaderGeneratedIdentifier,
-        new Integer(0),//alternateVendorDetailAssignedIdentifier,
+        Integer.valueOf(0),//alternateVendorHeaderGeneratedIdentifier,
+        Integer.valueOf(0),//alternateVendorDetailAssignedIdentifier,
         "",//alternateVendorName,        
         false,//deliveryBuildingOther,
         "1000-0",//vendorNumber,
-        new Integer(1000),//vendorAddressGeneratedIdentifier,
+        Integer.valueOf(1000),//vendorAddressGeneratedIdentifier,
         null,//alternateVendorNumber
-        new Integer(0),//purchaseOrderIdentifier
+        Integer.valueOf(0),//purchaseOrderIdentifier
         new LineItemReceivingItemFixture[] { //lineItemReceivingItemFixtures
             LineItemReceivingItemFixture.NORMAL_ITEM_1 }
     );
