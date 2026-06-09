@@ -284,8 +284,6 @@ public class AssetTransferDocumentRule extends GeneralLedgerPostingDocumentRuleB
 
         return valid;
     }
-
-
     /**
      * This method validates location information provided by the user
      * 
@@ -301,8 +299,6 @@ public class AssetTransferDocumentRule extends GeneralLedgerPostingDocumentRuleB
         GlobalVariables.getMessageMap().removeFromErrorPath(CamsConstants.DOCUMENT_PATH);
         return valid;
     }
-
-
     /**
      * This method checks if reference objects exist in the database or not
      * 
@@ -376,8 +372,6 @@ public class AssetTransferDocumentRule extends GeneralLedgerPostingDocumentRuleB
         }
         return valid;
     }
-
-
     /**
      * This method validates the new owner organization and account provided
      * 
@@ -527,8 +521,6 @@ public class AssetTransferDocumentRule extends GeneralLedgerPostingDocumentRuleB
         }
         return assetLockService;
     }
-
-
     public void setAssetService(AssetService assetService) {
         this.assetService = assetService;
     }

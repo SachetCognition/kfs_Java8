@@ -22,15 +22,33 @@ package org.kuali.kfs.module.cam.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Asset Transaction Type Business Object.
  */
+@Entity
+@Table(name = "CM_CPTLAST_LOCK_T")
+@IdClass(AssetLockId.class)
 public class AssetLock extends PersistableBusinessObjectBase{
 
+    @Id
+
+    @Column(name = "DOC_HDR_ID")
+
     private String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Id
+    @Column(name = "LOCK_INFO_TXT")
     private String lockingInformation;
+    @Column(name = "DOC_TYP_NM")
     private String documentTypeName;
 
     /**

@@ -20,8 +20,6 @@ package org.kuali.kfs.module.cam.dataaccess;
 
 import java.util.Collection;
 import java.util.List;
-
-
 public interface CapitalAssetLockDao {
     List<String> getLockingDocumentNumbers(Collection capitalAssetNumbers, Collection documentTypeNames, String documentNumber);
 }

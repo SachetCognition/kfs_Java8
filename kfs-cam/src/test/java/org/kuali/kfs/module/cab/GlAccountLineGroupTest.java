@@ -97,6 +97,4 @@ public class GlAccountLineGroupTest extends KualiTestBase {
         entry.setTransactionLedgerEntryAmount(amount);
         return entry;
     }
-
-
 }

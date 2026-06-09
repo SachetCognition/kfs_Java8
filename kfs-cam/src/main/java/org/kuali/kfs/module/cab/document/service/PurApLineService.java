@@ -26,8 +26,6 @@ import org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableActionHi
 import org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableDocument;
 import org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableItemAsset;
 import org.kuali.kfs.module.cab.document.web.PurApLineSession;
-
-
 /**
  * This class declares methods used by CAB PurAp Line process
  */

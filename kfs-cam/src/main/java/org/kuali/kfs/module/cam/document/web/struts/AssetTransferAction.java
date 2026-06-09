@@ -121,8 +121,6 @@ public class AssetTransferAction extends FinancialSystemTransactionalDocumentAct
             assetTransferDocument.refreshReferenceObject(CamsPropertyConstants.AssetTransferDocument.ASSET);
         }
     }
-
-
     /**
      * Since the organization fields are view only we need to make sure they are in sync with the data entry fields.
      * 
@@ -141,8 +139,6 @@ public class AssetTransferAction extends FinancialSystemTransactionalDocumentAct
 
         return actionForward;
     }
-
-
     /**
      * Route the document
      */

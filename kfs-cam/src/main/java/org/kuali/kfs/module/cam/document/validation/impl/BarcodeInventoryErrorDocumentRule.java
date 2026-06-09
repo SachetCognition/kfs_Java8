@@ -69,8 +69,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
     protected boolean processCustomSaveDocumentBusinessRules(Document document) {
         return true;
     }
-
-
     /**
      * Invokes several methods that validates each barcode error record
      *
@@ -234,8 +232,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         }
         return result;
     }
-
-
     /**
      * Validates that the existance of the building code is consistent with the asset type requirements.
      *
@@ -510,8 +506,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         }
         return result;
     }
-
-
     /**
      * Iterates over the list of errors each records might have and returns a single string with all the errors for each asset
      *
@@ -533,8 +527,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         }
         return (StringUtils.isEmpty(message) ? message : message.substring(2));
     }
-
-
     /**
      * Deletes the asset locking error messages from the GlobalVariables.
      *

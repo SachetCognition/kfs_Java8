@@ -35,8 +35,6 @@ public class AssetServiceTest extends KualiTestBase {
         super.setUp();
         assetService = SpringContext.getBean(AssetService.class);
     }
-
-
     public void testIsObjectSubTypeCompatible_Success() throws Exception {
         List<String> ls = new ArrayList<String>();
         ls.add("UC");

@@ -53,80 +53,143 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_DOC_T")
 public class AssetGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetGlobal.class);
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Column(name = "CPTLAST_ACQ_TYP_CD")
     private String acquisitionTypeCode;
+    @Column(name = "CPTLAST_DESC")
     private String capitalAssetDescription;
+    @Column(name = "AST_INVN_STAT_CD")
     private String inventoryStatusCode;
+    @Column(name = "CPTLAST_COND_CD")
     private String conditionCode;
+    @Column(name = "CPTLAST_TYP_CD")
     private String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_MFR_NM")
     private String manufacturerName;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     private String manufacturerModelNumber;
+    @Column(name = "CPTLAST_TOTCST_AMT")
     private KualiDecimal totalCostAmount;
+    @Column(name = "CPTL_AST_LAND_CNTY_NM")
     private String landCountyName;
+    @Column(name = "CPTL_AST_LAND_ACRG_SZ")
     private Integer landAcreageSize;
+    @Column(name = "CPTL_AST_LAND_PRCL_NBR")
     private String landParcelNumber;
+    @Column(name = "CPTLAST_VENDOR_NM")
     private String vendorName;
+    @Column(name = "ORG_TXT")
     private String organizationText;
+    @Column(name = "CPTLAST_CRT_DT")
     private Date createDate;
+    @Column(name = "CPTL_AST_IN_SRVC_DT")
     private Date capitalAssetInServiceDate;
+    @Column(name = "CPTL_AST_DEPR_DT")
     private Date capitalAssetDepreciationDate;
+    @Column(name = "AST_REP_UNVL_ID")
     private String representativeUniversalIdentifier;
+    @Column(name = "ORG_OWNER_COA_CD")
     private String organizationOwnerChartOfAccountsCode;
+    @Column(name = "ORG_OWNER_ACCT_NBR")
     private String organizationOwnerAccountNumber;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "FDOC_NXT_LINE_NBR")
     private Integer financialDocumentNextLineNumber;
+    @Transient
     private Asset separateSourceCapitalAsset;
+    @Column(name = "SEP_SRC_AST_PMT_SEQ_NBR")
     private Integer separateSourcePaymentSequenceNumber;
+    @Column(name = "CB_ORIGIN_IND")
+    @Type(type = "yes_no")
     private boolean capitalAssetBuilderOriginIndicator;
     
+    @Column(name = "FDOC_POST_PRD_CD")
+    
     protected String financialDocumentPostingPeriodCode;
+    @Column(name = "FDOC_POST_YR")
     protected Integer financialDocumentPostingYear;
 
 // CSU 6702 END
+    @Transient
     protected String universityFiscalPeriodName;
 // CSU 6702 END    
 
     // Not Persisted   
+    @Transient
     private AccountingPeriod accountingPeriod;
+    @Transient
     private Date lastInventoryDate;
+    @Transient
     private ContractsAndGrantsAgency agency;
+    @Transient
     private Person assetRepresentative;
+    @Transient
     private AssetType capitalAssetType;
+    @Transient
     private AssetCondition assetCondition;
+    @Transient
     private AssetStatus inventoryStatus;
+    @Transient
     private List<AssetGlobalDetail> assetGlobalDetails;
+    @Transient
     private List<AssetGlobalDetail> assetSharedDetails;
+    @Transient
     private List<AssetPaymentDetail> assetPaymentDetails;
+    @Transient
     private AssetAcquisitionType acquisitionType;
+    @Transient
     private Chart organizationOwnerChartOfAccounts;
+    @Transient
     private Account organizationOwnerAccount;
 
     // field is here so that AssetLookupableHelperServiceImpl can pass action information
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "SEP_SRC_CPTLAST_NBR")
     private Long separateSourceCapitalAssetNumber;
 
-    // Calculate Equal Source Amounts button
+    @Transient
     private String calculateEqualSourceAmountsButton;
 
-    // calculate remaining source amount
+    @Transient
     private KualiDecimal separateSourceRemainingAmount;
+    @Transient
     private KualiDecimal separateSourceTotalAmount;
+    @Transient
     private String calculateSeparateSourceRemainingAmountButton;
 
+    @Transient
     private List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
+    @Transient
     private FinancialSystemDocumentHeader documentHeader;
+    @Transient
     private KualiDecimal totalAssetPaymentAmount;
 
-    //
+    @Transient
     private KualiDecimal minAssetTotalAmount;
+    @Transient
     private KualiDecimal maxAssetTotalAmount;
 
     // CSU 6702 BEGIN
@@ -160,8 +223,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
-
-
     /**
      * Gets the acquisitionTypeCode attribute.
      * 
@@ -179,8 +240,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setAcquisitionTypeCode(String acquisitionTypeCode) {
         this.acquisitionTypeCode = acquisitionTypeCode;
     }
-
-
     /**
      * Gets the capitalAssetDescription attribute.
      * 
@@ -198,8 +257,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setCapitalAssetDescription(String capitalAssetDescription) {
         this.capitalAssetDescription = capitalAssetDescription;
     }
-
-
     /**
      * Gets the inventoryStatusCode attribute.
      * 
@@ -217,8 +274,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setInventoryStatusCode(String inventoryStatusCode) {
         this.inventoryStatusCode = inventoryStatusCode;
     }
-
-
     /**
      * Gets the conditionCode attribute.
      * 
@@ -236,8 +291,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setConditionCode(String conditionCode) {
         this.conditionCode = conditionCode;
     }
-
-
     /**
      * Gets the capitalAssetTypeCode attribute.
      * 
@@ -255,8 +308,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setCapitalAssetTypeCode(String capitalAssetTypeCode) {
         this.capitalAssetTypeCode = capitalAssetTypeCode;
     }
-
-
     /**
      * Gets the manufacturerName attribute.
      * 
@@ -310,8 +361,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setTotalCostAmount(KualiDecimal totalCostAmount) {
         this.totalCostAmount = totalCostAmount;
     }
-
-
     /**
      * Gets the landCountyName attribute.
      * 
@@ -705,8 +754,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         }
         return true;
     }
-
-
     public List<? extends GlobalBusinessObjectDetail> getAllDetailObjects() {
         return getAssetGlobalDetails();
     }
@@ -746,8 +793,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setFinancialDocumentPostingPeriodCode(String financialDocumentPostingPeriodCode) {
         this.financialDocumentPostingPeriodCode = financialDocumentPostingPeriodCode;
     }
-
-
     /**
      * Gets the financialDocumentPostingYear attribute.
      *
@@ -1171,7 +1216,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public String getUniversityFiscalPeriodName() {
         if (StringUtils.isNotBlank(universityFiscalPeriodName)) {        
             this.setFinancialDocumentPostingPeriodCode(StringUtils.left(universityFiscalPeriodName, 2));
-            this.setFinancialDocumentPostingYear(Integer.valueOf(StringUtils.right(universityFiscalPeriodName, 4)));
+            this.setFinancialDocumentPostingYear(new Integer(StringUtils.right(universityFiscalPeriodName, 4)));
         }
         
         if (StringUtils.isBlank(universityFiscalPeriodName)) {
@@ -1198,7 +1243,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         String THIRTEEN = "13";
         if (StringUtils.isNotBlank(universityFiscalPeriodName) && StringUtils.left(universityFiscalPeriodName, 2).equals(THIRTEEN)) {
             String period = StringUtils.left(universityFiscalPeriodName, 2);
-            Integer year = Integer.valueOf(StringUtils.right(universityFiscalPeriodName, 4));
+            Integer year = new Integer(StringUtils.right(universityFiscalPeriodName, 4));
             AccountingPeriod accountingPeriod = getAccountingPeriodService().getByPeriod(period, year);
             setAccountingPeriod(accountingPeriod);
         }
@@ -1228,7 +1273,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         String THIRTEEN = "13";
         if (StringUtils.isNotBlank(accountingPeriodString) && StringUtils.left(accountingPeriodString, 2).equals(THIRTEEN)) {
             String period = StringUtils.left(accountingPeriodString, 2);
-            Integer year = Integer.valueOf(StringUtils.right(accountingPeriodString, 4));
+            Integer year = new Integer(StringUtils.right(accountingPeriodString, 4));
             AccountingPeriod accountingPeriod = getAccountingPeriodService().getByPeriod(period, year);
             setAccountingPeriod(accountingPeriod);
         }

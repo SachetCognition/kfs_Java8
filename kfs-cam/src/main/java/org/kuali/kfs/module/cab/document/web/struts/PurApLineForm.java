@@ -59,8 +59,6 @@ public class PurApLineForm extends KualiForm {
     private boolean selectAll;
 
     private String documentNumber;
-
-
     public PurApLineForm() {
         this.purApDocs = new ArrayList<PurchasingAccountsPayableDocument>();
     }
@@ -78,8 +76,6 @@ public class PurApLineForm extends KualiForm {
         super.addRequiredNonEditableProperties();
         registerRequiredNonEditableProperty(CabPropertyConstants.PurchasingAccountsPayableDocument.PURCHASE_ORDER_IDENTIFIER);
     }
-
-
     /**
      * Gets the documentNumber attribute.
      * 
@@ -88,8 +84,6 @@ public class PurApLineForm extends KualiForm {
     public String getDocumentNumber() {
         return documentNumber;
     }
-
-
     /**
      * Sets the documentNumber attribute value.
      * 
@@ -98,8 +92,6 @@ public class PurApLineForm extends KualiForm {
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
-
-
     /**
      * Gets the requisitionIdentifier attribute.
      * 
@@ -108,8 +100,6 @@ public class PurApLineForm extends KualiForm {
     public Integer getRequisitionIdentifier() {
         return requisitionIdentifier;
     }
-
-
     /**
      * Sets the requisitionIdentifier attribute value.
      * 
@@ -127,8 +117,6 @@ public class PurApLineForm extends KualiForm {
     public KualiDecimal getMergeQty() {
         return mergeQty;
     }
-
-
     /**
      * Sets the mergeQty attribute value.
      * 
@@ -137,8 +125,6 @@ public class PurApLineForm extends KualiForm {
     public void setMergeQty(KualiDecimal mergeQty) {
         this.mergeQty = mergeQty;
     }
-
-
     /**
      * Gets the mergeDesc attribute.
      * 
@@ -147,8 +133,6 @@ public class PurApLineForm extends KualiForm {
     public String getMergeDesc() {
         return mergeDesc;
     }
-
-
     /**
      * Sets the mergeDesc attribute value.
      * 
@@ -157,8 +141,6 @@ public class PurApLineForm extends KualiForm {
     public void setMergeDesc(String mergeDesc) {
         this.mergeDesc = mergeDesc;
     }
-
-
     /**
      * Gets the purApContactEmailAddress attribute.
      * 
@@ -167,8 +149,6 @@ public class PurApLineForm extends KualiForm {
     public String getPurApContactEmailAddress() {
         return purApContactEmailAddress;
     }
-
-
     /**
      * Sets the purApContactEmailAddress attribute value.
      * 
@@ -177,8 +157,6 @@ public class PurApLineForm extends KualiForm {
     public void setPurApContactEmailAddress(String purApContactEmailAddress) {
         this.purApContactEmailAddress = purApContactEmailAddress;
     }
-
-
     /**
      * Gets the purApContactPhoneNumber attribute.
      * 
@@ -187,8 +165,6 @@ public class PurApLineForm extends KualiForm {
     public String getPurApContactPhoneNumber() {
         return purApContactPhoneNumber;
     }
-
-
     /**
      * Sets the purApContactPhoneNumber attribute value.
      * 
@@ -197,8 +173,6 @@ public class PurApLineForm extends KualiForm {
     public void setPurApContactPhoneNumber(String purApContactPhoneNumber) {
         this.purApContactPhoneNumber = purApContactPhoneNumber;
     }
-
-
     /**
      * Gets the actionPurApDocIndex attribute.
      * 
@@ -207,8 +181,6 @@ public class PurApLineForm extends KualiForm {
     public int getActionPurApDocIndex() {
         return actionPurApDocIndex;
     }
-
-
     /**
      * Sets the actionPurApDocIndex attribute value.
      * 
@@ -217,8 +189,6 @@ public class PurApLineForm extends KualiForm {
     public void setActionPurApDocIndex(int actionPurApDocIndex) {
         this.actionPurApDocIndex = actionPurApDocIndex;
     }
-
-
     /**
      * Gets the actionItemAssetIndex attribute.
      * 
@@ -227,8 +197,6 @@ public class PurApLineForm extends KualiForm {
     public int getActionItemAssetIndex() {
         return actionItemAssetIndex;
     }
-
-
     /**
      * Sets the actionItemAssetIndex attribute value.
      * 
@@ -237,8 +205,6 @@ public class PurApLineForm extends KualiForm {
     public void setActionItemAssetIndex(int actionItemAssetIndex) {
         this.actionItemAssetIndex = actionItemAssetIndex;
     }
-
-
     /**
      * Gets the purchaseOrderIdentifier attribute.
      * 
@@ -247,8 +213,6 @@ public class PurApLineForm extends KualiForm {
     public Integer getPurchaseOrderIdentifier() {
         return purchaseOrderIdentifier;
     }
-
-
     /**
      * Sets the purchaseOrderIdentifier attribute value.
      * 
@@ -257,8 +221,6 @@ public class PurApLineForm extends KualiForm {
     public void setPurchaseOrderIdentifier(Integer purchaseOrderIdentifier) {
         this.purchaseOrderIdentifier = purchaseOrderIdentifier;
     }
-
-
     /**
      * Gets the purApDocs attribute.
      * 
@@ -267,8 +229,6 @@ public class PurApLineForm extends KualiForm {
     public List<PurchasingAccountsPayableDocument> getPurApDocs() {
         return purApDocs;
     }
-
-
     /**
      * Sets the purApDocs attribute value.
      * 
@@ -277,8 +237,6 @@ public class PurApLineForm extends KualiForm {
     public void setPurApDocs(List<PurchasingAccountsPayableDocument> purApDocs) {
         this.purApDocs = purApDocs;
     }
-
-
     /**
      * Gets the purchaseOrderInquiryUrl attribute.
      * 
@@ -287,8 +245,6 @@ public class PurApLineForm extends KualiForm {
     public String getPurchaseOrderInquiryUrl() {
         return purchaseOrderInquiryUrl;
     }
-
-
     @Override
     public void populate(HttpServletRequest request) {
         super.populate(request);
@@ -320,13 +276,9 @@ public class PurApLineForm extends KualiForm {
     private PurApInfoService getPurApInfoService() {
         return SpringContext.getBean(PurApInfoService.class);
     }
-
-
     public boolean isSelectAll() {
         return selectAll;
     }
-
-
     public void setSelectAll(boolean selectAll) {
         this.selectAll = selectAll;
     }

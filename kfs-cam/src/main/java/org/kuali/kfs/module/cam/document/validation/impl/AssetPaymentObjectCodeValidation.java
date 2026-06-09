@@ -104,6 +104,4 @@ public class AssetPaymentObjectCodeValidation extends GenericValidation {
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
-
 }

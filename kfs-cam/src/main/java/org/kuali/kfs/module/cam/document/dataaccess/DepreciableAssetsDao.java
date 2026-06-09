@@ -41,7 +41,5 @@ public interface DepreciableAssetsDao {
      * @return
      */
     public List<String[]> generateStatistics(boolean beforeDepreciationReport, List<String> documentNumbers, Integer fiscalYear, Integer fiscalMonth, Calendar depreciationDate, String depreciationRunDate, Collection<AssetObjectCode> assetObjectCodes, int fiscalStartMonth, String errorMessage);
-
-
  
 }

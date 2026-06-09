@@ -151,8 +151,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
 
             input = new BufferedReader(new FileReader(file));
             String line = null;
-
-
             while ((line = input.readLine()) != null) {
                 recordCount++;
                 errorMsg = "";
@@ -213,8 +211,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
                     if(!validateDate(column[2])) {
                         errorMsg += ", " + InventoryDateLabel + " is invalid";
                     }
-
-
 
                 }
                 if (!StringUtils.isBlank(errorMsg)) {
@@ -425,8 +421,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
         form.getMessages().add(TOTAL_RECORDS_UPLOADED_MSG + ": " + StringUtils.rightPad(Integer.toString(totalRecCount), 5, " "));
         form.getMessages().add(TOTAL_RECORDS_IN_ERROR_MSG + ": " + StringUtils.rightPad(Integer.toString(errorRecCount), 5, " "));
     }
-
-
     /**
      * This method...
      * 
@@ -480,8 +474,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
         }
         return documentsCreated;
     }
-
-
     /**
      * This method updates the asset information particularly the building code, bulding room, building subrool, campus code, and
      * condition code
@@ -546,8 +538,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
 
         return document;
     }
-
-
     /**
      * saves the barcode inventory document
      * 

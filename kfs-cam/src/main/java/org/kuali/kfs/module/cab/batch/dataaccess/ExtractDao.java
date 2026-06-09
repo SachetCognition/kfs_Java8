@@ -35,8 +35,6 @@ public interface ExtractDao {
      * @return GL Entries
      */
     Collection<Entry> findMatchingGLEntries(BatchParameters batchParameters);
-
-
     /**
      * This method implementation should find valid Credit Memo account line changes as per the batch parameters
      *

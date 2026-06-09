@@ -265,8 +265,6 @@ public class AssetBarcodeInventoryInputFileType implements BatchInputFileSetType
     public String generateFileName(String fileType, String principalName, String fileUserIdentifer) {
         return null;
     }
-
-
     public String getFileExtension(String fileType) {
         return "." + fileType;
     }

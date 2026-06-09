@@ -102,8 +102,6 @@ public class AccountLineGroupTest extends KualiTestBase {
         GlAccountLineGroup first = new GlAccountLineGroup(entry);
         return first;
     }
-
-
     private PurApAccountLineGroup createPurApAccountLineGroup(Integer i, String chartCode, String acctNum, String subAcctNum, String objCd, String subObjCd, String fiscalPrd, String docNum, String refDocNum, KualiDecimal amount, Class<? extends PurApAccountingLineBase> clazz) {
         PurApAccountingLineBase entry = createEntry(i, chartCode, acctNum, subAcctNum, objCd, subObjCd, fiscalPrd, docNum, refDocNum, amount, clazz);
         PurApAccountLineGroup first = new PurApAccountLineGroupTest.PurApAccountLineGroupTestable(entry, docNum, refDocNum);

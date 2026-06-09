@@ -33,15 +33,31 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetail;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+
+@Table(name = "CM_AST_LOC_DOC_T")
+
 public class AssetLocationGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+	@Id
+
+	@Column(name = "FDOC_NBR")
+
 	private String documentNumber;
+    @Transient
     private DocumentHeader documentHeader;
+    @Transient
     private List<AssetLocationGlobalDetail> assetLocationGlobalDetails;
     
 	/**

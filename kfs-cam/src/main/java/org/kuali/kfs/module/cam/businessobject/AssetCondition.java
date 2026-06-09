@@ -22,14 +22,29 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_CONDITION_T")
 public class AssetCondition extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "CPTLAST_COND_CD")
+
     private String assetConditionCode;
+    @Column(name = "CPTLAST_COND_NM")
     private String assetConditionName;
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     /**
@@ -56,8 +71,6 @@ public class AssetCondition extends PersistableBusinessObjectBase implements Mut
     public void setAssetConditionCode(String assetConditionCode) {
         this.assetConditionCode = assetConditionCode;
     }
-
-
     /**
      * Gets the assetConditionName attribute.
      * 
@@ -75,8 +88,6 @@ public class AssetCondition extends PersistableBusinessObjectBase implements Mut
     public void setAssetConditionName(String assetConditionName) {
         this.assetConditionName = assetConditionName;
     }
-
-
     /**
      * Gets the active attribute.
      * 
@@ -94,8 +105,6 @@ public class AssetCondition extends PersistableBusinessObjectBase implements Mut
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */

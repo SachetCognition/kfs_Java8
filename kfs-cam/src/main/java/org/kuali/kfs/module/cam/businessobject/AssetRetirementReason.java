@@ -22,15 +22,32 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_RETIRE_REAS_T")
 public class AssetRetirementReason extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "AST_RETIRE_REAS_CD")
+
     private String retirementReasonCode;
+    @Column(name = "AST_RETIRE_REAS_NM")
     private String retirementReasonName;
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
+    @Column(name = "AST_RETIRE_REAS_RSTR_IND")
+    @Type(type = "yes_no")
     private boolean retirementReasonRestrictionIndicator;
 
     /**
@@ -57,8 +74,6 @@ public class AssetRetirementReason extends PersistableBusinessObjectBase impleme
     public void setRetirementReasonCode(String retirementReasonCode) {
         this.retirementReasonCode = retirementReasonCode;
     }
-
-
     /**
      * Gets the retirementReasonName attribute.
      * 
@@ -76,8 +91,6 @@ public class AssetRetirementReason extends PersistableBusinessObjectBase impleme
     public void setRetirementReasonName(String retirementReasonName) {
         this.retirementReasonName = retirementReasonName;
     }
-
-
     /**
      * Gets the active attribute.
      * 

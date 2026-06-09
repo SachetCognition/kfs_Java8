@@ -52,18 +52,35 @@ import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * Capital assets document class for the asset payment document
  */
+@Entity
+@Table(name = "CM_AST_PMT_DOC_T")
 public class AssetPaymentDocument extends AccountingDocumentBase implements Copyable, AmountTotaling {
 	protected static Logger LOG = Logger.getLogger(AssetPaymentDocument.class);
 
+	@Transient
+
 	protected List<AssetPaymentAssetDetail> assetPaymentAssetDetail;
 	protected Long capitalAssetNumber;
+	@Column(name = "CB_ORIGIN_IND")
+	@Type(type = "yes_no")
 	protected boolean capitalAssetBuilderOriginIndicator;
+	@Transient
 	protected AssetPaymentAllocationType assetPaymentAllocationType; 
+	@Column(name = "AST_PMT_DST_CD")
 	protected String assetPaymentAllocationTypeCode;
+	@Column(name = "AST_PMT_DIST_CD_FROM_FP_IND")
+	@Type(type = "yes_no")
 	protected boolean allocationFromFPDocuments;
 	
     public AssetPaymentDocument() {
@@ -240,8 +257,6 @@ public class AssetPaymentDocument extends AccountingDocumentBase implements Copy
             // CSU 6702 END Inferred change            
         }
 	}
-
-
 	public List<AssetPaymentAssetDetail> getAssetPaymentAssetDetail() {
 		return assetPaymentAssetDetail;
 	}

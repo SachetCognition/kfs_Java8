@@ -39,8 +39,6 @@ public abstract class CamsGeneralLedgerPendingEntrySourceBase implements General
     private List<GeneralLedgerPendingEntry> pendingEntries = new ArrayList<GeneralLedgerPendingEntry>();
     private FinancialSystemDocumentHeader documentHeader;
     private List<GeneralLedgerPendingEntrySourceDetail> postables = new ArrayList<GeneralLedgerPendingEntrySourceDetail>();
-
-
     public CamsGeneralLedgerPendingEntrySourceBase(FinancialSystemDocumentHeader documentHeader) {
         this.documentHeader = documentHeader;
     }
@@ -119,8 +117,6 @@ public abstract class CamsGeneralLedgerPendingEntrySourceBase implements General
             removeGeneralLedgerPendingEntries(documentHeader.getDocumentNumber());
         }
     }
-
-
     /**
      * This method calls the service to remove all of the GLPE's associated with this document
      */

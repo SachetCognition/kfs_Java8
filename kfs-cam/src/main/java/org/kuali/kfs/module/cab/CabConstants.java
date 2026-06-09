@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.kuali.kfs.module.cab;
-
-
 public class CabConstants {
     public static final String PREQ = "PREQ";
     public static final String CM = "CM";

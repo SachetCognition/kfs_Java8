@@ -34,24 +34,51 @@ import org.kuali.rice.krad.service.PersistenceStructureService;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+
+@Table(name = "CM_AST_LOC_DTL_T")
+
+@IdClass(AssetLocationGlobalDetailId.class)
+
 public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
     private static final Logger LOG = Logger.getLogger(AssetLocationGlobalDetail.class);
 
+	@Id
+
+	@Column(name = "FDOC_NBR")
+
 	protected String documentNumber;
+	@Id
+	@Column(name = "CPTLAST_NBR")
 	protected Long capitalAssetNumber;
+	@Column(name = "CAMPUS_CD")
 	protected String campusCode;
+	@Column(name = "BLDG_CD")
 	protected String buildingCode;
+	@Column(name = "BLDG_ROOM_NBR")
 	protected String buildingRoomNumber;
+	@Column(name = "BLDG_SUB_ROOM_NBR")
 	protected String buildingSubRoomNumber;
+	@Column(name = "CPTLAST_TAG_NBR")
 	protected String campusTagNumber;
+
+    @Transient
 
     protected Asset asset;
     protected CampusEbo campus;
+    @Transient
     protected Building building;
     protected Room buildingRoom;
 
@@ -83,8 +110,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setDocumentNumber(String documentNumber) {
 		this.documentNumber = documentNumber;
 	}
-
-
 	/**
 	 * Gets the capitalAssetNumber attribute.
 	 *
@@ -104,8 +129,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setCapitalAssetNumber(Long capitalAssetNumber) {
 		this.capitalAssetNumber = capitalAssetNumber;
 	}
-
-
 	/**
 	 * Gets the campusCode attribute.
 	 *
@@ -125,8 +148,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setCampusCode(String campusCode) {
 		this.campusCode = campusCode;
 	}
-
-
 	/**
 	 * Gets the buildingCode attribute.
 	 *
@@ -146,8 +167,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setBuildingCode(String buildingCode) {
 		this.buildingCode = buildingCode;
 	}
-
-
 	/**
 	 * Gets the buildingRoomNumber attribute.
 	 *
@@ -167,8 +186,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setBuildingRoomNumber(String buildingRoomNumber) {
 		this.buildingRoomNumber = buildingRoomNumber;
 	}
-
-
 	/**
 	 * Gets the buildingSubRoomNumber attribute.
 	 *
@@ -188,8 +205,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
 		this.buildingSubRoomNumber = buildingSubRoomNumber;
 	}
-
-
 	/**
 	 * Gets the campusTagNumber attribute.
 	 *

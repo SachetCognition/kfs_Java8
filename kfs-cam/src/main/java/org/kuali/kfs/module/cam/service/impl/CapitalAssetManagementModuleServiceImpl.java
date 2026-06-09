@@ -206,8 +206,6 @@ public class CapitalAssetManagementModuleServiceImpl implements CapitalAssetMana
 
         return true;
     }
-
-
     /**
      * Remove asset locks if document won't move towards Final status.
      *

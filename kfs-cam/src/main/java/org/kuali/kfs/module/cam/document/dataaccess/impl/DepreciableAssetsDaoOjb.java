@@ -58,8 +58,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
     protected final static String PAYMENT_TO_OBJECT_REFERENCE_DESCRIPTOR = "financialObject.";
     protected final static String ASSET_TO_ASSET_TYPE_REFERENCE_DESCRIPTOR = "asset.capitalAssetType.";
     protected final static String[] REPORT_GROUP = { "*** BEFORE RUNNING DEPRECIATION PROCESS ****", "*** AFTER RUNNING DEPRECIATION PROCESS ****" };
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.dataaccess.DepreciableAssetsDao#generateStatistics(boolean, java.lang.String,
      *      java.lang.Integer, java.lang.Integer, java.util.Calendar)
@@ -74,8 +72,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
         NumberFormat usdFormat = NumberFormat.getCurrencyInstance(Locale.US);
         KualiDecimal amount = new KualiDecimal(0);
         String[] columns = new String[2];
-
-
         columns[1] = "******************";
         if (beforeDepreciationReport)
             columns[0] = REPORT_GROUP[0];
@@ -88,8 +84,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
             columns[0] = "Depreciation Run Date";
             columns[1] = depreciationRunDate; 
             reportLine.add(columns.clone());
-
-
             columns[0] = "Fiscal Year";
             columns[1] = (fiscalYear.toString());
             reportLine.add(columns.clone());
@@ -251,8 +245,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
             columns[1] = data[0].toString();
             reportLine.add(columns.clone());
         }
-
-
         if (!beforeDepreciationReport) {
             // Generating a list of depreciation expense object codes.
             List<String> depreExpObjCodes = this.getExpenseObjectCodes(assetObjectCodes);
@@ -365,8 +357,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
         LOG.info(CamsConstants.Depreciation.DEPRECIATION_BATCH + "Finished generating statistics for report - " + (beforeDepreciationReport ? "Before part." : "After part"));
         return reportLine;
     }
-
-
     /**
      * This method returns the number of records found resulting from a join of the organization table and the account table
      * 

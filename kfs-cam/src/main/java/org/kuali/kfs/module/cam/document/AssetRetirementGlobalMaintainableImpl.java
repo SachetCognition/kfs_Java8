@@ -58,8 +58,6 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.ObjectUtils;
-
-
 /**
  * This class overrides the base {@link KualiGlobalMaintainableImpl} to generate the specific maintenance locks for Global location
  * assets
@@ -69,8 +67,6 @@ public class AssetRetirementGlobalMaintainableImpl extends LedgerPostingMaintain
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetRetirementGlobalMaintainableImpl.class);
     protected static final String RETIRED_ASSET_TRANSFERRED_EXTERNALLY = "RetiredAssetTransferredExternally";
     protected static final String RETIRED_ASSET_SOLD_OR_GIFTED = "RetiredAssetSoldOrGifted";
-
-
     /**
      * @see org.kuali.kfs.sys.document.FinancialSystemGlobalMaintainable#answerSplitNodeQuestion(java.lang.String)
      */
@@ -100,8 +96,6 @@ public class AssetRetirementGlobalMaintainableImpl extends LedgerPostingMaintain
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
-
-
     @Override
     public void setupNewFromExisting(MaintenanceDocument document, Map<String, String[]> parameters) {
         super.setupNewFromExisting(document, parameters);
@@ -170,8 +164,6 @@ public class AssetRetirementGlobalMaintainableImpl extends LedgerPostingMaintain
             super.addMultipleValueLookupResults(document, collectionName, rawValues, needsBlank, bo);
         }
     }
-
-
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#refresh(java.lang.String, java.util.Map,
      *      org.kuali.rice.kns.document.MaintenanceDocument)
@@ -310,8 +302,6 @@ public class AssetRetirementGlobalMaintainableImpl extends LedgerPostingMaintain
     private String getClosingDate(Integer closingYear) {
         return SpringContext.getBean(AssetGlobalService.class).getFiscalYearEndDayAndMonth() + closingYear.toString();
     }
-
-
     /**
      * Return the calendar Date for the closing year
      * @param closingYear
@@ -345,8 +335,6 @@ public class AssetRetirementGlobalMaintainableImpl extends LedgerPostingMaintain
             }
         }
     }
-
-
     /**
      * Update assetRetirementGlobal fields for period 13
      * @param assetRetirementGlobal

@@ -88,6 +88,4 @@ public class AssetPaymentOriginCodeValidation extends GenericValidation {
     public void setDataDictionaryService(DataDictionaryService dataDictionaryService) {
         this.dataDictionaryService = dataDictionaryService;
     }
-
-
 }

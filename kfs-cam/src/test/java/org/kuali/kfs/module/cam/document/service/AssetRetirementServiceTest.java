@@ -49,8 +49,6 @@ public class AssetRetirementServiceTest extends KualiTestBase {
         assetRetirementService = SpringContext.getBean(AssetRetirementService.class);
         universityDateService = SpringContext.getBean(UniversityDateService.class);
     }
-
-
     /**
      * Test capital asset with active payments
      * 

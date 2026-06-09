@@ -24,17 +24,36 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.integration.cab.CapitalAssetBuilderAssetTransactionType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * Asset Transaction Type Business Object.
  */
+@Entity
+@Table(name = "CB_AST_TRN_TYP_T")
 public class AssetTransactionType extends PersistableBusinessObjectBase implements CapitalAssetBuilderAssetTransactionType, MutableInactivatable {
 
+    @Id
+
+    @Column(name = "CPTL_AST_TRN_TYP_CD")
+
     private String capitalAssetTransactionTypeCode;
+    @Column(name = "CPTL_AST_TRN_TYP_DESC")
     private String capitalAssetTransactionTypeDescription;
+    @Column(name = "CPTL_AST_NON_QTY_DRVN_ALLW_IND")
+    @Type(type = "yes_no")
     private boolean capitalAssetNonquantityDrivenAllowIndicator;
+    @Column(name = "CPTLAST_QTY_SUBTYP_REQ_TXT")
     private String capitalAssetQuantitySubtypeRequiredText;
+    @Column(name = "CPTLAST_NONQTY_SUBTYP_REQ_TXT")
     private String capitalAssetNonquantitySubtypeRequiredText;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     /**

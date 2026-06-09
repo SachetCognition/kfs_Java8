@@ -41,8 +41,6 @@ public interface BatchExtractService {
      * @param processLog
      */
     public void performExtract(ExtractProcessLog processLog);
-
-
     /**
      * Allocate additional charges during batch.
      *
@@ -57,8 +55,6 @@ public interface BatchExtractService {
      * @return Eligible GL Entries meeting batch parameters configured under parameter group KFS-CAB:Batch
      */
     Collection<Entry> findElgibleGLEntries(ExtractProcessLog processLog);
-
-
     /**
      * Saves financial transaction lines which dont have Purchase Order number associated with it
      *
@@ -91,16 +87,12 @@ public interface BatchExtractService {
      * @param time Last extract start time
      */
     void updateLastExtractTime(Timestamp time);
-
-
     /**
      * This method collects account line history using batch parameters
      *
      * @return Collection Purchasing Accounts Payable Account Line History
      */
     Collection<PurApAccountingLineBase> findPurapAccountRevisions();
-
-
     /**
      * Implementation will retrieve all eligible Purchase Order account lines from a Purchase order that matches criteria required
      * by pre-asset tagging, using these account lines, batch process can identify the eligible purchase order line items to be

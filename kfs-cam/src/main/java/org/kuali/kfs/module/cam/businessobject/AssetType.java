@@ -23,17 +23,37 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementAssetType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_ASSET_TYPE_T")
 public class AssetType extends PersistableBusinessObjectBase implements CapitalAssetManagementAssetType, MutableInactivatable {
 
+	@Id
+
+	@Column(name = "CPTLAST_TYP_CD")
+
 	private String capitalAssetTypeCode;
+	@Column(name = "CPTLAST_TYP_DESC")
 	private String capitalAssetTypeDescription;
+	@Column(name = "CPTLAST_DEPRLF_LMT")
 	private Integer depreciableLifeLimit;
+	@Column(name = "CPTLAST_MOVING_CD")
+	@Type(type = "yes_no")
 	private boolean movingIndicator;
+	@Column(name = "CPTLAST_RQDBLDG_CD")
+	@Type(type = "yes_no")
 	private boolean requiredBuildingIndicator;
+	@Column(name = "ROW_ACTV_IND")
+	@Type(type = "yes_no")
 	private boolean active;
 
 	/**
@@ -62,8 +82,6 @@ public class AssetType extends PersistableBusinessObjectBase implements CapitalA
 	public void setCapitalAssetTypeCode(String capitalAssetTypeCode) {
 		this.capitalAssetTypeCode = capitalAssetTypeCode;
 	}
-
-
 	/**
 	 * Gets the capitalAssetTypeDescription attribute.
 	 * 
@@ -83,8 +101,6 @@ public class AssetType extends PersistableBusinessObjectBase implements CapitalA
 	public void setCapitalAssetTypeDescription(String capitalAssetTypeDescription) {
 		this.capitalAssetTypeDescription = capitalAssetTypeDescription;
 	}
-
-
 	/**
 	 * Gets the depreciableLifeLimit attribute.
 	 * 
@@ -104,8 +120,6 @@ public class AssetType extends PersistableBusinessObjectBase implements CapitalA
 	public void setDepreciableLifeLimit(Integer depreciableLifeLimit) {
 		this.depreciableLifeLimit = depreciableLifeLimit;
 	}
-
-
 	/**
 	 * Gets the movingIndicator attribute.
 	 * 
@@ -125,8 +139,6 @@ public class AssetType extends PersistableBusinessObjectBase implements CapitalA
 	public void setMovingIndicator(boolean movingIndicator) {
 		this.movingIndicator = movingIndicator;
 	}
-
-
 	/**
 	 * Gets the requiredBuildingIndicator attribute.
 	 * 
@@ -146,8 +158,6 @@ public class AssetType extends PersistableBusinessObjectBase implements CapitalA
 	public void setRequiredBuildingIndicator(boolean requiredBuildingIndicator) {
 		this.requiredBuildingIndicator = requiredBuildingIndicator;
 	}
-
-
 	/**
 	 * Gets the active attribute.
 	 * 

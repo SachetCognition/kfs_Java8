@@ -21,8 +21,6 @@ package org.kuali.kfs.module.cab.batch.service;
 import java.io.File;
 
 import org.kuali.kfs.module.cab.batch.ExtractProcessLog;
-
-
 public interface BatchExtractReportService {
     /**
      * Generates a PDF report with status details

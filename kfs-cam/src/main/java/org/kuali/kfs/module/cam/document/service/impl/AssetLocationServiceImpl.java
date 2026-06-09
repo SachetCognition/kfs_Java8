@@ -180,8 +180,6 @@ public class AssetLocationServiceImpl implements AssetLocationService {
         }
         return valid;
     }
-
-
     protected boolean validateCapitalAssetLocation(AssetType assetType, Map<LocationField, String> fieldMap, String campusCode, String buildingCode, String roomNumber, String subRoomNumber, String contactName, String streetAddress, String cityName, String stateCode, String zipCode, String countryCode, boolean onCampus, boolean offCampus, DataDictionaryEntryBase businessObjectEntry) {
         boolean valid = true;
         if (ObjectUtils.isNull(assetType)) {
@@ -268,8 +266,6 @@ public class AssetLocationServiceImpl implements AssetLocationService {
         }
         return valid;
     }
-
-
     /**
      * Convenience method to append the path prefix
      */
@@ -330,8 +326,6 @@ public class AssetLocationServiceImpl implements AssetLocationService {
             putError(fieldMap, LocationField.CITY_NAME, CamsKeyConstants.AssetLocation.ERROR_OFFCAMPUS_CITY_REQUIRED);
             valid &= false;
         }
-
-
         if (isCountryUS) {
             if (isBlank(fieldMap, LocationField.STATE_CODE, stateCode)) {
                 putError(fieldMap, LocationField.STATE_CODE, CamsKeyConstants.AssetLocation.ERROR_OFFCAMPUS_STATE_REQUIRED);

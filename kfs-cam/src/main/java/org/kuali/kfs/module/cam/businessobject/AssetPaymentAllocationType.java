@@ -22,19 +22,33 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * Asset payment Allocation type is used to select the method of Allocation of payments. In other words, the type determines how
  * source line payments are distributed/allocated amonth the target assets.
  */
+@Entity
+@Table(name = "CM_AST_PMT_DST_CD_T")
 public class AssetPaymentAllocationType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
+    @Id
+    @Column(name = "AST_PMT_DST_CD")
     private String allocationCode;
+    @Column(name = "AST_PMT_DST_NM")
     private String allocationName;
+    @Column(name = "AST_PMT_DST_COL_NM")
     private String allocationColumnName;
+    @Column(name = "AST_PMT_DST_EDT")
+    @Type(type = "yes_no")
     private boolean allocationEditable;
-
-
     /**
      * Gets the Allocation code
      */
@@ -42,48 +56,36 @@ public class AssetPaymentAllocationType extends PersistableBusinessObjectBase im
     	
         return allocationCode;
     }
-
-
     /**
      * Gets the Allocation codes descriptive name
      */
     public String getAllocationName() {
         return allocationName;
     }
-
-
     /**
      * @see org.kuali.rice.core.api.mo.common.active.MutableInactivatable#isActive()
      */
     public boolean isActive() {
         return active;
     }
-
-
     /**
      * @see org.kuali.rice.core.api.mo.common.active.MutableInactivatable#setActive(boolean)
      */
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
     /**
      * Sets the Allocation code
      */
     public void setAllocationCode(String allocationCode) {
         this.allocationCode = allocationCode;
     }
-
-
     /**
      * Sets the Allocation codes descriptive name
      */
     public void setAllocationName(String allocationName) {
         this.allocationName = allocationName;
     }
-
-
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
@@ -93,32 +95,24 @@ public class AssetPaymentAllocationType extends PersistableBusinessObjectBase im
         m.put("AllocationCode", allocationCode);
         return m;
     }
-
-
     /**
      * Returns the column name displayed to the user 
      */
     public String getAllocationColumnName() {
         return allocationColumnName;
     }
-
-
     /**
      * Sets the column name displayed to the user 
      */
     public void setAllocationColumnName(String allocationColumnName) {
         this.allocationColumnName = allocationColumnName;
     }
-
-
 	/**
 	 * Sets whether the allocation column is editable by the user
 	 */
 	public void setAllocationEditable(boolean allocationEditable) {
 		this.allocationEditable = allocationEditable;
 	}
-
-
 	/**
 	 * Returns true if the allocation column is editable by the user
 	 */

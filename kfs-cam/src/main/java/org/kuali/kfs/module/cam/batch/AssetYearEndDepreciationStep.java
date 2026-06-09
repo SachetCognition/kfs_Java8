@@ -30,8 +30,6 @@ import java.util.Date;
 public class AssetYearEndDepreciationStep extends AbstractStep {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetYearEndDepreciationStep.class);
     private AssetDepreciationService assetDepreciationService;
-
-
     /**
      * @see org.kuali.kfs.sys.batch.Step#execute(java.lang.String, java.util.Date)
      */

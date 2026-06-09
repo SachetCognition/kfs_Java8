@@ -72,8 +72,6 @@ public class AssetGlobalAuthorizer extends FinancialSystemMaintenanceDocumentAut
         
         return documentActionsToReturn;
     }
-
-
     /**
      * @see org.kuali.rice.krad.document.authorization.MaintenanceDocumentAuthorizerBase#addPermissionDetails(org.kuali.rice.krad.bo.BusinessObject, java.util.Map)
      */

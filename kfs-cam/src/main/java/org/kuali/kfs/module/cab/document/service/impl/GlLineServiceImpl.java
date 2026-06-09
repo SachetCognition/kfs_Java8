@@ -290,8 +290,6 @@ public class GlLineServiceImpl implements GlLineService {
 
         return matchingGLEntries;
     }
-
-
     protected boolean doesGeneralLedgerEntryMatchAssetAccountingDetails( GeneralLedgerEntry entry, CapitalAssetAccountsGroupDetails accountingDetails ) {
         // this method will short-circuit and return false as soon as possible
 
@@ -374,8 +372,6 @@ public class GlLineServiceImpl implements GlLineService {
         entryAsset.setCapitalAssetManagementDocumentNumber(document.getDocumentNumber());
         entry.getGeneralLedgerEntryAssets().add(entryAsset);
     }
-
-
     /**
      * Creates asset global
      *
@@ -699,8 +695,6 @@ public class GlLineServiceImpl implements GlLineService {
         createCapitalAccountingLine(capitalAccountingLines, entry, null);
         createNewCapitalAsset(capitalAccountingLines,entry.getDocumentNumber(),null,nextCapitalAssetLineNumber);
     }
-
-
     protected List<CapitalAccountingLines> createCapitalAccountingLine(List<CapitalAccountingLines> capitalAccountingLines, GeneralLedgerEntry entry, String distributionAmountCode) {
         Integer sequenceNumber = capitalAccountingLines.size() + 1;
 

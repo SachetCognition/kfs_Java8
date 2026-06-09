@@ -92,8 +92,6 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         }
         return false;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetPaymentService#isPaymentEligibleForAccumDeprGLPosting(org.kuali.kfs.module.cam.businessobject.AssetPayment)
      */
@@ -136,8 +134,6 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         }
         return false;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetPaymentService#processApprovedAssetPayment(org.kuali.kfs.module.cam.document.AssetPaymentDocument)
      */
@@ -145,8 +141,6 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         // Creating new asset payment records
         processPayments(document);
     }
-
-
     /**
      * Creates a new asset payment record for each new asset payment detail record and then save them
      * 
@@ -263,8 +257,6 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         }
         LOG.debug("Finished - adjustAmounts()");
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetPaymentService#isPaymentEligibleForGLPosting(org.kuali.kfs.module.cam.businessobject.AssetPayment)
      */
@@ -320,8 +312,6 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         }
         return assetPaymentDetailQuantity;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetPaymentService#validateAssets(java.lang.String,
      *      org.kuali.kfs.module.cam.businessobject.Asset)
@@ -342,8 +332,6 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         }
         return valid;
     }
-
-
     /**
      * This method determines whether or not an asset has different object sub type codes in its documents.
      * 
@@ -422,18 +410,12 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
     public ParameterService getParameterService() {
         return parameterService;
     }
-
-
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
-
     public AssetPaymentDao getAssetPaymentDao() {
         return assetPaymentDao;
     }
-
-
     public void setAssetPaymentDao(AssetPaymentDao assetPaymentDao) {
         this.assetPaymentDao = assetPaymentDao;
     }

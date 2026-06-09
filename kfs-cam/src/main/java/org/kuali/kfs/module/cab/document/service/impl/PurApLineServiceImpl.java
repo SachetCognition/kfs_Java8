@@ -50,8 +50,6 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.springframework.transaction.annotation.Transactional;
-
-
 /**
  * This class provides default implementations of {@link PurApLineService}
  */
@@ -191,8 +189,6 @@ public class PurApLineServiceImpl implements PurApLineService {
 
         return allocatedIndicator;
     }
-
-
     /**
      * Process after allocate.
      *
@@ -392,8 +388,6 @@ public class PurApLineServiceImpl implements PurApLineService {
         newAction.setAccountsPayableItemQuantity(sourceAccount.getPurchasingAccountsPayableItemAsset().getAccountsPayableItemQuantity());
         actionsTakeHistory.add(newAction);
     }
-
-
     /**
      * Search matching account in targetAccounts by glIdentifier.
      *
@@ -420,8 +414,6 @@ public class PurApLineServiceImpl implements PurApLineService {
         KualiDecimal baseAmount = targetAccount.getItemAccountTotalAmount();
         targetAccount.setItemAccountTotalAmount(baseAmount != null ? baseAmount.add(additionalAmount) : additionalAmount);
     }
-
-
     /**
      * Searching in accountList by glIdentifier for matching account which associated with the same item as targetAccount.
      *
@@ -774,8 +766,6 @@ public class PurApLineServiceImpl implements PurApLineService {
     public boolean isPretaggingExisting(Pretag newTag) {
         return ObjectUtils.isNotNull(newTag) && newTag.getPretagDetails() != null && !newTag.getPretagDetails().isEmpty();
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.document.service.PurApLineService#isMultipleTagExisting(java.lang.Integer, java.util.Set)
      */
@@ -818,8 +808,6 @@ public class PurApLineServiceImpl implements PurApLineService {
             actionsTakenHistory.add(newAction);
         }
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.document.service.PurApLineService#processPercentPayment(org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableItemAsset)
      */
@@ -904,8 +892,6 @@ public class PurApLineServiceImpl implements PurApLineService {
         // clear up user input
         splitItemAsset.setSplitQty(null);
     }
-
-
     /**
      * Get the max cab line #. As part of the primary key, it should be the max value among the form item list and DB.
      *
@@ -962,8 +948,6 @@ public class PurApLineServiceImpl implements PurApLineService {
             actionsTakenHistory.add(newAction);
         }
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.document.service.PurApLineService#processSaveBusinessObjects(java.util.List,
      *      org.kuali.kfs.module.cab.document.web.PurApLineSession)
@@ -1004,8 +988,6 @@ public class PurApLineServiceImpl implements PurApLineService {
 
         }
     }
-
-
     /**
      * Create asset account list for new item asset and update the current account amount.
      *
@@ -1028,8 +1010,6 @@ public class PurApLineServiceImpl implements PurApLineService {
             currentAccount.setItemAccountTotalAmount(currentAccount.getItemAccountTotalAmount().subtract(newAccount.getItemAccountTotalAmount()));
         }
     }
-
-
     /**
      * Set object code by the first one from the accounting lines.
      *
@@ -1045,8 +1025,6 @@ public class PurApLineServiceImpl implements PurApLineService {
         }
         item.setFirstFincialObjectCode(firstFinancialObjectCode);
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.document.service.PurApLineService#buildPurApItemAssetList(java.util.List)
      */
@@ -1088,8 +1066,6 @@ public class PurApLineServiceImpl implements PurApLineService {
             }
         }
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.document.service.PurApLineService#getPreTagLineItem(java.lang.String, java.lang.Integer)
      */
@@ -1270,8 +1246,6 @@ public class PurApLineServiceImpl implements PurApLineService {
         }
         return totalCost;
     }
-
-
     /**
      * Gets the businessObjectService attribute.
      *
@@ -1280,8 +1254,6 @@ public class PurApLineServiceImpl implements PurApLineService {
     public BusinessObjectService getBusinessObjectService() {
         return businessObjectService;
     }
-
-
     /**
      * Sets the businessObjectService attribute value.
      *
@@ -1290,8 +1262,6 @@ public class PurApLineServiceImpl implements PurApLineService {
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
-
-
     /**
      * Gets the purApLineDao attribute.
      *
@@ -1300,8 +1270,6 @@ public class PurApLineServiceImpl implements PurApLineService {
     public PurApLineDao getPurApLineDao() {
         return purApLineDao;
     }
-
-
     /**
      * Sets the purApLineDao attribute value.
      *
@@ -1355,6 +1323,4 @@ public class PurApLineServiceImpl implements PurApLineService {
     public void setCapitalAssetManagementModuleService(CapitalAssetManagementModuleService capitalAssetManagementModuleService) {
         this.capitalAssetManagementModuleService = capitalAssetManagementModuleService;
     }
-
-
 }
