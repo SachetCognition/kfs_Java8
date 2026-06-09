@@ -28,9 +28,6 @@
 	default-lazy-init="false">
 	<!-- This Spring File loads all of the Rice Configuration (including transaction managers, datasources and the Rice Configurer) -->
 
-	<!-- install the JavaMelody monitoring beans -->
-	<import resource="classpath:net/bull/javamelody/monitoring-spring.xml" />
-
 	<!--  Define the properties which will be used in ${} expressions throughout the remainder
 		  of the KFS and Rice spring files.  These properties will be injected into
 		  all Rice Spring contexts as well. -->
@@ -47,12 +44,6 @@
 			</list>
 		</property>
 	</bean>
-
-	<!-- Import the base Rice setup beans which contain the datasources
-		 and the Rice modules. -->
-	<import resource="classpath:kfs-RiceJTASpringBeans.xml" />
-	<import resource="classpath:kfs-RiceDataSourceSpringBeans.xml" />
-	<import resource="classpath:kfs-RiceSpringBeans.xml" />
 
 	<!-- Add the KFS module to the system.  This bean is what makes this a KFS instance
 		 instead of a base Rice server. -->

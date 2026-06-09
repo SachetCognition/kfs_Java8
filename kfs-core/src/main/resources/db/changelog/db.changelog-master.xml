@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
+
+    <!-- Baseline: existing KFS 6.0.1 schema is assumed to be in place.
+         Mark all prior schema as deployed so Liquibase tracks only
+         incremental changes going forward. -->
+    <changeSet id="baseline-6.0.1" author="kfs-migration" context="baseline">
+        <tagDatabase tag="v6.0.1-baseline"/>
+    </changeSet>
+
+</databaseChangeLog>
