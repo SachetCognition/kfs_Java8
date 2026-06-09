@@ -19,6 +19,15 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.Arrays;
 
@@ -37,15 +46,28 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 /**
  *
  */
+@Entity
+@Table(name = "CA_DLGT_CHG_DOC_T")
+@IdClass(AccountDelegateGlobalDetailId.class)
+
 public class AccountDelegateGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     private static final long serialVersionUID = -8089154029664644867L;
 
+    @Id
+    @Column(name = "ACCT_DLGT_UNVL_ID")
     private String accountDelegateUniversalId;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "FDOC_APRV_FROM_AMT")
     private KualiDecimal approvalFromThisAmount;
+    @Column(name = "FDOC_APRV_TO_AMT")
     private KualiDecimal approvalToThisAmount;
+    @Column(name = "ACCT_DLGT_PRMRT_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean accountDelegatePrimaryRoutingIndicator;
+    @Column(name = "ACCT_DLGT_START_DT")
     private Date accountDelegateStartDate;
 
     private Person accountDelegate;

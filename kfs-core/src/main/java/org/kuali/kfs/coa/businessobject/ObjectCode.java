@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -34,6 +44,10 @@ import org.kuali.rice.krad.service.impl.PersistenceStructureServiceImpl;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_OBJECT_CODE_T")
+@IdClass(ObjectCodeId.class)
+
 public class ObjectCode extends PersistableBusinessObjectBase implements KualiCode, FiscalYearBasedBusinessObject {
 
 
@@ -46,30 +60,54 @@ public class ObjectCode extends PersistableBusinessObjectBase implements KualiCo
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "ObjectCode";
     
     private static final long serialVersionUID = -965833141452795485L;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "FIN_OBJ_CD_NM")
     protected String financialObjectCodeName;
+    @Column(name = "FIN_OBJ_CD_SHRT_NM")
     protected String financialObjectCodeShortName;
+    @Column(name = "HIST_FIN_OBJECT_CD")
     protected String historicalFinancialObjectCode;
+    @Column(name = "FIN_OBJ_ACTIVE_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     protected String financialObjectLevelCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_FIN_OBJ_CD")
     protected String reportsToFinancialObjectCode;
+    @Column(name = "FIN_OBJ_TYP_CD")
     protected String financialObjectTypeCode;
+    @Column(name = "FIN_OBJ_SUB_TYP_CD")
     protected String financialObjectSubTypeCode;
+    @Column(name = "FOBJ_BDGT_AGGR_CD")
     protected String financialBudgetAggregationCd;
+    @Column(name = "NXT_YR_FIN_OBJ_CD")
     protected String nextYearFinancialObjectCode;
+    @Column(name = "FOBJ_MNXFR_ELIM_CD")
     protected String finObjMandatoryTrnfrelimCd;
+    @Column(name = "FIN_FED_FUNDED_CD")
     protected String financialFederalFundedCode;
         
+    @Transient
     protected transient BudgetAggregationCode financialBudgetAggregation;
     protected transient MandatoryTransferEliminationCode finObjMandatoryTrnfrelim;
     protected transient FederalFundedCode financialFederalFunded;
+    @Transient
     protected transient SystemOptions universityFiscal;
+    @Transient
     protected transient ObjectLevel financialObjectLevel;
     protected transient Chart chartOfAccounts;
     protected transient Chart reportsToChartOfAccounts;
+    @Transient
     protected transient ObjectCode reportsToFinancialObject;
     protected transient ObjectType financialObjectType;
     protected transient ObjectSubType financialObjectSubType;

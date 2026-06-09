@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -26,6 +36,10 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_OBJ_CONSOLDTN_T")
+@IdClass(ObjectConsolidationId.class)
+
 public class ObjectConsolidation extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,13 +49,23 @@ public class ObjectConsolidation extends PersistableBusinessObjectBase implement
 
     }
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String finConsolidationObjectCode;
+    @Column(name = "FIN_CONS_OBJ_NM")
     private String finConsolidationObjectName;
+    @Column(name = "FIN_CONOBJ_SHRT_NM")
     private String finConsolidationObjShortName;
+    @Column(name = "FIN_CONOBJ_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
     
+    @Transient
     private Chart chartOfAccounts;
     
     /**

@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,15 +42,29 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_RTNG_MDL_NM_T")
+@IdClass(AccountDelegateModelId.class)
+
 public class AccountDelegateModel extends PersistableBusinessObjectBase implements MutableInactivatable {
     private static final Logger LOG = Logger.getLogger(AccountDelegateModel.class);
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "ORG_RTNG_MDL_NM")
     private String accountDelegateModelName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Transient
     private List<AccountDelegateModelDetail> accountDelegateModelDetails;
 
+    @Transient
     private Organization organization;
     private Chart chartOfAccounts;
 

@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -27,13 +37,26 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ICR_EXCL_TYPE_T")
+@IdClass(IndirectCostRecoveryExclusionTypeId.class)
+
 public class IndirectCostRecoveryExclusionType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ACCT_ICR_TYP_CD")
     private String accountIndirectCostRecoveryTypeCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "ACCT_ICR_EXCL_TYP_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active; 
     
+    @Transient
     private Chart chart;
     private IndirectCostRecoveryType indirectCostRecoveryType;
     private ObjectCode objectCodeCurrent;

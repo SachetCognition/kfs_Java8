@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
@@ -29,6 +39,10 @@ import org.kuali.rice.krad.service.impl.PersistenceStructureServiceImpl;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_OBJECT_CD_T")
+@IdClass(SubObjectCodeId.class)
+
 public class SubObjectCode extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
     private static final long serialVersionUID = -5292158248714650271L;
@@ -62,17 +76,33 @@ public class SubObjectCode extends PersistableBusinessObjectBase implements Muta
         this.active = true;
     }
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD_NM")
     private String financialSubObjectCodeName;
+    @Column(name = "FIN_SUBOBJ_SHRT_NM")
     private String financialSubObjectCdshortNm;
+    @Column(name = "FIN_SUBOBJ_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
 
+    @Transient
     private Chart chartOfAccounts;
     private Account account;
+    @Transient
     private ObjectCode financialObject;
     private SystemOptions universityFiscal;
 

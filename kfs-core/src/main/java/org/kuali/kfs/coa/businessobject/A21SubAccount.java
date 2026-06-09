@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,28 +39,49 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_A21_SUB_ACCT_T")
+@IdClass(A21SubAccountId.class)
+
 public class A21SubAccount extends PersistableBusinessObjectBase {
 
     private static final long serialVersionUID = 2983753447370117974L;
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     protected String subAccountNumber;
+    @Column(name = "SUB_ACCT_TYP_CD")
     protected String subAccountTypeCode;
+    @Column(name = "ICR_TYP_CD")
     protected String indirectCostRecoveryTypeCode;
+    @Column(name = "FIN_SERIES_ID")
     protected String financialIcrSeriesIdentifier;
+    @Column(name = "OFF_CMP_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean offCampusCode;
+    @Column(name = "CST_SHR_COA_CD")
     protected String costShareChartOfAccountCode;
+    @Column(name = "CST_SHRSRCACCT_NBR")
     protected String costShareSourceAccountNumber;
+    @Column(name = "CST_SRCSUBACCT_NBR")
     protected String costShareSourceSubAccountNumber;
 
+    @Transient
     protected Chart costShareChartOfAccount;
     protected Account costShareAccount;
     protected SubAccount costShareSourceSubAccount;
+    @Transient
     protected IndirectCostRecoveryType indirectCostRecoveryType;
     protected Chart chartOfAccounts;
     protected Account account;
     
+    @Transient
     protected List<A21IndirectCostRecoveryAccount> a21IndirectCostRecoveryAccounts;
 
     /**

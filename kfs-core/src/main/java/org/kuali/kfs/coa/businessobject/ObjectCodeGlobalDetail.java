@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -27,12 +35,21 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_OBJ_CD_CHG_DTL_T")
+@IdClass(ObjectCodeGlobalDetailId.class)
+
 public class ObjectCodeGlobalDetail extends GlobalBusinessObjectDetailBase {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
     private String financialObjectCode;
 
+    @Transient
     private Chart chartOfAccounts;
 
     /**

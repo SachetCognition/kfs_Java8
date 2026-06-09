@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -27,11 +35,20 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CTGRY_T")
+
 public class OrganizationReversionCategory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_CTGRY_NM")
     private String organizationReversionCategoryName;
+    @Column(name = "ORG_RVRSN_SORT_CD")
     private String organizationReversionSortCode;
+    @Column(name = "ORG_RVRSN_CTGRY_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

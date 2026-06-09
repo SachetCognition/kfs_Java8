@@ -19,6 +19,17 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
@@ -29,21 +40,35 @@ import org.springframework.beans.BeanUtils;
 /**
  * IndrectCostRecoveryAccount
  */
+@Entity
+@Table(name = "CA_ICR_ACCT_T")
+
 public class IndirectCostRecoveryAccount extends PersistableBusinessObjectBase implements MutableInactivatable{
     private static Logger LOG = Logger.getLogger(IndirectCostRecoveryAccount.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CA_ICR_ACCT_GNRTD_ID")
     private Integer indirectCostRecoveryAccountGeneratedIdentifier;
 
     //foreign keys to Account
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
 
+    @Column(name = "ICR_FIN_COA_CD")
     private String indirectCostRecoveryFinCoaCode;
+    @Column(name = "ICR_FIN_ACCT_NBR")
     private String indirectCostRecoveryAccountNumber;
+    @Column(name = "ACLN_PCT")
     private BigDecimal accountLinePercent;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     //BO Reference
+    @Transient
     private Account indirectCostRecoveryAccount;
     private Chart indirectCostRecoveryChartOfAccounts;
 

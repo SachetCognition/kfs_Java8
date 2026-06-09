@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
@@ -34,17 +44,32 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "SH_ACCT_PERIOD_T")
+@IdClass(AccountingPeriodId.class)
+
 public class AccountingPeriod extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "AccountingPeriod";
     
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Column(name = "UNIV_FISCAL_PRD_NM")
     private String universityFiscalPeriodName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "BDGT_ROLLOVER_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean budgetRolloverIndicator;
 
+    @Column(name = "UNIV_FSCPD_END_DT")
     private Date universityFiscalPeriodEndDate;
+    @Transient
     private SystemOptions options;
 
     /**

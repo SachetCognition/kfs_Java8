@@ -19,6 +19,17 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.apache.log4j.Logger;
@@ -27,12 +38,19 @@ import org.springframework.beans.BeanUtils;
 /**
  * IndirectCostRecoveryAccount for A21SubAccount
  */
+@Entity
+@Table(name = "CA_A21_ICR_ACCT_T")
+
 public class A21IndirectCostRecoveryAccount extends IndirectCostRecoveryAccount {
     private static Logger LOG = Logger.getLogger(A21IndirectCostRecoveryAccount.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CA_A21_ICR_ACCT_GNRTD_ID")
     private Integer a21IndirectCostRecoveryAccountGeneratedIdentifier;
     
     //additional foreign keys to SubAccount
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
     
     /**

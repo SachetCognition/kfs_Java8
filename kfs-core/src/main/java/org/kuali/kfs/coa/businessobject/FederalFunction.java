@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -27,10 +35,18 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_FEDERAL_FUNC_T")
+
 public class FederalFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_FED_FUNC_CD")
     private String financialFederalFunctionCode;
+    @Column(name = "FIN_FED_FUNC_NM")
     private String financialFederalFunctionName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

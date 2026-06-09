@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -26,9 +34,17 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Org Type Business Object
  */
+@Entity
+@Table(name = "CA_ORG_TYPE_T")
+
 public class OrganizationType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "ORG_TYP_CD")
     private String organizationTypeCode;
+    @Column(name = "ORG_TYP_NM")
     private String organizationTypeName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
 

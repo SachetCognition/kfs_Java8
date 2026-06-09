@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,73 +55,138 @@ import org.kuali.rice.location.framework.state.StateEbo;
 /**
  *
  */
+@Entity
+@Table(name = "CA_PRIOR_YR_ACCT_T")
+@IdClass(PriorYearAccountId.class)
+
 public class PriorYearAccount extends PersistableBusinessObjectBase implements AccountIntf, MutableInactivatable {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PriorYearAccount.class);
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "ACCOUNT_NM")
     protected String accountName;
+    @Column(name = "ACCT_FRNG_BNFT_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean accountsFringesBnftIndicator;
+    @Column(name = "ACCT_RSTRC_STAT_DT")
     protected Date accountRestrictedStatusDate;
+    @Column(name = "ACCT_CITY_NM")
     protected String accountCityName;
+    @Column(name = "ACCT_STATE_CD")
     protected String accountStateCode;
+    @Column(name = "ACCT_STREET_ADDR")
     protected String accountStreetAddress;
+    @Column(name = "ACCT_ZIP_CD")
     protected String accountZipCode;
+    @Column(name = "ACCT_CREATE_DT")
     protected Date accountCreateDate;
+    @Column(name = "ACCT_EFFECT_DT")
     protected Date accountEffectiveDate;
+    @Column(name = "ACCT_EXPIRATION_DT")
     protected Date accountExpirationDate;
+    @Column(name = "ACCT_ICR_TYP_CD")
     protected String acctIndirectCostRcvyTypeCd;
+    @Column(name = "AC_CSTM_ICREXCL_CD")
     protected String acctCustomIndCstRcvyExclCd;
+    @Column(name = "FIN_SERIES_ID")
     protected String financialIcrSeriesIdentifier;
+    @Column(name = "ACCT_IN_FP_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean accountInFinancialProcessingIndicator;
+    @Column(name = "BDGT_REC_LVL_CD")
     protected String budgetRecordingLevelCode;
+    @Column(name = "ACCT_SF_CD")
     protected String accountSufficientFundsCode;
+    @Column(name = "ACCT_PND_SF_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean pendingAcctSufficientFundsIndicator;
+    @Column(name = "FIN_EXT_ENC_SF_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean extrnlFinEncumSufficntFndIndicator;
+    @Column(name = "FIN_INT_ENC_SF_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean intrnlFinEncumSufficntFndIndicator;
+    @Column(name = "FIN_PRE_ENC_SF_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean finPreencumSufficientFundIndicator;
+    @Column(name = "FIN_OBJ_PRSCTRL_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean financialObjectivePrsctrlIndicator;
+    @Column(name = "CG_CFDA_NBR")
     protected String accountCfdaNumber;
+    @Column(name = "ACCT_OFF_CMP_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean accountOffCampusIndicator;
+    @Column(name = "ACCT_CLOSED_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Column(name = "ACCT_FSC_OFC_UID")
     protected String accountFiscalOfficerSystemIdentifier;
+    @Column(name = "ACCT_SPVSR_UNVL_ID")
     protected String accountsSupervisorySystemsIdentifier;
+    @Column(name = "ACCT_MGR_UNVL_ID")
     protected String accountManagerSystemIdentifier;
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "ACCT_TYP_CD")
     protected String accountTypeCode;
+    @Column(name = "ACCT_PHYS_CMP_CD")
     protected String accountPhysicalCampusCode;
+    @Column(name = "SUB_FUND_GRP_CD")
     protected String subFundGroupCode;
+    @Column(name = "FIN_HGH_ED_FUNC_CD")
     protected String financialHigherEdFunctionCd;
+    @Column(name = "ACCT_RSTRC_STAT_CD")
     protected String accountRestrictedStatusCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ACCT_NBR")
     protected String reportsToAccountNumber;
+    @Column(name = "CONT_FIN_COA_CD")
     protected String continuationFinChrtOfAcctCd;
+    @Column(name = "CONT_ACCOUNT_NBR")
     protected String continuationAccountNumber;
+    @Column(name = "ENDOW_FIN_COA_CD")
     protected String endowmentIncomeAcctFinCoaCd;
+    @Column(name = "ENDOW_ACCOUNT_NBR")
     protected String endowmentIncomeAccountNumber;
+    @Column(name = "CONTR_CTRL_FCOA_CD")
     protected String contractControlFinCoaCode;
+    @Column(name = "CONTR_CTRLACCT_NBR")
     protected String contractControlAccountNumber;
+    @Column(name = "INCOME_FIN_COA_CD")
     protected String incomeStreamFinancialCoaCode;
+    @Column(name = "INCOME_ACCOUNT_NBR")
     protected String incomeStreamAccountNumber;
 
+    @Transient
     protected Chart chartOfAccounts;
     protected Organization organization;
     protected AccountType accountType;
     protected CampusEbo accountPhysicalCampus;
     protected StateEbo accountState;
+    @Transient
     protected SubFundGroup subFundGroup;
     protected HigherEducationFunction financialHigherEdFunction;
     protected RestrictedStatus accountRestrictedStatus;
+    @Transient
     protected Account reportsToAccount;
     protected Account continuationAccount;
     protected Account endowmentIncomeAccount;
+    @Transient
     protected Account contractControlAccount;
     protected Account incomeStreamAccount;
     protected Person accountFiscalOfficerUser;
     protected Person accountSupervisoryUser;
     protected Person accountManagerUser;
     protected PostalCodeEbo postalZipCode;
+    @Transient
     protected BudgetRecordingLevel budgetRecordingLevel;
     protected SufficientFundsCode sufficientFundsCode;
 
@@ -125,12 +200,15 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     protected String accountDescriptionSectionBlank;
     protected String accountDescriptionSection;
 
+    @Transient
     protected AccountGuideline accountGuideline;
     protected AccountDescription accountDescription;
 
+    @Transient
     protected List subAccounts;
     protected Boolean forContractsAndGrants;
 
+    @Transient
     protected List<PriorYearIndirectCostRecoveryAccount> indirectCostRecoveryAccounts;
 
     /**

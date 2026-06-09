@@ -18,12 +18,23 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
 /**
  * Federal Funded Code Business Object
  */
+@Entity
+@Table(name = "CA_FED_FND_T")
+
 public class FederalFundedCode extends KualiCodeBase implements MutableInactivatable {
 
     private static final long serialVersionUID = -3582946967647008777L;
