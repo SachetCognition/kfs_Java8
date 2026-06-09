@@ -29,19 +29,41 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Represents a relationship between a {@link Proposal} and a {@link ProjectDirector}.
  */
+@IdClass(ProposalProjectDirectorId.class)
+@Entity
+@Table(name = "CG_PRPSL_PRJDR_T")
 public class ProposalProjectDirector extends PersistableBusinessObjectBase implements Primaryable, CGProjectDirector, MutableInactivatable {
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "PRPSL_PRMPRJDR_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean proposalPrimaryProjectDirectorIndicator;
+    @Column(name = "PRPSL_PRJDRPRJ_TTL")
     private String proposalProjectDirectorProjectTitle;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @Transient
     private Person projectDirector;
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     /**

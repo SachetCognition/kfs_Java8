@@ -26,12 +26,24 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Letter Of Credit Fund Group.
  */
+@Entity
+@Table(name = "CG_LTRCR_FNDGRP_T")
 public class LetterOfCreditFundGroup extends PersistableBusinessObjectBase implements MutableInactivatable, ContractsAndGrantsLetterOfCreditFundGroup {
+    @Id
+    @Column(name = "CG_LTRCR_FNDGRP_CD")
     private String letterOfCreditFundGroupCode;
+    @Column(name = "LTRCR_FNDGRP_DESC")
     private String letterOfCreditFundGroupDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
 
     /**

@@ -25,16 +25,29 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  * BillingFrequency under Contracts & Grants section.
  */
 
+@Entity
+@Table(name = "CG_BILL_FREQ_T")
 public class BillingFrequency extends PersistableBusinessObjectBase implements ContractsAndGrantsBillingFrequency, MutableInactivatable {
 
+    @Id
+    @Column(name = "BILL_FREQ_CD")
     private String frequency;
+    @Column(name = "BILL_FREQ_DESC")
     private String frequencyDescription;
+    @Column(name = "GRACE_PERIOD")
     private Integer gracePeriodDays;
+    @Column(name = "ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
 
     @Override

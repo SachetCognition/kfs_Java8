@@ -33,25 +33,56 @@ import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class represents an association between an award and an account. It's like a reference to the account from the award. This
  * way an award can maintain a collection of these references instead of owning accounts directly.
  */
+@IdClass(AwardAccountId.class)
+@Entity
+@Table(name = "CG_AWD_ACCT_T")
 public class AwardAccount extends PersistableBusinessObjectBase implements CGProjectDirector, MutableInactivatable, ContractsAndGrantsBillingAwardAccount {
 	private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AwardAccount.class);
 
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
+    @Column(name = "FNL_BILLED_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean finalBilledIndicator;
+    @Column(name = "CURR_LST_BILLED_DT")
     private Date currentLastBilledDate;
+    @Column(name = "PREV_LST_BILLED_DT")
     private Date previousLastBilledDate;
 
+    @Transient
     private Account account;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Person projectDirector;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Award award;
 
     /**

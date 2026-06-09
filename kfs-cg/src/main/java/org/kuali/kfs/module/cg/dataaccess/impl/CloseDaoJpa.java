@@ -1,0 +1,105 @@
+/*
+ * The Kuali Financial System, a comprehensive financial management system for higher education.
+ *
+ * Copyright 2005-2014 The Kuali Foundation
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.kuali.kfs.module.cg.dataaccess.impl;
+
+import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import org.kuali.kfs.module.cg.businessobject.Award;
+import org.kuali.kfs.module.cg.businessobject.Proposal;
+import org.kuali.kfs.module.cg.dataaccess.CloseDao;
+import org.kuali.kfs.module.cg.document.ProposalAwardCloseDocument;
+import org.kuali.kfs.sys.KFSConstants;
+
+/**
+ * JPA/Hibernate implementation of {@link CloseDao}.
+ */
+public class CloseDaoJpa implements CloseDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public String getMaxApprovedClose(Date currentSqlMidnight) {
+        Query query = entityManager.createNativeQuery(
+                "SELECT c.CG_PRPSL_CLOSE_NBR FROM CG_PRPSL_CLOSE_T c " +
+                "INNER JOIN FS_DOC_HEADER_T h ON c.CG_PRPSL_CLOSE_NBR = h.FDOC_NBR " +
+                "WHERE c.CG_USR_INITIATE_DT = ?1 " +
+                "AND h.FDOC_HDR_STAT_CD = ?2 " +
+                "ORDER BY c.CG_PRPSL_CLOSE_NBR DESC");
+        query.setParameter(1, currentSqlMidnight);
+        query.setParameter(2, KFSConstants.DocumentStatusCodes.ENROUTE);
+        query.setMaxResults(1);
+
+        List<String> results = query.getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public String getMostRecentClose(Date currentSqlMidnight) {
+        entityManager.clear();
+        Query query = entityManager.createNativeQuery(
+                "SELECT c.CG_PRPSL_CLOSE_NBR FROM CG_PRPSL_CLOSE_T c " +
+                "INNER JOIN FS_DOC_HEADER_T h ON c.CG_PRPSL_CLOSE_NBR = h.FDOC_NBR " +
+                "WHERE c.CG_USR_INITIATE_DT = ?1 " +
+                "AND h.FDOC_HDR_STAT_CD = ?2 " +
+                "ORDER BY c.CG_PRPSL_CLOSE_NBR DESC");
+        query.setParameter(1, currentSqlMidnight);
+        query.setParameter(2, KFSConstants.DocumentStatusCodes.APPROVED);
+        query.setMaxResults(1);
+
+        List<String> results = query.getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+    @Override
+    public Collection<Proposal> getProposalsToClose(ProposalAwardCloseDocument c) {
+        TypedQuery<Proposal> query = entityManager.createQuery(
+                "SELECT p FROM Proposal p " +
+                "WHERE p.proposalClosingDate IS NULL " +
+                "AND p.proposalSubmissionDate <= :closeDate",
+                Proposal.class);
+        query.setParameter("closeDate", c.getCloseOnOrBeforeDate());
+
+        return query.getResultList();
+    }
+
+    @Override
+    public Collection<Award> getAwardsToClose(ProposalAwardCloseDocument c) {
+        TypedQuery<Award> query = entityManager.createQuery(
+                "SELECT a FROM Award a " +
+                "WHERE a.awardClosingDate IS NULL " +
+                "AND a.awardEntryDate <= :closeDate " +
+                "AND a.awardStatusCode <> :excludedStatus",
+                Award.class);
+        query.setParameter("closeDate", c.getCloseOnOrBeforeDate());
+        query.setParameter("excludedStatus", "U");
+
+        return query.getResultList();
+    }
+
+}
