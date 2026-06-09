@@ -26,6 +26,15 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -40,15 +49,35 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 /**
  * This class represents a Payment Process.
  */
+@Entity
+@Table(name = "PDP_PROC_T")
 public class PaymentProcess extends TimestampedBusinessObjectBase {
+
+    @Id
+    @Column(name = "PROC_ID")
     protected KualiInteger id;
+
+    @Column(name = "PROC_TS")
     protected Timestamp processTimestamp;
+
+    @Column(name = "PHYS_CMP_CD")
     protected String campusCode;
+
+    @Column(name = "PROC_USR_ID")
     protected String processUserId;
+
+    @Transient
     protected Person processUser;
+
+    @Column(name = "EXTRACTED_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean extractedInd;
+
+    @Column(name = "FORMATTED_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean formattedIndicator;
 
+    @Transient
     protected CampusEbo campus;
 
     /**

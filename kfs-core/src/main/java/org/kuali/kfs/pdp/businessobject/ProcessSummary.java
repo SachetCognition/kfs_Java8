@@ -24,6 +24,12 @@ package org.kuali.kfs.pdp.businessobject;
 
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.pdp.service.PaymentGroupService;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
@@ -34,19 +40,43 @@ import org.kuali.rice.core.api.util.type.KualiInteger;
 /**
  * 
  */
+@Entity
+@Table(name = "PDP_PROC_SUM_T")
 public class ProcessSummary extends TimestampedBusinessObjectBase {
+
+    @Id
+    @Column(name = "PROC_SUM_ID")
     private KualiInteger id;
+
+    @Column(name = "CUST_ID")
     private KualiInteger customerId;
+
+    @Column(name = "DISB_TYP_CD")
     private String disbursementTypeCode;
+
+    @Column(name = "PROC_ID")
     private KualiInteger processId;
+
+    @Column(name = "PMT_SORT_ORD_VAL")
     private KualiInteger sortGroupId;
+
+    @Column(name = "BEG_DISB_NBR")
     private KualiInteger beginDisbursementNbr;
+
+    @Column(name = "END_DISB_NBR")
     private KualiInteger endDisbursementNbr;
+
+    @Column(name = "PROC_TOT_AMT")
     private KualiDecimal processTotalAmount;
+
+    @Column(name = "PROC_TOT_CNT")
     private KualiInteger processTotalCount;
-    
+
+    @Transient
     private DisbursementType disbursementType;
+    @Transient
     private PaymentProcess process;
+    @Transient
     private CustomerProfile customer;
     
     public ProcessSummary() {

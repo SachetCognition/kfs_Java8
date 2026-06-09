@@ -25,6 +25,12 @@ package org.kuali.kfs.pdp.businessobject;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,17 +38,38 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.kim.api.identity.Person;
 
+@Entity
+@Table(name = "PDP_FIL_T")
 public class Batch extends TimestampedBusinessObjectBase {
-    private KualiInteger id; 
+
+    @Id
+    @Column(name = "PMT_FIL_ID")
+    private KualiInteger id;
+
+    @Column(name = "CUST_ID")
     private KualiInteger customerId;
-    private String paymentFileName; 
-    private Timestamp customerFileCreateTimestamp; 
-    private KualiInteger paymentCount; 
-    private KualiDecimal paymentTotalAmount; 
-    private String submiterUserId; 
-    private Timestamp fileProcessTimestamp; 
-    
-    private CustomerProfile customerProfile; 
+
+    @Column(name = "PMT_FL_NM")
+    private String paymentFileName;
+
+    @Column(name = "CUST_FL_CRTN_TS")
+    private Timestamp customerFileCreateTimestamp;
+
+    @Column(name = "PMT_CNT")
+    private KualiInteger paymentCount;
+
+    @Column(name = "PMT_TOT_AMT")
+    private KualiDecimal paymentTotalAmount;
+
+    @Column(name = "SBMTR_USR_ID")
+    private String submiterUserId;
+
+    @Column(name = "FL_PROC_TS")
+    private Timestamp fileProcessTimestamp;
+
+    @Transient
+    private CustomerProfile customerProfile;
+    @Transient
     private Person submiterUser;
     
     public Batch() {
