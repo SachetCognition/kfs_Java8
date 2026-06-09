@@ -24,14 +24,34 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Purchase Order Quote Language Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_QT_LANG_T")
 public class PurchaseOrderQuoteLanguage extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PO_QT_LANG_ID")
     private Integer purchaseOrderQuoteLanguageIdentifier;
+    @Column(name = "PO_QT_LANG_DESC")
     private String purchaseOrderQuoteLanguageDescription;
+    @Column(name = "PO_QT_LANG_CRTE_DT")
     private Date purchaseOrderQuoteLanguageCreateDate;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

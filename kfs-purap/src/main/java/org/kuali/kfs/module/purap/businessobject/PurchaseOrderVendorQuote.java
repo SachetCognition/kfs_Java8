@@ -35,36 +35,81 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
 /**
  * Purchase Order Vendor Quote Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_VNDR_QT_T")
+@IdClass(PurchaseOrderVendorQuoteId.class)
 public class PurchaseOrderVendorQuote extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PO_VNDR_QT_ID")
     private Integer purchaseOrderVendorQuoteIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Column(name = "VNDR_NM")
     private String vendorName;
+    @Column(name = "VNDR_LN1_ADDR")
     private String vendorLine1Address;
+    @Column(name = "VNDR_LN2_ADDR")
     private String vendorLine2Address;
+    @Column(name = "VNDR_CTY_NM")
     private String vendorCityName;
+    @Column(name = "VNDR_ST_CD")
     private String vendorStateCode;
+    @Column(name = "VNDR_PSTL_CD")
     private String vendorPostalCode;
+    @Column(name = "VNDR_PHN_NBR")
     private String vendorPhoneNumber;
+    @Column(name = "VNDR_FAX_NBR")
     private String vendorFaxNumber;
+    @Column(name = "VNDR_EMAIL_ADDR")
     private String vendorEmailAddress;
+    @Column(name = "VNDR_ATTN_NM")
     private String vendorAttentionName;
+    @Column(name = "PO_QT_TRANS_TYP_CD")
     private String purchaseOrderQuoteTransmitTypeCode;
+    @Column(name = "PO_QT_TRANS_DT")
     private Timestamp purchaseOrderQuoteTransmitTimestamp;
+    @Column(name = "PO_QT_PRCE_EXPR_DT")
     private Date purchaseOrderQuotePriceExpirationDate;
+    @Column(name = "PO_QT_STAT_CD")
     private String purchaseOrderQuoteStatusCode;
+    @Column(name = "PO_QT_AWD_DT")
     private Timestamp purchaseOrderQuoteAwardTimestamp;
+    @Column(name = "PO_QT_RANK_NBR")
     private String purchaseOrderQuoteRankNumber;
+    @Column(name = "VNDR_CNTRY_CD")
     private String vendorCountryCode;
+    @Column(name = "VNDR_ADDR_INTL_PROV_NM")
     private String vendorAddressInternationalProvinceName;
     private boolean isTransmitPrintDisplayed = false;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private PurchaseOrderDocument purchaseOrder;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PO_QT_STAT_CD", insertable = false, updatable = false)
     private PurchaseOrderQuoteStatus purchaseOrderQuoteStatus;
     private CountryEbo vendorCountry;
 

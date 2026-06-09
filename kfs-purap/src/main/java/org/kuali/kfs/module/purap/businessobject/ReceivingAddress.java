@@ -25,6 +25,21 @@ import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Receiving Address Business Object. 
  * Used when an institution has products shipped by vendors to their "central receiving" organziation, 
@@ -32,23 +47,50 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * ReceivingAddress defines all the required address fields as well as an indicator to decide whether the 
  * receiving address or the final delivery address will be used as the shipping address provided to a vendor.
  */
+@Entity
+@Table(name = "PUR_RCVNG_ADDR_T")
 public class ReceivingAddress extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PUR_RCVNG_ADDR_ID")
     private Integer receivingAddressIdentifier;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;    
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "PUR_RCVNG_NM")
     private String receivingName;
+    @Column(name = "PUR_RCVNG_LN1_ADDR")
     private String receivingLine1Address;
+    @Column(name = "PUR_RCVNG_LN2_ADDR")
     private String receivingLine2Address;
+    @Column(name = "PUR_RCVNG_CTY_NM")
     private String receivingCityName;
+    @Column(name = "PUR_RCVNG_ST_CD")
     private String receivingStateCode;
+    @Column(name = "PUR_RCVNG_PSTL_CD")
     private String receivingPostalCode;
+    @Column(name = "PUR_RCVNG_CNTRY_CD")
     private String receivingCountryCode;
+    @Column(name = "VNDR_ADDR_USE_RCVNG_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean useReceivingIndicator;
+    @Column(name = "PUR_RCVNG_DFLT_ADDR_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean defaultIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+            @JoinColumn(name = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
 
     /**

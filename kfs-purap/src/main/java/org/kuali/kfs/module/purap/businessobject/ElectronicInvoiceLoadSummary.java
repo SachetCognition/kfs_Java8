@@ -30,18 +30,41 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
+@Entity
+@Table(name = "AP_ELCTRNC_INV_LOAD_SUM_T")
+@IdClass(ElectronicInvoiceLoadSummaryId.class)
 public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase {
   
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "INV_LOAD_SUM_ID")
   private Integer invoiceLoadSummaryIdentifier;
+  @Id
+  @Column(name = "VNDR_DUNS_NBR")
   private String vendorDunsNumber; // this is string constant if DUNS not found
   private Integer vendorHeaderGeneratedIdentifier;
   private Integer vendorDetailAssignedIdentifier;
   private String vendorName;
+  @Column(name = "INV_LOAD_SCCSS_CNT")
   private Integer invoiceLoadSuccessCount = new Integer(0);
+  @Column(name = "INV_LOAD_SCCSS_AMT")
   private KualiDecimal invoiceLoadSuccessAmount = new KualiDecimal(0.00);
+  @Column(name = "INV_LOAD_FAIL_CNT")
   private Integer invoiceLoadFailCount = new Integer(0);
+  @Column(name = "INV_LOAD_FAIL_AMT")
   private KualiDecimal invoiceLoadFailAmount = new KualiDecimal(0.00);
   private Boolean isEmpty = Boolean.TRUE;
+  @Column(name = "FL_PROC_DT")
   private Timestamp fileProcessTimestamp;
   
   public ElectronicInvoiceLoadSummary() {

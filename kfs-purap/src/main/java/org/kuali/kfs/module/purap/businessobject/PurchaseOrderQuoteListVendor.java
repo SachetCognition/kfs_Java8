@@ -27,17 +27,52 @@ import org.kuali.kfs.vnd.document.service.VendorService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Purchase Order Quote List Vendor Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_QT_LST_VNDR_T")
+@IdClass(PurchaseOrderQuoteListVendorId.class)
 public class PurchaseOrderQuoteListVendor extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PO_QT_LST_ID")
     protected Integer purchaseOrderQuoteListIdentifier;
+    @Id
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     protected Integer vendorHeaderGeneratedIdentifier;
+    @Id
+    @Column(name = "VNDR_DTL_ASND_ID")
     protected Integer vendorDetailAssignedIdentifier;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PO_QT_LST_ID", insertable = false, updatable = false)
     protected PurchaseOrderQuoteList purchaseOrderQuoteList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+            @JoinColumn(name = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+    })
     protected VendorDetail vendorDetail;
 
     /**

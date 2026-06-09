@@ -38,15 +38,39 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Item line Business Object for Credit Memo Document.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_ITM_T")
 public class CreditMemoItem extends AccountsPayableItemBase {
+    @Column(name = "PO_INV_TOT_QTY")
     private KualiDecimal poInvoicedTotalQuantity;
+    @Column(name = "PO_UNT_PRC")
     private BigDecimal poUnitPrice;
+    @Column(name = "PO_EXTND_PRC")
     private KualiDecimal poTotalAmount;
+    @Column(name = "PMT_RQST_INV_TOT_QTY")
     private KualiDecimal preqInvoicedTotalQuantity;
+    @Column(name = "PMT_RQST_UNT_PRC")
     private BigDecimal preqUnitPrice;
+    @Column(name = "PMT_RQST_EXTND_PRC")
     private KualiDecimal preqTotalAmount;
 
     /**

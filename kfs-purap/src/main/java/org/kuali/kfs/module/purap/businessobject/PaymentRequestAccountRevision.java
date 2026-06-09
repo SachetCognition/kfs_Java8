@@ -28,14 +28,38 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.util.ObjectPopulationUtils;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
 /**
  * Payment Request Account Revision Business Object.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_ACCT_CHG_T")
 public class PaymentRequestAccountRevision extends PaymentRequestAccount {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_RQST_ACCT_CHG_ID")
     protected Integer accountRevisionIdentifier;
+    @Column(name = "PMT_RQST_ACCT_CHG_TS")
     private Timestamp accountRevisionTimestamp;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "FDOC_POST_YR", insertable = false, updatable = false),
+            @JoinColumn(name = "FDOC_POST_PRD_CD", insertable = false, updatable = false)
+    })
     private AccountingPeriod accountingPeriod;
 
     public AccountingPeriod getAccountingPeriod() {

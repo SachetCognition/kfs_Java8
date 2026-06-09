@@ -23,9 +23,22 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.Note;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+
 /**
  * Requisition View Business Object.
  */
+@Entity
+@Table(name = "PUR_REQS_T")
+@IdClass(RequisitionViewId.class)
 public class RequisitionView extends AbstractRelatedView {
     private Integer requisitionIdentifier;
 

@@ -26,19 +26,44 @@ import org.kuali.rice.core.web.format.CurrencyFormatter;
 import org.kuali.rice.core.web.format.DateFormatter;
 import org.kuali.rice.krad.bo.Note;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
+
 
 /**
  * Credit Memo View Business Object.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_T")
+@IdClass(CreditMemoViewId.class)
 public class CreditMemoView extends AbstractRelatedView {
+    @Column(name = "CRDT_MEMO_NBR")
     private String creditMemoNumber;
+    @Column(name = "PMT_RQST_ID")
     private Integer paymentRequestIdentifier;
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+    @Column(name = "CRDT_HLD_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean creditHoldIndicator;
+    @Column(name = "VNDR_CUST_NBR")
     private String vendorCustomerNumber;
+    @Column(name = "AP_APRVL_DT")
     private Timestamp accountsPayableApprovalTimestamp;
+    @Column(name = "CRDT_MEMO_EXTRT_DT")
     private Timestamp creditMemoExtractedTimestamp;
+    @Column(name = "CRDT_MEMO_PD_TS")
     private Timestamp creditMemoPaidTimestamp;
+    @Column(name = "VNDR_NM")
     private String vendorName;
 
     // GETTERS & SETTERS

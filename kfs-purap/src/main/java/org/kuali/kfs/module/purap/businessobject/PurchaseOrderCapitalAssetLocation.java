@@ -20,13 +20,31 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.kfs.integration.purap.CapitalAssetSystem;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "PUR_PO_CPTL_AST_LOC_T")
 public class PurchaseOrderCapitalAssetLocation extends PurchasingCapitalAssetLocationBase {
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CPTL_AST_SYS_ID", insertable = false, updatable = false)
     protected CapitalAssetSystem purchaseOrderCapitalAssetSystem;
 
 	/**
