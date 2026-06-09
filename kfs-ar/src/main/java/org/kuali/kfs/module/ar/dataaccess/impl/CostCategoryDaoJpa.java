@@ -345,6 +345,7 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
 
     @Override
     public CostCategory getCostCategoryForObjectCode(Integer universityFiscalYear, String chartOfAccountsCode, String financialObjectCode) {
+        // Path 1: Direct match via CostCategoryObjectCode
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<CostCategoryObjectCode> cq = cb.createQuery(CostCategoryObjectCode.class);
         Root<CostCategoryObjectCode> root = cq.from(CostCategoryObjectCode.class);
@@ -364,6 +365,60 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
             String categoryCode = results.get(0).getCategoryCode();
             return entityManager.find(CostCategory.class, categoryCode);
         }
+
+        // Path 2: Match via object level - look up level code for the object code, then find category by level
+        String levelSql = "SELECT oc.FIN_OBJ_LEVEL_CD FROM CA_OBJECT_CODE_T oc " +
+                "WHERE oc.UNIV_FISCAL_YR = ?1 AND oc.FIN_COA_CD = ?2 AND oc.FIN_OBJECT_CD = ?3";
+        javax.persistence.Query levelQuery = entityManager.createNativeQuery(levelSql);
+        levelQuery.setParameter(1, universityFiscalYear);
+        levelQuery.setParameter(2, chartOfAccountsCode);
+        levelQuery.setParameter(3, financialObjectCode);
+        @SuppressWarnings("unchecked")
+        List<String> levelResults = levelQuery.getResultList();
+        if (!levelResults.isEmpty()) {
+            String levelCode = levelResults.get(0);
+            CriteriaQuery<CostCategoryObjectLevel> lcq = cb.createQuery(CostCategoryObjectLevel.class);
+            Root<CostCategoryObjectLevel> lroot = lcq.from(CostCategoryObjectLevel.class);
+            List<Predicate> lPreds = new ArrayList<Predicate>();
+            lPreds.add(cb.equal(lroot.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), chartOfAccountsCode));
+            lPreds.add(cb.equal(lroot.get(KFSPropertyConstants.FINANCIAL_OBJECT_LEVEL_CODE), levelCode));
+            lPreds.add(cb.equal(lroot.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+            lcq.where(lPreds.toArray(new Predicate[0]));
+            lcq.select(lroot);
+            TypedQuery<CostCategoryObjectLevel> lQuery = entityManager.createQuery(lcq);
+            lQuery.setMaxResults(1);
+            List<CostCategoryObjectLevel> lResults = lQuery.getResultList();
+            if (!lResults.isEmpty()) {
+                return entityManager.find(CostCategory.class, lResults.get(0).getCategoryCode());
+            }
+
+            // Path 3: Match via consolidation - look up consolidation code for the level, then find category
+            String consolSql = "SELECT lvl.FIN_CONS_OBJ_CD FROM CA_OBJ_LEVEL_T lvl " +
+                    "WHERE lvl.FIN_COA_CD = ?1 AND lvl.FIN_OBJ_LEVEL_CD = ?2";
+            javax.persistence.Query consolQuery = entityManager.createNativeQuery(consolSql);
+            consolQuery.setParameter(1, chartOfAccountsCode);
+            consolQuery.setParameter(2, levelCode);
+            @SuppressWarnings("unchecked")
+            List<String> consolResults = consolQuery.getResultList();
+            if (!consolResults.isEmpty()) {
+                String consolCode = consolResults.get(0);
+                CriteriaQuery<CostCategoryObjectConsolidation> ccq = cb.createQuery(CostCategoryObjectConsolidation.class);
+                Root<CostCategoryObjectConsolidation> croot = ccq.from(CostCategoryObjectConsolidation.class);
+                List<Predicate> cPreds = new ArrayList<Predicate>();
+                cPreds.add(cb.equal(croot.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), chartOfAccountsCode));
+                cPreds.add(cb.equal(croot.get(KFSPropertyConstants.FIN_CONSOLIDATION_OBJECT_CODE), consolCode));
+                cPreds.add(cb.equal(croot.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+                ccq.where(cPreds.toArray(new Predicate[0]));
+                ccq.select(croot);
+                TypedQuery<CostCategoryObjectConsolidation> cQuery = entityManager.createQuery(ccq);
+                cQuery.setMaxResults(1);
+                List<CostCategoryObjectConsolidation> cResults = cQuery.getResultList();
+                if (!cResults.isEmpty()) {
+                    return entityManager.find(CostCategory.class, cResults.get(0).getCategoryCode());
+                }
+            }
+        }
+
         return null;
     }
 
