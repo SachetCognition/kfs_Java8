@@ -23,21 +23,45 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_WRNTY_T")
 public class AssetWarranty extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+
+	@Column(name = "CPTLAST_NBR")
+
 	private Long capitalAssetNumber;
+	@Column(name = "AST_WRNTY_CNTCT_NM")
 	private String warrantyContactName;
+	@Column(name = "AST_WRNTYPHN_NBR")
 	private String warrantyPhoneNumber;
+	@Column(name = "AST_WRNTY_BEG_DT")
 	private Date warrantyBeginningDate;
+	@Column(name = "AST_WRNTY_END_DT")
 	private Date warrantyEndingDate;
+	@Column(name = "AST_WRNTY_NBR")
 	private String warrantyNumber;
+	@Column(name = "AST_WRNTY_PO_NBR")
 	private String warrantyPurchaseOrderNumber;
+	@Column(name = "AST_WRNTY_TXT")
 	private String warrantyText;
+	@Column(name = "ACTV_IND")
+	@Type(type = "yes_no")
 	private boolean active;
+
+    @Transient
 
     private Asset asset;
 
@@ -67,8 +91,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setCapitalAssetNumber(Long capitalAssetNumber) {
 		this.capitalAssetNumber = capitalAssetNumber;
 	}
-
-
 	/**
 	 * Gets the warrantyContactName attribute.
 	 *
@@ -88,8 +110,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyContactName(String warrantyContactName) {
 		this.warrantyContactName = warrantyContactName;
 	}
-
-
 	/**
 	 * Gets the warrantyPhoneNumber attribute.
 	 *
@@ -109,8 +129,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyPhoneNumber(String warrantyPhoneNumber) {
 		this.warrantyPhoneNumber = warrantyPhoneNumber;
 	}
-
-
 	/**
 	 * Gets the warrantyBeginningDate attribute.
 	 *
@@ -130,8 +148,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyBeginningDate(Date warrantyBeginningDate) {
 		this.warrantyBeginningDate = warrantyBeginningDate;
 	}
-
-
 	/**
 	 * Gets the warrantyEndingDate attribute.
 	 *
@@ -151,8 +167,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyEndingDate(Date warrantyEndingDate) {
 		this.warrantyEndingDate = warrantyEndingDate;
 	}
-
-
 	/**
 	 * Gets the warrantyNumber attribute.
 	 *
@@ -172,8 +186,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyNumber(String warrantyNumber) {
 		this.warrantyNumber = warrantyNumber;
 	}
-
-
 	/**
 	 * Gets the warrantyPurchaseOrderNumber attribute.
 	 *
@@ -193,8 +205,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyPurchaseOrderNumber(String warrantyPurchaseOrderNumber) {
 		this.warrantyPurchaseOrderNumber = warrantyPurchaseOrderNumber;
 	}
-
-
 	/**
 	 * Gets the warrantyText attribute.
 	 *
@@ -214,8 +224,6 @@ public class AssetWarranty extends PersistableBusinessObjectBase implements Muta
 	public void setWarrantyText(String warrantyText) {
 		this.warrantyText = warrantyText;
 	}
-
-
 	/**
 	 * Gets the asset attribute.
 	 *

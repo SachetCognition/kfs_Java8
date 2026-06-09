@@ -122,8 +122,6 @@ public class BatchExtractReportServiceImpl implements BatchExtractReportService 
     public void setCabBatchStatusReportInfo(ReportInfo cabBatchStatusReportInfo) {
         this.cabBatchStatusReportInfo = cabBatchStatusReportInfo;
     }
-
-
     /**
      * Gets the dateTimeService attribute.
      * 

@@ -40,50 +40,105 @@ import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@Entity
+
+@Table(name = "CB_GL_ENTRY_T")
 
 public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CB_GL_ACCT_ID_SEQ")
+    @SequenceGenerator(name = "CB_GL_ACCT_ID_SEQ", sequenceName = "CB_GL_ACCT_ID_SEQ")
+    @Column(name = "CB_GL_ACCT_ID")
     private Long generalLedgerAccountIdentifier;
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String financialObjectTypeCode;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     private Integer transactionLedgerEntrySequenceNumber;
+    @Column(name = "TRN_LDGR_ENTR_DESC")
     private String transactionLedgerEntryDescription;
+    @Column(name = "TRN_LDGR_ENTR_AMT")
     private KualiDecimal transactionLedgerEntryAmount;
+    @Column(name = "TRN_LDGR_SUBMIT_AMT")
     private KualiDecimal transactionLedgerSubmitAmount;
+    @Column(name = "ORG_REFERENCE_ID")
     private String organizationReferenceId;
+    @Column(name = "FS_REF_ORIGIN_CD")
     private String referenceFinancialSystemOriginationCode;
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitCreditCode;
+    @Column(name = "ORG_DOC_NBR")
     private String organizationDocumentNumber;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Column(name = "TRN_POST_DT")
     private Date transactionPostingDate;
+    @Column(name = "TRANSACTION_DT")
     private Date transactionDate;
+    @Column(name = "TIMESTAMP")
     private Timestamp transactionDateTimeStamp;
+    @Column(name = "ACTV_IND")
     private String activityStatusCode;
 
     // References
+    @Transient
     private Account account;
+    @Transient
     private Chart chart;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private ObjectType objectType;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
+    @Transient
     private List<GeneralLedgerEntryAsset> generalLedgerEntryAssets;
+    @Transient
     private List<PurchasingAccountsPayableLineAssetAccount> purApLineAssetAccounts;
     // non-db fields
+    @Transient
     private boolean selected;
+    @Transient
     private KualiDecimal amount;
+    @Transient
     private boolean active;
 
     public GeneralLedgerEntry() {
@@ -124,8 +179,6 @@ public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
         this.setTransactionDateTimeStamp(entry.getTransactionDateTimeStamp());
         this.setActivityStatusCode(CabConstants.ActivityStatusCode.NEW);
     }
-
-
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap<String, String> m = new LinkedHashMap<String, String>();
         if (this.generalLedgerAccountIdentifier != null) {
@@ -155,8 +208,6 @@ public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
     public Long getGeneralLedgerAccountIdentifier() {
         return generalLedgerAccountIdentifier;
     }
-
-
     /**
      * Sets the generalLedgerAccountIdentifier attribute.
      *
@@ -372,8 +423,6 @@ public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
     public String getDocumentNumber() {
         return documentNumber;
     }
-
-
     /**
      * Sets the documentNumber attribute.
      *
@@ -616,8 +665,6 @@ public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
     public void setSubAccount(SubAccount subAccount) {
         this.subAccount = subAccount;
     }
-
-
     /**
      * Gets the chart attribute.
      *
@@ -716,8 +763,6 @@ public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
     public boolean isActive() {
         return CabConstants.ActivityStatusCode.NEW.equalsIgnoreCase(this.getActivityStatusCode()) || CabConstants.ActivityStatusCode.MODIFIED.equalsIgnoreCase(this.getActivityStatusCode());
     }
-
-
     /**
      * Gets the activityStatusCode attribute.
      *

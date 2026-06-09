@@ -18,9 +18,16 @@
  */
 package org.kuali.kfs.module.cam.businessobject;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /* 
  * This is a dummy class used to create a DataDictionary entry for the CAMS parent type (CAMM) for searching.
  */
+
+@Entity
+
+@Table(name = "CM_CPTLAST_SEARCH_T")
 
 public class AssetForSearching extends AssetBase {
 

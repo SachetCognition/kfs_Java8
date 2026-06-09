@@ -19,16 +19,33 @@
 package org.kuali.kfs.module.cam.businessobject;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_ORG_T")
 public class AssetOrganization extends PersistableBusinessObjectBase {
 
+	@Id
+
+	@Column(name = "CPTLAST_NBR")
+
 	protected Long capitalAssetNumber;
+	@Column(name = "ORG_CPTLAST_TYP_ID")
 	protected String organizationAssetTypeIdentifier;
+	@Column(name = "CPTLAST_ORGTAG_NBR")
 	protected String organizationTagNumber;
+	@Column(name = "ORG_TXT")
 	protected String organizationText;
+
+    @Transient
 
     protected Asset asset;
 
@@ -58,8 +75,6 @@ public class AssetOrganization extends PersistableBusinessObjectBase {
 	public void setCapitalAssetNumber(Long capitalAssetNumber) {
 		this.capitalAssetNumber = capitalAssetNumber;
 	}
-
-
 	/**
 	 * Gets the organizationAssetTypeIdentifier attribute.
 	 *
@@ -79,8 +94,6 @@ public class AssetOrganization extends PersistableBusinessObjectBase {
 	public void setOrganizationAssetTypeIdentifier(String organizationAssetTypeIdentifier) {
 		this.organizationAssetTypeIdentifier = organizationAssetTypeIdentifier;
 	}
-
-
 	/**
 	 * Gets the organizationTagNumber attribute.
 	 *
@@ -100,8 +113,6 @@ public class AssetOrganization extends PersistableBusinessObjectBase {
 	public void setOrganizationTagNumber(String organizationTagNumber) {
 		this.organizationTagNumber = organizationTagNumber;
 	}
-
-
 	/**
 	 * Gets the organizationText attribute.
 	 *
@@ -121,8 +132,6 @@ public class AssetOrganization extends PersistableBusinessObjectBase {
 	public void setOrganizationText(String organizationText) {
 		this.organizationText = organizationText;
 	}
-
-
 	/**
 	 * Gets the asset attribute.
 	 *

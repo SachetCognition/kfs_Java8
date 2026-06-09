@@ -114,8 +114,6 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
     protected boolean isAccountAndOrganizationReviewRequired(){
         return ((AssetGlobal) getBusinessObject()).isCapitalAssetBuilderOriginIndicator();
     }
-
-
     /**
      * Get Asset from AssetGlobal
      *
@@ -178,8 +176,6 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
 
         assetGlobal.setLastInventoryDate(getDateTimeService().getCurrentSqlDate());
     }
-
-
     /**
      * Get Asset from AssetGlobal
      *
@@ -451,8 +447,6 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
-
-
     /**
      * @see org.kuali.rice.kns.maintenance.KualiGlobalMaintainableImpl#prepareForSave()
      */
@@ -783,8 +777,6 @@ public class AssetGlobalMaintainableImpl extends LedgerPostingMaintainable {
     private String getClosingDate(Integer closingYear) {
         return getAssetGlobalService().getFiscalYearEndDayAndMonth() + closingYear.toString();
     }
-
-
     /**
      * Return the calendar Date for the closing year
      * @param closingYear

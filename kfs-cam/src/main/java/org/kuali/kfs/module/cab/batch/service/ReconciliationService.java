@@ -75,6 +75,4 @@ public interface ReconciliationService {
      * @param purapAcctEntries Purap Account Entries
      */
     void reconcile(Collection<Entry> glEntries, Collection<PurApAccountingLineBase> purapAcctEntries);
-
-
 }

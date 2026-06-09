@@ -22,14 +22,29 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_LOC_TYP_T")
 public class AssetLocationType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "CPTLAST_LOC_TYP_CD")
+
     private String assetLocationTypeCode;
+    @Column(name = "CPTLAST_LOC_TYP_NM")
     private String assetLocationTypeName;
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     /**
@@ -56,8 +71,6 @@ public class AssetLocationType extends PersistableBusinessObjectBase implements 
     public void setAssetLocationTypeCode(String assetLocationTypeCode) {
         this.assetLocationTypeCode = assetLocationTypeCode;
     }
-
-
     /**
      * Gets the assetLocationTypeName attribute.
      * 
@@ -75,8 +88,6 @@ public class AssetLocationType extends PersistableBusinessObjectBase implements 
     public void setAssetLocationTypeName(String assetLocationTypeName) {
         this.assetLocationTypeName = assetLocationTypeName;
     }
-
-
     /**
      * Gets the active attribute.
      * 

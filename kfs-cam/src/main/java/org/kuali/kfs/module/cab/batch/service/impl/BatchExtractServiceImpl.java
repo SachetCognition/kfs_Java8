@@ -269,8 +269,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         BatchParameters parameters = createPreTagBatchParameters();
         return extractDao.findPreTaggablePOAccounts(parameters, getDocumentsNumbersAwaitingPurchaseOrderOpenStatus());
     }
-
-
     /**
      * Retrieves a payment request document for a specific document number
      *
@@ -287,8 +285,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         }
         return paymentRequestDocument;
     }
-
-
     /**
      * Computes the last run time stamp, if null then it gives yesterday
      *
@@ -679,8 +675,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         }
         return purApInfoService.retrieveValidAssetNumberForLocking(purApdocument.getPurapDocumentIdentifier(), purApdocument.getCapitalAssetSystemTypeCode(), purapItem);
     }
-
-
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
@@ -710,8 +704,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         copyEntry.setTransactionLedgerEntryAmount(KualiDecimal.ZERO);
         return copyEntry;
     }
-
-
     /**
      * Retrieves Payment Request Account History and Credit Memo account history, combines them into a single list
      *
@@ -909,8 +901,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
             }
         }
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.batch.service.BatchExtractService#updateLastExtractTime(java.sql.Timestamp)
      */
@@ -983,8 +973,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         }
         return poDocumentNumbers;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.batch.service.BatchExtractService#updateLastExtractDate(java.sql.Date)
      */
@@ -995,8 +983,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
 
         if (parameter != null) {
             SimpleDateFormat format = new SimpleDateFormat(CabConstants.DateFormats.MONTH_DAY_YEAR);
-
-
             Parameter.Builder updatedParameter = Parameter.Builder.create(parameter);
             updatedParameter.setValue(format.format(dt));
             parameterService.updateParameter(updatedParameter.build());

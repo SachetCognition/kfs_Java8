@@ -172,8 +172,6 @@ public class AssetRetirementServiceImpl implements AssetRetirementService {
     public void setAssetObjectCodeService(AssetObjectCodeService assetObjectCodeService) {
         this.assetObjectCodeService = assetObjectCodeService;
     }
-
-
     public BusinessObjectService getBusinessObjectService() {
         return businessObjectService;
     }
@@ -289,8 +287,6 @@ public class AssetRetirementServiceImpl implements AssetRetirementService {
         persistables.addAll(newPayments);
         return maxSequenceNo;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetRetirementService#isRetirementReasonCodeInGroup(java.lang.String,
      *      java.lang.String)
@@ -405,8 +401,6 @@ public class AssetRetirementServiceImpl implements AssetRetirementService {
         AssetObjectCode assetObjectCode = assetObjectCodeService.findAssetObjectCode(asset.getOrganizationOwnerChartOfAccountsCode(), objectCode.getFinancialObjectSubTypeCode());
         return assetObjectCode;
     }
-
-
     /**
      * Get the offset Object Code.
      *
@@ -426,8 +420,6 @@ public class AssetRetirementServiceImpl implements AssetRetirementService {
 
         return SpringContext.getBean(BusinessObjectService.class).findByPrimaryKey(ObjectCode.class, pkMap);
     }
-
-
     /**
      * Get the corresponding Plant Fund Account object based on the payment's financialObjectSubTypeCode.
      *

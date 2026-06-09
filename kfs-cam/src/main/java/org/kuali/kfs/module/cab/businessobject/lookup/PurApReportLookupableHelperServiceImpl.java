@@ -130,8 +130,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
         else {
             purApReportList = updateResultList(purApReportList);
         }
-
-
         return buildSearchResultList(purApReportList);
     }
 
@@ -178,8 +176,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
 
         return searchResults;
     }
-
-
     /**
      * Build a HashMap for documentNumbers from the PurchasingAccountsPayableDocument search results
      *
@@ -345,8 +341,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
             newReport.setReportAmount(newReport.getAmount());
         }
     }
-
-
     /**
      * Return and remove the selected field from the user input.
      *
@@ -371,8 +365,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
     public PurchasingAccountsPayableReportService getPurApReportService() {
         return purApReportService;
     }
-
-
     /**
      * Sets the purApReportService attribute value.
      *

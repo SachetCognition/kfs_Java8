@@ -38,9 +38,7 @@
 			</list>
 		</property>
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/cab/ojb-cab.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>
@@ -97,8 +95,12 @@
     </bean>
 	
 <!-- Begin - CAB Batch Beans -->
-	<bean id="extractDao" parent="platformAwareDao" class="org.kuali.kfs.module.cab.batch.dataaccess.impl.ExtractDaoOjb" />
-	<bean id="purchasingAccountsPayableItemAssetDao" parent="platformAwareDao" class="org.kuali.kfs.module.cab.batch.dataaccess.impl.PurchasingAccountsPayableItemAssetDaoOjb" />
+	<bean id="extractDao" class="org.kuali.kfs.module.cab.batch.dataaccess.impl.ExtractDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="purchasingAccountsPayableItemAssetDao" class="org.kuali.kfs.module.cab.batch.dataaccess.impl.PurchasingAccountsPayableItemAssetDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 	
 	
 	<bean id="batchExtractService"  parent="batchExtractService-parentBean"/>
@@ -120,8 +122,9 @@
 		<property name="reportGenerationService" ref="reportGenerationService" />
 	</bean>
 
-    <bean id="reconciliationDao" parent="platformAwareDao"
-        class="org.kuali.kfs.module.cab.dataaccess.impl.ReconciliationDaoOjb" />
+    <bean id="reconciliationDao" class="org.kuali.kfs.module.cab.dataaccess.impl.ReconciliationDaoJpa">
+        <property name="entityManager" ref="entityManager" />
+    </bean>
 	
 	<bean id="reconciliationService"  parent="reconciliationService-parentBean" singleton="false"/>
 	<bean id="reconciliationService-parentBean" class="org.kuali.kfs.module.cab.batch.service.impl.ReconciliationServiceImpl" abstract="true">
@@ -230,7 +233,9 @@
 <!-- **** End of Lookupable beans **** -->
 
 <!--  **** PurAp service beans **** -->
-	<bean id="purchasingAccountsPayableReportDao" parent="platformAwareDao" class="org.kuali.kfs.module.cab.dataaccess.impl.PurchasingAccountsPayableReportDaoOjb"></bean>
+	<bean id="purchasingAccountsPayableReportDao" class="org.kuali.kfs.module.cab.dataaccess.impl.PurchasingAccountsPayableReportDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 	
 	<bean id="purchasingAccountsPayableReportService" parent="purchasingAccountsPayableReportService-parentBean"/>
     <bean id="purchasingAccountsPayableReportService-parentBean" abstract="true"  class="org.kuali.kfs.module.cab.service.impl.PurchasingAccountsPayableReportServiceImpl" >
@@ -244,7 +249,9 @@
 		<property name="businessObjectService" ref="businessObjectService" />
 	</bean>  
 	
-	<bean id="purApLineDao" parent="platformAwareDao" class="org.kuali.kfs.module.cab.dataaccess.impl.PurApLineDaoOjb"></bean>
+	<bean id="purApLineDao" class="org.kuali.kfs.module.cab.dataaccess.impl.PurApLineDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 	
 	<bean id="purApLineService" parent="purApLineService-parentBean"/>
 	<bean id="purApLineService-parentBean" abstract="true"  class="org.kuali.kfs.module.cab.document.service.impl.PurApLineServiceImpl">

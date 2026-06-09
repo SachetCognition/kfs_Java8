@@ -54,8 +54,6 @@ public class AssetGlobalPreRules extends MaintenancePreRulesBase {
         }
         return true;
     }
-
-
     /**
      * Validate all object sub type codes are from the same group.
      * 
@@ -80,8 +78,6 @@ public class AssetGlobalPreRules extends MaintenancePreRulesBase {
         }
         return invalid;
     }
-
-
     protected boolean isOkHavingDifferentObjectSubTypes() {
         String parameterDetail = "(module:" + KRADServiceLocatorWeb.getKualiModuleService().getNamespaceCode(AssetGlobal.class) + "/component:" + AssetGlobal.class.getSimpleName() + ")";
         ConfigurationService kualiConfiguration = SpringContext.getBean(ConfigurationService.class);

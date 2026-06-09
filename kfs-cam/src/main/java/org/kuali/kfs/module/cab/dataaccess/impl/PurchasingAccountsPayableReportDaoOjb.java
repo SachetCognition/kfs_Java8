@@ -50,8 +50,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
         QueryByCriteria query = QueryFactory.newQuery(PurchasingAccountsPayableDocument.class, criteria);
         return getPersistenceBrokerTemplate().getCollectionByQuery(query);
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.dataaccess.PurchasingAccountsPayableReportDao#findGeneralLedgers(java.util.Map)
      */
@@ -91,8 +89,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
         query.setAttributes(attributes);
         return query;
     }
-
-
     /**
      * Get activity_statu_code
      *
@@ -113,8 +109,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
         }
         return activityStatusCodes;
     }
-
-
     /**
      * Get Document type code selection
      *
@@ -139,8 +133,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
 
         return docTypeCodes;
     }
-
-
     /**
      * Build attribute list for select clause.
      *

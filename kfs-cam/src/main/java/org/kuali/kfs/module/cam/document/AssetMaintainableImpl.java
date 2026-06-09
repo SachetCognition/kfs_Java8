@@ -253,8 +253,6 @@ public class AssetMaintainableImpl extends FinancialSystemMaintainable {
         }
         super.saveBusinessObject();
     }
-
-
     @Override
     public void processAfterNew(MaintenanceDocument document, Map<String, String[]> parameters) {
         super.processAfterNew(document, parameters);

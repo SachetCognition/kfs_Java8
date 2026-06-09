@@ -329,6 +329,4 @@ public class ExtractProcessLog {
     public void setStatusMessage(String statusMessage) {
         this.statusMessage = statusMessage;
     }
-
-
 }

@@ -58,6 +58,4 @@ public class AssetObjectCodeServiceImpl implements AssetObjectCodeService {
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
-
-
 }

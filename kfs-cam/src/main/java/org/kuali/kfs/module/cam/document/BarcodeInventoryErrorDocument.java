@@ -25,10 +25,23 @@ import java.util.List;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.businessobject.BarcodeInventoryErrorDetail;
 import org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+@Entity
+@Table(name = "CM_INVN_ERR_DOC_T")
 public class BarcodeInventoryErrorDocument extends FinancialSystemTransactionalDocumentBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorDocument.class);
     
+	@Id
+    
+	@Column(name = "FDOC_NBR")
+    
 	protected String documentNumber;
+	@Column(name = "AST_UPLDR_UNVL_ID")
 	protected String uploaderUniversalIdentifier;
 	
     //global replace	- search fields
@@ -49,6 +62,8 @@ public class BarcodeInventoryErrorDocument extends FinancialSystemTransactionalD
     protected String newRoom;
     protected String newSubroom;
     protected String newConditionCode;
+	
+    @Transient
 	
     protected List<BarcodeInventoryErrorDetail> barcodeInventoryErrorDetail;
     
@@ -79,8 +94,6 @@ public class BarcodeInventoryErrorDocument extends FinancialSystemTransactionalD
 	public void setDocumentNumber(String documentNumber) {
 		this.documentNumber = documentNumber;
 	}
-
-
 	/**
 	 * Gets the uploaderUniversalIdentifier attribute.
 	 * 

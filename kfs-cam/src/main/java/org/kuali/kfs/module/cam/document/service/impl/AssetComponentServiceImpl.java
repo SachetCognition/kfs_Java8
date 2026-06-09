@@ -26,18 +26,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AssetComponentServiceImpl implements AssetComponentService {
     AssetComponentDao assetComponentDao;
-
-
     public AssetComponentDao getAssetComponentDao() {
         return assetComponentDao;
     }
-
-
     public void setAssetComponentDao(AssetComponentDao assetComponentDao) {
         this.assetComponentDao = assetComponentDao;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetComponentService#getMaxSequenceNumber(org.kuali.kfs.module.cam.businessobject.AssetComponent)
      */

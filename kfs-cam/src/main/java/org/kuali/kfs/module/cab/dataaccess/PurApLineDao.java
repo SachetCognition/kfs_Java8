@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.kuali.kfs.module.cab.dataaccess;
-
-
 public interface PurApLineDao {
     /**
      * This method gets the maximum asset payment sequence number column from database and sets the value

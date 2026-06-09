@@ -97,8 +97,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
     private AssetObjectCodeService assetObjectCodeService;
     private DateTimeService dateTimeService;
     private AssetLocationService assetLocationService;
-
-
     /**
      * Creates an instance of AssetGlpeSourceDetail depending on the source flag
      *
@@ -210,8 +208,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
         }
         return maxSequenceNo;
     }
-
-
     /**
      * Creates offset payment copying the details from original payments and reversing the amounts
      *
@@ -249,8 +245,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
         }
         return maxSequenceNo;
     }
-
-
     /**
      * Creates GL Postables for the source organization
      *
@@ -292,8 +286,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
             }
         }
     }
-
-
     /**
      * Creates target GL Postable for the receiving organization
      *
@@ -327,18 +319,12 @@ public class AssetTransferServiceImpl implements AssetTransferService {
     public AssetPaymentService getAssetPaymentService() {
         return assetPaymentService;
     }
-
-
     public AssetService getAssetService() {
         return assetService;
     }
-
-
     public BusinessObjectService getBusinessObjectService() {
         return businessObjectService;
     }
-
-
     public UniversityDateService getUniversityDateService() {
         return universityDateService;
     }
@@ -380,8 +366,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
         }
         return isGLPostable;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetTransferService#saveApprovedChanges(org.kuali.kfs.module.cam.document.AssetTransferDocument)
      */
@@ -411,8 +395,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
         persistableObjects.add(saveAsset);
         getBusinessObjectService().save(persistableObjects);
     }
-
-
     /**
      * Updates organization data for the asset
      *
@@ -479,8 +461,6 @@ public class AssetTransferServiceImpl implements AssetTransferService {
         }
 
     }
-
-
     /**
      * Updates organization changes
      *
@@ -503,13 +483,9 @@ public class AssetTransferServiceImpl implements AssetTransferService {
     public void setAssetPaymentService(AssetPaymentService assetPaymentService) {
         this.assetPaymentService = assetPaymentService;
     }
-
-
     public void setAssetService(AssetService assetService) {
         this.assetService = assetService;
     }
-
-
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }

@@ -144,8 +144,6 @@ public class AssetDepreciationServiceTest extends KualiTestBase {
             throw e;
         }
     }
-
-
     /**
      * stores the depreciation date into parameters table
      * 
@@ -215,8 +213,6 @@ public class AssetDepreciationServiceTest extends KualiTestBase {
         depreciationDate.add(Calendar.MONTH, incrementBy);
         return dateFormat.format(depreciationDate.getTime());
     }
-
-
     /**
      * Determines whether or not a calculated depreciation amount has the same value as the on the fixture file
      * 

@@ -467,8 +467,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         // no need for error
         return true;
     }
-
-
     /**
      * Validates the capital asset field requirements based on system parameter and chart for individual system type. This also
      * calls validations for quantity on locations equal quantity on line items, validates that the transaction type allows asset
@@ -1173,8 +1171,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         // If there is a tran type ...
         if ((capitalAssetTransactionType != null) && (capitalAssetTransactionType.getCapitalAssetTransactionTypeCode() != null)) {
             String recurringTransactionTypeCodes = this.getParameterService().getParameterValueAsString(KfsParameterConstants.CAPITAL_ASSET_BUILDER_DOCUMENT.class, CabParameterConstants.CapitalAsset.RECURRING_CAMS_TRAN_TYPES);
-
-
             if (StringUtils.isNotEmpty(recurringPaymentTypeCode)) { // If there is a recurring payment type ...
                 if (!StringUtils.contains(recurringTransactionTypeCodes, capitalAssetTransactionType.getCapitalAssetTransactionTypeCode())) {
                     // There should be a recurring tran type code.
@@ -1457,8 +1453,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         final AccountCapitalObjectCode accountCapitalObjectCode = getCapitalAssetObjectSubTypeLinesFlag(accountingDocument);
         return accountCapitalObjectCode != null && !accountCapitalObjectCode.equals(AccountCapitalObjectCode.BOTH_NONCAP);
     }
-
-
     /**
      * To check if data exists on create new asset
      *
@@ -1622,8 +1616,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                     valid = false;
                 }
             }
-
-
             index++;
         }
 
@@ -1720,8 +1712,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                     valid = false;
                 }
             }
-
-
             index++;
         }
 
@@ -2503,8 +2493,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
 
         return true;
     }
-
-
     /**
      * Activates PO Lines
      *
@@ -2539,8 +2527,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
             }
         }
     }
-
-
     /**
      * gets the document type based on the instance of a class
      *
@@ -2798,8 +2784,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
 
         return isValid;
     }
-
-
     /**
      * Check FP document eligibility by document type for CAB Extract batch.
      *
@@ -2816,8 +2800,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         }
         return eligible;
     }
-
-
     @Override
     public List<String> getBatchIncludedObjectSubTypes() {
         List<String> includedFinancialObjectSubTypeCodes = new ArrayList<String>(parameterService.getParameterValuesAsString(KfsParameterConstants.CAPITAL_ASSET_BUILDER_BATCH.class, CabConstants.Parameters.OBJECT_SUB_TYPES));
@@ -2835,8 +2817,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         List<String> excludedSubFundCodes = new ArrayList<String>(parameterService.getParameterValuesAsString(KfsParameterConstants.CAPITAL_ASSET_BUILDER_BATCH.class, CabConstants.Parameters.SUB_FUND_GROUPS));
         return excludedSubFundCodes;
     }
-
-
     /**
      * Check FP document individual Capital Asset line eligibility for CAB Extract Batch
      *

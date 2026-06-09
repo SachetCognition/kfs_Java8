@@ -29,28 +29,58 @@ import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_OBJ_T")
+@IdClass(AssetObjectCodeId.class)
 public class AssetObjectCode extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "AssetObjectCode";
     
+    @Id
+    
+    @Column(name = "UNIV_FISCAL_YR")
+    
     protected Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_SUB_TYPE_CD")
     protected String financialObjectSubTypeCode;
+    @Column(name = "CPTLZTN_FOBJ_CD")
     protected String capitalizationFinancialObjectCode;
+    @Column(name = "ACCUM_DEPR_FOBJ_CD")
     protected String accumulatedDepreciationFinancialObjectCode;
+    @Column(name = "DEPR_EXP_FOBJ_CD")
     protected String depreciationExpenseFinancialObjectCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     protected boolean active;
 
     protected transient SystemOptions universityFiscal;
+    @Transient
     protected ObjectCode accumulatedDepreciationFinancialObject;
+    @Transient
     protected ObjectCode capitalizationFinancialObject;
+    @Transient
     protected ObjectCode depreciationExpenseFinancialObject;
+    @Transient
     protected List<ObjectCode> objectCode;
+    @Transient
     protected Chart chartOfAccounts;
+    @Transient
     protected ObjectSubType financialObjectSubType;
 
     /**
@@ -77,8 +107,6 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     public void setUniversityFiscalYear(Integer universityFiscalYear) {
         this.universityFiscalYear = universityFiscalYear;
     }
-
-
     /**
      * Gets the chartOfAccountsCode attribute.
      * 
@@ -96,8 +124,6 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
-
     /**
      * Gets the financialObjectSubTypeCode attribute.
      * 
@@ -115,8 +141,6 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     public void setFinancialObjectSubTypeCode(String financialObjectSubTypeCode) {
         this.financialObjectSubTypeCode = financialObjectSubTypeCode;
     }
-
-
     /**
      * Gets the capitalizationFinancialObjectCode attribute.
      * 
@@ -134,8 +158,6 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     public void setCapitalizationFinancialObjectCode(String capitalizationFinancialObjectCode) {
         this.capitalizationFinancialObjectCode = capitalizationFinancialObjectCode;
     }
-
-
     /**
      * Gets the accumulatedDepreciationFinancialObjectCode attribute.
      * 
@@ -153,8 +175,6 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     public void setAccumulatedDepreciationFinancialObjectCode(String accumulatedDepreciationFinancialObjectCode) {
         this.accumulatedDepreciationFinancialObjectCode = accumulatedDepreciationFinancialObjectCode;
     }
-
-
     /**
      * Gets the depreciationExpenseFinancialObjectCode attribute.
      * 
@@ -172,8 +192,6 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     public void setDepreciationExpenseFinancialObjectCode(String depreciationExpenseFinancialObjectCode) {
         this.depreciationExpenseFinancialObjectCode = depreciationExpenseFinancialObjectCode;
     }
-
-
     /**
      * Gets the accumulatedDepreciationFinancialObject attribute.
      * 

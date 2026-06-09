@@ -103,8 +103,6 @@ public class PurApAccountLineGroup extends AccountLineGroup {
             this.amount = this.amount.add(newEntry.getAmount());
         }
     }
-
-
     /**
      * Gets the sourceEntries attribute.
      * 

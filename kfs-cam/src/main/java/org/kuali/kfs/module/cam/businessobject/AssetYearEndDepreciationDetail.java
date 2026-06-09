@@ -22,16 +22,39 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+
+@Table(name = "CM_FSCL_YR_END_DEPR_DTL_T")
+
+@IdClass(AssetYearEndDepreciationDetailId.class)
+
 public class AssetYearEndDepreciationDetail extends GlobalBusinessObjectDetailBase implements MutableInactivatable {
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Column(name = "YEAR_END_DEPR_DTL_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
+    @Column(name = "YEAR_END_DEPR_DTL_PROC_IND")
+    @Type(type = "yes_no")
     private boolean processed;
+    @Transient
     private Asset asset;
     private AssetYearEndDepreciation assetYearEndDepreciation;
 
@@ -126,8 +149,6 @@ public class AssetYearEndDepreciationDetail extends GlobalBusinessObjectDetailBa
     public void setAsset(Asset asset) {
         this.asset = asset;
     }
-
-
     /**
      * get asset YearEnd Depreciation
      * @return assetYearEndDepreciation
@@ -143,8 +164,6 @@ public class AssetYearEndDepreciationDetail extends GlobalBusinessObjectDetailBa
     public void setAssetYearEndDepreciation(AssetYearEndDepreciation assetYearEndDepreciation) {
         this.assetYearEndDepreciation = assetYearEndDepreciation;
     }
-
-
     /**
      * @see org.kuali.rice.kns.bo.BusinessObjectBase#toStringMapper()
      */

@@ -29,17 +29,29 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetail;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
-
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
+@Entity
+@Table(name = "CM_FSCL_YR_END_DEPR_HDR_T")
 public class AssetYearEndDepreciation extends PersistableBusinessObjectBase implements MutableInactivatable {
     private String documentNumber;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "YEAR_END_DEPR_RUN_DATE")
     private Date runDate;
+    @Column(name = "YEAR_END_DEPR_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
+    @Transient
     private List<AssetYearEndDepreciationDetail> assetYearEndDepreciationDetails;
+    @Transient
     private List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
-
-
     /**
      * Default constructor.
      */
@@ -48,8 +60,6 @@ public class AssetYearEndDepreciation extends PersistableBusinessObjectBase impl
         generalLedgerPendingEntries = new ArrayList<GeneralLedgerPendingEntry>();
         setActive(true);
     }
-
-
     /**
      * Get the document Number
      * 
@@ -107,8 +117,6 @@ public class AssetYearEndDepreciation extends PersistableBusinessObjectBase impl
     private void setAssetForPersist(Asset asset, List<PersistableBusinessObject> persistables) {
         persistables.add(asset);
     }
-
-
     /**
      * return asset year end depreciation details
      * 
@@ -126,8 +134,6 @@ public class AssetYearEndDepreciation extends PersistableBusinessObjectBase impl
     public boolean isPersistable() {
         return true;
     }
-
-
     /**
      * asset Year End Depreciation Details
      * 

@@ -54,9 +54,7 @@
 			</list>
 		</property>
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/cam/ojb-cam.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="scriptConfigurationFilePaths">
             <list>
@@ -153,10 +151,11 @@
 		</property>
     </bean>
 
-	<bean id="depreciableAssetsDao" parent="platformAwareDao" class="org.kuali.kfs.module.cam.document.dataaccess.impl.DepreciableAssetsDaoOjb">
+	<bean id="depreciableAssetsDao" class="org.kuali.kfs.module.cam.document.dataaccess.impl.DepreciableAssetsDaoJpa">
 		<property name="depreciationBatchDao">
 			<ref bean="depreciationBatchDao" />
 		</property>
+		<property name="entityManager" ref="entityManager" />
 	</bean>
 	<bean id="depreciationBatchDao" parent="platformAwareDaoJdbc" class="org.kuali.kfs.module.cam.document.dataaccess.impl.DepreciationBatchDaoJdbc">
 		<property name="universityDateDao">
@@ -284,7 +283,9 @@
     	<property name="businessObjectService" ref="businessObjectService" />
     </bean>
 
-    <bean id="assetComponentDao" parent="platformAwareDao" class="org.kuali.kfs.module.cam.document.dataaccess.impl.AssetComponentDaoOjb"/>
+    <bean id="assetComponentDao" class="org.kuali.kfs.module.cam.document.dataaccess.impl.AssetComponentDaoJpa">
+        <property name="entityManager" ref="entityManager" />
+    </bean>
 
     <bean id="assetComponentService"  parent="assetComponentService-parentBean"/>
     <bean id="assetComponentService-parentBean" class="org.kuali.kfs.module.cam.document.service.impl.AssetComponentServiceImpl" abstract="true">
@@ -311,7 +312,9 @@
     	<property name="dataDictionaryService" ref="dataDictionaryService" />
     </bean>
 
-    <bean id="assetPaymentDao" parent="platformAwareDao" class="org.kuali.kfs.module.cam.document.dataaccess.impl.AssetPaymentDaoOjb"/>
+    <bean id="assetPaymentDao" class="org.kuali.kfs.module.cam.document.dataaccess.impl.AssetPaymentDaoJpa">
+        <property name="entityManager" ref="entityManager" />
+    </bean>
 
     <bean id="assetPaymentService" parent="assetPaymentService-parentBean"/>
     <bean id="assetPaymentService-parentBean" class="org.kuali.kfs.module.cam.document.service.impl.AssetPaymentServiceImpl" abstract="true">
@@ -430,7 +433,9 @@
 
 	<!-- Start Asset Lock beans -->
 
-    <bean id="capitalAssetLockDao" parent="platformAwareDao" class="org.kuali.kfs.module.cam.dataaccess.impl.CapitalAssetLockDaoOjb" />
+    <bean id="capitalAssetLockDao" class="org.kuali.kfs.module.cam.dataaccess.impl.CapitalAssetLockDaoJpa">
+        <property name="entityManager" ref="entityManager" />
+    </bean>
 
     <bean id="assetLockService" parent="assetLockService-parentBean"/>
     <bean id="assetLockService-parentBean" abstract="true"  class="org.kuali.kfs.module.cam.service.impl.AssetLockServiceImpl">

@@ -157,8 +157,6 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
         // Displaying JSP
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
-
     /**
      * Validates all the selected records and saves them
      * 
@@ -225,8 +223,6 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
-
     /**
      * Deletes selected lines from the document
      * 
@@ -272,8 +268,6 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
         this.loadDocument((KualiDocumentFormBase) form);
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
-
     protected boolean validateGlobalReplaceFields(BarcodeInventoryErrorDocument document) {
         if (StringUtils.isBlank(document.getCurrentScanCode()) && StringUtils.isBlank(document.getCurrentCampusCode()) && StringUtils.isBlank(document.getCurrentBuildingNumber()) && StringUtils.isBlank(document.getCurrentRoom()) && StringUtils.isBlank(document.getCurrentSubroom()) && StringUtils.isBlank(document.getCurrentConditionCode()) && StringUtils.isBlank(document.getCurrentTagNumber())) {
 

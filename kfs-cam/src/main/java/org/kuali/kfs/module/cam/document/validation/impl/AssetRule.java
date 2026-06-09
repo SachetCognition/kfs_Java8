@@ -106,8 +106,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
     protected Asset newAsset;
     protected Asset oldAsset;
     protected boolean isFabrication;
-
-
     /**
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#processCustomSaveDocumentBusinessRules(org.kuali.rice.kns.document.MaintenanceDocument)
      */
@@ -338,8 +336,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         if (!StringUtils.equalsIgnoreCase(oldAsset.getAssetRepresentative().getPrincipalName(), newAsset.getAssetRepresentative().getPrincipalName())) {
             valid &= validateAssetRepresentative();
         }
-
-
         // validate Vendor Name.
         if (!StringUtils.equalsIgnoreCase(oldAsset.getVendorName(), newAsset.getVendorName())) {
             valid &= validateVendorName();
@@ -359,8 +355,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
-
     /**
      * Check if the new In-service Date is a valid University Date
      *
@@ -380,8 +374,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
-
     /**
      * Check if off campus fields has changed.
      *
@@ -483,8 +475,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
-
     /**
      * Validate Asset Location fields
      *

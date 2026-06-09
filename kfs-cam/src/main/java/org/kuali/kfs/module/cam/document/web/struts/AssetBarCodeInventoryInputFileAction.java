@@ -49,8 +49,6 @@ import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.kns.util.KNSGlobalVariables;
 import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.util.GlobalVariables;
-
-
 /**
  * 
  * Action class for the CAMS Barcode Inventory upload. 

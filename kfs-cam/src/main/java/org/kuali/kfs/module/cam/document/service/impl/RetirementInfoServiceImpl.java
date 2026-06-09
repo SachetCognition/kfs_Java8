@@ -60,8 +60,6 @@ public class RetirementInfoServiceImpl implements RetirementInfoService {
             }
 
         }
-
-
         Comparator<AssetRetirementGlobalDetail> comparator = new Comparator<AssetRetirementGlobalDetail>() {
             public int compare(AssetRetirementGlobalDetail o1, AssetRetirementGlobalDetail o2) {
                 // sort descending based on retirement date
@@ -74,8 +72,6 @@ public class RetirementInfoServiceImpl implements RetirementInfoService {
             asset.setRetirementInfo(sortableList.get(0));
         }
     }
-
-
     /**
      * Checks asset retirement document status, if approved returns true
      * 
@@ -89,28 +85,18 @@ public class RetirementInfoServiceImpl implements RetirementInfoService {
         }
         return false;
     }
-
-
     public ParameterService getParameterService() {
         return parameterService;
     }
-
-
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
-
     public AssetService getAssetService() {
         return assetService;
     }
-
-
     public void setAssetService(AssetService assetService) {
         this.assetService = assetService;
     }
-
-
     public void setMergeHistory(Asset asset) {
         List<AssetRetirementGlobal> retirementGlobals = asset.getRetirementGlobals();
         List<AssetRetirementGlobalDetail> mergeHistory = new ArrayList<AssetRetirementGlobalDetail>();

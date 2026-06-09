@@ -129,8 +129,6 @@ public class AssetLocationGlobalMaintainableImpl extends KualiGlobalMaintainable
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
-
-
     @Override
     public Class<? extends PersistableBusinessObject> getPrimaryEditedBusinessObjectClass() {
         return Asset.class;

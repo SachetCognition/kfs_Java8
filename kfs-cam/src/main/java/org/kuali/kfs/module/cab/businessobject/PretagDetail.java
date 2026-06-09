@@ -33,28 +33,61 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.api.campus.CampusService;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CB_PRTG_DTL_T")
+@IdClass(PretagDetailId.class)
 public class PretagDetail extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PO_NUMBER")
+
     private String purchaseOrderNumber;
+    @Id
+    @Column(name = "ITM_LN_NBR")
     private Integer itemLineNumber;
+    @Id
+    @Column(name = "CPTLAST_TAG_NBR")
     private String campusTagNumber;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     private String serialNumber;
+    @Column(name = "CPTLAST_ORGTAG_NBR")
     private String organizationTagNumber;
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "BLDG_CD")
     private String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     private String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     private String buildingSubRoomNumber;
+    @Column(name = "AST_PRTGTAG_CRT_DT")
     private Date pretagTagCreateDate;
+    @Column(name = "CPTL_AST_GOV_TAG_NBR")
     private String governmentTagNumber;
+    @Column(name = "CPTL_AST_NTL_STOCK_NBR")
     private String nationalStockNumber;
+    @Column(name = "ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
+    @Transient
     protected CampusEbo campus;
+    @Transient
     private Building building;
+    @Transient
     private Room buildingRoom;
 
     /**
@@ -81,8 +114,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setPurchaseOrderNumber(String purchaseOrderNumber) {
         this.purchaseOrderNumber = purchaseOrderNumber;
     }
-
-
     /**
      * Gets the itemLineNumber attribute.
      *
@@ -118,8 +149,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setCampusTagNumber(String campusTagNumber) {
         this.campusTagNumber = campusTagNumber;
     }
-
-
     /**
      * Gets the serialNumber attribute.
      *
@@ -137,8 +166,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
-
-
     /**
      * Gets the organizationTagNumber attribute.
      *
@@ -156,8 +183,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setOrganizationTagNumber(String organizationTagNumber) {
         this.organizationTagNumber = organizationTagNumber;
     }
-
-
     /**
      * Gets the campusCode attribute.
      *
@@ -175,8 +200,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setCampusCode(String campusCode) {
         this.campusCode = campusCode;
     }
-
-
     /**
      * Gets the buildingCode attribute.
      *
@@ -194,8 +217,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setBuildingCode(String buildingCode) {
         this.buildingCode = buildingCode;
     }
-
-
     /**
      * Gets the buildingRoomNumber attribute.
      *
@@ -213,8 +234,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setBuildingRoomNumber(String buildingRoomNumber) {
         this.buildingRoomNumber = buildingRoomNumber;
     }
-
-
     /**
      * Gets the buildingSubRoomNumber attribute.
      *
@@ -232,8 +251,6 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
         this.buildingSubRoomNumber = buildingSubRoomNumber;
     }
-
-
     /**
      * Gets the pretagTagCreateDate attribute.
      *

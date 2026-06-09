@@ -47,8 +47,6 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AssetAcquisitionTypeLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
     protected boolean initializingAssetGlobal = true;
-
-
     /**
      * Overrides the base implementation to add in new parameters to the return url
      * <ul>

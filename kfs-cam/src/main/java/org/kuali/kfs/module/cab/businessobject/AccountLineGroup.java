@@ -21,8 +21,6 @@ package org.kuali.kfs.module.cab.businessobject;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
-
-
 /**
  * Base account line group class which assist in easy group by clause
  */
@@ -39,8 +37,6 @@ public abstract class AccountLineGroup {
     protected String projectCode;
     protected String organizationReferenceId;
     protected KualiDecimal amount;
-
-
     /**
      * Gets the universityFiscalYear attribute.
      * 
@@ -202,8 +198,6 @@ public abstract class AccountLineGroup {
     public void setReferenceFinancialDocumentNumber(String referenceFinancialDocumentNumber) {
         this.referenceFinancialDocumentNumber = referenceFinancialDocumentNumber;
     }
-
-
     /**
      * Gets the projectCode attribute.
      * 

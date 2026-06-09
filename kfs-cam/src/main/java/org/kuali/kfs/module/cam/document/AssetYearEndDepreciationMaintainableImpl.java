@@ -50,8 +50,6 @@ import org.kuali.rice.krad.maintenance.MaintenanceLock;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
-
-
 /**
  * This class overrides the base {KualiGlobalMaintainableImpl} to generate the specific maintenance locks for Global location assets
  */
@@ -72,8 +70,6 @@ public class AssetYearEndDepreciationMaintainableImpl extends FinancialSystemMai
     public List<MaintenanceLock> generateMaintenanceLocks() {
         return new ArrayList<MaintenanceLock>();
     }
-
-
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterEdit(org.kuali.rice.kns.document.MaintenanceDocument,
      *      java.util.Map)
@@ -218,8 +214,6 @@ public class AssetYearEndDepreciationMaintainableImpl extends FinancialSystemMai
         super.refreshReferences("add.assetYearEndDepreciationDetails.asset");
         super.addNewLineToCollection(collectionName);
     }
-
-
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#populateNewCollectionLines(java.util.Map, org.kuali.rice.kns.document.MaintenanceDocument, java.lang.String)
      */

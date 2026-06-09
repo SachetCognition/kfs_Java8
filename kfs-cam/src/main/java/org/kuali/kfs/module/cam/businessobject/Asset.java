@@ -19,10 +19,21 @@
 package org.kuali.kfs.module.cam.businessobject;
 
 import org.kuali.kfs.integration.cam.CapitalAssetManagementAsset;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_T")
 public class Asset extends AssetBase implements CapitalAssetManagementAsset {
     
     public Asset(){

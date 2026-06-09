@@ -18,8 +18,6 @@
  */
 package org.kuali.kfs.module.cam;
 
-
-
 /**
  * Constants for cams business object property names.
  */
@@ -399,8 +397,6 @@ public class CamsPropertyConstants {
     public static final String COMMON_ERROR_SECTION_ID = "commonErrorSection";
     public static final String BCIE_GLOBAL_REPLACE_ERROR_SECTION_ID = "globalReplaceErrorSection";
     public static final String DOCUMENT_NUMBER = "documentNumber";
-
-
     public static class AssetLock {
         public static final String DOCUMENT_NUMBER = "documentNumber";
     }

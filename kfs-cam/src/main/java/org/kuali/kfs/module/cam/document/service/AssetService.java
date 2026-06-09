@@ -26,8 +26,6 @@ import org.kuali.kfs.module.cam.businessobject.Asset;
 import org.kuali.rice.kew.api.WorkflowDocument;
 import org.kuali.rice.kns.document.MaintenanceDocument;
 import org.kuali.rice.krad.document.Document;
-
-
 /**
  * The interface defines methods for Asset Document
  */

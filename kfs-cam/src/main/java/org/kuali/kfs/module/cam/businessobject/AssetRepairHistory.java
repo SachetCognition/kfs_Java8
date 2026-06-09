@@ -24,22 +24,50 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_RPR_HIST_T")
+@IdClass(AssetRepairHistoryId.class)
 public class AssetRepairHistory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+
+	@Column(name = "CPTLAST_NBR")
+
 	private Long capitalAssetNumber;
+	@Id
+	@Column(name = "CPTLAST_INCIDNT_DT")
 	private Date incidentDate;
+	@Column(name = "CPTLAST_PRBLM_DESC")
 	private String problemDescription;
+	@Column(name = "CPTLAST_RPRCNTC_NM")
 	private String repairContactName;
+	@Column(name = "CPTLAST_RPR_NT_TXT")
 	private String repairNoteText;
+	@Column(name = "CPTLAST_EST_RPR_DT")
 	private Date estimatedRepairDate;
+	@Column(name = "CPTLAST_RPR_DT")
 	private Date repairDate;
+	@Column(name = "CPTLAST_RPR_AMT")
 	private KualiDecimal repairAmount;
+	@Column(name = "AST_RPR_SOLN_DESC")
 	private String repairSolutionDescription;
+	@Column(name = "ACTV_IND")
+	@Type(type = "yes_no")
 	private boolean active;
+
+    @Transient
 
     private Asset asset;
 
@@ -69,8 +97,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setCapitalAssetNumber(Long capitalAssetNumber) {
 		this.capitalAssetNumber = capitalAssetNumber;
 	}
-
-
 	/**
 	 * Gets the incidentDate attribute.
 	 *
@@ -90,8 +116,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setIncidentDate(Date incidentDate) {
 		this.incidentDate = incidentDate;
 	}
-
-
 	/**
 	 * Gets the problemDescription attribute.
 	 *
@@ -111,8 +135,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setProblemDescription(String problemDescription) {
 		this.problemDescription = problemDescription;
 	}
-
-
 	/**
 	 * Gets the repairContactName attribute.
 	 *
@@ -132,8 +154,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setRepairContactName(String repairContactName) {
 		this.repairContactName = repairContactName;
 	}
-
-
 	/**
 	 * Gets the repairNoteText attribute.
 	 *
@@ -153,8 +173,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setRepairNoteText(String repairNoteText) {
 		this.repairNoteText = repairNoteText;
 	}
-
-
 	/**
 	 * Gets the estimatedRepairDate attribute.
 	 *
@@ -174,8 +192,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setEstimatedRepairDate(Date estimatedRepairDate) {
 		this.estimatedRepairDate = estimatedRepairDate;
 	}
-
-
 	/**
 	 * Gets the repairDate attribute.
 	 *
@@ -195,8 +211,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setRepairDate(Date repairDate) {
 		this.repairDate = repairDate;
 	}
-
-
 	/**
 	 * Gets the repairAmount attribute.
 	 *
@@ -216,8 +230,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setRepairAmount(KualiDecimal repairAmount) {
 		this.repairAmount = repairAmount;
 	}
-
-
 	/**
 	 * Gets the repairSolutionDescription attribute.
 	 *
@@ -237,8 +249,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setRepairSolutionDescription(String repairSolutionDescription) {
 		this.repairSolutionDescription = repairSolutionDescription;
 	}
-
-
 	/**
 	 * Gets the asset attribute.
 	 *
@@ -258,8 +268,6 @@ public class AssetRepairHistory extends PersistableBusinessObjectBase implements
 	public void setAsset(Asset asset) {
 		this.asset = asset;
 	}
-
-
     /**
     * Gets the active attribute.
     *

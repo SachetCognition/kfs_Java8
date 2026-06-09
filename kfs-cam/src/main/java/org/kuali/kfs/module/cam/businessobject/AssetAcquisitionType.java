@@ -22,15 +22,31 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_ACQ_TYPE_T")
 public class AssetAcquisitionType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "CPTLAST_ACQ_TYP_CD")
+
     private String acquisitionTypeCode;
+    @Column(name = "CPTLAST_ACQ_TYP_NM")
     private String acquisitionTypeName;
+    @Column(name = "CPTLAST_INC_OBJ_CD")
     private String incomeAssetObjectCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     /**
