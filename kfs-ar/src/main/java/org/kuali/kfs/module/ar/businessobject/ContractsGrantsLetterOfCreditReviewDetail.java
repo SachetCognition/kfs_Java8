@@ -21,6 +21,13 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.module.ar.document.ContractsGrantsLetterOfCreditReviewDocument;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -29,27 +36,50 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Defines a detail in the Contracts & Grants Letter of Credit Review Document.
  */
+@Entity
+@IdClass(ContractsGrantsLetterOfCreditReviewDetailId.class)
+@Table(name = "AR_LTRCR_RVW_DTL_T")
 public class ContractsGrantsLetterOfCreditReviewDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "LTRCR_RVW_DTL_ID")
     private Long letterOfCreditReviewDetailIdentifier;
+    @Column(name = "AWD_BEG_DT")
     private Date awardBeginningDate;
+    @Column(name = "AWD_END_DT")
     private Date awardEndingDate;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Column(name = "AWD_FDOC_NBR")
     private String awardDocumentNumber;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "ACCT_EXP_DT")
     private Date accountExpirationDate;
+    @Column(name = "ACCOUNT_DESC")
     private String accountDescription;
+    @Column(name = "AWD_BDGT_AMT")
     private KualiDecimal awardBudgetAmount = KualiDecimal.ZERO;
+    @Column(name = "CLM_ON_CSH_BAL_AMT")
     private KualiDecimal claimOnCashBalance = KualiDecimal.ZERO;
+    @Column(name = "DRW_AMT")
     private KualiDecimal amountToDraw = KualiDecimal.ZERO;
     private KualiDecimal hiddenAmountToDraw = KualiDecimal.ZERO;// This would be used for comparision with AmountToDraw field when
                                                                 // user modifies it - not persisted
+    @Column(name = "FND_NOT_DRWN_AMT")
     private KualiDecimal fundsNotDrawn = KualiDecimal.ZERO; // Difference between amountToDraw and hiddenAmountToDraw.
+    @Column(name = "LTRCR_AMT")
     private KualiDecimal letterOfCreditAmount = KualiDecimal.ZERO;// This field would be visible only for the contract control account row.
+    @Column(name = "AVAIL_DRW_AMT")
     private KualiDecimal amountAvailableToDraw = KualiDecimal.ZERO;// This field would be visible only for the contract control
                                                                    // account row.
     private ContractsGrantsLetterOfCreditReviewDocument contractsGrantsLOCReviewDocument;

@@ -22,6 +22,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -46,28 +53,55 @@ import org.kuali.rice.location.framework.state.StateEbo;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(SystemInformationId.class)
+@Table(name = "AR_SYS_INFO_T")
 public class SystemInformation extends PersistableBusinessObjectBase implements MutableInactivatable, AccountsReceivableSystemInformation, FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Id
+    @Column(name = "PRCS_FIN_COA_CD")
     protected String processingChartOfAccountCode;
+    @Id
+    @Column(name = "PRCS_ORG_CD")
     protected String processingOrganizationCode;
+    @Column(name = "UNIV_FEIN_NBR")
     protected String universityFederalEmployerIdentificationNumber;
+    @Column(name = "REFUND_FIN_OBJ_CD")
     protected String discountObjectCode;
+    @Column(name = "UNIV_CLR_COA_CD")
     protected String universityClearingChartOfAccountsCode;
+    @Column(name = "UNIV_CLR_ACCT_NBR")
     protected String universityClearingAccountNumber;
+    @Column(name = "UNIV_CLR_SUBAC_NBR")
     protected String universityClearingSubAccountNumber;
+    @Column(name = "UNIV_CLR_OBJECT_CD")
     protected String universityClearingObjectCode;
+    @Column(name = "UNIV_CLR_SUBOBJ_CD")
     protected String universityClearingSubObjectCode;
+    @Column(name = "PMT_CLR_FIN_OBJ_CD")
     protected String creditCardObjectCode;
+    @Column(name = "AR_LOCKBOX_NBR")
     protected String lockboxNumber;
+    @Column(name = "ROW_ACTV_IND")
     protected boolean active;
+    @Column(name = "ORG_REMIT_ADDR_NM")
     protected String organizationRemitToAddressName;
+    @Column(name = "ORG_REMIT_LN1_ADDR")
     protected String organizationRemitToLine1StreetAddress;
+    @Column(name = "ORG_REMIT_LN2_ADDR")
     protected String organizationRemitToLine2StreetAddress;
+    @Column(name = "ORG_REMIT_CITY_NM")
     protected String organizationRemitToCityName;
+    @Column(name = "ORG_REMIT_ST_CD")
     protected String organizationRemitToStateCode;
+    @Column(name = "ORG_REMIT_ZIP_CD")
     protected String organizationRemitToZipCode;
+    @Column(name = "ORG_CHCK_PAY_TO_NM")
     protected String organizationCheckPayableToName;
+    @Column(name = "FDOC_INITIATOR_ID")
     protected String financialDocumentInitiatorIdentifier;
     protected ObjectCode creditCardFinancialObject;
     protected SubObjectCode universityClearingSubObject;

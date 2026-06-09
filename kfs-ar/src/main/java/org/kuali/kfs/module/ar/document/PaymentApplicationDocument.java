@@ -24,6 +24,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -83,6 +89,8 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Payment Application Document.
  */
+@Entity
+@Table(name = "AR_APPLICATION_DOC_T")
 public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocument.class);
@@ -96,10 +104,15 @@ public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase
     protected Collection<NonAppliedDistribution> nonAppliedDistributions;
     protected NonAppliedHolding nonAppliedHolding;
     protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Column(name = "INV_DOC_TYP")
     protected String invoiceDocumentType;// this document type variable would help in differentiating Customer and CG Invoices
+    @Column(name = "LTRCR_CRTN_TYP")
     protected String letterOfCreditCreationType;// To categorize the CG Invoices based on Award LOC Type
+    @Column(name = "PRPSL_NBR")
     protected Long proposalNumber;// For loc creation type = Award
+    @Column(name = "LTRCR_FNDGRP_CD")
     protected String letterOfCreditFundGroupCode;// for loc creation type = LOC fund
+    @Column(name = "LTRCR_FND_CD")
     protected String letterOfCreditFundCode;// for loc creation type = LOC fund group
     protected transient PaymentApplicationDocumentService paymentApplicationDocumentService;
     protected transient CashControlDetail cashControlDetail;

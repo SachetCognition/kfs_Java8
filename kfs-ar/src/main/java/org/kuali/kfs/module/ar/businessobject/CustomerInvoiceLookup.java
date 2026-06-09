@@ -21,15 +21,30 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "AR_INV_DOC_T")
 public class CustomerInvoiceLookup extends PersistableBusinessObjectBase {
     
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String invoiceNumber;
+    @Column(name = "CUST_NM")
     protected String customerName;    
+    @Column(name = "AR_INV_DUE_DT")
     protected Date invoiceDueDate;
+    @Column(name = "AR_BILLING_DT")
     protected Date billingDate;
+    @Column(name = "AR_BILL_BY_COA_CD")
     protected String billByChartOfAccountCode;
+    @Column(name = "AR_BILL_BY_ORG_CD")
     protected String billedByOrganizationCode;
     
     /**

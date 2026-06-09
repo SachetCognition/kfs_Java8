@@ -23,6 +23,12 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -30,10 +36,16 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_NON_APLD_HLDG_T")
 public class NonAppliedHolding extends PersistableBusinessObjectBase {
 
+	@Id
+	@Column(name = "FDOC_REF_NBR")
 	private String referenceFinancialDocumentNumber;
+	@Column(name = "FDOC_LINE_AMT")
 	private KualiDecimal financialDocumentLineAmount = KualiDecimal.ZERO;
+	@Column(name = "CUST_NBR")
 	private String customerNumber;
 	private Customer customer;
     private KualiDecimal availableUnappliedAmount = KualiDecimal.ZERO;

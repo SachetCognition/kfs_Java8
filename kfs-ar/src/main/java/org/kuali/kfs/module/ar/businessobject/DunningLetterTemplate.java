@@ -20,13 +20,24 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Defines the letter templates that will be assigned to the appropriate dunning letter campaigns.
  *
  */
+@Entity
+@Table(name = "AR_DUN_LTR_TMPLT_T")
 public class DunningLetterTemplate extends TemplateBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "DUN_LTR_TMPLT_CD")
     private String dunningLetterTemplateCode;
+    @Column(name = "DUN_LTR_TMPLT_DESC")
     private String dunningLetterTemplateDescription;
 
     /**

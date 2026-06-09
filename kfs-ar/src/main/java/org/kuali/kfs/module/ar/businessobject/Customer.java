@@ -23,6 +23,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
@@ -37,28 +43,51 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_CUST_T")
 public class Customer extends PersistableBusinessObjectBase implements MutableInactivatable, AccountsReceivableCustomer {
 
+    @Id
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Column(name = "CUST_NM")
     private String customerName;
+    @Column(name = "CUST_PARENT_CO_NBR")
     private String customerParentCompanyNumber;
+    @Column(name = "CUST_TYP_CD")
     private String customerTypeCode;
     private String customerTypeDescription;
+    @Column(name = "CUST_ADDR_CHG_DT")
     private Date customerAddressChangeDate;
+    @Column(name = "CUST_REC_ADD_DT")
     private Date customerRecordAddDate;
+    @Column(name = "CUST_LST_ACTV_DT")
     private Date customerLastActivityDate;
+    @Column(name = "CUST_TAX_TYP_CD")
     private String customerTaxTypeCode;
+    @Column(name = "CUST_TAX_NBR")
     private String customerTaxNbr;
+    @Column(name = "CUST_ACTIVE_CD")
     private boolean active;
+    @Column(name = "CUST_PHONE_NBR")
     private String customerPhoneNumber;
+    @Column(name = "CUST_800_PHONE_NBR")
     private String customer800PhoneNumber;
+    @Column(name = "CUST_CNTCT_NM")
     private String customerContactName;
+    @Column(name = "CUST_CNTCT_PHN_NBR")
     private String customerContactPhoneNumber;
+    @Column(name = "CUST_FAX_NBR")
     private String customerFaxNumber;
+    @Column(name = "CUST_BIRTH_DT")
     private Date customerBirthDate;
+    @Column(name = "CUST_TAX_EXMPT_IND")
     private boolean customerTaxExemptIndicator;
+    @Column(name = "CUST_CRDT_LMT_AMT")
     private KualiDecimal customerCreditLimitAmount;
+    @Column(name = "CUST_CRDT_APRV_NM")
     private String customerCreditApprovedByName;
+    @Column(name = "CUST_EMAIL_ADDR")
     private String customerEmailAddress;
 
     private Customer customerParentCompany;
@@ -67,14 +96,20 @@ public class Customer extends PersistableBusinessObjectBase implements MutableIn
 
     private List<CustomerAddress> customerAddresses;
 
+  @Column(name = "BNKRPTCY_TYP_CD")
   private String bankruptcyType;
+  @Column(name = "BNKRPTCY_DT")
   private Date bankruptcyDate;
+  @Column(name = "BNKRPTCY_REVIEW_DT")
   private Date bankruptcyReviewDate;
+  @Column(name = "STOP_WRK_IND")
   private boolean stopWorkIndicator;
+  @Column(name = "STOP_WRK_REASON_TXT")
   private String stopWorkReason;
 
   // Invoice Types link
 
+  @Column(name = "CUST_INV_TMPLT_CD")
   private String customerInvoiceTemplateCode;
   private InvoiceTemplate customerInvoiceTemplate;
     /**

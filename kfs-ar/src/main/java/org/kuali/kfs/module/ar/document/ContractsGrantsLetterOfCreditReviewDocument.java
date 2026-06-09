@@ -27,6 +27,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
@@ -56,11 +62,15 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Contracts & Grants LOC Review Document.
  */
+@Entity
+@Table(name = "AR_LTRCR_RVW_DOC_T")
 public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystemTransactionalDocumentBase {
     private static final Logger LOG = Logger.getLogger(ContractsGrantsLetterOfCreditReviewDocument.class);
 
+    @Column(name = "LTRCR_FND_CD")
     private String letterOfCreditFundCode;
     private ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
+    @Column(name = "LTRCR_FNDGRP_CD")
     private String letterOfCreditFundGroupCode;
     private ContractsAndGrantsLetterOfCreditFundGroup letterOfCreditFundGroup;
     private List<ContractsGrantsLetterOfCreditReviewDetail> headerReviewDetails;

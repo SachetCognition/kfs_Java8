@@ -23,6 +23,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -53,6 +59,8 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Contracts & Grants Invoice document extending Customer Invoice document.
  */
 
+@Entity
+@Table(name = "AR_INV_DOC_T")
 public class ContractsGrantsInvoiceDocument extends CustomerInvoiceDocument {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceDocument.class);

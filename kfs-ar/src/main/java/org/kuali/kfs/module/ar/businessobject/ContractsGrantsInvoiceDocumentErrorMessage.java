@@ -20,13 +20,25 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Defines a Contracts & Grants Billing Invoice Document Error Message.
  */
+@Entity
+@Table(name = "AR_INV_DOC_ERROR_MSG_T")
 public class ContractsGrantsInvoiceDocumentErrorMessage extends PersistableBusinessObjectBase {
 
+    @Column(name = "ERROR_LOG_ID")
     private Long errorLogIdentifier;
+    @Id
+    @Column(name = "ERROR_MSG_ID")
     private Long errorMessageIdentifier;
+    @Column(name = "ERROR_MSG_TXT")
     private String errorMessageText;
 
     public Long getErrorLogIdentifier() {

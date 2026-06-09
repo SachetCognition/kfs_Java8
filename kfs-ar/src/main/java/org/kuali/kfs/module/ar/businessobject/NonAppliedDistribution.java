@@ -20,6 +20,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -27,13 +34,25 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(NonAppliedDistributionId.class)
+@Table(name = "AR_NON_APLD_DIST_T")
 public class NonAppliedDistribution extends PersistableBusinessObjectBase {
 
+	@Id
+	@Column(name = "FDOC_NBR")
 	private String documentNumber; // document that generated this distribution
+	@Id
+	@Column(name = "AR_PD_APLD_ITM_NBR")
 	private Integer paidAppliedItemNumber; // ???
+	@Id
+	@Column(name = "FDOC_REF_NBR")
 	private String referenceFinancialDocumentNumber; // document that created the non-applied-holding that this is distributing
+	@Column(name = "UNIV_FISCAL_YR")
 	private Integer universityFiscalYear; // ???
+	@Column(name = "UNIV_FISCAL_PRD_CD")
 	private String universityFiscalPeriodCode; // ???
+	@Column(name = "FDOC_LINE_AMT")
 	private KualiDecimal financialDocumentLineAmount;
 
 	private AccountingPeriod universityFiscalPeriod;

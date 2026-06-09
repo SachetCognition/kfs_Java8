@@ -22,10 +22,27 @@ import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectConsolidation;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@IdClass(CostCategoryObjectConsolidationId.class)
+@Table(name = "AR_CST_CTGRY_FIN_CONSOLDTN_T")
 public class CostCategoryObjectConsolidation extends PersistableBusinessObjectBase implements CostCategoryDetail {
+    @Id
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String finConsolidationObjectCode;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     private Chart chart;
