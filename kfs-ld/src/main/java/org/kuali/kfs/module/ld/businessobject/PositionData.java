@@ -27,26 +27,74 @@ import org.kuali.kfs.gl.businessobject.TransientBalanceInquiryAttributes;
 import org.kuali.kfs.integration.ld.LaborLedgerPositionData;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table(name = "PS_POSITION_DATA")
+@IdClass(PositionDataId.class)
 /**
  * Labor business object for PositionData
  */
 public class PositionData extends PersistableBusinessObjectBase implements LaborLedgerPositionData {
+    @Id
+
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Column(name = "JOBCODE")
+
     private String jobCode;
+    @Id
+
+    @Column(name = "EFFDT")
+
     private Date effectiveDate;
+    @Column(name = "POS_EFF_STATUS")
+
     private String positionEffectiveStatus;
+    @Column(name = "DESCR")
+
     private String description;
+    @Column(name = "DESCRSHORT")
+
     private String shortDescription;
+    @Column(name = "BUSINESS_UNIT")
+
     private String businessUnit;
+    @Column(name = "DEPTID")
+
     private String departmentId;
+    @Column(name = "POSN_STATUS")
+
     private String positionStatus;
+    @Column(name = "STATUS_DT")
+
     private Date statusDate;
+    @Column(name = "BUDGETED_POSN")
+
     private String budgetedPosition;
+    @Column(name = "STD_HRS_DEFAULT")
+
     private BigDecimal standardHoursDefault;
+    @Column(name = "STD_HRS_FREQUENCY")
+
     private String standardHoursFrequency;
+    @Column(name = "POS_REG_TEMP")
+
     private String positionRegularTemporary;
+    @Column(name = "POS_FTE")
+
     private BigDecimal positionFullTimeEquivalency;
+    @Column(name = "POS_SAL_PLAN_DFLT")
+
     private String positionSalaryPlanDefault;
+    @Column(name = "POS_GRADE_DFLT")
+
     private String positionGradeDefault;
     private TransientBalanceInquiryAttributes dummyBusinessObject;
 

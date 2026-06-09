@@ -20,6 +20,22 @@ package org.kuali.kfs.module.ld.businessobject;
 
 import org.kuali.kfs.integration.ld.LaborLedgerBalanceForEffortCertification;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_LDGR_BAL_T")
+@IdClass(LedgerBalanceForEffortCertificationId.class)
 /**
  * This class...
  */

@@ -29,33 +29,115 @@ import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry;
 import org.kuali.kfs.sys.businessobject.OriginationCode;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_PND_LDGR_ENTR_T")
+@IdClass(LaborLedgerPendingEntryId.class)
 /**
  * Labor business object for LaborLedgerPendingEntry.
  */
 public class LaborLedgerPendingEntry extends GeneralLedgerPendingEntry implements LaborTransaction, LaborLedgerPendingEntryForSearching {
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Column(name = "TRN_POST_DT")
+
     private Date transactionPostingDate;
+    @Column(name = "PAY_PERIOD_END_DT")
+
     private Date payPeriodEndDate;
+    @Column(name = "TRN_TOTAL_HR")
+
     private BigDecimal transactionTotalHours;
+    @Column(name = "PYRL_DT_FSCL_YR")
+
     private Integer payrollEndDateFiscalYear;
+    @Column(name = "PYRL_DT_FSCLPRD_CD")
+
     private String payrollEndDateFiscalPeriodCode;
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Column(name = "EMPL_RCD")
+
     private Integer employeeRecord;
+    @Column(name = "ERNCD")
+
     private String earnCode;
+    @Column(name = "PAYGROUP")
+
     private String payGroup;
+    @Column(name = "SAL_ADMIN_PLAN")
+
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
+
     private String grade;
+    @Column(name = "RUN_ID")
+
     private String runIdentifier;
+    @Column(name = "LL_ORIG_FIN_COA_CD")
+
     private String laborLedgerOriginalChartOfAccountsCode;
+    @Column(name = "LL_ORIG_ACCT_NBR")
+
     private String laborLedgerOriginalAccountNumber;
+    @Column(name = "LL_ORIG_SUB_ACCT_NBR")
+
     private String laborLedgerOriginalSubAccountNumber;
+    @Column(name = "LL_ORIG_FIN_OBJECT_CD")
+
     private String laborLedgerOriginalFinancialObjectCode;
+    @Column(name = "LL_ORIG_FIN_SUB_OBJ_CD")
+
     private String laborLedgerOriginalFinancialSubObjectCode;
+    @Column(name = "COMPANY")
+
     private String hrmsCompany;
+    @Column(name = "SETID")
+
     private String setid;
+    @Column(name = "TIMESTAMP")
+
     private Timestamp transactionDateTimeStamp;
+    @Column(name = "TRN_ENTR_OFST_CD")
+
     private String transactionEntryOffsetCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "UNIV_FISCAL_PRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
+
+    })
+
     private AccountingPeriod universityFiscalPeriod;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "PYRL_DT_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "PYRL_DT_FSCLPRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
+
+    })
+
     private AccountingPeriod payrollEndDateFiscalPeriod;
     private UniversityDate reversalDate;
     private PositionData positionData;
@@ -554,5 +636,29 @@ public class LaborLedgerPendingEntry extends GeneralLedgerPendingEntry implement
      */
     public Timestamp getTransactionEntryProcessedTimestamp() {
         return super.getTransactionEntryProcessedTs();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
+    @Access(AccessType.PROPERTY)
+    public String getFinancialSystemOriginationCode() {
+        return super.getFinancialSystemOriginationCode();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FDOC_NBR")
+    @Access(AccessType.PROPERTY)
+    public String getDocumentNumber() {
+        return super.getDocumentNumber();
+    }
+
+    @Override
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
+    @Access(AccessType.PROPERTY)
+    public Integer getTransactionLedgerEntrySequenceNumber() {
+        return super.getTransactionLedgerEntrySequenceNumber();
     }
 }
