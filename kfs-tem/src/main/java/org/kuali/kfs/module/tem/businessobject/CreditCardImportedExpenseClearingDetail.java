@@ -48,6 +48,16 @@ public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjec
 
     private transient CreditCardStagingData creditCardStagingData;
 
+    @Override
+    public String getDocumentNumber() {
+        return this.documentNumber;
+    }
+
+    @Override
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
     /**
      * Gets the creditCardStagingDataId attribute.
      *
