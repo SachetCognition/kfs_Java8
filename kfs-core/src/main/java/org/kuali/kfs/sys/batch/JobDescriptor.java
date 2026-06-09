@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.kuali.kfs.sys.batch.service.SchedulerService;
+import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.springframework.beans.factory.BeanNameAware;
 
@@ -63,7 +64,11 @@ public class JobDescriptor implements BeanNameAware {
      * @return the org.quartz.JobDetail corresponding to this instance
      */
     public JobDetail getJobDetail() {
-        return new JobDetail(name, group, Job.class, false, durable, false);
+        return JobBuilder.newJob(Job.class)
+                .withIdentity(name, group)
+                .storeDurably(durable)
+                .requestRecovery(false)
+                .build();
     }
 
     /**

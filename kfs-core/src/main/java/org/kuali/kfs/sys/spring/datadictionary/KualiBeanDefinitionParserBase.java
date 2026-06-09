@@ -89,10 +89,10 @@ public abstract class KualiBeanDefinitionParserBase extends AbstractBeanDefiniti
         } else {
             builder = BeanDefinitionBuilder.childBeanDefinition(getBaseBeanTypeParent(element)); 
         }
-        builder.setSource(parserContext.extractSource(element));
+        builder.getRawBeanDefinition().setSource(parserContext.extractSource(element));
         if (parserContext.isNested()) {
             // Inner bean definition must receive same singleton status as containing bean.
-            builder.setSingleton(parserContext.getContainingBeanDefinition().isSingleton());
+            builder.setScope(parserContext.getContainingBeanDefinition().isSingleton() ? "singleton" : "prototype");
         }
         if (parserContext.isDefaultLazyInit()) {
             // Default-lazy-init applies to custom bean definitions as well.

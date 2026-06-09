@@ -13,6 +13,11 @@
   <packaging>war</packaging>
   <name>Kuali Financial Web Application</name>
 
+  <properties>
+    <!-- Enable Spring Boot plugin for the web module (overrides parent skip=true) -->
+    <spring-boot.repackage.skip>false</spring-boot.repackage.skip>
+  </properties>
+
   <!--
         Using dependency unpack as opposed to war overlay for a number of reasons
         1) overlay requires the packaging phase - tomcat plugin run goal does not work with overlays.
