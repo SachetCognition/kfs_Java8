@@ -59,6 +59,7 @@ public class Customer extends PersistableBusinessObjectBase implements MutableIn
     private String customerParentCompanyNumber;
     @Column(name = "CUST_TYP_CD")
     private String customerTypeCode;
+    @Transient
     private String customerTypeDescription;
     @Column(name = "CUST_ADDR_CHG_DT")
     private Date customerAddressChangeDate;
@@ -99,6 +100,7 @@ public class Customer extends PersistableBusinessObjectBase implements MutableIn
     private Customer customerParentCompany;
     @Transient
     private CustomerType customerType;
+    @Transient
     private List    boNotes;
 
     @Transient

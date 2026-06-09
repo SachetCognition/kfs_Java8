@@ -55,10 +55,12 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
     @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
 
+    @Transient
     private String predeterminedBillingScheduleInquiryTitle;
 
     @Transient
     private List<Bill> bills;
+    @Transient
     private ContractsAndGrantsBillingAward award;
 
     public PredeterminedBillingSchedule() {

@@ -86,6 +86,7 @@ public class CustomerInvoiceDetail extends SourceAccountingLine implements Appli
     @Column(name = "AR_INV_ITM_TXBL_IND")
     @Convert(converter = YesNoConverter.class)
     private boolean taxableIndicator;
+    @Transient
     private boolean isDebit;
     @Column(name = "AR_INV_ITM_DSCT_LN_NBR")
     private Integer invoiceItemDiscountLineNumber;

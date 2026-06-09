@@ -99,6 +99,7 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     protected Date billingDate;
     @Column(name = "AR_INV_CLOSE_DT")
     protected Date closedDate;
+    @Transient
     protected Date billingDateForDisplay;
     @Column(name = "AR_INV_TERMS_TXT")
     protected String invoiceTermsText;
@@ -128,6 +129,7 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     protected boolean openInvoiceIndicator;
     @Column(name = "AR_PRNT_DT")
     protected Date printDate;
+    @Transient
     protected Integer age;
     @Column(name = "CUST_NM")
     protected String customerName;
@@ -191,7 +193,9 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     protected CustomerProcessingType customerSpecialProcessing;
     @Transient
     protected PrintInvoiceOptions printInvoiceOption;
+    @Transient
     protected CustomerAddress customerShipToAddress;
+    @Transient
     protected CustomerAddress customerBillToAddress;
     @Transient
     protected CustomerInvoiceRecurrenceDetails customerInvoiceRecurrenceDetails;

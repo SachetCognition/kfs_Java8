@@ -50,7 +50,9 @@ public class NonAppliedHolding extends PersistableBusinessObjectBase {
 	private String customerNumber;
     @Transient
 	private Customer customer;
+    @Transient
     private KualiDecimal availableUnappliedAmount = KualiDecimal.ZERO;
+    @Transient
     private KualiDecimal appliedUnappliedAmount = KualiDecimal.ZERO;
     @Transient
     private Collection<NonInvoicedDistribution> nonInvoicedDistributions;

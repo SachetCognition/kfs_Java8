@@ -89,6 +89,7 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
     protected String customerPaymentMediumCode;
     @Column(name = "AR_CSHCTRL_TOT_AMT")
     protected KualiDecimal cashControlTotalAmount = KualiDecimal.ZERO;
+    @Transient
     protected String lockboxNumber;
     @Column(name = "BNK_CD")
     protected String bankCode;

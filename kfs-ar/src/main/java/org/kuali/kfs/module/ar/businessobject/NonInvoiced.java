@@ -72,6 +72,7 @@ public class NonInvoiced extends PersistableBusinessObjectBase {
 	private KualiDecimal financialDocumentLineAmount;
     @Column(name = "FDOC_OVERRIDE_CD")
 	private String financialDocumentOverrideCode;
+    @Transient
     private KualiDecimal nonInvoicedDistributionAmount = KualiDecimal.ZERO;
 
     @Transient

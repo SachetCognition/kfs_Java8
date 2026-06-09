@@ -87,8 +87,10 @@ public class CustomerInvoiceWriteoffDocument extends GeneralLedgerPostingDocumen
     protected String organizationReferenceIdentifier;
     @Column(name = "FDOC_REF_INV_NBR")
     protected String financialDocumentReferenceInvoiceNumber;
+    @Transient
     protected String statusCode;
 
+    @Transient
     protected String customerNote;
 
     @Transient

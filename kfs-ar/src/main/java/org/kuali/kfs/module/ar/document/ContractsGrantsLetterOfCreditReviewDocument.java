@@ -70,9 +70,11 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
 
     @Column(name = "LTRCR_FND_CD")
     private String letterOfCreditFundCode;
+    @Transient
     private ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
     @Column(name = "LTRCR_FNDGRP_CD")
     private String letterOfCreditFundGroupCode;
+    @Transient
     private ContractsAndGrantsLetterOfCreditFundGroup letterOfCreditFundGroup;
     @Transient
     private List<ContractsGrantsLetterOfCreditReviewDetail> headerReviewDetails;

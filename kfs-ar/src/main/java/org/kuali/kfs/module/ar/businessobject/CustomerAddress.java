@@ -87,6 +87,7 @@ public class CustomerAddress extends PersistableBusinessObjectBase implements Co
     private CustomerAddressType customerAddressType;
     @Transient
     private Customer customer;
+    @Transient
     private CountryEbo customerCountry;
 
     // Invoice Template link

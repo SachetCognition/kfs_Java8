@@ -55,10 +55,12 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
     @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
 
+    @Transient
     private String milestoneScheduleInquiryTitle;
 
     @Transient
     private List<Milestone> milestones;
+    @Transient
     private ContractsAndGrantsBillingAward award;
 
     public MilestoneSchedule() {

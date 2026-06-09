@@ -125,10 +125,13 @@ public class SystemInformation extends PersistableBusinessObjectBase implements 
     protected SubAccount universityClearingSubAccount;
     @Transient
     protected ObjectCode universityFiscalYearObject;
+    @Transient
     protected StateEbo organizationRemitToState;
+    @Transient
     protected Person financialDocumentInitiator;
     @Transient
     protected SystemOptions universityFiscal;
+    @Transient
     protected PostalCodeEbo orgRemitToZipCode;
 
 	public Person getFinancialDocumentInitiator() {

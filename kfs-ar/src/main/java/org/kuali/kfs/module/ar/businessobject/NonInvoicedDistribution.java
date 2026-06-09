@@ -25,6 +25,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -48,6 +49,7 @@ public class NonInvoicedDistribution extends PersistableBusinessObjectBase {
     @Column(name = "FDOC_LINE_AMT")
 	private KualiDecimal financialDocumentLineAmount;
 
+    @Transient
     private NonAppliedHolding nonAppliedHolding;
 
 	/**

@@ -85,6 +85,7 @@ public class OrganizationOptions extends PersistableBusinessObjectBase implement
 	protected String organizationRemitToStateCode;
     @Column(name = "ORG_REMIT_ZIP_CD")
 	protected String organizationRemitToZipCode;
+    @Transient
     protected String organizationRemitToCountryCode = KFSConstants.COUNTRY_CODE_UNITED_STATES;
     @Column(name = "ORG_PHONE_NBR")
 	protected String organizationPhoneNumber;

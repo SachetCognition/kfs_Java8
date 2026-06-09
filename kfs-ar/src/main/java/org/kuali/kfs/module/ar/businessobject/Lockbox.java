@@ -65,6 +65,7 @@ public class Lockbox extends PersistableBusinessObjectBase implements Comparable
 	private Date processedInvoiceDate; //the date when the invoices/payments were processed.
     @Column(name = "AR_BATCH_SEQ_NBR")
 	private Integer batchSequenceNumber; //a batch of invoices/payments processed.
+	@Transient
 	private String proxyInitiator;
     @Column(name = "BNK_CD")
 	private String bankCode; //a unique code used to identify the bank associated with this lockbox.

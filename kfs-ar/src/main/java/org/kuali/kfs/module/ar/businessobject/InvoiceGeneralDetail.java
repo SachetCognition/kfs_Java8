@@ -28,6 +28,7 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
@@ -87,7 +88,9 @@ public class InvoiceGeneralDetail extends PersistableBusinessObjectBase {
     @Column(name = "LTRCR_FND_CD")
     private String letterOfCreditFundCode;
 
+    @Transient
     private ContractsGrantsInvoiceDocument invoiceDocument;
+    @Transient
     private ContractsAndGrantsBillingAward award;
 
     /**

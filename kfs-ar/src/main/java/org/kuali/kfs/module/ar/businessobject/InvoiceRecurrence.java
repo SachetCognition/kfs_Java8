@@ -65,10 +65,13 @@ public class InvoiceRecurrence extends PersistableBusinessObjectBase implements 
     @Convert(converter = YesNoConverter.class)
 	protected boolean active;
 
+	@Transient
 	protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Transient
     protected CustomerInvoiceDocument customerInvoiceDocument;
     @Transient
     protected Customer customer;
+    @Transient
     protected Person documentInitiatorUser;
 
     /**
