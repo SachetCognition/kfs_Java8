@@ -60,8 +60,8 @@ public class AccountingDocumentRelationshipDaoJpa implements AccountingDocumentR
         if (attribute != null) {
             cq.where(cb.equal(root.get(attribute), value));
         } else {
-            Predicate docNbrPred = cb.equal(root.get(AccountingDocumentRelationship.DOC_NBR), value);
-            Predicate relDocNbrPred = cb.equal(root.get(AccountingDocumentRelationship.REL_DOC_NBR), value);
+            Predicate docNbrPred = cb.equal(root.get("documentNumber"), value);
+            Predicate relDocNbrPred = cb.equal(root.get("relDocumentNumber"), value);
             cq.where(cb.or(docNbrPred, relDocNbrPred));
         }
 
@@ -81,13 +81,13 @@ public class AccountingDocumentRelationshipDaoJpa implements AccountingDocumentR
 
         List<Predicate> predicates = new ArrayList<Predicate>();
         if (adr.getId() != null) {
-            predicates.add(cb.equal(root.get(AccountingDocumentRelationship.ID), adr.getId()));
+            predicates.add(cb.equal(root.get("id"), adr.getId()));
         }
         if (adr.getDocumentNumber() != null) {
-            predicates.add(cb.equal(root.get(AccountingDocumentRelationship.DOC_NBR), adr.getDocumentNumber()));
+            predicates.add(cb.equal(root.get("documentNumber"), adr.getDocumentNumber()));
         }
         if (adr.getRelDocumentNumber() != null) {
-            predicates.add(cb.equal(root.get(AccountingDocumentRelationship.REL_DOC_NBR), adr.getRelDocumentNumber()));
+            predicates.add(cb.equal(root.get("relDocumentNumber"), adr.getRelDocumentNumber()));
         }
 
         if (!predicates.isEmpty()) {

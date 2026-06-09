@@ -43,7 +43,7 @@ public class HistoricalTravelExpenseDaoJpa implements HistoricalTravelExpenseDao
         Root<HistoricalTravelExpense> root = cq.from(HistoricalTravelExpense.class);
 
         Predicate nullDate = cb.isNull(root.get("expenseNotificationDate"));
-        Predicate notAssigned = cb.equal(root.get("assigned"), "N");
+        Predicate notAssigned = cb.equal(root.get("assigned"), Boolean.FALSE);
         cq.where(nullDate, notAssigned);
 
         TypedQuery<HistoricalTravelExpense> query = entityManager.createQuery(cq);
@@ -58,7 +58,7 @@ public class HistoricalTravelExpenseDaoJpa implements HistoricalTravelExpenseDao
 
         Predicate profilePred = cb.equal(root.get("profileId"), travelerProfileId);
         Predicate nullDate = cb.isNull(root.get("expenseNotificationDate"));
-        Predicate notAssigned = cb.equal(root.get("assigned"), "N");
+        Predicate notAssigned = cb.equal(root.get("assigned"), Boolean.FALSE);
         cq.where(profilePred, nullDate, notAssigned);
 
         TypedQuery<HistoricalTravelExpense> query = entityManager.createQuery(cq);

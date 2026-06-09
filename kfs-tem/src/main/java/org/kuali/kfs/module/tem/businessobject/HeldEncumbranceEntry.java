@@ -53,6 +53,8 @@ public class HeldEncumbranceEntry extends PersistableBusinessObjectBase {
     @Id
     @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     private Integer transactionLedgerEntrySequenceNumber;
     private String travelDocumentIdentifier;
     private String chartOfAccountsCode;

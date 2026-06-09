@@ -18,7 +18,9 @@
  */
 package org.kuali.kfs.module.tem.dataaccess.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -26,6 +28,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
@@ -55,13 +58,18 @@ public class TravelerDaoJpa implements TravelerDao {
         CriteriaQuery cq = cb.createQuery(customerClass);
         Root root = cq.from(customerClass);
 
+        List<Predicate> predicates = new ArrayList<Predicate>();
         for (final Map.Entry<String, String> entry : criteria.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
 
             if (!key.contains("customerAddresses.")) {
-                cq.where(cb.and(cq.getRestriction(), cb.equal(root.get(key), value)));
+                predicates.add(cb.equal(root.get(key), value));
             }
+        }
+
+        if (!predicates.isEmpty()) {
+            cq.where(predicates.toArray(new Predicate[0]));
         }
 
         return entityManager.createQuery(cq).getResultList();
