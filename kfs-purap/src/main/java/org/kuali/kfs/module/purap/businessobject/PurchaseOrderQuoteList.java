@@ -68,6 +68,7 @@ public class PurchaseOrderQuoteList extends PersistableBusinessObjectBase implem
     private ContractManager contractManager;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PO_QT_LST_ID")
     private List<PurchaseOrderQuoteListVendor> quoteListVendors;
 
     /**

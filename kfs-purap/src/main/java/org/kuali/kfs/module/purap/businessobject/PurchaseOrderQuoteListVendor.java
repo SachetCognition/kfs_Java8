@@ -31,8 +31,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -52,7 +50,6 @@ import org.hibernate.type.YesNoConverter;
 public class PurchaseOrderQuoteListVendor extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PO_QT_LST_ID")
     protected Integer purchaseOrderQuoteListIdentifier;
     @Id

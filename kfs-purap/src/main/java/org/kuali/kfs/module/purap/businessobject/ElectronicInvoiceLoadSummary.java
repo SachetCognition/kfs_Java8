@@ -32,11 +32,10 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 
 
@@ -46,14 +45,16 @@ import jakarta.persistence.Version;
 public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "INV_LOAD_SUM_ID")
   private Integer invoiceLoadSummaryIdentifier;
   @Id
   @Column(name = "VNDR_DUNS_NBR")
   private String vendorDunsNumber; // this is string constant if DUNS not found
+  @Transient
   private Integer vendorHeaderGeneratedIdentifier;
+  @Transient
   private Integer vendorDetailAssignedIdentifier;
+  @Transient
   private String vendorName;
   @Column(name = "INV_LOAD_SCCSS_CNT")
   private Integer invoiceLoadSuccessCount = new Integer(0);
@@ -63,6 +64,7 @@ public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase 
   private Integer invoiceLoadFailCount = new Integer(0);
   @Column(name = "INV_LOAD_FAIL_AMT")
   private KualiDecimal invoiceLoadFailAmount = new KualiDecimal(0.00);
+  @Transient
   private Boolean isEmpty = Boolean.TRUE;
   @Column(name = "FL_PROC_DT")
   private Timestamp fileProcessTimestamp;

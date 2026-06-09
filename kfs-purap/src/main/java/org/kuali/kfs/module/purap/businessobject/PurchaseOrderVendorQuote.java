@@ -38,8 +38,6 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
@@ -60,7 +58,6 @@ public class PurchaseOrderVendorQuote extends PersistableBusinessObjectBase {
     @Column(name = "FDOC_NBR")
     private String documentNumber;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PO_VNDR_QT_ID")
     private Integer purchaseOrderVendorQuoteIdentifier;
     @Column(name = "VNDR_HDR_GNRTD_ID")

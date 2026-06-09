@@ -34,6 +34,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
@@ -57,6 +58,7 @@ public class SensitiveDataAssignment extends PersistableBusinessObjectBase {
     private  Date sensitiveDataAssignmentChangeDate;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "SNSTV_DTA_ASGN_ID")
     private List<SensitiveDataAssignmentDetail> sensitiveDataAssignmentDetails;
     
     public SensitiveDataAssignment() {
