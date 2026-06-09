@@ -170,9 +170,18 @@
     <jul-to-slf4j.version>${slf4j.version}</jul-to-slf4j.version>
 
   </properties>
-  <!-- NOTE: Spring Boot BOM (3.3.5) will be added to <dependencyManagement> in Phase 4 (S-4A)
-       when Rice is fully removed and Spring Boot is adopted. Adding it now would override
-       Spring 3.x transitives from Rice with Spring 6.x, breaking compilation. -->
+  <!-- Spring Boot 3.3.5 BOM – added in Phase 4 (S-4A) for Spring MVC 6.1 migration -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>3.3.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -359,6 +368,31 @@
 
 
   <dependencies>
+    <!-- Spring Boot Web (S-4A: Struts 1 → Spring MVC migration) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <!-- Jakarta Mail API for javax→jakarta namespace migration (S-4A) -->
+    <dependency>
+      <groupId>jakarta.mail</groupId>
+      <artifactId>jakarta.mail-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.angus</groupId>
+      <artifactId>angus-mail</artifactId>
+    </dependency>
+
     <!-- rice-core dependencies. -->
     <dependency>
       <groupId>org.kuali.rice</groupId>

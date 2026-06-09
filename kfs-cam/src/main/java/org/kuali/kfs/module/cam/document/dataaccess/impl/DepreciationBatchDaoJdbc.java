@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
 import org.kuali.kfs.module.cam.CamsConstants;
@@ -61,7 +59,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  * JDBC implementation of {@link DepreciationBatchDao}
  */
 public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implements DepreciationBatchDao {
-    private static final Logger LOG = LoggerFactory.getLogger(DepreciationBatchDaoJdbc.class);
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DepreciationBatchDaoJdbc.class);
 
     protected UniversityDateDao universityDateDao;
     protected ConfigurationService kualiConfigurationService;
@@ -114,6 +112,7 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
         });
     }
 
+
     /**
      * @see org.kuali.kfs.module.cam.document.dataaccess.DepreciationBatchDao#updateAssetsCreatedInLastFiscalPeriod(java.lang.Integer,
      *      java.lang.Integer)
@@ -151,6 +150,7 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
             }
         }
     }
+
 
     /**
      * @see org.kuali.kfs.module.cam.document.dataaccess.DepreciationBatchDao#savePendingGLEntries(java.util.List)
@@ -316,7 +316,7 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
      */
     @Override
     public Integer getFullyDepreciatedAssetCount() {
-        int count = getJdbcTemplate().queryForInt("SELECT COUNT(1) FROM CM_CPTLAST_T AST, (SELECT CPTLAST_NBR, (SUM(AST_DEPR1_BASE_AMT - AST_ACUM_DEPR1_AMT) - (SELECT 0.0+CPTLAST_SALVAG_AMT FROM CM_CPTLAST_T X WHERE X.CPTLAST_NBR = Y.CPTLAST_NBR)) BAL FROM CM_AST_PAYMENT_T Y WHERE AST_DEPR1_BASE_AMT IS NOT NULL AND AST_DEPR1_BASE_AMT <> 0.0 AND AST_ACUM_DEPR1_AMT IS NOT NULL AND AST_ACUM_DEPR1_AMT <> 0.0 AND (AST_TRNFR_PMT_CD = 'N' OR AST_TRNFR_PMT_CD = '' OR AST_TRNFR_PMT_CD IS NULL) GROUP BY CPTLAST_NBR) PMT WHERE PMT.BAL = 0.0 AND AST.CPTLAST_NBR = PMT.CPTLAST_NBR");
+        int count = getJdbcTemplate().queryForObject("SELECT COUNT(1) FROM CM_CPTLAST_T AST, (SELECT CPTLAST_NBR, (SUM(AST_DEPR1_BASE_AMT - AST_ACUM_DEPR1_AMT) - (SELECT 0.0+CPTLAST_SALVAG_AMT FROM CM_CPTLAST_T X WHERE X.CPTLAST_NBR = Y.CPTLAST_NBR)) BAL FROM CM_AST_PAYMENT_T Y WHERE AST_DEPR1_BASE_AMT IS NOT NULL AND AST_DEPR1_BASE_AMT <> 0.0 AND AST_ACUM_DEPR1_AMT IS NOT NULL AND AST_ACUM_DEPR1_AMT <> 0.0 AND (AST_TRNFR_PMT_CD = 'N' OR AST_TRNFR_PMT_CD = '' OR AST_TRNFR_PMT_CD IS NULL) GROUP BY CPTLAST_NBR) PMT WHERE PMT.BAL = 0.0 AND AST.CPTLAST_NBR = PMT.CPTLAST_NBR", Integer.class);
         return count;
     }
 
@@ -401,7 +401,7 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
      */
     @Override
     public Integer getTransferDocLockedAssetCount() {
-        return getJdbcTemplate().queryForInt("select count(1) from CM_AST_TRNFR_DOC_T t inner join FS_DOC_HEADER_T h on t.fdoc_nbr = h.fdoc_nbr where h.fdoc_status_cd ='" + KFSConstants.DocumentStatusCodes.ENROUTE + "'");
+        return getJdbcTemplate().queryForObject("select count(1) from CM_AST_TRNFR_DOC_T t inner join FS_DOC_HEADER_T h on t.fdoc_nbr = h.fdoc_nbr where h.fdoc_status_cd ='" + KFSConstants.DocumentStatusCodes.ENROUTE + "'", Integer.class);
     }
 
     /**
@@ -409,7 +409,7 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
      */
     @Override
     public Integer getRetireDocLockedAssetCount() {
-        return getJdbcTemplate().queryForInt("select count(1) from CM_AST_RETIRE_DTL_T t inner join FS_DOC_HEADER_T h on t.fdoc_nbr = h.fdoc_nbr where h.fdoc_status_cd  ='" + KFSConstants.DocumentStatusCodes.ENROUTE + "'");
+        return getJdbcTemplate().queryForObject("select count(1) from CM_AST_RETIRE_DTL_T t inner join FS_DOC_HEADER_T h on t.fdoc_nbr = h.fdoc_nbr where h.fdoc_status_cd  ='" + KFSConstants.DocumentStatusCodes.ENROUTE + "'", Integer.class);
     }
 
     /**
@@ -536,6 +536,7 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
         }
         return federallyOwnedObjectSubTypes;
     }
+
 
     protected String buildCriteriaYearEnd(Integer fiscalYear, Integer fiscalMonth, Collection<String> depreciationMethodList, Collection<String> notAcceptedAssetStatus, Collection<String> federallyOwnedObjectSubTypes, boolean includeFederal, boolean includePending, boolean includeRetired) {
         if ( LOG.isInfoEnabled() ) {

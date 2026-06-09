@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
-import javax.mail.MessagingException;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class AttachmentDevelopmentMailServiceImpl extends AttachmentMailServiceI
     private static final Logger LOG = LoggerFactory.getLogger(AttachmentDevelopmentMailServiceImpl.class);
 
     @Override
-    public void sendMessage(MailMessage message) throws InvalidAddressException, MessagingException {
+    public void sendMessage(MailMessage message) throws InvalidAddressException {
         LOG.info( "*********************** EMAIL SEND *****************************");
         LOG.info( "FROM : " + message.getToAddresses() );
         LOG.info( "TO   : " + message.getFromAddress() );
@@ -47,7 +47,7 @@ public class AttachmentDevelopmentMailServiceImpl extends AttachmentMailServiceI
     }
 
     @Override
-    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException, MessagingException {
+    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException {
         LOG.info( "*********************** EMAIL SEND *****************************");
         LOG.info( "FROM : " + message.getToAddresses() );
         LOG.info( "TO   : " + message.getFromAddress() );

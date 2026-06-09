@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.kfs.sys.mail.AttachmentMailMessage;
 import org.kuali.kfs.sys.mail.AttachmentMailer;
@@ -34,8 +34,12 @@ public class AttachmentMailServiceImpl extends MailServiceImpl implements Attach
     protected AttachmentMailer attachmentMailer;
 
     @Override
-    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException, MessagingException {
-        attachmentMailer.sendEmail(composeMessage(message));
+    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException {
+        try {
+            attachmentMailer.sendEmail(composeMessage(message));
+        } catch (MessagingException e) {
+            throw new RuntimeException("Error sending email with attachment", e);
+        }
     }
 
     /**

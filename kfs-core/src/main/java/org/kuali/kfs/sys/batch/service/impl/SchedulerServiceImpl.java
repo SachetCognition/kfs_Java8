@@ -52,13 +52,17 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.MailService;
 import org.kuali.rice.krad.service.ModuleService;
 import org.quartz.CronExpression;
+import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
+import org.quartz.JobKey;
 import org.quartz.ObjectAlreadyExistsException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.UnableToInterruptJobException;
+import org.quartz.impl.matchers.EverythingMatcher;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -101,7 +105,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         LOG.info("Initializing the schedule");
         jobListener.setSchedulerService(this);
         try {
-            scheduler.addGlobalJobListener(jobListener);
+            scheduler.getListenerManager().addJobListener(jobListener, EverythingMatcher.allJobs());
         }
         catch (SchedulerException e) {
             throw new RuntimeException("SchedulerServiceImpl encountered an exception when trying to register the global job listener", e);
@@ -169,9 +173,14 @@ public class SchedulerServiceImpl implements SchedulerService {
     protected void loadJob(JobDescriptor jobDescriptor) {
         JobDetail jobDetail = jobDescriptor.getJobDetail();
         addJob(jobDetail);
-        if (SCHEDULED_GROUP.equals(jobDetail.getGroup())) {
-            jobDetail.setGroup(UNSCHEDULED_GROUP);
-            addJob(jobDetail);
+        if (SCHEDULED_GROUP.equals(jobDetail.getKey().getGroup())) {
+            JobDetail unscheduledCopy = JobBuilder.newJob(jobDetail.getJobClass())
+                    .withIdentity(jobDetail.getKey().getName(), UNSCHEDULED_GROUP)
+                    .storeDurably(jobDetail.isDurable())
+                    .requestRecovery(jobDetail.requestsRecovery())
+                    .build();
+            unscheduledCopy.getJobDataMap().putAll(jobDetail.getJobDataMap());
+            addJob(unscheduledCopy);
         }
     }
 
@@ -181,7 +190,7 @@ public class SchedulerServiceImpl implements SchedulerService {
      */
     protected void dropDependenciesNotScheduled() {
         try {
-            List<String> scheduledGroupJobNames = Arrays.asList(scheduler.getJobNames(SCHEDULED_GROUP));
+            List<String> scheduledGroupJobNames = scheduler.getJobKeys(GroupMatcher.jobGroupEquals(SCHEDULED_GROUP)).stream().map(k -> k.getName()).collect(java.util.stream.Collectors.toList());
 
             for (String jobName : scheduledGroupJobNames) {
                 JobDescriptor jobDescriptor = BatchSpringContext.getJobDescriptor(jobName);
@@ -228,7 +237,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
             boolean jobIsIncomplete = isIncomplete(scheduledJobDetail);
             if (jobIsIncomplete) {
-                log.append("\n\t").append(scheduledJobDetail.getFullName());
+                log.append("\n\t").append(scheduledJobDetail.getKey().toString());
                 hasIncompleteJob = true;
             }
         }
@@ -243,7 +252,7 @@ public class SchedulerServiceImpl implements SchedulerService {
             return false;
         }
 
-        return !SCHEDULE_JOB_NAME.equals(scheduledJobDetail.getName()) && (isPending(scheduledJobDetail) || isScheduled(scheduledJobDetail));
+        return !SCHEDULE_JOB_NAME.equals(scheduledJobDetail.getKey().getName()) && (isPending(scheduledJobDetail) || isScheduled(scheduledJobDetail));
     }
 
     /**
@@ -256,7 +265,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     protected boolean isPastScheduleCutoffTime(Calendar dateTime, boolean log) {
         try {
-            Date scheduleCutoffTimeTemp = scheduler.getTriggersOfJob(SCHEDULE_JOB_NAME, SCHEDULED_GROUP)[0].getPreviousFireTime();
+            Date scheduleCutoffTimeTemp = scheduler.getTriggersOfJob(JobKey.jobKey(SCHEDULE_JOB_NAME, SCHEDULED_GROUP)).get(0).getPreviousFireTime();
             Calendar scheduleCutoffTime;
             if (scheduleCutoffTimeTemp == null) {
                 scheduleCutoffTime = dateTimeService.getCurrentCalendar();
@@ -333,8 +342,8 @@ public class SchedulerServiceImpl implements SchedulerService {
         StringBuilder scheduleResults = new StringBuilder("The schedule completed.");
         for ( String scheduledJobName : getJobNamesForScheduleJob() ) {
             JobDetail jobDetail = getScheduledJobDetail(scheduledJobName);
-            if ( jobDetail != null &&  !SCHEDULE_JOB_NAME.equals(jobDetail.getName())) {
-                scheduleResults.append("\n\t").append(jobDetail.getName()).append("=").append(getStatus(jobDetail));
+            if ( jobDetail != null &&  !SCHEDULE_JOB_NAME.equals(jobDetail.getKey().getName())) {
+                scheduleResults.append("\n\t").append(jobDetail.getKey().getName()).append("=").append(getStatus(jobDetail));
             }
         }
         LOG.info("{}", scheduleResults);
@@ -345,18 +354,18 @@ public class SchedulerServiceImpl implements SchedulerService {
      */
     @Override
     public boolean shouldNotRun(JobDetail jobDetail) {
-        if (SCHEDULED_GROUP.equals(jobDetail.getGroup())) {
+        if (SCHEDULED_GROUP.equals(jobDetail.getKey().getGroup())) {
             if (isCancelled(jobDetail)) {
                 if ( LOG.isInfoEnabled() ) {
-                    LOG.info("Telling listener not to run job, because it has been cancelled: " + jobDetail.getName());
+                    LOG.info("Telling listener not to run job, because it has been cancelled: " + jobDetail.getKey().getName());
                 }
                 return true;
             }
             else {
-                for (String dependencyJobName : getJobDependencies(jobDetail.getName()).keySet()) {
+                for (String dependencyJobName : getJobDependencies(jobDetail.getKey().getName()).keySet()) {
                     if (!isDependencySatisfiedPositively(jobDetail, getScheduledJobDetail(dependencyJobName))) {
                         if ( LOG.isInfoEnabled() ) {
-                            LOG.info("Telling listener not to run job, because a dependency has not been satisfied positively: "+jobDetail.getName()+" (dependency job = "+dependencyJobName+")");
+                            LOG.info("Telling listener not to run job, because a dependency has not been satisfied positively: "+jobDetail.getKey().getName()+" (dependency job = "+dependencyJobName+")");
                         }
                         return true;
                     }
@@ -372,7 +381,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public void updateStatus(JobDetail jobDetail, String jobStatus) {
         if ( LOG.isInfoEnabled() ) {
-            LOG.info("Updating status of job: "+jobDetail.getName()+"="+jobStatus);
+            LOG.info("Updating status of job: "+jobDetail.getKey().getName()+"="+jobStatus);
         }
         jobDetail.getJobDataMap().put(JOB_STATUS_PARAMETER, jobStatus);
     }
@@ -394,7 +403,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         }
 
         try {
-            JobDetail jobDetail = scheduler.getJobDetail(jobName, groupName);
+            JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName, groupName));
             scheduleJob(groupName, jobName, startStep, stopStep, jobStartTime, requestorEmailAddress, null);
         }
         catch (SchedulerException ex) {
@@ -434,7 +443,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     public boolean isJobRunning(String jobName) {
         List<JobExecutionContext> runningJobs = getRunningJobs();
         for (JobExecutionContext jobCtx : runningJobs) {
-            if (jobCtx.getJobDetail().getName().equals(jobName)) {
+            if (jobCtx.getJobDetail().getKey().getName().equals(jobName)) {
                 return true;
             }
         }
@@ -444,22 +453,22 @@ public class SchedulerServiceImpl implements SchedulerService {
     protected void addJob(JobDetail jobDetail) {
         try {
             if ( LOG.isInfoEnabled() ) {
-                LOG.info("Adding job: " + jobDetail.getFullName());
+                LOG.info("Adding job: " + jobDetail.getKey().toString());
             }
             scheduler.addJob(jobDetail, true);
         }
         catch (SchedulerException e) {
-            throw new RuntimeException("Caught exception while adding job: " + jobDetail.getFullName(), e);
+            throw new RuntimeException("Caught exception while adding job: " + jobDetail.getKey().toString(), e);
         }
     }
 
     protected void addTrigger(Trigger trigger) {
         try {
-            if (UNSCHEDULED_GROUP.equals(trigger.getGroup())) {
-                LOG.error("Triggers should not be specified for jobs in the unscheduled group - not adding trigger: " + trigger.getName());
+            if (UNSCHEDULED_GROUP.equals(trigger.getKey().getGroup())) {
+                LOG.error("Triggers should not be specified for jobs in the unscheduled group - not adding trigger: " + trigger.getKey().getName());
             }
             else {
-                LOG.info("Adding trigger: " + trigger.getName());
+                LOG.info("Adding trigger: " + trigger.getKey().getName());
                 try {
                     scheduler.scheduleJob(trigger);
                 }
@@ -468,7 +477,7 @@ public class SchedulerServiceImpl implements SchedulerService {
             }
         }
         catch (SchedulerException e) {
-            throw new RuntimeException("Caught exception while adding trigger: " + trigger.getFullName(), e);
+            throw new RuntimeException("Caught exception while adding trigger: " + trigger.getKey().toString(), e);
         }
     }
 
@@ -484,8 +493,8 @@ public class SchedulerServiceImpl implements SchedulerService {
             if ( additionalJobData != null ) {
                 qTrigger.getJobDataMap().putAll(additionalJobData);
             }
-            for (Trigger oldTrigger : scheduler.getTriggersOfJob(jobName, groupName)) {
-                scheduler.unscheduleJob(oldTrigger.getName(), groupName);
+            for (Trigger oldTrigger : scheduler.getTriggersOfJob(JobKey.jobKey(jobName, groupName))) {
+                scheduler.unscheduleJob(oldTrigger.getKey());
             }
             scheduler.scheduleJob(qTrigger);
         }
@@ -496,13 +505,13 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     protected boolean shouldScheduleJob(JobDetail jobDetail) {
         try {
-            if (scheduler.getTriggersOfJob(jobDetail.getName(), SCHEDULED_GROUP).length > 0) {
+            if (scheduler.getTriggersOfJob(JobKey.jobKey(jobDetail.getKey().getName(), SCHEDULED_GROUP)).size() > 0) {
                 return false;
             }
-            for (String dependencyJobName : getJobDependencies(jobDetail.getName()).keySet()) {
+            for (String dependencyJobName : getJobDependencies(jobDetail.getKey().getName()).keySet()) {
                 JobDetail dependencyJobDetail = getScheduledJobDetail(dependencyJobName);
                 if ( dependencyJobDetail == null ) {
-                    LOG.error( "Unable to get JobDetail for dependency of " + jobDetail.getName() + " : " + dependencyJobName );
+                    LOG.error( "Unable to get JobDetail for dependency of " + jobDetail.getKey().getName() + " : " + dependencyJobName );
                     return false;
                 }
                 if (!isDependencySatisfiedPositively(jobDetail, dependencyJobDetail)) {
@@ -511,17 +520,17 @@ public class SchedulerServiceImpl implements SchedulerService {
             }
         }
         catch (SchedulerException se) {
-            throw new RuntimeException("Caught scheduler exception while determining whether to schedule job: " + jobDetail.getName(), se);
+            throw new RuntimeException("Caught scheduler exception while determining whether to schedule job: " + jobDetail.getKey().getName(), se);
         }
         return true;
     }
 
     protected boolean shouldCancelJob(JobDetail jobDetail) {
-        LOG.info("shouldCancelJob:::::: " + jobDetail.getFullName());
+        LOG.info("shouldCancelJob:::::: " + jobDetail.getKey().toString());
         if ( jobDetail == null ) {
             return true;
         }
-        for (String dependencyJobName : getJobDependencies(jobDetail.getName()).keySet()) {
+        for (String dependencyJobName : getJobDependencies(jobDetail.getKey().getName()).keySet()) {
             LOG.info("dependencyJobName:::::" + dependencyJobName);
             JobDetail dependencyJobDetail = getScheduledJobDetail(dependencyJobName);
             if (isDependencySatisfiedNegatively(jobDetail, dependencyJobDetail)) {
@@ -535,15 +544,16 @@ public class SchedulerServiceImpl implements SchedulerService {
         if ( dependentJobDetail == null || dependencyJobDetail == null ) {
             return false;
         }
-        return isSucceeded(dependencyJobDetail) || ((isFailed(dependencyJobDetail) || isCancelled(dependencyJobDetail)) && isSoftDependency(dependentJobDetail.getName(), dependencyJobDetail.getName()));
+        return isSucceeded(dependencyJobDetail) || ((isFailed(dependencyJobDetail) || isCancelled(dependencyJobDetail)) && isSoftDependency(dependentJobDetail.getKey().getName(), dependencyJobDetail.getKey().getName()));
     }
 
     protected boolean isDependencySatisfiedNegatively(JobDetail dependentJobDetail, JobDetail dependencyJobDetail) {
-       LOG.info("isDependencySatisfiedNegatively::::  dependentJobDetail::: " + dependencyJobDetail.getFullName() + " dependencyJobDetail    " + dependencyJobDetail.getFullName() );
         if ( dependentJobDetail == null || dependencyJobDetail == null ) {
+            LOG.info("isDependencySatisfiedNegatively:::: one or both job details are null");
             return true;
         }
-        return (isFailed(dependencyJobDetail) || isCancelled(dependencyJobDetail)) && !isSoftDependency(dependentJobDetail.getName(), dependencyJobDetail.getName());
+        LOG.info("isDependencySatisfiedNegatively::::  dependentJobDetail::: " + dependentJobDetail.getKey().toString() + " dependencyJobDetail    " + dependencyJobDetail.getKey().toString() );
+        return (isFailed(dependencyJobDetail) || isCancelled(dependencyJobDetail)) && !isSoftDependency(dependentJobDetail.getKey().getName(), dependencyJobDetail.getKey().getName());
     }
 
     protected boolean isSoftDependency(String dependentJobName, String dependencyJobName) {
@@ -581,18 +591,18 @@ public class SchedulerServiceImpl implements SchedulerService {
             return FAILED_JOB_STATUS_CODE;
         }
         KfsModuleServiceImpl moduleService = (KfsModuleServiceImpl)
-            SpringContext.getBean(KualiModuleService.class).getResponsibleModuleServiceForJob(jobDetail.getName());
+            SpringContext.getBean(KualiModuleService.class).getResponsibleModuleServiceForJob(jobDetail.getKey().getName());
         //If the module service has status information for a job, get the status from it
         //else get status from job detail data map
-        return (moduleService!=null && moduleService.isExternalJob(jobDetail.getName()))
-                    ? moduleService.getExternalJobStatus(jobDetail.getName())
+        return (moduleService!=null && moduleService.isExternalJob(jobDetail.getKey().getName()))
+                    ? moduleService.getExternalJobStatus(jobDetail.getKey().getName())
                     : jobDetail.getJobDataMap().getString(SchedulerServiceImpl.JOB_STATUS_PARAMETER);
     }
 
     protected JobDetail getScheduledJobDetail(String jobName) {
         LOG.info("getScheduledJobDetail ::::::: " + jobName);
         try {
-            JobDetail jobDetail = scheduler.getJobDetail(jobName, SCHEDULED_GROUP);
+            JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName, SCHEDULED_GROUP));
             if ( jobDetail == null ) {
                 LOG.error( "Unable to obtain the job details for the scheduled version of: " + jobName );
             }
@@ -649,10 +659,10 @@ public class SchedulerServiceImpl implements SchedulerService {
         ArrayList<BatchJobStatus> jobs = new ArrayList<BatchJobStatus>();
         try {
             for (String jobGroup : scheduler.getJobGroupNames()) {
-                for (String jobName : scheduler.getJobNames(jobGroup)) {
+                for (String jobName : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(jobGroup)).stream().map(k -> k.getName()).collect(java.util.stream.Collectors.toList())) {
                     try {
                         JobDescriptor jobDescriptor = retrieveJobDescriptor(jobName);
-                        JobDetail jobDetail = scheduler.getJobDetail(jobName, jobGroup);
+                        JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName, jobGroup));
                         jobs.add(new BatchJobStatus(jobDescriptor, jobDetail));
                     }
                     catch (NoSuchBeanDefinitionException ex) {
@@ -682,10 +692,10 @@ public class SchedulerServiceImpl implements SchedulerService {
     public List<BatchJobStatus> getJobs(String groupName) {
         ArrayList<BatchJobStatus> jobs = new ArrayList<BatchJobStatus>();
         try {
-            for (String jobName : scheduler.getJobNames(groupName)) {
+            for (String jobName : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName)).stream().map(k -> k.getName()).collect(java.util.stream.Collectors.toList())) {
                 try {
                     JobDescriptor jobDescriptor = retrieveJobDescriptor(jobName);
-                    JobDetail jobDetail = scheduler.getJobDetail(jobName, groupName);
+                    JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName, groupName));
                     jobs.add(new BatchJobStatus(jobDescriptor, jobDetail));
                 }
                 catch (NoSuchBeanDefinitionException ex) {
@@ -713,7 +723,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 
     protected void updateStatus(String groupName, String jobName, String jobStatus) {
         try {
-            JobDetail jobDetail = scheduler.getJobDetail(jobName, groupName);
+            JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName, groupName));
             updateStatus(jobDetail, jobStatus);
             scheduler.addJob(jobDetail, true);
         }
@@ -725,7 +735,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public void removeScheduled(String jobName) {
         try {
-            scheduler.deleteJob(jobName, SCHEDULED_GROUP);
+            scheduler.deleteJob(JobKey.jobKey(jobName, SCHEDULED_GROUP));
         }
         catch (SchedulerException ex) {
             throw new RuntimeException("Unable to remove scheduled job: " + jobName, ex);
@@ -735,29 +745,37 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public void addScheduled(JobDetail job) {
         try {
-            job.setGroup(SCHEDULED_GROUP);
-            scheduler.addJob(job, true);
+            JobDetail scheduledJob = JobBuilder.newJob(job.getJobClass())
+                    .withIdentity(job.getKey().getName(), SCHEDULED_GROUP)
+                    .storeDurably(job.isDurable())
+                    .build();
+            scheduledJob.getJobDataMap().putAll(job.getJobDataMap());
+            scheduler.addJob(scheduledJob, true);
         }
         catch (SchedulerException ex) {
-            throw new RuntimeException("Unable to add job to scheduled group: " + job.getName(), ex);
+            throw new RuntimeException("Unable to add job to scheduled group: " + job.getKey().getName(), ex);
         }
     }
 
     @Override
     public void addUnscheduled(JobDetail job) {
         try {
-            job.setGroup(UNSCHEDULED_GROUP);
-            scheduler.addJob(job, true);
+            JobDetail unscheduledJob = JobBuilder.newJob(job.getJobClass())
+                    .withIdentity(job.getKey().getName(), UNSCHEDULED_GROUP)
+                    .storeDurably(job.isDurable())
+                    .build();
+            unscheduledJob.getJobDataMap().putAll(job.getJobDataMap());
+            scheduler.addJob(unscheduledJob, true);
         }
         catch (SchedulerException ex) {
-            throw new RuntimeException("Unable to add job to unscheduled group: " + job.getName(), ex);
+            throw new RuntimeException("Unable to add job to unscheduled group: " + job.getKey().getName(), ex);
         }
     }
 
     @Override
     public List<String> getSchedulerGroups() {
         try {
-            return Arrays.asList(scheduler.getJobGroupNames());
+            return scheduler.getJobGroupNames();
         }
         catch (SchedulerException ex) {
             throw new RuntimeException("Exception while obtaining job list", ex);
@@ -773,7 +791,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     public void interruptJob(String jobName) {
         List<JobExecutionContext> runningJobs = getRunningJobs();
         for (JobExecutionContext jobCtx : runningJobs) {
-            if (jobName.equals(jobCtx.getJobDetail().getName())) {
+            if (jobName.equals(jobCtx.getJobDetail().getKey().getName())) {
                 // if so...
                 try {
                     ((Job) jobCtx.getJobInstance()).interrupt();
@@ -790,7 +808,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     @Override
     public Date getNextStartTime(BatchJobStatus job) {
         try {
-            Trigger[] triggers = scheduler.getTriggersOfJob(job.getName(), job.getGroup());
+            List<? extends Trigger> triggers = scheduler.getTriggersOfJob(JobKey.jobKey(job.getName(), job.getGroup()));
             Date nextDate = new Date(Long.MAX_VALUE);
             for (Trigger trigger : triggers) {
                 if (trigger.getNextFireTime() != null){
@@ -833,8 +851,8 @@ public class SchedulerServiceImpl implements SchedulerService {
     protected List<String> getJobNamesForScheduleJob() {
         List<String> jobNames = new ArrayList<String>();
         try {
-            for (String scheduledJobName : scheduler.getJobNames(SCHEDULED_GROUP)) {
-                if (scheduler.getTriggersOfJob(scheduledJobName, SCHEDULED_GROUP).length == 0) {
+            for (String scheduledJobName : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(SCHEDULED_GROUP)).stream().map(k -> k.getName()).collect(java.util.stream.Collectors.toList())) {
+                if (scheduler.getTriggersOfJob(JobKey.jobKey(scheduledJobName, SCHEDULED_GROUP)).size() == 0) {
                     // jobs that have their own triggers will not be included in the master scheduleJob
                     jobNames.add( scheduledJobName );
                 }
