@@ -53,7 +53,7 @@ public class SimpleTriggerDescriptor extends TriggerDescriptor {
             effectiveStartTime = new Date(new Date().getTime() + 525600000L);
         }
         triggerBuilder.startAt(effectiveStartTime);
-        if (!isTestMode() && repeatCount > 0) {
+        if (!isTestMode() && repeatCount != 0) {
             triggerBuilder.withSchedule(SimpleScheduleBuilder.simpleSchedule()
                     .withRepeatCount(repeatCount));
         }

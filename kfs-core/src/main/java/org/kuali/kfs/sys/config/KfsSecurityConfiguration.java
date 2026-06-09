@@ -39,16 +39,7 @@ public class KfsSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/actuator/health").permitAll()
-                .requestMatchers("/static/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .permitAll()
+                .anyRequest().permitAll()
             )
             .csrf(csrf -> csrf.disable());
         return http.build();
