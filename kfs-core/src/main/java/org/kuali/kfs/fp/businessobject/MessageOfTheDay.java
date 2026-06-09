@@ -23,16 +23,30 @@ import java.util.LinkedHashMap;
 
 import org.kuali.kfs.sys.businessobject.OriginationCode;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a "message of the day" object.  These messages are displayed on the associated 
  * portal page and may contain phrases, informational messages or any other message deemed worthy.
  */
+@Entity
+@Table(name = "FP_MOTD_T")
 public class MessageOfTheDay extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Column(name = "FS_MOTD_TXT")
     private String financialSystemMessageOfTheDayText;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_ORIGIN_CD", insertable = false, updatable = false)
     private OriginationCode financialSystemOrigination;
 
     /**

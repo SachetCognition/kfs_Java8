@@ -25,22 +25,48 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * This class represents the CreditCardDetail business object, which is a single record on the Credit Card Receipts Document
  * representing a single credit card receipt. This is a type of advance deposit.
  */
+@Entity
+@Table(name = "FP_CR_CARD_DTL_T")
+@IdClass(CreditCardDetailId.class)
 public class CreditCardDetail extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "FDOC_CCRD_TYP_CD")
     private String financialDocumentCreditCardTypeCode;
+    @Column(name = "FDOC_CCRD_VNDR_NBR")
     private String financialDocumentCreditCardVendorNumber;
+    @Column(name = "FDOC_CCRD_DPST_DT")
     private Date creditCardDepositDate;
+    @Column(name = "FDOC_CCRD_DREF_NBR")
     private String creditCardDepositReferenceNumber;
+    @Column(name = "FDOC_CCRD_DPST_AMT")
     private KualiDecimal creditCardAdvanceDepositAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_CCRD_TYP_CD", insertable = false, updatable = false)
     private CreditCardType financialDocumentCreditCardType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_CCRD_VNDR_NBR", insertable = false, updatable = false)
     private CreditCardVendor financialDocumentCreditCardVendor;
 
     /**

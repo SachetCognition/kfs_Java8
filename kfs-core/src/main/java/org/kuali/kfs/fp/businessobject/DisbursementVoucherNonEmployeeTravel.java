@@ -32,45 +32,88 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a non-employee trip for a disbursement voucher .
  */
+@Entity
+@Table(name = "FP_DV_NONEM_TRVL_T")
 public class DisbursementVoucherNonEmployeeTravel extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "DV_TRVLFROM_CTY_NM")
     private String disbVchrTravelFromCityName;
+    @Column(name = "DV_TRVL_FROM_ST_CD")
     private String disbVchrTravelFromStateCode;
+    @Column(name = "DV_TRVL_FRM_CNTRY_CD")
     private String dvTravelFromCountryCode;
+    @Column(name = "DV_TRVL_TO_CTY_NM")
     private String disbVchrTravelToCityName;
+    @Column(name = "DV_TRVL_TO_ST_CD")
     private String disbVchrTravelToStateCode;
+    @Column(name = "DV_TRVL_TO_CNTRY_CD")
     private String disbVchrTravelToCountryCode;
+    @Column(name = "DV_DIEM_STRT_TS")
     private Timestamp dvPerdiemStartDttmStamp;
+    @Column(name = "DV_DIEM_END_TS")
     private Timestamp dvPerdiemEndDttmStamp;
+    @Column(name = "DV_DIEM_CALC_AMT")
     private KualiDecimal disbVchrPerdiemCalculatedAmt;
+    @Column(name = "DV_DIEM_ACTL_AMT")
     private KualiDecimal disbVchrPerdiemActualAmount;
+    @Column(name = "DV_DIEM_CHG_TXT")
     private String dvPerdiemChangeReasonText;
+    @Column(name = "DV_SRVC_PRFRM_DESC")
     private String disbVchrServicePerformedDesc;
+    @Column(name = "DV_SRVC_LOC_NM")
     private String dvServicePerformedLocName;
+    @Column(name = "DV_SRVC_EMPR_NM")
     private String dvServiceRegularEmprName;
+    @Column(name = "DV_AUTOFROM_CTY_NM")
     private String disbVchrAutoFromCityName;
+    @Column(name = "DV_AUTO_FROM_ST_CD")
     private String disbVchrAutoFromStateCode;
+    @Column(name = "DV_AUTO_TO_CTY_NM")
     private String disbVchrAutoToCityName;
+    @Column(name = "DV_AUTO_TO_ST_CD")
     private String disbVchrAutoToStateCode;
+    @Column(name = "DV_AUTO_RNDTRP_IND")
     private boolean disbVchrAutoRoundTripCode;
+    @Column(name = "DV_PRSNCAR_MLG_AMT")
     private Integer dvPersonalCarMileageAmount;
+    @Column(name = "DV_PRSNL_CAR_RT")
     private KualiDecimal disbVchrPersonalCarRate;
+    @Column(name = "DV_PRSNL_CAR_AMT")
     private KualiDecimal disbVchrPersonalCarAmount;
+    @Column(name = "DV_EXCPN_IND")
     private boolean disbVchrExceptionCode;
+    @Column(name = "FDOC_NXT_LINE_NBR")
     private Integer financialDocumentNextLineNbr;
+    @Column(name = "DV_NONEMP_TRVLR_NM")
     private String disbVchrNonEmpTravelerName;
+    @Column(name = "DV_DIEM_RT")
     private KualiDecimal disbVchrPerdiemRate;
+    @Column(name = "DV_DIEM_CTGRY_NM")
     private String disbVchrPerdiemCategoryName;
+    @Column(name = "DV_MLG_CALC_AMT")
     private KualiDecimal disbVchrMileageCalculatedAmt;
 
+    @Transient
     private KualiDecimal totalTravelAmount;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "disbursementVoucherNonEmployeeTravel")
     private List dvNonEmployeeExpenses;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "disbursementVoucherNonEmployeeTravel")
     private List dvPrePaidEmployeeExpenses;
 
     /**

@@ -21,13 +21,20 @@ package org.kuali.kfs.fp.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a travel expense type code business object.
  */
+@Entity
+@Table(name = "FP_DV_EXP_TYP_T")
 public class TravelExpenseTypeCode extends KualiCodeBase implements MutableInactivatable {
     boolean prepaidExpense;
 
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
     
     /**

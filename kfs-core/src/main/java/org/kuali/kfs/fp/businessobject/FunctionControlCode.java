@@ -22,14 +22,24 @@ package org.kuali.kfs.fp.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a function control code business object.
  */
+@Entity
+@Table(name = "FP_FUNC_CTRL_CD_T")
 public class FunctionControlCode extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FS_FUNC_CTRL_CD")
     private String financialSystemFunctionControlCode;
+    @Column(name = "FS_FUNC_DFLT_IND")
     private boolean financialSystemFunctionDefaultIndicator;
+    @Column(name = "FS_FUNC_DESC")
     private String financialSystemFunctionDescription;
 
     /**
