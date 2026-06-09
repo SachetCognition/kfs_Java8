@@ -24,16 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Payment Terms for Shipping from a particular Vendor. Per Vendor as distinct from <code>PaymentTermType</code>.
  * 
  * @see org.kuali.kfs.vnd.businessobject.PaymentTermType
  */
+@Entity
+@Table(name = "PUR_SHP_PMT_TERM_T")
 public class ShippingPaymentTerms extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_SHP_PMT_TERM_CD")
     private String vendorShippingPaymentTermsCode;
+    @Column(name = "VNDR_SHP_PMT_TERM_DESC")
     private String vendorShippingPaymentTermsDescription;
+    @Column(name = "VNDR_SHP_PMT_TERM_PAY_IND")
     private boolean vendorShippingPaymentTermsPayIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

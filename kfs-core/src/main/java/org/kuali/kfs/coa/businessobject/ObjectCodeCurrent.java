@@ -20,9 +20,20 @@ package org.kuali.kfs.coa.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This is for ojb only to map to the object code view. Should not be used by application code.
  */
+@Entity
+@Table(name = "CA_OBJECT_CODE_V")
 public class ObjectCodeCurrent extends ObjectCode implements MutableInactivatable {
 
 }

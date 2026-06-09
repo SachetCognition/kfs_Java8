@@ -26,27 +26,56 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a disbursement voucher non-resident alien tax.
  */
+@Entity
+@Table(name = "FP_DV_NRA_TAX_T")
 public class DisbursementVoucherNonResidentAlienTax extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "FED_INC_TAX_PCT")
     private KualiDecimal federalIncomeTaxPercent;
+    @Column(name = "ST_INC_TAX_PCT")
     private KualiDecimal stateIncomeTaxPercent;
+    @Column(name = "INC_CLS_CD")
     private String incomeClassCode;
+    @Column(name = "POSTAL_CNTRY_CD")
     private String postalCountryCode;
+    @Column(name = "INC_TAX_TRTY_EXMPT_IND")
     private boolean incomeTaxTreatyExemptCode;
+    @Column(name = "FRGN_SRC_INC_IND")
     private boolean foreignSourceIncomeCode;
+    @Column(name = "INC_TAX_GRS_UP_IND")
     private boolean incomeTaxGrossUpCode;
+    @Column(name = "FS_REF_ORIGIN_CD")
     private String referenceFinancialSystemOriginationCode;
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Column(name = "FDOC_ACCTG_LN_TXT")
     private String financialDocumentAccountingLineText;
+    @Column(name = "NQI_CUST_TAX_ID")
     private String taxNQIId;
+    @Column(name = "INC_TAX_EXMPT_CD_OTHR_IND")
     private boolean taxOtherExemptIndicator;
+    @Column(name = "USAID_DIEM_IND")
     private boolean taxUSAIDPerDiemIndicator;
+    @Column(name = "SPCL_W4_INC_AMT")
     protected KualiDecimal taxSpecialW4Amount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_CLS_CD", insertable = false, updatable = false)
     private TaxIncomeClassCode incomeClass;
 
     /**

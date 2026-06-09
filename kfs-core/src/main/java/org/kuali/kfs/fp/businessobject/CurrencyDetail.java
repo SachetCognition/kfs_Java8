@@ -26,21 +26,43 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Represents a breakdown of currency amounts (i.e. $100, $50, $20, etc.)
  */
+@Entity
+@Table(name = "FP_CURRENCY_DTL_T")
 public class CurrencyDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "CSHR_STAT_CD")
     private String cashieringStatus;
+    @Column(name = "FDOC_100_DLR_AMT")
     private KualiDecimal financialDocumentHundredDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_50_DLR_AMT")
     private KualiDecimal financialDocumentFiftyDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_20_DLR_AMT")
     private KualiDecimal financialDocumentTwentyDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_10_DLR_AMT")
     private KualiDecimal financialDocumentTenDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_5_DLR_AMT")
     private KualiDecimal financialDocumentFiveDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_2_DLR_AMT")
     private KualiDecimal financialDocumentTwoDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_1_DLR_AMT")
     private KualiDecimal financialDocumentOneDollarAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_OTHR_DLR_AMT")
     private KualiDecimal financialDocumentOtherDollarAmount = KualiDecimal.ZERO;
 
     /**

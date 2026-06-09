@@ -39,19 +39,34 @@ import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Individuals who are assigned to manage a particular set of Contracts with Vendors, who must therefore look at associated Purchase
  * Orders.
  *
  * @see org.kuali.kfs.vnd.businessobject.VendorContract
  */
+@Entity
+@Table(name = "PUR_CONTR_MGR_T")
 public class ContractManager extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CONTR_MGR_CD")
     private Integer contractManagerCode;
+    @Column(name = "CONTR_MGR_NM")
     private String contractManagerName;
+    @Column(name = "CONTR_MGR_PHN_NBR")
     private String contractManagerPhoneNumber;
+    @Column(name = "CONTR_MGR_FAX_NBR")
     private String contractManagerFaxNumber;
+    @Column(name = "CONTR_MGR_DLGN_DLR_LMT")
     private KualiDecimal contractManagerDelegationDollarLimit;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
 

@@ -20,12 +20,26 @@ package org.kuali.kfs.fp.businessobject;
 
 import org.kuali.kfs.sys.businessobject.TargetAccountingLine;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * This class is used to represent a procurement card target accounting line.
  */
+@Entity
+@Table(name = "FP_PRCRMNT_ACCT_LINES_T")
 public class ProcurementCardTargetAccountingLine extends TargetAccountingLine {
+    @Id
+    @Column(name = "FDOC_TRN_LN_NBR")
     private Integer financialDocumentTransactionLineNumber;
+    @Transient
     protected int transactionContainerIndex;
     
     /**

@@ -32,6 +32,18 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 import org.kuali.rice.krad.util.ObjectUtils;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+@Entity
+@Table(name = "FP_FND_TRNFR_DOC_T")
 public class IntraAccountAdjustmentDocument extends CapitalAccountingLinesDocumentBase implements Copyable, Correctable, Serializable{
 
     private static final long serialVersionUid=1L;

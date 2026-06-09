@@ -25,17 +25,30 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Address Types for Vendor Addresses. Used to distinguish the intended use of this address among the various addresses that a
  * vendor might give out.
  * 
  * @see org.kuali.kfs.vnd.businessobject.VendorAddress
  */
+@Entity
+@Table(name = "PUR_ADDR_TYP_T")
 public class AddressType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_ADDR_TYP_CD")
     private String vendorAddressTypeCode;
+    @Column(name = "VNDR_ADDR_TYP_DESC")
     private String vendorAddressTypeDescription;
+    @Column(name = "VNDR_DFLT_IND")
     private boolean vendorDefaultIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

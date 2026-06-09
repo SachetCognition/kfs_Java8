@@ -23,20 +23,44 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_HIGHR_ED_FUNC_T")
 public class HigherEducationFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_HGH_ED_FUNC_CD")
     protected String financialHigherEdFunctionCd;
+    @Column(name = "FIN_HGH_ED_FUNC_NM")
     protected String financialHigherEdFunctionNm;
+    @Column(name = "FIN_UBO_FUNC_CD")
     protected String finUnivBdgtOfficeFunctionCd;
+    @Column(name = "FIN_AICPA_FUNC_CD")
     protected String finAicpaFunctionCode;
+    @Column(name = "FIN_FED_FUNC_CD")
     protected String financialFederalFunctionCode;
+    @Column(name = "ROW_ACTV_IND")
     protected boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_UBO_FUNC_CD", insertable = false, updatable = false)
     protected UniversityBudgetOfficeFunction universityBudgetOfficeFunction;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_FED_FUNC_CD", insertable = false, updatable = false)
     protected FederalFunction federalFunction;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_AICPA_FUNC_CD", insertable = false, updatable = false)
     protected AICPAFunction aicpaFunction; // American Institute of Certified Public Accountants
 
     /**

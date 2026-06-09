@@ -24,12 +24,25 @@ import java.util.LinkedHashMap;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * IndirectCostRecoveryAccount for A21SubAccount
  */
+@Entity
+@Table(name = "CA_PRIOR_YR_ICR_ACCT_T")
 public class PriorYearIndirectCostRecoveryAccount extends IndirectCostRecoveryAccount {
     private static Logger LOG = Logger.getLogger(PriorYearIndirectCostRecoveryAccount.class);
 
+    @Id
+    @Column(name = "CA_PRIOR_YR_ICR_ACCT_GNRTD_ID")
     private Integer priorYearIndirectCostRecoveryAccountGeneratedIdentifier;
     
     /**

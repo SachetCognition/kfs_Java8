@@ -25,12 +25,24 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Security Attribute represents attributes that can used within the security system to define restrictions.
  */
+@Entity
+@Table(name = "SEC_SCRTY_ATTR_T")
 public class SecurityAttribute extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "ATTR_ID")
     private KualiInteger id;
+    @Column(name = "ATTR_NM")
     private String name;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     public SecurityAttribute() {

@@ -24,25 +24,52 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Generic Phone Numbers for Vendors, as opposed to <code>VendorContactPhoneNumber</code> instances, which are specific to the
  * Contact.
  * 
  * @see org.kuali.kfs.vnd.businessobject.VendorContactPhoneNumber
  */
+@Entity
+@Table(name = "PUR_VNDR_PHN_NBR_T")
 public class VendorPhoneNumber extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_PHN_GNRTD_ID")
     private Integer vendorPhoneGeneratedIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Column(name = "VNDR_PHN_TYP_CD")
     private String vendorPhoneTypeCode;
+    @Column(name = "VNDR_PHN_NBR")
     private String vendorPhoneNumber;
+    @Column(name = "VNDR_PHN_EXTNS_NBR")
     private String vendorPhoneExtensionNumber;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private VendorDetail vendorDetail;
+    @Transient
     private VendorContact vendorContact;
+    @Transient
     private VendorAddress vendorAddress;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_PHN_TYP_CD", insertable = false, updatable = false)
     private PhoneType vendorPhoneType;
 
     /**

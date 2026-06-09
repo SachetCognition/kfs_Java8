@@ -42,67 +42,138 @@ import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.service.KeyValuesService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This class represents the PaymentGroup
  */
+@Entity
+@Table(name = "PDP_PMT_GRP_T")
 public class PaymentGroup extends TimestampedBusinessObjectBase {
     private static KualiDecimal zero = KualiDecimal.ZERO;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_GRP_ID")
     private KualiInteger id; // PMT_GRP_ID
+    @Column(name = "PMT_PAYEE_NM")
     private String payeeName; // PMT_PAYEE_NM
+    @Column(name = "PAYEE_ID")
     private String payeeId; // PAYEE_ID
+    @Column(name = "PAYEE_ID_TYP_CD")
     private String payeeIdTypeCd; // PAYEE_ID_TYP_CD
+    @Column(name = "ALTRNT_PAYEE_ID")
     private String alternatePayeeId; // ALTRNT_PAYEE_ID
+    @Column(name = "ALTRNT_PAYEE_ID_TYP_CD")
     private String alternatePayeeIdTypeCd; // ALTRNT_PAYEE_ID_TYP_CD
+    @Column(name = "PAYEE_OWNR_CD")
     private String payeeOwnerCd; // PAYEE_OWNR_CD
+    @Column(name = "PMT_LN1_ADDR")
     private String line1Address; // PMT_LN1_ADDR
+    @Column(name = "PMT_LN2_ADDR")
     private String line2Address; // PMT_LN2_ADDR
+    @Column(name = "PMT_LN3_ADDR")
     private String line3Address; // PMT_LN3_ADDR
+    @Column(name = "PMT_LN4_ADDR")
     private String line4Address; // PMT_LN4_ADDR
+    @Column(name = "PMT_CTY_NM")
     private String city; // PMT_CTY_NM
+    @Column(name = "PMT_ST_NM")
     private String state; // PMT_ST_NM
+    @Column(name = "PMT_CNTRY_NM")
     private String country; // PMT_CNTRY_NM
+    @Column(name = "PMT_ZIP_CD")
     private String zipCd; // PMT_ZIP_CD
+    @Column(name = "CMP_ADDR_IND")
     private Boolean campusAddress; // CMP_ADDR_IND
+    @Column(name = "PMT_DT")
     private Date paymentDate; // PMT_DT DATE
+    @Column(name = "PMT_ATTCHMNT_IND")
     private Boolean pymtAttachment; // PMT_ATTCHMNT_IND
+    @Column(name = "PMT_SPCL_HANDLG_IND")
     private Boolean pymtSpecialHandling; // PMT_SPCL_HANDLG_IND
+    @Column(name = "PMT_TXBL_IND")
     private Boolean taxablePayment; // PMT_TXBL_IND
+    @Column(name = "NRA_PMT_IND")
     private Boolean nraPayment; // NRA_PMT_IND
+    @Column(name = "PROC_IMD_IND")
     private Boolean processImmediate; // PROC_IMD_IND
+    @Column(name = "PMT_GRP_CMB_IND")
     private Boolean combineGroups; // PMT_GRP_CMB_IND
+    @Column(name = "ACH_BNK_RTNG_NBR")
     private String achBankRoutingNbr; // ACH_BNK_RTNG_NBR
+    @Column(name = "ADV_EMAIL_ADDR")
     private String adviceEmailAddress; // ADV_EMAIL_ADDR
+    @Column(name = "EMP_IND")
     private Boolean employeeIndicator; // EMP_IND
+    @Transient
     private String creditMemoNbr; // PMT_CRDT_MEMO_NBR
+    @Transient
     private KualiDecimal creditMemoAmount; // PMT_CRDT_MEMO_AMT
+    @Column(name = "DISB_NBR")
     private KualiInteger disbursementNbr; // DISB_NBR
+    @Column(name = "DISB_TS")
     private Date disbursementDate; // DISB_TS
+    @Column(name = "PHYS_CMP_PROC_CD")
     private String physCampusProcessCd; // PHYS_CMP_PROC_CD
+    @Column(name = "PMT_SORT_ORD_VAL")
     private String sortValue; // PMT_SORT_ORD_VAL
+    @Column(name = "CUST_ACCT_TYP_CD")
     private String achAccountType; // CUST_ACCT_TYP_CD
+    @Column(name = "PDP_EPIC_PMT_CNCL_EXTRT_TS")
     private Timestamp epicPaymentCancelledExtractedDate; // PDP_EPIC_PMT_CNCL_EXTRT_TS
+    @Column(name = "PDP_EPIC_PMT_PD_EXTRT_TS")
     private Timestamp epicPaymentPaidExtractedDate; // PDP_EPIC_PMT_PD_EXTRT_TS
+    @Column(name = "ADV_EMAIL_SNT_TS")
     private Timestamp adviceEmailSentDate; // ADV_EMAIL_SNT_TS
 
+    @Column(name = "PMT_FIL_ID")
     private KualiInteger batchId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_FIL_ID", insertable = false, updatable = false)
     private Batch batch; // PMT_BATCH_ID
 
+    @Column(name = "PROC_ID")
     private KualiInteger processId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROC_ID", insertable = false, updatable = false)
     private PaymentProcess process; // PROC_ID
 
+    @Column(name = "PMT_STAT_CD")
     private String paymentStatusCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_STAT_CD", insertable = false, updatable = false)
     private PaymentStatus paymentStatus; // PMT_STAT_CD
 
+    @Column(name = "DISB_TYP_CD")
     private String disbursementTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DISB_TYP_CD", insertable = false, updatable = false)
     private DisbursementType disbursementType; // DISB_TYP_CD
 
+    @Column(name = "BNK_CD")
     private String bankCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BNK_CD", insertable = false, updatable = false)
     private Bank bank; // BNK_ID
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_GRP_ID", insertable = false, updatable = false)
     private AchAccountNumber achAccountNumber;
 
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PaymentGroupHistory> paymentGroupHistory = new ArrayList<PaymentGroupHistory>();
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PaymentDetail> paymentDetails = new ArrayList<PaymentDetail>();
 
     /**

@@ -25,20 +25,43 @@ import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Represents a GLCP criteria
  */
+@Entity
+@Table(name = "GL_COR_CRTA_T")
 public class CorrectionCriteria extends PersistableBusinessObjectBase implements Comparable {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_GRP_LN_NBR")
     private Integer correctionChangeGroupLineNumber;
+    @Id
+    @Column(name = "GL_COR_CRTA_LN_NBR")
     private Integer correctionCriteriaLineNumber;
+    @Column(name = "GL_COR_STRT_POS")
     private Integer correctionStartPosition;
+    @Column(name = "GL_COR_END_POS")
     private Integer correctionEndPosition;
+    @Column(name = "GL_COR_OPR_CD")
     private String correctionOperatorCode;
+    @Column(name = "GL_COR_FIELD_VAL")
     private String correctionFieldValue;
+    @Column(name = "GL_COR_FIELD_NM")
     private String correctionFieldName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private CorrectionChangeGroup correctionChangeGroup;
 
     public CorrectionCriteria() {

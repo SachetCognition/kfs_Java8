@@ -24,13 +24,25 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_FND_GRP_TYP_T")
 public class SubFundGroupType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "SUB_FUNDGRP_TYP_CD")
     private String subFundGroupTypeCode;
+    @Column(name = "SUB_FND_GRP_TYP_DESC")
     private String subFundGroupTypeDescription;
+    @Column(name = "SUB_FND_GRP_TYP_ACTV_IND")
     private boolean active;
 
     /**

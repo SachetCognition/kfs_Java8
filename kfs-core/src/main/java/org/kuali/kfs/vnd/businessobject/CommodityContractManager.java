@@ -24,18 +24,41 @@ import org.kuali.kfs.vnd.VendorPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "PUR_COMM_CONTR_MGR_T")
 public class CommodityContractManager extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+	@Column(name = "PUR_COMM_CD")
 	private String purchasingCommodityCode;
+	@Id
+	@Column(name = "CAMPUS_CD")
 	private String campusCode;
+	@Id
+	@Column(name = "CONTR_MGR_CD")
 	private Integer contractManagerCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false)
     private CampusParameter campus;
+    @Transient
     private CommodityCode commodityCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     private ContractManager contractManager;
+    @Column(name = "CONTR_MGR_ACTV_IND")
     private boolean active;
     
 	/**

@@ -24,9 +24,17 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * AccountBalance BO for Balancing process. I.e. a shadow representation.
  */
+@Entity
+@Table(name = "GL_ACCT_BALANCES_HIST_T")
 public class AccountBalanceHistory extends AccountBalance {
     
     /**

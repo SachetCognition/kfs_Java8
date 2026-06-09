@@ -20,10 +20,18 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  * This class represents a payment type code
  */
+@Entity
+@Table(name = "PDP_PMT_TYP_T")
 public class PaymentType extends KualiCodeBase {
     
     public PaymentType() {

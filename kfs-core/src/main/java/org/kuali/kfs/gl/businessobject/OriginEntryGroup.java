@@ -24,6 +24,19 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "GL_ORIGIN_ENTRY_GRP_T")
 public class OriginEntryGroup extends PersistableBusinessObjectBase {
 
     private static final String VALID_STRING = "Valid-";
@@ -33,17 +46,28 @@ public class OriginEntryGroup extends PersistableBusinessObjectBase {
     private static final String SCRUB_STRING = "Scrub";
     private static final String NO_SCRUB_STRING = "Don't Scrub";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ORIGIN_ENTRY_GRP_ID")
     private Integer id;
+    @Column(name = "ORIGIN_ENTRY_GRP_DT")
     private Date date;
+    @Column(name = "ORIGIN_ENTRY_GRP_SRC_CD")
     private String sourceCode;
+    @Column(name = "ORIGIN_ENTRY_GRP_VLD_IND")
     private Boolean valid;
+    @Column(name = "ORIGIN_ENTRY_PRCS_IND")
     private Boolean process;
+    @Column(name = "ORIGIN_ENTRY_SCRUB_IND")
     private Boolean scrub;
 
     // This does not normally get populated. It only gets populated if
     // getAllOriginEntryGroup() is called
+    @Transient
     private Integer rows = new Integer(0);
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIGIN_ENTRY_GRP_SRC_CD", insertable = false, updatable = false)
     private OriginEntrySource source;
 
     /**

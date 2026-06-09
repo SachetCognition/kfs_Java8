@@ -27,35 +27,72 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Bank Business Object
  */
+@Entity
+@Table(name = "FP_BANK_T")
 public class Bank extends PersistableBusinessObjectBase implements MutableInactivatable {
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Bank";
 
+    @Id
+    @Column(name = "BNK_CD")
     protected String bankCode;
+    @Column(name = "BNK_NM")
     protected String bankName;
+    @Column(name = "BNK_SHRT_NM")
     protected String bankShortName;
+    @Column(name = "BNK_RTNG_NBR")
     protected String bankRoutingNumber;
+    @Column(name = "BNK_ACCT_NBR")
     protected String bankAccountNumber;
+    @Column(name = "BNK_ACCT_DESC")
     protected String bankAccountDescription;
+    @Column(name = "CSH_OFST_FIN_COA_CD")
     protected String cashOffsetFinancialChartOfAccountCode;
+    @Column(name = "CSH_OFST_ACCT_NBR")
     protected String cashOffsetAccountNumber;
+    @Column(name = "CSH_OFST_SUB_ACCT_NBR")
     protected String cashOffsetSubAccountNumber;
+    @Column(name = "CSH_OFST_OBJ_CD")
     protected String cashOffsetObjectCode;
+    @Column(name = "CSH_OFST_SUB_OBJ_CD")
     protected String cashOffsetSubObjectCode;
+    @Column(name = "CONT_BNK_CD")
     protected String continuationBankCode;
+    @Column(name = "BNK_DPST_IND")
     protected boolean bankDepositIndicator;
+    @Column(name = "BNK_DISB_IND")
     protected boolean bankDisbursementIndicator;
+    @Column(name = "BNK_ACH_IND")
     protected boolean bankAchIndicator;
+    @Column(name = "BNK_CHK_IND")
     protected boolean bankCheckIndicator;
+    @Column(name = "ROW_ACTV_IND")
     protected boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CSH_OFST_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart cashOffsetFinancialChartOfAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account cashOffsetAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected ObjectCode cashOffsetObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected SubAccount cashOffsetSubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected SubObjectCode cashOffsetSubObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONT_BNK_CD", insertable = false, updatable = false)
     protected Bank continuationBank;
 
     /**

@@ -31,20 +31,43 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "SH_ROOM_T")
 public class Room extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Id
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Id
+    @Column(name = "BLDG_ROOM_NBR")
     protected String buildingRoomNumber;
+    @Column(name = "BLDG_ROOM_TYPE")
     protected String buildingRoomType;
+    @Column(name = "BLDG_ROOM_DEPT")
     protected String buildingRoomDepartment;
+    @Column(name = "BLDG_ROOM_DESC")
     protected String buildingRoomDescription;
+    @Column(name = "ROW_ACTV_IND")
     protected boolean active;
 
+    @Transient
     protected CampusEbo campus;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Building building;
 
     /**

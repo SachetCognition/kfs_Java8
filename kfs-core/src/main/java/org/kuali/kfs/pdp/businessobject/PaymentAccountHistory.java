@@ -29,19 +29,45 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PDP_PMT_ACCT_HIST_T")
 public class PaymentAccountHistory extends TimestampedBusinessObjectBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_ACCT_HIST_ID")
     private KualiInteger id; // PMT_ACCT_HIST_ID
 
+    @Column(name = "ACCTG_CHG_CD")
     private String accountingChangeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCTG_CHG_CD", insertable = false, updatable = false)
     private AccountingChangeCode accountingChange; // ACCTG_CHG_CD
 
+    @Column(name = "ACCT_ATTRIB_NM")
     private String acctAttributeName; // ACCT_ATTRIB_NM
+    @Column(name = "ACCT_ATTRIB_ORIG_VAL")
     private String acctAttributeOrigValue; // ACCT_ATTRIB_ORIG_VAL
+    @Column(name = "ACCT_ATTRIB_NEW_VAL")
     private String acctAttributeNewValue; // ACCT_ATTRIB_NEW_VAL
+    @Column(name = "ACCT_CHG_TS")
     private Timestamp acctChangeDate; // ACCT_CHG_TS
     
+    @Column(name = "PMT_ACCT_DTL_ID")
     private KualiInteger paymentAccountDetailId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_ACCT_DTL_ID", insertable = false, updatable = false)
     private PaymentAccountDetail paymentAccountDetail; // PMT_ACCT_DTL_ID
 
     public PaymentAccountHistory() {

@@ -42,14 +42,29 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the NonCheckDisbursementDocument in Kuali. The "Non-Check Disbursement" document is
  * used to record charges or credits directly assessed to university bank accounts. It is used primarily by the Tax and Treasury
  * Accounting office to record wire transfers, foreign drafts, etc.
  */
+@Entity
+@Table(name = "FP_NCHK_DSBRSDOC_T")
 public class NonCheckDisbursementDocument extends AccountingDocumentBase implements Copyable, Correctable, AmountTotaling {
+    @Column(name = "FDOC_BNK_CD")
     protected String financialDocumentBankCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_BNK_CD", insertable = false, updatable = false)
     protected Bank bank;
 
     /**

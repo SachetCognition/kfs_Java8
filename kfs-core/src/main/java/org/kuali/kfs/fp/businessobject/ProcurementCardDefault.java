@@ -31,42 +31,84 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a procurement card holder, or the individual whose name is on the card.
  */
 
+@Entity
+@Table(name = "FP_PRCRMNT_CARD_DFLT_T")
 public class ProcurementCardDefault extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "ID")
     private Long id;
 
+    @Column(name = "CC_NBR")
     private String creditCardNumber;
+    @Column(name = "CARD_HLDR_NM")
     private String cardHolderName;
+    @Column(name = "CARD_HLDR_ALTRNT_NM")
     private String cardHolderAlternateName;
+    @Column(name = "CARD_HLDR_LN1_ADDR")
     private String cardHolderLine1Address;
+    @Column(name = "CARD_HLDR_LN2_ADDR")
     private String cardHolderLine2Address;
+    @Column(name = "CARD_HLDR_CTY_NM")
     private String cardHolderCityName;
+    @Column(name = "CARD_HLDR_ST_CD")
     private String cardHolderStateCode;
+    @Column(name = "CARD_HLDR_ZIP_CD")
     private String cardHolderZipCode;
+    @Column(name = "CARD_HLDR_WRK_PHN_NBR")
     private String cardHolderWorkPhoneNumber;
+    @Column(name = "CARD_LMT")
     private KualiDecimal cardLimit;
+    @Column(name = "CARD_CYCLE_AMT_LMT")
     private KualiDecimal cardCycleAmountLimit;
+    @Column(name = "CARD_CYCLE_VOL_LMT")
     private KualiDecimal cardCycleVolumeLimit;
+    @Column(name = "CARD_STAT_CD")
     private String cardStatusCode;
+    @Column(name = "CARD_NTE_TXT")
     private String cardNoteText;
 
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
 
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode objectCode;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubObjectCode subObjectCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROJECT_CD", insertable = false, updatable = false)
     private ProjectCode project;
 
     /**

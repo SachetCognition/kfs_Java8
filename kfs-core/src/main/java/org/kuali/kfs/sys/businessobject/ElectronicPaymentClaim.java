@@ -33,9 +33,20 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent an electronic payment claim.
  */
+@Entity
+@Table(name = "FP_ELCTRNC_PMT_CLM_T")
 public class ElectronicPaymentClaim extends PersistableBusinessObjectBase {
     
     public final static class ClaimStatusCodes {
@@ -43,16 +54,29 @@ public class ElectronicPaymentClaim extends PersistableBusinessObjectBase {
         public final static String UNCLAIMED = "U";
     }
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Column(name = "FDOC_POST_YR")
     private Integer financialDocumentPostingYear;
+    @Column(name = "FDOC_POST_PRD_CD")
     private String financialDocumentPostingPeriodCode;
+    @Column(name = "PMT_CLM_STAT_CD")
     private String paymentClaimStatusCode;
     
+    @Transient
     private AdvanceDepositDocument generatingDocument;
+    @Transient
     private SourceAccountingLine generatingAccountingLine;
+    @ManyToOne(fetch = FetchType.LAZY)
     private AccountingPeriod financialDocumentPostingPeriod;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private DocumentHeader generatingDocumentHeader;
 
     /**

@@ -44,32 +44,70 @@ import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@Table(name = "PDP_PMT_DTL_T")
 public class PaymentDetail extends TimestampedBusinessObjectBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentDetail.class);
     private static KualiDecimal zero = KualiDecimal.ZERO;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_DTL_ID")
     private KualiInteger id;
+    @Column(name = "INV_NBR")
     private String invoiceNbr;
+    @Column(name = "INV_DT")
     private Date invoiceDate;
+    @Column(name = "PO_NBR")
     private String purchaseOrderNbr;
+    @Column(name = "CUST_PMT_DOC_NBR")
     private String custPaymentDocNbr;
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginCode;
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "REQS_NBR")
     private String requisitionNbr;
+    @Column(name = "ORG_DOC_NBR")
     private String organizationDocNbr;
+    @Column(name = "CUST_INST_NBR")
     private String customerInstitutionNumber;
+    @Column(name = "ORIG_INV_AMT")
     private KualiDecimal origInvoiceAmount;
+    @Column(name = "NET_PMT_AMT")
     private KualiDecimal netPaymentAmount;
+    @Column(name = "INV_TOT_DSCT_AMT")
     private KualiDecimal invTotDiscountAmount;
+    @Column(name = "INV_TOT_SHP_AMT")
     private KualiDecimal invTotShipAmount;
+    @Column(name = "INV_TOT_OTHR_DEBIT_AMT")
     private KualiDecimal invTotOtherDebitAmount;
+    @Column(name = "INV_TOT_OTHR_CRDT_AMT")
     private KualiDecimal invTotOtherCreditAmount;
+    @Column(name = "PDP_PRM_PMT_CNCL_IND")
     private Boolean primaryCancelledPayment;
 
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PaymentAccountDetail> accountDetail = new ArrayList<PaymentAccountDetail>();
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PaymentNoteText> notes = new ArrayList<PaymentNoteText>();
 
+    @Column(name = "PMT_GRP_ID")
     private KualiInteger paymentGroupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_GRP_ID", insertable = false, updatable = false)
     private PaymentGroup paymentGroup;
 
     public PaymentDetail() {

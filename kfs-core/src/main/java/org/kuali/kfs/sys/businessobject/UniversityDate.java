@@ -25,20 +25,38 @@ import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Represents a specific university date
  * 
  */
+@Entity
+@Table(name = "SH_UNIV_DATE_T")
 public class UniversityDate extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
     static final long serialVersionUID = 2587833750168955556L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "UniversityDate";
     
+    @Id
+    @Column(name = "UNIV_DT")
     private Date universityDate;
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalAccountingPeriod;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private AccountingPeriod accountingPeriod;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions options;
 
     /*

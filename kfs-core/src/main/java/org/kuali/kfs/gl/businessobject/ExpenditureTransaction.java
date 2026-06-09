@@ -25,11 +25,22 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Represents a expenditure transaction for a specific fiscal year, COA code, account number,
  * sub account number, object code, sub-object code, balance type code, object type code,
  * fiscal accounting period, project code, organization reference ID
  */
+@Entity
+@Table(name = "GL_EXPEND_TRN_MT")
 public class ExpenditureTransaction extends PersistableBusinessObjectBase {
     static final long serialVersionUID = 5296540728313789670L;
 
@@ -45,20 +56,46 @@ public class ExpenditureTransaction extends PersistableBusinessObjectBase {
     private final static String PROJECT_CODE = "projectCode";
     private final static String ORGANIZATION_REFERENCE_ID = "organizationReferenceId";
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String balanceTypeCode;
+    @Id
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String objectTypeCode;
+    @Id
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalAccountingPeriod;
+    @Id
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Id
+    @Column(name = "ORG_REFERENCE_ID")
     private String organizationReferenceId;
+    @Column(name = "ACCT_OBJ_DCST_AMT")
     private KualiDecimal accountObjectDirectCostAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions option;
 
     /**

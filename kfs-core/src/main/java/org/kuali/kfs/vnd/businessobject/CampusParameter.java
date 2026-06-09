@@ -33,27 +33,52 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Campus Parameter Business Object. Maintenance document for campus parameters.
  */
+@Entity
+@Table(name = "PUR_AP_CMP_PARM_T")
 public class CampusParameter extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "CMP_PUR_DRCTR_NM")
     protected String campusPurchasingDirectorName;
+    @Column(name = "CMP_PUR_DRCTR_TTL")
     protected String campusPurchasingDirectorTitle;
+    @Column(name = "CMP_AP_EMAIL_ADDR")
     protected String campusAccountsPayableEmailAddress;
+    @Column(name = "PUR_INST_NM")
     protected String purchasingInstitutionName;
+    @Column(name = "PUR_DEPT_NM")
     protected String purchasingDepartmentName;
+    @Column(name = "PUR_DEPT_LN1_ADDR")
     protected String purchasingDepartmentLine1Address;
+    @Column(name = "PUR_DEPT_LN2_ADDR")
     protected String purchasingDepartmentLine2Address;
+    @Column(name = "PUR_DEPT_CTY_NM")
     protected String purchasingDepartmentCityName;
+    @Column(name = "PUR_DEPT_ST_CD")
     protected String purchasingDepartmentStateCode;
+    @Column(name = "PUR_DEPT_ZIP_CD")
     protected String purchasingDepartmentZipCode;
+    @Column(name = "PUR_DEPT_CNTRY_CD")
     protected String purchasingDepartmentCountryCode;
+    @Column(name = "ACTV_IND")
     protected boolean active;
 
+    @Transient
     protected CampusEbo campus;
+    @Transient
     protected StateEbo purchasingDepartmentState;
+    @Transient
     protected CountryEbo purchasingDepartmentCountry;
 
     public CampusEbo getCampus() {

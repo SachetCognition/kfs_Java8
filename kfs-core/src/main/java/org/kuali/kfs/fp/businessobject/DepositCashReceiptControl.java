@@ -25,18 +25,40 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.fp.document.CashReceiptDocument;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class represents a deposit cash receipt control which contains cash receipt header used for validating receipts
  */
+@Entity
+@Table(name = "FP_DEP_CSH_RCPT_T")
 public class DepositCashReceiptControl extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_DPST_NBR")
     private String financialDocumentDepositNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentDepositLineNumber;
+    @Id
+    @Column(name = "FDOC_CSH_RCPT_NBR")
     private String financialDocumentCashReceiptNumber;
 
+    @Column(name = "FS_CSHRCPT_PRCS_TS")
     private Timestamp financialSystemsCashReceiptProcessingTimestamp;
+    @Column(name = "FS_PRCS_OPR_ID")
     private String financialSystemsProcessingOperatorIdentifier;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Deposit deposit;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_CSH_RCPT_NBR", insertable = false, updatable = false)
     private CashReceiptDocument cashReceiptDocument;
 
 

@@ -25,18 +25,38 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a non-resident alien tax percent.  This is the percentage of a total 
  * reimbursement that is collected in taxes for non-resident aliens.
  */
+@Entity
+@Table(name = "FP_NRA_TAX_PCT_T")
 public class NonResidentAlienTaxPercent extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "INC_CLS_CD")
     private String incomeClassCode;
+    @Id
+    @Column(name = "INC_TAX_TYP_CD")
     private String incomeTaxTypeCode;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
     
+    @Id
+    @Column(name = "INC_TAX_PCT")
     private KualiDecimal incomeTaxPercent;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_CLS_CD", insertable = false, updatable = false)
     private TaxIncomeClassCode incomeClass;
 
     /**

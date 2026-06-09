@@ -36,19 +36,39 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 
 /**
  * This class represents a Payment Process.
  */
+@Entity
+@Table(name = "PDP_PROC_T")
 public class PaymentProcess extends TimestampedBusinessObjectBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PROC_ID")
     protected KualiInteger id;
+    @Column(name = "PROC_TS")
     protected Timestamp processTimestamp;
+    @Column(name = "PHYS_CMP_CD")
     protected String campusCode;
+    @Column(name = "PROC_USR_ID")
     protected String processUserId;
+    @Transient
     protected Person processUser;
+    @Column(name = "EXTRACTED_IND")
     protected boolean extractedInd;
+    @Column(name = "FORMATTED_IND")
     protected boolean formattedIndicator;
 
+    @Transient
     protected CampusEbo campus;
 
     /**

@@ -24,21 +24,42 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class is used to represent a procurement card vendor business object.
  */
+@Entity
+@Table(name = "FP_PRCRMNT_VNDR_T")
 public class ProcurementCardVendor extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TRN_LN_NBR")
     private Integer financialDocumentTransactionLineNumber;
+    @Column(name = "VNDR_NM")
     private String vendorName;
+    @Column(name = "VNDR_LN1_ADDR")
     private String vendorLine1Address;
+    @Column(name = "VNDR_LN2_ADDR")
     private String vendorLine2Address;
+    @Column(name = "VNDR_CTY_NM")
     private String vendorCityName;
+    @Column(name = "VNDR_ST_CD")
     private String vendorStateCode;
+    @Column(name = "VNDR_ZIP_CD")
     private String vendorZipCode;
+    @Column(name = "VISA_VNDR_ID")
     private String visaVendorIdentifier;
+    @Column(name = "VNDR_ORD_NBR")
     private String vendorOrderNumber;
+    @Column(name = "TRN_MCC_CD")
     private String transactionMerchantCategoryCode;
 
     /**

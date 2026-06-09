@@ -29,59 +29,120 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 /**
  * This class is used to represent a procurement card transaction business object.
  */
+@Entity
+@Table(name = "FP_PRCRMNT_CARD_TRN_MT")
 public class ProcurementCardTransaction extends PersistableBusinessObjectBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TRN_SEQ_ROW_NBR")
     private Integer transactionSequenceRowNumber;
+    @Column(name = "TRN_CC_NBR")
     private String transactionCreditCardNumber;
+    @Column(name = "FDOC_TOTAL_AMT")
     private KualiDecimal financialDocumentTotalAmount;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitCreditCode;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Column(name = "TRN_CYCLE_STRT_DT")
     private Date transactionCycleStartDate;
+    @Column(name = "TRN_CYCLE_END_DT")
     private Date transactionCycleEndDate;
+    @Column(name = "FDOC_CARD_HLDR_NM")
     private String cardHolderName;
+    @Column(name = "TRANSACTION_DT")
     private Date transactionDate;
+    @Column(name = "TRN_REF_NBR")
     private String transactionReferenceNumber;
+    @Column(name = "TRN_MCC_CD")
     private String transactionMerchantCategoryCode;
+    @Column(name = "TRN_POST_DT")
     private Date transactionPostingDate;
+    @Column(name = "TRN_ORIG_CRNCY_CD")
     private String transactionOriginalCurrencyCode;
+    @Column(name = "TRN_BILL_CRNCY_CD")
     private String transactionBillingCurrencyCode;
+    @Column(name = "TRN_ORIG_CRNCY_AMT")
     private KualiDecimal transactionOriginalCurrencyAmount;
+    @Column(name = "TRN_CRNCY_EXCH_RT")
     private BigDecimal transactionCurrencyExchangeRate;
+    @Column(name = "TRN_STLMNT_AMT")
     private KualiDecimal transactionSettlementAmount;
+    @Column(name = "TRN_SALES_TAX_AMT")
     private KualiDecimal transactionSalesTaxAmount;
+    @Column(name = "TRN_TAX_EXMPT_IND")
     private boolean transactionTaxExemptIndicator;
+    @Column(name = "TRN_PURCH_ID_IND")
     private boolean transactionPurchaseIdentifierIndicator;
+    @Column(name = "TRN_PURCH_ID_DESC")
     private String transactionPurchaseIdentifierDescription;
+    @Column(name = "TRN_UNIT_CNTCT_NM")
     private String transactionUnitContactName;
+    @Column(name = "TRN_TRVL_AUTH_CD")
     private String transactionTravelAuthorizationCode;
+    @Column(name = "TRN_PT_OF_SALE_CD")
     private String transactionPointOfSaleCode;
+    @Column(name = "VNDR_NM")
     private String vendorName;
+    @Column(name = "VNDR_LN1_ADDR")
     private String vendorLine1Address;
+    @Column(name = "VNDR_LN2_ADDR")
     private String vendorLine2Address;
+    @Column(name = "VNDR_CTY_NM")
     private String vendorCityName;
+    @Column(name = "VNDR_ST_CD")
     private String vendorStateCode;
+    @Column(name = "VNDR_ZIP_CD")
     private String vendorZipCode;
+    @Column(name = "VNDR_ORD_NBR")
     private String vendorOrderNumber;
+    @Column(name = "VISA_VNDR_ID")
     private String visaVendorIdentifier;
+    @Column(name = "FDOC_CARD_HLDR_ALTRNT_NM")
     private String cardHolderAlternateName;
+    @Column(name = "FDOC_CARD_HLDR_LN1_ADDR")
     private String cardHolderLine1Address;
+    @Column(name = "FDOC_CARD_HLDR_LN2_ADDR")
     private String cardHolderLine2Address;
+    @Column(name = "FDOC_CARD_HLDR_CTY_NM")
     private String cardHolderCityName;
+    @Column(name = "FDOC_CARD_HLDR_ST_CD")
     private String cardHolderStateCode;
+    @Column(name = "FDOC_CARD_HLDR_ZIP_CD")
     private String cardHolderZipCode;
+    @Column(name = "FDOC_CARD_HLDR_WRK_PHN_NBR")
     private String cardHolderWorkPhoneNumber;
+    @Column(name = "FDOC_CARD_LMT")
     private KualiDecimal cardLimit;
+    @Column(name = "FDOC_CARD_CYCLE_AMT_LMT")
     private KualiDecimal cardCycleAmountLimit;
+    @Column(name = "FDOC_CARD_CYCLE_VOL_LMT")
     private KualiDecimal cardCycleVolumeLimit;
+    @Column(name = "FDOC_CARD_STAT_CD")
     private String cardStatusCode;
+    @Column(name = "FDOC_CARD_NTE_TXT")
     private String cardNoteText;
 
     /**

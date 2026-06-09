@@ -25,21 +25,45 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a disbursement voucher non-employee expense, often associated with a trip or a service rendered.
  */
+@Entity
+@Table(name = "FP_DV_NONEMP_EXP_T")
 public class DisbursementVoucherNonEmployeeExpense extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "DV_EXP_CD")
     private String disbVchrExpenseCode;
+    @Column(name = "DV_EXP_CO_NM")
     private String disbVchrExpenseCompanyName;
+    @Column(name = "DV_EXP_AMT")
     private KualiDecimal disbVchrExpenseAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false)
     private TravelExpenseTypeCode disbVchrExpense;
+    @ManyToOne(fetch = FetchType.LAZY)
     private TravelCompanyCode disbVchrExpenseCompany;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private DisbursementVoucherNonEmployeeTravel disbursementVoucherNonEmployeeTravel;
 
+    @Transient
     private boolean isPrepaid;
 
     /**

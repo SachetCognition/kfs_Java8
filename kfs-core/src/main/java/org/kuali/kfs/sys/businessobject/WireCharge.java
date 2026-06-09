@@ -27,23 +27,49 @@ import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a Wire Charge business object, which is a method of payment to an institution.
  */
+@Entity
+@Table(name = "FS_WIRE_CHRG_T")
 public class WireCharge extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "INC_FIN_OBJ_CD")
     private String incomeFinancialObjectCode;
+    @Column(name = "EXP_FIN_OBJ_CD")
     private String expenseFinancialObjectCode;
+    @Column(name = "DOMSTC_CHG_AMT")
     private KualiDecimal domesticChargeAmt;
+    @Column(name = "FRGN_CHRG_AMT")
     private KualiDecimal foreignChargeAmt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions fiscalYear;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode incomeFinancialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode expenseFinancialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
 
     /**

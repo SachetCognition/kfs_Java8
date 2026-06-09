@@ -34,38 +34,79 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * Container for information about how to get in Contact with a person at a Vendor for a particular purpose.
  */
+@Entity
+@Table(name = "PUR_VNDR_CNTCT_T")
 public class VendorContact extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_CNTCT_GNRTD_ID")
     protected Integer vendorContactGeneratedIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     protected Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     protected Integer vendorDetailAssignedIdentifier;
+    @Column(name = "VNDR_CNTCT_TYP_CD")
     protected String vendorContactTypeCode;
+    @Column(name = "VNDR_CNTCT_NM")
     protected String vendorContactName;
+    @Column(name = "VNDR_CNTCT_EMAIL_ADDR")
     protected String vendorContactEmailAddress;
+    @Column(name = "VNDR_CNTCT_CMNT_TXT")
     protected String vendorContactCommentText;
+    @Column(name = "VNDR_LN1_ADDR")
     protected String vendorLine1Address;
+    @Column(name = "VNDR_LN2_ADDR")
     protected String vendorLine2Address;
+    @Column(name = "VNDR_CTY_NM")
     protected String vendorCityName;
+    @Column(name = "VNDR_ST_CD")
     protected String vendorStateCode;
+    @Column(name = "VNDR_ZIP_CD")
     protected String vendorZipCode;
+    @Column(name = "VNDR_CNTRY_CD")
     protected String vendorCountryCode;
+    @Column(name = "VNDR_ATTN_NM")
     protected String vendorAttentionName;
+    @Column(name = "VNDR_ADDR_INTL_PROV_NM")
     protected String vendorAddressInternationalProvinceName;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     protected boolean active;
 
     // These aren't persisted in db, only for lookup page
+    @Transient
     protected String phoneNumberForLookup;
+    @Transient
     protected String tollFreeForLookup;
+    @Transient
     protected String faxForLookup;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<VendorContactPhoneNumber> vendorContactPhoneNumbers;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     protected VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CNTCT_TYP_CD", insertable = false, updatable = false)
     protected ContactType vendorContactType;
+    @Transient
     protected StateEbo vendorState;
+    @Transient
     protected CountryEbo vendorCountry;
 
     public VendorContact() {

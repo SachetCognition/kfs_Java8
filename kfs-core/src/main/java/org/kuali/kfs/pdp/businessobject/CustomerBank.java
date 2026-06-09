@@ -31,15 +31,38 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PDP_CUST_BNK_T")
 public class CustomerBank extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CUST_ID")
     private KualiInteger customerId;
+    @Column(name = "BNK_CD")
     private String bankCode;
+    @Id
+    @Column(name = "DISB_TYP_CD")
     private String disbursementTypeCode;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUST_ID", insertable = false, updatable = false)
     private CustomerProfile customerProfile; 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BNK_CD", insertable = false, updatable = false)
     private Bank bank; 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DISB_TYP_CD", insertable = false, updatable = false)
     private DisbursementType disbursementType;
     
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     public CustomerBank() {

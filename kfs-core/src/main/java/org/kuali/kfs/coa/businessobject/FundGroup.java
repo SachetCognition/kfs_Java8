@@ -22,12 +22,22 @@ package org.kuali.kfs.coa.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Fund Group Business Object
  */
+@Entity
+@Table(name = "CA_FUND_GRP_T")
 public class FundGroup extends KualiCodeBase implements MutableInactivatable {
     private static final long serialVersionUID = 6940405128416948259L;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
+    @Column(name = "FND_GRP_BA_RSTR_LVL_CD")
     private String fundGroupBudgetAdjustmentRestrictionLevelCode;
 
     /**

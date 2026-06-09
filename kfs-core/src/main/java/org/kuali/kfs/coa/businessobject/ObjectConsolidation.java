@@ -23,9 +23,20 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_OBJ_CONSOLDTN_T")
 public class ObjectConsolidation extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,13 +46,23 @@ public class ObjectConsolidation extends PersistableBusinessObjectBase implement
 
     }
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String finConsolidationObjectCode;
+    @Column(name = "FIN_CONS_OBJ_NM")
     private String finConsolidationObjectName;
+    @Column(name = "FIN_CONOBJ_SHRT_NM")
     private String finConsolidationObjShortName;
+    @Column(name = "FIN_CONOBJ_ACTV_CD")
     private boolean active;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
     
     /**

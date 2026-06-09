@@ -25,16 +25,36 @@ import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a fiscal year function control business object.
  */
+@Entity
+@Table(name = "FP_FSCL_YR_CTRL_T")
 public class FiscalYearFunctionControl extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FS_FUNC_CTRL_CD")
     private String financialSystemFunctionControlCode;
+    @Column(name = "FS_FUNC_ACTIVE_IND")
     private boolean financialSystemFunctionActiveIndicator;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_FUNC_CTRL_CD", insertable = false, updatable = false)
     private FunctionControlCode functionControl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
 
     /**

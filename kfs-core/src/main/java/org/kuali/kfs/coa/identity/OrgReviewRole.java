@@ -65,9 +65,17 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.krad.util.KRADConstants;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * @author Kuali Rice Team (kuali-rice@googlegroups.com)
  */
+@Entity
+@Table(name = "CA_ORG_TYPE_T")
 public class OrgReviewRole extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "OrgReviewRole";
@@ -80,6 +88,7 @@ public class OrgReviewRole extends PersistableBusinessObjectBase implements Muta
     private static transient ChartService chartService;
 
     //Dummy variable
+    @Transient
     protected String organizationTypeCode = "99";
     private static final long serialVersionUID = 1L;
 
@@ -109,70 +118,119 @@ public class OrgReviewRole extends PersistableBusinessObjectBase implements Muta
 
     public static final String NEW_DELEGATION_ID_KEY_VALUE = "New";
 
+    @Transient
     protected String methodToCall;
+    @Transient
     protected String kimTypeId;
 
+    @Id
+    @Column(name = "ORG_TYP_CD")
     protected String orgReviewRoleMemberId;
+    @Transient
     protected Chart chart;
+    @Transient
     protected Organization organization;
+    @Transient
     protected boolean edit;
+    @Transient
     protected boolean copy;
 
+    @Transient
     protected RoleEbo role;
+    @Transient
     protected GroupEbo group;
+    @Transient
     protected Person person;
 
+    @Transient
     protected List<KfsKimDocumentAttributeData> attributes = new ArrayList<KfsKimDocumentAttributeData>();
+    @Transient
     protected List<RoleResponsibilityAction> roleRspActions = new ArrayList<RoleResponsibilityAction>();
 
     //Identifying information for the 3 kinds of role members this document caters to
+    @Transient
     protected String roleMemberRoleId;
+    @Transient
     protected String roleMemberRoleNamespaceCode;
+    @Transient
     protected String roleMemberRoleName;
 
+    @Transient
     protected String groupMemberGroupId;
+    @Transient
     protected String groupMemberGroupNamespaceCode;
+    @Transient
     protected String groupMemberGroupName;
 
+    @Transient
     protected String principalMemberPrincipalId;
+    @Transient
     protected String principalMemberPrincipalName;
+    @Transient
     protected String principalMemberName;
 
     //The role id this object corresponds to ( org review / acct review )
+    @Transient
     protected String roleId;
+    @Transient
     protected String namespaceCode;
+    @Transient
     protected String roleName;
 
     //Identifying information for a single member (of any type)
+    @Transient
     protected String memberTypeCode;
 
     //In case the document is dealing with delegations
+    @Transient
     protected String delegationTypeCode;
 
+    @Transient
     protected String delegationMemberId;
+    @Transient
     protected String roleMemberId;
 
+    @Transient
     protected String oDelMId;
+    @Transient
     protected String oRMId;
 
+    @Transient
     protected String financialSystemDocumentTypeCode;
+    @Transient
     protected DocumentTypeEBO financialSystemDocumentType;
+    @Transient
     protected List<String> roleNamesToConsider;
+    @Transient
     protected String reviewRolesIndicator;
 
+    @Transient
     protected String actionTypeCode;
+    @Transient
     protected String priorityNumber;
+    @Transient
     protected String actionPolicyCode;
+    @Transient
     protected boolean forceAction;
+    @Transient
     protected String chartOfAccountsCode;
+    @Transient
     protected String organizationCode;
+    @Transient
     protected KualiDecimal fromAmount;
+    @Transient
     protected KualiDecimal toAmount;
+    @Transient
     protected String overrideCode;
+    @Transient
     protected boolean active = true;
+    @Id
+    @Column(name = "OBJ_ID")
     protected boolean delegate;
 
+    @Transient
     protected Date activeFromDate;
+    @Transient
     protected Date activeToDate;
 
     /**

@@ -36,27 +36,63 @@ import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@Table(name = "PDP_PMT_ACCT_DTL_T")
 public class PaymentAccountDetail extends TimestampedBusinessObjectBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_ACCT_DTL_ID")
     private KualiInteger id; // PMT_ACCT_DTL_ID
+    @Column(name = "FIN_COA_CD")
     private String finChartCode; // FIN_COA_CD
+    @Column(name = "ACCOUNT_NBR")
     private String accountNbr; // ACCOUNT_NBR
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNbr; // SUB_ACCT_NBR
+    @Column(name = "FIN_OBJECT_CD")
     private String finObjectCode; // FIN_OBJECT_CD
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String finSubObjectCode; // FIN_SUB_OBJ_CD
+    @Column(name = "ORG_REFERENCE_ID")
     private String orgReferenceId; // ORG_REFERENCE_ID
+    @Column(name = "PROJECT_CD")
     private String projectCode; // PROJECT_CD
+    @Column(name = "ACCT_NET_AMT")
     private KualiDecimal accountNetAmount; // ACCT_NET_AMT
 
+    @Column(name = "PMT_DTL_ID")
     private KualiInteger paymentDetailId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_DTL_ID", insertable = false, updatable = false)
     private PaymentDetail paymentDetail; // PMT_DTL_ID
 
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PaymentAccountHistory> accountHistory = new ArrayList<PaymentAccountHistory>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROJECT_CD", insertable = false, updatable = false)
     private ProjectCode project;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCodeCurrent objectCode;
 
     /**

@@ -29,11 +29,23 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.service.DebitDeterminerService;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the ServiceBillingDocument in Kuali. See
  * {@link org.kuali.kfs.fp.document.validation.impl.ServiceBillingDocumentRule} for details on how it differs from
  * {@link InternalBillingDocument}.
  */
+@Entity
+@Table(name = "FP_INT_BILL_DOC_T")
 public class ServiceBillingDocument extends InternalBillingDocument implements CapitalAssetEditable {
 
     /**

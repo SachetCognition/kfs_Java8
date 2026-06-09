@@ -50,69 +50,147 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@Table(name = "PDP_CUST_PRFL_T")
 public class CustomerProfile extends PersistableBusinessObjectBase implements MutableInactivatable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerProfile.class);
 
+    @Column(name = "ACH_PMT_DESC")
     protected String achPaymentDescription; // ACH_PMT_DESC
+    @Column(name = "ADDL_CHK_NTE_LN1_TXT")
     protected String additionalCheckNoteTextLine1;
+    @Column(name = "ADDL_CHK_NTE_LN2_TXT")
     protected String additionalCheckNoteTextLine2;
+    @Column(name = "ADDL_CHK_NTE_LN3_TXT")
     protected String additionalCheckNoteTextLine3;
+    @Column(name = "ADDL_CHK_NTE_LN4_TXT")
     protected String additionalCheckNoteTextLine4;
+    @Column(name = "CUST_LN1_ADDR")
     protected String address1; // CUST_LN1_ADDR
+    @Column(name = "CUST_LN2_ADDR")
     protected String address2; // CUST_LN2_ADDR
+    @Column(name = "CUST_LN3_ADDR")
     protected String address3; // CUST_LN3_ADDR
+    @Column(name = "CUST_LN4_ADDR")
     protected String address4; // CUST_LN4_ADDR
+    @Column(name = "ADV_CRTE_IND")
     protected boolean adviceCreate; // ADV_CRTE_IND
+    @Column(name = "ADV_HDR_TXT")
     protected String adviceHeaderText; // ADV_HDR_TXT
+    @Column(name = "ADV_SUBJ_LN_TXT")
     protected String adviceSubjectLine;
+    @Column(name = "ADV_RTRN_EMAIL_ADDR")
     protected String adviceReturnEmailAddr;
+    @Column(name = "FIN_COA_CD")
     protected String chartCode; // FIN_COA_CD
+    @Column(name = "CHK_HDR_NTE_LN1_TXT")
     protected String checkHeaderNoteTextLine1;
+    @Column(name = "CHK_HDR_NTE_LN2_TXT")
     protected String checkHeaderNoteTextLine2;
+    @Column(name = "CHK_HDR_NTE_LN3_TXT")
     protected String checkHeaderNoteTextLine3;
+    @Column(name = "CHK_HDR_NTE_LN4_TXT")
     protected String checkHeaderNoteTextLine4;
+    @Column(name = "CUST_CTY_NM")
     protected String city; // CUST_CTY_NM
+    @Column(name = "CUST_CNTC_FULL_NM")
     protected String contactFullName; // CUST_CNTC_FULL_NM
+    @Column(name = "CUST_CNTRY_CD")
     protected String countryCode; // CUST_CNTRY_NM
+    @Column(name = "CUST_DESC")
     protected String customerDescription; // CUST_DESC
+    @Column(name = "DFLT_COA_CD")
     protected String defaultChartCode; // DFLT_COA_CD
+    @Column(name = "DFLT_ACCT_NBR")
     protected String defaultAccountNumber; // DFLT_ACCT_NBR
+    @Column(name = "DFLT_SUB_ACCT_NBR")
     protected String defaultSubAccountNumber; // DFLT_SUB_ACCT_NBR
+    @Column(name = "DFLT_OBJ_CD")
     protected String defaultObjectCode; // DFLT_OBJ_CD
+    @Column(name = "DFLT_PHYS_CMP_PROC_CD")
     protected String defaultPhysicalCampusProcessingCode; // DFLT_PHYS_CMP_PROC_CD
+    @Column(name = "DFLT_SUB_OBJ_CD")
     protected String defaultSubObjectCode; // DFLT_SUB_OBJ_CD
+    @Column(name = "CUST_EMP_CHK_IND")
     protected boolean employeeCheck; // CUST_EMP_CHK_IND
+    @Column(name = "FL_THRSHLD_AMT")
     protected KualiDecimal fileThresholdAmount; // FL_THRSHLD_AMT
+    @Column(name = "CUST_FILE_THRSHLD_EMAIL_ADDR")
     protected String fileThresholdEmailAddress; // CUST_FILE_THRSHLD_EMAIL_ADDR
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CUST_ID")
     protected KualiInteger id; // CUST_ID
+    @Column(name = "CUST_NRA_RVW_IND")
     protected boolean nraReview; // CUST_NRA_RVW_IND
+    @Column(name = "UNT_CD")
     protected String unitCode; // ORG_CD
+    @Column(name = "CUST_OWNR_CD_REQ_IND")
     protected boolean ownershipCodeRequired; // CUST_OWNR_CD_REQ_IND
+    @Column(name = "CUST_PAYEE_ID_REQ_IND")
     protected boolean payeeIdRequired; // CUST_PAYEE_ID_REQ_IND
+    @Column(name = "PMT_THRSHLD_AMT")
     protected KualiDecimal paymentThresholdAmount; // PMT_THRSHLD_AMT
+    @Column(name = "CUST_PMT_THRSHLD_EMAIL_ADDR")
     protected String paymentThresholdEmailAddress; // CUST_PMT_THRSHLD_EMAIL_ADDR
+    @Column(name = "CUST_PRCS_EMAIL_ADDR")
     protected String processingEmailAddr; // CUST_PRCS_EMAIL_ADDR
+    @Column(name = "ACH_TRANS_TYP")
     protected String achTransactionType;
+    @Column(name = "CUST_ST_CD")
     protected String stateCode; // CUST_ST_CD
+    @Column(name = "SBUNT_CD")
     protected String subUnitCode; // SBUNT_CD
+    @Column(name = "CUST_ZIP_CD")
     protected String zipCode; // CUST_ZIP_CD
+    @Column(name = "ACCTG_EDIT_REQ_IND")
     protected boolean accountingEditRequired; // ACCTG_EDIT_REQ_IND
+    @Column(name = "FIN_OBJECT_CD_LBLTY_RLF_CD")
     protected boolean relieveLiabilities;
+    @Column(name = "ACTV_IND")
     protected boolean active;
+    @Transient
     protected boolean selectedForFormat;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @Transient
     protected CampusEbo defaultProcessingCampus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DFLT_COA_CD", insertable = false, updatable = false)
     protected Chart defaultChart;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account defaultAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected SubAccount defaultSubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected ObjectCode defaultObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected SubObjectCode defaultSubObject;
+    @Transient
     protected StateEbo state;
+    @Transient
     protected PostalCodeEbo postalCode;
+    @Transient
     protected CountryEbo country;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACH_TRANS_TYP", insertable = false, updatable = false)
     protected ACHTransactionType transactionType;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<CustomerBank> customerBanks;
 
 

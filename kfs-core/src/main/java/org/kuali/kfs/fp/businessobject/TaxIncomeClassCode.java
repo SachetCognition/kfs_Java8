@@ -22,9 +22,17 @@ package org.kuali.kfs.fp.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class is used to represent a tax income class code business object.
  */
+@Entity
+@Table(name = "FP_INC_CLS_T")
 public class TaxIncomeClassCode extends KualiCodeBase implements MutableInactivatable {
 
     /**

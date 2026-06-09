@@ -21,6 +21,14 @@ package org.kuali.kfs.coa.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "CA_ACCT_SF_T")
 public class SufficientFundsCode extends KualiCodeBase implements MutableInactivatable {
 
 

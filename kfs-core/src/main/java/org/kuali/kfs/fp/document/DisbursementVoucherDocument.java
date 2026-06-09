@@ -97,9 +97,21 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the DisbursementVoucher document in Kuali.
  */
+@Entity
+@Table(name = "FP_DV_DOC_T")
 public class DisbursementVoucherDocument extends AccountingDocumentBase implements Copyable, AmountTotaling, PaymentSource {
     protected static Logger LOG = Logger.getLogger(DisbursementVoucherDocument.class);
 
@@ -128,45 +140,89 @@ public class DisbursementVoucherDocument extends AccountingDocumentBase implemen
     protected static transient PaymentSourceExtractionService paymentSourceExtractionService;
     protected static volatile transient PaymentSourceHelperService paymentSourceHelperService;
 
+    @Column(name = "FDOC_NXT_REG_NBR")
     protected Integer finDocNextRegistrantLineNbr;
+    @Column(name = "DV_CNTCT_PRSN_NM")
     protected String disbVchrContactPersonName;
+    @Column(name = "DV_CNTCT_PHN_NBR")
     protected String disbVchrContactPhoneNumber;
+    @Column(name = "DV_CNTCT_EMAIL_ID")
     protected String disbVchrContactEmailId;
+    @Column(name = "DV_DUE_DT")
     protected Date disbursementVoucherDueDate;
+    @Column(name = "DV_ATTCH_IND")
     protected boolean disbVchrAttachmentCode;
+    @Column(name = "DV_SPCL_HANDLG_IND")
     protected boolean disbVchrSpecialHandlingCode;
+    @Column(name = "DV_CHK_TOT_AMT")
     protected KualiDecimal disbVchrCheckTotalAmount;
+    @Column(name = "DV_FRGN_CRNCY_IND")
     protected boolean disbVchrForeignCurrencyInd;
+    @Column(name = "DV_DOC_LOC_CD")
     protected String disbursementVoucherDocumentationLocationCode;
+    @Column(name = "DV_CHK_STUB_TXT")
     protected String disbVchrCheckStubText;
+    @Column(name = "DV_CHKSTUBOVFL_IND")
     protected boolean dvCheckStubOverflowCode;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "DV_PAYEE_TXCTRL_CD")
     protected String disbVchrPayeeTaxControlCode;
+    @Column(name = "DV_PAYEE_CHG_IND")
     protected boolean disbVchrPayeeChangedInd;
+    @Column(name = "DV_CHK_NBR")
     protected String disbursementVoucherCheckNbr;
+    @Column(name = "DV_CHK_DT")
     protected Timestamp disbursementVoucherCheckDate;
+    @Column(name = "DV_W9_CMPLT_IND")
     protected boolean disbVchrPayeeW9CompleteCode;
+    @Column(name = "DV_PMT_MTHD_CD")
     protected String disbVchrPaymentMethodCode;
+    @Transient
     protected boolean exceptionIndicator;
+    @Column(name = "DV_EXCPT_IND")
     protected boolean disbExcptAttachedIndicator;
+    @Column(name = "DV_EXTRT_DT")
     protected Date extractDate;
+    @Column(name = "DV_PD_DT")
     protected Date paidDate;
+    @Column(name = "DV_CNCL_DT")
     protected Date cancelDate;
+    @Column(name = "DV_BNK_CD")
     protected String disbVchrBankCode;
+    @Column(name = "DV_PDP_BNK_CD")
     protected String disbVchrPdpBankCode;
 
+    @Transient
     protected boolean payeeAssigned = false;
+    @Transient
     protected boolean editW9W8BENbox = false;
+    @Column(name = "IMD_PMT_IND")
     protected boolean immediatePaymentIndicator = false;
 
+    @Transient
     protected DocumentHeader financialDocument;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DV_DOC_LOC_CD", insertable = false, updatable = false)
     protected PaymentDocumentationLocation disbVchrDocumentationLoc;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DisbursementVoucherNonEmployeeTravel dvNonEmployeeTravel;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DisbursementVoucherNonResidentAlienTax dvNonResidentAlienTax;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DisbursementVoucherPayeeDetail dvPayeeDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DisbursementVoucherPreConferenceDetail dvPreConferenceDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected PaymentSourceWireTransfer wireTransfer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DV_BNK_CD", insertable = false, updatable = false)
     protected Bank bank;
 
     /**

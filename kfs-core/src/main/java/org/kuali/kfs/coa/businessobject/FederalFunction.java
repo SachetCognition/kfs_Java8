@@ -24,13 +24,25 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_FEDERAL_FUNC_T")
 public class FederalFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_FED_FUNC_CD")
     private String financialFederalFunctionCode;
+    @Column(name = "FIN_FED_FUNC_NM")
     private String financialFederalFunctionName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

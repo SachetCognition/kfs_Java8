@@ -28,17 +28,39 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+
 /**
  * Represents the assignment of one or more definitions to one or more members (principal, group, or role). A model becomes a role in KIM
  */
+@Entity
+@Table(name = "SEC_SCRTY_MDL_T")
 public class SecurityModel extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MDL_ID")
     protected KualiInteger id;
+    @Column(name = "MDL_NM")
     protected String name;
+    @Column(name = "MDL_DESC_TXT")
     protected String description;
+    @Column(name = "ROLE_ID")
     protected String roleId;
+    @Column(name = "ACTV_IND")
     protected boolean active;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<SecurityModelDefinition> modelDefinitions = new org.apache.ojb.broker.util.collections.ManageableArrayList();// = new ArrayList<SecurityModelDefinition>();
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<SecurityModelMember> modelMembers = new org.apache.ojb.broker.util.collections.ManageableArrayList();// = new ArrayList<SecurityModelMember>();
 
     /**

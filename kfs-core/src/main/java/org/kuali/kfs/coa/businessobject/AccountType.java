@@ -23,9 +23,17 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ACCOUNT_TYPE_T")
 public class AccountType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,8 +43,12 @@ public class AccountType extends PersistableBusinessObjectBase implements Mutabl
 
     }
 
+    @Id
+    @Column(name = "ACCT_TYP_CD")
     private String accountTypeCode;
+    @Column(name = "ACCT_TYP_NM")
     private String accountTypeName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

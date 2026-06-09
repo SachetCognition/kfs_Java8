@@ -24,6 +24,14 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "PDP_PMT_STAT_CD_T")
 public class PaymentStatus extends KualiCodeBase {
     
     public PaymentStatus() {

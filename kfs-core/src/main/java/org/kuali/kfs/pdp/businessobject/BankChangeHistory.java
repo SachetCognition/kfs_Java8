@@ -20,11 +20,22 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.apache.commons.lang.StringUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 
 /**
  * Report object for the bank change lookup
  */
+@Entity
+@Table(name = "PDP_PMT_DTL_T")
 public class BankChangeHistory extends PaymentDetail {
 
     public BankChangeHistory() {

@@ -24,33 +24,60 @@ import org.kuali.kfs.sec.SecPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 
 /**
  * Represents a member who can be assigned to a model. Can be of Person, Role, or Group type
  */
+@Entity
+@Table(name = "SEC_FOO_T")
 public class ModelMember extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "FOO")
     private String memberId;
+    @Transient
     private String memberName;
+    @Id
+    @Column(name = "FOO")
     private String memberTypeCode;
+    @Transient
     private boolean active;
 
     // person fields
+    @Transient
     private String principalId;
+    @Transient
     private String principalName;
+    @Transient
     private String entityId;
+    @Transient
     private String firstName = "";
+    @Transient
     private String middleName = "";
+    @Transient
     private String lastName = "";
+    @Transient
     private String emailAddress = "";
+    @Transient
     private String employeeId = "";
 
     // role fields
+    @Transient
     private String roleId;
+    @Transient
     private String roleName;
+    @Transient
     private String namespaceCode; // part of group fields as well
 
     // group fields
+    @Transient
     private String groupId;
+    @Transient
     private String groupName;
 
     public ModelMember() {

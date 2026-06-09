@@ -24,13 +24,25 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_UBO_FUNC_T")
 public class UniversityBudgetOfficeFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_UBO_FUNC_CD")
     private String financialUniversityBudgetOfficeFunctionCode;
+    @Column(name = "FIN_UBO_FUNC_NM")
     private String financialUniversityBudgetOfficeFunctionName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

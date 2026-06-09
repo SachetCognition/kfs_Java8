@@ -38,15 +38,29 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 /**
  * This is the business object that represents the InternalBillingDocument in Kuali. This is a transactional document that will
  * eventually post transactions to the G/L. It integrates with workflow and also contains two groupings of accounting lines: Expense
  * and Income.
  */
+@Entity
+@Table(name = "FP_INT_BILL_DOC_T")
 public class InternalBillingDocument extends CapitalAccountingLinesDocumentBase implements Copyable, Correctable, AmountTotaling {
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List items;
+    @Column(name = "FDOC_NXT_ITM_NBR")
     protected Integer nextItemLineNumber;
 
     protected transient CapitalAssetManagementModuleService capitalAssetManagementModuleService;

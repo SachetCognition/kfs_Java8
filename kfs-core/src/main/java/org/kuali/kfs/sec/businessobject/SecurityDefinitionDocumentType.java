@@ -31,13 +31,26 @@ import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 
 /**
  * Associates a document type to a security definition
  */
+@Entity
+@Table(name = "SEC_SCRTY_DEFN_DOC_TYP_T")
 public class SecurityDefinitionDocumentType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "DEFN_ID")
     private KualiInteger definitionId;
+    @Id
+    @Column(name = "DOC_TYP_NM")
     private String financialSystemDocumentTypeCode;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     private transient DocumentTypeEBO financialSystemDocumentType;

@@ -24,6 +24,17 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * An association between a <code>Campus</code> and a <code>VendorAddress</code> to indicate that the Address is the default one
  * for this Campus among the various Addresses available for this Vendor.
@@ -31,14 +42,26 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.rice.location.framework.campus.CampusEbo
  * @see org.kuali.kfs.vnd.businessobject.VendorAddress
  */
+@Entity
+@Table(name = "PUR_VNDR_DFLT_ADDR_T")
 public class VendorDefaultAddress extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_DFLT_ADDR_GNRTD_ID")
     protected Integer vendorDefaultAddressGeneratedIdentifier;
+    @Column(name = "VNDR_ADDR_GNRTD_ID")
     protected Integer vendorAddressGeneratedIdentifier;
+    @Column(name = "VNDR_CMP_CD")
     protected String vendorCampusCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     protected boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_ADDR_GNRTD_ID", insertable = false, updatable = false)
     protected VendorAddress vendorAddress;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CMP_CD", insertable = false, updatable = false)
     protected CampusParameter vendorCampus;
 
     /**

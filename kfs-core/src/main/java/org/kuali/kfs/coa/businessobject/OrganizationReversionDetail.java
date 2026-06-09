@@ -26,24 +26,55 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_DTL_T")
 public class OrganizationReversionDetail extends PersistableBusinessObjectBase implements MutableInactivatable, OrganizationReversionCategoryInfo, FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_CD")
     private String organizationReversionCode;
+    @Column(name = "ORG_RVRSN_OBJ_CD")
     private String organizationReversionObjectCode;
+    @Column(name = "ACTV_IND")
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode organizationReversionObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORG_RVRSN_CTGRY_CD", insertable = false, updatable = false)
     private OrganizationReversionCategory organizationReversionCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
+    @ManyToOne(fetch = FetchType.LAZY)
     private OrganizationReversion organizationReversion;
 
     /**
