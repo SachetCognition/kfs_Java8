@@ -81,7 +81,7 @@ public class Deposit extends PersistableBusinessObjectBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private CashManagementDocument cashManagementDocument;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "deposit")
     private List depositCashReceiptControl;
 
 

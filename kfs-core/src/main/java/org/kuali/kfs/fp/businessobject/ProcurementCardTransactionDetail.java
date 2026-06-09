@@ -110,8 +110,16 @@ public class ProcurementCardTransactionDetail extends PersistableBusinessObjectB
     private ProcurementCardVendor procurementCardVendor;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumns({
+        @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR"),
+        @JoinColumn(name = "FDOC_TRN_LN_NBR", referencedColumnName = "FDOC_TRN_LN_NBR")
+    })
     private List sourceAccountingLines;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumns({
+        @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR"),
+        @JoinColumn(name = "FDOC_TRN_LN_NBR", referencedColumnName = "FDOC_TRN_LN_NBR")
+    })
     private List targetAccountingLines;
 
     @Transient

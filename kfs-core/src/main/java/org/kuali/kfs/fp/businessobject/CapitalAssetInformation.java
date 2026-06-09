@@ -91,9 +91,9 @@ public class CapitalAssetInformation extends PersistableBusinessObjectBase {
     private CapitalAssetManagementAsset capitalAssetManagementAsset;
     @Transient
     private CapitalAssetManagementAssetType capitalAssetManagementAssetType;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "capitalAssetInformation")
     private List<CapitalAssetInformationDetail> capitalAssetInformationDetails;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "capitalAssetInformation")
     private List<CapitalAssetAccountsGroupDetails> capitalAssetAccountsGroupDetails;
     
     @ManyToOne(fetch = FetchType.LAZY)

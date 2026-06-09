@@ -111,9 +111,9 @@ public class DisbursementVoucherNonEmployeeTravel extends PersistableBusinessObj
     @Transient
     private KualiDecimal totalTravelAmount;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "disbursementVoucherNonEmployeeTravel")
     private List dvNonEmployeeExpenses;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "disbursementVoucherNonEmployeeTravel")
     private List dvPrePaidEmployeeExpenses;
 
     /**
