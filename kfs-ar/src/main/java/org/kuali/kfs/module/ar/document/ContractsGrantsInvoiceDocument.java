@@ -23,6 +23,15 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -53,19 +62,30 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Contracts & Grants Invoice document extending Customer Invoice document.
  */
 
+@Entity
+@Table(name = "AR_INV_DOC_T")
 public class ContractsGrantsInvoiceDocument extends CustomerInvoiceDocument {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceDocument.class);
     private KualiDecimal paymentAmount = KualiDecimal.ZERO;
     private KualiDecimal balanceDue = KualiDecimal.ZERO;
+    @Transient
     private List<ContractsGrantsInvoiceDetail> invoiceDetails;
+    @Transient
     private List<CollectionEvent> collectionEvents;
+    @Transient
     private List<InvoiceDetailAccountObjectCode> invoiceDetailAccountObjectCodes;
+    @Transient
     private List<InvoiceAddressDetail> invoiceAddressDetails;
+    @Transient
     private List<InvoiceAccountDetail> accountDetails;
+    @Transient
     private InvoiceGeneralDetail invoiceGeneralDetail;
+    @Transient
     private List<InvoiceMilestone> invoiceMilestones;
+    @Transient
     private List<InvoiceBill> invoiceBills;
+    @Transient
     private List<InvoiceSuspensionCategory> invoiceSuspensionCategories;
 
     private final String REQUIRES_APPROVAL_SPLIT = "RequiresApprovalSplit";

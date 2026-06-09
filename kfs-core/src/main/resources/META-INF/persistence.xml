@@ -17,6 +17,73 @@
         <!-- Migrated entity classes (add here as OJB mappings are converted) -->
         <class>org.kuali.kfs.coa.businessobject.Chart</class>
 
+        <!-- S-2-AR: Accounts Receivable business objects -->
+        <class>org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader</class>
+        <class>org.kuali.kfs.module.ar.businessobject.AwardAccountObjectCodeTotalBilled</class>
+        <class>org.kuali.kfs.module.ar.businessobject.Bill</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CashControlDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CollectionActivityType</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CollectionEvent</class>
+        <class>org.kuali.kfs.module.ar.businessobject.ContractsGrantsCollectionActivityInvoiceDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.ContractsGrantsInvoiceDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.ContractsGrantsInvoiceDocumentErrorLog</class>
+        <class>org.kuali.kfs.module.ar.businessobject.ContractsGrantsInvoiceDocumentErrorMessage</class>
+        <class>org.kuali.kfs.module.ar.businessobject.ContractsGrantsLetterOfCreditReviewDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CostCategory</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CostCategoryObjectCode</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CostCategoryObjectConsolidation</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CostCategoryObjectLevel</class>
+        <class>org.kuali.kfs.module.ar.businessobject.Customer</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerAddress</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerAddressType</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerBillingStatement</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerCreditMemoDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerInvoiceDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerInvoiceItemCode</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerInvoiceLookup</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerInvoiceRecurrenceDetails</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerProcessingType</class>
+        <class>org.kuali.kfs.module.ar.businessobject.CustomerType</class>
+        <class>org.kuali.kfs.module.ar.businessobject.DunningCampaign</class>
+        <class>org.kuali.kfs.module.ar.businessobject.DunningLetterDistribution</class>
+        <class>org.kuali.kfs.module.ar.businessobject.DunningLetterTemplate</class>
+        <class>org.kuali.kfs.module.ar.businessobject.FinalBilledIndicatorEntry</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceAccountDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceAddressDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceBill</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceDetailAccountObjectCode</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceGeneralDetail</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceMilestone</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoicePaidApplied</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceRecurrence</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceSuspensionCategory</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceTemplate</class>
+        <class>org.kuali.kfs.module.ar.businessobject.InvoiceTransmissionMethod</class>
+        <class>org.kuali.kfs.module.ar.businessobject.Lockbox</class>
+        <class>org.kuali.kfs.module.ar.businessobject.Milestone</class>
+        <class>org.kuali.kfs.module.ar.businessobject.MilestoneSchedule</class>
+        <class>org.kuali.kfs.module.ar.businessobject.NonAppliedDistribution</class>
+        <class>org.kuali.kfs.module.ar.businessobject.NonAppliedHolding</class>
+        <class>org.kuali.kfs.module.ar.businessobject.NonInvoiced</class>
+        <class>org.kuali.kfs.module.ar.businessobject.NonInvoicedDistribution</class>
+        <class>org.kuali.kfs.module.ar.businessobject.OrganizationAccountingDefault</class>
+        <class>org.kuali.kfs.module.ar.businessobject.OrganizationOptions</class>
+        <class>org.kuali.kfs.module.ar.businessobject.PaymentMedium</class>
+        <class>org.kuali.kfs.module.ar.businessobject.PredeterminedBillingSchedule</class>
+        <class>org.kuali.kfs.module.ar.businessobject.PrintInvoiceOptions</class>
+        <class>org.kuali.kfs.module.ar.businessobject.SystemInformation</class>
+
+        <!-- S-2-AR: Accounts Receivable document classes -->
+        <class>org.kuali.kfs.module.ar.document.CashControlDocument</class>
+        <class>org.kuali.kfs.module.ar.document.ContractsGrantsCollectionActivityDocument</class>
+        <class>org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument</class>
+        <class>org.kuali.kfs.module.ar.document.ContractsGrantsLetterOfCreditReviewDocument</class>
+        <class>org.kuali.kfs.module.ar.document.CustomerCreditMemoDocument</class>
+        <class>org.kuali.kfs.module.ar.document.CustomerInvoiceDocument</class>
+        <class>org.kuali.kfs.module.ar.document.CustomerInvoiceWriteoffDocument</class>
+        <class>org.kuali.kfs.module.ar.document.FinalBilledIndicatorDocument</class>
+        <class>org.kuali.kfs.module.ar.document.PaymentApplicationDocument</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>

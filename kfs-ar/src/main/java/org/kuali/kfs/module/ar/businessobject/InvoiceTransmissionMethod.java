@@ -20,16 +20,31 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * Method of Invoice Transmission
  */
+@Entity
+@Table(name = "AR_INV_TRNS_MTHD_T")
 public class InvoiceTransmissionMethod extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "INV_TRNS_MTHD_CD")
     private String invoiceTransmissionMethodCode;
+    @Column(name = "INV_TRNS_MTHD_DESC")
     private String invoiceTransmissionMethodDescription;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
 

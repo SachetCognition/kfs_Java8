@@ -20,16 +20,28 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.sql.Date;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "AR_CUST_BILLING_STMT_T")
 public class CustomerBillingStatement extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CUST_NBR")
     protected String customerNumber;
+    @Column(name = "PREV_BILLED_AMT")
     protected KualiDecimal previouslyBilledAmount;
+    @Column(name = "REPORTED_DT")
     protected Date reportedDate;
 
     /**

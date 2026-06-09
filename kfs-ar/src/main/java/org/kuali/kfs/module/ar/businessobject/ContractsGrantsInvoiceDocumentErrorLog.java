@@ -24,6 +24,13 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.integration.cg.ContractsAndGrantsAward;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -34,21 +41,35 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Defines a Contracts & Grants Billing Invoice Document Error Log entry.
  */
+@Entity
+@Table(name = "AR_INV_DOC_ERROR_LOG_T")
 public class ContractsGrantsInvoiceDocumentErrorLog extends PersistableBusinessObjectBase {
 
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "ERROR_LOG_ID")
     private Long errorLogIdentifier;
+    @Column(name = "ACCOUNTS")
     private String accounts;
+    @Column(name = "CGAWD_BEG_DT")
     private Date awardBeginningDate;
+    @Column(name = "CGAWD_END_DT")
     private Date awardEndingDate;
+    @Column(name = "CGAWD_TOT_AMT")
     private BigDecimal awardTotalAmount;
+    @Column(name = "CUM_EXPND_AMT")
     private BigDecimal cumulativeExpensesAmount;
+    @Column(name = "ERROR_DT")
     private Timestamp errorDate;
+    @Column(name = "CRTN_PRCS_TYP_CD")
     private String creationProcessTypeCode;
     private String batchForReport;
+    @Column(name = "PRM_FNDMGR_PRNCPL_ID")
     private String primaryFundManagerPrincipalId;
     private String primaryFundManagerName;
 
+    @Transient
     private List<ContractsGrantsInvoiceDocumentErrorMessage> errorMessages;
     private ContractsAndGrantsAward award;
     private Person awardPrimaryFundManager;

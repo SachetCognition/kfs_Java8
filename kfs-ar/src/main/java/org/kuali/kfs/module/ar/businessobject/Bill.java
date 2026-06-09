@@ -20,6 +20,14 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -29,10 +37,17 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 /**
  * Bills to be used for Billing Schedule under Contracts & Grants
  */
+@Entity
+@Table(name = "AR_BILL_T")
 public class Bill extends BillBase implements MutableInactivatable {
 
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "BILLED_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean billed = false;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     private ContractsAndGrantsBillingAward award;

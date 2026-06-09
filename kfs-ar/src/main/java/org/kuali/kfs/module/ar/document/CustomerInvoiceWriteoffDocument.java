@@ -22,6 +22,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -59,29 +66,48 @@ import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+@Entity
+@Table(name = "AR_WRITEOFF_DOC_T")
 public class CustomerInvoiceWriteoffDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling {
 
     protected static final String REQUIRES_APPROVAL_NODE = "RequiresApproval";
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     protected String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "PROJECT_CD")
     protected String projectCode;
+    @Column(name = "ORG_REFERENCE_ID")
     protected String organizationReferenceIdentifier;
+    @Column(name = "FDOC_REF_INV_NBR")
     protected String financialDocumentReferenceInvoiceNumber;
     protected String statusCode;
 
     protected String customerNote;
 
+    @Transient
     protected Account account;
+    @Transient
     protected Chart chartOfAccounts;
+    @Transient
     protected SubAccount subAccount;
+    @Transient
     protected ObjectCode financialObject;
+    @Transient
     protected SubObjectCode financialSubObject;
+    @Transient
     protected ProjectCode project;
+    @Transient
     protected CustomerInvoiceDocument customerInvoiceDocument;
+    @Transient
     protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Column(name = "AR_INV_WRTOFF_AMT")
     protected KualiDecimal invoiceWriteoffAmount;
 
     // GLPEs from invoice to be written off - used for collecting tax amounts that should be written off

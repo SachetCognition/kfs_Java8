@@ -18,17 +18,38 @@
  */
 package org.kuali.kfs.module.ar.businessobject;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectConsolidation;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "AR_CST_CTGRY_FIN_CONSOLDTN_T")
 public class CostCategoryObjectConsolidation extends PersistableBusinessObjectBase implements CostCategoryDetail {
+    @Id
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String finConsolidationObjectCode;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private Chart chart;
+    @Transient
     private ObjectConsolidation objectConsolidation;
 
     @Override

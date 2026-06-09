@@ -23,6 +23,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.sys.batch.FlatFileTransactionInformation;
 import org.kuali.kfs.sys.businessobject.Bank;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -31,20 +38,35 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_LOCKBOX_T")
 public class Lockbox extends PersistableBusinessObjectBase implements Comparable<Lockbox> {
 
+    @Id
+    @Column(name = "AR_INV_SEQ_NBR")
     private Long invoiceSequenceNumber; //a unique number assigned to the invoice/payment processed.
+    @Column(name = "AR_LOCKBOX_NBR")
 	private String lockboxNumber; //a unique number assigned to each processing organization.
+    @Column(name = "CUST_NBR")
 	private String customerNumber; //customer number.
+    @Column(name = "FDOC_REF_INV_NBR")
 	private String financialDocumentReferenceInvoiceNumber; //document number of the invoice being processed.
+    @Column(name = "AR_BILLING_DT")
 	private Date billingDate; //the date when the customer was billed.
+    @Column(name = "AR_INV_TOT_AMT")
 	private KualiDecimal invoiceTotalAmount; //the total amount an invoice was billed for.
+    @Column(name = "AR_INV_PD_APLD_AMT")
 	private KualiDecimal invoicePaidOrAppliedAmount; //the amount paid by the customer.
+    @Column(name = "AR_SCAN_INV_DT")
 	private Date scannedInvoiceDate; //the date when the customer paid the invoice.
+    @Column(name = "CUST_PMT_MEDIUM_CD")
 	private String customerPaymentMediumCode; //Cash/Check/Credit. It will always be check for lockbox.
+    @Column(name = "AR_PRCS_INV_DT")
 	private Date processedInvoiceDate; //the date when the invoices/payments were processed.
+    @Column(name = "AR_BATCH_SEQ_NBR")
 	private Integer batchSequenceNumber; //a batch of invoices/payments processed.
 	private String proxyInitiator;
+    @Column(name = "BNK_CD")
 	private String bankCode; //a unique code used to identify the bank associated with this lockbox.
 
 	private KualiDecimal headerTransactionBatchTotal;
@@ -52,7 +74,9 @@ public class Lockbox extends PersistableBusinessObjectBase implements Comparable
     private List<LockboxDetail> lockboxDetails;
     private FlatFileTransactionInformation fileTransactionInformation;
 
+    @Transient
     private PaymentMedium customerPaymentMedium;
+    @Transient
     private Bank bank;
 
 	/**

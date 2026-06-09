@@ -18,6 +18,13 @@
  */
 package org.kuali.kfs.module.ar.businessobject;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.datetime.DateTimeService;
@@ -35,22 +42,36 @@ import java.util.LinkedHashMap;
 /**
  * Collection Event class.
  */
+@Entity
+@Table(name = "AR_CLCTN_EVNT_T")
 public class CollectionEvent extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "CLCTN_EVNT_CD")
     private String collectionEventCode;
+    @Column(name = "INV_NBR")
     private String invoiceNumber;
+    @Column(name = "ACTVY_CD")
     private String activityCode;
+    @Column(name = "ACTVY_DT")
     private Date activityDate;
+    @Column(name = "ACTVY_TXT")
     private String activityText;
+    @Column(name = "FLLW_UP_DT")
     private Date followupDate;
+    @Column(name = "CMPLTD_DT")
     private Date completedDate;
+    @Column(name = "POST_DT")
     private Timestamp postedDate;
+    @Column(name = "USR_PRNCPL_ID")
     private String userPrincipalId;
     private boolean completed;
 
     private transient Person user;
     private ContractsGrantsInvoiceDocument invoiceDocument;
+    @Transient
     private CollectionActivityType collectionActivityType;
 
     /**

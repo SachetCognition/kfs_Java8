@@ -22,6 +22,13 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
 import org.kuali.kfs.module.ar.document.service.SystemInformationService;
@@ -36,23 +43,39 @@ import org.kuali.rice.krad.service.DocumentService;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_INV_PD_APLD_T")
 public class InvoicePaidApplied extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber; // document the payment is being applied FROM
+    @Id
+    @Column(name = "AR_PD_APLD_ITM_NBR")
     private Integer paidAppliedItemNumber;
+    @Column(name = "FDOC_REF_INV_NBR")
     private String financialDocumentReferenceInvoiceNumber; // document the payment is being applied TO
+    @Column(name = "AR_INV_ITM_NBR")
     private Integer invoiceItemNumber;
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Column(name = "AR_INV_ITMAPLD_AMT")
     private KualiDecimal invoiceItemAppliedAmount = KualiDecimal.ZERO;
 
+    @Transient
     private CustomerInvoiceDetail invoiceDetail;
+    @Transient
     private AccountingPeriod universityFiscalPeriod;
+    @Transient
     private FinancialSystemDocumentHeader documentHeader;
     transient private DocumentService documentService;
     private KualiDecimal paidAppiedDistributionAmount = KualiDecimal.ZERO;
     private Collection<NonInvoicedDistribution> nonInvoicedDistributions;
+    @Transient
     private Collection<NonAppliedDistribution> nonAppliedDistributions;
+    @Transient
     private transient CustomerInvoiceDocument customerInvoiceDocument;
 
     public InvoicePaidApplied() {

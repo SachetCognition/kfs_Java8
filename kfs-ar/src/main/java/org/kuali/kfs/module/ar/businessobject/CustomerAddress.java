@@ -23,6 +23,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
@@ -41,38 +48,64 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_CUST_ADDR_T")
 public class CustomerAddress extends PersistableBusinessObjectBase implements Comparable<CustomerAddress>, AccountsReceivableCustomerAddress {
 
+    @Id
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Id
+    @Column(name = "CUST_ADDR_ID")
     private Integer customerAddressIdentifier;
+    @Column(name = "CUST_ADDR_NM")
     private String customerAddressName;
+    @Column(name = "CUST_LINE_1_ADDR")
     private String customerLine1StreetAddress;
+    @Column(name = "CUST_LINE_2_ADDR")
     private String customerLine2StreetAddress;
+    @Column(name = "CUST_CITY_NM")
     private String customerCityName;
+    @Column(name = "CUST_STATE_CD")
     private String customerStateCode;
+    @Column(name = "CUST_ZIP_CD")
     private String customerZipCode;
+    @Column(name = "CUST_CNTRY_CD")
     private String customerCountryCode;
+    @Column(name = "CUST_ADDR_INTL_PROV_NM")
     private String customerAddressInternationalProvinceName;
+    @Column(name = "CUST_INTL_MAIL_CD")
     private String customerInternationalMailCode;
+    @Column(name = "CUST_EMAIL_ADDR")
     private String customerEmailAddress;
+    @Column(name = "CUST_ADDR_TYPE_CD")
     private String customerAddressTypeCode;
+    @Column(name = "CUST_ADDR_END_DT")
     private Date customerAddressEndDate;
 
+    @Transient
     private CustomerAddressType customerAddressType;
+    @Transient
     private Customer customer;
     private CountryEbo customerCountry;
 
     // Invoice Template link
 
+    @Column(name = "INV_TMPLT_CD")
     private String customerInvoiceTemplateCode;
+    @Transient
     private InvoiceTemplate customerInvoiceTemplate;
 
     // Invoice Indicator link
 
+    @Column(name = "INV_TRNS_MTHD_CD")
     private String invoiceTransmissionMethodCode;
+    @Transient
     private InvoiceTransmissionMethod invoiceTransmissionMethod;
 
+    @Column(name = "COPIES_TO_PRINT_QTY")
     private Integer customerCopiesToPrint;
+    @Column(name = "ENV_TO_PRINT_QTY")
     private Integer customerEnvelopesToPrintQuantity;
 
     /**

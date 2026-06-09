@@ -21,6 +21,13 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
@@ -34,18 +41,31 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_DOC_HDR_T")
 public class AccountsReceivableDocumentHeader extends PersistableBusinessObjectBase implements org.kuali.kfs.integration.ar.AccountsReceivableDocumentHeader{
 
+    @Id
+    @Column(name = "FDOC_NBR")
 	private String documentNumber;
+    @Column(name = "CUST_NBR")
 	private String customerNumber;
+    @Column(name = "PRCS_FIN_COA_CD")
 	private String processingChartOfAccountCode;
+    @Column(name = "PRCS_ORG_CD")
 	private String processingOrganizationCode;
+    @Column(name = "AR_ENTRY_DT")
 	private Date entryDate;
+    @Column(name = "FDOC_EXPLAIN_TXT")
 	private String financialDocumentExplanationText;
 
+    @Transient
 	private Customer customer;
+    @Transient
 	private Chart processingChartOfAccount;
+    @Transient
 	private Organization processingOrganization;
+    @Transient
     private DocumentHeader documentHeader;
 
 	/**

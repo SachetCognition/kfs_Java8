@@ -22,6 +22,14 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
@@ -34,26 +42,49 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Invoice Document for Contracts & Grants
  */
+@Entity
+@Table(name = "AR_INV_GNRL_DTL_T")
 public class InvoiceGeneralDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "COMMENT_TXT")
     private String comment;
+    @Column(name = "AWD_DT_RNG")
     private String awardDateRange;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "BILL_FREQ_CD")
     private String billingFrequencyCode;
+    @Column(name = "FNL_BILL_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean finalBillIndicator;
+    @Column(name = "BILLNG_PRD")
     private String billingPeriod;
+    @Column(name = "INSTRMNT_TYP_CD")
     private String instrumentTypeCode;
+    @Column(name = "AWD_TOT_AMT")
     private KualiDecimal awardTotal = KualiDecimal.ZERO;
+    @Column(name = "TOT_AMT_BILLED_TO_DT")
     private KualiDecimal totalAmountBilledToDate = KualiDecimal.ZERO;
+    @Column(name = "TOT_PREV_BILLED_AMT")
     private KualiDecimal totalPreviouslyBilled = KualiDecimal.ZERO;
+    @Column(name = "COST_SHR_AMT")
     private KualiDecimal costShareAmount = KualiDecimal.ZERO;
+    @Column(name = "LST_BILLED_DT")
     private Date lastBilledDate;
+    @Column(name = "DUN_LTR_TMPLT_ASND")
     private String dunningLetterTemplateAssigned;
+    @Column(name = "DUN_LTR_TMPLT_SNT_DT")
     private Date dunningLetterTemplateSentDate;
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "LTRCR_CRTN_TYP")
     private String letterOfCreditCreationType;// To categorize the CG Invoices based on Award LOC Type
+    @Column(name = "LTRCR_FNDGRP_CD")
     private String letterOfCreditFundGroupCode;
+    @Column(name = "LTRCR_FND_CD")
     private String letterOfCreditFundCode;
 
     private ContractsGrantsInvoiceDocument invoiceDocument;

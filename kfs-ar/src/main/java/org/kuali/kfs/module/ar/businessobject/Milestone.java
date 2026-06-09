@@ -21,6 +21,14 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -29,11 +37,19 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 /**
  * Milestone to be used for Milestone Schedule under Contracts & Grants
  */
+@Entity
+@Table(name = "AR_MLSTN_T")
 public class Milestone extends MilestoneBase implements MutableInactivatable {
 
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "MLSTN_EXPCTD_COMPLTN_DT")
     private Date milestoneExpectedCompletionDate;
+    @Column(name = "BILLED_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean billed = false;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     private ContractsAndGrantsBillingAward award;
