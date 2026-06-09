@@ -246,7 +246,7 @@
 	</bean>	
 	 	
 	<!-- DAO declarations -->		
-	<bean id="effortCertificationReportDefinitionDao" parent="platformAwareDao" class="org.kuali.kfs.module.ec.dataaccess.impl.EffortCertificationReportDefinitionDaoOjb" />
+	<bean id="effortCertificationReportDefinitionDao" class="org.kuali.kfs.module.ec.dataaccess.impl.EffortCertificationReportDefinitionDaoJpa" />
 	
 	<!-- lookup declarations -->
 	<bean id="outstandingReportsByOrganizationLookupable"  parent="outstandingReportsByOrganizationLookupable-parentBean" singleton="false"/>

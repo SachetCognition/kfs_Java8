@@ -20,13 +20,24 @@ package org.kuali.kfs.module.ec.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * Business Object for the Effort Certification Report Status Code Table.
  */
+@Entity
+@Table(name = "LD_A21_PRD_STAT_T")
 public class EffortCertificationPeriodStatusCode extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "LBR_RPT_PRDSTAT_CD")
     private String effortCertificationReportPeriodStatusCode;
+
+    @Column(name = "LBR_PRD_STAT_DESC")
     private String effortCertificationReportPeriodStatusDescription;
 
     /**

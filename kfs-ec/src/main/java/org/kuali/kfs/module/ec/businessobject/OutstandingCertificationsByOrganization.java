@@ -21,6 +21,9 @@ package org.kuali.kfs.module.ec.businessobject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -35,6 +38,8 @@ import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 /**
  * Business object for the outstanding documents by organization report
  */
+@Entity
+@Table(name = "LD_A21_DETAIL_T")
 @COMPONENT(component = "OutstandingCertificationsByOrganization")
 public class OutstandingCertificationsByOrganization extends EffortCertificationDocument {
 

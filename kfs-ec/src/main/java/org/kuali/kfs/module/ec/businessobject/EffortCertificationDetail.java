@@ -22,6 +22,18 @@ package org.kuali.kfs.module.ec.businessobject;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -45,48 +57,131 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Business Object for the Effort Certification Detail Table.
  */
+@Entity
+@Table(name = "LD_A21_DETAIL_LN_T")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class EffortCertificationDetail extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+
+    @Id
+    @Column(name = "POSITION_NBR")
     private String positionNumber;
+
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+
+    @Id
+    @Column(name = "SOURCE_FIN_COA_CD")
     private String sourceChartOfAccountsCode;
+
+    @Id
+    @Column(name = "SOURCE_ACCT_NBR")
     private String sourceAccountNumber;
 
 
+    @Column(name = "A21_LBR_PYRL_AMT")
     private KualiDecimal effortCertificationPayrollAmount;
+
+    @Column(name = "A21_LBRORIG_PY_AMT")
     private KualiDecimal effortCertificationOriginalPayrollAmount;
+
+    @Column(name = "LBR_CALC_OVRLL_PCT")
     private Integer effortCertificationCalculatedOverallPercent;
+
+    @Column(name = "LBR_UPDT_OVRLL_PCT")
     private Integer effortCertificationUpdatedOverallPercent;
+
+    @Column(name = "CST_SRCSUBACCT_NBR")
     private String costShareSourceSubAccountNumber;
 
+    @Column(name = "FDOC_POST_YR")
     private Integer universityFiscalYear;
 
+    @Transient
     private KualiDecimal originalFringeBenefitAmount;
 
+    @Transient
     private boolean accountExpiredOverride;
+    @Transient
     private boolean accountExpiredOverrideNeeded;
+    @Transient
     private String overrideCode = AccountingLineOverride.CODE.NONE;
 
-    private boolean newLineIndicator; // to indicate if this detail line has been persisted or not
+    @Transient
+    private boolean newLineIndicator;
 
-    // holds last saved updated payroll amount so business rule can check if it has been updated at the route level
+    @Transient
     private KualiDecimal persistedPayrollAmount;
+    @Transient
     private Integer persistedEffortPercent;
+    @Transient
     private String groupId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR", insertable = false, updatable = false)
     private EffortCertificationDocument effortCertificationDocument;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FDOC_POST_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "FIN_OBJECT_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
+    })
     private ObjectCode financialObject;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account account;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SOURCE_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart sourceChartOfAccounts;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "SOURCE_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "SOURCE_ACCT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account sourceAccount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+        @JoinColumn(name = "SUB_ACCT_NBR", referencedColumnName = "SUB_ACCT_NBR", insertable = false, updatable = false)
+    })
     private SubAccount subAccount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_POST_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions options;
+
+    @Transient
     private Boolean federalOrFederalPassThroughIndicator = null;
 
+    @Transient
     protected String effectiveDate;
     
     /**

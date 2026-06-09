@@ -27,6 +27,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.integration.ec.EffortCertificationReport;
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
@@ -40,33 +53,101 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Business Object for the Effort Certification Report Definition Table.
  */
+@Entity
+@Table(name = "LD_A21_REPORT_T")
 public class EffortCertificationReportDefinition extends PersistableBusinessObjectBase implements EffortCertificationReport, MutableInactivatable, FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+
+    @Id
+    @Column(name = "A21_LBR_RPT_NBR")
     private String effortCertificationReportNumber;
+
+    @Column(name = "A21LBR_RPT_PRD_TTL")
     private String effortCertificationReportPeriodTitle;
+
+    @Column(name = "LBR_RPT_PRDSTAT_CD")
     private String effortCertificationReportPeriodStatusCode;
+
+    @Column(name = "LBR_ET_FSCL_YR")
     private Integer expenseTransferFiscalYear;
+
+    @Column(name = "LBR_ET_FSCL_PRD_CD")
     private String expenseTransferFiscalPeriodCode;
+
+    @Column(name = "A21_LBR_RPT_TYP_CD")
     private String effortCertificationReportTypeCode;
+
+    @Column(name = "A21LBR_RPT_RTRN_DT")
     private Date effortCertificationReportReturnDate;
+
+    @Column(name = "LBR_RPT_BEG_FSCL_YR")
     private Integer effortCertificationReportBeginFiscalYear;
+
+    @Column(name = "LBR_RPT_BEG_FSCL_PRD_CD")
     private String effortCertificationReportBeginPeriodCode;
+
+    @Column(name = "LBR_RPT_END_FSCL_YR")
     private Integer effortCertificationReportEndFiscalYear;
+
+    @Column(name = "LBR_RPT_END_FSCL_PRD_CD")
     private String effortCertificationReportEndPeriodCode;
+
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions options;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LBR_RPT_BEG_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions reportBeginFiscalYear;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LBR_RPT_END_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions reportEndFiscalYear;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "LBR_RPT_BEG_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "LBR_RPT_BEG_FSCL_PRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
+    })
     private AccountingPeriod reportBeginPeriod;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "LBR_RPT_END_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "LBR_RPT_END_FSCL_PRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
+    })
     private AccountingPeriod reportEndPeriod;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LBR_ET_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions expenseTransferYear;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "LBR_ET_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "LBR_ET_FSCL_PRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
+    })
     private AccountingPeriod expenseTransferFiscalPeriod;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LBR_RPT_PRDSTAT_CD", referencedColumnName = "LBR_RPT_PRDSTAT_CD", insertable = false, updatable = false)
     private EffortCertificationPeriodStatusCode effortCertificationPeriodStatusCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "A21_LBR_RPT_TYP_CD", referencedColumnName = "A21_LBR_RPT_TYP_CD", insertable = false, updatable = false)
     private EffortCertificationReportType effortCertificationReportType;
+
+    @OneToMany(mappedBy = "effortCertificationReportDefinition", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @OrderBy("effortCertificationReportPositionObjectGroupCode ASC")
     private Collection<EffortCertificationReportPosition> effortCertificationReportPositions;
 
+    @Transient
     private Map<Integer, Set<String>> reportPeriods;
 
     /**

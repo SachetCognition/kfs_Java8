@@ -22,6 +22,16 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
@@ -31,17 +41,47 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
+@Entity
+@Table(name = "FOO")
 public class OutstandingCertificationsByReport extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FOO")
     private Integer universityFiscalYear;
+
+    @Id
+    @Column(name = "FOO")
     private String effortCertificationReportNumber;
+
+    @Column(name = "FOO")
     private String chartOfAccountsCode;
+
+    @Column(name = "FOO")
     private String organizationCode;
+
+    @Transient
     private Integer outstandingCertificationCount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FOO", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions options;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FOO", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "FOO", referencedColumnName = "A21_LBR_RPT_NBR", insertable = false, updatable = false)
+    })
     private EffortCertificationReportDefinition effortCertificationReportDefinition;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FOO", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FOO", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "FOO", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
 
     /**
