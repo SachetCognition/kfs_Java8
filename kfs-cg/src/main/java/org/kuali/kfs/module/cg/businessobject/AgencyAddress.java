@@ -36,10 +36,13 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -53,6 +56,8 @@ public class AgencyAddress extends PersistableBusinessObjectBase implements Prim
     private String agencyNumber;
     @Id
     @Column(name = "CG_AGENCY_ADDR_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AGENCY_ADDR_ID_SEQ")
+    @SequenceGenerator(name = "AGENCY_ADDR_ID_SEQ", sequenceName = "AGENCY_ADDR_ID_SEQ")
     private Long agencyAddressIdentifier;
     @Column(name = "CG_AGENCY_ADDR_NM")
     private String agencyAddressName;

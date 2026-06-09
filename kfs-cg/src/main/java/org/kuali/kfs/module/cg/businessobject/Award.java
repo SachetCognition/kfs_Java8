@@ -148,21 +148,25 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
     private String kimGroupNames;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("principalId ASC")
     private List<AwardProjectDirector> awardProjectDirectors;
     private AwardProjectDirector awardPrimaryProjectDirector;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("principalId ASC")
     private List<AwardFundManager> awardFundManagers;
     private AwardFundManager awardPrimaryFundManager;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "award", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @OrderBy("chartOfAccountsCode ASC, accountNumber ASC")
     private List<AwardAccount> awardAccounts;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("awardSubcontractorAmendmentNumber ASC, awardSubcontractorNumber ASC, subcontractorNumber ASC")
     private List<AwardSubcontractor> awardSubcontractors;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("chartOfAccountsCode ASC, organizationCode ASC")
     private List<AwardOrganization> awardOrganizations;
 

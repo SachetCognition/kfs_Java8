@@ -116,16 +116,19 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     @Column(name = "ROW_ACTV_IND")
     @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("proposalSubcontractorNumber ASC, subcontractorNumber ASC")
     private List<ProposalSubcontractor> proposalSubcontractors;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("chartOfAccountsCode ASC, organizationCode ASC")
     private List<ProposalOrganization> proposalOrganizations;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CGPRPSL_NBR", referencedColumnName = "CGPRPSL_NBR", insertable = false, updatable = false)
     @OrderBy("principalId ASC")
     private List<ProposalProjectDirector> proposalProjectDirectors;
-    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "proposal", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private List<ProposalResearchRisk> proposalResearchRisks;
 
     @ManyToOne(fetch = FetchType.LAZY)

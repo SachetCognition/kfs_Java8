@@ -77,11 +77,9 @@ public class CloseDaoJpa implements CloseDao {
         TypedQuery<Proposal> query = entityManager.createQuery(
                 "SELECT p FROM Proposal p " +
                 "WHERE p.proposalClosingDate IS NULL " +
-                "AND p.proposalSubmissionDate <= :closeDate " +
-                "AND p.proposalStatusCode <> :excludedStatus",
+                "AND p.proposalSubmissionDate <= :closeDate",
                 Proposal.class);
         query.setParameter("closeDate", c.getCloseOnOrBeforeDate());
-        query.setParameter("excludedStatus", "U");
 
         return query.getResultList();
     }
@@ -100,7 +98,4 @@ public class CloseDaoJpa implements CloseDao {
         return query.getResultList();
     }
 
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 }

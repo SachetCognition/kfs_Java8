@@ -140,9 +140,7 @@
 
 	<!-- DAOs -->
 
-	<bean id="closeDao" class="org.kuali.kfs.module.cg.dataaccess.impl.CloseDaoJpa">
-		<property name="entityManager" ref="entityManagerFactory" />
-	</bean>
+	<bean id="closeDao" class="org.kuali.kfs.module.cg.dataaccess.impl.CloseDaoJpa" />
 
 	<!-- Services -->
 	<bean id="closeService"  parent="closeService-parentBean"/>

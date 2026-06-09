@@ -79,7 +79,7 @@ public class Agency extends PersistableBusinessObjectBase implements ContractsAn
     @JoinColumn(name = "CG_AGENCY_TYP_CD", insertable = false, updatable = false)
     private AgencyType agencyType;
     @Column(name = "CG_AGENCY_HIST_IND")
-    @org.hibernate.annotations.Type(type = "yes_no")
+    @org.hibernate.annotations.Type(type = "org.kuali.kfs.module.cg.businessobject.jpa.InverseBooleanType")
     private boolean active;
 
     // Contracts & Grants fields
@@ -92,7 +92,7 @@ public class Agency extends PersistableBusinessObjectBase implements ContractsAn
     @Column(name = "DUNS_PLUS_FOUR_NBR")
     private String dunsPlusFourNumber;
 
-    @OneToMany(mappedBy = "agencyNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "agency", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @OrderBy("agencyAddressIdentifier ASC")
     private List<AgencyAddress> agencyAddresses;
 

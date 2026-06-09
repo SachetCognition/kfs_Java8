@@ -42,7 +42,7 @@ public class GrantDescription extends PersistableBusinessObjectBase implements M
     @Column(name = "CG_GRANT_DESC")
     private String grantDescription;
     @Column(name = "CG_GRNT_DESC_ACTV_CD")
-    @org.hibernate.annotations.Type(type = "yes_no")
+    @org.hibernate.annotations.Type(type = "org.kuali.kfs.module.cg.businessobject.jpa.AIBooleanType")
     private boolean active;
 
     /**
