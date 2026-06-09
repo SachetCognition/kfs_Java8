@@ -37,6 +37,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -49,6 +50,8 @@ public class CreditCardImportedExpenseClearingObject extends PersistableBusiness
 
 
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "FDOC_NBR")
     List<CreditCardImportedExpenseClearingDetail> expenses = new ArrayList<CreditCardImportedExpenseClearingDetail>();
 
     /**
