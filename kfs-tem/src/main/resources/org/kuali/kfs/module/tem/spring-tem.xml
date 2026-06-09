@@ -50,7 +50,6 @@
 		</property>
 		<property name="databaseRepositoryFilePaths">
 			<list>
-				<value>org/kuali/kfs/module/tem/ojb-tem.xml</value>
 			</list>
 		</property>
 		<property name="jobNames">
@@ -288,9 +287,10 @@
 	</bean>
 
 	<bean id="travelerDao" parent="travelerDao-parentBean" />
-	<bean id="travelerDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.module.tem.dataaccess.impl.TravelerDaoOjb">
+	<bean id="travelerDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.TravelerDaoJpa">
 		<property name="lookupDao" ref="lookupDao" />
-		<property name="accountsReceivableModuleService" ref="accountsReceivableModuleService" />		
+		<property name="accountsReceivableModuleService" ref="accountsReceivableModuleService" />
+		<property name="entityManager" ref="entityManager" />
 	</bean>
 
 	<bean id="travelerService" parent="travelerService-parentBean" />
@@ -592,10 +592,14 @@
 	</bean>
 
 	<bean id="travelDocumentDao" parent="travelDocumentDao-parentBean" />
-	<bean id="travelDocumentDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.module.tem.dataaccess.impl.TravelDocumentDaoOjb" />		
+	<bean id="travelDocumentDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.TravelDocumentDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>		
 	
 	<bean id="perDiemDao" parent="perDiemDao-parentBean" />
-	<bean id="perDiemDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.module.tem.dataaccess.impl.PerDiemDaoOjb" />			
+	<bean id="perDiemDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.PerDiemDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>			
 
 	<bean id="temAccountingDocumentRelationshipService" parent="temAccountingDocumentRelationshipService-parentBean" />
 	<bean id="temAccountingDocumentRelationshipService-parentBean" class="org.kuali.kfs.module.tem.document.service.impl.AccountingDocumentRelationshipServiceImpl"	abstract="true">
@@ -605,7 +609,9 @@
 	</bean>
 
 	<bean id="accountingDocumentRelationshipDao" parent="accountingDocumentRelationshipDao-parentBean"/>
-	<bean id="accountingDocumentRelationshipDao-parentBean" parent="platformAwareDao" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.AccountingDocumentRelationshipDaoOjb" />
+	<bean id="accountingDocumentRelationshipDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.AccountingDocumentRelationshipDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 
 	<bean id="travelerDerivedRoleTypeService" parent="travelerDerivedRoleTypeService-parentBean" />
 	<bean id="travelerDerivedRoleTypeService-parentBean" abstract="true" class="org.kuali.kfs.module.tem.identity.TravelerDerivedRoleTypeServiceImpl"/>
@@ -636,7 +642,9 @@
 	</bean>
 	
 	<bean id="expenseTypeObjectCodeDao" parent="expenseTypeObjectCodeDao-parentBean"/>
-	<bean id="expenseTypeObjectCodeDao-parentBean" parent="platformAwareDao" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.ExpenseTypeObjectCodeDaoOjb" />
+	<bean id="expenseTypeObjectCodeDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.ExpenseTypeObjectCodeDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 	
 	<bean id="travelExpenseService" parent="travelExpenseService-parentBean" />
 	<bean id="travelExpenseService-parentBean" abstract="true" class="org.kuali.kfs.module.tem.service.impl.TravelExpenseServiceImpl">
@@ -1325,7 +1333,9 @@
     <bean id="temExecutiveManagerRoleTypeService-parentBean" abstract="true" class="org.kuali.kfs.module.tem.identity.ExecutiveManagerRoleTypeServiceImpl" />
     
     <bean id="historicalTravelExpenseDao" parent="historicalTravelExpenseDao-parentBean" />
-    <bean id="historicalTravelExpenseDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.module.tem.dataaccess.impl.HistoricalTravelExpenseDaoOjb"/>
+    <bean id="historicalTravelExpenseDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.HistoricalTravelExpenseDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
  
  	<bean id="historicalTravelExpenseService" parent="historicalTravelExpenseService-parentBean" />
     <bean id="historicalTravelExpenseService-parentBean" abstract="true" class="org.kuali.kfs.module.tem.service.impl.HistoricalTravelExpenseServiceImpl">
@@ -1566,7 +1576,9 @@
 	</bean>
 	
 	<bean id="travelAuthorizationDao" parent="travelAuthorizationDao-parentBean" />
-	<bean id="travelAuthorizationDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.module.tem.dataaccess.impl.TravelAuthorizationDaoOjb"/>
+	<bean id="travelAuthorizationDao-parentBean" abstract="true" class="org.kuali.kfs.module.tem.dataaccess.impl.TravelAuthorizationDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 
 	<bean id="perDiemMealIncidentalBreakDownRule" parent="perDiemMealIncidentalBreakDownRule-parentBean" />
 	<bean id="perDiemMealIncidentalBreakDownRule-parentBean" abstract="true" class="org.kuali.kfs.module.tem.document.validation.impl.PerDiemMealIncidentalBreakDownRule">

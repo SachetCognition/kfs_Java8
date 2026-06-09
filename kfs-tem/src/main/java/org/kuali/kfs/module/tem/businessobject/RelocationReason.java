@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -34,29 +35,31 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Entity
 @Table(name="TEM_RELO_REASON_T")
 public class RelocationReason extends PersistableBusinessObjectBase implements MutableInactivatable{
+    @Id
+    @Column(name = "RELO_REASON_CD", length = 2, nullable = false)
     private String reloReasonCode;
+    @Column(name = "RELO_REASON_NM", length = 40, nullable = false)
     private String reloReasonName;
+    @Column(name = "RELO_REASON_DESCR", length = 200, nullable = true)
     private String reloReasonDescription;
+    @Column(name = "ROW_ACTV_IND", length = 1, nullable = false)
     private Boolean active = Boolean.TRUE;
 
     public void setReloReasonCode(String reloReasonCode){
         this.reloReasonCode = reloReasonCode;
     }
-    @Column(name="RELO_REASON_CD",length=2,nullable=false)
     public String getReloReasonCode(){
         return this.reloReasonCode;
     }
     public void setReloReasonName(String reloReasonName){
         this.reloReasonName = reloReasonName;
     }
-    @Column(name="RELO_REASON_NM",length=40,nullable=false)
     public String getReloReasonName(){
         return this.reloReasonName;
     }
     public void setReloReasonDescription(String reloReasonDescription){
         this.reloReasonDescription = reloReasonDescription;
     }
-    @Column(name="RELO_REASON_DESCR",length=200,nullable=true)
     public String getReloReasonDescription(){
         return this.reloReasonDescription;
     }
@@ -65,11 +68,9 @@ public class RelocationReason extends PersistableBusinessObjectBase implements M
         this.active = active;
     }
     @Override
-    @Column(name="ROW_ACTV_IND",length=1, nullable=false)
     public boolean isActive(){
         return this.active;
     }
-    @Column(name="ROW_ACTV_IND",length=1, nullable=false)
     public boolean getActive(){
         return this.active;
     }

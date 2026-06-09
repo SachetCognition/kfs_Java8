@@ -39,7 +39,9 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class BaseTemProfile extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     protected Integer id;

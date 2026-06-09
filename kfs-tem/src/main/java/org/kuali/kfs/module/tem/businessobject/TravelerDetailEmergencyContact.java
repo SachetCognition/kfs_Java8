@@ -45,6 +45,7 @@ public class TravelerDetailEmergencyContact extends EmergencyContact {
         this.setEmailAddress(emergencyContact.getEmailAddress());
     }
 
+    @Column(name = "TRAVELER_DTL_ID")
     public Integer getTravelerDetailId() {
         return travelerDetailId;
     }

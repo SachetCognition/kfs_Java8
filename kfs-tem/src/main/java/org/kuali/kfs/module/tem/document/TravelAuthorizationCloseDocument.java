@@ -33,7 +33,18 @@ import org.kuali.rice.kew.api.document.DocumentStatus;
 import org.kuali.rice.kew.api.document.attribute.DocumentAttributeIndexingQueue;
 import org.kuali.rice.kew.api.exception.WorkflowException;
 import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_TRVL_AUTH_CLOSE_DOC_T")
 public class TravelAuthorizationCloseDocument extends TravelAuthorizationDocument {
     protected String travelReimbursementDocumentNumber;
 

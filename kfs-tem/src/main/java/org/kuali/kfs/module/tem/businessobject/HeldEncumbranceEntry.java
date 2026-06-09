@@ -35,28 +35,59 @@ import org.kuali.rice.kew.api.doctype.DocumentTypeService;
 import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Table which holds travel encumbrances waiting for the next fiscal year to be created
  */
+@Entity
+@Table(name = "TEM_HELD_ENCUM_ENTRY_T")
+@IdClass(HeldEncumbranceEntryId.class)
 public class HeldEncumbranceEntry extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     private Integer transactionLedgerEntrySequenceNumber;
+    @Column(name = "TRIP_ID")
     private String travelDocumentIdentifier;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Column(name = "TRN_LDGR_ENTR_DESC")
     private String transactionLedgerEntryDescription;
+    @Column(name = "TRN_LDGR_ENTR_AMT", precision = 19, scale = 2)
     private KualiDecimal transactionLedgerEntryAmount;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitCreditCode;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "ORG_REFERENCE_ID")
     private String organizationReferenceId;
+    @Column(name = "ACCT_SF_FINOBJ_CD")
     private String acctSufficientFundsFinObjCd;
+    @Column(name = "TRN_ENTR_OFST_CD")
     private boolean transactionEntryOffsetIndicator;
+    @Column(name = "TRNENTR_PROCESS_TM")
     private Timestamp transactionEntryProcessedTs;
 
     private DocumentTypeEBO financialSystemDocumentTypeCode;

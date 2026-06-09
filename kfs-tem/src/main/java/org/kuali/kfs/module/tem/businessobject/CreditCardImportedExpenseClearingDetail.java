@@ -22,15 +22,43 @@ import java.sql.Date;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_CC_IMP_EXP_CLR_DTL_T")
+@IdClass(CreditCardImportedExpenseClearingDetailId.class)
 public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjectDetailBase {
+    @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
+    @Column(name = "CC_STG_DAT_ID")
     private Integer creditCardStagingDataId;
 
     private String merchantName;
     private String travelerName;
     private Date bankPostDate;
 
-    private transient CreditCardStagingData creditCardStagingData;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CC_STG_DAT_ID", insertable = false, updatable = false)
+    private CreditCardStagingData creditCardStagingData;
+
+    @Override
+    public String getDocumentNumber() {
+        return this.documentNumber;
+    }
+
+    @Override
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 
     /**
      * Gets the creditCardStagingDataId attribute.
@@ -117,7 +145,6 @@ public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjec
      */
 
     public CreditCardStagingData getCreditCardStagingData() {
-        this.refreshReferenceObject("creditCardStagingData");
         return creditCardStagingData;
     }
 

@@ -35,8 +35,17 @@ import org.kuali.kfs.module.tem.businessobject.TemProfileAccount;
 import org.kuali.rice.core.web.format.DateFormatter;
 import org.kuali.rice.kew.api.document.DocumentStatus;
 import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
+@Entity
+@Table(name = "TEM_CORP_CARD_APP_DOC_T")
 public class TemCorporateCardApplicationDocument extends CardApplicationDocumentBase implements CardApplicationDocument {
     protected static Logger LOG = Logger.getLogger(TemCorporateCardApplicationDocument.class);
 
