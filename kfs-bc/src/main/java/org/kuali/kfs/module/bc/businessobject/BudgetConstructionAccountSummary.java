@@ -29,31 +29,94 @@ import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_ACCT_SUMM_T")
+@IdClass(BudgetConstructionAccountSummaryId.class)
 public class BudgetConstructionAccountSummary extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "ORG_FIN_COA_CD")
     private String organizationChartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FUND_GRP_CD")
     private String fundGroupCode;
+    @Id
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "INC_EXP_CD")
     private String incomeExpenseCode;
+    @Column(name = "ACLN_ANNL_BAL_AMT")
     private KualiInteger accountLineAnnualBalanceAmount;
+    @Column(name = "FIN_BEG_BAL_LN_AMT")
     private KualiInteger financialBeginningBalanceLineAmount;
+    @Column(name = "SUB_FUND_SORT_CD")
     private String subFundSortCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "ORG_FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart organizationChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "ORG_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+        @JoinColumn(name = "SUB_ACCT_NBR", referencedColumnName = "SUB_ACCT_NBR", insertable = false, updatable = false)
+    })
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     private SubFundGroup subFundGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FUND_GRP_CD", insertable = false, updatable = false)
     private FundGroup fundGroup;
 
     /**

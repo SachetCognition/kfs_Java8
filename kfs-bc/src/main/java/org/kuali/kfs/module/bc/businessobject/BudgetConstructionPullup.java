@@ -26,24 +26,65 @@ import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.bc.document.service.BudgetConstructionOrganizationReportsService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_PULLUP_T")
+@IdClass(BudgetConstructionPullupId.class)
 public class BudgetConstructionPullup extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     private String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ORG_CD")
     private String reportsToOrganizationCode;
+    @Column(name = "PULL_FLAG")
     private Integer pullFlag;
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
 
     public boolean isLeaf;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "RPTS_TO_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "RPTS_TO_ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization reportsToOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
     private Chart reportsToChartOfAccounts;
 
     /**

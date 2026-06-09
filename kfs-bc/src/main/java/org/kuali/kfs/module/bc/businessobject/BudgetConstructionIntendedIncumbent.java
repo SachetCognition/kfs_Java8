@@ -28,18 +28,40 @@ import java.util.Map;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
+
+@Entity
+@Table(name = "LD_BCN_INTINCBNT_T")
 public class BudgetConstructionIntendedIncumbent extends PersistableBusinessObjectBase implements PendingBudgetConstructionAppointmentFundingAware, Incumbent, MutableInactivatable {
 
+    @Id
+
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Column(name = "PERSON_NM")
     private String name;
+    @Column(name = "SETID_SALARY")
     private String setidSalary;
+    @Column(name = "SAL_ADMIN_PLAN")
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
     private String grade;
+    @Column(name = "IU_CLASSIF_LEVEL")
     private String iuClassificationLevel;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
+    @javax.persistence.Transient
     private List<BudgetConstructionSalarySocialSecurityNumber> budgetConstructionSalarySocialSecurity;
+    @OneToMany(mappedBy = "budgetConstructionIntendedIncumbent", fetch = FetchType.LAZY)
     private List<PendingBudgetConstructionAppointmentFunding> pendingBudgetConstructionAppointmentFunding;
 
     /**

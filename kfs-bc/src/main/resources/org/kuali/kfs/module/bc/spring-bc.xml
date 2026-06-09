@@ -44,9 +44,7 @@
 			</list>
 		</property>
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/bc/ojb-bc.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>
@@ -414,7 +412,7 @@
 		</property>
 	</bean>	
 
-	<bean id="budgetConstructionDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionDaoOjb" />
+	<bean id="budgetConstructionDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionDaoJpa" />
 	
 	<!-- oracleIndicator and mySQLIndicator were originally pulling their
 	     values from ConfigurableKualiDBPlatformFactory which no longer
@@ -775,7 +773,7 @@
 	
 	<bean id="budgetConstructionDocumentAccountObjectDetailReportDao" parent="bcBudgetConstructionDaoBase" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionDocumentAccountObjectDetailReportDaoJdbc" />
 
-	<bean id="budgetConstructionOrganizationReportsDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionOrganizationReportsDaoOjb" />
+	<bean id="budgetConstructionOrganizationReportsDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionOrganizationReportsDaoJpa" />
 	
     <bean id="genesisService"  parent="genesisService-parentBean"/>
     <bean id="genesisService-parentBean" class="org.kuali.kfs.module.bc.batch.service.impl.GenesisServiceImpl" abstract="true">
@@ -788,7 +786,7 @@
     </bean>
 
     <bean id="genesisDao"  parent="genesisDao-parentBean"/>
-    <bean id="genesisDao-parentBean" parent="budgetConstructionBatchHelperDao" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.GenesisDaoOjb" abstract="true">
+    <bean id="genesisDao-parentBean" parent="budgetConstructionBatchHelperDao" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.GenesisDaoJpa" abstract="true">
         <property name="dateTimeService">
         	<ref bean="dateTimeService"/>
         </property>
@@ -834,7 +832,7 @@
     <bean id="budgetConstructionHumanResourcesPayrollInterfaceDao" parent="bcBudgetConstructionDaoBase" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.BudgetConstructionHumanResourcesPayrollInterfaceDaoJdbc">
     </bean>
 
-    <bean id="generalLedgerBudgetLoadDao" parent="budgetConstructionBatchHelperDao" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.GeneralLedgerBudgetLoadDaoOjb" />
+    <bean id="generalLedgerBudgetLoadDao" parent="budgetConstructionBatchHelperDao" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.GeneralLedgerBudgetLoadDaoJpa" />
     
     <bean id="calculatedSalaryFoundationTrackerOverrideService"  parent="calculatedSalaryFoundationTrackerOverrideService-parentBean"/>
     <bean id="calculatedSalaryFoundationTrackerOverrideService-parentBean" class="org.kuali.kfs.module.bc.document.service.impl.CalculatedSalaryFoundationTrackerOverrideServiceImpl" abstract="true">
@@ -953,7 +951,7 @@
         </property>
 	</bean>
 	
-	<bean id="importRequestDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.ImportRequestDaoOjb">
+	<bean id="importRequestDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.ImportRequestDaoJpa">
     </bean>
 	
 	<bean id="budgetPayrateImportService"  parent="budgetPayrateImportService-parentBean"/>
@@ -978,7 +976,7 @@
 		</property>	
 	</bean>
 	
-	<bean id="payrateImportDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.PayrateImportDaoOjb">
+	<bean id="payrateImportDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.PayrateImportDaoJpa">
     </bean>
     
     <bean id="budgetPayrateExportService"  parent="budgetPayrateExportService-parentBean"/>
@@ -991,7 +989,7 @@
 		</property>
 	</bean>
 	
-	<bean id="payrateExportDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.PayrateExportDaoOjb">
+	<bean id="payrateExportDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.PayrateExportDaoJpa">
     </bean>
 
     <bean id="reportDumpService"  parent="reportDumpService-parentBean"/>
@@ -1007,13 +1005,13 @@
 	<bean id="reportDumpDao" parent="bcBudgetConstructionDaoBase" class="org.kuali.kfs.module.bc.document.dataaccess.impl.ReportDumpDaoJdbc">
     </bean>
     
-	<bean id="budgetConstructionBatchHelperDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.BudgetConstructionBatchHelperDaoOjb">
+	<bean id="budgetConstructionBatchHelperDao" class="org.kuali.kfs.module.bc.batch.dataaccess.impl.BudgetConstructionBatchHelperDaoJpa">
 	    <property name="ojbPlatform" value="${datasource.ojb.platform}"/>
 	    <property name="ojbOraclePlatform" ref="oracleIndicator"/>
 	    <property name="ojbMySqlPlatform" ref="mySqlIndicator"/>
 	</bean>
 
-    <bean id="budgetConstructionLockDao" parent="platformAwareDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionLockDaoOjb">
+    <bean id="budgetConstructionLockDao" class="org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionLockDaoJpa">
   		<property name="budgetConstructionDao">
 			<ref bean="budgetConstructionDao" />
 		</property>  

@@ -28,31 +28,103 @@ import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_CTRL_LIST_T")
+@IdClass(BudgetConstructionControlListId.class)
 public class BudgetConstructionControlList extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "HIER_ORG_LVL_CD")
     private Integer hierarchyOrganizationLevelCode;
+    @Column(name = "SEL_ORG_LVL_CD")
     private Integer selectedOrganizationLevelCode;
+    @Column(name = "SEL_ORG_FIN_COA")
     private String selectedOrganizationChartOfAccountsCode;
+    @Column(name = "SEL_ORG_CD")
     private String selectedOrganizationCode;
+    @Column(name = "SEL_PULL_FLAG")
     private Integer selectedPullFlag;
+    @Column(name = "SEL_SUB_FUND_GRP")
     private String selectedSubFundGroupCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "SUB_ACCT_NBR", referencedColumnName = "SUB_ACCT_NBR", insertable = false, updatable = false)
+
+    })
+
     private BudgetConstructionHeader budgetConstructionHeader;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "SEL_ORG_FIN_COA", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "SEL_ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization selectedOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SEL_ORG_FIN_COA", insertable = false, updatable = false)
     private Chart selectedOrganizationChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+        @JoinColumn(name = "SUB_ACCT_NBR", referencedColumnName = "SUB_ACCT_NBR", insertable = false, updatable = false)
+    })
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SEL_SUB_FUND_GRP", insertable = false, updatable = false)
     private SubFundGroup selectedSubFundGroup;
 
     /**

@@ -34,31 +34,92 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCNSTR_HDR_T")
+@IdClass(BudgetConstructionHeaderId.class)
 public class BudgetConstructionHeader extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "ORG_LEVEL_CD")
     private Integer organizationLevelCode;
+    @Column(name = "ORG_COA_OF_LVL_CD")
     private String organizationLevelChartOfAccountsCode;
+    @Column(name = "ORG_OF_LVL_CD")
     private String organizationLevelOrganizationCode;
+    @Column(name = "BDGT_LOCK_USR_ID")
     private String budgetLockUserIdentifier;
+    @Column(name = "BDGT_TRNLCK_USR_ID")
     private String budgetTransactionLockUserIdentifier;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+        @JoinColumn(name = "SUB_ACCT_NBR", referencedColumnName = "SUB_ACCT_NBR", insertable = false, updatable = false)
+    })
     private SubAccount subAccount;
     private Person budgetLockUser;
     private Person budgetTransactionLockUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "ORG_COA_OF_LVL_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_OF_LVL_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organizationLevelOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private DocumentHeader financialDocument;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private BudgetConstructionAccountReports budgetConstructionAccountReports;
+
+    @OneToMany(mappedBy = "budgetConstructionHeader", fetch = FetchType.LAZY)
 
     private List budgetConstructionAccountSelect;
 
