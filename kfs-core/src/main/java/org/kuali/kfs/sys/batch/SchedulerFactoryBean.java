@@ -35,7 +35,7 @@ import org.quartz.impl.matchers.EverythingMatcher;
  * use the jdbc or ram job store.
  */
 public class SchedulerFactoryBean extends org.springframework.scheduling.quartz.SchedulerFactoryBean {
-    private static final Scheduler SCHEDULER_DUMMY = null;
+    private static final Scheduler SCHEDULER_DUMMY = SchedulerDummy.getInstance();
     private boolean useQuartzScheduling;
     private boolean useJdbcJobstore;
     private Properties quartzPropertiesReference;
