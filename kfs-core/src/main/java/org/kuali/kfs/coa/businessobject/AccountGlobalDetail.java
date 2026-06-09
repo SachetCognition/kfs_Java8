@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -34,17 +42,38 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Business Object representing the account change details entity
  */
+@Entity
+@Table(name = "CA_ACCT_CHG_DTL_T")
+@IdClass(AccountGlobalDetailId.class)
+
 public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     private static final long serialVersionUID = -6329389744704772474L;
     private static final Logger LOG = Logger.getLogger(AccountGlobalDetail.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
 
     // jkeller: made these transient to prevent post processor serialization errors
     transient private Chart chartOfAccounts;
     transient private Account account;
+
+    @Override
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    @Override
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 
     /**
      * Default constructor.

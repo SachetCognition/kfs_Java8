@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.Arrays;
 
@@ -37,6 +47,10 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  *
  */
+@Entity
+@Table(name = "CA_ACCT_DELEGATE_T")
+@IdClass(AccountDelegateId.class)
+
 public class AccountDelegate extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     private static final long serialVersionUID = 6883162275377881235L;
@@ -47,16 +61,32 @@ public class AccountDelegate extends PersistableBusinessObjectBase implements Mu
     public AccountDelegate() {
     }
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "ACCT_DLGT_UNVL_ID")
     private String accountDelegateSystemId;
+    @Column(name = "FDOC_APRV_FROM_AMT")
     private KualiDecimal finDocApprovalFromThisAmt;
+    @Column(name = "ACCT_DLGT_PRMRT_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean accountsDelegatePrmrtIndicator;
+    @Column(name = "ACCT_DLGT_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "ACCT_DLGT_START_DT")
     private Date accountDelegateStartDate;
+    @Column(name = "FDOC_APRV_TO_AMT")
     private KualiDecimal finDocApprovalToThisAmount;
 
+    @Transient
     private Chart chart;
     private Account account;
     private transient DocumentTypeEBO financialSystemDocumentTypeCode;

@@ -18,17 +18,35 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "CA_ACCTG_CTGRY_T")
+
 public class BasicAccountingCategory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ACCTG_CTGRY_CD")
     private String code;
+    @Column(name = "ACCTG_CTGRY_DESC")
     private String description;
+    @Column(name = "ACCTG_CTGRY_SHRT_NM")
     private String shortName;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String sortCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

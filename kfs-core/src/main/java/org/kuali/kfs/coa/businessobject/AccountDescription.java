@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,18 +39,32 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+@Entity
+@Table(name = "CA_ACCT_DESC_T")
+@IdClass(AccountDescriptionId.class)
+
 public class AccountDescription extends PersistableBusinessObjectBase {
     private static final long serialVersionUID = 6233459415790165510L;
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "CAMPUS_DESC")
     protected String campusDescription;
+    @Column(name = "ORG_DESC")
     protected String organizationDescription;
+    @Column(name = "RC_DESC")
     protected String responsibilityCenterDescription;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
     
     protected CampusEbo campus;
+    @Transient
     protected Building building;
 
     public String getChartOfAccountsCode() {

@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
@@ -26,12 +34,20 @@ import org.kuali.rice.krad.bo.KualiCodeBase;
 /**
  * This class is the business object for the Balance Type object.
  */
+@Entity
+@Table(name = "CA_BALANCE_TYPE_T")
+
 public class BalanceType extends KualiCodeBase implements MutableInactivatable {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "BalanceType";
 
+    @Column(name = "FIN_BALTYP_SHRT_NM")
     protected String financialBalanceTypeShortNm;
+    @Column(name = "FIN_OFFST_GNRTN_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean financialOffsetGenerationIndicator;
+    @Column(name = "FIN_BALTYP_ENC_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean finBalanceTypeEncumIndicator;
 
     /**

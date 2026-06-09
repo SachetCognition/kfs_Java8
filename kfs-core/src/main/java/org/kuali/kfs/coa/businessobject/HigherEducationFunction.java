@@ -18,6 +18,15 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -26,15 +35,27 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  *
  */
+@Entity
+@Table(name = "CA_HIGHR_ED_FUNC_T")
+
 public class HigherEducationFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_HGH_ED_FUNC_CD")
     protected String financialHigherEdFunctionCd;
+    @Column(name = "FIN_HGH_ED_FUNC_NM")
     protected String financialHigherEdFunctionNm;
+    @Column(name = "FIN_UBO_FUNC_CD")
     protected String finUnivBdgtOfficeFunctionCd;
+    @Column(name = "FIN_AICPA_FUNC_CD")
     protected String finAicpaFunctionCode;
+    @Column(name = "FIN_FED_FUNC_CD")
     protected String financialFederalFunctionCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected UniversityBudgetOfficeFunction universityBudgetOfficeFunction;
     protected FederalFunction federalFunction;
     protected AICPAFunction aicpaFunction; // American Institute of Certified Public Accountants

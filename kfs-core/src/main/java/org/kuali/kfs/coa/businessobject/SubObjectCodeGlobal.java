@@ -19,6 +19,15 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -40,23 +49,38 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_OBJ_CD_CHG_DOC_T")
+
 public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject, MutableInactivatable {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SubObjectCodeGlobal.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD_NM")
     protected String financialSubObjectCodeName;
+    @Column(name = "FIN_SUBOBJ_SHRT_NM")
     protected String financialSubObjectCodeShortName;
+    @Column(name = "FIN_SUBOBJ_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected DocumentHeader financialDocument;
     protected SystemOptions universityFiscal;
     protected Chart chartOfAccounts;
 
+    @Transient
     protected List<SubObjectCodeGlobalDetail> subObjCdGlobalDetails;
+    @Transient
     protected List<AccountGlobalDetail> accountGlobalDetails;
 
     /**

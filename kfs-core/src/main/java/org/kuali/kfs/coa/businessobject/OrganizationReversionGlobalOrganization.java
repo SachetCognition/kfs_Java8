@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 
@@ -29,12 +37,23 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 /**
  * An organization which is related to a Global Organization Reversion Detail.
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CHG_ORG_T")
+@IdClass(OrganizationReversionGlobalOrganizationId.class)
+
 public class OrganizationReversionGlobalOrganization extends GlobalBusinessObjectDetailBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalOrganization.class);
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
 
+    @Transient
     private Chart chartOfAccounts;
     private Organization organization;
 

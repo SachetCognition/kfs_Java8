@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
@@ -30,6 +40,10 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ICR_AUTO_ENTR_T")
+@IdClass(IndirectCostRecoveryRateDetailId.class)
+
 public class IndirectCostRecoveryRateDetail extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
     /**
@@ -38,18 +52,34 @@ public class IndirectCostRecoveryRateDetail extends PersistableBusinessObjectBas
     public IndirectCostRecoveryRateDetail() {
     }
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_SERIES_ID")
     private String financialIcrSeriesIdentifier;
+    @Id
+    @Column(name = "AWRD_ICR_ENTRY_NBR")
     private Integer awardIndrCostRcvyEntryNbr;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitIndicator;
+    @Column(name = "AWRD_ICR_RATE_PCT")
     private BigDecimal awardIndrCostRcvyRatePct;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "ACCT_ICR_RATE_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private SystemOptions universityFiscal;
     private IndirectCostRecoveryRate indirectCostRecoveryRate;
     
