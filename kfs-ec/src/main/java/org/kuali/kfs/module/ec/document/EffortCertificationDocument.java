@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,10 +74,6 @@ public class EffortCertificationDocument extends FinancialSystemTransactionalDoc
 
     protected static final String DO_AWARD_SPLIT = "DoAwardSplit";
     protected static final String DO_RECREATE_SPLIT = "DoRecreateSplit";
-
-    @Id
-    @Column(name = "FDOC_NBR")
-    protected String documentNumber;
 
     @Column(name = "A21_LBR_RPT_NBR")
     protected String effortCertificationReportNumber;
@@ -897,6 +895,14 @@ public class EffortCertificationDocument extends FinancialSystemTransactionalDoc
      */
     protected boolean isDoRecreateSplit() {
         return this.getEffortCertificationDocumentCode();
+    }
+
+    @Id
+    @Column(name = "FDOC_NBR")
+    @Access(AccessType.PROPERTY)
+    @Override
+    public String getDocumentNumber() {
+        return super.getDocumentNumber();
     }
 }
 
