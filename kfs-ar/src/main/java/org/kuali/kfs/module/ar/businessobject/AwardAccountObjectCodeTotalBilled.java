@@ -60,6 +60,7 @@ public class AwardAccountObjectCodeTotalBilled extends PersistableBusinessObject
     private Account account;
     @Transient
     private Chart chartOfAccounts;
+    @Transient
     private ObjectCode objectCode;
 
 

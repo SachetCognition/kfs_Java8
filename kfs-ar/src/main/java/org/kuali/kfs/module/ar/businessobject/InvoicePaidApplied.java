@@ -71,7 +71,9 @@ public class InvoicePaidApplied extends PersistableBusinessObjectBase {
     @Transient
     private FinancialSystemDocumentHeader documentHeader;
     transient private DocumentService documentService;
+    @Transient
     private KualiDecimal paidAppiedDistributionAmount = KualiDecimal.ZERO;
+    @Transient
     private Collection<NonInvoicedDistribution> nonInvoicedDistributions;
     @Transient
     private Collection<NonAppliedDistribution> nonAppliedDistributions;

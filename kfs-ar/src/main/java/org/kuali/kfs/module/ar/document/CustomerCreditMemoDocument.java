@@ -72,14 +72,19 @@ import org.kuali.rice.krad.util.ObjectUtils;
 public class CustomerCreditMemoDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling, AccountsReceivableCustomerCreditMemo {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerCreditMemoDocument.class);
 
+    @Transient
     protected String statusCode;
     @Column(name = "FDOC_REF_INV_NBR")
     protected String financialDocumentReferenceInvoiceNumber;
 
+    @Transient
     protected KualiDecimal crmTotalItemAmount = KualiDecimal.ZERO;
+    @Transient
     protected KualiDecimal crmTotalTaxAmount = KualiDecimal.ZERO;
+    @Transient
     protected KualiDecimal crmTotalAmount = KualiDecimal.ZERO;
 
+    @Transient
     protected Integer invOutstandingDays;
 
     @Transient

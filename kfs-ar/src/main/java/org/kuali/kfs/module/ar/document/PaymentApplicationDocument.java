@@ -98,6 +98,7 @@ public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase
 
     protected static final String LAUNCHED_FROM_BATCH = "LaunchedBySystemUser";
 
+    @Transient
     protected String hiddenFieldForErrors;
     @Transient
     protected List<InvoicePaidApplied> invoicePaidApplieds;
@@ -131,6 +132,7 @@ public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase
     private static volatile transient AccountsReceivablePendingEntryService accountsReceivablePendingEntryService;
 
     // used for non-cash-control payapps
+    @Transient
     protected ArrayList<NonAppliedHolding> nonAppliedHoldingsForCustomer; // control docs for non-cash-control payapps
 
     public PaymentApplicationDocument() {

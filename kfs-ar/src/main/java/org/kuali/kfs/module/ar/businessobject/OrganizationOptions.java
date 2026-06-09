@@ -111,10 +111,15 @@ public class OrganizationOptions extends PersistableBusinessObjectBase implement
 	protected Chart processingChartOfAccount;
     @Transient
 	protected Organization processingOrganization;
+    @Transient
     protected StateEbo organizationRemitToState;
+    @Transient
     protected PrintInvoiceOptions printInvoiceOptions;
+    @Transient
     protected PostalCodeEbo orgPostalZipCode;
+    @Transient
     protected PostalCodeEbo orgRemitToZipCode;
+    @Transient
     protected CountryEbo orgPostalCountryCode;
 
     protected transient SystemInformation systemInformationForAddress;

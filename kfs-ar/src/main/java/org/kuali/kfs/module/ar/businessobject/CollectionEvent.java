@@ -67,9 +67,11 @@ public class CollectionEvent extends PersistableBusinessObjectBase {
     private Timestamp postedDate;
     @Column(name = "USR_PRNCPL_ID")
     private String userPrincipalId;
+    @Transient
     private boolean completed;
 
     private transient Person user;
+    @Transient
     private ContractsGrantsInvoiceDocument invoiceDocument;
     @Transient
     private CollectionActivityType collectionActivityType;

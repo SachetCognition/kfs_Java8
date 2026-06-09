@@ -59,6 +59,7 @@ public class CashControlDetail extends PersistableBusinessObjectBase {
 	private String customerPaymentDescription;
     @Column(name = "CUST_NBR")
 	private String customerNumber;
+    @Transient
     private String status;
     @Column(name = "CUST_PMT_DT")
 	private Date customerPaymentDate;

@@ -69,9 +69,13 @@ public class Lockbox extends PersistableBusinessObjectBase implements Comparable
     @Column(name = "BNK_CD")
 	private String bankCode; //a unique code used to identify the bank associated with this lockbox.
 
+    @Transient
 	private KualiDecimal headerTransactionBatchTotal;
+    @Transient
     private Integer headerTransactionBatchCount;
+    @Transient
     private List<LockboxDetail> lockboxDetails;
+    @Transient
     private FlatFileTransactionInformation fileTransactionInformation;
 
     @Transient

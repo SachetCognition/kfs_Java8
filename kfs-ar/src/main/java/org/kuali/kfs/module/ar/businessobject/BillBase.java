@@ -22,6 +22,7 @@ import java.sql.Date;
 import java.util.LinkedHashMap;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -33,6 +34,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @MappedSuperclass
 public class BillBase extends PersistableBusinessObjectBase {
 
+    @Id
     @Column(name = "BILL_ID")
     private Long billIdentifier;
     @Column(name = "BILL_NBR")

@@ -26,6 +26,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
@@ -60,13 +61,21 @@ public class CustomerCreditMemoDetail extends PersistableBusinessObjectBase impl
     private KualiDecimal creditMemoItemTaxAmount;
     @Column(name = "CRDT_MEMO_ITM_TOT_AMT")
     private KualiDecimal creditMemoItemTotalAmount;
+    @Transient
     private KualiDecimal duplicateCreditMemoItemTotalAmount; // not in DB
+    @Transient
     private KualiDecimal invoiceLineTotalAmount; // not in DB
+    @Transient
     private KualiDecimal creditMemoLineTotalAmount; // not in DB
+    @Transient
     private KualiDecimal invoiceOpenItemAmount; // not in DB
+    @Transient
     private BigDecimal invoiceOpenItemQuantity; // not in DB
+    @Transient
     private CustomerInvoiceDetail customerInvoiceDetail; // not in DB
+    @Transient
     private String financialDocumentReferenceInvoiceNumber; // not in DB
+    @Transient
     private boolean invoiceOpenItemQuantityZero; // not in DB
 
     /**

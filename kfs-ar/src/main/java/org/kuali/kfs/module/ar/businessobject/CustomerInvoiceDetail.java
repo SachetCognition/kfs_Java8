@@ -106,7 +106,9 @@ public class CustomerInvoiceDetail extends SourceAccountingLine implements Appli
     private transient CustomerInvoiceDetail discountCustomerInvoiceDetail;
 
     // fields used for CustomerInvoiceWriteoffDocument
+    @Transient
     private KualiDecimal writeoffAmount;
+    @Transient
     private String customerInvoiceWriteoffDocumentNumber;
 
     // ---- BEGIN OPEN AMOUNTS

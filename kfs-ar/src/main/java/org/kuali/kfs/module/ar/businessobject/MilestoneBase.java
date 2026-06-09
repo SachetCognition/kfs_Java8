@@ -22,6 +22,7 @@ import java.sql.Date;
 import java.util.LinkedHashMap;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -36,6 +37,7 @@ public abstract class MilestoneBase extends PersistableBusinessObjectBase  {
 
     @Column(name = "MLSTN_NBR")
     protected Long milestoneNumber;
+    @Id
     @Column(name = "MLSTN_ID")
     protected Long milestoneIdentifier;
     @Column(name = "MLSTN_DESC")

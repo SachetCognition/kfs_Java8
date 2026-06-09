@@ -64,14 +64,18 @@ public class ContractsGrantsInvoiceDocumentErrorLog extends PersistableBusinessO
     private Timestamp errorDate;
     @Column(name = "CRTN_PRCS_TYP_CD")
     private String creationProcessTypeCode;
+    @Transient
     private String batchForReport;
     @Column(name = "PRM_FNDMGR_PRNCPL_ID")
     private String primaryFundManagerPrincipalId;
+    @Transient
     private String primaryFundManagerName;
 
     @Transient
     private List<ContractsGrantsInvoiceDocumentErrorMessage> errorMessages;
+    @Transient
     private ContractsAndGrantsAward award;
+    @Transient
     private Person awardPrimaryFundManager;
 
     public ContractsGrantsInvoiceDocumentErrorLog() {

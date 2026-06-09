@@ -25,8 +25,8 @@ import java.util.LinkedHashMap;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
@@ -52,6 +52,7 @@ public class Milestone extends MilestoneBase implements MutableInactivatable {
     @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private ContractsAndGrantsBillingAward award;
 
     public Long getProposalNumber() {

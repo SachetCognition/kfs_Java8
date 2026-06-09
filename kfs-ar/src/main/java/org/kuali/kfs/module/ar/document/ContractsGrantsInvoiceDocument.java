@@ -67,7 +67,9 @@ import org.kuali.rice.krad.util.ObjectUtils;
 public class ContractsGrantsInvoiceDocument extends CustomerInvoiceDocument {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceDocument.class);
+    @Transient
     private KualiDecimal paymentAmount = KualiDecimal.ZERO;
+    @Transient
     private KualiDecimal balanceDue = KualiDecimal.ZERO;
     @Transient
     private List<ContractsGrantsInvoiceDetail> invoiceDetails;
