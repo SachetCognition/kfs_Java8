@@ -18,12 +18,29 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "GL_ORIGIN_ENTRY_GRP_T")
 public class OriginEntryGroup extends PersistableBusinessObjectBase {
 
     private static final String VALID_STRING = "Valid-";
@@ -33,17 +50,31 @@ public class OriginEntryGroup extends PersistableBusinessObjectBase {
     private static final String SCRUB_STRING = "Scrub";
     private static final String NO_SCRUB_STRING = "Don't Scrub";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ORIGIN_ENTRY_GRP_ID")
     private Integer id;
+    @Column(name = "ORIGIN_ENTRY_GRP_DT")
     private Date date;
+    @Column(name = "ORIGIN_ENTRY_GRP_SRC_CD")
     private String sourceCode;
+    @Column(name = "ORIGIN_ENTRY_GRP_VLD_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean valid;
+    @Column(name = "ORIGIN_ENTRY_PRCS_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean process;
+    @Column(name = "ORIGIN_ENTRY_SCRUB_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean scrub;
 
     // This does not normally get populated. It only gets populated if
     // getAllOriginEntryGroup() is called
+    @Transient
     private Integer rows = new Integer(0);
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIGIN_ENTRY_GRP_SRC_CD", insertable = false, updatable = false)
     private OriginEntrySource source;
 
     /**

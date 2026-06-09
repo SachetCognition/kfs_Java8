@@ -18,6 +18,15 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -36,21 +45,43 @@ import org.kuali.rice.location.api.campus.CampusService;
 /**
  * This class represents a unique header for use with a CollectorBatch class
  */
+@Entity
+@Table(name = "FS_CLCTR_HDR_T")
+@IdClass(CollectorHeader.PK.class)
 public class CollectorHeader extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "PROC_TRNS_DT")
     private Date processTransmissionDate;
+    @Id
+    @Column(name = "PROC_BATCH_SEQ_NBR")
     private Integer processBatchSequenceNumber;
+    @Id
+    @Column(name = "PROC_TOT_REC_CNT")
     private Integer processTotalRecordCount;
+    @Id
+    @Column(name = "PROC_TOT_AMT")
     private KualiDecimal processTotalAmount;
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "CNTCT_PRSN_PHN_NBR")
     private String contactPersonPhoneNumber;
+    @Column(name = "CNTCT_MAIL_ADDR")
     private String contactMailingAddress;
+    @Column(name = "CNTCT_DEPT_NM")
     private String contactDepartmentName;
 
+    @Transient
     private Organization organization;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Campus campus;
 
     /**
@@ -324,5 +355,30 @@ public class CollectorHeader extends PersistableBusinessObjectBase {
      */
     public void setCampus(Campus campus) {
         this.campus = campus;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String chartOfAccountsCode;
+        private String organizationCode;
+        private java.sql.Date processTransmissionDate;
+        private Integer processBatchSequenceNumber;
+        private Integer processTotalRecordCount;
+        private org.kuali.rice.core.api.util.type.KualiDecimal processTotalAmount;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(organizationCode, that.organizationCode) && java.util.Objects.equals(processTransmissionDate, that.processTransmissionDate) && java.util.Objects.equals(processBatchSequenceNumber, that.processBatchSequenceNumber) && java.util.Objects.equals(processTotalRecordCount, that.processTotalRecordCount) && java.util.Objects.equals(processTotalAmount, that.processTotalAmount);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(chartOfAccountsCode, organizationCode, processTransmissionDate, processBatchSequenceNumber, processTotalRecordCount, processTotalAmount);
+        }
     }
 }

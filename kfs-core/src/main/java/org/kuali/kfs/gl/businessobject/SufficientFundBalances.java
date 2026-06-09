@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.sql.Date;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -36,19 +44,38 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents sufficient fund balances
  */
+@Entity
+@Table(name = "GL_SF_BALANCES_T")
+@IdClass(SufficientFundBalances.PK.class)
 public class SufficientFundBalances extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "ACCT_SF_CD")
     private String accountSufficientFundsCode;
+    @Column(name = "CURR_BDGT_BAL_AMT")
     private KualiDecimal currentBudgetBalanceAmount;
+    @Column(name = "ACCT_ACTL_XPND_AMT")
     private KualiDecimal accountActualExpenditureAmt;
+    @Column(name = "ACCT_ENCUM_AMT")
     private KualiDecimal accountEncumbranceAmount;
+    @Column(name = "TIMESTAMP")
     private Date transactionDateTimeStamp;
+    @Transient
     private ObjectCode objectCode;
+    @Transient
     private Chart chart;
+    @Transient
     private Account account;
 
     public static final String BLANKS = "                 ";
@@ -447,5 +474,28 @@ public class SufficientFundBalances extends PersistableBusinessObjectBase {
         m.put(KFSPropertyConstants.ACCOUNT_NUMBER, this.accountNumber);
         m.put(KFSPropertyConstants.FINANCIAL_OBJECT_CODE, this.financialObjectCode);
         return m;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String financialObjectCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(financialObjectCode, that.financialObjectCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, financialObjectCode);
+        }
     }
 }

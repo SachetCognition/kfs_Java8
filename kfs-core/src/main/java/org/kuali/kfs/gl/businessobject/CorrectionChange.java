@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,14 +36,27 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * A class that represents a change to any origin entry that was altered within a GLCP Document
  */
+@Entity
+@Table(name = "GL_COR_CHG_T")
+@IdClass(CorrectionChange.PK.class)
 public class CorrectionChange extends PersistableBusinessObjectBase implements Comparable {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_GRP_LN_NBR")
     private Integer correctionChangeGroupLineNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_LN_NBR")
     private Integer correctionChangeLineNumber;
+    @Column(name = "GL_COR_STRT_POS")
     private Integer correctionStartPosition;
+    @Column(name = "GL_COR_END_POS")
     private Integer correctionEndPosition;
+    @Column(name = "GL_COR_FIELD_VAL")
     private String correctionFieldValue;
+    @Column(name = "GL_COR_FIELD_NM")
     private String correctionFieldName;
 
     public CorrectionChange() {
@@ -135,4 +156,26 @@ public class CorrectionChange extends PersistableBusinessObjectBase implements C
         return m;
     }
 
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String documentNumber;
+        private Integer correctionChangeGroupLineNumber;
+        private Integer correctionChangeLineNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(documentNumber, that.documentNumber) && java.util.Objects.equals(correctionChangeGroupLineNumber, that.correctionChangeGroupLineNumber) && java.util.Objects.equals(correctionChangeLineNumber, that.correctionChangeLineNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(documentNumber, correctionChangeGroupLineNumber, correctionChangeLineNumber);
+        }
+    }
 }

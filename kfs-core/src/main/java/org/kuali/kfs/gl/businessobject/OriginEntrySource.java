@@ -18,12 +18,31 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
 /**
  * A class that defines all the source codes for all types of Origin Entry groups
  */
 
+@Entity
+@Table(name = "GL_ORIGIN_ENTRY_SRC_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "ENTRY_SRC_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "ENTRY_SRC_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "DOBJ_MAINT_CD_ACTV_IND")),
+    @AttributeOverride(name = "objectId", column = @Column(name = "OBJ_ID")),
+    @AttributeOverride(name = "versionNumber", column = @Column(name = "VER_NBR"))
+})
 public class OriginEntrySource extends KualiCodeBase {
     /**
      * A general ledger backup group

@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
@@ -47,37 +57,79 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * outstanding amount
  *
 */
+@Entity
+@Table(name = "GL_ENCUMBRANCE_T")
+@IdClass(Encumbrance.PK.class)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Encumbrance extends PersistableBusinessObjectBase {
     static final long serialVersionUID = -7494473472438516396L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String balanceTypeCode;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String documentTypeCode;
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String originCode;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "TRN_ENCUM_DESC")
     private String transactionEncumbranceDescription;
+    @Column(name = "TRN_ENCUM_DT")
     private Date transactionEncumbranceDate;
+    @Column(name = "ACLN_ENCUM_AMT")
     private KualiDecimal accountLineEncumbranceAmount;
+    @Column(name = "ACLN_ENCUM_CLS_AMT")
     private KualiDecimal accountLineEncumbranceClosedAmount;
+    @Transient
     private KualiDecimal accountLineEncumbranceOutstandingAmount;
+    @Column(name = "ACLN_ENCUM_PRG_CD")
     private String accountLineEncumbrancePurgeCode;
+    @Column(name = "TIMESTAMP")
     private Timestamp timestamp;
 
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private Chart chart;
+    @Transient
     private Account account;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private BalanceType balanceType;
+    @Transient
     private OriginationCode originationCode;
+    @Transient
     private SystemOptions option;
+
+    @Transient
 
     private TransientBalanceInquiryAttributes dummyBusinessObject;
 
@@ -539,5 +591,34 @@ public class Encumbrance extends PersistableBusinessObjectBase {
      */
     public void setFinancialSubObject(SubObjectCode financialSubObject) {
         this.financialSubObject = financialSubObject;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String objectCode;
+        private String subObjectCode;
+        private String balanceTypeCode;
+        private String documentTypeCode;
+        private String originCode;
+        private String documentNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(objectCode, that.objectCode) && java.util.Objects.equals(subObjectCode, that.subObjectCode) && java.util.Objects.equals(balanceTypeCode, that.balanceTypeCode) && java.util.Objects.equals(documentTypeCode, that.documentTypeCode) && java.util.Objects.equals(originCode, that.originCode) && java.util.Objects.equals(documentNumber, that.documentNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, objectCode, subObjectCode, balanceTypeCode, documentTypeCode, originCode, documentNumber);
+        }
     }
 }

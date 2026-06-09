@@ -81,6 +81,31 @@
         <class>org.kuali.kfs.coa.businessobject.SufficientFundsCode</class>
         <class>org.kuali.kfs.coa.businessobject.UniversityBudgetOfficeFunction</class>
 
+        <!-- GL module entities (S-2-GL migration) -->
+        <class>org.kuali.kfs.gl.businessobject.AccountBalance</class>
+        <class>org.kuali.kfs.gl.businessobject.AccountBalanceHistory</class>
+        <class>org.kuali.kfs.gl.businessobject.Balance</class>
+        <class>org.kuali.kfs.gl.businessobject.BalanceHistory</class>
+        <class>org.kuali.kfs.gl.businessobject.CollectorDetail</class>
+        <class>org.kuali.kfs.gl.businessobject.CollectorHeader</class>
+        <class>org.kuali.kfs.gl.businessobject.CorrectionChange</class>
+        <class>org.kuali.kfs.gl.businessobject.CorrectionChangeGroup</class>
+        <class>org.kuali.kfs.gl.businessobject.CorrectionCriteria</class>
+        <class>org.kuali.kfs.gl.businessobject.Encumbrance</class>
+        <class>org.kuali.kfs.gl.businessobject.EncumbranceHistory</class>
+        <class>org.kuali.kfs.gl.businessobject.Entry</class>
+        <class>org.kuali.kfs.gl.businessobject.EntryHistory</class>
+        <class>org.kuali.kfs.gl.businessobject.ExpenditureTransaction</class>
+        <class>org.kuali.kfs.gl.businessobject.OrgReversionUnitOfWork</class>
+        <class>org.kuali.kfs.gl.businessobject.OrgReversionUnitOfWorkCategoryAmount</class>
+        <class>org.kuali.kfs.gl.businessobject.OriginEntryFull</class>
+        <class>org.kuali.kfs.gl.businessobject.OriginEntryGroup</class>
+        <class>org.kuali.kfs.gl.businessobject.OriginEntrySource</class>
+        <class>org.kuali.kfs.gl.businessobject.PendingBalancesMove</class>
+        <class>org.kuali.kfs.gl.businessobject.Reversal</class>
+        <class>org.kuali.kfs.gl.businessobject.SufficientFundBalances</class>
+        <class>org.kuali.kfs.gl.businessobject.SufficientFundRebuild</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>
@@ -89,7 +114,7 @@
             <property name="jakarta.persistence.jdbc.driver"   value="com.mysql.cj.jdbc.Driver"/>
 
             <!-- Hibernate settings (dialect auto-detected from JDBC URL) -->
-            <property name="hibernate.hbm2ddl.auto"  value="validate"/>
+            <property name="hibernate.hbm2ddl.auto"  value="none"/>
             <property name="hibernate.show_sql"      value="false"/>
             <property name="hibernate.format_sql"    value="true"/>
         </properties>
