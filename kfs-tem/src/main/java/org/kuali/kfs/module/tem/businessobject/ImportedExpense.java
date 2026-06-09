@@ -39,19 +39,17 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
     private String cardType = "";
     private Boolean receiptRequired = Boolean.FALSE;
     private String temExpenseTypeCode = TemConstants.EXPENSE_IMPORTED;
-    @Column(name = "HIST_EXP_ID")
     private Long historicalTravelExpenseId;
     private Boolean enableNonReimbursable = Boolean.TRUE;
     private String expenseLineTypeCode = TemConstants.EXPENSE_IMPORTED;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "HIST_EXP_ID", insertable = false, updatable = false)
     private HistoricalTravelExpense historicalTravelExpense;
 
     public ImportedExpense(){
     }
 
     @Override
+    @Column(name = "EXP_LN_TYP_CD")
     public String getExpenseLineTypeCode(){
         return expenseLineTypeCode;
     }
@@ -60,6 +58,7 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
      * Gets the historicalTravelExpenseId attribute.
      * @return Returns the historicalTravelExpenseId.
      */
+    @Column(name = "HIST_EXP_ID")
     public Long getHistoricalTravelExpenseId() {
         return historicalTravelExpenseId;
     }
@@ -76,6 +75,7 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
      * Gets the cardType attribute.
      * @return Returns the cardType.
      */
+    @Column(name = "CARD_TYPE")
     public String getCardType() {
         return cardType;
     }
@@ -156,6 +156,8 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
         return false;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HIST_EXP_ID", insertable = false, updatable = false)
     public HistoricalTravelExpense getHistoricalTravelExpense() {
         return historicalTravelExpense;
     }

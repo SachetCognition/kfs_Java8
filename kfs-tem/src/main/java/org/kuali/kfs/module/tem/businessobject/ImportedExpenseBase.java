@@ -95,7 +95,7 @@ public abstract class ImportedExpenseBase extends PersistableBusinessObjectBase 
      * @return Returns the creditCardAgency.
      */
     @ManyToOne
-    @JoinColumn(name="CREDIT_AGENCY_CD")
+    @JoinColumn(name = "CCA_CD", insertable = false, updatable = false)
     public CreditCardAgency getCreditCardAgency() {
         return creditCardAgency;
     }
