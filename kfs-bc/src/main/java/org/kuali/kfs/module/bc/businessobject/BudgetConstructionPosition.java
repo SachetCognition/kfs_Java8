@@ -66,6 +66,7 @@ public class BudgetConstructionPosition extends PersistableBusinessObjectBase im
     private Integer universityFiscalYear;
     @Column(name = "POS_EFFDT")
     private Date positionEffectiveDate;
+    @javax.persistence.Transient
     private String positionEffectiveStatus;
     @Column(name = "POSN_STATUS")
     private String positionStatus;

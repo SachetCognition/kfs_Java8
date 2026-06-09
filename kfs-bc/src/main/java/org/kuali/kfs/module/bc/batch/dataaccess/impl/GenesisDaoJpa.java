@@ -261,10 +261,10 @@ public class GenesisDaoJpa extends BudgetConstructionBatchHelperDaoJpa implement
         entityManager.createNativeQuery(
             "INSERT INTO LD_BCN_CSF_TRCKR_T (UNIV_FISCAL_YR, FIN_COA_CD, ACCOUNT_NBR, " +
             "SUB_ACCT_NBR, FIN_OBJECT_CD, FIN_SUB_OBJ_CD, POSITION_NBR, EMPLID, " +
-            "CSF_AMT, CSF_FTE_QTY, CSF_TME_PRCNT, OBJ_ID, VER_NBR) " +
+            "POS_CSF_AMT, POS_CSF_FTE_QTY, POS_CSF_TM_PCT, OBJ_ID, VER_NBR) " +
             "SELECT c.UNIV_FISCAL_YR, c.FIN_COA_CD, c.ACCOUNT_NBR, c.SUB_ACCT_NBR, " +
             "c.FIN_OBJECT_CD, c.FIN_SUB_OBJ_CD, c.POSITION_NBR, c.EMPLID, " +
-            "c.CSF_AMT, c.CSF_FTE_QTY, c.CSF_TME_PRCNT, '', 1 " +
+            "c.POS_CSF_AMT, c.POS_CSF_FTE_QTY, c.POS_CSF_TM_PCT, '', 1 " +
             "FROM LD_CSF_TRACKER_T c WHERE c.UNIV_FISCAL_YR = ?1")
             .setParameter(1, baseYear)
             .executeUpdate();
