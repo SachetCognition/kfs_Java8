@@ -42,8 +42,7 @@
         </property>
         <property name="databaseRepositoryFilePaths">
             <list>
-                <value>org/kuali/kfs/sys/ojb-sys.xml</value>
-            </list>
+					</list>
         </property>
         <property name="scriptConfigurationFilePaths">
             <list>

@@ -45,8 +45,7 @@
 		</property>
 		<property name="databaseRepositoryFilePaths">
 			<list>
-				<value>org/kuali/kfs/gl/ojb-gl.xml</value>
-			</list>
+					</list>
 		</property>
 		<property name="jobNames">
 			<list>

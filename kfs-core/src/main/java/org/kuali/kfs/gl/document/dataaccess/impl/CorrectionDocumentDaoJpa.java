@@ -54,6 +54,11 @@ public class CorrectionDocumentDaoJpa extends org.kuali.rice.core.framework.pers
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     /**
      * Queries the database to get a Collection of GLCP documents finalized on the given date
      * 

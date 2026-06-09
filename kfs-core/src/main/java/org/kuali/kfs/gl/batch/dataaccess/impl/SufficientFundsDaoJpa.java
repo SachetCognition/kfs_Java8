@@ -57,6 +57,11 @@ public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persist
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SufficientFundsDaoJpa.class);
 
     private static final String YEAR_END_DOC_PREFIX = "YE%";

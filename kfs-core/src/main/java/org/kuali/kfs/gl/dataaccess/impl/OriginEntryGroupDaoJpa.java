@@ -57,6 +57,11 @@ public class OriginEntryGroupDaoJpa extends org.kuali.rice.core.framework.persis
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(OriginEntryGroupDaoJpa.class);
 
     private static final String DATE = "date";

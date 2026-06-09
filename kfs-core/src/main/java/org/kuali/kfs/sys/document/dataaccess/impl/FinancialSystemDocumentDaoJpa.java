@@ -55,6 +55,11 @@ public class FinancialSystemDocumentDaoJpa extends org.kuali.rice.core.framework
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     public <T extends Document> Collection<T> findByDocumentHeaderStatusCode(Class<T> clazz, String statusCode) {
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KRADPropertyConstants.DOCUMENT_HEADER + "." + KFSPropertyConstants.FINANCIAL_DOCUMENT_STATUS_CODE, statusCode);

@@ -47,8 +47,7 @@
 		</property>
 		<property name="databaseRepositoryFilePaths">
 			<list>
-				<value>org/kuali/kfs/coa/ojb-coa.xml</value>
-			</list>
+					</list>
 		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>

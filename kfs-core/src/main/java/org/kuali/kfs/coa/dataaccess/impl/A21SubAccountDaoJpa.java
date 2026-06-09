@@ -49,6 +49,11 @@ public class A21SubAccountDaoJpa extends org.kuali.rice.core.framework.persisten
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(A21SubAccountDaoJpa.class);
 
     public A21SubAccountDaoJpa() {

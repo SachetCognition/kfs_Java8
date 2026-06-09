@@ -53,6 +53,11 @@ public class FinancialSystemDocumentHeaderPopulationDaoJpa extends org.kuali.ric
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     /**
      *
      * @see org.kuali.kfs.sys.batch.dataaccess.FinancialSystemDocumentHeaderPopulationDao#countTotalFinancialSystemDocumentHeadersToProcess()

@@ -48,6 +48,11 @@ public class OriginationCodeDaoJpa extends org.kuali.rice.core.framework.persist
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static Logger LOG = Logger.getLogger(OriginationCodeDaoJpa.class);
 
     public OriginationCodeDaoJpa() {

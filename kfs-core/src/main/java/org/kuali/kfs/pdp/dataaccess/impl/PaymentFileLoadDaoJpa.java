@@ -58,6 +58,11 @@ public class PaymentFileLoadDaoJpa extends org.kuali.rice.core.framework.persist
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(PaymentFileLoadDaoJpa.class);
 
     public PaymentFileLoadDaoJpa() {

@@ -50,6 +50,11 @@ public class FinancialSystemDocumentHeaderDaoJpa extends DocumentHeaderDaoOjb im
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     /*
      * (non-Javadoc)
      * 

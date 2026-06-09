@@ -33,7 +33,7 @@ import java.util.List;
 import org.kuali.kfs.vnd.businessobject.DebarredVendorMatch;
 import org.kuali.kfs.vnd.businessobject.VendorDetail;
 
-public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.persistence.dao.PlatformAwareDao implements DebarredVendorMatchDao {
+public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.persistence.dao.PlatformAwareDao, DebarredVendorMatchDao {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -47,6 +47,11 @@ public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.
     public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
         this.dbPlatform = dbPlatform;
     }
+
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
 
     /**
      * @see org.kuali.kfs.vnd.batch.dataaccess.DebarredVendorMatchDao.getPreviousVendorExcludeConfirmation(org.kuali.kfs.vnd.businessobject.DebarredVendorMatch)

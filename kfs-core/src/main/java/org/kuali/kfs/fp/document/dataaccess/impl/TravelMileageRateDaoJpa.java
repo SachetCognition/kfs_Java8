@@ -56,6 +56,11 @@ public class TravelMileageRateDaoJpa extends org.kuali.rice.core.framework.persi
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static Logger LOG = Logger.getLogger(TravelMileageRateDaoJpa.class);
 
     /**

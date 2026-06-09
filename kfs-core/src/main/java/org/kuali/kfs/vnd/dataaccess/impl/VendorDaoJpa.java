@@ -52,6 +52,11 @@ public class VendorDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(VendorDaoJpa.class);
 
     public VendorContract getVendorB2BContract(VendorDetail vendorDetail, String campus, Date currentSqlDate) {

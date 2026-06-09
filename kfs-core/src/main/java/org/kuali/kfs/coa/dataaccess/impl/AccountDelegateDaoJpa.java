@@ -57,6 +57,11 @@ public class AccountDelegateDaoJpa extends org.kuali.rice.core.framework.persist
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     /**
      * @see org.kuali.kfs.coa.dataaccess.AccountDelegateDao#getLockingDocumentNumber(java.lang.String, java.lang.String)
      */

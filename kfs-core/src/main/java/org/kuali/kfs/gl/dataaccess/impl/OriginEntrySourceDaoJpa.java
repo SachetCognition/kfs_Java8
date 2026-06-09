@@ -51,6 +51,11 @@ public class OriginEntrySourceDaoJpa extends org.kuali.rice.core.framework.persi
         this.dbPlatform = dbPlatform;
     }
 
+    public void setJcdAlias(String jcdAlias) {
+        // no-op: JPA does not use OJB jcdAlias
+    }
+
+
     private static final String FINANCIAL_DOCUMENT_REVERSAL_DATE = "financialDocumentReversalDate";
     private static final String UNIVERSITY_FISCAL_YEAR = "universityFiscalYear";
     private static final String CHART_OF_ACCOUNTS_CODE = "chartOfAccountsCode";

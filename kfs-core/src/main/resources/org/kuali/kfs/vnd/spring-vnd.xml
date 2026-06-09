@@ -52,8 +52,7 @@
         </property>
 		<property name="databaseRepositoryFilePaths">
 			<list>
-				<value>org/kuali/kfs/vnd/ojb-vnd.xml</value>
-			</list>
+					</list>
 		</property>
         <property name="batchFileDirectories">
           	<list>
