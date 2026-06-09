@@ -48,12 +48,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 /**
  * Purchase Order Item Business Object.
  */
 @Entity
 @Table(name = "PUR_PO_ITM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "itemIdentifier", column = @Column(name = "PO_ITM_ID")),
+    @AttributeOverride(name = "itemQuantity", column = @Column(name = "ITM_ORD_QTY"))
+})
 public class PurchaseOrderItem extends PurchasingItemBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderItem.class);
 
@@ -75,10 +82,13 @@ public class PurchaseOrderItem extends PurchasingItemBase {
     @Column(name = "ITM_DMGED_TOT_QTY")
     private KualiDecimal itemDamagedTotalQuantity;
         
+    @Transient
     private PurchaseOrderDocument purchaseOrder;
     
     // Not persisted to DB
+    @Transient
     private boolean itemSelectedForRetransmitIndicator;
+    @Transient
     private boolean movingToSplit;
 
     /**

@@ -49,12 +49,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 /**
  * Payment Request Item Business Object.
  */
 @Entity
 @Table(name = "AP_PMT_RQST_ITM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "itemIdentifier", column = @Column(name = "PMT_RQST_ITM_ID")),
+    @AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "PMT_RQST_ID")),
+    @AttributeOverride(name = "itemQuantity", column = @Column(name = "ITM_INV_QTY")),
+    @AttributeOverride(name = "itemUnitPrice", column = @Column(name = "ITM_UNIT_PRC"))
+})
 public class PaymentRequestItem extends AccountsPayableItemBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestItem.class);
 

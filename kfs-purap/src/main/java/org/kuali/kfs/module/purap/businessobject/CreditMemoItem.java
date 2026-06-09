@@ -49,12 +49,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 /**
  * Item line Business Object for Credit Memo Document.
  */
 @Entity
 @Table(name = "AP_CRDT_MEMO_ITM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "itemIdentifier", column = @Column(name = "CRDT_MEMO_ITM_ID")),
+    @AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "CRDT_MEMO_ID")),
+    @AttributeOverride(name = "itemQuantity", column = @Column(name = "ITM_CRDT_QTY")),
+    @AttributeOverride(name = "itemUnitPrice", column = @Column(name = "ITM_UNT_PRC"))
+})
 public class CreditMemoItem extends AccountsPayableItemBase {
     @Column(name = "PO_INV_TOT_QTY")
     private KualiDecimal poInvoicedTotalQuantity;

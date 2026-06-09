@@ -37,19 +37,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.AttributeOverride;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 @Entity
 @Table(name = "PUR_RCVNG_LN_ITM_T")
+@AttributeOverride(name = "receivingItemIdentifier", column = @Column(name = "RCVNG_LN_ITM_ID"))
 public class LineItemReceivingItem extends ReceivingItemBase {
 
     @Column(name = "ITM_ORD_QTY")
     private KualiDecimal itemOrderedQuantity;
 
     // not stored in db
+    @Transient
     private KualiDecimal itemReceivedPriorQuantity;
+    @Transient
     private KualiDecimal itemReceivedToBeQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)

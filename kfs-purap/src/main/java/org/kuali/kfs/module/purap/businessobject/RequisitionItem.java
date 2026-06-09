@@ -32,16 +32,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 /**
  * Requisition Item Business Object.
  */
 @Entity
 @Table(name = "PUR_REQS_ITM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "itemIdentifier", column = @Column(name = "REQS_ITM_ID")),
+    @AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "REQS_ID"))
+})
 public class RequisitionItem extends PurchasingItemBase {
 
     @Column(name = "ITM_RSTRC_IND")
     private boolean itemRestrictedIndicator;
+    @Transient
     private String holdSupplierId; //not persisted
         
     /**
