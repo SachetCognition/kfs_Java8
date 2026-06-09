@@ -25,20 +25,34 @@ import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 /**
  * Represents a specific university date
  * 
  */
+@Entity
+@Table(name = "SH_UNIV_DATE_T")
 public class UniversityDate extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
     static final long serialVersionUID = 2587833750168955556L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "UniversityDate";
     
+    @Id
+    @Column(name = "UNIV_DT")
     private Date universityDate;
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalAccountingPeriod;
 
+    @Transient
     private AccountingPeriod accountingPeriod;
+    @Transient
     private SystemOptions options;
 
     /*
@@ -46,6 +60,7 @@ public class UniversityDate extends PersistableBusinessObjectBase implements Fis
      * 
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap map = new LinkedHashMap();
         map.put("universityDate", getUniversityDate());

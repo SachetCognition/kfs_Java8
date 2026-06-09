@@ -48,52 +48,98 @@ import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+
 /**
  * This is the generic class which contains all the elements on a typical line of accounting elements. These are all the accounting
  * items necessary to create a pending entry to the G/L. All transaction documents will use this business object inherently.
  */
+@MappedSuperclass
 public abstract class AccountingLineBase extends PersistableBusinessObjectBase implements Serializable, AccountingLine, GeneralLedgerPendingEntrySourceDetail {
     private static final Logger LOG = Logger.getLogger(AccountingLineBase.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     protected Integer sequenceNumber; // relative to the grouping of acctng lines
+    @Column(name = "FDOC_POST_YR")
     protected Integer postingYear;
+    @Column(name = "FDOC_LINE_AMT")
     protected KualiDecimal amount;
+    @Column(name = "FS_REF_ORIGIN_CD")
     protected String referenceOriginCode;
+    @Column(name = "FDOC_REF_NBR")
     protected String referenceNumber;
+    @Column(name = "FDOC_REF_TYP_CD")
     protected String referenceTypeCode;
+    @Column(name = "FDOC_OVERRIDE_CD")
     protected String overrideCode = AccountingLineOverride.CODE.NONE;
+    @Transient
     protected boolean accountExpiredOverride; // for the UI, persisted in overrideCode
+    @Transient
     protected boolean accountExpiredOverrideNeeded; // for the UI, not persisted
+    @Transient
     protected boolean nonFringeAccountOverride; // for the UI, persisted in overrideCode
+    @Transient
     protected boolean nonFringeAccountOverrideNeeded; // for the UI, not persisted
+    @Transient
     protected boolean objectBudgetOverride;
+    @Transient
     protected boolean objectBudgetOverrideNeeded;
+    @Column(name = "ORG_REFERENCE_ID")
     protected String organizationReferenceId;
+    @Column(name = "FDOC_LINE_DBCR_CD")
     protected String debitCreditCode; // should only be set by the Journal Voucher or Auxiliary Voucher document
+    @Column(name = "TRN_ENCUM_UPDT_CD")
     protected String encumbranceUpdateCode; // should only be set by the Journal Voucher document
+    @Id
+    @Column(name = "FDOC_LN_TYP_CD")
     protected String financialDocumentLineTypeCode;
+    @Column(name = "FDOC_LINE_DESC")
     protected String financialDocumentLineDescription;
+    @Transient
     protected boolean salesTaxRequired;
 
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "SUB_ACCT_NBR")
     protected String subAccountNumber;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "PROJECT_CD")
     protected String projectCode;
+    @Column(name = "FIN_BALANCE_TYP_CD")
     protected String balanceTypeCode;
 
     // bo references
+    @Transient
     protected Chart chart;
+    @Transient
     protected Account account;
+    @Transient
     protected ObjectCode objectCode;
+    @Transient
     protected SubAccount subAccount;
+    @Transient
     protected SubObjectCode subObjectCode;
+    @Transient
     protected ProjectCode project;
+    @Transient
     protected BalanceType balanceTyp;
+    @Transient
     protected OriginationCode referenceOrigin;
+    @Transient
     protected DocumentTypeEBO referenceFinancialSystemDocumentTypeCode;
+    @Transient
     protected SalesTax salesTax;
 
     /**

@@ -23,13 +23,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Unit Of Measure Business Object.
  */
+@Entity
+@Table(name = "SH_UOM_T")
 public class UnitOfMeasure extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ITM_UOM_CD")
     private String itemUnitOfMeasureCode;
+    @Column(name = "ITM_UOM_DESC")
     private String itemUnitOfMeasureDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

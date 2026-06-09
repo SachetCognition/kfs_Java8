@@ -31,20 +31,45 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  *
  */
+@Entity
+@Table(name = "SH_ROOM_T")
+@IdClass(RoomId.class)
 public class Room extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Id
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Id
+    @Column(name = "BLDG_ROOM_NBR")
     protected String buildingRoomNumber;
+    @Column(name = "BLDG_ROOM_TYPE")
     protected String buildingRoomType;
+    @Column(name = "BLDG_ROOM_DEPT")
     protected String buildingRoomDepartment;
+    @Column(name = "BLDG_ROOM_DESC")
     protected String buildingRoomDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected CampusEbo campus;
+    @Transient
     protected Building building;
 
     /**
