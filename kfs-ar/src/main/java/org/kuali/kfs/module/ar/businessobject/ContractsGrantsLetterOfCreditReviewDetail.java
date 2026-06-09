@@ -26,6 +26,7 @@ import javax.persistence.Entity;
 import javax.persistence.IdClass;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.kuali.kfs.module.ar.document.ContractsGrantsLetterOfCreditReviewDocument;
@@ -73,6 +74,7 @@ public class ContractsGrantsLetterOfCreditReviewDetail extends PersistableBusine
     private KualiDecimal claimOnCashBalance = KualiDecimal.ZERO;
     @Column(name = "DRW_AMT")
     private KualiDecimal amountToDraw = KualiDecimal.ZERO;
+    @Transient
     private KualiDecimal hiddenAmountToDraw = KualiDecimal.ZERO;// This would be used for comparision with AmountToDraw field when
                                                                 // user modifies it - not persisted
     @Column(name = "FND_NOT_DRWN_AMT")

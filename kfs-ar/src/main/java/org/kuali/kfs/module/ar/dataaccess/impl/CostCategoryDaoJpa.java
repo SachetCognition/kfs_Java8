@@ -292,52 +292,74 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
 
         // Use native SQL to build OR across object codes, levels, and consolidations
+        // Dynamically expand collection parameters into individual placeholders
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT b.* FROM GL_BALANCE_T b ");
-        sql.append("WHERE b.UNIV_FISCAL_YR = ?1 ");
-        sql.append("AND b.FIN_COA_CD = ?2 ");
-        sql.append("AND b.ACCOUNT_NBR = ?3 ");
-        sql.append("AND b.FIN_BALANCE_TYP_CD = ?4 ");
-        if (objectType != null && !objectType.isEmpty()) {
-            sql.append("AND b.FIN_OBJ_TYP_CD IN (?5) ");
-        }
-        sql.append("AND ( ");
+        List<Object> params = new ArrayList<Object>();
+        int paramIdx = 1;
 
+        sql.append("SELECT b.* FROM GL_BALANCE_T b ");
+        sql.append("WHERE b.UNIV_FISCAL_YR = ?" + paramIdx);
+        params.add(fiscalYear);
+        paramIdx++;
+
+        sql.append(" AND b.FIN_COA_CD = ?" + paramIdx);
+        params.add(chartOfAccountsCode);
+        int chartParamIdx = paramIdx;
+        paramIdx++;
+
+        sql.append(" AND b.ACCOUNT_NBR = ?" + paramIdx);
+        params.add(accountNumber);
+        paramIdx++;
+
+        sql.append(" AND b.FIN_BALANCE_TYP_CD = ?" + paramIdx);
+        params.add(balanceType);
+        paramIdx++;
+
+        if (objectType != null && !objectType.isEmpty()) {
+            List<String> objTypeList = new ArrayList<String>(objectType);
+            sql.append(" AND b.FIN_OBJ_TYP_CD IN (");
+            sql.append(buildPlaceholders(paramIdx, objTypeList.size()));
+            for (String ot : objTypeList) { params.add(ot); }
+            paramIdx += objTypeList.size();
+            sql.append(")");
+        }
+
+        sql.append(" AND ( ");
         boolean hasOrClause = false;
+
         if (!objectCodes.isEmpty()) {
-            sql.append("b.FIN_OBJECT_CD IN (?6) ");
+            sql.append("b.FIN_OBJECT_CD IN (");
+            sql.append(buildPlaceholders(paramIdx, objectCodes.size()));
+            for (String oc : objectCodes) { params.add(oc); }
+            paramIdx += objectCodes.size();
+            sql.append(")");
             hasOrClause = true;
         }
         if (!objectLevelCodes.isEmpty()) {
-            if (hasOrClause) sql.append("OR ");
+            if (hasOrClause) sql.append(" OR ");
             sql.append("b.FIN_OBJECT_CD IN (SELECT oc.FIN_OBJECT_CD FROM CA_OBJECT_CODE_T oc ");
-            sql.append("WHERE oc.FIN_COA_CD = ?2 AND oc.UNIV_FISCAL_YR = ?1 AND oc.FIN_OBJ_LEVEL_CD IN (?7)) ");
+            sql.append("WHERE oc.FIN_COA_CD = ?" + chartParamIdx + " AND oc.UNIV_FISCAL_YR = ?1 AND oc.FIN_OBJ_LEVEL_CD IN (");
+            sql.append(buildPlaceholders(paramIdx, objectLevelCodes.size()));
+            for (String lc : objectLevelCodes) { params.add(lc); }
+            paramIdx += objectLevelCodes.size();
+            sql.append("))");
             hasOrClause = true;
         }
         if (!consolidationCodes.isEmpty()) {
-            if (hasOrClause) sql.append("OR ");
+            if (hasOrClause) sql.append(" OR ");
             sql.append("b.FIN_OBJECT_CD IN (SELECT oc2.FIN_OBJECT_CD FROM CA_OBJECT_CODE_T oc2 ");
             sql.append("JOIN CA_OBJ_LEVEL_T lvl ON oc2.FIN_COA_CD = lvl.FIN_COA_CD AND oc2.FIN_OBJ_LEVEL_CD = lvl.FIN_OBJ_LEVEL_CD ");
-            sql.append("WHERE oc2.FIN_COA_CD = ?2 AND oc2.UNIV_FISCAL_YR = ?1 AND lvl.FIN_CONS_OBJ_CD IN (?8)) ");
+            sql.append("WHERE oc2.FIN_COA_CD = ?" + chartParamIdx + " AND oc2.UNIV_FISCAL_YR = ?1 AND lvl.FIN_CONS_OBJ_CD IN (");
+            sql.append(buildPlaceholders(paramIdx, consolidationCodes.size()));
+            for (String cc : consolidationCodes) { params.add(cc); }
+            paramIdx += consolidationCodes.size();
+            sql.append("))");
         }
-        sql.append(") ");
+        sql.append(" ) ");
 
         javax.persistence.Query query = entityManager.createNativeQuery(sql.toString(), Balance.class);
-        query.setParameter(1, fiscalYear);
-        query.setParameter(2, chartOfAccountsCode);
-        query.setParameter(3, accountNumber);
-        query.setParameter(4, balanceType);
-        if (objectType != null && !objectType.isEmpty()) {
-            query.setParameter(5, objectType);
-        }
-        if (!objectCodes.isEmpty()) {
-            query.setParameter(6, objectCodes);
-        }
-        if (!objectLevelCodes.isEmpty()) {
-            query.setParameter(7, objectLevelCodes);
-        }
-        if (!consolidationCodes.isEmpty()) {
-            query.setParameter(8, consolidationCodes);
+        for (int i = 0; i < params.size(); i++) {
+            query.setParameter(i + 1, params.get(i));
         }
 
         return query.getResultList();
@@ -420,6 +442,15 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
 
         return null;
+    }
+
+    private String buildPlaceholders(int startIdx, int count) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            if (i > 0) sb.append(", ");
+            sb.append("?" + (startIdx + i));
+        }
+        return sb.toString();
     }
 
     public void setEntityManager(EntityManager entityManager) {
