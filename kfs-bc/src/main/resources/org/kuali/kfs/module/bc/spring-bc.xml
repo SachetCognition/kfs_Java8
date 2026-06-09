@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED: Migrating to Java @Configuration. See org.kuali.kfs.module.bc.context.*Config -->
 <!--
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
@@ -42,7 +43,13 @@
 				<value>classpath:org/kuali/kfs/module/bc/businessobject/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/module/bc/document/datadictionary/*.xml</value>
 			</list>
-		</property>		<property name="scriptConfigurationFilePaths">
+		</property>
+		<property name="databaseRepositoryFilePaths">
+			<list>
+				<value>org/kuali/kfs/module/bc/ojb-bc.xml</value>
+			</list>
+		</property>
+		<property name="scriptConfigurationFilePaths">
 			<list>
 				<value>org/kuali/kfs/module/bc/dwr-bc.xml</value>
 			</list>

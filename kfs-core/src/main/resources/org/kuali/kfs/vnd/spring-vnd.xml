@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED: Migrating to Java @Configuration. See org.kuali.kfs.vnd.context.*Config -->
 <!--
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
@@ -49,7 +50,13 @@
             <list>
                 <value>org/kuali/kfs/vnd/dwr-vnd.xml</value>
             </list>
-        </property>        <property name="batchFileDirectories">
+        </property>
+		<property name="databaseRepositoryFilePaths">
+			<list>
+				<value>org/kuali/kfs/vnd/ojb-vnd.xml</value>
+			</list>
+		</property>
+        <property name="batchFileDirectories">
           	<list>
             	<value>${reports.directory}/vnd</value>
             	<value>${staging.directory}/vnd/exclusion</value>
