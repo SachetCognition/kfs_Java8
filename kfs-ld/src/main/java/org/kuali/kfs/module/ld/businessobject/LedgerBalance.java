@@ -37,6 +37,8 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -57,22 +59,6 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  * Labor business object for LedgerBalance.
  */
 public class LedgerBalance extends Balance implements LaborLedgerBalance{
-    @Id
-    @Column(name = "UNIV_FISCAL_YR")
-    private Integer universityFiscalYear;
-
-    @Id
-    @Column(name = "FIN_COA_CD")
-    private String chartOfAccountsCode;
-
-    @Id
-    @Column(name = "ACCOUNT_NBR")
-    private String accountNumber;
-
-    @Id
-    @Column(name = "SUB_ACCT_NBR")
-    private String subAccountNumber;
-
     @Id
 
     @Column(name = "FIN_OBJECT_CD")
@@ -666,6 +652,38 @@ public class LedgerBalance extends Balance implements LaborLedgerBalance{
                 getMonth11Amount().isZero() &&
                 getMonth12Amount().isZero() &&
                 getMonth13Amount().isZero();
+    }
+
+    @Override
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
+    @Access(AccessType.PROPERTY)
+    public Integer getUniversityFiscalYear() {
+        return super.getUniversityFiscalYear();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FIN_COA_CD")
+    @Access(AccessType.PROPERTY)
+    public String getChartOfAccountsCode() {
+        return super.getChartOfAccountsCode();
+    }
+
+    @Override
+    @Id
+    @Column(name = "ACCOUNT_NBR")
+    @Access(AccessType.PROPERTY)
+    public String getAccountNumber() {
+        return super.getAccountNumber();
+    }
+
+    @Override
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
+    @Access(AccessType.PROPERTY)
+    public String getSubAccountNumber() {
+        return super.getSubAccountNumber();
     }
 
     /**

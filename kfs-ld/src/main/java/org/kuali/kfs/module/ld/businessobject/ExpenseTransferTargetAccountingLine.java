@@ -29,6 +29,8 @@ import org.kuali.kfs.sys.businessobject.TargetAccountingLine;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -50,14 +52,6 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  * <code>{@link org.kuali.module.labor.document.ExpenseTransferDocument}</code>
  */
 public class ExpenseTransferTargetAccountingLine extends TargetAccountingLine implements ExpenseTransferAccountingLine, LaborLedgerExpenseTransferTargetAccountingLine, Comparable<ExpenseTransferTargetAccountingLine> {
-    @Id
-    @Column(name = "FDOC_NBR")
-    private String documentNumber;
-
-    @Id
-    @Column(name = "FDOC_LINE_NBR")
-    private Integer sequenceNumber;
-
     @Column(name = "POSITION_NBR")
 
     private String positionNumber;
@@ -292,5 +286,21 @@ public class ExpenseTransferTargetAccountingLine extends TargetAccountingLine im
      */
     public String getFringeBenefitView() {
         return SpringContext.getBean(ConfigurationService.class).getPropertyValueAsString(KFSKeyConstants.SALARY_TRANSFER_FRINGE_BENEFIT_INQUIRY_LABEL);
+    }
+
+    @Override
+    @Id
+    @Column(name = "FDOC_NBR")
+    @Access(AccessType.PROPERTY)
+    public String getDocumentNumber() {
+        return super.getDocumentNumber();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
+    @Access(AccessType.PROPERTY)
+    public Integer getSequenceNumber() {
+        return super.getSequenceNumber();
     }
 }

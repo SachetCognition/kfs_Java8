@@ -25,6 +25,8 @@ import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.fp.businessobject.VoucherSourceAccountingLine;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -46,14 +48,6 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  */
 public class LaborJournalVoucherDetail extends VoucherSourceAccountingLine {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborJournalVoucherDetail.class);
-
-    @Id
-    @Column(name = "FDOC_NBR")
-    private String documentNumber;
-
-    @Id
-    @Column(name = "FDOC_LINE_NBR")
-    private Integer sequenceNumber;
 
     @Column(name = "POSITION_NBR")
 
@@ -545,4 +539,19 @@ public class LaborJournalVoucherDetail extends VoucherSourceAccountingLine {
         this.payrollEndDateFiscalYear = payrollEndDateFiscalYear;
     }
 
+    @Override
+    @Id
+    @Column(name = "FDOC_NBR")
+    @Access(AccessType.PROPERTY)
+    public String getDocumentNumber() {
+        return super.getDocumentNumber();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
+    @Access(AccessType.PROPERTY)
+    public Integer getSequenceNumber() {
+        return super.getSequenceNumber();
+    }
 }

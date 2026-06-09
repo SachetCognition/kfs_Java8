@@ -29,6 +29,8 @@ import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry;
 import org.kuali.kfs.sys.businessobject.OriginationCode;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -49,18 +51,6 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  * Labor business object for LaborLedgerPendingEntry.
  */
 public class LaborLedgerPendingEntry extends GeneralLedgerPendingEntry implements LaborTransaction, LaborLedgerPendingEntryForSearching {
-    @Id
-    @Column(name = "FS_ORIGIN_CD")
-    private String financialSystemOriginationCode;
-
-    @Id
-    @Column(name = "FDOC_NBR")
-    private String documentNumber;
-
-    @Id
-    @Column(name = "TRN_ENTR_SEQ_NBR")
-    private Integer transactionLedgerEntrySequenceNumber;
-
     @Column(name = "POSITION_NBR")
 
     private String positionNumber;
@@ -646,5 +636,29 @@ public class LaborLedgerPendingEntry extends GeneralLedgerPendingEntry implement
      */
     public Timestamp getTransactionEntryProcessedTimestamp() {
         return super.getTransactionEntryProcessedTs();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
+    @Access(AccessType.PROPERTY)
+    public String getFinancialSystemOriginationCode() {
+        return super.getFinancialSystemOriginationCode();
+    }
+
+    @Override
+    @Id
+    @Column(name = "FDOC_NBR")
+    @Access(AccessType.PROPERTY)
+    public String getDocumentNumber() {
+        return super.getDocumentNumber();
+    }
+
+    @Override
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
+    @Access(AccessType.PROPERTY)
+    public Integer getTransactionLedgerEntrySequenceNumber() {
+        return super.getTransactionLedgerEntrySequenceNumber();
     }
 }
