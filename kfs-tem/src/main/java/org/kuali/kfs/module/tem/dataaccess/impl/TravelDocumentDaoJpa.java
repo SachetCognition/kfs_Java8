@@ -231,12 +231,15 @@ public class TravelDocumentDaoJpa implements TravelDocumentDao {
         CriteriaQuery<TravelReimbursementDocument> cq = cb.createQuery(TravelReimbursementDocument.class);
         Root<TravelReimbursementDocument> root = cq.from(TravelReimbursementDocument.class);
 
-        Predicate profilePred = cb.equal(root.get("temProfileId"), temProfileId);
-        Predicate beginPred = cb.equal(root.get("tripBegin"), tripBegin);
+        Predicate profileAndBegin = cb.and(
+            cb.equal(root.get("temProfileId"), temProfileId),
+            cb.equal(root.get("tripBegin"), tripBegin)
+        );
         Predicate endPred = cb.equal(root.get("tripEnd"), tripEnd);
+        Predicate matchingTrip = cb.or(profileAndBegin, endPred);
         Predicate notInitiated = cb.not(root.get("documentHeader").get("financialDocumentStatusCode").in(Arrays.asList(DocumentStatusCodes.INITIATED)));
 
-        cq.where(profilePred, cb.or(beginPred, endPred), notInitiated);
+        cq.where(matchingTrip, notInitiated);
 
         return entityManager.createQuery(cq).getResultList();
     }

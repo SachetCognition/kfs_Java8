@@ -231,7 +231,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the creditCardAgencyCode.
      */
-    @Column(name = "credit_card_agency_code", nullable = false, length = 19)
     public String getCreditCardOrAgencyCode() {
         return creditCardOrAgencyCode;
     }
@@ -250,7 +249,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the creditCardAgency.
      */
-    @JoinColumn(name = "credit_card_agency_code")
     public CreditCardAgency getCreditCardAgency() {
         return creditCardAgency;
     }

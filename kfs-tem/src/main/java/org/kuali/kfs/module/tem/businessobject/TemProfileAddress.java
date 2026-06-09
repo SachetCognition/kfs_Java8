@@ -38,16 +38,23 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
 	@Id
 	@Column(name = "TEM_PROFILE_ID")
 	private Integer profileId;
+    @Column(name = "ADDR_LINE_1")
     private String streetAddressLine1;
+    @Column(name = "ADDR_LINE_2")
     private String streetAddressLine2;
+    @Column(name = "CITY_NM")
     private String cityName;
+    @Column(name = "STATE_CD")
     private String stateCode;
+    @Column(name = "ZIP_CD")
     private String zipCode;
+    @Column(name = "COUNTRY_CD")
     private String countryCode;
 
     private TemProfile profile;
 
     private String customerNumber;
+    @Column(name = "CUST_ADDR_ID")
     private Integer customerAddressIdentifier;
     private String principalId;
 
@@ -70,7 +77,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the temProfileId attribute.
      * @return Returns the temProfileId.
      */
-    @Column(name = "tem_profile_id", nullable = false, length=19)
     public Integer getProfileId() {
         return profileId;
     }
@@ -89,7 +95,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the streetAddressLine1 attribute.
      * @return Returns the streetAddressLine1.
      */
-    @Column(name = "addr_line_1", length = 50)
     public String getStreetAddressLine1() {
         return streetAddressLine1;
     }
@@ -108,7 +113,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the streetAddressLine2 attribute.
      * @return Returns the streetAddressLine2.
      */
-    @Column(name = "addr_line_2", length = 50)
     public String getStreetAddressLine2() {
         return streetAddressLine2;
     }
@@ -127,7 +131,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the cityName attribute.
      * @return Returns the cityName.
      */
-    @Column(name = "city_nm", length = 30)
     public String getCityName() {
         return cityName;
     }
@@ -146,7 +149,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the state attribute.
      * @return Returns the state.
      */
-    @Column(name = "state_cd", length = 40)
     public String getStateCode() {
         return stateCode;
     }
@@ -165,7 +167,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the zipCode attribute.
      * @return Returns the zipCode.
      */
-    @Column(name = "zip_cd", length = 40)
     public String getZipCode() {
         return zipCode;
     }
@@ -184,7 +185,6 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
      * Gets the country attribute.
      * @return Returns the country.
      */
-    @Column(name = "country_cd", length = 40)
     public String getCountryCode() {
         return countryCode;
     }
