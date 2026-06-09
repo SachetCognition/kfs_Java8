@@ -197,4 +197,23 @@ class BarcodeInventoryErrorDetailPredicateTest extends KfsUnitTestBase {
         assertThat(detail.getBuildingSubRoomNumber()).isEqualTo("B");
         assertThat(detail.getAssetConditionCode()).isEqualTo("E");
     }
+
+    @Test
+    @DisplayName("scan code filter overrides prior tag number rejection (documents pre-existing source behavior)")
+    void scanCodeFilterOverridesTagNumberFilter() {
+        // Tag number filter rejects (different tag), but scan code filter overrides to true
+        when(doc.getCurrentTagNumber()).thenReturn("WRONG_TAG");
+        when(doc.getCurrentScanCode()).thenReturn("Y");
+        when(doc.getCurrentCampusCode()).thenReturn(null);
+        when(doc.getCurrentBuildingNumber()).thenReturn(null);
+        when(doc.getCurrentRoom()).thenReturn(null);
+        when(doc.getCurrentSubroom()).thenReturn(null);
+        when(doc.getCurrentConditionCode()).thenReturn(null);
+
+        BarcodeInventoryErrorDetail detail = createErrorDetail();
+        detail.setUploadScanIndicator(true);
+
+        // Despite tag mismatch, scan code override makes evaluate() return true
+        assertThat(predicate.evaluate(detail)).isTrue();
+    }
 }
