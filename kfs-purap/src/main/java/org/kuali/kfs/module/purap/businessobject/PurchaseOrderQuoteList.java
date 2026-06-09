@@ -62,7 +62,7 @@ public class PurchaseOrderQuoteList extends PersistableBusinessObjectBase implem
     @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     private ContractManager contractManager;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrderQuoteListIdentifier")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrderQuoteList")
     private List<PurchaseOrderQuoteListVendor> quoteListVendors;
 
     /**

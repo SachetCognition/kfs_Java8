@@ -54,7 +54,7 @@ public class SensitiveDataAssignment extends PersistableBusinessObjectBase {
     @Column(name = "SNSTV_DTA_ASGN_CHG_DT")
     private  Date sensitiveDataAssignmentChangeDate;
     
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "sensitiveDataAssignmentIdentifier")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "sensitiveDataAssignment")
     private List<SensitiveDataAssignmentDetail> sensitiveDataAssignmentDetails;
     
     public SensitiveDataAssignment() {

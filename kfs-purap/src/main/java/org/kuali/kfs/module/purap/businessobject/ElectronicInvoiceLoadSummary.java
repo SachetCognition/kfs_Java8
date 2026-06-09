@@ -35,8 +35,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "AP_ELCTRNC_INV_LOAD_SUM_T")
@@ -49,8 +49,11 @@ public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase 
   @Id
   @Column(name = "VNDR_DUNS_NBR")
   private String vendorDunsNumber; // this is string constant if DUNS not found
+  @Transient
   private Integer vendorHeaderGeneratedIdentifier;
+  @Transient
   private Integer vendorDetailAssignedIdentifier;
+  @Transient
   private String vendorName;
   @Column(name = "INV_LOAD_SCCSS_CNT")
   private Integer invoiceLoadSuccessCount = new Integer(0);
@@ -60,6 +63,7 @@ public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase 
   private Integer invoiceLoadFailCount = new Integer(0);
   @Column(name = "INV_LOAD_FAIL_AMT")
   private KualiDecimal invoiceLoadFailAmount = new KualiDecimal(0.00);
+  @Transient
   private Boolean isEmpty = Boolean.TRUE;
   @Column(name = "FL_PROC_DT")
   private Timestamp fileProcessTimestamp;

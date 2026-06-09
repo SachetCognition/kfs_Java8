@@ -45,7 +45,7 @@ public class ElectronicInvoiceItemMappingDaoJpa implements ElectronicInvoiceItem
     public List getAll() {
         LOG.debug("getAll() started");
         return entityManager.createQuery(
-            "SELECT e FROM ElectronicInvoiceItemMapping e ORDER BY e.id", ElectronicInvoiceItemMapping.class)
+            "SELECT e FROM ElectronicInvoiceItemMapping e ORDER BY e.invoiceMapIdentifier", ElectronicInvoiceItemMapping.class)
             .getResultList();
     }
 
@@ -53,7 +53,7 @@ public class ElectronicInvoiceItemMappingDaoJpa implements ElectronicInvoiceItem
     public ElectronicInvoiceItemMapping getByUniqueKeys(Integer headerId, Integer detailId, String invoiceTypeCode) {
         LOG.debug("getByUniqueKeys() started");
         TypedQuery<ElectronicInvoiceItemMapping> query = entityManager.createQuery(
-            "SELECT e FROM ElectronicInvoiceItemMapping e WHERE e.vendorHeaderGeneratedId = :headerId AND e.vendorDetailAssignedId = :detailId AND e.electronicInvoiceItemTypeCode = :typeCode",
+            "SELECT e FROM ElectronicInvoiceItemMapping e WHERE e.vendorHeaderGeneratedIdentifier = :headerId AND e.vendorDetailAssignedIdentifier = :detailId AND e.invoiceItemTypeCode = :typeCode",
             ElectronicInvoiceItemMapping.class);
         query.setParameter("headerId", headerId);
         query.setParameter("detailId", detailId);
@@ -66,7 +66,7 @@ public class ElectronicInvoiceItemMappingDaoJpa implements ElectronicInvoiceItem
     public List getAllItemTypes() {
         LOG.debug("getAllItemTypes() started");
         return entityManager.createQuery(
-            "SELECT i FROM ItemType i WHERE i.active = true ORDER BY i.code", ItemType.class)
+            "SELECT i FROM ItemType i WHERE i.active = true ORDER BY i.itemTypeCode", ItemType.class)
             .getResultList();
     }
 
@@ -74,7 +74,7 @@ public class ElectronicInvoiceItemMappingDaoJpa implements ElectronicInvoiceItem
     public ItemType getItemTypeByCode(String code) {
         LOG.debug("getItemTypeByCode() started");
         TypedQuery<ItemType> query = entityManager.createQuery(
-            "SELECT i FROM ItemType i WHERE i.code = :code", ItemType.class);
+            "SELECT i FROM ItemType i WHERE i.itemTypeCode = :code", ItemType.class);
         query.setParameter("code", code);
         List<ItemType> results = query.getResultList();
         return results.isEmpty() ? null : results.get(0);

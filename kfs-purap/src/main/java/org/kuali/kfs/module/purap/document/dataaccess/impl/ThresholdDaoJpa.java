@@ -105,8 +105,8 @@ public class ThresholdDaoJpa implements ThresholdDao {
             "SELECT t FROM ReceivingThreshold t WHERE t.chartOfAccountsCode = :chart AND t.vendorHeaderGeneratedIdentifier = :vh AND t.vendorDetailAssignedIdentifier = :vd AND t.active = true",
             ReceivingThreshold.class)
             .setParameter("chart", chartCode)
-            .setParameter("vh", vendorHeaderGeneratedIdentifier)
-            .setParameter("vd", vendorDetailAssignedIdentifier)
+            .setParameter("vh", Integer.valueOf(vendorHeaderGeneratedIdentifier))
+            .setParameter("vd", Integer.valueOf(vendorDetailAssignedIdentifier))
             .getResultList();
     }
 }

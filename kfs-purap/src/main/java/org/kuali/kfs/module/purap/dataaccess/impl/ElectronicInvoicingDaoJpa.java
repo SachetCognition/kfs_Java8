@@ -50,7 +50,7 @@ public class ElectronicInvoicingDaoJpa implements ElectronicInvoicingDao {
     public ElectronicInvoiceLoadSummary getElectronicInvoiceLoadSummary(Integer loadId, String vendorDunsNumber) {
         LOG.debug("getElectronicInvoiceLoadSummary() started");
         TypedQuery<ElectronicInvoiceLoadSummary> query = entityManager.createQuery(
-            "SELECT e FROM ElectronicInvoiceLoadSummary e WHERE e.id = :loadId AND e.vendorDunsNumber = :duns",
+            "SELECT e FROM ElectronicInvoiceLoadSummary e WHERE e.invoiceLoadSummaryIdentifier = :loadId AND e.vendorDunsNumber = :duns",
             ElectronicInvoiceLoadSummary.class);
         query.setParameter("loadId", loadId);
         query.setParameter("duns", vendorDunsNumber);
@@ -62,7 +62,7 @@ public class ElectronicInvoicingDaoJpa implements ElectronicInvoicingDao {
     public List getPendingElectronicInvoices() {
         LOG.debug("getPendingElectronicInvoices() started");
         return entityManager.createQuery(
-            "SELECT p FROM PaymentRequestDocument p WHERE p.applicationDocumentStatus = :status AND p.isElectronicInvoice = true",
+            "SELECT p FROM PaymentRequestDocument p WHERE p.documentHeader.applicationDocumentStatus = :status AND p.paymentRequestElectronicInvoiceIndicator = true",
             PaymentRequestDocument.class)
             .setParameter("status", PurapConstants.PaymentRequestStatuses.APPDOC_PENDING_E_INVOICE)
             .getResultList();

@@ -56,7 +56,7 @@ import javax.persistence.Table;
 public class ContractManagerAssignmentDocument extends FinancialSystemTransactionalDocumentBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractManagerAssignmentDocument.class);
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "contractManagerAssignmentDocument")
     protected List<ContractManagerAssignmentDetail> contractManagerAssignmentDetails = new ArrayList<ContractManagerAssignmentDetail>();
 
     // Not persisted (only for labels in tag)
