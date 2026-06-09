@@ -53,7 +53,9 @@ public class AssetPaymentAssetDetail extends PersistableBusinessObjectBase {
 
     @Transient
     private Asset asset;
+    @Transient
     private List<AssetPaymentDetail> assetPaymentDetails;
+    @Transient
     private FinancialSystemDocumentHeader documentHeader;
 
     public AssetPaymentAssetDetail() {

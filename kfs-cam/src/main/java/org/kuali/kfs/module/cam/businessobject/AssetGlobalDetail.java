@@ -93,15 +93,20 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     @Transient
     private Asset asset;
+    @Transient
     private CampusEbo campus;
     @Transient
     private Building building;
     @Transient
     private Room buildingRoom;
+    @Transient
     private StateEbo offCampusState;
+    @Transient
     private CountryEbo offCampusCountry;
+    @Transient
     private PostalCodeEbo postalZipCode;
 
+    @Transient
     private Integer locationQuantity;
     @Column(name = "AST_REP_UNVL_ID")
     private String representativeUniversalIdentifier;
@@ -123,7 +128,9 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     private KualiDecimal separateSourceAmount; 
 
     // Non persistent
+    @Transient
     private List<AssetGlobalDetail> assetGlobalUniqueDetails;
+    @Transient
     private Person assetRepresentative;
     
     public Person getAssetRepresentative() {

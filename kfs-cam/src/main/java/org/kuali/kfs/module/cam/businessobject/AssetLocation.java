@@ -74,8 +74,11 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     @Transient
     protected AssetLocationType assetLocationType;
 
+    @Transient
     protected StateEbo assetLocationState;
+    @Transient
     protected CountryEbo assetLocationCountry;
+    @Transient
     protected PostalCodeEbo postalZipCode;
 
     /**

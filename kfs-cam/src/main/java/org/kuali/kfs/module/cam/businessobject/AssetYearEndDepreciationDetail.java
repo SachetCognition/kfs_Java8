@@ -51,6 +51,7 @@ public class AssetYearEndDepreciationDetail extends GlobalBusinessObjectDetailBa
     private boolean processed;
     @Transient
     private Asset asset;
+    @Transient
     private AssetYearEndDepreciation assetYearEndDepreciation;
 
     /**

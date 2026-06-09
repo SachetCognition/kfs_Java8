@@ -144,6 +144,7 @@ public class AssetPayment extends PersistableBusinessObjectBase {
     private ProjectCode project;
     @Transient
     private AccountingPeriod financialDocumentPostingPeriod;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
     @Transient
     private DocumentHeader documentHeader;
@@ -153,6 +154,7 @@ public class AssetPayment extends PersistableBusinessObjectBase {
     private SystemOptions option;
 
     // Non-persisted attributes:
+    @Transient
     private KualiDecimal yearToDate;
 
     /**

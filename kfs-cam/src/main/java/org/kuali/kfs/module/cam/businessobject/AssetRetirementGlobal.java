@@ -132,19 +132,26 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     protected Chart retirementChartOfAccounts;
     @Transient
     protected DocumentHeader cashReceiptFinancialDocument;
+    @Transient
     protected StateEbo retirementState;
+    @Transient
     protected CountryEbo retirementCountry;
+    @Transient
     protected PostalCodeEbo postalZipCode;
 
     @Transient
     protected List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
 
+    @Transient
     protected Integer postingYear;
+    @Transient
     protected String postingPeriodCode;
+    @Transient
     protected AccountingPeriod accountingPeriod;
     static protected transient AccountingPeriodService accountingPeriodService;
 
     // Non-persistent
+    @Transient
     protected KualiDecimal calculatedTotal;
 
     /**

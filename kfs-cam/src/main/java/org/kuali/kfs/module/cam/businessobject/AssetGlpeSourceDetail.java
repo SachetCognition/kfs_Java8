@@ -38,33 +38,46 @@ public class AssetGlpeSourceDetail extends PersistableBusinessObjectBase impleme
     private String accountNumber;
     @Column(name = "ACCT_CHARGE_AMT")
     private KualiDecimal amount;
+    @Transient
     private String balanceTypeCode;
     @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
     @Id
     @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Transient
     private String financialDocumentLineDescription;
     @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
     @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Transient
     private String organizationReferenceId;
     @Column(name = "FDOC_POST_YR")
     private Integer postingYear;
     @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Transient
     private String referenceNumber;
+    @Transient
     private String referenceOriginCode;
+    @Transient
     private String referenceTypeCode;
     @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Transient
     private boolean source;
+    @Transient
     private boolean expense;
+    @Transient
     private boolean capitalization;
+    @Transient
     private boolean accumulatedDepreciation;
+    @Transient
     private boolean capitalizationOffset;
+    @Transient
     private boolean payment;
+    @Transient
     private boolean paymentOffset;
     @Transient
     private Account account;

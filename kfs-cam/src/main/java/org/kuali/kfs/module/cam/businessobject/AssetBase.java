@@ -159,6 +159,7 @@ public class AssetBase extends PersistableBusinessObjectBase {
     protected String campusPoliceDepartmentCaseNumber;
     @Column(name = "AST_INVN_SCAN_CD")
     protected String inventoryScannedCode;
+    @Transient
     protected boolean active;
     @Column(name = "CPTL_AST_IN_SRVC_DT")
     protected Date capitalAssetInServiceDate;
@@ -185,6 +186,7 @@ public class AssetBase extends PersistableBusinessObjectBase {
     protected Account organizationOwnerAccount;
     @Transient
     protected Chart organizationOwnerChartOfAccounts;
+    @Transient
     protected CampusEbo campus;
     @Transient
     protected Room buildingRoom;
@@ -210,10 +212,13 @@ public class AssetBase extends PersistableBusinessObjectBase {
     protected AssetStatus inventoryStatus;
     @Transient
     protected List<AssetPayment> assetPayments;
+    @Transient
     protected Person assetRepresentative;
+    @Transient
     protected Person borrowerPerson;
     @Transient
     protected AssetOrganization assetOrganization;
+    @Transient
     protected String organizationTagNumber;
     @Transient
     protected List<AssetRepairHistory> assetRepairHistory;
@@ -233,38 +238,65 @@ public class AssetBase extends PersistableBusinessObjectBase {
     protected ObjectSubType financialObjectSubType;
     @Transient
     protected AssetAcquisitionType acquisitionType;
+    @Transient
     protected ContractsAndGrantsAgency agency;
 
 
     // Non-persisted attributes:
+    @Transient
     protected KualiDecimal paymentTotalCost;
     protected transient AssetGlobal separateHistory;
+    @Transient
     protected List<AssetRetirementGlobalDetail> mergeHistory;
+    @Transient
     protected KualiDecimal federalContribution;
+    @Transient
     protected AssetRetirementGlobalDetail retirementInfo;
+    @Transient
     protected AssetLocation offCampusLocation;
+    @Transient
     protected AssetLocation borrowerLocation;
+    @Transient
     protected AssetLocation borrowerStorageLocation;
     // calculated depreciation amounts
+    @Transient
     protected KualiDecimal accumulatedDepreciation;
+    @Transient
     protected KualiDecimal baseAmount;
+    @Transient
     protected KualiDecimal bookValue;
+    @Transient
     protected KualiDecimal prevYearDepreciation;
+    @Transient
     protected KualiDecimal yearToDateDepreciation;
+    @Transient
     protected KualiDecimal currentMonthDepreciation;
+    @Transient
     protected Date depreciationDateCopy;
     protected transient Integer quantity;
+    @Transient
     protected String lookup;
+    @Transient
     protected String assetTransferDocumentLookup;
+    @Transient
     protected String assetMaintenanceDocumentLookup;
+    @Transient
     protected String assetFabricationDocumentLookup;
+    @Transient
     protected String assetCreateOrSeparateDocumentLookup;
+    @Transient
     protected String assetPaymentDocumentLookup;
+    @Transient
     protected String assetEquipmentLoanOrReturnDocumentLookup;
+    @Transient
     protected String assetLocationDocumentLookup;
+    @Transient
     protected String assetMergeOrRetirementDocumentLookup;
+    @Transient
     protected String camsComplexMaintenanceDocumentLookup;
+    @Transient
     protected boolean tagged;
+    @Transient
     protected String lastInventoryDateUpdateButton; 
 
     /**

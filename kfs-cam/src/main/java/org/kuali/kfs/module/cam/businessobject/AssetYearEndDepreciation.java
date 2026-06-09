@@ -41,6 +41,7 @@ import org.hibernate.type.YesNoConverter;
 @Entity
 @Table(name = "CM_FSCL_YR_END_DEPR_HDR_T")
 public class AssetYearEndDepreciation extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Transient
     private String documentNumber;
     @Id
     @Column(name = "UNIV_FISCAL_YR")

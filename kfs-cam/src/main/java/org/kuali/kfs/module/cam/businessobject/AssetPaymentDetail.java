@@ -75,6 +75,7 @@ public class AssetPaymentDetail extends SourceAccountingLine {
     // bo references
     @Transient
     private AccountingPeriod financialDocumentPostingPeriod;
+    @Transient
     private DocumentTypeEBO expenditureFinancialSystemDocumentTypeCode;
     @Transient
     private OriginationCode expenditureFinancialSystemOrigination;

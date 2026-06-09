@@ -68,6 +68,7 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     @Transient
     protected Asset asset;
+    @Transient
     protected CampusEbo campus;
     @Transient
     protected Building building;
