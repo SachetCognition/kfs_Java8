@@ -1,0 +1,58 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/pbglLineDataCellDetail.tag -->
+<!-- Fragment parameters: accountingLine, detailField, detailFields, dataFieldCssClass, formattedNumberValue -->
+<div th:fragment="content (accountingLine, detailField, detailFields, dataFieldCssClass, formattedNumberValue)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="cssClass=${empty dataFieldCssClass ? 'fineprint' : dataFieldCssClass}"> /*/-->
+             
+<th:block th:if="${!KualiForm.hideDetails}">
+<%--    <br/> --%>
+    <div id="${accountingLine}.${detailField}.div" class="${cssClass}">
+    <th:block th:if="${!empty detailFields}">
+	    <c:forTokens var="key" items="${detailFields}" delims=",">
+	        <!--/*/ <th:block th:with="field=${key}"> /*/-->
+			<th:block th:switch="${true}">
+			    <th:block th:case="${fn:startsWith(field,';')}">
+	    			<span th:text="${#strings.substringAfter(field,';')}"></span>
+			    </th:block>
+				<th:block th:case="*">		
+					<span th:text="${KualiForm.${accountingLine}.${field}}"></span>
+			    </th:block>
+    		</th:block>    
+	    </c:forTokens>    
+    </th:block>
+    
+    <th:block th:if="${!empty detailField && empty detailFields && empty formattedNumberValue}">
+        <span th:text="${KualiForm.${accountingLine}.${detailField}}"></span>
+    </th:block>
+    
+    <th:block th:if="${!empty detailField && empty detailFields && not empty formattedNumberValue}">
+        ${formattedNumberValue}
+    </th:block>
+  </div>
+</th:block>
+<th:block th:if="${!empty detailField}">
+  <c:catch var="e">
+ 	<input type="hidden" th:field="*{${accountingLine}.${detailField}}" />
+  </c:catch>
+  <th:block th:if="${e!=null}">
+    <input type="hidden" name="${accountingLine}.${detailField}" value="test"/>
+  </th:block>
+</th:block>
+</div>

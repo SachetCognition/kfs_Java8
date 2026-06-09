@@ -1,0 +1,129 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/creditCardReceipts.tag -->
+<!-- Fragment parameters: editingMode -->
+<div th:fragment="content (editingMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] || KualiForm.document.errorCorrected}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Credit Card Receipts" data-default-open="true">
+  <h3>Credit Card Receipts</h3>
+<!--/*/ <th:block th:with="ccrAttributes=${DataDictionary.CreditCardDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+
+ <div class="tab-container" align=center>
+	<h3>Credit Card Receipts</h3>
+	<table cellpadding=0 class="datatable" summary="Credit Card Receipts section">
+		<tr>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ccrAttributes.financialDocumentCreditCardTypeCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ccrAttributes.financialDocumentCreditCardVendorNumber}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ccrAttributes.creditCardDepositDate}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ccrAttributes.creditCardDepositReferenceNumber}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ccrAttributes.creditCardAdvanceDepositAmount}"></th>
+            <th:block th:if="${not readOnly}">
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            </th:block>
+		</tr>
+        <th:block th:if="${not readOnly}">
+            <tr>
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                
+                <td class="infoline">
+                	<input type="text" name="newCreditCardReceipt.financialDocumentCreditCardTypeCode" th:field="*{newCreditCardReceipt.financialDocumentCreditCardTypeCode}" data-attribute-entry="${ccrAttributes.financialDocumentCreditCardTypeCode}" />
+                	&nbsp;
+                	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.CreditCardType" th:replace="~{fragments/kul/lookup :: content}"></span>
+                </td>
+                <td class="infoline">
+                	<input type="text" name="newCreditCardReceipt.financialDocumentCreditCardVendorNumber" th:field="*{newCreditCardReceipt.financialDocumentCreditCardVendorNumber}" data-attribute-entry="${ccrAttributes.financialDocumentCreditCardVendorNumber}" />
+                	&nbsp;
+                	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.CreditCardVendor" th:replace="~{fragments/kul/lookup :: content}"></span>
+                </td>
+                <td class="infoline">
+                	<input type="text" name="newCreditCardReceipt.creditCardDepositDate" th:field="*{newCreditCardReceipt.creditCardDepositDate}" data-attribute-entry="${ccrAttributes.creditCardDepositDate}" />
+                </td>
+                <td class="infoline">
+                	<input type="text" name="newCreditCardReceipt.creditCardDepositReferenceNumber" th:field="*{newCreditCardReceipt.creditCardDepositReferenceNumber}" data-attribute-entry="${ccrAttributes.creditCardDepositReferenceNumber}" />
+                </td>
+                <td class="infoline">
+                	<input type="text" name="newCreditCardReceipt.creditCardAdvanceDepositAmount" th:field="*{newCreditCardReceipt.creditCardAdvanceDepositAmount}" data-attribute-entry="${ccrAttributes.creditCardAdvanceDepositAmount}" />
+                </td>
+                <td class="infoline">
+                	<div align="center">
+                		<input type="image" property="methodToCall.addCreditCardReceipt" tabindex="${tabindexOverrideBase} + 25"
+                		src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" title="Add a Credit Card Receipt" alt="Add a Credit Card Receipt" styleClass="tinybutton"/>
+                	</div>
+                </td>
+            </tr>
+        </th:block>
+        <tr th:each="creditCardReceipt : ${KualiForm.document.creditCardReceipts}" indexId="ctr">
+            <tr>
+                <th>
+					<span th:text="${ctr + 1}"></span>:
+				</th>
+				
+                <td class="datacell">
+                	<input type="text" name="document.creditCardReceipt[${ctr}].financialDocumentCreditCardTypeCode" th:field="*{document.creditCardReceipt[${ctr}].financialDocumentCreditCardTypeCode}" data-attribute-entry="${ccrAttributes.financialDocumentCreditCardTypeCode}" />
+                	<th:block th:if="${not readOnly}">
+	                	&nbsp;
+    	            	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.CreditCardType" th:replace="~{fragments/kul/lookup :: content}"></span>
+                	</th:block>
+                </td>
+                <td class="datacell">
+                	<input type="text" name="document.creditCardReceipt[${ctr}].financialDocumentCreditCardVendorNumber" th:field="*{document.creditCardReceipt[${ctr}].financialDocumentCreditCardVendorNumber}" data-attribute-entry="${ccrAttributes.financialDocumentCreditCardVendorNumber}" />
+                	<th:block th:if="${not readOnly}">
+	                	&nbsp;
+    	            	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.CreditCardVendor" th:replace="~{fragments/kul/lookup :: content}"></span>
+    	            </th:block>
+                </td>
+                <td class="datacell">
+                	<th:block th:switch="${true}">
+                        <th:block th:case="${readOnly}">
+                            <input type="text" name="document.creditCardReceipt[${ctr}].creditCardDepositDate" th:field="*{document.creditCardReceipt[${ctr}].creditCardDepositDate}" data-attribute-entry="${ccrAttributes.creditCardDepositDate}" readonly="readonly" />
+                        </th:block>
+                        <th:block th:case="*">
+                            <kul:dateInput attributeEntry="${ccrAttributes.creditCardDepositDate}" property="document.creditCardReceipt[${ctr}].creditCardDepositDate" />
+                        </th:block>
+                    </th:block>
+                </td>
+                <td class="datacell">
+                	<input type="text" name="document.creditCardReceipt[${ctr}].creditCardDepositReferenceNumber" th:field="*{document.creditCardReceipt[${ctr}].creditCardDepositReferenceNumber}" data-attribute-entry="${ccrAttributes.creditCardDepositReferenceNumber}" />
+                </td>
+                <td class="datacell">
+                	<input type="text" name="document.creditCardReceipt[${ctr}].creditCardAdvanceDepositAmount" th:field="*{document.creditCardReceipt[${ctr}].creditCardAdvanceDepositAmount}" data-attribute-entry="${ccrAttributes.creditCardAdvanceDepositAmount}" />
+                </td>
+                <th:block th:if="${not readOnly}">
+                    <td class="datacell">
+                    	<div align="center">
+                    		<input type="image" property="methodToCall.deleteCreditCardReceipt.line${ctr}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" title="Delete a Credit Card Receipt" alt="Delete a Credit Card Receipt" styleClass="tinybutton"/>
+                    	</div>
+                    </td>
+                </th:block>
+            </tr>
+        </tr>
+		<tr>
+	 		<td class="total-line" colspan="5">&nbsp;</td>
+	  		<td class="total-line" ><strong>Total: ${KualiForm.document.currencyFormattedTotalCreditCardAmount}</strong></td>
+            <th:block th:if="${not readOnly}">
+                <td class="total-line">&nbsp;</td>
+            </th:block>
+		</tr>
+	</table>
+  </div>
+</section>
+</div>

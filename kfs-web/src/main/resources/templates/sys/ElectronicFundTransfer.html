@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: sys/ElectronicFundTransfer.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">sys/ElectronicFundTransfer</title>
+</head>
+<body>
+<script language="javascript">
+  function toggleclaimedcheckbox(lineNbr) {
+    if (document.getElementById) {
+      var claimRefNbr = document.getElementById("claim["+lineNbr+"].referenceFinancialDocumentNumber");
+      if (claimRefNbr && claimRefNbr.value) {
+        // check the related claimed checkbox
+        var claimCheckboxName = "claimedByCheckboxHelper["+lineNbr+"].electronicPaymentClaimRepresentation";
+        var claimCheckbox = document.forms[0][claimCheckboxName];
+        claimCheckbox.checked = true;
+      }
+    }
+  }
+</script>
+
+<div class="kfs-page" data-header-title="Electronic Payment Claiming" data-doc-title="Electronic Payments to Claim">
+  <form action="electronicFundTransfer.do" method="post">
+  <div th:replace="~{fragments/sys/electronicPaymentClaims :: content}" data-allow-administration="${KualiForm.allowElectronicFundsTransferAdministration}"></div>
+  <section class="kfs-tab" data-tab-title="Claiming Document" data-default-open="true">
+  <h3>Claiming Document</h3>
+    <div class="tab-container" align=center>
+      <h3>Claiming Document Type</h3>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+        <tr>
+          <td>
+            <p>
+              <span th:text="#{${__MSG_KEY__}}"></span>
+            </p>
+            <p align="center">
+              <tr th:each="docType : ${KualiForm.availableClaimingDocumentStrategies}">
+                <!--/*/ <th:block th:with="docTypeFieldName=chosenElectronicPaymentClaimingDocumentCode"> /*/-->
+                <!--/*/ <th:block th:with="docTypeFieldId=${docTypeFieldName}${docType.claimingDocumentWorkflowDocumentType}"> /*/-->
+              	${kfunc:registerEditableProperty(KualiForm, docTypeFieldName)}
+              	
+              	<!--/*/ <th:block th:with="checked=${KualiForm.chosenElectronicPaymentClaimingDocumentCode == docType.claimingDocumentWorkflowDocumentType? 'checked' : ''}"> /*/-->
+                <input type="radio" id="${docTypeFieldId}" name="${docTypeFieldName}" value="${docType.claimingDocumentWorkflowDocumentType}" ${checked} />
+                <label for="${docTypeFieldId}">${docType.documentLabel}</label>&nbsp;
+              </tr>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+  <section class="kfs-tab" data-tab-title="Documentation" data-default-open="true">
+  <h3>Documentation</h3>
+    <div class="tab-container" align=center>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+        <tr>
+          <td>
+            <p>
+              <span th:text="#{${__MSG_KEY__}}"></span>
+            </p>
+            <p align="center">
+              <!--/*/ <th:block th:with="questionFieldName=hasDocumentation"> /*/-->
+              ${kfunc:registerEditableProperty(KualiForm, questionFieldName)}
+              <input type="radio" id="hasDocumentationYes" name="${questionFieldName}" value="Yep"<th:block th:if="${KualiForm.properlyDocumented}"> checked="checked"</th:block> /><label for="hasDocumentationYes">Yes</label>&nbsp;
+              <input type="radio" id="hasDocumentationNo" name="${questionFieldName}" value="Nope"<th:block th:if="${not KualiForm.properlyDocumented}"> checked="checked"</th:block> /><label for="hasDocumentationNo">No</label>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </section>
+  <div class="kfs-panel-footer"></div>
+  <div id="globalbuttons" class="globalbuttons">
+    <input type="image" src="${ConfigProperties.externalizable.images.url}buttonsmall_claim.gif" styleClass="globalbuttons" property="methodToCall.claim" title="claim" alt="claim"/>
+    <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" styleClass="globalbuttons" property="methodToCall.cancel" title="cancel" alt="cancel"/>
+  </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/cashControlDetails.tag -->
+<!-- Fragment parameters: documentAttributes, cashControlDetailAttributes, readOnly, editDetails, editPaymentAppDoc -->
+<div th:fragment="content (documentAttributes, cashControlDetailAttributes, readOnly, editDetails, editPaymentAppDoc)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Cash Control Details" data-default-open="true">
+  <h3>Cash Control Details</h3>
+	<div id="cashControlDetails" class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable"
+			summary="Cash control Details">
+			<tr>
+				<td colspan="8" class="subhead">
+					Cash Control Details
+				</td>
+			</tr>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.documentNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.status}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.customerNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.customerPaymentMediumIdentifier}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.customerPaymentDate}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.financialDocumentLineAmount}"></th>
+				<th:block th:if="${editDetails}">
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				</th:block>
+			</tr>
+			<th:block th:if="${editDetails}">
+				<div th:replace="~{fragments/ar/cashControlDetail :: content}" data-property-name="newCashControlDetail" data-cash-control-detail-attributes="${cashControlDetailAttributes}" data-add-line="true" data-read-only="${readOnly}" data-row-heading="add" data-edit-payment-app-doc="${editPaymentAppDoc}" data-css-class="infoline" data-action-method="addCashControlDetail" data-action-alt="Add Cash Control Detail" data-action-image="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"></div>
+			</th:block>
+			<tr th:each="cashControlDetail : ${KualiForm.document.cashControlDetails}" indexId="ctr">
+				<div th:replace="~{fragments/ar/cashControlDetail :: content}" data-property-name="document.cashControlDetail[${ctr}]" data-cash-control-detail-attributes="${cashControlDetailAttributes}" data-add-line="false" data-read-only="${!editDetails}" data-row-heading="${ctr+1}" data-edit-payment-app-doc="${editPaymentAppDoc}" data-css-class="datacell" data-action-method="deleteCashControlDetail.line${ctr}" data-action-alt="Delete Cash Control Detail" data-action-image="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"></div>
+			</tr>
+			<tr>
+				<td class="total-line" colspan="6">
+					&nbsp;
+				</td>
+				<td class="total-line">
+					<strong>Total:
+						${KualiForm.document.currencyFormattedTotalCashControlAmount}</strong>
+				</td>
+				<th:block th:if="${!readOnly}">
+					<td class="total-line">
+						&nbsp;
+					</td>
+				</th:block>
+			</tr>
+
+		</table>
+	</div>
+</section>
+</div>

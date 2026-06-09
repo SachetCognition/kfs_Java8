@@ -1,0 +1,68 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/invoiceAccountDetails.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber}">
+	<section class="kfs-tab" data-tab-title="Account Summary" data-default-open="true">
+  <h3>Account Summary</h3>
+		<!--/*/ <th:block th:with="invoiceAccountDetailsAttributes=${DataDictionary.InvoiceAccountDetail.attributes}"> /*/-->
+		<!--/*/ <th:block th:with="contractsGrantsInvoiceDocumentAttributes=${DataDictionary.ContractsGrantsInvoiceDocument.attributes}"> /*/-->
+
+		<div class="tab-container" align="center">
+			<h3>Account Summary</h3>
+			<table cellpadding=0 class="datatable" summary="Invoice Account Details section">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.chartOfAccountsCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.accountNumber}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.totalBudget}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.invoiceAmount}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.cumulativeExpenditures}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.budgetRemaining}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAccountDetailsAttributes.totalAmountBilledToDate}"></th>
+				</tr>
+				<logic:iterate indexId="ctr" name="KualiForm" property="document.accountDetails" id="accountDetail">
+					<tr>
+						<td class="datacell"><input type="text" name="document.accountDetails[${ctr}].chartOfAccountsCode" th:field="*{document.accountDetails[${ctr}].chartOfAccountsCode}" data-attribute-entry="${invoiceAccountDetailsAttributes.chartOfAccountsCode}" readonly="readonly" /></td>
+						<td class="datacell"><a
+							href="${ConfigProperties.application.url}/kr/inquiry.do?chartOfAccountsCode=${KualiForm.document.accountDetails[ctr].chartOfAccountsCode}&businessObjectClassName=org.kuali.kfs.coa.businessobject.Account&methodToCall=start&accountNumber=${KualiForm.document.accountDetails[ctr].accountNumber}"
+							target="_blank"> <input type="text" name="document.accountDetails[${ctr}].accountNumber" th:field="*{document.accountDetails[${ctr}].accountNumber}" data-attribute-entry="${invoiceAccountDetailsAttributes.accountNumber}" readonly="readonly" />
+						</a></td>						
+						<td class="datacell"><input type="text" name="document.accountDetails[${ctr}].totalBudget" th:field="*{document.accountDetails[${ctr}].totalBudget}" data-attribute-entry="${invoiceAccountDetailsAttributes.totalBudget}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.accountDetails[${ctr}].invoiceAmount" th:field="*{document.accountDetails[${ctr}].invoiceAmount}" data-attribute-entry="${invoiceAccountDetailsAttributes.invoiceAmount}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.accountDetails[${ctr}].cumulativeExpenditures" th:field="*{document.accountDetails[${ctr}].cumulativeExpenditures}" data-attribute-entry="${invoiceAccountDetailsAttributes.cumulativeExpenditures}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.accountDetails[${ctr}].budgetRemaining" th:field="*{document.accountDetails[${ctr}].budgetRemaining}" data-attribute-entry="${invoiceAccountDetailsAttributes.budgetRemaining}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.accountDetails[${ctr}].totalAmountBilledToDate" th:field="*{document.accountDetails[${ctr}].totalAmountBilledToDate}" data-attribute-entry="${invoiceAccountDetailsAttributes.totalAmountBilledToDate}" readonly="readonly" /></td>
+					</tr>
+				</tr>
+				<th:block th:if="${fn:length(KualiForm.document.accountDetails) gt 1}">
+					<tr>
+						<td colspan="2"><b>Totals</b></td>
+						<td class="datacell"><input type="text" name="document.totalBudgetAmount" th:field="*{document.totalBudgetAmount}" data-attribute-entry="${contractsGrantsInvoiceDocumentAttributes.totalBudgetAmount}" readonly="readonly" /> </td>
+						<td class="datacell"><input type="text" name="document.totalInvoiceAmount" th:field="*{document.totalInvoiceAmount}" data-attribute-entry="${contractsGrantsInvoiceDocumentAttributes.totalInvoiceAmount}" readonly="readonly" /> </td>
+						<td class="datacell"><input type="text" name="document.totalCumulativeExpenditures" th:field="*{document.totalCumulativeExpenditures}" data-attribute-entry="${contractsGrantsInvoiceDocumentAttributes.totalCumulativeExpenditures}" readonly="readonly" /> </td>
+						<td class="datacell"><input type="text" name="document.totalBudgetRemaining" th:field="*{document.totalBudgetRemaining}" data-attribute-entry="${contractsGrantsInvoiceDocumentAttributes.totalBudgetRemaining}" readonly="readonly" /> </td>
+						<td class="datacell"><input type="text" name="document.totalAmountBilledToDate" th:field="*{document.totalAmountBilledToDate}" data-attribute-entry="${contractsGrantsInvoiceDocumentAttributes.totalAmountBilledToDate}" readonly="readonly" /> </td>
+					</tr>
+				</th:block>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

@@ -1,0 +1,150 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/contractsGrantsLetterOfCreditReviewDetail.tag -->
+<!-- Fragment parameters: proposalNumberValue -->
+<div th:fragment="content (proposalNumberValue)" xmlns:th="http://www.thymeleaf.org">
+<!-- If there are no bills, this section should not be displayed -->
+
+<!--/*/ <th:block th:with="contractsGrantsLetterOfCreditReviewDetailAttributes=${DataDictionary.ContractsGrantsLetterOfCreditReviewDetail.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<!--/*/ <th:block th:with="hideRecalculateButton=${KualiForm.editingMode['hideRecalculateButton']}"> /*/-->
+	
+<!--/*/ <th:block th:with="disableAmountToDraw=${KualiForm.editingMode['disableAmountToDraw']}"> /*/-->
+
+<table style="width: 100%; border: none" cellpadding="0" cellspacing="0" class="datatable">
+
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardDocumentNumber}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.agencyNumber}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.customerNumber}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardBeginningDate}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardEndingDate}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardBudgetAmount}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.letterOfCreditAmount}"></th>
+
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.claimOnCashBalance}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountToDraw}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountAvailableToDraw}"></th>
+
+	<logic:iterate indexId="ctr" name="KualiForm" property="document.headerReviewDetails" id="headerReviewDetail">
+
+		<th:block th:if="${KualiForm.document.headerReviewDetails[ctr].proposalNumber == proposalNumberValue }">
+
+			<tr>
+
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].awardDocumentNumber" th:field="*{document.headerReviewDetails[${ctr}].awardDocumentNumber}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardDocumentNumber}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].agencyNumber" th:field="*{document.headerReviewDetails[${ctr}].agencyNumber}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.agencyNumber}" readonly="readonly" /></td>
+				<td class="datacell" width="5%"><input type="text" name="document.headerReviewDetails[${ctr}].customerNumber" th:field="*{document.headerReviewDetails[${ctr}].customerNumber}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.customerNumber}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].awardBeginningDate" th:field="*{document.headerReviewDetails[${ctr}].awardBeginningDate}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardBeginningDate}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].awardEndingDate" th:field="*{document.headerReviewDetails[${ctr}].awardEndingDate}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardEndingDate}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].awardBudgetAmount" th:field="*{document.headerReviewDetails[${ctr}].awardBudgetAmount}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardBudgetAmount}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].letterOfCreditAmount" th:field="*{document.headerReviewDetails[${ctr}].letterOfCreditAmount}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.letterOfCreditAmount}" readonly="readonly" /></td>
+
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].claimOnCashBalance" th:field="*{document.headerReviewDetails[${ctr}].claimOnCashBalance}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.claimOnCashBalance}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].amountToDraw" th:field="*{document.headerReviewDetails[${ctr}].amountToDraw}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountToDraw}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.headerReviewDetails[${ctr}].amountAvailableToDraw" th:field="*{document.headerReviewDetails[${ctr}].amountAvailableToDraw}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountAvailableToDraw}" readonly="readonly" /></td>
+
+
+			</tr>
+
+			<%-- generate unique tab key from invPropertyName --%>
+			<!--/*/ <th:block th:with="invPropertyName=document.headerReviewDetails[${ctr}]"> /*/-->
+			<!--/*/ <th:block th:with="lineNumber=${ctr }"> /*/-->
+		</th:block>
+	</tr>
+</table>
+
+<!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(invPropertyName)}"> /*/-->
+<!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+<%-- default to closed --%>
+<th:block th:switch="${true}">
+	<th:block th:case="${empty currentTab}">
+		<!--/*/ <th:block th:with="isOpen=false"> /*/-->
+	</th:block>
+	<th:block th:case="${!empty currentTab}">
+		<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+	</th:block>
+</th:block>
+
+<table style="width: 100%; border: none" cellpadding="0" cellspacing="0" class="datatable">
+	<tr>
+		<td class="tab-subhead" style="border-right: none;">Accounts <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+				<input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" alt="hide"
+					title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+			</th:block> <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+				<input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" alt="show"
+					title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+			</th:block><th:block th:if="${hideRecalculateButton != 'true' && hideRecalculateButton != 'TRUE'}"> <%-- display the recalculate button--%> <input type="image" property="methodToCall.recalculateAmountToDraw.line${lineNumber}"
+				src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif" title="Recalculate Amount to Draw" alt="Recalculate Amount to Draw"
+				styleClass="tinybutton" /></th:block>
+		</td>
+	</tr>
+</table>
+
+
+<th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+	<div style="display: block;" id="tab-${tabKey}-div" class="accountsInfo">
+</th:block>
+<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+	<div style="display: none;" id="tab-${tabKey}-div" class="accountsInfo">
+</th:block>
+
+<table style="width: 100%; border: none" cellpadding="0" cellspacing="0" class="datatable" border="0">
+
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.accountDescription}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.chartOfAccountsCode}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.accountNumber}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.accountExpirationDate}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardBudgetAmount}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.claimOnCashBalance}"></th>
+		
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountToDraw}"></th>		
+	
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.fundsNotDrawn}"></th>
+
+
+	<logic:iterate indexId="ctr" name="KualiForm" property="document.accountReviewDetails" id="accountReviewDetail">
+		<th:block th:if="${KualiForm.document.accountReviewDetails[ctr].proposalNumber == proposalNumberValue }">
+
+			<tr>
+
+				</td>
+				<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].accountDescription" th:field="*{document.accountReviewDetails[${ctr}].accountDescription}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.accountDescription}" readonly="readonly" /></td>
+				<td class="datacell" width="5%"><input type="text" name="document.accountReviewDetails[${ctr}].chartOfAccountsCode" th:field="*{document.accountReviewDetails[${ctr}].chartOfAccountsCode}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.chartOfAccountsCode}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].accountNumber" th:field="*{document.accountReviewDetails[${ctr}].accountNumber}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.accountNumber}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].accountExpirationDate" th:field="*{document.accountReviewDetails[${ctr}].accountExpirationDate}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.accountExpirationDate}" readonly="readonly" />
+				<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].awardBudgetAmount" th:field="*{document.accountReviewDetails[${ctr}].awardBudgetAmount}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.awardBudgetAmount}" readonly="readonly" /></td>
+				<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].claimOnCashBalance" th:field="*{document.accountReviewDetails[${ctr}].claimOnCashBalance}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.claimOnCashBalance}" readonly="readonly" /></td>
+						
+				<th:block th:switch="${true}">
+					<th:block th:case="${disableAmountToDraw}">
+						<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].amountToDraw" th:field="*{document.accountReviewDetails[${ctr}].amountToDraw}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountToDraw}" readonly="readonly" /></td>
+					</th:block>
+					<th:block th:case="*">
+						<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].amountToDraw" th:field="*{document.accountReviewDetails[${ctr}].amountToDraw}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.amountToDraw}" /></td>
+					</th:block>
+				</th:block>
+				<td class="datacell"><input type="text" name="document.accountReviewDetails[${ctr}].fundsNotDrawn" th:field="*{document.accountReviewDetails[${ctr}].fundsNotDrawn}" data-attribute-entry="${contractsGrantsLetterOfCreditReviewDetailAttributes.fundsNotDrawn}" readonly="readonly" /></td>
+			</tr>
+		</th:block>
+	</tr>
+</table>
+</div>

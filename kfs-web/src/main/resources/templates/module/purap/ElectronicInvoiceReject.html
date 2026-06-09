@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/purap/ElectronicInvoiceReject.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/purap/ElectronicInvoiceReject</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.ElectronicInvoiceRejectDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="vendorAttributes=${DataDictionary.VendorDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="itemAttributes=${DataDictionary.ElectronicInvoiceRejectItem.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purapItemAttributes=${DataDictionary.PurchaseOrderItem.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purchaseOrderAttributes=${DataDictionary.PurchaseOrderDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purchaseOrderStatusAttributes=${DataDictionary.PurchaseOrderStatus.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="fullEntryMode=${ KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<div class="kfs-document-page" data-document-type="ElectronicInvoiceRejectDocument">
+  <form action="purapElectronicInvoiceReject.do" method="post" enctype="multipart/form-data">
+
+	<th:block th:if="${KualiForm.document.invoiceResearchIndicator}">
+		NOTE: This reject document is currently being researched. See the notes below for more detail. The document will not be allowed to be routed until the research is complete.<br /><br />
+	</th:block>
+			
+	<div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}" data-include-posting-year="false" data-class="kfs-tab" data-title="Comparison Data" data-open="TRUE" data-class="tab-container" data-if="${fn:length(KualiForm.document.invoiceRejectReasons)>0}" data-class="error" data-align="left" data-index-id="ctr" data-name="KualiForm" data-property="document.invoiceRejectReasons" data-id="reason" data-class="error" data-cellpadding="0" data-cellspacing="0" data-class="datatable" data-summary="Vendor Section" data-colspan="4" data-class="subhead" data-align="right" data-valign="middle" data-class="bord-l-b" data-width="25%" data-align="right" data-class="kfs-label" data-name="" data-entry="${documentAttributes.vendorDunsNumber}" data-class="datacell" data-colspan="3" data-type="text" data-name="document.vendorDunsNumber" data-field="*{document.vendorDunsNumber}" data-entry="${documentAttributes.vendorDunsNumber}"></div>
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorAttributes.vendorName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorDetail.vendorName" th:field="*{document.vendorDetail.vendorName}" data-attribute-entry="${vendorAttributes.vendorName}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceFileNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.invoiceFileNumber" th:field="*{document.invoiceFileNumber}" data-attribute-entry="${documentAttributes.invoiceFileNumber}" />
+	                    <input type="text" name="document.invoiceNumberAcceptIndicator" th:field="*{document.invoiceNumberAcceptIndicator}" data-attribute-entry="${documentAttributes.invoiceNumberAcceptIndicator}" />
+	                    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceNumberAcceptIndicator}"></label>
+					</td>
+	            </tr>
+	
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoicePurchaseOrderNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.invoicePurchaseOrderNumber" th:field="*{document.invoicePurchaseOrderNumber}" data-attribute-entry="${documentAttributes.invoicePurchaseOrderNumber}" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceFileDate}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.invoiceFileDate" th:field="*{document.invoiceFileDate}" data-attribute-entry="${documentAttributes.invoiceFileDate}" />
+	                </td>
+	            </tr>
+
+				<!--/*/ <th:block th:with="colCount=9"> /*/-->
+				<th:block th:if="${KualiForm.document.invoiceFileSpecialHandlingInLineIndicator || KualiForm.document.invoiceFileShippingInLineIndicator || KualiForm.document.invoiceFileDiscountInLineIndicator}">
+					<!--/*/ <th:block th:with="colCount=${colCount + 1}"> /*/-->
+				</th:block>
+
+	            <tr>
+	                <td colspan="4">
+
+						<table cellpadding="0" cellspacing="0" class="datatable" summary="Items section">
+				            <tr>
+				                <td colspan="${colCount}" class="subhead">Electronic Invoice Items:</td>
+				            </tr>
+							<tr>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceReferenceItemLineNumber}"></th>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemQuantity}"></th>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemUnitOfMeasureCode}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemCatalogNumber}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceReferenceItemDescription}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemUnitPrice}"></th>				
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemSubTotalAmount}"></th>				
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemTaxAmount}"></th>				
+		    					<th:block th:if="${KualiForm.document.invoiceFileSpecialHandlingInLineIndicator || KualiForm.document.invoiceFileShippingInLineIndicator || KualiForm.document.invoiceFileDiscountInLineIndicator}">
+									<th>Inline Item Values</th>
+		    					</th:block>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemNetAmount}"></th>
+							</tr>
+							<!--/*/ <th:block th:with="colCountBeforeTotal=${colCount - 2}"> /*/-->
+
+							<logic:iterate indexId="ctr" name="KualiForm" property="document.invoiceRejectItems" id="itemLine">
+								<tr>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceReferenceItemLineNumber" th:field="*{document.invoiceRejectItems[${ctr}].invoiceReferenceItemLineNumber}" data-attribute-entry="${itemAttributes.invoiceReferenceItemLineNumber}" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemQuantity" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemQuantity}" data-attribute-entry="${itemAttributes.invoiceItemQuantity}" />
+									</td>
+									<td class="datacell" nowrap>
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemUnitOfMeasureCode" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemUnitOfMeasureCode}" data-attribute-entry="${itemAttributes.invoiceItemUnitOfMeasureCode}" /><br />
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].unitOfMeasureAcceptIndicator" th:field="*{document.invoiceRejectItems[${ctr}].unitOfMeasureAcceptIndicator}" data-attribute-entry="${itemAttributes.unitOfMeasureAcceptIndicator}" />
+										<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.unitOfMeasureAcceptIndicator}"></label>
+									</td>
+									<td class="datacell" nowrap>
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemCatalogNumber" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemCatalogNumber}" data-attribute-entry="${itemAttributes.invoiceItemCatalogNumber}" readonly="readonly" /><br />
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].catalogNumberAcceptIndicator" th:field="*{document.invoiceRejectItems[${ctr}].catalogNumberAcceptIndicator}" data-attribute-entry="${itemAttributes.catalogNumberAcceptIndicator}" />
+										<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.catalogNumberAcceptIndicator}"></label>
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceReferenceItemDescription" th:field="*{document.invoiceRejectItems[${ctr}].invoiceReferenceItemDescription}" data-attribute-entry="${itemAttributes.invoiceReferenceItemDescription}" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemUnitPrice" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemUnitPrice}" data-attribute-entry="${itemAttributes.invoiceItemUnitPrice}" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemSubTotalAmount" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemSubTotalAmount}" data-attribute-entry="${itemAttributes.invoiceItemSubTotalAmount}" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemTaxAmount" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemTaxAmount}" data-attribute-entry="${itemAttributes.invoiceItemTaxAmount}" />
+									</td>
+		    					<th:block th:if="${KualiForm.document.invoiceFileSpecialHandlingInLineIndicator || KualiForm.document.invoiceFileShippingInLineIndicator || KualiForm.document.invoiceFileDiscountInLineIndicator}">
+									<td class="datacell" nowrap>
+					    		<th:block th:if="${KualiForm.document.invoiceFileSpecialHandlingInLineIndicator}">
+										<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemSpecialHandlingAmount}"></label>
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemSpecialHandlingAmount" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemSpecialHandlingAmount}" data-attribute-entry="${itemAttributes.invoiceItemSpecialHandlingAmount}" /><br />
+		    					</th:block>
+		    					<th:block th:if="${KualiForm.document.invoiceFileShippingInLineIndicator}">
+										<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemShippingAmount}"></label>
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemShippingAmount" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemShippingAmount}" data-attribute-entry="${itemAttributes.invoiceItemShippingAmount}" /><br />
+		    					</th:block>
+		    					<th:block th:if="${KualiForm.document.invoiceFileDiscountInLineIndicator}">
+										<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.invoiceItemDiscountAmount}"></label>
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemDiscountAmount" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemDiscountAmount}" data-attribute-entry="${itemAttributes.invoiceItemDiscountAmount}" /><br />
+		    					</th:block>
+									</td>
+								</th:block>
+									<td class="datacell">
+									    <input type="text" name="document.invoiceRejectItems[${ctr}].invoiceItemNetAmount" th:field="*{document.invoiceRejectItems[${ctr}].invoiceItemNetAmount}" data-attribute-entry="${itemAttributes.invoiceItemNetAmount}" />
+									</td>
+								</tr>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}"></td>
+								<th align="center" colspan="2">Totals:</th>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}"></td>
+								<th align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.totalAmount}"></label></th>
+								<td>
+								    <input type="text" name="document.totalAmount" th:field="*{document.totalAmount}" data-attribute-entry="${documentAttributes.totalAmount}" readonly="readonly" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}">&nbsp;</td>
+								<th align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceItemTaxAmount}"></label></th>
+								<td>
+								    <input type="text" name="document.invoiceItemTaxAmount" th:field="*{document.invoiceItemTaxAmount}" data-attribute-entry="${documentAttributes.invoiceItemTaxAmount}" />									    
+								</td>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}">&nbsp;</td>
+								<th align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceItemSpecialHandlingAmount}"></label></th>
+								<td>
+								    <input type="text" name="document.invoiceItemSpecialHandlingAmount" th:field="*{document.invoiceItemSpecialHandlingAmount}" data-attribute-entry="${documentAttributes.invoiceItemSpecialHandlingAmount}" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}">&nbsp;</td>
+								<th align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceItemShippingAmount}"></label></th>
+								<td>
+								    <input type="text" name="document.invoiceItemShippingAmount" th:field="*{document.invoiceItemShippingAmount}" data-attribute-entry="${documentAttributes.invoiceItemShippingAmount}" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}">&nbsp;</td>
+								<th align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceItemDiscountAmount}"></label></th>
+								<td>
+								    <input type="text" name="document.invoiceItemDiscountAmount" th:field="*{document.invoiceItemDiscountAmount}" data-attribute-entry="${documentAttributes.invoiceItemDiscountAmount}" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="${colCountBeforeTotal}">&nbsp;</td>
+								<th align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.grandTotalAmount}"></label></th>
+								<td>
+								    <input type="text" name="document.grandTotalAmount" th:field="*{document.grandTotalAmount}" data-attribute-entry="${documentAttributes.grandTotalAmount}" readonly="readonly" />
+								</td>
+							</tr>
+						</table>
+					</td>
+	            </tr>
+
+	            <tr>
+	                <td colspan="4" class="subhead">Purchase Order Data</td>
+	            </tr>
+
+			<th:block th:switch="${true}">
+    		<th:block th:case="${empty KualiForm.document.currentPurchaseOrderDocument}">
+	            <tr>
+	                <td align="center" valign="middle" class="datacell" colspan="4">
+		    			No matching purchase order found.
+	                </td>
+	            </tr>
+    		</th:block>
+    		<th:block th:case="*">
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorAttributes.vendorDunsNumber}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" colspan="3">
+	                    <input type="text" name="document.vendorDetail.vendorDunsNumber" th:field="*{document.vendorDetail.vendorDunsNumber}" data-attribute-entry="${vendorAttributes.vendorDunsNumber}" readonly="readonly" />
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorAttributes.vendorName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.vendorName" th:field="*{document.currentPurchaseOrderDocument.vendorName}" data-attribute-entry="${vendorAttributes.vendorName}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                </th>
+	                <td align="left" valign="middle" class="datacell">
+	                </td>
+	            </tr>
+
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.purapDocumentIdentifier}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.purapDocumentIdentifier" th:field="*{document.currentPurchaseOrderDocument.purapDocumentIdentifier}" data-attribute-entry="${purchaseOrderAttributes.purapDocumentIdentifier}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.documentFundingSourceCode}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.documentFundingSourceCode" th:field="*{document.currentPurchaseOrderDocument.documentFundingSourceCode}" data-attribute-entry="${purchaseOrderAttributes.documentFundingSourceCode}" readonly="readonly" />
+	                </td>
+	            </tr>
+
+	            <tr>
+	                <td colspan="4">
+						<table cellpadding="0" cellspacing="0" class="datatable" summary="Items section">
+				            <tr>
+				                <td colspan="9" class="subhead">Purchase Order Items:</td>
+				            </tr>
+							<tr>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.itemLineNumber}"></th>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.outstandingQuantity}"></th>
+					            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.itemUnitOfMeasureCode}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.itemCatalogNumber}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.itemDescription}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.itemUnitPrice}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.extendedPrice}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.itemTaxAmount}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purapItemAttributes.totalAmount}"></th>				
+							</tr>
+
+							<logic:iterate indexId="ctr" name="KualiForm" property="document.currentPurchaseOrderDocument.items" id="itemLine">
+								<th:block th:if="${itemLine.itemType.lineItemIndicator == true}">
+								<tr>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].itemLineNumber" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].itemLineNumber}" data-attribute-entry="${purapItemAttributes.itemLineNumber}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].outstandingQuantity" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].outstandingQuantity}" data-attribute-entry="${purapItemAttributes.itemQuantity}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].itemUnitOfMeasureCode" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].itemUnitOfMeasureCode}" data-attribute-entry="${purapItemAttributes.itemUnitOfMeasureCode}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].itemCatalogNumber" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].itemCatalogNumber}" data-attribute-entry="${purapItemAttributes.itemCatalogNumber}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].itemDescription" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].itemDescription}" data-attribute-entry="${purapItemAttributes.itemDescription}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].itemUnitPrice" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].itemUnitPrice}" data-attribute-entry="${purapItemAttributes.itemUnitPrice}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].extendedPrice" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].extendedPrice}" data-attribute-entry="${purapItemAttributes.extendedPrice}" readonly="readonly" />
+									</td>									
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].itemTaxAmount" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].itemTaxAmount}" data-attribute-entry="${purapItemAttributes.itemTaxAmount}" readonly="readonly" />
+									</td>
+									<td class="datacell">
+									    <input type="text" name="document.currentPurchaseOrderDocument.items[${ctr}].totalAmount" th:field="*{document.currentPurchaseOrderDocument.items[${ctr}].totalAmount}" data-attribute-entry="${purapItemAttributes.totalAmount}" readonly="readonly" />
+									</td>
+								</tr>
+								</th:block>
+							</tr>
+
+						<logic:iterate indexId="ctr" name="KualiForm" property="document.currentPurchaseOrderDocument.items" id="itemLine">
+							<th:block th:if="${itemLine.itemType.lineItemIndicator != true}">
+									<tr>
+										<td colspan="4">&nbsp;</td>
+										<th align="right">
+											<input type="text" name="document.currentPurchaseOrderDocument.item[${ctr}].itemType.itemTypeDescription" th:field="*{document.currentPurchaseOrderDocument.item[${ctr}].itemType.itemTypeDescription}" data-attribute-entry="${purapItemAttributes.itemTypeCode}" />
+										</th>
+										<td>
+										    <input type="text" name="document.currentPurchaseOrderDocument.item[${ctr}].itemUnitPrice" th:field="*{document.currentPurchaseOrderDocument.item[${ctr}].itemUnitPrice}" data-attribute-entry="${purapItemAttributes.itemUnitPrice}" />
+										</td>
+										<td>
+										    <input type="text" name="document.currentPurchaseOrderDocument.item[${ctr}].extendedPrice" th:field="*{document.currentPurchaseOrderDocument.item[${ctr}].extendedPrice}" data-attribute-entry="${purapItemAttributes.extendedPrice}" />
+										</td>										
+										<td>
+										    <input type="text" name="document.currentPurchaseOrderDocument.item[${ctr}].itemTaxAmount" th:field="*{document.currentPurchaseOrderDocument.item[${ctr}].itemTaxAmount}" data-attribute-entry="${purapItemAttributes.itemTaxAmount}" />
+										</td>
+										<td>
+										    <input type="text" name="document.currentPurchaseOrderDocument.item[${ctr}].totalAmount" th:field="*{document.currentPurchaseOrderDocument.item[${ctr}].totalAmount}" data-attribute-entry="${purapItemAttributes.totalAmount}" />
+										</td>										
+									</tr>
+								</th:block>
+							</tr>
+							<tr><td colspan="9">&nbsp;</td></tr>
+							<tr>
+								<td colspan="9" class="subhead">Totals</td>
+							</tr>
+							<tr>
+								<th align="right" colspan="8">
+							        <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.RequisitionDocument.attributes.totalPreTaxDollarAmount}"></label>
+								</th>
+								<td>
+				                    <input type="text" name="document.currentPurchaseOrderDocument.totalPreTaxDollarAmount" th:field="*{document.currentPurchaseOrderDocument.totalPreTaxDollarAmount}" data-attribute-entry="${DataDictionary.RequisitionDocument.attributes.totalPreTaxDollarAmount}" readonly="readonly" />
+								</td>
+							</tr>
+							<tr>
+								<th align="right" colspan="8">
+							        <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.RequisitionDocument.attributes.totalTaxAmount}"></label>
+								</th>
+								<td>
+				                    <input type="text" name="document.currentPurchaseOrderDocument.totalTaxAmount" th:field="*{document.currentPurchaseOrderDocument.totalTaxAmount}" data-attribute-entry="${DataDictionary.RequisitionDocument.attributes.totalTaxAmount}" readonly="readonly" />
+								</td>
+							</tr>							
+							<tr>
+								<th align="right" colspan="8">
+							        <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.RequisitionDocument.attributes.totalDollarAmount}"></label>
+								</th>
+								<td>
+				                    <input type="text" name="document.currentPurchaseOrderDocument.totalDollarAmount" th:field="*{document.currentPurchaseOrderDocument.totalDollarAmount}" data-attribute-entry="${DataDictionary.RequisitionDocument.attributes.totalDollarAmount}" readonly="readonly" />
+								</td>
+							</tr>
+						</table>
+					</td></tr>
+				</th:block>
+				</th:block>
+	        </table>
+	
+	    </div>
+	</section>
+	
+	
+	<section class="kfs-tab" data-tab-title="Addresses" data-default-open="TRUE">
+  <h3>Addresses</h3>
+	    <div class="tab-container" align="center">			
+	        <table cellpadding="0" cellspacing="0" class="datatable" summary="Vendor Section">
+	            <tr>
+	                <td colspan="4" class="subhead">Electronic Invoice Data</td>
+	            </tr>
+	            <tr>
+	                <th colspan="2">Ship To:</th>
+	                <th colspan="2">Bill To:</th>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceShipToAddressName" th:field="*{document.invoiceShipToAddressName}" data-attribute-entry="${documentAttributes.invoiceShipToAddressName}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceBillToAddressName" th:field="*{document.invoiceBillToAddressName}" data-attribute-entry="${documentAttributes.invoiceBillToAddressName}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressLine1}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceShipToAddressLine1" th:field="*{document.invoiceShipToAddressLine1}" data-attribute-entry="${documentAttributes.invoiceShipToAddressLine1}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressLine1}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceBillToAddressLine1" th:field="*{document.invoiceBillToAddressLine1}" data-attribute-entry="${documentAttributes.invoiceBillToAddressLine1}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressLine2}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceShipToAddressLine2" th:field="*{document.invoiceShipToAddressLine2}" data-attribute-entry="${documentAttributes.invoiceShipToAddressLine2}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressLine2}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceBillToAddressLine2" th:field="*{document.invoiceBillToAddressLine2}" data-attribute-entry="${documentAttributes.invoiceBillToAddressLine2}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressLine3}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceShipToAddressLine3" th:field="*{document.invoiceShipToAddressLine3}" data-attribute-entry="${documentAttributes.invoiceShipToAddressLine3}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressLine3}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceBillToAddressLine3" th:field="*{document.invoiceBillToAddressLine3}" data-attribute-entry="${documentAttributes.invoiceBillToAddressLine3}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right">
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressCityName}"></label>,&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressStateCode}"></label>&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressPostalCode}"></label>
+						</div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceShipToAddressCityName" th:field="*{document.invoiceShipToAddressCityName}" data-attribute-entry="${documentAttributes.invoiceShipToAddressCityName}" readonly="readonly" />,&nbsp;
+	                    <input type="text" name="document.invoiceShipToAddressStateCode" th:field="*{document.invoiceShipToAddressStateCode}" data-attribute-entry="${documentAttributes.invoiceShipToAddressStateCode}" readonly="readonly" />&nbsp;
+	                    <input type="text" name="document.invoiceShipToAddressPostalCode" th:field="*{document.invoiceShipToAddressPostalCode}" data-attribute-entry="${documentAttributes.invoiceShipToAddressPostalCode}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right">
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressCityName}"></label>,&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressStateCode}"></label>&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressPostalCode}"></label>
+						</div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceBillToAddressCityName" th:field="*{document.invoiceBillToAddressCityName}" data-attribute-entry="${documentAttributes.invoiceBillToAddressCityName}" readonly="readonly" />,&nbsp;
+	                    <input type="text" name="document.invoiceBillToAddressStateCode" th:field="*{document.invoiceBillToAddressStateCode}" data-attribute-entry="${documentAttributes.invoiceBillToAddressStateCode}" readonly="readonly" />&nbsp;
+	                    <input type="text" name="document.invoiceBillToAddressPostalCode" th:field="*{document.invoiceBillToAddressPostalCode}" data-attribute-entry="${documentAttributes.invoiceBillToAddressPostalCode}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceShipToAddressCountryName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceShipToAddressCountryName" th:field="*{document.invoiceShipToAddressCountryName}" data-attribute-entry="${documentAttributes.invoiceShipToAddressCountryName}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceBillToAddressCountryName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.invoiceBillToAddressCountryName" th:field="*{document.invoiceBillToAddressCountryName}" data-attribute-entry="${documentAttributes.invoiceBillToAddressCountryName}" readonly="readonly" />
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <td colspan="4" class="subhead">Purchase Order Data</td>
+	            </tr>
+			<th:block th:switch="${true}">
+    		<th:block th:case="${empty KualiForm.document.currentPurchaseOrderDocument}">
+	            <tr>
+	                <td align="center" valign="middle" class="datacell" colspan="4">
+	                	No matching purchase order found.
+	                </td>
+	            </tr>
+    		</th:block>
+    		<th:block th:case="*">
+	            <tr>
+	                <th colspan="2">Delivery:</th>
+	                <th colspan="2">Billing:</th>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryToName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryToName" th:field="*{document.currentPurchaseOrderDocument.deliveryToName}" data-attribute-entry="${purchaseOrderAttributes.deliveryToName}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingName}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingName" th:field="*{document.currentPurchaseOrderDocument.billingName}" data-attribute-entry="${purchaseOrderAttributes.billingName}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryBuildingLine1Address}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryBuildingLine1Address" th:field="*{document.currentPurchaseOrderDocument.deliveryBuildingLine1Address}" data-attribute-entry="${purchaseOrderAttributes.deliveryBuildingLine1Address}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingLine1Address}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingLine1Address" th:field="*{document.currentPurchaseOrderDocument.billingLine1Address}" data-attribute-entry="${purchaseOrderAttributes.billingLine1Address}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryBuildingLine2Address}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryBuildingLine2Address" th:field="*{document.currentPurchaseOrderDocument.deliveryBuildingLine2Address}" data-attribute-entry="${purchaseOrderAttributes.deliveryBuildingLine2Address}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingLine2Address}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingLine2Address" th:field="*{document.currentPurchaseOrderDocument.billingLine2Address}" data-attribute-entry="${purchaseOrderAttributes.billingLine2Address}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right">
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryCityName}"></label>,&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryStateCode}"></label>&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryPostalCode}"></label>
+						</div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryCityName" th:field="*{document.currentPurchaseOrderDocument.deliveryCityName}" data-attribute-entry="${purchaseOrderAttributes.deliveryCityName}" readonly="readonly" />,&nbsp;
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryStateCode" th:field="*{document.currentPurchaseOrderDocument.deliveryStateCode}" data-attribute-entry="${purchaseOrderAttributes.deliveryStateCode}" readonly="readonly" />&nbsp;
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryPostalCode" th:field="*{document.currentPurchaseOrderDocument.deliveryPostalCode}" data-attribute-entry="${purchaseOrderAttributes.deliveryPostalCode}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right">
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingCityName}"></label>,&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingStateCode}"></label>&nbsp;
+	                    	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingPostalCode}"></label>
+						</div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingCityName" th:field="*{document.currentPurchaseOrderDocument.billingCityName}" data-attribute-entry="${purchaseOrderAttributes.billingCityName}" readonly="readonly" />,&nbsp;
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingStateCode" th:field="*{document.currentPurchaseOrderDocument.billingStateCode}" data-attribute-entry="${purchaseOrderAttributes.billingStateCode}" readonly="readonly" />&nbsp;
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingPostalCode" th:field="*{document.currentPurchaseOrderDocument.billingPostalCode}" data-attribute-entry="${purchaseOrderAttributes.billingPostalCode}" readonly="readonly" />
+	                </td>
+	            </tr>
+	            <tr>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.deliveryCountryCode}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.deliveryCountryCode" th:field="*{document.currentPurchaseOrderDocument.deliveryCountryCode}" data-attribute-entry="${purchaseOrderAttributes.deliveryCountryCode}" readonly="readonly" />
+	                </td>
+	                <th align="right" valign="middle" class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.billingCountryCode}"></label></div>
+	                </th>
+	                <td align="left" valign="middle" class="datacell" width="25%">
+	                    <input type="text" name="document.currentPurchaseOrderDocument.billingCountryCode" th:field="*{document.currentPurchaseOrderDocument.billingCountryCode}" data-attribute-entry="${purchaseOrderAttributes.billingCountryCode}" readonly="readonly" />
+	                </td>
+	            </tr>
+			</th:block>
+			</th:block>
+	        </table>
+	    </div>
+	</section>
+
+    <div th:replace="~{fragments/purap/relatedDocuments :: content}" data-document-attributes="${DataDictionary.RelatedDocuments.attributes}"></div>
+    
+    <div th:replace="~{fragments/purap/paymentHistory :: content}" data-document-attributes="${DataDictionary.RelatedDocuments.attributes}"></div>
+	            
+	<div th:replace="~{fragments/kul/notes :: content}"></div>
+
+	<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+
+	<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+
+	<div class="kfs-panel-footer"></div>
+
+	<div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="true" data-extra-buttons="${KualiForm.extraButtons}"></div>
+
+  </form>
+</div>
+</body>
+</html>

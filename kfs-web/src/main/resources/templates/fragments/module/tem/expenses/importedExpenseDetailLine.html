@@ -1,0 +1,111 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/expenses/importedExpenseDetailLine.tag -->
+<!-- Fragment parameters: detail, lineNumber, detailLineNumber, detailObject, parentObject -->
+<div th:fragment="content (detail, lineNumber, detailLineNumber, detailObject, parentObject)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="importedExpenseAttributes=${DataDictionary.ImportedExpense.attributes}"> /*/-->
+<jsp:useBean id="paramMap" class="java.util.HashMap" />
+<!--/*/ <th:block th:with="tripType=${KualiForm.document.tripTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="travelerType=${KualiForm.document.traveler.travelerTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="documentType=${KualiForm.docTypeName}"> /*/-->
+
+								<tr>
+									<th:block th:switch="${true}">
+										<th:block th:case="${detailLineNumber == null }">
+											<th scope="row" class="infoline" rowspan="2">
+												<div align="right">add:</div>
+											</th>
+										</th:block>
+										<th:block th:case="*">
+											<th scope="row" class="infoline" rowspan="2">
+												<div align="center"> 
+													${detailLineNumber+1}
+												</div>
+											</th>
+										</th:block>
+									</th:block>
+									<td valign="top" class="infoline">
+										<input type="text" name="${detail}.expenseDate" th:field="*{${detail}.expenseDate}" data-attribute-entry="${importedExpenseAttributes.expenseDate}" />
+									</td>
+									<td valign="top" class="infoline">
+										<span th:text="${detailObject.expenseTypeObjectCode.expenseType.name}"></span>
+									</td>
+									<td valign="top" nowrap class="infoline">
+										<div align="center">
+											<input type="text" name="${detail}.expenseAmount" th:field="*{${detail}.expenseAmount}" data-attribute-entry="${importedExpenseAttributes.expenseAmount}" />
+										</div>
+									</td>
+						            <td valign="top" nowrap class="infoline">
+										<div align="center">
+											<input type="text" name="${detail}.convertedAmount" th:field="*{${detail}.convertedAmount}" data-attribute-entry="${importedExpenseAttributes.convertedAmount}" readonly="readonly" />
+										</div>
+									</td>
+						            <td valign="top" nowrap class="infoline">
+										<div align="center">
+											<input type="text" name="${detail}.nonReimbursable" th:field="*{${detail}.nonReimbursable}" data-attribute-entry="${importedExpenseAttributes.nonReimbursable}" />
+						            	</div>
+						            </td>
+						            <td valign="top" nowrap class="infoline">
+										<div align="center">
+											<input type="text" name="${detail}.taxable" th:field="*{${detail}.taxable}" data-attribute-entry="${importedExpenseAttributes.taxable}" />
+						            	</div>
+						            </td>
+									<td class="infoline" rowspan="2">
+										<th:block th:switch="${true}">
+											<th:block th:case="${detailLineNumber != null}">
+												<th:block th:if="${fullEntryMode}">
+													<div align="center">
+														<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+															styleClass="tinybutton"
+															property="methodToCall.deleteImportedExpenseDetailLine.line${lineNumber}-${detailLineNumber}"
+															alt="Delete Imported Expense Line"
+															title="Delete Imported Expense Detail Line" /></div>
+												</th:block>
+												<th:block th:if="${!fullEntryMode}">
+													&nbsp;
+												</th:block>
+											</th:block>
+											<th:block th:case="*">
+												<!--/*/ <th:block th:with="tabindex=${KualiForm.currentTabIndex}"> /*/-->
+												<!--/*/ <th:block th:with="dummyIncrementVar=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+												<div align="center">
+													<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+														styleClass="tinybutton" 
+														tabindex="${tabindex}" 
+														property="methodToCall.addImportedExpenseDetailLine.line${lineNumber}"
+														alt="Add Imported Expense Detail Line" 
+														title="Add Imported Expense Detail Line" />
+												</div>
+											</th:block>
+										</th:block>
+					
+										
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div align="right">
+											<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.description}"></label>
+										</div>
+									</th>
+									<td valign="top" class="infoline" colspan="5">
+										<input type="text" name="${detail}.description" th:field="*{${detail}.description}" data-attribute-entry="${importedExpenseAttributes.description}" />
+									</td>
+								</tr>
+</div>

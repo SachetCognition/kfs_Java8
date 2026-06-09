@@ -1,0 +1,51 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvPDPStatus.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Pre-Disbursement Processor Status" data-default-open="false">
+  <h3>Pre-Disbursement Processor Status</h3>
+  <div class="tab-container" align=center > 
+  <h3>Disbursement Voucher Pre-Disbursement Processor Status</h3>
+  <!--/*/ <th:block th:with="dvAttributes=${DataDictionary.DisbursementVoucherDocument.attributes}"> /*/-->
+  <table style="datatable" cellpadding="0" border="0" summary="DV PDP Status">
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbursementVoucherPdpStatus}"></label></th>
+      <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.disbursementVoucherPdpStatus" th:field="*{document.disbursementVoucherPdpStatus}" data-attribute-entry="${dvAttributes.disbursementVoucherPdpStatus}" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.extractDate}"></label></th>
+      <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.extractDate" th:field="*{document.extractDate}" data-attribute-entry="${dvAttributes.extractDate}" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.paidDate}"></label></th>
+       <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.paidDate" th:field="*{document.paidDate}" data-attribute-entry="${dvAttributes.paidDate}" readonly="readonly" />
+          
+          <th:block th:if="${not empty KualiForm.document.extractDate}">
+              <div th:replace="~{fragments/fp/dvDisbursementInfo :: content}" data-source-document-number="${KualiForm.document.documentNumber}" data-source-document-type="${KualiForm.document.paymentDetailDocumentType}"></div> 
+          </th:block>
+      </td>
+    </tr>
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.cancelDate}"></label></th>
+      <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.cancelDate" th:field="*{document.cancelDate}" data-attribute-entry="${dvAttributes.cancelDate}" readonly="readonly" /></td>
+    </tr>
+  </table>
+  </div>
+</section>
+</div>

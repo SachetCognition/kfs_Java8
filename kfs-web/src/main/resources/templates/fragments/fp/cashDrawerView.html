@@ -1,0 +1,77 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/cashDrawerView.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="cashDrawerAttributes=${DataDictionary.CashDrawer.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="drawer=${KualiForm.document.cashDrawer}"> /*/-->
+
+            			<h3>Cash Drawer Contents</h3>
+        <html:hidden name="KualiForm" property="document.cashDrawer.statusCode" />
+				<table border="0" cellspacing="0" cellpadding="0" class="datatable">
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentHundredDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.hundredDollarCount}"> (Count: ${KualiForm.document.cashDrawer.hundredDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentHundredDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentHundredCentAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.hundredCentCount}"> (Count: ${KualiForm.document.cashDrawer.hundredCentCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentHundredCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentFiftyDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.fiftyDollarCount}"> (Count: ${KualiForm.document.cashDrawer.fiftyDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentFiftyDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentFiftyCentAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.fiftyCentCount}"> (Count: ${KualiForm.document.cashDrawer.fiftyCentCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentFiftyCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentTwentyDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.twentyDollarCount}"> (Count: ${KualiForm.document.cashDrawer.twentyDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentTwentyDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentTwentyFiveCentAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.twentyFiveCentCount}"> (Count: ${KualiForm.document.cashDrawer.twentyFiveCentCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentTwentyFiveCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentTenDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.tenDollarCount}"> (Count: ${KualiForm.document.cashDrawer.tenDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentTenDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentTenCentAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.tenCentCount}"> (Count: ${KualiForm.document.cashDrawer.tenCentCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentTenCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentFiveDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.fiveDollarCount}"> (Count: ${KualiForm.document.cashDrawer.fiveDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentFiveDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentFiveCentAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.fiveCentCount}"> (Count: ${KualiForm.document.cashDrawer.fiveCentCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentFiveCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentTwoDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.twoDollarCount}"> (Count: ${KualiForm.document.cashDrawer.twoDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentTwoDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentOneCentAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.oneCentCount}"> (Count: ${KualiForm.document.cashDrawer.oneCentCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentOneCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentOneDollarAmount}"></label><th:block th:if="${!empty KualiForm.document.cashDrawer.oneDollarCount}"> (Count: ${KualiForm.document.cashDrawer.oneDollarCount})</th:block></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentOneDollarAmount" write="true" /></td>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentOtherCentAmount}"></label> </td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentOtherCentAmount" write="true" /></td>
+					</tr>
+					<tr>
+						<td><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashDrawerAttributes.financialDocumentOtherDollarAmount}"></label></td>
+						<td>$<html:hidden property="cashManagementDocument.cashDrawer.financialDocumentOtherDollarAmount" write="true" /></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+</div>

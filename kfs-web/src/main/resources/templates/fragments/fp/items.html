@@ -1,0 +1,96 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/items.tag -->
+<!-- Fragment parameters: editingMode -->
+<div th:fragment="content (editingMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Items" data-default-open="false">
+  <h3>Items</h3>
+<!--/*/ <th:block th:with="itemAttributes=${DataDictionary.InternalBillingItem.attributes}"> /*/-->
+
+ <div class="tab-container" align=center>
+	<h3>Items</h3>
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Items section">
+	    
+		<tr>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemServiceDate}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemStockNumber}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemStockDescription}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemQuantity}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.unitOfMeasureCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitAmount}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.total}"></th>
+            <th:block th:if="${not readOnly}">
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            </th:block>
+		</tr>
+        <th:block th:if="${not readOnly}">
+            <tr>
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                <td class="infoline"><kul:dateInput attributeEntry="${itemAttributes.itemServiceDate}" property="newItem.itemServiceDate" /></td>
+                <td class="infoline"><input type="text" name="newItem.itemStockNumber" th:field="*{newItem.itemStockNumber}" data-attribute-entry="${itemAttributes.itemStockNumber}" /></td>
+                <td class="infoline"><input type="text" name="newItem.itemStockDescription" th:field="*{newItem.itemStockDescription}" data-attribute-entry="${itemAttributes.itemStockDescription}" /></td>
+                <td class="infoline"><input type="text" name="newItem.itemQuantity" th:field="*{newItem.itemQuantity}" data-attribute-entry="${itemAttributes.itemQuantity}" /></td>
+                <td class="infoline"><input type="text" name="newItem.unitOfMeasureCode" th:field="*{newItem.unitOfMeasureCode}" data-attribute-entry="${itemAttributes.unitOfMeasureCode}" /></td>
+                <td class="infoline"><input type="text" name="newItem.itemUnitAmount" th:field="*{newItem.itemUnitAmount}" data-attribute-entry="${itemAttributes.itemUnitAmount}" /></td>
+                <td class="infoline"><!-- no total until it's added --></td>
+                <td class="infoline"><div align="center"><input type="image" property="methodToCall.insertItem" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="Insert an Item" title="Insert an Item" styleClass="tinybutton"/></div></td>
+            </tr>
+        </th:block>
+        <tr th:each="item : ${KualiForm.document.items}" indexId="ctr">
+            <tr>
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                    <%-- Outside this th, these hidden fields would be invalid HTML. --%>
+                    <input type="hidden" th:field="*{document.item[${ctr}].itemSequenceId}" />
+                    <input type="hidden" th:field="*{document.item[${ctr}].versionNumber}" />
+                </div><!-- /kul:htmlAttributeHeaderCell -->
+                <td class="datacell">
+                    <th:block th:switch="${true}">
+                        <th:block th:case="${readOnly}">
+                            <input type="text" name="document.item[${ctr}].itemServiceDate" th:field="*{document.item[${ctr}].itemServiceDate}" data-attribute-entry="${itemAttributes.itemServiceDate}" readonly="readonly" />
+                        </th:block>
+                        <th:block th:case="*">
+                            <kul:dateInput attributeEntry="${itemAttributes.itemServiceDate}" property="document.item[${ctr}].itemServiceDate"/>
+                        </th:block>
+                    </th:block>
+                </td>
+                <td class="datacell"><input type="text" name="document.item[${ctr}].itemStockNumber" th:field="*{document.item[${ctr}].itemStockNumber}" data-attribute-entry="${itemAttributes.itemStockNumber}" /></td>
+                <td class="datacell"><input type="text" name="document.item[${ctr}].itemStockDescription" th:field="*{document.item[${ctr}].itemStockDescription}" data-attribute-entry="${itemAttributes.itemStockDescription}" /></td>
+                <td class="datacell"><input type="text" name="document.item[${ctr}].itemQuantity" th:field="*{document.item[${ctr}].itemQuantity}" data-attribute-entry="${itemAttributes.itemQuantity}" /></td>
+                <td class="datacell"><input type="text" name="document.item[${ctr}].unitOfMeasureCode" th:field="*{document.item[${ctr}].unitOfMeasureCode}" data-attribute-entry="${itemAttributes.unitOfMeasureCode}" /></td>
+                <td class="datacell"><input type="text" name="document.item[${ctr}].itemUnitAmount" th:field="*{document.item[${ctr}].itemUnitAmount}" data-attribute-entry="${itemAttributes.itemUnitAmount}" /></td>
+                <td class="datacell">$${KualiForm.document.items[ctr].total}</td> <%-- EL doesn't quash items' plural like Struts does. --%>
+                <th:block th:if="${not readOnly}">
+                    <td class="datacell"><div align="center"><input type="image" property="methodToCall.deleteItem.line${ctr}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" title="Delete Item ${ctr+1}" alt="Delete Item ${ctr+1}" styleClass="tinybutton"/></div></td>
+                </th:block>
+            </tr>
+        </tr>
+		<tr>
+	 		<td class="total-line" colspan="7">&nbsp;</td>
+	  		<td class="total-line" ><strong>Total: $${KualiForm.document.itemTotal}</strong></td>
+            <th:block th:if="${not readOnly}">
+                <td class="total-line">&nbsp;</td>
+            </th:block>
+		</tr>
+	</table>
+</div>
+</section>
+</div>

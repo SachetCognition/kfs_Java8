@@ -1,0 +1,331 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerInvoiceAddresses.tag -->
+<!-- Fragment parameters: documentAttributes, readOnly -->
+<div th:fragment="content (documentAttributes, readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="customerAddressAttributes=${DataDictionary.CustomerAddress.attributes}"> /*/-->              
+<!--/*/ <th:block th:with="tabindexOverrideBase=200"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Billing/Shipping" data-default-open="true">
+  <h3>Billing/Shipping</h3>
+    <div class="tab-container" align=center>	
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Invoice Section">
+        
+	        <tr>
+				<td colspan="4" class="subhead">Bill To Address</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.customerBillToAddressIdentifier}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<input type="text" name="document.customerBillToAddressIdentifier" th:field="*{document.customerBillToAddressIdentifier}" data-attribute-entry="${documentAttributes.customerBillToAddressIdentifier}" />
+					<th:block th:if="${not readOnly}">
+					    &nbsp;
+					    <span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ar.businessobject.CustomerAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+							&nbsp;
+						<input type="image" property="methodToCall.refreshBillToAddress"
+							src="${ConfigProperties.externalizable.images.url}tinybutton-refresh.gif"
+							tabindex="-1"
+							title="Refresh Bill to Address" alt="Refresh Bill To Address"
+							styleClass="tinybutton" />
+					</th:block>			
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerCityName}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingCityName.div">
+					<input type="text" name="document.billingCityName" th:field="*{document.billingCityName}" data-attribute-entry="${documentAttributes.billingCityName}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerAddressTypeCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingAddressTypeCode.div">
+					<input type="text" name="document.billingAddressTypeCode" th:field="*{document.billingAddressTypeCode}" data-attribute-entry="${documentAttributes.billingAddressTypeCode}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerStateCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingStateCode.div">
+					<input type="text" name="document.billingStateCode" th:field="*{document.billingStateCode}" data-attribute-entry="${documentAttributes.billingStateCode}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerAddressName}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingAddressName.div">
+					<input type="text" name="document.billingAddressName" th:field="*{document.billingAddressName}" data-attribute-entry="${documentAttributes.billingAddressName}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerZipCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingZipCode.div">
+					<input type="text" name="document.billingZipCode" th:field="*{document.billingZipCode}" data-attribute-entry="${documentAttributes.billingZipCode}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerLine1StreetAddress}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingLine1StreetAddress.div">
+					<input type="text" name="document.billingLine1StreetAddress" th:field="*{document.billingLine1StreetAddress}" data-attribute-entry="${documentAttributes.billingLine1StreetAddress}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerAddressInternationalProvinceName}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingAddressInternationalProvinceName.div">
+					<input type="text" name="document.billingAddressInternationalProvinceName" th:field="*{document.billingAddressInternationalProvinceName}" data-attribute-entry="${documentAttributes.billingAddressInternationalProvinceName}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerLine2StreetAddress}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingLine2StreetAddress.div">
+					<input type="text" name="document.billingLine2StreetAddress" th:field="*{document.billingLine2StreetAddress}" data-attribute-entry="${documentAttributes.billingLine2StreetAddress}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerInternationalMailCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingInternationalMailCode.div">
+					<input type="text" name="document.billingInternationalMailCode" th:field="*{document.billingInternationalMailCode}" data-attribute-entry="${documentAttributes.billingInternationalMailCode}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerEmailAddress}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingEmailAddress.div">
+					<input type="text" name="document.billingEmailAddress" th:field="*{document.billingEmailAddress}" data-attribute-entry="${documentAttributes.billingEmailAddress}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerCountryCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingCountryCode.div">
+					<input type="text" name="document.billingCountryCode" th:field="*{document.billingCountryCode}" data-attribute-entry="${documentAttributes.billingCountryCode}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			
+			
+	        <tr>
+				<td colspan="4" class="subhead">Ship To Address</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.customerShipToAddressIdentifier}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<input type="text" name="document.customerShipToAddressIdentifier" th:field="*{document.customerShipToAddressIdentifier}" data-attribute-entry="${documentAttributes.customerShipToAddressIdentifier}" />
+					<th:block th:if="${not readOnly}">
+					    &nbsp;
+					    <span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ar.businessobject.CustomerAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+							&nbsp;
+						<input type="image" property="methodToCall.refreshShipToAddress"
+							src="${ConfigProperties.externalizable.images.url}tinybutton-refresh.gif"
+							title="Refresh Bill to Address" alt="Refresh Bill To Address"
+							tabindex="-1"
+							styleClass="tinybutton" />
+					</th:block>			
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerCityName}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingCityName.div">
+					<input type="text" name="document.shippingCityName" th:field="*{document.shippingCityName}" data-attribute-entry="${customerAddressAttributes.customerCityName}" readonly="readonly" />
+                     </div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerAddressTypeCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingAddressTypeCode.div">
+					<input type="text" name="document.shippingAddressTypeCode" th:field="*{document.shippingAddressTypeCode}" data-attribute-entry="${customerAddressAttributes.customerAddressTypeCode}" readonly="readonly" />
+                     </div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerStateCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingStateCode.div">
+					<input type="text" name="document.shippingStateCode" th:field="*{document.shippingStateCode}" data-attribute-entry="${customerAddressAttributes.customerStateCode}" readonly="readonly" />
+                     </div>   
+				</td>
+			</tr>
+			
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerAddressName}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingAddressName.div">
+					<input type="text" name="document.shippingAddressName" th:field="*{document.shippingAddressName}" data-attribute-entry="${customerAddressAttributes.customerAddressName}" readonly="readonly" />
+                     </div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerZipCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingZipCode.div">
+					<input type="text" name="document.shippingZipCode" th:field="*{document.shippingZipCode}" data-attribute-entry="${customerAddressAttributes.customerZipCode}" readonly="readonly" />
+                     </div>
+				</td>
+			</tr>
+
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerLine1StreetAddress}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingLine1StreetAddress.div">
+					<input type="text" name="document.shippingLine1StreetAddress" th:field="*{document.shippingLine1StreetAddress}" data-attribute-entry="${customerAddressAttributes.customerLine1StreetAddress}" readonly="readonly" />
+                     </div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerAddressInternationalProvinceName}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingAddressInternationalProvinceName.div">
+					<input type="text" name="document.shippingAddressInternationalProvinceName" th:field="*{document.shippingAddressInternationalProvinceName}" data-attribute-entry="${documentAttributes.shippingAddressInternationalProvinceName}" readonly="readonly" />
+                     </div>
+				</td>
+			</tr>
+
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerLine2StreetAddress}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingLine2StreetAddress.div">
+					<input type="text" name="document.shippingLine2StreetAddress" th:field="*{document.shippingLine2StreetAddress}" data-attribute-entry="${customerAddressAttributes.customerLine2StreetAddress}" readonly="readonly" />
+                     </div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerInternationalMailCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingInternationalMailCode.div">
+					<input type="text" name="document.shippingInternationalMailCode" th:field="*{document.shippingInternationalMailCode}" data-attribute-entry="${documentAttributes.shippingInternationalMailCode}" readonly="readonly" />
+                     </div>
+				</td>
+			</tr>
+
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerEmailAddress}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingEmailAddress.div">
+					<input type="text" name="document.shippingEmailAddress" th:field="*{document.shippingEmailAddress}" data-attribute-entry="${documentAttributes.shippingEmailAddress}" readonly="readonly" />
+                     </div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAddressAttributes.customerCountryCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+                    <div id="document.shippingCountryCode.div">
+					<input type="text" name="document.shippingCountryCode" th:field="*{document.shippingCountryCode}" data-attribute-entry="${documentAttributes.shippingCountryCode}" readonly="readonly" />
+                     </div>
+				</td>
+			</tr>
+        </table>
+    </div>
+</section>
+</div>

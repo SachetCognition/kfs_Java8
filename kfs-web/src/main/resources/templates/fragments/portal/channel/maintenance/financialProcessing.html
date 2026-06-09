@@ -1,0 +1,40 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/maintenance/financialProcessing.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Financial Processing"></div>
+<div class="body">
+
+    <ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Cash Drawer" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.CashDrawer&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+ 		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Credit Card Type" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.CreditCardType&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Credit Card Vendor" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.CreditCardVendor&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Voucher Payment Reason" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.PaymentReasonCode&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Voucher Tax Income Class" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.TaxIncomeClassCode&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Voucher Travel Expense Type" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.TravelExpenseTypeCode&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Voucher Travel Mileage Rate" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.TravelMileageRate&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Voucher Travel Per Diem" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.TravelPerDiem&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Fiscal Year Function Control" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.FiscalYearFunctionControl&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>				
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Function Control Code" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.FunctionControlCode&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>				
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Non-Resident Alien Tax Percent" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Procurement Card Defaults" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.ProcurementCardDefault&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+   </ul>
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

@@ -1,0 +1,52 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerInvoiceWriteoffDetail.tag -->
+<!-- Fragment parameters: invPropertyName, cssClass, rowHeader -->
+<div th:fragment="content (invPropertyName, cssClass, rowHeader)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="customerInvoiceDetailAttributes=${DataDictionary.CustomerInvoiceDetail.attributes}"> /*/-->
+
+<tr>
+	<!--  Line Number -->
+	<th class="${cssClass}" style="text-align:right">
+		${rowHeader}:
+	</th>
+			
+	<!--  Quantity -->	
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${invPropertyName}.invoiceItemQuantity" th:field="*{${invPropertyName}.invoiceItemQuantity}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemQuantity}" readonly="readonly" />
+	</td>
+
+			
+	<!--  Description -->
+	<td class="${cssClass}" >
+		<input type="text" name="${invPropertyName}.invoiceItemDescription" th:field="*{${invPropertyName}.invoiceItemDescription}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemDescription}" readonly="readonly" />
+	</td>
+
+	<!--  Open Amount -->
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${invPropertyName}.amountOpen" th:field="*{${invPropertyName}.amountOpen}" data-attribute-entry="${customerInvoiceDetailAttributes.amountOpen}" readonly="readonly" />
+	</td>
+
+	<!--  Open Amount -->
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${invPropertyName}.writeoffAmount" th:field="*{${invPropertyName}.writeoffAmount}" data-attribute-entry="${customerInvoiceDetailAttributes.writeoffAmount}" readonly="readonly" />
+	</td>
+			
+</tr>
+</div>

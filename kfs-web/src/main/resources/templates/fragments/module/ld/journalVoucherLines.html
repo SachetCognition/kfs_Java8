@@ -1,0 +1,44 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ld/journalVoucherLines.tag -->
+<!-- Fragment parameters: optionalFields, isOptionalFieldsInNewRow, sourceAccountingLinesOnly, extraSourceRowFields, extraTargetRowFields, editingMode, editableAccounts, editableFields, useCurrencyFormattedTotal, includeObjectTypeCode, debitCreditAmount, currentBaseAmount, extraHiddenFields, displayMonthlyAmounts, forcedReadOnlyFields, accountingLineAttributes, inherit, groupsOverride, accountPrefix, hideTotalLine, hideFields, accountingAddLineIndex, suppressBaseline, customActions, newLineCustomActions, sourceLinesReadOnly, targetLinesReadOnly, sourceTotalsOverride, targetTotalsOverride -->
+<div th:fragment="content (optionalFields, isOptionalFieldsInNewRow, sourceAccountingLinesOnly, extraSourceRowFields, extraTargetRowFields, editingMode, editableAccounts, editableFields, useCurrencyFormattedTotal, includeObjectTypeCode, debitCreditAmount, currentBaseAmount, extraHiddenFields, displayMonthlyAmounts, forcedReadOnlyFields, accountingLineAttributes, inherit, groupsOverride, accountPrefix, hideTotalLine, hideFields, accountingAddLineIndex, suppressBaseline, customActions, newLineCustomActions, sourceLinesReadOnly, targetLinesReadOnly, sourceTotalsOverride, targetTotalsOverride)" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/sys/accountingLineScriptImports :: content}"></div>
+
+<c:forEach items="${editableAccounts}" var="account">
+  <html:hidden property="editableAccounts(${account.key})" value="${account.key}"/>
+</tr>
+
+<c:forEach items="${editableFields}" var="field">
+  <input type="hidden" th:field="*{accountingLineEditableFields(${field.key})}" />
+</tr>
+
+<!--/*/ <th:block th:with="optionalFieldCount=${empty optionalFields ? 0 : fn:length(fn:split(optionalFields, ' ,'))}"> /*/-->
+<!--/*/ <th:block th:with="columnCountUntilAmount=${8
+                                        + (includeObjectTypeCode ? 1 : 0)
+                                        + (isOptionalFieldsInNewRow ? 0 : optionalFieldCount)}"> /*/-->
+                                                                               
+<!--/*/ <th:block th:with="arrHideFields=${fn:split(hideFields,',') }"> /*/-->
+<!--/*/ <th:block th:with="numHideFields=${fn:length(numHideFields) }"> /*/-->
+<%-- add extra columns count for the "Action" button and/or dual amounts --%>
+<!--/*/ <th:block th:with="columnCount=${columnCountUntilAmount
+                                        + (debitCreditAmount || currentBaseAmount ? 2 : 1)
+                                        - (not empty hideFields ? 0 : numHideFields)
+                                        + (empty editingMode['viewOnly'] ? 1 : 0)}"> /*/-->
+</div>

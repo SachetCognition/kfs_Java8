@@ -1,0 +1,43 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/generateDunningLettersSummaryResultContent.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="accountDetails=${DataDictionary.Account.attributes}"> /*/-->
+<!--/*/ <th:block th:with="invoiceGeneralDetails=${DataDictionary.InvoiceGeneralDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="invoiceAttributes=${DataDictionary.ContractsGrantsInvoiceDocument.attributes}"> /*/-->
+<div class="tab-container" align="center">
+	<h3>Contracts & Grants Invoices</h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+		<thead>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAttributes.documentNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountDetails.accountNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAttributes.billingDate}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAttributes.age}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAttributes.sourceTotal}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAttributes.openAmount}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetails.dunningLetterTemplateSentDate}"></th>
+			</tr>
+		</thead>
+		<tr th:each="invoices : ${KualiForm.${requestScope.propertyName}.invoices}" indexId="ctr">
+			<div th:replace="~{fragments/ar/generateDunningLettersSummarySubResult :: content}" data-invoice-attributes="${invoiceAttributes}" data-property-name="${requestScope.propertyName}.invoices[${ctr}]"></div>
+		</tr>
+	</table>
+</div>
+</div>

@@ -1,0 +1,34 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/generateDunningLettersSummarySubResult.tag -->
+<!-- Fragment parameters: invoiceAttributes, propertyName -->
+<div th:fragment="content (invoiceAttributes, propertyName)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="invoiceGeneralDetails=${DataDictionary.InvoiceGeneralDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountDetails=${DataDictionary.Account.attributes}"> /*/-->
+
+<tr>
+	<td><input type="text" name="${propertyName}.documentNumber" th:field="*{${propertyName}.documentNumber}" data-attribute-entry="${invoiceAttributes.documentNumber}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.accountDetails[0].accountNumber" th:field="*{${propertyName}.accountDetails[0].accountNumber}" data-attribute-entry="${accountDetails.accountNumber}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.billingDate" th:field="*{${propertyName}.billingDate}" data-attribute-entry="${invoiceAttributes.billingDate}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.age" th:field="*{${propertyName}.age}" data-attribute-entry="${invoiceAttributes.age}" readonly="readonly" />	</td>
+	<td><input type="text" name="${propertyName}.sourceTotal" th:field="*{${propertyName}.sourceTotal}" data-attribute-entry="${invoiceAttributes.sourceTotal}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.openAmount" th:field="*{${propertyName}.openAmount}" data-attribute-entry="${invoiceAttributes.openAmount}" readonly="readonly" />
+	<td><input type="text" name="${propertyName}.invoiceGeneralDetail.dunningLetterTemplateSentDate" th:field="*{${propertyName}.invoiceGeneralDetail.dunningLetterTemplateSentDate}" data-attribute-entry="${invoiceGeneralDetails.dunningLetterTemplateSentDate}" readonly="readonly" />
+</tr>
+</div>

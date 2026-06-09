@@ -1,0 +1,87 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailLineImport.tag -->
+<!-- Fragment parameters: attributes, readOnly, image -->
+<div th:fragment="content (attributes, readOnly, image)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="imageName=${empty image ? 'tinybutton-load.gif' : image}"> /*/-->
+
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Effort Detail Importing">
+	
+	<tr>
+		<td colspan="2"><div class="kfs-errors" data-key-match="${EffortConstants.DOCUMENT_PREFIX}*" th:if="${#fields.hasErrors('${EffortConstants.DOCUMENT_PREFIX}*')}"><h4>Errors found in Importing Criteria:</h4></div></td>
+	</tr>
+
+	<tr>
+		<th width="35%" class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.PersonImpl.attributes.employeeId}"></label>
+			</div>
+		</th>
+			
+		<td class="datacell-nowrap">
+			<div th:replace="~{fragments/sys/employee :: content}" data-user-id-field-name="emplid" data-force-required="true" data-user-name-field-name="name" data-field-conversions="employeeId:emplid" data-lookup-parameters="emplid:employeeId" data-read-only="${readOnly}"></div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th width="35%" class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.universityFiscalYear}"></label>
+			</div>
+		</th>
+		
+		<td class="datacell-nowrap">	
+			<input type="text" name="universityFiscalYear" th:field="*{universityFiscalYear}" data-attribute-entry="${attributes.universityFiscalYear}" />
+			
+			<th:block th:if="${!readOnly}">	 
+			<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.SystemOptions" th:replace="~{fragments/kul/lookup :: content}"></span>
+			</th:block>
+		</td>
+	</tr>
+	
+	<tr>
+		<th width="35%" class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.effortCertificationReportNumber}"></label>
+			</div>
+		</th>
+				
+		<td class="datacell-nowrap">
+			<input type="text" name="effortCertificationReportNumber" th:field="*{effortCertificationReportNumber}" data-attribute-entry="${attributes.effortCertificationReportNumber}" />
+			
+			<th:block th:if="${!readOnly}"> 
+			<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ec.businessobject.EffortCertificationReportDefinition" th:replace="~{fragments/kul/lookup :: content}"></span>
+			</th:block>
+		</td>
+	</tr>
+	
+	<th:block th:if="${!readOnly}">
+	<tr>
+		<td height="30" class="infoline">&nbsp;</td>
+        <td height="30" class="infoline">
+		<!--/*/ <th:block th:with="loadDetailLineButtonName=methodToCall.loadDetailLine"> /*/-->
+		  	   ${kfunc:registerEditableProperty(KualiForm, loadDetailLineButtonName)}
+			<input type="image" tabindex="${tabindex}" name="${loadDetailLineButtonName}"
+   				   src="${ConfigProperties.externalizable.images.url}${imageName}" 
+			   	   alt="Import Detail Lines" title="Import Detail Lines" border="0" class="tinybutton" valign="middle"/>
+        </td>
+	</tr>
+	</th:block>	
+</table>
+</div>

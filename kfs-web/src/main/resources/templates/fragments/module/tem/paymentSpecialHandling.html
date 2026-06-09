@@ -1,0 +1,69 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/paymentSpecialHandling.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Special Handling" data-default-open="true">
+  <h3>Special Handling</h3>
+	<!--/*/ <th:block th:with="travelPaymentAttributes=${DataDictionary.TravelPayment.attributes}"> /*/-->
+    <div class="tab-container" align=center > 
+<h3>Send Check To</h3>
+	<table cellpadding=0 class="datatable" summary="Special Handling Section">          
+            <tr>
+              <th class="bord-l-b">&nbsp;</th>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingCityName}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.travelPayment.specialHandlingCityName" th:field="*{document.travelPayment.specialHandlingCityName}" data-attribute-entry="${travelPaymentAttributes.specialHandlingCityName}" />  
+              </td>
+            </tr>
+            
+            <tr>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine1Addr}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.travelPayment.specialHandlingLine1Addr" th:field="*{document.travelPayment.specialHandlingLine1Addr}" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine1Addr}" />  
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingStateCode}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.travelPayment.specialHandlingStateCode" th:field="*{document.travelPayment.specialHandlingStateCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingStateCode}" />  
+              </td>
+            </tr>
+            
+            <tr>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine2Addr}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.travelPayment.specialHandlingLine2Addr" th:field="*{document.travelPayment.specialHandlingLine2Addr}" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine2Addr}" />  
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingZipCode}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.travelPayment.specialHandlingZipCode" th:field="*{document.travelPayment.specialHandlingZipCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingZipCode}" />  
+              </td>
+            </tr>
+            
+            <tr>
+              <th align=right valign=middle class="bord-l-b"></th>
+              <td align=left valign=middle class="datacell">
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingCountryCode}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.travelPayment.specialHandlingCountryCode" th:field="*{document.travelPayment.specialHandlingCountryCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingCountryCode}" />  
+              </td>
+            </tr>
+     </table>
+     </div>
+</section>
+</div>

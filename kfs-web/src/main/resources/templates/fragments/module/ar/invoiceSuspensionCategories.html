@@ -1,0 +1,46 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/invoiceSuspensionCategories.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber}">
+	<section class="kfs-tab" data-tab-title="Invoice Suspension Categories" data-default-open="true">
+  <h3>Invoice Suspension Categories</h3>
+		<!--/*/ <th:block th:with="invoiceSuspensionCategoriesAttributes=${DataDictionary.InvoiceSuspensionCategory.attributes}"> /*/-->
+		<!--/*/ <th:block th:with="suspensionCategoriesAttributes=${DataDictionary.SuspensionCategory.attributes}"> /*/-->
+		<div class="tab-container" align="center">
+			<h3>Invoice Suspension Categories</h3>
+ 			<table cellpadding=0 class="datatable" summary="Invoice Suspension Categories section">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceSuspensionCategoriesAttributes.suspensionCategoryCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${suspensionCategoriesAttributes.suspensionCategoryDescription}"></th>
+				</tr>
+				<th:block th:if="${!empty KualiForm.document.invoiceSuspensionCategories}">
+					<logic:iterate indexId="ctr" name="KualiForm" property="document.invoiceSuspensionCategories" id="SuspensionCategory">
+						<tr>
+							<td class="datacell"><input type="text" name="document.invoiceSuspensionCategories[${ctr}].suspensionCategoryCode" th:field="*{document.invoiceSuspensionCategories[${ctr}].suspensionCategoryCode}" data-attribute-entry="${invoiceSuspensionCategoriesAttributes.suspensionCategoryCode}" readonly="readonly" /></td>
+							<td class="datacell" width="75%"><input type="text" name="document.invoiceSuspensionCategories[${ctr}].suspensionCategoryDescription" th:field="*{document.invoiceSuspensionCategories[${ctr}].suspensionCategoryDescription}" data-attribute-entry="${invoiceSuspensionCategoriesAttributes['suspensionCategoryDescription']}" readonly="readonly" /></td>
+						</tr>
+					</tr>
+				</th:block>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

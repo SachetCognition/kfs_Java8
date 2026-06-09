@@ -1,0 +1,153 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/paymentApplicationNonAr.tag -->
+<!-- Fragment parameters: hasRelatedCashControlDocument, readOnly, isCustomerSelected, customerAttributes, accountsCanCrossCharts -->
+<div th:fragment="content (hasRelatedCashControlDocument, readOnly, isCustomerSelected, customerAttributes, accountsCanCrossCharts)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="nonInvoicedAttributes=${DataDictionary['NonInvoiced'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="nonInvoicedAddLine=${KualiForm.nonInvoicedAddLine}"> /*/-->
+
+    <section class="kfs-tab" data-tab-title="Non-AR" data-default-open="true">
+  <h3>Non-AR</h3>
+
+        <div class="tab-container" align="center">
+			<h3>Non-AR</h3>
+            <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+                <tr>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>             
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.chartOfAccountsCode}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.accountNumber}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.subAccountNumber}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.financialObjectCode}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.financialSubObjectCode}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.projectCode}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${nonInvoicedAttributes.financialDocumentLineAmount}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                </tr>
+				<th:block th:if="${readOnly ne true}">
+	                <tr>
+	                    <td>
+	                        add
+	                    </td>
+	                    <td>
+			                <th:block th:if="${!accountsCanCrossCharts}">	
+	    		            	<span id="nonInvoicedAddLine.chartOfAccountsCode.div"><span th:text="${KualiForm.nonInvoicedAddLine.chartOfAccountsCode}"></span></span> 
+	            		    </th:block>
+							<th:block th:if="${accountsCanCrossCharts}">				
+	                        <input type="text" name="nonInvoicedAddLine.chartOfAccountsCode" th:field="*{nonInvoicedAddLine.chartOfAccountsCode}" data-attribute-entry="${nonInvoicedAttributes.chartOfAccountsCode}" />
+	            		    </th:block>
+	                        <div id="nonInvoicedAddLine.chart.finChartOfAccountDescription.div"><span th:text="${KualiForm.nonInvoicedAddLine.chartOfAccounts.finChartOfAccountDescription}"></span></div>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="nonInvoicedAddLine.accountNumber" th:field="*{nonInvoicedAddLine.accountNumber}" data-attribute-entry="${nonInvoicedAttributes.accountNumber}" />
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Account" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                        <div id="nonInvoicedAddLine.account.accountName.div"><span th:text="${KualiForm.nonInvoicedAddLine.account.accountName}"></span></div>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="nonInvoicedAddLine.subAccountNumber" th:field="*{nonInvoicedAddLine.subAccountNumber}" data-attribute-entry="${nonInvoicedAttributes.subAccountNumber}" />
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.SubAccount" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                        <div id="nonInvoicedAddLine.subAccount.subAccountName.div"><span th:text="${KualiForm.nonInvoicedAddLine.subAccount.subAccountName}"></span></div>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="nonInvoicedAddLine.financialObjectCode" th:field="*{nonInvoicedAddLine.financialObjectCode}" data-attribute-entry="${nonInvoicedAttributes.financialObjectCode}" />
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.ObjectCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                        <div id="nonInvoicedAddLine.objectCode.financialObjectCodeName.div"><span th:text="${KualiForm.nonInvoicedAddLine.financialObject.financialObjectCodeName}"></span></div>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="nonInvoicedAddLine.financialSubObjectCode" th:field="*{nonInvoicedAddLine.financialSubObjectCode}" data-attribute-entry="${nonInvoicedAttributes.financialSubObjectCode}" />
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.SubObjectCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                        <div id="nonInvoicedAddLine.subObjectCode.financialSubObjectCodeName.div"><span th:text="${KualiForm.nonInvoicedAddLine.financialSubObject.financialSubObjectCodeName}"></span></div>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="nonInvoicedAddLine.projectCode" th:field="*{nonInvoicedAddLine.projectCode}" data-attribute-entry="${nonInvoicedAttributes.projectCode}" />
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.ProjectCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                        <div id="nonInvoicedAddLine.project.projectDescription.div"><span th:text="${KualiForm.nonInvoicedAddLine.project.projectDescription}"></span></div>
+	                    </td>
+	                    <td>
+	                        <input type="text" name="nonInvoicedAddLine.financialDocumentLineAmount" th:field="*{nonInvoicedAddLine.financialDocumentLineAmount}" data-attribute-entry="${nonInvoicedAttributes.financialDocumentLineAmount}" />
+	                    </td>
+	                    <td>
+	                    	<input type="image" property="methodToCall.applyAllAmounts"
+		                        src="${ConfigProperties.externalizable.images.url}tinybutton-add1.gif"
+		                        alt="Add" title="Add" styleClass="tinybutton" />
+		                </td>
+	                </tr>
+                </th:block>
+                <tr th:each="nonInvoiced : ${KualiForm.paymentApplicationDocument.nonInvoiceds}" indexId="ctr">
+                    <tr>
+                        <td>
+                            <span th:text="${nonInvoiced.financialDocumentLineNumber}"></span>
+                        </td>
+                        <td>
+			                <th:block th:if="${!accountsCanCrossCharts}">	
+	    		            	<span id="paymentApplicationDocument.nonInvoiced[${ctr}].chartOfAccountsCode.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].chartOfAccountsCode}"></span></span> 
+	            		    </th:block>
+							<th:block th:if="${accountsCanCrossCharts}">				
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].chartOfAccountsCode" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].chartOfAccountsCode}" data-attribute-entry="${nonInvoicedAttributes.chartOfAccountsCode}" onchange="loadChartInfo(this.name, 'paymentApplicationDocument.nonInvoiced[${ctr}].chart.finChartOfAccountDescription')" />
+	            		    </th:block>
+                            <div id="paymentApplicationDocument.nonInvoiced[${ctr}].chart.finChartOfAccountDescription.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].chartOfAccounts.finChartOfAccountDescription}"></span></div>
+                        </td>
+                        <td>
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].accountNumber" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].accountNumber}" data-attribute-entry="${nonInvoicedAttributes.accountNumber}" />
+                            <div id="paymentApplicationDocument.nonInvoiced[${ctr}].account.accountName.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].account.accountName}"></span></div>
+                        </td>
+                        <td>
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].subAccountNumber" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].subAccountNumber}" data-attribute-entry="${nonInvoicedAttributes.subAccountNumber}" />
+                            <div id="paymentApplicationDocument.nonInvoiced[${ctr}].subAccount.subAccountName.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].subAccount.subAccountName}"></span></div>
+                        </td>
+                        <td>
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].financialObjectCode" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].financialObjectCode}" data-attribute-entry="${nonInvoicedAttributes.financialObjectCode}" onchange="loadObjectInfo('${paymentApplicationDocument.postingYear}', '', '', this.name, 'paymentApplicationDocument.nonInvoiced[${ctr}].objectCode.financialObjectCodeName')" />
+                            <div id="paymentApplicationDocument.nonInvoiced[${ctr}].objectCode.financialObjectCodeName.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].financialObject.financialObjectCodeName}"></span></div>
+                        </td>
+                        <td>
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].financialSubObjectCode" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].financialSubObjectCode}" data-attribute-entry="${nonInvoicedAttributes.financialSubObjectCode}" />
+                            <div id="paymentApplicationDocument.nonInvoiced[${ctr}].subObjectCode.financialSubObjectCodeName.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].financialSubObject.financialSubObjectCodeName}"></span></div>
+                        </td>
+                        <td>
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].projectCode" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].projectCode}" data-attribute-entry="${nonInvoicedAttributes.projectCode}" />
+                            <div id="paymentApplicationDocument.nonInvoiced[${ctr}].project.projectDescription.div"><span th:text="${KualiForm.paymentApplicationDocument.nonInvoiced[${ctr}].project.projectDescription}"></span></div>
+                        </td>
+                        <td style="text-align: right;">
+                            <input type="text" name="paymentApplicationDocument.nonInvoiced[${ctr}].financialDocumentLineAmount" th:field="*{paymentApplicationDocument.nonInvoiced[${ctr}].financialDocumentLineAmount}" data-attribute-entry="${nonInvoicedAttributes.financialDocumentLineAmount}" />
+                        </td>
+                        <th:block th:switch="${true}">
+                        <th:block th:case="${readOnly ne true}">
+                            <td>
+	                    	    <input type="image" property="methodToCall.deleteNonArLine.line${nonInvoiced.financialDocumentLineNumber}"
+		                            src="${ConfigProperties.externalizable.images.url}tinybutton-delete1.gif"
+		                            alt="Delete" title="Delete" styleClass="tinybutton" />
+                            </td>
+                        </th:block>
+                        <th:block th:case="*">
+                        	<td>&nbsp;</td>
+                        </th:block>
+                        </th:block>
+                    </tr>
+                </tr>
+                <tr>
+                    <th colspan='6'>&nbsp;</th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                    <td style="text-align: right;">                    	
+                    	${KualiForm.nonArTotal}
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,92 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/barcodeInventoryErrorDetail.tag -->
+<!-- Fragment parameters: barcodeInventoryDetailAttributes, readOnly, propertyName, cssClass, lineNumber, rowNumber, status -->
+<div th:fragment="content (barcodeInventoryDetailAttributes, readOnly, propertyName, cssClass, lineNumber, rowNumber, status)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${(status == CamsConstants.BarCodeInventoryError.STATUS_CODE_ERROR) || readOnly}">
+	<tr>	
+	   	<th:block th:if="${!readOnly}">				
+			<td align="right" class="${cssClass}">
+				<html:checkbox property="rowCheckbox" value="${rowNumber}"/>
+			</td>
+		</th:block>
+				
+		<td align="right" class="${cssClass}">
+		    ${lineNumber}	
+		</td>
+		
+	   	<th:block th:if="${readOnly}">				
+			<td align="right" class="${cssClass}">${CamsConstants.BarCodeInventoryError.statusDescription[status]}&nbsp</td>			
+		</th:block>
+
+		<td align=left class="${cssClass}">&nbsp		
+			<input type="text" name="${propertyName}.assetTagNumber" th:field="*{${propertyName}.assetTagNumber}" data-attribute-entry="${barcodeInventoryDetailAttributes.assetTagNumber}" />
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.uploadScanIndicator" th:field="*{${propertyName}.uploadScanIndicator}" data-attribute-entry="${barcodeInventoryDetailAttributes.uploadScanIndicator}" readonly="readonly" />
+		</td>
+
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.uploadScanTimestamp" th:field="*{${propertyName}.uploadScanTimestamp}" data-attribute-entry="${barcodeInventoryDetailAttributes.uploadScanTimestamp}" readonly="readonly" />
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.campusCode" th:field="*{${propertyName}.campusCode}" data-attribute-entry="${barcodeInventoryDetailAttributes.campusCode}" />
+			<th:block th:if="${not readOnly}">
+				&nbsp;
+				<span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.campus.CampusEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+			</th:block>
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.buildingCode" th:field="*{${propertyName}.buildingCode}" data-attribute-entry="${barcodeInventoryDetailAttributes.buildingCode}" />
+				<th:block th:if="${not readOnly}">
+					&nbsp;
+					<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>				
+				</th:block>
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.buildingRoomNumber" th:field="*{${propertyName}.buildingRoomNumber}" data-attribute-entry="${barcodeInventoryDetailAttributes.buildingRoomNumber}" />
+				<th:block th:if="${not readOnly}">
+					&nbsp;
+					<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Room" th:replace="~{fragments/kul/lookup :: content}"></span>				
+				</th:block>			
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.buildingSubRoomNumber" th:field="*{${propertyName}.buildingSubRoomNumber}" data-attribute-entry="${barcodeInventoryDetailAttributes.buildingSubRoomNumber}" />	
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.assetConditionCode" th:field="*{${propertyName}.assetConditionCode}" data-attribute-entry="${barcodeInventoryDetailAttributes.assetConditionCode}" />
+			<th:block th:if="${not readOnly}">
+				&nbsp;
+				<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetCondition" th:replace="~{fragments/kul/lookup :: content}"></span>			
+			</th:block>	
+		</td>
+		
+		<td align=left class="${cssClass}">&nbsp
+			<input type="text" name="${propertyName}.errorDescription" th:field="*{${propertyName}.errorDescription}" data-attribute-entry="${barcodeInventoryDetailAttributes.errorDescription}" />
+		</td>
+	</tr>
+</th:block>
+</div>

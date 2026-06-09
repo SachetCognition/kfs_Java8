@@ -1,0 +1,163 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/camsItems.tag -->
+<!-- Fragment parameters: itemAttributes, camsItemAttributes, camsSystemAttributes, camsAssetAttributes, camsLocationAttributes, isRequisition, isPurchaseOrder, fullEntryMode -->
+<div th:fragment="content (itemAttributes, camsItemAttributes, camsSystemAttributes, camsAssetAttributes, camsLocationAttributes, isRequisition, isPurchaseOrder, fullEntryMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="tabindexOverrideBase=60"> /*/-->
+<!--/*/ <th:block th:with="availabilityOnce=${PurapConstants.CapitalAssetAvailability.ONCE}"> /*/-->
+
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Capital Asset Items">
+	<tr>
+		<td colspan="12" class="subhead">Capital Asset Items</td>
+	</tr>
+	<tr>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemLineNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemTypeCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemQuantity}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemCatalogNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.purchasingCommodityCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDescription}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitPrice}"></th>				
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.extendedPrice}"></th>
+		<th:block th:if="${isRequisition}">
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemRestrictedIndicator}"></th>
+		</th:block>
+	</tr>
+
+<logic:iterate indexId="ctr" name="KualiForm" property="document.purchasingCapitalAssetItems" id="itemLine">
+
+	<tr>
+        <td class="infoline" rowspan="2" valign="middle" align="middle">
+        	<b>${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemLineNumber}</b>
+        </td>
+		<td class="infoline">
+			${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemType.itemTypeDescription}
+	    </td>
+		<td class="infoline">
+		    ${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemQuantity}
+	    </td>
+		<td class="infoline">
+		    ${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemUnitOfMeasureCode}
+	    </td>
+		<td class="infoline">
+		    ${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemCatalogNumber}
+	    </td>
+        <td class="infoline">	
+            ${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.commodityCode.commodityDescription}
+		</td>			    
+		<td class="infoline">
+		   ${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemDescription}
+	    </td>
+		<td class="infoline">
+		    <div align="right">
+		        ${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemUnitPrice}
+			</div>
+		</td>
+		<td class="infoline">
+			<div align="right">
+				${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.extendedPrice}
+			</div>
+		</td>
+		<th:block th:if="${isRequisition}">
+		<td class="infoline">
+			<div align="center">
+				<input type="text" name="document.purchasingCapitalAssetItems[${ctr}].purchasingItem.itemRestrictedIndicator" th:field="*{document.purchasingCapitalAssetItems[${ctr}].purchasingItem.itemRestrictedIndicator}" data-attribute-entry="${itemAttributes.itemRestrictedIndicator}" readonly="readonly" />
+			</div>
+		</td>
+		</th:block>		
+	</tr>
+
+	<!-- Cams Tab -->
+    <!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+    <!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+    <!--/*/ <th:block th:with="tabTitle=CamsLines-${currentTabIndex}"> /*/-->
+    <!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(tabTitle)}"> /*/-->
+    <!--  hit form method to increment tab index -->
+    <!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+    <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+    <%-- default to closed --%>
+    <th:block th:switch="${true}">
+        <th:block th:case="${empty currentTab}">
+            <!--/*/ <th:block th:with="isOpen=true"> /*/-->
+        </th:block>
+        <th:block th:case="${!empty currentTab}">
+            <!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+        </th:block>
+    </th:block>
+	
+    <th:block th:if="${not isPurchaseOrder}">
+    	<!--/*/ <th:block th:with="itemActive=true"> /*/-->
+    </th:block>    
+	
+	<th:block th:if="${isPurchaseOrder}">
+    	<!--/*/ <th:block th:with="itemActive=${KualiForm.document.purchasingCapitalAssetItems[ctr].purchasingItem.itemActiveIndicator}"> /*/-->
+    </th:block>
+        
+	<tr>
+	<td class="infoline" valign="middle" colspan="10">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<th colspan="10" style="padding: 0px; border-right: none;">
+		    <div align=left>
+		  	    <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+			         <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" alt="hide" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+				</th:block>
+			    <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			         <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" alt="show" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+			    </th:block>
+			    Capital Asset
+			</div>
+			</th>
+	    </tr>
+	
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			<tr style="display: none;"  id="tab-${tabKey}-div">
+		</th:block>  
+	        <th colspan="10" style="padding:0;">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+				<tr>
+		            <th width="20%" align=right valign=middle class="bord-l-b">
+		               <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsItemAttributes.capitalAssetTransactionTypeCode}"></label></div>
+		            </th>
+				    <td class="datacell">
+				    <th:block th:switch="${true}">
+							<th:block th:case="${!empty KualiForm.document.purchasingCapitalAssetItems and ( (KualiForm.purchasingItemCapitalAssetAvailability eq availabilityOnce) or (KualiForm.purchasingCapitalAssetSystemCommentsAvailability eq availabilityOnce) or (KualiForm.purchasingCapitalAssetSystemDescriptionAvailability eq availabilityOnce) or (KualiForm.purchasingCapitalAssetSystemAvailability eq availabilityOnce) )}">
+								<input type="text" name="document.purchasingCapitalAssetItems[${ctr}].capitalAssetTransactionTypeCode" th:field="*{document.purchasingCapitalAssetItems[${ctr}].capitalAssetTransactionTypeCode}" data-attribute-entry="${camsItemAttributes.capitalAssetTransactionTypeCode}" />
+							</th:block>
+							<th:block th:case="*">
+								<input type="text" name="document.purchasingCapitalAssetItems[${ctr}].capitalAssetTransactionTypeCode" th:field="*{document.purchasingCapitalAssetItems[${ctr}].capitalAssetTransactionTypeCode}" data-attribute-entry="${camsItemAttributes.capitalAssetTransactionTypeCode}" />
+							</th:block>
+						</th:block>
+					</td>
+				</tr>
+				</table>
+				<div th:replace="~{fragments/purap/camsDetail :: content}" data-ctr="${ctr}" data-cams-item-index="${ctr}" data-cams-system-attributes="${camsSystemAttributes}" data-cams-asset-attributes="${camsAssetAttributes}" data-cams-location-attributes="${camsLocationAttributes}" data-cams-asset-system-property="document.purchasingCapitalAssetItems[${ctr}].purchasingCapitalAssetSystem" data-availability="${PurapConstants.CapitalAssetAvailability.EACH}" data-is-requisition="${isRequisition}" data-is-purchase-order="${isPurchaseOrder}" data-po-item-inactive="${not itemActive}" data-full-entry-mode="${fullEntryMode}"></div>
+	        </th>    
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+		    </tr>
+		</th:block>
+	
+		</table>
+	</td>
+	</tr>
+</tr>
+</table>
+</div>

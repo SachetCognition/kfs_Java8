@@ -1,0 +1,64 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/stipulationsAndInfo.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="stipulationAttributes=${DataDictionary.PurchaseOrderVendorStipulation.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=40"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Stipulations" data-default-open="false">
+  <h3>Stipulations</h3>
+    <div class="tab-container" align=center>
+            <h3>Vendor Stipulations and Information</h3>
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Stipulations & Info Section">
+            <tr>
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${stipulationAttributes.vendorStipulationDescription}"></th>
+                <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            </tr>
+            <th:block th:if="${(fullEntryMode or (!empty KualiForm.editingMode['amendmentEntry']))}">
+                <tr>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                    <td class="infoline">
+                        <input type="text" name="newPurchaseOrderVendorStipulationLine.vendorStipulationDescription" th:field="*{newPurchaseOrderVendorStipulationLine.vendorStipulationDescription}" data-attribute-entry="${stipulationAttributes.vendorStipulationDescription}" />
+                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.purap.businessobject.VendorStipulation" th:replace="~{fragments/kul/lookup :: content}"></span></div>
+                    </td>
+                    <td class="infoline">
+                		<div align="center"><input type="image" property="methodToCall.addStipulation" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="Insert a Stipulation" title="Add a Stipulation" styleClass="tinybutton"/></div>
+    				</td>
+                </tr>
+            </th:block>
+        	<th:block th:unless="${#lists.isEmpty(KualiForm.document.purchaseOrderVendorStipulations)}">
+	 			<logic:iterate name="KualiForm" id="stipulation" property="document.purchaseOrderVendorStipulations" indexId="ctr">
+                    <tr>
+		                <td class="infoline">&nbsp;</td>
+		                <td align=center valign=middle class="datacell">
+		                    <input type="text" name="document.purchaseOrderVendorStipulation[${ctr}].vendorStipulationDescription" th:field="*{document.purchaseOrderVendorStipulation[${ctr}].vendorStipulationDescription}" data-attribute-entry="${stipulationAttributes.vendorStipulationDescription}" />
+		                </td>
+		                <th:block th:if="${(fullEntryMode or (!empty KualiForm.editingMode['amendmentEntry']))}">		                
+		                	<td class="infoline"><div align="center"><input type="image" property="methodToCall.deleteStipulation.line${ctr}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" alt="Delete Stipulation ${ctr+1}" title="Delete Stipulation ${ctr+1}" styleClass="tinybutton"/></div></td>
+						</th:block>
+		            </tr>
+	        	</tr>
+	        </th:block>
+        </table>
+    </div>
+</section>
+</div>

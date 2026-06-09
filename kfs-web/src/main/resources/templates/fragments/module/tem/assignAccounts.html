@@ -1,0 +1,53 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/assignAccounts.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<a name="${TEMConstants.DISTRIBUTION_ANCHOR }" id="${TEMConstants.DISTRIBUTION_ANCHOR }"></a>
+	<section class="kfs-tab" data-tab-title="Assign Accounts" data-default-open="${fullEntryMode }">
+  <h3>Assign Accounts</h3>
+	<th:block th:switch="${true}">
+		<th:block th:case="${KualiForm.hasSelectedDistributionRemainingAmount}">
+			<div class="kfs-sys-java-accountingLines" th:include="~{fragments/sys/java/accountingLines :: content}">
+		        <div th:replace="~{fragments/sys/java/accountingLineGroup :: content}" data-new-line-property-name="accountDistributionnewSourceLine" data-collection-property-name="accountDistributionsourceAccountingLines" data-collection-item-property-name="accountDistributionsourceAccountingLines" data-attribute-group-name="accountDistribution"></div>
+		    </div><!-- /kfs-sys-java-accountingLines -->
+		    <div class="tab-container" align="left">
+		    	<th:block th:switch="${true}">
+		    		<th:block th:case="${fn:length(KualiForm.accountDistributionsourceAccountingLines) > 0}">
+		    			<input type="image" property="methodToCall.distributeAccountingLines"
+							src="${ConfigProperties.externalizable.images.url}tinybutton-assignaccounts.gif"
+							alt="Assign Accounts" title="Assign Accounts"
+							styleClass="tinybutton" />
+		    		</th:block>
+		    		<th:block th:case="*">
+		    			<img src="${ConfigProperties.externalizable.images.url}tinybutton-assignaccounts1.gif" alt="Assign Accounts Disabled" title="Assign Accounts Disabled" />
+		    		</th:block>
+		    	</th:block>
+			    
+				<hr />
+			</div>
+		</th:block>
+		<th:block th:case="*">
+			<div class="tab-container" align="left">
+				${TemConstants.ASSIGN_ACCOUNTS_DISABLED_MESSAGE }
+			</div>
+		</th:block>
+	</th:block>
+	
+	</section>
+</div>

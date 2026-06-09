@@ -1,0 +1,58 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/customRelatedDocuments.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentType=${KualiForm.document.documentHeader.workflowDocument.documentTypeName}"> /*/-->
+<!--/*/ <th:block th:with="isATypeOfPurAPRecDoc=${KualiForm.document.isATypeOfPurAPRecDoc}"> /*/-->
+<!--/*/ <th:block th:with="isATypeOfPODoc=${KualiForm.document.isATypeOfPODoc}"> /*/-->
+<!--/*/ <th:block th:with="isRequisition=${KualiForm.document.isReqsDoc}"> /*/-->
+
+<th:block th:switch="${true}">
+    <th:block th:case="${isRequisition}">
+    </th:block>   
+    <th:block th:case="${isATypeOfPODoc}">
+        <!--/*/ <th:block th:with="limitByPoId=${KualiForm.document.purapDocumentIdentifier}"> /*/-->
+    </th:block>
+    <th:block th:case="*">
+        <!--/*/ <th:block th:with="limitByPoId=${KualiForm.document.purchaseOrderIdentifier}"> /*/-->
+	</th:block>
+</th:block>
+
+<div th:replace="~{fragments/purap/loadOnOpenTab :: content}" data-tab-title="View Related Documents" data-default-open="false" data-tab-error-key="${PurapConstants.RELATED_DOCS_TAB_ERRORS}" data-class="tab-container"></div>
+		<th:block th:if="${kfunc:getTabState(KualiForm, tabKey) == 'OPEN'}">
+		<div th:replace="~{fragments/purap/relatedDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-view-list="document.relatedViews.relatedRequisitionViews"></div> 
+		
+		<div th:replace="~{fragments/purap/relatedPurchaseOrderDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-group-list="document.relatedViews.groupedRelatedPurchaseOrderViews" data-limit-by-po-id="${limitByPoId}"></div> 
+
+		<div th:replace="~{fragments/purap/relatedDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-view-list="document.relatedViews.relatedBulkReceivingViews" data-limit-by-po-id="${limitByPoId}"></div> 
+
+		<div th:replace="~{fragments/purap/relatedReceivingDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-group-list="document.relatedViews.groupedRelatedReceivingViews" data-limit-by-po-id="${limitByPoId}"></div> 
+			 
+		<div th:replace="~{fragments/purap/relatedDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-view-list="document.relatedViews.relatedPaymentRequestViews" data-limit-by-po-id="${limitByPoId}"></div> 
+
+		<div th:replace="~{fragments/purap/relatedDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-view-list="document.relatedViews.relatedCreditMemoViews" data-limit-by-po-id="${limitByPoId}"></div> 
+			
+		<th:block th:if="${!isATypeOfPurAPRecDoc}">
+			<div th:replace="~{fragments/purap/relatedElectronicRejectDocumentsDetail :: content}" data-document-attributes="${documentAttributes}" data-view-list="document.relatedViews.relatedRejectViews" data-limit-by-po-id="${limitByPoId}"></div> 	
+		</th:block>
+		</th:block>
+    </div>
+</div><!-- /purap:loadOnOpenTab -->
+</div>

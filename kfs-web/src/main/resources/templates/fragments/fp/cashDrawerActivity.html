@@ -1,0 +1,162 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/cashDrawerActivity.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="cmDocAttributes=${DataDictionary.CashManagementDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="drawerAttributes=${DataDictionary.CashManagementDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="dummyAttributes=${DataDictionary.DummyBusinessObject.attributes}"> /*/-->
+<!--/*/ <th:block th:with="cashDrawerAttributes=${DataDictionary.CashDrawer.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="allowOpen=${(KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]) && KualiForm.allowOpenCashDrawer}"> /*/-->
+<!--/*/ <th:block th:with="allowRefresh=${KualiForm.document.rawCashDrawerStatus != KFSConstants.CashDrawerConstants.STATUS_CLOSED}"> /*/-->
+
+<!--/*/ <th:block th:with="drawer=${KualiForm.document.cashDrawer}"> /*/-->
+
+<style>
+    td {white-space: nowrap}
+    th {white-space: nowrap}
+</style>
+
+<!--/*/ <th:block th:with="subheading=Cash Drawer Activity"> /*/-->
+<th:block th:if="${!empty KualiForm.cashDrawerSummary}">
+    <!--/*/ <th:block th:with="subheading=${subheading} as of ${KualiForm.cashDrawerSummary.timeRefreshed}"> /*/-->
+</th:block>
+
+
+<section class="kfs-tab" data-tab-title="Cash Drawer Activity" data-default-open="true">
+  <h3>Cash Drawer Activity</h3>
+    <div class="tab-container" align=center>
+	  <table cellspacing="0" cellpadding="0" border="0" class="datatable">
+		  <tr>
+			  <td width="50%" valign="top">
+            			  <h3>${subheading}</h3>
+
+        			  <table cellspacing=0 cellpadding=0 border=0 class="datatable">
+            			<tr>
+			                  <td class="infoline" colspan=3>
+                    				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cmDocAttributes.campusCode}"></label>
+                				</td>
+                				<td colspan=2>
+                    				<input type="text" name="document.campusCode" th:field="*{document.campusCode}" data-attribute-entry="${cmDocAttributes.campusCode}" readonly="readonly" />
+                				</td>
+            			</tr>
+
+            			<tr>
+                				<td class="infoline" colspan=3>
+                    				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cmDocAttributes.cashDrawerStatus}"></label>
+                				</td>
+                				<td colspan=2>
+                    				<input type="text" name="document.cashDrawerStatus" th:field="*{document.cashDrawerStatus}" data-attribute-entry="${cmDocAttributes.cashDrawerStatus}" readonly="readonly" />
+                    				<th:block th:if="${KualiForm.document.rawCashDrawerStatus == KFSConstants.CashDrawerConstants.STATUS_OPEN}">
+                        				(opened at ${KualiForm.cashDrawerSummary.timeOpened})
+                    				</th:block>
+                				</td>
+            			</tr>
+
+            			<th:block th:if="${KualiForm.document.rawCashDrawerStatus != KFSConstants.CashDrawerConstants.STATUS_CLOSED && KualiForm.cashDrawerSummary.remainingSumTotal != null}">
+                				<tr>
+                    				<td colspan=5 class="tab-subhead">Cash Drawer Activity: <span th:text="${KualiForm.cashDrawerSummary.overallReceiptStats.receiptCount}"></span> available Cash Receipts</td>
+                				</tr>
+                
+                				<tr>
+                    				<td rowspan=4 >&nbsp;&nbsp;</td>
+                    				<td colspan=2 class="infoline">Checks</td>
+                    				<td style="text-align: right">$<span th:text="${KualiForm.cashDrawerSummary.overallReceiptStats.checkTotal}"></span></td>
+                    				<td rowspan=4 width=100%>&nbsp;</td>
+                				</tr>
+                				<tr>
+                    				<td colspan="2" class="infoline">Currency</td>
+                    				<td style="text-align: right">$<span th:text="${KualiForm.cashDrawerSummary.overallReceiptStats.currencyTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<td colspan="2" class="infoline">Coin</td>
+                    					<td style="text-align: right">$
+                    					<span th:text="${KualiForm.cashDrawerSummary.overallReceiptStats.coinTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<th colspan=2 style="text-align: left; padding-left: 0px">TOTAL</th>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.overallReceiptStats.sumTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<td colspan=5 class="tab-subhead">Deposit Activity: <span th:text="${KualiForm.cashDrawerSummary.depositedReceiptCount}"></span>  Deposited Cash Receipts</td>
+                				</tr>
+                				<tr>
+                    				<td rowspan="8">&nbsp;&nbsp;</td>
+                    				<td colspan=2 class="infoline">Operating</td>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.overallReceiptSumTotal}"></span></td>
+                    				<td rowspan="8" width=100%>&nbsp;</td>
+                				</tr>
+                				<tr>
+                    				<td colspan=2 class="infoline">- Interim</td>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.interimReceiptSumTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<td colspan=2 class="infoline">- Final</td>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.finalReceiptSumTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<th colspan=2 style="text-align: left; padding-left: 0px">= Remaining</th>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.remainingSumTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<td rowspan="3">&nbsp;&nbsp;</td>
+                    				<td class="infoline">Checks</td>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.remainingCheckTotal}"></span></td>
+                				</tr>
+                				<tr>
+                   	 			<td class="infoline">Currency</td>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.remainingCurrencyTotal}"></span></td>
+                				</tr>
+                				<tr>
+                    				<td class="infoline">Coin</td>
+                    				<td style="text-align: right">$
+                    				<span th:text="${KualiForm.cashDrawerSummary.remainingCoinTotal}"></span></td>
+                				</tr>
+		    
+            			</th:block>
+        			</table>
+			</td>
+			<td width="50%" valign="top">
+				<div th:replace="~{fragments/fp/cashDrawerCurrencyCoin :: content}" data-cash-drawer-property="document.cashDrawer" data-read-only="true" data-show-cash-drawer-summary="${KualiForm.document.rawCashDrawerStatus != KFSConstants.CashDrawerConstants.STATUS_CLOSED && KualiForm.cashDrawerSummary.cashDrawerTotal != null}"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+       	 		<div style="padding: 10px; text-align: center;">
+            			<th:block th:if="${allowOpen}">
+                				<input type="image" src="${ConfigProperties.externalizable.images.url}buttonsmall_openCashDrawer.gif" style="border: none" property="methodToCall.openCashDrawer" title="Open Cash Drawer" alt="Open Cash Drawer" />
+            			</th:block>
+            
+            			<th:block th:if="${allowRefresh}">
+                				<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_refresh.gif" style="border: none" property="methodToCall.refreshSummary" title="Refresh Cash Drawer Summary" alt="Refresh Cash Drawer Summary" />
+            			</th:block>
+        			</div>
+			</td>
+		</tr>
+	</table>
+    </div>
+</section>
+</div>

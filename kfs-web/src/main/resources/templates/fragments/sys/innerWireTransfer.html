@@ -1,0 +1,103 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/innerWireTransfer.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="wireTransAttributes=${DataDictionary.PaymentSourceWireTransfer.attributes}"> /*/-->
+
+<table cellpadding=0 class="datatable" summary="Wire Transfer Section">
+	<tbody>
+		<tr>
+			<td colspan="4" align="left" valign="middle" class="datacell"><span th:text="${KualiForm.wireChargeMessage}"></span></td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.automatedClearingHouseProfileNumber}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.automatedClearingHouseProfileNumber" th:field="*{document.wireTransfer.automatedClearingHouseProfileNumber}" data-attribute-entry="${wireTransAttributes.automatedClearingHouseProfileNumber}" />
+			</td>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.wireTransferFeeWaiverIndicator}"></label> </div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.wireTransferFeeWaiverIndicator" th:field="*{document.wireTransfer.wireTransferFeeWaiverIndicator}" data-attribute-entry="${wireTransAttributes.wireTransferFeeWaiverIndicator}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.bankName}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.bankName" th:field="*{document.wireTransfer.bankName}" data-attribute-entry="${wireTransAttributes.bankName}" />
+			</td>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.additionalWireText}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.additionalWireText" th:field="*{document.wireTransfer.additionalWireText}" data-attribute-entry="${wireTransAttributes.additionalWireText}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.bankRoutingNumber}"></label>
+				<th:block th:if="${fullEntryMode||wireEntryMode||frnEntryMode}"><br/> *required for US bank</th:block>
+			</th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.bankRoutingNumber" th:field="*{document.wireTransfer.bankRoutingNumber}" data-attribute-entry="${wireTransAttributes.bankRoutingNumber}" />
+			</td>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.attentionLineText}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.attentionLineText" th:field="*{document.wireTransfer.attentionLineText}" data-attribute-entry="${wireTransAttributes.attentionLineText}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.bankCityName}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.bankCityName" th:field="*{document.wireTransfer.bankCityName}" data-attribute-entry="${wireTransAttributes.bankCityName}" />
+			</td>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.currencyTypeCode}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.currencyTypeCode" th:field="*{document.wireTransfer.currencyTypeCode}" data-attribute-entry="${wireTransAttributes.currencyTypeCode}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.bankStateCode}"></label>
+				<th:block th:if="${fullEntryMode||wireEntryMode||frnEntryMode}"><br/> *required for US bank</th:block>
+			</th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.bankStateCode" th:field="*{document.wireTransfer.bankStateCode}" data-attribute-entry="${wireTransAttributes.bankStateCode}" />
+			</td>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.currencyTypeName}"></label></div></th>
+			<td class="datacell" colspan="3">
+				<input type="text" name="document.wireTransfer.currencyTypeName" th:field="*{document.wireTransfer.currencyTypeName}" data-attribute-entry="${wireTransAttributes.currencyTypeName}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.bankCountryCode}"></label></div></th>
+			<td class="datacell" colspan="3">
+				<input type="text" name="document.wireTransfer.bankCountryCode" th:field="*{document.wireTransfer.bankCountryCode}" data-attribute-entry="${wireTransAttributes.bankCountryCode}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.payeeAccountNumber}"></label></div></th>
+			<td class="datacell" colspan="3">
+				<input type="text" name="document.wireTransfer.payeeAccountNumber" th:field="*{document.wireTransfer.payeeAccountNumber}" data-attribute-entry="${wireTransAttributes.payeeAccountNumber}" />
+			</td>
+		</tr>
+		<tr>
+			<th scope=row class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.payeeAccountName}"></label></div></th>
+			<td class="datacell">
+				<input type="text" name="document.wireTransfer.payeeAccountName" th:field="*{document.wireTransfer.payeeAccountName}" data-attribute-entry="${wireTransAttributes.payeeAccountName}" />
+			</td>
+			<td class="datacell" colspan="2"><span th:text="#{message.wiretransfer.fee}"></span></td>
+		</tr>
+	</tbody>
+</table>
+</div>

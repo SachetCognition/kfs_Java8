@@ -1,0 +1,84 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/travelPaymentPDPStatus.tag -->
+<!-- Fragment parameters: travelPaymentProperty, pdpPaymentDocumentType, displayCorporateCardExtraction -->
+<div th:fragment="content (travelPaymentProperty, pdpPaymentDocumentType, displayCorporateCardExtraction)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="travelPaymentProp=${travelPaymentProperty}"> /*/-->
+<th:block th:if="${empty travelPaymentProp}">
+	<!--/*/ <th:block th:with="travelPaymentProp=travelPayment"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="displayCorpCard=${displayCorporateCardExtraction}"> /*/-->
+<th:block th:if="${empty displayCorpCard}">
+	<!--/*/ <th:block th:with="displayCorpCard=false"> /*/-->
+</th:block>
+
+<section class="kfs-tab" data-tab-title="Pre-Disbursement Processor Status" data-default-open="false">
+  <h3>Pre-Disbursement Processor Status</h3>
+  <div class="tab-container" align=center > 
+  <h3>Pre-Disbursement Processor Status</h3>
+  <!--/*/ <th:block th:with="travelPaymentAttributes=${DataDictionary.TravelPayment.attributes}"> /*/-->
+  <table style="datatable" cellpadding="0" border="0" summary="PDP Status">
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.paymentPdpStatus}"></label></th>
+      <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.${travelPaymentProp}.paymentPdpStatus" th:field="*{document.${travelPaymentProp}.paymentPdpStatus}" data-attribute-entry="${travelPaymentAttributes.paymentPdpStatus}" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.extractDate}"></label></th>
+      <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.${travelPaymentProp}.extractDate" th:field="*{document.${travelPaymentProp}.extractDate}" data-attribute-entry="${travelPaymentAttributes.extractDate}" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.paidDate}"></label></th>
+       <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.${travelPaymentProp}.paidDate" th:field="*{document.${travelPaymentProp}.paidDate}" data-attribute-entry="${travelPaymentAttributes.paidDate}" readonly="readonly" />
+          <th:block th:if="${not empty KualiForm.document[travelPaymentProp].extractDate}">
+              <div th:replace="~{fragments/tem/travelPaymentDisbursementInfo :: content}" data-source-document-number="${KualiForm.document.documentNumber}" data-source-document-type="${pdpPaymentDocumentType}"></div> 
+          </th:block>
+      </td>
+    </tr>
+    <tr>
+      <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.cancelDate}"></label></th>
+      <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.${travelPaymentProp}.cancelDate" th:field="*{document.${travelPaymentProp}.cancelDate}" data-attribute-entry="${travelPaymentAttributes.cancelDate}" readonly="readonly" /></td>
+    </tr>
+	<th:block th:if="${displayCorpCard}">
+		<!--/*/ <th:block th:with="corporateCardAttributes=${DataDictionary[KualiForm.document['class'].simpleName].attributes}"> /*/-->
+		<tr>
+		  <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentPdpStatus}"></label></th>
+		  <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.corporateCardPaymentPdpStatus" th:field="*{document.corporateCardPaymentPdpStatus}" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentPdpStatus}" readonly="readonly" /></td>
+		</tr>
+		<tr>
+		  <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentExtractDate}"></label></th>
+		  <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.corporateCardPaymentExtractDate" th:field="*{document.corporateCardPaymentExtractDate}" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentExtractDate}" readonly="readonly" /></td>
+		</tr>
+		<tr>
+		  <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentPaidDate}"></label></th>
+		   <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.corporateCardPaymentPaidDate" th:field="*{document.corporateCardPaymentPaidDate}" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentPaidDate}" readonly="readonly" />
+			  
+			  <th:block th:if="${not empty KualiForm.document.corporateCardPaymentExtractDate}">
+				  <div th:replace="~{fragments/tem/travelPaymentDisbursementInfo :: content}" data-source-document-number="${KualiForm.document.documentNumber}" data-source-document-type="${KualiForm.document.corporateCardPaymentAchCheckDocumentType}"></div> 
+			  </th:block>
+		  </td>
+		</tr>
+		<tr>
+		  <th align="right" valign="middle" class="bord-l-b" width="50%"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentCancelDate}"></label></th>
+		  <td align="left" valign="middle" class="datacell" width="50%"><input type="text" name="document.corporateCardPaymentCancelDate" th:field="*{document.corporateCardPaymentCancelDate}" data-attribute-entry="${corporateCardAttributes.corporateCardPaymentCancelDate}" readonly="readonly" /></td>
+		</tr>
+	</th:block>
+  </table>
+  </div>
+</section>
+</div>

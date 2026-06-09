@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: pdp/format/formatContinue.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">pdp/format/formatContinue</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="disbursementNumberRangeAttributes=${DataDictionary.DisbursementNumberRange.attributes}"> /*/-->
+<!--/*/ <th:block th:with="formatResultAttributes=${DataDictionary.FormatResult.attributes}"> /*/-->
+<!--/*/ <th:block th:with="customerProfileAttributes=${DataDictionary.CustomerProfile.attributes}"> /*/-->
+<!--/*/ <th:block th:with="dummyAttributes=${DataDictionary.AttributeReferenceDummy.attributes}"> /*/-->
+
+<div class="kfs-page" data-header-title="Format Disbursement Summary" data-doc-title="Format Disbursement Summary">
+  <form action="pdp/format.do" method="post">
+	
+	<table width="100%" border="0"><tr><td>	
+	  <div class="kfs-errors" data-key-match="${Constants.GLOBAL_ERRORS}" th:if="${#fields.hasErrors('${Constants.GLOBAL_ERRORS}')}"><h4>Errors Found On Page:</h4></div>
+	</td></tr></table>  
+	</br>
+	
+	<div th:replace="~{fragments/pdp/formatSelectedPayments :: content}" data-disbursement-number-range-attributes="${disbursementNumberRangeAttributes}" data-customer-profile-attributes="${customerProfileAttributes}" data-format-result-attributes="${formatResultAttributes}"></div>
+	<div class="kfs-panel-footer"></div>
+	<div id="globalbuttons" class="globalbuttons">
+		<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_continue.gif"
+			styleClass="globalbuttons" property="methodToCall.continueFormat"
+			title="begin format" alt="continue format" />
+		<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif"
+			styleClass="globalbuttons" property="methodToCall.cancel"
+			title="cancel" alt="cancel" />
+	</div>
+
+  </form>
+</div>
+</body>
+</html>

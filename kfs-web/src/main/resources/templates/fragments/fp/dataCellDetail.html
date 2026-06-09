@@ -1,0 +1,57 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dataCellDetail.tag -->
+<!-- Fragment parameters: businessObjectFormName, detailField, detailFields -->
+<div th:fragment="content (businessObjectFormName, detailField, detailFields)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!KualiForm.hideDetails}">
+    <br/>
+    <div id="${businessObjectFormName}.${detailField}.div" class="fineprint">
+    <th:block th:if="${!empty detailFields}">
+	    <c:forTokens var="key" items="${detailFields}" delims=",">
+	        <!--/*/ <th:block th:with="field=${key}"> /*/-->
+			<th:block th:switch="${true}">
+			    <th:block th:case="${fn:startsWith(field,';')}">
+	    			<span th:text="${#strings.substringAfter(field,';')}"></span>
+			    </th:block>
+				<th:block th:case="*">		
+					<span th:text="${KualiForm.${businessObjectFormName}.${field}}"></span>&nbsp;
+			    </th:block>
+    		</th:block>    
+	    </c:forTokens>    
+    </th:block>
+    <th:block th:if="${!empty detailField && empty detailFields}">   
+		<th:block th:unless="${#lists.isEmpty(KualiForm.${businessObjectFormName}.${detailField})}">
+			<c:set var="temp1">
+				<span th:text="${KualiForm.${businessObjectFormName}.${detailField}}"></span>
+			</c:set>
+			<c:set value = "${fn:replace(temp1, '[br]', '<br/>')}" var="temp2"  />
+			${temp2}
+		</th:block>
+    </th:block>
+  </div>
+</th:block>
+<th:block th:if="${!empty detailField}">
+  <c:catch var="e">
+ 	<input type="hidden" th:field="*{${businessObjectFormName}.${detailField}}" />
+  </c:catch>
+  <th:block th:if="${e!=null}">
+    <input type="hidden" name="${businessObjectFormName}.${detailField}" value="test"/>
+  </th:block>
+</th:block>
+</div>

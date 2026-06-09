@@ -1,0 +1,82 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/purapGeneralAccounting.tag -->
+<!-- Fragment parameters: accountPrefix, itemColSpan -->
+<div th:fragment="content (accountPrefix, itemColSpan)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!accountingLineScriptsLoaded}">
+        <script language="JavaScript" type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+        <!--/*/ <th:block th:with="accountingLineScriptsLoaded=true"> /*/-->
+    </th:block>
+    
+    <%-- add extra columns count for the "Action" button and/or dual amounts --%>
+
+    <!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+    <!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+    <!--/*/ <th:block th:with="tabTitle=AccountingLines-${currentTabIndex}"> /*/-->
+    <!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(tabTitle)}"> /*/-->
+    <!--  hit form method to increment tab index -->
+    <!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+    <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+	<%-- default to closed --%>
+	<th:block th:switch="${true}">
+		<th:block th:case="${empty currentTab}">
+			<!--/*/ <th:block th:with="isOpen=false"> /*/-->
+		</th:block>
+		<th:block th:case="${!empty currentTab}">
+			<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+		</th:block>
+	</th:block>
+
+    <html:hidden property="tabStates(${tabKey})" value="${(isOpen ? 'OPEN' : 'CLOSE')}" />
+
+	<tr>
+	<td colspan="${itemColSpan}">
+	<table border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<th style="padding: 0px; border-right: none;">
+		    <div align=left>
+		  	    <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+		         <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" alt="hide" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+		     </th:block>
+		     <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+		         <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" alt="show" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+		     </th:block>
+		    	Accounting Lines
+		    </div>
+		</th>
+	</tr>
+
+	<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+	    <tr style="display: none;"  id="tab-${tabKey}-div">
+	</th:block>   
+        <th style="padding:0;">              
+            <div class="kfs-sys-java-accountingLines" th:include="~{fragments/sys/java/accountingLines :: content}">
+			    <div th:replace="~{fragments/sys/java/accountingLineGroup :: content}" data-new-line-property-name="${accountPrefix}newSourceLine" data-collection-property-name="${accountPrefix}sourceAccountingLines" data-collection-item-property-name="${accountPrefix}sourceAccountingLine" data-attribute-group-name="source"></div>
+		    </div><!-- /kfs-sys-java-accountingLines -->
+        </th>
+    
+	<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+	    </tr>
+	</th:block>
+
+</table>
+</td>
+</tr>
+</div>

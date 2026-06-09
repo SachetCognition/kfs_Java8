@@ -1,0 +1,137 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/paymentApplicationControlInformation.tag -->
+<!-- Fragment parameters: hasRelatedCashControlDocument, readOnly, isCustomerSelected, customerAttributes, customerInvoiceDetailAttributes, invoiceAttributes -->
+<div th:fragment="content (hasRelatedCashControlDocument, readOnly, isCustomerSelected, customerAttributes, customerInvoiceDetailAttributes, invoiceAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="cashControlDetailAttributes=${DataDictionary['CashControlDetail'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="nonAppliedHoldingAttributes=${DataDictionary['NonAppliedHolding'].attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Control Information" data-default-open="true">
+  <h3>Control Information</h3>
+
+    <div class="tab-container" align="center">
+		<input type="hidden" th:field="*{document.hiddenFieldForErrors}" />
+
+        <th:block th:switch="${true}">
+            <th:block th:case="${!hasRelatedCashControlDocument}">
+         	    <th:block th:switch="${true}">
+                  <th:block th:case="${!isCustomerSelected}">
+				      No Customer Selected            
+	              </th:block>
+                  <th:block th:case="*">
+    	              <div style='text-align: right; margin-top: 20px; padding: 2px 6px; width: 90%;'>
+        	            <style type='text/css'>
+            	            #ctrl-info th { text-align: right; }
+                	        #ctrl-info th, #ctrl-info td { width: 50%; }
+    	                </style>
+		  				<h3>Control Information</h3>
+    				    <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+                    	    <tr>
+                        	    <th>Application Document #</th>
+                        	    <th:block th:if="${readOnly ne true}">
+                        	    	<th>Original Unapplied Amount</th>
+                        	    </th:block>
+                                <th>Applied Amount</th>
+                  		    </tr>
+            	            <tr th:each=" : ${KualiForm.nonAppliedControlHoldings}" id="nonApplied" indexId="idx">
+        	               	    <tr>
+    	                   		    <td>
+    	                   		    	<input type="text" name="nonAppliedControlHoldings[${idx}].referenceFinancialDocumentNumber" th:field="*{nonAppliedControlHoldings[${idx}].referenceFinancialDocumentNumber}" data-attribute-entry="${nonAppliedHoldingAttributes.referenceFinancialDocumentNumber}" readonly="readonly" />
+                           			    <!--<span th:text="${nonApplied.referenceFinancialDocumentNumber}"></span>-->
+                        		    </td>
+	                        	    <th:block th:if="${readOnly ne true}">
+ 		    <td style="text-align: right;">
+											<input type="text" name="nonAppliedControlHoldings[${idx}].availableUnappliedAmount" th:field="*{nonAppliedControlHoldings[${idx}].availableUnappliedAmount}" data-attribute-entry="${nonAppliedHoldingAttributes.availableUnappliedAmount}" readonly="readonly" />
+	                	           		    <!--<span th:text="${nonApplied.availableUnappliedAmount}"></span>-->
+	            	           		    </td>
+	                        	    </th:block>
+                    	   		    <td style="text-align: right;">
+                   	   		    	<th:block th:switch="${true}">
+                   	   		    	<th:block th:case="${KualiForm.document.approved}">
+                   	   		    		<span th:text="${KualiForm.distributionsFromControlDocs[nonApplied.referenceFinancialDocumentNumber]}"></span>
+                   	   		    	</th:block>
+                   	   		    	<th:block th:case="*">
+                   	   		    		<span th:text="${KualiForm.nonAppliedControlAllocations[nonApplied.referenceFinancialDocumentNumber]}"></span>
+                   	   		    	</th:block>
+                   	   		    	</th:block>
+            	           		    </td>
+                        	    </tr>
+                            </tr>
+           	        	    <tr>
+                        	    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                        	    <th:block th:if="${readOnly ne true}">
+	                        	    <td style="text-align: right;">
+	                        	        ${KualiForm.totalFromControl}
+    							    </td>
+                        	    </th:block>
+                        	    <td style="text-align: right;">
+                        	    	   ${KualiForm.totalApplied}
+		             
+                        	    </td>
+                        	</tr>
+                        </table>
+                      </div>
+
+        	      </th:block>
+                </th:block>
+	        </th:block>
+        	<th:block th:case="*">
+          	  <div style='text-align: right; margin-top: 20px; padding: 2px 6px; width: 98%;'>
+                <style type='text/css'>
+                	#ctrl-info th { text-align: right; }
+                	#ctrl-info th, #ctrl-info td { width: 50%; }
+            	</style>
+  				<h3>Control Information</h3>
+            	<table id='ctrl-info' width="100%" cellpadding="0" cellspacing="0" class="datatable">
+              		<tr>
+                		<th>Org Doc #</th>
+                		<td><span th:text="${KualiForm.cashControlDocument.documentNumber}"></span></td>
+              		</tr>
+              		<tr>
+	                	<th>Customer</th>
+                		<td>
+							<input type="text" name="document.cashControlDetail.customerNumber" th:field="*{document.cashControlDetail.customerNumber}" data-attribute-entry="${cashControlDetailAttributes.customerNumber}" readonly="readonly" />
+                		</td>
+              		</tr>
+              		<tr>
+                		<th>Control Total</th>
+                		<td>
+							<input type="text" name="document.cashControlDetail.financialDocumentLineAmount" th:field="*{document.cashControlDetail.financialDocumentLineAmount}" data-attribute-entry="${cashControlDetailAttributes.financialDocumentLineAmount}" readonly="readonly" />
+                		</td>
+              		</tr>
+              		<tr>
+                		<th>Open Amount</th>
+                		<td>
+                			<%--
+                			<input type="text" name="unallocatedBalance" th:field="*{unallocatedBalance}" data-attribute-entry="${unallocatedBalance}" readonly="readonly" />
+							 --%>
+							 <span th:text="${KualiForm.document.unallocatedBalance}"></span>&nbsp;
+                		</td>
+              		</tr>
+              		<tr>
+                		<th>Payment #</th>
+                		<td><span th:text="${KualiForm.document.paymentNumber}"></span>&nbsp;</td>
+              		</tr>
+            	</table>
+              </div>
+        	</th:block>
+        </th:block>
+    </div>
+</section>
+</div>

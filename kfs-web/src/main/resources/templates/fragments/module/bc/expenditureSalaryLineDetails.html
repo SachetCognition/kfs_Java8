@@ -1,0 +1,279 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/expenditureSalaryLineDetails.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="bciiAttributes=${DataDictionary['BudgetConstructionIntendedIncumbent'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="bccsftAttributes=${DataDictionary['BudgetConstructionCalculatedSalaryFoundationTracker'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="pbcafAttributes=${DataDictionary['PendingBudgetConstructionAppointmentFunding'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="bcpAttributes=${DataDictionary['BudgetConstructionPosition'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="fundingPropertyName=salarySettingExpansion.pendingBudgetConstructionAppointmentFunding"> /*/-->
+<!--/*/ <th:block th:with="isHourlyPaid=${KualiForm.salarySettingExpansion.hourlyPaid}"> /*/-->
+<!--/*/ <th:block th:with="numOfColumsRemoved=${isHourlyPaid ? 0 : 1 }"> /*/-->
+						
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Expenditure Salary Line Detail">	
+	<tr>
+		<td colspan="${16 - numOfColumsRemoved}" class="subhead">	
+			<span class="subhead-left">Salary Line Detail</span>
+    		<span class="subhead-right">   			   			
+		   		<th:block th:if="${not readOnly}">	    
+			    	
+			    	<!--/*/ <th:block th:with="hideOrShow=${KualiForm.hideAdjustmentMeasurement ? 'show' : 'hide'}"> /*/-->
+			    	<input type="image" property="methodToCall.toggleAdjustmentMeasurement" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-${hideOrShow}adjust.gif" 
+						alt="${hideOrShow} percent adjustment" title="${hideOrShow} percent adjustment"
+						styleClass="tinybutton" />	
+	    		</th:block>
+			</span>
+    	</td>
+	</tr>
+
+	<tr>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.appointmentFundingDeleteIndicator}"></th>
+				
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.positionNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.emplid}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bciiAttributes.iuClassificationLevel}"></th>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcpAttributes.positionSalaryPlanDefault}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcpAttributes.positionGradeDefault}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcpAttributes.iuNormalWorkMonths}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcpAttributes.iuPayMonths}"></th>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bccsftAttributes.csfAmount}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bccsftAttributes.csfFullTimeEmploymentQuantity}"></th>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.appointmentFundingMonth}"></th>
+		
+		<th:block th:if="${isHourlyPaid}">
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.appointmentRequestedPayRate}"></th>
+		</th:block>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.appointmentRequestedAmount}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.appointmentRequestedFteQuantity}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.percentChange}"></th>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>		
+	</tr>
+
+	<c:forEach items="${KualiForm.salarySettingExpansion.pendingBudgetConstructionAppointmentFunding}" var="fundingLine" varStatus="status">
+	<!--/*/ <th:block th:with="fundingLineName=${fundingPropertyName}[${status.index}]"> /*/-->	
+	<!--/*/ <th:block th:with="isVacant=${fundingLine.emplid eq BCConstants.VACANT_EMPLID}"> /*/-->
+	<!--/*/ <th:block th:with="hidePercentAdjustment=${fundingLine.appointmentFundingDeleteIndicator || KualiForm.hideAdjustmentMeasurement || readOnly || empty fundingLine.bcnCalculatedSalaryFoundationTracker}"> /*/-->
+	<!--/*/ <th:block th:with="notEditable=${readOnly || fundingLine.persistedDeleteIndicator}"> /*/-->
+	<!--/*/ <th:block th:with="canDelete=${not notEditable && not fundingLine.appointmentFundingDeleteIndicator }"> /*/-->
+	<!--/*/ <th:block th:with="canUndelete=${not notEditable && not fundingLine.vacatable && fundingLine.appointmentFundingDeleteIndicator}"> /*/-->
+	<!--/*/ <th:block th:with="rowspan=${ hidePercentAdjustment ? 1: 2}"> /*/-->
+	
+	<tr>		
+		<%-- Appointment Funding Delete Indicator --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentFundingDeleteIndicator" data-row-span="${rowspan}" data-read-only="false" data-field-align="left" data-disabled="${true}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="positionNumber" data-inquiry="true" data-lookup-or-inquiry-keys="positionNumber,universityFiscalYear" data-bo-class-simple-name="BudgetConstructionPosition" data-bo-package-name="org.kuali.kfs.module.bc.businessobject" data-accounting-line-values-map="${fundingLine.valuesMap}" data-field-align="left" data-read-only="true" data-row-span="${rowspan}" data-anchor="salaryexistingLineLineAnchor${status.index}"></div>
+	
+		<th:block th:switch="${true}">
+			<th:block th:case="${not isVacant}">					
+				<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="emplid" data-detail-function="loadEmplInfo" data-detail-field="budgetConstructionIntendedIncumbent.name" data-attributes="${pbcafAttributes}" data-inquiry="true" data-bo-class-simple-name="BudgetConstructionIntendedIncumbent" data-bo-package-name="org.kuali.kfs.module.bc.businessobject" data-read-only="true" data-display-hidden="false" data-lookup-or-inquiry-keys="emplid" data-row-span="${rowspan}" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>	
+					
+				<td class="datacell" valign="top" rowspan="${rowspan}">${fundingLine.budgetConstructionIntendedIncumbent.iuClassificationLevel}&nbsp;</td>						
+			</th:block>
+			<th:block th:case="*">
+				<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}.budgetConstructionIntendedIncumbent" data-attributes="${bciiAttributes}" data-field="name" data-read-only="true" data-formatted-number-value="${BCConstants.VACANT_EMPLID}" data-display-hidden="false" data-row-span="${rowspan}"></div>
+				
+				<td rowspan="${rowspan}">&nbsp;</td>
+			</th:block>
+		</th:block>
+		
+		<%-- Salary Plan Default --%>
+		<td class="datacell" valign="top" rowSpan="${rowspan}">${fundingLine.budgetConstructionPosition.positionSalaryPlanDefault}</td>
+
+		<%-- Position Grade Default --%>
+		<td class="datacell" valign="top" rowSpan="${rowspan}">${fundingLine.budgetConstructionPosition.positionGradeDefault}</td>
+
+		<%-- IU Normal Work Months --%>
+		<td class="datacell" valign="top" rowSpan="${rowspan}">${fundingLine.budgetConstructionPosition.iuNormalWorkMonths}</td>
+
+		<%-- IU Pay Months --%>
+		<td class="datacell" valign="top" rowSpan="${rowspan}">${fundingLine.budgetConstructionPosition.iuPayMonths}</td>
+				
+		<%-- csf Amount --%>
+		<th:block th:switch="${true}">
+			<th:block th:case="${!empty fundingLine.bcnCalculatedSalaryFoundationTracker}">	
+				<fmt:formatNumber value="${fundingLine.bcnCalculatedSalaryFoundationTracker[0].csfAmount}" 
+					var="formattedCsfAmount" type="number" groupingUsed="true"/>		
+				<td class="datacell" valign="top" style="text-align: right;">
+					<a href="${ConfigProperties.application.url}/budgetTempListLookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.bc.businessobject.CalculatedSalaryFoundationTracker&universityFiscalYear=${KualiForm.universityFiscalYear-1}&chartOfAccountsCode=${KualiForm.chartOfAccountsCode}&accountNumber=${KualiForm.accountNumber}&subAccountNumber=${KualiForm.subAccountNumber}&financialObjectCode=${KualiForm.financialObjectCode}&financialSubObjectCode=${KualiForm.financialSubObjectCode}&hideReturnLink=true&suppressActions=true&tempListLookupMode=6&showInitialResults=true&docFormKey=${KualiForm.returnFormKey}&backLocation=${KualiForm.backLocation}"  target="_blank">
+    					${formattedCsfAmount}
+    				</a>
+    			</td>
+				
+				<fmt:formatNumber value="${fundingLine.bcnCalculatedSalaryFoundationTracker[0].csfFullTimeEmploymentQuantity}" 
+					var="formattedCsfFTE" type="number" groupingUsed="true" minFractionDigits="5" />
+				<td class="datacell" valign="top" style="text-align: right;">${formattedCsfFTE}</td>
+			</th:block>
+			<th:block th:case="*">
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</th:block>
+		</th:block>
+
+		<%-- Appointment Funding Month --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentFundingMonth" data-field-align="right" data-read-only="true"></div>
+			
+		<!-- appointment requested hourly rate -->
+		<th:block th:if="${isHourlyPaid}">
+	        <fmt:formatNumber value="${fundingLine.appointmentRequestedPayRate}" 
+	        	var="formattedNumber" type="number" groupingUsed="true" minFractionDigits="2" />	
+	
+			<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedPayRate" data-field-align="right" data-formatted-number-value="${formattedNumber}" data-read-only="${notEditable}" data-data-field-css-class="amount"></div>
+		</th:block>		
+
+		<%-- Appointment Requested Amount --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedAmount" data-field-align="right" data-read-only="${notEditable}" data-row-span="1" data-data-field-css-class="amount" data-value="${fundingLine.appointmentRequestedFteQuantity}" data-var="formattedNumber" data-type="number" data-grouping-used="true" data-min-fraction-digits="5"></div>	
+
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedFteQuantity" data-field-align="right" data-formatted-number-value="${formattedNumber}" data-read-only="true" data-data-field-css-class="amount"></div>
+
+		<%-- Percent Change --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="percentChange" data-field-align="right" data-read-only="true"></div>
+
+		<td class="datacell" rowspan="${rowspan}" style="white-space: nowrap;">
+			<input type="image" property="methodToCall.performPositionSalarySetting.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+				src="${ConfigProperties.externalizable.images.url}tinybutton-posnsalset.gif" 
+				title="Position Salary Setting For Line ${status.index}"
+				alt="Position Salary Setting For Line ${status.index}" 
+				styleClass="tinybutton" />
+
+			<th:block th:if="${not isVacant}">
+				<input type="image" property="methodToCall.performIncumbentSalarySetting.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+					src="${ConfigProperties.externalizable.images.url}tinybutton-incmbntsalset.gif" 
+					title="Incumbent Salary Setting For Line ${status.index}"
+					alt="Incumbent Salary Setting For Line ${status.index}" styleClass="tinybutton" />
+			</th:block>
+
+			<th:block th:if="${not readOnly}">
+				<th:block th:if="${fundingLine.vacatable}">
+					<br/>
+					<input type="image" property="methodToCall.vacateSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-vacate.gif" 
+						title="Vacate Salary Setting Line ${status.index}"
+						alt="Vacate Salary Setting Line ${status.index}" styleClass="tinybutton" />	
+				</th:block>
+				
+				<th:block th:if="${canDelete}">	
+					<input type="image" property="methodToCall.deleteSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-delete1.gif" 
+						title="Delete Salary Setting Line ${status.index}"
+						alt="Delete Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+				
+				<th:block th:if="${canUndelete}">
+					<br/>	
+					<input type="image" property="methodToCall.revertSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-revert1.gif" 
+						title="revert Salary Setting Line ${status.index}"
+						alt="revert Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+												
+				<th:block th:if="${isHourlyPaid && not notEditable}">	
+					<input type="image" property="methodToCall.normalizePayRateAndAmount.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-normalize.gif" 
+						title="Normalize the hourly rate and annual amount for Salary Setting Line ${status.index}"
+						alt="Normalize the hourly rate and annual amount for Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+			</th:block>
+		</td>
+	</tr>
+	
+	<th:block th:if="${not hidePercentAdjustment}">
+	<tr>
+		<td colspan ="${7 - numOfColumsRemoved}" class="infoline"><center>
+			<div th:replace="~{fragments/bc/salaryAdjustment :: content}" data-attributes="${pbcafAttributes}" data-adjustment-measurement-field-name="${fundingLineName}.adjustmentMeasurement" data-adjustment-amount-field-name="${fundingLineName}.adjustmentAmount"></div>
+			</center>
+		</td>
+	</tr>
+	</th:block>
+	</tr>
+		
+	<tr>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	
+	    <div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-cell-property="csfAmountTotal" data-disable-hidden-field="true"></div>
+		
+		<fmt:formatNumber var="formattedCsfFTETotal" value="${KualiForm.csfFullTimeEmploymentQuantityTotal}" 
+        	type="number" groupingUsed="true" minFractionDigits="5" />
+		<div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-cell-property="csfFullTimeEmploymentQuantityTotal" data-formatted-number-value="${formattedCsfFTETotal}" data-disable-hidden-field="true"></div>
+	
+		<div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="${3 - numOfColumsRemoved}" data-cell-property="appointmentRequestedAmountTotal" data-disable-hidden-field="true"></div>
+	
+		<fmt:formatNumber var="formattedRequestedFTETotal" value="${KualiForm.appointmentRequestedFteQuantityTotal}" 
+        	type="number" groupingUsed="true" minFractionDigits="5" />
+		<div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-cell-property="appointmentRequestedFteQuantityTotal" data-formatted-number-value="${formattedRequestedFTETotal}" data-disable-hidden-field="true"></div>
+	
+		<div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-cell-property="percentChangeTotal" data-disable-hidden-field="true"></div>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	</tr>
+	
+	<tr>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	
+	    <div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-cell-property="salarySettingExpansion.financialBeginningBalanceLineAmount"></div>
+	
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	
+		<div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="${3 - numOfColumsRemoved}" data-cell-property="salarySettingExpansion.accountLineAnnualBalanceAmount"></div>
+	
+		<div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="datacell" data-text-style="${textStyle}" data-field-align="right" data-col-span="2" data-cell-property="salarySettingExpansion.percentChange"></div>
+		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	</tr>
+	
+	<th:block th:if="${not readOnly}">
+		<tr>
+			<td colspan="${16 - numOfColumsRemoved}" class="subhead">
+				<span class="subhead-left">Global Actions</span>
+			</td>
+		</tr>
+		
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+		
+		    <td colspan ="${5 - numOfColumsRemoved}"><center>
+				<div th:replace="~{fragments/bc/salaryAdjustment :: content}" data-attributes="${pbcafAttributes}" data-adjustment-measurement-field-name="adjustmentMeasurement" data-adjustment-amount-field-name="adjustmentAmount" data-method-to-call="adjustAllSalarySettingLinesPercent"></div>
+				</center>
+			</td>
+			
+			<td colspan="3" style="white-space: nowrap;">				   		
+		   		<th:block th:if="${KualiForm.payrollPositionFeedIndicator}">	
+			   		&nbsp;&nbsp;&nbsp;
+			   		<html:checkbox property="refreshPositionBeforeSalarySetting" title="Refresh Position" alt="Refresh Position">
+			   			Refresh Position?
+			   		</html:checkbox>
+		   		</th:block>
+		        
+		        <th:block th:if="${KualiForm.payrollIncumbentFeedIndictor}">	
+			        &nbsp;&nbsp;&nbsp;  	
+			   		<html:checkbox property="refreshIncumbentBeforeSalarySetting" title="Refresh Incumbent" alt="Refresh Incumbent">
+			   			Refresh Incumbent?
+			   		</html:checkbox>
+		   		</th:block>
+			</td>
+		</tr>
+	</th:block>
+		
+</table>
+</div>

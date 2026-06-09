@@ -1,0 +1,241 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cab/purApLineDetail.tag -->
+<!-- Fragment parameters: chkcount, docPos, linePos, itemLine, purApDocLine -->
+<div th:fragment="content (chkcount, docPos, linePos, itemLine, purApDocLine)" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="scripts/module/cab/selectCheckBox.js"></script>
+
+<!--/*/ <th:block th:with="purApDocumentAttributes=${DataDictionary.PurchasingAccountsPayableDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purApItemAssetAttributes=${DataDictionary.PurchasingAccountsPayableItemAsset.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purApLineAssetAccountsAttributes=${DataDictionary.PurchasingAccountsPayableLineAssetAccount.attributes}"> /*/-->
+<!--/*/ <th:block th:with="generalLedgerAttributes=${DataDictionary.GeneralLedgerEntry.attributes}"> /*/-->
+<!--/*/ <th:block th:with="financialSystemDocumentHeaderAttributes=${DataDictionary.FinancialSystemDocumentHeader.attributes}"> /*/-->
+<!--/*/ <th:block th:with="genericAttributes=${DataDictionary.GenericAttributes.attributes}"> /*/-->
+<!--/*/ <th:block th:with="CapitalAssetInformationAttributes=${DataDictionary.CapitalAssetInformation.attributes}"> /*/-->	
+<!--/*/ <th:block th:with="dateFormatPattern=MM/dd/yyyy"> /*/-->
+
+<th:block th:switch="${true}">
+	<th:block th:case="${itemLine.tradeInAllowance}">
+		<!--/*/ <th:block th:with="color=red"> /*/-->
+	</th:block>
+	<th:block th:case="*">
+		<th:block th:switch="${true}">
+		<th:block th:case="${itemLine.additionalChargeNonTradeInIndicator}">
+			<!--/*/ <th:block th:with="color=blue"> /*/-->
+		</th:block>
+		<th:block th:case="*">
+			<!--/*/ <th:block th:with="color=black"> /*/-->
+		</th:block>
+		</th:block>
+	</th:block>
+</th:block>
+<!--/*/ <th:block th:with="assetItemStr=purApDoc[${docPos-1}].purchasingAccountsPayableItemAsset[${linePos-1}]"> /*/-->
+<tr style="color:${color}">
+	<th:block th:switch="${true}">
+	<th:block th:case="${itemLine.active && !itemLine.additionalChargeNonTradeInIndicator && !itemLine.tradeInAllowance}">
+		<td rowspan="2"><html:checkbox styleId="systemCheckbox" property="${assetItemStr}.selectedValue" /></td>
+	</th:block>
+	<th:block th:case="*">
+		<td rowspan="2">&nbsp;</td>
+	</th:block>
+	</th:block>
+	
+	<th:block th:if="${!itemLine.active}">	
+	    <td class="infoline" align="center">
+	    	<html:link target="_blank" href="cabPurApLine.do?methodToCall=viewDoc&documentNumber=${itemLine.capitalAssetManagementDocumentNumber}">
+				${itemLine.capitalAssetManagementDocumentNumber }
+			</html:link>
+		</td>
+		<td class="infoline" align="center">
+			<c:forEach items="${itemLine.approvedAssetNumbers }" var="assetNumber" >
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.integration.cam.CapitalAssetManagementAsset" data-key-values="capitalAssetNumber=${assetNumber}">
+					${assetNumber }
+				</span>
+				&nbsp;
+			</tr>
+			&nbsp;
+		</td>
+	</th:block>	
+			
+	<td class="infoline">
+		${purApDocLine.purapDocumentIdentifier}
+		<th:block th:if="${!empty itemLine.paymentRequestIdentifier}">
+		-${itemLine.paymentRequestIdentifier}
+		</th:block>
+	</td>
+	<td class="infoline">${purApDocLine.documentTypeCode}</td>
+	<td class="infoline">${purApDocLine.statusDescription}</td>
+	<th:block th:switch="${true}">
+		<th:block th:case="${!empty itemLine.itemLineNumber}">
+		<td class="infoline">
+		<!--/*/ <th:block th:with="preTagUrl=${itemLine.preTagInquiryUrl}"> /*/-->
+		<th:block th:switch="${true}">
+		<th:block th:case="${!empty preTagUrl}">
+		<a href="${ConfigProperties.application.url}/${preTagUrl }" target="_blank">${itemLine.itemLineNumber}</a>
+		</th:block>
+		<th:block th:case="*">
+			${itemLine.itemLineNumber}&nbsp;
+		</th:block>
+		</th:block>		
+		</td>
+		</th:block>
+		<th:block th:case="*">
+		<td class="infoline">${itemLine.itemTypeCode}</td>
+		</th:block>
+	</th:block>
+	<td class="infoline">${itemLine.accountsPayableItemQuantity }</td>
+	<td class="infoline">
+		<th:block th:if="${itemLine.active }">
+			<input type="text" name="${assetItemStr}.splitQty" th:field="*{${assetItemStr}.splitQty}" data-attribute-entry="${purApItemAssetAttributes.accountsPayableItemQuantity}" />
+		</th:block>
+		&nbsp;
+	</td>
+	<td class="infoline">${itemLine.unitCost}</td>
+	<td class="infoline">${itemLine.firstFincialObjectCode }</td>
+	<td class="infoline">
+		<th:block th:switch="${true}">
+		<th:block th:case="${itemLine.active }">
+			<input type="text" name="${assetItemStr}.accountsPayableLineItemDescription" th:field="*{${assetItemStr}.accountsPayableLineItemDescription}" data-attribute-entry="${purApItemAssetAttributes.accountsPayableLineItemDescription}" />
+		</th:block>
+		<th:block th:case="*">
+			${itemLine.accountsPayableLineItemDescription }
+		</th:block>
+		</th:block>
+	</td>
+	
+	<td class="infoline">
+     		<input type="text" name="${assetItemStr}.capitalAssetTransactionTypeCode" th:field="*{${assetItemStr}.capitalAssetTransactionTypeCode}" data-attribute-entry="${purApItemAssetAttributes.capitalAssetTransactionTypeCode}" readonly="readonly" />
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cab.businessobject.AssetTransactionType" data-key-values="capitalAssetTransactionTypeCode=${itemLine.capitalAssetTransactionTypeCode}">
+             			<html:hidden write="true" property="${assetItemStr}.capitalAssetTransactionTypeCode" />
+           		</span>&nbsp;
+       		</div><!-- /kul:htmlControlAttribute -->
+		<br></br>
+		<c:forEach items="${itemLine.purApItemAssets}" var="purApItemAsset">
+		<!--/*/ <th:block th:with="i=${i+1}"> /*/-->
+			${purApItemAsset.capitalAssetNumber}&nbsp;
+		</tr>
+	</td>
+	<th:block th:switch="${true}">
+	<th:block th:case="${itemLine.itemAssignedToTradeInIndicator}">
+		<td class="infoline">Y
+	</th:block>
+	<th:block th:case="*">
+		<td class="infoline">N
+	</th:block>
+	</th:block>
+	<th:block th:switch="${true}">
+	<th:block th:case="${itemLine.active }">
+		<td class="infoline" align="center">
+		<!-- c:if test="${!itemLine.additionalChargeNonTradeInIndicator && !itemLine.tradeInAllowance}" -->
+		<th:block th:if="${!itemLine.tradeInAllowance}">
+			<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-split.gif" styleClass="tinybutton" property="methodToCall.split.doc${docPos-1}.line${linePos-1}" title="Split" alt="Split" />
+			<br></br>
+			<th:block th:if="${itemLine.accountsPayableItemQuantity < 1 }">
+			<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-percentpayment.gif" styleClass="tinybutton" property="methodToCall.percentPayment.doc${docPos-1}.line${linePos-1}" title="Percent Payment" alt="Percent Payment" />
+			<br></br>
+			</th:block>
+		</th:block>
+		<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-allocate.gif" styleClass="tinybutton" property="methodToCall.allocate.doc${docPos-1}.line${linePos-1}" title="allocate" alt="allocate"/>
+		<br></br>
+		<th:block th:if="${itemLine.createAssetIndicator}">
+		<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-createasset.gif" styleClass="tinybutton" property="methodToCall.createAsset.doc${docPos-1}.line${linePos-1}" title="createAsset" alt="createAsset"/>
+		<br></br>
+		</th:block>
+		<th:block th:if="${itemLine.applyPaymentIndicator}">
+		<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-applypayment.gif" styleClass="tinybutton" property="methodToCall.applyPayment.doc${docPos-1}.line${linePos-1}" title="applyPayment" alt="applyPayment"/>
+		</th:block>
+		</td>
+	</th:block>
+	</th:block>
+</tr>
+<tr>
+	<!--/*/ <th:block th:with="tabKey=payment-${docPos}-${linePos}"> /*/-->
+	<html:hidden property="tabStates(${tabKey})" value="CLOSE" />
+	<td colspan="13" style="padding:0px; border-style:none;">
+	<table class="datatable" cellpadding="0" cellspacing="0" align="center"
+       style="width: 100%; text-align: left;">
+		<tr>
+			<td colspan="14" class="tab-subhead" style="border-right: medium none;">
+			<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif"
+	                                    property="methodToCall.toggleTab.tab${tabKey}"
+	                                    title="toggle"
+	                                    alt="show"
+	                                    styleClass="tinybutton"
+	                                    styleId="tab-${tabKey}-imageToggle"
+	                                    onclick="javascript: return toggleTab(document, '${tabKey}'); "/>
+	            View Payments
+			</td>
+		</tr>
+		<tbody  style="display: none;" id="tab-${tabKey}-div">
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.chartOfAccountsCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.accountNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.subAccountNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.financialObjectCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.financialSubObjectCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.projectCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.referenceFinancialDocumentNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.documentNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.financialDocumentTypeCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.transactionDate}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.universityFiscalYear}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${generalLedgerAttributes.universityFiscalPeriodCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purApLineAssetAccountsAttributes.itemAccountTotalAmount}"></th>
+		</tr>
+		<!--/*/ <th:block th:with="acctId=0"> /*/-->
+		<c:forEach items="${itemLine.purchasingAccountsPayableLineAssetAccounts}" var="payment" >
+		<tr>
+			<!--/*/ <th:block th:with="acctId=${acctId+1}"> /*/-->
+			<td class="infoline">&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.chartOfAccountsCode}&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.accountNumber}&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.subAccountNumber}&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.financialObjectCode}&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.financialSubObjectCode}&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.projectCode}&nbsp;</td>
+			<td class="infoline">
+				<th:block th:switch="${true}">
+				<th:block th:case="${!empty KualiForm.purchaseOrderInquiryUrl }">
+					<a href="${ConfigProperties.application.url}/${KualiForm.purchaseOrderInquiryUrl }" target="_blank">${KualiForm.purchaseOrderIdentifier}</a>							
+				</th:block>
+				<th:block th:case="*">
+					${KualiForm.purchaseOrderIdentifier}&nbsp;
+				</th:block>
+				</th:block>
+			</td>
+			<td class="infoline">
+				<html:link target="_blank" href="cabPurApLine.do?methodToCall=viewDoc&documentNumber=${payment.generalLedgerEntry.documentNumber}">
+					${payment.generalLedgerEntry.documentNumber}
+				</html:link>
+			</td>
+			<td class="infoline">${payment.generalLedgerEntry.financialDocumentTypeCode}&nbsp;</td>
+			<td class="infoline" align="left"><span th:text="${#dates.format(${payment.generalLedgerEntry.transactionDate}, &apos;${dateFormatPattern}&apos;)}"></span>&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.universityFiscalYear}&nbsp;</td>
+			<td class="infoline">${payment.generalLedgerEntry.universityFiscalPeriodCode}&nbsp;</td>
+			<td class="infoline">${payment.itemAccountTotalAmount}&nbsp;</td>
+		</tr>
+		</tr>
+		<th colspan="13" style="text-align: right;">Total:</th>
+		<th>${itemLine.totalCost}</th>
+		</tbody>
+	</table>
+	</td>
+</tr>
+</div>

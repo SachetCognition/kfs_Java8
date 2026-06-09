@@ -1,0 +1,140 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/groupTravel.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="groupTravelerAttributes=${DataDictionary.GroupTraveler.attributes}"> /*/-->
+<!--/*/ <th:block th:with="customerAttributes=${DataDictionary.Customer.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Group Travel" data-default-open="false">
+  <h3>Group Travel</h3>
+	<div class="tab-container" align=center>
+		<h3>Group Travel Section <a href="${KualiForm.uploadParserInstructionsUrl}" target="helpWindow"><img src="${ConfigProperties.kr.externalizable.images.url}my_cp_inf.gif" title="Group Traveler Import Help" src="Group Traveler Import Help" hspace="5" border="0" align="middle" /></a></h3>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Group Traveler Section">
+			<th:block th:if="${fullEntryMode}">
+				<tr>
+					<td colspan="7" class="tab-subhead" align="right" nowrap="nowrap">
+						<script type="text/javascript">
+	                  		function hideImport() {
+	                      		document.getElementById("showLink").style.display="inline";
+	                      		document.getElementById("uploadDiv").style.display="none";
+	                  		}
+	                  		function showImport() {
+	                      		document.getElementById("showLink").style.display="none";
+	                      		document.getElementById("uploadDiv").style.display="inline";
+	                  		}
+	                  		document.write(
+	                    		'<a id="showLink" href="#" onclick="showImport();return false;">' +
+	                      		'<img src="${ConfigProperties.externalizable.images.url}tinybutton-importlines.gif" title="import items from file" alt="import items from file"' +
+	                      		'     width=72 height=15 border=0 align="right" class="det-button">' +
+	                    		'<\/a>' +
+	                    		'<div id="uploadDiv" style="display:none; float:right;" >' +
+	                      		'<html:file size="30" property="groupTravelerImportFile" />' +
+	                      		'<input type="image" property="methodToCall.uploadGroupTravelerImportFile" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+	                                    styleClass="tinybutton" alt="add imported items" title="add imported items" />' +
+	                      		'<input type="image" property="methodToCall.cancel" src="${ConfigProperties.externalizable.images.url}tinybutton-cancelimport.gif"
+	                                    styleClass="tinybutton" alt="cancel import" title="cancel import" onclick="hideImport();return false;" />' +
+	                    		'<\/div>');
+	                		</script>
+						<NOSCRIPT>
+							Import lines
+							<html:file size="30" property="groupTravelerImportFile" style="font:10px;height:16px;" />
+							<input type="image" property="methodToCall.uploadGroupTravelerImportFile" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="add imported group traveler" title="add imported group traveler" />
+						</NOSCRIPT>
+					</td>
+				</tr>			
+				<tr>
+					<th class="bord-l-b">
+						<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${groupTravelerAttributes.groupTravelerTypeCode}"></label></div>
+					</th>
+					<td class="datacell">
+						<input type="text" name="newGroupTravelerLine.groupTravelerTypeCode" th:field="*{newGroupTravelerLine.groupTravelerTypeCode}" data-attribute-entry="${groupTravelerAttributes.groupTravelerTypeCode}" />
+					</td>
+					<th class="bord-l-b">
+						<div align="right" style="display:block;" id="personLabel"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${groupTravelerAttributes.groupTravelerEmpId}"></label></div>
+						<div align="right" style="display:none;" id="customerLabel"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAttributes.customerNumber}"></label></div>
+					</th>
+					<td class="datacell">
+						<input type="text" name="newGroupTravelerLine.groupTravelerEmpId" th:field="*{newGroupTravelerLine.groupTravelerEmpId}" data-attribute-entry="${groupTravelerAttributes.groupTravelerEmpId}" readonly="readonly" />
+						<div style="display:inline;" id="personLookupButton">
+							<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.GroupTravelerForLookup" th:replace="~{fragments/kul/lookup :: content}"></span>
+						</div>
+					</td>
+					<th class="bord-l-b">
+						<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${groupTravelerAttributes.name}"></label></div>
+					</th>
+					<td class="datacell">
+						<input type="text" name="newGroupTravelerLine.name" th:field="*{newGroupTravelerLine.name}" data-attribute-entry="${groupTravelerAttributes.name}" />
+					</td>
+					<td class="infoline">
+						<div align=center>
+							<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+							styleClass="tinybutton" property="methodToCall.addGroupTravelerLine"
+							alt="Add Group Traveler Line" title="Add Group Traveler Line" />
+						</div>
+					</td>
+				</tr>
+			</th:block>
+			<th:block th:if="${fn:length(KualiForm.document.groupTravelers) > 0}">
+				<tr>
+					<td colspan="7">
+					<table cellpadding="0" cellspacing="0" class="datatable">
+						<logic:iterate indexId="ctr" name="KualiForm" property="document.groupTravelers" id="currentLine">
+							<tr>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th></div><!-- /kul:htmlAttributeHeaderCell -->
+								<th class="bord-l-b">
+									<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${groupTravelerAttributes.groupTravelerTypeCode}"></label></div>
+								</th>
+								<td valign=top>
+									<input type="text" name="document.groupTravelers[${ctr}].groupTravelerTypeCode" th:field="*{document.groupTravelers[${ctr}].groupTravelerTypeCode}" data-attribute-entry="${groupTravelerAttributes.groupTravelerTypeCode}" readonly="readonly" />
+								</td>
+								<th class="bord-l-b">
+									<div align="right"><span th:text="${KualiForm.document.groupTravelers[${ctr}].travelerLabel}"></span>:</div>
+								</th>
+								<td valign=top>
+									<input type="text" name="document.groupTravelers[${ctr}].groupTravelerEmpId" th:field="*{document.groupTravelers[${ctr}].groupTravelerEmpId}" data-attribute-entry="${groupTravelerAttributes.groupTravelerEmpId}" readonly="readonly" />
+								</td>
+								<th class="bord-l-b">
+									<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${groupTravelerAttributes.name}"></label></div>
+								</th>
+								<td valign=top nowrap>
+									<div align="left">
+										<input type="text" name="document.groupTravelers[${ctr}].name" th:field="*{document.groupTravelers[${ctr}].name}" data-attribute-entry="${groupTravelerAttributes.name}" readonly="readonly" />
+									</div>
+								</td>
+								<th:block th:if="${fullEntryMode}">
+									<td>
+										<div align=center>
+											<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+											styleClass="tinybutton"
+											property="methodToCall.deleteGroupTravelerLine.line${ctr}"
+											alt="Delete Group Traveler Line"
+											title="Delete Group Traveler Line" />
+										</div>
+									</td>
+								</th:block>
+							</tr>
+						</tr>
+					</table>
+					</td>
+				</tr>
+			</th:block>
+		</table>
+	</div>
+</section>
+</div>

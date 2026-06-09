@@ -1,0 +1,215 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/invoiceGeneral.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="invoiceGeneralDetailAttributes=${DataDictionary.InvoiceGeneralDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.ContractsGrantsInvoiceDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="readOnlyForFinal=${readOnly || not KualiForm.document.finalizable}"> /*/-->
+<!--/*/ <th:block th:with="arDocHeaderAttributes=${DataDictionary.AccountsReceivableDocumentHeader.attributes}"> /*/-->
+<section class="kfs-tab" data-tab-title="General" data-default-open="true">
+  <h3>General</h3>
+	<div class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Invoice Section">
+			<tr>
+				<td colspan="4" class="subhead">Billing Summary</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.proposalNumber}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.proposalNumber.div">
+						<input type="text" name="document.invoiceGeneralDetail.proposalNumber" th:field="*{document.invoiceGeneralDetail.proposalNumber}" data-attribute-entry="${invoiceGeneralDetailAttributes.proposalNumber}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.awardTotal}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.awardTotal.div">
+						<input type="text" name="document.invoiceGeneralDetail.awardTotal" th:field="*{document.invoiceGeneralDetail.awardTotal}" data-attribute-entry="${invoiceGeneralDetailAttributes.awardTotal}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.awardDateRange}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.awardDateRange.div">
+						<input type="text" name="document.invoiceGeneralDetail.awardDateRange" th:field="*{document.invoiceGeneralDetail.awardDateRange}" data-attribute-entry="${invoiceGeneralDetailAttributes.awardDateRange}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.totalPreviouslyBilled}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.totalPreviouslyBilled.div">
+						<input type="text" name="document.invoiceGeneralDetail.totalPreviouslyBilled" th:field="*{document.invoiceGeneralDetail.totalPreviouslyBilled}" data-attribute-entry="${invoiceGeneralDetailAttributes.totalPreviouslyBilled}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.billingFrequencyCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingFrequencyCode.div">
+						<input type="text" name="document.invoiceGeneralDetail.billingFrequencyCode" th:field="*{document.invoiceGeneralDetail.billingFrequencyCode}" data-attribute-entry="${invoiceGeneralDetailAttributes.billingFrequencyCode}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.totalAmountBilledToDate}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.totalAmountBilledToDate.div">
+						<input type="text" name="document.invoiceGeneralDetail.totalAmountBilledToDate" th:field="*{document.invoiceGeneralDetail.totalAmountBilledToDate}" data-attribute-entry="${invoiceGeneralDetailAttributes.totalAmountBilledToDate}" readonly="readonly" />
+						&nbsp;&nbsp;&nbsp;
+						<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber && KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}">
+							<th:block th:if="${empty KualiForm.document.invoiceMilestones}">
+								<th:block th:if="${empty KualiForm.document.invoiceBills}">
+									<input type="image" src="${ConfigProperties.externalizable.images.url}buttonsmall_calculate.gif" styleClass="tinybutton"
+										property="methodToCall.recalculateTotalAmountBilledToDate" title="relcalculate" alt="recalculate" />
+								</th:block>
+							</th:block>
+						</th:block>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.billingPeriod}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.billingPeriod.div">
+						<input type="text" name="document.invoiceGeneralDetail.billingPeriod" th:field="*{document.invoiceGeneralDetail.billingPeriod}" data-attribute-entry="${invoiceGeneralDetailAttributes.billingPeriod}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.amountRemainingToBill}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.amountRemainingToBill.div">
+						<input type="text" name="document.invoiceGeneralDetail.amountRemainingToBill" th:field="*{document.invoiceGeneralDetail.amountRemainingToBill}" data-attribute-entry="${invoiceGeneralDetailAttributes.amountRemainingToBill}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.finalBillIndicator}"></label>
+					</div>
+				</th>
+				<th:block th:switch="${true}">
+					<th:block th:case="${KualiForm.document.invoiceReversal}">
+						<td align=left valign=middle class="datacell" style="width: 25%;" />
+					</th:block>
+					<th:block th:case="*">
+						<td align=left valign=middle class="datacell" style="width: 25%;">
+							<div id="document.finalBill.div">
+								<input type="text" name="document.invoiceGeneralDetail.finalBillIndicator" th:field="*{document.invoiceGeneralDetail.finalBillIndicator}" data-attribute-entry="${invoiceGeneralDetailAttributes.finalBillIndicator}" />
+							</div>
+						</td>
+					</th:block>
+				</th:block>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.instrumentTypeCode}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.instrumentTypeCode.div">
+						<input type="text" name="document.invoiceGeneralDetail.instrumentTypeCode" th:field="*{document.invoiceGeneralDetail.instrumentTypeCode}" data-attribute-entry="${invoiceGeneralDetailAttributes.instrumentTypeCode}" readonly="readonly" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.lastBilledDate}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" style="width: 25%;">
+					<div id="document.lastBilledDate.div">
+						<input type="text" name="document.invoiceGeneralDetail.lastBilledDate" th:field="*{document.invoiceGeneralDetail.lastBilledDate}" data-attribute-entry="${invoiceGeneralDetailAttributes.lastBilledDate}" readonly="readonly" />
+					</div>
+				</td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${invoiceGeneralDetailAttributes.costShareAmount}"></label>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell" colspan="3">
+					<div id="document.costShareAmount.div">
+						<input type="text" name="document.invoiceGeneralDetail.costShareAmount" th:field="*{document.invoiceGeneralDetail.costShareAmount}" data-attribute-entry="${invoiceGeneralDetailAttributes.costShareAmount}" />
+					</div>
+				</td>
+			</tr>
+			<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber}">
+				<tr>
+					<td colspan="4" class="subhead">Customer Information</td>
+				</tr>
+				<tr>
+					<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+						<div align="right">
+							<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arDocHeaderAttributes.customerNumber}"></label>
+						</div>
+					</th>
+					<td valign=top>
+            			<th:block th:if="${not empty KualiForm.document.accountsReceivableDocumentHeader.customerNumber}">
+		                <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.ar.businessobject.Customer" data-key-values="customerNumber=${KualiForm.document.accountsReceivableDocumentHeader.customerNumber}">
+		                    <input type="text" name="document.accountsReceivableDocumentHeader.customer.customerNumber" th:field="*{document.accountsReceivableDocumentHeader.customer.customerNumber}" data-attribute-entry="${arDocHeaderAttributes.customerNumber}" readonly="readonly" />
+		                </span>
+	                </th:block>
+          			</td>
+					<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+						<div align="right">
+							<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.customerName}"></label>
+						</div>
+					</th>
+					<td align=left valign=middle class="datacell" style="width: 25%;">
+						<div id="document.accountsReceivableDocumentHeader.customer.customerName.div">
+							<input type="text" name="document.accountsReceivableDocumentHeader.customer.customerName" th:field="*{document.accountsReceivableDocumentHeader.customer.customerName}" data-attribute-entry="${documentAttributes.customerName}" readonly="readonly" />
+						</div>
+					</td>
+					
+				</tr>
+			</th:block>	
+		</table>
+	</div>
+
+</section>
+</div>

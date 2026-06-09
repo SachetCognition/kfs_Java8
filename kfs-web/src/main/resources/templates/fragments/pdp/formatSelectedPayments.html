@@ -1,0 +1,59 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: pdp/formatSelectedPayments.tag -->
+<!-- Fragment parameters: disbursementNumberRangeAttributes, customerProfileAttributes, formatResultAttributes -->
+<div th:fragment="content (disbursementNumberRangeAttributes, customerProfileAttributes, formatResultAttributes)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Payments Selected for Format Process" data-default-open="true">
+  <h3>Payments Selected for Format Process</h3>
+	<div id="disbursementRanges" class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable"
+			summary="Payments Selected for Format Process">
+			<tr>
+				<td colspan="4" class="subhead">
+					Your Default Campus Code is <input type="text" name="campus" th:field="*{campus}" data-attribute-entry="${disbursementNumberRangeAttributes.physCampusProcCode}" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${formatResultAttributes.sortGroupName}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerProfileAttributes.customerShortName}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${formatResultAttributes.payments}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${formatResultAttributes.amount}"></th>
+				
+			</tr>
+			
+			<tr th:each="result : ${KualiForm.formatProcessSummary.processSummaryList}" indexId="ctr">
+            <tr>
+               <td class="${dataCell}"><input type="text" name="formatProcessSummary.processSummary[${ctr}].sortGroupName" th:field="*{formatProcessSummary.processSummary[${ctr}].sortGroupName}" data-attribute-entry="${formatResultAttributes.sortGroupName}" readonly="readonly" /></td>
+               <td class="${dataCell}"><input type="text" name="formatProcessSummary.processSummary[${ctr}].customer.customerShortName" th:field="*{formatProcessSummary.processSummary[${ctr}].customer.customerShortName}" data-attribute-entry="${customerProfileAttributes.customerShortName}" readonly="readonly" /></td>
+               <td class="${dataCell}"><input type="text" name="formatProcessSummary.processSummary[${ctr}].processTotalCount" th:field="*{formatProcessSummary.processSummary[${ctr}].processTotalCount}" data-attribute-entry="${formatResultAttributes.payments}" readonly="readonly" /></td>
+               <td class="${dataCell}"><input type="text" name="formatProcessSummary.processSummary[${ctr}].processTotalAmount" th:field="*{formatProcessSummary.processSummary[${ctr}].processTotalAmount}" data-attribute-entry="${formatResultAttributes.amount}" readonly="readonly" /></td>
+            </tr>
+            </tr>
+            
+         <tr>
+            <td class="total-line">&nbsp;</td>
+            <td class="total-line">Total</td>
+            <td class="total-line">${KualiForm.formatProcessSummary.totalCount}</td>
+            <td class="total-line"><b>${KualiForm.currencyFormattedTotalAmount}</b></td>
+         </tr>
+
+		</table>
+	</div>
+</section>
+</div>

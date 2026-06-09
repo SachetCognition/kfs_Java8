@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/bc/PayrateImportExport.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/bc/PayrateImportExport</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="payrateImportExportAttributes=${DataDictionary.PayrateImportExport.attributes}"> /*/-->
+
+<html:xhtml/>
+
+<div class="kfs-page" data-header-title="" data-doc-title="">
+  <form action="budgetPayrateImportExport.do" method="post">
+	
+	<script type="text/javascript">
+	
+	        var excludeSubmitRestriction = true;
+	
+	</script>    
+	    <br>
+    <input type="hidden" th:field="*{returnAnchor}" />
+    <input type="hidden" th:field="*{returnFormKey}" />
+    <input type="hidden" th:field="*{backLocation}" />
+    <html:hidden name="KualiForm" property="universityFiscalYear" />
+    
+    <strong><h2>Payrate Import/Export </h2> </strong>
+    <section class="kfs-tab" data-tab-title="Payrate Import/Export" data-default-open="true">
+  <h3>Payrate Import/Export</h3>
+		<div class="tab-container" align=center>
+			<table >
+			<tr>
+					<td width="90%" colspan="2"><h3>Payrate Export</h3></td>
+					<td width="10%" ><h3>Action</h3></td>
+				</tr>
+				<tr >
+					<td class="infoline" > 
+						<b>
+								<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payrateImportExportAttributes.positionUnionCode}"></label></b>
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.bc.businessobject.BudgetConstructionPosition" th:replace="~{fragments/kul/lookup :: content}"></span> 
+								<input type="text" name="positionUnionCode" th:field="*{positionUnionCode}" data-attribute-entry="${payrateImportExportAttributes.positionUnionCode}" />
+					</td> 
+					<td class="infoline"  > 
+						<b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payrateImportExportAttributes.csfFreezeDate}"></label></b>
+						<input type="text" name="csfFreezeDate" th:field="*{csfFreezeDate}" data-attribute-entry="${payrateImportExportAttributes.csfFreezeDate}" />
+					</td>
+					<td class="infoline"  >
+						<div align="center">
+							<input type="image" property="methodToCall.performExport" src="kr/static/images/buttonsmall_submit.gif"  title="Export" alt="Export" styleClass="tinybutton" /> &nbsp;&nbsp;&nbsp;
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="tab-container" align=center>
+			<table bgcolor="#C0C0C0" cellpadding="30" >
+				<tr>
+					<td width="90%"><h3>Payrate Import</h3></td>
+					<td width="10%"><h3>Action</h3></td>
+				</tr>
+				
+				<tr >
+					<td class="infoline" > 
+						<b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payrateImportExportAttributes.fileName}"></label></b>
+						<html:file property="file" />
+					</td> 
+					<td class="infoline" colspan="2">
+						<div align="center">
+							<input type="image" property="methodToCall.performImport" src="kr/static/images/buttonsmall_submit.gif"  title="Import" alt="Import" styleClass="tinybutton" /> &nbsp;&nbsp;&nbsp;
+						</div>
+					</td>
+				</tr>
+				
+			</table>
+			<table bgcolor="#C0C0C0" cellpadding="0" cellspacing="0" >
+				<tr align="center" >
+					<td class="infoline" width="50%"></td>
+					<td class="infoline"> 
+						<input type="image" property="methodToCall.close" src="kr/static/images/buttonsmall_close.gif"  title="Import" alt="Import" styleClass="tinybutton" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+	</section>
+	<div class="kfs-panel-footer"></div>
+	
+  </form>
+</div>
+</body>
+</html>

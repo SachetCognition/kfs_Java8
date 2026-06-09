@@ -1,0 +1,106 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/procurementCardTransactions.tag -->
+<!-- Fragment parameters: editingMode, editableAccounts, editableFields -->
+<div th:fragment="content (editingMode, editableAccounts, editableFields)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="columnCountUntilAmount=8"> /*/-->
+<!--/*/ <th:block th:with="columnCount=${columnCountUntilAmount + 1 + (KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] ? 1 : 0)}"> /*/-->
+<!--/*/ <th:block th:with="accountingLineAttributes=${DataDictionary['TargetAccountingLine'].attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Accounting Lines" data-default-open="true">
+  <h3>Accounting Lines</h3>
+  <!--/*/ <th:block th:with="transactionAttributes=${DataDictionary.ProcurementCardTransactionDetail.attributes}"> /*/-->
+  <!--/*/ <th:block th:with="vendorAttributes=${DataDictionary.ProcurementCardVendor.attributes}"> /*/-->
+  <!--/*/ <th:block th:with="cardAttributes=${DataDictionary.ProcurementCardHolder.attributes}"> /*/-->
+	
+  <div class="tab-container" align="center">
+  <logic:iterate indexId="ctr" name="KualiForm" property="document.transactionEntries" id="currentTransaction">
+    <table cellpadding="0" class="datatable" summary="Transaction Details">
+                                                                                           
+       <div th:replace="~{fragments/fp/subheadingWithDetailToggleRow :: content}" data-column-count="4" data-subheading="Transaction #${currentTransaction.transactionReferenceNumber}"></div>
+	      <tr>
+	        <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cardAttributes.transactionCreditCardNumber}"></label></div></th>
+	        <td>
+	          <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.fp.businessobject.ProcurementCardHolder" data-key-values="documentNumber=${currentTransaction.documentNumber}">
+				<th:block th:switch="${true}">
+					<th:block th:case="${KualiForm.transactionCreditCardNumbersViewStatus[ctr]}">
+						<span th:text="${KualiForm.document.procurementCardHolder.transactionCreditCardNumber}"></span>
+					</th:block>
+					<th:block th:case="*">
+						<input type="text" name="document.procurementCardHolder.transactionCreditCardNumber" th:field="*{document.procurementCardHolder.transactionCreditCardNumber}" data-attribute-entry="${cardAttributes.transactionCreditCardNumber}" readonly="readonly" />
+					</th:block>
+				</th:block>
+	          </span>
+	        </td>
+			<th>&nbsp;</th>
+			<td>&nbsp;</td>
+	      </tr>
+	      <tr>
+	        <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cardAttributes.cardHolderName}"></label></div></th>
+	        <td><input type="text" name="document.procurementCardHolder.cardHolderName" th:field="*{document.procurementCardHolder.cardHolderName}" data-attribute-entry="${cardAttributes.cardHolderName}" readonly="readonly" /></td>
+            <th> <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${transactionAttributes.transactionTotalAmount}"></label></div></th>
+            <td valign=top><input type="text" name="document.transactionEntries[${ctr}].transactionTotalAmount" th:field="*{document.transactionEntries[${ctr}].transactionTotalAmount}" data-attribute-entry="${transactionAttributes.transactionTotalAmount}" readonly="readonly" /></td>
+	     </tr>
+       <tr>
+          <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${transactionAttributes.transactionDate}"></label></div></th>
+          <td valign=top><span th:text="${KualiForm.document.transactionEntries[${ctr}].transactionDate}"></span></td>
+          <th> <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${transactionAttributes.transactionReferenceNumber}"></label></div></th>
+          <td valign=top>
+            <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.fp.businessobject.ProcurementCardTransactionDetail" data-key-values="documentNumber=${currentTransaction.documentNumber}&financialDocumentTransactionLineNumber=${currentTransaction.financialDocumentTransactionLineNumber}">
+				<span th:text="${KualiForm.document.transactionEntries[${ctr}].transactionReferenceNumber}"></span>
+            </span>
+          </td>
+       </tr>   
+       <tr>  
+          <th> <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorAttributes.vendorName}"></label></div></th> 
+          <td valign=top>
+            <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.fp.businessobject.ProcurementCardVendor" data-key-values="documentNumber=${currentTransaction.documentNumber}&financialDocumentTransactionLineNumber=${currentTransaction.financialDocumentTransactionLineNumber}">
+				<span th:text="${KualiForm.document.transactionEntries[${ctr}].procurementCardVendor.vendorName}"></span>
+            </span>  
+          </td>
+          <th colspan="2"> <div align="left">
+		  <th:block th:switch="${true}">
+			<th:block th:case="${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}">
+				<a href="${KualiForm.disputeURL}" target="_blank"><img src="${ConfigProperties.externalizable.images.url}buttonsmall_dispute.gif"/></a>
+			</th:block>
+			<th:block th:case="*">&nbsp;</th:block>
+		  </th:block>
+          </div></th>
+       </tr>   
+    </table>   
+	
+	<%-- For accounting lines to tab through the fields correctly, the kfs-sys-java-accountingLineGroup needs to be in a TAB tag, and in 
+	 	kfs-sys-java-accountingLines.  Nesting accountingLineGroup sets the tabindex element of the image tags very high, and the actual fields 
+	 	have no tabindex attribute at all.  Without nesting both the images and fields have no tabindex attribute.  
+	--%>
+	<kul:subtab width="100%" noShowHideButton="true" useCurrentTabIndexAsKey="false">
+		<div class="kfs-sys-java-accountingLines" th:include="~{fragments/sys/java/accountingLines :: content}">
+			<div th:replace="~{fragments/sys/java/accountingLineGroup :: content}" data-new-line-property-name="newTargetLines[${ctr}]" data-collection-property-name="document.transactionEntries[${ctr}].targetAccountingLines" data-collection-item-property-name="document.transactionEntries[${ctr}].targetAccountingLines" data-attribute-group-name="target"></div>
+		</div><!-- /kfs-sys-java-accountingLines -->
+	</div><!-- /kul:subtab -->
+    
+    <br/>
+   </tr> 
+  </div>
+  <SCRIPT type="text/javascript">
+    var kualiForm = document.forms['KualiForm'];
+    var kualiElements = kualiForm.elements;
+  </SCRIPT>
+</section>
+</div>

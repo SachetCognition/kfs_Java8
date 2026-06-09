@@ -1,0 +1,95 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/expenses/reconciledExpenses.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="historicalTravelExpenseAttributes=${DataDictionary.HistoricalTravelExpense.attributes}"> /*/-->
+<!--/*/ <th:block th:with="travelCardTypeAttributes=${DataDictionary.TravelCardType.attributes}"> /*/-->
+<!--/*/ <th:block th:with="expenseTypeAttributes=${DataDictionary.ExpenseType.attributes}"> /*/-->
+<jsp:useBean id="paramMap" class="java.util.HashMap" />
+  
+<div class="tab-container" align="center">
+<h3>Reconciled Expenses</h3>
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Imported Expenses">
+	<tr>
+		<th align="center">&nbsp;</th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${historicalTravelExpenseAttributes.reconciled}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${historicalTravelExpenseAttributes.documentNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${travelCardTypeAttributes.code}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${historicalTravelExpenseAttributes.transactionPostingDate}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${expenseTypeAttributes.name}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${historicalTravelExpenseAttributes.travelCompany}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${historicalTravelExpenseAttributes.amount}"></th>
+	</tr>
+	<logic:iterate indexId="ctr" name="KualiForm"
+			property="document.reconciledHistoricalTravelExpenses" id="currentLine">
+			<!--/*/ <th:block th:with="lineCounter=${lineCounter + 1}"> /*/-->
+		<tr>
+			<td>
+				<div align="center">
+					<th:block th:switch="${true}">
+						<th:block th:case="${KualiForm.document.reconciledHistoricalTravelExpenses[ctr].agencyStagingDataId != null}">
+							<a target="blank" href="kr/inquiry.do?businessObjectClassName=org.kuali.kfs.module.tem.businessobject.AgencyStagingData&methodToCall=start&id=${KualiForm.document.reconciledHistoricalTravelExpenses[ctr].agencyStagingDataId }">View Details</a>
+						</th:block>
+						<th:block th:case="*">
+							<a target="blank" href="kr/inquiry.do?businessObjectClassName=org.kuali.kfs.module.tem.businessobject.CreditCardStagingData&methodToCall=start&id=${KualiForm.document.reconciledHistoricalTravelExpenses[ctr].creditCardStagingDataId }">View Details</a>
+						</th:block>
+					</th:block>
+				</div>
+			</td>
+			<td>
+				<div align="center">
+					<input type="text" name="document.reconciledHistoricalTravelExpenses[${ctr}].reconciled" th:field="*{document.reconciledHistoricalTravelExpenses[${ctr}].reconciled}" data-attribute-entry="${historicalTravelExpenseAttributes.reconciled}" readonly="readonly" />
+				</div>
+			</td>
+			<td>
+				<div align="center">
+					${KualiForm.document.reconciledHistoricalTravelExpenses[ctr].documentNumber}
+				</div>
+			</td>
+			<td>
+				<div align="center">
+					${KualiForm.document.reconciledHistoricalTravelExpenses[ctr].creditCardAgency.travelCardTypeCode}
+				</div>
+			</td>
+			<td>
+				<div align="center">
+					<input type="text" name="document.reconciledHistoricalTravelExpenses[${ctr}].transactionPostingDate" th:field="*{document.reconciledHistoricalTravelExpenses[${ctr}].transactionPostingDate}" data-attribute-entry="${historicalTravelExpenseAttributes.transactionPostingDate}" readonly="readonly" />
+				</div>
+			</td>
+			<td>
+				<div align="left">
+					<input type="text" name="document.reconciledHistoricalTravelExpenses[${ctr}].expenseType.name" th:field="*{document.reconciledHistoricalTravelExpenses[${ctr}].expenseType.name}" data-attribute-entry="${expenseTypeAttributes.name}" readonly="readonly" />
+				</div>
+			</td>
+			<td>
+				<div align="left">
+					<input type="text" name="document.reconciledHistoricalTravelExpenses[${ctr}].travelCompany" th:field="*{document.reconciledHistoricalTravelExpenses[${ctr}].travelCompany}" data-attribute-entry="${historicalTravelExpenseAttributes.travelCompany}" readonly="readonly" />
+				</div>
+			
+			</td>
+			<td>
+				<div align="right">
+					<input type="text" name="document.reconciledHistoricalTravelExpenses[${ctr}].convertedAmount" th:field="*{document.reconciledHistoricalTravelExpenses[${ctr}].convertedAmount}" data-attribute-entry="${historicalTravelExpenseAttributes.convertedAmount}" readonly="readonly" />
+				</div>
+			</td>
+		</tr>
+	</tr>
+  </table>
+</div>
+</div>

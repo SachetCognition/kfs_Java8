@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/ld/GLLaborEntrySummarizationInquiry.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/ld/GLLaborEntrySummarizationInquiry</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="laborLedgerEntryAttributes=${DataDictionary.LedgerEntry.attributes}"> /*/-->
+
+<div class="kfs-page" data-header-title="${KualiForm.pageTitle}" data-doc-title="">
+  <form action="laborGLLaborEntrySummarizationInquiry.do" method="post">
+	<table width="100%">
+		<tr>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="20" height="20" /></td>
+			<td>
+				<table width="100%" class="datatable-100">
+					<tr>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.universityFiscalYear}"></label></th>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.universityFiscalPeriodCode}"></label></th>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.chartOfAccountsCode}"></label></th>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.accountNumber}"></label></th>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.subAccountNumber}"></label></th>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.financialObjectCode}"></label></th>
+						<th class="grid"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${laborLedgerEntryAttributes.financialSubObjectCode}"></label></th>
+					</tr>
+					<tr>
+						<td class="grid"><th:block th:if="${!empty KualiForm.universityFiscalYearInquiryUrl}"><a href="${KualiForm.universityFiscalYearInquiryUrl}" target="_blank"></th:block><input type="text" name="universityFiscalYear" th:field="*{universityFiscalYear}" data-attribute-entry="${laborLedgerEntryAttributes.universityFiscalYear}" readonly="readonly" /><th:block th:if="${!empty KualiForm.universityFiscalYearInquiryUrl}"></a></th:block></td>
+						<td class="grid"><th:block th:if="${!empty KualiForm.universityFiscalPeriodCodeInquiryUrl}"><a href="${KualiForm.universityFiscalPeriodCodeInquiryUrl}" target="_blank"></th:block><input type="text" name="universityFiscalPeriodCode" th:field="*{universityFiscalPeriodCode}" data-attribute-entry="${laborLedgerEntryAttributes.universityFiscalPeriodCode}" readonly="readonly" /><th:block th:if="${!empty KualiForm.universityFiscalPeriodCodeInquiryUrl}"></a></th:block></td>
+						<td class="grid"><th:block th:if="${!empty KualiForm.chartOfAccountsCodeInquiryUrl}"><a href="${KualiForm.chartOfAccountsCodeInquiryUrl}" target="_blank"></th:block><input type="text" name="chartOfAccountsCode" th:field="*{chartOfAccountsCode}" data-attribute-entry="${laborLedgerEntryAttributes.chartOfAccountsCode}" readonly="readonly" /><th:block th:if="${!empty KualiForm.chartOfAccountsCodeInquiryUrl}"></a></th:block></td>
+						<td class="grid"><th:block th:if="${!empty KualiForm.accountNumberInquiryUrl}"><a href="${KualiForm.accountNumberInquiryUrl}" target="_blank"></th:block><input type="text" name="accountNumber" th:field="*{accountNumber}" data-attribute-entry="${laborLedgerEntryAttributes.accountNumber}" readonly="readonly" /><th:block th:if="${!empty KualiForm.accountNumberInquiryUrl}"></a></th:block></td>
+						<td class="grid"><th:block th:if="${!empty KualiForm.subAccountNumberInquiryUrl}"><a href="${KualiForm.subAccountNumberInquiryUrl}" target="_blank"></th:block><input type="text" name="subAccountNumber" th:field="*{subAccountNumber}" data-attribute-entry="${laborLedgerEntryAttributes.subAccountNumber}" readonly="readonly" /><th:block th:if="${!empty KualiForm.subAccountNumberInquiryUrl}"></a></th:block></td>
+						<td class="grid"><th:block th:if="${!empty KualiForm.financialObjectCodeInquiryUrl}"><a href="${KualiForm.financialObjectCodeInquiryUrl}" target="_blank"></th:block><input type="text" name="financialObjectCode" th:field="*{financialObjectCode}" data-attribute-entry="${laborLedgerEntryAttributes.financialObjectCode}" readonly="readonly" /><th:block th:if="${!empty KualiForm.financialObjectCodeInquiryUrl}"></a></th:block></td>
+						<td class="grid"><th:block th:if="${!empty KualiForm.financialSubObjectCodeInquiryUrl}"><a href="${KualiForm.financialSubObjectCodeInquiryUrl}" target="_blank"></th:block><input type="text" name="financialSubObjectCode" th:field="*{financialSubObjectCode}" data-attribute-entry="${laborLedgerEntryAttributes.financialSubObjectCode}" readonly="readonly" /><th:block th:if="${!empty KualiForm.financialSubObjectCodeInquiryUrl}"></a></th:block></td>
+					</tr>
+				</table>
+			</td>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" height="20" width="20" /></td>
+		</tr>
+		<tr>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="20" height="20" /></td>
+			<td> 
+			<th:block th:if="${!empty KualiForm.entries}">
+	        
+	        <display:table class="datatable-100" cellspacing="0"
+				cellpadding="0" name="${KualiForm.entries}" id="row"
+				export="true" pagesize="100" defaultsort="2"
+				requestURI="laborGLLaborEntrySummarizationInquiry.do?methodToCall=start&universityFiscalYear=${KualiForm.universityFiscalYear}&universityFiscalPeriodCode=${KualiForm.universityFiscalPeriodCode}&chartOfAccountsCode=${KualiForm.chartOfAccountsCode}&accountNumber=${KualiForm.accountNumber}&subAccountNumber=${KualiForm.subAccountNumber}&financialObjectCode=${KualiForm.financialObjectCode}&financialSubObjectCode=${KualiForm.financialSubObjectCode}&financialBalanceTypeCode=${KualiForm.financialBalanceTypeCode}&financialObjectTypeCode=${KualiForm.financialObjectTypeCode}&financialDocumentTypeCode=${KualiForm.financialDocumentTypeCode}&financialSystemOriginationCode=${KualiForm.financialSystemOriginationCode}&documentNumber=${KualiForm.documentNumber}">
+				
+				<!--/*/ <th:block th:with="columnLength=${fn:length(row.columns)-15}"> /*/-->
+				<c:forEach items="${row.columns}" var="column" varStatus="status">
+					<th:block th:if="${!empty column.columnAnchor.title}">
+						<!--/*/ <th:block th:with="title=${column.columnAnchor.title}"> /*/-->
+					</th:block>
+					<th:block th:if="${empty column.columnAnchor.title}">
+						<!--/*/ <th:block th:with="title=${column.propertyValue}"> /*/-->
+					</th:block>
+					
+					<display:column class="${column.formatter.implementationClass == 'org.kuali.rice.kns.web.format.CurrencyFormatter' ? 'numbercell' : 'infocell'}" sortable="${column.sortable}" decorator="org.kuali.rice.kns.web.ui.FormatAwareDecorator" title="${column.columnTitle}" comparator="${column.comparator}">
+						<th:block th:switch="${true}">
+							<th:block th:case="${!empty column.propertyURL}">
+								<a href="<span th:text="${column.propertyURL}"></span>" title="<span th:text="${column.columnAnchor.title}"></span>" target="_blank"><span th:text="${column.propertyValue}"></span></a>	
+							</th:block>		
+							<th:block th:case="*">
+								<span th:text="${column.propertyValue}"></span>
+							</th:block>	
+						</th:block>
+					</display:column>
+				</tr>
+				
+			</display:table>
+			</td>
+			</th:block>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" height="20" width="20" /></td>
+		</tr>
+	</table>
+	
+	<kul:inquiryControls />
+
+  </form>
+</div>
+</body>
+</html>

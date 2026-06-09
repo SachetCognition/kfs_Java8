@@ -1,0 +1,83 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/paymentApplicationQuickApplyToInvoice.tag -->
+<!-- Fragment parameters: hasRelatedCashControlDocument, readOnly, isCustomerSelected, customerInvoiceDetailAttributes, invoiceAttributes -->
+<div th:fragment="content (hasRelatedCashControlDocument, readOnly, isCustomerSelected, customerInvoiceDetailAttributes, invoiceAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="invoiceApplicationsByDocumentNumber=${KualiForm.invoiceApplicationsByDocumentNumber}"> /*/-->
+
+    <section class="kfs-tab" data-tab-title="Quick Apply to Invoice" data-default-open="${isCustomerSelected}">
+  <h3>Quick Apply to Invoice</h3>
+        <div class="tab-container" align="center">
+            <th:block th:switch="${true}">
+                <th:block th:case="${!isCustomerSelected}">
+                    No Customer Selected
+                </th:block>
+                <th:block th:case="*">
+                    <h3>Quick Apply to Invoice</h3>
+                    <table width="100%" cellpadding="0" cellspacing="0"
+                        class="datatable">
+                        <tr>
+                            <th>Invoice Number</th>
+                            <th>Open Amount</th>
+							<th:block th:if="${readOnly ne true}">
+	                            <th>Quick Apply</th>
+	                        </th:block>
+                        </tr>
+                     <th:block th:switch="${true}">
+                     <th:block th:case="${empty KualiForm.invoiceApplications}">
+                     	<tr><td colspan="3">No Invoices Are Available for QuickApply</td></tr>
+                     </th:block>
+                     <th:block th:case="*">
+                        <tr th:each=" : ${KualiForm.invoiceApplications}" id="invoiceApplication" indexId="idx">
+                        
+                            <tr>
+                                <td>
+									<input type="text" name="invoiceApplications[${idx}].documentNumber" th:field="*{invoiceApplications[${idx}].documentNumber}" data-attribute-entry="${invoiceAttributes.documentNumber}" readonly="readonly" />
+                                    <!--<span th:text="${invoiceApplication.documentNumber}"></span>-->
+                                </td>
+                                <td style="text-align: right;">
+									<input type="text" name="invoiceApplications[${idx}].openAmount" th:field="*{invoiceApplications[${idx}].openAmount}" data-attribute-entry="${invoiceAttributes.openAmount}" readonly="readonly" />
+                                    <!-- $<span th:text="${invoiceApplication.openAmount}"></span>-->
+                                </td>
+								<th:block th:if="${readOnly ne true}">
+	                                <td>
+	                                	<center>
+											<input type="text" name="invoiceApplications[${idx}].quickApply" th:field="*{invoiceApplications[${idx}].quickApply}" data-attribute-entry="${customerInvoiceDetailAttributes.taxableIndicator}" />
+		                                </center>
+	                                </td>
+	                            </th:block>
+                            </tr>
+                        </tr>
+                      </th:block>
+                      </th:block>
+						<th:block th:if="${readOnly ne true}">
+	                        <tr>
+	                            <td colspan='3' style='text-align: right;'>
+	                                <input type="image" property="methodToCall.applyAllAmounts"
+	                                    src="${ConfigProperties.externalizable.images.url}tinybutton-apply.gif"
+	                                    alt="Quick Apply" title="Quick Apply" styleClass="tinybutton" />
+	                            </td>
+	                        </tr>
+	                    </th:block>
+                    </table>
+                </th:block>
+            </th:block>
+        </div>
+    </section>
+</div>

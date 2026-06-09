@@ -1,0 +1,88 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/expenses/importedExpenseHeader.tag -->
+<!-- Fragment parameters: lineNumber, isCTS -->
+<div th:fragment="content (lineNumber, isCTS)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="importedExpenseAttributes=${DataDictionary.ImportedExpense.attributes}"> /*/-->
+			<tr>
+				<th:block th:switch="${true}">
+					<th:block th:case="${lineNumber == null }">
+						<th>&nbsp;</th>
+					</th:block>
+					<th:block th:case="*">
+						<th scope="row" class="infoline" rowspan="${isCTS?3:4}">
+							<div align="center"> 
+								${lineNumber}
+							</div>
+						</th>
+					</th:block>
+				</th:block>
+	            <th>
+	            	<div align="left">
+	            		<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.cardType}"></label>
+	            	</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.expenseDate}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.expenseTypeObjectCodeId}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.travelCompanyCodeName}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.expenseAmount}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.currencyRate}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">$US</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.nonReimbursable}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.receiptRequired}"></label>
+					</div>
+				</th>
+				<th>
+					<div align="left">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${importedExpenseAttributes.taxable}"></label>
+					</div>
+				</th>
+	            <th>
+	            	<div align="center">Actions</div>
+	            </th>
+			</tr>
+</div>

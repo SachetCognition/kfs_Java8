@@ -1,0 +1,126 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ld/displayLaborOriginEntrySearchResults.tag -->
+<!-- Fragment parameters: laborOriginEntries -->
+<div th:fragment="content (laborOriginEntries)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${empty laborOriginEntries}">
+    No Origin Entries found.
+</th:block>
+<th:block th:if="${!empty laborOriginEntries}">
+    <kul:tableRenderPagingBanner pageNumber="${KualiForm.originEntrySearchResultTableMetadata.viewedPageNumber}"
+            totalPages="${KualiForm.originEntrySearchResultTableMetadata.totalNumberOfPages}"
+            firstDisplayedRow="${KualiForm.originEntrySearchResultTableMetadata.firstRowIndex}" lastDisplayedRow="${KualiForm.originEntrySearchResultTableMetadata.lastRowIndex}"
+            resultsActualSize="${KualiForm.originEntrySearchResultTableMetadata.resultsActualSize}" resultsLimitedSize="${KualiForm.originEntrySearchResultTableMetadata.resultsLimitedSize}"
+            buttonExtraParams=".anchor${currentTabIndex}"/>
+    <input type="hidden" name="originEntrySearchResultTableMetadata.${Constants.TableRenderConstants.PREVIOUSLY_SORTED_COLUMN_INDEX_PARAM}" value="${KualiForm.originEntrySearchResultTableMetadata.columnToSortIndex}"/>
+    <input type="hidden" name="originEntrySearchResultTableMetadata.sortDescending" value="${KualiForm.originEntrySearchResultTableMetadata.sortDescending}"/>
+    <input type="hidden" name="originEntrySearchResultTableMetadata.viewedPageNumber" value="${KualiForm.originEntrySearchResultTableMetadata.viewedPageNumber}"/>
+    <table class="datatable-100" id="laborOriginEntry" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th:block th:if="${KualiForm.editableFlag == true}">
+                    <th>Manual Edit</th>
+                </th:block>
+                <c:forEach items="${KualiForm.tableRenderColumnMetadata}" var="column">
+                    <th class="sortable">
+                        <span th:text="${column.columnTitle}"></span><th:block th:if="${empty column.columnTitle}">$nbsp;</th:block>
+                    </th>
+                </tr>
+            </tr>
+            <tr>
+                <th:block th:if="${KualiForm.editableFlag == true and KualiForm.showOutputFlag == false}">
+                    <td>&nbsp;</td>
+                </th:block>
+                <c:forEach items="${KualiForm.tableRenderColumnMetadata}" var="column" varStatus="columnLoopStatus">
+                    <td class="sortable" style="text-align: center;">
+                        <th:block th:if="${column.sortable}">
+                            <input type="image" property="methodToCall.sort.${columnLoopStatus.index}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}sort.gif" styleClass="tinybutton" alt="Sort column" title="Sort column ${column.columnTitle}"/>
+                        </th:block>
+                        <th:block th:if="${!column.sortable}">
+                            &nbsp;
+                        </th:block>
+                    </td>
+                </tr>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${laborOriginEntries}" var="originEntry" varStatus="loopStatus" 
+                    begin="${KualiForm.originEntrySearchResultTableMetadata.firstRowIndex}" end="${KualiForm.originEntrySearchResultTableMetadata.lastRowIndex}">
+                <!--/*/ <th:block th:with="rowclass=odd"> /*/-->
+                <th:block th:if="${loopStatus.count % 2 == 0}">
+                    <!--/*/ <th:block th:with="rowclass=even"> /*/-->
+                </th:block>
+                <tr class="${rowclass}">
+                    <th:block th:if="${KualiForm.editableFlag == true and KualiForm.editMethod == 'M'}">
+                        <td>
+                            <input type="image" property="methodToCall.editManualEntry.entryId${originEntry.entryId}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif" styleClass="tinybutton" alt="edit" title="edit" />
+                            <input type="image" property="methodToCall.deleteManualEntry.entryId${originEntry.entryId}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" alt="delete" title="delete" />
+                        </td>
+                    </th:block>
+                    <td class="infocell"><span th:text="${originEntry.universityFiscalYear}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.chartOfAccountsCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.accountNumber}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.subAccountNumber}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialObjectCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialSubObjectCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialBalanceTypeCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialObjectTypeCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.universityFiscalPeriodCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialDocumentTypeCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialSystemOriginationCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.documentNumber}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.transactionLedgerEntrySequenceNumber}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.positionNumber}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.projectCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.transactionLedgerEntryDescription}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.transactionLedgerEntryAmount}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.transactionDebitCreditCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.transactionDate}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.organizationDocumentNumber}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.organizationReferenceId}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.referenceFinancialDocumentTypeCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.referenceFinancialSystemOriginationCode}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.referenceFinancialDocumentNumber}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.financialDocumentReversalDate}"></span>&nbsp;</td>
+                    <td class="infocell"><span th:text="${originEntry.transactionEncumbranceUpdateCode}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.transactionPostingDate}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.payPeriodEndDate}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.transactionTotalHours}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.payrollEndDateFiscalYear}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.payrollEndDateFiscalPeriodCode}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.emplid}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.employeeRecord}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.earnCode}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.payGroup}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.salaryAdministrationPlan}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.grade}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.runIdentifier}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.laborLedgerOriginalChartOfAccountsCode}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.laborLedgerOriginalAccountNumber}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.laborLedgerOriginalSubAccountNumber}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.laborLedgerOriginalFinancialObjectCode}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.laborLedgerOriginalFinancialSubObjectCode}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.hrmsCompany}"></span>&nbsp;</td>
+					<td class="infocell"><span th:text="${originEntry.setid}"></span>&nbsp;</td>
+				</tr>
+            </tr>
+        <tbody>
+    </table>
+</th:block>
+</div>

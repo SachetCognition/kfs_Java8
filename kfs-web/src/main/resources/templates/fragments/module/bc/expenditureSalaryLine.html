@@ -1,0 +1,107 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/expenditureSalaryLine.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="sseAttributes=${DataDictionary['SalarySettingExpansion'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountAttributes=${DataDictionary['Account'].attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="accountingLine=salarySettingExpansion"> /*/-->
+<!--/*/ <th:block th:with="colSpan=7"> /*/-->
+
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Expenditure Salary Line">
+<tbody>
+	<tr>
+		<td colspan="${colSpan}" class="subhead">
+			<span class="subhead-left">Expenditure Salary Line</span>
+		</td>
+	</tr>
+
+	<tr>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${sseAttributes.chartOfAccountsCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${sseAttributes.accountNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${sseAttributes.subAccountNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${sseAttributes.financialObjectCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${sseAttributes.financialSubObjectCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountAttributes.subFundGroupCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountAttributes.organizationCode}"></th>
+	</tr>
+	
+	<tr>
+		<%-- Chart of Accounts Code and Name --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${accountingLine}" data-field="chartOfAccountsCode" data-detail-function="loadChartInfo" data-detail-field="chartOfAccounts.finChartOfAccountDescription" data-attributes="${sseAttributes}" data-lookup="false" data-inquiry="true" data-bo-class-simple-name="Chart" data-read-only="true" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.salarySettingExpansion.valuesMap}"></div>
+
+
+		<%-- Account Number and Name --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${accountingLine}" data-field="accountNumber" data-detail-function="loadAccountInfo" data-detail-field="account.accountName" data-attributes="${sseAttributes}" data-lookup="false" data-inquiry="true" data-bo-class-simple-name="Account" data-read-only="true" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.salarySettingExpansion.valuesMap}"></div>
+
+		<%-- Sub-Account Number and Name --%>
+		<!--/*/ <th:block th:with="doLookupOrInquiry=${KualiForm.salarySettingExpansion.subAccountNumber ne KualiForm.dashSubAccountNumber ? true : false}"> /*/-->
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${accountingLine}" data-field="subAccountNumber" data-detail-function="loadSubAccountInfo" data-detail-field="subAccount.subAccountName" data-attributes="${sseAttributes}" data-lookup="${doLookupOrInquiry}" data-inquiry="${doLookupOrInquiry}" data-bo-class-simple-name="SubAccount" data-read-only="true" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="chartOfAccountsCode,accountNumber" data-accounting-line-values-map="${KualiForm.salarySettingExpansion.valuesMap}"></div>
+
+		<%-- Object Code and Name --%>
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${accountingLine}" data-field="financialObjectCode" data-detail-function="loadObjectInfo" data-detail-field="financialObject.financialObjectCodeName" data-attributes="${sseAttributes}" data-lookup="false" data-inquiry="true" data-bo-class-simple-name="ObjectCode" data-read-only="true" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.salarySettingExpansion.valuesMap}"></div>
+
+		<%-- Sub-Object Code and Name --%>
+		<!--/*/ <th:block th:with="doLookupOrInquiry=${KualiForm.salarySettingExpansion.financialSubObjectCode ne KualiForm.dashFinancialSubObjectCode ? true : false}"> /*/-->
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${accountingLine}" data-field="financialSubObjectCode" data-detail-function="loadSubObjectInfo" data-detail-field="financialSubObject.financialSubObjectCodeName" data-attributes="${sseAttributes}" data-lookup="${doLookupOrInquiry}" data-inquiry="${doLookupOrInquiry}" data-bo-class-simple-name="SubObjCd" data-read-only="true" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode,accountNumber,financialObjectCode" data-accounting-line-values-map="${KualiForm.salarySettingExpansion.valuesMap}"></div>
+
+		<%-- Sub-Fund Group Code  --%>
+		<td align="center" valign="middle">
+			<input type="text" name="salarySettingExpansion.account.subFundGroupCode" th:field="*{salarySettingExpansion.account.subFundGroupCode}" data-attribute-entry="${accountAttributes.subFundGroupCode}" readonly="readonly" />
+				
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubFundGroup" data-key-values="subFundGroupCode=${KualiForm.salarySettingExpansion.account.subFundGroupCode}">
+				</span>
+			</div><!-- /kul:htmlControlAttribute -->
+
+			<div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-accounting-line="${accountingLine}" data-detail-fields="account.subFundGroup.subFundGroupDescription"></div>
+		</td>
+
+		<%-- organization Code  --%>
+		<td align="center" valign="middle">
+			<input type="text" name="salarySettingExpansion.account.organizationCode" th:field="*{salarySettingExpansion.account.organizationCode}" data-attribute-entry="${accountAttributes.organizationCode}" readonly="readonly" />
+				
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${KualiForm.salarySettingExpansion.account.chartOfAccountsCode}&amp;organizationCode=${KualiForm.salarySettingExpansion.account.organizationCode}">
+				</span>
+			</div><!-- /kul:htmlControlAttribute -->
+
+			<div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-accounting-line="${accountingLine}" data-detail-fields="account.organization.organizationName"></div>
+		</td>
+	</tr>
+
+	<%-- Row for Add Position and Add Incumbent Buttons --%>
+	<th:block th:if="${not readOnly}">
+	<tr>
+		<td class="infoline" colspan="${colSpan}"><center>			
+			<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-addposition.gif" 
+				property="methodToCall.addPosition" title="Add Position" 
+				alt="Add Position" styleClass="tinybutton" />
+				
+			&nbsp;&nbsp;&nbsp;	   			
+	   		<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-addincumbent.gif" 
+	   			property="methodToCall.addIncumbent" title="Add Incumbent" 
+	   			alt="Add Incumbent" styleClass="tinybutton" />
+	          
+	   		</center>
+		</td>
+	</tr>	
+	</th:block>
+</tbody>
+</table>
+</div>

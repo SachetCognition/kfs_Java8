@@ -1,0 +1,48 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/employee.tag -->
+<!-- Fragment parameters: userIdFieldName, userNameFieldName, label, fieldConversions, lookupParameters, referencesToRefresh, hasErrors, readOnly, onblur, highlight, forceRequired -->
+<div th:fragment="content (userIdFieldName, userNameFieldName, label, fieldConversions, lookupParameters, referencesToRefresh, hasErrors, readOnly, onblur, highlight, forceRequired)" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="dwr/interface/PersonService.js"></script>
+<script language="JavaScript" type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+
+<input type="text" name="${userIdFieldName}" th:field="*{${userIdFieldName}}" data-attribute-entry="${DataDictionary['PersonImpl'].attributes.employeeId}" />
+<th:block th:if="${!readOnly}">
+	<span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span>
+</th:block>
+
+<th:block th:if="${readOnly}">
+  <div>${userName}</div>
+</th:block>
+
+<div id="${userNameFieldName}.div">
+    <html:hidden write="true" property="${userNameFieldName}"/>       
+</div>
+	
+<th:block th:if="${!empty universalIdFieldName}">
+	<input type="hidden" name="${universalIdFieldName}" value="${universalId}" />
+</th:block>
+<th:block th:if="${!empty userNameFieldName}">
+	<input type="hidden" name="${userNameFieldName}" value="${userName}" />
+</th:block>
+
+<th:block th:if="${highlight}">
+<kul:fieldShowChangedIcon/>
+</th:block>
+</div>

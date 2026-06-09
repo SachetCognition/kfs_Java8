@@ -1,0 +1,140 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/creditMemoInfo.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="fullDocumentEntryCompleted=${not empty KualiForm.editingMode['fullDocumentEntryCompleted']}"> /*/-->
+<!--/*/ <th:block th:with="purchaseOrderAttributes=${DataDictionary.PurchaseOrderDocument.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Credit Memo Info" data-default-open="true">
+  <h3>Credit Memo Info</h3>
+   
+    <div class="tab-container" align=center>
+            <h3>Credit Memo Info</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Credit Memo Info Section">
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b" width="25%">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.creditMemoNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" width="25%">
+                   <input type="text" name="document.creditMemoNumber" th:field="*{document.creditMemoNumber}" data-attribute-entry="${documentAttributes.creditMemoNumber}" readonly="readonly" /> 
+                </td>
+                <th align=right valign=middle class="bord-l-b" width="25%">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.creditMemoType}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" width="25%">
+                   <span th:text="${KualiForm.document.creditMemoType}"></span>
+                </td>
+            </tr>
+            
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.creditMemoDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.creditMemoDate" th:field="*{document.creditMemoDate}" data-attribute-entry="${documentAttributes.creditMemoDate}" readonly="readonly" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.vendorNumber" th:field="*{document.vendorNumber}" data-attribute-entry="${documentAttributes.vendorNumber}" readonly="readonly" />
+                </td>
+             </tr>
+             
+             <th:block th:if="${not fullDocumentEntryCompleted}">
+                  <tr>
+                     <th align=right valign=middle class="bord-l-b">                   
+        	    		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.creditMemoAmount}"></label></div>
+                     </th>
+                     <td align=left valign=middle class="datacell">                   
+                     	<input type="text" name="document.creditMemoAmount" th:field="*{document.creditMemoAmount}" data-attribute-entry="${documentAttributes.creditMemoAmount}" readonly="readonly" />
+                     </td>
+                     <th align=right valign=middle class="bord-l-b">&nbsp;</th>               
+                     <td align=left valign=middle class="datacell">&nbsp;</td>                
+                  <tr>   
+             </th:block>
+
+             <tr>   
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderEndDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.purchaseOrder.purchaseOrderEndDate" th:field="*{document.purchaseOrder.purchaseOrderEndDate}" data-attribute-entry="${documentAttributes.purchaseOrderEndDate}" readonly="readonly" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderIdentifier}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.purchaseOrderIdentifier" th:field="*{document.purchaseOrderIdentifier}" data-attribute-entry="${documentAttributes.purchaseOrderIdentifier}" readonly="readonly" />
+                </td>
+             </tr>
+             
+             <tr>   
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderNotes}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <span th:text="${KualiForm.document.purchaseOrderNotes}"></span>
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.paymentRequestIdentifier}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.paymentRequestIdentifier" th:field="*{document.paymentRequestIdentifier}" data-attribute-entry="${documentAttributes.paymentRequestIdentifier}" readonly="readonly" />
+                </td>
+            </tr>
+			<tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.extractedTimestamp}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.extractedTimestamp" th:field="*{document.extractedTimestamp}" data-attribute-entry="${documentAttributes.extractedTimestamp}" />
+                    <th:block th:if="${not empty KualiForm.document.extractedTimestamp}">
+                        <div th:replace="~{fragments/purap/disbursementInfo :: content}" data-source-document-number="${KualiForm.document.documentNumber}" data-source-document-type="${KualiForm.document.documentType}"></div>          
+					</th:block>
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.accountsPayableApprovalTimestamp}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.accountsPayableApprovalTimestamp" th:field="*{document.accountsPayableApprovalTimestamp}" data-attribute-entry="${documentAttributes.accountsPayableApprovalTimestamp}" />
+                </td>          
+            </tr>
+
+			<tr>
+	            <div th:replace="~{fragments/sys/bankLabel :: content}" data-align="right"></div>
+                <div th:replace="~{fragments/sys/bankControl :: content}" data-property="document.bankCode" data-object-property="document.bank" data-read-only="${not fullEntryMode}"></div>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right">&nbsp;</div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    &nbsp;
+                </td>
+                
+            </tr>
+            
+		</table> 
+    </div>
+    
+</section>
+</div>

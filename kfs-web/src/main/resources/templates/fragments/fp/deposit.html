@@ -1,0 +1,206 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/deposit.tag -->
+<!-- Fragment parameters: editingMode, depositIndex, deposit -->
+<div th:fragment="content (editingMode, depositIndex, deposit)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="allowAdditionalDeposits=${editingMode[KfsAuthorizationConstants.CashManagementEditMode.ALLOW_ADDITIONAL_DEPOSITS]}"> /*/-->
+<!--/*/ <th:block th:with="allowCancelDeposits=${editingMode[KfsAuthorizationConstants.CashManagementEditMode.ALLOW_CANCEL_DEPOSITS]}"> /*/-->
+
+<!--/*/ <th:block th:with="receiptAttributes=${DataDictionary.CashReceiptDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="dummyAttributes=${DataDictionary.AttributeReferenceDummy.attributes}"> /*/-->
+<!--/*/ <th:block th:with="depositAttributes=${DataDictionary.Deposit.attributes}"> /*/-->
+<!--/*/ <th:block th:with="checkAttributes=${DataDictionary.CheckBase.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="depositPropertyBase=document.deposit[${depositIndex}]"> /*/-->
+<!--/*/ <th:block th:with="labelBase=document.deposit[${depositIndex}]"> /*/-->
+
+<c:set var="depositType">
+    <span th:text="${KualiForm.${depositPropertyBase}.rawDepositTypeCode}"></span>
+</c:set>
+
+<c:set var="depositTitle">
+    <span th:text="${KualiForm.${depositPropertyBase}.depositTypeCode}"></span> Deposit
+</c:set>
+<th:block th:if="${depositType != KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL}">
+    <!--/*/ <th:block th:with="depositTitle=${depositTitle} ${depositIndex + 1}"> /*/-->
+</th:block>
+
+<th:block th:switch="${true}">
+<th:block th:case="${depositType == KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL}">
+  	<!--/*/ <th:block th:with="columnNumbers=5"> /*/-->
+  </th:block>
+  <th:block th:case="*">
+    <!--/*/ <th:block th:with="columnNumbers=4"> /*/-->
+  </th:block>
+</th:block>	
+
+    <h3>${depositTitle}</h3>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+    <%-- deposit --%>
+    <tr>
+        <td colspan="${columnNumbers}">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+                <tr>
+                    <div th:replace="~{fragments/sys/bankLabel :: content}" data-align="left"></div>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${depositAttributes.depositTicketNumber}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${depositAttributes.depositTypeCode}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${depositAttributes.depositDate}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${depositAttributes.depositAmount}"></th>
+                </tr>
+
+                <tr>
+                    <div th:replace="~{fragments/sys/bankControl :: content}" data-property="${depositPropertyBase}.depositBankCode" data-object-property="${depositPropertyBase}.bank" data-deposit-only="true" data-read-only="${readOnly}"></div>
+                    
+                    <td align="left" rowspan="2">
+                        <input type="text" name="${depositPropertyBase}.depositTicketNumber" th:field="*{${depositPropertyBase}.depositTicketNumber}" data-attribute-entry="${depositAttributes.depositTicketNumber}" />
+                        <br/>
+                        &nbsp;
+                    </td>
+
+                    <td align="left" rowspan="2">
+                        <input type="text" name="${depositPropertyBase}.depositTypeCode" th:field="*{${depositPropertyBase}.depositTypeCode}" data-attribute-entry="${depositAttributes.depositTypeCode}" readonly="readonly" />
+                        <br/>
+                        &nbsp;
+                    </td>
+
+                    <td align="left" rowspan="2">
+                        <input type="text" name="${depositPropertyBase}.depositDate" th:field="*{${depositPropertyBase}.depositDate}" data-attribute-entry="${depositAttributes.depositDate}" readonly="readonly" />
+                        <br/>
+                        &nbsp;
+                    </td>
+
+                    <td align="left" rowspan="2">
+                        <input type="text" name="${depositPropertyBase}.depositAmount" th:field="*{${depositPropertyBase}.depositAmount}" data-attribute-entry="${depositAttributes.depositAmount}" readonly="readonly" />
+                        <br/>
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    
+    <%-- currency/coin details --%>
+    <th:block th:if="${depositType == KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL && !empty deposit.depositedCurrency && !empty deposit.depositedCoin}">
+      <tr>
+       	<td colspan="${columnNumbers}" class="tab-subhead">
+          Currency/Coin Details
+        </td>
+      </tr>
+      <tr>
+    	<td colspan="${columnNumbers}">
+          <div th:replace="~{fragments/fp/currencyCoinLine :: content}" data-currency-property="${depositPropertyBase}.depositedCurrency" data-coin-property="${depositPropertyBase}.depositedCoin" data-read-only="true"></div>
+        </td>
+      </tr>
+    </th:block>
+    
+    <%-- cashReceipts header --%>
+    <th:block th:if="${!empty KualiForm.depositHelpers[depositIndex].cashReceiptSummarys}">
+    <tr>
+  		<td colspan="${columnNumbers}" class="tab-subhead">
+        Cash Receipts
+    </td></tr>
+    <tr>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${receiptAttributes.documentNumber}"></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${receiptAttributes.totalCheckAmount}"></th>
+       	<th:block th:if="${depositType == KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL}">
+       		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+       	</th:block>
+    </tr>
+
+    <%-- cashReceipts data --%>
+    <tr th:each=" : ${KualiForm.depositHelper[${depositIndex}].cashReceiptSummarys}" id="receiptSummary" indexId="summaryIndex" >
+        <!--/*/ <th:block th:with="receiptSummaryBase=depositHelper[${depositIndex}].cashReceiptSummary[${summaryIndex}]"> /*/-->
+        <tr>
+            <td align="left">
+				<a href="financialCashReceipt.do?methodToCall=docHandler&docId=${receiptSummary.documentNumber}&command=displayDocSearchView" target="new">
+                <input type="text" name="${receiptSummaryBase}.documentNumber" th:field="*{${receiptSummaryBase}.documentNumber}" data-attribute-entry="${receiptAttributes.documentNumber}" readonly="readonly" />
+				</a>
+            </td>
+
+            <td align="left">
+                <input type="text" name="${receiptSummaryBase}.description" th:field="*{${receiptSummaryBase}.description}" data-attribute-entry="${receiptAttributes.documentNumber}" readonly="readonly" />
+            </td>
+
+            <td align="left">
+                <input type="text" name="${receiptSummaryBase}.createDate" th:field="*{${receiptSummaryBase}.createDate}" data-attribute-entry="${dummyAttributes.genericTimestamp}" readonly="readonly" />
+            </td>
+    
+            <td align="left">
+            <th:block th:switch="${true}">
+            	<th:block th:case="${depositType == KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL}">
+  		            <input type="text" name="${receiptSummaryBase}.checkAmount" th:field="*{${receiptSummaryBase}.checkAmount}" data-attribute-entry="${dummyAttributes.genericAmount}" readonly="readonly" />
+ 				</th:block>
+            	<th:block th:case="*">
+            		<input type="text" name="${receiptSummaryBase}.checkAmount" th:field="*{${receiptSummaryBase}.checkAmount}" data-attribute-entry="${dummyAttributes.genericAmount}" readonly="readonly" />
+            	</th:block>
+            </th:block>	           	
+            </td>
+            <th:block th:if="${depositType == KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL}">
+            <td>
+            	<input type="text" name="${receiptSummaryBase}.cashAmount" th:field="*{${receiptSummaryBase}.cashAmount}" data-attribute-entry="${dummyAttributes.genericAmount}" readonly="readonly" />
+            </td>
+            </th:block>
+        </tr>
+    </tr>
+    </th:block>
+    
+    <%-- cashiering checks --%>
+    <th:block th:if="${!empty KualiForm.depositHelpers[depositIndex].cashieringChecks}">
+    <tr>
+      <td colspan="4" class="tab-subhead">Cashiering Checks</td>
+    </tr>
+    <tr>
+      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.checkNumber}"></th>
+      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.checkDate}"></th>
+      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.description}"></th>
+      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.amount}"></th>
+    </tr>
+    <tr th:each=" : ${KualiForm.depositHelper[${depositIndex}].cashieringChecks}" id="cashieringCheck" indexId="cashieringCheckCtr">
+      <tr>
+        <td align="left">
+          <input type="text" name="depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].checkNumber" th:field="*{depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].checkNumber}" data-attribute-entry="${checkAttributes.checkNumber}" readonly="readonly" />
+        </td>
+        <td align="left">
+          <input type="text" name="depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].checkDate" th:field="*{depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].checkDate}" data-attribute-entry="${checkAttributes.checkDate}" readonly="readonly" />
+        </td>
+        <td align="left">
+          <input type="text" name="depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].description" th:field="*{depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].description}" data-attribute-entry="${checkAttributes.description}" readonly="readonly" />
+        </td>
+        <td align="left">
+          <input type="text" name="depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].amount" th:field="*{depositHelper[${depositIndex}].cashieringChecks[${cashieringCheckCtr}].amount}" data-attribute-entry="${checkAttributes.amount}" readonly="readonly" />
+        </td>
+      </tr>
+    </tr>
+    </th:block>
+
+    <%-- deposit footer --%>
+    <th:block th:if="${(depositType == KFSConstants.DepositConstants.DEPOSIT_TYPE_FINAL && allowCancelDeposits) || allowAdditionalDeposits}">
+        <tr>
+            <td colspan="${columnNumbers}" class="subhead" style="text-align: center">
+                <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" style="border: none" property="methodToCall.cancelDeposit.line${depositIndex}" alt="close" title="close"/>
+            </td>
+        </tr>         
+    </th:block>
+</table>
+</div>

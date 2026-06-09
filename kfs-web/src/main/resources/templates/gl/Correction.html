@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: gl/Correction.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">gl/Correction</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="${KualiForm.docTitle}">
+  <form action="${KualiForm.htmlFormAction}.do" method="post" enctype="multipart/form-data">
+  <!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+  <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+
+  
+  <th:block th:if="${debug == true}">
+    <section class="kfs-tab" data-tab-title="Debug" data-default-open="true">
+  <h3>Debug</h3>
+      <div class="tab-container" align="center"> 
+	    <table cellpadding="0" class="datatable" summary=""> 
+          <tr>
+            <td align="left" valign="middle" class="subhead"><span class="subhead-left">Debug</span></td>
+          </tr>
+        </table>
+        <table cellpadding="0" class="datatable">
+          <tr><td width="10%">editableFlag</td><td>${KualiForm.editableFlag}</td></tr>
+          <tr><td>manualEditFlag</td><td>${KualiForm.manualEditFlag}</td></tr>
+          <tr><td>processInBatch</td><td>${KualiForm.processInBatch}</td></tr>
+          <tr><td>chooseSystem</td><td>${KualiForm.chooseSystem}</td></tr>
+          <tr><td>editMethod</td><td>${KualiForm.editMethod}</td></tr>
+          <tr><td>inputGroupId</td><td>${KualiForm.document.correctionInputFileName}</td></tr>
+		  <tr><td>outputGroupId</td><td>${KualiForm.document.correctionOutputFileName}</td></tr>
+          <tr><td>inputFileName</td><td>${KualiForm.inputFileName}</td></tr>
+          <tr><td>dataLoadedFlag</td><td>${KualiForm.dataLoadedFlag}</td></tr>
+          <tr><td>matchCriteriaOnly</td><td>${KualiForm.matchCriteriaOnly}</td></tr>
+          <tr><td>editableFlag</td><td>${KualiForm.editableFlag}</td></tr>
+          <tr><td>deleteFileFlag</td><td>${KualiForm.deleteFileFlag}</td></tr>
+          <tr><td>allEntries.size</td><td>${KualiForm.allEntriesSize}</td></tr>
+          <tr><td>readOnly</td><td>${readOnly}</td></tr>
+        </table>
+      </div>
+    </section>
+  </th:block>
+  <section class="kfs-tab" data-tab-title="Summary" data-default-open="true">
+  <h3>Summary</h3>
+    <th:block th:if="${KualiForm.document.correctionTypeCode ne 'R' and (not (KualiForm.persistedOriginEntriesMissing && KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.inputGroupId)) && ((KualiForm.dataLoadedFlag and !KualiForm.restrictedFunctionalityMode) or KualiForm.document.correctionOutputFileName != null or !KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT])}">
+      
+      <div class="tab-container" align="center"> 
+	    <table cellpadding="0" class="datatable" summary=""> 
+          <tr>
+            <th:block th:if="${KualiForm.showOutputFlag == true or KualiForm.showSummaryOutputFlag == true}">
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Summary of Output Group</span></td>
+            </th:block>
+            <th:block th:if="${KualiForm.showOutputFlag == false}">
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Summary of Input Group</span></td>
+            </th:block>
+          </tr>
+        </table>
+        <table cellpadding="0" class="datatable">
+          <tr>
+            <td width="20%" align="left" valign="middle" > Total Debits: </td> 
+            <td align="right" valign="middle"> <fmt:formatNumber value="${KualiForm.document.correctionDebitTotalAmount}" groupingUsed="true" minFractionDigits="2"/></td>
+          </tr>
+          <tr>
+            <td width="20%" align="left" valign="middle" > Total Credits: </td> 
+            <td align="right" valign="middle"> <fmt:formatNumber value="${KualiForm.document.correctionCreditTotalAmount}" groupingUsed="true" minFractionDigits="2"/></td>
+          </tr>
+          <tr>
+            <td width="20%" align="left" valign="middle" > Total No DB/CR: </td> 
+            <td align="right" valign="middle"> <fmt:formatNumber value="${KualiForm.document.correctionBudgetTotalAmount}" groupingUsed="true" minFractionDigits="2"/></td>
+          </tr>
+          <tr>
+            <td width="20%" align="left" valign="middle" > Rows output: </td> 
+            <td align="right" valign="middle"> <fmt:formatNumber value="${KualiForm.document.correctionRowCount}" groupingUsed="true"/></td>
+          </tr>
+        </table>
+      </div>
+    </th:block>
+    <th:block th:if="${KualiForm.persistedOriginEntriesMissing && KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.document.correctionInputFileName}">
+      <div class="tab-container" align="center"> 
+	    <table cellpadding="0" class="datatable" summary=""> 
+          <tr>
+            <th:block th:if="${KualiForm.showOutputFlag == true or KualiForm.showSummaryOutputFlag == true}">
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Summary of Output Group</span></td>
+            </th:block>
+            <th:block th:if="${KualiForm.showOutputFlag == false or KualiForm.showSummaryOutputFlag == true}">
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Summary of Input Group</span></td>
+            </th:block>
+          </tr>
+        </table>
+        <table cellpadding="0" class="datatable">
+          <tr>
+            <td>The summary is unavailable because the origin entries are unavailable.</td> 
+          </tr>
+        </table>
+      </div>
+    </th:block>
+    <th:block th:if="${KualiForm.restrictedFunctionalityMode && not KualiForm.persistedOriginEntriesMissing && KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}">
+      <div class="tab-container" align="center"> 
+	    <table cellpadding="0" class="datatable" summary=""> 
+          <tr>
+            <th:block th:if="${KualiForm.showOutputFlag == true or KualiForm.showSummaryOutputFlag == true}">
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Summary of Output Group</span></td>
+            </th:block>
+            <th:block th:if="${KualiForm.showOutputFlag == false or KualiForm.showSummaryOutputFlag == true}">
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Summary of Input Group</span></td>
+            </th:block>
+          </tr>
+        </table>
+        <table cellpadding="0" class="datatable">
+          <tr>
+            <td>The summary is unavailable because the selected origin entry group is too large.</td> 
+          </tr>
+        </table>
+      </div>
+    </th:block>
+  </section>
+
+<%-- ------------------------------------------------------------ This is read/write mode --------------------------------------------------- --%>
+  <th:block th:if="${readOnly == false}">
+    <section class="kfs-tab" data-tab-title="Correction Process" data-default-open="true">
+  <h3>Correction Process</h3>
+      <div class="tab-container" align="center" >
+        <table cellpadding=0 class="datatable" summary=""> 
+          <tr>
+            <td align="left" valign="middle" class="subhead"><span class="subhead-left"></span><label for="chooseSystem">Select System</label> and <label for"editMethod">Edit Method</label></td>
+          </tr>
+          <tr>
+            <td>
+              <center>
+                <select th:field="*{chooseSystem}" styleId="chooseSystem" title="Select System">
+                  <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|CorrectionChooseSystemValuesFinder" label="value" value="key"/>
+                </select>
+                
+                <select th:field="*{editMethod}" styleId="editMethod" title="Edit Method">
+                  <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|CorrectionEditMethodValuesFinder" label="value" value="key"/>
+                </select>
+                <input type="image" property="methodToCall.selectSystemEditMethod.anchor${currentTabIndex}" src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif" styleClass="tinybutton" alt="Select System and Edit Method" title="Select System and Edit Method"/>
+              </center>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </section>  
+    <section class="kfs-tab" data-tab-title="Documents in System" data-default-open="true">
+  <h3>Documents in System</h3>
+      <th:block th:if="${KualiForm.chooseSystem == 'D'}">
+        <div class="tab-container" align="center" > 
+          <table cellpadding=0 class="datatable" summary="">
+            <tr>
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left"></span>Documents in System</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="bord-l-b" style="padding: 4px; vertical-align: top;"> 
+                <center>
+                  <label for="inputGroupId"><strong>Origin Entry Group</strong></label><br/><br/>
+                  <select th:field="*{document.correctionInputFileName}" size="10" styleId="inputGroupId" title="Origin Entry Group" >
+                    <th:block th:if="${KualiForm.inputGroupIdFromLastDocumentLoadIsMissing and KualiForm.inputGroupId eq KualiForm.inputGroupIdFromLastDocumentLoad}">
+                      <option value="<span th:text="${KualiForm.inputGroupIdFromLastDocumentLoad}"></span>" selected="selected"><span th:text="${KualiForm.inputGroupIdFromLastDocumentLoad}"></span> Document was last saved with this origin entry group selected.  Group is no longer in system.</option>
+                    </th:block>
+                    
+                  <th:block th:switch="${true}">
+					<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+						<th:block th:switch="${true}">
+		                      <th:block th:case="${KualiForm.editMethod eq 'R'}">
+    		                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|ProcessingCorrectionLaborGroupEntriesFinder" label="value" value="key" />
+        		              </th:block>
+            		          <th:block th:case="*">
+                		        <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|CorrectionLaborGroupEntriesFinder" label="value" value="key" />
+                    		  </th:block>
+                    	</th:block>
+                   	</th:block>
+                   	<th:block th:case="*">
+                   		<th:block th:switch="${true}">
+	                      <th:block th:case="${KualiForm.editMethod eq 'R'}">
+    	                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|ProcessingCorrectionGroupEntriesFinder" label="value" value="key" />
+        	              </th:block>
+            	          <th:block th:case="*">
+                	        <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|CorrectionGroupEntriesFinder" label="value" value="key" />
+                    	  </th:block>
+                    	</th:block>
+                   	</th:block>
+                  </th:block>
+                  </select>
+                  
+                  <br/><br/>
+                  <th:block th:if="${KualiForm.editMethod eq 'R'}">
+                    <input type="image" property="methodToCall.confirmDeleteDocument.anchor${currentTabIndex}" src="${ConfigProperties.externalizable.images.url}tinybutton-remgrpproc.gif" styleClass="tinybutton" alt="Remove Group From Processing" title="Remove Group From Processing" />
+                  </th:block>
+                  <th:block th:if="${KualiForm.editMethod eq 'M' or KualiForm.editMethod eq 'C'}">
+                    <input type="image" property="methodToCall.loadGroup.anchor${currentTabIndex}" src="${ConfigProperties.externalizable.images.url}tinybutton-loadgroup.gif" styleClass="tinybutton" alt="Show All Entries" title="Show All Entries"/>
+                  </th:block>
+                  <input type="image" property="methodToCall.saveToDesktop.anchor${currentTabIndex}" src="${ConfigProperties.externalizable.images.url}tinybutton-cpygrpdesk.gif" styleClass="tinybutton" alt="Save To Desktop" title="Save To Desktop" onclick="excludeSubmitRestriction=true" />
+                </center> 
+              </td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+    </section>
+    <section class="kfs-tab" data-tab-title="Correction File Upload" data-default-open="true">
+  <h3>Correction File Upload</h3>
+      <th:block th:if="${KualiForm.chooseSystem == 'U'}">
+        <div class="tab-container" align="center"> 
+            <h3>Corrections <label for="sourceFile">File Upload</upload></h3>
+          <table cellpadding=0 class="datatable" summary=""> 
+            <tr>
+              <td class="bord-l-b" style="padding: 4px;">
+              	
+                <html:file size="30" property="sourceFile" styleId="sourceFile" title="File Upload" />
+                <input type="image" property="methodToCall.uploadFile.anchor${currentTabIndex}" src="${ConfigProperties.externalizable.images.url}tinybutton-loaddoc.gif" styleClass="tinybutton" alt="upload file" title="upload file"/>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+    </section>
+    <section class="kfs-tab" data-tab-title="Search Results" data-default-open="true">
+  <h3>Search Results</h3>
+      <th:block th:if="${KualiForm.restrictedFunctionalityMode && !KualiForm.persistedOriginEntriesMissing}">
+        <div class="tab-container" align="center">
+          <table cellpadding=0 class="datatable" summary=""> 
+            <tr>
+              <td align="left" valign="middle" class="subhead">Search Results</td>
+            </tr>
+            <tr>
+              <td><span th:text="#{gl.correction.restricted.functionality.search.results.label}"></span></td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+      <th:block th:if="${KualiForm.restrictedFunctionalityMode && KualiForm.persistedOriginEntriesMissing && KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.document.correctionInputFileName}">
+        <div class="tab-container" align="center">
+          <table cellpadding=0 class="datatable" summary=""> 
+            <tr>
+              <td align="left" valign="middle" class="subhead">Search Results</td>
+            </tr>
+            <tr>
+              <td><span th:text="#{gl.correction.persisted.origin.entries.missing}"></span></td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+      <th:block th:if="${KualiForm.chooseSystem != null and KualiForm.editMethod != null and KualiForm.dataLoadedFlag == true and !KualiForm.restrictedFunctionalityMode and !(KualiForm.persistedOriginEntriesMissing && KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.document.correctionInputFileName)}">
+        <div class="tab-container" align="left" style="overflow: scroll; width: 100% ;"> 
+          <table cellpadding=0 class="datatable" summary=""> 
+            <tr>
+              <th:block th:switch="${true}">
+                <th:block th:case="${KualiForm.showOutputFlag == true and KualiForm.editMethod == 'C'}">
+                  <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Results - Output Group</span></td>
+                </th:block>
+                <th:block th:case="${KualiForm.showOutputFlag == false and KualiForm.editMethod == 'C'}">
+                  <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Results - Input Group</span></td>
+                </th:block>
+                <th:block th:case="${KualiForm.showOutputFlag == true and KualiForm.editMethod == 'M'}">
+                  <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Results - Matching Entries Only</span></td>
+                </th:block>
+                <th:block th:case="${KualiForm.showOutputFlag == false and KualiForm.editMethod == 'M'}">
+                  <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Results - All Entries</span></td>
+                </th:block>
+              </th:block>
+            </tr>
+            <tr>
+            	<th:block th:switch="${true}">
+	            	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+		              <td>
+    		          	<div th:replace="~{fragments/ld/displayLaborOriginEntrySearchResults :: content}" data-labor-origin-entries="${KualiForm.displayEntries}"></div>
+        		      </td>
+        		    </th:block>
+            		<th:block th:case="*">  
+		              <td>
+    		            <div th:replace="~{fragments/glcp/displayOriginEntrySearchResults :: content}" data-origin-entries="${KualiForm.displayEntries}"></div>
+        	 	      </td>
+	        	    </th:block>
+	        	</th:block>    
+            </tr>
+            <th:block th:if="${KualiForm.editMethod == 'M' and KualiForm.editableFlag == true}">
+              <tr>
+                <td align="left" valign="middle" class="subhead"><span class="subhead-left">Manual Editing</span></td>
+              </tr>
+              <tr>                
+                <td>
+                  <table id="eachEntryForManualEdit">
+                    <thead>
+                      <tr>
+                        <th>Manual Edit</th>
+                        
+                        <c:forEach items="${KualiForm.tableRenderColumnMetadata}" var="column">
+                       
+				          <th class="sortable">
+				          	<label for="<span th:text="${column.propertyName}"></span>">
+					        <span th:text="${column.columnTitle}"></span><th:block th:if="${empty column.columnTitle}">$nbsp;</th:block>
+					        </label>
+				          </th>
+			            </tr>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="odd">
+                        <th:block th:switch="${true}">
+						  <th:block th:case="${KualiForm.documentType == 'LLCP'}">
+			            	<th:block th:switch="${true}">
+	                          <th:block th:case="${KualiForm.laborEntryForManualEdit.entryId == 0}">
+    	                        <td><input type="image" property="methodToCall.addManualEntry.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" alt="edit" title="edit"/></td>
+        	                  </th:block>
+            	              <th:block th:case="*">
+                	            <td>
+                	              
+                              	<input type="image" property="methodToCall.saveManualEntry.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif" styleClass="tinybutton" alt="edit" title="edit"/>
+                            	</td>
+                         	 </th:block>
+	                        </th:block>
+                        	<td><input type="text" th:field="*{laborEntryUniversityFiscalYear}" size="5" styleId="laborEntryUniversityFiscalYear" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.chartOfAccountsCode}" size="5" styleId="laborEntryForManualEdit.chartOfAccountsCode" /></td>
+    	                    <td><input type="text" th:field="*{laborEntryForManualEdit.accountNumber}" size="7" styleId="laborEntryForManualEdit.accountNumber" /></td>
+        	                <td><input type="text" th:field="*{laborEntryForManualEdit.subAccountNumber}" size="7" styleId="laborEntryForManualEdit.subAccountNumber" /></td>
+            	            <td><input type="text" th:field="*{laborEntryForManualEdit.financialObjectCode}" size="5" styleId="laborEntryForManualEdit.financialObjectCode" /></td>
+                	        <td><input type="text" th:field="*{laborEntryForManualEdit.financialSubObjectCode}" size="6" styleId="laborEntryForManualEdit.financialSubObjectCode" /></td>
+                    	    <td><input type="text" th:field="*{laborEntryForManualEdit.financialBalanceTypeCode}" size="8" styleId="laborEntryForManualEdit.financialBalanceTypeCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.financialObjectTypeCode}" size="6" styleId="laborEntryForManualEdit.financialObjectTypeCode" /></td>
+    	                    <td><input type="text" th:field="*{laborEntryForManualEdit.universityFiscalPeriodCode}" size="6" styleId="laborEntryForManualEdit.universityFiscalPeriodCode" /></td>
+        	                <td><input type="text" th:field="*{laborEntryForManualEdit.financialDocumentTypeCode}" size="10" styleId="laborEntryForManualEdit.financialDocumentTypeCode" /></td>
+                	        <td><input type="text" th:field="*{laborEntryForManualEdit.financialSystemOriginationCode}" size="6" styleId="laborEntryForManualEdit.financialSystemOriginationCode" /></td>
+            	            <td><input type="text" th:field="*{laborEntryForManualEdit.documentNumber}" size="14" styleId="laborEntryForManualEdit.documentNumber" /></td>
+    	                    <td><input type="text" th:field="*{laborEntryTransactionLedgerEntrySequenceNumber}" size="9" styleId="laborEntryTransactionLedgerEntrySequenceNumber" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.positionNumber}" size="14" styleId="laborEntryForManualEdit.positionNumber" /></td>
+        	                <td><input type="text" th:field="*{laborEntryForManualEdit.projectCode}" size="7" styleId="laborEntryForManualEdit.projectCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.transactionLedgerEntryDescription}" size="11" styleId="laborEntryForManualEdit.transactionLedgerEntryDescription" /></td>
+	                        <td><input type="text" th:field="*{laborEntryTransactionLedgerEntryAmount}" size="7" styleId="laborEntryTransactionLedgerEntryAmount" /></td>
+            	            <td><input type="text" th:field="*{laborEntryForManualEdit.transactionDebitCreditCode}" size="9" styleId="laborEntryForManualEdit.transactionDebitCreditCode" /></td>
+                	        <td><input type="text" th:field="*{laborEntryTransactionDate}" size="12" styleId="laborEntryTransactionDate" /></td>
+                    	    <td><input type="text" th:field="*{laborEntryForManualEdit.organizationDocumentNumber}" size="12" styleId="laborEntryForManualEdit.organizationDocumentNumber" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.organizationReferenceId}" size="13" styleId="laborEntryForManualEdit.organizationReferenceId" /></td>
+        	                <td><input type="text" th:field="*{laborEntryForManualEdit.referenceFinancialDocumentTypeCode}" size="10" styleId="laborEntryForManualEdit.referenceFinancialDocumentTypeCode" /></td>
+            	            <td><input type="text" th:field="*{laborEntryForManualEdit.referenceFinancialSystemOriginationCode}" size="10" styleId="laborEntryForManualEdit.referenceFinancialSystemOriginationCode" /></td>
+                	        <td><input type="text" th:field="*{laborEntryForManualEdit.referenceFinancialDocumentNumber}" size="9" styleId="laborEntryForManualEdit.referenceFinancialDocumentNumber" /></td>
+                    	    <td><input type="text" th:field="*{laborEntryFinancialDocumentReversalDate}" size="8" styleId="laborEntryFinancialDocumentReversalDate" /></td>
+                            <td><input type="text" th:field="*{laborEntryForManualEdit.transactionEncumbranceUpdateCode}" size="13" styleId="laborEntryForManualEdit.transactionEncumbranceUpdateCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryTransactionPostingDate}" size="14" styleId="laborEntryTransactionPostingDate" /></td>
+	                        <td><input type="text" th:field="*{laborEntryPayPeriodEndDate}" size="14" styleId="laborEntryPayPeriodEndDate" /></td>
+	                        <td><input type="text" th:field="*{laborEntryTransactionTotalHours}" size="14" styleId="laborEntryTransactionTotalHours" /></td>
+	                        <td><input type="text" th:field="*{laborEntryPayrollEndDateFiscalYear}" size="14" styleId="laborEntryPayrollEndDateFiscalYear" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.payrollEndDateFiscalPeriodCode}" size="14" styleId="laborEntryForManualEdit.payrollEndDateFiscalPeriodCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.emplid}" size="14" styleId="laborEntryForManualEdit.emplid" /></td>
+	                        <td><input type="text" th:field="*{laborEntryEmployeeRecord}" size="14" styleId="laborEntryEmployeeRecord" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.earnCode}" size="14" styleId="laborEntryForManualEdit.earnCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.payGroup}" size="14" styleId="laborEntryForManualEdit.payGroup" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.salaryAdministrationPlan}" size="14" styleId="laborEntryForManualEdit.salaryAdministrationPlan" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.grade}" size="14" styleId="laborEntryForManualEdit.grade" /></td>
+  	                        <td><input type="text" th:field="*{laborEntryForManualEdit.runIdentifier}" size="14" styleId="laborEntryForManualEdit.runIdentifier" /></td>
+ 	                        <td><input type="text" th:field="*{laborEntryForManualEdit.laborLedgerOriginalChartOfAccountsCode}" size="14" styleId="laborEntryForManualEdit.laborLedgerOriginalChartOfAccountsCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.laborLedgerOriginalAccountNumber}" size="14" styleId="laborEntryForManualEdit.laborLedgerOriginalAccountNumber" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.laborLedgerOriginalSubAccountNumber}" size="14" styleId="laborEntryForManualEdit.laborLedgerOriginalSubAccountNumber" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.laborLedgerOriginalFinancialObjectCode}" size="14" styleId="laborEntryForManualEdit.laborLedgerOriginalFinancialObjectCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.laborLedgerOriginalFinancialSubObjectCode}" size="14" styleId="laborEntryForManualEdit.laborLedgerOriginalFinancialSubObjectCode" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.hrmsCompany}" size="14" styleId="laborEntryForManualEdit.hrmsCompany" /></td>
+	                        <td><input type="text" th:field="*{laborEntryForManualEdit.setid}" size="14" styleId="laborEntryForManualEdit.setid" /></td>
+    	 				  </th:block>
+						  <th:block th:case="*">
+						  <th:block th:switch="${true}">
+	                          <th:block th:case="${KualiForm.entryForManualEdit.entryId == 0}">
+    	                        <td><input type="image" property="methodToCall.addManualEntry.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" alt="edit" title="edit"/></td>
+        	                  </th:block>
+            	              <th:block th:case="*">
+                	            <td>
+                	              
+                              	<input type="image" property="methodToCall.saveManualEntry.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif" styleClass="tinybutton" alt="edit" title="edit"/>
+                            	</td>
+                         	 </th:block>
+	                        </th:block>
+	                        
+			            	<td><input type="text" th:field="*{entryUniversityFiscalYear}" size="5" styleId="entryUniversityFiscalYear" /></td>
+	                        <td><input type="text" th:field="*{entryForManualEdit.chartOfAccountsCode}" size="5" styleId="entryForManualEdit.chartOfAccountsCode" /></td>
+    	                    <td><input type="text" th:field="*{entryForManualEdit.accountNumber}" size="7" styleId="entryForManualEdit.accountNumber." /></td>
+        	                <td><input type="text" th:field="*{entryForManualEdit.subAccountNumber}" size="7" styleId="entryForManualEdit.subAccountNumber" /></td>
+            	            <td><input type="text" th:field="*{entryForManualEdit.financialObjectCode}" size="5" styleId="entryForManualEdit.financialObjectCode" /></td>
+                	        <td><input type="text" th:field="*{entryForManualEdit.financialSubObjectCode}" size="6" styleId="entryForManualEdit.financialSubObjectCode" /></td>
+                    	    <td><input type="text" th:field="*{entryForManualEdit.financialBalanceTypeCode}" size="8" styleId="entryForManualEdit.financialBalanceTypeCode" /></td>
+	                        <td><input type="text" th:field="*{entryForManualEdit.financialObjectTypeCode}" size="6" styleId="entryForManualEdit.financialObjectTypeCode" /></td>
+    	                    <td><input type="text" th:field="*{entryForManualEdit.universityFiscalPeriodCode}" size="6" styleId="entryForManualEdit.universityFiscalPeriodCode" /></td>
+        	                <td><input type="text" th:field="*{entryForManualEdit.financialDocumentTypeCode}" size="10" styleId="entryForManualEdit.financialDocumentTypeCode" /></td>
+                	        <td><input type="text" th:field="*{entryForManualEdit.financialSystemOriginationCode}" size="6" styleId="entryForManualEdit.financialSystemOriginationCode" /></td>
+            	            <td><input type="text" th:field="*{entryForManualEdit.documentNumber}" size="14" styleId="entryForManualEdit.documentNumber" /></td>
+    	                    <td><input type="text" th:field="*{entryTransactionLedgerEntrySequenceNumber}" size="9" styleId="entryTransactionLedgerEntrySequenceNumber" /></td>
+	                        <td><input type="text" th:field="*{entryForManualEdit.transactionLedgerEntryDescription}" size="11" styleId="entryForManualEdit.transactionLedgerEntryDescription" /></td>
+        	                <td><input type="text" th:field="*{entryTransactionLedgerEntryAmount}" size="7" styleId="entryTransactionLedgerEntryAmount" /></td>
+            	            <td><input type="text" th:field="*{entryForManualEdit.transactionDebitCreditCode}" size="9" styleId="entryForManualEdit.transactionDebitCreditCode" /></td>
+                	        <td><input type="text" th:field="*{entryTransactionDate}" size="12" styleId="entryTransactionDate" /></td>
+                    	    <td><input type="text" th:field="*{entryForManualEdit.organizationDocumentNumber}" size="12" styleId="entryForManualEdit.organizationDocumentNumber" /></td>
+	                        <td><input type="text" th:field="*{entryForManualEdit.projectCode}" size="7" styleId="entryForManualEdit.projectCode" /></td>
+    	                    <td><input type="text" th:field="*{entryForManualEdit.organizationReferenceId}" size="13" styleId="entryForManualEdit.organizationReferenceId" /></td>
+        	                <td><input type="text" th:field="*{entryForManualEdit.referenceFinancialDocumentTypeCode}" size="10" styleId="entryForManualEdit.referenceFinancialDocumentTypeCode" /></td>
+            	            <td><input type="text" th:field="*{entryForManualEdit.referenceFinancialSystemOriginationCode}" size="10" styleId="entryForManualEdit.referenceFinancialSystemOriginationCode" /></td>
+                	        <td><input type="text" th:field="*{entryForManualEdit.referenceFinancialDocumentNumber}" size="9" styleId="entryForManualEdit.referenceFinancialDocumentNumber" /></td>
+                    	    <td><input type="text" th:field="*{entryFinancialDocumentReversalDate}" size="8" styleId="entryFinancialDocumentReversalDate" /></td>
+                        	<td><input type="text" th:field="*{entryForManualEdit.transactionEncumbranceUpdateCode}" size="13" styleId="entryForManualEdit.transactionEncumbranceUpdateCode" /></td>
+                          </th:block>	
+                        </th:block>	
+                  
+                      	</tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </th:block>
+            <th:block th:if="${KualiForm.manualEditFlag == true}">
+              <td>
+                <STRONG> Do you want to edit this document? </STRONG>
+                <input type="image" property="methodToCall.manualEdit.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif" styleClass="tinybutton" alt="show edit" title="show edit" />
+              </td>
+            </th:block>
+          </table>
+        </div>
+      </th:block>
+    </section>
+    <section class="kfs-tab" data-tab-title="Edit Options and Action" data-default-open="true">
+  <h3>Edit Options and Action</h3>
+      <th:block th:if="${KualiForm.deleteFileFlag == false and (KualiForm.dataLoadedFlag == true || KualiForm.restrictedFunctionalityMode) and ((KualiForm.editMethod == 'C') or (KualiForm.editMethod == 'M' and KualiForm.editableFlag == true))}">
+        <div class="tab-container" align="center">
+          <table cellpadding=0 class="datatable" summary="">
+            <th:block th:if="${KualiForm.editMethod == 'C'}">
+              <tr>
+                <td align="left" valign="middle" class="subhead"><span class="subhead-left">Edit Options and Action</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <center>
+                    <html:checkbox styleId="processInBatch" property="processInBatch" /> <STRONG> <label for="processInBatch">Process In Batch</label> </STRONG> &nbsp; &nbsp; &nbsp; &nbsp;  
+                    <input type="hidden" name="processInBatch{CheckboxPresentOnFormAnnotation}" value="true"/>
+                    <html:checkbox styleId="matchCriteriaOnly" property="matchCriteriaOnly" /> <STRONG> <label for="matchCriteriaOnly">Output only records which match criteria?</label> </STRONG>
+                    <input type="hidden" name="matchCriteriaOnly{CheckboxPresentOnFormAnnotation}" value="true"/>
+                  </center>
+                </td>
+              </tr>  
+              <th:block th:if="${KualiForm.restrictedFunctionalityMode == false}">
+                <tr>
+                  <td>
+                    <center>
+                      <th:block th:if="${KualiForm.showOutputFlag == true}">
+                        <strong>Show Input Group</strong>
+                        <input type="image" property="methodToCall.showOutputGroup.anchor${currentTabIndex - 1}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" styleClass="tinybutton" alt="show Input Group" title="show Input Group" />
+                      </th:block>
+                      <th:block th:if="${KualiForm.showOutputFlag == false}">
+                        <strong>Show Output Group</strong>
+                        <input type="image" property="methodToCall.showOutputGroup.anchor${currentTabIndex - 1}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" styleClass="tinybutton" alt="show Output Group" title="show Output Group" />
+                      </th:block>
+                    </center>
+                  </td>
+                </tr>
+              </th:block>
+            </th:block>
+            <th:block th:if="${KualiForm.editMethod == 'M' and KualiForm.editableFlag == true}">
+              <tr>
+                <td align="left" valign="middle" class="subhead"><span class="subhead-left">Edit Options and Action</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <center>
+                    <html:checkbox styleId="processInBatch" property="processInBatch" /> <STRONG> <label for="processInBatch">Process In Batch</label> </STRONG>
+                    <input type="hidden" name="processInBatch{CheckboxPresentOnFormAnnotation}" value="true"/>
+                  </center>
+                </td>
+              </tr>
+            </th:block>
+          </table>
+        </div>
+      </th:block>
+    </section>
+    <section class="kfs-tab" data-tab-title="Edit Criteria" data-default-open="true">
+  <h3>Edit Criteria</h3>
+      <th:block th:if="${KualiForm.deleteFileFlag == false and KualiForm.editMethod == 'C' and (KualiForm.dataLoadedFlag == true || KualiForm.restrictedFunctionalityMode == true)}">
+        <div class="tab-container" align="center"> 
+          <table cellpadding=0 class="datatable" summary="">
+            <tr>
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Criteria</span></td> 
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Modification Criteria</span></td>
+            </tr>
+            <tr th:each="group : ${KualiForm.document.correctionChangeGroup}"> 
+              <tr>
+                <td colspan="2" align="left" class="bord-l-b" style="padding: 4px; vertical-align: top;"> 
+                  <strong>Group:</strong>
+                  <input type="image" property="methodToCall.removeCorrectionGroup.group${group.correctionChangeGroupLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" alt="delete correction group" title="delete correction group" />
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #333;"> 
+                <td class="bord-l-b" style="padding: 4px; vertical-align: top;">
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldName">Field</label>:
+                  <select th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldName}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldName" title="Field">
+                    <option value=""></option>
+	                    <th:block th:switch="${true}">
+    	                	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+        	            		<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+							</th:block>
+							<th:block th:case="*">
+		            	        <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+		                	</th:block>
+		                </th:block>
+                  </select>
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionOperatorCode">Operator</label>:
+                  <select th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionOperatorCode}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionOperatorCode" title="Operator">
+                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|SearchOperatorsFinder" label="value" value="key"/>
+                  </select>
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldValue">Value</label>:
+                  <input type="text" th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldValue}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldValue" title="Value" />
+                  <input type="image" property="methodToCall.addCorrectionCriteria.criteria${group.correctionChangeGroupLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" alt="Add Search Criteria" title="Add Search Criteria" /><br>
+                  <c:forEach items="${group.correctionCriteria}" var="criteria" varStatus="cc">
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName">Field</label>:
+                    <select th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName" title="field">
+                      
+                      <th:block th:switch="${true}">
+    	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+        	          		<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+						</th:block>
+						<th:block th:case="*">
+		            	    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+		                </th:block>
+		              </th:block>
+                      
+                    </select>
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode">Operator</label>:
+                    <select th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode" title="Operator">
+                      <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|SearchOperatorsFinder" label="value" value="key"/>
+                    </select>
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue">Value</label>:
+                    <input type="text" th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue" title="Value" />
+                    <input type="image" property="methodToCall.removeCorrectionCriteria.criteria${group.correctionChangeGroupLineNumber}-${criteria.correctionCriteriaLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" alt="delete search criterion" title="delete search criterion" />
+                    <br>
+                  </tr>
+                </td>
+                <td class="bord-l-b" style="padding: 4px; vertical-align: top;">
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionChange.correctionFieldName">Field</label>:
+                  <select th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionChange.correctionFieldName}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionChange.correctionFieldName" title="Field">
+                    <option value=""></option>
+                     <th:block th:switch="${true}">
+    	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+							<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+						</th:block>
+						<th:block th:case="*">
+		                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+		                </th:block>
+		              </th:block>
+
+                  </select>
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionChange.correctionFieldValue">Replacement Value</label>:
+                  <input type="text" th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionChange.correctionFieldValue}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionChange.correctionFieldValue" title="Replacement Value" />
+                  <input type="image" property="methodToCall.addCorrectionChange.change${group.correctionChangeGroupLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="add replacement specification" title="add replacement specification" styleClass="tinybutton" /> <br>
+                  <c:forEach items="${group.correctionChange}" var="change">
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldName">Field</label>:
+                    <select th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldName}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldName" title="Field">
+				      <th:block th:switch="${true}">
+    	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+							<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+						</th:block>
+						<th:block th:case="*">
+		                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+		                </th:block>
+		              </th:block>
+                    </select>
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldValue">Replacement Value</label>:
+                    <input type="text" th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldValue}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldValue" title="Replacement Value" />
+                    <input type="image" property="methodToCall.removeCorrectionChange.change${group.correctionChangeGroupLineNumber}-${change.correctionChangeLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" alt="delete search specification" title="delete search specification" styleClass="tinybutton" />
+                    <br>
+                  </tr>
+                </td>
+              </tr>
+            </tr>
+            <tr>
+              <td colspan="2" align="left" class="bord-l-b" style="padding: 4px; vertical-align: top;"> 
+                <center>
+                  <STRONG>Add Groups </STRONG>
+                  <input type="image" property="methodToCall.addCorrectionGroup.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="add correction group" title="add correction group" styleClass="tinybutton" />
+                </center>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+    </section>
+    <!--  Search for Manual Edit -->
+    <section class="kfs-tab" data-tab-title="Search Criteria for Manual Edit" data-default-open="true">
+  <h3>Search Criteria for Manual Edit</h3>    
+      <th:block th:if="${KualiForm.editMethod == 'M' and KualiForm.editableFlag == true and KualiForm.dataLoadedFlag == true}">
+        <div class="tab-container" align="center">
+          <table cellpadding=0 class="datatable" summary="">
+            <tr>
+              <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Criteria for Manual Edit</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;"> 
+              <td class="bord-l-b" style="padding: 4px; vertical-align: top;">
+                <tr th:each="group : ${KualiForm.document.correctionChangeGroup}"> 
+                  <c:forEach items="${group.correctionCriteria}" var="criteria" varStatus="cc">
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName">Field</label>:
+                    <select th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName" title="Field">
+                     <th:block th:switch="${true}">
+    	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+							<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+						</th:block>
+						<th:block th:case="*">
+		                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+		                </th:block>
+		              </th:block> 
+                    </select>
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode">Operator</label>:
+                    <select th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode" title="Operator">
+                      <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|SearchOperatorsFinder" label="value" value="key"/>
+                    </select>
+                    <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue">Value</label>:
+                    <input type="text" th:field="*{correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue}" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue" title="Value" />
+                    <input type="image" property="methodToCall.removeCorrectionCriteria.criteria${group.correctionChangeGroupLineNumber}-${criteria.correctionCriteriaLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" alt="Remove Search Criteria" title="Remove Search Criteria" />
+                    <br />
+                  </tr>
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldName">Field</label>:
+                  <select th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldName}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldName" title="Field">
+                    <option value=""></option>
+                     <th:block th:switch="${true}">
+    	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+							<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+						</th:block>
+						<th:block th:case="*">
+		                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+		                </th:block>
+		              </th:block>
+                  </select>
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionOperatorCode">Operator</label>:
+                  <select th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionOperatorCode}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionOperatorCode" title="Operator">
+                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|SearchOperatorsFinder" label="value" value="key"/>
+                  </select>
+                  <label for="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldValue">Value</label>:
+                  <input type="text" th:field="*{groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldValue}" styleId="groupsItem[${group.correctionChangeGroupLineNumber}].correctionCriteria.correctionFieldValue" title="Value" />
+                  <input type="image" property="methodToCall.addCorrectionCriteria.criteria${group.correctionChangeGroupLineNumber}.anchor${currentTabIndex}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" alt="Add Search Criteria" title="Add Search Criteria" />
+                  <br />
+                </tr>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <center>
+                  <th:block th:if="${KualiForm.showOutputFlag == true}">
+                    <strong>Show All Entries</strong>
+                    <input type="image" property="methodToCall.searchCancelForManualEdit.anchor${currentTabIndex - 3}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" styleClass="tinybutton" alt="Show Matching Entries" title="Show Matching Entries" />
+                  </th:block>
+                  <th:block th:if="${KualiForm.showOutputFlag == false}">
+                    <strong>Show Matching Entries</strong>
+                    <input type="image" property="methodToCall.searchForManualEdit.anchor${currentTabIndex - 3}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" styleClass="tinybutton" alt="Show All Entries" title="Show All Entries" />
+                  </th:block>
+                </center>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+    </section>
+  </th:block>
+
+<%-- ------------------------------------------------------------ This is read only mode --------------------------------------------------- --%>
+
+  <th:block th:if="${readOnly == true}">
+    <tr th:each="group : ${KualiForm.document.correctionChangeGroup}"> 
+      <c:forEach items="${group.correctionCriteria}" var="criteria" varStatus="cc">
+        
+      </tr>
+      <c:forEach items="${group.correctionChange}" var="change">
+       
+      </tr>
+    </tr>
+    <div class="tab-container" align="center" >
+      <table cellpadding=0 class="datatable" summary=""> 
+        <tr>
+          <td align="left" valign="middle" class="subhead"><span class="subhead-left"></span>System and Edit Method</td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td width="20%" align="left" valign="middle"> System: </td>
+          <td align="left" valign="middle" ><span th:text="${KualiForm.document.system}"></span></td>
+        </tr>
+        <tr>
+          <td width="20%" align="left" valign="middle"> Edit Method: </td>
+          <td align="left" valign="middle" ><span th:text="${KualiForm.document.method}"></span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-container" align="center" >
+      <table cellpadding=0 class="datatable" summary=""> 
+        <tr>
+          <td align="left" valign="middle" class="subhead"><span class="subhead-left"></span>Input and Output File</td>
+        </tr>
+      </table>
+      <table>
+        <th:block th:if="${KualiForm.document.correctionInputFileName != null}">
+          <tr>
+            <td width="20%" align="left" valign="middle" > Input File Name: </td> 
+            <td align="left" valign="middle" > <span th:text="${KualiForm.document.correctionInputFileName}"></span></td>
+          </tr>
+        </th:block>
+        <tr>
+          <td width="20%" align="left" valign="middle" > Output File Name: </td> 
+          <th:block th:if="${KualiForm.document.correctionOutputFileName != null}">
+            <td align="left" valign="middle" > <span th:text="${KualiForm.document.correctionOutputFileName}"></span></td>
+          </th:block>
+          <th:block th:if="${KualiForm.document.correctionOutputFileName == null}">
+            <th:block th:if="${KualiForm.document.correctionTypeCode eq 'R'}">
+              <td align="left" valign="middle" ><span th:text="${Constants.NOT_AVAILABLE_STRING}"></span></td>
+            </th:block>
+            <th:block th:if="${KualiForm.document.correctionTypeCode ne 'R'}">
+              <td align="left" valign="middle" > The output file name is unavailable until the document has a status of PROCESSED or FINAL.</td>
+            </th:block>
+          </th:block>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-container" align="left" style="overflow: scroll; max-width: 100%;">
+      <th:block th:if="${KualiForm.restrictedFunctionalityMode}">
+        <div class="tab-container" align="center">
+          <table cellpadding=0 class="datatable" summary=""> 
+            <tr>
+              <td align="left" valign="middle" class="subhead">Search Results</td>
+            </tr>
+            <tr>
+              <td><span th:text="#{gl.correction.restricted.functionality.search.results.label}"></span></td>
+            </tr>
+          </table>
+        </div>
+      </th:block>
+      <th:block th:if="${!KualiForm.restrictedFunctionalityMode}">
+        <table cellpadding=0 class="datatable" summary=""> 
+          <tr>
+            <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Results - Output Group</span></td>
+          </tr>
+          <tr>
+         	 <th:block th:switch="${true}">
+	         	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+		    	    <td>
+    		    	   	<div th:replace="~{fragments/ld/displayLaborOriginEntrySearchResults :: content}" data-labor-origin-entries="${KualiForm.displayEntries}"></div>
+        		    </td>
+        		</th:block>
+            	<th:block th:case="*">  
+		    	    <td>
+    		    	    <div th:replace="~{fragments/glcp/displayOriginEntrySearchResults :: content}" data-origin-entries="${KualiForm.displayEntries}"></div>
+        	 	    </td>
+	         	</th:block>
+	      	 </th:block> 
+          </tr>
+        </table>
+      </th:block>
+    </div>
+    <div class="tab-container" align="center"> 
+      <table cellpadding=0 class="datatable" summary="">
+        <tr>
+          <td align="left" valign="middle" class="subhead"><span class="subhead-left">Edit Options and Action</span></td>
+        </tr>
+        <tr>
+          <td>
+            <center>
+              <html:checkbox styleId="processInBatch" property="processInBatch" disabled="true"/> <STRONG> <label for="processInBatch">Process In Batch</label> </STRONG> &nbsp; &nbsp; &nbsp; &nbsp;  
+              <th:block th:if="${KualiForm.document.correctionTypeCode == 'C'}">
+                <html:checkbox styleId="matchCriteriaOnly" property="matchCriteriaOnly" disabled="true"/> <STRONG> <label for="matchCriteriaOnly">Output only records which match criteria?</label> </STRONG>
+                <%--disabled checkbox above is not submitted, so we create a hidden input --%>
+              </th:block>
+            </center>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <th:block th:if="${KualiForm.document.correctionTypeCode == 'C'}">
+      <div class="tab-container" align="center"> 
+        <table cellpadding=0 class="datatable" summary="">
+          <tr>
+            <td align="left" valign="middle" class="subhead"><span class="subhead-left">Search Criteria</span></td> 
+            <td align="left" valign="middle" class="subhead"><span class="subhead-left">Modification Criteria</span></td>
+          </tr>
+          <tr th:each="group : ${KualiForm.document.correctionChangeGroup}"> 
+            <tr>
+              <td colspan="2" align="left" class="bord-l-b" style="padding: 4px; vertical-align: top;"> 
+                <strong>Group:</strong>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #333;"> 
+              <td class="bord-l-b" style="padding: 4px; vertical-align: top;">
+                <c:forEach items="${group.correctionCriteria}" var="criteria" varStatus="cc">
+                  <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName">Field</label>:
+                  <html:select disabled="true" property="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldName" title="Field">
+                  <th:block th:switch="${true}">
+   	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+						<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+					</th:block>
+					<th:block th:case="*">
+	                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+	                </th:block>
+	              </th:block>
+                  </select>
+                  <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode">Operator</label>:
+                  <html:select disabled="true" property="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionOperatorCode" title="Operator">
+                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|SearchOperatorsFinder" label="value" value="key"/>
+                  </select>
+                  <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue">Value</label>:
+                  <html:text disabled="true" property="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionCriteriaItem[${criteria.correctionCriteriaLineNumber}].correctionFieldValue" title="Value"/>
+                  <br>
+                </tr>
+              </td>
+              <td class="bord-l-b" style="padding: 4px; vertical-align: top;">
+                <c:forEach items="${group.correctionChange}" var="change">
+                  <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldName">Field</label>:
+                  <html:select disabled="true" property="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldName" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldName" title="Field">
+	              <th:block th:switch="${true}">
+   	              	<th:block th:case="${KualiForm.documentType == 'LLCP'}">
+						<html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|ld|businessobject|options|LaborOriginEntryFieldFinder" label="value" value="key"/>
+					</th:block>
+					<th:block th:case="*">
+	                    <html:optionsCollection property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|gl|businessobject|options|OriginEntryFieldFinder" label="value" value="key"/>
+	                </th:block>
+	              </th:block>
+                  </select>
+                  <label for="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldValue">Replacement Value</label>:
+                  <html:text disabled="true" property="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldValue" styleId="correctionDocument.correctionChangeGroupItem[${group.correctionChangeGroupLineNumber}].correctionChangeItem[${change.correctionChangeLineNumber}].correctionFieldValue" title="Replacement Value"/>
+                  <br>
+                </tr>
+              </td>
+            </tr>
+          </tr>
+        </table>
+      </div>
+    </th:block>
+  </th:block>
+  <div th:replace="~{fragments/kul/notes :: content}"></div>
+  <div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>        
+  <div th:replace="~{fragments/kul/routeLog :: content}"></div>
+  <div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+  <div class="kfs-panel-footer"></div>
+  <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="false"></div>
+  </form>
+</div>
+</body>
+</html>

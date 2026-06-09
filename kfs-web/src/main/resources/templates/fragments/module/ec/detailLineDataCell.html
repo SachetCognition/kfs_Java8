@@ -1,0 +1,116 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailLineDataCell.tag -->
+<!-- Fragment parameters: fieldFormName, infoFieldFormName, fieldValue, attributeEntry, onblur, onchange, fieldInfo, inquirableUrl, fieldFormNamePrefix, relationshipMetadata, readOnlySection, readOnly, withHiddenForm, index -->
+<div th:fragment="content (fieldFormName, infoFieldFormName, fieldValue, attributeEntry, onblur, onchange, fieldInfo, inquirableUrl, fieldFormNamePrefix, relationshipMetadata, readOnlySection, readOnly, withHiddenForm, index)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the given field in the given detail line" %>
+
+<th:block th:if="${!scriptsLoaded}">
+	<SCRIPT type="text/javascript">
+	    var kualiForm = document.forms['KualiForm'];
+	    var kualiElements = kualiForm.elements;
+	</SCRIPT>
+		
+	<script language="JavaScript" type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+	<script language="JavaScript" type="text/javascript" src="scripts/module/ec/objectInfo.js"></script>
+	
+	<!--/*/ <th:block th:with="scriptsLoaded=true"> /*/-->
+</th:block>              
+              
+<!--/*/ <th:block th:with="inquirable=${not empty inquirableUrl}"> /*/-->  
+<!--/*/ <th:block th:with="currencyFormatter=org.kuali.rice.core.web.format.CurrencyFormatter"> /*/-->
+<!--/*/ <th:block th:with="integerFormatter=org.kuali.rice.core.web.format.IntegerFormatter"> /*/--> 
+
+<!--/*/ <th:block th:with="entryFormatter=${attributeEntry.formatterClass}"> /*/--> 
+<!--/*/ <th:block th:with="isCurrency=${not empty entryFormatter && fn:contains(currencyFormatter, entryFormatter)}"> /*/-->
+<!--/*/ <th:block th:with="isInteger=${not empty entryFormatter && fn:contains(integerFormatter, entryFormatter)}"> /*/-->
+
+<!--/*/ <th:block th:with="styleClass=${(isCurrency || isInteger) ? 'right' : '' }"> /*/--> 
+<!--/*/ <th:block th:with="readonlySuffix=${readOnlySection ? '.readonly' : ''}"> /*/--> 
+<!--/*/ <th:block th:with="percent=${fn:contains(fieldFormName, 'Percent') ? '%' : '' }"> /*/-->
+                   
+<input type="text" name="${fieldFormName}" th:field="*{${fieldFormName}}" data-attribute-entry="${attributeEntry}" onchange="${onchange}" />
+	
+	<!--/*/ <th:block th:with="spanName=${fieldFormName}.span${readonlySuffix}"> /*/-->
+	<!--/*/ <th:block th:with="divName=${fieldFormName}.div${readonlySuffix}"> /*/-->
+	<!--/*/ <th:block th:with="formatNumber=${fieldValue}"> /*/-->
+	
+	<th:block th:switch="${true}">
+		<th:block th:case="${isCurrency}">
+		    <fmt:formatNumber var="formatNumber" value="${fieldValue}" currencySymbol="" type="currency"/>
+		</th:block>
+		<th:block th:case="${isInteger}">
+		    <fmt:formatNumber var="formatNumber" value="${fieldValue}" type="number"/>
+		</th:block>
+	</th:block>
+
+    <th:block th:switch="${true}">
+      	<th:block th:case="${inquirable}">
+      		<a href="${inquirableUrl.href}" target="_blank">
+	    		<span class="${styleClass}" style="text-decoration: underline;" id="${spanName}" name="${spanName}">
+	    			${formatNumber}${percent}
+	    		</span>
+    		</a>
+		</th:block>
+		<th:block th:case="*">
+    		<span class="${styleClass}" id="${spanName}" name="${spanName}">
+    			${formatNumber}${percent}
+    		</span>
+		</th:block>
+	</th:block>
+	
+	<br/>
+	
+	<span class="${styleClass}">
+   		<div id="${divName}" name="${divName}" class="fineprint">${fieldInfo}</div>
+   	</span>
+   	
+   	<th:block th:if="${withHiddenForm}">
+   		<html:hidden write="false" property="${fieldFormName}"/>
+   	</th:block>		
+</div><!-- /kul:htmlControlAttribute -->  
+
+<th:block th:if="${!readOnly && not empty relationshipMetadata}">
+	<tr th:each="field, status : ${relationshipMetadata.parentToChildReferences}">
+		<th:block th:switch="${true}">
+			<th:block th:case="${status.index == 0}">
+				<!--/*/ <th:block th:with="fieldConversions=${field.value}:${fieldFormNamePrefix}.${field.key}"> /*/-->
+				<!--/*/ <th:block th:with="lookupParameters=${fieldFormNamePrefix}.${field.key}:${field.value}"> /*/-->
+			</th:block>
+			<th:block th:case="*">			
+				<!--/*/ <th:block th:with="fieldConversions=${field.value}:${fieldFormNamePrefix}.${field.key},${fieldConversions}"> /*/-->
+				<!--/*/ <th:block th:with="lookupParameters=${fieldFormNamePrefix}.${field.key}:${field.value},${lookupParameters}"> /*/-->
+			</th:block>
+		</th:block>
+	</tr>
+	
+	<span class="kfs-lookup" data-bo-class="${relationshipMetadata.relatedClass.name}" th:replace="~{fragments/kul/lookup :: content}"></span> 
+</th:block>
+              	
+<th:block th:if="${!readOnly && not empty infoFieldFormName}">
+	<div id="${infoFieldFormName}.div" name="${infoFieldFormName}.div" class="fineprint">
+		<span th:text="${KualiForm.${infoFieldFormName}}"></span>
+	</div>
+	
+	<th:block th:if="${not empty relationshipMetadata}">
+		<html:hidden write="false" property="${infoFieldFormName}"/>
+	</th:block>
+	
+</th:block>
+</div>

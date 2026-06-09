@@ -1,0 +1,163 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/additional.tag -->
+<!-- Fragment parameters: documentAttributes, displayRequisitionFields -->
+<div th:fragment="content (documentAttributes, displayRequisitionFields)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="contentReadOnly=${not empty KualiForm.editingMode['lockContentEntry']}"> /*/-->
+<!--/*/ <th:block th:with="internalPurchasingReadOnly=${not empty KualiForm.editingMode['lockInternalPurchasingEntry']}"> /*/-->
+<!--/*/ <th:block th:with="amendmentEntry=${(not empty KualiForm.editingMode['amendmentEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="lockB2BEntry=${(not empty KualiForm.editingMode['lockB2BEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=80"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Additional Institutional Info" data-default-open="true">
+  <h3>Additional Institutional Info</h3>
+
+    <div class="tab-container" align=center>
+            <h3>Additional</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Additional Section">
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderTransmissionMethodCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.purchaseOrderTransmissionMethodCode" th:field="*{document.purchaseOrderTransmissionMethodCode}" data-attribute-entry="${documentAttributes.purchaseOrderTransmissionMethodCode}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requestorPersonName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.requestorPersonName" th:field="*{document.requestorPersonName}" data-attribute-entry="${documentAttributes.requestorPersonName}" />
+			        <th:block th:if="${(fullEntryMode or amendmentEntry)}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span></div>
+			        </th:block>
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderCostSourceCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.purchaseOrderCostSourceCode" th:field="*{document.purchaseOrderCostSourceCode}" data-attribute-entry="${documentAttributes.purchaseOrderCostSourceCode}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requestorPersonPhoneNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.requestorPersonPhoneNumber" th:field="*{document.requestorPersonPhoneNumber}" data-attribute-entry="${documentAttributes.requestorPersonPhoneNumber}" />
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.institutionContactName" th:field="*{document.institutionContactName}" data-attribute-entry="${documentAttributes.institutionContactName}" />
+                    <th:block th:if="${(fullEntryMode or amendmentEntry)}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span></div>
+                    </th:block>
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requestorPersonEmailAddress}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.requestorPersonEmailAddress" th:field="*{document.requestorPersonEmailAddress}" data-attribute-entry="${documentAttributes.requestorPersonEmailAddress}" />
+                </td>
+            </tr>
+            
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactPhoneNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.institutionContactPhoneNumber" th:field="*{document.institutionContactPhoneNumber}" data-attribute-entry="${documentAttributes.institutionContactPhoneNumber}" />
+                </td>
+                <th:block th:switch="${true}">
+                	<th:block th:case="${displayRequisitionFields}">
+		                <th align=right valign=middle class="bord-l-b">
+		                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requisitionOrganizationReference1Text}"></label></div>
+		                </th>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.requisitionOrganizationReference1Text" th:field="*{document.requisitionOrganizationReference1Text}" data-attribute-entry="${documentAttributes.requisitionOrganizationReference1Text}" />
+		                </td>
+	                </th:block>
+        			<th:block th:case="*">
+		                <th align=right valign=middle class="bord-l-b" rowspan=3>
+		                    Sensitive Data
+		                </th>
+		                <td align=left valign=middle class="datacell" rowspan=3>
+		                	<logic:iterate indexId="ctr" name="KualiForm" property="document.purchaseOrderSensitiveData" id="sd">
+		                		${sd.sensitiveData.sensitiveDataDescription}<br>
+		                	</tr>	
+		                </td>
+	                </th:block>
+				</th:block>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactEmailAddress}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.institutionContactEmailAddress" th:field="*{document.institutionContactEmailAddress}" data-attribute-entry="${documentAttributes.institutionContactEmailAddress}" />
+                </td>
+                <th:block th:if="${displayRequisitionFields}">
+		                <th align=right valign=middle class="bord-l-b">
+		                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requisitionOrganizationReference2Text}"></label></div>
+		                </th>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.requisitionOrganizationReference2Text" th:field="*{document.requisitionOrganizationReference2Text}" data-attribute-entry="${documentAttributes.requisitionOrganizationReference2Text}" />
+		                </td>
+	            </th:block>
+            </tr>
+
+            <th:block th:if="${!lockB2BEntry or displayRequisitionFields}">
+            <tr>
+	                <th:block th:if="${!lockB2BEntry}">
+                		<th align=right valign=middle class="bord-l-b">
+                    		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderTotalLimit}"></label></div>
+                		</th>
+                		<td align=left valign=middle class="datacell">
+                    		<input type="text" name="document.purchaseOrderTotalLimit" th:field="*{document.purchaseOrderTotalLimit}" data-attribute-entry="${documentAttributes.purchaseOrderTotalLimit}" />
+                		</td>
+		            </th:block>
+	                <th:block th:if="${lockB2BEntry}">
+	                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+	                    <td align=left valign=middle class="datacell">&nbsp;</td>
+	                </th:block>
+	                <th:block th:if="${displayRequisitionFields}">
+		                <th align=right valign=middle class="bord-l-b">
+		                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requisitionOrganizationReference3Text}"></label></div>
+		                </th>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.requisitionOrganizationReference3Text" th:field="*{document.requisitionOrganizationReference3Text}" data-attribute-entry="${documentAttributes.requisitionOrganizationReference3Text}" />
+		                </td>
+	                </th:block>
+            </tr>
+            </th:block>
+
+        </table>
+
+    </div>
+</section>
+</div>

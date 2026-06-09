@@ -1,0 +1,276 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/bulkReceivingVendor.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="vendorReadOnly=${(not empty KualiForm.editingMode['lockVendorEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=10"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Vendor" data-default-open="${true}">
+  <h3>Vendor</h3>
+    <div class="tab-container" align=center>
+        
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Vendor Section">
+            <tr>
+                <td colspan="4" class="subhead">Vendor</td>
+            </tr>
+		
+			<%-- If PO available, display the available vendor and alternate vendor details --%>
+	        <th:block th:if="${isPOAvailable}"> 
+        		<tr>
+	        		<th align=right valign=middle  class="bord-l-b">
+	                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell"> 
+	                	<input type="text" name="document.vendorName" th:field="*{document.vendorName}" data-attribute-entry="${documentAttributes.vendorName}" readonly="readonly" /><br>
+	                   	<input type="text" name="document.vendorLine1Address" th:field="*{document.vendorLine1Address}" data-attribute-entry="${documentAttributes.vendorLine1Address}" readonly="readonly" /><br>
+	                   	<th:block th:if="${! empty KualiForm.document.vendorLine2Address}">                   	
+	                   		<input type="text" name="document.vendorLine2Address" th:field="*{document.vendorLine2Address}" data-attribute-entry="${documentAttributes.vendorLine2Address}" readonly="readonly" /><br>
+	                   	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.vendorCityName}">                   	
+	    	           		<input type="text" name="document.vendorCityName" th:field="*{document.vendorCityName}" data-attribute-entry="${documentAttributes.vendorCityName}" readonly="readonly" />,&nbsp;
+	                   	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.vendorStateCode}">                   	
+		                    <input type="text" name="document.vendorStateCode" th:field="*{document.vendorStateCode}" data-attribute-entry="${documentAttributes.vendorStateCode}" readonly="readonly" />&nbsp;
+	                  	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.vendorPostalCode}">                   	
+		                    <input type="text" name="document.vendorPostalCode" th:field="*{document.vendorPostalCode}" data-attribute-entry="${documentAttributes.vendorPostalCode}" readonly="readonly" />
+	                   	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.vendorAddressInternationalProvinceName}">                   	
+		                    <input type="text" name="document.vendorAddressInternationalProvinceName" th:field="*{document.vendorAddressInternationalProvinceName}" data-attribute-entry="${documentAttributes.vendorAddressInternationalProvinceName}" readonly="readonly" />
+	                   	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.vendorCountryCode}">                   	
+		            		<br><input type="text" name="document.vendorCountryCode" th:field="*{document.vendorCountryCode}" data-attribute-entry="${documentAttributes.vendorCountryCode}" readonly="readonly" />
+	                   	</th:block>
+	            	</td>
+	            	
+	            	<th align=right valign=middle  class="bord-l-b">
+	                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternateVendorName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell"> 
+	                	<input type="text" name="document.alternateVendorName" th:field="*{document.alternateVendorName}" data-attribute-entry="${documentAttributes.alternateVendorName}" readonly="readonly" /><br>
+	                	<th:block th:if="${! empty KualiForm.document.alternateVendorNumber}">
+		                   	<input type="text" name="document.alternateVendorDetail.defaultAddressLine1" th:field="*{document.alternateVendorDetail.defaultAddressLine1}" data-attribute-entry="${documentAttributes.vendorLine1Address}" readonly="readonly" /><br>
+		                   	<th:block th:if="${! empty KualiForm.document.alternateVendorDetail.defaultAddressLine2}">                   	
+		                   		<input type="text" name="document.alternateVendorDetail.defaultAddressLine2" th:field="*{document.alternateVendorDetail.defaultAddressLine2}" data-attribute-entry="${documentAttributes.vendorLine2Address}" readonly="readonly" /><br>
+		                   	</th:block>
+		                   	<th:block th:if="${! empty KualiForm.document.alternateVendorDetail.defaultAddressCity}">                   	
+		    	           		<input type="text" name="document.alternateVendorDetail.defaultAddressCity" th:field="*{document.alternateVendorDetail.defaultAddressCity}" data-attribute-entry="${documentAttributes.vendorCityName}" readonly="readonly" />,&nbsp;
+		                   	</th:block>
+		                   	<th:block th:if="${! empty KualiForm.document.alternateVendorDetail.defaultAddressStateCode}">                   	
+			                    <input type="text" name="document.alternateVendorDetail.defaultAddressStateCode" th:field="*{document.alternateVendorDetail.defaultAddressStateCode}" data-attribute-entry="${documentAttributes.vendorStateCode}" readonly="readonly" />&nbsp;
+		                  	</th:block>
+		                   	<th:block th:if="${! empty KualiForm.document.alternateVendorDetail.defaultAddressPostalCode}">                   	
+			                    <input type="text" name="document.alternateVendorDetail.defaultAddressPostalCode" th:field="*{document.alternateVendorDetail.defaultAddressPostalCode}" data-attribute-entry="${documentAttributes.vendorPostalCode}" readonly="readonly" />
+		                   	</th:block>
+		                   	<th:block th:if="${! empty KualiForm.document.alternateVendorDetail.defaultAddressInternationalProvince}">                   	
+			                    <input type="text" name="document.alternateVendorDetail.defaultAddressInternationalProvince" th:field="*{document.alternateVendorDetail.defaultAddressInternationalProvince}" data-attribute-entry="${documentAttributes.vendorAddressInternationalProvinceName}" readonly="readonly" />
+		                   	</th:block>
+		                   	<th:block th:if="${! empty KualiForm.document.alternateVendorDetail.defaultAddressCountryCode}">                   	
+			            		<br><input type="text" name="document.alternateVendorDetail.defaultAddressCountryCode" th:field="*{document.alternateVendorDetail.defaultAddressCountryCode}" data-attribute-entry="${documentAttributes.vendorCountryCode}" readonly="readonly" />
+		                   	</th:block>
+		                 </th:block>  	
+	            	</td>
+            	</tr>
+            	<tr>
+            		<th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorContact}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.vendorContact" th:field="*{document.vendorContact}" data-attribute-entry="${documentAttributes.vendorContact}" readonly="readonly" />   
+                        <th:block th:if="${(not empty KualiForm.document.vendorNumber) and fullEntryMode}"> 						                   
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorContact" th:replace="~{fragments/kul/lookup :: content}"></span>     
+	                    </th:block>    	                        
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">
+   	                    <div align="right"><span th:text="#{${__MSG_KEY__}}"></span></div>
+       	            </th>
+       	            <td align=left valign=middle class="datacell" width="25%">
+        	          <th:block th:if="${(not empty KualiForm.document.alternateVendorNumber) and fullEntryMode}">
+            	 			<html:radio property="document.goodsDeliveredVendorNumber" 
+		            		    		value="${KualiForm.document.vendorNumber}"> 
+		            		<span th:text="${KualiForm.document.vendorName}"></span></html:radio>
+		         			<html:radio property="document.goodsDeliveredVendorNumber" 
+		            		    		value="${KualiForm.document.alternateVendorNumber}"> 
+		            		<span th:text="${KualiForm.document.alternateVendorName}"></span>
+		            		</html:radio>
+					   </th:block>
+			           <th:block th:if="${((empty KualiForm.document.alternateVendorNumber) and fullEntryMode) or not fullEntryMode}"> 
+			              	  <input type="text" name="document.goodsDeliveredVendorName" th:field="*{document.goodsDeliveredVendorName}" data-attribute-entry="${documentAttributes.goodsDeliveredVendorName}" readonly="readonly" />
+		    	       </th:block>
+		    	    </td>    
+                 </tr>
+			</th:block>
+
+			<%-- If PO not available, display all the vendor editable fields to allow the user to key --%>
+
+            <th:block th:if="${!isPOAvailable}"> 
+	            <tr>
+	                <th align=right valign=middle class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell" width="25%">
+	                    <input type="text" name="document.vendorName" th:field="*{document.vendorName}" data-attribute-entry="${documentAttributes.vendorName}" />
+	                    <th:block th:if="${fullEntryMode}">
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorDetail" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                    </th:block>
+                	</td>
+	                <th align=right valign=middle class="bord-l-b" width="25%">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorCityName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell" width="25%">
+	                    <input type="text" name="document.vendorCityName" th:field="*{document.vendorCityName}" data-attribute-entry="${documentAttributes.vendorCityName}" />
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorNumber" th:field="*{document.vendorNumber}" data-attribute-entry="${documentAttributes.vendorNumber}" readonly="readonly" />
+	                </td>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorStateCode}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorStateCode" th:field="*{document.vendorStateCode}" data-attribute-entry="${documentAttributes.vendorStateCode}" />
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorLine1Address}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorLine1Address" th:field="*{document.vendorLine1Address}" data-attribute-entry="${documentAttributes.vendorLine1Address}" />
+	                    <th:block th:if="${fullEntryMode}">
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                    </th:block>
+	                </td>
+	                <th align=right valign=middle class="bord-l-b">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorAddressInternationalProvinceName}"></label>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorAddressInternationalProvinceName" th:field="*{document.vendorAddressInternationalProvinceName}" data-attribute-entry="${documentAttributes.vendorAddressInternationalProvinceName}" />
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorLine2Address}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorLine2Address" th:field="*{document.vendorLine2Address}" data-attribute-entry="${documentAttributes.vendorLine2Address}" />
+	                </td>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorPostalCode}"></label></div>
+	                </th>
+					<td align=left valign=middle class="datacell">
+						<input type="text" name="document.vendorPostalCode" th:field="*{document.vendorPostalCode}" data-attribute-entry="${documentAttributes.vendorPostalCode}" />
+					</td>
+	            </tr>
+	            
+	            <tr>
+	            	<th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorContact}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.vendorContact" th:field="*{document.vendorContact}" data-attribute-entry="${documentAttributes.vendorContact}" readonly="readonly" />   
+                        <th:block th:if="${fullEntryMode}"> 						                   
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorContact" th:replace="~{fragments/kul/lookup :: content}"></span>     
+	                    </th:block>    	                        
+                    </td>
+	            	<th align=right valign=middle class="bord-l-b">
+	            		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorCountryCode}"></label></div>
+	            	</th>
+	            	<td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorCountryCode" th:field="*{document.vendorCountryCode}" data-attribute-entry="${documentAttributes.vendorCountryCode}" />
+	            	</td>
+	            </tr>
+            
+			</th:block>
+
+			<%-- This is common if PO is available or not --%>
+			
+			<tr>
+                <td colspan="4" class="subhead">Shipment Information</td>
+            </tr> 
+	           
+			<tr>
+				 <th align=right valign=middle class="bord-l-b">
+                   	 <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.trackingNumber}"></label></div>
+                 </th>
+                 <td align=left valign=middle class="datacell">
+                   	 <input type="text" name="document.trackingNumber" th:field="*{document.trackingNumber}" data-attribute-entry="${documentAttributes.trackingNumber}" />
+                 </td>
+				 <th align=right valign=middle class="bord-l-b">
+	                 <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentReceivedDate}"></label></div>
+	             </th>
+	             <td align=left valign=middle class="datacell">
+	                 <input type="text" name="document.shipmentReceivedDate" th:field="*{document.shipmentReceivedDate}" data-attribute-entry="${documentAttributes.shipmentReceivedDate}" />
+	             </td>
+            </tr>
+			<tr>
+            	<th align=right valign=middle class="bord-l-b">
+                  		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentPackingSlipNumber}"></label></div>
+                </th>
+   	            <td align=left valign=middle class="datacell">
+       	           <input type="text" name="document.shipmentPackingSlipNumber" th:field="*{document.shipmentPackingSlipNumber}" data-attribute-entry="${documentAttributes.shipmentPackingSlipNumber}" />
+           	    </td>
+           	    <th align=right valign=middle class="bord-l-b">
+                  		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentReferenceNumber}"></label></div>
+                </th>
+   	            <td align=left valign=middle class="datacell">
+       	           <input type="text" name="document.shipmentReferenceNumber" th:field="*{document.shipmentReferenceNumber}" data-attribute-entry="${documentAttributes.shipmentReferenceNumber}" />
+           	    </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentBillOfLadingNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.shipmentBillOfLadingNumber" th:field="*{document.shipmentBillOfLadingNumber}" data-attribute-entry="${documentAttributes.shipmentBillOfLadingNumber}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                  		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.carrierCode}"></label></div>
+               	</th>
+               	<td align=left valign=middle class="datacell">
+                  		<input type="text" name="document.carrier.carrierDescription" th:field="*{document.carrier.carrierDescription}" data-attribute-entry="${documentAttributes.carrierCode}" readonly="readonly" />
+               	</td>
+            </tr>     
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentWeight}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.shipmentWeight" th:field="*{document.shipmentWeight}" data-attribute-entry="${documentAttributes.shipmentWeight}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                  		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.noOfCartons}"></label></div>
+               	</th>
+               	<td align=left valign=middle class="datacell">
+                  		<input type="text" name="document.noOfCartons" th:field="*{document.noOfCartons}" data-attribute-entry="${documentAttributes.noOfCartons}" />
+               	</td>
+            </tr>    
+      </table> <%-- If PO not available --%>
+    </div>
+</section>
+</div>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/cams/AssetTransfer.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/cams/AssetTransfer</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="AssetTransferDocument">
+  <form action="camsAssetTransfer.do" method="post" enctype="multipart/form-data">
+	<script type='text/javascript' src="dwr/interface/AccountService.js"></script>
+	<script language="JavaScript" type="text/javascript" src="scripts/module/cams/assetTransfer.js"></script>   
+	<!--/*/ <th:block th:with="assetTransferAttributes=${DataDictionary.AssetTransferDocument.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->	
+	<!--/*/ <th:block th:with="assetOrgAttributes=${DataDictionary.AssetOrganization.attributes}"> /*/-->	
+	<!--/*/ <th:block th:with="organizationAttributes=${DataDictionary.Organization.attributes}"> /*/-->	
+	<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+	<!--/*/ <th:block th:with="accountsCanCrossCharts=[[${__EXPR__}]]"> /*/-->
+	<!--/*/ <th:block th:with="readOnlyChartCode=${readOnly or !accountsCanCrossCharts}"> /*/-->
+	<div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}" data-view-year-end-account-period="${!empty KualiForm.documentActions[KFSConstants.YEAR_END_ACCOUNTING_PERIOD_VIEW_DOCUMENT_ACTION]}"></div>
+    <div th:replace="~{fragments/cams/viewAssetDetails :: content}" data-default-tab-hide="false"></div> 
+	
+	  <section class="kfs-tab" data-tab-title="Asset Transfer Information" data-default-open="true">
+  <h3>Asset Transfer Information</h3> 
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+			
+			<tr>
+				<td class="tab-subhead" colspan="2" width="50%"><div class="tab-subhead-r">Old</div></td><td class="tab-subhead" colspan="2" width="50%"><div class="tab-subhead-r">New</div></td>
+			</tr>
+			<tr>
+				<td class="tab-subhead"  colspan="2" width="50%">Transfer from Originating Organization</td><td class="tab-subhead"  colspan="2" width="50%">Transfer to Receiving Organization</td>
+			</tr>			
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.oldOrganizationOwnerChartOfAccountsCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.oldOrganizationOwnerChartOfAccountsCode" th:field="*{document.oldOrganizationOwnerChartOfAccountsCode}" data-attribute-entry="${assetTransferAttributes.organizationOwnerChartOfAccountsCode}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationOwnerChartOfAccountsCode}"></label></th>
+				<td class="grid" width="25%">
+	                <th:block th:if="${readOnlyChartCode}">	
+	                	<span id="document.organizationOwnerChartOfAccountsCode"><span th:text="${KualiForm.document.organizationOwnerChartOfAccountsCode}"></span></span> 
+	                </th:block>
+					<th:block th:if="${not readOnlyChartCode}">				
+						<input type="text" name="document.organizationOwnerChartOfAccountsCode" th:field="*{document.organizationOwnerChartOfAccountsCode}" data-attribute-entry="${assetTransferAttributes.organizationOwnerChartOfAccountsCode}" />
+						&nbsp; 
+		                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                </th:block>
+				</td>						
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.oldOrganizationOwnerAccountNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.oldOrganizationOwnerAccountNumber" th:field="*{document.oldOrganizationOwnerAccountNumber}" data-attribute-entry="${assetTransferAttributes.organizationOwnerAccountNumber}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationOwnerAccountNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.organizationOwnerAccountNumber" th:field="*{document.organizationOwnerAccountNumber}" data-attribute-entry="${assetTransferAttributes.organizationOwnerAccountNumber}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Account" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                </th:block>
+				</td>				
+			</tr>
+
+			<tr>				
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${organizationAttributes.organizationCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.oldOrganizationOwnerAccount.organizationCode" th:field="*{document.oldOrganizationOwnerAccount.organizationCode}" data-attribute-entry="${organizationAttributes.organizationCode}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${organizationAttributes.organizationCode}"></label></th>
+                <td class="grid" width="25%"><input type="text" name="document.organizationOwnerAccount.organizationCode" th:field="*{document.organizationOwnerAccount.organizationCode}" data-attribute-entry="${organizationAttributes.organizationCode}" readonly="readonly" /></td>
+ 			</tr>
+
+			<tr>
+				<td class="tab-subhead" colspan="4" width="100%">Interdepartmental Sale</td>
+			</tr>			
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.interdepartmentalSalesIndicator}"></label></th>
+				<td class="grid" colspan="3"><input type="text" name="document.interdepartmentalSalesIndicator" th:field="*{document.interdepartmentalSalesIndicator}" data-attribute-entry="${assetTransferAttributes.interdepartmentalSalesIndicator}" /></td>						
+			</tr>
+			<tr>				
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.transferOfFundsFinancialDocumentNumber}"></label></th>
+				<td class="grid" colspan="3"><input type="text" name="document.transferOfFundsFinancialDocumentNumber" th:field="*{document.transferOfFundsFinancialDocumentNumber}" data-attribute-entry="${assetTransferAttributes.transferOfFundsFinancialDocumentNumber}" /></td>
+			</tr>
+		</table>
+		</div>
+	 </section>
+	 
+    <section class="kfs-tab" data-tab-title="Asset Location" data-default-open="true">
+  <h3>Asset Location</h3> 
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">								
+			<tr>
+				<td class="tab-subhead"  colspan="2" width="50%">On Campus</td><td class="tab-subhead"  colspan="2" width="50%">Off Campus</td>
+			</tr>			
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.campusCode}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.campusCode" th:field="*{document.campusCode}" data-attribute-entry="${assetTransferAttributes.campusCode}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.campus.CampusEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+		            </th:block>
+				</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusName}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.offCampusName" th:field="*{document.offCampusName}" data-attribute-entry="${assetTransferAttributes.offCampusName}" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.buildingCode}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.buildingCode" th:field="*{document.buildingCode}" data-attribute-entry="${assetTransferAttributes.buildingCode}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                </th:block>
+				</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusAddress}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.offCampusAddress" th:field="*{document.offCampusAddress}" data-attribute-entry="${assetTransferAttributes.offCampusAddress}" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.buildingRoomNumber}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.buildingRoomNumber" th:field="*{document.buildingRoomNumber}" data-attribute-entry="${assetTransferAttributes.buildingRoomNumber}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Room" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                </th:block>
+				</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusCityName}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.offCampusCityName" th:field="*{document.offCampusCityName}" data-attribute-entry="${assetTransferAttributes.offCampusCityName}" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.buildingSubRoomNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.buildingSubRoomNumber" th:field="*{document.buildingSubRoomNumber}" data-attribute-entry="${assetTransferAttributes.buildingSubRoomNumber}" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusStateCode}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.offCampusStateCode" th:field="*{document.offCampusStateCode}" data-attribute-entry="${assetTransferAttributes.offCampusStateCode}" />						
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.state.StateEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                </th:block>
+				</td>						
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right" colspan="2"></th>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusZipCode}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.offCampusZipCode" th:field="*{document.offCampusZipCode}" data-attribute-entry="${assetTransferAttributes.offCampusZipCode}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</th:block>		                
+				</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right" colspan="2"></th>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusCountryCode}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.offCampusCountryCode" th:field="*{document.offCampusCountryCode}" data-attribute-entry="${assetTransferAttributes.offCampusCountryCode}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.country.CountryEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                </th:block>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</section>
+
+	<!-- Organization Information -->
+	<section class="kfs-tab" data-tab-title="Organization Information" data-default-open="true">
+  <h3>Organization Information</h3> 
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">			
+			<tr>
+				<td class="tab-subhead" colspan="2" width="50%"><div class="tab-subhead-r">Current</div></td><td class="tab-subhead" colspan="2" width="50%"><div class="tab-subhead-r">New</div></td>
+			</tr>					
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationInventoryName}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.organizationInventoryName" th:field="*{document.asset.organizationInventoryName}" data-attribute-entry="${assetTransferAttributes.organizationInventoryName}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationInventoryName}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.organizationInventoryName" th:field="*{document.organizationInventoryName}" data-attribute-entry="${assetTransferAttributes.organizationInventoryName}" /></td>						
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.representativeUniversalIdentifier}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetRepresentative.name" th:field="*{document.asset.assetRepresentative.name}" data-attribute-entry="${assetTransferAttributes.representativeUniversalIdentifier}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.representativeUniversalIdentifier}"></label></th>
+				<td class="grid" width="25%">
+					<kul:checkErrors keyMatch="document.assetRepresentative.principalName" />
+					<kul:user userIdFieldName="document.assetRepresentative.principalName" universalIdFieldName="document.representativeUniversalIdentifier" userNameFieldName="document.assetRepresentative.name" label="User" 
+					lookupParameters="document.assetRepresentative.principalName:principalName,document.representativeUniversalIdentifier:principalId,document.assetRepresentative.name:name" 
+					fieldConversions="principalName:document.assetRepresentative.principalName,principalId:document.representativeUniversalIdentifier,name:document.assetRepresentative.name" 
+					userId="${KualiForm.document.assetRepresentative.principalName}" universalId="${KualiForm.document.representativeUniversalIdentifier}" userName="${KualiForm.document.assetRepresentative.name}" 
+					hasErrors="${hasErrors}" readOnly="${readOnly}"/>
+				</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationText}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetOrganization.organizationText" th:field="*{document.asset.assetOrganization.organizationText}" data-attribute-entry="${assetTransferAttributes.organizationText}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationText}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.organizationText" th:field="*{document.organizationText}" data-attribute-entry="${assetTransferAttributes.organizationText}" /></td>						
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationTagNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetOrganization.organizationTagNumber" th:field="*{document.asset.assetOrganization.organizationTagNumber}" data-attribute-entry="${assetTransferAttributes.organizationTagNumber}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.organizationTagNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.organizationTagNumber" th:field="*{document.organizationTagNumber}" data-attribute-entry="${assetTransferAttributes.organizationTagNumber}" /></td>						
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetOrgAttributes.organizationAssetTypeIdentifier}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetOrganization.organizationAssetTypeIdentifier" th:field="*{document.asset.assetOrganization.organizationAssetTypeIdentifier}" data-attribute-entry="${assetOrgAttributes.organizationAssetTypeIdentifier}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right">&nbsp;</th>
+				<td class="grid" width="25%">&nbsp;</td>						
+			</tr>		
+		</table>
+		</div>
+	</section>		
+	<div th:replace="~{fragments/cams/viewPayments :: content}" data-default-tab-hide="true" data-asset-payments="${KualiForm.document.asset.assetPayments}"></div>
+	<div th:replace="~{fragments/cams/viewDepreciationInfo :: content}" data-default-tab-hide="true"></div>
+	<div th:replace="~{fragments/gl/generalLedgerPendingEntries :: content}"></div>
+	<div th:replace="~{fragments/kul/notes :: content}"></div>
+	<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+	<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+	<div class="kfs-panel-footer"></div>
+	<div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="${documentEntry.transactionalDocument}"></div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/cashieringTransaction.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<input type="text" name="document.currentTransaction.referenceFinancialDocumentNumber" th:field="*{document.currentTransaction.referenceFinancialDocumentNumber}" data-attribute-entry="${DataDictionary.CashieringTransaction.attributes.referenceFinancialDocumentNumber}" />
+<h5>Money In</h5>
+<div style="padding: 5px;">
+    <h3>Currency/Coin</h3>
+  <div th:replace="~{fragments/fp/currencyCoinLine :: content}" data-currency-property="document.currentTransaction.moneyInCurrency" data-coin-property="document.currentTransaction.moneyInCoin" data-editing-mode="${KualiForm.editingMode}"></div>
+</div>
+<div style="padding: 5px;">
+    <h3>New Miscellaneous Advance</h3>
+<table border="0" cellspacing="0" cellpadding="0" class="datatable">
+  <div th:replace="~{fragments/fp/miscAdvanceHeader :: content}" data-item-in-process-property="document.currentTransaction.newItemInProcess" data-creating-item-in-process="true"></div>
+  <div th:replace="~{fragments/fp/miscAdvanceLine :: content}" data-item-in-process-property="document.currentTransaction.newItemInProcess" data-creating-item-in-process="true"></div>
+</table>
+</div>
+<div style="padding: 5px;">
+    <h3>Cashiering Checks</h3>
+  <div th:replace="~{fragments/fp/checkLines :: content}" data-check-detail-mode="true" data-editing-mode="${KualiForm.editingMode}" data-display-hidden="false"></div>
+</div>
+
+<h5>Money Out</h5>
+<div style="padding: 5px;">
+    <h3>Currency/Coin</h3>
+  <div th:replace="~{fragments/fp/currencyCoinLine :: content}" data-currency-property="document.currentTransaction.moneyOutCurrency" data-coin-property="document.currentTransaction.moneyOutCoin" data-editing-mode="${KualiForm.editingMode}"></div>
+</div>
+<div style="padding: 5px;">
+    <h3>Open Miscellaneous Advances</h3>
+  <div th:replace="~{fragments/fp/openMiscAdvanceLines :: content}"></div>
+</div>
+</div>

@@ -1,0 +1,107 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dataCell.tag -->
+<!-- Fragment parameters: dataCellCssClass, dataFieldCssClass, field, attributes, readOnly, disabled, businessObjectFormName, lookup, inquiry, boClassFullName, boClassSimpleName, boPackageName, conversionField, lookupOrInquiryKeys, lookupUnkeyedFieldConversions, lookupParameters, businessObjectValuesMap, inquiryExtraKeyValues, detailFunction, detailFunctionExtraParam, detailField, detailFields, rowSpan, colSpan -->
+<div th:fragment="content (dataCellCssClass, dataFieldCssClass, field, attributes, readOnly, disabled, businessObjectFormName, lookup, inquiry, boClassFullName, boClassSimpleName, boPackageName, conversionField, lookupOrInquiryKeys, lookupUnkeyedFieldConversions, lookupParameters, businessObjectValuesMap, inquiryExtraKeyValues, detailFunction, detailFunctionExtraParam, detailField, detailFields, rowSpan, colSpan)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="qualifiedField=${businessObjectFormName}.${field}"> /*/-->
+<th:block th:if="${empty cellProperty}">
+    <!--/*/ <th:block th:with="cellProperty=${qualifiedField}"> /*/-->
+</th:block>
+<th:block th:if="${empty conversionField}">
+    <!--/*/ <th:block th:with="conversionField=${field}"> /*/-->
+</th:block>
+<th:block th:if="${empty dataFieldCssClass}">
+    <!--/*/ <th:block th:with="dataFieldCssClass="> /*/-->
+</th:block>
+<th:block th:if="${empty lookupParameters}">
+    <!--/*/ <th:block th:with="lookupParameters="> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="rowSpan=${empty rowSpan ? 1 : rowSpan}"> /*/-->
+<!--/*/ <th:block th:with="useXmlHttp=${(!readOnly) && (!empty detailFunction)}"> /*/-->
+
+<th:block th:switch="${true}">
+    <th:block th:case="${not empty boClassFullName}">
+        <!--/*/ <th:block th:with="boClassName=${boClassFullName}"> /*/-->
+    </th:block>
+    <th:block th:case="${empty boPackageName}">
+        <!--/*/ <th:block th:with="boClassName=org.kuali.kfs.coa.businessobject.${boClassSimpleName}"> /*/-->
+    </th:block>
+    <th:block th:case="*">
+        <!--/*/ <th:block th:with="boClassName=${boPackageName}.${boClassSimpleName}"> /*/-->
+    </th:block>
+</th:block>
+        
+<td class="${dataCellCssClass}" valign="top" rowspan="${rowSpan}" colspan="${colSpan}"><span class="nowrap">
+    <th:block th:switch="${true}">
+        <th:block th:case="${useXmlHttp}">
+            <!--/*/ <th:block th:with="onblur=${detailFunction}(${detailFunctionExtraParam} this.name, '${businessObjectFormName}.${detailField}');"> /*/-->
+        </th:block>
+        <th:block th:case="*">
+            <!--/*/ <th:block th:with="onblur="> /*/-->
+        </th:block>
+    </th:block>
+    
+    <jsp:doBody/>
+    
+    <!--/*/ <th:block th:with="datePicker=${attributes[field].validationPattern.type eq 'date' ? true : false}"> /*/-->
+    <input type="text" name="${cellProperty}" th:field="*{${cellProperty}}" data-attribute-entry="${attributes[field]}" />
+                    
+        <!--/*/ <th:block th:with="aKeyIsMissing=${empty businessObjectValuesMap[field]}"> /*/-->
+		<!--/*/ <th:block th:with="keyValues=${conversionField}=${businessObjectValuesMap[field]}"> /*/-->
+		<!--/*/ <th:block th:with="dashedValue=false"> /*/-->
+		
+		<c:forTokens var="key" items="${lookupOrInquiryKeys}" delims=",">
+			<!--/*/ <th:block th:with="aKeyIsMissing=${missingKey || empty businessObjectValuesMap[key]}"> /*/-->
+			<!--/*/ <th:block th:with="keyValues=${keyValues}&${key}=${businessObjectValuesMap[key]}"> /*/-->
+			<th:block th:if="${!empty businessObjectValuesMap[key] && kfsfunc:matchesPattern(businessObjectValuesMap[key], '^-*$')}">
+				<!--/*/ <th:block th:with="dashedValue=true"> /*/-->
+			</th:block>
+		</c:forTokens>
+		
+		<!--/*/ <th:block th:with="keyValues=${keyValues}${empty inquiryExtraKeyValues ? '' : '&'}${inquiryExtraKeyValues}"> /*/-->
+		<!--/*/ <th:block th:with="canRenderInquiry=${not empty keyValues && not aKeyIsMissing && !dashedValue}"> /*/-->
+		
+		<span class="kfs-inquiry" data-bo-class="${boClassName}" data-key-values="${keyValues}">
+		    <html:hidden write="true" property="${cellProperty}" style="${textStyle}" />
+		</span>&nbsp;    
+    </div><!-- /kul:htmlControlAttribute -->
+
+    <%-- lookup control --%>
+    <th:block th:if="${!readOnly && lookup}">
+        <!--/*/ <th:block th:with="fieldConversions=${lookupUnkeyedFieldConversions}"> /*/-->
+        <c:forTokens var="key" items="${lookupOrInquiryKeys}" delims=",">
+            <!--/*/ <th:block th:with="businessObjectKey=${businessObjectFormName}.${key}"> /*/-->
+            
+            <th:block th:if="${!empty lookupParameters}">
+                <!--/*/ <th:block th:with="lookupParameters=${lookupParameters},"> /*/-->
+            </th:block>
+            
+            <!--/*/ <th:block th:with="lookupParameters=${lookupParameters}${businessObjectKey}:${key}"> /*/-->
+            <!--/*/ <th:block th:with="fieldConversions=${fieldConversions}${key}:${businessObjectKey},"> /*/-->
+        </c:forTokens>
+
+        <span class="kfs-lookup" data-bo-class="${boClassName}" th:replace="~{fragments/kul/lookup :: content}"></span>
+    </th:block>    
+	</span>
+	
+	<div th:replace="~{fragments/fp/dataCellDetail :: content}" data-detail-field="${detailField}" data-business-object-form-name="${businessObjectFormName}" data-detail-fields="${detailFields}"></div>
+</td>
+
+</td>
+</div>

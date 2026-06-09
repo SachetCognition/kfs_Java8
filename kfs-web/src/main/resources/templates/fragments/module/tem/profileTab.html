@@ -1,0 +1,248 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/profileTab.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="profileAttributes=${DataDictionary.TemProfile.attributes}"> /*/-->
+<!--/*/ <th:block th:with="travelerAttributes=${DataDictionary.TravelerDetail.attributes}"> /*/-->
+<section class="kfs-tab" data-tab-title="TEM Profile" data-default-open="true">
+  <h3>TEM Profile</h3>
+	<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+			<tr>
+				<td colspan="2" class="tab-subhead">&nbsp;</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.travelerTypeCode}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.travelerTypeCode }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.lastUpdate}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.lastUpdate }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.updatedBy}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.updatedBy }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.firstName}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.firstName }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.middleName}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.middleName }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.lastName}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.lastName }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.employeeId}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.employeeId }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.homeDepartment}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.homeDepartment }</td>
+			</tr>
+			
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.dateOfBirth}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.dateOfBirth }</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tab-subhead">Default Accounting</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.defaultChartCode}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.defaultChartCode }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.defaultAccount}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.defaultAccount }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.defaultSubAccount}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.defaultSubAccount }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.defaultProjectCode}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.defaultProjectCode }</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="tab-subhead">Billing Info</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.streetAddressLine1}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.temProfileAddress.streetAddressLine1 }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.streetAddressLine2}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.temProfileAddress.streetAddressLine2 }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.cityName}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.temProfileAddress.cityName }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.stateCode}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.temProfileAddress.stateCode }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.zipCode}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.temProfileAddress.zipCode }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.countryCode}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.temProfileAddress.countryCode }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.phoneNumber}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.phoneNumber }</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${profileAttributes.emailAddress}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.temProfile.emailAddress }</td>
+			</tr>
+		</table>
+
+	</div>
+
+</section>
+
+<!--
+<bean parent="MaintainableSubSectionHeaderDefinition" p:name="TEM Profile"/>
+				<bean parent="MaintainableFieldDefinition" p:name="profileId" p:required="true" p:unconditionallyReadOnly="true" p:defaultValueFinderClass="org.kuali.kfs.module.tem.businessobject.options.TemProfileIdFinder" />
+				<bean parent="MaintainableFieldDefinition" p:name="travelerTypeCode" p:required="true" p:noLookup="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="lastUpdate" p:required="false" p:unconditionallyReadOnly="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="updatedBy" p:required="false" p:unconditionallyReadOnly="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="firstName" p:required="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="middleName" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="lastName" p:required="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="employeeId" p:required="false" p:unconditionallyReadOnly="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="homeDepartment" p:required="true" p:lookupReadOnly="true" p:overrideFieldConversions="organizationCode:homeDeptOrgCode,chartOfAccountsCode:homeDeptChartOfAccountsCode" p:overrideLookupClass="org.kuali.kfs.coa.businessobject.Organization" />
+				<bean parent="MaintainableFieldDefinition" p:name="driversLicenseNumber" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="driversLicenseState" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="driversLicenseExpDate" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="motorVehicleRecordCheck" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="dateOfBirth" p:required="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="citizenship" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="nonResidentAlien" p:required="true" p:defaultValue="" />
+				<bean parent="MaintainableFieldDefinition" p:name="gender" p:required="true" />
+				<bean parent="MaintainableSubSectionHeaderDefinition" p:name="Default Accounting"/>
+				<bean parent="MaintainableFieldDefinition" p:name="defaultChartCode" p:required="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="defaultAccount" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="defaultSubAccount" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="defaultProjectCode" p:required="false" />
+				<bean parent="MaintainableSubSectionHeaderDefinition" p:name="Address"/>
+				<bean parent="MaintainableFieldDefinition" p:name="temProfileAddress.streetAddressLine1" p:required="true" p:noLookup="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="temProfileAddress.streetAddressLine2" p:noLookup="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="temProfileAddress.cityName" p:required="true" p:noLookup="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="temProfileAddress.stateCode" p:required="false" p:noLookup="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="temProfileAddress.zipCode" p:required="false" p:noLookup="true" />
+				<bean parent="MaintainableFieldDefinition" p:name="temProfileAddress.countryCode" p:required="true" p:noLookup="true" />
+				<bean parent="MaintainableSubSectionHeaderDefinition" p:name="Contact Info"/>
+				<bean parent="MaintainableFieldDefinition" p:name="phoneNumber" p:required="false" />
+				<bean parent="MaintainableFieldDefinition" p:name="emailAddress" p:required="false" />
+
+
+-->
+</div>

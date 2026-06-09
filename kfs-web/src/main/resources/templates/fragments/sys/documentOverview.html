@@ -1,0 +1,102 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/documentOverview.tag -->
+<!-- Fragment parameters: editingMode, includePostingYear, postingYearOnChange, includePostingYearRefresh, postingYearAttributes, fiscalYearReadOnly, includeBankCode, bankProperty, bankObjectProperty, depositOnly, disbursementOnly, viewYearEndAccountPeriod -->
+<div th:fragment="content (editingMode, includePostingYear, postingYearOnChange, includePostingYearRefresh, postingYearAttributes, fiscalYearReadOnly, includeBankCode, bankProperty, bankObjectProperty, depositOnly, disbursementOnly, viewYearEndAccountPeriod)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="financialDocHeaderAttributes=${DataDictionary.FinancialSystemDocumentHeader.attributes}"> /*/-->
+<!--/*/ <th:block th:with="includeTotalAmount=${not empty editingMode[KFSConstants.AMOUNT_TOTALING_EDITING_MODE]}"> /*/-->
+
+<div class="kfs-document-overview" th:replace="~{fragments/kul/documentOverview :: content}">	
+	<th:block th:if="${includePostingYear or includeTotalAmount or includeBankCode or viewYearEndAccountPeriod}">
+	  <h3><span th:text="Financial Document Detail"></span></h3>
+	  
+	  <th:block th:if="${includeBankCode}">
+	      <div class="tab-container-error"><div class="left-errmsg-tab"><div class="kfs-errors" data-key-match="${bankProperty}" th:if="${#fields.hasErrors('${bankProperty}')}"><h4></h4></div></div></div>
+	  </th:block>	  
+	  <table cellpadding="0" cellspacing="0" class="datatable" summary="KFS Detail Section">	  
+	    <tr>
+	      <th:block th:switch="${true}">
+	        <th:block th:case="${includePostingYear}">
+		        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${postingYearAttributes.postingYear}"></th>
+		
+		        <td class="datacell-nowrap">
+		          <input type="text" name="document.postingYear" th:field="*{document.postingYear}" data-attribute-entry="${postingYearAttributes.postingYear}" onchange="${postingYearOnChange}" />
+		          <th:block th:if="${!readOnly and includePostingYearRefresh}">
+		            <input type="image" property="methodToCall.refresh" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_refresh.gif" alt="refresh" title="refresh" styleClass="tinybutton"/>    
+		          </th:block>   
+		        </td>
+	        </th:block>
+	        <th:block th:case="${includeBankCode}">
+	            <div th:replace="~{fragments/sys/bankLabel :: content}" data-align="right"></div>
+	            <div th:replace="~{fragments/sys/bankControl :: content}" data-property="${bankProperty}" data-object-property="${bankObjectProperty}" data-deposit-only="${depositOnly}" data-disbursement-only="${disbursementOnly}" data-read-only="${readOnly}"></div>
+	        </th:block>	        
+	        <th:block th:case="*">
+	          <th colspan="2">
+	             &nbsp;
+	          </th>
+	        </th:block>
+	      </th:block>
+	      <th:block th:switch="${true}">
+	        <th:block th:case="${includeTotalAmount}">
+	          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${financialDocHeaderAttributes.financialDocumentTotalAmount}"></th>
+	
+	          <td align="left" valign="middle">
+	            <input type="text" name="document.documentHeader.financialDocumentTotalAmount" th:field="*{document.documentHeader.financialDocumentTotalAmount}" data-attribute-entry="${financialDocHeaderAttributes.financialDocumentTotalAmount}" readonly="readonly" />
+	          </td>
+	        </th:block>
+	        <th:block th:case="*">
+	          <th colspan="2">
+	             &nbsp;
+	          </th>
+	        </th:block>
+	      </th:block>
+	    </tr>
+	    
+	    <!-- need to display bank code in a new row if it was not displayed above -->
+	    <th:block th:if="${includePostingYear and includeBankCode}">
+	      <tr>
+		     <div th:replace="~{fragments/sys/bankLabel :: content}" data-align="right"></div>
+	         <div th:replace="~{fragments/sys/bankControl :: content}" data-property="${bankProperty}" data-object-property="${bankObjectProperty}" data-deposit-only="${depositOnly}" data-disbursement-only="${disbursementOnly}" data-read-only="${readOnly}"></div>      
+	      </tr>
+	    </th:block>
+	   
+	   	<!-- CSU 6702 BEGIN -->
+	   	<!-- rSmart-jkneal-KFSCSU-199-begin mod for displaying accounting period field -->	   	 
+	   	<th:block th:if="${!empty KualiForm.documentActions[KFSConstants.YEAR_END_ACCOUNTING_PERIOD_VIEW_DOCUMENT_ACTION]}">	   
+	      	<!--/*/ <th:block th:with="accountingPeriodAttribute=${DataDictionary.LedgerPostingDocumentBase.attributes.accountingPeriodCompositeString}"> /*/-->
+	      	<tr>	      
+			  	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingPeriodAttribute}"></th>
+		
+		       	<td class="datacell-nowrap">
+		          	<input type="text" name="document.accountingPeriodCompositeString" th:field="*{document.accountingPeriodCompositeString}" data-attribute-entry="${accountingPeriodAttribute}" />
+		                	${KualiForm.document.accountingPeriod.universityFiscalPeriodName}
+		           	</div><!-- /kul:htmlControlAttribute -->      
+		      	</td>
+		      	<th colspan="2">&nbsp;</th>       
+	      	</tr>
+	   	</th:block>
+	   	<!-- rSmart-jkneal-KFSCSU-199-end mod --> 
+	   	<!-- CSU 6702 END -->
+	   	   
+	  </table>
+	</th:block>
+	<jsp:doBody/>
+</div><!-- /kul:documentOverview -->
+</div>

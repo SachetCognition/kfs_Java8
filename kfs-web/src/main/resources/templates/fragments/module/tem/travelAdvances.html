@@ -1,0 +1,51 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/travelAdvances.tag -->
+<!-- Fragment parameters: tabTitle -->
+<div th:fragment="content (tabTitle)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="tabTitleVar=${tabTitle}"> /*/-->
+<th:block th:if="${empty tabTitleVar}"><!--/*/ <th:block th:with="tabTitleVar=Travel Advances"> /*/--></th:block>
+
+<!--/*/ <th:block th:with="travelAdvanceAttributes=${DataDictionary.TravelAdvance.attributes}"> /*/-->
+<section class="kfs-tab" data-tab-title="${tabTitleVar}" data-default-open="true">
+  <h3>${tabTitleVar}</h3>
+	<div id="TravelAdvances" class="tab-container">
+		<div align="right">
+			<a target="_blank" class="portal_link"
+				href="portal.do?channelTitle=Customer Report&channelUrl=${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.ar.businessobject.Customer&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&customerNumber=${KualiForm.document.traveler.customer.customerNumber}&customerTypeCode=${KualiForm.document.traveler.customer.customerTypeCode}"
+				title="Customer Report">Customer Report</a>
+		</div>
+		<h3><span th:text="${tabTitleVar}"></span></h3>
+		<table style="border: none;">
+			<c:forEach items="${KualiForm.document.travelAdvances}" var="travelAdvance">
+				<tr>
+					<th><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.travelAdvanceRequested}"></label> </th>
+					<td class="datacell">${travelAdvance.travelAdvanceRequested}</td>
+					<th><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.dueDate}"></label> </th>
+					<td class="datacell">${travelAdvance.dueDate==null ? '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' : travelAdvance.dueDate}</td>
+					<th><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.amountDue}"></label> </th>
+					<td class="datacell">${travelAdvance.amountDue}</td>
+					<th><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.arInvoiceDocNumber}"></label> </th>
+					<td class="datacell">${travelAdvance.arInvoiceDocNumber}</td>
+				</tr>
+			</tr>
+		</table>
+	</div>
+</section>
+</div>

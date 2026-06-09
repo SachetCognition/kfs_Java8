@@ -1,0 +1,83 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailLine.tag -->
+<!-- Fragment parameters: detailLine, detailLineFormName, attributes, detailFieldNames, detailFieldNamesWithHiddenFormWhenReadonly, hiddenFieldNames, editableFieldNames, onchangeForEditableFieldNames, onchangeableInfoFieldNames, fieldInfo, inquirableUrl, relationshipMetadata, hasActions, actions, actionImageFileNames, index, readOnlySection -->
+<div th:fragment="content (detailLine, detailLineFormName, attributes, detailFieldNames, detailFieldNamesWithHiddenFormWhenReadonly, hiddenFieldNames, editableFieldNames, onchangeForEditableFieldNames, onchangeableInfoFieldNames, fieldInfo, inquirableUrl, relationshipMetadata, hasActions, actions, actionImageFileNames, index, readOnlySection)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the given field in the given detail line"%>
+
+<!--/*/ <th:block th:with="commaDeliminator=,"> /*/-->
+	
+<c:forTokens var="fieldName" items="${hiddenFieldNames}" delims=",">
+	<input type="hidden" th:field="*{${detailLineFormName}.${fieldName}}" />
+</c:forTokens>
+
+<!--/*/ <th:block th:with="onchangeForEditableFieldNamesArray=${fn:split(onchangeForEditableFieldNames, commaDeliminator)}"> /*/-->
+<!--/*/ <th:block th:with="onchangeableInfoFieldNamesArray=${fn:split(onchangeableInfoFieldNames, commaDeliminator)}"> /*/-->
+					
+<!-- populate the table with the given deatil lines -->
+<c:forTokens var="fieldName" items="${detailFieldNames}" delims=","	varStatus="status">
+	<!--/*/ <th:block th:with="editable=${not empty fieldName && fn:contains(editableFieldNames, fieldName)}"> /*/-->
+	<!--/*/ <th:block th:with="withHiddenFormWhenReadonly=${!editable && fn:contains(detailFieldNamesWithHiddenFormWhenReadonly, fieldName)}"> /*/-->
+	
+	<!--/*/ <th:block th:with="onchangeableInfoFieldName="> /*/-->
+	<!--/*/ <th:block th:with="onchange="> /*/-->
+	
+	<!--/*/ <th:block th:with="onchangeIndex=-1"> /*/-->
+	<th:block th:if="${editable}">
+		<c:forTokens var="editableFieldName" items="${editableFieldNames}" delims="," varStatus="editableStatus">
+			<th:block th:if="${editableFieldName == fieldName}">
+				<!--/*/ <th:block th:with="onchangeIndex=${editableStatus.index}"> /*/-->
+			</th:block>
+		</c:forTokens>
+	</th:block>
+	
+	<th:block th:if="${editable && onchangeIndex >=0}">
+		<!--/*/ <th:block th:with="tempInfoFieldName=${onchangeableInfoFieldNamesArray[onchangeIndex]}"> /*/-->
+		<!--/*/ <th:block th:with="onchangeableInfoFieldName=${detailLineFormName}.${tempInfoFieldName}"> /*/-->
+		<!--/*/ <th:block th:with="onchangeableInfoFieldName=${fn:length(tempInfoFieldName) > 0 ? onchangeableInfoFieldName : ''}"> /*/-->
+		<!--/*/ <th:block th:with="onchange=${onchangeForEditableFieldNamesArray[onchangeIndex]}(this.name, '${onchangeableInfoFieldName}');"> /*/-->
+	</th:block>
+	
+	<td class="datacell-nowrap">	
+		<div th:replace="~{fragments/ec/detailLineDataCell :: content}" data-field-value="${detailLine[fieldName]}" data-field-form-name="${detailLineFormName}.${fieldName}" data-with-hidden-form="${withHiddenFormWhenReadonly}" data-field-form-name-prefix="${detailLineFormName}" data-info-field-form-name="${onchangeableInfoFieldName}" data-attribute-entry="${attributes[fieldName]}" data-inquirable-url="${inquirableUrl[fieldName]}" data-field-info="${fieldInfo[fieldName]}" data-onchange="${onchange}" data-read-only="${not editable}" data-read-only-section="${readOnlySection}"></div>			
+		
+		<th:block th:if="${fn:contains(fieldName, 'accountNumber') && detailLine.accountExpiredOverrideNeeded && detailLine.newLineIndicator}">
+			<div th:replace="~{fragments/ec/expiredAccountOverride :: content}" data-detail-line-form-name="${detailLineFormName}" data-attributes="${attributes}" data-read-only="${not editable}"></div>
+		</th:block>
+	</td>
+</c:forTokens>
+
+<th:block th:if="${hasActions}">
+	<td class="datacell-nowrap">
+		<div align="center">
+			<c:forTokens var="action" items="${actions}" delims="," varStatus="actionStatus">
+				<!--/*/ <th:block th:with="actionImageFileName="> /*/-->
+				
+				<c:forTokens var="imageFileName" items="${actionImageFileNames}" delims="," varStatus="imageStatus">
+					<th:block th:if="${actionStatus.index == imageStatus.index}">
+						<!--/*/ <th:block th:with="actionImageFileName=${imageFileName}"> /*/-->
+					</th:block>
+				</c:forTokens>
+				
+				<div th:replace="~{fragments/ec/detailLineActionDataCell :: content}" data-action="${action}.line${index}" data-image-file-name="${actionImageFileName}"></div>
+			</c:forTokens>		
+		</div>
+	</td>
+</th:block>
+</div>

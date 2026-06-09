@@ -1,0 +1,59 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/bankControl.tag -->
+<!-- Fragment parameters: property, objectProperty, depositOnly, disbursementOnly, readOnly, style -->
+<div th:fragment="content (property, objectProperty, depositOnly, disbursementOnly, readOnly, style)" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="scripts/fp/objectInfo.js"></script>
+<script language="JavaScript" type="text/javascript" src="dwr/interface/BankService.js"></script>
+
+<th:block th:if="${KualiForm.editingMode[KFSConstants.BANK_ENTRY_VIEWABLE_EDITING_MODE]}">
+
+  <th:block th:if="${empty KualiForm.documentActions[KFSConstants.KFS_ACTION_CAN_EDIT_BANK]}">
+    <!--/*/ <th:block th:with="readOnly=true"> /*/-->
+  </th:block>
+  
+  <th:block th:if="${empty style}">
+    <!--/*/ <th:block th:with="style=datacell-nowrap"> /*/-->
+  </th:block>
+
+  <th:block th:if="${depositOnly}">
+    <!--/*/ <th:block th:with="lookupParameters='Y':bankDepositIndicator"> /*/-->
+    <!--/*/ <th:block th:with="readOnlyFields=bankDepositIndicator"> /*/-->
+  </th:block>
+
+  <th:block th:if="${disbursementOnly}">
+    <!--/*/ <th:block th:with="lookupParameters='Y':bankDisbursementIndicator"> /*/-->
+    <!--/*/ <th:block th:with="readOnlyFields=bankDisbursementIndicator"> /*/-->
+  </th:block>
+
+  <td class="${style}">
+    <input type="text" name="${property}" th:field="*{${property}}" data-attribute-entry="${DataDictionary.Bank.attributes.bankCode}" />
+    <th:block th:if="${not readOnly}">
+      &nbsp;
+      <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Bank" th:replace="~{fragments/kul/lookup :: content}"></span>
+    </th:block>
+  
+    <br/>
+    <div id="${objectProperty}.div" class="fineprint">
+       <span th:text="${KualiForm.${objectProperty}.bankName}"></span>&nbsp;
+    </div>
+  </td>
+
+</th:block>
+</div>

@@ -1,0 +1,96 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/positionInfo.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="positionAttributes=${DataDictionary['BudgetConstructionPosition'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="budgetConstructionPosition=${KualiForm.budgetConstructionPosition}"> /*/-->
+<!--/*/ <th:block th:with="objectName=budgetConstructionPosition"> /*/-->
+
+<%-- FIXME: hidden for JS FTE calc to work remove when fix is in place --%>
+<input type="hidden" th:field="*{${objectName}.iuPayMonths}" />
+<input type="hidden" th:field="*{${objectName}.iuNormalWorkMonths}" />
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+	<tr>
+        <td colspan="6" class="subhead">Position</td>
+   	</tr>
+   	
+    <tr>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.universityFiscalYear}"></th>
+            
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${budgetConstructionPosition}" data-cell-property="budgetConstructionPosition.universityFiscalYear" data-field="universityFiscalYear" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>            
+        
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionNumber}"></th>    
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${budgetConstructionPosition}" data-cell-property="budgetConstructionPosition.positionNumber" data-field="positionNumber" data-attributes="${positionAttributes}" data-inquiry="true" data-bo-class-simple-name="BudgetConstructionPosition" data-bo-package-name="org.kuali.kfs.module.bc.businessobject" data-read-only="true" data-display-hidden="false" data-lookup-or-inquiry-keys="positionNumber,universityFiscalYear" data-accounting-line-values-map="${KualiForm.budgetConstructionPosition.valuesMap}"></div>
+            
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionDescription}"></th>    
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${budgetConstructionPosition}" data-cell-property="budgetConstructionPosition.positionDescription" data-field="positionDescription" data-attributes="${positionAttributes}" data-inquiry="true" data-bo-class-simple-name="BudgetConstructionPosition" data-bo-package-name="org.kuali.kfs.module.bc.businessobject" data-read-only="true" data-display-hidden="false"></div>            
+    </tr>
+    
+    <tr>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.iuDefaultObjectCode}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${budgetConstructionPosition}" data-cell-property="budgetConstructionPosition.iuDefaultObjectCode" data-field="iuDefaultObjectCode" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionDepartmentIdentifier}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.positionDepartmentIdentifier" data-field="positionDepartmentIdentifier" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+            
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.setidJobCode}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.setidJobCode" data-field="setidJobCode" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+    </tr>
+    
+    <tr>            
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.jobCode}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.jobCode" data-field="jobCode" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionSalaryPlanDefault}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.positionSalaryPlanDefault" data-field="positionSalaryPlanDefault" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+        
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionGradeDefault}"></th>    
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.positionGradeDefault" data-field="positionGradeDefault" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+    </tr>
+    
+    <tr>            
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.iuNormalWorkMonths}"></th> 
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.iuNormalWorkMonths" data-field="iuNormalWorkMonths" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+       
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.iuPayMonths}"></th>             
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.iuPayMonths" data-field="iuPayMonths" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+            
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionStandardHoursDefault}"></th>  
+        <fmt:formatNumber value="${budgetConstructionPosition.positionStandardHoursDefault}" var="formattedNumber" type="number" groupingUsed="true" minFractionDigits="2" />
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.positionStandardHoursDefault" data-field="positionStandardHoursDefault" data-attributes="${positionAttributes}" data-read-only="true" data-formatted-number-value="${formattedNumber}" data-display-hidden="false" data-data-field-css-class="amount"></div>
+    </tr>
+    
+    <tr>            
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionFullTimeEquivalency}"></th>
+        <fmt:formatNumber value="${KualiForm.budgetConstructionPosition.positionFullTimeEquivalency}" var="formattedNumber" type="number" groupingUsed="true" minFractionDigits="2" />
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.positionFullTimeEquivalency" data-field="positionFullTimeEquivalency" data-attributes="${positionAttributes}" data-read-only="true" data-formatted-number-value="${formattedNumber}" data-display-hidden="false"></div>
+
+<%--
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	    <td>&nbsp;</td>
+--%>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionEffectiveDate}"></th>    
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionPosition.positionEffectiveDate" data-field="positionEffectiveDate" data-attributes="${positionAttributes}" data-read-only="true" data-display-hidden="false"></div>
+	    
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	    <td>&nbsp;</td>	     
+    </tr>
+</table>
+</div>

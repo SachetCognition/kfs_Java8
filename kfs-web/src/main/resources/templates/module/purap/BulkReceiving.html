@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/purap/BulkReceiving.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/purap/BulkReceiving</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="BulkReceivingDocument">
+  <form action="purapBulkReceiving.do" method="post" enctype="multipart/form-data">
+
+    <div th:replace="~{fragments/sys/hiddenDocumentFields :: content}" data-is-financial-document="false"></div>
+    		     		
+    <!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+    
+	<th:block th:if="${KualiForm.editingMode['displayInitTab']}"> 
+    	<div th:replace="~{fragments/purap/bulkReceivingInit :: content}" data-document-attributes="${DataDictionary.BulkReceivingDocument.attributes}"></div>
+	</th:block>
+
+    <th:block th:switch="${true}">
+	    <th:block th:case="${not empty KualiForm.document.purchaseOrderIdentifier}">    
+	    	<!--/*/ <th:block th:with="isPOAvailable=true"> /*/-->
+	    </th:block>
+	    <th:block th:case="*">
+	    	<!--/*/ <th:block th:with="isPOAvailable=false"> /*/-->
+	    </th:block>
+    </th:block>
+    
+   <th:block th:if="${not KualiForm.editingMode['displayInitTab']}">
+	    <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+	
+		 <div th:replace="~{fragments/purap/bulkReceivingVendor :: content}" data-document-attributes="${DataDictionary.BulkReceivingDocument.attributes}"></div> 
+	
+	    <div th:replace="~{fragments/purap/bulkReceivingDelivery :: content}" data-document-attributes="${DataDictionary.BulkReceivingDocument.attributes}" data-delivery-read-only="true"></div> 
+		          	
+	    <div th:replace="~{fragments/purap/relatedDocuments :: content}" data-document-attributes="${DataDictionary.RelatedDocuments.attributes}"></div>
+	            
+		<div th:replace="~{fragments/kul/notes :: content}"></div>
+	
+		<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+		
+	    <div th:replace="~{fragments/kul/routeLog :: content}"></div>
+	    
+	    <div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+	</th:block>
+	    		
+    <div class="kfs-panel-footer"></div>
+	
+    <!--/*/ <th:block th:with="extraButtons=${KualiForm.extraButtons}"> /*/-->  
+  	
+    <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="true" data-extra-buttons="${extraButtons}" data-suppress-routing-controls="${KualiForm.editingMode['displayInitTab']}"></div>
+      
+  </form>
+</div>
+</body>
+</html>

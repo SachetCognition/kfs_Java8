@@ -1,0 +1,82 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/administration/batch.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Batch"></div>
+<div class="body">
+	<th:block th:if="${ConfigProperties.module.accounts.receivable.enabled == 'true'}">
+		<strong>Accounts Receivable</strong><br/>
+	    <ul class="chan">
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Customer XML Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=customerLoadInputFileType"></div></li>
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Customer CSV Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=customerLoadCSVInputFileType"></div></li>
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Lockbox Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=lockboxInputFileType"></div></li>
+						  
+		  </ul>
+	</th:block>
+	<strong>Financial Processing</strong><br/>
+    <ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Procurement Card Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=procurementCardInputFileType"></div></li>
+	</ul>
+	<strong>General Ledger</strong><br/>
+    <ul class="chan">
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Collector Flat File Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=collectorFlatFileInputFileType"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Collector XML Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=collectorXmlInputFileType"></div></li>				
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Enterprise Feed Upload" data-url="${ConfigProperties.application.url}/batchUploadFileSet.do?methodToCall=start&batchUpload.batchInputTypeName=enterpriseFeederFileSetType"></div></li>
+		<th:block th:if="${ConfigProperties.module.labor.distribution.enabled == 'true'}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Labor Enterprise Feed Upload" data-url="${ConfigProperties.application.url}/laborBatchUploadFileSet.do?methodToCall=start&batchUpload.batchInputTypeName=laborEnterpriseFeederFileSetType"></div></li>
+		</th:block>
+	</ul>
+	<strong>Purchasing/Accounts Payable</strong><br/>
+    <ul class="chan">
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Electronic Invoice Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=electronicInvoiceInputFileType"></div></li>
+    	<th:block th:if="${!KualiConfigurationService.isProductionEnvironment}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Electronic Invoice Test File Generation" data-url="${ConfigProperties.application.url}/purapElectronicInvoiceTestFileGeneration.do"></div></li>				
+	    </th:block>
+	</ul>
+	<th:block th:if="${ConfigProperties.module.travel.enabled == 'true'}">
+    <strong>Travel</strong><br/>
+	<ul class="chan">
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Credit Card Data Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=creditCardDataXmlInputFileType"></div></li>
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Per Diem XML Batch Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=perDiemXmlInputFileType"></div></li>
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Per Diem TXT Batch Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=perDiemTxtInputFileType"></div></li>
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Travel Agency Data Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=agencyDataXmlInputFileType"></div></li>
+    </ul>	
+	</th:block>
+	<strong>Vendor</strong><br/>
+	<ul class="chan">
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Vendor Exclusion Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=vendorExcludeInputFileType"></div></li>
+	</ul>
+	<strong>Batch/Scheduled Jobs</strong><br/>
+    <ul class="chan">
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Batch Semaphore File Upload" data-url="${ConfigProperties.application.url}/batchUpload.do?methodToCall=start&batchUpload.batchInputTypeName=semaphoreInputFileTypeError"></div></li>
+    	<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Batch File" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.sys.batch.BatchFile&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+    	<th:block th:if="${ConfigProperties.use.quartz.scheduling == 'true'}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Schedule" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.sys.batch.BatchJobStatus&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true&conversionFields=name:name,group:group"></div></li>
+		</th:block>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Special Batch File Upload" data-url="${ConfigProperties.application.url}/batchFileUpload"></div></li>
+	</ul>
+	<th:block th:if="${ConfigProperties.module.access.security.enabled == 'true'}">
+	<strong>Security</strong><br/>
+    <ul class="chan">
+    	<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Access Security Simulation" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.sec.businessobject.AccessSecuritySimulation&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+	</ul>
+	</th:block>
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

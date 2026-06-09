@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/bc/IncumbentSalarySetting.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/bc/IncumbentSalarySetting</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="readOnly=${KualiForm.viewOnlyEntry || KualiForm.salarySettingClosed}"> /*/-->
+<!--/*/ <th:block th:with="accountsCanCrossCharts=[[${__EXPR__}]]"> /*/-->
+
+
+<div class="kfs-page" data-header-title="" data-doc-title="${KualiForm.documentTitle}">
+  <form action="budgetIncumbentSalarySetting.do" method="post">
+
+    <input type="hidden" th:field="*{mainWindow}" />
+
+    <div th:replace="~{fragments/bc/incumbentSalarySetting :: content}" data-read-only="${readOnly}" data-accounts-can-cross-charts="${accountsCanCrossCharts}"></div>	
+    
+	<div class="kfs-panel-footer"></div>
+
+    <div id="globalbuttons" class="globalbuttons">
+        <th:block th:if="${not readOnly}">
+	        <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_save.gif" 
+	        	styleClass="globalbuttons" property="methodToCall.save" title="save" alt="save"/>
+        </th:block>
+    	    
+	    <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif" 
+       		styleClass="globalbuttons" property="methodToCall.close" title="close" alt="close"/>
+    </div>
+
+	<%-- Need these here to override and initialize vars used by objectinfo.js to BC specific --%>
+	<SCRIPT type="text/javascript">
+	  subObjectCodeNameSuffix = ".financialSubObject.financialSubObjectCdshortNm";
+	  var kualiForm = document.forms['KualiForm'];
+	  var kualiElements = kualiForm.elements;
+	</SCRIPT>
+  </form>
+</div>
+</body>
+</html>

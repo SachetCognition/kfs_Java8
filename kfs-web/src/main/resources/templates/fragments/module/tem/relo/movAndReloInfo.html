@@ -1,0 +1,107 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/relo/movAndReloInfo.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelRelocationDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="requesterAttributes=${DataDictionary.TravelerDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=8"> /*/-->
+
+<h3>Moving and Relocation Information</h3>
+
+<table cellpadding="0" cellspacing="0" class="datatable"
+	summary="Moving And Relocation Information">
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.reasonCode}"></label>
+			</div></th>
+		<td class="datacell" ><input type="text" name="document.reasonCode" th:field="*{document.reasonCode}" data-attribute-entry="${documentAttributes.reasonCode}" /></td>
+		<th class="bord-l-b" />
+		<td class="datacell" />
+	</tr>
+	<tr>
+		<th width="25%">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripBegin}"></label>
+			</div></th>
+		<td class="datacell" width="25%"><input type="text" name="document.tripBegin" th:field="*{document.tripBegin}" data-attribute-entry="${documentAttributes.tripBegin}" /></td>
+		<th width="25%">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripEnd}"></label>
+			</div></th>
+		<td class="datacell" width="25%"><input type="text" name="document.tripEnd" th:field="*{document.tripEnd}" data-attribute-entry="${documentAttributes.tripEnd}" /></td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.fromCity}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.fromCity" th:field="*{document.fromCity}" data-attribute-entry="${documentAttributes.fromCity}" /></td>
+		<th>
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.toCity}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.toCity" th:field="*{document.toCity}" data-attribute-entry="${documentAttributes.toCity}" /></td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.fromStateCode}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.fromStateCode" th:field="*{document.fromStateCode}" data-attribute-entry="${documentAttributes.fromStateCode}" /></td>
+		<th>
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.toStateCode}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.toStateCode" th:field="*{document.toStateCode}" data-attribute-entry="${documentAttributes.toStateCode}" /></td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.fromCountryCode}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.fromCountryCode" th:field="*{document.fromCountryCode}" data-attribute-entry="${documentAttributes.fromCountryCode}" />
+		</td>
+		<th>
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.toCountryCode}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.toCountryCode" th:field="*{document.toCountryCode}" data-attribute-entry="${documentAttributes.toCountryCode}" /></td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.titleCode}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.titleCode" th:field="*{document.titleCode}" data-attribute-entry="${documentAttributes.titleCode}" /></td>
+		<th rowspan="2">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.comments}"></label>
+			</div></th>
+		<td class="datacell" rowspan="2"><input type="text" name="document.comments" th:field="*{document.comments}" data-attribute-entry="${documentAttributes.comments}" /></td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.jobClsCode}"></label>
+			</div></th>
+		<td class="datacell"><input type="text" name="document.jobClsCode" th:field="*{document.jobClsCode}" data-attribute-entry="${documentAttributes.jobClsCode}" /></td>
+	</tr>
+</table>
+</div>

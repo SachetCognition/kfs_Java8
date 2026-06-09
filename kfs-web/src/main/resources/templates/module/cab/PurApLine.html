@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/cab/PurApLine.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/cab/PurApLine</title>
+</head>
+<body>
+<script>
+<th:block th:if="${!empty KualiForm.documentNumber}">
+	var popUpurl = '${KualiForm.docHandlerForwardLink}';
+	window.open(popUpurl, "${KualiForm.documentNumber}");
+</th:block>
+</script>
+
+<div class="kfs-page" data-header-title="" data-doc-title="Purchasing / Accounts Payable Transactions">
+  <form action="cabPurApLine.do" method="post">
+	<section class="kfs-tab" data-tab-title="Purchase Order Processing" data-default-open="true">
+  <h3>Purchase Order Processing</h3>
+		<div class="tab-container" align=center>
+			<!--/*/ <th:block th:with="cabPurApDocumentAttributes=${DataDictionary.PurchasingAccountsPayableDocument.attributes}"> /*/-->
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+				<tr>
+        			<td colspan="2" class="subhead">Purchase Order Processing</td>
+   				</tr>
+   				<tr>
+   					<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cabPurApDocumentAttributes.purchaseOrderIdentifier}"></label></th>
+        			<td class="grid" width="75%">
+        				<th:block th:switch="${true}">
+        				<th:block th:case="${!empty KualiForm.purchaseOrderInquiryUrl }">
+							<a href="${ConfigProperties.application.url}/${KualiForm.purchaseOrderInquiryUrl }" target="_blank"> 
+							${KualiForm.purchaseOrderIdentifier}							
+							</a>
+						</th:block>
+						<th:block th:case="*">
+							${KualiForm.purchaseOrderIdentifier}&nbsp;
+						</th:block>
+						</th:block>
+        			</td>								
+    			</tr>
+    			<tr>
+   					<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cabPurApDocumentAttributes.purApContactEmailAddress}"></label></th>
+        			<td class="grid" width="75%">${KualiForm.purApContactEmailAddress}</td>								
+    			</tr>
+    			<tr>
+   					<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cabPurApDocumentAttributes.purApContactPhoneNumber}"></label></th>
+        			<td class="grid" width="75%">${KualiForm.purApContactPhoneNumber}</td>
+        		</tr>
+    		</table>
+		</div>
+	</section>
+	
+	<!--/*/ <th:block th:with="readOnly=true"> /*/-->
+	<c:forEach items="${KualiForm.purApDocs}" var="purApDoc" >
+		<c:forEach items="${purApDoc.purchasingAccountsPayableItemAssets}" var="assetLine" >
+		<th:block th:if="${assetLine.active}">
+			<!--/*/ <th:block th:with="readOnly=false"> /*/-->
+		</th:block>
+		</tr>
+	</tr>
+	
+	<div th:replace="~{fragments/cab/purApItemLines :: content}" data-active-indicator="true" data-title="Active Line Items" data-default-open="true" data-tab-error-key="purApDocs*,merge*" data-read-only="${readOnly}"></div>
+	<div th:replace="~{fragments/cab/purApItemLines :: content}" data-active-indicator="false" data-title="Submitted Line Items" data-default-open="false"></div>
+	<div class="kfs-panel-footer"></div>
+	
+	
+	<div id="globalbuttons" class="globalbuttons">
+        <th:block th:if="${not readOnly}">
+	        <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_save.gif" styleClass="globalbuttons" 
+	        	property="methodToCall.save" title="save" alt="save"/>
+	        <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif" styleClass="globalbuttons" 
+	        	property="methodToCall.close" title="close" alt="close"/>
+        </th:block>
+	    <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_reload.gif" styleClass="globalbuttons" property="methodToCall.reload" title="reload" alt="reload"/>
+        <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" styleClass="globalbuttons" property="methodToCall.cancel" title="Cancel" alt="Cancel"/>		
+    </div>
+  </form>
+</div>
+</body>
+</html>

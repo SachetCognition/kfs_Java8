@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/bc/QuickSalarySetting.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/bc/QuickSalarySetting</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="readOnly=${KualiForm.viewOnlyEntry || KualiForm.salarySettingClosed}"> /*/-->
+
+<div class="kfs-page" data-header-title="" data-doc-title="Quick Salary Setting">
+  <form action="budgetQuickSalarySetting.do" method="post">
+	
+<%--
+    <c:forEach items="${KualiForm.documentActions}" var="action">
+      <input type="hidden" th:field="*{documentActions(${action.key})}" />
+    </tr>
+    
+	<c:forEach items="${KualiForm.editingMode}" var="mode">
+  		<input type="hidden" th:field="*{editingMode(${mode.key})}" />
+	</tr>
+--%>
+    <input type="hidden" th:field="*{mainWindow}" />
+    
+	<section class="kfs-tab" data-tab-title="Quick Salary Setting" data-default-open="true">
+  <h3>Quick Salary Setting</h3>
+		<div class="tab-container" align=center>
+			<div th:replace="~{fragments/bc/expenditureSalaryLine :: content}" data-read-only="${readOnly}"></div>	
+			
+			<br/>
+						
+			<div th:replace="~{fragments/bc/expenditureSalaryLineDetails :: content}" data-read-only="${readOnly}"></div>
+		</div>
+	</section>
+
+	<div class="kfs-panel-footer"></div>
+
+    <%-- add another copy of the errors since this screen can get long --%>
+    <div class="kfs-errors" data-key-match="${Constants.GLOBAL_ERRORS}" th:if="${#fields.hasErrors('${Constants.GLOBAL_ERRORS}')}"><h4> </h4></div>
+    <div class="kfs-errors" data-key-match="${BCConstants.ErrorKey.RETURNED_DETAIL_SALARY_SETTING_TAB_ERRORS}" th:if="${#fields.hasErrors('${BCConstants.ErrorKey.RETURNED_DETAIL_SALARY_SETTING_TAB_ERRORS}')}"><h4> </h4></div>
+    
+    <div id="globalbuttons" class="globalbuttons">
+        <th:block th:if="${not readOnly}">
+	        <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_save.gif" 
+	        	styleClass="globalbuttons" property="methodToCall.save" title="save" alt="save"/>
+	    </th:block>    	
+	        	
+        <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif" 
+       		styleClass="globalbuttons" property="methodToCall.close" title="close" alt="close"/>	
+
+    </div>
+  </form>
+</div>
+</body>
+</html>

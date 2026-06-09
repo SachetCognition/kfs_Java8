@@ -1,0 +1,255 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/receivingLineItems.tag -->
+<!-- Fragment parameters: itemAttributes -->
+<div th:fragment="content (itemAttributes)" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="dwr/interface/ItemUnitOfMeasureService.js"></script>
+<script language="JavaScript" type="text/javascript" src="scripts/purap/objectInfo.js"></script>
+
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="documentType=${KualiForm.document.documentHeader.workflowDocument.documentTypeName}"> /*/-->
+<!--/*/ <th:block th:with="colCount=12"> /*/-->
+
+<th:block th:if="${KualiForm.stateFinal}">
+	<!--/*/ <th:block th:with="colCount=10"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Items" data-default-open="true">
+  <h3>Items</h3>
+	<div class="tab-container" align=center>
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Items Section">
+		<tr>
+			<td colspan="${colCount}" class="subhead">
+			    <span class="subhead-left">Receiving Line Items</span>
+			</td>
+		</tr>
+
+		<th:block th:if="${fullEntryMode}">
+		<tr>
+			<td colspan="${colCount}" class="datacell" align="right" nowrap="nowrap">
+				<div align="right">
+					<th:block th:if="${KualiForm.ableToShowClearAndLoadQtyButtons}">
+						<input type="image" property="methodToCall.loadQty" src="${ConfigProperties.externalizable.images.url}tinybutton-loadqtyreceived.gif" alt="load qty received" title="load qty received" styleClass="tinybutton" />
+						<input type="image" property="methodToCall.clearQty" src="${ConfigProperties.externalizable.images.url}tinybutton-clearqtyreceived.gif" alt="clear qty received" title="clear qty received" styleClass="tinybutton" />
+					</th:block>
+					<th:block th:if="${KualiForm.hideAddUnorderedItem}">
+						<input type="image" property="methodToCall.showAddUnorderedItem"
+							src="${ConfigProperties.externalizable.images.url}tinybutton-addunorditem.gif"
+							alt="add unordered item" title="add unordered item"
+							styleClass="tinybutton" />
+					</th:block>
+					<th:block th:if="${!KualiForm.hideAddUnorderedItem}">
+						<img src="${ConfigProperties.externalizable.images.url}tinybutton-addunorditem-grey.gif"
+							alt="add unordered item" border="0" styleClass="tinybutton" />
+					</th:block>
+				</div>
+			</td>
+		</tr>
+		</th:block>
+		
+		<!--  Column Names -->
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemLineNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemCatalogNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDescription}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemOrderedQuantity}"></th>						
+			<kul:htmlAttributeHeaderCell><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}"></label></div><!-- /kul:htmlAttributeHeaderCell -->
+
+			<th:block th:if="${KualiForm.stateFinal == false}">
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReceivedPriorQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReceivedToBeQuantity}"></th>		
+			</th:block>
+
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReceivedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReturnedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDamagedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReasonAddedCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+		</tr>
+		
+		<!--  New Receiving Line Item -->
+		<th:block th:if="${fullEntryMode and !KualiForm.hideAddUnorderedItem}">
+		<tr>
+            <td class="infoline">
+                <input type="text" name="newLineItemReceivingItemLine.itemLineNumber" th:field="*{newLineItemReceivingItemLine.itemLineNumber}" data-attribute-entry="${itemAttributes.itemLineNumber}" />
+            </td>
+			<td class="infoline">
+			    <input type="text" name="newLineItemReceivingItemLine.itemCatalogNumber" th:field="*{newLineItemReceivingItemLine.itemCatalogNumber}" data-attribute-entry="${itemAttributes.itemCatalogNumber}" />
+		    </td>
+			<td class="infoline">
+			    <input type="text" name="newLineItemReceivingItemLine.itemDescription" th:field="*{newLineItemReceivingItemLine.itemDescription}" data-attribute-entry="${itemAttributes.itemDescription}" />
+		    </td>
+			<td class="infoline">
+			    <input type="text" name="newLineItemReceivingItemLine.itemOrderedQuantity" th:field="*{newLineItemReceivingItemLine.itemOrderedQuantity}" data-attribute-entry="${itemAttributes.itemOrderedQuantity}" />
+		    </td>
+			<td class="infoline" nowrap="nowrap">
+                <!--/*/ <th:block th:with="itemUnitOfMeasureCodeField=newLineItemReceivingItemLine.itemUnitOfMeasureCode"> /*/-->
+                <!--/*/ <th:block th:with="itemUnitOfMeasureDescriptionField=newLineItemReceivingItemLine.itemUnitOfMeasure.itemUnitOfMeasureDescription"> /*/-->
+                <input type="text" name="${itemUnitOfMeasureCodeField}" th:field="*{${itemUnitOfMeasureCodeField}}" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}" />
+                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.UnitOfMeasure" th:replace="~{fragments/kul/lookup :: content}"></span>     
+                <div id="newLineItemReceivingItemLine.itemUnitOfMeasure.itemUnitOfMeasureDescription.div" class="fineprint">
+                    <html:hidden write="true" property="${itemUnitOfMeasureDescriptionField}"/>&nbsp;        
+                </div>     
+            </td>        
+
+			<th:block th:if="${KualiForm.stateFinal == false}">
+
+			<td class="infoline">
+			    <input type="text" name="newLineItemReceivingItemLine.itemReceivedPriorQuantity" th:field="*{newLineItemReceivingItemLine.itemReceivedPriorQuantity}" data-attribute-entry="${itemAttributes.itemReceivedPriorQuantity}" />
+		    </td>
+			<td class="infoline">
+				<input type="text" name="newLineItemReceivingItemLine.itemReceivedToBeQuantity" th:field="*{newLineItemReceivingItemLine.itemReceivedToBeQuantity}" data-attribute-entry="${itemAttributes.itemReceivedToBeQuantity}" />
+			</td>
+			</th:block>
+			
+			<td class="infoline">
+				<input type="text" name="newLineItemReceivingItemLine.itemReceivedTotalQuantity" th:field="*{newLineItemReceivingItemLine.itemReceivedTotalQuantity}" data-attribute-entry="${itemAttributes.itemReceivedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+				<input type="text" name="newLineItemReceivingItemLine.itemReturnedTotalQuantity" th:field="*{newLineItemReceivingItemLine.itemReturnedTotalQuantity}" data-attribute-entry="${itemAttributes.itemReturnedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+				<input type="text" name="newLineItemReceivingItemLine.itemDamagedTotalQuantity" th:field="*{newLineItemReceivingItemLine.itemDamagedTotalQuantity}" data-attribute-entry="${itemAttributes.itemDamagedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+				<input type="text" name="newLineItemReceivingItemLine.itemReasonAddedCode" th:field="*{newLineItemReceivingItemLine.itemReasonAddedCode}" data-attribute-entry="${itemAttributes.itemReasonAddedCode}" />
+			</td>
+
+			<td class="infoline">
+			    <div align="center">
+			        <input type="image" property="methodToCall.addItem" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="Insert an Item" title="Add an Item" styleClass="tinybutton" />
+			    </div>
+			</td>						
+		</tr>
+		</th:block>
+		
+		<!-- Existing Receiving Line Items -->
+		<logic:iterate indexId="ctr" name="KualiForm" property="document.items" id="itemLine">
+			<!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+			<!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+			
+			<th:block th:switch="${true}">
+				<th:block th:case="${itemLine.objectId == null}">
+					<!--/*/ <th:block th:with="newObjectId=[[${__EXPR__}]]"> /*/-->
+                    <!--/*/ <th:block th:with="tabKey=Item-${newObjectId}"> /*/-->
+			    </th:block>
+			    <th:block th:case="${itemLine.objectId != null}">
+			        <!--/*/ <th:block th:with="tabKey=Item-${itemLine.objectId}"> /*/-->
+			    </th:block>
+			</th:block>
+			
+            <!--  hit form method to increment tab index -->
+            <!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+
+            <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+			<%-- default to closed --%>
+			<th:block th:switch="${true}">
+				<th:block th:case="${empty currentTab}">
+					<!--/*/ <th:block th:with="isOpen=true"> /*/-->
+				</th:block>
+				<th:block th:case="${!empty currentTab}">
+					<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+				</th:block>
+			</th:block>
+
+		<tr>
+			<td colspan="${colCount}" class="tab-subhead" style="border-right: none;">				 
+		    <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+			    <input type="image" property="methodToCall.toggleTab.tab${tabKey}"
+				    src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif"
+				    alt="hide" title="toggle" styleClass="tinybutton"
+				    styleId="tab-${tabKey}-imageToggle"
+				    onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+		    </th:block> 
+		    <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			    <input type="image" property="methodToCall.toggleTab.tab${tabKey}"
+				    src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif"
+				    alt="show" title="toggle" styleClass="tinybutton"
+				    styleId="tab-${tabKey}-imageToggle"
+				    onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+			</th:block>
+			</td>
+		</tr>
+
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			<tbody style="display: none;" id="tab-${tabKey}-div">
+		</th:block>
+
+		<tr>			
+			<td class="infoline" nowrap="nowrap">
+				    &nbsp;<b><span th:text="${KualiForm.document.item[${ctr}].itemLineNumber}"></span></b>&nbsp; 
+			</td>		
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemCatalogNumber" th:field="*{document.item[${ctr}].itemCatalogNumber}" data-attribute-entry="${itemAttributes.itemCatalogNumber}" />
+			</td>
+			<td class="infoline">
+				<input type="text" name="document.item[${ctr}].itemDescription" th:field="*{document.item[${ctr}].itemDescription}" data-attribute-entry="${itemAttributes.itemDescription}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemOrderedQuantity" th:field="*{document.item[${ctr}].itemOrderedQuantity}" data-attribute-entry="${itemAttributes.itemOrderedQuantity}" />
+		    </td>
+			<td class="infoline">
+	            <input type="text" name="document.item[${ctr}].itemUnitOfMeasureCode" th:field="*{document.item[${ctr}].itemUnitOfMeasureCode}" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}" />
+	                <th:block th:if="${((!itemLine.itemTypeCode eq 'ITEM') && fullEntryMode)}">
+	                	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.UnitOfMeasure" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block> 
+	            	<div id="document.item[${ctr}].itemUnitOfMeasure.itemUnitOfMeasureDescription.div" class="fineprint">
+	                	<html:hidden write="true" property="document.item[${ctr}].itemUnitOfMeasure.itemUnitOfMeasureDescription"/>&nbsp;  
+	            	</div>   
+	            	
+		    </td>
+
+			<th:block th:if="${KualiForm.stateFinal == false}">
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemReceivedPriorQuantity" th:field="*{document.item[${ctr}].itemReceivedPriorQuantity}" data-attribute-entry="${itemAttributes.itemReceivedPriorQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemReceivedToBeQuantity" th:field="*{document.item[${ctr}].itemReceivedToBeQuantity}" data-attribute-entry="${itemAttributes.itemReceivedToBeQuantity}" />
+			</td>
+			</th:block>
+			
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemReceivedTotalQuantity" th:field="*{document.item[${ctr}].itemReceivedTotalQuantity}" data-attribute-entry="${itemAttributes.itemReceivedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemReturnedTotalQuantity" th:field="*{document.item[${ctr}].itemReturnedTotalQuantity}" data-attribute-entry="${itemAttributes.itemReturnedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemDamagedTotalQuantity" th:field="*{document.item[${ctr}].itemDamagedTotalQuantity}" data-attribute-entry="${itemAttributes.itemDamagedTotalQuantity}" />
+			</td>
+			<td class="infoline">				
+				<input type="text" name="document.item[${ctr}].itemReasonAddedCode" th:field="*{document.item[${ctr}].itemReasonAddedCode}" data-attribute-entry="${itemAttributes.itemReasonAddedCode}" />					
+			</td>
+			<td class="infoline">
+			    &nbsp;
+			</td>
+		</tr>
+
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			</tbody>
+		</th:block>
+
+		</tr>
+		
+	</table>
+	</div>
+</section>
+</div>

@@ -1,0 +1,111 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerCreditMemoDetailAccountingInfo.tag -->
+<!-- Fragment parameters: invPropertyName, cssClass -->
+<div th:fragment="content (invPropertyName, cssClass)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="customerInvoiceDetailAttributes=${DataDictionary.CustomerInvoiceDetail.attributes}"> /*/-->
+
+<%-- generate unique tab key from invPropertyName --%>
+<!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(invPropertyName)}"> /*/-->
+<!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+<%-- default to closed --%>
+<th:block th:switch="${true}">
+    <th:block th:case="${empty currentTab}">
+        <!--/*/ <th:block th:with="isOpen=false"> /*/-->
+    </th:block>
+    <th:block th:case="${!empty currentTab}">
+        <!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+    </th:block>
+</th:block>
+
+<tr>
+    <td colspan="10" style="padding: 0px;">
+        <table style="width: 100%;" cellpadding="0" cellspacing="0" class="datatable" >
+            <tr>
+                <td class="tab-subhead" style="border-right: none;">Accounting Information
+                	<th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}"> 
+                		<input type="image" property="methodToCall.toggleTab.tab${tabKey}" 
+                        			src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" 
+                                    alt="hide" title="toggle" styleClass="tinybutton"
+                                    styleId="tab-${tabKey}-imageToggle"
+                                    onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+                    </th:block>
+                    <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+                    	<input type="image" property="methodToCall.toggleTab.tab${tabKey}"
+                    				src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif"
+                    				alt="show" title="toggle" styleClass="tinybutton"
+                    				styleId="tab-${tabKey}-imageToggle"
+                    				onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+                 	</th:block>
+                </td>
+            </tr>
+        </table>
+        
+        <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+            <div style="display: block;" id="tab-${tabKey}-div" class="accountingInfo">
+        </th:block>
+        <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+            <div style="display: none;" id="tab-${tabKey}-div" class="accountingInfo">
+        </th:block>
+        
+        <table style="width: 100%;" cellpadding="0" cellspacing="0" class="datatable" >
+        	<tr>
+        		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.chartOfAccountsCode}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.accountNumber}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.subAccountNumber}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.financialObjectCode}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.financialSubObjectCode}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.projectCode}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.organizationReferenceId}"></th>
+        	</tr>
+        	<tr>
+        		<!--  Chart -->
+	            <td align=left class="${cssClass}">
+					<input type="text" name="${invPropertyName}.chartOfAccountsCode" th:field="*{${invPropertyName}.chartOfAccountsCode}" data-attribute-entry="${customerInvoiceDetailAttributes.chartOfAccountsCode }" readonly="readonly" />
+				</td>
+				<!--  Account -->               
+				<td align=left class="${cssClass}">
+					<input type="text" name="${invPropertyName}.accountNumber" th:field="*{${invPropertyName}.accountNumber}" data-attribute-entry="${customerInvoiceDetailAttributes.accountNumber }" readonly="readonly" />
+				</td>
+				<!--  Sub-Account -->               
+				<td align=left class="${cssClass}">
+					<input type="text" name="${invPropertyName}.subAccountNumber" th:field="*{${invPropertyName}.subAccountNumber}" data-attribute-entry="${customerInvoiceDetailAttributes.subAccountNumber }" readonly="readonly" />
+				</td>
+				<!--  Object -->               
+				<td align=left class="${cssClass}">
+					<input type="text" name="${invPropertyName}.financialObjectCode" th:field="*{${invPropertyName}.financialObjectCode}" data-attribute-entry="${customerInvoiceDetailAttributes.financialObjectCode }" readonly="readonly" />
+				</td>
+				<!--  Sub-Object -->               
+				<td align=left class="${cssClass}">
+			  	    <input type="text" name="${invPropertyName}.financialSubObjectCode" th:field="*{${invPropertyName}.financialSubObjectCode}" data-attribute-entry="${customerInvoiceDetailAttributes.financialSubObjectCode }" readonly="readonly" />
+			    </td>
+			    <!--  Project -->               
+				<td align=left class="${cssClass}">
+			     	<input type="text" name="${invPropertyName}.projectCode" th:field="*{${invPropertyName}.projectCode}" data-attribute-entry="${customerInvoiceDetailAttributes.projectCode }" readonly="readonly" />
+				</td>
+				<!--  Org. Ref. Id -->
+				<td align=left class="${cssClass}">
+					<input type="text" name="${invPropertyName}.organizationReferenceId" th:field="*{${invPropertyName}.organizationReferenceId}" data-attribute-entry="${customerInvoiceDetailAttributes.organizationReferenceId }" readonly="readonly" />
+				</td> 
+			</tr>
+         </table>    
+    </td>
+</tr>
+</div>

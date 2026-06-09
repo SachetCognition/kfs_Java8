@@ -1,0 +1,42 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailLineHeader.tag -->
+<!-- Fragment parameters: attributes, detailFieldNames, hasActions, index, sortableFieldNames -->
+<div th:fragment="content (attributes, detailFieldNames, hasActions, index, sortableFieldNames)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the header of the detail line table" %>
+              
+<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+		
+<!-- render the header of the detail line table -->
+<c:forTokens var="fieldName" items="${detailFieldNames}" delims=",">
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes[fieldName]}"></th>		
+		<th:block th:if="${#strings.contains(sortableFieldNames,fieldName)}">
+			&nbsp;<input type="image" property="methodToCall.sortDetailLineByColumn.${fieldName}" 
+				src="${ConfigProperties.kr.externalizable.images.url}sort.gif" 
+				title="Sort by ${attributes[fieldName].label}" 
+				alt="Sort by ${attributes[fieldName].label}" 
+				styleClass="tinybutton" />
+		</th:block>
+	</div><!-- /kul:htmlAttributeHeaderCell -->		            
+</c:forTokens>
+
+<th:block th:if="${hasActions}">		
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+</th:block>
+</div>

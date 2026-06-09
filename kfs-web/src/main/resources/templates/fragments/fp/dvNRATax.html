@@ -1,0 +1,151 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvNRATax.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Nonresident Alien Tax" data-default-open="false">
+  <h3>Nonresident Alien Tax</h3>
+<!--/*/ <th:block th:with="nraTaxAttributes=${DataDictionary.DisbursementVoucherNonResidentAlienTax.attributes}"> /*/-->
+
+<div class="tab-container" align=center > 
+<h3>NRA Tax</h3>
+
+<table cellpadding=0 class="datatable" summary="NRA Tax Section">
+  <tr>
+    <th width="25%">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.incomeClassCode}"></label></div>
+    </th>
+    <td width="25%">
+      <input type="text" name="document.dvNonResidentAlienTax.incomeClassCode" th:field="*{document.dvNonResidentAlienTax.incomeClassCode}" data-attribute-entry="${nraTaxAttributes.incomeClassCode}" />
+        <th:block th:if="${taxEntryMode and empty KualiForm.document.dvNonResidentAlienTax.financialDocumentAccountingLineText}">
+          <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.TaxIncomeClassCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+        </th:block>
+    </td>
+    <th width="25%" scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.foreignSourceIncomeCode}"></label></div>
+    </th>
+    <td width="25%">
+      <input type="text" name="document.dvNonResidentAlienTax.foreignSourceIncomeCode" th:field="*{document.dvNonResidentAlienTax.foreignSourceIncomeCode}" data-attribute-entry="${nraTaxAttributes.foreignSourceIncomeCode}" />
+    </td>
+  </tr>
+          
+  <tr>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.federalIncomeTaxPercent}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.federalIncomeTaxPercent" th:field="*{document.dvNonResidentAlienTax.federalIncomeTaxPercent}" data-attribute-entry="${nraTaxAttributes.federalIncomeTaxPercent}" />
+        <th:block th:if="${taxEntryMode and empty KualiForm.document.dvNonResidentAlienTax.financialDocumentAccountingLineText}">
+          <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent" th:replace="~{fragments/kul/lookup :: content}"></span>
+        </th:block>
+    </td>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.incomeTaxTreatyExemptCode}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.incomeTaxTreatyExemptCode" th:field="*{document.dvNonResidentAlienTax.incomeTaxTreatyExemptCode}" data-attribute-entry="${nraTaxAttributes.incomeTaxTreatyExemptCode}" />
+    </td>
+  </tr>
+          
+  <tr>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.stateIncomeTaxPercent}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.stateIncomeTaxPercent" th:field="*{document.dvNonResidentAlienTax.stateIncomeTaxPercent}" data-attribute-entry="${nraTaxAttributes.stateIncomeTaxPercent}" />
+       <th:block th:if="${taxEntryMode and empty KualiForm.document.dvNonResidentAlienTax.financialDocumentAccountingLineText}">
+          <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent" th:replace="~{fragments/kul/lookup :: content}"></span>
+       </th:block>
+    </td>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.taxOtherExemptIndicator}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.taxOtherExemptIndicator" th:field="*{document.dvNonResidentAlienTax.taxOtherExemptIndicator}" data-attribute-entry="${nraTaxAttributes.taxOtherExemptIndicator}" />
+    </td>
+  </tr>
+          
+  <tr>
+    <th scope="row">
+    	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.postalCountryCode}"></label>
+    		<th:block th:if="${taxEntryMode}"><br> *required unless Income Class Code is Non Reportable</th:block>
+    	</div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.postalCountryCode" th:field="*{document.dvNonResidentAlienTax.postalCountryCode}" data-attribute-entry="${nraTaxAttributes.postalCountryCode}" />
+    </td>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.incomeTaxGrossUpCode}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.incomeTaxGrossUpCode" th:field="*{document.dvNonResidentAlienTax.incomeTaxGrossUpCode}" data-attribute-entry="${nraTaxAttributes.incomeTaxGrossUpCode}" />
+    </td>
+  </tr>
+  
+  <tr>
+    <th scope="row">
+      <div align="right">
+        <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.taxNQIId}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.taxNQIId" th:field="*{document.dvNonResidentAlienTax.taxNQIId}" data-attribute-entry="${nraTaxAttributes.taxNQIId}" />
+    </td>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.taxUSAIDPerDiemIndicator}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.taxUSAIDPerDiemIndicator" th:field="*{document.dvNonResidentAlienTax.taxUSAIDPerDiemIndicator}" data-attribute-entry="${nraTaxAttributes.taxUSAIDPerDiemIndicator}" />
+    </td>
+  </tr>
+  
+  <tr>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.referenceFinancialDocumentNumber}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.referenceFinancialDocumentNumber" th:field="*{document.dvNonResidentAlienTax.referenceFinancialDocumentNumber}" data-attribute-entry="${nraTaxAttributes.referenceFinancialDocumentNumber}" />
+    </td>
+    <th scope="row">
+      <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nraTaxAttributes.taxSpecialW4Amount}"></label></div>
+    </th>
+    <td>
+      <input type="text" name="document.dvNonResidentAlienTax.taxSpecialW4Amount" th:field="*{document.dvNonResidentAlienTax.taxSpecialW4Amount}" data-attribute-entry="${nraTaxAttributes.taxSpecialW4Amount}" />
+    </td>
+  </tr>
+          
+	<th:block th:if="${taxEntryMode}">
+	<tr>
+	  <td class="infoline" colspan="4">
+	    <center>
+	    <th:block th:if="${empty KualiForm.document.dvNonResidentAlienTax.financialDocumentAccountingLineText}">
+        <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-genlines.gif" styleClass="tinybutton" property="methodToCall.generateNonResidentAlienTaxLines" title="Generate Non-resident Alien Tax Lines" alt="Generate Non-resident Alien Tax Lines"/>
+        <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-clearall.gif" styleClass="tinybutton" property="methodToCall.clearNonResidentAlienTaxInfo" title="Clear All Info From NRA Tax Entries" alt="Clear All Info From NRA Tax Entries"/>
+	    </th:block>
+      <th:block th:if="${!empty KualiForm.document.dvNonResidentAlienTax.financialDocumentAccountingLineText}">
+        <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-clearlines.gif" styleClass="tinybutton" property="methodToCall.clearNonResidentAlienTaxLines"  title="Clear Non-resident Alien Tax Lines" alt="Clear Non-resident Alien Tax Lines" />
+        <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-clearall.gif" styleClass="tinybutton" property="methodToCall.clearNonResidentAlienTaxInfo" title="Clear All Info From NRA Tax Entries" alt="Clear All Info From NRA Tax Entries"/>
+      </th:block>
+	    </center>
+	  </td>
+	</tr> 
+	</th:block> 
+</table>
+
+</div>
+</section>
+</div>

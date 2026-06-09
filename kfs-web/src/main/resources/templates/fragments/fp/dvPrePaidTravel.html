@@ -1,0 +1,132 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvPrePaidTravel.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Pre-Paid Travel Expenses" data-default-open="false">
+  <h3>Pre-Paid Travel Expenses</h3>
+	<!--/*/ <th:block th:with="prePaidConfAttributes=${DataDictionary.DisbursementVoucherPreConferenceDetail.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="prePaidRegistrantAttributes=${DataDictionary.DisbursementVoucherPreConferenceRegistrant.attributes}"> /*/-->
+  
+    <div class="tab-container" align=center > 
+<h3>Pre-Paid Travel Expenses</h3>
+    	<table cellpadding=0 class="datatable" summary="Pre-Paid Travel Section">
+
+            
+            <tr>
+              <td colspan="2" class="tab-subhead">Overview</td>
+            </tr>
+            
+            <tr>
+              <th width="35%" ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidConfAttributes.dvConferenceDestinationName}"></label></div></th>
+              <td width="65%" ><input type="text" name="document.dvPreConferenceDetail.dvConferenceDestinationName" th:field="*{document.dvPreConferenceDetail.dvConferenceDestinationName}" data-attribute-entry="${prePaidConfAttributes.dvConferenceDestinationName}" /></td>
+            </tr>
+            
+            <tr>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidConfAttributes.disbVchrExpenseCode}"></label></div></th>
+              <td><input type="text" name="document.dvPreConferenceDetail.disbVchrExpenseCode" th:field="*{document.dvPreConferenceDetail.disbVchrExpenseCode}" data-attribute-entry="${prePaidConfAttributes.disbVchrExpenseCode}" /></td>
+            </tr>
+ 
+            <tr>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidConfAttributes.disbVchrConferenceStartDate}"></label></div></th>
+              <td><input type="text" name="document.dvPreConferenceDetail.disbVchrConferenceStartDate" th:field="*{document.dvPreConferenceDetail.disbVchrConferenceStartDate}" data-attribute-entry="${prePaidConfAttributes.disbVchrConferenceStartDate}" /></td>
+            </tr>           
+
+            <tr>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidConfAttributes.disbVchrConferenceEndDate}"></label></div></th>
+              <td><input type="text" name="document.dvPreConferenceDetail.disbVchrConferenceEndDate" th:field="*{document.dvPreConferenceDetail.disbVchrConferenceEndDate}" data-attribute-entry="${prePaidConfAttributes.disbVchrConferenceEndDate}" /></td>
+            </tr> 
+          </table>
+            
+           <table cellpadding=0 class="datatable" summary="Expenses">
+            <tr>
+              <td colspan="6" class="tab-subhead">Expenses</td>
+            </tr>
+            
+            <tr>
+              <th>&nbsp;</th>
+              <th> <div align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidRegistrantAttributes.dvConferenceRegistrantName}"></label></div></th>
+              <th> <div align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidRegistrantAttributes.disbVchrPreConfDepartmentCd}"></label></div></th>
+              <th> <div align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidRegistrantAttributes.dvPreConferenceRequestNumber}"></label></div></th>
+              <th> <div align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidRegistrantAttributes.disbVchrExpenseAmount}"></label></div></th>
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+	              <th> <div align=center>Actions</div></th>
+	          </th:block>
+            </tr>
+            
+            <tr>
+              <th scope="row"><div align="center">&nbsp;
+	              <th:block th:if="${fullEntryMode||travelEntryMode}">
+    		          add:
+            	  </th:block>
+              </div></th>
+              <td valign=top nowrap class="infoline"><div align="center"><span>
+                  <input type="text" name="newPreConferenceRegistrantLine.dvConferenceRegistrantName" th:field="*{newPreConferenceRegistrantLine.dvConferenceRegistrantName}" data-attribute-entry="${prePaidRegistrantAttributes.dvConferenceRegistrantName}" />
+              </span></div></td>
+              <td valign=top nowrap class="infoline"><div align="center"><span>
+                  <input type="text" name="newPreConferenceRegistrantLine.disbVchrPreConfDepartmentCd" th:field="*{newPreConferenceRegistrantLine.disbVchrPreConfDepartmentCd}" data-attribute-entry="${prePaidRegistrantAttributes.disbVchrPreConfDepartmentCd}" />
+              </span></div></td>
+              <td valign=top nowrap class="infoline"><div align="center"><span>
+                  <input type="text" name="newPreConferenceRegistrantLine.dvPreConferenceRequestNumber" th:field="*{newPreConferenceRegistrantLine.dvPreConferenceRequestNumber}" data-attribute-entry="${prePaidRegistrantAttributes.dvPreConferenceRequestNumber}" />
+              </span></div></td>
+              <td valign=top nowrap class="infoline"><div align="center"><span>
+                  <input type="text" name="newPreConferenceRegistrantLine.disbVchrExpenseAmount" th:field="*{newPreConferenceRegistrantLine.disbVchrExpenseAmount}" data-attribute-entry="${prePaidRegistrantAttributes.disbVchrExpenseAmount}" />
+              </span></div></td>
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+	              <td class="infoline"><div align=center>
+	                   <input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" property="methodToCall.addPreConfRegistrantLine"  title="Add Pre-Conference Registrant Line" alt="Add Pre-Conference Registrant Line"/>
+	              </div></td>
+              </th:block>
+            </tr>
+  
+            <logic:iterate indexId="ctr" name="KualiForm" property="document.dvPreConferenceDetail.dvPreConferenceRegistrants" id="currentLine">
+            <tr>
+              <th scope="row"><div align="center"><input type="text" name="document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].financialDocumentLineNumber" th:field="*{document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].financialDocumentLineNumber}" data-attribute-entry="${prePaidRegistrantAttributes.financialDocumentLineNumber}" readonly="readonly" /></div></th>
+              <td valign=top nowrap><div align="center"><span>
+                  <input type="text" name="document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].dvConferenceRegistrantName" th:field="*{document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].dvConferenceRegistrantName}" data-attribute-entry="${prePaidRegistrantAttributes.dvConferenceRegistrantName}" />
+              </span></div></td>
+              <td valign=top nowrap><div align="center"><span>
+                  <input type="text" name="document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].disbVchrPreConfDepartmentCd" th:field="*{document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].disbVchrPreConfDepartmentCd}" data-attribute-entry="${prePaidRegistrantAttributes.disbVchrPreConfDepartmentCd}" />
+              </span></div></td>
+              <td valign=top nowrap><div align="center"><span>
+                  <input type="text" name="document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].dvPreConferenceRequestNumber" th:field="*{document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].dvPreConferenceRequestNumber}" data-attribute-entry="${prePaidRegistrantAttributes.dvPreConferenceRequestNumber}" />
+              </span></div></td>
+              <td valign=top nowrap><div align="center"><span>
+                  <input type="text" name="document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].disbVchrExpenseAmount" th:field="*{document.dvPreConferenceDetail.dvPreConferenceRegistrants[${ctr}].disbVchrExpenseAmount}" data-attribute-entry="${prePaidRegistrantAttributes.disbVchrExpenseAmount}" />
+              </span></div></td>
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+	              <td><div align=center>
+	                   <input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" property="methodToCall.deletePreConfRegistrantLine.line${ctr}" title="Delete Pre-Conference Registrant Line" alt="Delete Pre-Conference Registrant Line"/>
+	              </div></td>
+              </th:block>
+            </tr>
+            </tr>
+            
+            <tr>
+                <td colspan="4" class="infoline" scope="row"><div align="right"><strong><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${prePaidConfAttributes.disbVchrConferenceTotalAmt}"></label></strong></div></td>
+                <td class="infoline" nowrap="nowrap" valign="top"><div align="center"><strong>$<input type="text" name="document.dvPreConferenceDetail.disbVchrConferenceTotalAmt" th:field="*{document.dvPreConferenceDetail.disbVchrConferenceTotalAmt}" data-attribute-entry="${prePaidConfAttributes.disbVchrConferenceTotalAmt}" readonly="readonly" /></strong></div></td>
+            	<th:block th:if="${fullEntryMode||travelEntryMode}">
+               		<td class="infoline">&nbsp;</td>
+              	</th:block>
+            </tr>
+          </table>
+          
+        
+        </div>
+</section>
+</div>

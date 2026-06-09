@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/ld/FringeBenefitInquiry.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/ld/FringeBenefitInquiry</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="benefitInq=${DataDictionary.BenefitInquiry.attributes}"> /*/-->
+
+<div class="kfs-page" data-header-title="Fringe Benefit Inquiry" data-doc-title="Fringe Benefit Inquiry">
+  <form action="fringeBenefitInquiry.do" method="post">
+	<section class="kfs-tab" data-tab-title="Fringe Benefit Detail" data-default-open="true">
+  <h3>Fringe Benefit Detail</h3>
+        <div id="workarea">
+          <table cellpadding="0" cellspacing="0" class="datatable" summary="" width="50%">
+            <tr>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            </tr>
+
+            <logic:iterate name="KualiForm" id="benefitInquiry" property="benefitInquiry" indexId="ctr">
+              <tr>
+                 <td>
+                 <span th:text="${benefitInquiry.fringeBenefitObjectCode}"></span>
+                </td>
+                <td>
+                  <span th:text="${benefitInquiry.benefitAmount}"></span>
+                </td>
+              </tr>
+            </tr>
+          </table>
+        </div>
+        <div id="globalbuttons" class="globalbuttons">
+	    <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif" styleClass="globalbuttons" 
+	        onclick="window.close();return false;" title="close the window" alt="close the window"/>		
+		</div>
+      </section>
+	    
+  </form>
+</div>
+</body>
+</html>

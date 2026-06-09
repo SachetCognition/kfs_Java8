@@ -1,0 +1,72 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvSpecialHandling.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Special Handling" data-default-open="${!empty KualiForm.document.dvPayeeDetail.disbVchrSpecialHandlingPersonName}">
+  <h3>Special Handling</h3>
+	<!--/*/ <th:block th:with="payeeAttributes=${DataDictionary.DisbursementVoucherPayeeDetail.attributes}"> /*/-->
+    <div class="tab-container" align=center > 
+<h3>Send Check To</h3>
+	<table cellpadding=0 class="datatable" summary="Special Handling Section">          
+            <tr>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingPersonName}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingPersonName" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingPersonName}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingPersonName}" />  
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingCityName}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingCityName" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingCityName}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingCityName}" />  
+              </td>
+            </tr>
+            
+            <tr>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingLine1Addr}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingLine1Addr" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingLine1Addr}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingLine1Addr}" />  
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingStateCode}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingStateCode" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingStateCode}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingStateCode}" />  
+              </td>
+            </tr>
+            
+            <tr>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingLine2Addr}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingLine2Addr" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingLine2Addr}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingLine2Addr}" />  
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingZipCode}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingZipCode" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingZipCode}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingZipCode}" />  
+              </td>
+            </tr>
+            
+            <tr>
+              <th align=right valign=middle class="bord-l-b"></th>
+              <td align=left valign=middle class="datacell">
+              </td>
+              <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingCountryCode}"></label></div></th>
+              <td align=left valign=middle class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrSpecialHandlingCountryCode" th:field="*{document.dvPayeeDetail.disbVchrSpecialHandlingCountryCode}" data-attribute-entry="${payeeAttributes.disbVchrSpecialHandlingCountryCode}" />  
+              </td>
+            </tr>
+     </table>
+     </div>
+</section>
+</div>

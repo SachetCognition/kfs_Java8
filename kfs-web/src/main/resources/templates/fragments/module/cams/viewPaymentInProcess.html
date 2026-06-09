@@ -1,0 +1,120 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/viewPaymentInProcess.tag -->
+<!-- Fragment parameters: assetPaymentDetails, assetPaymentAssetDetail, defaultTabHide, assetPaymentsTotal, assetPaymentDistribution -->
+<div th:fragment="content (assetPaymentDetails, assetPaymentAssetDetail, defaultTabHide, assetPaymentsTotal, assetPaymentDistribution)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="numberOfUnallocatedPayments=${#strings.length(assetPaymentDetails)}"> /*/-->
+
+
+<th:block th:if="${ (fn:length(assetPaymentDetails) > 0) }">
+	<!--/*/ <th:block th:with="assetPaymentAttributes=${DataDictionary.AssetPaymentDetail.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->	
+	<!--/*/ <th:block th:with="totalHistoricalAmount=${KualiForm.document.assetsTotalHistoricalCost}"> /*/-->			
+	<!--/*/ <th:block th:with="documentTotal=${KualiForm.document.sourceTotal}"> /*/-->
+	<!--/*/ <th:block th:with="dateFormatPattern=MM/dd/yyyy"> /*/-->
+	
+	
+	<section class="kfs-tab" data-tab-title="In Process Payments" data-default-open="${!defaultTabHide}">
+  <h3>In Process Payments</h3>
+		<div class="tab-container" align="center">
+			<table width="100%" cellpadding="0" cellspacing="0" class="datatable">								
+				<tr>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.chartOfAccountsCode}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.accountNumber}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.subAccountNumber}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialObjectCode}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialSubObjectCode}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.projectCode}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.organizationReferenceId}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.documentNumber}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.expenditureFinancialDocumentTypeCode}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.purchaseOrderNumber}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.requisitionNumber}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.expenditureFinancialDocumentPostedDate}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.postingYear}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.postingPeriodCode}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.transferPaymentIndicator}"></label></th>
+					<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.amount}"></label></th>
+				</tr>
+				
+				<!--/*/ <th:block th:with="totalPayments=${0.00}"> /*/-->
+				<!--/*/ <th:block th:with="line=${-1}"> /*/-->
+				<tr th:each="payment : ${assetPaymentDetails}">
+					<!--/*/ <th:block th:with="line=${line + 1}"> /*/-->
+					<!--/*/ <th:block th:with="object=document.sourceAccountingLine[${line}]"> /*/-->
+					<th:block th:if="${totalHistoricalAmount > 0 }">
+						<th:block th:switch="${true}">
+							<th:block th:case="${assetPaymentAssetDetail.previousTotalCostAmount == null}">
+								<!--/*/ <th:block th:with="previousTotalCost=${0}"> /*/-->
+							</th:block>
+							<th:block th:case="*">
+								<!--/*/ <th:block th:with="previousTotalCost=${assetPaymentAssetDetail.previousTotalCostAmount}"> /*/-->								
+							</th:block>
+						</th:block>
+					</th:block>
+
+					<!--/*/ <th:block th:with="allocatedAmount=${assetPaymentDistribution[payment.assetPaymentDetailKey][assetPaymentAssetDetail]}"> /*/-->				
+					<!--/*/ <th:block th:with="totalPayments=${allocatedAmount + totalPayments}"> /*/-->									 	
+					<tr>
+		 				<td class="grid"><input type="text" name="${object}.chartOfAccountsCode" th:field="*{${object}.chartOfAccountsCode}" data-attribute-entry="${assetPaymentAttributes.chartOfAccountsCode}" readonly="readonly" /></td>								
+						<td class="grid">
+							<input type="text" name="${object}.accountNumber" th:field="*{${object}.accountNumber}" data-attribute-entry="${assetPaymentAttributes.accountNumber}" readonly="readonly" />								
+								<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${KualiForm.document.sourceAccountingLines[line].chartOfAccountsCode}&amp;accountNumber=${KualiForm.document.sourceAccountingLines[line].accountNumber}">
+		                			<html:hidden write="true" property="${object}.accountNumber" />
+        		        		</span>&nbsp;
+            				</div><!-- /kul:htmlControlAttribute -->
+		      			</td>
+						<td class="grid"><span th:text="${payment.subAccountNumber}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.financialObjectCode}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.financialSubObjectCode}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.projectCode}"></span>&nbsp;</td>
+						<td class="grid"><span th:text="${payment.organizationReferenceId}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.expenditureFinancialDocumentNumber}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.expenditureFinancialDocumentTypeCode}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.purchaseOrderNumber}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.requisitionNumber}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${#dates.format(${payment.expenditureFinancialDocumentPostedDate}, &apos;${dateFormatPattern}&apos;)}"></span>&nbsp;</td>
+						<td class="grid"><span th:text="${payment.postingYear}"></span>&nbsp;</td>								
+						<td class="grid"><span th:text="${payment.postingPeriodCode}"></span>&nbsp;</td>														
+						<td class="grid"><input type="text" name="${object}.transferPaymentIndicator" th:field="*{${object}.transferPaymentIndicator}" data-attribute-entry="${assetPaymentAttributes.transferPaymentIndicator}" readonly="readonly" /></td>
+						<td class="grid"><div align="right"><fmt:formatNumber value="${allocatedAmount}" maxFractionDigits="2" minFractionDigits="2"/></div>&nbsp;</td>
+					</tr>
+				</tr>
+				
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<td class="grid"><div align="right"><fmt:formatNumber value="${totalPayments}" maxFractionDigits="2" minFractionDigits="2"/></div></td>					
+				</tr>									
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th></th>
+					<td class="grid"><div align="right">
+						<fmt:formatNumber value="${previousTotalCost}" maxFractionDigits="2" minFractionDigits="2"/></div>					
+					</td>					
+				</tr>									
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<td class="grid"><div align="right">
+						<fmt:formatNumber value="${totalPayments + previousTotalCost}" maxFractionDigits="2" minFractionDigits="2"/></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>
