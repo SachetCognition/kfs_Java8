@@ -108,6 +108,7 @@ public class ExpenseTypeObjectCodeDaoJpa implements ExpenseTypeObjectCodeDao {
         }
 
         cq.where(predicates.toArray(new Predicate[0]));
+        cq.orderBy(cb.asc(root.get("expenseType").get("name")));
 
         TypedQuery<ExpenseTypeObjectCode> query = entityManager.createQuery(cq);
         return new ArrayList<ExpenseTypeObjectCode>(query.getResultList());
