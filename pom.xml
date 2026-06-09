@@ -70,6 +70,9 @@
   </prerequisites>
   <properties>
 
+    <!-- JaCoCo agent arg, set by prepare-agent; default empty so skipping JaCoCo doesn't break surefire -->
+    <argLine/>
+
     <!-- maven properties -->
     <maven.require.version>3.0</maven.require.version>
     <enforcer.phase>validate</enforcer.phase>
