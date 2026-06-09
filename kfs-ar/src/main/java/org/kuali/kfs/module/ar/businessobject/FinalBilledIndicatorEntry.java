@@ -20,17 +20,31 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.document.Document;
 
 /**
  * Describes a Final Billed Indicator Entry.
  */
+@Entity
+@Table(name = "AR_FNL_BILLED_IND_ENTRY_T")
 public class FinalBilledIndicatorEntry extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "ENTRY_ID")
     private Long id;
+    @Column(name = "INV_NBR")
     private String invoiceDocumentNumber;
+    @Column(name = "FDOC_NBR")
     private String documentId;
+    @Transient
     private Document invoiceDocument; 
 
     /**

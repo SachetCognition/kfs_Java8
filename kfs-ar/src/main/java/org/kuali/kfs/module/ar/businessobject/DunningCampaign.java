@@ -22,6 +22,15 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.integration.ar.AccountsReceivableDunningCampaign;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -29,12 +38,20 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Business Object for Dunning Campaigns
  */
+@Entity
+@Table(name = "AR_DUN_CMPGN_DOC_T")
 public class DunningCampaign extends PersistableBusinessObjectBase implements AccountsReceivableDunningCampaign, MutableInactivatable {
 
+    @Id
+    @Column(name = "CMPGN_ID")
     private String campaignID;
+    @Column(name = "CMPGN_DESC")
     private String campaignDescription;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private List<DunningLetterDistribution> dunningLetterDistributions;
 
     /**

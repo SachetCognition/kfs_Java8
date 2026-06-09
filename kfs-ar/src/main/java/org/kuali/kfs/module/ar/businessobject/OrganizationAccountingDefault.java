@@ -20,6 +20,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -34,55 +41,107 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_ORG_ACCTGDFLT_T")
 public class OrganizationAccountingDefault extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
 	protected Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
 	protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
 	protected String organizationCode;
+    @Column(name = "ORG_LT_CHRG_OBJ_CD")
 	protected String organizationLateChargeObjectCode;
+    @Column(name = "INV_FIN_COA_CD")
 	protected String defaultInvoiceChartOfAccountsCode;
+    @Column(name = "INV_ACCT_NBR")
 	protected String defaultInvoiceAccountNumber;
+    @Column(name = "INV_SUB_ACCT_NBR")
 	protected String defaultInvoiceSubAccountNumber;
+    @Column(name = "INV_FIN_OBJ_CD")
 	protected String defaultInvoiceFinancialObjectCode;
+    @Column(name = "INV_FIN_SUB_OBJ_CD")
 	protected String defaultInvoiceFinancialSubObjectCode;
+    @Column(name = "INV_PROJECT_CD")
 	protected String defaultInvoiceProjectCode;
+    @Column(name = "INV_ORG_REF_ID")
 	protected String defaultInvoiceOrganizationReferenceIdentifier;
+    @Column(name = "PMT_FIN_COA_CD")
 	protected String defaultPaymentChartOfAccountsCode;
+    @Column(name = "PMT_ACCT_NBR")
 	protected String defaultPaymentAccountNumber;
+    @Column(name = "PMT_SUB_ACCT_NBR")
 	protected String defaultPaymentSubAccountNumber;
+    @Column(name = "PMT_FIN_OBJ_CD")
     protected String defaultPaymentFinancialObjectCode;
+    @Column(name = "PMT_FIN_SUB_OBJ_CD")
     protected String defaultPaymentFinancialSubObjectCode;
+    @Column(name = "PMT_PROJECT_CD")
     protected String defaultPaymentProjectCode;
+    @Column(name = "PMT_ORG_REF_ID")
 	protected String defaultPaymentOrganizationReferenceIdentifier;
+    @Column(name = "WRITEOFF_FIN_COA_CD")
     protected String writeoffChartOfAccountsCode;
+    @Column(name = "WRITEOFF_ACCT_NBR")
     protected String writeoffAccountNumber;
+    @Column(name = "WRITEOFF_SUB_ACCT_NBR")
     protected String writeoffSubAccountNumber;
+    @Column(name = "WRITEOFF_FIN_OBJ_CD")
     protected String writeoffFinancialObjectCode;
+    @Column(name = "WRITEOFF_FIN_SUB_OBJ_CD")
     protected String writeoffFinancialSubObjectCode;
+    @Column(name = "WRITEOFF_PROJECT_CD")
     protected String writeoffProjectCode;
+    @Column(name = "WRITEOFF_ORG_REF_ID")
     protected String writeoffOrganizationReferenceIdentifier;
 
+    @Transient
     protected ObjectCode defaultInvoiceFinancialObject;
+    @Transient
 	protected SubObjectCode defaultInvoiceFinancialSubObject;
+    @Transient
 	protected ObjectCode organizationLateChargeObject;
+    @Transient
 	protected Chart chartOfAccounts;
+    @Transient
 	protected Organization organization;
+    @Transient
 	protected Chart defaultInvoiceChartOfAccounts;
+    @Transient
 	protected SubAccount defaultInvoiceSubAccount;
+    @Transient
 	protected Account defaultInvoiceAccount;
+    @Transient
 	protected ProjectCode defaultInvoiceProject;
+    @Transient
 	protected Account defaultPaymentAccount;
+    @Transient
 	protected Chart defaultPaymentChartOfAccounts;
+    @Transient
 	protected SubAccount defaultPaymentSubAccount;
+    @Transient
 	protected ProjectCode defaultPaymentProject;
+    @Transient
 	protected transient SystemOptions universityFiscal;
+    @Transient
     protected ObjectCode defaultPaymentFinancialObject;
+    @Transient
     protected SubObjectCode defaultPaymentFinancialSubObject;
+    @Transient
     protected Chart writeoffChartOfAccounts;
+    @Transient
     protected Account writeoffAccount;
+    @Transient
     protected SubAccount writeoffSubAccount;
+    @Transient
     protected ObjectCode writeoffFinancialObject;
+    @Transient
     protected SubObjectCode writeoffFinancialSubObject;
+    @Transient
     protected ProjectCode writeoffProject;
 
 	/**

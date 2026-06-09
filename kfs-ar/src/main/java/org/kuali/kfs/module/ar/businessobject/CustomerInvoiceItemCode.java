@@ -21,6 +21,15 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
@@ -36,34 +45,67 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_INV_ITM_CODE_T")
 public class CustomerInvoiceItemCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
 	private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
 	private String organizationCode;
+    @Id
+    @Column(name = "AR_INV_ITM_CD")
 	private String invoiceItemCode;
+    @Column(name = "AR_INV_ITM_DESC")
 	private String invoiceItemDescription;
+    @Column(name = "AR_RLTD_STOCK_NBR")
 	private String relatedStockNumber;
+    @Column(name = "INV_FIN_COA_CD")
 	private String defaultInvoiceChartOfAccountsCode;
+    @Column(name = "INV_ACCT_NBR")
 	private String defaultInvoiceAccountNumber;
+    @Column(name = "INV_SUB_ACCT_NBR")
 	private String defaultInvoiceSubAccountNumber;
+    @Column(name = "INV_FIN_OBJ_CD")
 	private String defaultInvoiceFinancialObjectCode;
+    @Column(name = "INV_FIN_SUB_OBJ_CD")
 	private String defaultInvoiceFinancialSubObjectCode;
+    @Column(name = "INV_PROJECT_CD")
 	private String defaultInvoiceProjectCode;
+    @Column(name = "INV_ORG_REF_ID")
 	private String defaultInvoiceOrganizationReferenceIdentifier;
+    @Column(name = "AR_ITM_DFLT_PRC")
 	private KualiDecimal itemDefaultPrice;
+    @Column(name = "AR_DFLT_UOM_CD")
 	private String defaultUnitOfMeasureCode;
+    @Column(name = "AR_ITM_DFLT_QTY")
 	private BigDecimal itemDefaultQuantity;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
 	private boolean active;
+    @Column(name = "AR_INV_ITM_TXBL_IND")
+    @Convert(converter = YesNoConverter.class)
 	private boolean taxableIndicator;
 
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
 	private Organization organization;
+    @Transient
 	private Account defaultInvoiceAccount;
+    @Transient
 	private SubAccount defaultInvoiceSubAccount;
+    @Transient
 	private Chart defaultInvoiceChartOfAccounts;
+    @Transient
     private ObjectCodeCurrent defaultInvoiceFinancialObject;
+    @Transient
     private SubObjectCodeCurrent defaultInvoiceFinancialSubObject;
+    @Transient
 	private ProjectCode defaultInvoiceProject;
+    @Transient
 	private UnitOfMeasure unitOfMeasure;
 
 	/**

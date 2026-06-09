@@ -26,6 +26,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -49,37 +58,58 @@ import org.kuali.rice.krad.util.ObjectUtils;
  *
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_INV_DTL_T")
 public class CustomerInvoiceDetail extends SourceAccountingLine implements AppliedPayment, AccountsReceivableCustomerInvoiceDetail {
 
     private static Logger LOG = Logger.getLogger(CustomerInvoiceDetail.class);
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "CustomerInvoiceDetail";
 
     // private Integer invoiceItemNumber; using SourceAccountingLine.sequenceNumber
+    @Column(name = "AR_INV_ITM_QTY")
     private BigDecimal invoiceItemQuantity;
+    @Column(name = "AR_INVITM_UNIT_PRC")
     private BigDecimal invoiceItemUnitPrice;
     // private KualiDecimal invoiceItemTotalAmount; using SourceAccountingLine.amount for now
+    @Column(name = "AR_INV_ITM_SRVC_DT")
     private Date invoiceItemServiceDate;
+    @Column(name = "AR_INV_ITM_CD")
     private String invoiceItemCode;
+    @Column(name = "AR_INV_ITM_DESC")
     private String invoiceItemDescription;
+    @Column(name = "FIN_AR_OBJ_CD")
     private String accountsReceivableObjectCode;
+    @Column(name = "FIN_AR_SUB_OBJ_CD")
     private String accountsReceivableSubObjectCode;
+    @Column(name = "AR_INV_ITM_TAX_AMT")
     private KualiDecimal invoiceItemTaxAmount = KualiDecimal.ZERO;;
+    @Column(name = "AR_INV_ITM_TXBL_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean taxableIndicator;
+    @Transient
     private boolean isDebit;
+    @Column(name = "AR_INV_ITM_DSCT_LN_NBR")
     private Integer invoiceItemDiscountLineNumber;
 
+    @Column(name = "AR_INV_ITM_UOM_CD")
     private String invoiceItemUnitOfMeasureCode;
+    @Transient
     private UnitOfMeasure unitOfMeasure;
 
+    @Transient
     private SubObjectCode accountsReceivableSubObject;
+    @Transient
     private ObjectCode accountsReceivableObject;
 
+    @Transient
     private transient CustomerInvoiceDocument customerInvoiceDocument;
     private transient CustomerInvoiceDetail parentDiscountCustomerInvoiceDetail;
     private transient CustomerInvoiceDetail discountCustomerInvoiceDetail;
 
     // fields used for CustomerInvoiceWriteoffDocument
+    @Transient
     private KualiDecimal writeoffAmount;
+    @Transient
     private String customerInvoiceWriteoffDocumentNumber;
 
     // ---- BEGIN OPEN AMOUNTS

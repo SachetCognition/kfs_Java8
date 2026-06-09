@@ -24,6 +24,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -83,23 +90,37 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Payment Application Document.
  */
+@Entity
+@Table(name = "AR_APPLICATION_DOC_T")
 public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocument.class);
 
     protected static final String LAUNCHED_FROM_BATCH = "LaunchedBySystemUser";
 
+    @Transient
     protected String hiddenFieldForErrors;
+    @Transient
     protected List<InvoicePaidApplied> invoicePaidApplieds;
+    @Transient
     protected List<NonInvoiced> nonInvoiceds;
+    @Transient
     protected Collection<NonInvoicedDistribution> nonInvoicedDistributions;
+    @Transient
     protected Collection<NonAppliedDistribution> nonAppliedDistributions;
+    @Transient
     protected NonAppliedHolding nonAppliedHolding;
+    @Transient
     protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Column(name = "INV_DOC_TYP")
     protected String invoiceDocumentType;// this document type variable would help in differentiating Customer and CG Invoices
+    @Column(name = "LTRCR_CRTN_TYP")
     protected String letterOfCreditCreationType;// To categorize the CG Invoices based on Award LOC Type
+    @Column(name = "PRPSL_NBR")
     protected Long proposalNumber;// For loc creation type = Award
+    @Column(name = "LTRCR_FNDGRP_CD")
     protected String letterOfCreditFundGroupCode;// for loc creation type = LOC fund
+    @Column(name = "LTRCR_FND_CD")
     protected String letterOfCreditFundCode;// for loc creation type = LOC fund group
     protected transient PaymentApplicationDocumentService paymentApplicationDocumentService;
     protected transient CashControlDetail cashControlDetail;
@@ -111,6 +132,7 @@ public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase
     private static volatile transient AccountsReceivablePendingEntryService accountsReceivablePendingEntryService;
 
     // used for non-cash-control payapps
+    @Transient
     protected ArrayList<NonAppliedHolding> nonAppliedHoldingsForCustomer; // control docs for non-cash-control payapps
 
     public PaymentApplicationDocument() {
@@ -319,6 +341,7 @@ public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase
     /**
      * @return
      */
+    @Transient
     public boolean isFinal() {
         return isApproved();
     }

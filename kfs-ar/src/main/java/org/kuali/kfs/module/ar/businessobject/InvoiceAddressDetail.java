@@ -22,33 +22,64 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * This class is used to represent an invoice address detail business object.
  */
+@Entity
+@Table(name = "AR_INV_ADDR_DTL_T")
 public class InvoiceAddressDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Id
+    @Column(name = "CUST_ADDR_ID")
     private Integer customerAddressIdentifier;
+    @Column(name = "CUST_ADDR_TYPE_CD")
     private String customerAddressTypeCode;
+    @Column(name = "CUST_ADDR_NM")
     private String customerAddressName;
+    @Column(name = "CUST_INV_TMPLT_CD")
     private String customerInvoiceTemplateCode;
+    @Column(name = "INV_TRNS_MTHD_CD")
     private String invoiceTransmissionMethodCode;
+    @Column(name = "CUST_EMAIL_ADDR")
     private String customerEmailAddress;
+    @Column(name = "NTE_ID")
     private long noteId;
+    @Column(name = "INIT_TRNS_DT")
     private Date initialTransmissionDate;
+    @Column(name = "CUST_LINE_1_ADDR")
     private String customerLine1StreetAddress;
+    @Column(name = "CUST_LINE_2_ADDR")
     private String customerLine2StreetAddress;
+    @Column(name = "CUST_CITY_NM")
     private String customerCityName;
+    @Column(name = "CUST_STATE_CD")
     private String customerStateCode;
+    @Column(name = "CUST_ZIP_CD")
     private String customerZipCode;
+    @Column(name = "CUST_CNTRY_CD")
     private String customerCountryCode;
+    @Column(name = "CUST_ADDR_INTL_PROV_NM")
     private String customerAddressInternationalProvinceName;
+    @Column(name = "CUST_INTL_MAIL_CD")
     private String customerInternationalMailCode;
 
+    @Transient
     private CustomerAddress customerAddress;
 
     /**

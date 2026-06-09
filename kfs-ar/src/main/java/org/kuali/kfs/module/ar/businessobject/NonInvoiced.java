@@ -22,6 +22,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -37,27 +44,50 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_NON_INV_T")
 public class NonInvoiced extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
 	private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
 	private Integer financialDocumentLineNumber;
+    @Column(name = "FDOC_POST_YR")
 	private Integer financialDocumentPostingYear;
+    @Column(name = "FIN_COA_CD")
 	private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
 	private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
 	private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
 	private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
 	private String financialSubObjectCode;
+    @Column(name = "PROJECT_CD")
 	private String projectCode;
+    @Column(name = "FDOC_LINE_AMT")
 	private KualiDecimal financialDocumentLineAmount;
+    @Column(name = "FDOC_OVERRIDE_CD")
 	private String financialDocumentOverrideCode;
+    @Transient
     private KualiDecimal nonInvoicedDistributionAmount = KualiDecimal.ZERO;
 
+    @Transient
     private AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
 	private SubAccount subAccount;
+    @Transient
 	private Chart chartOfAccounts;
+    @Transient
 	private SubObjectCode financialSubObject;
+    @Transient
 	private Account account;
+    @Transient
 	private ProjectCode project;
 
 
