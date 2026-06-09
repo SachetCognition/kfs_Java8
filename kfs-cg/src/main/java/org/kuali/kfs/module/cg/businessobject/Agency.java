@@ -36,38 +36,82 @@ import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.KualiModuleService;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.sys.persistence.BooleanYNInverseConverter;
+import org.kuali.kfs.sys.persistence.KualiDecimalConverter;
+
 /**
  * This class defines an agency as it is used and referenced within the Contracts & Grants portion of a college or university
  * financial system.
  */
+@Entity
+@Table(name = "CG_AGENCY_T")
 public class Agency extends PersistableBusinessObjectBase implements ContractsAndGrantsBillingAgency, MutableInactivatable {
 
+    @Id
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "CG_AGENCY_RPT_NM")
     private String reportingName;
+    @Column(name = "CG_AGENCY_FULL_NM")
     private String fullName;
+    @Column(name = "CG_AGENCY_TYP_CD")
     private String agencyTypeCode;
+    @Column(name = "CG_RPTTO_AGNCY_NBR")
     private String reportsToAgencyNumber;
+    @Column(name = "CG_AGNCY_INDR_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal indirectAmount;
+    @Column(name = "CG_AGNCY_IN_ST_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean inStateIndicator;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_RPTTO_AGNCY_NBR", insertable = false, updatable = false)
     private Agency reportsToAgency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_TYP_CD", insertable = false, updatable = false)
     private AgencyType agencyType;
+    @Column(name = "CG_AGENCY_HIST_IND")
+    @Convert(converter = BooleanYNInverseConverter.class)
     private boolean active;
 
     // Contracts & Grants fields
+    @Column(name = "CAGE_NBR")
     private String cageNumber;
+    @Column(name = "DODAC_NBR")
     private String dodacNumber;
+    @Column(name = "DUNS_NBR")
     private String dunAndBradstreetNumber;
+    @Column(name = "DUNS_PLUS_FOUR_NBR")
     private String dunsPlusFourNumber;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_NBR")
     private List<AgencyAddress> agencyAddresses;
 
+    @Column(name = "STATE_AGENCY_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean stateAgencyIndicator;
 
     // Creating Customer from Agency
     private AccountsReceivableCustomer customer;
+    @Column(name = "CUST_CRTN_OPTN_CD")
     private String customerCreationOptionCode;
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Column(name = "CUST_TYP_CD")
     private String customerTypeCode;
+    @Column(name = "CMPGN_ID")
     private String dunningCampaign;
 
     //To add boNotes

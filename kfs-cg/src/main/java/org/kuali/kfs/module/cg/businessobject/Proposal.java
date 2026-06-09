@@ -38,12 +38,31 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.LookupService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.sys.persistence.KualiDecimalConverter;
+
 /**
  * See functional documentation.
  */
+@Entity
+@Table(name = "CG_PRPSL_T")
 public class Proposal extends PersistableBusinessObjectBase implements MutableInactivatable, ContractAndGrantsProposal {
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGPRPSL_BEG_DT")
     private Date proposalBeginningDate;
+    @Column(name = "CGPRPSL_END_DT")
     private Date proposalEndingDate;
 
     /**
@@ -53,43 +72,92 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
      * @see #getProposalTotalAmount
      * @see #setProposalTotalAmount
      */
+    @Column(name = "CGPRPSL_TOT_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal proposalTotalAmount;
 
+    @Column(name = "CGPRPSL_DRCTCS_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal proposalDirectCostAmount;
+    @Column(name = "CGPRPSL_INDRCS_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal proposalIndirectCostAmount;
+    @Column(name = "CGPRPSL_REJECTD_DT")
     private Date proposalRejectedDate;
+    @Column(name = "CGPRPSL_LSTUPDT_DT")
     private Timestamp proposalLastUpdateDate;
+    @Column(name = "CGPRPSL_DUE_DT")
     private Date proposalDueDate;
+    @Column(name = "CGPRPSL_TOTPRJ_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal proposalTotalProjectAmount;
+    @Column(name = "CGPRPSL_SUBMSSN_DT")
     private Date proposalSubmissionDate;
+    @Column(name = "CGPRPSL_FEDPT_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean proposalFederalPassThroughIndicator;
+    @Column(name = "CG_OLD_PRPSL_NBR")
     private String oldProposalNumber;
+    @Column(name = "CG_GRANT_NBR")
     private String grantNumber;
+    @Column(name = "CGPRPSL_CLOSING_DT")
     private Date proposalClosingDate;
+    @Column(name = "CGPRPSL_AWD_TYP_CD")
     private String proposalAwardTypeCode;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "CGPRPSL_STAT_CD")
     private String proposalStatusCode;
+    @Column(name = "CG_FEDPT_AGNCY_NBR")
     private String federalPassThroughAgencyNumber;
+    @Column(name = "CG_CFDA_NBR")
     private String cfdaNumber;
+    @Column(name = "CGPRPSL_FELLOW_NM")
     private String proposalFellowName;
+    @Column(name = "CGPRPSL_PURPOSE_CD")
     private String proposalPurposeCode;
+    @Column(name = "CGPRPSL_PROJ_TTL")
     private String proposalProjectTitle;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<ProposalSubcontractor> proposalSubcontractors;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<ProposalOrganization> proposalOrganizations;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<ProposalProjectDirector> proposalProjectDirectors;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<ProposalResearchRisk> proposalResearchRisks;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_AWD_TYP_CD", insertable = false, updatable = false)
     private ProposalAwardType proposalAwardType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_NBR", insertable = false, updatable = false)
     private Agency agency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_STAT_CD", insertable = false, updatable = false)
     private ProposalStatus proposalStatus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_FEDPT_AGNCY_NBR", insertable = false, updatable = false)
     private Agency federalPassThroughAgency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_PURPOSE_CD", insertable = false, updatable = false)
     private ProposalPurpose proposalPurpose;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_CFDA_NBR", insertable = false, updatable = false)
     private CFDA cfda;
     private ProposalOrganization primaryProposalOrganization;
     private String routingOrg;
     private String routingChart;
     private LookupService lookupService;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Award award;
 
     /** Dummy value used to facilitate lookups */

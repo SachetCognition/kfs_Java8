@@ -28,18 +28,46 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * This class represents an association between an award and an organization. It's like a reference to the organization from the
  * award. This way an award can maintain a collection of these references instead of owning organizations directly.
  */
+@Entity
+@Table(name = "CG_AWD_ORG_T")
+@IdClass(AwardOrganization.AwardOrganizationId.class)
 public class AwardOrganization extends PersistableBusinessObjectBase implements Primaryable, MutableInactivatable, ContractsAndGrantsOrganization {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGAWD_PRM_ORG_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean awardPrimaryOrganizationIndicator;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
     private Organization organization;
 
@@ -201,4 +229,27 @@ public class AwardOrganization extends PersistableBusinessObjectBase implements 
         }
         return m;
     }
+
+    public static class AwardOrganizationId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String chartOfAccountsCode;
+        private String organizationCode;
+        private Long proposalNumber;
+
+        public AwardOrganizationId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AwardOrganizationId that = (AwardOrganizationId) o;
+            return java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(organizationCode, that.organizationCode) && java.util.Objects.equals(proposalNumber, that.proposalNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(chartOfAccountsCode, organizationCode, proposalNumber);
+        }
+    }
+
 }

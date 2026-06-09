@@ -24,12 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.kuali.kfs.sys.persistence.BooleanAIConverter;
+
 /**
  *
  */
+@Entity
+@Table(name = "CG_GRANT_DESC_T")
 public class GrantDescription extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CG_GRANT_DESC_CD")
     private String grantDescriptionCode;
+    @Column(name = "CG_GRANT_DESC")
     private String grantDescription;
+    @Column(name = "CG_GRNT_DESC_ACTV_CD")
+    @Convert(converter = BooleanAIConverter.class)
     private boolean active;
 
     /**
