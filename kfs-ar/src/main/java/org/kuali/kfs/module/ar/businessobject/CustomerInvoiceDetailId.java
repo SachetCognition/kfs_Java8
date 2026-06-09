@@ -7,11 +7,11 @@ public class CustomerInvoiceDetailId implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String documentNumber;
-    private String sequenceNumber;
+    private Integer sequenceNumber;
 
     public CustomerInvoiceDetailId() {}
 
-    public CustomerInvoiceDetailId(String documentNumber, String sequenceNumber) {
+    public CustomerInvoiceDetailId(String documentNumber, Integer sequenceNumber) {
         this.documentNumber = documentNumber;
         this.sequenceNumber = sequenceNumber;
     }
@@ -19,8 +19,8 @@ public class CustomerInvoiceDetailId implements Serializable {
     public String getDocumentNumber() { return documentNumber; }
     public void setDocumentNumber(String documentNumber) { this.documentNumber = documentNumber; }
 
-    public String getSequenceNumber() { return sequenceNumber; }
-    public void setSequenceNumber(String sequenceNumber) { this.sequenceNumber = sequenceNumber; }
+    public Integer getSequenceNumber() { return sequenceNumber; }
+    public void setSequenceNumber(Integer sequenceNumber) { this.sequenceNumber = sequenceNumber; }
 
     @Override
     public boolean equals(Object o) {

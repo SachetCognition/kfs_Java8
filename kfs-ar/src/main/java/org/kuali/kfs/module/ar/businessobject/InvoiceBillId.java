@@ -7,11 +7,11 @@ public class InvoiceBillId implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String documentNumber;
-    private String billIdentifier;
+    private Long billIdentifier;
 
     public InvoiceBillId() {}
 
-    public InvoiceBillId(String documentNumber, String billIdentifier) {
+    public InvoiceBillId(String documentNumber, Long billIdentifier) {
         this.documentNumber = documentNumber;
         this.billIdentifier = billIdentifier;
     }
@@ -19,8 +19,8 @@ public class InvoiceBillId implements Serializable {
     public String getDocumentNumber() { return documentNumber; }
     public void setDocumentNumber(String documentNumber) { this.documentNumber = documentNumber; }
 
-    public String getBillIdentifier() { return billIdentifier; }
-    public void setBillIdentifier(String billIdentifier) { this.billIdentifier = billIdentifier; }
+    public Long getBillIdentifier() { return billIdentifier; }
+    public void setBillIdentifier(Long billIdentifier) { this.billIdentifier = billIdentifier; }
 
     @Override
     public boolean equals(Object o) {

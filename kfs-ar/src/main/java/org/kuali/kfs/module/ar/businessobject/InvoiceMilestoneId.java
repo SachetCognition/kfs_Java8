@@ -7,11 +7,11 @@ public class InvoiceMilestoneId implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String documentNumber;
-    private String milestoneIdentifier;
+    private Long milestoneIdentifier;
 
     public InvoiceMilestoneId() {}
 
-    public InvoiceMilestoneId(String documentNumber, String milestoneIdentifier) {
+    public InvoiceMilestoneId(String documentNumber, Long milestoneIdentifier) {
         this.documentNumber = documentNumber;
         this.milestoneIdentifier = milestoneIdentifier;
     }
@@ -19,8 +19,8 @@ public class InvoiceMilestoneId implements Serializable {
     public String getDocumentNumber() { return documentNumber; }
     public void setDocumentNumber(String documentNumber) { this.documentNumber = documentNumber; }
 
-    public String getMilestoneIdentifier() { return milestoneIdentifier; }
-    public void setMilestoneIdentifier(String milestoneIdentifier) { this.milestoneIdentifier = milestoneIdentifier; }
+    public Long getMilestoneIdentifier() { return milestoneIdentifier; }
+    public void setMilestoneIdentifier(Long milestoneIdentifier) { this.milestoneIdentifier = milestoneIdentifier; }
 
     @Override
     public boolean equals(Object o) {
