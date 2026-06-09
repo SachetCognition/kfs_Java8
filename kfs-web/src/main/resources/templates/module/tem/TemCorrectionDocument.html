@@ -1,0 +1,535 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Tem Correction Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="document-page" data-document-type="${KualiForm.docTitle}" data-form-action="${KualiForm.htmlFormAction}" data-show-document-info="true">
+<form th:action="@{${KualiForm.htmlFormAction}}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+	<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+	<th:block th:if="${debug == true}">
+		<div class="tab-container" th:data-tab-title="Debug">
+    <h3 th:text="Debug">Debug</h3>
+			<div class="tab-container" align="center">
+				<table cellpadding="0" class="datatable" summary="">
+					<tr>
+						<td align="left" valign="middle" class="subhead"><span
+							class="subhead-left">Debug</span></td>
+					</tr>
+				</table>
+				<table cellpadding="0" class="datatable">
+					<tr>
+						<td width="10%">editableFlag</td>
+						<td>${KualiForm.editableFlag}</td>
+					</tr>
+					<tr>
+						<td>manualEditFlag</td>
+						<td>${KualiForm.manualEditFlag}</td>
+					</tr>
+					<tr>
+						<td>processInBatch</td>
+						<td>${KualiForm.processInBatch}</td>
+					</tr>
+					<tr>
+						<td>chooseSystem</td>
+						<td>${KualiForm.chooseSystem}</td>
+					</tr>
+					<tr>
+						<td>editMethod</td>
+						<td>${KualiForm.editMethod}</td>
+					</tr>
+					<tr>
+						<td>inputGroupId</td>
+						<td>${KualiForm.document.correctionInputFileName}</td>
+					</tr>
+					<tr>
+						<td>outputGroupId</td>
+						<td>${KualiForm.document.correctionOutputFileName}</td>
+					</tr>
+					<tr>
+						<td>inputFileName</td>
+						<td>${KualiForm.inputFileName}</td>
+					</tr>
+					<tr>
+						<td>dataLoadedFlag</td>
+						<td>${KualiForm.dataLoadedFlag}</td>
+					</tr>
+					<tr>
+						<td>matchCriteriaOnly</td>
+						<td>${KualiForm.matchCriteriaOnly}</td>
+					</tr>
+					<tr>
+						<td>editableFlag</td>
+						<td>${KualiForm.editableFlag}</td>
+					</tr>
+					<tr>
+						<td>deleteFileFlag</td>
+						<td>${KualiForm.deleteFileFlag}</td>
+					</tr>
+					<tr>
+						<td>allEntries.size</td>
+						<td>${KualiForm.allEntriesSize}</td>
+					</tr>
+					<tr>
+						<td>readOnly</td>
+						<td>${readOnly}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</th:block>
+	<div class="tab-container" th:data-tab-title="Summary">
+    <h3 th:text="Summary">Summary</h3>
+		<th:block th:if="${KualiForm.document.correctionTypeCode ne 'R' and (not (KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.inputGroupId)) && ((KualiForm.dataLoadedFlag and !KualiForm.restrictedFunctionalityMode) or KualiForm.document.correctionOutputFileName != null or !KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT])}">
+
+			<div class="tab-container" align="center">
+				<table cellpadding="0" class="datatable" summary="">
+					<tr>
+						<th:block th:if="${KualiForm.showOutputFlag == true or KualiForm.showSummaryOutputFlag == true}">
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Summary of Output Group</span></td>
+						</th:block>
+						<th:block th:if="${KualiForm.showOutputFlag == false}">
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Summary of Input Group</span></td>
+						</th:block>
+					</tr>
+				</table>
+				<table cellpadding="0" class="datatable">
+					<tr>
+						<td width="20%" align="left" valign="middle">Trip Totals:</td>
+						<td align="right" valign="middle"><fmt:formatNumber
+								value="${KualiForm.document.correctionTripTotalAmount}"
+								groupingUsed="true" minFractionDigits="2" /></td>
+					</tr>
+					<tr>
+						<td width="20%" align="left" valign="middle">Rows output:</td>
+						<td align="right" valign="middle"><fmt:formatNumber
+								value="${KualiForm.document.correctionRowCount}"
+								groupingUsed="true" /></td>
+					</tr>
+				</table>
+			</div>
+		</th:block>
+		<th:block th:if="${KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.document.correctionInputFileName}">
+			<div class="tab-container" align="center">
+				<table cellpadding="0" class="datatable" summary="">
+					<tr>
+						<th:block th:if="${KualiForm.showOutputFlag == true or KualiForm.showSummaryOutputFlag == true}">
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Summary of Output Group</span></td>
+						</th:block>
+						<th:block th:if="${KualiForm.showOutputFlag == false or KualiForm.showSummaryOutputFlag == true}">
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Summary of Input Group</span></td>
+						</th:block>
+					</tr>
+				</table>
+				<table cellpadding="0" class="datatable">
+					<tr>
+						<td>The summary is unavailable because the agency entries are
+							unavailable.</td>
+					</tr>
+				</table>
+			</div>
+		</th:block>
+		<th:block th:if="${KualiForm.restrictedFunctionalityMode && KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}">
+			<div class="tab-container" align="center">
+				<table cellpadding="0" class="datatable" summary="">
+					<tr>
+						<th:block th:if="${KualiForm.showOutputFlag == true or KualiForm.showSummaryOutputFlag == true}">
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Summary of Output Group</span></td>
+						</th:block>
+						<th:block th:if="${KualiForm.showOutputFlag == false or KualiForm.showSummaryOutputFlag == true}">
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Summary of Input Group</span></td>
+						</th:block>
+					</tr>
+				</table>
+				<table cellpadding="0" class="datatable">
+					<tr>
+						<td>The summary is unavailable because the selected agency
+							entry group is too large.</td>
+					</tr>
+				</table>
+			</div>
+		</th:block>
+	</div>
+	
+	<th:block th:if="${readOnly == false}">
+		<div class="tab-container" th:data-tab-title="Correction Process">
+    <h3 th:text="Correction Process">Correction Process</h3>
+			<div class="tab-container" align="center">
+				<table cellpadding=0 class="datatable" summary="">
+					<tr>
+						<td align="left" valign="middle" class="subhead"><span
+							class="subhead-left"></span><label for="chooseSystem">Select
+								System</label> and <labelfor"editMethod">Edit Method</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<center>
+								<strong>System:</strong> Database
+
+								<select th:field="*{editMethod}" styleId="editMethod"
+									title="Edit Method">
+									<html:optionsCollection
+										property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|tem|businessobject|options|CorrectionEditMethodValuesFinder"
+										label="value" value="key" />
+								</select>
+								<html:image
+									property="methodToCall.selectSystemEditMethod.anchor${currentTabIndex}"
+									src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif"
+									styleClass="tinybutton" alt="Select System and Edit Method"
+									title="Select System and Edit Method" />
+							</center>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</th:block>
+	<div class="tab-container" th:data-tab-title="Documents in System">
+    <h3 th:text="Documents in System">Documents in System</h3>
+		<th:block th:if="${KualiForm.chooseSystem == 'D'}">
+			<div class="tab-container" align="center">
+				<table cellpadding=0 class="datatable" summary="">
+					<tr>
+						<td align="left" valign="middle" class="subhead"><span
+							class="subhead-left"></span>Documents in System</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="bord-l-b"
+							style="padding: 4px; vertical-align: top;">
+							<center>
+								<label for="inputGroupId"><strong>Agency Entry
+										Group</strong> </label><br /> <br />
+								<select th:field="*{document.correctionInputFileName}"
+									size="10" styleId="inputGroupId" title="Agency Entry Group">
+									<th:block th:if="${KualiForm.inputGroupIdFromLastDocumentLoadIsMissing and KualiForm.inputGroupId eq KualiForm.inputGroupIdFromLastDocumentLoad}">
+										<option
+											value="<span th:text="${KualiForm.inputGroupIdFromLastDocumentLoad}"></span>"
+											selected="selected">
+											<span th:text="${KualiForm.inputGroupIdFromLastDocumentLoad}"></span>
+											Document was last saved with this agency entry group
+											selected. Group is no longer in system.
+										</option>
+									</th:block>
+
+									<html:optionsCollection
+										property="actionFormUtilMap.getOptionsMap~org|kuali|kfs|module|tem|businessobject|options|AgencyCorrectionGroupEntriesFinder"
+										label="value" value="key" />
+								</select>
+
+								<br /> <br />
+								<th:block th:if="${KualiForm.editMethod eq 'R'}">
+									<html:image
+										property="methodToCall.confirmDeleteDocument.anchor${currentTabIndex}"
+										src="${ConfigProperties.externalizable.images.url}tinybutton-remgrpproc.gif"
+										styleClass="tinybutton" alt="Remove Group From Processing"
+										title="Remove Group From Processing" />
+								</th:block>
+								<th:block th:if="${KualiForm.editMethod eq 'M' or KualiForm.editMethod eq 'C'}">
+									<html:image
+										property="methodToCall.loadGroup.anchor${currentTabIndex}"
+										src="${ConfigProperties.externalizable.images.url}tinybutton-loadgroup.gif"
+										styleClass="tinybutton" alt="Show All Entries"
+										title="Show All Entries" />
+								</th:block>
+							</center>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</th:block>
+	</div>
+	<div class="tab-container" th:data-tab-title="Search Results">
+    <h3 th:text="Search Results">Search Results</h3>
+		<th:block th:if="${KualiForm.restrictedFunctionalityMode}">
+			<div class="tab-container" align="center">
+				<table cellpadding=0 class="datatable" summary="">
+					<tr>
+						<td align="left" valign="middle" class="subhead">Search
+							Results</td>
+					</tr>
+					<tr>
+						<td><span th:text="#{gl.correction.restricted.functionality.search.results.label}"></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</th:block>
+		<th:block th:if="${KualiForm.restrictedFunctionalityMode && KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.document.correctionInputFileName}">
+			<div class="tab-container" align="center">
+				<table cellpadding=0 class="datatable" summary="">
+					<tr>
+						<td align="left" valign="middle" class="subhead">Search
+							Results</td>
+					</tr>
+					<tr>
+						<td><span th:text="#{gl.correction.persisted.origin.entries.missing}"></span></td>
+					</tr>
+				</table>
+			</div>
+		</th:block>
+		<th:block th:if="${KualiForm.chooseSystem != null and KualiForm.editMethod != null and KualiForm.dataLoadedFlag == true and !KualiForm.restrictedFunctionalityMode and !(KualiForm.inputGroupIdFromLastDocumentLoad eq KualiForm.document.correctionInputFileName)}">
+			<div class="tab-container" align="left"
+				style="overflow: scroll; width: 100%;">
+				<table cellpadding=0 class="datatable" summary="">
+					<tr>
+						<th:block th:switch="${true}">
+							<th:block th:case="${KualiForm.showOutputFlag == true and KualiForm.editMethod == 'C'}">
+								<td align="left" valign="middle" class="subhead"><span
+									class="subhead-left">Search Results - Output Group</span></td>
+							</th:block>
+							<th:block th:case="${KualiForm.showOutputFlag == false and KualiForm.editMethod == 'C'}">
+								<td align="left" valign="middle" class="subhead"><span
+									class="subhead-left">Search Results - Input Group</span></td>
+							</th:block>
+							<th:block th:case="${KualiForm.showOutputFlag == true and KualiForm.editMethod == 'M'}">
+								<td align="left" valign="middle" class="subhead"><span
+									class="subhead-left">Search Results - Matching Entries
+										Only</span></td>
+							</th:block>
+							<th:block th:case="${KualiForm.showOutputFlag == false and KualiForm.editMethod == 'M'}">
+								<td align="left" valign="middle" class="subhead"><span
+									class="subhead-left">Search Results - All Entries</span></td>
+							</th:block>
+						</th:block>
+					</tr>
+					<tr>
+						<td>
+						<th:block th:if="${empty KualiForm.allEntries}">
+                        No Agency Entries found.
+                        </th:block> 
+                        <th:block th:if="${!empty KualiForm.allEntries}">
+								<kul:tableRenderPagingBanner
+									pageNumber="${KualiForm.agencyEntrySearchResultTableMetadata.viewedPageNumber}"
+									totalPages="${KualiForm.agencyEntrySearchResultTableMetadata.totalNumberOfPages}"
+									firstDisplayedRow="${KualiForm.agencyEntrySearchResultTableMetadata.firstRowIndex}"
+									lastDisplayedRow="${KualiForm.agencyEntrySearchResultTableMetadata.lastRowIndex}"
+									resultsActualSize="${KualiForm.agencyEntrySearchResultTableMetadata.resultsActualSize}"
+									resultsLimitedSize="${KualiForm.agencyEntrySearchResultTableMetadata.resultsLimitedSize}"
+									buttonExtraParams=".anchor${currentTabIndex}" />
+								<input type="hidden"
+									name="agencyEntrySearchResultTableMetadata.${T(org.kuali.rice.krad.util.KRADConstants).TableRenderConstants.PREVIOUSLY_SORTED_COLUMN_INDEX_PARAM}"
+									value="${KualiForm.agencyEntrySearchResultTableMetadata.columnToSortIndex}" />
+								<input type="hidden"
+									name="agencyEntrySearchResultTableMetadata.sortDescending"
+									value="${KualiForm.agencyEntrySearchResultTableMetadata.sortDescending}" />
+								<input type="hidden"
+									name="agencyEntrySearchResultTableMetadata.viewedPageNumber"
+									value="${KualiForm.agencyEntrySearchResultTableMetadata.viewedPageNumber}" />
+								<table class="datatable-100" id="agencyEntry" cellpadding="0"
+									cellspacing="0">
+									<thead>
+										<tr>
+											<th:block th:if="${KualiForm.editableFlag == true}">
+												<th>Manual Edit</th>
+											</th:block>
+											<th:block th:each="column : ${KualiForm.tableRenderColumnMetadata}">
+												<th class="sortable"><span th:text="${column.columnTitle}"></span> <th:block th:if="${empty column.columnTitle}">$nbsp;</th:block></th>
+											</th:block>
+										</tr>
+										<tr>
+											<th:block th:if="${KualiForm.editableFlag == true and KualiForm.showOutputFlag == false}">
+												<td>&nbsp;</td>
+											</th:block>
+											<th:block th:each="column,columnLoopStatus : ${KualiForm.tableRenderColumnMetadata}">
+												<td class="sortable" style="text-align: center;"><th:block th:if="${column.sortable}">
+														<html:image
+															property="methodToCall.sort.${columnLoopStatus.index}.anchor${currentTabIndex}"
+															src="${ConfigProperties.kr.externalizable.images.url}sort.gif"
+															styleClass="tinybutton" alt="Sort column"
+															title="Sort column ${column.columnTitle}" />
+													</th:block> <th:block th:if="${!column.sortable}">
+                            &nbsp;
+                        </th:block></td>
+											</th:block>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${KualiForm.allEntries}" var="agencyEntry"
+											varStatus="loopStatus"
+											begin="${KualiForm.agencyEntrySearchResultTableMetadata.firstRowIndex}"
+											end="${KualiForm.agencyEntrySearchResultTableMetadata.lastRowIndex}">
+											<!-- th:with="rowclass=odd" -->
+											<th:block th:if="${loopStatus.count % 2 == 0}">
+												<!-- th:with="rowclass=even" -->
+											</th:block>
+											<tr class="${rowclass}">
+												<th:block th:if="${KualiForm.editableFlag == true and KualiForm.editMethod == 'M'}">
+													<td><html:image
+															property="methodToCall.editManualEntry.entryId${agencyEntry.entryId}.anchor${currentTabIndex}"
+															src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif"
+															styleClass="tinybutton" alt="edit" title="edit" /> <html:image
+															property="methodToCall.deleteManualEntry.entryId${agencyEntry.entryId}.anchor${currentTabIndex}"
+															src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+															styleClass="tinybutton" alt="delete" title="delete" /></td>
+												</th:block>
+												<td class="infocell"><span th:text="${agencyEntry.creditCardOrAgencyCode}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.agency}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.merchantName}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.tripInvoiceNumber}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.travelerName}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.travelerId}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.tripExpenseAmount}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.tripArrangerName}"></span>&nbsp;</td>
+                                                <td class="infocell"><span th:text="${agencyEntry.tripDepartureDate}"></span>&nbsp;</td>
+												<td class="infocell"><span th:text="${agencyEntry.airBookDate}"></span>&nbsp;</td>
+                                                <td class="infocell"><span th:text="${agencyEntry.airCarrierCode}"></span>&nbsp;</td>
+                                                <td class="infocell"><span th:text="${agencyEntry.airTicketNumber}"></span>&nbsp;</td>
+                                                <td class="infocell"><span th:text="${agencyEntry.pnrNumber}"></span>&nbsp;</td>
+                                                <td class="infocell"><span th:text="${agencyEntry.transactionUniqueId}"></span>&nbsp;</td>
+                                                <td class="infocell"><span th:text="${agencyEntry.transactionPostingDate}"></span>&nbsp;</td>
+											</tr>
+										</th:block>
+									<tbody>
+								</table>
+							</th:block></td>
+					</tr>
+					<th:block th:if="${KualiForm.editMethod == 'M' and KualiForm.editableFlag == true}">
+						<tr>
+							<td align="left" valign="middle" class="subhead"><span
+								class="subhead-left">Manual Editing</span></td>
+						</tr>
+						<tr>
+							<td>
+								<table id="eachEntryForManualEdit">
+									<thead>
+										<tr>
+											<th>Manual Edit</th>
+
+											<th:block th:each="column : ${KualiForm.tableRenderColumnMetadata}">
+
+												<th class="sortable"><label
+													for="<span th:text="${column.propertyName}"></span>"> <span th:text="${column.columnTitle}"></span> <th:block th:if="${empty column.columnTitle}">$nbsp;</th:block> </label>
+												</th>
+											</th:block>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="odd">
+
+											<th:block th:switch="${true}">
+												<th:block th:case="${KualiForm.entryForManualEdit.entryId == 0}">
+													<td><html:image
+															property="methodToCall.addManualEntry.anchor${currentTabIndex}"
+															src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+															styleClass="tinybutton" alt="edit" title="edit" />
+													</td>
+												</th:block>
+												<th:block th:case="*">
+													<td><html:image
+															property="methodToCall.saveManualEntry.anchor${currentTabIndex}"
+															src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif"
+															styleClass="tinybutton" alt="edit" title="edit" /></td>
+												</th:block>
+											</th:block>
+											<td><input type="text" th:field="*{entryForManualEdit.creditCardOrAgencyCode}" size="5"
+													styleId="entryForManualEdit.creditCardOrAgencyCode" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.agency}" size="7"
+													styleId="entryForManualEdit.agency" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.merchantName}" size="7"
+													styleId="entryForManualEdit.merchantName" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.tripInvoiceNumber}" size="5"
+													styleId="entryForManualEdit.tripInvoiceNumber" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.travelerName}"
+													size="6"
+													styleId="entryForManualEdit.travelerName" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.travelerId}"
+													size="8"
+													styleId="entryForManualEdit.travelerId" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.tripExpenseAmount}"
+													size="6"
+													styleId="entryForManualEdit.tripExpenseAmount" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.tripArrangerName}"
+													size="6"
+													styleId="entryForManualEdit.tripArrangerName" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.tripDepartureDate}"
+													size="10"
+													styleId="entryForManualEdit.tripDepartureDate" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.airBookDate}"
+													size="6"
+													styleId="entryForManualEdit.airBookDate" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.airCarrierCode}" size="14"
+													styleId="entryForManualEdit.airCarrierCode" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.airTicketNumber}"
+													size="11"
+													styleId="entryForManualEdit.airTicketNumber" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.pnrNumber}" size="7"
+													styleId="entryForManualEdit.pnrNumber" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.transactionUniqueId}"
+													size="9"
+													styleId="entryForManualEdit.transactionUniqueId" />
+											</td>
+											<td><input type="text" th:field="*{entryForManualEdit.transactionPostingDate}" size="12"
+													styleId="entryForManualEdit.transactionPostingDate" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${KualiForm.manualEditFlag == true}">
+						<td><STRONG> Do you want to edit this document? </STRONG> <html:image
+								property="methodToCall.manualEdit.anchor${currentTabIndex}"
+								src="${ConfigProperties.kr.externalizable.images.url}tinybutton-edit1.gif"
+								styleClass="tinybutton" alt="show edit" title="show edit" />
+						</td>
+					</th:block>
+				</table>
+			</div>
+		</th:block>
+	</div>
+	<div th:replace="~{fragments/notes :: notes}"></div>
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

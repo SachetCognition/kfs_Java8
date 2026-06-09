@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="adHocRecipients" class="tab-container">
+    <h3>Ad Hoc Recipients</h3>
+    <table class="datatable" summary="ad hoc recipients">
+        <thead>
+            <tr>
+                <th>Action Requested</th>
+                <th>Person</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="recipient,iterStat : ${KualiForm.adHocRoutePersons}">
+                <td>
+                    <select th:name="'adHocRoutePerson[' + ${iterStat.index} + '].actionRequested'"
+                            th:id="'adHocRoutePerson[' + ${iterStat.index} + '].actionRequested'">
+                        <option value="F" th:selected="${recipient.actionRequested == 'F'}">FYI</option>
+                        <option value="K" th:selected="${recipient.actionRequested == 'K'}">ACKNOWLEDGE</option>
+                        <option value="A" th:selected="${recipient.actionRequested == 'A'}">APPROVE</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" th:name="'adHocRoutePerson[' + ${iterStat.index} + '].id'"
+                           th:id="'adHocRoutePerson[' + ${iterStat.index} + '].id'"
+                           th:value="${recipient.id}"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Equipment Loan Or Return</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="document-page" data-document-type="EquipmentLoanOrReturnDocument" data-form-action="camsEquipmentLoanOrReturn" data-show-document-info="true">
+<form th:action="@{camsEquipmentLoanOrReturn}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+	<!-- th:with="equipAttributes=${DataDictionary.EquipmentLoanOrReturnDocument.attributes}" -->
+	<!-- th:with="assetAttributes=${DataDictionary.Asset.attributes}" -->
+	<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+	<c:set var="displayNewLoanTab" value="${KualiForm.editingMode['displayNewLoanTab']}" scope="request"/>
+	<c:set var="displayReturnLoanFieldsReadOnly" value="${KualiForm.editingMode['displayReturnLoanFieldsReadOnly']}" scope="request"/>
+	
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+    <div th:replace="~{fragments/cams/viewAssetDetails :: viewAssetDetails}" th:with="defaultTabHide='false'"></div> 
+
+	<div class="tab-container" th:data-tab-title="Equipment Loans">
+    <h3 th:text="Equipment Loans">Equipment Loans</h3> 
+	    <div class="tab-container" align="center">
+	      <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+	      	<tr>
+                <td colspan="4" class="tab-subhead">Equipment Loan Information</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerUniversalIdentifier.label}"></label></th>
+				<th:block th:switch="${true}">
+					<th:block th:case="${!empty KualiForm.document.borrowerPerson.principalName and !displayNewLoanTab}">
+						<td class="grid" width="25%"><span th:text="${KualiForm.document.borrowerPerson.principalName}"></span>
+			        </th:block>
+			        <th:block th:case="*">
+					   	<td class="grid" width="25%">
+						   	<kul:checkErrors keyMatch="document.borrowerPerson.principalName,document.borrowerUniversalIdentifier" />
+							<kul:user userIdFieldName="document.borrowerPerson.principalName" 
+								userId="${KualiForm.document.borrowerPerson.principalName}" 
+								universalIdFieldName="document.borrowerUniversalIdentifier" 
+								universalId="${KualiForm.document.borrowerUniversalIdentifier}" 
+								userNameFieldName="document.borrowerPerson.name" label="User" 
+								userName="${KualiForm.document.borrowerPerson.name}"
+								lookupParameters="document.borrowerPerson.principalName:principalName" 
+								fieldConversions="principalName:document.borrowerPerson.principalName,principalId:document.borrowerUniversalIdentifier,name:document.borrowerPerson.name" 
+								hasErrors="${hasErrors}" readOnly="${readOnly}" />
+						</td>
+					</th:block>
+				</th:block>				
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.loanDate.label}"></label></th>
+			   	<th:block th:switch="${true}">
+		            <th:block th:case="${readOnly or !displayNewLoanTab}">
+		                <td class="grid" width="25%"><kul:htmlControlAttribute attributeEntry="${equipAttributes.loanDate}" property="document.loanDate" readOnly="true" />
+		            </th:block>
+		            <th:block th:case="*">
+				        <td class="grid" width="25%"><kul:dateInput attributeEntry="${equipAttributes.loanDate}" property="document.loanDate" /> </td>
+		            </th:block>
+ 		       </th:block>
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.expectedReturnDate.label}"></label></th>
+			   	<th:block th:switch="${true}">
+		            <th:block th:case="${readOnly or displayReturnLoanFieldsReadOnly}">
+		                <td class="grid" width="25%"><kul:htmlControlAttribute attributeEntry="${equipAttributes.expectedReturnDate}" property="document.expectedReturnDate" readOnly="true" />
+		            </th:block>
+		            <th:block th:case="*">
+		                <td class="grid" width="25%"><kul:dateInput attributeEntry="${equipAttributes.expectedReturnDate}" property="document.expectedReturnDate" /> </td>
+		            </th:block>
+ 		       </th:block>
+			   	<th:block th:switch="${true}">
+	                <th:block th:case="${displayNewLoanTab or (empty KualiForm.document.loanReturnDate)}">
+						<th class="grid" width="25%" align="right" colspan="2"></th>
+		            </th:block>
+		            <th:block th:case="*">
+		    			<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.loanReturnDate.label}"></label></th>	
+		    			<th:block th:switch="${true}">                
+				            <th:block th:case="${readOnly}">
+								<td class="grid" width="25%"><kul:htmlControlAttribute attributeEntry="${equipAttributes.loanReturnDate}" property="document.loanReturnDate" readOnly="true" />
+				            </th:block>
+				            <th:block th:case="*">
+								<td class="grid" width="25%"><kul:dateInput attributeEntry="${equipAttributes.loanReturnDate}" property="document.loanReturnDate" /></td> 
+				            </th:block>
+					    </th:block>
+				    </th:block>
+			    </th:block>
+       		</tr>		    
+		</table>
+		</div>
+	</div>
+
+	<div class="tab-container" th:data-tab-title="Borrower's Address">
+    <h3 th:text="Borrower's Address">Borrower's Address</h3>
+	         <!--Address,document.borrowerCityName,document.borrowerStateCode,document.borrowerZipCode,document.borrowerCountryCode,document.borrowerPhoneNumber,document.borrowerStorageStateCode,document.borrowerStorageZipCode,document.borrowerStorageCountryCode,document.borrowerStoragePhoneNumber" --> 
+
+	    <div class="tab-container" align="center">
+	      <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+	      	<tr>
+				<td class="tab-subhead"  width="50%" colspan="2">Borrower</td>
+				<td class="tab-subhead"  width="50%" colspan="2">Stored at</td>			
+			</tr>	
+			<tr>
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerAddress.label}"></label></th>
+				<td class="grid" width="25%"><input type="text" th:name="document.borrowerAddress" th:value="${KualiForm.document.borrowerAddress}" th:title="${equipAttributes.borrowerAddress.label}" readOnly="${readOnly}" /></td>								
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStorageAddress.label}"></label></th>
+				<td class="grid" width="25%"><input type="text" th:name="document.borrowerStorageAddress" th:value="${KualiForm.document.borrowerStorageAddress}" th:title="${equipAttributes.borrowerStorageAddress.label}" readOnly="${readOnly}" /></td>								
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerCityName.label}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" th:name="document.borrowerCityName" th:value="${KualiForm.document.borrowerCityName}" th:title="${equipAttributes.borrowerCityName.label}" readOnly="${readOnly}" /></td>		      	
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStorageCityName.label}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" th:name="document.borrowerStorageCityName" th:value="${KualiForm.document.borrowerStorageCityName}" th:title="${equipAttributes.borrowerStorageCityName.label}" readOnly="${readOnly}" /></td>		      	
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStateCode.label}"></label></th>
+				<td class="grid" width="25%"><input type="text" th:name="document.borrowerStateCode" th:value="${KualiForm.document.borrowerStateCode}" th:title="${equipAttributes.borrowerStateCode.label}" readOnly="${readOnly}" />								
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <kul:lookup boClassName="org.kuali.rice.location.framework.state.StateEbo" fieldConversions="code:document.borrowerStateCode" lookupParameters="document.borrowerCountryCode:countryCode,document.borrowerStateCode:code" />
+					</th:block>
+                </td>
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStorageStateCode.label}"></label></th>
+				<td class="grid" width="25%"><input type="text" th:name="document.borrowerStorageStateCode" th:value="${KualiForm.document.borrowerStorageStateCode}" th:title="${equipAttributes.borrowerStorageStateCode.label}" readOnly="${readOnly}" />								
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <kul:lookup boClassName="org.kuali.rice.location.framework.state.StateEbo" fieldConversions="code:document.borrowerStorageStateCode" lookupParameters="document.borrowerStorageCountryCode:countryCode,document.borrowerStorageStateCode:code" />
+					</th:block>
+                </td>
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerZipCode.label}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" th:name="document.borrowerZipCode" th:value="${KualiForm.document.borrowerZipCode}" th:title="${equipAttributes.borrowerZipCode.label}" readOnly="${readOnly}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <kul:lookup boClassName="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" fieldConversions="code:document.borrowerZipCode" lookupParameters="document.borrowerCountryCode:countryCode,document.borrowerZipCode:code,document.borrowerStateCode:stateCode" />
+					</th:block>
+		      	</td>		      	
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStorageZipCode.label}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" th:name="document.borrowerStorageZipCode" th:value="${KualiForm.document.borrowerStorageZipCode}" th:title="${equipAttributes.borrowerStorageZipCode.label}" readOnly="${readOnly}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <kul:lookup boClassName="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" fieldConversions="code:document.borrowerStorageZipCode" lookupParameters="document.borrowerStorageCountryCode:countryCode,document.borrowerStorageZipCode:code,document.borrowerStorageStateCode:stateCode" />
+					</th:block>
+		      	</td>		      	
+		    </tr>		    
+		    <tr>
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerCountryCode.label}"></label></th>
+				<td class="grid" width="25%"><input type="text" th:name="document.borrowerCountryCode" th:value="${KualiForm.document.borrowerCountryCode}" th:title="${equipAttributes.borrowerCountryCode.label}" readOnly="${readOnly}" />								
+				</td>
+				<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStorageCountryCode.label}"></label></th>
+				<td class="grid" width="25%"><input type="text" th:name="document.borrowerStorageCountryCode" th:value="${KualiForm.document.borrowerStorageCountryCode}" th:title="${equipAttributes.borrowerStorageCountryCode.label}" readOnly="${readOnly}" />								
+				</td>
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerPhoneNumber.label}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" th:name="document.borrowerPhoneNumber" th:value="${KualiForm.document.borrowerPhoneNumber}" th:title="${equipAttributes.borrowerPhoneNumber.label}" readOnly="${readOnly}" /></td>		      	
+		      	<th class="grid" width="25%" align="right"><label th:text="${equipAttributes.borrowerStoragePhoneNumber.label}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" th:name="document.borrowerStoragePhoneNumber" th:value="${KualiForm.document.borrowerStoragePhoneNumber}" th:title="${equipAttributes.borrowerStoragePhoneNumber.label}" readOnly="${readOnly}" /></td>		      	
+		    </tr>		    
+		  </table>   
+        </div>
+	  </div>
+    
+    <div th:replace="~{fragments/cams/assetLocation :: assetLocation}" th:with="defaultTabHide='true'"></div>  
+	<div th:replace="~{fragments/cams/organizationInfo :: organizationInfo}" th:with="defaultTabHide='true'"></div>
+
+	<div th:replace="~{fragments/cams/viewPayments :: viewPayments}" th:with="defaultTabHide='true',assetPayments=${KualiForm.document.asset.assetPayments}"></div>	
+    <div th:replace="~{fragments/notes :: notes}"></div>
+    <div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+    <div th:replace="~{fragments/routeLog :: routeLog}"></div>
+    <div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+    <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+    <div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

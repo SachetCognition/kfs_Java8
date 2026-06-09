@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="glpe" class="tab-container">
+    <h3>General Ledger Pending Entries</h3>
+    <table class="datatable" summary="general ledger pending entries" th:if="${KualiForm.document.generalLedgerPendingEntries != null and !KualiForm.document.generalLedgerPendingEntries.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Sequence #</th>
+                <th>Fiscal Year</th>
+                <th>Chart</th>
+                <th>Account</th>
+                <th>Object</th>
+                <th>Sub-Object</th>
+                <th>Project</th>
+                <th>Bal Type</th>
+                <th>Object Type</th>
+                <th>Period</th>
+                <th>Doc Type</th>
+                <th>Origin</th>
+                <th>Ref Doc Number</th>
+                <th>Debit/Credit</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="entry : ${KualiForm.document.generalLedgerPendingEntries}">
+                <td th:text="${entry.transactionLedgerEntrySequenceNumber}"></td>
+                <td th:text="${entry.universityFiscalYear}"></td>
+                <td th:text="${entry.chartOfAccountsCode}"></td>
+                <td th:text="${entry.accountNumber}"></td>
+                <td th:text="${entry.financialObjectCode}"></td>
+                <td th:text="${entry.financialSubObjectCode}"></td>
+                <td th:text="${entry.projectCode}"></td>
+                <td th:text="${entry.financialBalanceTypeCode}"></td>
+                <td th:text="${entry.financialObjectTypeCode}"></td>
+                <td th:text="${entry.universityFiscalPeriodCode}"></td>
+                <td th:text="${entry.financialDocumentTypeCode}"></td>
+                <td th:text="${entry.financialSystemOriginationCode}"></td>
+                <td th:text="${entry.referenceFinancialDocumentNumber}"></td>
+                <td th:text="${entry.transactionDebitCreditCode}"></td>
+                <td th:text="${entry.transactionLedgerEntryAmount}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${KualiForm.document.generalLedgerPendingEntries == null or KualiForm.document.generalLedgerPendingEntries.isEmpty()}">
+        There are currently no General Ledger Pending Entries associated with this Transaction Processing document.
+    </p>
+</div>
+</body>
+</html>

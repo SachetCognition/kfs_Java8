@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="capitalAccountingLines" class="tab-container">
+    <h3>Capital Accounting Lines</h3>
+    <table class="datatable" summary="capital accounting lines"
+           th:if="${KualiForm.document.capitalAccountingLines != null and !KualiForm.document.capitalAccountingLines.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Line #</th>
+                <th>Chart</th>
+                <th>Account</th>
+                <th>Object Code</th>
+                <th>Amount</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="line,iterStat : ${KualiForm.document.capitalAccountingLines}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${line.chartOfAccountsCode}"></td>
+                <td th:text="${line.accountNumber}"></td>
+                <td th:text="${line.financialObjectCode}"></td>
+                <td th:text="${line.amount}"></td>
+                <td>
+                    <input type="checkbox" th:unless="${readOnly}"
+                           th:name="'capitalAccountingLine[' + ${iterStat.index} + '].selectLine'"
+                           th:checked="${line.selectLine}"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

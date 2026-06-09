@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="superUserActions" class="tab-container" th:if="${KualiForm.superUserDocument}">
+    <h3>Super User Actions</h3>
+    <table class="datatable" summary="super user actions">
+        <tr>
+            <td>
+                <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_blanketapp.gif'}"
+                       name="methodToCall.superUserBlanketApprove" title="Super User Blanket Approve" alt="Super User Blanket Approve"/>
+                <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_approve.gif'}"
+                       name="methodToCall.superUserApprove" title="Super User Approve" alt="Super User Approve"/>
+                <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_disapprove.gif'}"
+                       name="methodToCall.superUserDisapprove" title="Super User Disapprove" alt="Super User Disapprove"/>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Journal Voucher</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="journalVoucherAttributes=${DataDictionary['JournalVoucherDocument'].attributes}" -->
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+<div class="document-page" data-document-type="JournalVoucherDocument" data-form-action="financialJournalVoucher" data-show-document-info="true">
+<form th:action="@{financialJournalVoucher}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+	<div th:replace="~{fragments/hiddenDocumentFields :: hiddenDocumentFields}"></div>
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+	<!-- JOURNAL VOUCHER SPECIFIC FIELDS -->
+	<div class="tab-container" th:data-tab-title="Journal Voucher Details">
+    <h3 th:text="Journal Voucher Details">Journal Voucher Details</h3>
+		<div class="tab-container" align=center>
+		<h3>Journal Voucher Details</h3>
+		<table cellpadding=0 class="datatable"
+			summary="Journal Voucher Details">
+			<tbody>
+
+				<tr>
+					<th width="35%" class="bord-l-b">
+					<div align="right"><kul:htmlAttributeLabel
+						labelFor="selectedAccountingPeriod" attributeEntry="${journalVoucherAttributes.accountingPeriod}"
+						useShortLabel="false" /></div>
+					</th>
+					<td class="datacell-nowrap">
+					<th:block th:if="${readOnly}">
+                        ${KualiForm.accountingPeriod.universityFiscalPeriodName}
+                        <input type="hidden" th:field="*{selectedAccountingPeriod}" />
+					</th:block> 
+					<th:block th:if="${!readOnly}">
+						<SCRIPT type="text/javascript">
+						<!--
+						    function submitForChangedAccountingPeriod() {
+					    		document.forms[0].submit();
+						    }
+						//-->
+						</SCRIPT>
+						<select th:field="*{selectedAccountingPeriod}" onchange="submitForChangedAccountingPeriod()">
+							<th:block th:each="accountingPeriod : ${KualiForm.accountingPeriods}">
+								<!-- th:with="accountingPeriodCompositeValue=${accountingPeriod.universityFiscalPeriodCode}${accountingPeriod.universityFiscalYear}" -->
+								<html:option value="${accountingPeriodCompositeValue}"><span th:text="${accountingPeriod.universityFiscalPeriodName}"></span></html:option>
+							</th:block>
+						</select>
+						
+						<NOSCRIPT><input type="submit" value="refresh"
+							title="press this button to refresh the page after changing the accounting period" alt="press this button to refresh the page after changing the accounting period" />
+						</NOSCRIPT>
+					</th:block></td>
+				</tr>
+				<tr>
+					<th width="35%" class="bord-l-b">
+					<div align="right"><kul:htmlAttributeLabel
+						labelFor="" attributeEntry="${journalVoucherAttributes.balanceTypeCode}"
+						useShortLabel="false" /></div>
+					</th>
+					<td class="datacell-nowrap">
+					<th:block th:if="${readOnly}">
+                        ${KualiForm.selectedBalanceType.financialBalanceTypeName}
+					</th:block> 
+					
+					<th:block th:if="${!readOnly}">
+						<SCRIPT type="text/javascript">
+						<!--
+						    function submitForChangedBalanceType() {
+					    		document.forms[0].submit();
+						    }
+						//-->
+						</SCRIPT>
+						<select th:field="*{selectedBalanceType.code}" onchange="submitForChangedBalanceType()">
+							<th:block th:each="balanceType : ${KualiForm.balanceTypes}">
+								<html:option value="${balanceType.code}" >
+									<span th:text="${balanceType.codeAndDescription}"></span> 
+								</html:option>
+							</th:block>
+						</select>
+						<NOSCRIPT><input type="submit" value="refresh"
+							title="press this button to refresh the page after changing the balance type" alt="press this button to refresh the page after changing the balance type" />
+						</NOSCRIPT>
+						<kul:lookup
+							boClassName="org.kuali.kfs.coa.businessobject.BalanceType"
+							fieldConversions="code:selectedBalanceType.code"
+							lookupParameters="selectedBalanceType.code:code" 
+							 fieldLabel="${journalVoucherAttributes.balanceTypeCode.label}" />
+					</th:block></td>
+				</tr>
+				<tr>
+                    <kul:htmlAttributeHeaderCell
+                        attributeEntry="${journalVoucherAttributes.reversalDate}"
+                        horizontal="true"
+                        width="35%"
+                        />
+                    <td class="datacell-nowrap"><kul:htmlControlAttribute
+                        attributeEntry="${journalVoucherAttributes.reversalDate}"
+                        datePicker="true"
+                        property="document.reversalDate"
+                        readOnly="${readOnly}"
+                        readOnlyAlternateDisplay="${fn:escapeXml(KualiForm.formattedReversalDate)}"
+                        /></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+
+	<!-- th:with="isEncumbrance=${KualiForm.isEncumbranceBalanceType}" -->
+	<!-- th:with="isDebitCreditAmount=${KualiForm.selectedBalanceType.financialOffsetGenerationIndicator}" -->
+
+	<th:block th:switch="${true}">
+		<th:block th:case="${isEncumbrance && isDebitCreditAmount}">
+			<!-- th:with="attributeGroupName=source-withDebitCreditEncumbrance" -->
+		</th:block>
+		<th:block th:case="${!isEncumbrance && isDebitCreditAmount}">
+			<!-- th:with="attributeGroupName=source-withDebitCredit" -->
+		</th:block>		
+		<th:block th:case="${isEncumbrance && !isDebitCreditAmount}">
+			<!-- th:with="attributeGroupName=source-withEncumbrance" -->
+		</th:block>
+		<th:block th:case="*">
+			<!-- th:with="attributeGroupName=source" -->
+		</th:block>
+	</th:block>
+
+	<div class="tab-container" th:data-tab-title="Accounting Lines">
+    <h3 th:text="Accounting Lines">Accounting Lines</h3>
+		<sys-java:accountingLines>
+			<sys-java:accountingLineGroup newLinePropertyName="newSourceLine" collectionPropertyName="document.sourceAccountingLines" collectionItemPropertyName="document.sourceAccountingLine" attributeGroupName="${attributeGroupName}" />
+		</sys-java:accountingLines>
+	</div>
+		
+	<div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+	<div th:replace="~{fragments/notes :: notes}"></div>
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

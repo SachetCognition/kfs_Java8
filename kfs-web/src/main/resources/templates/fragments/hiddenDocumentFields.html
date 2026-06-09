@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="hiddenDocumentFields">
+    <input type="hidden" name="methodToCall" value=""/>
+    <input type="hidden" name="refreshCaller" value=""/>
+    <input type="hidden" name="docFormKey" th:value="${KualiForm.formKey}"/>
+    <input type="hidden" name="docTypeName" th:value="${KualiForm.docTypeName}"/>
+    <input type="hidden" name="document.documentNumber" th:value="${KualiForm.document.documentNumber}"/>
+</div>
+</body>
+</html>

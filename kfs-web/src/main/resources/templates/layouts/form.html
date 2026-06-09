@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title th:text="${docTitle != null ? docTitle : 'KFS Form'}">KFS Form</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Non-Transactional Page Wrapper (kul:page equivalent) -->
+    <div class="kfs-page">
+        <h1 th:if="${headerTitle}" th:text="${headerTitle}">Page Title</h1>
+
+        <div th:if="${showDocumentInfo}" th:replace="~{fragments/documentInfo :: documentInfo(${KualiForm})}"></div>
+
+        <form th:action="@{${htmlFormAction}}" method="post"
+              th:attr="enctype=${renderMultipart ? 'multipart/form-data' : 'application/x-www-form-urlencoded'}"
+              id="kualiForm" name="KualiForm">
+
+            <!-- Error display -->
+            <div th:if="${errorKey}" class="error-container">
+                <div th:replace="~{fragments/errors :: errors(${errorKey})}"></div>
+            </div>
+
+            <!-- Page Body -->
+            <div th:replace="${bodyFragment}"></div>
+
+            <!-- Panel Footer -->
+            <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+            <!-- Global Buttons -->
+            <div id="globalbuttons" class="globalbuttons"
+                 th:replace="${buttonsFragment != null ? buttonsFragment : '~{fragments/empty :: empty}'}"></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

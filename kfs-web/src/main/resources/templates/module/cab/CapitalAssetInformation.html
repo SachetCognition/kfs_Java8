@@ -1,0 +1,138 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Capital Asset Information</title>
+</head>
+<body>
+<div layout:fragment="content">
+<script>
+<th:block th:if="${!empty KualiForm.currDocNumber}">
+	var popUpurl = 'cabCapitalAssetInformation.do?methodToCall=viewDoc&documentNumber=${KualiForm.currDocNumber}';
+	window.open(popUpurl, "${KualiForm.currDocNumber}");
+</th:block>
+	
+</script>
+<div class="kfs-page" data-header-title="" data-doc-title="Capital Asset Information Processing">
+<h1></h1>
+<form th:action="@{cabCapitalAssetInformation}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+	
+	<kul:tabTop tabTitle="Financial Document Capital Asset Info" defaultOpen="true">
+		<div class="tab-container" align=center>
+		<!-- th:with="CapitalAssetInformationAttributes=${DataDictionary.CapitalAssetInformation.attributes}" -->	
+		<!-- th:with="dataCellCssClass=datacell" -->
+		<!-- th:with="capitalAssetInfoName=KualiForm.capitalAssetInformation" -->
+	    <div align="center" vAlign="middle">
+	    <h3>Capital Assets for Accounting Line</h3>
+		<table datatable style="border-top: 1px solid rgb(153, 153, 153); width: 100%;" cellpadding="0" cellspacing="0" summary="Asset for Accounting Lines">
+			<tr>
+			 	<th:block th:if="${!readOnly}">
+					<kul:htmlAttributeHeaderCell literalLabel="Action"/>
+				</th:block>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetActionIndicator}" labelFor="${capitalAssetInfoName}.capitalAssetActionIndicator"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetLineNumber}" labelFor="${capitalAssetInfoName}.capitalAssetLineNumber"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetNumber}" labelFor="${capitalAssetInfoName}.capitalAssetNumber"/> 
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetQuantity}" labelFor="${capitalAssetInfoName}.capitalAssetQuantity"/> 
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetTypeCode}" labelFor="${capitalAssetInfoName}.capitalAssetTypeCode"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.vendorName}" labelFor="${capitalAssetInfoName}.vendorName"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetManufacturerName}" labelFor="${capitalAssetInfoName}.capitalAssetManufacturerName"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetManufacturerModelNumber}" labelFor="${capitalAssetInfoName}.capitalAssetManufacturerModelNumber"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetDescription}" labelFor="${capitalAssetInfoName}.capitalAssetDescription"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.distributionAmountCode}" labelFor="${capitalAssetInfoName}.distributionAmountCode"/>
+				<kul:htmlAttributeHeaderCell attributeEntry="${CapitalAssetInformationAttributes.capitalAssetLineAmount}" labelFor="${capitalAssetInfoName}.capitalAssetLineAmount"/>
+			</tr>
+			<!-- th:with="capitalAssetPosition=0" -->			
+			<th:block th:each="detailLine,status : ${KualiForm.capitalAssetInformation}">
+			<!-- th:with="capitalAssetPosition=${capitalAssetPosition+1}" -->			
+			<tr>
+				<th:block th:if="${!readOnly}">
+					<th:block th:if="${detailLine.capitalAssetProcessedIndicator == true}">
+				    	<td class="grid" align="center"><div vAlign="middle"><b>Processed</b></div></td>
+					</th:block>	
+					<th:block th:if="${detailLine.capitalAssetProcessedIndicator == false}">
+				    	<td class="grid" align="center">
+			    			<html:link target="_blank" href="cabGlLine.do?methodToCall=process&documentNumber=${detailLine.documentNumber}&generalLedgerAccountIdentifier=${KualiForm.generalLedgerAccountIdentifier}&capitalAssetLineNumber=${detailLine.capitalAssetLineNumber}">
+								Process
+							</html:link>
+						</td>
+					</th:block>
+				</th:block>
+				<td class="grid"><div>
+					<!-- th:with="assetActionType=${detailLine.capitalAssetActionIndicator}" -->
+				    	<th:block th:if="${assetActionType eq KFSConstants.CapitalAssets.CAPITAL_ASSET_CREATE_ACTION_INDICATOR}">
+					    	<span th:text="${T(org.kuali.kfs.sys.KFSConstants).CapitalAssets.CREATE_CAPITAL_ASSETS_TAB_TITLE}"></span>
+					    </th:block>
+				        <th:block th:if="${assetActionType eq KFSConstants.CapitalAssets.CAPITAL_ASSET_MODIFY_ACTION_INDICATOR}">
+					    	<span th:text="${T(org.kuali.kfs.sys.KFSConstants).CapitalAssets.MODIFY_CAPITAL_ASSETS_TAB_TITLE}"></span>
+					    </th:block>
+				</div></td>
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetLineNumber" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetLineNumber}" th:title="${CapitalAssetInformationAttributes.capitalAssetLineNumber.label}" readOnly="true"/></td>
+				<td class="grid">
+					<th:block th:if="${!empty detailLine.capitalAssetNumber}">
+						<kul:inquiry boClassName="org.kuali.kfs.integration.cam.CapitalAssetManagementAsset" keyValues="capitalAssetNumber=${detailLine.capitalAssetNumber}" render="true">
+							<input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetNumber" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetNumber}" th:title="${CapitalAssetInformationAttributes.capitalAssetNumber.label}" readOnly="true"/>
+						</kul:inquiry>
+					</th:block>&nbsp;
+				</td>	
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetQuantity" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetQuantity}" th:title="${CapitalAssetInformationAttributes.capitalAssetQuantity.label}" readOnly="true"/></td>
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetTypeCode" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetTypeCode}" th:title="${CapitalAssetInformationAttributes.capitalAssetTypeCode.label}" readOnly="true"/></td>
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].vendorName" th:value="${KualiForm.capitalAssetInformation[${status.index}].vendorName}" th:title="${CapitalAssetInformationAttributes.vendorName.label}" readOnly="true"/></td>
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetManufacturerName" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetManufacturerName}" th:title="${CapitalAssetInformationAttributes.capitalAssetManufacturerName.label}" readOnly="true"/></td>
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetManufacturerModelNumber" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetManufacturerModelNumber}" th:title="${CapitalAssetInformationAttributes.capitalAssetManufacturerModelNumber.label}" readOnly="true"/></td>
+				<td class="grid"><input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetDescription" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetDescription}" th:title="${CapitalAssetInformationAttributes.capitalAssetDescription.label}" readOnly="true"/></td>
+				
+				<!-- th:with="distributionAmountCode=${detailLine.distributionAmountCode}" -->
+				<th:block th:if="${distributionAmountCode eq KFSConstants.CapitalAssets.DISTRIBUTE_COST_EQUALLY_CODE}">
+					<!-- th:with="distributionAmountDescription=${T(org.kuali.kfs.sys.KFSConstants).CapitalAssets.DISTRIBUTE_COST_EQUALLY_DESCRIPTION}" -->
+				</th:block>
+				<th:block th:if="${distributionAmountCode eq KFSConstants.CapitalAssets.DISTRIBUTE_COST_BY_INDIVIDUAL_ASSET_AMOUNT_CODE}">
+					<!-- th:with="distributionAmountDescription=${T(org.kuali.kfs.sys.KFSConstants).CapitalAssets.DISTRIBUTE_COST_BY_INDIVIDUAL_ASSET_AMOUNT_DESCRIPTION}" -->
+				</th:block>
+				
+				<td>	
+					<div><span th:text="${distributionAmountDescription}"></span></div>
+				</td>	
+				
+				<td class="grid">
+					<div align="right" valign="middle">
+						<input type="text" th:name="capitalAssetInformation[${status.index}].capitalAssetLineAmount" th:value="${KualiForm.capitalAssetInformation[${status.index}].capitalAssetLineAmount}" th:title="${CapitalAssetInformationAttributes.capitalAssetLineAmount.label}" readOnly="true"/>
+					</div></td>
+			</tr>
+			<tr>
+				<td colspan="11">
+					<div th:replace="~{fragments/cab/groupAccountingLinesDetails :: groupAccountingLinesDetails}" th:with="capitalAssetInformation=${detailLine},capitalAssetPosition=${capitalAssetPosition},showViewButton='true'"></div>
+				</td>
+			</tr>
+			</th:block>	
+	    </table>
+		</div>
+	</kul:tabTop>
+	
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>	
+	
+	
+</div>
+</div>
+</div>
+</body>
+</html>
