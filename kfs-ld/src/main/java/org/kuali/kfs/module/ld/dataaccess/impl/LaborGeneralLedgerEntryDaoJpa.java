@@ -20,6 +20,7 @@ package org.kuali.kfs.module.ld.dataaccess.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.kuali.kfs.module.ld.businessobject.LaborGeneralLedgerEntry;
 import org.kuali.kfs.module.ld.dataaccess.LaborGeneralLedgerEntryDao;
@@ -31,6 +32,33 @@ public class LaborGeneralLedgerEntryDaoJpa implements LaborGeneralLedgerEntryDao
 
     @Override
     public Integer getMaxSequenceNumber(LaborGeneralLedgerEntry laborGeneralLedgerEntry) {
-        return 0;
+        TypedQuery<Integer> query = entityManager.createQuery(
+            "SELECT MAX(e.transactionLedgerEntrySequenceNumber) FROM LaborGeneralLedgerEntry e " +
+            "WHERE e.universityFiscalYear = :fiscalYear " +
+            "AND e.chartOfAccountsCode = :chart " +
+            "AND e.accountNumber = :account " +
+            "AND e.subAccountNumber = :subAccount " +
+            "AND e.financialObjectCode = :objectCode " +
+            "AND e.financialSubObjectCode = :subObjectCode " +
+            "AND e.financialBalanceTypeCode = :balanceType " +
+            "AND e.financialObjectTypeCode = :objectType " +
+            "AND e.universityFiscalPeriodCode = :periodCode " +
+            "AND e.financialDocumentTypeCode = :docType " +
+            "AND e.financialSystemOriginationCode = :originCode " +
+            "AND e.documentNumber = :docNumber", Integer.class);
+        query.setParameter("fiscalYear", laborGeneralLedgerEntry.getUniversityFiscalYear());
+        query.setParameter("chart", laborGeneralLedgerEntry.getChartOfAccountsCode());
+        query.setParameter("account", laborGeneralLedgerEntry.getAccountNumber());
+        query.setParameter("subAccount", laborGeneralLedgerEntry.getSubAccountNumber());
+        query.setParameter("objectCode", laborGeneralLedgerEntry.getFinancialObjectCode());
+        query.setParameter("subObjectCode", laborGeneralLedgerEntry.getFinancialSubObjectCode());
+        query.setParameter("balanceType", laborGeneralLedgerEntry.getFinancialBalanceTypeCode());
+        query.setParameter("objectType", laborGeneralLedgerEntry.getFinancialObjectTypeCode());
+        query.setParameter("periodCode", laborGeneralLedgerEntry.getUniversityFiscalPeriodCode());
+        query.setParameter("docType", laborGeneralLedgerEntry.getFinancialDocumentTypeCode());
+        query.setParameter("originCode", laborGeneralLedgerEntry.getFinancialSystemOriginationCode());
+        query.setParameter("docNumber", laborGeneralLedgerEntry.getDocumentNumber());
+        Integer result = query.getSingleResult();
+        return result != null ? result : Integer.valueOf(0);
     }
 }

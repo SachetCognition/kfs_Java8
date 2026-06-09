@@ -26,6 +26,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.gl.businessobject.Balance;
@@ -52,16 +53,20 @@ public class LaborLedgerPendingEntryDaoJpa implements LaborLedgerPendingEntryDao
 
     @Override
     public KualiDecimal getTransactionSummary(Collection universityFiscalYears, String chartOfAccountsCode, String accountNumber, Collection objectCodes, Collection balanceTypeCodes, boolean isDebit) {
+        // TODO: Implement full transaction summary query once kfs-core parent class is JPA-annotated.
+        // This requires dynamic query construction based on debit/credit code filtering.
         return KualiDecimal.ZERO;
     }
 
     @Override
     public KualiDecimal getTransactionSummary(Integer universityFiscalYear, String chartOfAccountsCode, String accountNumber, Collection objectTypeCodes, Collection balanceTypeCodes, String acctSufficientFundsFinObjCd, boolean isDebit, boolean isYearEnd) {
+        // TODO: Implement full transaction summary query once kfs-core parent class is JPA-annotated.
         return KualiDecimal.ZERO;
     }
 
     @Override
     public KualiDecimal getTransactionSummary(Integer universityFiscalYear, String chartOfAccountsCode, String accountNumber, Collection objectTypeCodes, Collection balanceTypeCodes, String acctSufficientFundsFinObjCd, boolean isYearEnd) {
+        // TODO: Implement full transaction summary query once kfs-core parent class is JPA-annotated.
         return KualiDecimal.ZERO;
     }
 
@@ -72,26 +77,35 @@ public class LaborLedgerPendingEntryDaoJpa implements LaborLedgerPendingEntryDao
 
     @Override
     public void delete(String documentHeaderId) {
-        entityManager.createQuery("DELETE FROM LaborLedgerPendingEntry e WHERE e.documentNumber = :docId")
+        entityManager.createNativeQuery("DELETE FROM LD_PND_LDGR_ENTR_T WHERE FDOC_NBR = :docId")
             .setParameter("docId", documentHeaderId)
             .executeUpdate();
     }
 
     @Override
     public void deleteByFinancialDocumentApprovedCode(String financialDocumentApprovedCode) {
-        entityManager.createQuery("DELETE FROM LaborLedgerPendingEntry e WHERE e.financialDocumentApprovedCode = :code")
+        entityManager.createNativeQuery("DELETE FROM LD_PND_LDGR_ENTR_T WHERE FDOC_APRVL_CD = :code")
             .setParameter("code", financialDocumentApprovedCode)
             .executeUpdate();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Iterator findApprovedPendingLedgerEntries() {
-        return new ArrayList<>().iterator();
+        Query query = entityManager.createNativeQuery(
+            "SELECT * FROM LD_PND_LDGR_ENTR_T WHERE FDOC_APRVL_CD = :approvedCode",
+            LaborLedgerPendingEntry.class);
+        query.setParameter("approvedCode", "A");
+        return query.getResultList().iterator();
     }
 
     @Override
     public int countPendingLedgerEntries(Account account) {
-        return 0;
+        Query query = entityManager.createNativeQuery(
+            "SELECT COUNT(*) FROM LD_PND_LDGR_ENTR_T WHERE FIN_COA_CD = :chart AND ACCOUNT_NBR = :account");
+        query.setParameter("chart", account.getChartOfAccountsCode());
+        query.setParameter("account", account.getAccountNumber());
+        return ((Number) query.getSingleResult()).intValue();
     }
 
     @Override

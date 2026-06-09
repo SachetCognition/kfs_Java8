@@ -44,7 +44,34 @@ public class LaborLedgerEntryDaoJpa implements LaborLedgerEntryDao, LedgerEntryB
 
     @Override
     public Integer getMaxSquenceNumber(LedgerEntry ledgerEntry) {
-        return 0;
+        TypedQuery<Integer> query = entityManager.createQuery(
+            "SELECT MAX(e.transactionLedgerEntrySequenceNumber) FROM LedgerEntry e " +
+            "WHERE e.universityFiscalYear = :fiscalYear " +
+            "AND e.chartOfAccountsCode = :chart " +
+            "AND e.accountNumber = :account " +
+            "AND e.subAccountNumber = :subAccount " +
+            "AND e.financialObjectCode = :objectCode " +
+            "AND e.financialSubObjectCode = :subObjectCode " +
+            "AND e.financialBalanceTypeCode = :balanceType " +
+            "AND e.financialObjectTypeCode = :objectType " +
+            "AND e.universityFiscalPeriodCode = :periodCode " +
+            "AND e.financialDocumentTypeCode = :docType " +
+            "AND e.financialSystemOriginationCode = :originCode " +
+            "AND e.documentNumber = :docNumber", Integer.class);
+        query.setParameter("fiscalYear", ledgerEntry.getUniversityFiscalYear());
+        query.setParameter("chart", ledgerEntry.getChartOfAccountsCode());
+        query.setParameter("account", ledgerEntry.getAccountNumber());
+        query.setParameter("subAccount", ledgerEntry.getSubAccountNumber());
+        query.setParameter("objectCode", ledgerEntry.getFinancialObjectCode());
+        query.setParameter("subObjectCode", ledgerEntry.getFinancialSubObjectCode());
+        query.setParameter("balanceType", ledgerEntry.getFinancialBalanceTypeCode());
+        query.setParameter("objectType", ledgerEntry.getFinancialObjectTypeCode());
+        query.setParameter("periodCode", ledgerEntry.getUniversityFiscalPeriodCode());
+        query.setParameter("docType", ledgerEntry.getFinancialDocumentTypeCode());
+        query.setParameter("originCode", ledgerEntry.getFinancialSystemOriginationCode());
+        query.setParameter("docNumber", ledgerEntry.getDocumentNumber());
+        Integer result = query.getSingleResult();
+        return result != null ? result : Integer.valueOf(0);
     }
 
     @Override

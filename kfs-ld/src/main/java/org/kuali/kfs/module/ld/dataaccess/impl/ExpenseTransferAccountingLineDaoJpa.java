@@ -37,9 +37,8 @@ public class ExpenseTransferAccountingLineDaoJpa implements AccountingLineDao {
 
     @Override
     public void deleteAccountingLine(AccountingLine line) {
-        if (entityManager.contains(line)) {
-            entityManager.remove(line);
-        }
+        AccountingLine managed = entityManager.contains(line) ? line : entityManager.merge(line);
+        entityManager.remove(managed);
     }
 
     @Override
