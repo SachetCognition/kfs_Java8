@@ -53,8 +53,11 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
     private Date dueDate;
     @Column(name = "TAX_RAM_NTF_DT")
     private Date taxRamificationNotificationDate;
+    @Column(name = "ADV_PMNT_RSN_CD")
     private String advancePaymentReasonCode;
+    @Column(name = "TRVL_ADV_PLCY")
     private Boolean travelAdvancePolicy = Boolean.FALSE;
+    @Column(name = "ADD_JUST")
     private String additionalJustification;
     private AdvancePaymentReason advancePaymentReason;
 

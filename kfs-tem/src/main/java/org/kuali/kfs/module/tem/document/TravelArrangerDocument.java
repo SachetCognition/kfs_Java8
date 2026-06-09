@@ -42,12 +42,18 @@ import javax.persistence.Table;
 @Table(name = "TEM_TRVL_ARRANGER_DOC_T")
 public class TravelArrangerDocument extends FinancialSystemTransactionalDocumentBase {
 
+    @Column(name = "profile_id")
     private Integer profileId;
+    @Column(name = "ARRANGER_ID")
     private String arrangerId;
-    private String travelerName;
+    private transient String travelerName;
+    @Column(name = "TA_IND")
     private Boolean taInd = Boolean.FALSE;
+    @Column(name = "TR_IND")
     private Boolean trInd = Boolean.FALSE;
+    @Column(name = "RESIGN_IND")
     private Boolean resign = Boolean.FALSE;
+    @Column(name = "PRIMARY_IND")
     private Boolean primaryInd = Boolean.FALSE;
 
     private TemProfile profile;

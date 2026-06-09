@@ -41,23 +41,41 @@ public class CreditCardAgency extends PersistableBusinessObjectBase implements M
     @Column(name = "CREDIT_CARD_AGENCY_CODE")
 
     private String creditCardOrAgencyCode;
+    @Column(name = "TRAVEL_CARD_TYPE_CD")
     private String travelCardTypeCode;
+    @Column(name = "PAYMENT_IND")
     private Boolean paymentIndicator = Boolean.FALSE;
+    @Column(name = "CREDIT_CARD_AGENCY_NAME")
     private String creditCardOrAgencyName;
+    @Column(name = "ADDRESS1")
     private String address1;
+    @Column(name = "ADDRESS2")
     private String address2;
+    @Column(name = "CITY")
     private String city;
+    @Column(name = "STATE")
     private String state;
+    @Column(name = "ZIPCODE")
     private String zipCode;
+    @Column(name = "EMAIL")
     private String email;
+    @Column(name = "PHONE")
     private String phone;
+    @Column(name = "CONTACT_NAME")
     private String contactName;
+    @Column(name = "PRE_RECONCILED")
     private Boolean preReconciled = Boolean.FALSE;
+    @Column(name = "ENABLE_NON_REIMBURSABLE")
     private Boolean enableNonReimbursable = Boolean.FALSE;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Column(name = "FOREIGN_COMPANY")
     private Boolean foreignCompany = Boolean.FALSE;
+    @Column(name = "BNK_CD")
     private String bankCode;
+    @Column(name = "ACTV_IND")
     private Boolean active = Boolean.TRUE;
 
     private TravelCardType travelCardType;

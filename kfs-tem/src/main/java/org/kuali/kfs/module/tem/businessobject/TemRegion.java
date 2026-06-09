@@ -35,7 +35,9 @@ public class TemRegion extends PersistableBusinessObjectBase implements MutableI
     @Column(name = "REGION_CD")
 
     private String regionCode;
+    @Column(name = "REGION_NM")
     private String regionName;
+    @Column(name = "TRIP_TYP_CD")
     private String tripTypeCode;
 
 
