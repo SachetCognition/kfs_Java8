@@ -16,8 +16,11 @@ public abstract class KfsIntegrationTestBase {
 
     @BeforeAll
     static void setupDatabase() {
-        System.setProperty("datasource.url", mysql.getJdbcUrl());
-        System.setProperty("datasource.username", mysql.getUsername());
-        System.setProperty("datasource.password", mysql.getPassword());
+        System.setProperty("kfs.datasource.url", mysql.getJdbcUrl());
+        System.setProperty("kfs.datasource.username", mysql.getUsername());
+        System.setProperty("kfs.datasource.password", mysql.getPassword());
+        System.setProperty("rice.datasource.url", mysql.getJdbcUrl());
+        System.setProperty("rice.datasource.username", mysql.getUsername());
+        System.setProperty("rice.datasource.password", mysql.getPassword());
     }
 }
