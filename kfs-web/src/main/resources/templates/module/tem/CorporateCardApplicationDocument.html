@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/tem/CorporateCardApplicationDocument.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/tem/CorporateCardApplicationDocument</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TemCorporateCardApplicationDocument.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="documentTypeName=TemCorporateCardApplicationDocument"> /*/-->
+<!--/*/ <th:block th:with="canEdit=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.editingMode['fullEntry']}"> /*/-->
+<!--/*/ <th:block th:with="documentTitle="> /*/-->
+<div class="kfs-document-page" data-document-type="TemCorporateCardApplicationDocument">
+  <form action="temCorporateCardApplication.do" method="post" enctype="multipart/form-data">
+    <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+    <div th:replace="~{fragments/tem/profileTab :: content}"></div>
+    <div th:replace="~{fragments/tem/agreementTab :: content}" data-property="userAgreement" data-document-attribute="${documentAttributes.userAgreement}" data-text="${KualiForm.document.userAgreementText}" data-title="User Agreement" data-enable="${KualiForm.initiator && canEdit}" data-open="${KualiForm.initiator}"></div>
+    <div th:replace="~{fragments/tem/agreementTab :: content}" data-property="departmentHeadAgreement" data-document-attribute="${documentAttributes.departmentHeadAgreement}" data-text="${KualiForm.document.departmentHeadAgreementText}" data-title="Department Head Agreement" data-enable="${KualiForm.fiscalOfficer && canEdit}" data-open="${KualiForm.fiscalOfficer}"></div>
+    <th:block th:if="${KualiForm.appliedToBank }">
+    <section class="kfs-tab" data-tab-title="Banking Information" data-default-open="true">
+  <h3>Banking Information</h3>
+    <div class="tab-container" align="center">
+		<table cellpadding=0 class="datatable" summary="Banking Information">
+			<tr>
+		    	<td colspan="2" class="tab-subhead">&nbsp;</td>
+		    </tr>
+		    <tr>
+		    	<th scope=row class="bord-l-b">
+		    		<div align="right">
+		    			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.pseudoNumber}"></label>
+					</div>
+				</th>
+				<td class="datacell" width="50%">${KualiForm.document.pseudoNumber }</td>
+		    </tr>
+		    </table>
+		   </div>
+	</section>
+	</th:block>
+    <div th:replace="~{fragments/kul/notes :: content}"></div>
+	<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+	<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+	<div class="kfs-panel-footer"></div>
+    <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="${documentEntry.transactionalDocument}" data-extra-buttons="${KualiForm.extraButtons}"></div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/purap/ContractManagerAssignment.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/purap/ContractManagerAssignment</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="ContractManagerAssignmentDocument">
+  <form action="purapContractManagerAssignment.do" method="post" enctype="multipart/form-data">
+
+	<div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+
+    <div th:replace="~{fragments/purap/contractManagerAssignment :: content}"></div>
+
+	<div th:replace="~{fragments/kul/notes :: content}"></div>
+
+    <div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+	
+	<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+	
+	<div class="kfs-panel-footer"></div>
+
+	<div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="true"></div>
+
+  </form>
+</div>
+</body>
+</html>

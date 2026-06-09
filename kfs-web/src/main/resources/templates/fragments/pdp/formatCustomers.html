@@ -1,0 +1,51 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: pdp/formatCustomers.tag -->
+<!-- Fragment parameters: customerProfileAttributes, dummyAttributes -->
+<div th:fragment="content (customerProfileAttributes, dummyAttributes)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Customers" data-default-open="true">
+  <h3>Customers</h3>
+	<div id="formatCustomer" class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable"
+			summary="Customers">
+			<tr>
+				<td colspan="3" class="subhead">
+					Customers
+				</td>
+			</tr>
+			<tr>
+			
+			 <tr>
+            <tr th:each="customer : ${KualiForm.customers}" indexId="ctr">
+	                    <tr>
+	                      <td class="${dataCell}">
+                            <input type="text" name="customer[${ctr}].selectedForFormat" th:field="*{customer[${ctr}].selectedForFormat}" data-attribute-entry="${dummyAttributes.genericBoolean}" />
+	                      </td>
+	                      <td class="${dataCell}"><input type="text" name="customer[${ctr}].customerShortName" th:field="*{customer[${ctr}].customerShortName}" data-attribute-entry="${customerProfileAttributes.customerShortName}" readonly="readonly" /></td>
+	                      <td class="${dataCell}"><input type="text" name="customer[${ctr}].customerDescription" th:field="*{customer[${ctr}].customerDescription}" data-attribute-entry="${customerProfileAttributes.customerDescription}" readonly="readonly" /></td>
+	                    </tr>
+	         </tr>
+          </tr>
+
+		</table>
+
+		
+	</div>
+</section>
+</div>

@@ -1,0 +1,115 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/summaryByObjectCode.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelReimbursementDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="distributionAttributes=${DataDictionary.AccountingDistribution.attributes}"> /*/-->
+
+<th:block th:if="${accountDistribution}">
+<a name="${TEMConstants.SUMMARY_ANCHOR }" id="${TEMConstants.SUMMARY_ANCHOR }"></a>
+	<section class="kfs-tab" data-tab-title="Summary by Object Code" data-default-open="true">
+  <h3>Summary by Object Code</h3>
+		<div class="tab-container" align="center">
+			<h3>Accounting Distribution</h3>
+			<input type="hidden" id="accountDistributionSize" name="accountDistributionSize" value="<span th:text="${#strings.length(KualiForm.distribution)}"></span>" />
+			<table class="datatable" summary="Summary by Object Code"
+				cellpadding="0">
+				<tr>
+					<th class="bord-1-b">&nbsp;</th>
+					<th class="bord-1-b"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${distributionAttributes.objectCode}"></label></th>
+					<th class="bord-1-b"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${distributionAttributes.cardType}"></label></th>
+					<th class="bord-1-b"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${distributionAttributes.objectCodeName}"></label></th>
+					<th class="bord-1-b"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${distributionAttributes.subTotal}"></label></th>
+					<th class="bord-1-b"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${distributionAttributes.remainingAmount}"></label></th>
+				</tr>
+				<!--/*/ <th:block th:with="tempValue=${0.00}"> /*/-->
+				<!--/*/ <th:block th:with="selectedCount=${0}"> /*/-->
+				<!--/*/ <th:block th:with="selectedValue=${0.00}"> /*/-->
+				<th:block th:switch="${true}">
+					<th:block th:case="${fn:length(KualiForm.distribution) > 0}">
+						<logic:iterate indexId="ctr" name="KualiForm" property="distribution" id="dist">
+							<tr>
+								<td class="bord-1-b" align="center">
+									<th:block th:switch="${true}">
+										<th:block th:case="${(dist.remainingAmount > 0 && fullEntryMode && !dist.disabled)}">
+											<input type="text" name="distribution[${ctr}].selected" th:field="*{distribution[${ctr}].selected}" data-attribute-entry="${distributionAttributes.selected}" />
+											<input type="hidden" id="distribution[<span th:text="${ctr}"></span>].remainingAmount" name="distribution[<span th:text="${ctr}"></span>].remainingAmount" value="<span th:text="${KualiForm.distribution[ctr].remainingAmount}"></span>" />
+											<input type="hidden" id="distribution[<span th:text="${ctr}"></span>].subTotal" name="distribution[<span th:text="${ctr}"></span>].subTotal" value="<span th:text="${KualiForm.distribution[ctr].subTotal}"></span>" />
+										</th:block>
+										<th:block th:case="*">
+											&nbsp;
+										</th:block>
+									</th:block>									
+								</td>
+								<td class="bord-1-b">
+									<input type="text" name="distribution[${ctr}].objectCode" th:field="*{distribution[${ctr}].objectCode}" data-attribute-entry="${distributionAttributes.objectCode}" readonly="readonly" />
+								</td>
+								<td class="bord-1-b">
+									<input type="text" name="distribution[${ctr}].cardType" th:field="*{distribution[${ctr}].cardType}" data-attribute-entry="${distributionAttributes.cardType}" readonly="readonly" />
+								</td>
+								<td class="bord-1-b">
+									<input type="text" name="distribution[${ctr}].objectCodeName" th:field="*{distribution[${ctr}].objectCodeName}" data-attribute-entry="${distributionAttributes.objectCodeName}" readonly="readonly" />
+								</td>
+								<td class="bord-1-b">
+									<input type="text" name="distribution[${ctr}].subTotal" th:field="*{distribution[${ctr}].subTotal}" data-attribute-entry="${distributionAttributes.subTotal}" readonly="readonly" />
+								</td>
+								<td class="bord-1-b">
+									<input type="text" name="distribution[${ctr}].remainingAmount" th:field="*{distribution[${ctr}].remainingAmount}" data-attribute-entry="${distributionAttributes.remainingAmount}" readonly="readonly" />
+								</td>
+								<!--/*/ <th:block th:with="tempValue=${temfunc:add(dist.remainingAmount,tempValue)}"> /*/-->
+								<!--/*/ <th:block th:with="selectedCount=${selectedCount + (dist.selected ? 1 : 0)}"> /*/-->
+								<!--/*/ <th:block th:with="selectedValue=${temfunc:add(selectedValue,(dist.selected ? dist.subTotal : 0))}"> /*/-->
+							</tr>
+						</tr>
+					</th:block>
+					<th:block th:case="*">
+						<td class="bord-1-b" colspan="6" align="left">No Expenses to show.</th>
+					</th:block>
+				</th:block>
+				
+				<tr>
+					<th colspan="4">
+						<div align="left">
+							<th:block th:switch="${true}">
+								<th:block th:case="${tempValue == 0 || selectedCount == 0}">
+									<img src="<span th:text="${ConfigProperties.externalizable.images.url}"></span>tinybutton-setdist1.gif" />
+								</th:block>
+								<th:block th:case="*">
+									<input type="image" property="methodToCall.selectAllDistributions.line${(fn:length(KualiForm.distribution) == selectedCount) ? TemConstants.UNSELECT_ALL_INDEX : TemConstants.SELECT_ALL_INDEX }"
+										src="${ConfigProperties.externalizable.images.url}tinybutton-${(fn:length(KualiForm.distribution) == selectedCount)? 'un' : ''}selectall.gif"
+										alt="${(fn:length(KualiForm.distribution) == selectedCount)? 'Uns' : 'S'}elect All Distributions" 
+										title="${(fn:length(KualiForm.distribution) == selectedCount)? 'Uns' : 'S'}elect All Distributions"
+										styleClass="tinybutton" />
+								</th:block>
+							</th:block>							
+						</div>
+					</th>
+					<th class="bord-1-b" align="right">Total Remaining:</th>
+					<!--/*/ <th:block th:with="numValue=${remainingDistribution == null ? tempValue : remainingDistribution}"> /*/-->
+					<!--/*/ <th:block th:with="formattedValue=${fn:endsWith(numValue,'.0') ? '0' : ''}"> /*/-->
+					<td class="inline">${numValue}${formattedValue} USD
+						<input type="hidden" id="selectedDistributionAmount" value="${KualiForm.selectedDistributionRemainingAmount}" />
+						<input type="hidden" id="distributionAmount" value="${KualiForm.fullDistributionSubTotal}" />
+					</td>
+				</tr>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

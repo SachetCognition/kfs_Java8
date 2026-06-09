@@ -1,0 +1,162 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerCreditMemoDetail.tag -->
+<!-- Fragment parameters: invPropertyName, crmPropertyName, refreshMethod, recalculateMethod, displayOrangeFlower, isInvoiceOpenItemQuantityZero, cssClass, readOnly, rowHeader -->
+<div th:fragment="content (invPropertyName, crmPropertyName, refreshMethod, recalculateMethod, displayOrangeFlower, isInvoiceOpenItemQuantityZero, cssClass, readOnly, rowHeader)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="customerInvoiceDetailAttributes=${DataDictionary.CustomerInvoiceDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="customerCreditMemoDetailAttributes=${DataDictionary.CustomerCreditMemoDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="salesTaxEnabled=${(not empty KualiForm.editingMode['salesTaxEnabled'])}"> /*/-->
+
+<tr>
+	<!--  Line Number -->
+	<th class="${cssClass}" style="text-align:right" rowspan="4" >
+		<th:block th:if="${displayOrangeFlower}">
+	    	<img src="${ConfigProperties.kr.externalizable.images.url}asterisk_orange.png" alt="changed"/>
+	    	&nbsp;
+	    </th:block>
+		${rowHeader}:
+			
+	<!--  Quantity -->	
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${invPropertyName}.invoiceItemQuantity" th:field="*{${invPropertyName}.invoiceItemQuantity}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemQuantity}" readonly="readonly" />
+	
+	<!--  Item Code -->		
+	<td class="${cssClass}" style="text-align:center" >
+		<input type="text" name="${invPropertyName}.invoiceItemCode" th:field="*{${invPropertyName}.invoiceItemCode}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemCode}" readonly="readonly" />
+			
+	<!--  UOM -->
+	<td class="${cssClass}" >
+		<input type="text" name="${invPropertyName}.invoiceItemUnitOfMeasureCode" th:field="*{${invPropertyName}.invoiceItemUnitOfMeasureCode}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemUnitOfMeasureCode}" readonly="readonly" />
+			
+	<!--  Description -->
+	<td class="${cssClass}" >
+		<input type="text" name="${invPropertyName}.invoiceItemDescription" th:field="*{${invPropertyName}.invoiceItemDescription}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemDescription}" readonly="readonly" />
+
+	<!--  Unit Price -->
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${invPropertyName}.invoiceItemUnitPrice" th:field="*{${invPropertyName}.invoiceItemUnitPrice}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemUnitPrice}" readonly="readonly" />
+			
+	<!--  Item Amount -->
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${invPropertyName}.invoiceItemPreTaxAmount" th:field="*{${invPropertyName}.invoiceItemPreTaxAmount}" data-attribute-entry="${customerInvoiceDetailAttributes.amount}" readonly="readonly" />
+			
+	<!--  Tax Amount -->
+	<th:block th:if="${salesTaxEnabled}">
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${invPropertyName}.invoiceItemTaxAmount" th:field="*{${invPropertyName}.invoiceItemTaxAmount}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemTaxAmount}" readonly="readonly" />
+	</th:block>
+	<!--  Total Amount -->
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${crmPropertyName}.invoiceLineTotalAmount" th:field="*{${crmPropertyName}.invoiceLineTotalAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.invoiceLineTotalAmount}" readonly="readonly" />
+			
+	<!--  Open Invoice Quantity --> 
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${crmPropertyName}.invoiceOpenItemQuantity" th:field="*{${crmPropertyName}.invoiceOpenItemQuantity}" data-attribute-entry="${customerCreditMemoDetailAttributes.invoiceOpenItemQuantity}" readonly="readonly" />
+	
+	<!--  Open Invoice Amount -->
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${crmPropertyName}.invoiceOpenItemAmount" th:field="*{${crmPropertyName}.invoiceOpenItemAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.invoiceOpenItemAmount}" readonly="readonly" />
+
+	<!--  If not readOnly mode -> show the buttons Recalculate/Refresh -->
+	<th:block th:if="${not readOnly}">
+		<!--  Actions -->
+		<td rowspan="4"><div align="center" class="middle" >
+			<input type="image" property="methodToCall.${recalculateMethod}"
+	    		src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif"
+	    		title="Recalculate Credit Memo Line Amounts"
+	    		alt="Recalculate Credit Memo Line Amounts"
+	        	styleClass="tinybutton" />
+	    	&nbsp;
+			<input type="image" property="methodToCall.${refreshMethod}"
+	    		src="${ConfigProperties.externalizable.images.url}tinybutton-refresh.gif"
+	    		title="Refresh Credit Memo Line"
+	    		alt="Refresh Credit Memo Line"
+	        	styleClass="tinybutton" />
+		</div>     
+		</td>
+	</th:block>
+</tr>
+<tr>
+	<!--  If not readOnly mode -> make "Quantity" editable -->
+	<th:block th:if="${not readOnly && not isInvoiceOpenItemQuantityZero}">			
+		<!--  CRM Quantity -->
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${crmPropertyName}.creditMemoItemQuantity" th:field="*{${crmPropertyName}.creditMemoItemQuantity}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemQuantity}" />
+		</td>
+	</th:block>
+	<th:block th:if="${not readOnly && isInvoiceOpenItemQuantityZero}">			
+		<!--  CRM Quantity -->
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${crmPropertyName}.creditMemoItemQuantity" th:field="*{${crmPropertyName}.creditMemoItemQuantity}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemQuantity}" readonly="readonly" />
+		</td>
+	</th:block>
+	<!--  If readOnly mode -> make "Quantity" read only -->
+	<th:block th:if="${readOnly}">
+		<!--  CRM Quantity -->
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${crmPropertyName}.creditMemoItemQuantity" th:field="*{${crmPropertyName}.creditMemoItemQuantity}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemQuantity}" readonly="readonly" />
+		</td>
+	</th:block>
+	
+	<!--  CRM 4 empty columns -->
+	<td class="${cssClass}" />
+	<td class="${cssClass}" />
+	<td class="${cssClass}" />
+	<td class="${cssClass}" />
+
+	<!--  If not readOnly mode -> make "Amount" editable -->
+	<th:block th:if="${not readOnly && not isInvoiceOpenItemQuantityZero}">	
+		<!--  CRM Item Amount -->
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${crmPropertyName}.creditMemoItemTotalAmount" th:field="*{${crmPropertyName}.creditMemoItemTotalAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemTotalAmount}" />
+		</td>
+	</th:block>
+	<th:block th:if="${not readOnly && isInvoiceOpenItemQuantityZero}">			
+		<!--  CRM Item Amount -->
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${crmPropertyName}.creditMemoItemTotalAmount" th:field="*{${crmPropertyName}.creditMemoItemTotalAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemTotalAmount}" readonly="readonly" />
+		</td>
+	</th:block>
+	<!--  If readOnly mode -> make "Amount" read only -->
+	<th:block th:if="${readOnly}">
+		<!--  CRM Item Amount -->
+		<td class="${cssClass}" style="text-align:right" >
+			<input type="text" name="${crmPropertyName}.creditMemoItemTotalAmount" th:field="*{${crmPropertyName}.creditMemoItemTotalAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemTotalAmount}" readonly="readonly" />
+		</td>
+	</th:block>
+	
+	<!--  CRM Tax Amount -->
+	<th:block th:if="${salesTaxEnabled}">
+	<td class="${cssClass}" style="text-align:right" >
+		<input type="text" name="${crmPropertyName}.creditMemoItemTaxAmount" th:field="*{${crmPropertyName}.creditMemoItemTaxAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemTaxAmount}" readonly="readonly" />
+	</td>
+	</th:block>
+	
+	<!--  CRM Total Amount -->
+	<td class="${cssClass}" style="text-align:right" colspan="1" >
+		<input type="text" name="${crmPropertyName}.creditMemoLineTotalAmount" th:field="*{${crmPropertyName}.creditMemoLineTotalAmount}" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoLineTotalAmount}" readonly="readonly" />
+	</td>
+	
+	<!--  CRM 2 empty columns -->
+	<td class="${cssClass}" />
+	<td class="${cssClass}" />
+<tr/>
+
+<div th:replace="~{fragments/ar/customerCreditMemoDetailAccountingInfo :: content}" data-inv-property-name="${invPropertyName}" data-css-class="${cssClass}"></div>
+</div>

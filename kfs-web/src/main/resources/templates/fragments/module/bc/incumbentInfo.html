@@ -1,0 +1,52 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/incumbentInfo.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="intcumbentAttributes=${DataDictionary['BudgetConstructionIntendedIncumbent'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="budgetConstructionIntendedIncumbent=${KualiForm.budgetConstructionIntendedIncumbent}"> /*/-->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+	<tr>
+        <td colspan="6" class="subhead">Incumbent</td>
+   	</tr>
+   	
+    <tr>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${intcumbentAttributes.emplid}"></th>
+            
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionIntendedIncumbent" data-cell-property="budgetConstructionIntendedIncumbent.emplid" data-field="emplid" data-attributes="${intcumbentAttributes}" data-read-only="true" data-display-hidden="false"></div>                  
+
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${intcumbentAttributes.name}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionIntendedIncumbent" data-cell-property="budgetConstructionIntendedIncumbent.name" data-field="name" data-attributes="${intcumbentAttributes}" data-read-only="true" data-display-hidden="false"></div>
+           
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${intcumbentAttributes.iuClassificationLevel}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionIntendedIncumbent.iuClassificationLevel" data-field="iuClassificationLevel" data-attributes="${intcumbentAttributes}" data-read-only="true" data-display-hidden="false"></div>
+    </tr>
+    
+    <tr>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${intcumbentAttributes.setidSalary}"></th>           
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionIntendedIncumbent" data-cell-property="budgetConstructionIntendedIncumbent.setidSalary" data-field="setidSalary" data-attributes="${intcumbentAttributes}" data-read-only="true" data-display-hidden="false"></div>                  
+
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${intcumbentAttributes.salaryAdministrationPlan}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionIntendedIncumbent" data-cell-property="budgetConstructionIntendedIncumbent.salaryAdministrationPlan" data-field="salaryAdministrationPlan" data-attributes="${intcumbentAttributes}" data-read-only="true" data-display-hidden="false"></div>
+           
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${intcumbentAttributes.grade}"></th>
+        <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-cell-property="budgetConstructionIntendedIncumbent.grade" data-field="grade" data-attributes="${intcumbentAttributes}" data-read-only="true" data-display-hidden="false"></div>
+    </tr>
+</table>
+</div>

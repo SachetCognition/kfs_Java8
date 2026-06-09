@@ -1,0 +1,95 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerCreditMemoGeneral.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="scripts/module/ar/customerObjectInfo.js"></script>
+ 
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.CustomerCreditMemoDocument.attributes}"> /*/-->             
+<!--/*/ <th:block th:with="customerAttributes=${DataDictionary.Customer.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="General" data-default-open="true">
+  <h3>General</h3>
+    <div class="tab-container" align=center>
+       	<h3>General</h3>
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="General Section">
+
+        	<tr>
+        		<th align=right valign=middle class="bord-l-b">
+        			<div align="right">
+        				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.financialDocumentReferenceInvoiceNumber}"></label>
+        			</div>
+        		</th>
+        		<td>
+					<a href="${ConfigProperties.workflow.url}/DocHandler.do?docId=${KualiForm.document.financialDocumentReferenceInvoiceNumber}&command=displayDocSearchView" target="blank">
+        			<input type="text" name="document.financialDocumentReferenceInvoiceNumber" th:field="*{document.financialDocumentReferenceInvoiceNumber}" data-attribute-entry="${documentAttributes.financialDocumentReferenceInvoiceNumber}" readonly="readonly" />	
+					</a>
+        		</td>
+        	</tr>
+        	<tr>
+        		<th align=right valign=middle class="bord-l-b">
+        			<div align="right">
+        				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAttributes.customerNumber}"></label>
+        			</div>
+        		</th>
+        		<td>
+        			<input type="text" name="document.invoice.accountsReceivableDocumentHeader.customerNumber" th:field="*{document.invoice.accountsReceivableDocumentHeader.customerNumber}" data-attribute-entry="${customerAttributes.customerNumber}" readonly="readonly" />
+        		</td>
+        	</tr>
+        	
+        	<tr>
+        		<th align=right valign=middle class="bord-l-b">
+        			<div align="right">
+        				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerAttributes.customerName}"></label>
+        			</div>
+            	</th>
+        		<td>
+        			<input type="text" name="document.invoice.accountsReceivableDocumentHeader.customer.customerName" th:field="*{document.invoice.accountsReceivableDocumentHeader.customer.customerName}" data-attribute-entry="${customerAttributes.customerNumber}" readonly="readonly" />
+        		</td>
+        	</tr>
+        	
+			<tr>
+				<th align=right valign=middle class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.CustomerInvoiceDocument.attributes.billingDateForDisplay}"></label>
+					</div>
+				</th>
+				<td>
+					<input type="text" name="document.invoice.billingDateForDisplay" th:field="*{document.invoice.billingDateForDisplay}" data-attribute-entry="${DataDictionary.CustomerInvoiceDocument.attributes.billingDateForDisplay}" readonly="readonly" />
+				</td>
+			</tr>
+			
+            <tr>
+				<th align=right valign=middle class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invOutstandingDays}"></label>
+					</div>
+				</th>
+				<td style="width: 50%;">
+					<input type="text" name="document.invOutstandingDays" th:field="*{document.invOutstandingDays}" data-attribute-entry="${documentAttributes.invOutstandingDays}" readonly="readonly" />
+				</td>
+            <%--
+        		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+        		<!--  service should be called here customerShipToAddressIdentifier-->
+        		<td align=left valign=middle class="datacell" style="width: 50%;"></td>
+        	--%>
+        	</tr>
+		</table>
+	</div>
+</section>
+</div>

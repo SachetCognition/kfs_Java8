@@ -1,0 +1,81 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerInvoiceOrganization.tag -->
+<!-- Fragment parameters: documentAttributes, readOnly -->
+<div th:fragment="content (documentAttributes, readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="arDocHeaderAttributes=${DataDictionary.AccountsReceivableDocumentHeader.attributes}"> /*/-->
+<!--/*/ <th:block th:with="processingOrgMode=${KualiForm.editingMode['processingOrganizationMode']}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Organization" data-default-open="true">
+  <h3>Organization</h3>
+    <div class="tab-container" align=center>	
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Invoice Section">
+            <tr>
+                <td colspan="4" class="subhead">Organization</td>
+            </tr>
+			<tr>		
+                <th align=right valign=middle class="bord-l-b" style="width: 25%;">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arDocHeaderAttributes.processingChartOfAccountCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+                    <input type="text" name="document.accountsReceivableDocumentHeader.processingChartOfAccountCode" th:field="*{document.accountsReceivableDocumentHeader.processingChartOfAccountCode}" data-attribute-entry="${arDocHeaderAttributes.processingChartOfAccountCode}" />
+                </td>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.billByChartOfAccountCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+                    <input type="text" name="document.billByChartOfAccountCode" th:field="*{document.billByChartOfAccountCode}" data-attribute-entry="${documentAttributes.billByChartOfAccountCode}" />
+                </td>                                
+            </tr>
+            <tr>
+				<th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arDocHeaderAttributes.processingOrganizationCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.accountsReceivableDocumentHeader.processingOrganizationCode" th:field="*{document.accountsReceivableDocumentHeader.processingOrganizationCode}" data-attribute-entry="${arDocHeaderAttributes.processingOrganizationCode}" />
+                </td>                
+				<th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.billedByOrganizationCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.billedByOrganizationCode" th:field="*{document.billedByOrganizationCode}" data-attribute-entry="${documentAttributes.billedByOrganizationCode}" />
+					<th:block th:if="${not readOnly}">
+	                    &nbsp;
+	                    <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                </td>                 
+            </tr>
+            <tr>
+				<th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.organizationInvoiceNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.organizationInvoiceNumber" th:field="*{document.organizationInvoiceNumber}" data-attribute-entry="${documentAttributes.organizationInvoiceNumber}" />
+                </td>  
+				<th align=right valign=middle class="bord-l-b">
+                    &nbsp;
+                </th>
+                <td align=left valign=middle class="datacell">
+                    &nbsp;
+                </td> 
+            </tr>
+        </table>
+    </div>
+</section>
+</div>

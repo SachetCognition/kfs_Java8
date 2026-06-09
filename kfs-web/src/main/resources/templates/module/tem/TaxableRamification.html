@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/tem/TaxableRamification.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/tem/TaxableRamification</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TaxableRamificationDocument.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="documentTypeName=TaxableRamificationDocument"> /*/-->
+<!--/*/ <th:block th:with="htmlFormAction=temTaxableRamification"> /*/-->
+
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<div class="kfs-document-page" data-document-type="${documentTypeName}">
+  <form action="${htmlFormAction}.do" method="post" enctype="multipart/form-data">
+    
+    <div th:replace="~{fragments/sys/hiddenDocumentFields :: content}" data-is-financial-document="false"></div>   
+    <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+    
+	<!--/*/ <th:block th:with="tabTitle=Taxable Ramification Notice"> /*/-->
+	<section class="kfs-tab" data-tab-title="${tabTitle}" data-default-open="true">
+  <h3>${tabTitle}</h3>
+		<div class="tab-container" align=center>
+		<h3></h3>
+		<table cellpadding=0 class="datatable" summary="${tabTitle}">
+			<th:block th:if="${!readOnly}">
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.travelDocumentIdentifier}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.travelDocumentIdentifier" th:field="*{document.travelDocumentIdentifier}" data-attribute-entry="${documentAttributes.travelDocumentIdentifier}" /> 
+				</td>
+			</tr>
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.travelAdvanceDocumentNumber}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.travelAdvanceDocumentNumber" th:field="*{document.travelAdvanceDocumentNumber}" data-attribute-entry="${documentAttributes.travelAdvanceDocumentNumber}" /> 
+				</td>
+			</tr>
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.travelerDetailId}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.travelerDetailId" th:field="*{document.travelerDetailId}" data-attribute-entry="${documentAttributes.travelerDetailId}" /> 
+				</td>
+			</tr>			
+			</th:block>	
+					
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.arInvoiceDocNumber}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.arInvoiceDocNumber" th:field="*{document.arInvoiceDocNumber}" data-attribute-entry="${documentAttributes.arInvoiceDocNumber}" /> 
+				</td>
+			</tr>
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.dueDate}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.dueDate" th:field="*{document.dueDate}" data-attribute-entry="${documentAttributes.dueDate}" /> 
+				</td>
+			</tr>
+			
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceAmount}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.invoiceAmount" th:field="*{document.invoiceAmount}" data-attribute-entry="${documentAttributes.invoiceAmount}" /> 
+				</td>
+			</tr>						
+			<tr>	
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.openAmount}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="document.openAmount" th:field="*{document.openAmount}" data-attribute-entry="${documentAttributes.openAmount}" /> 
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="datacell" colspan="2">
+					<input type="text" name="document.taxableRamificationNotice" th:field="*{document.taxableRamificationNotice}" data-attribute-entry="${documentAttributes.taxableRamificationNotice}" /> 
+				</td>
+			</tr>			
+		</table>
+		</div>				
+	</section>
+	
+	<div th:replace="~{fragments/tem/relatedDocuments :: content}" data-no-new-related-document="true"></div>
+	
+    <div th:replace="~{fragments/kul/notes :: content}"></div>
+    <div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+    <div th:replace="~{fragments/kul/routeLog :: content}"></div>
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+    <div class="kfs-panel-footer"></div>
+    <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="false"></div>
+  </form>
+</div>
+</body>
+</html>

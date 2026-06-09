@@ -1,0 +1,93 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/contractsGrantsAgingReportResults.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!empty reqSearchResultsSize}">
+    <!--/*/ <th:block th:with="offset=0"> /*/-->
+    <display:table class="datatable-100" cellspacing="0" cellpadding="0" name="${reqSearchResults}"
+   id="row" export="true" pagesize="100" offset="${offset}"
+   requestURI="contractsGrantsAgingReportLookup.do?methodToCall=viewResults&reqSearchResultsSize=${reqSearchResultsSize}&searchResultKey=${searchResultKey}">
+       <c:forEach items="${row.columns}" var="column">
+						<th:block th:switch="${true}">
+							<th:block th:case="${column.formatter.implementationClass == 'org.kuali.rice.core.web.format.CurrencyFormatter'}">
+								<display:column class="numbercell"
+												sortable="true"
+												decorator="org.kuali.rice.kns.web.ui.FormatAwareDecorator"
+												title="${column.columnTitle}"
+												comparator="${column.comparator}">
+									<th:block th:switch="${true}">
+										<th:block th:case="${column.propertyURL != \"\"}">
+											<a href="<span th:text="${column.propertyURL}"></span>"
+											   title="${column.propertyValue}"
+											   target="blank">
+											   <span th:text="${column.propertyValue}"></span>
+											</a>	
+										</th:block>
+										<th:block th:case="*">
+											<span th:text="${column.propertyValue}"></span>
+										</th:block>
+									</th:block>
+								</display:column>
+							</th:block>
+							<th:block th:case="*">
+								<display:column class="infocell"
+										        sortable="${column.sortable}"
+										        decorator="org.kuali.rice.kns.web.ui.FormatAwareDecorator"
+										        title="${column.columnTitle}"
+										        comparator="${column.comparator}">
+									<th:block th:switch="${true}">
+										<th:block th:case="${column.propertyURL != \"\"}">
+											<a href="<span th:text="${column.propertyURL}"></span>"
+										   	   title="${column.propertyValue}"
+										       target="blank">
+										       <span th:text="${column.propertyValue}"></span>
+										    </a>
+										</th:block>
+										<th:block th:case="*">
+											<span th:text="${column.propertyValue}"></span>
+										</th:block>
+									</th:block>
+								</display:column>
+							</th:block>
+						</th:block>	
+					</tr>
+
+        <display:footer>
+            <th><span class="grid">TOTALS:</span></th>
+            <th:block th:if="${reqSearchResultsSize == '1'}">
+				<td class="numbercell">&nbsp; <span th:text="${reqSearchResultsSize}"></span> customer</td>
+            </th:block>
+            <th:block th:if="${reqSearchResultsSize != '1'}">
+				<td class="numbercell">&nbsp; <span th:text="${reqSearchResultsSize}"></span> customers</td>
+            </th:block>
+            <td class="numbercell">&nbsp;</td>
+            
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total0to30}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total31to60}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total61to90}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total91toSYSPR}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalSYSPRplus1orMore}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalOpenInvoices}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalCredits}"></span></td>
+            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalWriteOffs}"></span></td>
+        </display:footer>
+
+    </display:table>
+</th:block>
+</div>

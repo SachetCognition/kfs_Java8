@@ -1,0 +1,144 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/tripInformation.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelAuthorizationDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="showAllPerDiemCategories=${KualiForm.showAllPerDiemCategories}"> /*/-->
+<!--/*/ <th:block th:with="destinationNotFound=${KualiForm.document.primaryDestinationIndicator}"> /*/-->
+<!--/*/ <th:block th:with="primaryDestinationAttributes=${DataDictionary.PrimaryDestination.attributes}"> /*/-->
+<!--/*/ <th:block th:with="docType=${KualiForm.document.dataDictionaryEntry.documentTypeName }"> /*/-->
+
+<h3>Trip Information Section</h3>
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Trip Information Section">
+	<tr>
+		<th class="bord-l-b" width="25%">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripTypeCode}"></label>
+			</div>
+		</th>
+		<td class="datacell"  width="25%">
+			<input type="text" name="document.tripTypeCode" th:field="*{document.tripTypeCode}" data-attribute-entry="${documentAttributes.tripTypeCode}" onchange="document.getElementById('refreshPage').click();" />
+			<input type="image" property="methodToCall.recalculate" src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif" alt="calculate" styleClass="tinybutton" styleId="refreshPage" style="display:none; visibility:hidden;"/>			
+		</td>
+		<th:block th:switch="${true}">
+			<th:block th:case="${blanketTravelEntryMode || blanketTravelViewMode}">
+				<th class="bord-l-b" width="25%">
+				<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.blanketTravel}"></label></div>
+				</th>
+				<td class="datacell" width="25%"><input type="text" name="document.blanketTravel" th:field="*{document.blanketTravel}" data-attribute-entry="${documentAttributes.blanketTravel}" />
+				</td>
+			</th:block>
+			<th:block th:case="*">
+				<th class="bord-l-b" width="25%">&nbsp;</th><td class="datacell" width="25%">&nbsp;</td>
+			</th:block>
+		</th:block>
+	</tr>
+	<tr>
+		<th class="bord-l-b" width="25%">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripBegin}"></label>
+			</div>
+		</th>
+		<td class="datacell" width="25%">
+			<input type="text" name="document.tripBegin" th:field="*{document.tripBegin}" data-attribute-entry="${documentAttributes.tripBegin}" />
+            <th:block th:if="${fullEntryMode}">
+            	<img src="${ConfigProperties.kr.externalizable.images.url}cal.gif" id="document.tripBegin_datepicker" style="cursor: pointer;" title="Date selector" alt="Date selector" onmouseover="this.style.backgroundColor='red';" onmouseout="this.style.backgroundColor='transparent';"	/>
+            	<script type="text/javascript">
+                Calendar.setup(
+                        {
+                          inputField : "document.tripBegin", // ID of the input field
+                          ifFormat : "%m/%d/%Y %I:%M %p", // the date format
+                          button : "document.tripBegin_datepicker", // ID of the button
+                          showsTime: true,
+                          timeFormat: "12"
+                        }
+                );
+            	</script>
+            </th:block> 
+		</td>
+		<th class="bord-l-b" width="25%">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripEnd}"></label>
+			</div>
+		</th>
+		<td class="datacell" width="25%">
+			<input type="text" name="document.tripEnd" th:field="*{document.tripEnd}" data-attribute-entry="${documentAttributes.tripEnd}" />
+            <th:block th:if="${fullEntryMode}">
+            	<img src="${ConfigProperties.kr.externalizable.images.url}cal.gif" id="document.tripEnd_datepicker" style="cursor: pointer;" title="Date selector" alt="Date selector" onmouseover="this.style.backgroundColor='red';" onmouseout="this.style.backgroundColor='transparent';"	/>
+            	<script type="text/javascript">
+                Calendar.setup(
+                        {
+                          inputField : "document.tripEnd", // ID of the input field
+                          ifFormat : "%m/%d/%Y %I:%M %p", // the date format
+                          button : "document.tripEnd_datepicker", // ID of the button
+                          showsTime: true,
+                          timeFormat: "12"
+                        }
+                );
+            	</script>
+            </th:block> 			
+		</td>
+	</tr>
+	<tr>
+        <th class="bord-l-b">
+        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${primaryDestinationAttributes.primaryDestinationName}"></label></div>
+        </th>
+        <td class="datacell" colspan="3"><input type="text" name="document.primaryDestinationName" th:field="*{document.primaryDestinationName}" data-attribute-entry="${primaryDestinationAttributes.primaryDestinationName}" onchange="document.getElementById('refreshPage').click();" />
+            <th:block th:if="${fullEntryMode}">
+                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.PrimaryDestination" th:replace="~{fragments/kul/lookup :: content}"></span>
+            </th:block>
+        
+            <th:block th:if="${fullEntryMode && enablePrimaryDestination}">
+                <br />  
+                <br />  
+                <input type="image" property="methodToCall.enablePrimaryDestinationFields" src="${ConfigProperties.externalizable.images.url}tinybutton-destinationnotfound.gif" alt="destination not found" styleClass="tinybutton" />             
+            </th:block>
+            <th:block th:if="${enablePerDiemLookupLinks}">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.TravelPerDiem&docFormKey=88888888" target="_BLANK">Per Diem Links</a>
+            </th:block>
+        </td>
+    </tr>
+	<tr>
+        <th class="bord-l-b">
+            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.primaryDestinationCountryState}"></label></div>
+        </th>
+        <td class="datacell"><input type="text" name="document.primaryDestinationCountryState" th:field="*{document.primaryDestinationCountryState}" data-attribute-entry="${documentAttributes.primaryDestinationCountryState}" /></td>
+        <th class="bord-l-b">
+            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.primaryDestinationCounty}"></label></div>
+        </th>
+        <td class="datacell"><input type="text" name="document.primaryDestinationCounty" th:field="*{document.primaryDestinationCounty}" data-attribute-entry="${documentAttributes.primaryDestinationCounty}" /></td>
+    </tr>
+	<tr>
+		<th class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripDescription}"></label></div>
+		</th>
+		<td class="datacell" colspan="3"><input type="text" name="document.tripDescription" th:field="*{document.tripDescription}" data-attribute-entry="${documentAttributes.tripDescription}" /></td>
+	</tr>
+	<th:block th:if="${(docType == 'TA' || docType == 'TR') && travelManager}">
+	<tr>
+		<th class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.delinquentTRException}"></label></div>
+		</th>
+		<td class="datacell" colspan="3"><input type="text" name="document.delinquentTRException" th:field="*{document.delinquentTRException}" data-attribute-entry="${documentAttributes.delinquentTRException}" />
+		</td>
+	</tr>
+	</th:block>	
+    <jsp:doBody />
+</table>
+</div>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/cams/EquipmentLoanOrReturn.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/cams/EquipmentLoanOrReturn</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="EquipmentLoanOrReturnDocument">
+  <form action="camsEquipmentLoanOrReturn.do" method="post" enctype="multipart/form-data">
+
+	<!--/*/ <th:block th:with="equipAttributes=${DataDictionary.EquipmentLoanOrReturnDocument.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+	<!--/*/ <th:block th:with="displayNewLoanTab=${KualiForm.editingMode['displayNewLoanTab']}"> /*/-->
+	<!--/*/ <th:block th:with="displayReturnLoanFieldsReadOnly=${KualiForm.editingMode['displayReturnLoanFieldsReadOnly']}"> /*/-->
+	
+	<div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+    <div th:replace="~{fragments/cams/viewAssetDetails :: content}" data-default-tab-hide="false"></div> 
+
+	<section class="kfs-tab" data-tab-title="Equipment Loans" data-default-open="true">
+  <h3>Equipment Loans</h3> 
+	    <div class="tab-container" align="center">
+	      <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+	      	<tr>
+                <td colspan="4" class="tab-subhead">Equipment Loan Information</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerUniversalIdentifier}"></label></th>
+				<th:block th:switch="${true}">
+					<th:block th:case="${!empty KualiForm.document.borrowerPerson.principalName and !displayNewLoanTab}">
+						<td class="grid" width="25%"><span th:text="${KualiForm.document.borrowerPerson.principalName}"></span>
+			        </th:block>
+			        <th:block th:case="*">
+					   	<td class="grid" width="25%">
+						   	<kul:checkErrors keyMatch="document.borrowerPerson.principalName,document.borrowerUniversalIdentifier" />
+							<kul:user userIdFieldName="document.borrowerPerson.principalName" 
+								userId="${KualiForm.document.borrowerPerson.principalName}" 
+								universalIdFieldName="document.borrowerUniversalIdentifier" 
+								universalId="${KualiForm.document.borrowerUniversalIdentifier}" 
+								userNameFieldName="document.borrowerPerson.name" label="User" 
+								userName="${KualiForm.document.borrowerPerson.name}"
+								lookupParameters="document.borrowerPerson.principalName:principalName" 
+								fieldConversions="principalName:document.borrowerPerson.principalName,principalId:document.borrowerUniversalIdentifier,name:document.borrowerPerson.name" 
+								hasErrors="${hasErrors}" readOnly="${readOnly}" />
+						</td>
+					</th:block>
+				</th:block>				
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.loanDate}"></label></th>
+			   	<th:block th:switch="${true}">
+		            <th:block th:case="${readOnly or !displayNewLoanTab}">
+		                <td class="grid" width="25%"><input type="text" name="document.loanDate" th:field="*{document.loanDate}" data-attribute-entry="${equipAttributes.loanDate}" readonly="readonly" />
+		            </th:block>
+		            <th:block th:case="*">
+				        <td class="grid" width="25%"><kul:dateInput attributeEntry="${equipAttributes.loanDate}" property="document.loanDate" /> </td>
+		            </th:block>
+ 		       </th:block>
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.expectedReturnDate}"></label></th>
+			   	<th:block th:switch="${true}">
+		            <th:block th:case="${readOnly or displayReturnLoanFieldsReadOnly}">
+		                <td class="grid" width="25%"><input type="text" name="document.expectedReturnDate" th:field="*{document.expectedReturnDate}" data-attribute-entry="${equipAttributes.expectedReturnDate}" readonly="readonly" />
+		            </th:block>
+		            <th:block th:case="*">
+		                <td class="grid" width="25%"><kul:dateInput attributeEntry="${equipAttributes.expectedReturnDate}" property="document.expectedReturnDate" /> </td>
+		            </th:block>
+ 		       </th:block>
+			   	<th:block th:switch="${true}">
+	                <th:block th:case="${displayNewLoanTab or (empty KualiForm.document.loanReturnDate)}">
+						<th class="grid" width="25%" align="right" colspan="2"></th>
+		            </th:block>
+		            <th:block th:case="*">
+		    			<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.loanReturnDate}"></label></th>	
+		    			<th:block th:switch="${true}">                
+				            <th:block th:case="${readOnly}">
+								<td class="grid" width="25%"><input type="text" name="document.loanReturnDate" th:field="*{document.loanReturnDate}" data-attribute-entry="${equipAttributes.loanReturnDate}" readonly="readonly" />
+				            </th:block>
+				            <th:block th:case="*">
+								<td class="grid" width="25%"><kul:dateInput attributeEntry="${equipAttributes.loanReturnDate}" property="document.loanReturnDate" /></td> 
+				            </th:block>
+					    </th:block>
+				    </th:block>
+			    </th:block>
+       		</tr>		    
+		</table>
+		</div>
+	</section>
+
+	<section class="kfs-tab" data-tab-title="Borrower's Address" data-default-open="true">
+  <h3>Borrower's Address</h3>
+	         <!--Address,document.borrowerCityName,document.borrowerStateCode,document.borrowerZipCode,document.borrowerCountryCode,document.borrowerPhoneNumber,document.borrowerStorageStateCode,document.borrowerStorageZipCode,document.borrowerStorageCountryCode,document.borrowerStoragePhoneNumber" --> 
+
+	    <div class="tab-container" align="center">
+	      <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+	      	<tr>
+				<td class="tab-subhead"  width="50%" colspan="2">Borrower</td>
+				<td class="tab-subhead"  width="50%" colspan="2">Stored at</td>			
+			</tr>	
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerAddress}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.borrowerAddress" th:field="*{document.borrowerAddress}" data-attribute-entry="${equipAttributes.borrowerAddress}" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStorageAddress}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.borrowerStorageAddress" th:field="*{document.borrowerStorageAddress}" data-attribute-entry="${equipAttributes.borrowerStorageAddress}" /></td>								
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerCityName}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" name="document.borrowerCityName" th:field="*{document.borrowerCityName}" data-attribute-entry="${equipAttributes.borrowerCityName}" /></td>		      	
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStorageCityName}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" name="document.borrowerStorageCityName" th:field="*{document.borrowerStorageCityName}" data-attribute-entry="${equipAttributes.borrowerStorageCityName}" /></td>		      	
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStateCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.borrowerStateCode" th:field="*{document.borrowerStateCode}" data-attribute-entry="${equipAttributes.borrowerStateCode}" />								
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.state.StateEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</th:block>
+                </td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStorageStateCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.borrowerStorageStateCode" th:field="*{document.borrowerStorageStateCode}" data-attribute-entry="${equipAttributes.borrowerStorageStateCode}" />								
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.state.StateEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</th:block>
+                </td>
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerZipCode}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" name="document.borrowerZipCode" th:field="*{document.borrowerZipCode}" data-attribute-entry="${equipAttributes.borrowerZipCode}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</th:block>
+		      	</td>		      	
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStorageZipCode}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" name="document.borrowerStorageZipCode" th:field="*{document.borrowerStorageZipCode}" data-attribute-entry="${equipAttributes.borrowerStorageZipCode}" />
+					<th:block th:if="${not readOnly}">
+						&nbsp;
+		                <span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</th:block>
+		      	</td>		      	
+		    </tr>		    
+		    <tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerCountryCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.borrowerCountryCode" th:field="*{document.borrowerCountryCode}" data-attribute-entry="${equipAttributes.borrowerCountryCode}" />								
+				</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStorageCountryCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.borrowerStorageCountryCode" th:field="*{document.borrowerStorageCountryCode}" data-attribute-entry="${equipAttributes.borrowerStorageCountryCode}" />								
+				</td>
+			</tr>
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerPhoneNumber}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" name="document.borrowerPhoneNumber" th:field="*{document.borrowerPhoneNumber}" data-attribute-entry="${equipAttributes.borrowerPhoneNumber}" /></td>		      	
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${equipAttributes.borrowerStoragePhoneNumber}"></label></th>
+		      	<td class="grid" width="25%"><input type="text" name="document.borrowerStoragePhoneNumber" th:field="*{document.borrowerStoragePhoneNumber}" data-attribute-entry="${equipAttributes.borrowerStoragePhoneNumber}" /></td>		      	
+		    </tr>		    
+		  </table>   
+        </div>
+	  </section>
+    
+    <div th:replace="~{fragments/cams/assetLocation :: content}" data-default-tab-hide="true"></div>  
+	<div th:replace="~{fragments/cams/organizationInfo :: content}" data-default-tab-hide="true"></div>
+
+	<div th:replace="~{fragments/cams/viewPayments :: content}" data-default-tab-hide="true" data-asset-payments="${KualiForm.document.asset.assetPayments}"></div>	
+    <div th:replace="~{fragments/kul/notes :: content}"></div>
+    <div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+    <div th:replace="~{fragments/kul/routeLog :: content}"></div>
+    <div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+    <div class="kfs-panel-footer"></div>
+    <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="${documentEntry.transactionalDocument}"></div>
+
+  </form>
+</div>
+</body>
+</html>

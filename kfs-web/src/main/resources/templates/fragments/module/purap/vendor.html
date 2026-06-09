@@ -1,0 +1,500 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/vendor.tag -->
+<!-- Fragment parameters: documentAttributes, displayRequisitionFields, displayPurchaseOrderFields, displayPaymentRequestFields, displayCreditMemoFields, purchaseOrderAwarded -->
+<div th:fragment="content (documentAttributes, displayRequisitionFields, displayPurchaseOrderFields, displayPaymentRequestFields, displayCreditMemoFields, purchaseOrderAwarded)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="vendorReadOnly=${(not empty KualiForm.editingMode['lockVendorEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="amendmentEntry=${(not empty KualiForm.editingMode['amendmentEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="lockB2BEntry=${(not empty KualiForm.editingMode['lockB2BEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="editPreExtract=${(not empty KualiForm.editingMode['editPreExtract'])}"> /*/-->
+<!--/*/ <th:block th:with="currentUserCampusCode=${UserSession.person.campusCode}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=30"> /*/-->
+
+<!--  this is a temporary workaround until release 3, where this is fixed more generally -->
+<!--/*/ <th:block th:with="fullDocEntryCompleted=${(not empty KualiForm.editingMode['fullDocumentEntryCompleted'])}"> /*/-->
+<!--/*/ <th:block th:with="readOnlyForPREQ=${(displayPaymentRequestFields) and (fullDocEntryCompleted)}"> /*/-->
+
+<th:block th:switch="${true}"> 
+  <th:block th:case="${displayPurchaseOrderFields or displayPaymentRequestFields}"> 
+    <!--/*/ <th:block th:with="extraPrefix=document"> /*/-->
+  </th:block> 
+  <th:block th:case="${displayRequisitionFields}"> 
+    <th:block th:if="${not empty KualiForm.document.vendorContractGeneratedIdentifier}">
+        <!--/*/ <th:block th:with="extraPrefix=document.vendorContract"> /*/-->
+    </th:block>
+    <th:block th:if="${empty KualiForm.document.vendorContractGeneratedIdentifier}">
+        <!--/*/ <th:block th:with="extraPrefix=document.vendorDetail"> /*/-->
+    </th:block>
+  </th:block> 
+  <th:block th:case="*"> 
+ 	<!--/*/ <th:block th:with="extraPrefix=document.vendorDetail"> /*/-->
+  </th:block> 
+</th:block>  
+<th:block th:switch="${true}"> 
+  <th:block th:case="${displayPurchaseOrderFields}"> 
+    <!--/*/ <th:block th:with="extraPrefixShippingTitle=document"> /*/-->
+  </th:block> 
+  <th:block th:case="${displayPaymentRequestFields}"> 
+    <!--/*/ <th:block th:with="extraPrefixShippingTitle=document.purchaseOrderDocument"> /*/-->
+  </th:block> 
+  <th:block th:case="${displayRequisitionFields}"> 
+    <th:block th:if="${not empty KualiForm.document.vendorContractGeneratedIdentifier}">
+        <!--/*/ <th:block th:with="extraPrefixShippingTitle=document.vendorContract"> /*/-->
+    </th:block>
+    <th:block th:if="${empty KualiForm.document.vendorContractGeneratedIdentifier}">
+        <!--/*/ <th:block th:with="extraPrefixShippingTitle=document.vendorDetail"> /*/-->
+    </th:block>
+  </th:block> 
+  <th:block th:case="*"> 
+    <!--/*/ <th:block th:with="extraPrefixShippingTitle=document.vendorDetail"> /*/-->
+  </th:block> 
+</th:block>  
+
+<section class="kfs-tab" data-tab-title="Vendor" data-default-open="true">
+  <h3>Vendor</h3>
+    <div class="tab-container" align=center>
+		
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Vendor Section">
+            <tr>
+                <td colspan="4" class="subhead">Vendor Address</td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b" width="25%">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" width="25%">
+                    <input type="text" name="document.vendorName" th:field="*{document.vendorName}" data-attribute-entry="${documentAttributes.vendorName}" />
+                    <th:block th:if="${(fullEntryMode or amendmentEntry) and (displayRequisitionFields or displayPurchaseOrderFields) and !purchaseOrderAwarded and !lockB2BEntry}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorDetail" th:replace="~{fragments/kul/lookup :: content}"></span>
+                        <th:block th:if="${displayRequisitionFields}">
+                            &nbsp;<input type="image" property="methodToCall.clearVendor" src="${ConfigProperties.externalizable.images.url}tinybutton-clearvendor.gif" alt="clear vendor" styleClass="tinybutton"/>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if="${lockB2BEntry or (displayRequisitionFields or displayPurchaseOrderFields) and KualiForm.document.hasB2BVendor}">
+                        &nbsp;&nbsp;<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Shop Catalogs" data-url="b2b.do?methodToCall=shopCatalogs"></div>
+                    </th:block>
+                </td>
+                <th align=right valign=middle class="bord-l-b" width="25%">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorCityName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" width="25%">
+                    <input type="text" name="document.vendorCityName" th:field="*{document.vendorCityName}" data-attribute-entry="${documentAttributes.vendorCityName}" />
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+	                <th:block th:if="${not empty KualiForm.document.vendorHeaderGeneratedIdentifier}">
+		                <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorDetail" data-key-values="vendorHeaderGeneratedIdentifier=${KualiForm.document.vendorHeaderGeneratedIdentifier}&vendorDetailAssignedIdentifier=${KualiForm.document.vendorDetailAssignedIdentifier}">
+		                    <input type="text" name="document.vendorDetail.vendorNumber" th:field="*{document.vendorDetail.vendorNumber}" data-attribute-entry="${documentAttributes.vendorNumber}" readonly="readonly" />
+		                </span>
+	                </th:block>
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorStateCode}"></label>
+                    	<th:block th:if="${displayPurchaseOrderFields}"><br> *required for US</th:block>
+                    </div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.vendorStateCode" th:field="*{document.vendorStateCode}" data-attribute-entry="${documentAttributes.vendorStateCode}" />
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorLine1Address}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.vendorLine1Address" th:field="*{document.vendorLine1Address}" data-attribute-entry="${documentAttributes.vendorLine1Address}" />
+                    <th:block th:if="${(fullEntryMode or amendmentEntry) and vendorReadOnly and !lockB2BEntry}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+					<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorAddressInternationalProvinceName}"></label>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.vendorAddressInternationalProvinceName" th:field="*{document.vendorAddressInternationalProvinceName}" data-attribute-entry="${documentAttributes.vendorAddressInternationalProvinceName}" />
+                </td>
+            </tr>
+
+            <tr>
+            
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorLine2Address}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.vendorLine2Address" th:field="*{document.vendorLine2Address}" data-attribute-entry="${documentAttributes.vendorLine2Address}" />
+                </td>
+                    
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorPostalCode}"></label>
+                    	<th:block th:if="${displayPurchaseOrderFields}"> <br> *required for US</th:block>
+					</div>
+                </th>
+				<td align=left valign=middle class="datacell">
+					<input type="text" name="document.vendorPostalCode" th:field="*{document.vendorPostalCode}" data-attribute-entry="${documentAttributes.vendorPostalCode}" />
+				</td>
+            </tr>
+            
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorAttentionName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.vendorAttentionName" th:field="*{document.vendorAttentionName}" data-attribute-entry="${documentAttributes.vendorAttentionName}" />
+                </td>
+                
+            	<th align=right valign=middle class="bord-l-b">
+            		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorCountryCode}"></label></div>
+            	</th>
+            	<td align=left valign=middle class="datacell">
+                    <input type="text" name="document.vendorCountryCode" th:field="*{document.vendorCountryCode}" data-attribute-entry="${documentAttributes.vendorCountryCode}" />
+            	</td>
+            </tr>
+            <th:block th:if="${(not empty KualiForm.document.vendorDetail) and KualiForm.document.vendorDetail.vendorHeader.vendorDebarredIndicator}">
+            <tr>
+            	<th align=right valign=middle class="bord-l-b" >
+            		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.justification}"></label></div>
+            	</th>
+            	<td align=left valign=middle class="datacell">
+                    <input type="text" name="document.justification" th:field="*{document.justification}" data-attribute-entry="${documentAttributes.justification}" />
+            	</td>
+            </tr>
+            </th:block>
+
+            <tr>
+                <td colspan="4" class="subhead">Vendor Info</td>
+            </tr>
+
+            <th:block th:if="${displayPurchaseOrderFields}">
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderVendorChoiceCode}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.purchaseOrderVendorChoiceCode" th:field="*{document.purchaseOrderVendorChoiceCode}" data-attribute-entry="${documentAttributes.purchaseOrderVendorChoiceCode}" />
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </tr>
+            </th:block>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorCustomerNumber}"></label></div>
+                </th>
+
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.vendorCustomerNumber" th:field="*{document.vendorCustomerNumber}" data-attribute-entry="${documentAttributes.vendorCustomerNumber}" />
+                    <th:block th:if="${(fullEntryMode or amendmentEntry) and vendorReadOnly and !lockB2BEntry}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorCustomerNumber" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                </td>
+
+            	<th align=right valign=middle class="bord-l-b">&nbsp;</th>
+            	<td align=left valign=middle class="datacell">&nbsp;</td>
+            	
+            </tr>
+
+            <tr>
+                <th:block th:if="${displayRequisitionFields or displayPurchaseOrderFields}">
+                    <th align=right valign=middle class="bord-l-b" rowspan="3">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorNoteText}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell" rowspan="3">
+                        <input type="text" name="document.vendorNoteText" th:field="*{document.vendorNoteText}" data-attribute-entry="${documentAttributes.vendorNoteText}" />
+                    </td>
+                </th:block>                                                 
+                <th:block th:if="${displayPaymentRequestFields or displayCreditMemoFields}">
+                    <th align=right valign=middle class="bord-l-b" rowspan="3">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.noteLine1Text}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.noteLine1Text" th:field="*{document.noteLine1Text}" data-attribute-entry="${documentAttributes.noteLine1Text}" />
+                    </td>
+                </th:block>
+                <th:block th:if="${not displayCreditMemoFields}">                                                 
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorPaymentTermsCode}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorPaymentTermsCode" th:field="*{document.vendorPaymentTermsCode}" data-attribute-entry="${documentAttributes.vendorPaymentTermsCode}" />
+	                </td>
+				</th:block>	
+				<th:block th:if="${displayCreditMemoFields}">
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </th:block>                    
+            </tr> 
+
+            <tr>
+                <!-- left column populated by note row span for PUR docs-->
+                <th:block th:if="${displayPaymentRequestFields or displayCreditMemoFields}">
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.noteLine2Text" th:field="*{document.noteLine2Text}" data-attribute-entry="${documentAttributes.noteLine2Text}" />
+                    </td>
+                </th:block>                                                 
+                <th:block th:if="${not displayCreditMemoFields}">
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorShippingTitleCode}"></label></div>
+	                </th>	             
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.vendorShippingTitleCode" th:field="*{document.vendorShippingTitleCode}" data-attribute-entry="${documentAttributes.vendorShippingTitleCode}" />
+	                </td>		            			            
+                </th:block>
+                <th:block th:if="${displayCreditMemoFields}">
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </th:block>    
+            </tr> 
+
+            <tr>
+                <!-- left column populated by note row span for PUR docs-->
+                <th:block th:if="${displayPaymentRequestFields or displayCreditMemoFields}">
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.noteLine3Text" th:field="*{document.noteLine3Text}" data-attribute-entry="${documentAttributes.noteLine3Text}" />
+                    </td>
+                </th:block> 
+                <th:block th:if="${not displayCreditMemoFields}">                                                
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorShippingPaymentTermsCode}"></label></div>
+	                </th>
+		            <td align=left valign=middle class="datacell">
+		               <input type="text" name="document.vendorShippingPaymentTermsCode" th:field="*{document.vendorShippingPaymentTermsCode}" data-attribute-entry="${documentAttributes.vendorShippingPaymentTermsCode}" />
+		            </td>
+				</th:block>
+				<th:block th:if="${displayCreditMemoFields}">
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </th:block>    	                
+            </tr> 
+
+            <th:block th:if="${displayRequisitionFields or displayPurchaseOrderFields}">
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorContractName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.vendorContractName" th:field="*{document.vendorContractName}" data-attribute-entry="${documentAttributes.vendorContractName}" readonly="readonly" />
+                        <th:block th:if="${(fullEntryMode or amendmentEntry) and !lockB2BEntry}">
+                            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorContract" th:replace="~{fragments/kul/lookup :: content}"></span>
+                        </th:block>
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorContactsLabel}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.vendorContactsLabel" th:field="*{document.vendorContactsLabel}" data-attribute-entry="${documentAttributes.vendorContactsLabel}" readonly="readonly" />                    
+                        <th:block th:if="${vendorReadOnly}">
+                            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorContact" th:replace="~{fragments/kul/lookup :: content}"></span>                    
+                        </th:block>
+                    </td>
+                </tr>            
+
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorPhoneNumber}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.vendorPhoneNumber" th:field="*{document.vendorPhoneNumber}" data-attribute-entry="${documentAttributes.vendorPhoneNumber}" readonly="readonly" />                    
+                        <th:block th:if="${vendorReadOnly}">
+                            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorPhoneNumber" th:replace="~{fragments/kul/lookup :: content}"></span>                    
+                        </th:block>
+                    </td>
+                    <th align=right valign=middle class="bord-l-b" rowspan="2">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.supplierDiversityLabel}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell" rowspan="2">
+                          <th:block th:if="${not empty KualiForm.document.vendorDetail.vendorHeader.vendorSupplierDiversities}">
+                              <tr th:each="item, status : ${KualiForm.document.vendorDetail.vendorHeader.vendorSupplierDiversities}">
+                                  <th:block th:if="${!(status.first)}"><br></th:block>${item.vendorSupplierDiversity.vendorSupplierDiversityDescription}
+                              </tr>
+                          </th:block>&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorFaxNumber}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.vendorFaxNumber" th:field="*{document.vendorFaxNumber}" data-attribute-entry="${documentAttributes.vendorFaxNumber}" />
+                    </td>
+                </tr>
+            </th:block>
+
+            <th:block th:if="${displayPaymentRequestFields}">
+                <tr>
+                    <th align=right valign=middle class="bord-l-b" rowspan="3">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine1Text}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.specialHandlingInstructionLine1Text" th:field="*{document.specialHandlingInstructionLine1Text}" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine1Text}" />
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </tr> 
+    
+                <tr>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.specialHandlingInstructionLine2Text" th:field="*{document.specialHandlingInstructionLine2Text}" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine2Text}" />
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </tr> 
+    
+                <tr>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.specialHandlingInstructionLine3Text" th:field="*{document.specialHandlingInstructionLine3Text}" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine3Text}" />
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </tr> 
+            </th:block>
+            
+			<th:block th:switch="${true}"> 				
+			
+            <th:block th:case="${displayPurchaseOrderFields}">                 
+            <th:block th:if="${(fullEntryMode or amendmentEntry) or ( (not(fullEntryMode or amendmentEntry)) and (not empty KualiForm.document.alternateVendorHeaderGeneratedIdentifier) )}">
+                <!-- display search and remove alternate vendor if on purchase order document -->               
+                <tr>
+            	<th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                <td align=left valign=middle class="datacell">&nbsp;</td>
+            
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right">Alternate Vendor For Non-Primary Vendor Payment:</div>
+                </th>
+                <td align=left valign=middle class="datacell">
+					<!-- -<input type="image" name="methodToCall." src="${ConfigProperties.externalizable.images.url}tinybutton-searchaltvend.gif" class="tinybutton" title="Search for alternate vendor" alt="Search for alternate vendor">-->
+					<th:block th:if="${fullEntryMode or amendmentEntry}">
+					<div align="left">
+					<b>Search for alternate vendor</b> 						
+					<span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorDetail" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</div>
+					<br/>
+					</th:block>
+											
+					<div align="left">						
+					<b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternateVendorName}"></label></b>
+                    <input type="text" name="document.alternateVendorName" th:field="*{document.alternateVendorName}" data-attribute-entry="${documentAttributes.alternateVendorName}" readonly="readonly" />
+                    </div>
+        
+                    <div align="left">
+                    <b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternateVendorNumber}"></label></b>
+                    <input type="text" name="document.alternateVendorNumber" th:field="*{document.alternateVendorNumber}" data-attribute-entry="${documentAttributes.alternateVendorNumber}" readonly="readonly" />
+                    </div>						
+					
+					<th:block th:if="${fullEntryMode or amendmentEntry}">
+					<br/>
+					<input type="image" property="methodToCall.removeAlternateVendor" src="${ConfigProperties.externalizable.images.url}tinybutton-remaltvendor.gif" alt="Remove alternate vendor" title="Remove alternate vendor" styleClass="tinybutton"/>
+					</th:block>
+                </td>      
+                </tr>
+            </th:block>          
+            </th:block>
+			
+            <th:block th:case="${displayPaymentRequestFields and (not empty KualiForm.document.alternateVendorHeaderGeneratedIdentifier)}">
+                <!-- display use alternate or original vendor if on payment request document and there is an alternate to select from -->
+                <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right">Alternate Vendor For Non-Primary Vendor Payment:</div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                <th:block th:switch="${true}">
+                <th:block th:case="${fullEntryMode}">
+                <div align="left">
+                	<input type="image" property="methodToCall.useAlternateVendor" src="${ConfigProperties.externalizable.images.url}tinybutton-usealtvendor.gif" alt="Use alternate vendor" title="Use alternate vendor" styleClass="tinybutton"/>
+                </div>
+                <br>
+				<div align="left">
+					<input type="image" property="methodToCall.useOriginalVendor" src="${ConfigProperties.externalizable.images.url}tinybutton-useorigvendor.gif" alt="Use original vendor" title="Use original vendor" styleClass="tinybutton"/>
+				</div>
+				</th:block>
+				<th:block th:case="*">
+					&nbsp;
+				</th:block>
+				</th:block>
+                </td>
+                    
+                <th align=right valign=middle class="bord-l-b">Primary Vendor Name:</th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.primaryVendorName" th:field="*{document.primaryVendorName}" data-attribute-entry="${documentAttributes.primaryVendorName}" readonly="readonly" />
+                </td>
+                </tr>
+			</th:block>
+
+			</th:block>
+
+        </table>
+
+        <th:block th:if="${displayRequisitionFields and !lockB2BEntry}">
+                <h3>Additional Suggested Vendor Names</h3>
+
+            <table cellpadding="0" cellspacing="0" class="datatable" summary="Additional Vendor Section">
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternate1VendorName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.alternate1VendorName" th:field="*{document.alternate1VendorName}" data-attribute-entry="${documentAttributes.alternate1VendorName}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternate2VendorName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.alternate2VendorName" th:field="*{document.alternate2VendorName}" data-attribute-entry="${documentAttributes.alternate2VendorName}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternate3VendorName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.alternate3VendorName" th:field="*{document.alternate3VendorName}" data-attribute-entry="${documentAttributes.alternate3VendorName}" />
+                    </td>
+                </tr>
+                <tr>    
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternate4VendorName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.alternate4VendorName" th:field="*{document.alternate4VendorName}" data-attribute-entry="${documentAttributes.alternate4VendorName}" />
+                    </td>
+                </tr>
+                <tr>    
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.alternate5VendorName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.alternate5VendorName" th:field="*{document.alternate5VendorName}" data-attribute-entry="${documentAttributes.alternate5VendorName}" />
+                    </td>                                                
+                </tr>
+            </table>
+        </th:block>
+
+    </div>
+</section>
+</div>

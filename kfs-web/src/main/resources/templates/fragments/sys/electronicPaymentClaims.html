@@ -1,0 +1,49 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/electronicPaymentClaims.tag -->
+<!-- Fragment parameters: allowAdministration -->
+<div th:fragment="content (allowAdministration)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="electronicPaymentClaimAttributes=${DataDictionary.ElectronicPaymentClaim.attributes}"> /*/-->
+<!--/*/ <th:block th:with="advanceDepositDocumentAttributes=${DataDictionary.AdvanceDepositDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountingLineAttributes=${DataDictionary.SourceAccountingLine.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Electronic Payments" data-default-open="true">
+  <h3>Electronic Payments</h3>
+  <div class="tab-container" align="center">
+    <h3>Electronic Payments</h3>
+
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+      <tr>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${electronicPaymentClaimAttributes.documentNumber}"></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${electronicPaymentClaimAttributes.fiscalDocumentLineNumber}"></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${advanceDepositDetailAttributes.financialDocumentAdvanceDepositDate}"></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.financialDocumentLineDescription}"></th>
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.amount}"></th>
+        <th:block th:if="${allowAdministration}">
+          <th><span th:text="#{${__MSG_KEY__}}"></span></th>
+          <th><span th:text="#{${__MSG_KEY__}}"></span></th>
+        </th:block>
+      </tr>
+      <logic:iterate indexId="ctr" name="KualiForm" property="claims" id="currentLine">
+        <div th:replace="~{fragments/sys/electronicPaymentClaim :: content}" data-claim-index="${ctr}" data-allow-administration="${allowAdministration}" data-electronic-payment-claim="${currentLine}"></div>
+      </tr>
+    </table>
+  </div>
+</section>
+</div>

@@ -1,0 +1,42 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/contractsGrantsLetterOfCreditReviewDetails.tag -->
+<!-- Fragment parameters: invPropertyName -->
+<div th:fragment="content (invPropertyName)" xmlns:th="http://www.thymeleaf.org">
+<!-- If there are no bills, this section should not be displayed -->
+<section class="kfs-tab" data-tab-title="Award Accounts" data-default-open="true">
+  <h3>Award Accounts</h3>
+	<!--/*/ <th:block th:with="contractsGrantsLetterOfCreditReviewDetailAttributes=${DataDictionary.ContractsGrantsLetterOfCreditReviewDetail.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+	<!--/*/ <th:block th:with="detailPropertyName=document.contractsGrantsLetterOfCreditReviewDetails[${ctr}]"> /*/-->
+
+	<div class="tab-container" align="center">
+		<h3>Award Accounts</h3>
+
+		<table style="width: 100%; border: none" cellpadding="0" cellspacing="0" class="datatable" border="0">
+			<logic:iterate indexId="counter" name="KualiForm" property="proposalNumbers" id="proposalNumber">
+				<tr>
+					<th width="5%" align="center">Award (${KualiForm.proposalNumbers[counter] }):</th>
+					<td><div th:replace="~{fragments/ar/contractsGrantsLetterOfCreditReviewDetail :: content}" data-proposal-number-value="${KualiForm.proposalNumbers[counter] }"></div></td>
+				</tr>
+			</tr>
+		</table>
+	</div>
+</section>
+</div>

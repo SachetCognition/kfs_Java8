@@ -1,0 +1,68 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/finalBilledIndicatorEntries.tag -->
+<!-- Fragment parameters: editingMode -->
+<div th:fragment="content (editingMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Final Billed Indicator Entries" data-default-open="true">
+  <h3>Final Billed Indicator Entries</h3>
+	<!--/*/ <th:block th:with="attributes=${DataDictionary.FinalBilledIndicatorEntry.attributes}"> /*/-->
+	<div class="tab-container" align=center>
+		<h3>Entries</h3>
+		<table cellpadding=0 class="datatable" summary="Final Billed Indicator Entries">
+
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.invoiceDocumentNumber}"></th>
+				<th:block th:if="${not readOnly}">
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				</th:block>
+			</tr>
+			<th:block th:if="${not readOnly}">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<td class="infoline"><input type="text" name="invoiceEntry.invoiceDocumentNumber" th:field="*{invoiceEntry.invoiceDocumentNumber}" data-attribute-entry="${attributes.invoiceDocumentNumber}" /></td>
+					<td class="infoline">
+						<div align="center">
+							<input type="image" property="methodToCall.addInvoiceEntry" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+								alt="Add an Invoice Entry" title="Add an Invoice Entry" styleClass="tinybutton" />
+						</div>
+					</td>
+				</tr>
+			</th:block>
+			<tr th:each="FinalBilledIndicatorEntry : ${KualiForm.document.invoiceEntries}" indexId="ctr">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+
+					<td class="datacell"><input type="text" name="document.invoiceEntries[${ctr}].invoiceDocumentNumber" th:field="*{document.invoiceEntries[${ctr}].invoiceDocumentNumber}" data-attribute-entry="${attributes.invoiceDocumentNumber}" readonly="readonly" /></td>
+					<th:block th:if="${not readOnly}">
+						<td class="datacell">
+							<div align="center">
+								<input type="image" property="methodToCall.deleteInvoiceEntry.line${ctr}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+									alt="Delete an Invoice Entry" title="Delete an Invoice Entry" styleClass="tinybutton" />
+							</div>
+						</td>
+					</th:block>
+				</tr>
+			</tr>
+		</table>
+	</div>
+</section>
+</div>

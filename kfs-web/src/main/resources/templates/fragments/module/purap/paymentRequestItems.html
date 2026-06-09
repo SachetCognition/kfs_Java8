@@ -1,0 +1,223 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/paymentRequestItems.tag -->
+<!-- Fragment parameters: itemAttributes, accountingLineAttributes, showAmount, mainColumnCount -->
+<div th:fragment="content (itemAttributes, accountingLineAttributes, showAmount, mainColumnCount)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="lockTaxAmountEntry=${(not empty KualiForm.editingMode['lockTaxAmountEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="clearAllTaxes=${(not empty KualiForm.editingMode['clearAllTaxes'])}"> /*/-->
+<!--/*/ <th:block th:with="purapTaxEnabled=${(not empty KualiForm.editingMode['purapTaxEnabled'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=50"> /*/-->
+<!--/*/ <th:block th:with="fullDocEntryCompleted=${(not empty KualiForm.editingMode['fullDocumentEntryCompleted'])}"> /*/-->
+
+<!--/*/ <th:block th:with="colSpanDescription=3"> /*/-->
+<th:block th:if="${purapTaxEnabled}">
+	<!--/*/ <th:block th:with="colSpanDescription=1"> /*/-->
+</th:block>
+
+<tr>
+	<td colspan="${mainColumnCount}" class="subhead">
+		<span class="subhead-left">Items</span>
+	</td>
+</tr>
+
+<th:block th:if="${fullEntryMode}">
+		<tr>
+			<td colspan="${mainColumnCount}" class="datacell" align="right" nowrap="nowrap">
+				<div align="right">
+					<th:block th:if="${KualiForm.ableToShowClearAndLoadQtyButtons}">
+						<input type="image" property="methodToCall.loadQty" src="${ConfigProperties.externalizable.images.url}tinybutton-loadqtyinvoiced.gif" alt="load qty invoiced" title="load qty invoiced" styleClass="tinybutton" />
+						<input type="image" property="methodToCall.clearQty" src="${ConfigProperties.externalizable.images.url}tinybutton-clearqtyinvoiced.gif" alt="clear qty invoiced" title="clear qty invoiced" styleClass="tinybutton" />
+					</th:block>
+				</div>
+			</td>
+		</tr>
+</th:block>
+		
+		
+<%-- temporary workaround due to removing discount item --%>
+<th:block th:if="${KualiForm.countOfAboveTheLine>=1}">
+	<tr>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemLineNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.poOutstandingQuantity}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.purchaseOrderItemUnitPrice}"></th>				
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemQuantity}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitPrice}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.extendedPrice}"></th>
+		
+		<th:block th:if="${purapTaxEnabled}">
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemTaxAmount}"></th>		
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.totalAmount}"></th>
+		</th:block>
+
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemCatalogNumber}"></th>
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemAssignedToTradeInIndicator}"></th>		
+		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDescription}"></th>
+		<th:block th:if="${fullEntryMode}">
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+		</th:block>
+		
+	</tr>
+</th:block>
+
+<th:block th:if="${KualiForm.countOfAboveTheLine<1}">
+	<tr>
+		<th height=30 colspan="${mainColumnCount}">No items Payable</th>
+	</tr>
+</th:block>
+
+<logic:iterate indexId="ctr" name="KualiForm" property="document.items" id="itemLine">
+	
+	<th:block th:if="${itemLine.itemType.lineItemIndicator == true}">
+		<!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+		<!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+        
+        <th:block th:switch="${true}">
+            <th:block th:case="${itemLine.objectId == null}">
+                <!--/*/ <th:block th:with="newObjectId=[[${__EXPR__}]]"> /*/-->
+                <!--/*/ <th:block th:with="tabKey=Item-${newObjectId}"> /*/-->
+            </th:block>
+            <th:block th:case="${itemLine.objectId != null}">
+                <!--/*/ <th:block th:with="tabKey=Item-${itemLine.objectId}"> /*/-->
+            </th:block>
+        </th:block>
+    
+        <!--  hit form method to increment tab index -->
+        <!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+        <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+		<%-- default to closed --%>
+		<th:block th:switch="${true}">
+		<th:block th:case="${empty currentTab}">
+			<!--/*/ <th:block th:with="isOpen=false"> /*/-->
+		</th:block>
+		<th:block th:case="${!empty currentTab}">
+			<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+		</th:block>
+		</th:block>
+
+		<tr>
+			<td class="infoline" nowrap="nowrap" rowspan="2">
+				  &nbsp;<b><span th:text="${KualiForm.document.item[${ctr}].itemLineNumber}"></span></b> 
+			</td>
+			<td class="infoline">
+				<th:block th:switch="${true}">
+				<th:block th:case="${KualiForm.document.items[ctr].itemType.quantityBasedGeneralLedgerIndicator}">
+			    <input type="text" name="document.item[${ctr}].poOutstandingQuantity" th:field="*{document.item[${ctr}].poOutstandingQuantity}" data-attribute-entry="${itemAttributes.poOutstandingQuantity}" readonly="readonly" />
+				</th:block>
+				<th:block th:case="*">
+					&nbsp;
+				</th:block>
+				</th:block>
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemUnitOfMeasureCode" th:field="*{document.item[${ctr}].itemUnitOfMeasureCode}" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}" readonly="readonly" />
+		    </td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].purchaseOrderItemUnitPrice" th:field="*{document.item[${ctr}].purchaseOrderItemUnitPrice}" data-attribute-entry="${itemAttributes.purchaseOrderItemUnitPrice}" readonly="readonly" />
+		    </td>				    
+			<td class="infoline">
+			    <div align="right">
+			        <input type="text" name="document.item[${ctr}].itemQuantity" th:field="*{document.item[${ctr}].itemQuantity}" data-attribute-entry="${itemAttributes.itemQuantity}" />				        
+				</div>
+			</td>
+			<td class="infoline">
+			    <div align="right">
+                    <th:block th:if="${KualiForm.document.items[ctr].itemType.quantityBasedGeneralLedgerIndicator}">
+                        <input type="text" name="document.item[${ctr}].itemUnitPrice" th:field="*{document.item[${ctr}].itemUnitPrice}" data-attribute-entry="${itemAttributes.itemUnitPrice}" />
+                    </th:block>
+                    <th:block th:if="${KualiForm.document.items[ctr].itemType.amountBasedGeneralLedgerIndicator}">
+                        <input type="text" name="document.item[${ctr}].poOutstandingAmount" th:field="*{document.item[${ctr}].poOutstandingAmount}" data-attribute-entry="${itemAttributes.itemUnitPrice}" readonly="readonly" />
+                    </th:block>
+				</div>
+			</td>
+			<td class="infoline">
+			    <div align="right">
+			        <input type="text" name="document.item[${ctr}].extendedPrice" th:field="*{document.item[${ctr}].extendedPrice}" data-attribute-entry="${itemAttributes.extendedPrice}" />
+			    </div>
+			</td>
+
+			<th:block th:if="${purapTaxEnabled}">
+			<td class="infoline">
+			    <div align="right">
+			        <input type="text" name="document.item[${ctr}].itemTaxAmount" th:field="*{document.item[${ctr}].itemTaxAmount}" data-attribute-entry="${itemAttributes.itemTaxAmount}" />
+			    </div>
+			</td>			
+			<td class="infoline">
+			    <div align="right">
+			        <input type="text" name="document.item[${ctr}].totalAmount" th:field="*{document.item[${ctr}].totalAmount}" data-attribute-entry="${itemAttributes.totalAmount}" readonly="readonly" />
+			    </div>
+			</td>
+			</th:block>
+
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemCatalogNumber" th:field="*{document.item[${ctr}].itemCatalogNumber}" data-attribute-entry="${itemAttributes.itemCatalogNumber}" readonly="readonly" />
+		    </td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemAssignedToTradeInIndicator" th:field="*{document.item[${ctr}].itemAssignedToTradeInIndicator}" data-attribute-entry="${itemAttributes.itemAssignedToTradeInIndicator}" readonly="readonly" />
+			</td>			    
+			<td  class="infoline" colspan="${colSpanDescription}">
+			    <input type="text" name="document.item[${ctr}].itemDescription" th:field="*{document.item[${ctr}].itemDescription}" data-attribute-entry="${itemAttributes.itemDescription}" readonly="readonly" />
+			</td>	
+			
+			<th:block th:if="${fullEntryMode}">
+				<td class="infoline"> 
+					<div style="text-align: center;">
+						<input type="image" property="methodToCall.recalculateItemAccountsAmounts.line${ctr}.Anchor" 
+							src="${ConfigProperties.externalizable.images.url}tinybutton-calculate.gif" 
+							title="Recalculate Item's accounts amounts distributions"
+							alt="Recalculate Item's accounts amounts distributions" styleClass="tinybutton" />&nbsp;	
+						<input type="image" property="methodToCall.restoreItemAccountsAmounts.line${ctr}.Anchor" 
+							src="${ConfigProperties.externalizable.images.url}tinybutton-restore.gif" 
+							title="Restore Item's accounts percents/amounts from Purchase Order"
+							alt="Restore Item's accounts percents/amounts from Purchase Order" styleClass="tinybutton" />
+					</div>
+				</td>										
+		</th:block>		
+					
+		</tr>
+		
+		<!--/*/ <th:block th:with="hideFields=amount"> /*/-->
+		<th:block th:if="${showAmount}">
+			<!--/*/ <th:block th:with="hideFields="> /*/-->
+		</th:block>		
+		<div th:replace="~{fragments/purap/purapGeneralAccounting :: content}" data-account-prefix="document.item[${ctr}]." data-item-col-span="${mainColumnCount-1}"></div>	
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			</tbody>
+		</th:block>
+	</th:block>
+</tr>
+
+<th:block th:if="${(fullEntryMode) and (clearAllTaxes) and (purapTaxEnabled)}">
+	<tr>
+		<th height=30 colspan="${mainColumnCount}">
+			<input type="image" property="methodToCall.clearAllTaxes" 
+			    src="${ConfigProperties.externalizable.images.url}tinybutton-clearalltax.gif" 
+			    alt="Clear all tax" 
+			    title="Clear all tax" styleClass="tinybutton" />
+			 </div>
+	 	</th>
+	 </tr>
+</th:block>	
+		
+<tr>
+	<th height=30 colspan="${mainColumnCount}">&nbsp;</th>
+</tr>
+</div>

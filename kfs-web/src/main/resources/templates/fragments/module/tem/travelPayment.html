@@ -1,0 +1,212 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/travelPayment.tag -->
+<!-- Fragment parameters: isForAdvance -->
+<div th:fragment="content (isForAdvance)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="paymentPropertyName=travelPayment"> /*/-->
+<!--/*/ <th:block th:with="tabErrorKey=${TemConstants.TRAVEL_PAYMENT_TAB_ERRORS},${TemConstants.TRVL_SPECHAND_TAB_ERRORS},${KFSConstants.WIRETRANSFER_TAB_ERRORS},${KFSConstants.FOREIGNDRAFTS_TAB_ERRORS}"> /*/-->
+<!--/*/ <th:block th:with="travelPaymentAttributes=${DataDictionary.TravelPayment.attributes}"> /*/-->
+<!--/*/ <th:block th:with="travelPaymentLabel=${DataDictionary.TravelPayment.objectLabel}"> /*/-->
+<th:block th:if="${!empty isForAdvance and isForAdvance}">
+	<!--/*/ <th:block th:with="paymentPropertyName=advanceTravelPayment"> /*/-->
+	<!--/*/ <th:block th:with="tabErrorKey=${TemConstants.ADVANCE_TRAVEL_PAYMENT_TAB_ERRORS},${TemConstants.ADVANCE_TRVL_SPECHAND_TAB_ERRORS},${KFSConstants.WIRETRANSFER_TAB_ERRORS},${KFSConstants.FOREIGNDRAFTS_TAB_ERRORS}"> /*/-->
+	<!--/*/ <th:block th:with="travelPaymentAttributes=${DataDictionary.AdvanceTravelPayment.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="travelPaymentLabel=${DataDictionary.AdvanceTravelPayment.objectLabel}"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="checkAmountEntry=${KualiForm.editingMode['checkAmountEntry']}"> /*/-->
+<!--/*/ <th:block th:with="canEdit=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="immediateDisbursementEntryMode=${canEdit && KualiForm.editingMode['immediateDisbursementEntryMode']}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="${travelPaymentLabel}" data-default-open="${KualiForm.defaultOpenPaymentInfoTab}">
+  <h3>${travelPaymentLabel}</h3>
+    <div class="tab-container" align=center > 
+        <h3>Payment Information</h3>
+		<table cellpadding=0 class="datatable" summary="Payment Section">
+            <tr>
+              <th width="20%"  class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.checkTotalAmount}"></label></div>
+              </th>
+              <td width="30%"  class="datacell">
+                <input type="text" name="document.${paymentPropertyName}.checkTotalAmount" th:field="*{document.${paymentPropertyName}.checkTotalAmount}" data-attribute-entry="${travelPaymentAttributes.checkTotalAmount}" />
+              </td>
+              <th width="20%"  class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.dueDate}"></label></div></th>
+              <td width="30%"  class="datacell">
+                 <input type="text" name="document.${paymentPropertyName}.dueDate" th:field="*{document.${paymentPropertyName}.dueDate}" data-attribute-entry="${travelPaymentAttributes.dueDate}" />
+              </td>
+            </tr>
+            
+            <tr>
+              <th  class="bord-l-b"><div align="right">Payment Type:</div></th>
+              <td valign="top"  class="datacell">
+                <th:block th:if="${taxEntryMode}">
+                  <input type="text" name="document.${paymentPropertyName}.alienPaymentCode" th:field="*{document.${paymentPropertyName}.alienPaymentCode}" data-attribute-entry="${travelPaymentAttributes.alienPaymentCode}" />
+                  <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.alienPaymentCode}"></label>
+                  <br><br>
+                </th:block>
+                <th:block th:if="${!taxEntryMode}">
+                    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.alienPaymentCode}"></label>
+                    <input type="text" name="document.${paymentPropertyName}.alienPaymentCode" th:field="*{document.${paymentPropertyName}.alienPaymentCode}" data-attribute-entry="${travelPaymentAttributes.alienPaymentCode}" readonly="readonly" />
+                    <br><br>
+                </th:block>
+				<%--
+                <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.payeeEmployeeCode}"></label> <span th:text="${KualiForm.document.${paymentPropertyName}.payeeEmployeeCode}"></span><br><br>
+				<th:block th:if="${KualiForm.document[paymentPropertyName].payeeTypeCode=='V'}">
+                	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.employeePaidOutsidePayrollCode}"></label><span th:text="${KualiForm.document.${paymentPropertyName}.employeePaidOutsidePayrollCode}"></span><br><br>
+                </th:block>
+				--%>
+              </td>  
+              <th width="20%"  class="bord-l-b"><div align="right">Other Considerations: </div></th>
+              <td width="30%"  class="datacell">
+				<th:block th:switch="${true}">
+					<th:block th:case="${fullEntryMode}"> 
+						<input type="text" name="document.${paymentPropertyName}.attachmentCode" th:field="*{document.${paymentPropertyName}.attachmentCode}" data-attribute-entry="${travelPaymentAttributes.attachmentCode}" />
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.attachmentCode}"></label><br>
+					</th:block>
+					<th:block th:case="*"> 
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.attachmentCode}"></label>
+						<input type="text" name="document.${paymentPropertyName}.attachmentCode" th:field="*{document.${paymentPropertyName}.attachmentCode}" data-attribute-entry="${travelPaymentAttributes.attachmentCode}" readonly="readonly" /><br>
+					</th:block>
+				</th:block>
+         
+				<th:block th:switch="${true}">
+                 <th:block th:case="${fullEntryMode || specialHandlingChangingEntryMode}">        
+                   <input type="text" name="document.${paymentPropertyName}.specialHandlingCode" th:field="*{document.${paymentPropertyName}.specialHandlingCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingCode}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingCode}"></label><br>
+                 </th:block>
+                 <th:block th:case="*">
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingCode}"></label>
+                   <input type="text" name="document.${paymentPropertyName}.specialHandlingCode" th:field="*{document.${paymentPropertyName}.specialHandlingCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingCode}" readonly="readonly" /><br>          
+                 </th:block>
+				</th:block>
+                 
+                 <!--/*/ <th:block th:with="w9IndReadOnly=${!fullEntryMode}"> /*/-->
+                 <%-- cannot change w9 indicator if it has previousely been checked --%>
+                 <th:block th:if="${KualiForm.document[paymentPropertyName].editW9W8BENbox==true}">  
+                     <!--/*/ <th:block th:with="w9IndReadOnly=true"> /*/-->    
+                 </th:block>
+                 <th:block th:switch="${true}">
+					<th:block th:case="${w9IndReadOnly}">    
+						<input type="text" name="document.${paymentPropertyName}.payeeW9CompleteCode" th:field="*{document.${paymentPropertyName}.payeeW9CompleteCode}" data-attribute-entry="${travelPaymentAttributes.payeeW9CompleteCode}" />
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.payeeW9CompleteCode}"></label><br>                     
+					</th:block>
+					<th:block th:case="*">                
+						<input type="text" name="document.${paymentPropertyName}.payeeW9CompleteCode" th:field="*{document.${paymentPropertyName}.payeeW9CompleteCode}" data-attribute-entry="${travelPaymentAttributes.payeeW9CompleteCode}" />
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.payeeW9CompleteCode}"></label><br>
+					</th:block>
+				</th:block>
+                 
+                 
+				<th:block th:switch="${true}">
+                 <th:block th:case="${fullEntryMode}">        
+                   <input type="text" name="document.${paymentPropertyName}.exceptionAttachedIndicator" th:field="*{document.${paymentPropertyName}.exceptionAttachedIndicator}" data-attribute-entry="${travelPaymentAttributes.exceptionAttachedIndicator}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.exceptionAttachedIndicator}"></label><br>
+                 </th:block>
+                 <th:block th:case="*">
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.exceptionAttachedIndicator}"></label>
+                   <input type="text" name="document.${paymentPropertyName}.exceptionAttachedIndicator" th:field="*{document.${paymentPropertyName}.exceptionAttachedIndicator}" data-attribute-entry="${travelPaymentAttributes.exceptionAttachedIndicator}" readonly="readonly" /><br>          
+                 </th:block>
+				</th:block>     
+
+				<th:block th:switch="${true}">
+                 <th:block th:case="${immediateDisbursementEntryMode}">        
+                   <input type="text" name="document.${paymentPropertyName}.immediatePaymentIndicator" th:field="*{document.${paymentPropertyName}.immediatePaymentIndicator}" data-attribute-entry="${travelPaymentAttributes.immediatePaymentIndicator}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.immediatePaymentIndicator}"></label><br>
+                 </th:block>
+                 <th:block th:case="*">
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.immediatePaymentIndicator}"></label>
+                   <input type="text" name="document.${paymentPropertyName}.immediatePaymentIndicator" th:field="*{document.${paymentPropertyName}.immediatePaymentIndicator}" data-attribute-entry="${travelPaymentAttributes.immediatePaymentIndicator}" readonly="readonly" /><br>          
+                 </th:block>
+				</th:block>
+                 </td>
+            </tr>
+            
+            <tr>
+              <th  class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.paymentMethodCode}"></label></div></th>
+              <td  class="datacell">
+                <input type="text" name="document.${paymentPropertyName}.paymentMethodCode" th:field="*{document.${paymentPropertyName}.paymentMethodCode}" data-attribute-entry="${travelPaymentAttributes.paymentMethodCode}" onchange="paymentMethodMessages(this.value);" />
+              </td>
+              <th  class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.documentationLocationCode}"></label></div></th>
+              <td  class="datacell">
+                <input type="text" name="document.${paymentPropertyName}.documentationLocationCode" th:field="*{document.${paymentPropertyName}.documentationLocationCode}" data-attribute-entry="${travelPaymentAttributes.documentationLocationCode}" readonly="readonly" onchange="documentationMessage(this.value);" />
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.checkStubText}"></label></div></th>
+              <td colspan="3"><input type="text" name="document.${paymentPropertyName}.checkStubText" th:field="*{document.${paymentPropertyName}.checkStubText}" data-attribute-entry="${travelPaymentAttributes.checkStubText}" readonly="readonly" /></td>
+            </tr>
+        </table>
+		<%-- SPECIAL HANDLING --%>
+		<kul:subtab width="100%" subTabTitle="Special Handling" open="false" noShowHideButton="false">
+			<table cellpadding=0 class="datatable" summary="Special Handling Section">          
+				<tr>
+				  <th align=right valign=middle class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingPersonName}"></label></div></th>
+				  <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.${paymentPropertyName}.specialHandlingPersonName" th:field="*{document.${paymentPropertyName}.specialHandlingPersonName}" data-attribute-entry="${travelPaymentAttributes.specialHandlingPersonName}" />  
+                  </td>
+				  <th align="right" valign="middle" class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingCityName}"></label></div></th>
+				  <td align="left" valign="middle" class="datacell" colspan="3">
+					<input type="text" name="document.${paymentPropertyName}.specialHandlingCityName" th:field="*{document.${paymentPropertyName}.specialHandlingCityName}" data-attribute-entry="${travelPaymentAttributes.specialHandlingCityName}" />  
+				  </td>
+				</tr>
+				
+				<tr>
+				  <th align="right" valign="middle" class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine1Addr}"></label></div></th>
+				  <td align="left" valign="middle" class="datacell">
+					<input type="text" name="document.${paymentPropertyName}.specialHandlingLine1Addr" th:field="*{document.${paymentPropertyName}.specialHandlingLine1Addr}" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine1Addr}" />  
+				  </td>
+				  <th align="right" valign="middle" class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingStateCode}"></label></div></th>
+				  <td align="left" valign="middle" class="datacell">
+					<input type="text" name="document.${paymentPropertyName}.specialHandlingStateCode" th:field="*{document.${paymentPropertyName}.specialHandlingStateCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingStateCode}" />  
+				  </td>
+				</tr>
+				
+				<tr>
+				  <th align="right" valign="middle" class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine2Addr}"></label></div></th>
+				  <td align="left" valign="middle" class="datacell">
+					<input type="text" name="document.${paymentPropertyName}.specialHandlingLine2Addr" th:field="*{document.${paymentPropertyName}.specialHandlingLine2Addr}" data-attribute-entry="${travelPaymentAttributes.specialHandlingLine2Addr}" />  
+				  </td>
+				  <th align="right" valign="middle" class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingZipCode}"></label></div></th>
+				  <td align="left" valign="middle" class="datacell">
+					<input type="text" name="document.${paymentPropertyName}.specialHandlingZipCode" th:field="*{document.${paymentPropertyName}.specialHandlingZipCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingZipCode}" />  
+				  </td>
+				</tr>
+				
+				<tr>
+				  <th align="right" valign="middle" class="bord-l-b"></th>
+				  <td align="left" valign="middle" class="datacell">
+				  </td>
+				  <th align="right" valign="middle" class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelPaymentAttributes.specialHandlingCountryCode}"></label></div></th>
+				  <td align="left" valign="middle" class="datacell">
+					<input type="text" name="document.${paymentPropertyName}.specialHandlingCountryCode" th:field="*{document.${paymentPropertyName}.specialHandlingCountryCode}" data-attribute-entry="${travelPaymentAttributes.specialHandlingCountryCode}" />  
+				  </td>
+				</tr>
+			</table>
+		</div><!-- /kul:subtab -->
+	 <%-- WIRE TRANSFER --%>
+	 <kul:subtab width="100%" subTabTitle="Wire Transfer" open="${KualiForm.document[paymentPropertyName].paymentMethodCode==KFSConstants.PaymentSourceConstants.PAYMENT_METHOD_WIRE}" noShowHideButton="false">
+		<div th:replace="~{fragments/sys/innerWireTransfer :: content}"></div>
+	 </div><!-- /kul:subtab -->
+	 <%-- FOREIGN DRAFT --%>
+	 <kul:subtab width="100%" subTabTitle="Foreign Draft" open="${KualiForm.document[paymentPropertyName].paymentMethodCode==KFSConstants.PaymentSourceConstants.PAYMENT_METHOD_DRAFT}" noShowHideButton="false">
+		<div th:replace="~{fragments/sys/innerForeignDraft :: content}"></div>
+	 </div><!-- /kul:subtab -->
+     </div>
+</section>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/cams/AssetMaintenanceGlpe.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/cams/AssetMaintenanceGlpe</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="generalLedgerPendingEntriesList=${KualiForm.document.newMaintainableObject.businessObject.generalLedgerPendingEntries}"> /*/-->
+<th:block th:if="${!empty generalLedgerPendingEntriesList}">
+	<div th:replace="~{fragments/gl/generalLedgerPendingEntries :: content}" data-general-ledger-pending-entries="${generalLedgerPendingEntriesList}" data-general-ledger-pending-entry-property="document.newMaintainableObject.businessObject.generalLedgerPendingEntries" data-general-ledger-pending-entries-property="document.newMaintainableObject.businessObject.generalLedgerPendingEntries"></div>
+</th:block>
+<th:block th:if="${empty generalLedgerPendingEntriesList}">
+	<section class="kfs-tab" data-tab-title="General Ledger Pending Entries" data-default-open="false">
+  <h3>General Ledger Pending Entries</h3>
+		<div class="tab-container" align=center>
+		<h3>General Ledger Pending Entries <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry" th:replace="~{fragments/kul/lookup :: content}"></span></h3>
+		<table cellpadding="0" cellspacing="0" class="datatable"
+			summary="view/edit pending entries">
+			<tr>
+				<td class="datacell" height="50" colspan="12">
+				<div align="center">There are currently no General Ledger Pending Entries associated with this Transaction Processing document.</div>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</section>
+</th:block>
+</body>
+</html>

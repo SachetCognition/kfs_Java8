@@ -1,0 +1,55 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/tr/history.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelReimbursementDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="docHeaderAttributes=${DataDictionary.DocumentHeader.attributes}"> /*/-->
+<section class="kfs-tab" data-tab-title="View Reimbursement History" data-default-open="true">
+  <h3>View Reimbursement History</h3>
+    <div class="tab-container" align=center > 
+		<h3>Reimbursement History - Travel Reimbursements ${KualiForm.document.travelDocumentIdentifier}</h3>
+		<table class="datatable" summary="Reimbursement History - Travel Reimbursements" cellpadding="0">
+           <tbody>
+           <tr>
+             <th class="bord-l-b">
+			   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${docHeaderAttributes.documentNumber}"></label>
+             </th>
+             <th class="bord-l-b">
+			   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.tripBegin}"></label>
+             </th>
+             <th class="bord-l-b">Status</th>
+             <th class="bord-l-b">Hold</th>
+             <th class="bord-l-b">Request Cancel</th>
+             <th class="bord-l-b">Amount</th>
+           </tr>
+           <tr th:each="reimbursement : ${KualiForm.history}">
+           <tr>
+             <td><span th:text="${reimbursement.documentNumber}"></span></td>
+             <td><span th:text="${reimbursement.date}"></span></td>
+             <td><span th:text="${reimbursement.status}"></span></td>
+             <td><span th:text="${reimbursement.onHold}"></span></td>
+             <td><span th:text="${reimbursement.cancel}"></span></td>
+             <td><span th:text="${reimbursement.amount}"></span></td>
+		   </tr>             
+           </tr>
+           </tbody>
+        </table>
+    </div>
+</section>
+</div>

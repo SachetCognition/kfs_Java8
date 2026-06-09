@@ -1,0 +1,42 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/pbglLineReadOnlyCellProperty.tag -->
+<!-- Fragment parameters: property, textStyle, inquiry, boClassName, field, conversionField, inquiryKeys, accountingLineValuesMap, inquiryExtraKeyValues, formattedNumberValue -->
+<div th:fragment="content (property, textStyle, inquiry, boClassName, field, conversionField, inquiryKeys, accountingLineValuesMap, inquiryExtraKeyValues, formattedNumberValue)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="aKeyIsMissing=${empty accountingLineValuesMap[field]}"> /*/-->
+<!--/*/ <th:block th:with="keyValues=${conversionField}=${accountingLineValuesMap[field]}"> /*/-->
+<c:forTokens var="key" items="${inquiryKeys}" delims=",">
+    <!--/*/ <th:block th:with="aKeyIsMissing=${missingKey || empty accountingLineValuesMap[key]}"> /*/-->
+    <!--/*/ <th:block th:with="keyValues=${keyValues}&${key}=${accountingLineValuesMap[key]}"> /*/-->
+</c:forTokens>
+<!--/*/ <th:block th:with="keyValues=${keyValues}${empty inquiryExtraKeyValues ? '' : '&'}${inquiryExtraKeyValues}"> /*/-->
+<!--/*/ <th:block th:with="canRenderInquiry=${not empty keyValues && not aKeyIsMissing}"> /*/-->
+
+<span class="kfs-inquiry" data-bo-class="${boClassName}" data-key-values="${keyValues}">
+    <th:block th:switch="${true}">
+        <th:block th:case="${empty formattedNumberValue}">
+            <span th:text="${KualiForm.${property}}"></span>&nbsp;
+        </th:block>
+        <th:block th:case="*">
+            ${formattedNumberValue}
+        </th:block>
+    </th:block>
+    
+</span>
+</div>

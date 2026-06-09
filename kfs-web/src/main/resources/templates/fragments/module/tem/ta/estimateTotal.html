@@ -1,0 +1,89 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/ta/estimateTotal.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelAuthorizationDocument.attributes}"> /*/-->
+	<section class="kfs-tab" data-tab-title="Trip Detail Estimate Total" data-default-open="true">
+  <h3>Trip Detail Estimate Total</h3>
+	    <div id="TravelExpenseTotal" class="tab-container" align=center > 
+	        <h3>Travel Expense Total</h3>
+			<table border="0">
+				<tbody>
+					<tr>
+						<th width="80%"><div align="right"><strong>Total Estimated</strong>:</div></th>
+						<td width="20%"><span th:text="${KualiForm.document.documentGrandTotal}"></span></td>
+					</tr>
+					<tr>
+						<th><div align="right">Less Manual Per Diem Adjustment: -</div></th>
+						<td align="left" valign="middle"><input type="text" name="document.perDiemAdjustment" th:field="*{document.perDiemAdjustment}" data-attribute-entry="${documentAttributes.perDiemAdjustment}" /></td>							
+					</tr>
+					<tr>
+						<th class="bord-l-b"><div align="right">Less CTS Charges: -</div></th>
+					    <td><span th:text="${KualiForm.document.fullCTSTotal}"></span></td>
+					</tr>
+					<th:block th:if="${KualiForm.showCorporateCardTotal}">
+						<tr>
+						    <th class="bord-l-b"><div align="right">Amount due Corporate Credit Card: -</div></th>
+						    <td><span th:text="${KualiForm.document.corporateCardTotal}"></span></td>
+						</tr>
+					</th:block>
+					<tr>
+			             <th class="bord-l-b"><div align="right">Less Non-Reimbursable: -</div></th>
+			             <td><span th:text="${KualiForm.document.nonReimbursableTotal}"></span></td>
+		           </tr>
+<!-- 					<tr> -->
+<!-- 						<th> -->
+<!-- 							<div align="right">Calculated Encumbrance:</div> -->
+<!-- 						</th> -->
+<%-- 						<td align="left" valign="middle"><bean:write --%>
+<!-- 							name="KualiForm" property="document.encumbranceTotal" /></td> -->
+<!-- 					</tr> -->
+					<tr>
+						<th>
+							<div align="right">Travel Expense Limit:</div>
+						</th>
+						<th:block th:switch="${true}">
+							<th:block th:case="${(KualiForm.document.expenseLimit) == null}">
+								<td align="left" valign="middle">N/A</td>
+							</th:block>
+							<th:block th:case="*">
+								<td align="left" valign="middle"><span th:text="${KualiForm.document.expenseLimit}"></span></td>
+							</th:block>
+						</th:block>
+					</tr>
+					<tr>
+						<th>
+							<div align="right">Actual Encumbrance:</div>
+						</th>
+						<td width="20%" align="left" valign="middle"><span th:text="${KualiForm.document.encumbranceTotal}"></span></td>
+					</tr>
+					<th:block th:if="${fullEntryMode}">
+						<tr>
+							<td colspan="2">
+								<div align="center">
+									<input type="image" property="methodToCall.recalculate" src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif" styleClass="tinybutton" alt="recalculate total" title="recalculate total" />
+	                            </div>							
+							</td>
+						</tr>
+					</th:block>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>

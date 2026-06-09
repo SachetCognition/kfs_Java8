@@ -1,0 +1,177 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: gl/balanceInquiryLookupResults.tag -->
+<!-- Fragment parameters: resultsList -->
+<div th:fragment="content (resultsList)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="imageSelectAll=${empty image ? 'buttonsmall_selectall.gif' : image}"> /*/-->
+<!--/*/ <th:block th:with="imageUnselectAll=${empty image ? 'buttonsmall_unselall.gif' : image}"> /*/-->
+<!--/*/ <th:block th:with="imageSort=${empty image ? 'sort.gif' : image}"> /*/-->
+
+<th:block th:if="${empty resultsList && KualiForm.methodToCall != 'start' && KualiForm.methodToCall != 'refresh'}">
+	There were no results found.
+</th:block>
+
+<th:block th:if="${!empty resultsList}">
+    <th:block th:if="${KualiForm.searchUsingOnlyPrimaryKeyValues}">
+    	<bean-el:message key="lookup.using.primary.keys" arg0="${KualiForm.primaryKeyFieldLabels}"/>
+    	<br/><br/>
+    </th:block>
+	<th:block th:switch="${true}">
+		<th:block th:case="${param['d-16544-e'] == null}">
+			<kul:tableRenderPagingBanner pageNumber="${KualiForm.viewedPageNumber}" totalPages="${KualiForm.totalNumberOfPages}"
+				firstDisplayedRow="${KualiForm.firstRowIndex}" lastDisplayedRow="${KualiForm.lastRowIndex}" resultsActualSize="${KualiForm.resultsActualSize}"
+				resultsLimitedSize="${KualiForm.resultsLimitedSize}"
+				buttonExtraParams=".${Constants.METHOD_TO_CALL_PARM12_LEFT_DEL}${KualiForm.searchUsingOnlyPrimaryKeyValues}${Constants.METHOD_TO_CALL_PARM12_RIGHT_DEL}"/>
+			<input type="hidden" name="${Constants.MULTIPLE_VALUE_LOOKUP_PREVIOUSLY_SELECTED_OBJ_IDS_PARAM}" value="${KualiForm.compositeSelectedObjectIds}"/>
+			<input type="hidden" name="${Constants.TableRenderConstants.PREVIOUSLY_SORTED_COLUMN_INDEX_PARAM}" value="${KualiForm.columnToSortIndex}"/>
+
+			<p>
+				<!--/*/ <th:block th:with="balanceInquirySelectAllButtonName=methodToCall.selectAll.${Constants.METHOD_TO_CALL_PARM12_LEFT_DEL}${KualiForm.searchUsingOnlyPrimaryKeyValues}${Constants.METHOD_TO_CALL_PARM12_RIGHT_DEL}.x"> /*/-->
+					${kfunc:registerEditableProperty(KualiForm, balanceInquirySelectAllButtonName)}
+					<input type="image" tabindex="${tabindex}" name="${balanceInquirySelectAllButtonName}"
+   						src="${ConfigProperties.kr.externalizable.images.url}${imageSelectAll}" alt="Select all rows" title="Select all rows" border="0" class="tinybutton" valign="middle"/>
+				<!--/*/ <th:block th:with="balanceInquiryUnselectAllButtonName=methodToCall.unselectAll.${Constants.METHOD_TO_CALL_PARM12_LEFT_DEL}${KualiForm.searchUsingOnlyPrimaryKeyValues}${Constants.METHOD_TO_CALL_PARM12_RIGHT_DEL}.x"> /*/-->
+					${kfunc:registerEditableProperty(KualiForm, balanceInquiryUnselectAllButtonName)}
+					<input type="image" tabindex="${tabindex}" name="${balanceInquiryUnselectAllButtonName}"
+   						src="${ConfigProperties.kr.externalizable.images.url}${imageUnselectAll}" alt="Unselect all rows" title="Unselect all rows" border="0" class="tinybutton" valign="middle"/>
+			</p>
+			
+            <!--/*/ <th:block th:with="numOfMonthField=14"> /*/-->            
+            <!--/*/ <th:block th:with="numOfNonMonthField=${fn:length(resultsList[0].columns) - numOfMonthField}"> /*/-->
+            
+			<table cellpadding="0" class="datatable-100" cellspacing="1" id="row">
+				<thead>
+					<tr>
+			    		<c:forEach items="${resultsList[0].columns}" var="column" begin="0" end="${numOfNonMonthField}" varStatus="columnLoopStatus">
+							<th class="sortable">
+								${column.columnTitle}
+							</th>
+						</tr>
+					</tr>
+					<tr>
+						<c:forEach items="${resultsList[0].columns}" var="column" begin="0" end="${numOfNonMonthField}" varStatus="columnLoopStatus">
+							<th class="sortable" align="center">
+							<!--/*/ <th:block th:with="sortButtonName=methodToCall.sort.${columnLoopStatus.index}.${Constants.METHOD_TO_CALL_PARM12_LEFT_DEL}${KualiForm.searchUsingOnlyPrimaryKeyValues}${Constants.METHOD_TO_CALL_PARM12_RIGHT_DEL}.x"> /*/-->
+								   ${kfunc:registerEditableProperty(KualiForm, sortButtonName)}
+								   <input type="image" tabindex="${tabindex}" name="${sortButtonName}"
+										  src="${ConfigProperties.kr.externalizable.images.url}${imageSort}" alt="Sort column ${column.columnTitle}" 
+										  title="Sort column ${column.columnTitle}" border="0" valign="middle"/>
+							</th>
+						</tr>
+					</tr>
+				</thead>
+
+		        <!--/*/ <th:block th:with="rowCounter=0"> /*/-->
+				<c:forEach items="${resultsList}" var="row" varStatus="rowLoopStatus" begin="${KualiForm.firstRowIndex}" end="${KualiForm.lastRowIndex}">
+					<tr class="even">
+						<c:forEach items="${row.columns}" var="column" begin="0" end="${numOfNonMonthField}">
+							<td class="infocell" title="${column.propertyValue}">
+								<th:block th:if="${!empty column.propertyURL}">
+									<a href="<span th:text="${column.propertyURL}"></span>" target="blank">
+								</th:block>
+								
+								<span th:text="${fn:substring(column.propertyValue, 0, column.maxLength)}"></span>
+								<th:block th:if="${column.maxLength gt 0 && fn:length(column.propertyValue) gt column.maxLength}">...</th:block>
+								
+								<th:block th:if="${!empty column.propertyURL}"></a></th:block>
+							</td>
+						</tr>
+					</tr>
+					
+                    <tr>
+                        <td colspan="${numOfNonMonthField + 1}"><br/>
+                            <center>
+                            <table class="datatable-80" cellspacing="0" cellpadding="0" width="100%">
+                                <c:forEach var="column" items="${row.columns}" begin="${numOfNonMonthField + 1}" varStatus="columnStatus">
+                                    <th:block th:if="${(columnStatus.index - numOfNonMonthField) % 4 == 1}">
+                                	<tr>
+                                    </th:block>
+                                    
+                                    <th:block th:if="${(columnStatus.index - numOfNonMonthField + 1) eq numOfMonthField}">
+                                        <td colspan="6"></td>                                      
+                                    </th:block>
+                                    
+                                    <th class="infocell" style="text-align: left; width: 10%; white-space: nowrap;">                                    	
+                                    	<!--/*/ <th:block th:with="monthlyAmount=${fn:replace(column.propertyValue, ',', '')}"> /*/-->
+                                    	
+                                    	<!-- restore the negtive number -->
+                                    	<th:block th:if="${#strings.contains(monthlyAmount, '(')}">
+                                    		<!--/*/ <th:block th:with="monthlyAmount=${fn:replace(monthlyAmount, '(', '-')}"> /*/-->
+                                    		<!--/*/ <th:block th:with="monthlyAmount=${fn:replace(monthlyAmount, ')', '')}"> /*/-->
+                                    	</th:block>
+                                    	
+                                    	<fmt:formatNumber var="amount" value="${monthlyAmount}" maxFractionDigits="2" minFractionDigits="2" groupingUsed="false"/>
+                                    	<!--/*/ <th:block th:with="monthlyAmount=${fn:replace(amount, '.', '')}"> /*/-->
+
+                                    	<!--/*/ <th:block th:with="objectIdPrefix=${row.objectId}.${column.propertyName}"> /*/-->
+                                    	<!--/*/ <th:block th:with="objectId=${objectIdPrefix}.${monthlyAmount}"> /*/-->
+                                    	
+                                    	<!--/*/ <th:block th:with="checked=${empty KualiForm.compositeObjectIdMap[objectId] ? '' : 'checked=checked'}"> /*/-->
+                                    	<!--/*/ <th:block th:with="disabled=${amount != 0.0 ? '' : 'disabled=disabled'}"> /*/-->
+                                    	
+						                <!--/*/ <th:block th:with="checkBoxObjectIdName=${Constants.MULTIPLE_VALUE_LOOKUP_SELECTED_OBJ_ID_PARAM_PREFIX}${objectId}"> /*/-->                    	
+											${kfunc:registerEditableProperty(KualiForm, checkBoxObjectIdName)}
+											<input type="checkbox" name="${checkBoxObjectIdName}" title="${column.columnTitle}" value="checked" ${disabled} ${checked}>
+												${column.columnTitle}
+											 </input>
+                                    	<input type="hidden" name="${Constants.MULTIPLE_VALUE_LOOKUP_DISPLAYED_OBJ_ID_PARAM_PREFIX}${objectId}" value="onscreen"/>
+                                   	</th>
+                                    
+                                    <td class="numbercell" width="10%">
+                                    	<a href="${column.propertyURL}" target="blank">${column.propertyValue}</a>
+                                    </td>
+
+                                    <th:block th:if="${(columnStatus.index -numOfNonMonthField) % 4 == 0}">
+                                		</tr>
+                                    </th:block>
+                                </tr>
+                            </table>
+                            </center><br/>
+                        </td>
+                    </tr>
+				</tr>
+			</table>
+			
+			<p>
+				<!--/*/ <th:block th:with="balanceInquirySelectAllButtonName=methodToCall.selectAll.${Constants.METHOD_TO_CALL_PARM12_LEFT_DEL}${KualiForm.searchUsingOnlyPrimaryKeyValues}${Constants.METHOD_TO_CALL_PARM12_RIGHT_DEL}.x"> /*/-->
+					${kfunc:registerEditableProperty(KualiForm, balanceInquirySelectAllButtonName)}
+					<input type="image" tabindex="${tabindex}" name="${balanceInquirySelectAllButtonName}"
+   						src="${ConfigProperties.kr.externalizable.images.url}${imageSelectAll}" alt="Select all rows" title="Select all rows" border="0" class="tinybutton" valign="middle"/>
+				<!--/*/ <th:block th:with="balanceInquiryUnselectAllButtonName=methodToCall.unselectAll.${Constants.METHOD_TO_CALL_PARM12_LEFT_DEL}${KualiForm.searchUsingOnlyPrimaryKeyValues}${Constants.METHOD_TO_CALL_PARM12_RIGHT_DEL}.x"> /*/-->
+					${kfunc:registerEditableProperty(KualiForm, balanceInquiryUnselectAllButtonName)}
+					<input type="image" tabindex="${tabindex}" name="${balanceInquiryUnselectAllButtonName}"
+   						src="${ConfigProperties.kr.externalizable.images.url}${imageUnselectAll}" alt="Unselect all rows" title="Unselect all rows" border="0" class="tinybutton" valign="middle"/>
+			
+			</p>
+			<kul:multipleValueLookupExportBanner/>
+		</th:block>
+		<th:block th:case="*">
+			<display:table class="datatable-100" cellspacing="0"
+				requestURIcontext="false" cellpadding="0" name="${reqSearchResults}"
+				id="row" export="true" pagesize="100">
+				<c:forEach items="${row.columns}" var="column" varStatus="loopStatus">
+					<display:column class="${colClass}" sortable="${column.sortable}"
+								title="${column.columnTitle}" comparator="${column.comparator}"
+								maxLength="${column.maxLength}"><c:out value="${column.propertyValue}" escapeXml="false" default="" /></display:column>
+				</tr>
+			</display:table>
+		</th:block>
+	</th:block>
+</th:block>
+</div>

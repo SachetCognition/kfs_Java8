@@ -1,0 +1,78 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/capitalAssetAccountsGroupDetails.tag -->
+<!-- Fragment parameters: capitalAssetAccountsGroupDetails, capitalAssetAccountsGroupDetailsName, readOnly, capitalAssetAccountsGroupDetailsIndex -->
+<div th:fragment="content (capitalAssetAccountsGroupDetails, capitalAssetAccountsGroupDetailsName, readOnly, capitalAssetAccountsGroupDetailsIndex)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the given field in the capital asset info object"%>
+
+<!--/*/ <th:block th:with="attributes=${DataDictionary.CapitalAssetAccountsGroupDetails.attributes}"> /*/-->		
+
+<th:block th:if="${not empty capitalAssetAccountsGroupDetails}">
+	<table datatable style="border-top: 1px solid rgb(153, 153, 153); width: 78%;" cellpadding="0" cellspacing="0" summary="Asset for Accounting Lines">
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetAccountLineNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.sequenceNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.financialDocumentLineTypeCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.chartOfAccountsCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.accountNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.subAccountNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.financialObjectCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.financialSubObjectCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.projectCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.organizationReferenceId}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.amount}"></th>
+		</tr>
+		<c:forEach items="${capitalAssetAccountsGroupDetails}" var="assetAccountsGroupLine" varStatus="status">
+			<tr>
+				<td class="datacell center">
+					<div align="center" valign="middle">
+						<input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].capitalAssetAccountLineNumber" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].capitalAssetAccountLineNumber}" data-attribute-entry="${attributes.capitalAssetAccountLineNumber}" readonly="readonly" />					
+					</div>		            
+				</td>
+				<td class="datacell center">
+					<div align="center" valign="middle">
+						<input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].sequenceNumber" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].sequenceNumber}" data-attribute-entry="${attributes.sequenceNumber}" readonly="readonly" />					
+					</div>		            
+				</td>
+				<td class="datacell center"><div>
+					<!--/*/ <th:block th:with="lineType=${assetAccountsGroupLine.financialDocumentLineTypeCode}"> /*/-->
+					<th:block th:if="${lineType eq KFSConstants.SOURCE_ACCT_LINE_TYPE_CODE}">
+						<span th:text="${KFSConstants.SOURCE}"></span>
+					</th:block>
+					<th:block th:if="${lineType eq KFSConstants.TARGET_ACCT_LINE_TYPE_CODE}">
+						<span th:text="${KFSConstants.TARGET}"></span>
+					</th:block>
+					</div></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].chartOfAccountsCode" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].chartOfAccountsCode}" data-attribute-entry="${attributes.chartOfAccountsCode}" readonly="readonly" /></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].accountNumber" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].accountNumber}" data-attribute-entry="${attributes.accountNumber}" readonly="readonly" /></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].subAccountNumber" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].subAccountNumber}" data-attribute-entry="${attributes.subAccountNumber}" readonly="readonly" /></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].financialObjectCode" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].financialObjectCode}" data-attribute-entry="${attributes.financialObjectCode}" readonly="readonly" /></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].financialSubObjectCode" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].financialSubObjectCode}" data-attribute-entry="${attributes.financialSubObjectCode}" readonly="readonly" /></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].projectCode" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].projectCode}" data-attribute-entry="${attributes.projectCode}" readonly="readonly" /></td>
+					<td class="datacell center"><input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].organizationReferenceId" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].organizationReferenceId}" data-attribute-entry="${attributes.organizationReferenceId}" readonly="readonly" /></td>
+					<td class="datacell center">
+						<div align="right" valign="middle">
+							<input type="text" name="${capitalAssetAccountsGroupDetailsName}[${status.index}].amount" th:field="*{${capitalAssetAccountsGroupDetailsName}[${status.index}].amount}" data-attribute-entry="${attributes.amount}" readonly="readonly" />
+						</div>							
+					</td>
+			</tr>
+		</tr>
+	</table>
+</th:block>
+</div>

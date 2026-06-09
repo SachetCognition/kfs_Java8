@@ -1,0 +1,309 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvNonEmployeeTravel.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Non-Employee Travel Expense" data-default-open="false">
+  <h3>Non-Employee Travel Expense</h3>
+	<!--/*/ <th:block th:with="nonEmplTravelAttributes=${DataDictionary.DisbursementVoucherNonEmployeeTravel.attributes}"> /*/-->
+    <!--/*/ <th:block th:with="travelExpenseAttributes=${DataDictionary.DisbursementVoucherNonEmployeeExpense.attributes}"> /*/-->
+   
+    <div class="tab-container" align=center > 
+<h3>Non-Employee Travel Expense</h3>
+	  <table cellpadding=0 class="datatable" summary="Non-Employee Travel Section">
+           
+            <tr>
+              <td colspan="2" class="tab-subhead">Traveler Information </td>
+            </tr>
+            <tr>
+              <th width="35%" ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrNonEmpTravelerName}"></label></div></th>
+              <td width="65%" ><input type="text" name="document.dvNonEmployeeTravel.disbVchrNonEmpTravelerName" th:field="*{document.dvNonEmployeeTravel.disbVchrNonEmpTravelerName}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrNonEmpTravelerName}" /></td>
+            </tr>
+            <tr>
+              <th ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrServicePerformedDesc}"></label></div></th>
+              <td valign="top" ><input type="text" name="document.dvNonEmployeeTravel.disbVchrServicePerformedDesc" th:field="*{document.dvNonEmployeeTravel.disbVchrServicePerformedDesc}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrServicePerformedDesc}" /></td>
+            </tr>
+            <tr>
+              <th ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.dvServicePerformedLocName}"></label></div></th>
+              <td ><input type="text" name="document.dvNonEmployeeTravel.dvServicePerformedLocName" th:field="*{document.dvNonEmployeeTravel.dvServicePerformedLocName}" data-attribute-entry="${nonEmplTravelAttributes.dvServicePerformedLocName}" /></td>
+            </tr>
+            <tr>
+              <th ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.dvServiceRegularEmprName}"></label></div></th>
+              <td ><input type="text" name="document.dvNonEmployeeTravel.dvServiceRegularEmprName" th:field="*{document.dvNonEmployeeTravel.dvServiceRegularEmprName}" data-attribute-entry="${nonEmplTravelAttributes.dvServiceRegularEmprName}" /></td>
+            </tr>
+      </table>
+         
+        <table cellpadding=0 class="datatable" summary="Destination">
+            <tr>
+              <td colspan="6" class="tab-subhead">Destination</td>
+            </tr>
+            <tr>
+              <th>&nbsp;</th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelFromCityName}"></label></div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelFromStateCode}"></label>*US only</div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.dvTravelFromCountryCode}"></label></div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.perDiemEndDateTime}"></label></div></th>
+            </tr>
+            
+            <tr>
+              <th scope="row"><div align="right">From:</div></th>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.disbVchrTravelFromCityName" th:field="*{document.dvNonEmployeeTravel.disbVchrTravelFromCityName}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelFromCityName}" /></td>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.disbVchrTravelFromStateCode" th:field="*{document.dvNonEmployeeTravel.disbVchrTravelFromStateCode}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelFromStateCode}" /></td>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.dvTravelFromCountryCode" th:field="*{document.dvNonEmployeeTravel.dvTravelFromCountryCode}" data-attribute-entry="${nonEmplTravelAttributes.dvTravelFromCountryCode}" /></td>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.perDiemStartDateTime" th:field="*{document.dvNonEmployeeTravel.perDiemStartDateTime}" data-attribute-entry="${nonEmplTravelAttributes.perDiemStartDateTime}" />
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+              <img src="${ConfigProperties.kr.externalizable.images.url}cal.gif" id="document.dvNonEmployeeTravel.perDiemStartDateTime_datepicker" style="cursor: pointer;" title="Date selector" alt="Date selector" onmouseover="this.style.backgroundColor='red';" onmouseout="this.style.backgroundColor='transparent';"	/>
+                <script type="text/javascript">
+                  Calendar.setup(
+                          {
+                            inputField : "document.dvNonEmployeeTravel.perDiemStartDateTime", // ID of the input field
+                            ifFormat : "%m/%d/%Y %I:%M %p", // the date format
+                            button : "document.dvNonEmployeeTravel.perDiemStartDateTime_datepicker", // ID of the button
+                            showsTime: true,
+                            timeFormat: "12"
+                          }
+                  );
+               </script>
+              </th:block> 
+              </td>
+              </td>
+            </tr>
+            
+            <tr>
+              <th scope="row"><div align="right">To:</div></th>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.disbVchrTravelToCityName" th:field="*{document.dvNonEmployeeTravel.disbVchrTravelToCityName}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelToCityName}" /></td>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.disbVchrTravelToStateCode" th:field="*{document.dvNonEmployeeTravel.disbVchrTravelToStateCode}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelToStateCode}" /></td>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.disbVchrTravelToCountryCode" th:field="*{document.dvNonEmployeeTravel.disbVchrTravelToCountryCode}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrTravelToCountryCode}" /></td>
+              <td valign=top><input type="text" name="document.dvNonEmployeeTravel.perDiemEndDateTime" th:field="*{document.dvNonEmployeeTravel.perDiemEndDateTime}" data-attribute-entry="${nonEmplTravelAttributes.perDiemStartDateTime}" />
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+              <img src="${ConfigProperties.kr.externalizable.images.url}cal.gif" id="document.dvNonEmployeeTravel.perDiemEndDateTime_datepicker" style="cursor: pointer;" title="Date selector" alt="Date selector" onmouseover="this.style.backgroundColor='red';" onmouseout="this.style.backgroundColor='transparent';"	/>
+                <script type="text/javascript">
+                  Calendar.setup(
+                          {
+                            inputField : "document.dvNonEmployeeTravel.perDiemEndDateTime", // ID of the input field
+                            ifFormat : "%m/%d/%Y %I:%M %p", // the date format
+                            button : "document.dvNonEmployeeTravel.perDiemEndDateTime_datepicker", // ID of the button
+                            showsTime: true,
+                            timeFormat: "12"
+                          }
+                  );
+               </script>
+               </th:block>
+              </td>
+            </tr>
+      </table>
+          
+          <table cellpadding=0 class="datatable" summary="Per Diem, Personal Vehicle ">
+            <tr>
+              <td colspan="2" class="tab-subhead">Per Diem<br/>* All fields required if section is used.</td>
+              <td colspan="2" class="tab-subhead">Personal Vehicle<br/>* All fields required if section is used.</td>
+            </tr>
+            
+            <tr>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemCategoryName}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrPerdiemCategoryName" th:field="*{document.dvNonEmployeeTravel.disbVchrPerdiemCategoryName}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemCategoryName}" /></td>
+              <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoFromCityName}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrAutoFromCityName" th:field="*{document.dvNonEmployeeTravel.disbVchrAutoFromCityName}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoFromCityName}" />
+                 <input type="text" name="document.dvNonEmployeeTravel.disbVchrAutoFromStateCode" th:field="*{document.dvNonEmployeeTravel.disbVchrAutoFromStateCode}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoFromStateCode}" />
+              </td>
+            </tr>
+
+            <tr>
+              <th ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemRate}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrPerdiemRate" th:field="*{document.dvNonEmployeeTravel.disbVchrPerdiemRate}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemRate}" />
+                &nbsp;&nbsp;<a href="dvPerDiem.do?methodToCall=showTravelPerDiemLinks" tabindex="${KualiForm.nextArbitrarilyHighIndex}" target="_blank">Per Diem Links</a>
+              </td>
+              <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoToCityName}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrAutoToCityName" th:field="*{document.dvNonEmployeeTravel.disbVchrAutoToCityName}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoToCityName}" />
+                 <input type="text" name="document.dvNonEmployeeTravel.disbVchrAutoToStateCode" th:field="*{document.dvNonEmployeeTravel.disbVchrAutoToStateCode}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoToStateCode}" />
+              </td>
+            </tr>
+
+            <tr>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemCalculatedAmt}"></label></div></th>
+              <td><div class="left"><input type="text" name="document.dvNonEmployeeTravel.disbVchrPerdiemCalculatedAmt" th:field="*{document.dvNonEmployeeTravel.disbVchrPerdiemCalculatedAmt}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemCalculatedAmt}" readonly="readonly" /></div>
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+                   <div class="right"><input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-clear1.gif" styleClass="tinybutton" property="methodToCall.clearTravelPerDiem" alt="Clear Per Diem" title="Clear Per Diem"/></div>
+                   <div class="right"><input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-calculate.gif" styleClass="tinybutton" property="methodToCall.calculateTravelPerDiem" alt="Calculate Per Diem" title="Calculate Per Diem"/></div>
+              </th:block>
+              </td>
+              <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoRoundTripCode}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrAutoRoundTripCode" th:field="*{document.dvNonEmployeeTravel.disbVchrAutoRoundTripCode}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrAutoRoundTripCode}" /></td>
+            </tr>
+            
+            <tr>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemActualAmount}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrPerdiemActualAmount" th:field="*{document.dvNonEmployeeTravel.disbVchrPerdiemActualAmount}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPerdiemActualAmount}" /></td>
+              <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.dvPersonalCarMileageAmount}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.dvPersonalCarMileageAmount" th:field="*{document.dvNonEmployeeTravel.dvPersonalCarMileageAmount}" data-attribute-entry="${nonEmplTravelAttributes.dvPersonalCarMileageAmount}" /></td>
+            </tr>
+            
+            <tr>
+              <th rowspan="2"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.dvPerdiemChangeReasonText}"></label></div></th>
+              <td rowspan="2"><input type="text" name="document.dvNonEmployeeTravel.dvPerdiemChangeReasonText" th:field="*{document.dvNonEmployeeTravel.dvPerdiemChangeReasonText}" data-attribute-entry="${nonEmplTravelAttributes.dvPerdiemChangeReasonText}" /></td>
+              <th><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrMileageCalculatedAmt}"></label></div></th>
+              <td><div class="left"><input type="text" name="document.dvNonEmployeeTravel.disbVchrMileageCalculatedAmt" th:field="*{document.dvNonEmployeeTravel.disbVchrMileageCalculatedAmt}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrMileageCalculatedAmt}" readonly="readonly" /></div>
+              <th:block th:if="${fullEntryMode||travelEntryMode}">
+                   <div class="right"><input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-clear1.gif" styleClass="tinybutton" property="methodToCall.clearTravelMileageAmount" alt="Clear Total Mileage" title="Clear Total Mileage"/></div>
+                   <div class="right"><input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-calculate.gif" styleClass="tinybutton" property="methodToCall.calculateTravelMileageAmount" alt="Calculate Total Mileage" title="Calculate Total Mileage"/></div>
+              </th:block>
+              </td>
+            </tr>
+
+            <tr>
+              <th ><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPersonalCarAmount}"></label></div></th>
+              <td><input type="text" name="document.dvNonEmployeeTravel.disbVchrPersonalCarAmount" th:field="*{document.dvNonEmployeeTravel.disbVchrPersonalCarAmount}" data-attribute-entry="${nonEmplTravelAttributes.disbVchrPersonalCarAmount}" />
+            </tr>
+          </table>
+
+          <table cellpadding="0" class="datatable" summary="Travel Reimbursements">
+                <tbody>
+                  <tr>
+                    <td colspan="5" class="tab-subhead">Traveler Expenses<br/>* All fields required if section is used</td>
+                  </tr>
+           <tr>
+              <th width="10">&nbsp;</th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseCode}"></label></div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseCompanyName}"></label></div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseAmount}"></label></div></th>
+			  <th:block th:if="${fullEntryMode||travelEntryMode}">
+	              <th> <div align=center>Actions</div></th>
+			  </th:block>
+            </tr>
+            
+            <th:block th:if="${fullEntryMode||travelEntryMode}">
+            <tr>
+              <th  scope="row"><div align="right">add:</div></th>
+              <td valign=top class="infoline"><input type="text" name="newNonEmployeeExpenseLine.disbVchrExpenseCode" th:field="*{newNonEmployeeExpenseLine.disbVchrExpenseCode}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseCode}" /></td>
+              <td valign=top class="infoline"><input type="text" name="newNonEmployeeExpenseLine.disbVchrExpenseCompanyName" th:field="*{newNonEmployeeExpenseLine.disbVchrExpenseCompanyName}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseCompanyName}" />
+                  <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.TravelCompanyCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+              </td>
+              <td valign=top nowrap class="infoline"><div align="center">
+                  <input type="text" name="newNonEmployeeExpenseLine.disbVchrExpenseAmount" th:field="*{newNonEmployeeExpenseLine.disbVchrExpenseAmount}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseAmount}" />
+              </div></td>
+	              <td class="infoline"><div align=center>
+		               <input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" property="methodToCall.addNonEmployeeExpenseLine" alt="Add Expense Line" title="Add Expense Line"/>
+	              </div></td>
+            </tr>
+            </th:block>
+            
+            <logic:iterate indexId="ctr" name="KualiForm" property="document.dvNonEmployeeTravel.dvNonEmployeeExpenses" id="currentLine">
+                <tr>
+                  <th scope="row"><div align="right"><input type="text" name="document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].financialDocumentLineNumber" th:field="*{document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].financialDocumentLineNumber}" data-attribute-entry="${travelExpenseAttributes.financialDocumentLineNumber}" readonly="readonly" /></div></th>
+                  <td valign=top><input type="text" name="document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].disbVchrExpenseCode" th:field="*{document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].disbVchrExpenseCode}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseCode}" /></td>
+                  <td valign=top><input type="text" name="document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].disbVchrExpenseCompanyName" th:field="*{document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].disbVchrExpenseCompanyName}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseCompanyName}" />
+                     <th:block th:if="${fullEntryMode||travelEntryMode}">
+                      <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.TravelCompanyCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                  </td>   
+                  <td valign=top nowrap ><div align="center">
+                     <input type="text" name="document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].disbVchrExpenseAmount" th:field="*{document.dvNonEmployeeTravel.dvNonEmployeeExpenses[${ctr}].disbVchrExpenseAmount}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseAmount}" />
+                  </div></td>
+				  <th:block th:if="${fullEntryMode||travelEntryMode}">
+	                  <td><div align=center>
+	                     <input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" property="methodToCall.deleteNonEmployeeExpenseLine.line${ctr}" alt="Delete Expense Line" title="Delete Expense Line"/>
+	                  </div></td>
+				  </th:block>
+                </tr>
+           </tr>
+
+
+                  <tr>
+                    <th colspan="3" class="infoline" scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.totalExpenseAmount}"></label></div></th>
+                    <td valign="top" nowrap="nowrap" class="infoline"><div align="center"><strong>$ ${KualiForm.document.dvNonEmployeeTravel.totalExpenseAmount}</strong></div></td>
+					<th:block th:if="${fullEntryMode||travelEntryMode}">
+	                    <td class="infoline">&nbsp;</td>
+					</th:block>
+                  </tr>
+				  <tr>
+                    <td colspan="5" class="tab-subhead">Travel Expenses Total</td>
+                  </tr>
+                  <tr>
+                    <th colspan="3" class="infoline" scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.totalTravelAmount}"></label></div></th>
+                    <td valign="top" nowrap="nowrap" class="infoline">
+                    	<div align="center">
+                    		<kul:checkErrors keyMatch="${KFSConstants.DV_CHECK_TRAVEL_TOTAL_ERROR}"/>
+                    		$<input type="text" name="document.dvNonEmployeeTravel.totalTravelAmount" th:field="*{document.dvNonEmployeeTravel.totalTravelAmount}" data-attribute-entry="${nonEmplTravelAttributes.totalTravelAmount}" readonly="readonly" />
+                    	</div>
+                    </td>
+					<th:block th:if="${fullEntryMode||travelEntryMode}">
+                    	<td class="infoline">&nbsp;</td>
+					</th:block>
+                  </tr>
+                  <tr>
+                    <td colspan="5" class="tab-subhead">Pre Paid Expenses<br/>* All fields required if section is used</td>
+                  </tr>
+             <tr>
+              <th>&nbsp;</th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelExpenseAttributes.disbVchrPrePaidExpenseCode}"></label></div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelExpenseAttributes.disbVchrPrePaidExpenseCompanyName}"></label></div></th>
+              <th> <div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseAmount}"></label></div></th>
+			  <th:block th:if="${fullEntryMode||travelEntryMode}">
+              	  <th> <div align=center>Actions</div></th>
+			  </th:block>
+            </tr>
+            
+            <th:block th:if="${fullEntryMode||travelEntryMode}">
+            <tr>
+              <th scope="row"><div align="right">add:</div></th>
+              <td valign=top class="infoline"><input type="text" name="newPrePaidNonEmployeeExpenseLine.disbVchrPrePaidExpenseCode" th:field="*{newPrePaidNonEmployeeExpenseLine.disbVchrPrePaidExpenseCode}" data-attribute-entry="${travelExpenseAttributes.disbVchrPrePaidExpenseCode}" /></td>
+              <td valign=top class="infoline"><input type="text" name="newPrePaidNonEmployeeExpenseLine.disbVchrPrePaidExpenseCompanyName" th:field="*{newPrePaidNonEmployeeExpenseLine.disbVchrPrePaidExpenseCompanyName}" data-attribute-entry="${travelExpenseAttributes.disbVchrPrePaidExpenseCompanyName}" />
+                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.TravelCompanyCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+              </td> 
+              <td valign=top nowrap class="infoline"><div align="center">
+                <input type="text" name="newPrePaidNonEmployeeExpenseLine.disbVchrExpenseAmount" th:field="*{newPrePaidNonEmployeeExpenseLine.disbVchrExpenseAmount}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseAmount}" />
+              </div></td>
+	            <td class="infoline"><div align=center>
+	              <input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" property="methodToCall.addPrePaidNonEmployeeExpenseLine" alt="Add Expense Line" title="Add Expense Line"/>
+	            </div></td>
+            </tr>
+            </th:block>
+            
+            <logic:iterate indexId="ctr2" name="KualiForm" property="document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses" id="currentLine">
+                <tr>
+                  <th scope="row"><div align="right"><input type="text" name="document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].financialDocumentLineNumber" th:field="*{document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].financialDocumentLineNumber}" data-attribute-entry="${travelExpenseAttributes.financialDocumentLineNumber}" readonly="readonly" /></div></th>
+                  <td valign=top ><input type="text" name="document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].disbVchrExpenseCode" th:field="*{document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].disbVchrExpenseCode}" data-attribute-entry="${travelExpenseAttributes.disbVchrPrePaidExpenseCode}" /></td>
+                  <td valign=top ><input type="text" name="document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].disbVchrExpenseCompanyName" th:field="*{document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].disbVchrExpenseCompanyName}" data-attribute-entry="${travelExpenseAttributes.disbVchrPrePaidExpenseCompanyName}" />
+                    <th:block th:if="${fullEntryMode||travelEntryMode}">
+                      <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.TravelCompanyCode" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                  </td> 
+                  <td valign=top nowrap ><div align="center">
+                     <input type="text" name="document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].disbVchrExpenseAmount" th:field="*{document.dvNonEmployeeTravel.dvPrePaidEmployeeExpenses[${ctr2}].disbVchrExpenseAmount}" data-attribute-entry="${travelExpenseAttributes.disbVchrExpenseAmount}" />
+                  </div></td>
+				  <th:block th:if="${fullEntryMode||travelEntryMode}">
+	                  <td><div align=center>
+	                      <input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" property="methodToCall.deletePrePaidEmployeeExpenseLine.line${ctr2}" alt="Delete Expense Line" title="Delete Expense Line"/>
+	                  </div></td>
+                  </th:block>
+                </tr>
+           </tr>
+               <tr>
+                    <th colspan="3" class="infoline" scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${nonEmplTravelAttributes.totalPrePaidAmount}"></label></div></th>
+                    <td valign="top" nowrap="nowrap" class="infoline"><div align="center"><strong>$ ${KualiForm.document.dvNonEmployeeTravel.totalPrePaidAmount}</strong></div></td>
+					<th:block th:if="${fullEntryMode||travelEntryMode}">
+                    	<td class="infoline">&nbsp;</td>
+                    </th:block>
+                  </tr>
+                  
+                </tbody>
+      </table>
+       
+    </div>
+</section>
+</div>

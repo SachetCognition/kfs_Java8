@@ -1,0 +1,42 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailLines.tag -->
+<!-- Fragment parameters: detailLines, attributes, detailFieldNamesWithHiddenFormWhenReadonly, hiddenFieldNames, detailFieldNames, editableFieldNames, inquirableUrl, fieldInfo, relationshipMetadata, onchangeForEditableFieldNames, onchangeableInfoFieldNames, hasActions, actions, actionImageFileNames -->
+<div th:fragment="content (detailLines, attributes, detailFieldNamesWithHiddenFormWhenReadonly, hiddenFieldNames, detailFieldNames, editableFieldNames, inquirableUrl, fieldInfo, relationshipMetadata, onchangeForEditableFieldNames, onchangeableInfoFieldNames, hasActions, actions, actionImageFileNames)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="display all detail lines of current document in a table" %>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+	<tr>
+		<div th:replace="~{fragments/ec/detailLineHeader :: content}" data-attributes="${attributes}" data-detail-field-names="${detailFieldNames}" data-has-actions="${hasActions}"></div>
+	</tr> 
+
+	<!-- populate the table with the given deatil lines -->
+	<tr th:each="detailLine, status : ${detailLines}">
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+			
+			<div th:replace="~{fragments/ec/detailLine :: content}" data-detail-line="${detailLine}" data-detail-line-form-name="document.effortCertificationDetailLines[${status.index}]" data-attributes="${attributes}" data-detail-field-names="${detailFieldNames}" data-detail-field-names-with-hidden-form-when-readonly="${detailFieldNamesWithHiddenFormWhenReadonly}" data-editable-field-names="${editableFieldNames}" data-hidden-field-names="${hiddenFieldNames}" data-onchange-for-editable-field-names="${onchangeForEditableFieldNames}" data-onchangeable-info-field-names="${onchangeableInfoFieldNames}" data-inquirable-url="${inquirableUrl[status.index]}" data-field-info="${fieldInfo[status.index]}" data-index="${status.index}" data-has-actions="${hasActions}" data-actions="${actions}" data-action-image-file-names="${actionImageFileNames}"></div>			
+		</tr>		
+	</tr>
+	
+	<tr>
+		<jsp:doBody/>
+	</tr>	
+</table>
+</div>

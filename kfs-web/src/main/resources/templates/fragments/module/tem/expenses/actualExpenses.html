@@ -1,0 +1,81 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/expenses/actualExpenses.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="otherExpenseAttributes=${DataDictionary.ActualExpense.attributes}"> /*/-->
+<!--/*/ <th:block th:with="temExtension=${DataDictionary.ExpenseTypeObjectCode.attributes}"> /*/-->
+<!--/*/ <th:block th:with="isTA=${KualiForm.isTravelAuthorizationDoc}"> /*/-->
+
+<jsp:useBean id="paramMap" class="java.util.HashMap" />
+<!--/*/ <th:block th:with="tripType=${KualiForm.document.tripTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="travelerType=${KualiForm.document.traveler.travelerTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="documentType=${KualiForm.docTypeName}"> /*/-->
+  	
+	<div class="tab-container" align="center">
+	    <h3>${KualiForm.expenseLabel}</h3>
+	    <table cellpadding="0" cellspacing="0" class="datatable" summary="Actual Expenses">
+			<tr>
+				<td colspan="12" class="tab-subhead">* All fields required if section is used</td>
+			</tr>
+					
+	        <th:block th:if="${fullEntryMode}">
+	        	<div th:replace="~{fragments/tem/exp/actualExpenseHeader :: content}" data-detail-object="${KualiForm.newActualExpenseLine }"></div>
+				<div th:replace="~{fragments/tem/exp/actualExpenseLine :: content}" data-expense="newActualExpenseLine" data-detail-object="${KualiForm.newActualExpenseLine}"></div>
+	        </th:block>
+	        
+			<logic:iterate indexId="ctr" name="KualiForm" property="document.actualExpenses" id="currentLine">
+				<!--/*/ <th:block th:with="lineCounter=${lineCounter + 1}"> /*/-->
+				<tr>
+	       			<td class="infoline" colspan="12"><div align="center">&nbsp;</div></td>
+	       		</tr>
+	        	<div th:replace="~{fragments/tem/exp/actualExpenseHeader :: content}" data-line-number="${lineCounter}" data-detail-object="${KualiForm.document.actualExpenses[ctr]}"></div>
+	        	<div th:replace="~{fragments/tem/exp/actualExpenseLine :: content}" data-line-number="${lineCounter}" data-expense="document.actualExpenses[${ctr}]" data-detail-object="${KualiForm.document.actualExpenses[ctr]}"></div>
+
+			  	<%-- Expense Details SubTab --%>
+				<tr>
+				  	<td colspan="12">
+			  			<kul:subtab lookedUpCollectionName="expenseDetails${ctr}" width="${tableWidth}" 
+			  				subTabTitle="${KualiForm.expenseLabel} Details - ${KualiForm.document.actualExpenses[ctr].expenseTypeObjectCode.expenseType.name} - ${lineCounter}" 
+			  				noShowHideButton="false" 
+			  				open="${KualiForm.document.actualExpenses[ctr].defaultTabOpen}">
+			  				<table cellpadding="0" cellspacing="0" class="datatable">
+								<!--/*/ <th:block th:with="detailLineCounter=0"> /*/-->
+							    <tr>
+							    	<th colspan="1">&nbsp;</th>
+							        <td colspan="11">
+	          							<table cellpadding="0" cellspacing="0" class="datatable">
+	          								<div th:replace="~{fragments/tem/exp/actualExpenseDetailHeader :: content}" data-detail-object="${KualiForm.document.actualExpenses[ctr]}"></div>
+	          								<th:block th:if="${fullEntryMode}">
+												<div th:replace="~{fragments/tem/exp/actualExpenseDetailLine :: content}" data-line-number="${ctr}" data-detail="newActualExpenseLines[${ctr}]" data-detail-object="${KualiForm.document.actualExpenses[ctr]}" data-parent-object="${KualiForm.document.actualExpenses[ctr]}"></div>
+											</th:block>
+											<logic:iterate indexId="ctrDetail" name="currentLine" property="expenseDetails" id="currentLineDetails">
+												<!--/*/ <th:block th:with="lineCounterDetails=${lineCounterDetails + 1}"> /*/-->
+												<div th:replace="~{fragments/tem/exp/actualExpenseDetailLine :: content}" data-detail="document.actualExpenses[${ctr}].expenseDetails[${ctrDetail}]" data-line-number="${ctr}" data-detail-line-number="${ctrDetail}" data-detail-object="${KualiForm.document.actualExpenses[ctr].expenseDetails[ctrDetail]}" data-parent-object="${KualiForm.document.actualExpenses[ctr]}"></div>							           
+											</tr>
+	          							</table>
+	          						</td>
+	          					</tr>
+	          				</table>
+	          			</div><!-- /kul:subtab -->
+	          		</td>
+	          	</tr>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,35 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/contractsGrantsInvoiceSummarySubResult.tag -->
+<!-- Fragment parameters: awardAttributes, propertyName -->
+<div th:fragment="content (awardAttributes, propertyName)" xmlns:th="http://www.thymeleaf.org">
+<tr>
+	<td><input type="text" name="${propertyName}.proposalNumber" th:field="*{${propertyName}.proposalNumber}" data-attribute-entry="${awardAttributes.proposalNumber}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.awardBeginningDate" th:field="*{${propertyName}.awardBeginningDate}" data-attribute-entry="${awardAttributes.awardBeginningDate}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.awardEndingDate" th:field="*{${propertyName}.awardEndingDate}" data-attribute-entry="${awardAttributes.awardEndingDate}" readonly="readonly" />
+	</td>
+	<td><input type="text" name="${propertyName}.billingFrequencyCode" th:field="*{${propertyName}.billingFrequencyCode}" data-attribute-entry="${awardAttributes.billingFrequencyCode}" readonly="readonly" /></td>
+	<td><input type="text" name="${propertyName}.instrumentTypeCode" th:field="*{${propertyName}.instrumentTypeCode}" data-attribute-entry="${awardAttributes.instrumentTypeCode}" readonly="readonly" />
+	</td>
+	<td><input type="text" name="${propertyName}.invoicingOptionDescription" th:field="*{${propertyName}.invoicingOptionDescription}" data-attribute-entry="${awardAttributes.invoicingOptionCode}" readonly="readonly" />
+	</td>
+	<td><input type="text" name="${propertyName}.awardTotalAmount" th:field="*{${propertyName}.awardTotalAmount}" data-attribute-entry="${awardAttributes.awardTotalAmount}" readonly="readonly" />
+	</td>
+</tr>
+</div>

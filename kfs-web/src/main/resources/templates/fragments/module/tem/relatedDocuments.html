@@ -1,0 +1,158 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/relatedDocuments.tag -->
+<!-- Fragment parameters: noNewRelatedDocument -->
+<div th:fragment="content (noNewRelatedDocument)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="accountingDocumentRelationship=${DataDictionary.AccountingDocumentRelationship.attributes}"> /*/-->
+
+<noscript>
+	<!--/*/ <th:block th:with="noscript=true"> /*/-->
+</noscript>
+<script>
+	$(document).ready(function() {
+		$("#relatedDocuments").accordion({
+			autoHeight : false
+		});
+	});
+</script>
+
+<th:block th:switch="${true}">
+	<th:block th:case="${noscript}">
+		<section class="kfs-tab" data-tab-title="View Related Documents" data-default-open="false">
+  <h3>View Related Documents</h3>		
+			<div id="relatedDocuments" class="tab-container" align="center">
+				<th:block th:if="${KualiForm.document.versionNumber == null}">
+					<div>Related document can only be added after this document has been saved.</div>
+				</th:block>
+				<th:block th:if="${KualiForm.document.versionNumber != null && !noNewRelatedDocument}">
+					<h3>New Related Document</h3>
+					<table cellpadding="0" class="datatable">
+						<tbody>
+							<tr>
+								<th><div align="left"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${accountingDocumentRelationship.relDocumentNumber}"></label></div></th>
+								<th><div align="left"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${accountingDocumentRelationship.description}"></label></div></th>				
+								<th><div align="center">Actions</div></th>
+							</tr>
+							<tr>
+								<td>
+									<div align="center">
+										<input type="text" name="newAccountingDocumentRelationship.relDocumentNumber" th:field="*{newAccountingDocumentRelationship.relDocumentNumber}" data-attribute-entry="${accountingDocumentRelationship.relDocumentNumber}" />
+				                    </div>
+				                </td>
+								<td valign=top class="infoline">
+									<div align="center">
+										<input type="text" name="newAccountingDocumentRelationship.description" th:field="*{newAccountingDocumentRelationship.description}" data-attribute-entry="${accountingDocumentRelationship.relDocumentNumber}" />
+				                    </div>
+			                    </td>
+				                <td valign=top class="infoline">
+									<div align="center">
+										<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+										styleClass="tinybutton"
+										property="methodToCall.addRelatedDocumentLine"
+										alt="Add Related Document Line" title="Add Related Document Line" />
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</th:block>
+				<c:forEach items="${KualiForm.relatedDocuments}" var="relatedEntry">
+					<h3 style="cursor: pointer;">
+						<a style="color: #FFF;" href="#">${relatedEntry.key} (${#strings.length(relatedEntry.value)})</a>
+					</h3>
+					<div>
+						<th:block th:if="${fn:length(relatedEntry.value) < 1}">
+							<b>No related ${relatedEntry.key} documents</b>
+						</th:block>
+						<c:forEach items="${relatedEntry.value}" var="view">
+							<!--/*/ <th:block th:with="documentTitle=${view.documentNumber} + ${view.documentTitle}"> /*/-->
+							<!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(documentTitle)}"> /*/-->
+							<!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+							<th:block th:switch="${true}">
+								<th:block th:case="${empty currentTab}">
+									<!--/*/ <th:block th:with="isOpen=false"> /*/-->	
+								</th:block>
+								<th:block th:case="${!empty currentTab}">
+									<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+								</th:block>
+							</th:block>			    
+							<html:hidden property="tabStates(${tabKey})" value="${(isOpen ? 'OPEN' : 'CLOSE')}" />
+							<h3 style="background-color: #C3C3C3; ">
+								<a href="${ConfigProperties.rice.server.url}/kew/DocHandler.do?command=displayDocSearchView&docId=${view.documentNumber}" target="_BLANK">${view.documentNumber} - ${view.documentTitle}</a>
+								<th:block th:if="${!empty KualiForm.relatedDocumentNotes[view.documentNumber]}">
+									<th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+										<input type="image" property="methodToCall.toggleTab.tab${tabKey}" 
+											src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" 
+											alt="hide" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle"
+											onclick="javascript: return toggleTab(document, '${tabKey}'); " tabindex="-1" />
+									</th:block>
+									<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+										<input type="image" property="methodToCall.toggleTab.tab${tabKey}" 
+											src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" 
+											alt="show" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle"
+											onclick="javascript: return toggleTab(document, '${tabKey}'); " tabindex="-1" />
+									</th:block>
+								</th:block>
+								<th:block th:if="${temfunc:canDeleteDocumentRelationship(KualiForm.document.documentNumber, view.documentNumber)}">
+									<div style="float:right"><input type="image" property="methodToCall.deleteRelatedDocumentLine.${view.documentNumber}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" title="Delete a Related Document" alt="Delete a Related Document" styleClass="tinybutton"/></div>
+								</th:block>			
+							</h3>							
+							<th:block th:switch="${true}">
+								<th:block th:case="${isOpen == 'true' || isOpen == 'TRUE'}">
+									<div style="display: block;" id="tab-${tabKey}-div">
+								</th:block>
+								<th:block th:case="*">
+									<div style="display: none;" id="tab-${tabKey}-div">
+								</th:block>
+							</th:block>
+								<table cellpadding="0" cellspacing="0" class="datatable" summary="Notes">
+									<th:block th:if="${!empty KualiForm.relatedDocumentNotes[view.documentNumber]}">
+										<tr>
+											<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Date</div><!-- /kul:htmlAttributeHeaderCell -->
+											<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>User</div><!-- /kul:htmlAttributeHeaderCell -->
+											<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Note</div><!-- /kul:htmlAttributeHeaderCell -->
+										</tr>
+										<c:forEach items="${KualiForm.relatedDocumentNotes[view.documentNumber]}" var="note">
+											<tr>
+												<td align="center" valign="middle" class="datacell"><span th:text="${note.notePostedTimestamp}"></span></td>
+												<td align="center" valign="middle" class="datacell"><span th:text="${note.authorUniversal.name}"></span></td>
+												<td align="left" valign="middle" class="datacell"><span th:text="${note.noteText}"></span></td>
+											</tr>
+										</tr>
+									</th:block>
+									<th:block th:if="${empty KualiForm.relatedDocumentNotes[view.documentNumber]}">
+										<tr>
+											<th align="center" valign="middle" class="bord-l-b">No Notes</th>
+										</tr>
+									</th:block>
+								</table>
+					    	</div>
+					    	<b>&nbsp;</b>							
+						</tr>
+					</div>
+				</tr>
+			</div>			
+		</section>
+	</th:block>
+	<th:block th:case="*">
+		<div th:replace="~{fragments/tem/noscript/relatedDocuments :: content}"></div>
+	</th:block>
+</th:block>
+</div>

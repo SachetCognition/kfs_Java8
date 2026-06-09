@@ -1,0 +1,108 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerCreditMemoDetails.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.CustomerCreditMemoDocument.attributes}"> /*/-->              
+<!--/*/ <th:block th:with="customerInvoiceDetailAttributes=${DataDictionary.CustomerInvoiceDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="customerCreditMemoDetailAttributes=${DataDictionary.CustomerCreditMemoDetail.attributes}"> /*/-->   
+<!--/*/ <th:block th:with="salesTaxEnabled=${(not empty KualiForm.editingMode['salesTaxEnabled'])}"> /*/-->
+    
+
+<section class="kfs-tab" data-tab-title="Items" data-default-open="true">
+  <h3>Items</h3>
+    <div class="tab-container" align=center>		
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Invoice Items">
+            <tr>
+            <!--  If readOnly mode -> hide the column 'Actions' -->
+            <th:block th:if="${readOnly}">
+            	<td colspan="11" class="subhead">Invoice Items</td>
+            </th:block>
+            <!--  If not readOnly mode -> show the column 'Actions' -->
+            <th:block th:if="${not readOnly}">
+                <td colspan="12" class="subhead">Invoice Items</td>
+            </th:block>
+            </tr>
+			<tr>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemQuantity}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemCode}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemUnitOfMeasureCode}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemDescription}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemUnitPrice}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerCreditMemoDetailAttributes.creditMemoItemTotalAmount}"></th>
+			    <th:block th:if="${salesTaxEnabled}">
+				    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemTaxAmount}"></th>
+			    </th:block>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerCreditMemoDetailAttributes.invoiceLineTotalAmount}"></th>
+			    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerCreditMemoDetailAttributes.invoiceOpenItemQuantity}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerCreditMemoDetailAttributes.invoiceOpenItemAmount}"></th>				
+			    <!--  If not readOnly mode -> show the column 'Actions' -->
+            	<th:block th:if="${not readOnly}">
+                	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            	</th:block>
+			</tr>
+			<tr th:each="customerCreditMemoDetail : ${KualiForm.document.creditMemoDetails}"
+				indexId="ctr">
+		        <!--/*/ <th:block th:with="displayOrangeFlower=${KualiForm.document.creditMemoDetails[ctr].creditMemoLineTotalAmount != 0}"> /*/-->
+		        <!--/*/ <th:block th:with="isInvoiceOpenItemQuantityZero=${KualiForm.document.creditMemoDetails[ctr].invoiceOpenItemQuantityZero}"> /*/-->
+				<div th:replace="~{fragments/ar/customerCreditMemoDetail :: content}" data-row-header="${ctr+1}" data-inv-property-name="document.invoice.customerInvoiceDetailsWithoutDiscounts[${ctr}]" data-crm-property-name="document.creditMemoDetails[${ctr}]" data-refresh-method="refreshCustomerCreditMemoDetail.line${ctr}" data-recalculate-method="recalculateCustomerCreditMemoDetail.line${ctr}" data-display-orange-flower="${displayOrangeFlower}" data-is-invoice-open-item-quantity-zero="${isInvoiceOpenItemQuantityZero}" data-css-class="datacell" data-read-only="${readOnly}"></div>
+			</tr>
+			<tr>
+				<td class="total-line" colspan="6">
+					<strong>Credit Memo Total:</strong>
+				</td>
+				<!--  Customer Credit Memo Total Item Amount -->
+				<td class="total-line">
+					<strong>${KualiForm.document.currencyFormattedCrmTotalItemAmount}</strong>
+				</td>
+				<!-- Customer Credit Memo Total Tax Amount -->
+				<th:block th:if="${salesTaxEnabled}">
+				<td class="total-line">
+					<strong>${KualiForm.document.currencyFormattedCrmTotalTaxAmount}</strong>
+				</td>
+				</th:block>
+				<!--  Customer Credit Memo Total Amount -->
+				<td class="total-line">
+					<strong>${KualiForm.document.currencyFormattedCrmTotalAmount}</strong>
+				</td>
+				<td />
+				<td />
+				<!--  If not readOnly mode -> show Recalculate/Refresh buttons for the total line -->
+				<th:block th:if="${not readOnly}">
+					<td><div align="center" valign="middle" >
+						<input type="image" property="methodToCall.recalculateCustomerCreditMemoDocument"
+   							src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif"
+   							title="Recalculate Credit Memo Line Amounts"
+   							alt="Recalculate Credit Memo Line Amounts"
+                           	styleClass="tinybutton" />
+	                	&nbsp;
+						<input type="image" property="methodToCall.refreshCustomerCreditMemoDocument"
+   							src="${ConfigProperties.externalizable.images.url}tinybutton-refresh.gif"
+   							title="Refresh Credit Memo Lines"
+   							alt="Refresh Credit Memo Lines"
+                           	styleClass="tinybutton" />
+	            	</div>     
+					</td>
+				</th:block>
+			</tr> 
+    	</table>
+    </div>
+</section>
+</div>

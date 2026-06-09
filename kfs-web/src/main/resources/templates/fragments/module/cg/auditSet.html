@@ -1,0 +1,38 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cg/auditSet.tag -->
+<!-- Fragment parameters: title, soft, auditType -->
+<div th:fragment="content (title, soft, auditType)" xmlns:th="http://www.thymeleaf.org">
+<tr><td colspan="3" class="subhead">${title}</td></tr>
+<!--/*/ <th:block th:with="found=${false}"> /*/-->
+<c:forEach items="${AuditErrors}" var="cluster">
+	<th:block th:if="${cluster.value.softAudits == soft && cluster.value.size != 0}">
+		<th:block th:if="${!found}"><!--/*/ <th:block th:with="found=${true}"> /*/--></th:block>
+		<div th:replace="~{fragments/cg/auditRow :: content}" data-tab-title="${cluster.value.label}" data-default-open="false" data-total-errors="${cluster.value.size}" data-cluster="${cluster.key}" data-is-link="true"></div>
+		</div><!-- /cg:auditRow -->
+	</th:block>
+</tr>
+<th:block th:if="${!found}">
+	<tr>
+		<td colspan="3" height="70" align=left valign=middle class="datacell">
+			<div align="center">No ${auditType} audit errors present.</div>
+		</td>
+	</tr>
+</th:block>
+</div>

@@ -1,0 +1,51 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/innerForeignDraft.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="wireTransAttributes=${DataDictionary.PaymentSourceWireTransfer.attributes}"> /*/-->
+
+<table class="datatable" summary="Foreign Draft Section" cellpadding="0">
+	<tbody>
+		<tr>
+			<td><div class="floaters" >
+			<strong>
+				<th:block th:if="${!fullEntryMode&&!frnEntryMode}">
+					<th:block th:if="${KualiForm.document.wireTransfer.foreignCurrencyTypeCode=='C'}">
+						Payment amount is stated in U.S. dollars; convert to foreign currency
+					</th:block>  
+					<th:block th:if="${KualiForm.document.wireTransfer.foreignCurrencyTypeCode=='F'}">
+						Payment amount is stated in foreign currency
+					</th:block> 
+				</th:block>
+				<th:block th:if="${fullEntryMode||frnEntryMode}">
+					<html:radio property="document.wireTransfer.foreignCurrencyTypeCode" value="C"/>
+					Payment amount is stated in U.S. dollars; convert to foreign currency </label>
+					<br/>
+					<br/>
+					<html:radio property="document.wireTransfer.foreignCurrencyTypeCode" value="F"/>
+					Payment amount is stated in foreign currency <br/>
+				</th:block>
+				<br/>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${wireTransAttributes.currencyTypeName}"></label>&nbsp;
+				<input type="text" name="document.wireTransfer.foreignCurrencyTypeName" th:field="*{document.wireTransfer.foreignCurrencyTypeName}" data-attribute-entry="${wireTransAttributes.currencyTypeName}" />
+			</strong></div></td>
+		</tr>
+	</tbody>
+</table>
+</div>

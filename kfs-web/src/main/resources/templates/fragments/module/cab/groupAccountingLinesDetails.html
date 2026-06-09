@@ -1,0 +1,104 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cab/groupAccountingLinesDetails.tag -->
+<!-- Fragment parameters: capitalAssetInformation, capitalAssetPosition, showViewButton -->
+<div th:fragment="content (capitalAssetInformation, capitalAssetPosition, showViewButton)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="groupAccountingLinesAttributes=${DataDictionary.CapitalAssetAccountsGroupDetails.attributes}"> /*/-->
+<!--/*/ <th:block th:with="docPos=0"> /*/-->
+<!--/*/ <th:block th:with="linePos=0"> /*/-->
+
+<!--/*/ <th:block th:with="docPos=${docPos+1}"> /*/-->
+
+<div class="tab-container" align="center">
+<table width="80%" cellpadding="0" cellspacing="0" class="datatable"  align="center"
+	       style="width: 85%; text-align: left;">	
+	<tr>
+		<td class="tab-subhead"  width="100%" colspan="15">Accounting Lines Amount Distributions</td>
+	</tr>
+	<tr>
+		<!--/*/ <th:block th:with="tabKey=payment-${capitalAssetPosition}"> /*/-->
+		<html:hidden property="tabStates(${tabKey})" value="CLOSE" />
+		<td colspan="7" style="padding:0px; border-style:none;">
+		<table class="datatable" cellpadding="0" cellspacing="0" align="center"
+	       style="width: 100%; text-align: left;">
+	       <th:block th:if="${showViewButton == true}">
+				<tr>
+					<td colspan="11" class="tab-subhead" style="border-right: medium none;">
+					<input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif"
+			                                    property="methodToCall.toggleTab.tab${tabKey}"
+			                                    title="toggle"
+			                                    alt="show"
+			                                    styleClass="tinybutton"
+			                                    styleId="tab-${tabKey}-imageToggle"
+			                                    onclick="javascript: return toggleTab(document, '${tabKey}'); "/>
+			            Payments
+					</td>
+				</tr>
+			<tbody  style="display: none;" id="tab-${tabKey}-div">
+ 		</th:block>			
+			<tr align="center">
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.capitalAssetAccountLineNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.sequenceNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.financialDocumentLineTypeCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.chartOfAccountsCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.accountNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.subAccountNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.financialObjectCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.financialSubObjectCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.projectCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.organizationReferenceId}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${groupAccountingLinesAttributes.amount}"></th>
+			</tr>
+			<c:forEach items="${capitalAssetInformation.capitalAssetAccountsGroupDetails}" var="accountLine" >
+				<tr>
+					<td class="infoline" align="center">
+						<div align="center" valign="middle">
+							${accountLine.capitalAssetAccountLineNumber}&nbsp;
+						</div></td>
+					<td class="infoline">
+						<div align="center" valign="middle">
+							${accountLine.sequenceNumber}&nbsp;
+						</div></td>
+					<td class="infoline">
+						<div>
+				        	<!--/*/ <th:block th:with="lineType=${accountLine.financialDocumentLineTypeCode}"> /*/-->
+				            <th:block th:if="${lineType eq KFSConstants.SOURCE_ACCT_LINE_TYPE_CODE}">
+					        	<span th:text="${KFSConstants.SOURCE}"></span>
+					        </th:block>
+				            <th:block th:if="${lineType eq KFSConstants.TARGET_ACCT_LINE_TYPE_CODE}">
+					            <span th:text="${KFSConstants.TARGET}"></span>
+					        </th:block>
+				       </div></td>					
+					<td class="infoline">${accountLine.chartOfAccountsCode}&nbsp;</td>
+					<td class="infoline">${accountLine.accountNumber}&nbsp;</td>
+					<td class="infoline">${accountLine.subAccountNumber}&nbsp;</td>
+					<td class="infoline">${accountLine.financialObjectCode}&nbsp;</td>
+					<td class="infoline">${accountLine.financialSubObjectCode}&nbsp;</td>
+					<td class="infoline">${accountLine.projectCode}&nbsp;</td>
+					<td class="infoline">${accountLine.organizationReferenceId}&nbsp;</td>
+					<td class="infoline"><div align="right" valign="middle">${accountLine.amount}&nbsp;</div></td>
+				</tr>
+			</tr>
+			</tbody>
+		</table>
+		</td>
+	</tr>
+</table>
+</div>
+</div>

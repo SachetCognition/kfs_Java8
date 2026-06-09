@@ -1,0 +1,264 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvPayment.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="payeeAttributes=${DataDictionary.DisbursementVoucherPayeeDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="dvAttributes=${DataDictionary.DisbursementVoucherDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="payeeAttributes=${DataDictionary.DisbursementVoucherPayeeDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="paymentReasonEditMode=${(not empty KualiForm.editingMode['paymentReasonEditMode'])}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Payment Information" data-default-open="true">
+  <h3>Payment Information</h3>
+    <div class="tab-container" align=center > 
+        <h3>Payment Information</h3>
+		<table cellpadding=0 class="datatable" summary="Payment Section">			            
+            <tr>
+              <th class="bord-l-b"><div align="right">
+              	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPaymentReasonCode}"></label>
+              </div></th>
+              <td colspan="3" class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPaymentReasonCode" th:field="*{document.dvPayeeDetail.disbVchrPaymentReasonCode}" data-attribute-entry="${payeeAttributes.disbVchrPaymentReasonCode}" />
+              </td> 
+            </tr>
+            
+            <tr>
+              <th class="bord-l-b"><div align="right">
+              	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeIdNumber}"></label>           	
+              </div></th>
+              <td colspan="3" class="datacell">              	
+              	<th:block th:switch="${true}">       
+              	  <%-- If payee is vendor (including employee-vendor), display vendor inquiry link using vendor header-detail ID --%>       
+	          	  <th:block th:case="${KualiForm.document.dvPayeeDetail.vendor &&
+	          	  					not empty KualiForm.document.dvPayeeDetail.disbVchrVendorHeaderIdNumber && 
+	          				  		not empty KualiForm.document.dvPayeeDetail.disbVchrVendorDetailAssignedIdNumber}">
+		        	<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorDetail" data-key-values="vendorHeaderGeneratedIdentifier=${KualiForm.document.dvPayeeDetail.disbVchrVendorHeaderIdNumber}&vendorDetailAssignedIdentifier=${KualiForm.document.dvPayeeDetail.disbVchrVendorDetailAssignedIdNumber}">
+		                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeIdNumber" th:field="*{document.dvPayeeDetail.disbVchrPayeeIdNumber}" data-attribute-entry="${payeeAttributes.disbVchrPayeeIdNumber}" readonly="readonly" />
+		            </span>
+	              </th:block> 
+	              <%-- If payee is non-vendor employee, retrieve principalId using payeeId (which shall hold employeeIdnc in this case), and display Person inquiry link --%>   
+	              <th:block th:case="${KualiForm.document.dvPayeeDetail.employee && 
+	              					not empty KualiForm.document.dvPayeeDetail.disbVchrPayeeIdNumber}"> 
+					<!--/*/ <th:block th:with="employeePrincipalId=${KualiForm.document.dvPayeeDetail.employeePrincipalId}"> /*/-->
+	              	<th:block th:if="${not empty employeePrincipalId}"> 
+		        	  <span class="kfs-inquiry" data-bo-class="org.kuali.rice.kim.api.identity.Person" data-key-values="principalId=${employeePrincipalId}">
+		                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeIdNumber" th:field="*{document.dvPayeeDetail.disbVchrPayeeIdNumber}" data-attribute-entry="${payeeAttributes.disbVchrPayeeIdNumber}" readonly="readonly" />
+		              </span>
+		            </th:block>
+		 		  </th:block>          
+		 		  <%-- Otherwise, payee is neither vendor nor employee, probably customer or empty. 
+		 		  	Note: We currently don't handle the potential case that DV payee might be a Customer.
+		 		  	If in the future we decide otherwise, logic could be added here to handle hyper link for 
+		 		  	Customer inquiry when the returned payee is a Customer.
+		 		  --%>
+	              <th:block th:case="*"> 
+		                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeIdNumber" th:field="*{document.dvPayeeDetail.disbVchrPayeeIdNumber}" data-attribute-entry="${payeeAttributes.disbVchrPayeeIdNumber}" readonly="readonly" />
+		 		  </th:block>          
+	            </th:block>                                    
+                <th:block th:if="${fullEntryMode}">
+	                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.DisbursementPayee" th:replace="~{fragments/kul/lookup :: content}"></span>
+                </th:block>
+              </td>
+            </tr>
+		
+            <tr>
+              <th class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbursementVoucherPayeeTypeName}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbursementVoucherPayeeTypeName" th:field="*{document.dvPayeeDetail.disbursementVoucherPayeeTypeName}" data-attribute-entry="${payeeAttributes.disbursementVoucherPayeeTypeName}" readonly="readonly" />   
+              </td>
+              
+              <th class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeePersonName}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeePersonName" th:field="*{document.dvPayeeDetail.disbVchrPayeePersonName}" data-attribute-entry="${payeeAttributes.disbVchrPayeePersonName}" readonly="readonly" />  
+              </td>              
+            </tr>
+            
+            <tr>
+              <th class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeLine1Addr}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeLine1Addr" th:field="*{document.dvPayeeDetail.disbVchrPayeeLine1Addr}" data-attribute-entry="${payeeAttributes.disbVchrPayeeLine1Addr}" />  
+              </td>
+              
+              <th class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeLine2Addr}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeLine2Addr" th:field="*{document.dvPayeeDetail.disbVchrPayeeLine2Addr}" data-attribute-entry="${payeeAttributes.disbVchrPayeeLine2Addr}" />  
+              </td>
+            </tr>
+            
+            <tr>
+			  <th class="bord-l-b">
+			  	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeCityName}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeCityName" th:field="*{document.dvPayeeDetail.disbVchrPayeeCityName}" data-attribute-entry="${payeeAttributes.disbVchrPayeeCityName}" />
+              </td> 
+                           
+			  <th class="bord-l-b">
+			  	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeStateCode}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeStateCode" th:field="*{document.dvPayeeDetail.disbVchrPayeeStateCode}" data-attribute-entry="${payeeAttributes.disbVchrPayeeStateCode}" />
+                <th:block th:if="${fullEntryMode || payeeEntryMode}">
+              		<span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.state.StateEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+              	</th:block>
+              </td>
+            </tr>            
+            
+            <tr>
+              <th class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeCountryCode}"></label></div>
+              </th>
+              <td class="datacell">
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeCountryCode" th:field="*{document.dvPayeeDetail.disbVchrPayeeCountryCode}" data-attribute-entry="${payeeAttributes.disbVchrPayeeCountryCode}" />  
+              </td>
+                          
+              <th class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeZipCode}"></label></div>            	
+              </th>
+              <td class="datacell">	 
+                <input type="text" name="document.dvPayeeDetail.disbVchrPayeeZipCode" th:field="*{document.dvPayeeDetail.disbVchrPayeeZipCode}" data-attribute-entry="${payeeAttributes.disbVchrPayeeZipCode}" />
+                <th:block th:if="${fullEntryMode || payeeEntryMode}">
+              		<span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+              	</th:block>
+              </td>              
+            </tr>
+            
+            <tr>
+              <th width="20%"  class="bord-l-b">
+              	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrCheckTotalAmount}"></label></div>
+              </th>
+              <td width="30%"  class="datacell">
+                <input type="text" name="document.disbVchrCheckTotalAmount" th:field="*{document.disbVchrCheckTotalAmount}" data-attribute-entry="${dvAttributes.disbVchrCheckTotalAmount}" />
+              </td>
+              <th width="20%"  class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbursementVoucherDueDate}"></label></div></th>
+              <td width="30%"  class="datacell">
+                 <input type="text" name="document.disbursementVoucherDueDate" th:field="*{document.disbursementVoucherDueDate}" data-attribute-entry="${dvAttributes.disbursementVoucherDueDate}" />
+              </td>
+            </tr>
+            
+            <tr>
+              <th  class="bord-l-b"><div align="right">Payment Type:</div></th>
+              <td valign="top"  class="datacell">
+                <th:block th:if="${taxEntryMode}">
+                  <input type="text" name="document.dvPayeeDetail.disbVchrAlienPaymentCode" th:field="*{document.dvPayeeDetail.disbVchrAlienPaymentCode}" data-attribute-entry="${payeeAttributes.disbVchrAlienPaymentCode}" />
+                  <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrAlienPaymentCode}"></label>
+                  <br><br>
+                </th:block>
+                <th:block th:if="${!taxEntryMode}">
+                    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrAlienPaymentCode}"></label>
+                    <input type="text" name="document.dvPayeeDetail.disbVchrAlienPaymentCode" th:field="*{document.dvPayeeDetail.disbVchrAlienPaymentCode}" data-attribute-entry="${payeeAttributes.disbVchrAlienPaymentCode}" readonly="readonly" />
+                    <br><br>
+                </th:block>
+                <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrPayeeEmployeeCode}"></label> <span th:text="${KualiForm.document.dvPayeeDetail.disbVchrPayeeEmployeeCode}"></span><br><br>
+				<th:block th:if="${KualiForm.document.dvPayeeDetail.disbursementVoucherPayeeTypeCode=='V'}">
+                	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${payeeAttributes.disbVchrEmployeePaidOutsidePayrollCode}"></label><span th:text="${KualiForm.document.dvPayeeDetail.disbVchrEmployeePaidOutsidePayrollCode}"></span><br><br>
+                </th:block>
+              </td>  
+              <th width="20%"  class="bord-l-b"><div align="right">Other Considerations: </div></th>
+              <td width="30%"  class="datacell">
+				<th:block th:switch="${true}">
+					<th:block th:case="${fullEntryMode || paymentHandlingEntryMode}"> 
+						<input type="text" name="document.disbVchrAttachmentCode" th:field="*{document.disbVchrAttachmentCode}" data-attribute-entry="${dvAttributes.disbVchrAttachmentCode}" />
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrAttachmentCode}"></label><br>
+					</th:block>
+					<th:block th:case="*"> 
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrAttachmentCode}"></label>
+						<input type="text" name="document.disbVchrAttachmentCode" th:field="*{document.disbVchrAttachmentCode}" data-attribute-entry="${dvAttributes.disbVchrAttachmentCode}" readonly="readonly" /><br>
+					</th:block>
+				</th:block>
+         
+				<th:block th:switch="${true}">
+                 <th:block th:case="${fullEntryMode || specialHandlingChangingEntryMode}">        
+                   <input type="text" name="document.disbVchrSpecialHandlingCode" th:field="*{document.disbVchrSpecialHandlingCode}" data-attribute-entry="${dvAttributes.disbVchrSpecialHandlingCode}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrSpecialHandlingCode}"></label><br>
+                 </th:block>
+                 <th:block th:case="*">
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrSpecialHandlingCode}"></label>
+                   <input type="text" name="document.disbVchrSpecialHandlingCode" th:field="*{document.disbVchrSpecialHandlingCode}" data-attribute-entry="${dvAttributes.disbVchrSpecialHandlingCode}" readonly="readonly" /><br>          
+                 </th:block>
+				</th:block>
+                 
+                 <!--/*/ <th:block th:with="w9IndReadOnly=${!fullEntryMode}"> /*/-->
+                 <%-- cannot change w9 indicator if it has previousely been checked --%>
+                 <th:block th:if="${KualiForm.document.editW9W8BENbox==true}">  
+                     <!--/*/ <th:block th:with="w9IndReadOnly=true"> /*/-->    
+                 </th:block>
+                 <th:block th:if="${w9IndReadOnly}">    
+                   <input type="text" name="document.disbVchrPayeeW9CompleteCode" th:field="*{document.disbVchrPayeeW9CompleteCode}" data-attribute-entry="${dvAttributes.disbVchrPayeeW9CompleteCode}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrPayeeW9CompleteCode}"></label><br>                     
+                 </th:block>
+                 
+                 <th:block th:if="${!w9IndReadOnly}">                
+                   <input type="text" name="document.disbVchrPayeeW9CompleteCode" th:field="*{document.disbVchrPayeeW9CompleteCode}" data-attribute-entry="${dvAttributes.disbVchrPayeeW9CompleteCode}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrPayeeW9CompleteCode}"></label><br>
+                 </th:block>
+                 
+                 
+				<th:block th:switch="${true}">
+                 <th:block th:case="${fullEntryMode}">        
+                   <input type="text" name="document.disbExcptAttachedIndicator" th:field="*{document.disbExcptAttachedIndicator}" data-attribute-entry="${dvAttributes.disbExcptAttachedIndicator}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbExcptAttachedIndicator}"></label><br>
+                 </th:block>
+                 <th:block th:case="*">
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbExcptAttachedIndicator}"></label>
+                   <input type="text" name="document.disbExcptAttachedIndicator" th:field="*{document.disbExcptAttachedIndicator}" data-attribute-entry="${dvAttributes.disbExcptAttachedIndicator}" readonly="readonly" /><br>          
+                 </th:block>
+				</th:block>     
+
+				<th:block th:switch="${true}">
+                 <th:block th:case="${immediateDisbursementEntryMode}">        
+                   <input type="text" name="document.immediatePaymentIndicator" th:field="*{document.immediatePaymentIndicator}" data-attribute-entry="${dvAttributes.immediatePaymentIndicator}" />
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.immediatePaymentIndicator}"></label><br>
+                 </th:block>
+                 <th:block th:case="*">
+                   <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.immediatePaymentIndicator}"></label>
+                   <input type="text" name="document.immediatePaymentIndicator" th:field="*{document.immediatePaymentIndicator}" data-attribute-entry="${dvAttributes.immediatePaymentIndicator}" readonly="readonly" /><br>          
+                 </th:block>
+				</th:block>
+                 </td>
+            </tr>
+            
+            <tr>
+              <th  class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrPaymentMethodCode}"></label></div></th>
+              <td  class="datacell">
+                <input type="text" name="document.disbVchrPaymentMethodCode" th:field="*{document.disbVchrPaymentMethodCode}" data-attribute-entry="${dvAttributes.disbVchrPaymentMethodCode}" onchange="paymentMethodMessages(this.value);" />
+              </td>
+              <th  class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbursementVoucherDocumentationLocationCode}"></label></div></th>
+              <td  class="datacell">
+                <input type="text" name="document.disbursementVoucherDocumentationLocationCode" th:field="*{document.disbursementVoucherDocumentationLocationCode}" data-attribute-entry="${dvAttributes.disbursementVoucherDocumentationLocationCode}" onchange="documentationMessage(this.value);" />
+                <th:block th:if="${fullEntryMode}">
+              		<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.PaymentDocumentationLocation" th:replace="~{fragments/kul/lookup :: content}"></span>
+              	</th:block>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrCheckStubText}"></label></div></th>
+              <td colspan="3"><input type="text" name="document.disbVchrCheckStubText" th:field="*{document.disbVchrCheckStubText}" data-attribute-entry="${dvAttributes.disbVchrCheckStubText}" /></td>
+            </tr>
+        </table>
+     </div>
+</section>
+</div>

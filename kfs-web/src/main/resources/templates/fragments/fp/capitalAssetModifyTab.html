@@ -1,0 +1,58 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/capitalAssetModifyTab.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the capital modify tag that contains the given capital asset info"%>
+
+<!--/*/ <th:block th:with="capitalAssetInfoSize=${#strings.length(KualiForm.document.capitalAssetInformation)}"> /*/-->	
+<!--/*/ <th:block th:with="defaultOpen=false"> /*/-->
+<!--/*/ <th:block th:with="modifiedCapitalAssets=0"> /*/-->
+
+<c:forEach items="${KualiForm.document.capitalAssetInformation}" var="detailLine" varStatus="status">
+	<th:block th:if="${detailLine.capitalAssetActionIndicator == KFSConstants.CapitalAssets.CAPITAL_ASSET_MODIFY_ACTION_INDICATOR}">
+		<!--/*/ <th:block th:with="modifiedCapitalAssets=${modifiedCapitalAssets + 1}"> /*/-->
+	</th:block>
+</tr>	
+
+<th:block th:if="${modifiedCapitalAssets > 0}">
+	<!--/*/ <th:block th:with="defaultOpen=true"> /*/-->
+</th:block>
+
+<section class="kfs-tab" data-tab-title="${KFSConstants.CapitalAssets.MODIFY_CAPITAL_ASSETS_TAB_TITLE}" data-default-open="${defaultOpen}">
+  <h3>${KFSConstants.CapitalAssets.MODIFY_CAPITAL_ASSETS_TAB_TITLE}</h3>
+     <div class="tab-container" align="center" valign="middle">
+		 <h3>Modify Capital Assets</h3>
+		 <table class="datatable" cellpadding="0" cellspacing="0" summary="Capital Asset Information">
+		     <th:block th:if="${modifiedCapitalAssets <= 0}">
+				<tr>
+					<td class="datacell" height="50" colspan="5"><div align="center">There are currently no Modify Capital Assets entries associated with this Transaction Processing document.</div></td>
+				</tr>
+			</th:block>
+			<th:block th:if="${modifiedCapitalAssets > 0}">
+				<tr>
+					<td>
+						<div th:replace="~{fragments/fp/capitalAssetModify :: content}" data-read-only="${readOnly}"></div>					
+					</td>
+				</tr>	 
+	 		</th:block>
+	     </table>
+	 </div>	
+</section>
+</div>

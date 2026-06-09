@@ -1,0 +1,94 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/cashControl.tag -->
+<!-- Fragment parameters: documentAttributes, readOnly, showGenerateButton, editPaymentMedium, editRefDocNbr, editBankCode, showBankCode -->
+<div th:fragment="content (documentAttributes, readOnly, showGenerateButton, editPaymentMedium, editRefDocNbr, editBankCode, showBankCode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="arDocHeaderAttributes=${DataDictionary.AccountsReceivableDocumentHeader.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="General Info" data-default-open="true">
+  <h3>General Info</h3>
+	<div class="tab-container" align=center>
+			<h3>General Info</h3>
+		<table cellpadding="0" cellspacing="0" summary="General Info">
+
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${arDocHeaderAttributes.processingChartOfAccCodeAndOrgCode}"></th>
+
+				<td class="datacell-nowrap">
+					<input type="text" name="processingChartOfAccCodeAndOrgCode" th:field="*{processingChartOfAccCodeAndOrgCode}" data-attribute-entry="${arDocHeaderAttributes.processingChartOfAccCodeAndOrgCode}" readonly="readonly" />
+				</td>
+			</tr>
+			<th:block th:if="${showBankCode}">
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.bankCode}"></th>
+
+				<th:block th:switch="${true}">
+					<th:block th:case="${editBankCode}">
+					<div th:replace="~{fragments/sys/bankControl :: content}" data-property="document.bankCode" data-object-property="document.bank" data-deposit-only="false" data-disbursement-only="false" data-read-only="${readOnly}" data-style="datacell-nowrap"></div>
+					</th:block>
+					<th:block th:case="*">
+					<td class="datacell-nowrap">
+						<span th:text="${KualiForm.document.bankCode}"></span>
+					</td>
+					</th:block>
+				</th:block>
+			</tr>
+			</th:block>
+
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.customerPaymentMediumCode}"></th>
+
+				<td class="datacell-nowrap">
+					<th:block th:switch="${true}">
+						<th:block th:case="${editPaymentMedium}">
+							<input type="text" name="document.customerPaymentMediumCode" th:field="*{document.customerPaymentMediumCode}" data-attribute-entry="${documentAttributes.customerPaymentMediumCode}" onchange="submitForm()" />
+						</th:block>
+						<th:block th:case="*">
+							<span th:text="${KualiForm.document.customerPaymentMedium.customerPaymentMediumDescription}"></span>
+						</th:block>
+					</th:block>
+				</td>
+			</tr>
+
+			<th:block th:if="${KualiForm.cashPaymentMediumSelected}">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.referenceFinancialDocumentNumber}"></th>
+
+					<td class="datacell-nowrap">
+						<input type="text" name="document.referenceFinancialDocumentNumber" th:field="*{document.referenceFinancialDocumentNumber}" data-attribute-entry="${documentAttributes.referenceFinancialDocumentNumber}" />
+					</td>
+				</tr>
+			</th:block>
+
+			<th:block th:if="${showGenerateButton}">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<td class="datacell-nowrap">
+						<input type="image" property="methodToCall.generateGLPEs"
+							src="${ConfigProperties.externalizable.images.url}tinybutton-generate.gif"
+							alt="Generate General Ledger Pending Entries"
+							title="Generate General Ledger Pending Entries"
+							styleClass="tinybutton" />
+					</td>
+				</tr>
+			</th:block>
+		</table>
+	</div>
+</section>
+</div>

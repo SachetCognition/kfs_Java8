@@ -1,0 +1,92 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/relo/expenseTotals.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelRelocationDocument.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Expense Totals" data-default-open="true">
+  <h3>Expense Totals</h3>
+	<div id="Expense Totals" class="tab-container" align=center>
+		<h3></h3>
+		<table class="datatable" summary="Expense Totals" cellpadding="0">
+			<tbody>
+				<tr>
+					<th class="bord-l-b"><div align="right" width="80%">Total Expenses:</div></th>
+					<td width="20%"><span th:text="${KualiForm.document.documentGrandTotal}"></span></td>
+				</tr>
+				<tr>
+					<th class="bord-l-b"><div align="right">Less Non-Reimbursable:</div></th>
+					<td><span th:text="${KualiForm.document.nonReimbursableTotal}"></span></td>
+				</tr>
+				<tr>
+					<th class="bord-l-b"><div align="right">Approved Amount:</div> </th>
+					<td><span th:text="${KualiForm.document.approvedAmount}"></span></td>
+				</tr>
+				<tr>
+					<th class="bord-l-b"><div align="right">Less CTS Charges: -</div> </th>
+					<td><span th:text="${KualiForm.document.fullCTSTotal}"></span></td>
+				</tr>
+				<tr>
+					<th class="bord-l-b"><div align="right">Amount due Corporate Credit Card:</div></th>
+					<td><span th:text="${KualiForm.document.corporateCardTotal}"></span></td>
+				</tr>
+				<tr>
+					<th class="bord-l-b"><div align="right">Apply Expense Limit:</div> </th>
+					<th:block th:switch="${true}">
+						<th:block th:case="${(KualiForm.document.expenseLimit) == null}">
+							<td align="left" valign="middle">N/A</td>
+						</th:block>
+						<th:block th:case="*">
+							<td align="left" valign="middle"><span th:text="${KualiForm.document.expenseLimit}"></span></td>
+						</th:block>
+					</th:block>
+				</tr>
+				<tr>
+					<th class="bord-l-b"><div align="right">Reimbursement for this Moving and Relocation:</div> </th>
+					<td><span th:text="${KualiForm.document.reimbursableTotal}"></span></td>
+				</tr>
+				<tr title="Total calculated from Disbursement Vouchers">
+					<th class="bord-l-b"><div align="right">Total Amount paid to Vendor(DV):</div></th>
+					<td><span th:text="${KualiForm.document.totalPaidAmountToVendor}"></span></td>
+				</tr>
+				<tr title="Total calculated from Payment Requests">
+					<th class="bord-l-b"><div align="right">Total Amount paid from Payment Requests(PREQ):</div></th>
+					<td><span th:text="${KualiForm.document.totalPaidAmountToRequests}"></span></td>
+				</tr>
+				<tr title="Total approved amount, DV and Invoice">
+					<th class="bord-l-b"><div align="right"><b>Grand Total:</b></div></th>
+					<td><span th:text="${KualiForm.document.reimbursableGrandTotal}"></span></td>
+				</tr>
+				<th:block th:if="${fullEntryMode}">
+					<tr>
+						<td colspan="3">
+							<div align="center">
+								<input type="image" property="methodToCall.recalculate"
+									src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif"
+									alt="Recalculate Expense Total"
+									title="Recalculate Expense Total" styleClass="tinybutton" />
+							</div>
+						</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+</section>
+</div>

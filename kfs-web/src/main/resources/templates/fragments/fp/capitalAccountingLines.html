@@ -1,0 +1,145 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/capitalAccountingLines.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render accounting lines for capitalization tag that contains the given accounting lines for capitalization info"%>
+<!--/*/ <th:block th:with="capitalAccountingLinesAttributes=${DataDictionary.CapitalAccountingLines.attributes}"> /*/-->
+<!--/*/ <th:block th:with="capitalAccountingLines=${KualiForm.document.capitalAccountingLines}"> /*/-->
+<!--/*/ <th:block th:with="capitalAccountingLineAttributes=${DataDictionary.CapitalAccountingLine.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="defaultOpen=false"> /*/-->
+<th:block th:if="${KualiForm.document.capitalAccountingLinesExist and KualiForm.editCreateOrModify}">
+	<!--/*/ <th:block th:with="defaultOpen=true"> /*/-->
+</th:block>
+
+<section class="kfs-tab" data-tab-title="${KFSConstants.CapitalAssets.ACCOUNTING_LINES_FOR_CAPITALIZATION_TAB_TITLE}" data-default-open="${defaultOpen}">
+  <h3>${KFSConstants.CapitalAssets.ACCOUNTING_LINES_FOR_CAPITALIZATION_TAB_TITLE}</h3>
+     <div class="tab-container" align="center">
+     	<h3>Accounting Lines for Capitalization</h3>
+	    <th:block th:if="${!KualiForm.document.capitalAccountingLinesExist}">
+		    <table cellpadding="0" cellspacing="0" summary="Accounting Lines for Capitalization">
+		    	<tr>
+					<td class="datacell" height="50" colspan="11"><div align="center">There are currently no Accounting lines for capitalization entries associated with this Transaction Processing document.</div></td>
+				</tr>
+		    </table>
+	    </th:block>
+  		<th:block th:if="${KualiForm.document.capitalAccountingLinesExist}">
+         	<table cellpadding="0" cellspacing="0" summary="Accounting Lines for Capitalization">
+				<th:block th:switch="${true}">
+				   <th:block th:case="${empty KualiForm.document.capitalAccountingLines}">
+				       <th:block th:if="${!readOnly}">
+					    	<tr>
+							   <td class="datacell" height="50" colspan="11">
+							       <div align="center">There are Accounting lines for capitalization entries associated with this Transaction Processing document. Please click the generate button when you are ready to enter capitalization information. Note that once you click the button you cannot edit or enter new capitalization accounting lines unless you delete the capitalization information.</div>
+								   <div align="center"><input type="image" property="methodToCall.generateAccountingLinesForCapitalization" src="${ConfigProperties.externalizable.images.url}tinybutton-generate.gif" alt="Generate Accounting Lines For Capitalization" title="Generate Accounting Lines For Capitalization" styleClass="tinybutton"/></div>
+						       </td>
+							</tr>
+    			       </th:block>
+				   </th:block>
+				   <th:block th:case="*">
+						<tr>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.sequenceNumber}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.lineType}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.chartOfAccountsCode}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.accountNumber}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.subAccountNumber}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.financialObjectCode}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.financialSubObjectCode}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.projectCode}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.organizationReferenceId}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.amount}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.accountLinePercent}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.financialDocumentLineDescription}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${capitalAccountingLinesAttributes.selectLine}"></th>
+						</tr>
+						
+						<tr th:each="capitalAccountingLinesCollection : ${KualiForm.document.capitalAccountingLines}" indexId="ctr">
+							<bean:define id="amountDistributed" name="capitalAccountingLinesCollection" property="amountDistributed"/>
+							<!--/*/ <th:block th:with="lineReadOnly=false"> /*/-->
+			                <th:block th:if="${amountDistributed == true}">
+			                	<!--/*/ <th:block th:with="lineReadOnly=true"> /*/-->
+			               	</th:block>
+		
+					    	<tr>
+					            <td class="datacell">
+									<div align="center">
+										<input type="text" name="document.capitalAccountingLines[${ctr}].sequenceNumber" th:field="*{document.capitalAccountingLines[${ctr}].sequenceNumber}" data-attribute-entry="${capitalAccountingLinesAttributes.sequenceNumber}" readonly="readonly" />					
+									</div>		            
+					            </td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].lineType" th:field="*{document.capitalAccountingLines[${ctr}].lineType}" data-attribute-entry="${capitalAccountingLinesAttributes.lineType}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].chartOfAccountsCode" th:field="*{document.capitalAccountingLines[${ctr}].chartOfAccountsCode}" data-attribute-entry="${capitalAccountingLinesAttributes.chartOfAccountsCode}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].accountNumber" th:field="*{document.capitalAccountingLines[${ctr}].accountNumber}" data-attribute-entry="${capitalAccountingLinesAttributes.accountNumber}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].subAccountNumber" th:field="*{document.capitalAccountingLines[${ctr}].subAccountNumber}" data-attribute-entry="${capitalAccountingLinesAttributes.subAccountNumber}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].financialObjectCode" th:field="*{document.capitalAccountingLines[${ctr}].financialObjectCode}" data-attribute-entry="${capitalAccountingLinesAttributes.financialObjectCode}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].financialSubObjectCode" th:field="*{document.capitalAccountingLines[${ctr}].financialSubObjectCode}" data-attribute-entry="${capitalAccountingLinesAttributes.financialSubObjectCode}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].projectCode" th:field="*{document.capitalAccountingLines[${ctr}].projectCode}" data-attribute-entry="${capitalAccountingLinesAttributes.projectCode}" readonly="readonly" /></td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].organizationReferenceId" th:field="*{document.capitalAccountingLines[${ctr}].organizationReferenceId}" data-attribute-entry="${capitalAccountingLinesAttributes.organizationReferenceId}" readonly="readonly" /></td>
+					            <td class="datacell">
+					            	<div align="right">
+					            		<input type="text" name="document.capitalAccountingLines[${ctr}].amount" th:field="*{document.capitalAccountingLines[${ctr}].amount}" data-attribute-entry="${capitalAccountingLinesAttributes.amount}" readonly="readonly" />
+									</div>		            		
+					            </td>
+					            <td class="datacell">
+					            	<div align="right">
+					            		<input type="text" name="document.capitalAccountingLines[${ctr}].accountLinePercent" th:field="*{document.capitalAccountingLines[${ctr}].accountLinePercent}" data-attribute-entry="${capitalAccountingLinesAttributes.accountLinePercent}" readonly="readonly" />
+									</div>		            		
+					            </td>
+					            <td class="datacell"><input type="text" name="document.capitalAccountingLines[${ctr}].financialDocumentLineDescription" th:field="*{document.capitalAccountingLines[${ctr}].financialDocumentLineDescription}" data-attribute-entry="${capitalAccountingLinesAttributes.financialDocumentLineDescription}" readonly="readonly" /></td>
+			                    <td class="datacell">
+			                    	<div align="center">
+										<input type="text" name="document.capitalAccountingLines[${ctr}].selectLine" th:field="*{document.capitalAccountingLines[${ctr}].selectLine}" data-attribute-entry="${capitalAccountingLinesAttributes.selectLine}" />                    	
+			                    	</div>
+			                    </td>
+					        </tr>
+						</tr>
+						<th:block th:if="${!readOnly}">
+							<tr height="40">
+								<td colSpan="13">
+								<div align="center"><b>Select Amount Distribution Method&nbsp;</b>
+										<input type="text" name="capitalAccountingLine.distributionCode" th:field="*{capitalAccountingLine.distributionCode}" data-attribute-entry="${capitalAccountingLineAttributes.distributionCode}" />
+									</div>
+								</td>
+							</tr>
+						</th:block>
+						<th:block th:if="${!readOnly}">
+							<tr height="40">
+					            <td class="datacell" colSpan="13">
+					            	<div align="center">
+					            		<th:block th:if="${KualiForm.capitalAccountingLine.canCreateAsset}">
+					                		<input type="image" property="methodToCall.createAsset" src="${ConfigProperties.externalizable.images.url}tinybutton-createasset.gif" alt="Create Asset Details" title="Create Asset Details" styleClass="tinybutton"/>
+										</th:block>
+										<input type="image" property="methodToCall.modifyAsset" src="${ConfigProperties.externalizable.images.url}tinybutton-modifyasset.gif" alt="Modify Asset Details" title="Modify Asset Details" styleClass="tinybutton"/>                    		
+					                 </div>
+					            </td>
+							</tr>
+					    	<tr>
+							   <td class="datacell" height="50" colspan="13">
+							       <div align="center">If you wish to delete all capitalization information in order to edit or enter new capitalization accounting lines, click the following button.</div>
+							       <div align="center"><input type="image" property="methodToCall.deleteAccountingLinesForCapitalization" src="${ConfigProperties.externalizable.images.url}tinybutton-delete1.gif" alt="Delete Accounting Lines For Capitalization" title="Delete Accounting Lines For Capitalization" styleClass="tinybutton"/></div>
+							   </td>
+							</tr>
+						</th:block>					
+				   </th:block>
+				</th:block>
+         	</table>	 
+  		</th:block>
+	 </div>	
+</section>
+</div>

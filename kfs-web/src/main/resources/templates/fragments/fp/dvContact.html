@@ -1,0 +1,48 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/dvContact.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Contact Information" data-default-open="true">
+  <h3>Contact Information</h3>
+  	<!--/*/ <th:block th:with="dvAttributes=${DataDictionary.DisbursementVoucherDocument.attributes}"> /*/-->
+    <div class="tab-container" align=center > 
+		<h3>Contact Information</h3>
+		<table class="datatable" summary="Contact Information" cellpadding="0">
+             <tbody>
+               <tr>
+                 <th width="25%"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrContactPersonName}"></label></div></th>
+                 <td width="25%"><input type="text" name="document.disbVchrContactPersonName" th:field="*{document.disbVchrContactPersonName}" data-attribute-entry="${dvAttributes.disbVchrContactPersonName}" /></td>
+               </tr>
+               <tr>
+                 <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrContactPhoneNumber}"></label></div></th>
+                 <td><input type="text" name="document.disbVchrContactPhoneNumber" th:field="*{document.disbVchrContactPhoneNumber}" data-attribute-entry="${dvAttributes.disbVchrContactPhoneNumber}" /></td>
+               </tr>
+               <tr>
+                 <th scope="row"><div align="right"> <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.disbVchrContactEmailId}"></label></div></th>
+                 <td><input type="text" name="document.disbVchrContactEmailId" th:field="*{document.disbVchrContactEmailId}" data-attribute-entry="${dvAttributes.disbVchrContactEmailId}" /></td>
+               </tr>
+               <tr>
+                 <th scope="row"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${dvAttributes.campusCode}"></label></div></th>
+                 <td><input type="text" name="document.campusCode" th:field="*{document.campusCode}" data-attribute-entry="${dvAttributes.campusCode}" readonly="readonly" /></td>
+               </tr>
+             </tbody>
+        </table>
+    </div>
+</section>
+</div>

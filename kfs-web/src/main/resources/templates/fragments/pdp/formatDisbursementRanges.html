@@ -1,0 +1,53 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: pdp/formatDisbursementRanges.tag -->
+<!-- Fragment parameters: disbursementNumberRangeAttributes, bankAttributes -->
+<div th:fragment="content (disbursementNumberRangeAttributes, bankAttributes)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Disbursement Ranges" data-default-open="true">
+  <h3>Disbursement Ranges</h3>
+	<div id="disbursementRanges" class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable"
+			summary="Disbursement Ranges">
+			<tr>
+				<td colspan="4" class="subhead">
+					Your Default Campus Code is <input type="text" name="campus" th:field="*{campus}" data-attribute-entry="${disbursementNumberRangeAttributes.physCampusProcCode}" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${disbursementNumberRangeAttributes.physCampusProcCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bankAttributes.bankName}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${disbursementNumberRangeAttributes.disbursementTypeCode}"></th>					
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${disbursementNumberRangeAttributes.lastAssignedDisbNbr}"></th>
+				
+			</tr>
+			
+			<tr th:each="range : ${KualiForm.ranges}" indexId="ctr">
+              <tr>
+                <td class="${dataCell}"><input type="text" name="range[${ctr}].physCampusProcCode" th:field="*{range[${ctr}].physCampusProcCode}" data-attribute-entry="${disbursementNumberRangeAttributes.physCampusProcCode}" readonly="readonly" /></th>
+                <td class="${dataCell}"><input type="text" name="range[${ctr}].bank.bankName" th:field="*{range[${ctr}].bank.bankName}" data-attribute-entry="${bankAttributes.bankName}" readonly="readonly" /></td>
+                <td class="${dataCell}"><input type="text" name="range[${ctr}].disbursementTypeCode" th:field="*{range[${ctr}].disbursementTypeCode}" data-attribute-entry="${disbursementNumberRangeAttributes.disbursementTypeCode}" readonly="readonly" /></th>
+                <td class="${dataCell}"><input type="text" name="range[${ctr}].lastAssignedDisbNbr" th:field="*{range[${ctr}].lastAssignedDisbNbr}" data-attribute-entry="${disbursementNumberRangeAttributes.lastAssignedDisbNbr}" readonly="readonly" /></td>
+              </tr>
+            </tr>
+
+		</table>
+	</div>
+</section>
+</div>

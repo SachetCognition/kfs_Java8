@@ -1,0 +1,54 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/organizationInfo.tag -->
+<!-- Fragment parameters: defaultTabHide -->
+<div th:fragment="content (defaultTabHide)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+<!--/*/ <th:block th:with="assetOrganizationAttributes=${DataDictionary.AssetOrganization.attributes}"> /*/-->
+<!--/*/ <th:block th:with="assetGlobalDetailAttributes=${DataDictionary.AssetGlobalDetail.attributes}"> /*/-->
+
+	<section class="kfs-tab" data-tab-title="Organization" data-default-open="${!defaultTabHide}">
+  <h3>Organization</h3> 
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">			
+			<tr>
+                <td colspan="4" class="tab-subhead">Organization Information</td>
+			</tr>					
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.organizationInventoryName}"></label></th> 
+				<td class="grid" width="25%"><input type="text" name="document.asset.organizationInventoryName" th:field="*{document.asset.organizationInventoryName}" data-attribute-entry="${assetAttributes.organizationInventoryName}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetGlobalDetailAttributes.representativeUniversalIdentifier}"></label></th> 
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetRepresentative.name" th:field="*{document.asset.assetRepresentative.name}" data-attribute-entry="${assetAttributes.representativeUniversalIdentifier}" readonly="readonly" /></td>
+			</tr>
+
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetOrganizationAttributes.organizationText}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetOrganization.organizationText" th:field="*{document.asset.assetOrganization.organizationText}" data-attribute-entry="${assetOrganizationAttributes.organizationText}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetOrganizationAttributes.organizationTagNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetOrganization.organizationTagNumber" th:field="*{document.asset.assetOrganization.organizationTagNumber}" data-attribute-entry="${assetOrganizationAttributes.organizationTagNumber}" readonly="readonly" /></td>
+			</tr>		
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetGlobalDetailAttributes.organizationAssetTypeIdentifier}"></label></th> 
+				<td class="grid" width="25%"><input type="text" name="document.asset.assetOrganization.organizationAssetTypeIdentifier" th:field="*{document.asset.assetOrganization.organizationAssetTypeIdentifier}" data-attribute-entry="${assetOrganizationAttributes.organizationAssetTypeIdentifier}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right" colspan="2"></th>
+            </tr>
+		</table>
+		</div>
+	</section>
+</div>

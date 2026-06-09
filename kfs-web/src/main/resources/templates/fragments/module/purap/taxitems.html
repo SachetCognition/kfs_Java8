@@ -1,0 +1,103 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/taxitems.tag -->
+<!-- Fragment parameters: overrideTitle, documentAttributes, itemAttributes, accountingLineAttributes, mainColumnCount, colSpanItemType, colSpanExtendedPrice -->
+<div th:fragment="content (overrideTitle, documentAttributes, itemAttributes, accountingLineAttributes, mainColumnCount, colSpanItemType, colSpanExtendedPrice)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${empty overrideTitle}">
+	<!--/*/ <th:block th:with="overrideTitle=Tax Withholding Charges"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="colSpanBlank=${mainColumnCount - (colSpanItemType + colSpanExtendedPrice)}"> /*/-->
+
+<!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+<!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+<!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(overrideTitle)}"> /*/-->
+<!--  hit form method to increment tab index -->
+<!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+<!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+<%-- default to closed --%>
+<th:block th:switch="${true}">
+	<th:block th:case="${empty currentTab}">
+		<!--/*/ <th:block th:with="isOpen=false"> /*/-->
+	</th:block>
+	<th:block th:case="${!empty currentTab}">
+		<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+	</th:block>
+</th:block>
+	
+<tr>
+	<td colspan="${mainColumnCount}" class="subhead">
+		<span class="subhead-left"><span th:text="${overrideTitle}"></span> &nbsp;</span>
+		<th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+			<input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" alt="hide" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle"
+				onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+		</th:block>
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			<input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" alt="show" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle"
+				onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+		</th:block>
+	</td>
+</tr>
+
+<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+	<tbody style="display: none;" id="tab-${tabKey}-div">
+</th:block>
+
+<tr>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemTypeCode}"></th>	
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.extendedPrice}"></th>	
+	<th:block th:if="${colSpanBlank > 0}">
+		<th colspan="${colSpanBlank}">&nbsp;</th>
+	</th:block>
+</tr>
+
+<logic:iterate indexId="ctr" name="KualiForm" property="document.items"	id="itemLine">
+	<%-- to ensure order this should pull out items from APC instead of this--%>
+	<th:block th:if="${itemLine.itemType.isTaxCharge}">
+		<tr>
+			<td colspan="${mainColumnCount}" class="tab-subhead" style="border-right: none;">
+			<input type="text" name="document.item[${ctr}].itemType.itemTypeDescription" th:field="*{document.item[${ctr}].itemType.itemTypeDescription}" data-attribute-entry="${itemAttributes.itemTypeCode}" readonly="readonly" /> 
+		</tr>
+		<tr>
+			<td class="infoline" colspan="${colSpanItemType + 4}">
+			    <div align="right">
+			        <input type="text" name="document.item[${ctr}].itemType.itemTypeDescription" th:field="*{document.item[${ctr}].itemType.itemTypeDescription}" data-attribute-entry="${itemAttributes.itemTypeCode}" readonly="readonly" />:&nbsp;
+			    </div>
+			</td>
+			<td class="infoline" colspan="${colSpanExtendedPrice}">
+				<div align="right">
+					<input type="text" name="document.item[${ctr}].itemUnitPrice" th:field="*{document.item[${ctr}].itemUnitPrice}" data-attribute-entry="${itemAttributes.itemUnitPrice}" readonly="readonly" />
+				</div>
+			</td>
+			<th:block th:if="${colSpanBlank > 0}">					
+			<td colspan="${colSpanBlank}" class="infoline">
+				&nbsp;
+			</td>					
+			</th:block>								
+		</tr>	
+		<th:block th:if="${empty KualiForm.editingMode['allowItemEntry'] || !empty itemLine.itemExtendedPrice}">
+		    <div th:replace="~{fragments/purap/purapGeneralAccounting :: content}" data-account-prefix="document.item[${ctr}]." data-item-col-span="${mainColumnCount}"></div>
+		</th:block>
+	</th:block>
+</tr>
+
+<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+	</tbody>
+</th:block>
+</div>

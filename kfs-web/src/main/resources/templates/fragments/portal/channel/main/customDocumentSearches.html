@@ -1,0 +1,84 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/main/customDocumentSearches.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Custom Document Searches"></div>
+<div class="body">
+	<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Financial Transactions" data-url="${ConfigProperties.workflow.documentsearch.base.url}&documentTypeName=KFST"></div><br /><br />
+	<th:block th:if="${ConfigProperties.module.accounts.receivable.enabled == 'true'}">
+	 	<strong>Accounts Receivable</strong><br/>
+	    <ul class="chan">
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+			<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+		        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+			</th:block>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	    </ul>
+	</th:block>
+	<th:block th:if="${ConfigProperties.module.capital.asset.enabled == 'true'}">
+	    <strong>Capital Asset Management</strong><br/>
+	    <ul class="chan">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+		</ul>
+	</th:block>
+	<th:block th:if="${ConfigProperties['module.contracts.and.grants.enabled'] == 'true'} && 
+		${ConfigProperties['module.external.kuali.coeus.enabled'] == 'false'}">
+		<strong>Contracts & Grants</strong><br/>
+	   	 <ul class="chan">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+		</ul>
+	</th:block>
+	<th:block th:if="${ConfigProperties.module.labor.distribution.enabled == 'true'}">
+	 	<strong>Effort Certification</strong><br/>
+	    <ul class="chan">
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	    </ul>
+	</th:block>    
+	<strong>Financial Processing</strong><br/>
+    <ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Vouchers" data-url="${ConfigProperties.workflow.documentsearch.base.url}&documentTypeName=DV"></div></li>
+	</ul>
+	<th:block th:if="${ConfigProperties.module.purchasing.enabled == 'true'}">
+		<strong>Purchasing/Accounts Payable</strong><br/>
+	    <ul class="chan">
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+	     </ul>
+	</th:block>
+    <th:block th:if="${ConfigProperties.module.travel.enabled == 'true'}">
+	    <strong>Travel</strong><br/>
+        <ul class="chan">
+        	<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Corporate Card Application" data-url="${ConfigProperties.workflow.documentsearch.base.url}&documentTypeName=CCAP&methodToCall=search"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="CTS Card Application" data-url="${ConfigProperties.workflow.documentsearch.base.url}&documentTypeName=CTAP&methodToCall=search"></div></li>
+            <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+            <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>            
+            <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+            <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true"></div></li>
+        </ul>
+    </th:block>
+    </div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

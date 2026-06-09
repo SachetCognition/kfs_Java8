@@ -1,0 +1,102 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/subFundPick.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<table align="center" cellpadding="0" cellspacing="0"
+	class="datatable-100">
+	<tr>
+		<th class="grid" colspan="6" align="left">
+			<br>
+			${KualiForm.operatingModeTitle}
+			<br>
+			<br>
+		</th>
+	</tr>
+
+	<th:block th:if="${empty KualiForm.subFundPickList}">
+		<tr>
+			<th class="grid" colspan="6" align="left">
+				<span th:text="#{${__MSG_KEY__}}"></span>
+			</th>
+		</tr>
+</table>
+
+<div id="globalbuttons" class="globalbuttons">
+	<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif"
+		styleClass="globalbuttons" property="methodToCall.returnToCaller"
+		title="close" alt="close" />
+</div>
+</th:block>
+
+<th:block th:if="${!empty KualiForm.subFundPickList}">
+	<!--/*/ <th:block th:with="subFundAttribute=${DataDictionary.BudgetConstructionSubFundPick.attributes}"> /*/-->
+
+	<tr>
+		<th class="grid">
+			Select
+		</th>
+		<th class="grid">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${subFundAttribute.subFundGroupCode}"></label>
+		</th>
+		<th class="grid">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${subFundAttribute['subFundGroup.subFundGroupDescription']}"></label>
+		</th>
+	</tr>
+
+	<logic:iterate name="KualiForm" id="subFundPick"
+		property="subFundPickList" indexId="ctr">
+		<html-el:hidden name="KualiForm"
+			property="subFundPickList[${ctr}].principalId" />
+		<html-el:hidden name="KualiForm"
+			property="subFundPickList[${ctr}].versionNumber" />
+
+		<tr align="center">
+			<td class="grid" valign="center">
+				<html:checkbox property="subFundPickList[${ctr}].reportFlag"
+					value="1" />
+			</td>
+			<td class="grid" valign="center">
+				<input type="text" name="subFundPickList[${ctr}].subFundGroupCode" th:field="*{subFundPickList[${ctr}].subFundGroupCode}" data-attribute-entry="${subFundAttribute.subFundGroupCode}" readonly="readonly" />
+			</td>
+			<td class="grid" valign="center">
+				<input type="text" name="subFundPickList[${ctr}].subFundGroup.subFundGroupDescription" th:field="*{subFundPickList[${ctr}].subFundGroup.subFundGroupDescription}" data-attribute-entry="${subFundAttribute['subFundGroup.subFundGroupDescription']}" readonly="readonly" />
+			</td>
+		</tr>
+	</tr>
+
+	</table>
+
+	<div id="globalbuttons" class="globalbuttons">
+		<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_selectall.gif"
+			property="methodToCall.selectAllSubFunds" title="Select"
+			alt="Select All Codes" styleClass="smallbutton" />
+		<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_unselall.gif"
+			property="methodToCall.unselectAllSubFunds" title="Unselect"
+			alt="Unselect All Codes" styleClass="smallbutton" />
+		<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_submit.gif"
+			styleClass="globalbuttons" property="methodToCall.performReport"
+			title="Perform Report" alt="submit"
+			onclick="excludeSubmitRestriction=true" />
+		<input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif"
+			styleClass="globalbuttons" property="methodToCall.returnToCaller"
+			title="close" alt="close" />
+	</div>
+
+</th:block>
+</div>

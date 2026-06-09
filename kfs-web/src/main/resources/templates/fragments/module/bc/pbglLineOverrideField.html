@@ -1,0 +1,43 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/pbglLineOverrideField.tag -->
+<!-- Fragment parameters: overrideField, attributes, readOnly, accountingLine, baselineAccountingLine, displayHidden -->
+<div th:fragment="content (overrideField, attributes, readOnly, accountingLine, baselineAccountingLine, displayHidden)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="overrideNeededField=${overrideField}Needed"> /*/-->
+<bean:define id="overrideNeeded" property="${accountingLine}.${overrideNeededField}" name="KualiForm" />
+<bean:define id="override" property="${accountingLine}.${overrideField}" name="KualiForm" />
+<th:block th:switch="${true}">
+    <%-- These "Booleans" are case sensitive.  Why are these attributes being String-ified? --%>
+    <th:block th:case="${readOnly ? override == 'Yes' : overrideNeeded == 'Yes'}">
+        <br/>
+        <span class="nowrap">
+            <span style="font-weight: normal"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes[overrideField]}"></label></span>&nbsp;<input type="text" name="${accountingLine}.${overrideField}" th:field="*{${accountingLine}.${overrideField}}" data-attribute-entry="${attributes[overrideField]}" />
+        </span>
+    </th:block>
+    <th:block th:case="*">
+        <div th:replace="~{fragments/bc/hiddenPbglLineField :: content}" data-accounting-line="${accountingLine}" data-is-baseline="false" data-hidden-field="${overrideField}" data-display-hidden="${displayHidden}" data-value="${!readOnly && overrideNeeded == 'No' ? 'No' : override}"></div>
+    </th:block>
+</th:block>
+<div th:replace="~{fragments/bc/hiddenPbglLineField :: content}" data-accounting-line="${accountingLine}" data-is-baseline="false" data-hidden-field="${overrideNeededField}" data-display-hidden="${displayHidden}"></div>
+<th:block th:if="${!empty baselineAccountingLine}">
+    <%-- Add lines have no baseline. --%>
+    <div th:replace="~{fragments/bc/hiddenPbglLineField :: content}" data-accounting-line="${baselineAccountingLine}" data-is-baseline="true" data-hidden-field="${overrideField}" data-display-hidden="${displayHidden}"></div>
+    <div th:replace="~{fragments/bc/hiddenPbglLineField :: content}" data-accounting-line="${baselineAccountingLine}" data-is-baseline="true" data-hidden-field="${overrideNeededField}" data-display-hidden="${displayHidden}"></div>
+</th:block>
+</div>

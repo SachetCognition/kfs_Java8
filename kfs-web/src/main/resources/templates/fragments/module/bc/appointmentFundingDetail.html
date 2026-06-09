@@ -1,0 +1,134 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/appointmentFundingDetail.tag -->
+<!-- Fragment parameters: fundingLine, fundingLineName, lineIndex, isSetteingByIncumbent, readOnly, hasBeenAdded -->
+<div th:fragment="content (fundingLine, fundingLineName, lineIndex, isSetteingByIncumbent, readOnly, hasBeenAdded)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="reasonAttributes=${DataDictionary['BudgetConstructionAppointmentFundingReason'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="bcsfAttributes=${DataDictionary['BudgetConstructionCalculatedSalaryFoundationTracker'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="pbcafAttributes=${DataDictionary['PendingBudgetConstructionAppointmentFunding'].attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="hourlyPaid=${fundingLine.hourlyPaid}"> /*/-->
+<!--/*/ <th:block th:with="newLine=${fundingLine.newLineIndicator}"> /*/-->
+<!--/*/ <th:block th:with="vacantLine=${fundingLine.emplid eq BCConstants.VACANT_EMPLID}"> /*/-->
+<!--/*/ <th:block th:with="excludedFromTotal=${fundingLine.excludedFromTotal}"> /*/-->
+
+<th:block th:if="${isSetteingByIncumbent}">
+	<!--/*/ <th:block th:with="postionFieldPrefix=${fundingLineName}."> /*/-->
+</th:block>
+
+<table style="border-top: 1px solid rgb(153, 153, 153); width: 90%;" cellpadding="0" cellspacing="0" class="datatable">
+	<tr>
+		<th style="width: 15%;">&nbsp;</th>
+		<th style="width: 25%;">Row Operation</th>
+		<th style="width: 10%;">Amount</th>
+		<th style="width: 5%;">Hourly Rate</th>
+		<th style="width: 5%;">Months</th>
+		<th style="width: 10%;">Percent Time</th>
+		<th style="width: 10%;">FTE</th>
+		<th style="width: 10%;">Reason Select</th>
+		<th style="width: 10%;">Reason Amount</th>
+	</tr>
+	
+	<th:block th:if="${hasBeenAdded && !empty fundingLine.bcnCalculatedSalaryFoundationTracker}">
+	<tr>
+		<th style="text-align: right;">CSF:</th>	
+		
+		<td class="datacell">
+			<th:block th:if="${!readOnly && !excludedFromTotal}">
+				<div th:replace="~{fragments/bc/salaryAdjustment :: content}" data-attributes="${pbcafAttributes}" data-adjustment-measurement-field-name="${fundingLineName}.adjustmentMeasurement" data-adjustment-amount-field-name="${fundingLineName}.adjustmentAmount" data-method-to-call="adjustSalarySettingLinePercent" data-line-index="${lineIndex}"></div>
+			</th:block>&nbsp;
+		</td>		
+		
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-cell-property="${fundingLineName}.bcnCalculatedSalaryFoundationTracker[0].csfAmount" data-attributes="${bcsfAttributes}" data-field="csfAmount" data-field-align="right" data-read-only="true" data-excluded-from-total="${excludedFromTotal}" data-row-span="1" data-data-field-css-class="amount"></div>
+                
+		<td class="datacell">&nbsp;</td>
+		<td class="datacell">&nbsp;</td>
+		
+		<fmt:formatNumber var="formattedCsfTimePercent" value="${fundingLine.bcnCalculatedSalaryFoundationTracker[0].csfTimePercent}" 
+        		type="number" groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/>		
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-cell-property="${fundingLineName}.bcnCalculatedSalaryFoundationTracker[0].csfTimePercent" data-attributes="${bcsfAttributes}" data-field="csfTimePercent" data-field-align="right" data-read-only="true" data-row-span="1" data-data-field-css-class="amount" data-formatted-number-value="${formattedCsfTimePercent}" data-var="formattedCsfFteQuantity" data-value="${fundingLine.bcnCalculatedSalaryFoundationTracker[0].csfFullTimeEmploymentQuantity}" data-type="number" data-grouping-used="true" data-min-fraction-digits="5" data-max-fraction-digits="5"></div>         
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-cell-property="${fundingLineName}.bcnCalculatedSalaryFoundationTracker[0].csfFullTimeEmploymentQuantity" data-attributes="${bcsfAttributes}" data-field="csfFullTimeEmploymentQuantity" data-field-align="right" data-read-only="true" data-row-span="1" data-data-field-css-class="amount" data-formatted-number-value="${formattedCsfFteQuantity}" data-class="datacell" data-class="datacell" data-style="text-align: right;" data-class="datacell" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedAmount" data-field-align="right" data-read-only="${readOnly}" data-excluded-from-total="${excludedFromTotal}" data-row-span="1" data-data-field-css-class="amount"></div>
+                
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedPayRate" data-field-align="right" data-read-only="${readOnly || (!hourlyPaid && hasBeenAdded)}" data-excluded-from-total="${excludedFromTotal}" data-row-span="1" data-data-field-css-class="amount"></div>
+		
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentFundingMonth" data-detail-function="budgetObjectInfoUpdator.recalculateFTE" data-detail-function-extra-param="'${postionFieldPrefix}budgetConstructionPosition.iuPayMonths','${fundingLineName}.appointmentFundingMonth', '${fundingLineName}.appointmentRequestedFteQuantity','${fundingLineName}.appointmentRequestedTimePercent'," data-field-align="right" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+		
+		<fmt:formatNumber var="formattedRequestedTimePercent" value="${fundingLine.appointmentRequestedTimePercent}" 
+        		type="number" groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/>	
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedTimePercent" data-detail-function="budgetObjectInfoUpdator.recalculateFTE" data-detail-function-extra-param="'${postionFieldPrefix}budgetConstructionPosition.iuPayMonths','${fundingLineName}.appointmentFundingMonth', '${fundingLineName}.appointmentRequestedFteQuantity'," data-field-align="right" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount" data-formatted-number-value="${formattedRequestedTimePercent}"></div>
+                
+        <td class="datacell" style="text-align: right;" rowSpan="1">
+        	<fmt:formatNumber var="formattedFteQuantity" value="${fundingLine.appointmentRequestedFteQuantity}" 
+        		type="number" groupingUsed="true" minFractionDigits="5" maxFractionDigits="5"/>	
+        		
+		    <div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="appointmentRequestedFteQuantity" data-accounting-line="${fundingLineName}" data-data-field-css-class="nowrap" data-formatted-number-value="${formattedFteQuantity}"></div>
+		</td>        
+		
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-cell-property="${fundingLineName}.budgetConstructionAppointmentFundingReason[0].appointmentFundingReasonCode" data-attributes="${reasonAttributes}" data-detail-field="budgetConstructionAppointmentFundingReason[0].appointmentFundingReason.appointmentFundingReasonDescription" data-detail-function="budgetObjectInfoUpdator.loadReasonCodeInfo" data-field="appointmentFundingReasonCode" data-field-align="left" data-read-only="${readOnly}" data-row-span="1"></div>
+	
+		<!--/*/ <th:block th:with="disabled=${empty fundingLine.budgetConstructionAppointmentFundingReason[0].appointmentFundingReasonCode}"> /*/-->
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-cell-property="${fundingLineName}.budgetConstructionAppointmentFundingReason[0].appointmentFundingReasonAmount" data-attributes="${reasonAttributes}" data-field="appointmentFundingReasonAmount" data-field-align="right" data-read-only="${readOnly}" data-disabled="${disabled}" data-row-span="1" data-data-field-css-class="amount"></div>
+	</tr>
+	
+	<tr>
+		<th style="text-align: right;">Leave Request CSF:</th>
+			
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-detail-field="budgetConstructionDuration.appointmentDurationDescription" data-detail-function="budgetObjectInfoUpdator.loadDurationInfo" data-field="appointmentFundingDurationCode" data-field-align="left" data-read-only="${readOnly || vacantLine}" data-row-span="1"></div>
+                	                	
+		<!--/*/ <th:block th:with="disabled=${fundingLine.appointmentFundingDurationCode eq BCConstants.AppointmentFundingDurationCodes.NONE.durationCode}"> /*/-->
+		
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedCsfAmount" data-field-align="right" data-excluded-from-total="${excludedFromTotal}" data-read-only="${readOnly || vacantLine}" data-disabled="${disabled}" data-row-span="1" data-data-field-css-class="amount"></div>
+                
+		<td>&nbsp;</td>		
+		<td>&nbsp;</td>
+		
+		<fmt:formatNumber var="formattedReqCsfTimePercent" value="${fundingLine.appointmentRequestedCsfTimePercent}" 
+        		type="number" groupingUsed="true" minFractionDigits="2" maxFractionDigits="2"/> 
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentRequestedCsfTimePercent" data-detail-function="budgetObjectInfoUpdator.recalculateFTE" data-detail-function-extra-param="'${postionFieldPrefix}budgetConstructionPosition.iuPayMonths', '${postionFieldPrefix}budgetConstructionPosition.iuNormalWorkMonths','${fundingLineName}.appointmentRequestedCsfFteQuantity'," data-field-align="right" data-read-only="${readOnly || vacantLine}" data-disabled="${disabled}" data-row-span="1" data-data-field-css-class="amount" data-formatted-number-value="${formattedReqCsfTimePercent}"></div>
+                
+        <td class="datacell" style="text-align: right;" rowSpan="1">
+        	<fmt:formatNumber var="formattedReqCsfFteQuantity" value="${fundingLine.appointmentRequestedCsfFteQuantity}" 
+        		type="number" groupingUsed="true" minFractionDigits="5" maxFractionDigits="5"/>	
+        		
+		    <div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="appointmentRequestedCsfFteQuantity" data-accounting-line="${fundingLineName}" data-data-field-css-class="nowrap" data-formatted-number-value="${formattedReqCsfFteQuantity}"></div>
+		</td>         
+						
+        <td class="datacell">&nbsp;</td>
+        <td class="datacell">&nbsp;</td>        
+	</tr>
+	
+	<tr>
+		<th style="text-align: right;">Total Intended:</th>		
+		<td class="datacell">&nbsp;</td> 
+
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentTotalIntendedAmount" data-field-align="right" data-read-only="${readOnly}" data-excluded-from-total="${excludedFromTotal}" data-row-span="1" data-data-field-css-class="amount"></div>
+                
+		<td>&nbsp;</td>		
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+        
+        <fmt:formatNumber var="formattedIndendedFteQuantity" value="${fundingLine.appointmentTotalIntendedFteQuantity}" 
+        		type="number" groupingUsed="true" minFractionDigits="5" maxFractionDigits="5"/>          
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="appointmentTotalIntendedFteQuantity" data-field-align="right" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount" data-formatted-number-value="${formattedIndendedFteQuantity}"></div>
+		
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+</div>

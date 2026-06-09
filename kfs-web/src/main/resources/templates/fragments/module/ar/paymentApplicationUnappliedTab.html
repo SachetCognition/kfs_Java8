@@ -1,0 +1,59 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/paymentApplicationUnappliedTab.tag -->
+<!-- Fragment parameters: hasRelatedCashControlDocument, readOnly, isCustomerSelected -->
+<div th:fragment="content (hasRelatedCashControlDocument, readOnly, isCustomerSelected)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="unappliedAttributes=${DataDictionary['NonAppliedHolding'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="customerAttributes=${DataDictionary['Customer'].attributes}"> /*/-->
+
+    <section class="kfs-tab" data-tab-title="Unapplied" data-default-open="${hasRelatedCashControlDocument}">
+  <h3>Unapplied</h3>
+        <div class="tab-container" align="center">
+        	<th:block th:switch="${true}">
+            	<th:block th:case="${!hasRelatedCashControlDocument}">
+					No Cash Control Document
+	        	</th:block>
+	        	<th:block th:case="*">
+	        	    <h3>Unapplied</h3>
+            		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+                		<tr>
+                    		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>  
+                    		<td>
+                        		<input type="text" name="nonAppliedHoldingCustomerNumber" th:field="*{nonAppliedHoldingCustomerNumber}" data-attribute-entry="${customerAttributes.customerNumber}" />
+								<th:block th:if="${readOnly ne true}">
+	                        		<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ar.businessobject.Customer" th:replace="~{fragments/kul/lookup :: content}"></span>
+                        		</th:block>
+                    		</td>
+                    		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>  
+                    		<td>
+                    			<html:hidden property="oldNonAppliedHoldingAmount" value="${oldNonAppliedHoldingAmount}" />
+                        		<input type="text" name="nonAppliedHoldingAmount" th:field="*{nonAppliedHoldingAmount}" data-attribute-entry="${unappliedAttributes.financialDocumentLineAmount}" />
+								<th:block th:if="${readOnly ne true}">
+	                        		<input type="image" property="methodToCall.applyAllAmounts"
+	                            		src="${ConfigProperties.externalizable.images.url}tinybutton-apply.gif"
+	                            		alt="Commit Unapplied" title="Commit Unapplied" styleClass="tinybutton" />
+	                    		</th:block>
+                    		</td>
+                		</tr>
+            		</table>
+	        	</th:block>
+        	</th:block>
+        </div>
+    </section>
+</div>

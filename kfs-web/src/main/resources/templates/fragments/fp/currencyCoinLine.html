@@ -1,0 +1,305 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/currencyCoinLine.tag -->
+<!-- Fragment parameters: currencyProperty, coinProperty, confirmedCurrencyProperty, confirmedCoinProperty, readOnly, editingMode, confirmMode, confirmed -->
+<div th:fragment="content (currencyProperty, coinProperty, confirmedCurrencyProperty, confirmedCoinProperty, readOnly, editingMode, confirmMode, confirmed)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!readOnly && !empty editingMode}">
+  <!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+</th:block>
+
+<%-- FIXME FIXED by KFSCNTRB-1793 
+	We should show both the original and confirmed details after CashManagerment confirmation; 	only that neither column would be editable.
+--%>	 
+<!--/*/ <th:block th:with="showConfirm=${confirmMode || confirmed}"> /*/-->
+
+<!--/*/ <th:block th:with="currencyAttributes=${DataDictionary.CurrencyDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="coinAttributes=${DataDictionary.CoinDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+
+      <table border="0" cellspacing="0" cellpadding="0" class="datatable" width="100%">
+        <th:block th:if="${showConfirm}">
+          <tr>
+          	<th>&nbsp;</th>
+          	<th colspan="2">Original</th>
+          	<th colspan="2">Cash Manager</th>
+          	<th>&nbsp;</th>
+			<th colspan="2">Original</th>
+          	<th colspan="2">Cash Manager</th>
+          </tr>
+        </th:block>
+        <tr>
+          <th>&nbsp;</th>
+          <th>Count</th>
+          <th>Amount</th>
+          <th:block th:if="${showConfirm}">
+          	<th>Count</th>
+          	<th>Amount</th>
+          </th:block>
+          <th>&nbsp;</th>
+          <th>Count</th>
+          <th>Amount</th>
+          <th:block th:if="${showConfirm}">
+          	<th>Count</th>
+        	<th>Amount</th>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.hundredDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.hundredDollarCount" th:field="*{${currencyProperty}.hundredDollarCount}" data-attribute-entry="${currencyAttributes.hundredDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentHundredDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentHundredDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.hundredDollarCount" th:field="*{${confirmedCurrencyProperty}.hundredDollarCount}" data-attribute-entry="${currencyAttributes.hundredDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentHundredDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentHundredDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.hundredCentCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${coinProperty}.hundredCentCount" th:field="*{${coinProperty}.hundredCentCount}" data-attribute-entry="${coinAttributes.hundredCentCount}" />
+          </td>
+          <td><span id="${coinProperty}.financialDocumentHundredCentAmount.span">$<span th:text="${KualiForm.${coinProperty}.financialDocumentHundredCentAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCoinProperty}.hundredCentCount" th:field="*{${confirmedCoinProperty}.hundredCentCount}" data-attribute-entry="${coinAttributes.hundredCentCount}" />
+          </td>
+          <td><span id="${confirmedCoinProperty}.financialDocumentHundredCentAmount.span">$<span th:text="${KualiForm.${confirmedCoinProperty}.financialDocumentHundredCentAmount}"></span></span></td>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.fiftyDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.fiftyDollarCount" th:field="*{${currencyProperty}.fiftyDollarCount}" data-attribute-entry="${currencyAttributes.fiftyDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentFiftyDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentFiftyDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.fiftyDollarCount" th:field="*{${confirmedCurrencyProperty}.fiftyDollarCount}" data-attribute-entry="${currencyAttributes.fiftyDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentFiftyDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentFiftyDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.fiftyCentCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${coinProperty}.fiftyCentCount" th:field="*{${coinProperty}.fiftyCentCount}" data-attribute-entry="${coinAttributes.fiftyCentCount}" />
+          </td>
+          <td><span id="${coinProperty}.financialDocumentFiftyCentAmount.span">$<span th:text="${KualiForm.${coinProperty}.financialDocumentFiftyCentAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCoinProperty}.fiftyCentCount" th:field="*{${confirmedCoinProperty}.fiftyCentCount}" data-attribute-entry="${coinAttributes.fiftyCentCount}" />
+          </td>
+          <td><span id="${confirmedCoinProperty}.financialDocumentFiftyCentAmount.span">$<span th:text="${KualiForm.${confirmedCoinProperty}.financialDocumentFiftyCentAmount}"></span></span></td>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.twentyDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.twentyDollarCount" th:field="*{${currencyProperty}.twentyDollarCount}" data-attribute-entry="${currencyAttributes.twentyDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentTwentyDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentTwentyDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.twentyDollarCount" th:field="*{${confirmedCurrencyProperty}.twentyDollarCount}" data-attribute-entry="${currencyAttributes.twentyDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentTwentyDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentTwentyDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.twentyFiveCentCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${coinProperty}.twentyFiveCentCount" th:field="*{${coinProperty}.twentyFiveCentCount}" data-attribute-entry="${coinAttributes.twentyFiveCentCount}" />
+          </td>
+          <td><span id="${coinProperty}.financialDocumentTwentyFiveCentAmount.span">$<span th:text="${KualiForm.${coinProperty}.financialDocumentTwentyFiveCentAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCoinProperty}.twentyFiveCentCount" th:field="*{${confirmedCoinProperty}.twentyFiveCentCount}" data-attribute-entry="${coinAttributes.twentyFiveCentCount}" />
+          </td>
+          <td><span id="${confirmedCoinProperty}.financialDocumentTwentyFiveCentAmount.span">$<span th:text="${KualiForm.${confirmedCoinProperty}.financialDocumentTwentyFiveCentAmount}"></span></span></td>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.tenDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.tenDollarCount" th:field="*{${currencyProperty}.tenDollarCount}" data-attribute-entry="${currencyAttributes.tenDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentTenDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentTenDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.tenDollarCount" th:field="*{${confirmedCurrencyProperty}.tenDollarCount}" data-attribute-entry="${currencyAttributes.tenDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentTenDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentTenDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.tenCentCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${coinProperty}.tenCentCount" th:field="*{${coinProperty}.tenCentCount}" data-attribute-entry="${coinAttributes.tenCentCount}" />
+          </td>
+          <td><span id="${coinProperty}.financialDocumentTenCentAmount.span">$<span th:text="${KualiForm.${coinProperty}.financialDocumentTenCentAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCoinProperty}.tenCentCount" th:field="*{${confirmedCoinProperty}.tenCentCount}" data-attribute-entry="${coinAttributes.tenCentCount}" />
+          </td>
+          <td><span id="${confirmedCoinProperty}.financialDocumentTenCentAmount.span">$<span th:text="${KualiForm.${confirmedCoinProperty}.financialDocumentTenCentAmount}"></span></span></td>
+          </th:block>
+        </tr>
+
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.fiveDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.fiveDollarCount" th:field="*{${currencyProperty}.fiveDollarCount}" data-attribute-entry="${currencyAttributes.fiveDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentFiveDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentFiveDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.fiveDollarCount" th:field="*{${confirmedCurrencyProperty}.fiveDollarCount}" data-attribute-entry="${currencyAttributes.fiveDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentFiveDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentFiveDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.fiveCentCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${coinProperty}.fiveCentCount" th:field="*{${coinProperty}.fiveCentCount}" data-attribute-entry="${coinAttributes.fiveCentCount}" />
+          </td>
+          <td><span id="${coinProperty}.financialDocumentFiveCentAmount.span">$<span th:text="${KualiForm.${coinProperty}.financialDocumentFiveCentAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCoinProperty}.fiveCentCount" th:field="*{${confirmedCoinProperty}.fiveCentCount}" data-attribute-entry="${coinAttributes.fiveCentCount}" />
+          </td>
+          <td><span id="${confirmedCoinProperty}.financialDocumentFiveCentAmount.span">$<span th:text="${KualiForm.${confirmedCoinProperty}.financialDocumentFiveCentAmount}"></span></span></td>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.twoDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.twoDollarCount" th:field="*{${currencyProperty}.twoDollarCount}" data-attribute-entry="${currencyAttributes.twoDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentTwoDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentTwoDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.twoDollarCount" th:field="*{${confirmedCurrencyProperty}.twoDollarCount}" data-attribute-entry="${currencyAttributes.twoDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentTwoDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentTwoDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.oneCentCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${coinProperty}.oneCentCount" th:field="*{${coinProperty}.oneCentCount}" data-attribute-entry="${coinAttributes.oneCentCount}" />
+          </td>
+          <td><span id="${coinProperty}.financialDocumentOneCentAmount.span">$<span th:text="${KualiForm.${coinProperty}.financialDocumentOneCentAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCoinProperty}.oneCentCount" th:field="*{${confirmedCoinProperty}.oneCentCount}" data-attribute-entry="${coinAttributes.oneCentCount}" />
+          </td>
+          <td><span id="${confirmedCoinProperty}.financialDocumentOneCentAmount.span">$<span th:text="${KualiForm.${confirmedCoinProperty}.financialDocumentOneCentAmount}"></span></span></td>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.oneDollarCount}"></label>
+          </td>
+          <td>
+            <input type="text" name="${currencyProperty}.oneDollarCount" th:field="*{${currencyProperty}.oneDollarCount}" data-attribute-entry="${currencyAttributes.oneDollarCount}" />
+          </td>
+          <td><span id="${currencyProperty}.financialDocumentOneDollarAmount.span">$<span th:text="${KualiForm.${currencyProperty}.financialDocumentOneDollarAmount}"></span></span></td>
+          <th:block th:if="${showConfirm}">
+          <td>
+            <input type="text" name="${confirmedCurrencyProperty}.oneDollarCount" th:field="*{${confirmedCurrencyProperty}.oneDollarCount}" data-attribute-entry="${currencyAttributes.oneDollarCount}" />
+          </td>
+          <td><span id="${confirmedCurrencyProperty}.financialDocumentOneDollarAmount.span">$<span th:text="${KualiForm.${confirmedCurrencyProperty}.financialDocumentOneDollarAmount}"></span></span></td>
+          </th:block>
+          
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${coinAttributes.financialDocumentOtherCentAmount}"></label>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            $<input type="text" name="${coinProperty}.financialDocumentOtherCentAmount" th:field="*{${coinProperty}.financialDocumentOtherCentAmount}" data-attribute-entry="${coinAttributes.financialDocumentOtherCentAmount}" />
+          </td>
+          <th:block th:if="${showConfirm}">
+          <td>&nbsp;</td>
+          <td>
+            $<input type="text" name="${confirmedCoinProperty}.financialDocumentOtherCentAmount" th:field="*{${confirmedCoinProperty}.financialDocumentOtherCentAmount}" data-attribute-entry="${coinAttributes.financialDocumentOtherCentAmount}" />
+          </td>
+          </th:block>
+        </tr>
+        
+        <tr>
+          <td>
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${currencyAttributes.financialDocumentOtherDollarAmount}"></label>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            $<input type="text" name="${currencyProperty}.financialDocumentOtherDollarAmount" th:field="*{${currencyProperty}.financialDocumentOtherDollarAmount}" data-attribute-entry="${currencyAttributes.financialDocumentOtherDollarAmount}" />
+          </td>
+          <th:block th:if="${showConfirm}">
+          <td>&nbsp;</td>
+          <td>
+            $<input type="text" name="${confirmedCurrencyProperty}.financialDocumentOtherDollarAmount" th:field="*{${confirmedCurrencyProperty}.financialDocumentOtherDollarAmount}" data-attribute-entry="${currencyAttributes.financialDocumentOtherDollarAmount}" />
+          </td>
+          </th:block>
+          <td colspan="5">&nbsp;</td>
+        </tr>
+        
+        <tr>
+          <td class="total-line" colspan="2">&nbsp;</td>
+          <td class="total-line"><strong>Total: <span th:text="${KualiForm.${currencyProperty}.totalAmount}"></span></strong></td>
+          <th:block th:if="${showConfirm}">
+          <td class="total-line" colspan="1">&nbsp;</td>
+          <td class="total-line"><strong>Total: <span th:text="${KualiForm.${confirmedCurrencyProperty}.totalAmount}"></span></strong></td>
+          </th:block>
+          <td class="total-line" colspan="2">&nbsp;</td>
+          <td class="total-line"><strong>Total: <span th:text="${KualiForm.${coinProperty}.totalAmount}"></span></strong></td>
+          <th:block th:if="${showConfirm}">
+          <td class="total-line" colspan="1">&nbsp;</td>
+          <td class="total-line"><strong>Total: <span th:text="${KualiForm.${confirmedCoinProperty}.totalAmount}"></span></strong></td>
+          </th:block>
+        </tr>
+      </table>
+</div>

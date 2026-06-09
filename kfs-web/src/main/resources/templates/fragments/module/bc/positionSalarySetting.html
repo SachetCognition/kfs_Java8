@@ -1,0 +1,135 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/positionSalarySetting.tag -->
+<!-- Fragment parameters: readOnly, accountsCanCrossCharts -->
+<div th:fragment="content (readOnly, accountsCanCrossCharts)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="tableWidth=100%"> /*/-->
+<!--/*/ <th:block th:with="isKeyFieldsLocked=${KualiForm.singleAccountMode}"> /*/-->
+
+<input type="hidden" th:field="*{budgetByAccountMode}" />
+
+<section class="kfs-tab" data-tab-title="Position" data-default-open="true">
+  <h3>Position</h3>
+	<div class="tab-container" align=center>
+		<div th:replace="~{fragments/bc/positionInfo :: content}"></div>
+	</div>
+</section>
+
+<!--/*/ <th:block th:with="budgetConstructionPosition=${KualiForm.budgetConstructionPosition}"> /*/-->
+    
+<section class="kfs-tab" data-tab-title="Position Funding" data-default-open="true">
+  <h3>Position Funding</h3>
+<div class="tab-container" align="center">
+	<th:block th:if="${not readOnly && budgetConstructionPosition.effective && budgetConstructionPosition.budgetedPosition}">   
+		<kul:subtab lookedUpCollectionName="fundingLine" width="${tableWidth}" subTabTitle="Add Funding">      
+			<div th:replace="~{fragments/bc/appointmentFundingLineForPosition :: content}" data-funding-line="${KualiForm.newBCAFLine}" data-funding-line-name="newBCAFLine" data-has-been-added="false" data-is-key-fields-locked="${isKeyFieldsLocked}" data-count-of-major-columns="9" data-accounts-can-cross-charts="${accountsCanCrossCharts}" data-type="image" data-property="methodToCall.addAppointmentFundingLine.anchorsalarynewLineLineAnchor" data-src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" data-title="Add a Salary Setting Line" data-alt="Add a Salary Setting Line" data-style-class="tinybutton"></div>
+			</div><!-- /bc:appointmentFundingLineForPosition -->
+		</div><!-- /kul:subtab -->
+	</th:block>
+        		
+    <c:forEach items="${KualiForm.budgetConstructionPosition.pendingBudgetConstructionAppointmentFunding}" var="fundingLine" varStatus="status">
+    <th:block th:if="${!fundingLine.purged}">	 
+    	<!--/*/ <th:block th:with="fundingLineName=budgetConstructionPosition.pendingBudgetConstructionAppointmentFunding[${status.index}]"> /*/-->
+    	<!--/*/ <th:block th:with="editable=${!readOnly && !fundingLine.displayOnlyMode}"> /*/-->
+		<!--/*/ <th:block th:with="isVacant=${fundingLine.emplid eq BCConstants.VACANT_EMPLID}"> /*/-->
+		<!--/*/ <th:block th:with="isNewLine=${fundingLine.newLineIndicator}"> /*/-->
+		<!--/*/ <th:block th:with="hasBeenDeleted=${fundingLine.appointmentFundingDeleteIndicator}"> /*/-->
+		<!--/*/ <th:block th:with="markedAsDelete=${!fundingLine.persistedDeleteIndicator && fundingLine.appointmentFundingDeleteIndicator}"> /*/-->
+		<!--/*/ <th:block th:with="hidePercentAdjustment=${fundingLine.appointmentFundingDeleteIndicator || KualiForm.hideAdjustmentMeasurement || readOnly || empty fundingLine.bcnCalculatedSalaryFoundationTracker}"> /*/-->
+		
+		<!--/*/ <th:block th:with="canPurge=${editable && !fundingLine.purged && empty fundingLine.bcnCalculatedSalaryFoundationTracker}"> /*/-->
+		<!--/*/ <th:block th:with="canUnpurge=${editable && fundingLine.purged}"> /*/-->
+		
+		<!--/*/ <th:block th:with="canDelete=${editable && !hasBeenDeleted && not isNewLine}"> /*/-->
+		<!--/*/ <th:block th:with="canUndelete=${editable && hasBeenDeleted}"> /*/--> 
+		
+		<!--/*/ <th:block th:with="canVacate=${editable && fundingLine.vacatable}"> /*/-->
+		<!--/*/ <th:block th:with="canRevert=${editable && markedAsDelete && not isVacant && not isNewLine && not fundingLine.vacatable}"> /*/-->
+		
+		<!--/*/ <th:block th:with="canRecalculate=${editable && !hasBeenDeleted && fundingLine.positionChangeIndicator}"> /*/-->
+			    
+	    <kul:subtab lookedUpCollectionName="fundingLine" width="${tableWidth}" subTabTitle="${fundingLine.appointmentFundingString}" >
+	    	<div th:replace="~{fragments/bc/appointmentFundingLineForPosition :: content}" data-funding-line="${fundingLine}" data-funding-line-name="${fundingLineName}" data-count-of-major-columns="9" data-line-index="${status.index}" data-read-only="${readOnly}" data-accounts-can-cross-charts="${accountsCanCrossCharts}" data-if="${canRecalculate}" data-type="image" data-property="methodToCall.recalculateSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" data-src="${ConfigProperties.externalizable.images.url}tinybutton-calculate.gif" data-title="Recalulate Salary Setting Line ${status.index}" data-alt="Recalulate Salary Setting Line ${status.index}" data-style-class="tinybutton"></div>
+				</th:block>
+	    		<th:block th:if="${canVacate}">
+					<input type="image" property="methodToCall.vacateSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-vacate.gif" 
+						title="Vacate Salary Setting Line ${status.index}"
+						alt="Vacate Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+				<th:block th:if="${canRevert}">	
+					<input type="image" property="methodToCall.revertSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-revert1.gif" 
+						title="revert Salary Setting Line ${status.index}"
+						alt="revert Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>				
+				
+				<th:block th:if="${canPurge}">	
+					<input type="image" property="methodToCall.purgeSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-purge.gif" 
+						title="Purge Salary Setting Line ${status.index}"
+						alt="Purge Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+				
+				<th:block th:if="${canDelete}">	
+					<input type="image" property="methodToCall.deleteSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-delete1.gif" 
+						title="Delete Salary Setting Line ${status.index}"
+						alt="Delete Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+				
+				<th:block th:if="${canUndelete}">	
+					<input type="image" property="methodToCall.undeleteSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-undelete.gif" 
+						title="undelete Salary Setting Line ${status.index}"
+						alt="undelete Salary Setting Line ${status.index}" styleClass="tinybutton" />
+				</th:block>
+			</div><!-- /bc:appointmentFundingLineForPosition -->	
+		</div><!-- /kul:subtab -->
+	</th:block>
+	</tr>
+        
+    <kul:subtab lookedUpCollectionName="fundingLine" width="${tableWidth}" subTabTitle="Totals" > 
+    	<table border="0" cellpadding="0" cellspacing="0" style="width: ${tableWidth};" class="datatable">    
+			<tr><td class="infoline"><center><br/>
+				<div th:replace="~{fragments/bc/appointmentFundingTotal :: content}" data-pcaf-aware="${KualiForm.budgetConstructionPosition}"></div>
+			<br/></center></td><tr>
+		</table>
+	</div><!-- /kul:subtab -->
+</div>
+</section>
+
+<th:block th:if="${!readOnly}">
+	<section class="kfs-tab" data-tab-title="Purged Appointment Funding" data-default-open="false">
+  <h3>Purged Appointment Funding</h3>
+	<div class="tab-container" align="center">        		
+	    <c:forEach items="${KualiForm.budgetConstructionPosition.pendingBudgetConstructionAppointmentFunding}" var="fundingLine" varStatus="status">
+		<th:block th:if="${fundingLine.purged}">	 
+			<!--/*/ <th:block th:with="fundingLineName=budgetConstructionPosition.pendingBudgetConstructionAppointmentFunding[${status.index}]"> /*/-->
+			         	
+		    <kul:subtab lookedUpCollectionName="fundingLine" width="${tableWidth}" subTabTitle="${fundingLine.appointmentFundingString}">
+		    	<div th:replace="~{fragments/bc/appointmentFundingLineForPosition :: content}" data-funding-line="${fundingLine}" data-funding-line-name="${fundingLineName}" data-count-of-major-columns="9" data-line-index="${status.index}" data-read-only="true" data-type="image" data-property="methodToCall.restorePurgedSalarySettingLine.line${status.index}.anchorsalaryexistingLineLineAnchor${status.index}" data-src="${ConfigProperties.externalizable.images.url}tinybutton-restore.gif" data-title="Restore the Purged Salary Setting Line ${status.index}" data-alt="Restore the Purged Salary Setting Line ${status.index}" data-style-class="tinybutton"></div>
+				</div><!-- /bc:appointmentFundingLineForPosition -->	
+			</div><!-- /kul:subtab -->
+		</th:block>
+		</tr>
+	</div>
+	</section>
+</th:block>
+</div>

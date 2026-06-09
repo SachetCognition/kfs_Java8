@@ -1,0 +1,132 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/capitalAsset.tag -->
+<!-- Fragment parameters: documentAttributes, displayRequisitionFields, displayPurchaseOrderFields -->
+<div th:fragment="content (documentAttributes, displayRequisitionFields, displayPurchaseOrderFields)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="systemSelected=${KualiForm.document.capitalAssetSystemTypeCode}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Capital Asset" data-default-open="false">
+  <h3>Capital Asset</h3>
+    <div class="tab-container" align=center>
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Choose System Type Section">
+        	<tr>
+                <td colspan="2" class="subhead">System Type Choice</td>
+            </tr>
+         	<tr>
+        		<th colspan="2" align=left valign=middle class="bord-l-b">
+        			<div align="left" class="annotate">
+        				<span th:text="${PurapConstants.CapitalAssetTabStrings.SYSTEM_DEFINITION}"></span>
+        			</div>
+        		</td>
+			</tr>
+			<tr>
+	        	<th:block th:switch="${true}">
+	        		<th:block th:case="${systemSelected eq PurapConstants.CapitalAssetTabStrings.INDIVIDUAL_ASSETS}">
+	        			<th align=right valign=middle class="bord-l-b" width="50%">
+	        				<span th:text="${PurapConstants.CapitalAssetTabStrings.INDIVIDUAL_ASSETS_DESC}"></span>
+	        			</th>
+	        			<td align=left valign=middle class="datacell" width="50%">
+	        				(selected)
+	        			</td>
+	        		</th:block>
+	        		<th:block th:case="*">
+			    		<th style="font-weight:normal" align="right" valign="middle" width="50%">
+	        					<span th:text="${PurapConstants.CapitalAssetTabStrings.INDIVIDUAL_ASSETS_DESC}"></span>
+	        			</th>
+	        			<td align=left valign=middle class="datacell" width="50%">
+	        				<input type="image" property="methodToCall.selectSystemType.${PurapConstants.CapitalAssetTabStrings.INDIVIDUAL_ASSETS}" src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif" alt="Select Individual Assets" title="Select Individual Assets" styleClass="tinybutton" />
+	        			</td>
+	        		</th:block>
+	        	</th:block>
+			</tr>
+			<tr>
+				<th:block th:switch="${true}">
+					<th:block th:case="${systemSelected eq PurapConstants.CapitalAssetTabStrings.ONE_SYSTEM}">
+						<th align=right valign=middle class="bord-l-b" width="50%">
+			        		<span th:text="${PurapConstants.CapitalAssetTabStrings.ONE_SYSTEM_DESC}"></span>
+			    		</th>
+			    		<td align=left valign=middle class="datacell" width="50%">
+			    			(selected)
+			    		</td>
+			    	</th:block>
+			    	<th:block th:case="*">
+			    		<th style="font-weight:normal" align="right" valign="middle" width="50%">
+	        					<span th:text="${PurapConstants.CapitalAssetTabStrings.ONE_SYSTEM_DESC}"></span>
+	        			</th>
+	        			<td align=left valign=middle class="datacell" width="50%">
+	        				<input type="image" property="methodToCall.selectSystemType.${PurapConstants.CapitalAssetTabStrings.ONE_SYSTEM}" src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif" alt="Select One System" title="Select One System" styleClass="tinybutton"/>
+	        			</td>
+			    	</th:block>
+			    </th:block>
+
+			</tr>
+			<tr>
+				<th:block th:switch="${true}">
+					<th:block th:case="${systemSelected eq PurapConstants.CapitalAssetTabStrings.MULTIPLE_SYSTEMS}">
+						<th align=right valign=middle class="bord-l-b" width="50%">	        			
+			        		<span th:text="${PurapConstants.CapitalAssetTabStrings.MULTIPLE_SYSTEMS_DESC}"></span>
+			    		</th>
+			    		<td align=left valign=middle class="datacell" width="50%">
+			    			(selected)
+			    		</td>
+			    	</th:block>
+			    	<th:block th:case="*">
+			    		<th style="font-weight:normal" align="right" valign="middle" width="50%">
+	        				<span th:text="${PurapConstants.CapitalAssetTabStrings.MULTIPLE_SYSTEMS_DESC}"></span>
+	        			</th>
+	        			<td align=left valign=middle class="datacell" width="50%">
+	        				<input type="image" property="methodToCall.selectSystemType.${PurapConstants.CapitalAssetTabStrings.MULTIPLE_SYSTEMS}" src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif" alt="Select Multiple Systems" title="Select Multiple Systems" styleClass="tinybutton"/>
+	        			</td>
+			    	</th:block>
+			    </th:block>
+			</tr>
+			<tr>
+                <td colspan="2" class="subhead">Asset Information</td>
+            </tr>
+            <tr>
+            	<th:block th:switch="${true}">           		
+            		<th:block th:case="${systemSelected eq PurapConstants.CapitalAssetTabStrings.INDIVIDUAL_ASSETS}">
+            			<tr>
+            				<th colspan="2" align=center valign=middle class="bord-l-b">
+            					<span th:text="${PurapConstants.CapitalAssetTabStrings.ASSET_DATA}"></span>
+            				</th>
+            			</tr>
+            		</th:block>
+            		<th:block th:case="*">
+            			<tr>       
+			            	<th align=right valign=middle class="bord-l-b">
+			            		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.systemDescription}"></label></div>
+			            	</th>
+			            	<td align=left valign=middle class="datacell">
+			            		<input type="text" name="document.systemDescription" th:field="*{document.systemDescription}" data-attribute-entry="${documentAttributes.systemDescription}" />
+			            	</td>			            
+            				<th:block th:if="${systemSelected eq PurapConstants.CapitalAssetTabStrings.ONE_SYSTEM}">
+								<td>
+	            					<!-- Here is where the hook to the Blue Box goes. -->
+	            				</td>
+	            			</th:block>
+	            		</tr>			            			
+            		</th:block>
+            	</th:block>
+            </tr>      
+      	</table>   
+	</div>
+</section>
+</div>

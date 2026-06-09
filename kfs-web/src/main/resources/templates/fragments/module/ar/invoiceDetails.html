@@ -1,0 +1,96 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/invoiceDetails.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber}">
+	<section class="kfs-tab" data-tab-title="Invoice Details" data-default-open="true">
+  <h3>Invoice Details</h3>
+		<!--/*/ <th:block th:with="contractsGrantsInvoiceDetailAttributes=${DataDictionary.ContractsGrantsInvoiceDetail.attributes}"> /*/-->
+
+		<div class="tab-container" align="center">
+			<h3>Invoice Details</h3>
+			<table cellpadding=0 class="datatable" summary="Invoice Details section">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes['costCategory.categoryName']}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalBudget}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.invoiceAmount}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.cumulativeExpenditures}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.budgetRemaining}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalPreviouslyBilled}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalAmountBilledToDate}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.amountRemainingToBill}"></th>
+				</tr>
+				<th:block th:if="${!empty KualiForm.document.invoiceDetails}">
+					<!-- If the categories are not retrieved, then its better not to display the total fields in this section. -->
+					<logic:iterate indexId="ctr" name="KualiForm" property="document.invoiceDetails" id="invoiceDetail">
+						<tr>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].costCategory.categoryName" th:field="*{document.invoiceDetails[${ctr}].costCategory.categoryName}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes['costCategory.categoryName']}" readonly="readonly" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].totalBudget" th:field="*{document.invoiceDetails[${ctr}].totalBudget}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalBudget}" readonly="readonly" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].invoiceAmount" th:field="*{document.invoiceDetails[${ctr}].invoiceAmount}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.invoiceAmount}" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].cumulativeExpenditures" th:field="*{document.invoiceDetails[${ctr}].cumulativeExpenditures}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.cumulativeExpenditures}" readonly="readonly" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].budgetRemaining" th:field="*{document.invoiceDetails[${ctr}].budgetRemaining}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.budgetRemaining}" readonly="readonly" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].totalPreviouslyBilled" th:field="*{document.invoiceDetails[${ctr}].totalPreviouslyBilled}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalPreviouslyBilled}" readonly="readonly" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].totalAmountBilledToDate" th:field="*{document.invoiceDetails[${ctr}].totalAmountBilledToDate}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalAmountBilledToDate}" readonly="readonly" /></td>
+							<td class="datacell"><input type="text" name="document.invoiceDetails[${ctr}].amountRemainingToBill" th:field="*{document.invoiceDetails[${ctr}].amountRemainingToBill}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.amountRemainingToBill}" readonly="readonly" /></td>
+						</tr>
+					</tr>
+					<tr>
+						<td class="datacell"><b> <span th:text="#{${__MSG_KEY__}}"></span>
+						</b></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.totalBudget" th:field="*{document.totalDirectCostInvoiceDetail.totalBudget}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalBudget}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.invoiceAmount" th:field="*{document.totalDirectCostInvoiceDetail.invoiceAmount}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.invoiceAmount}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.cumulativeExpenditures" th:field="*{document.totalDirectCostInvoiceDetail.cumulativeExpenditures}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.cumulativeExpenditures}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.budgetRemaining" th:field="*{document.totalDirectCostInvoiceDetail.budgetRemaining}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.budgetRemaining}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.totalPreviouslyBilled" th:field="*{document.totalDirectCostInvoiceDetail.totalPreviouslyBilled}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalPreviouslyBilled}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.totalAmountBilledToDate" th:field="*{document.totalDirectCostInvoiceDetail.totalAmountBilledToDate}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalAmountBilledToDate}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalDirectCostInvoiceDetail.amountRemainingToBill" th:field="*{document.totalDirectCostInvoiceDetail.amountRemainingToBill}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.amountRemainingToBill}" readonly="readonly" /></td>
+					</tr>
+
+					<tr>
+						<td class="datacell"><b> <span th:text="#{${__MSG_KEY__}}"></span>
+						</b></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.totalBudget" th:field="*{document.totalIndirectCostInvoiceDetail.totalBudget}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalBudget}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.invoiceAmount" th:field="*{document.totalIndirectCostInvoiceDetail.invoiceAmount}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.invoiceAmount}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.cumulativeExpenditures" th:field="*{document.totalIndirectCostInvoiceDetail.cumulativeExpenditures}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.cumulativeExpenditures}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.budgetRemaining" th:field="*{document.totalIndirectCostInvoiceDetail.budgetRemaining}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.budgetRemaining}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.totalPreviouslyBilled" th:field="*{document.totalIndirectCostInvoiceDetail.totalPreviouslyBilled}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalPreviouslyBilled}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.totalAmountBilledToDate" th:field="*{document.totalIndirectCostInvoiceDetail.totalAmountBilledToDate}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalAmountBilledToDate}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalIndirectCostInvoiceDetail.amountRemainingToBill" th:field="*{document.totalIndirectCostInvoiceDetail.amountRemainingToBill}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.amountRemainingToBill}" readonly="readonly" /></td>
+					</tr>
+
+					<tr>
+						<td class="datacell"><b> <span th:text="#{${__MSG_KEY__}}"></span>
+						</b></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.totalBudget" th:field="*{document.totalCostInvoiceDetail.totalBudget}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalBudget}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.invoiceAmount" th:field="*{document.totalCostInvoiceDetail.invoiceAmount}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.invoiceAmount}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.cumulativeExpenditures" th:field="*{document.totalCostInvoiceDetail.cumulativeExpenditures}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.cumulativeExpenditures}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.budgetRemaining" th:field="*{document.totalCostInvoiceDetail.budgetRemaining}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.budgetRemaining}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.totalPreviouslyBilled" th:field="*{document.totalCostInvoiceDetail.totalPreviouslyBilled}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalPreviouslyBilled}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.totalAmountBilledToDate" th:field="*{document.totalCostInvoiceDetail.totalAmountBilledToDate}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.totalAmountBilledToDate}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.totalCostInvoiceDetail.amountRemainingToBill" th:field="*{document.totalCostInvoiceDetail.amountRemainingToBill}" data-attribute-entry="${contractsGrantsInvoiceDetailAttributes.amountRemainingToBill}" readonly="readonly" /></td>
+					</tr>
+
+
+				</th:block>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

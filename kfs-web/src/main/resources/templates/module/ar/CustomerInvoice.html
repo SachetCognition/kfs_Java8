@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/ar/CustomerInvoice.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/ar/CustomerInvoice</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="orgAttributes=${DataDictionary.Organization.attributes}"> /*/-->
+	
+<div class="kfs-page" data-header-title="Customer Invoice Generation" data-doc-title="Customer Invoice Generation">
+  <form action="arCustomerInvoice.do" method="post">
+	
+	
+	
+	
+	
+	 <table cellpadding="0" cellspacing="0" class="datatable-80" summary="Invoice Section">
+            
+			<tr>		
+                <th align=right valign=middle class="grid" style="width: 25%;">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${orgAttributes.chartOfAccountsCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="grid" style="width: 25%;">
+					<input type="text" name="chartCode" th:field="*{chartCode}" data-attribute-entry="${orgAttributes.chartOfAccountsCode}" />	
+                    <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" th:replace="~{fragments/kul/lookup :: content}"></span>
+                </td>
+				                       
+            </tr>
+            <tr>
+				<th align=right valign=middle class="grid">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${orgAttributes.organizationCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="grid">
+                    <input type="text" name="orgCode" th:field="*{orgCode}" data-attribute-entry="${orgAttributes.organizationCode}" />
+                    <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" th:replace="~{fragments/kul/lookup :: content}"></span>
+                </td>                
+				            
+            </tr>
+            
+             <tr>
+                <th align=right valign=middle class="grid">
+                    <div align="right">User Id:</div>
+                </th>
+                <td align=left valign=middle class="grid">
+                <html-el:text property="userId"/>
+            	</td>
+            </tr>
+             <tr>
+				<th align=right valign=middle class="grid">
+                    <div align="right">Print invoices for date:</div>
+                </th>
+                <td align=left valign=middle class="grid">
+                    <kul:dateInput attributeEntry="${orgAttributes.organizationBeginDate}" property="runDate"/>
+                </td>                
+				            
+            </tr>
+            <tr>
+           		<th align=right valign=middle class="grid">
+                    <div align="right">Org Type:</div>
+                </th>
+            	<td align=left valign=middle class="grid">
+                    <html-el:radio property="orgType" value="P"/>Processing
+                    <html-el:radio property="orgType" value="B"/>Billing
+                </td>
+            </tr>
+            
+          
+            
+           
+<%--            <tr>--%>
+<%--        <th:block th:switch="${true}">--%>
+<%--            <th:block th:case="${!CustomerStatementForm.operationSelected}">--%>
+<%--         <th>--%>
+<%--            <html-el:image property="methodToCall.selectOperation" styleClass="tinybutton" src="${ConfigProperties.externalizable.images.url}tinybutton-generate.gif" />--%>
+<%--           </th>--%>
+<%--      --%>
+<%--        </th:block>--%>
+<%--        </th:block>--%>
+<%--        --%>
+<%--        <tr>--%>
+<%--        <th>--%>
+<%--           <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" styleClass="tinybutton" property="methodToCall.cancel" title="cancel" alt="cancel"/>--%>
+<%--            <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_clear.gif" styleClass="tinybutton" property="methodToCall.clear" title="clear" alt="clear"/>--%>
+<%--           </th>--%>
+<%--        </tr>--%>
+<%--        --%>
+<%--        </tr>--%>
+        </table>
+     
+
+    <!--/*/ <th:block th:with="extraButtons=${KualiForm.extraButtons}"> /*/-->  	
+  	
+	
+     <div id="globalbuttons" class="globalbuttons">
+	        	
+	        	<th:block th:if="${!empty extraButtons}">
+		        	<c:forEach items="${extraButtons}" var="extraButton">
+		        		<input type="image" src="${extraButton.extraButtonSource}" styleClass="globalbuttons" property="${extraButton.extraButtonProperty}" title="${extraButton.extraButtonAltText}" alt="${extraButton.extraButtonAltText}"/>
+		        	</tr>
+	        	</th:block>
+	</div>
+	
+	<div>
+	  <th:block th:if="${!empty KualiForm.message }">
+ 			${KualiForm.message }	
+      </th:block>
+   </div>
+	
+  </form>
+</div>
+</body>
+</html>

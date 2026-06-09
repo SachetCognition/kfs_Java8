@@ -1,0 +1,106 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerInvoiceRecurrenceDetails.tag -->
+<!-- Fragment parameters: documentAttributes, readOnly -->
+<div th:fragment="content (documentAttributes, readOnly)" xmlns:th="http://www.thymeleaf.org">
+<script type='text/javascript' src="dwr/interface/CustomerService.js"></script>
+<script language="JavaScript" type="text/javascript" src="scripts/module/ar/customerObjectInfo.js"></script>
+
+<!--/*/ <th:block th:with="customerInvoiceRecurrenceAttributes=${DataDictionary.CustomerInvoiceRecurrenceDetails.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Recurrence Details" data-default-open="true">
+  <h3>Recurrence Details</h3>
+    <div class="tab-container" align=center>	
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Invoice Section">
+            <tr>
+                <td colspan="4" class="subhead">Recurrence Details</td>
+            </tr>
+			<tr>
+                <th align=right valign=middle class="bord-l-b" style="width: 25%;"> 
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentRecurrenceIntervalCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+                    <input type="text" name="document.customerInvoiceRecurrenceDetails.documentRecurrenceIntervalCode" th:field="*{document.customerInvoiceRecurrenceDetails.documentRecurrenceIntervalCode}" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentRecurrenceIntervalCode}" />
+                </td>          
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentTotalRecurrenceNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+                    <input type="text" name="document.customerInvoiceRecurrenceDetails.documentTotalRecurrenceNumber" th:field="*{document.customerInvoiceRecurrenceDetails.documentTotalRecurrenceNumber}" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentTotalRecurrenceNumber}" />
+                </td>			
+            </tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentRecurrenceBeginDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+     		       	<th:block th:switch="${true}">
+			            <th:block th:case="${readOnly}">
+			                <input type="text" name="document.customerInvoiceRecurrenceDetails.documentRecurrenceBeginDate" th:field="*{document.customerInvoiceRecurrenceDetails.documentRecurrenceBeginDate}" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentRecurrenceBeginDate}" />
+			            </th:block>
+                        <th:block th:case="*">
+		                    <kul:dateInput attributeEntry="${customerInvoiceRecurrenceAttributes.documentRecurrenceBeginDate}"
+                       			property="document.customerInvoiceRecurrenceDetails.documentRecurrenceBeginDate" tabindexOverride="${tabindexOverrideBase} + 15" />
+			            </th:block>
+					</th:block>
+                </td>			          
+            </tr>    
+			<tr>
+				<th align=right valign=middle class="bord-l-b" style="width: 25%;">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentRecurrenceEndDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+     		       	<th:block th:switch="${true}">
+			            <th:block th:case="${readOnly}">
+			                <input type="text" name="document.customerInvoiceRecurrenceDetails.documentRecurrenceEndDate" th:field="*{document.customerInvoiceRecurrenceDetails.documentRecurrenceEndDate}" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentRecurrenceEndDate}" />
+			            </th:block>
+                        <th:block th:case="*">
+		                    <kul:dateInput attributeEntry="${customerInvoiceRecurrenceAttributes.documentRecurrenceEndDate}"
+                       			property="document.customerInvoiceRecurrenceDetails.documentRecurrenceEndDate" tabindexOverride="${tabindexOverrideBase} + 25" />
+			            </th:block>
+					</th:block>
+                </td>			
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceRecurrenceAttributes.documentInitiatorUserIdentifier}"></label></th>
+				<td class="grid" width="25%">
+				<kul:checkErrors keyMatch="document.customerInvoiceRecurrenceDetails.documentInitiatorUser.principalName" />
+				<kul:user userIdFieldName="document.customerInvoiceRecurrenceDetails.documentInitiatorUser.principalName" universalIdFieldName="document.customerInvoiceRecurrenceDetails.documentInitiatorUserIdentifier" userNameFieldName="document.customerInvoiceRecurrenceDetails.documentInitiatorUser.name" label="User" 
+				lookupParameters="document.customerInvoiceRecurrenceDetails.documentInitiatorUser.principalName:principalName,document.customerInvoiceRecurrenceDetails.documentInitiatorUserIdentifier:principalId,document.customerInvoiceRecurrenceDetails.documentInitiatorUser.name:name" 
+				fieldConversions="principalName:document.customerInvoiceRecurrenceDetails.documentInitiatorUser.principalName,principalId:document.customerInvoiceRecurrenceDetails.documentInitiatorUserIdentifier,name:document.customerInvoiceRecurrenceDetails.documentInitiatorUser.name" 
+				tabIndex="${tabindexOverrideBase} + 30"
+				userId="${KualiForm.document.customerInvoiceRecurrenceDetails.documentInitiatorUser.principalName}" universalId="${KualiForm.document.customerInvoiceRecurrenceDetails.documentInitiatorUserIdentifier}" userName="${KualiForm.document.customerInvoiceRecurrenceDetails.documentInitiatorUser.name}" hasErrors="${hasErrors}" readOnly="${readOnly}" />
+				</td>
+            </tr>    
+                <th align=right valign=middle class="bord-l-b" style="width: 25%;"> 
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceRecurrenceAttributes.active}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" style="width: 25%;">
+                    <input type="text" name="document.customerInvoiceRecurrenceDetails.active" th:field="*{document.customerInvoiceRecurrenceDetails.active}" data-attribute-entry="${customerInvoiceRecurrenceAttributes.active}" />
+                </td>
+				<th align=right valign=middle class="bord-l-b">
+                    &nbsp;
+                </th>
+                <td align=left valign=middle class="datacell">
+                    &nbsp;
+                </td> 
+            </tr>
+        </table>
+    </div>
+</section>
+</div>

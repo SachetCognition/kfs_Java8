@@ -1,0 +1,87 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/maintenance/contractsAndGrants.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Contracts & Grants"></div>
+<div class="body">
+	<ul class="chan">
+
+ 	<th:block th:switch="${true}">
+ 	<th:block th:case="${ConfigProperties['module.external.kuali.coeus.enabled'] == 'true'}"> 
+ 		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="CG Account Default" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.external.kc.businessobject.AccountAutoCreateDefaults&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+ 			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="KC Billing Frequency Mapping" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.external.kc.businessobject.BillingFrequencyMapping&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+ 		</th:block>
+    </th:block>
+    <th:block th:case="*">
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Agency" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.Agency&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Agency Type" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.AgencyType&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Award Status" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.AwardStatus&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Billing Frequency" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.BillingFrequency&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+			</li>
+		</th:block>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="CFDA" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.CFDA&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Instrument Type" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.InstrumentType&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+			</li>	
+		</th:block>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Grant Description" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.GrantDescription&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Letter of Credit Fund Group" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.LetterOfCreditFundGroup&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Letter of Credit Fund" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.LetterOfCreditFund&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+			</li>
+		</th:block>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Proposal/Award Close" data-url="${ConfigProperties.application.url}/cgClose.do?methodToCall=docHandler&command=initiate&docTypeName=CLOS"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Proposal Purpose" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.ProposalPurpose&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Proposal Status" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.ProposalStatus&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Proposal Type" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.ProposalAwardType&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Research Risk Type" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.ResearchRiskType&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>
+		<li>
+			<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Sub-Contractor" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.SubContractor&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div>
+		</li>	
+	</th:block>
+	</th:block>
+	</ul>
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

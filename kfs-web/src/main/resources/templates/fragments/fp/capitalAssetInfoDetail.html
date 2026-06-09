@@ -1,0 +1,73 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/capitalAssetInfoDetail.tag -->
+<!-- Fragment parameters: capitalAssetInfoDetails, capitalAssetInfoDetailsName, readOnly, capitalAssetInfoIndex -->
+<div th:fragment="content (capitalAssetInfoDetails, capitalAssetInfoDetailsName, readOnly, capitalAssetInfoIndex)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the given field in the capital asset info object"%>
+
+<!--/*/ <th:block th:with="attributes=${DataDictionary.CapitalAssetInformationDetail.attributes}"> /*/-->		
+<!--/*/ <th:block th:with="dataCellCssClass=datacell"> /*/-->
+
+<th:block th:if="${not empty capitalAssetInfoDetails}">
+	<table style="border-top: 1px solid rgb(153, 153, 153); width: 90%;" cellpadding="0" cellspacing="0" class="datatable" summary="Capital Asset Information Details">  
+	   <tr>  
+	   		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	   	    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetTagNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetSerialNumber}"></th>                      
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.campusCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.buildingCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.buildingRoomNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.buildingSubRoomNumber}"></th>
+			<th:block th:if="${!readOnly}">
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+			</th:block>
+	   </tr>
+	   
+   	   <c:forEach items="${capitalAssetInfoDetails}" var="detailLine" varStatus="status">
+	   <tr>
+	   		<!--/*/ <th:block th:with="lineNumber=${status.index + 1}"> /*/-->
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>	
+	   		
+			<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoDetailsName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="capitalAssetTagNumber" data-lookup="false" data-inquiry="false"></div>	
+				   
+			<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoDetailsName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="capitalAssetSerialNumber" data-lookup="false" data-inquiry="false"></div>
+				
+			<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoDetailsName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="campusCode" data-lookup="false" data-inquiry="true" data-bo-class-simple-name="Campus" data-bo-package-name="org.kuali.rice.kns.bo" data-lookup-or-inquiry-keys="campusCode" data-business-object-values-map="${capitalAssetInfoDetail.valuesMap}"></div>	
+			
+			<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoDetailsName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="buildingCode" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Building" data-bo-package-name="org.kuali.kfs.sys.businessobject" data-lookup-or-inquiry-keys="campusCode,buildingCode" data-business-object-values-map="${capitalAssetInfoDetail.valuesMap}"></div>
+			
+			<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoDetailsName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="buildingRoomNumber" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Room" data-bo-package-name="org.kuali.kfs.sys.businessobject" data-lookup-or-inquiry-keys="campusCode,buildingCode,buildingRoomNumber" data-business-object-values-map="${capitalAssetInfoDetail.valuesMap}"></div>	
+			
+			<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoDetailsName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="buildingSubRoomNumber" data-lookup="false" data-inquiry="false"></div>
+			
+			<th:block th:if="${!readOnly}">
+				<td class="infoline">  
+					<div style="text-align: center;">			 
+						 <input type="image" property="methodToCall.deleteCapitalAssetInfoDetailLine.line${capitalAssetInfoIndex}.Anchor" 
+							src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" 
+							title="delete the capital Asset Information Detail line ${lineNumber}"
+							alt="delete the capital Asset Information Detail line ${lineNumber}" styleClass="tinybutton" />
+					</div>
+				</td>
+			</th:block>																									 
+	   </tr>
+	   </tr>
+	</table>
+</th:block>
+</div>

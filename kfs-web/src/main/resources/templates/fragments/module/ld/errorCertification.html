@@ -1,0 +1,65 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ld/errorCertification.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the error certification tab"%>
+
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+    	
+<section class="kfs-tab" data-tab-title="Error Certification" data-default-open="false">
+  <h3>Error Certification</h3>
+     <div class="tab-container" align="center">
+        <!--/*/ <th:block th:with="attributes=${DataDictionary.ErrorCertification.attributes}"> /*/-->	
+     		<h3>Error Certification</h3>
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Error Certification Section">
+            <tr>
+                <th align="right" valign="middle" class="bord-l-b" width="50%">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.expenditureDescription}"></label></div>
+                </th>
+                <td align="left" valign="middle" class="datacell" width="50%">
+                     <input type="text" name="document.errorCertification.expenditureDescription" th:field="*{document.errorCertification.expenditureDescription}" data-attribute-entry="${attributes.expenditureDescription}" />
+                </td>
+            </tr>
+            <tr>            
+                <th align="right" valign="middle" class="bord-l-b" width="50%">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.expenditureProjectBenefit}"></label></div>
+                </th>
+                <td align="left" valign="middle" class="datacell" width="50%">
+                     <input type="text" name="document.errorCertification.expenditureProjectBenefit" th:field="*{document.errorCertification.expenditureProjectBenefit}" data-attribute-entry="${attributes.expenditureProjectBenefit}" />
+                </td>
+            </tr>
+                <th align="right" valign="middle" class="bord-l-b" width="50%">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.errorDescription}"></label></div>
+                </th>
+                <td align="left" valign="middle" class="datacell" width="50%">
+                     <input type="text" name="document.errorCertification.errorDescription" th:field="*{document.errorCertification.errorDescription}" data-attribute-entry="${attributes.errorDescription}" />
+                </td>
+            </tr>
+            <tr>
+                <th align="right" valign="middle" class="bord-l-b" width="50%">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.errorCorrectionReason}"></label></div>
+                </th>
+                <td align="left" valign="middle" class="datacell" width="50%">
+                     <input type="text" name="document.errorCertification.errorCorrectionReason" th:field="*{document.errorCertification.errorCorrectionReason}" data-attribute-entry="${attributes.errorCorrectionReason}" />
+                </td>
+            </tr>     	
+		</table>    	
+	 </div>	
+</section>
+</div>

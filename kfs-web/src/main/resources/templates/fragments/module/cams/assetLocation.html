@@ -1,0 +1,90 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/assetLocation.tag -->
+<!-- Fragment parameters: defaultTabHide -->
+<div th:fragment="content (defaultTabHide)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+<!--/*/ <th:block th:with="assetLocationAttributes=${DataDictionary.AssetLocation.attributes}"> /*/-->
+<!--/*/ <th:block th:with="assetTransferAttributes=${DataDictionary.AssetTransferDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="assetValue=${KualiForm.document.asset}"> /*/-->
+
+
+<section class="kfs-tab" data-tab-title="Asset Location" data-default-open="${!defaultTabHide}">
+  <h3>Asset Location</h3>    
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">								
+			<tr>
+				<td class="tab-subhead"  colspan="2" width="50%">On Campus</td><td class="tab-subhead"  colspan="2" width="50%">Off Campus</td>
+			</tr>			
+			<tr>
+				<th class="grid" width="25%" align="right">Campus:</th>  
+				<td class="grid" width="25%"><input type="text" name="document.asset.campusCode" th:field="*{document.asset.campusCode}" data-attribute-entry="${assetAttributes.campusCode}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusName}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.asset.offCampusLocation.assetLocationContactName" th:field="*{document.asset.offCampusLocation.assetLocationContactName}" data-attribute-entry="${assetLocationAttributes.assetLocationContactName}" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.buildingCode}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.asset.buildingCode" th:field="*{document.asset.buildingCode}" data-attribute-entry="${assetAttributes.buildingCode}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusAddress}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.asset.offCampusLocation.assetLocationStreetAddress" th:field="*{document.asset.offCampusLocation.assetLocationStreetAddress}" data-attribute-entry="${assetLocationAttributes.assetLocationStreetAddress}" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.buildingRoomNumber}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.asset.buildingRoomNumber" th:field="*{document.asset.buildingRoomNumber}" data-attribute-entry="${assetAttributes.buildingRoomNumber}" readonly="readonly" /></td><%--				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetLocationAttributes.assetLocationCityName}"></label></th> --%>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusCityName}"></label></th>  
+				<td class="grid" width="25%"><input type="text" name="document.asset.offCampusLocation.assetLocationCityName" th:field="*{document.asset.offCampusLocation.assetLocationCityName}" data-attribute-entry="${assetLocationAttributes.assetLocationCityName}" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.buildingSubRoomNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="document.asset.buildingSubRoomNumber" th:field="*{document.asset.buildingSubRoomNumber}" data-attribute-entry="${assetAttributes.buildingRoomNumber}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusStateCode}"></label></th>  
+				<td class="grid" width="25%">
+					<input type="text" name="document.asset.offCampusLocation.assetLocationStateCode" th:field="*{document.asset.offCampusLocation.assetLocationStateCode}" data-attribute-entry="${assetLocationAttributes.assetLocationStateCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.rice.location.framework.state.StateEbo" data-key-values="stateCode=${assetValue.offCampusLocation.assetLocationState.code}&amp;postalCountryCode=${assetValue.offCampusLocation.assetLocationCountryCode}">
+                			<html:hidden write="true" property="document.asset.offCampusLocation.assetLocationState.code" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+				</td>						
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right" colspan="2"></th>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusZipCode}"></label></th>  
+				<td class="grid" width="25%">
+					<input type="text" name="document.asset.offCampusLocation.assetLocationZipCode" th:field="*{document.asset.offCampusLocation.assetLocationZipCode}" data-attribute-entry="${assetLocationAttributes.assetLocationZipCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" data-key-values="postalCode=${assetValue.offCampusLocation.postalZipCode.code}&amp;postalCountryCode=${assetValue.offCampusLocation.assetLocationCountryCode}">
+                			<html:hidden write="true" property="document.asset.offCampusLocation.postalZipCode.code" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+				</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right" colspan="2"></th>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetTransferAttributes.offCampusCountryCode}"></label></th>  
+				<td class="grid" width="25%">
+					<input type="text" name="document.asset.offCampusLocation.assetLocationCountry.postalCountryName" th:field="*{document.asset.offCampusLocation.assetLocationCountry.postalCountryName}" data-attribute-entry="${assetLocationAttributes.assetLocationCountryCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.rice.location.framework.country.CountryEbo" data-key-values="postalCountryCode=${assetValue.offCampusLocation.assetLocationCountryCode}">
+                			<html:hidden write="true" property="document.asset.offCampusLocation.assetLocationCountry.name" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+				</td>
+			</tr>
+		</table>
+		</div>
+	</section>
+</div>

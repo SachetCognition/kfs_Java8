@@ -1,0 +1,47 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/main/yearEndTransactions.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Year End Transactions"></div>
+<div class="body">
+	<strong>Capital Asset Management</strong><br />
+    <ul class="chan">    
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End Depreciation" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cam.businessobject.AssetYearEndDepreciation&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+	</ul>		
+    <strong>Financial Processing</strong><br />
+    <ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End Budget Adjustment" data-url="${ConfigProperties.application.url}/financialYearEndBudgetAdjustment.do?methodToCall=docHandler&command=initiate&docTypeName=YEBA"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End Distribution of Income and Expense" data-url="${ConfigProperties.application.url}/financialYearEndDistributionOfIncomeAndExpense.do?methodToCall=docHandler&command=initiate&docTypeName=YEDI"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End General Error Correction" data-url="${ConfigProperties.application.url}/financialYearEndGeneralErrorCorrection.do?methodToCall=docHandler&command=initiate&docTypeName=YEGE"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End Transfer of Funds" data-url="${ConfigProperties.application.url}/financialYearEndTransferOfFunds.do?methodToCall=docHandler&command=initiate&docTypeName=YETF"></div></li>
+    </ul>
+    <th:block th:if="${ConfigProperties.module.labor.distribution.enabled == 'true'}">
+	    <strong>Labor Distribution</strong><br />
+	    <ul class="chan">
+		  	<li>
+				<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End Benefit Expense Transfer" data-url="${ConfigProperties.application.url}/laborYearEndBenefitExpenseTransfer.do?methodToCall=docHandler&command=initiate&docTypeName=YEBT"></div>
+			</li>
+			<li>
+				<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Year End Salary Expense Transfer" data-url="${ConfigProperties.application.url}/laborYearEndSalaryExpenseTransfer.do?methodToCall=docHandler&command=initiate&docTypeName=YEST"></div>
+			</li>
+	    </ul>
+    </th:block>
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

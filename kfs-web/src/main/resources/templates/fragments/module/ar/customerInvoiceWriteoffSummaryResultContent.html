@@ -1,0 +1,57 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/customerInvoiceWriteoffSummaryResultContent.tag -->
+<!-- Fragment parameters: customerInvoiceDocumentAttributes, propertyName -->
+<div th:fragment="content (customerInvoiceDocumentAttributes, propertyName)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="customerInvoiceWriteoffLookupResultAttributes=${DataDictionary.CustomerInvoiceWriteoffLookupResult.attributes}"> /*/-->
+
+<div class="tab-container" align="center">
+	<h3>Invoices to Writeoff</h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+		<thead>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDocumentAttributes.documentNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDocumentAttributes.age}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDocumentAttributes.billingDate}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDocumentAttributes.sourceTotal}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceDocumentAttributes.openAmount}"></th>
+			</tr>
+		</thead>
+		<tr th:each="customerInvoiceDocument : ${KualiForm.${propertyName}.customerInvoiceDocuments}" indexId="ctr">
+			<div th:replace="~{fragments/ar/customerInvoiceWriteoffSummarySubResult :: content}" data-customer-invoice-document-attributes="${customerInvoiceDocumentAttributes}" data-property-name="${propertyName}.customerInvoiceDocument[${ctr}]"></div>
+		</tr>
+	</table>
+	<h3>Customer Note</h3>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+		<tr>
+			<th align=right valign=middle class="bord-l-b">
+				<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${customerInvoiceWriteoffLookupResultAttributes.customerNote}"></label></div>
+			</th>
+			<td>
+				<th:block th:if="${KualiForm.sentToBatch}">
+					<input type="text" name="${propertyName}.customerNote" th:field="*{${propertyName}.customerNote}" data-attribute-entry="${customerInvoiceWriteoffLookupResultAttributes.customerNote}" readonly="readonly" />
+				</th:block>
+				<th:block th:if="${!KualiForm.sentToBatch}">
+					<input type="text" name="${propertyName}.customerNote" th:field="*{${propertyName}.customerNote}" data-attribute-entry="${customerInvoiceWriteoffLookupResultAttributes.customerNote}" />
+				</th:block>
+			</td>
+		</tr>	
+	</table>
+</div>
+</div>

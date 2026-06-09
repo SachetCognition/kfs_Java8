@@ -1,0 +1,135 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/contractManagerAssignment.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="requisitionAttributes=${DataDictionary.RequisitionDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="requisitionItemAttributes=${DataDictionary.RequisitionItem.attributes}"> /*/-->
+<!--/*/ <th:block th:with="sourceAccountingLineAttributes=${DataDictionary.SourceAccountingLine.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purchaseOrderAttributes=${DataDictionary.PurchaseOrderDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="ContractManagerAssignmentAttributes=${DataDictionary.ContractManagerAssignmentDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Assign A Contract Manager" data-default-open="true">
+  <h3>Assign A Contract Manager</h3>
+
+    <div class="tab-container" align=center>
+            <h3>Assign A Contract Manager</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Assign A Contract Manager">
+			<th:block th:if="${empty KualiForm.document.contractManagerAssignmentDetails}">
+		        <th align=right valign=middle class="bord-l-b">
+		            <div align="center"><br>There are no unassigned requisitions.<br></div>
+		        </th>
+			</th:block>
+			<th:block th:if="${!empty KualiForm.document.contractManagerAssignmentDetails}">
+	            <tr>
+	                     <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purchaseOrderAttributes.contractManagerCode}"></th>
+ 
+	                 	  <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.requisitionNumber}"></th>
+
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.deliveryCampusCode}"></th>
+	
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.vendorName}"></th>
+	                    
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.generalDescription}"></th>
+	                    
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.requisitionTotalAmount}"></th>
+	                    
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.requisitionCreateDate}"></th>
+	                    
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.firstItemDescription}"></th>
+
+                      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.firstItemCommodityCode}"></th>
+                        
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.firstObjectCode}"></th> 
+	                	
+	                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractManagerAssignmentAttributes.universityFiscalYear}"></th> 
+	            </tr>
+	
+		        <tr th:each="acmDetail : ${KualiForm.document.contractManagerAssignmentDetails}" indexId="ctr">
+		            <tr>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].contractManagerCode" th:field="*{document.contractManagerAssignmentDetail[${ctr}].contractManagerCode}" data-attribute-entry="${purchaseOrderAttributes.contractManagerCode}" />
+					        <th:block th:if="${!readOnly}">
+		                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.ContractManager" th:replace="~{fragments/kul/lookup :: content}"></span></div>
+		                        <kul:checkErrors keyMatch="document.contractManagerAssignmentDetails[${ctr}].contractManagerCode" />
+								<th:block th:if="${hasErrors}">
+									 <kul:fieldShowErrorIcon />
+								</th:block>	
+		                    </th:block>
+						</td>
+		                <td align=left valign=middle class="datacell">
+		                <th:block th:if="${!readOnly}">
+		                    <a href="<span th:text="${acmDetail.requisition.url}"></span>"  target="_BLANK"><span th:text="${acmDetail.requisitionIdentifier}"></span></a>
+		                </th:block>
+		                <th:block th:if="${readOnly}">
+		                    <span th:text="${acmDetail.requisitionIdentifier}"></span>
+		                </th:block>
+		                </td>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.deliveryCampusCode" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.deliveryCampusCode}" data-attribute-entry="${requisitionAttributes.deliveryCampusCode}" readonly="readonly" />
+		                </td>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.vendorName" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.vendorName}" data-attribute-entry="${requisitionAttributes.vendorName}" readonly="readonly" />
+		                </td>
+		                <td align=left valign=middle class="datacell">
+		                    <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.documentHeader.documentDescription" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.documentHeader.documentDescription}" data-attribute-entry="${requisitionAttributes['documentHeader.documentDescription']}" readonly="readonly" />
+		                </td>
+		                <td align=right valign=middle class="datacell">
+		                    <div align="right"><input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.documentHeader.financialDocumentTotalAmount" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.documentHeader.financialDocumentTotalAmount}" data-attribute-entry="${requisitionAttributes['financialSystemDocumentHeader.financialDocumentTotalAmount']}" readonly="readonly" /></div>
+		                </td>		               
+		                <td align=left valign=middle class="datacell">
+		                    <%-- fmt:formatDate value="${acmDetail.requisition.documentHeader.workflowDocument.createDate}" pattern="hh:mm a MM/dd/yyyy" / --%>
+						    <span th:text="${acmDetail.createDate}"></span>
+						</td>						
+		                <td align=left valign=middle class="datacell">		   
+		                    <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].itemDescription" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].itemDescription}" data-attribute-entry="${requisitionItemAttributes.itemDescription}" readonly="readonly" />  
+		                </td>
+		                <td align=left valign=middle class="datacell">            
+       
+                        <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].purchasingCommodityCode" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].purchasingCommodityCode}" data-attribute-entry="${requisitionItemAttributes.purchasingCommodityCode}" readonly="readonly" />
+   
+                        <th:block th:if="${! empty KualiForm.document.contractManagerAssignmentDetails[ctr].requisition.items[0].commodityCode.commodityDescription}">
+                    	  	&nbsp;-&nbsp;
+                    			<input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].commodityCode.commodityDescription" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].commodityCode.commodityDescription}" data-attribute-entry="${requisitionItemAttributes.purchasingCommodityCode}" readonly="readonly" />
+                        </th:block>
+                    </td>                       
+		                <td align=left valign=middle class="datacell">		                    
+		          				<th:block th:switch="${true}">
+												<th:block th:case="${!empty acmDetail.requisition.items[0].sourceAccountingLines}">
+
+		                    		<input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].sourceAccountingLines[0].financialObjectCode" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.items[0].sourceAccountingLines[0].financialObjectCode}" data-attribute-entry="${sourceAccountingLineAttributes.financialObjectCode}" readonly="readonly" />		      
+           	
+												</th:block>
+												<th:block th:case="${empty acmDetail.requisition.items[0].sourceAccountingLines}">
+		                    		Note: This is bad data! If you are seeing this, you may have a requisition with no account for one item.
+												</th:block>
+											</th:block>		                    
+		                </td>
+		                <td align=left valign=middle class="datacell">		   
+		                		 <input type="text" name="document.contractManagerAssignmentDetail[${ctr}].requisition.postingYear" th:field="*{document.contractManagerAssignmentDetail[${ctr}].requisition.postingYear}" data-attribute-entry="${requisitionAttributes.postingYear}" readonly="readonly" />            
+										</td>
+		                
+		            </tr>
+		        </tr>
+			</th:block>
+        </table>
+    </div>
+</section>
+</div>

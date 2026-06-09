@@ -1,0 +1,56 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/miscAdvanceLine.tag -->
+<!-- Fragment parameters: itemInProcessProperty, creatingItemInProcess, readOnly -->
+<div th:fragment="content (itemInProcessProperty, creatingItemInProcess, readOnly)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${empty readOnly}">
+  <!--/*/ <th:block th:with="readOnly=false"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="itemInProcessAttributes=${DataDictionary.CashieringItemInProcess.attributes}"> /*/-->
+
+
+  
+  <tr>
+    <th:block th:if="${!creatingItemInProcess}">
+      <td>
+        <input type="text" name="${itemInProcessProperty}.itemIdentifier" th:field="*{${itemInProcessProperty}.itemIdentifier}" data-attribute-entry="${itemInProcessAttributes.itemIdentifier}" readonly="readonly" />
+      </td>
+    </th:block>
+    <td>
+      <input type="text" name="${itemInProcessProperty}.itemAmount" th:field="*{${itemInProcessProperty}.itemAmount}" data-attribute-entry="${itemInProcessAttributes.itemAmount}" />
+    </td>
+    <th:block th:if="${!creatingItemInProcess}">
+      <td><input type="text" name="${itemInProcessProperty}.itemReducedAmount" th:field="*{${itemInProcessProperty}.itemReducedAmount}" data-attribute-entry="${itemInProcessAttributes.itemReducedAmount}" readonly="readonly" /></td>
+      <td><span th:text="${KualiForm.${itemInProcessProperty}.itemRemainingAmount}"></span></td>
+      <td><input type="text" name="${itemInProcessProperty}.currentPayment" th:field="*{${itemInProcessProperty}.currentPayment}" data-attribute-entry="${itemInProcessAttributes.currentPayment}" />
+    </th:block>
+    <td>
+      <th:block th:switch="${true}">
+        <th:block th:case="${!readOnly && creatingItemInProcess}">
+          <kul:dateInput property="${itemInProcessProperty}.itemOpenDate" attributeEntry="${itemInProcessAttributes.itemOpenDate}" />
+        </th:block>
+        <th:block th:case="*">
+          <input type="text" name="${itemInProcessProperty}.itemOpenDate" th:field="*{${itemInProcessProperty}.itemOpenDate}" data-attribute-entry="${itemInProcessAttributes.itemOpenDate}" readonly="readonly" />
+        </th:block>
+      </th:block>
+    </td>
+    <td><input type="text" name="${itemInProcessProperty}.itemDescription" th:field="*{${itemInProcessProperty}.itemDescription}" data-attribute-entry="${itemInProcessAttributes.itemDescription}" /></td>
+  </tr>
+</div>

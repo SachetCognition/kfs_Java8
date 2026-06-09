@@ -1,0 +1,144 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/splitPurchaseOrder.tag -->
+<!-- Fragment parameters: documentAttributes, itemAttributes -->
+<div th:fragment="content (documentAttributes, itemAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="additionalChargesExist=${KualiForm.document.additionalChargesExist}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Split a PO" data-default-open="true">
+  <h3>Split a PO</h3>
+
+    <div class="tab-container" align=center>
+            <h3>Split a PO</h3>
+        
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Preliminaries">
+
+            <tr>
+            	<th align=right valign=middle class="bord-l-b" width="50%">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.copyingNotesWhenSplitting}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell" width="50%">
+                    <input type="text" name="document.copyingNotesWhenSplitting" th:field="*{document.copyingNotesWhenSplitting}" data-attribute-entry="${documentAttributes.copyingNotesWhenSplitting}" />
+                </td>
+            </tr>
+            
+            <th:block th:if="${additionalChargesExist}">
+	            <tr>
+	            	<th align=right valign=middle class="bord-l-b" width="50%">
+	            		<div align="right"><span th:text="${PurapConstants.PODocumentsStrings.SPLIT_ADDL_CHARGES_WARNING_LABEL}"></span></div>
+	            	</th>
+	            	<td align=left valign=middle class="datacell" width="50%">
+	            		<h3><span th:text="${PurapConstants.PODocumentsStrings.SPLIT_ADDL_CHARGES_WARNING}"></span></h3>
+	            		<table cellpadding="0" cellspacing="0" class="datatable" summary="Additional Charges Summary">
+	            			<tr>
+	            				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	            				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.extendedPrice}"></th>
+	            			</tr>
+	            			<logic:iterate indexId="ctr" name="KualiForm" property="document.items" id="itemLine">
+	            				<th:block th:switch="${true}">
+        							<th:block th:case="${itemLine.itemType.additionalChargeIndicator == true}">
+        								<tr>
+        									<td class="datacell">
+											    <input type="text" name="document.item[${ctr}].itemTypeCode" th:field="*{document.item[${ctr}].itemTypeCode}" data-attribute-entry="${itemAttributes.itemTypeCode}" readonly="readonly" />
+											</td>
+											<td class="datacell">
+							    				<div align="right">
+							        				<input type="text" name="document.item[${ctr}].extendedPrice" th:field="*{document.item[${ctr}].extendedPrice}" data-attribute-entry="${itemAttributes.extendedPrice}" readonly="readonly" />
+							    				</div>
+											</td>
+										</tr>
+									</th:block>
+								</th:block>
+					         </tr>
+	            		</table>
+	            	</td>
+	            </tr>
+	        </th:block>
+        </table>
+        
+        	<h3>Splitting Item Selection</h3>
+        
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Splitting Item Selection">
+        	<tr>
+        		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.movingToSplit}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemLineNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemQuantity}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemCatalogNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.purchasingCommodityCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDescription}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitPrice}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.extendedPrice}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemAssignedToTradeInIndicator}"></th>
+        	</tr>
+        	<logic:iterate indexId="ctr" name="KualiForm" property="document.items" id="itemLine">
+        		<th:block th:if="${itemLine.itemType.lineItemIndicator == true}">
+       				<tr>
+			        	<td class="datacell">
+			        		<div align="center">
+				        		<input type="text" name="document.item[${ctr}].movingToSplit" th:field="*{document.item[${ctr}].movingToSplit}" data-attribute-entry="${itemAttributes.movingToSplit}" />
+							</div>
+			        	</td>
+		        		<td class="datacell">
+		        			<div align="center">
+		        				&nbsp;<b><html:hidden write="true" property="document.item[${ctr}].itemLineNumber" /></b>&nbsp;
+		        			</div>
+		        		</td>
+						<td class="datacell">
+						    <input type="text" name="document.item[${ctr}].itemTypeCode" th:field="*{document.item[${ctr}].itemTypeCode}" data-attribute-entry="${itemAttributes.itemTypeCode}" readonly="readonly" />
+						</td>
+						<td class="datacell">
+						    <input type="text" name="document.item[${ctr}].itemQuantity" th:field="*{document.item[${ctr}].itemQuantity}" data-attribute-entry="${itemAttributes.itemQuantity}" readonly="readonly" />
+						</td>
+						<td class="datacell">
+						    <input type="text" name="document.item[${ctr}].itemUnitOfMeasureCode" th:field="*{document.item[${ctr}].itemUnitOfMeasureCode}" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}" readonly="readonly" />
+					    </td>
+						<td class="datacell">
+						    <input type="text" name="document.item[${ctr}].itemCatalogNumber" th:field="*{document.item[${ctr}].itemCatalogNumber}" data-attribute-entry="${itemAttributes.itemCatalogNumber}" readonly="readonly" />
+					    </td>
+					    <td class="datacell">
+					    	<input type="text" name="document.item[${ctr}].purchasingCommodityCode" th:field="*{document.item[${ctr}].purchasingCommodityCode}" data-attribute-entry="${itemAttributes.purchasingCommodityCode}" readonly="readonly" />
+	                    </td>
+						<td class="datacell">
+							 <input type="text" name="document.item[${ctr}].itemDescription" th:field="*{document.item[${ctr}].itemDescription}" data-attribute-entry="${itemAttributes.itemDescription}" readonly="readonly" />
+						</td>
+						<td class="datacell">
+						    <div align="right">
+						        <input type="text" name="document.item[${ctr}].itemUnitPrice" th:field="*{document.item[${ctr}].itemUnitPrice}" data-attribute-entry="${itemAttributes.itemUnitPrice}" readonly="readonly" />
+							</div>
+						</td>
+						<td class="datacell">
+						    <div align="right">
+						        <input type="text" name="document.item[${ctr}].extendedPrice" th:field="*{document.item[${ctr}].extendedPrice}" data-attribute-entry="${itemAttributes.extendedPrice}" readonly="readonly" />
+						    </div>
+						</td>
+	                    <td class="datacell">
+						    <div align="right">
+						        <input type="text" name="document.item[${ctr}].itemAssignedToTradeInIndicator" th:field="*{document.item[${ctr}].itemAssignedToTradeInIndicator}" data-attribute-entry="${itemAttributes.itemAssignedToTradeInIndicator}" readonly="readonly" />
+						    </div>
+						</td>
+					</tr>					 			        	
+				</th:block>
+	        </tr>
+        </table>
+    </div>
+    
+</section>
+</div>

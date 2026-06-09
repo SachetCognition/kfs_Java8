@@ -1,0 +1,76 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailTab.tag -->
+<!-- Fragment parameters: isOpen, isEditable, accountsCanCrossCharts -->
+<div th:fragment="content (isOpen, isEditable, accountsCanCrossCharts)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.EffortCertificationDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="detailAttributes=${DataDictionary.EffortCertificationDetail.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="detailLines=${KualiForm.detailLines}"> /*/-->
+<!--/*/ <th:block th:with="newDetailLine=${KualiForm.newDetailLine}"> /*/-->
+<!--/*/ <th:block th:with="tabErrorKey=${isOpen ? EffortConstants.EFFORT_CERTIFICATION_TAB_ERRORS : '' }"> /*/-->
+
+
+<section class="kfs-tab" data-tab-title="Effort Detail" data-default-open="${isOpen}">
+  <h3>Effort Detail</h3>	
+<th:block th:switch="${true}">
+	<th:block th:case="${isEditable}">
+		<div class="tab-container" align=center>
+			<h3>Add New Detail Line</h3>
+			<!--/*/ <th:block th:with="newLineDetailFieldNames=chartOfAccountsCode,accountNumber,subAccountNumber,effortCertificationUpdatedOverallPercent,effortCertificationPayrollAmount"> /*/-->
+			
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+				<tr>
+					<div th:replace="~{fragments/ec/detailLineHeader :: content}" data-attributes="${detailAttributes}" data-detail-field-names="${newLineDetailFieldNames}" data-has-actions="true"></div>
+				</tr>
+				
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th:block th:switch="${true}">
+						<th:block th:case="${!accountsCanCrossCharts}">
+						<div th:replace="~{fragments/ec/detailLine :: content}" data-detail-line="${newDetailLine}" data-detail-line-form-name="newDetailLine" data-attributes="${detailAttributes}" data-detail-field-names="${newLineDetailFieldNames}" data-editable-field-names="accountNumber,subAccountNumber,effortCertificationUpdatedOverallPercent,effortCertificationPayrollAmount" data-detail-field-names-with-hidden-form-when-readonly="chartOfAccountsCode" data-field-info="${KualiForm.detailLineFieldInfo}" data-onchange-for-editable-field-names="effortAmountUpdator.loadChartAccountInfo,loadSubAccountInfo" data-onchangeable-info-field-names="account.accountName,subAccount.subAccountName" data-has-actions="true" data-actions="add" data-action-image-file-names="tinybutton-add1.gif"></div>
+						</th:block>
+						<th:block th:case="*">
+							<div th:replace="~{fragments/ec/detailLine :: content}" data-detail-line="${newDetailLine}" data-detail-line-form-name="newDetailLine" data-attributes="${detailAttributes}" data-detail-field-names="${newLineDetailFieldNames}" data-editable-field-names="chartOfAccountsCode,accountNumber,subAccountNumber,effortCertificationUpdatedOverallPercent,effortCertificationPayrollAmount" data-onchange-for-editable-field-names="loadChartInfo,effortAmountUpdator.loadAccountInfo,loadSubAccountInfo" data-onchangeable-info-field-names="chartOfAccounts.finChartOfAccountDescription,account.accountName,subAccount.subAccountName" data-has-actions="true" data-actions="add" data-action-image-file-names="tinybutton-add1.gif"></div>
+						</th:block>
+					</th:block>
+				</tr>
+			</table>
+		</div>
+	
+		<div class="tab-container" style="text-align: center;">
+			<th:block th:switch="${true}">
+				<th:block th:case="${!accountsCanCrossCharts}">
+			<div th:replace="~{fragments/ec/detailLinesWithGrouping :: content}" data-id="editableDetailLineTable" data-detail-lines="${detailLines}" data-detail-line-form-name="document.effortCertificationDetailLines" data-attributes="${detailAttributes}" data-detail-field-names="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,positionNumber,sourceChartOfAccountsCode,sourceAccountNumber,effortCertificationCalculatedOverallPercent,effortCertificationUpdatedOverallPercent,effortCertificationOriginalPayrollAmount,effortCertificationPayrollAmount,originalFringeBenefitAmount,fringeBenefitAmount" data-detail-field-names-with-hidden-form-when-readonly="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,sourceChartOfAccountsCode,sourceAccountNumber,positionNumber,effortCertificationCalculatedOverallPercent,effortCertificationUpdatedOverallPercent,effortCertificationOriginalPayrollAmount,effortCertificationPayrollAmount,originalFringeBenefitAmount,fringeBenefitAmount" data-hidden-field-names="documentNumber,universityFiscalYear,newLineIndicator,federalOrFederalPassThroughIndicator,persistedPayrollAmount,persistedEffortPercent,versionNumber" data-inquirable-url="${KualiForm.detailLineFieldInquiryUrl}" data-field-info="${KualiForm.fieldInfo}" data-sortable-field-names="chartOfAccountsCode,accountNumber,effortCertificationPayrollAmount" data-editable-field-names="effortCertificationUpdatedOverallPercent,effortCertificationPayrollAmount" data-extra-editable-field-names="accountNumber,subAccountNumber,financialObjectCode,positionNumber" data-onchange-for-extra-editable-field-names="effortAmountUpdator.loadAccountInfo,loadSubAccountInfo,loadObjectCodeInfo" data-onchangeable-info-field-names="" data-onchangeable-extra-info-field-names="account.accountName,subAccount.subAccountName,financialObject.financialObjectCodeName," data-relationship-metadata="${KualiForm.relationshipMetadata}" data-ferderal-total-field-names="federalTotalOriginalEffortPercent,federalTotalEffortPercent,federalTotalOriginalPayrollAmount,federalTotalPayrollAmount,federalTotalOriginalFringeBenefit,federalTotalFringeBenefit" data-non-ferderal-total-field-names="otherTotalOriginalEffortPercent,otherTotalEffortPercent,otherTotalOriginalPayrollAmount,otherTotalPayrollAmount,otherTotalOriginalFringeBenefit,otherTotalFringeBenefit" data-grand-total-field-names="totalOriginalEffortPercent,totalEffortPercent,totalOriginalPayrollAmount,totalPayrollAmount,totalOriginalFringeBenefit,totalFringeBenefit" data-has-actions="true"></div>
+				</th:block>
+				<th:block th:case="*">
+					<div th:replace="~{fragments/ec/detailLinesWithGrouping :: content}" data-id="editableDetailLineTable" data-detail-lines="${detailLines}" data-detail-line-form-name="document.effortCertificationDetailLines" data-attributes="${detailAttributes}" data-detail-field-names="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,positionNumber,sourceChartOfAccountsCode,sourceAccountNumber,effortCertificationCalculatedOverallPercent,effortCertificationUpdatedOverallPercent,effortCertificationOriginalPayrollAmount,effortCertificationPayrollAmount,originalFringeBenefitAmount,fringeBenefitAmount" data-detail-field-names-with-hidden-form-when-readonly="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,sourceChartOfAccountsCode,sourceAccountNumber,positionNumber,effortCertificationCalculatedOverallPercent,effortCertificationUpdatedOverallPercent,effortCertificationOriginalPayrollAmount,effortCertificationPayrollAmount,originalFringeBenefitAmount,fringeBenefitAmount" data-hidden-field-names="documentNumber,universityFiscalYear,newLineIndicator,federalOrFederalPassThroughIndicator,persistedPayrollAmount,persistedEffortPercent,versionNumber" data-inquirable-url="${KualiForm.detailLineFieldInquiryUrl}" data-field-info="${KualiForm.fieldInfo}" data-sortable-field-names="chartOfAccountsCode,accountNumber,effortCertificationPayrollAmount" data-editable-field-names="effortCertificationUpdatedOverallPercent,effortCertificationPayrollAmount" data-extra-editable-field-names="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,positionNumber" data-onchange-for-extra-editable-field-names="loadChartInfo,effortAmountUpdator.loadAccountInfo,loadSubAccountInfo,loadObjectCodeInfo" data-onchangeable-info-field-names="" data-onchangeable-extra-info-field-names="chartOfAccounts.finChartOfAccountDescription,account.accountName,subAccount.subAccountName,financialObject.financialObjectCodeName," data-relationship-metadata="${KualiForm.relationshipMetadata}" data-ferderal-total-field-names="federalTotalOriginalEffortPercent,federalTotalEffortPercent,federalTotalOriginalPayrollAmount,federalTotalPayrollAmount,federalTotalOriginalFringeBenefit,federalTotalFringeBenefit" data-non-ferderal-total-field-names="otherTotalOriginalEffortPercent,otherTotalEffortPercent,otherTotalOriginalPayrollAmount,otherTotalPayrollAmount,otherTotalOriginalFringeBenefit,otherTotalFringeBenefit" data-grand-total-field-names="totalOriginalEffortPercent,totalEffortPercent,totalOriginalPayrollAmount,totalPayrollAmount,totalOriginalFringeBenefit,totalFringeBenefit" data-has-actions="true"></div>
+				</th:block>
+			</th:block>			
+		</div>	
+	</th:block>
+	
+	<th:block th:case="*">
+		<div class="tab-container" style="text-align: center;">
+			<div th:replace="~{fragments/ec/detailLinesWithGrouping :: content}" data-id="readonlyDetailLineTable" data-detail-lines="${detailLines}" data-detail-line-form-name="document.effortCertificationDetailLines" data-attributes="${detailAttributes}" data-detail-field-names="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,positionNumber,sourceChartOfAccountsCode,sourceAccountNumber,effortCertificationCalculatedOverallPercent,effortCertificationUpdatedOverallPercent,effortCertificationOriginalPayrollAmount,effortCertificationPayrollAmount,originalFringeBenefitAmount,fringeBenefitAmount" data-detail-field-names-with-hidden-form-when-readonly="chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,sourceChartOfAccountsCode,sourceAccountNumber,positionNumber,effortCertificationCalculatedOverallPercent,effortCertificationUpdatedOverallPercent,effortCertificationOriginalPayrollAmount,effortCertificationPayrollAmount,originalFringeBenefitAmount,fringeBenefitAmount" data-hidden-field-names="documentNumber,universityFiscalYear,newLineIndicator,federalOrFederalPassThroughIndicator,persistedPayrollAmount,persistedEffortPercent,groupId,versionNumber" data-inquirable-url="${KualiForm.detailLineFieldInquiryUrl}" data-field-info="${KualiForm.fieldInfo}" data-ferderal-total-field-names="federalTotalOriginalEffortPercent,federalTotalEffortPercent,federalTotalOriginalPayrollAmount,federalTotalPayrollAmount,federalTotalOriginalFringeBenefit,federalTotalFringeBenefit" data-non-ferderal-total-field-names="otherTotalOriginalEffortPercent,otherTotalEffortPercent,otherTotalOriginalPayrollAmount,otherTotalPayrollAmount,otherTotalOriginalFringeBenefit,otherTotalFringeBenefit" data-grand-total-field-names="totalOriginalEffortPercent,totalEffortPercent,totalOriginalPayrollAmount,totalPayrollAmount,totalOriginalFringeBenefit,totalFringeBenefit" data-has-actions="false" data-read-only-section="true"></div>			
+		</div>
+	</th:block>
+</th:block>							
+</section>
+</div>

@@ -1,0 +1,97 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cab/purApItemLines.tag -->
+<!-- Fragment parameters: activeIndicator, title, defaultOpen, tabErrorKey, readOnly -->
+<div th:fragment="content (activeIndicator, title, defaultOpen, tabErrorKey, readOnly)" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="scripts/module/cab/selectCheckBox.js"></script>
+<!--/*/ <th:block th:with="purApDocumentAttributes=${DataDictionary.PurchasingAccountsPayableDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="purApItemAssetAttributes=${DataDictionary.PurchasingAccountsPayableItemAsset.attributes}"> /*/-->
+<section class="kfs-tab" data-tab-title="${title}" data-default-open="${defaultOpen}">
+  <h3>${title}</h3>
+<div class="tab-container" align="center">
+<table width="100%" cellpadding="0" cellspacing="0" class="datatable">	
+	<tr>
+		<td class="tab-subhead"  width="100%" colspan="17">Line Items</td>
+	</tr>	
+	<tr>
+		<th class="grid" align="center">
+		<th:block th:if="${activeIndicator=='true'}">
+			<html:checkbox property="selectAll" onclick="selectSources(this)"/>Select		
+		</th:block>
+		&nbsp;
+		</th>
+  		<!-- kul:htmlAttributeHeaderCell attributeEntry="${purApDocumentAttributes.purapDocumentIdentifier}"/ -->
+
+		<th:block th:if="${activeIndicator=='false'}">
+	    	<th class="grid" align="center">Document</th>
+	    	<th class="grid" align="center">Asset</th>
+		</th:block>
+  		
+  		<th class="grid" align="center">PREQ</th>
+  		<th class="grid" align="center">Doc Type</th>
+  		<th class="grid" align="center">Invoice Status</th>
+  		<th class="grid" align="center">Line #</th>
+  		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purApItemAssetAttributes.accountsPayableItemQuantity}"></th>
+  		<th class="grid" align="center">Split Qty</th>
+  		<th class="grid" align="center">Unit Cost</th>
+  		<th class="grid" align="center">Object Code</th>
+  		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purApItemAssetAttributes.accountsPayableLineItemDescription}"></th>
+  		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${purApItemAssetAttributes.capitalAssetTransactionTypeCode}"></th>
+	    <th class="grid" align="center">TI</th>
+
+	    <th:block th:switch="${true}">
+		    <th:block th:case="${activeIndicator=='true'}">
+		    	<th class="grid" align="center">Action</th>
+		    </th:block>
+	    </th:block>
+	</tr>
+   	<!--/*/ <th:block th:with="chkcount=0"> /*/-->
+   	<!--/*/ <th:block th:with="docPos=0"> /*/-->
+    <c:forEach items="${KualiForm.purApDocs}" var="purApDoc" >
+    	<!--/*/ <th:block th:with="docPos=${docPos+1}"> /*/-->
+    	<!--/*/ <th:block th:with="linePos=0"> /*/-->
+    	<c:forEach items="${purApDoc.purchasingAccountsPayableItemAssets}" var="assetLine" >
+	    	<!--/*/ <th:block th:with="linePos=${linePos+1}"> /*/-->
+	    	<th:block th:if="${(assetLine.active && activeIndicator=='true') || (!assetLine.active && activeIndicator == 'false')}">
+
+	    		<div th:replace="~{fragments/cab/purApLineDetail :: content}" data-chkcount="${chkcount}" data-doc-pos="${docPos}" data-line-pos="${linePos}" data-item-line="${assetLine}" data-pur-ap-doc-line="${purApDoc}"></div>
+
+		    	<th:block th:if="${!assetLine.additionalChargeNonTradeInIndicator}">
+					<!--/*/ <th:block th:with="chkcount=${chkcount+1}"> /*/-->
+				</th:block>
+	    	</th:block>
+		</tr>
+	</tr>
+	<th:block th:if="${activeIndicator == 'true' && !readOnly}">
+	<tr>
+		<th class="grid" align="right" colspan="6">How Many Assets</th>
+		<td class="infoline" colspan="2"><input type="text" name="mergeQty" th:field="*{mergeQty}" data-attribute-entry="${purApItemAssetAttributes.accountsPayableItemQuantity}" /></td>
+		<td class="grid" colspan="5" rowspan="2">&nbsp;&nbsp;
+			<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-merge.gif" styleClass="tinybutton" property="methodToCall.merge" title="merge" alt="merge"/>&nbsp;&nbsp;&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<th class="grid" align="right" colspan="6">System Description</th>
+		<td class="infoline" colspan="2"><input type="text" name="mergeDesc" th:field="*{mergeDesc}" data-attribute-entry="${purApItemAssetAttributes.accountsPayableLineItemDescription}" /></td>
+	</tr>
+	</th:block>
+</table>
+</div>
+</section>
+</div>

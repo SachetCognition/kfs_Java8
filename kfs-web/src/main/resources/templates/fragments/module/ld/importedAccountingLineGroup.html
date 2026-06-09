@@ -1,0 +1,219 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ld/importedAccountingLineGroup.tag -->
+<!-- Fragment parameters: isSource, columnCountUntilAmount, columnCount, editingMode, editableAccounts, editableFields, optionalFields, isOptionalFieldsInNewRow, extraRowFields, extraHiddenFields, debitCreditAmount, currentBaseAmount, useCurrencyFormattedTotal, includeObjectTypeCode, displayMonthlyAmounts, accountingLineAttributes, forcedReadOnlyFields, importRowOverride, accountPrefix, hideTotalLine, hideFields, accountingAddLineIndex -->
+<div th:fragment="content (isSource, columnCountUntilAmount, columnCount, editingMode, editableAccounts, editableFields, optionalFields, isOptionalFieldsInNewRow, extraRowFields, extraHiddenFields, debitCreditAmount, currentBaseAmount, useCurrencyFormattedTotal, includeObjectTypeCode, displayMonthlyAmounts, accountingLineAttributes, forcedReadOnlyFields, importRowOverride, accountPrefix, hideTotalLine, hideFields, accountingAddLineIndex)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="A source or target group of accounting line rows.
+The first row is for adding a new accounting line (if not read-only).
+It's followed by 0 or more rows for the accounting lines that have already been added." %>
+
+<!--/*/ <th:block th:with="sourceOrTarget=${isSource ? 'source' : 'target'}"> /*/-->
+<!--/*/ <th:block th:with="baselineSourceOrTarget=${isSource ? 'baselineSource' : 'baselineTarget'}"> /*/-->
+<!--/*/ <th:block th:with="capitalSourceOrTarget=${isSource ? 'Source' : 'Target'}"> /*/-->
+<!--/*/ <th:block th:with="dataDictionaryEntryName=${capitalSourceOrTarget}AccountingLine"> /*/-->
+<!--/*/ <th:block th:with="totalName=currencyFormatted${capitalSourceOrTarget}Total"> /*/-->
+
+<th:block th:if="${empty accountingLineAttributes}">
+    <th:block th:if="${isSource}">
+        <!--/*/ <th:block th:with="accountingLineAttributes=${DataDictionary[KualiForm.document.sourceAccountingLineEntryName].attributes}"> /*/-->
+    </th:block>
+    <th:block th:if="${!isSource}">
+            <!--/*/ <th:block th:with="accountingLineAttributes=${DataDictionary[KualiForm.document.targetAccountingLineEntryName].attributes}"> /*/-->
+    </th:block>
+
+</th:block>
+
+<th:block th:switch="${true}">  
+	<th:block th:case="${empty accountPrefix}">
+		<!--/*/ <th:block th:with="accountPrefix=document."> /*/-->
+		<!--/*/ <th:block th:with="newAccountPrefix="> /*/-->
+	</th:block>
+	<th:block th:case="*">
+		<!--/*/ <th:block th:with="newAccountPrefix=${accountPrefix}"> /*/-->
+	</th:block>
+</th:block>
+
+<th:block th:if="${currentBaseAmount}">
+	<%-- Make sure and hide the total line if it's currentBaseAmount --%>
+	<!-- KULEDOCS-1631: Removed Current & Base total as requested. -->
+	<!--/*/ <th:block th:with="hideTotalLine=true"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="hasActionsColumn=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<!--/*/ <th:block th:with="displayHidden=false"> /*/-->
+
+<!--/*/ <th:block th:with="errorPattern=${isSource ? KFSConstants.SOURCE_ACCOUNTING_LINE_ERROR_PATTERN : KFSConstants.TARGET_ACCOUNTING_LINE_ERROR_PATTERN}"> /*/-->
+<%-- need var titleName because the EL + operator is arithmetic only, not String concat --%>
+<!--/*/ <th:block th:with="titleName=${sourceOrTarget}AccountingLinesSectionTitle"> /*/-->
+<!--/*/ <th:block th:with="sectionTitle=${KualiForm.document[titleName]}"> /*/-->
+
+<th:block th:switch="${true}">
+    <th:block th:case="${empty sectionTitle}">
+        <%-- JournalVoucher has only one group of accounting lines with an empty titleName. --%>
+        <!--/*/ <th:block th:with="errorSectionTitle=this"> /*/-->
+    </th:block>
+    <th:block th:case="*">
+        <c:set var="errorSectionTitle" value='"${sectionTitle}"'/>
+    </th:block>
+</th:block>
+
+<kul:displayIfErrors keyMatch="${errorPattern}">
+    <tr>
+        <td class="error" colspan="${columnCount}">
+            <div class="kfs-errors" data-key-match="${errorPattern}" th:if="${#fields.hasErrors('${errorPattern}')}"><h4></h4></div>
+        </td>
+    </tr>    
+</div><!-- /kul:displayIfErrors -->
+<th:block th:switch="${true}">
+    <th:block th:case="${empty importRowOverride}">
+        <div th:replace="~{fragments/fp/accountingLineImportRow :: content}" data-column-count="${columnCount}" data-is-source="${isSource}" data-editing-mode="${editingMode}" data-section-title="${sectionTitle}"></div>
+    </th:block>
+    <th:block th:case="*">
+        <tr>
+            <td colspan="${!empty editingMode['fullEntry'] ? 4 : columnCount}" class="tab-subhead" style="border-right: none;">${sectionTitle}</td>
+            <th:block th:if="${!empty editingMode['fullEntry']}">
+                <td colspan="${columnCount - 4}" class="tab-subhead-import" align="right" nowrap="nowrap" style="border-left: none;">
+                    <jsp:invoke fragment="importRowOverride"/>
+                </td>
+            </th:block>
+        </tr>
+    </th:block>
+</th:block>
+
+<tr>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.chartOfAccountsCode}"></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.accountNumber}"></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.subAccountNumber}"></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.financialObjectCode}"></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.financialSubObjectCode}"></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.projectCode}"></th>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.organizationReferenceId}"></th>
+    
+	<c:forTokens items="${optionalFields}" delims=" ," var="currentField">
+	   <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes[currentField]}"></th>
+	</c:forTokens>
+    
+    <!--/*/ <th:block th:with="delimitedhideFields=,${hideFields},"> /*/-->
+	<%-- this is hard coded here but could be done in a more general purpose way --%>
+	<!--/*/ <th:block th:with="delimitedField=,amount,"> /*/-->
+	<th:block th:if="${not fn:contains(delimitedhideFields, delimitedField)}">
+    	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountingLineAttributes.amount}"></th>
+	</th:block>
+    <th:block th:if="${hasActionsColumn}">
+        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+    </th:block>
+</tr>
+<th:block th:switch="${true}">
+    <th:block th:case="${debitCreditAmount}">
+        <tr>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+        </tr>
+    </th:block>
+    <th:block th:case="${currentBaseAmount}">
+        <tr>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+        </tr>
+    </th:block>
+    <th:block th:case="*">
+        <tr></tr>
+    </th:block>
+</th:block>
+<th:block th:if="${empty editingMode['viewOnly']}">
+    <th:block th:switch="${true}">
+      <th:block th:case="${isSource}">
+        <!--/*/ <th:block th:with="valuesMap=${KualiForm.newSourceLine.valuesMap}"> /*/-->
+      </th:block>
+      <th:block th:case="*">
+        <!--/*/ <th:block th:with="valuesMap=${KualiForm.newTargetLine.valuesMap}"> /*/-->
+      </th:block>
+    </th:block>  
+    
+    <th:block th:switch="${true}">
+      <th:block th:case="${not empty accountingAddLineIndex}">
+    	<!--/*/ <th:block th:with="newActionGroup=newGroupLine"> /*/-->
+     </th:block>
+      <th:block th:case="*">
+    	<!--/*/ <th:block th:with="newActionGroup=newLine"> /*/-->
+      </th:block>
+    </th:block>    
+    
+</th:block>
+<logic:iterate indexId="ctr" name="KualiForm" property="${accountPrefix}${sourceOrTarget}AccountingLines" id="currentLine">
+    <%-- readonlyness of accountingLines depends on editingMode and user's account-list --%>
+    <th:block th:switch="${true}">
+        <th:block th:case="${!empty editingMode['fullEntry']}">
+            <!--/*/ <th:block th:with="accountIsEditable=true"> /*/-->
+        </th:block>
+        <th:block th:case="${!empty editingMode['viewOnly']||!empty editingMode['expenseSpecialEntry']}">
+            <!--/*/ <th:block th:with="accountIsEditable=false"> /*/-->
+        </th:block>
+        <th:block th:case="*">
+            <%-- using accountKey of baseline accountingLine, so that when the user changes to an account they can't access,
+                 they'll be allowed to revert or update the line to something to which they do have access --%>
+            <c:set var="baselineAccountKey">
+                <span th:text="${KualiForm.${baselineSourceOrTarget}AccountingLine[${ctr}].accountKey}"></span>
+            </c:set>
+
+            <!--/*/ <th:block th:with="accountIsEditable=${!empty editableAccounts[baselineAccountKey]}"> /*/-->
+        </th:block>
+    </th:block>
+
+    <th:block th:if="${empty newAccountPrefix}"> 
+		<!--/*/ <th:block th:with="baselineLine=${baselineSourceOrTarget}AccountingLine[${ctr}]"> /*/-->
+	</th:block>
+
+</tr>
+
+<tr>
+    <td class="total-line" colspan="${columnCountUntilAmount}">&nbsp;</td>
+    <th:block th:switch="${true}">
+        <th:block th:case="${debitCreditAmount}">
+            <%-- from JournalVoucherForm --%>
+            <td class="total-line" style="border-left: 0px;"><strong>Debit Total: $${KualiForm.currencyFormattedDebitTotal}</strong></td>
+            <td class="total-line" style="border-left: 0px;"><strong>Credit Total: $${KualiForm.currencyFormattedCreditTotal}</strong></td>
+        </th:block>
+        <th:block th:case="${hideTotalLine}">
+            <th:block th:if="${isSource}">
+              <td class="total-line" style="border-left: 0px;">&nbsp;</td>
+              <td class="total-line" style="border-left: 0px;">&nbsp;</td>
+            </th:block>
+            <th:block th:if="${!isSource}">
+              <td class="total-line" style="border-left: 0px;">&nbsp;</td>
+              <td class="total-line" style="border-left: 0px;">&nbsp;</td>
+            </th:block>
+        </th:block>
+        <th:block th:case="*">
+            <th:block th:switch="${true}">
+                <th:block th:case="${useCurrencyFormattedTotal}">
+                    <%-- from JournalVoucherForm --%>
+                    <td class="total-line" style="border-left: 0px;"><strong>Total: $${KualiForm.currencyFormattedTotal}</strong></td>
+                </th:block>
+                <th:block th:case="*">
+                <td class="total-line" style="border-left: 0px;"><strong>Total: $${KualiForm[totalName]}</strong></td>
+                </th:block>
+            </th:block>
+        </th:block>
+    </th:block>
+    <td class="total-line" style="border-left: 0px;">&nbsp;</td>
+</tr>
+</div>

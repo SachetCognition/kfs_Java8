@@ -1,0 +1,177 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/capitalAssetInfo.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="render the given field in the capital asset info object"%>
+
+<script language="JavaScript" type="text/javascript" src="dwr/interface/VendorService.js"></script>
+<script language="JavaScript" type="text/javascript" src="scripts/vnd/objectInfo.js"></script>
+	
+<!--/*/ <th:block th:with="attributes=${DataDictionary.CapitalAssetInformation.attributes}"> /*/-->	
+<!--/*/ <th:block th:with="dataCellCssClass=datacell"> /*/-->
+<!--/*/ <th:block th:with="capitalAssetInfoName=document.capitalAssetInformation"> /*/-->
+
+<!--/*/ <th:block th:with="totalColumnSpan=8"> /*/-->
+<!--/*/ <th:block th:with="amountReadOnly=${readOnly}"> /*/-->
+<th:block th:if="${KualiForm.distributeEqualAmount}">
+	<!--/*/ <th:block th:with="amountReadOnly=true"> /*/-->
+</th:block>
+
+<table class="datatable" cellpadding="0" cellspacing="0" summary="Capital Asset Information">
+    <tr>
+   		<td colspan="8" class="tab-subhead" style="border-top: medium;">Create New Assets</td>
+    </tr>
+	<tr>
+   		<td colspan="3" class="tab-subhead" style="border-top: medium;">
+   			<br/>System Control Amount: <span th:text="${KualiForm.systemControlAmount}"></span>
+   		</td>
+	   	<!--/*/ <th:block th:with="totalColumnSpan=${totalColumnSpan-4}"> /*/-->
+	   	<th:block th:if="${KualiForm.createdAssetsControlAmount != 0.00}">
+	   		<!--/*/ <th:block th:with="totalColumnSpan=4"> /*/-->
+	   	</th:block>
+	   	<th:block th:if="${KualiForm.createdAssetsControlAmount == 0.00}">
+	   		<!--/*/ <th:block th:with="totalColumnSpan=4"> /*/-->
+	   	</th:block>
+	   	<td colspan="${totalColumnSpan}" class="tab-subhead" style="border-top: medium;">
+	   		<br/>System Control Remainder Amount: <span th:text="${KualiForm.createdAssetsControlAmount}"></span>
+	   	</td>
+   		<th:block th:if="${KualiForm.createdAssetsControlAmount != 0.00}">
+	   		<td colspan="1" class="tab-subhead" style="border-top: medium;"><br/>
+				<div align="center" valign="bottom">	
+					<input type="image" property="methodToCall.redistributeCreateCapitalAssetAmount" 
+						src="${ConfigProperties.externalizable.images.url}tinybutton-redtotamt.gif" 
+						title="Redistribute Total Amount for new capital assets"
+						alt="Redistribute Total Amount for new capital assets" styleClass="tinybutton" />	
+				</div>
+	   		</td>
+   		</th:block>
+  	</tr>
+	<c:forEach items="${KualiForm.document.capitalAssetInformation}" var="detailLine" varStatus="status">
+		<!--/*/ <th:block th:with="distributionAmountCode=${detailLine.distributionAmountCode}"> /*/-->
+		<th:block th:if="${distributionAmountCode eq KFSConstants.CapitalAssets.DISTRIBUTE_COST_EQUALLY_CODE}">
+			<!--/*/ <th:block th:with="distributionAmountDescription=${KFSConstants.CapitalAssets.DISTRIBUTE_COST_EQUALLY_DESCRIPTION}"> /*/-->
+			<!--/*/ <th:block th:with="amountReadOnly=true"> /*/-->
+		</th:block>
+		<th:block th:if="${distributionAmountCode eq KFSConstants.CapitalAssets.DISTRIBUTE_COST_BY_INDIVIDUAL_ASSET_AMOUNT_CODE}">
+			<!--/*/ <th:block th:with="distributionAmountDescription=${KFSConstants.CapitalAssets.DISTRIBUTE_COST_BY_INDIVIDUAL_ASSET_AMOUNT_DESCRIPTION}"> /*/-->
+			<!--/*/ <th:block th:with="amountReadOnly=false"> /*/-->
+		</th:block>
+
+		<th:block th:if="${detailLine.capitalAssetActionIndicator == KFSConstants.CapitalAssets.CAPITAL_ASSET_CREATE_ACTION_INDICATOR}">
+			<tr><td colspan="8">
+	     	<div align="center" vAlign="middle">
+	     		<h3>Capital Asset for Accounting Lines</h3>
+				<th:block th:if="${not empty detailLine.capitalAssetAccountsGroupDetails}">
+					<tr><td colSpan="8"><center><br/>
+					<div th:replace="~{fragments/fp/capitalAssetAccountsGroupDetails :: content}" data-capital-asset-accounts-group-details="${detailLine.capitalAssetAccountsGroupDetails}" data-capital-asset-accounts-group-details-name="${capitalAssetInfoName}[${status.index}].capitalAssetAccountsGroupDetails" data-read-only="${readOnly}" data-capital-asset-accounts-group-details-index="${status.index}"></div>
+					<br/></center></td></tr>
+			    </th:block>
+				</div></td>	
+		   </tr>
+		   
+			<tr>
+				<td colspan="8">
+		     		<div align="center" valign="middle">
+			     		<table datatable style="border-top: 1px solid rgb(153, 153, 153); width: 96%;" cellpadding="0" cellspacing="0" summary="Asset for Accounting Lines">
+						   <tr> 
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>	   
+						   	    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetQuantity}"></th> 
+						   	    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetTypeCode}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.vendorName}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetManufacturerName}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetManufacturerModelNumber}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.distributionAmountCode}"></th>
+								<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetLineAmount}"></th>
+						   </tr>
+		 
+						   <tr>
+						   		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>	
+								<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-data-field-css-class="amount" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="capitalAssetQuantity" data-lookup="false" data-inquiry="false"></div>
+					
+								<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="capitalAssetTypeCode" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="CapitalAssetManagementAssetType" data-bo-package-name="org.kuali.kfs.integration.cam" data-lookup-or-inquiry-keys="capitalAssetTypeCode" data-business-object-values-map="${capitalAssetInfo.valuesMap}"></div>		
+									   
+								<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="vendorName" data-lookup="true" data-inquiry="true" data-disabled="true" data-bo-class-simple-name="VendorDetail" data-bo-package-name="org.kuali.kfs.vnd.businessobject" data-lookup-or-inquiry-keys="vendorHeaderGeneratedIdentifier,vendorDetailAssignedIdentifier,vendorName" data-business-object-values-map="${capitalAssetInfo.valuesMap}"></div>	
+								
+								<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="capitalAssetManufacturerName" data-lookup="false" data-inquiry="false"></div>
+								
+								<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="${readOnly}" data-field="capitalAssetManufacturerModelNumber" data-lookup="false" data-inquiry="false"></div>
+								
+								<td>	
+									<div><span th:text="${distributionAmountDescription}"></span></div>
+								</td>	
+								
+								<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-data-field-css-class="amount" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="${amountReadOnly}" data-field="capitalAssetLineAmount" data-lookup="false" data-inquiry="false"></div>
+									
+						   </tr>
+							<th:block th:if="${readOnly}">
+							<!--/*/ <th:block th:with="assetDescription=${detailLine.capitalAssetDescription}"> /*/-->
+							   <tr>
+									<th class="grid" width="5%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetDescription}"></label></th>
+									<td class="grid" width="95%" colspan="7"><input type="text" name="${capitalAssetInfoName}[${status.index}].capitalAssetDescription" th:field="*{${capitalAssetInfoName}[${status.index}].capitalAssetDescription}" data-attribute-entry="${attributes.capitalAssetDescription}" readonly="readonly" /></td>
+							   </tr>
+							</th:block>
+							<th:block th:if="${!readOnly}">
+							   <tr>
+							 		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attributes.capitalAssetDescription}"></th>
+									<div th:replace="~{fragments/fp/dataCell :: content}" data-data-cell-css-class="${dataCellCssClass}" data-business-object-form-name="${capitalAssetInfoName}[${status.index}]" data-attributes="${attributes}" data-read-only="false" data-disabled="false" data-field="capitalAssetDescription" data-lookup="false" data-inquiry="false" data-col-span="6" data-row-span="2"></div>
+									<th:block th:if="${!readOnly}">
+										<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+									</th:block>
+							   </tr>
+						   </th:block>
+							<th:block th:if="${!readOnly}">
+								<tr>
+									<td class="infoline">  
+										<div align="center" valign="middle">
+											<input type="image" property="methodToCall.insertCapitalAssetInfo.line${status.index}.Anchor" 
+												src="${ConfigProperties.externalizable.images.url}tinybutton-insert.gif" 
+												title="Add the capital Asset Information"
+												alt="Add the capital Asset Information" styleClass="tinybutton" />&nbsp;	
+											<input type="image" property="methodToCall.deleteCapitalAssetInfo.line${status.index}.Anchor" 
+												src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" 
+												title="Delete the capital Asset Information"
+												alt="Delete the capital Asset Information" styleClass="tinybutton" />&nbsp;
+											<input type="image" property="methodToCall.clearCapitalAssetInfo.line${status.index}.Anchor" 
+												src="${ConfigProperties.kr.externalizable.images.url}tinybutton-clear1.gif" 
+												title="Clear the capital Asset Information"
+												alt="Clear the capital Asset Information" styleClass="tinybutton" />
+											<br /><br />
+											<input type="image" property="methodToCall.addCapitalAssetTagLocationInfo.line${status.index}.Anchor" 
+												src="${ConfigProperties.externalizable.images.url}tinybutton-addtaglocation.gif" 
+												title="Add the capital Asset tag and location"
+												alt="Add the capital Asset tag and location" styleClass="tinybutton" />	
+										</div>
+									</td>
+								</tr>
+							</th:block>
+							
+							<th:block th:if="${not empty detailLine.capitalAssetInformationDetails}">
+							   <tr><td colSpan="8"><center><br/>
+									<div th:replace="~{fragments/fp/capitalAssetInfoDetail :: content}" data-capital-asset-info-details="${detailLine.capitalAssetInformationDetails}" data-capital-asset-info-details-name="${capitalAssetInfoName}[${status.index}].capitalAssetInformationDetails" data-read-only="${readOnly}" data-capital-asset-info-index="${status.index}"></div>
+								<br/></center></td></tr>
+							</th:block>
+						</table>
+					</div>
+		   		</td>
+			</tr>
+		</th:block>
+	</tr>	
+</table>
+</div>
