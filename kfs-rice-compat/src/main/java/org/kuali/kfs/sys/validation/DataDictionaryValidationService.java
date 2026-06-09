@@ -11,10 +11,15 @@ import java.util.Set;
 public class DataDictionaryValidationService {
 
     private final Validator validator;
+    private final ValidatorFactory validatorFactory;
 
     public DataDictionaryValidationService() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        this.validator = factory.getValidator();
+        this.validatorFactory = Validation.buildDefaultValidatorFactory();
+        this.validator = validatorFactory.getValidator();
+    }
+
+    public void close() {
+        validatorFactory.close();
     }
 
     public Map<String, String> validate(Object businessObject) {

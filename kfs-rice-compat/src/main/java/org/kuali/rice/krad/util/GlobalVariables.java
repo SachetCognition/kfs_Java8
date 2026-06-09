@@ -1,7 +1,13 @@
 package org.kuali.rice.krad.util;
 public class GlobalVariables {
-    public static MessageMap getMessageMap() { return new MessageMap(); }
-    public static void setMessageMap(MessageMap messageMap) {}
-    public static Object getUserSession() { return null; }
-    public static void setUserSession(Object session) {}
+    private static final ThreadLocal<MessageMap> messageMap = new ThreadLocal<MessageMap>() {
+        protected MessageMap initialValue() { return new MessageMap(); }
+    };
+    private static final ThreadLocal<org.kuali.rice.krad.UserSession> userSession = new ThreadLocal<org.kuali.rice.krad.UserSession>();
+
+    public static MessageMap getMessageMap() { return messageMap.get(); }
+    public static void setMessageMap(MessageMap map) { messageMap.set(map); }
+    public static org.kuali.rice.krad.UserSession getUserSession() { return userSession.get(); }
+    public static void setUserSession(org.kuali.rice.krad.UserSession session) { userSession.set(session); }
+    public static void clear() { messageMap.remove(); userSession.remove(); }
 }
