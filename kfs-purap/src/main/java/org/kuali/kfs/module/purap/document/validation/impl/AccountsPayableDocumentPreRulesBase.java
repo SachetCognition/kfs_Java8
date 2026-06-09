@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.purap.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
 import org.kuali.kfs.module.purap.document.AccountsPayableDocument;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.document.Document;
  * Performs prompts and other pre business rule checks for the Accounts Payable Document (and its children).
  */
 public abstract class AccountsPayableDocumentPreRulesBase extends PurapDocumentPreRulesBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsPayableDocumentPreRulesBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountsPayableDocumentPreRulesBase.class);
 
     public AccountsPayableDocumentPreRulesBase() {
         super();

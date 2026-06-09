@@ -30,6 +30,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.CollectorDetail;
 import org.kuali.kfs.gl.dataaccess.CollectorDetailDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.exception.ClassNotPersistableException;
  * An OJB implementation of the CollectorDetailDao
  */
 public class CollectorDetailDaoOjb extends PlatformAwareDaoBaseOjb implements CollectorDetailDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorDetailDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorDetailDaoOjb.class);
 
     private DescriptorRepository descriptorRepository;
 
@@ -88,7 +90,6 @@ public class CollectorDetailDaoOjb extends PlatformAwareDaoBaseOjb implements Co
 
         return classDescriptor.getFullTableName();
     }
-
 
     public Integer getMaxCreateSequence(Date date) {
         Criteria crit = new Criteria();

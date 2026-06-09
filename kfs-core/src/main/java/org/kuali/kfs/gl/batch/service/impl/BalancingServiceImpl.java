@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.PosterBalancingStep;
 import org.kuali.kfs.gl.batch.service.BalancingService;
@@ -59,7 +61,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory, BalanceHistory> implements BalancingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalancingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalancingServiceImpl.class);
 
     protected BalancingDao balancingDao;
     protected AccountBalanceDao accountBalanceDao;
@@ -361,7 +363,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
         this.updateEncumbranceHistory(originEntry);
     }
 
-
     /**
      * Update the account balance history table
      * @param originEntry representing the update details
@@ -429,7 +430,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
     @Override
     protected Integer compareBalanceHistory() {
         Integer countComparisionFailures = 0;
-
 
         String balanceTable = persistenceStructureService.getTableName(Balance.class);
         String historyTable = persistenceStructureService.getTableName(balanceHistoryPersistentClass);
@@ -514,8 +514,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
         businessObjectService.save(encumbranceHistory);
     }
 
-
-
     /**
      * @see org.kuali.kfs.gl.batch.service.impl.BalancingServiceBaseImpl#customCompareHistory()
      */
@@ -541,7 +539,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
 
         String accountBalanceTable = persistenceStructureService.getTableName(AccountBalance.class);
         String historyTable = persistenceStructureService.getTableName(AccountBalanceHistory.class);
-
 
         List<AccountBalance> data = ledgerEntryBalanceCachingDao.accountBalanceCompareHistory(accountBalanceTable, historyTable, getFiscalYear());
 
@@ -588,7 +585,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
             reportWriterService.writeNewLines(1);
             reportWriterService.writeFormattedMessageLine(kualiConfigurationService.getPropertyValueAsString(KFSKeyConstants.Balancing.MESSAGE_BATCH_BALANCING_FAILURE_COUNT), (EncumbranceHistory.class).getSimpleName(), countComparisionFailures, this.getComparisonFailuresToPrintPerReport());
         }
-
 
         countComparisionFailures = data.size();
 
@@ -697,7 +693,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
         accountBalanceHistory.setAccountLineActualsBalanceAmount(convertBigDecimalToKualiDecimal((BigDecimal)map.get(GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ACTUALS_BALANCE_AMOUNT)));
         accountBalanceHistory.setAccountLineEncumbranceBalanceAmount(convertBigDecimalToKualiDecimal((BigDecimal)map.get(GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_BALANCE_AMOUNT)));
 
-
         return accountBalanceHistory;
     }
 
@@ -715,7 +710,6 @@ public class BalancingServiceImpl extends BalancingServiceBaseImpl<EntryHistory,
         encumbranceHistory.setDocumentNumber((String)map.get(GeneralLedgerConstants.ColumnNames.DOCUMENT_NUMBER));
         encumbranceHistory.setAccountLineEncumbranceAmount(convertBigDecimalToKualiDecimal((BigDecimal)map.get(GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_AMOUNT)));
         encumbranceHistory.setAccountLineEncumbranceClosedAmount(convertBigDecimalToKualiDecimal((BigDecimal)map.get(GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_CLOSED_AMOUNT)));
-
 
         return encumbranceHistory;
     }

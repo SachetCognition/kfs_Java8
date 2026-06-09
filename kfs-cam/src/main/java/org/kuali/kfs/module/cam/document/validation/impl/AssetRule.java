@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cam.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.cam.CamsKeyConstants.ERROR_INVALID_ASSET_WARRANTY_NO;
 import static org.kuali.kfs.module.cam.CamsKeyConstants.PreTag.ERROR_PRE_TAG_INVALID_REPRESENTATIVE_ID;
 import static org.kuali.kfs.module.cam.CamsPropertyConstants.Asset.ASSET_REPRESENTATIVE;
@@ -76,7 +78,7 @@ import org.springframework.util.AutoPopulatingList;
  * AssetRule for Asset edit.
  */
 public class AssetRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AssetRule.class);
     protected static final Map<LocationField, String> LOCATION_FIELD_MAP = new HashMap<LocationField, String>();
     static {
         LOCATION_FIELD_MAP.put(LocationField.CAMPUS_CODE, CamsPropertyConstants.Asset.CAMPUS_CODE);
@@ -106,7 +108,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
     protected Asset newAsset;
     protected Asset oldAsset;
     protected boolean isFabrication;
-
 
     /**
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#processCustomSaveDocumentBusinessRules(org.kuali.rice.kns.document.MaintenanceDocument)
@@ -339,7 +340,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
             valid &= validateAssetRepresentative();
         }
 
-
         // validate Vendor Name.
         if (!StringUtils.equalsIgnoreCase(oldAsset.getVendorName(), newAsset.getVendorName())) {
             valid &= validateVendorName();
@@ -360,7 +360,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         return valid;
     }
 
-
     /**
      * Check if the new In-service Date is a valid University Date
      *
@@ -380,7 +379,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
 
     /**
      * Check if off campus fields has changed.
@@ -483,7 +481,6 @@ public class AssetRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
 
     /**
      * Validate Asset Location fields

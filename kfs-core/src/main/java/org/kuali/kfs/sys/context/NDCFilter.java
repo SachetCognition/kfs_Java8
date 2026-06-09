@@ -18,25 +18,23 @@
  */
 package org.kuali.kfs.sys.context;
 
-import org.apache.log4j.spi.Filter;
-import org.apache.log4j.spi.LoggingEvent;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.filter.AbstractFilter;
 
-public class NDCFilter extends Filter {
-    private String nestedDiagnosticContext;
+public class NDCFilter extends AbstractFilter {
+    private final String nestedDiagnosticContext;
 
     public NDCFilter(String nestedDiagnosticContext) {
-        super();
+        super(Result.ACCEPT, Result.DENY);
         this.nestedDiagnosticContext = nestedDiagnosticContext;
     }
 
-    /**
-     * @see org.apache.log4j.spi.Filter#decide(org.apache.log4j.spi.LoggingEvent)
-     */
     @Override
-    public int decide(LoggingEvent event) {
-        if (nestedDiagnosticContext.equals(event.getNDC())) {
-            return ACCEPT;
+    public Result filter(LogEvent event) {
+        String ndc = event.getContextStack().peek();
+        if (nestedDiagnosticContext.equals(ndc)) {
+            return Result.ACCEPT;
         }
-        return DENY;
+        return Result.DENY;
     }
 }

@@ -27,6 +27,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.kns.web.struts.action.KualiAction;
 import org.kuali.rice.kns.web.struts.form.KualiForm;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class handles Actions for the balance inquiry report menu
  */
 public class KualiBalanceInquiryReportMenuAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiBalanceInquiryReportMenuAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KualiBalanceInquiryReportMenuAction.class);
 
     /**
      * Entry point to balance inquiry menu, forwards to jsp for rendering.

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.document.AccountingDocument;
 import org.kuali.kfs.sys.document.validation.GenericValidation;
@@ -29,7 +31,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  */
 public class PurchasingAccountsPayableFixErrorPathValidation extends GenericValidation {
     private AccountingLine accountingLineForValidation;
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingAccountsPayableFixErrorPathValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableFixErrorPathValidation.class);
 
     /**
      * @see org.kuali.kfs.sys.document.validation.Validation#validate(java.lang.Object[])
@@ -56,6 +58,5 @@ public class PurchasingAccountsPayableFixErrorPathValidation extends GenericVali
     public void setAccountingLineForValidation(AccountingLine accountingLineForValidation) {
         this.accountingLineForValidation = accountingLineForValidation;
     }
-
 
 }

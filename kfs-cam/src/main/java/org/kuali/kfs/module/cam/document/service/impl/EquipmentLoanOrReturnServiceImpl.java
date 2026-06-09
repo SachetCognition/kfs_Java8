@@ -22,6 +22,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
 import org.kuali.kfs.module.cam.businessobject.Asset;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class EquipmentLoanOrReturnServiceImpl implements EquipmentLoanOrReturnService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EquipmentLoanOrReturnServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EquipmentLoanOrReturnServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 

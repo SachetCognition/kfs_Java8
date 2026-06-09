@@ -32,6 +32,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PurchaseOrderStatuses;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -107,7 +109,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 @NonTransactional
 public class PurapServiceImpl implements PurapService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurapServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected DataDictionaryService dataDictionaryService;
@@ -666,10 +668,9 @@ public class PurapServiceImpl implements PurapService {
         }
         else {
             String errorMessage = "Method processCloseReopenPo called using ID + '" + apDocument.getPurapDocumentIdentifier() + "' and invalid doc type '" + docType + "'";
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage);
         }
-
 
         Integer poId = apDocument.getPurchaseOrderIdentifier();
         PurchaseOrderDocument purchaseOrderDocument = purchaseOrderService.getCurrentPurchaseOrder(poId);
@@ -1410,7 +1411,6 @@ public class PurapServiceImpl implements PurapService {
                }
                clonedTradeInItems.add(cloneItem);
             }
-
 
             summaryAccounts = purapAccountingService.generateSummary(clonedTradeInItems);
             if (summaryAccounts.size() == 0) {

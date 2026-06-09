@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.dataaccess.AccountBalanceObjectDao;
 import org.kuali.kfs.gl.service.AccountBalanceService;
@@ -36,7 +38,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * Calculate Balance By Object Balance Inquiry Screen
  */
 public class AccountBalanceObjectDaoJdbc extends AccountBalanceDaoJdbcBase implements AccountBalanceObjectDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceObjectDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountBalanceObjectDaoJdbc.class);
 
     /**
      * Returns a collection of report data for the account balance by object inquiry
@@ -89,7 +91,6 @@ public class AccountBalanceObjectDaoJdbc extends AccountBalanceDaoJdbcBase imple
                             " AND o.fin_coa_cd = ?" + 
                             " AND a.SESID = ?", universityFiscalYear, chartOfAccountsCode, sessionId);
 
-
             // Delete what we don't need
             if (isCostShareExcluded) {
                 purgeCostShareEntries("FP_INTERIM2_OBJ_MT", "sesid", sessionId);
@@ -135,7 +136,6 @@ public class AccountBalanceObjectDaoJdbc extends AccountBalanceDaoJdbcBase imple
             String insertBalanceStatementSql = "INSERT INTO FP_INTERIM1_OBJ_MT (UNIV_FISCAL_YR, FIN_COA_CD, ACCOUNT_NBR, SUB_ACCT_NBR, FIN_OBJECT_CD, " + "FIN_SUB_OBJ_CD, CURR_BDLN_BAL_AMT, ACLN_ACTLS_BAL_AMT, ACLN_ENCUM_BAL_AMT, TIMESTAMP, SESID) " + "VALUES (?,?,?,?,?,?,?,?,?," + getDbPlatform().getCurTimeFunction() + ",?)";
 
             SqlRowSet pendingEntryRowSet = getJdbcTemplate().queryForRowSet("SELECT b.FIN_OFFST_GNRTN_CD,t.FIN_OBJTYP_DBCR_CD,e.* " + "FROM GL_PENDING_ENTRY_MT e,CA_OBJ_TYPE_T t,CA_BALANCE_TYPE_T b " + "WHERE e.SESID = ?" + " AND e.FIN_OBJ_TYP_CD = t.FIN_OBJ_TYP_CD AND e.fin_balance_typ_cd = b.fin_balance_typ_cd " + "ORDER BY e.univ_fiscal_yr,e.account_nbr,e.sub_acct_nbr,e.fin_object_cd,e.fin_sub_obj_cd,e.fin_obj_typ_cd", new Object[] { sessionId });
-
 
             int updateCount = 0;
             int insertCount = 0;

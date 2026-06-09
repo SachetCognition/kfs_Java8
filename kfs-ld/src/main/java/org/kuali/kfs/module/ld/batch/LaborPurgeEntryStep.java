@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.service.LaborLedgerEntryService;
@@ -31,7 +33,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * The step is used to remove the labor ledger entries posted before the given year from database
  */
 public class LaborPurgeEntryStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborPurgeEntryStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborPurgeEntryStep.class);
 
     private ChartService chartService;
     private LaborLedgerEntryService laborLedgerEntryService;

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -31,10 +33,9 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 @ConfigureContext
 public class SubAccountServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SubAccountServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(SubAccountServiceTest.class);
 
     private final static SubAccount subAccount = SubAccountFixture.VALID_SUB_ACCOUNT.createSubAccount();
-
 
     public void testA21SubAccount() {
         SubAccount sa = SpringContext.getBean(SubAccountService.class).getByPrimaryId(subAccount.getChartOfAccountsCode(), subAccount.getAccountNumber(), subAccount.getSubAccountNumber());
@@ -71,6 +72,5 @@ public class SubAccountServiceTest extends KualiTestBase {
         assertEquals("Wrong account", subAccount.getAccountNumber(), retrieved.getAccountNumber());
         assertEquals("Wrong Sub account number", subAccount.getSubAccountNumber(), retrieved.getSubAccountNumber());
     }
-
 
 }

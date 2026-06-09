@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.BALANCE_TYPE_ACTUAL;
 import static org.kuali.kfs.sys.KFSConstants.BLANK_SPACE;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
@@ -86,7 +88,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class GeneralLedgerPendingEntryServiceImpl implements GeneralLedgerPendingEntryService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerPendingEntryServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GeneralLedgerPendingEntryServiceImpl.class);
 
     protected GeneralLedgerPendingEntryDao generalLedgerPendingEntryDao;
     protected KualiRuleService kualiRuleService;
@@ -140,7 +142,6 @@ public class GeneralLedgerPendingEntryServiceImpl implements GeneralLedgerPendin
 
         // FIXME! - cache this list - balance type code will not change during the lifetime of the server
         List<String> balanceTypeCodes = balanceTypeService.getEncumbranceBalanceTypes(universityFiscalYear);
-
 
         return generalLedgerPendingEntryDao.getTransactionSummary(universityFiscalYear, chartOfAccountsCode, accountNumber, objectTypes, balanceTypeCodes, sufficientFundsObjectCode, isDebit, isYearEnd);
     }

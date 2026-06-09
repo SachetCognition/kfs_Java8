@@ -25,7 +25,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -40,7 +41,7 @@ import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
  * Accounting line for the asset payment document.
  */
 public class AssetPaymentDetail extends SourceAccountingLine {
-    private static Logger LOG = Logger.getLogger(AssetPaymentDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetPaymentDetail.class);
 
     private String expenditureFinancialSystemOriginationCode;
     private Date expenditureFinancialDocumentPostedDate;
@@ -58,8 +59,6 @@ public class AssetPaymentDetail extends SourceAccountingLine {
     private DocumentTypeEBO expenditureFinancialSystemDocumentTypeCode;
     private OriginationCode expenditureFinancialSystemOrigination;
     private Account account;
-
-
 
     /**
      * Default constructor.
@@ -88,7 +87,6 @@ public class AssetPaymentDetail extends SourceAccountingLine {
         this.setPostingPeriodCode(assetPayment.getFinancialDocumentPostingPeriodCode());
         this.setAmount(assetPayment.getAccountChargeAmount());
     }
-
 
     /**
      * @see org.kuali.rice.kns.bo.BusinessObjectBase#toStringMapper()
@@ -135,86 +133,69 @@ public class AssetPaymentDetail extends SourceAccountingLine {
         return expenditureFinancialSystemOriginationCode;
     }
 
-
     public void setExpenditureFinancialSystemOriginationCode(String expenditureFinancialSystemOriginationCode) {
         this.expenditureFinancialSystemOriginationCode = expenditureFinancialSystemOriginationCode;
     }
-
 
     public Date getExpenditureFinancialDocumentPostedDate() {
         return expenditureFinancialDocumentPostedDate;
     }
 
-
     public void setExpenditureFinancialDocumentPostedDate(Date expenditureFinancialDocumentPostedDate) {
         this.expenditureFinancialDocumentPostedDate = expenditureFinancialDocumentPostedDate;
     }
-
 
     public boolean isTransferPaymentIndicator() {
         return transferPaymentIndicator;
     }
 
-
     public void setTransferPaymentIndicator(boolean transferPaymentIndicator) {
         this.transferPaymentIndicator = transferPaymentIndicator;
     }
-
 
     public String getExpenditureFinancialDocumentNumber() {
         return expenditureFinancialDocumentNumber;
     }
 
-
     public void setExpenditureFinancialDocumentNumber(String expenditureFinancialDocumentNumber) {
         this.expenditureFinancialDocumentNumber = expenditureFinancialDocumentNumber;
     }
-
 
     public String getExpenditureFinancialDocumentTypeCode() {
         return expenditureFinancialDocumentTypeCode;
     }
 
-
     public void setExpenditureFinancialDocumentTypeCode(String expenditureFinancialDocumentTypeCode) {
         this.expenditureFinancialDocumentTypeCode = expenditureFinancialDocumentTypeCode;
     }
-
 
     public String getPostingPeriodCode() {
         return postingPeriodCode;
     }
 
-
     public void setPostingPeriodCode(String postingPeriodCode) {
         this.postingPeriodCode = postingPeriodCode;
     }
-
 
     public String getPurchaseOrderNumber() {
         return purchaseOrderNumber;
     }
 
-
     public void setPurchaseOrderNumber(String purchaseOrderNumber) {
         this.purchaseOrderNumber = purchaseOrderNumber;
     }
-
 
     public String getRequisitionNumber() {
         return requisitionNumber;
     }
 
-
     public void setRequisitionNumber(String requisitionNumber) {
         this.requisitionNumber = requisitionNumber;
     }
 
-
     public AccountingPeriod getFinancialDocumentPostingPeriod() {
         return financialDocumentPostingPeriod;
     }
-
 
     public void setFinancialDocumentPostingPeriod(AccountingPeriod financialDocumentPostingPeriod) {
         this.financialDocumentPostingPeriod = financialDocumentPostingPeriod;
@@ -236,7 +217,6 @@ public class AssetPaymentDetail extends SourceAccountingLine {
     public OriginationCode getExpenditureFinancialSystemOrigination() {
         return expenditureFinancialSystemOrigination;
     }
-
 
     public void setExpenditureFinancialSystemOrigination(OriginationCode expenditureFinancialSystemOrigination) {
         this.expenditureFinancialSystemOrigination = expenditureFinancialSystemOrigination;
@@ -269,7 +249,6 @@ public class AssetPaymentDetail extends SourceAccountingLine {
     public KualiDecimal getAmount() {
         return amount;
     }
-
 
     @Override
     public void setAmount(KualiDecimal amount) {

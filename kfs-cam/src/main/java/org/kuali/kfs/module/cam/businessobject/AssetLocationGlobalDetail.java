@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.Building;
 import org.kuali.kfs.sys.businessobject.Room;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -40,7 +41,7 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
  */
 
 public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
-    private static final Logger LOG = Logger.getLogger(AssetLocationGlobalDetail.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetLocationGlobalDetail.class);
 
 	protected String documentNumber;
 	protected Long capitalAssetNumber;
@@ -84,7 +85,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 		this.documentNumber = documentNumber;
 	}
 
-
 	/**
 	 * Gets the capitalAssetNumber attribute.
 	 *
@@ -104,7 +104,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setCapitalAssetNumber(Long capitalAssetNumber) {
 		this.capitalAssetNumber = capitalAssetNumber;
 	}
-
 
 	/**
 	 * Gets the campusCode attribute.
@@ -126,7 +125,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 		this.campusCode = campusCode;
 	}
 
-
 	/**
 	 * Gets the buildingCode attribute.
 	 *
@@ -146,7 +144,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setBuildingCode(String buildingCode) {
 		this.buildingCode = buildingCode;
 	}
-
 
 	/**
 	 * Gets the buildingRoomNumber attribute.
@@ -168,7 +165,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 		this.buildingRoomNumber = buildingRoomNumber;
 	}
 
-
 	/**
 	 * Gets the buildingSubRoomNumber attribute.
 	 *
@@ -188,7 +184,6 @@ public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
 	public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
 		this.buildingSubRoomNumber = buildingSubRoomNumber;
 	}
-
 
 	/**
 	 * Gets the campusTagNumber attribute.

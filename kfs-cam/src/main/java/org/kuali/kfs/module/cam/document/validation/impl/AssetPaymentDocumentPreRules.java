@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This prerule is ex..
  */
 public class AssetPaymentDocumentPreRules extends PromptBeforeValidationBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetPaymentDocumentPreRules.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AssetPaymentDocumentPreRules.class);
 
     @Override
     public boolean doPrompts(Document document) {

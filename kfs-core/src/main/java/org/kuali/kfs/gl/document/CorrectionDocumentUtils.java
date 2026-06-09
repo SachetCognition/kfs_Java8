@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.CorrectionChange;
 import org.kuali.kfs.gl.businessobject.CorrectionChangeGroup;
 import org.kuali.kfs.gl.businessobject.CorrectionCriteria;
@@ -40,7 +42,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * This class provides utility methods for the correction document
  */
 public class CorrectionDocumentUtils {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionDocumentUtils.class);
+    private static Logger LOG = LoggerFactory.getLogger(CorrectionDocumentUtils.class);
     public static final int DEFAULT_RECORD_COUNT_FUNCTIONALITY_LIMIT = 1000;
 
     /**
@@ -213,7 +215,6 @@ public class CorrectionDocumentUtils {
         }
         return compareTo(compareTo, cc.getCorrectionOperatorCode());
     }
-
 
     /**
      * Compares string data

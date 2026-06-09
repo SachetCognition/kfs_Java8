@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.module.ld.businessobject.AccountStatusCurrentFunds;
 import org.kuali.kfs.module.ld.businessobject.LaborLedgerPendingEntry;
@@ -42,7 +44,7 @@ import org.kuali.rice.kns.web.ui.Row;
  * inquiries.
  */
 public class LaborInquiryOptionsServiceImpl implements LaborInquiryOptionsService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborInquiryOptionsServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborInquiryOptionsServiceImpl.class);
 
     private LaborLedgerPendingEntryService laborLedgerPendingEntryService;
     private LaborLedgerBalanceService laborLedgerBalanceService;

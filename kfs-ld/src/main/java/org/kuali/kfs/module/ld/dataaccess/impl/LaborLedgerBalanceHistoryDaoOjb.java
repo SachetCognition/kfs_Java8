@@ -25,6 +25,8 @@ import java.util.List;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.dataaccess.LedgerBalanceHistoryBalancingDao;
 import org.kuali.kfs.module.ld.businessobject.LaborBalanceHistory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -36,7 +38,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * @see org.kuali.kfs.module.ld.businessobject.LaborBalanceHistory
  */
 public class LaborLedgerBalanceHistoryDaoOjb extends PlatformAwareDaoBaseOjb implements LedgerBalanceHistoryBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerBalanceHistoryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerBalanceHistoryDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.gl.dataaccess.LedgerBalanceHistoryBalancingDao#findDistinctFiscalYears()

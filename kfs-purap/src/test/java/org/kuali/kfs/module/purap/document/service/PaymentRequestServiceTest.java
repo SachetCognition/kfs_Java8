@@ -23,6 +23,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.document.PaymentRequestDocument;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.service.DocumentService;
 
 @ConfigureContext(session = UserNameFixture.appleton)
 public class PaymentRequestServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentRequestServiceTest.class);
 
     private DocumentService documentService;
     private KualiDecimal defaultMinimumLimit;
@@ -125,7 +127,6 @@ public class PaymentRequestServiceTest extends KualiTestBase {
         Method method = PaymentRequestServiceImpl.class.getDeclaredMethod("getPaymentRequestDocNumberForAutoApprove", null);
         method.setAccessible(true);
         List<String> docIds = (List<String>) method.invoke(prsi, null);
-
 
         assertTrue(docIds.contains(docIdShouldAutoApprove));
         assertTrue(!docIds.contains(docIdShouldNotAutoApprove));

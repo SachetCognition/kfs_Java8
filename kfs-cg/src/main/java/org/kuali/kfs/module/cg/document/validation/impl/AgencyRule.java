@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.module.cg.CGConstants;
 import org.kuali.kfs.module.cg.CGKeyConstants;
@@ -46,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Rules for processing Agency instances.
  */
 public class AgencyRule extends CGMaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(AgencyRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AgencyRule.class);
 
     protected Agency newAgency;
     protected Agency oldAgency;
@@ -209,7 +210,6 @@ public class AgencyRule extends CGMaintenanceDocumentRuleBase {
         oldAgency = (Agency) super.getOldBo();
     }
 
-
     /**
      * Overrides the method in MaintenanceDocumentRuleBase to give error message to the user when the user tries to add multiple
      * Primary Agency Addresses. At most one Primary Agency Address is allowed. contract.
@@ -324,7 +324,6 @@ public class AgencyRule extends CGMaintenanceDocumentRuleBase {
         return isValid;
     }
 
-
     /**
      * This method validates the addresses when Customer is created from Agency
      *
@@ -339,7 +338,6 @@ public class AgencyRule extends CGMaintenanceDocumentRuleBase {
             isValid &= checkAddressIsValid(agencyAddress, i);
             i++;
         }
-
 
         return isValid;
     }

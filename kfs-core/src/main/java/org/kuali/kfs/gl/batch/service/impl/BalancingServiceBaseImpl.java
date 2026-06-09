@@ -27,6 +27,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.dataaccess.LedgerEntryBalanceCachingDao;
 import org.kuali.kfs.gl.batch.service.BalancingService;
 import org.kuali.kfs.gl.batch.service.PosterService;
@@ -58,7 +60,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public abstract class BalancingServiceBaseImpl<T extends Entry, S extends Balance> implements BalancingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalancingServiceBaseImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalancingServiceBaseImpl.class);
 
     // Used to enable us to do generic general ledger or labor balancing
     protected Class<T> entryHistoryPersistentClass;
@@ -291,7 +293,7 @@ public abstract class BalancingServiceBaseImpl<T extends Entry, S extends Balanc
             posterErrorBufferedReader.close();
         }
         catch (Exception e) {
-            LOG.fatal(String.format(kualiConfigurationService.getPropertyValueAsString(KFSKeyConstants.Balancing.ERROR_BATCH_BALANCING_UNKNOWN_FAILURE), e.getMessage(), lineNumber), e);
+            LOG.error(String.format(kualiConfigurationService.getPropertyValueAsString(KFSKeyConstants.Balancing.ERROR_BATCH_BALANCING_UNKNOWN_FAILURE), e.getMessage(), lineNumber), e);
             reportWriterService.writeFormattedMessageLine(String.format(kualiConfigurationService.getPropertyValueAsString(KFSKeyConstants.Balancing.ERROR_BATCH_BALANCING_UNKNOWN_FAILURE), e.getMessage(), lineNumber));
             throw new RuntimeException(String.format(kualiConfigurationService.getPropertyValueAsString(KFSKeyConstants.Balancing.ERROR_BATCH_BALANCING_UNKNOWN_FAILURE), e.getMessage(), lineNumber), e);
         }
@@ -310,7 +312,6 @@ public abstract class BalancingServiceBaseImpl<T extends Entry, S extends Balanc
     protected int getFiscalYear(){
         return universityDateService.getCurrentFiscalYear()-getPastFiscalYearsToConsider();
     }
-
 
     /**
      * Possible override if sub class has additional history tables. Populates custom history tables.

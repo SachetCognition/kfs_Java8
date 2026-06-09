@@ -30,12 +30,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.service.ElectronicInvoiceMappingService;
 import org.kuali.kfs.module.purap.util.ElectronicInvoiceUtils;
 import org.kuali.kfs.module.purap.util.cxml.CxmlHeader;
 
 public class ElectronicInvoice {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoice.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoice.class);
 
     private static BigDecimal zero = new BigDecimal(0.00);
 
@@ -735,10 +737,8 @@ public class ElectronicInvoice {
         toString.append("invoiceDetailOrders", getInvoiceDetailOrders());
         toString.append("invoiceDetailRequestSummary", getInvoiceDetailRequestSummary());
 
-
         return toString.toString();
 
     }
-
 
 }

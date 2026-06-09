@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.ld.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.LaborKeyConstants;
 import org.kuali.kfs.module.ld.businessobject.ErrorCertification;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Validation for error certification tab to check if it's incomplete
  */
 public class ErrorCertificationValidation extends GenericValidation {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ErrorCertificationValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ErrorCertificationValidation.class);
 
     /**
      * Validates the Error Certification tab.

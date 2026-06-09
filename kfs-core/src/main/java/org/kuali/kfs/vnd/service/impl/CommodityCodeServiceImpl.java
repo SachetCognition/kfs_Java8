@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.vnd.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.vnd.businessobject.CommodityCode;
 import org.kuali.kfs.vnd.dataaccess.CommodityCodeDao;
 import org.kuali.kfs.vnd.service.CommodityCodeService;
@@ -32,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CommodityCodeServiceImpl implements CommodityCodeService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CommodityCodeServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CommodityCodeServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private CommodityCodeDao commodityCodeDao;

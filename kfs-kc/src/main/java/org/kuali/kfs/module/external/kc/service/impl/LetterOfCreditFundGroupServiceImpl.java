@@ -26,6 +26,8 @@ import java.util.Map;
 
 import javax.xml.ws.WebServiceException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kfs.module.external.kc.businessobject.LetterOfCreditFundGroup;
 import org.kuali.kfs.module.external.kc.dto.AwardBasisOfPaymentDTO;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.bo.ExternalizableBusinessObject;
  */
 
 public class LetterOfCreditFundGroupServiceImpl implements ExternalizableBusinessObjectService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LetterOfCreditFundGroupServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(LetterOfCreditFundGroupServiceImpl.class);
 
     protected ConfigurationService configurationService;
 

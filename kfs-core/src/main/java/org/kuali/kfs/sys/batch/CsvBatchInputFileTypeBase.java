@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.exception.ParseException;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -40,7 +41,7 @@ import au.com.bytecode.opencsv.CSVReader;
  * and parse using CSV comma delimited
  */
 public abstract class CsvBatchInputFileTypeBase<CSVEnum extends Enum<CSVEnum>> extends BatchInputFileTypeBase {
-    private static final Logger LOG = Logger.getLogger(CsvBatchInputFileTypeBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CsvBatchInputFileTypeBase.class);
 
     private Class<?> csvEnumClass;
     
@@ -74,7 +75,7 @@ public abstract class CsvBatchInputFileTypeBase<CSVEnum extends Enum<CSVEnum>> e
             fileByteContent.length == 0? "an invalid argument was given, empty input stream" : "";
         
         if (!errorMessage.isEmpty()){
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
 
@@ -154,7 +155,7 @@ public abstract class CsvBatchInputFileTypeBase<CSVEnum extends Enum<CSVEnum>> e
         }
         
         if (errorMessage != null){
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage);
         }
     }

@@ -31,7 +31,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.BatchJobStatus;
 import org.kuali.kfs.sys.batch.BatchSpringContext;
@@ -63,7 +64,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class SchedulerServiceImpl implements SchedulerService {
-    private static final Logger LOG = Logger.getLogger(SchedulerServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SchedulerServiceImpl.class);
     protected static final String SOFT_DEPENDENCY_CODE = "softDependency";
     protected static final String HARD_DEPENDENCY_CODE = "hardDependency";
 
@@ -165,7 +166,6 @@ public class SchedulerServiceImpl implements SchedulerService {
         }
     }
 
-
     protected void loadJob(JobDescriptor jobDescriptor) {
         JobDetail jobDetail = jobDescriptor.getJobDetail();
         addJob(jobDetail);
@@ -233,7 +233,7 @@ public class SchedulerServiceImpl implements SchedulerService {
             }
         }
         if (hasIncompleteJob) {
-            LOG.info(log);
+            LOG.info("{}", log);
         }
         return hasIncompleteJob;
     }
@@ -295,7 +295,7 @@ public class SchedulerServiceImpl implements SchedulerService {
             }
             boolean isPastScheduleCutoffTime = dateTime.after(scheduleCutoffTime);
             if (log) {
-                LOG.info(new StringBuilder("isPastScheduleCutoffTime=").append(isPastScheduleCutoffTime).append(" : ").append(dateTimeService.toDateTimeString(dateTime.getTime())).append(" / ").append(dateTimeService.toDateTimeString(scheduleCutoffTime.getTime())));
+                LOG.info(new StringBuilder("isPastScheduleCutoffTime=").append(isPastScheduleCutoffTime).append(" : ").append(dateTimeService.toDateTimeString(dateTime.getTime())).append(" / ").append(dateTimeService.toDateTimeString(scheduleCutoffTime.getTime())).toString());
             }
             return isPastScheduleCutoffTime;
         }
@@ -337,7 +337,7 @@ public class SchedulerServiceImpl implements SchedulerService {
                 scheduleResults.append("\n\t").append(jobDetail.getName()).append("=").append(getStatus(jobDetail));
             }
         }
-        LOG.info(scheduleResults);
+        LOG.info("{}", scheduleResults);
     }
 
     /**

@@ -20,7 +20,8 @@ package org.kuali.kfs.module.bc.batch.service.impl;
 
 import java.sql.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.batch.dataaccess.GeneralLedgerBudgetLoadDao;
 import org.kuali.kfs.module.bc.batch.service.GLBudgetLoadService;
 import org.kuali.kfs.module.bc.batch.service.GenesisService;
@@ -31,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GLBudgetLoadServiceImpl implements GLBudgetLoadService {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(GLBudgetLoadServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(GLBudgetLoadServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected HomeOriginationService homeOriginationService;
@@ -44,7 +45,6 @@ public class GLBudgetLoadServiceImpl implements GLBudgetLoadService {
     //
     //
     // load pending budget construction GL for a specific fiscal year
-
 
     private GenesisService genesisService;
     private GeneralLedgerBudgetLoadDao generalLedgerBudgetLoadDao;

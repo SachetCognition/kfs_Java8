@@ -30,6 +30,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -64,7 +66,7 @@ public class ContractsGrantsAgingReportServiceImpl implements ContractsGrantsAgi
     protected ContractsAndGrantsModuleBillingService contractsAndGrantsModuleBillingService;
     protected DateTimeService dateTimeService;
     protected LookupService lookupService;
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingReportServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingReportServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.ar.report.service.ContractsGrantsAgingReportService#filterContractsGrantsAgingReport(java.util.Map)

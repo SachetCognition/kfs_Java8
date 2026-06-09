@@ -20,6 +20,8 @@ package org.kuali.kfs.fp.document.validation.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonResidentAlienTax;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.fp.document.service.DisbursementVoucherTaxService;
@@ -29,9 +31,8 @@ import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent;
 import org.kuali.kfs.sys.document.validation.impl.AccountingLineAmountPositiveValidation;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 
-
 public class DisbursementVoucherAccountingLineAmountPositiveValidation extends AccountingLineAmountPositiveValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherAccountingLineAmountPositiveValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherAccountingLineAmountPositiveValidation.class);
 
     private ParameterService parameterService;
 
@@ -62,7 +63,6 @@ public class DisbursementVoucherAccountingLineAmountPositiveValidation extends A
         return isValid;
 
     }
-
 
     /**
     * Sets the parameterService attribute value.

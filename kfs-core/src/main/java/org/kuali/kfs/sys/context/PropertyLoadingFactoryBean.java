@@ -19,6 +19,8 @@
 package org.kuali.kfs.sys.context;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.util.ClassLoaderUtils;
 import org.kuali.rice.core.impl.config.property.JAXBConfigImpl;
@@ -52,8 +54,7 @@ public class PropertyLoadingFactoryBean implements FactoryBean<Properties> {
     private boolean testMode;
     private boolean secureMode;
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PropertyLoadingFactoryBean.class);
-
+    private static Logger LOG = LoggerFactory.getLogger(PropertyLoadingFactoryBean.class);
 
     public Properties getObject() {
         loadBaseProperties();
@@ -110,7 +111,7 @@ public class PropertyLoadingFactoryBean implements FactoryBean<Properties> {
             }
         }
         catch (IOException e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
            // throw new RuntimeException("PropertyLoadingFactoryBean unable to load property file: " + propertyFileName);
         }
     }
@@ -164,7 +165,6 @@ public class PropertyLoadingFactoryBean implements FactoryBean<Properties> {
 
         props.putAll(System.getProperties());
     }
-
 
     public void setTestMode(boolean testMode) {
         this.testMode = testMode;

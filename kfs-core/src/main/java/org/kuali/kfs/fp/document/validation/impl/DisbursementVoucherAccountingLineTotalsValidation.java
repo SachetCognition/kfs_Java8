@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.kns.service.DocumentHelperService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class DisbursementVoucherAccountingLineTotalsValidation extends AccountingLineGroupTotalsUnchangedValidation {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherAccountingLineTotalsValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherAccountingLineTotalsValidation.class);
 
     /**
      * @see org.kuali.kfs.sys.document.validation.impl.AccountingLineGroupTotalsUnchangedValidation#validate(org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent)
@@ -50,7 +52,6 @@ public class DisbursementVoucherAccountingLineTotalsValidation extends Accountin
         }
 
         DisbursementVoucherDocument dvDocument = (DisbursementVoucherDocument) event.getDocument();
-
 
         Person financialSystemUser = GlobalVariables.getUserSession().getPerson();
         final Set<String> currentEditModes = getEditModesFromDocument(dvDocument, financialSystemUser);

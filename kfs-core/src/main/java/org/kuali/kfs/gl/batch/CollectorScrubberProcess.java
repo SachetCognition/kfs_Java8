@@ -27,6 +27,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.impl.DocumentGroupData;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryFileIterator;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryTotals;
@@ -45,14 +47,13 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.krad.service.PersistenceService;
 
-
 /**
  * This class scrubs the billing details in a collector batch. Note that all services used by this class are passed in as parameters
  * to the constructor. NOTE: IT IS IMPERATIVE that a new instance of this class is constructed and used to parse each batch. Sharing
  * instances to scrub multiple batches may lead to unpredictable results.
  */
 public class CollectorScrubberProcess {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorScrubberProcess.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CollectorScrubberProcess.class);
     
     protected CollectorBatch batch;
     protected String inputFileName;

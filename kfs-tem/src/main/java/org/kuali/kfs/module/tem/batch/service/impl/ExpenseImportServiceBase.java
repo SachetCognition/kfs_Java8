@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.tem.batch.service.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.ProjectCode;
@@ -39,10 +40,9 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 public class ExpenseImportServiceBase {
 
-    private static Logger LOG = Logger.getLogger(ExpenseImportServiceBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExpenseImportServiceBase.class);
 
     /**
      *
@@ -227,7 +227,6 @@ public class ExpenseImportServiceBase {
             agencyData.setErrorCode(error);
         }
     }
-
 
     /**
      * Gets the accountService attribute.

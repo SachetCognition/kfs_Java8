@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -59,7 +61,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AssetGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetGlobal.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetGlobal.class);
 
     private String documentNumber;
     private String acquisitionTypeCode;
@@ -161,7 +163,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the acquisitionTypeCode attribute.
      * 
@@ -179,7 +180,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setAcquisitionTypeCode(String acquisitionTypeCode) {
         this.acquisitionTypeCode = acquisitionTypeCode;
     }
-
 
     /**
      * Gets the capitalAssetDescription attribute.
@@ -199,7 +199,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         this.capitalAssetDescription = capitalAssetDescription;
     }
 
-
     /**
      * Gets the inventoryStatusCode attribute.
      * 
@@ -217,7 +216,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setInventoryStatusCode(String inventoryStatusCode) {
         this.inventoryStatusCode = inventoryStatusCode;
     }
-
 
     /**
      * Gets the conditionCode attribute.
@@ -237,7 +235,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         this.conditionCode = conditionCode;
     }
 
-
     /**
      * Gets the capitalAssetTypeCode attribute.
      * 
@@ -255,7 +252,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setCapitalAssetTypeCode(String capitalAssetTypeCode) {
         this.capitalAssetTypeCode = capitalAssetTypeCode;
     }
-
 
     /**
      * Gets the manufacturerName attribute.
@@ -310,7 +306,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setTotalCostAmount(KualiDecimal totalCostAmount) {
         this.totalCostAmount = totalCostAmount;
     }
-
 
     /**
      * Gets the landCountyName attribute.
@@ -706,7 +701,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         return true;
     }
 
-
     public List<? extends GlobalBusinessObjectDetail> getAllDetailObjects() {
         return getAssetGlobalDetails();
     }
@@ -746,7 +740,6 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public void setFinancialDocumentPostingPeriodCode(String financialDocumentPostingPeriodCode) {
         this.financialDocumentPostingPeriodCode = financialDocumentPostingPeriodCode;
     }
-
 
     /**
      * Gets the financialDocumentPostingYear attribute.

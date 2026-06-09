@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.service.AccountService;
@@ -64,7 +66,7 @@ import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
 public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetTransferDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AssetTransferDocument.class);
     protected String hiddenFieldForError;
     protected String representativeUniversalIdentifier;
     protected String campusCode;
@@ -107,7 +109,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.targetAssetGlpeSourceDetails = new ArrayList<AssetGlpeSourceDetail>();
     }
 
-
     /**
      * @see org.kuali.kfs.sys.document.GeneralLedgerPendingEntrySource#customizeExplicitGeneralLedgerPendingEntry(org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySourceDetail,
      *      org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry)
@@ -130,7 +131,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public boolean generateDocumentGeneralLedgerPendingEntries(GeneralLedgerPendingEntrySequenceHelper sequenceHelper) {
         return true;
     }
-
 
     public Asset getAsset() {
         return asset;
@@ -164,7 +164,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return building;
     }
 
-
     /**
      * Gets the buildingCode attribute.
      * 
@@ -183,7 +182,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return buildingRoom;
     }
 
-
     /**
      * Gets the buildingRoomNumber attribute.
      * 
@@ -201,7 +199,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public String getBuildingSubRoomNumber() {
         return buildingSubRoomNumber;
     }
-
 
     /**
      * Gets the campus attribute.
@@ -276,7 +273,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return offCampusAddress;
     }
 
-
     /**
      * Gets the offCampusCityName attribute.
      * 
@@ -310,7 +306,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         
         return offCampusState;
     }
-
 
     /**
      * Gets the offCampusStateCode attribute.
@@ -378,7 +373,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return offCampusCountry;
     }
 
-
     /**
      * Gets the organizationInventoryName attribute.
      * 
@@ -423,7 +417,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public Chart getOrganizationOwnerChartOfAccounts() {
         return organizationOwnerChartOfAccounts;
     }
-
 
     /**
      * Gets the organizationOwnerChartOfAccountsCode attribute.
@@ -567,7 +560,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
 
     }
 
-
     /**
      * Gets the interdepartmentalSalesIndicator attribute.
      * 
@@ -576,7 +568,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public boolean isInterdepartmentalSalesIndicator() {
         return interdepartmentalSalesIndicator;
     }
-
 
     public void setAsset(Asset asset) {
         this.asset = asset;
@@ -592,7 +583,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.building = building;
     }
 
-
     /**
      * Sets the buildingCode attribute.
      * 
@@ -601,7 +591,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setBuildingCode(String buildingCode) {
         this.buildingCode = buildingCode;
     }
-
 
     /**
      * Sets the buildingRoom attribute value.
@@ -622,7 +611,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.buildingRoomNumber = buildingRoomNumber;
     }
 
-
     /**
      * Sets the buildingSubRoomNumber attribute.
      * 
@@ -631,7 +619,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
         this.buildingSubRoomNumber = buildingSubRoomNumber;
     }
-
 
     /**
      * Sets the campus attribute.
@@ -642,7 +629,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setCampus(CampusEbo campus) {
         this.campus = campus;
     }
-
 
     /**
      * Sets the campusCode attribute.
@@ -662,11 +648,9 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.documentNumber = documentNumber;
     }
 
-
     public void setGeneralLedgerPostables(List<AssetGlpeSourceDetail> generalLedgerPostables) {
         this.sourceAssetGlpeSourceDetails = generalLedgerPostables;
     }
-
 
     /**
      * Sets the interdepartmentalSalesIndicator attribute.
@@ -676,7 +660,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setInterdepartmentalSalesIndicator(boolean interdepartmentalSalesIndicator) {
         this.interdepartmentalSalesIndicator = interdepartmentalSalesIndicator;
     }
-
 
     /**
      * Sets the offCampusAddress attribute.
@@ -706,7 +689,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.offCampusState = offCampusState;
     }
 
-
     /**
      * Sets the offCampusStateCode attribute.
      * 
@@ -715,7 +697,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setOffCampusStateCode(String offCampusStateCode) {
         this.offCampusStateCode = offCampusStateCode;
     }
-
 
     /**
      * Sets the offCampusZipCode attribute.
@@ -745,7 +726,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.offCampusCountry = offCampusCountry;
     }
 
-
     /**
      * Sets the organizationInventoryName attribute.
      * 
@@ -754,7 +734,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setOrganizationInventoryName(String organizationInventoryName) {
         this.organizationInventoryName = organizationInventoryName;
     }
-
 
     /**
      * Sets the organizationOwnerAccount attribute.
@@ -794,7 +773,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         }
     }
 
-
     /**
      * Sets the organizationOwnerChartOfAccounts attribute.
      * 
@@ -804,7 +782,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setOrganizationOwnerChartOfAccounts(Chart organizationOwnerChartOfAccounts) {
         this.organizationOwnerChartOfAccounts = organizationOwnerChartOfAccounts;
     }
-
 
     /**
      * Sets the organizationOwnerChartOfAccountsCode attribute.
@@ -824,7 +801,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.organizationTagNumber = organizationTagNumber;
     }
 
-
     /**
      * Sets the organizationText attribute.
      * 
@@ -833,7 +809,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setOrganizationText(String organizationText) {
         this.organizationText = organizationText;
     }
-
 
     /**
      * Sets the representativeUniversalIdentifier attribute.
@@ -844,7 +819,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         this.representativeUniversalIdentifier = representativeUniversalIdentifier;
     }
 
-
     /**
      * Sets the transferOfFundsFinancialDocumentNumber attribute.
      * 
@@ -853,7 +827,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void setTransferOfFundsFinancialDocumentNumber(String transferOfFundsFinancialDocumentNumber) {
         this.transferOfFundsFinancialDocumentNumber = transferOfFundsFinancialDocumentNumber;
     }
-
 
     /**
      * @see org.kuali.rice.kns.bo.BusinessObjectBase#toStringMapper()
@@ -874,7 +847,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return generalLedgerPostables;
     }
 
-
     public List<AssetGlpeSourceDetail> getTargetAssetGlpeSourceDetails() {
         if (this.targetAssetGlpeSourceDetails == null) {
             this.targetAssetGlpeSourceDetails = new ArrayList<AssetGlpeSourceDetail>();
@@ -882,11 +854,9 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return this.targetAssetGlpeSourceDetails;
     }
 
-
     public void setTargetAssetGlpeSourceDetails(List<AssetGlpeSourceDetail> targetAssetGlpeSourceDetails) {
         this.targetAssetGlpeSourceDetails = targetAssetGlpeSourceDetails;
     }
-
 
     public void setSourceAssetGlpeSourceDetails(List<AssetGlpeSourceDetail> sourceAssetGlpeSourceDetails) {
         this.sourceAssetGlpeSourceDetails = sourceAssetGlpeSourceDetails;
@@ -899,41 +869,33 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
         return generalLedgerPostables;
     }
 
-
     public String getOffCampusCountryCode() {
         return offCampusCountryCode;
     }
-
 
     public void setOffCampusCountryCode(String offCampusCountryCode) {
         this.offCampusCountryCode = offCampusCountryCode;
     }
 
-
     public String getOffCampusName() {
         return offCampusName;
     }
-
 
     public void setOffCampusName(String offCampusName) {
         this.offCampusName = offCampusName;
     }
 
-
     public String getOldOrganizationOwnerAccountNumber() {
         return oldOrganizationOwnerAccountNumber;
     }
-
 
     public void setOldOrganizationOwnerAccountNumber(String oldOrganizationOwnerAccountNumber) {
         this.oldOrganizationOwnerAccountNumber = oldOrganizationOwnerAccountNumber;
     }
 
-
     public String getOldOrganizationOwnerChartOfAccountsCode() {
         return oldOrganizationOwnerChartOfAccountsCode;
     }
-
 
     public void setOldOrganizationOwnerChartOfAccountsCode(String oldOrganizationOwnerChartOfAccountsCode) {
         this.oldOrganizationOwnerChartOfAccountsCode = oldOrganizationOwnerChartOfAccountsCode;
@@ -948,7 +910,6 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public String getHiddenFieldForError() {
         return hiddenFieldForError;
     }
-
 
     public void setHiddenFieldForError(String hiddenFieldForError) {
         this.hiddenFieldForError = hiddenFieldForError;

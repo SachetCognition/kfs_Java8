@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ld.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.businessobject.AccountStatusBaseFunds;
 import org.kuali.kfs.module.ld.dataaccess.LaborBaseFundsDao;
 import org.kuali.kfs.module.ld.service.LaborBaseFundsService;
@@ -35,7 +37,7 @@ import org.kuali.kfs.sys.service.NonTransactional;
 
 @NonTransactional
 public class LaborBaseFundsServiceImpl implements LaborBaseFundsService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBaseFundsServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBaseFundsServiceImpl.class);
 
     private LaborBaseFundsDao laborBaseFundsDao;
     private LaborCalculatedSalaryFoundationTrackerService laborCalculatedSalaryFoundationTrackerService;

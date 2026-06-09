@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.web.ui.ContractsGrantsLookupResultRow;
 import org.kuali.rice.core.api.util.RiceConstants;
@@ -39,7 +41,7 @@ import org.kuali.rice.kns.web.ui.ResultRow;
  */
 public class GenerateDunningLettersLookupAction extends ContractsGrantsMultipleValueLookupAction {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GenerateDunningLettersLookupAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GenerateDunningLettersLookupAction.class);
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiMultipleValueLookupAction#search(org.apache.struts.action.ActionMapping,

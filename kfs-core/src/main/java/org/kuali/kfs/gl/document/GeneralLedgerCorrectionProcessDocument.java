@@ -29,6 +29,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.CorrectionProcessScrubberStep;
 import org.kuali.kfs.gl.businessobject.CorrectionChangeGroup;
@@ -53,7 +55,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * entries within them.
  */
 public class GeneralLedgerCorrectionProcessDocument extends FinancialSystemTransactionalDocumentBase implements AmountTotaling {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerCorrectionProcessDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(GeneralLedgerCorrectionProcessDocument.class);
 
     protected String correctionTypeCode; // CorrectionDocumentService.CORRECTION_TYPE_MANUAL or
     protected boolean correctionSelection; // false if all input rows should be in the output, true if only selected rows should be
@@ -390,7 +392,6 @@ public class GeneralLedgerCorrectionProcessDocument extends FinancialSystemTrans
         DateFormat dateFormat = new SimpleDateFormat(dateFormatStr);
 
         return dateFormat.format(date) + GeneralLedgerConstants.BatchFileSystem.EXTENSION;
-
 
     }
 }

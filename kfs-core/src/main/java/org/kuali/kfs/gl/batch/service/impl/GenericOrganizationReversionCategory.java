@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionCategory;
 import org.kuali.kfs.gl.batch.service.OrganizationReversionCategoryLogic;
@@ -30,7 +32,7 @@ import org.kuali.rice.core.api.parameter.ParameterEvaluatorService;
  * @see org.kuali.kfs.gl.batch.service.OrganizationReversionCategoryLogic
  */
 public class GenericOrganizationReversionCategory implements OrganizationReversionCategoryLogic {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GenericOrganizationReversionCategory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GenericOrganizationReversionCategory.class);
 
     protected String categoryCode;
     protected String categoryName;

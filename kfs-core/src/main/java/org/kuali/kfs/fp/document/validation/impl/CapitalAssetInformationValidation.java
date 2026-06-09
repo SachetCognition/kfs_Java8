@@ -20,6 +20,8 @@ package org.kuali.kfs.fp.document.validation.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAssetAccountsGroupDetails;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.fp.document.CapitalAssetEditable;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * validate the capital asset information associated with the accounting document for validation
  */
 public class CapitalAssetInformationValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAssetInformationValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(CapitalAssetInformationValidation.class);
 
     private CapitalAssetBuilderModuleService capitalAssetBuilderModuleService = SpringContext.getBean(CapitalAssetBuilderModuleService.class);
     private AccountingDocument accountingDocumentForValidation;

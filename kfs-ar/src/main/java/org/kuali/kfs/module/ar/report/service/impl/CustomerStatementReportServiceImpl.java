@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
 
 import net.sf.jasperreports.engine.JRParameter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.report.service.CustomerStatementReportService;
 import org.kuali.kfs.module.ar.report.util.CustomerStatementReportDataHolder;
@@ -38,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CustomerStatementReportServiceImpl implements CustomerStatementReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerStatementReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerStatementReportServiceImpl.class);
 
     private ReportGenerationService reportGenerationService;
     private ReportInfo customerStatementReportInfo;

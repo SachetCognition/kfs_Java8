@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrgReviewRoleService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -55,7 +57,7 @@ import org.kuali.rice.krad.bo.BusinessObject;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.UrlFactory;
 public class OrgReviewRoleLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrgReviewRoleLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrgReviewRoleLookupableHelperServiceImpl.class);
 
     protected OrgReviewRoleService orgReviewRoleService;
 
@@ -430,9 +432,6 @@ public class OrgReviewRoleLookupableHelperServiceImpl extends KualiLookupableHel
         return results;
     }
 
-
-
-
     private static final String[] TRUE_VALUES = new String[] { "true", "yes", "t", "y" };
     public static boolean getBooleanValueForString(String value, boolean defaultValue) {
         if (!StringUtils.isBlank(value)) {
@@ -652,6 +651,5 @@ public class OrgReviewRoleLookupableHelperServiceImpl extends KualiLookupableHel
     public void setOrgReviewRoleService(OrgReviewRoleService orgReviewRoleService) {
         this.orgReviewRoleService = orgReviewRoleService;
     }
-
 
 }

@@ -24,6 +24,8 @@ package org.kuali.kfs.module.purap.service.impl;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoice;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceItem;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceOrder;
@@ -33,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ElectronicInvoiceMappingServiceImpl implements ElectronicInvoiceMappingService {
-  private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceMappingServiceImpl.class);
+  private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceMappingServiceImpl.class);
   
   private ElectronicInvoicingDao electronicInvoicingDao;
 

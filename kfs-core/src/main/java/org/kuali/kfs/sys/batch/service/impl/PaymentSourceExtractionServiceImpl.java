@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.pdp.businessobject.Batch;
 import org.kuali.kfs.pdp.businessobject.CustomerProfile;
@@ -53,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PaymentSourceExtractionServiceImpl implements PaymentSourceExtractionService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentSourceExtractionServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentSourceExtractionServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected CustomerProfileService customerProfileService;
@@ -169,7 +171,6 @@ public class PaymentSourceExtractionServiceImpl implements PaymentSourceExtracti
 
         if (!documents.isEmpty()) {
             final PaymentSource firstPaymentSource = documents.get(0);
-
 
             Batch batch = createBatch(campusCode, principalId, processRunDate);
             Integer count = 0;

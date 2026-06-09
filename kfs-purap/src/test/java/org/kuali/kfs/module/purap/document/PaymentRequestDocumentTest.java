@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.document.AccountingDocumentTestUtils.testGetNewDocument_byDocumentClass;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.appleton;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
@@ -63,7 +65,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 @ConfigureContext(session = appleton)
 public class PaymentRequestDocumentTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestItem.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentRequestItem.class);
 
     public static final Class<PaymentRequestDocument> DOCUMENT_CLASS = PaymentRequestDocument.class;
     private static final String ACCOUNT_REVIEW = "Account";

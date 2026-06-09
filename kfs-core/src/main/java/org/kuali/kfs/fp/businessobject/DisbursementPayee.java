@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.service.DisbursementVoucherPayeeService;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.sys.KFSConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.kim.impl.KIMPropertyConstants;
 import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
 
 public class DisbursementPayee extends TransientBusinessObjectBase implements MutableInactivatable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementPayee.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementPayee.class);
 
     private String payeeIdNumber;
     private String payeeTypeCode;

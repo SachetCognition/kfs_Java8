@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleService;
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kfs.module.external.kc.businessobject.AccountAutoCreateDefaults;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 public class AccountDefaultServiceImpl implements AccountDefaultsService {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDefaultServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountDefaultServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected ContractsAndGrantsModuleService contractsAndGrantsModuleService;

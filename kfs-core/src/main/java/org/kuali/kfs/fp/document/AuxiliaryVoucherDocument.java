@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.fp.document.validation.impl.AuxiliaryVoucherDocumentRuleConstants.AUXILIARY_VOUCHER_ACCOUNTING_PERIOD_GRACE_PERIOD;
 import static org.kuali.kfs.fp.document.validation.impl.AuxiliaryVoucherDocumentRuleConstants.GENERAL_LEDGER_PENDING_ENTRY_OFFSET_CODE;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
@@ -62,7 +64,7 @@ import org.kuali.rice.krad.document.Copyable;
  * and target. Expense is the expense and target is the income lines.
  */
 public class AuxiliaryVoucherDocument extends AccountingDocumentBase implements VoucherDocument, Copyable, Correctable, AmountTotaling {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AuxiliaryVoucherDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AuxiliaryVoucherDocument.class);
 
     protected String typeCode = ADJUSTMENT_DOC_TYPE;
     protected java.sql.Date reversalDate;

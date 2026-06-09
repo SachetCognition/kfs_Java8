@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.gl.GeneralLedgerConstants.GlSummaryReport.CURRENT_AND_LAST_YEAR;
 import static org.kuali.kfs.gl.GeneralLedgerConstants.GlSummaryReport.CURRENT_YEAR_LOWER;
 import static org.kuali.kfs.gl.GeneralLedgerConstants.GlSummaryReport.CURRENT_YEAR_UPPER;
@@ -54,7 +56,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * Implements a set of methods that can generate labor balance summary reports
  */
 public class LaborBalanceSummaryReportServiceImpl implements LaborBalanceSummaryReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBalanceSummaryReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBalanceSummaryReportServiceImpl.class);
 
     private DateTimeService dateTimeService;
     private OptionsService optionsService;
@@ -107,7 +109,7 @@ public class LaborBalanceSummaryReportServiceImpl implements LaborBalanceSummary
     protected void generateBalanceSummaryReports(Integer fiscalYear, Date runDate) {
         SystemOptions options = optionsService.getOptions(fiscalYear);       
         if(options == null) {
-            LOG.fatal("The data for " + fiscalYear + "have NOT been setup.");
+            LOG.error("The data for " + fiscalYear + "have NOT been setup.");
             return;
         }
         
@@ -170,7 +172,6 @@ public class LaborBalanceSummaryReportServiceImpl implements LaborBalanceSummary
         
         posterOutputSummaryReport.writeReport(laborPosterOutputSummaryReportWriterService);
     }
-
 
     /**
      * get the encumbrance balance type codes for the given fiscal year
@@ -343,6 +344,5 @@ public class LaborBalanceSummaryReportServiceImpl implements LaborBalanceSummary
     public void setBatchFileDirectoryName(String batchFileDirectoryName) {
         this.batchFileDirectoryName = batchFileDirectoryName;
     }
-
 
 }

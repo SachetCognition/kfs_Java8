@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.math.BigDecimal;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.service.DocumentService;
 @ConfigureContext(session = khuntley, shouldCommitTransactions = true)
 public class CustomerCreditMemoDocumentRuleTest extends KualiTestBase {
 
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerCreditMemoDocumentRuleTest.class);
+    public static Logger LOG = LoggerFactory.getLogger(CustomerCreditMemoDocumentRuleTest.class);
 
     private CustomerCreditMemoDocumentRule rule;
     private CustomerCreditMemoDocument document;

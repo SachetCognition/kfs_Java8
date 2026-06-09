@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.io.IOException;
@@ -34,7 +36,7 @@ import org.kuali.kfs.sys.exception.ParseException;
 
 @ConfigureContext(session = khuntley)
 public class CustomerLoadCSVInputFileTypeTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerLoadCSVInputFileTypeTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerLoadCSVInputFileTypeTest.class);
 
     private static final String CSV_SAMPLE_DIRECTORY = "org/kuali/kfs/module/ar/batch/sample/";
     private static final String CSV_TEST_FILE = "CustomerLoad_Test.csv";

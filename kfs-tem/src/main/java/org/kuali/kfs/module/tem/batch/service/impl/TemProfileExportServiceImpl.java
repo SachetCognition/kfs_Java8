@@ -35,6 +35,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.batch.TemProfileExportStep;
 import org.kuali.kfs.module.tem.batch.service.TemProfileExportService;
@@ -51,7 +53,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
 public class TemProfileExportServiceImpl implements TemProfileExportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TemProfileExportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(TemProfileExportServiceImpl.class);
     protected TemProfileService temProfileService;
     protected PersonService personService;
     protected ParameterService parameterService;
@@ -174,7 +176,6 @@ public class TemProfileExportServiceImpl implements TemProfileExportService {
         return profileDetail;
     }
 
-
     protected Element createElement(Document doc, String elementName, String elementValue) {
         //create element
         Element element = doc.createElement(elementName);
@@ -234,8 +235,6 @@ public class TemProfileExportServiceImpl implements TemProfileExportService {
         return principalName;
     }
 
-
-
     /**
      * Sets the temProfileService attribute value.
      * @param temProfileService The temProfileService to set.
@@ -276,9 +275,6 @@ public class TemProfileExportServiceImpl implements TemProfileExportService {
         this.fileName = fileName;
     }
 
-
-
-
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
@@ -294,6 +290,5 @@ public class TemProfileExportServiceImpl implements TemProfileExportService {
     public void setPersonService(PersonService personService) {
         this.personService = personService;
     }
-
 
 }

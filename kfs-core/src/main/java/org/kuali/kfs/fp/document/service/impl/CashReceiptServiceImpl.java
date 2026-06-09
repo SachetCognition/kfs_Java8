@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.document.validation.impl.AccountingDocumentRuleBaseConstants.ERROR_PATH.DOCUMENT_ERROR_PREFIX;
 
 import java.util.ArrayList;
@@ -60,7 +62,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CashReceiptServiceImpl implements CashReceiptService {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashReceiptServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(CashReceiptServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected CashManagementDao cashManagementDao;
@@ -78,7 +80,6 @@ public class CashReceiptServiceImpl implements CashReceiptService {
     protected boolean verifyCampus(String campusCode) {
         return SpringContext.getBean(CampusService.class).getCampus(campusCode) != null;
     }
-
 
     /**
      * This method retrieves the cash receipt verification unit based on the user provided.  This is done by retrieving the campus
@@ -99,7 +100,6 @@ public class CashReceiptServiceImpl implements CashReceiptService {
 
         return user.getCampusCode();
     }
-
 
     /**
      * This method retrieves a collection of cash receipts using the verification unit and the status provided to
@@ -172,7 +172,6 @@ public class CashReceiptServiceImpl implements CashReceiptService {
 
         return documents;
     }
-
 
     /**
      * This method builds out a map of search criteria for performing cash receipt lookups using the values provided.

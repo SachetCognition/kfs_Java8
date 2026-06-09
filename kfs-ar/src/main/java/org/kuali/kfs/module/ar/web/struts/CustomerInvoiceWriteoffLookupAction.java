@@ -31,6 +31,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.web.ui.ContractsGrantsLookupResultRow;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 
 public class CustomerInvoiceWriteoffLookupAction extends KualiMultipleValueLookupAction {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceWriteoffLookupAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerInvoiceWriteoffLookupAction.class);
 
     /**
      * This method performs the operations necessary for a multiple value lookup to select all of the results and rerender the page

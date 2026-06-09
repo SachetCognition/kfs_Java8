@@ -32,6 +32,8 @@ import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.OJBUtility;
@@ -53,7 +55,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * An OJB implementation of BalanceDao
  */
 public class BalanceDaoOjb extends PlatformAwareDaoBaseOjb implements BalanceDao, LedgerBalanceBalancingDao {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceDaoOjb.class);
 
     /**
      * Does a ReportQuery to summarize GL balance data
@@ -157,7 +159,6 @@ public class BalanceDaoOjb extends PlatformAwareDaoBaseOjb implements BalanceDao
     protected void negatedCriteriaBuilder(Criteria criteria, String name, Collection collection) {
         criteriaBuilderHelper(criteria, name, collection, true);
     }
-
 
     /**
      * This method provides the implementation for the conveniences methods criteriaBuilder & negatedCriteriaBuilder

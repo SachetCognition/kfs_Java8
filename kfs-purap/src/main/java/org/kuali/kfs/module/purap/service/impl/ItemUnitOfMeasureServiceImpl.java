@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.service.ItemUnitOfMeasureService;
 import org.kuali.kfs.sys.businessobject.UnitOfMeasure;
 import org.kuali.rice.krad.service.BusinessObjectService;
@@ -29,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ItemUnitOfMeasureServiceImpl implements ItemUnitOfMeasureService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ItemUnitOfMeasureServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ItemUnitOfMeasureServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     

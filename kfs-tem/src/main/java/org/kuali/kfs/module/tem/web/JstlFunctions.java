@@ -146,7 +146,7 @@ public final class JstlFunctions {
 
     private static void warn(String message, Exception e) {
         if (LOG.isWarnEnabled()) {
-            LOG.warn(new StringBuilder(message).append(IN_PREPOSITION).append(buildTraceMessage(e)));
+            LOG.warn(new StringBuilder(message).append(IN_PREPOSITION).append(buildTraceMessage(e)).toString());
         }
     }
 

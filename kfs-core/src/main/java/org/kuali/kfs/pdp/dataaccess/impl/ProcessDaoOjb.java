@@ -26,17 +26,18 @@ import java.util.List;
 
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.PaymentProcess;
 import org.kuali.kfs.pdp.dataaccess.ProcessDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
-
 /**
  * 
  */
 public class ProcessDaoOjb extends PlatformAwareDaoBaseOjb implements ProcessDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcessDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcessDaoOjb.class);
 
     public ProcessDaoOjb() {
         super();

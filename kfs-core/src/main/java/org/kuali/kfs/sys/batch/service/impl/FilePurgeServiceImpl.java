@@ -24,6 +24,8 @@ import java.util.List;
 import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.OrFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.FileUtil;
 import org.kuali.kfs.sys.batch.FilePurgeCustomAge;
 import org.kuali.kfs.sys.batch.FilePurgeDirectoryWalker;
@@ -37,7 +39,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * Default implementation of the FilePurgeService
  */
 public class FilePurgeServiceImpl implements FilePurgeService {
-    protected org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FilePurgeServiceImpl.class);
+    protected Logger LOG = LoggerFactory.getLogger(FilePurgeServiceImpl.class);
     private ParameterService parameterService;
     
     protected static final String DAYS_BEFORE_PURGE_PARAMETER_SUFFIX = "_NUMBER_OF_DAYS_OLD";

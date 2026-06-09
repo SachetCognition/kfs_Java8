@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.PaymentRequestDocument;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Payment Request Item Business Object.
  */
 public class PaymentRequestItem extends AccountsPayableItemBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestItem.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentRequestItem.class);
 
     private BigDecimal purchaseOrderItemUnitPrice;
     private KualiDecimal itemOutstandingInvoiceQuantity;
@@ -219,7 +221,6 @@ public class PaymentRequestItem extends AccountsPayableItemBase {
         // do nothing
     }
 
-
     public KualiDecimal getPoOutstandingQuantity() {
         PurchaseOrderItem poi = getPurchaseOrderItem();
         if (poi == null) {
@@ -384,6 +385,5 @@ public class PaymentRequestItem extends AccountsPayableItemBase {
     public Class getUseTaxClass() {
         return PaymentRequestItemUseTax.class;
     }
-
 
 }

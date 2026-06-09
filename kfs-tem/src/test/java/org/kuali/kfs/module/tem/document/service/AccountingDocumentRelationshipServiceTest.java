@@ -22,10 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.AccountingDocumentRelationship;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -36,7 +37,7 @@ public class AccountingDocumentRelationshipServiceTest extends KualiTestBase {
 
     private AccountingDocumentRelationshipService adrService;
     private static final String TEST_PREFIX = "test";
-    private static final Logger LOG = Logger.getLogger(AccountingDocumentRelationshipServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingDocumentRelationshipServiceTest.class);
 
     /**
      * @see junit.framework.TestCase#setUp() Setup 5 doc relationships (test1-5).

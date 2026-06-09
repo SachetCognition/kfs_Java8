@@ -20,12 +20,14 @@ package org.kuali.kfs.module.tem.util;
 
 import java.text.MessageFormat;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.krad.util.ErrorMessage;
 
 public class MessageUtils {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MessageUtils.class);
+    protected static Logger LOG = LoggerFactory.getLogger(MessageUtils.class);
 
     /**
      * Resolve the message from the key and the parameters on ErrorMessage propertie

@@ -30,6 +30,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.service.UniversityDateService;
 import org.kuali.kfs.sys.suite.AnnotationTestSuite;
@@ -45,7 +47,7 @@ import org.springframework.aop.framework.ProxyFactory;
  */
 @AnnotationTestSuite(PreCommitSuite.class)
 public class TestUtils {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TestUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TestUtils.class);
     private static Integer fiscalYearForTesting;
     private static String periodCodeForTesting;
 

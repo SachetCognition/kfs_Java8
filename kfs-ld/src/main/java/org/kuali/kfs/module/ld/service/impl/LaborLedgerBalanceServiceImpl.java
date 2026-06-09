@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.module.ld.businessobject.EmployeeFunding;
 import org.kuali.kfs.module.ld.businessobject.LaborBalanceSummary;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.springframework.transaction.annotation.Transactional;
 
 public class LaborLedgerBalanceServiceImpl implements LaborLedgerBalanceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerBalanceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerBalanceServiceImpl.class);
 
     private LaborLedgerBalanceDao laborLedgerBalanceDao;
     private LaborCalculatedSalaryFoundationTrackerService laborCalculatedSalaryFoundationTrackerService;

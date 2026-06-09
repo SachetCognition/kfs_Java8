@@ -27,6 +27,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountIntf;
 import org.kuali.kfs.coa.businessobject.CarryForwardReversionProcessOrganizationInfo;
 import org.kuali.kfs.coa.businessobject.ClosedAccountOrganizationReversion;
@@ -71,7 +73,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class OrganizationReversionProcessImpl implements OrganizationReversionProcess, InitializingBean {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionProcessImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationReversionProcessImpl.class);
 
     // Services
     private OrganizationReversionService organizationReversionService;
@@ -1197,7 +1199,6 @@ public class OrganizationReversionProcessImpl implements OrganizationReversionPr
     public void setCashOrganizationReversionCategoryLogic(OrganizationReversionCategoryLogic cashOrganizationReversionCategoryLogic) {
         this.cashOrganizationReversionCategoryLogic = cashOrganizationReversionCategoryLogic;
     }
-
 
     /**
      * Gets the batchFileDirectoryName attribute. 

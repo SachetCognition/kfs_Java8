@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.module.ld.LaborConstants;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class is used to help generating pending entries for the given labor documents
  */
 public class LaborPendingEntryGenerator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborPendingEntryGenerator.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborPendingEntryGenerator.class);
 
     /**
      * generate the expense pending entries based on the given document and accounting line

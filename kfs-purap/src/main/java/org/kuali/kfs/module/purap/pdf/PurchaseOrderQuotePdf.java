@@ -165,7 +165,7 @@ public class PurchaseOrderQuotePdf extends PurapPdf {
             this.createPOQuotePdf(po, poqv, campusName, contractManagerCampusCode, logoImage, doc, writer, environment);
         }
         catch (DocumentException de) {
-            LOG.error(de.getMessage(), de);
+            LOG.error("{}", de);
             throw new PurError("Document Exception when trying to save a Purchase Order Quote PDF", de);
         }
     }
@@ -204,11 +204,11 @@ public class PurchaseOrderQuotePdf extends PurapPdf {
             this.createPOQuotePdf(po, poqv,campusName, orderTransmitParameters.getContractManagerCampusCode(), orderTransmitParameters.getLogoImage(), doc, writer, environment);
         }
         catch (DocumentException de) {
-            LOG.error(de.getMessage(), de);
+            LOG.error("{}", de);
             throw new PurError("Document Exception when trying to save a Purchase Order Quote PDF", de);
         }
         catch (FileNotFoundException f) {
-            LOG.error(f.getMessage(), f);
+            LOG.error("{}", f);
             throw new PurError("FileNotFound Exception when trying to save a Purchase Order Quote PDF", f);
         }
     }

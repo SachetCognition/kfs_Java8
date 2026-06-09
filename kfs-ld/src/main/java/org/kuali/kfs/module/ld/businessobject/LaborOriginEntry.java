@@ -30,6 +30,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.service.AccountService;
@@ -51,7 +53,7 @@ import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
  * Labor business object for LaborOriginEntry.
  */
 public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInformation, LaborTransaction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborOriginEntry.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborOriginEntry.class);
     private static LaborOriginEntryFieldUtil laborOriginEntryFieldUtil;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private String positionNumber;
@@ -1049,7 +1051,6 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
 
         return returnList;
     }
-
 
     /**
      * Get fieldValue from fieldName.

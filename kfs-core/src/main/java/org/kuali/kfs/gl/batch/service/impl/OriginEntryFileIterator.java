@@ -26,7 +26,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.gl.exception.LoadException;
 
@@ -37,7 +38,7 @@ import org.kuali.kfs.gl.exception.LoadException;
  * on the size of the file.
  */
 public class OriginEntryFileIterator implements Iterator<OriginEntryFull> {
-    private static Logger LOG = Logger.getLogger(OriginEntryFileIterator.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginEntryFileIterator.class);
 
     protected OriginEntryFull nextEntry;
     protected BufferedReader reader;

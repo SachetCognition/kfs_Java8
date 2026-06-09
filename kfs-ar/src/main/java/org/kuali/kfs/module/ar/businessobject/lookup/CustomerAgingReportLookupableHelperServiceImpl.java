@@ -30,6 +30,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.CustomerAgingReportDetail;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 import org.springframework.beans.factory.InitializingBean;
 
 public class CustomerAgingReportLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl implements InitializingBean {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerAgingReportLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(CustomerAgingReportLookupableHelperServiceImpl.class);
     protected DateTimeService dateTimeService;
     protected CustomerAgingReportService customerAgingReportService;
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;
@@ -92,7 +94,6 @@ public class CustomerAgingReportLookupableHelperServiceImpl extends KualiLookupa
     // default is 120 days
     private String cutoffdate91toSYSPRlabel;
     private String cutoffdateSYSPRplus1orMorelabel;
-
 
     /**
      * Get the search results that meet the input search criteria.
@@ -347,10 +348,8 @@ public class CustomerAgingReportLookupableHelperServiceImpl extends KualiLookupa
                 resultTable.add(row);
             }
 
-
             lookupForm.setHasReturnableRow(hasReturnableRow);
         }
-
 
         if (displayList.size() != 0) {
             ((CustomerAgingReportForm) lookupForm).setTotal0to30(total0to30.toString());

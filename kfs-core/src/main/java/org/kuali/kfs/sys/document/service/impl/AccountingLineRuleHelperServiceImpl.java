@@ -19,7 +19,8 @@
 package org.kuali.kfs.sys.document.service.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.FundGroup;
@@ -50,7 +51,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class AccountingLineRuleHelperServiceImpl implements AccountingLineRuleHelperService {
-    private static Logger LOG = Logger.getLogger(AccountingLineRuleHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountingLineRuleHelperServiceImpl.class);
     private DataDictionaryService dataDictionaryService;
     private FinancialSystemDocumentTypeService financialSystemDocumentTypeService;
     protected AccountService accountService;
@@ -190,7 +191,6 @@ public class AccountingLineRuleHelperServiceImpl implements AccountingLineRuleHe
     protected Account getUnexpiredContinuationAccountOrNull(Account account) {
         return accountService.getUnexpiredContinuationAccountOrNull(account);
     }
-
 
     /**
      * @see org.kuali.kfs.sys.document.service.AccountingLineRuleHelperService#isValidAccount(org.kuali.kfs.coa.businessobject.Account, org.kuali.rice.krad.datadictionary.DataDictionary)

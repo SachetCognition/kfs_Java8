@@ -21,6 +21,8 @@ package org.kuali.kfs.sys.service.impl;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
@@ -39,7 +41,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * This is the default implementation of the FlexibleOffsetAccountService interface.
  */
 public class FlexibleOffsetAccountServiceImpl implements FlexibleOffsetAccountService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FlexibleOffsetAccountServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(FlexibleOffsetAccountServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private AccountService accountService;

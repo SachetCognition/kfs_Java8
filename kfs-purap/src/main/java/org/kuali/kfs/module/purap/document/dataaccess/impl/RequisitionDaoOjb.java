@@ -25,6 +25,8 @@ import java.util.List;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.RequisitionDocument;
@@ -39,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class RequisitionDaoOjb extends PlatformAwareDaoBaseOjb implements RequisitionDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequisitionDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(RequisitionDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.RequisitionDao#getDocumentNumberForRequisitionId(java.lang.Integer)
@@ -59,7 +61,7 @@ public class RequisitionDaoOjb extends PlatformAwareDaoBaseOjb implements Requis
         }
         if (reqs.size() > 1) {
             String errorMsg = "Expected single document number for given criteria but multiple (at least 2) were returned";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException();
         } else {
             RequisitionDocument req = reqs.get(0);
@@ -93,7 +95,6 @@ public class RequisitionDaoOjb extends PlatformAwareDaoBaseOjb implements Requis
 
         return criteria;
     }
-
 
     protected List<String> getDocumentNumbersOfRequisitionsByCriteria(Criteria criteria, boolean orderByAscending) {
         LOG.debug("getDocumentNumberOfRequisitionsByCriteria() started");

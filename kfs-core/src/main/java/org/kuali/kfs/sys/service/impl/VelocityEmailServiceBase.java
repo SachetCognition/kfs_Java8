@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.service.VelocityEmailService;
 import org.kuali.rice.core.api.mail.MailMessage;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
@@ -37,7 +39,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
  * Please note, this class is subject to code refactoring and redesign.
  */
 public abstract class VelocityEmailServiceBase implements VelocityEmailService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VelocityEmailServiceBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(VelocityEmailServiceBase.class);
     protected MailService mailService;
     protected ParameterService parameterService;
     protected VelocityEngine velocityEngine;
@@ -60,7 +62,7 @@ public abstract class VelocityEmailServiceBase implements VelocityEmailService {
         }
         catch (Exception ex) {
             LOG.error("Exception received when send email ", ex);
-            LOG.error(body);
+            LOG.error("{}", body);
         }
     }
 

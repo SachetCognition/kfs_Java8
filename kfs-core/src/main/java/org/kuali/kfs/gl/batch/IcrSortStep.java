@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.batch;
 import java.io.File;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.springframework.util.StopWatch;
@@ -29,7 +31,7 @@ import org.springframework.util.StopWatch;
  * A step to run the scrubber process.
  */
 public class IcrSortStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IcrSortStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(IcrSortStep.class);
     private String batchFileDirectoryName;
     /**
      * Runs the scrubber process.

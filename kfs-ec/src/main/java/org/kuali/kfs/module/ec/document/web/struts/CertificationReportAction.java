@@ -31,6 +31,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleService;
 import org.kuali.kfs.module.ec.EffortConstants;
 import org.kuali.kfs.module.ec.EffortConstants.EffortCertificationEditMode;
@@ -64,7 +66,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class handles Actions for EffortCertification document approval.
  */
 public class CertificationReportAction extends EffortCertificationAction {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CertificationReportAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CertificationReportAction.class);
 
     /**
      * recalculate the detail line

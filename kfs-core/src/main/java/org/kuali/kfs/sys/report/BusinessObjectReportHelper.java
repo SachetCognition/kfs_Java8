@@ -26,6 +26,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.web.format.BigDecimalFormatter;
 import org.kuali.rice.core.web.format.CurrencyFormatter;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.sys.service.impl.ReportWriterTextServiceImpl
  */
 public class BusinessObjectReportHelper {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BusinessObjectReportHelper.class);
+    private static Logger LOG = LoggerFactory.getLogger(BusinessObjectReportHelper.class);
 
     protected int minimumMessageLength;
     protected String messageLabel;

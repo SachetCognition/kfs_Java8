@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cam.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.document.validation.impl.MaintenancePreRulesBase;
 import org.kuali.kfs.module.cam.businessobject.Asset;
 import org.kuali.rice.kns.document.MaintenanceDocument;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AssetPreRule extends MaintenancePreRulesBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetPreRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AssetPreRule.class);
 
     protected Asset newAsset;
     protected Asset copyAsset;

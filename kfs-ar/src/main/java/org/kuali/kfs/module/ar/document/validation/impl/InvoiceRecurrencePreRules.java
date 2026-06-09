@@ -22,6 +22,8 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.InvoiceRecurrence;
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class InvoiceRecurrencePreRules extends PromptBeforeValidationBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceRecurrencePreRules.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InvoiceRecurrencePreRules.class);
     /**
      * @see org.kuali.rice.kns.rules.PromptBeforeValidationBase#doRules(org.kuali.rice.krad.document.Document)
      */
@@ -53,7 +55,6 @@ public class InvoiceRecurrencePreRules extends PromptBeforeValidationBase {
      * @return
      */
     protected boolean setCustomerNumberIfInvoiceIsEntered(Document document) {
-
 
         MaintenanceDocument maintenanceDocument = (MaintenanceDocument) document;
         InvoiceRecurrence newInvoiceRecurrence = (InvoiceRecurrence) maintenanceDocument.getNewMaintainableObject().getBusinessObject();
@@ -84,7 +85,6 @@ public class InvoiceRecurrencePreRules extends PromptBeforeValidationBase {
      * @return
      */
     protected boolean setEndDateIfTotalRecurrenceNumberIsEntered(Document document) {
-
 
         MaintenanceDocument maintenanceDocument = (MaintenanceDocument) document;
         InvoiceRecurrence newInvoiceRecurrence = (InvoiceRecurrence) maintenanceDocument.getNewMaintainableObject().getBusinessObject();

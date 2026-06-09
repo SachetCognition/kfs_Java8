@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.wklykins;
 
 import java.text.DateFormat;
@@ -58,7 +60,7 @@ import org.kuali.rice.krad.util.ErrorMessage;
 @ConfigureContext(session = wklykins)
 public class ContractsGrantsAgingOpenInvoicesReportLookupableHelperServiceImplTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingOpenInvoicesReportLookupableHelperServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingOpenInvoicesReportLookupableHelperServiceImplTest.class);
 
     private ContractsGrantsAgingOpenInvoicesReportLookupableHelperServiceImpl agingOpenInvoicesReportLookupableHelperServiceImpl;
     private ContractsGrantsAgingOpenInvoicesReportForm agingOpenInvoicesReportForm;

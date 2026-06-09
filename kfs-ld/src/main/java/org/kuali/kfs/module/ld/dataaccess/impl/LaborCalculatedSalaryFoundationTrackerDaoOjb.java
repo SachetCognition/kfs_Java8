@@ -28,6 +28,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.module.ld.LaborConstants;
@@ -46,7 +48,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * @see org.kuali.kfs.module.ld.businessobject.CalculatedSalaryFoundationTracker
  */
 public class LaborCalculatedSalaryFoundationTrackerDaoOjb extends PlatformAwareDaoBaseOjb implements LaborCalculatedSalaryFoundationTrackerDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborCalculatedSalaryFoundationTrackerDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborCalculatedSalaryFoundationTrackerDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.ld.dataaccess.LaborBaseFundsDao#findCSFTrackers(java.util.Map, boolean)

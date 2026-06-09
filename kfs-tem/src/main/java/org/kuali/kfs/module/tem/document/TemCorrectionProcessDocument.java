@@ -23,6 +23,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.AgencyCorrectionChangeGroup;
 import org.kuali.kfs.module.tem.document.service.TemCorrectionDocumentService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -32,7 +34,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class TemCorrectionProcessDocument extends FinancialSystemTransactionalDocumentBase implements AmountTotaling {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TemCorrectionProcessDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TemCorrectionProcessDocument.class);
 
     protected String correctionTypeCode; // CorrectionDocumentService.CORRECTION_TYPE_MANUAL or
     protected boolean correctionSelection; // false if all input rows should be in the output, true if only selected rows should be

@@ -21,6 +21,8 @@ package org.kuali.kfs.module.tem.batch.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.batch.service.PerDiemLoadValidationService;
 import org.kuali.kfs.module.tem.businessobject.PerDiem;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class PerDiemLoadValidationServiceImpl implements PerDiemLoadValidationService {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PerDiemLoadValidationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PerDiemLoadValidationServiceImpl.class);
 
     private DictionaryValidationService dictionaryValidationService;
     private PerDiemService perDiemService;

@@ -21,7 +21,8 @@ package org.kuali.kfs.sys.document.workflow;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kew.api.action.ActionType;
 import org.kuali.rice.kew.framework.postprocessor.ActionTakenEvent;
@@ -43,7 +44,7 @@ import org.kuali.rice.krad.service.PostProcessorService;
  */
 public class PostProcessor implements org.kuali.rice.kew.framework.postprocessor.PostProcessor {
 
-    private static Logger LOG = Logger.getLogger(PostProcessor.class);
+    private static Logger LOG = LoggerFactory.getLogger(PostProcessor.class);
 
     public List<String> getDocumentIdsToLock(DocumentLockingEvent arg0) throws Exception {
         return SpringContext.getBean(PostProcessorService.class).getDocumentIdsToLock(arg0);

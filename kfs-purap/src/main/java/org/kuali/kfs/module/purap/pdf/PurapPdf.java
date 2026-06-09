@@ -20,6 +20,8 @@ package org.kuali.kfs.module.purap.pdf;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.datetime.DateTimeService;
@@ -45,7 +47,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * Base class to be extended for implementing PDF documents in Purchasing/Accounts Payable module.
  */
 public class PurapPdf extends PdfPageEventHelper {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapPdf.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurapPdf.class);
 
     /** headerTable pieces need to be public */
     public PdfTemplate tpl; // A template that will hold the total number of pages.
@@ -160,7 +162,6 @@ public class PurapPdf extends PdfPageEventHelper {
         cb.addTemplate(tpl, document.right() - adjust, textBase);
         cb.saveState();
     }
-
 
     /**
      * Overrides the method in the PdfPageEventHelper from itext to put the total number of pages into the template.

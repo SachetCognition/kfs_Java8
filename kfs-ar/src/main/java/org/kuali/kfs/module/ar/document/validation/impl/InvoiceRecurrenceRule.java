@@ -27,7 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -47,7 +48,7 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class InvoiceRecurrenceRule extends MaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceRecurrenceRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(InvoiceRecurrenceRule.class);
     protected InvoiceRecurrence oldInvoiceRecurrence;
     protected InvoiceRecurrence newInvoiceRecurrence;
 
@@ -65,7 +66,6 @@ public class InvoiceRecurrenceRule extends MaintenanceDocumentRuleBase {
         boolean success;
         java.sql.Date today = getDateTimeService().getCurrentSqlDateMidnight();
         Date currentDate = getDateTimeService().getCurrentSqlDate();
-
 
         success = checkIfInvoiceIsApproved(newInvoiceRecurrence.getInvoiceNumber());
 /*

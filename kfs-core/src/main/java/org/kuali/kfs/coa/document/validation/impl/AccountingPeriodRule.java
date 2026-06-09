@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.document.validation.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.service.KeyValuesService;
  */
 public class AccountingPeriodRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingPeriodRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountingPeriodRule.class);
 
     protected static final String GENERAL_FUND_CD = "GF";
     protected static final String RESTRICTED_FUND_CD = "RF";

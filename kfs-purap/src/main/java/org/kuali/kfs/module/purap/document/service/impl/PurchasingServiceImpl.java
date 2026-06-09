@@ -25,6 +25,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.ojb.broker.metadata.ClassDescriptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cab.CapitalAssetBuilderModuleService;
 import org.kuali.kfs.integration.purap.CapitalAssetLocation;
 import org.kuali.kfs.integration.purap.CapitalAssetSystem;
@@ -56,7 +58,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class PurchasingServiceImpl extends PersistenceServiceStructureImplBase implements PurchasingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchasingServiceImpl.class);
 
     private ParameterService parameterService;
     private SequenceAccessorService sequenceAccessorService;
@@ -136,7 +138,6 @@ public class PurchasingServiceImpl extends PersistenceServiceStructureImplBase i
         return camsItem;
     }
 
-
     protected PurchasingCapitalAssetItem getItemIfAlreadyInCamsItemsList(PurApItem item, List<PurchasingCapitalAssetItem> camsItemsList) {
         for (PurchasingCapitalAssetItem camsItem : camsItemsList) {
             if (camsItem.getItemIdentifier() != null && camsItem.getItemIdentifier().equals(item.getItemIdentifier())) {
@@ -146,7 +147,6 @@ public class PurchasingServiceImpl extends PersistenceServiceStructureImplBase i
 
         return null;
     }
-
 
     @Override
     public void deleteCapitalAssetItems(PurchasingDocument purDoc, Integer itemIdentifier) {
@@ -222,7 +222,6 @@ public class PurchasingServiceImpl extends PersistenceServiceStructureImplBase i
         return true;
     }
 
-
     @Override
     public boolean checkValidRoomNumber(CapitalAssetLocation location){
         boolean valid = true;
@@ -286,6 +285,5 @@ public class PurchasingServiceImpl extends PersistenceServiceStructureImplBase i
         GlobalVariables.getMessageMap().putError(path,PurapKeyConstants.ERROR_CAPITAL_ASSET_INCOMPLETE_ADDRESS,field);
         GlobalVariables.getMessageMap().removeFromErrorPath(PurapPropertyConstants.NEW_PURCHASING_CAPITAL_ASSET_LOCATION_LINE);
    }
-
 
 }

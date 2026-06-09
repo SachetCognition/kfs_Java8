@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cab.CapitalAssetBuilderModuleService;
 import org.kuali.kfs.integration.purap.CapitalAssetSystem;
 import org.kuali.kfs.module.purap.PurapConstants;
@@ -70,7 +72,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class RequisitionServiceImpl implements RequisitionService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequisitionServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(RequisitionServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private CapitalAssetBuilderModuleService capitalAssetBuilderModuleService;

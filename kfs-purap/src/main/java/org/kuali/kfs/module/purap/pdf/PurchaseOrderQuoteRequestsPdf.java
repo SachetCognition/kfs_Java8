@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorQuote;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
@@ -59,7 +61,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * 
  */
 public class PurchaseOrderQuoteRequestsPdf extends PdfPageEventHelper {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderQuoteRequestsPdf.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchaseOrderQuoteRequestsPdf.class);
 
     public PdfTemplate tpl; // A template that will hold the total number of pages.
     public PdfContentByte cb;
@@ -123,7 +125,6 @@ public class PurchaseOrderQuoteRequestsPdf extends PdfPageEventHelper {
         cb.saveState();
     }
 
-
     /**
      * Overrides the method in the PdfPageEventHelper from itext to put the total number of pages into the template.
      * 
@@ -186,7 +187,7 @@ public class PurchaseOrderQuoteRequestsPdf extends PdfPageEventHelper {
             this.createPOQuoteRequestsListPdf(po, doc, writer, institutionName);
         }
         catch (DocumentException de) {
-            LOG.error(de.getMessage(), de);
+            LOG.error("{}", de);
             errors.add(de.getMessage());
         }
         return errors;
@@ -215,11 +216,11 @@ public class PurchaseOrderQuoteRequestsPdf extends PdfPageEventHelper {
             this.createPOQuoteRequestsListPdf(po, doc, writer, institutionName);
         }
         catch (DocumentException de) {
-            LOG.error(de.getMessage(), de);
+            LOG.error("{}", de);
             errors.add(de.getMessage());
         }
         catch (FileNotFoundException f) {
-            LOG.error(f.getMessage(), f);
+            LOG.error("{}", f);
             errors.add(f.getMessage());
         }
         return errors;

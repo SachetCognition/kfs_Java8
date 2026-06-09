@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
 import org.kuali.kfs.module.cab.businessobject.GeneralLedgerEntry;
@@ -56,7 +58,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class overrids the base getActionUrls method
  */
 public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurApReportLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurApReportLookupableHelperServiceImpl.class);
 
     private PurchasingAccountsPayableReportService purApReportService;
 
@@ -131,7 +133,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
             purApReportList = updateResultList(purApReportList);
         }
 
-
         return buildSearchResultList(purApReportList);
     }
 
@@ -178,7 +179,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
 
         return searchResults;
     }
-
 
     /**
      * Build a HashMap for documentNumbers from the PurchasingAccountsPayableDocument search results
@@ -346,7 +346,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
         }
     }
 
-
     /**
      * Return and remove the selected field from the user input.
      *
@@ -371,7 +370,6 @@ public class PurApReportLookupableHelperServiceImpl extends KualiLookupableHelpe
     public PurchasingAccountsPayableReportService getPurApReportService() {
         return purApReportService;
     }
-
 
     /**
      * Sets the purApReportService attribute value.

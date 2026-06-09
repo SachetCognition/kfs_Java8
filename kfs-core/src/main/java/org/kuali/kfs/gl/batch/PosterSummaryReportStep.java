@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.filefilter.RegexFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryFileIterator;
 import org.kuali.kfs.gl.businessobject.GlSummary;
@@ -46,7 +48,7 @@ import org.kuali.kfs.sys.service.ReportWriterService;
  * A step to generate summary reports from a recent poster run
  */
 public class PosterSummaryReportStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PosterSummaryReportStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PosterSummaryReportStep.class);
     private static final String DATE_FORMAT = "MMdd";
     private static final String BUD = "bud";
     private static final String ACT = "act";

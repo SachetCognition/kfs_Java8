@@ -24,6 +24,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDetail;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationReportDefinition;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 @COMPONENT(component="EffortCertification")
 public class EffortCertificationDocument extends FinancialSystemTransactionalDocumentBase  {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(EffortCertificationDocument.class);
 
     protected static final String DO_AWARD_SPLIT = "DoAwardSplit";
     protected static final String DO_RECREATE_SPLIT = "DoRecreateSplit";
@@ -709,7 +711,6 @@ public class EffortCertificationDocument extends FinancialSystemTransactionalDoc
         super.populateDocumentForRouting();
     }
 
-
     /**
      * Finds the list of unique object codes contained in this document
      *
@@ -788,7 +789,6 @@ public class EffortCertificationDocument extends FinancialSystemTransactionalDoc
         }
         throw new UnsupportedOperationException("Cannot answer split question for this node you call \""+nodeName+"\"");
     }
-
 
     /**
      * KFSMI-4606

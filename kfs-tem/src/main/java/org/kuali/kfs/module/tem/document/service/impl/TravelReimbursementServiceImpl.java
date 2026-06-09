@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.DATE_CHANGED_MESSAGE;
 import static org.kuali.kfs.module.tem.TemConstants.TravelParameters.TRAVEL_COVERSHEET_INSTRUCTIONS;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.AIRFARE_EXPENSE_DISABLED;
@@ -39,7 +41,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.coa.service.OffsetDefinitionService;
@@ -100,7 +101,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TravelReimbursementServiceImpl implements TravelReimbursementService {
 
-    protected static Logger LOG = Logger.getLogger(TravelReimbursementServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelReimbursementServiceImpl.class);
 
     protected KualiRuleService kualiRuleService;
     protected BusinessObjectService businessObjectService;
@@ -337,8 +338,6 @@ public class TravelReimbursementServiceImpl implements TravelReimbursementServic
         getNoteService().save(noteToAdd);
     }
 
-
-
     /**
      *     TA may have the above information related to reimbursable amount and (invoice?)
      *
@@ -462,7 +461,7 @@ public class TravelReimbursementServiceImpl implements TravelReimbursementServic
         final AccountsReceivableCustomerCreditMemo customerCreditMemo = createCustomerCreditMemo(reimbursement, invoice, creditAmount);
 
         final String blanketApproveAnnotation= String.format("Blanket Approved CRM Doc # %s by system TR Document: %s TEM Doc # %s", customerCreditMemo.getDocumentNumber(), reimbursement.getDocumentNumber(), reimbursement.getTravelDocumentIdentifier());
-        LOG.info(blanketApproveAnnotation);
+        LOG.info("{}", blanketApproveAnnotation);
 
         UserSession originalUser = GlobalVariables.getUserSession();
         WorkflowDocument originalWorkflowDocument = customerCreditMemo.getFinancialSystemDocumentHeader().getWorkflowDocument();
@@ -940,7 +939,6 @@ public class TravelReimbursementServiceImpl implements TravelReimbursementServic
         }
         return requiresAuthorization;
     }
-
 
     /**
      * Sets the parameterService attribute value.

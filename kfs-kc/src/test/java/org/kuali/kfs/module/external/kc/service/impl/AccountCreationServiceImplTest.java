@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.external.kc.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import org.apache.commons.lang.StringUtils;
@@ -44,7 +46,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 @ConfigureContext(session = khuntley)
 public class AccountCreationServiceImplTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountCreationServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountCreationServiceImplTest.class);
 
     private AccountCreationService accountCreationService;
     private DateTimeService dateTimeService;

@@ -33,6 +33,8 @@ import java.util.TreeMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.batch.CfdaBatchStep;
 import org.kuali.kfs.module.cg.businessobject.CFDA;
 import org.kuali.kfs.module.cg.businessobject.CfdaUpdateResults;
@@ -47,7 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class CfdaServiceImpl implements CfdaService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CfdaServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CfdaServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected static Comparator cfdaComparator;

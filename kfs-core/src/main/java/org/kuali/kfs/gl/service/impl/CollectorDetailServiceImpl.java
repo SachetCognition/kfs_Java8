@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.service.impl;
 
 import java.sql.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.CollectorDetail;
 import org.kuali.kfs.gl.dataaccess.CollectorDetailDao;
 import org.kuali.kfs.gl.service.CollectorDetailService;
@@ -32,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CollectorDetailServiceImpl implements CollectorDetailService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorDetailServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorDetailServiceImpl.class);
 
     private CollectorDetailDao collectorDetailDao;
 

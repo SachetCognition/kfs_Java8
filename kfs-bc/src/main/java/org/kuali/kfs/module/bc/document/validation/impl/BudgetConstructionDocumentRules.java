@@ -32,6 +32,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -78,7 +80,7 @@ import org.kuali.rice.krad.util.MessageMap;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class BudgetConstructionDocumentRules extends TransactionalDocumentRuleBase implements AddBudgetConstructionDocumentRule<BudgetConstructionDocument>, AddPendingBudgetGeneralLedgerLineRule<BudgetConstructionDocument, PendingBudgetConstructionGeneralLedger>, DeletePendingBudgetGeneralLedgerLineRule<BudgetConstructionDocument, PendingBudgetConstructionGeneralLedger>, DeleteMonthlySpreadRule<BudgetConstructionDocument>, SaveMonthlyBudgetRule<BudgetConstructionDocument, BudgetConstructionMonthly> {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionDocumentRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(BudgetConstructionDocumentRules.class);
 
     // some services used here - other service refs are from parent classes
     // if this class is extended we may need to create protected getters
@@ -279,7 +281,6 @@ public class BudgetConstructionDocumentRules extends TransactionalDocumentRuleBa
 
             isValid &= this.checkPendingBudgetConstructionGeneralLedgerLine(budgetConstructionDocument, pendingBudgetConstructionGeneralLedger, errors, isRevenue, true);
 
-
             if (isValid) {
                 // line checks ok - does line already exist in target revenue or expenditure list
                 isValid &= isNewLineUnique(budgetConstructionDocument, pendingBudgetConstructionGeneralLedger, errors, isRevenue);
@@ -458,7 +459,6 @@ public class BudgetConstructionDocumentRules extends TransactionalDocumentRuleBa
         int currentErrorCount;
         List<PendingBudgetConstructionGeneralLedger> pendingBudgetConstructionGeneralLedgerLines;
         String linesErrorPath;
-
 
         if (isRevenue) {
             pendingBudgetConstructionGeneralLedgerLines = budgetConstructionDocument.getPendingBudgetConstructionGeneralLedgerRevenueLines();

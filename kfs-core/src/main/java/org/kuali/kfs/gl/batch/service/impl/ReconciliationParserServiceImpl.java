@@ -24,6 +24,8 @@ import java.io.Reader;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.ReconciliationParserService;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -64,12 +66,10 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  * are incorrect, then it is likely to cause undesired behavior.
  */
 public class ReconciliationParserServiceImpl implements ReconciliationParserService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileEnterpriseFeederHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(FileEnterpriseFeederHelperServiceImpl.class);
     private enum ParseState {
         INIT, TABLE_DEF, COLUMN_DEF, CHECKSUM_DEF;
     };
-
-
 
     /**
      * Parses a reconciliation file

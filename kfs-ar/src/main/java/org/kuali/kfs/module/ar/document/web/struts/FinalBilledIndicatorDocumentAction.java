@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.FinalBilledIndicatorEntry;
 import org.kuali.kfs.module.ar.document.FinalBilledIndicatorDocument;
 import org.kuali.kfs.module.ar.document.validation.impl.FinalBilledIndicatorValidation;
@@ -36,7 +38,7 @@ import org.kuali.rice.kns.web.struts.form.KualiForm;
  */
 public class FinalBilledIndicatorDocumentAction extends KualiTransactionalDocumentActionBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinalBilledIndicatorDocumentAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(FinalBilledIndicatorDocumentAction.class);
 
     /**
      * This method adds an entry to the list of entries.

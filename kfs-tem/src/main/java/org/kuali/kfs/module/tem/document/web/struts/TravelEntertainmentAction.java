@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.COVERSHEET_FILENAME_FORMAT;
 import static org.kuali.kfs.module.tem.TemConstants.SHOW_REPORTS_ATTRIBUTE;
 import static org.kuali.kfs.sys.KFSPropertyConstants.DOCUMENT_NUMBER;
@@ -31,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -70,7 +71,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  */
 public class TravelEntertainmentAction extends TravelActionBase {
 
-    public static Logger LOG = Logger.getLogger(TravelEntertainmentAction.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelEntertainmentAction.class);
 
     public static final String[] ATTENDEE_ATTRIBUTE_NAMES = { TemPropertyConstants.AttendeeProperties.ATTENDEE_TYPE, TemPropertyConstants.AttendeeProperties.COMPANY, TemPropertyConstants.AttendeeProperties.TITLE,TemPropertyConstants.AttendeeProperties.NAME};
     public static final Integer[] MAX_LENGTH={10,40,40,40};
@@ -90,10 +91,8 @@ public class TravelEntertainmentAction extends TravelActionBase {
 
         initializeNewAttendeeLines(entForm.getNewAttendeeLines(), document.getAttendee());
 
-
         return retval;
     }
-
 
     /**
      * Initiates the document based on another entertainment reimbursement if the expected query fields (needed: travelDocumentIdentifier; maybe: fromDocumentNumber) are filled in
@@ -139,19 +138,14 @@ public class TravelEntertainmentAction extends TravelActionBase {
                 document.setPrimaryDestinationId(travelDocument.getPrimaryDestinationId());
                 document.setPaymentMethod(travelDocument.getPaymentMethod());
 
-
                 document.setExpenseLimit(travelDocument.getExpenseLimit());
                 document.configureTraveler(travelDocument.getTemProfileId(), travelDocument.getTraveler());
                 document.getDocumentHeader().setOrganizationDocumentNumber(travelDocument.getDocumentHeader().getOrganizationDocumentNumber());
-
-
 
                 document.updatePayeeTypeForReimbursable();
 
                 final AccountingDocumentRelationship relationship = buildRelationshipToProgenitorDocument(travelDocument, document);
                 getBusinessObjectService().save(relationship);
-
-
 
         } else {
             document.setTripProgenitor(true); // this is the trip progenitor
@@ -294,8 +288,6 @@ public class TravelEntertainmentAction extends TravelActionBase {
 
         return true;
     }
-
-
 
     /**
      * Recalculates the Expenses Total Tab

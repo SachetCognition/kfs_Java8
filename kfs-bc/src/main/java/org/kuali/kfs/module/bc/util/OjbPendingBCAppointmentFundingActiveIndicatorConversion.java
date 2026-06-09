@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanConversion;
 
 /**
@@ -25,7 +27,7 @@ import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanCo
  * Converts database delete values of Y and N to java active N and Y and back.
  */
 public class OjbPendingBCAppointmentFundingActiveIndicatorConversion extends OjbCharBooleanConversion {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OjbPendingBCAppointmentFundingActiveIndicatorConversion.class);
+    private static Logger LOG = LoggerFactory.getLogger(OjbPendingBCAppointmentFundingActiveIndicatorConversion.class);
 
     public final static String INDICATOR_NO  = "N";
     public final static String INDICATOR_YES = "Y";

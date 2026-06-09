@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.PosterService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
  * The step that runs the poster service on indirect cost recovery encumbrance entries.
  */
 public class PosterIcrEncumbranceEntriesStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PosterIcrEncumbranceEntriesStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PosterIcrEncumbranceEntriesStep.class);
     protected PosterService posterService;
 
     @Override

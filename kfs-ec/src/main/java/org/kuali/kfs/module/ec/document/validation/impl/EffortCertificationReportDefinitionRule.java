@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ec.document.validation.impl;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.EffortKeyConstants;
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationReportDefinition;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Contains Business Rules for the Effort Certification Report Maintenance Document.
  */
 public class EffortCertificationReportDefinitionRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationReportDefinitionRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(EffortCertificationReportDefinitionRule.class);
 
     /**
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#processCustomRouteDocumentBusinessRules(org.kuali.rice.kns.document.MaintenanceDocument)

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.appleton;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.kfs;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 @ConfigureContext(session = kfs)
 public class PurapAccountingServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapAccountingServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurapAccountingServiceTest.class);
 
     private PurapAccountingService purapAccountingService;
     private PurapService purapService;

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.text.DateFormat;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 @ConfigureContext(session = khuntley)
 public class CustomerAgingReportLookupableHelperServiceImplTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerAgingReportLookupableHelperServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerAgingReportLookupableHelperServiceImplTest.class);
 
     private CustomerAgingReportLookupableHelperServiceImpl customerAgingReportLookupableHelperServiceImpl;
     private CustomerAgingReportForm customerAgingReportForm;

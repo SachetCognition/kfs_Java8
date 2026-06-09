@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.EMPTY_STRING;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
 import static org.kuali.kfs.sys.KFSConstants.GL_DEBIT_CODE;
@@ -57,7 +59,7 @@ import org.kuali.rice.krad.document.Copyable;
  * accounting lines as debits or credits.
  */
 public class JournalVoucherDocument extends AccountingDocumentBase implements VoucherDocument, Copyable, Correctable, AmountTotaling {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(JournalVoucherDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(JournalVoucherDocument.class);
 
     // document specific attributes
     protected String balanceTypeCode; // balanceType key

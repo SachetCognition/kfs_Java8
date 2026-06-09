@@ -18,12 +18,13 @@
  */
 package org.kuali.kfs.module.tem.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.NEW_ACTUAL_EXPENSE_LINE;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
 import org.kuali.kfs.module.tem.document.TravelDocument;
@@ -35,10 +36,9 @@ import org.kuali.kfs.module.tem.service.TravelExpenseService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.service.KualiRuleService;
 
-
 public class AddActualExpenseEvent implements Observer {
 
-    public static Logger LOG = Logger.getLogger(AddActualExpenseDetailEvent.class);
+    public static Logger LOG = LoggerFactory.getLogger(AddActualExpenseDetailEvent.class);
 
     protected volatile TravelExpenseService travelExpenseService;
 

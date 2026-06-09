@@ -21,7 +21,8 @@ package org.kuali.kfs.sys.identity;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.action.ActionTaken;
@@ -37,7 +38,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * so that document will not route to the initiator or single approver.
  */
 public class ExcludeSingleActorSeparationOfDutiesRoleTypeService  extends ExclusionRoleTypeServiceBase {
-    private static final Logger LOG = Logger.getLogger( ExcludeSingleActorSeparationOfDutiesRoleTypeService .class );
+    private static final Logger LOG = LoggerFactory.getLogger( ExcludeSingleActorSeparationOfDutiesRoleTypeService .class );
     protected volatile DocumentService documentService;
     protected volatile WorkflowDocumentService workflowDocumentService;
 

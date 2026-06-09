@@ -20,6 +20,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionAccountObjectDetailReportDao;
@@ -31,7 +33,7 @@ import org.kuali.kfs.sys.KFSConstants;
  */
 
 public class BudgetConstructionAccountObjectDetailReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionAccountObjectDetailReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionAccountObjectDetailReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionAccountObjectDetailReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsAccountObjectDetailTable = new ArrayList<SQLForStep>(4);
     protected static ArrayList<SQLForStep> insertDetailForReport = new ArrayList<SQLForStep>(1);
@@ -285,7 +287,6 @@ public class BudgetConstructionAccountObjectDetailReportDaoJdbc extends BudgetCo
     protected void cleanReportsAccountObjectTemporaryTable(String sessionId) {
         clearTempTableBySesId("LD_BCN_BUILD_ACCTBAL01_MT", "SESID", sessionId);
     }
-
 
     /**
      * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionAccountObjectDetailReportDao#updateReportsAccountObjectDetailTable(java.lang.String)

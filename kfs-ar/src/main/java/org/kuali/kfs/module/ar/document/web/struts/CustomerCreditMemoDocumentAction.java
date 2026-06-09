@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.CustomerCreditMemoDetail;
@@ -56,7 +58,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 
 public class CustomerCreditMemoDocumentAction extends KualiTransactionalDocumentActionBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerCreditMemoDocumentAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerCreditMemoDocumentAction.class);
 
     public CustomerCreditMemoDocumentAction() {
         super();

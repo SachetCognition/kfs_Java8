@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PurapDocTypeCodes;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -70,7 +72,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 @NonTransactional
 public class PurapAccountingServiceImpl implements PurapAccountingService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapAccountingServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurapAccountingServiceImpl.class);
 
     protected static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
     protected static final int SCALE = 340;
@@ -381,7 +383,6 @@ public class PurapAccountingServiceImpl implements PurapAccountingService {
         updateAccountAmounts(document);
         return generateSummaryAccounts(document.getItems(), ZERO_TOTALS_RETURNED_VALUE, USE_TAX_INCLUDED);
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.service.PurapAccountingService#generateSummaryAccountsWithNoZeroTotals(org.kuali.kfs.module.purap.document.PurchasingAccountsPayableDocument)
@@ -872,7 +873,6 @@ public class PurapAccountingServiceImpl implements PurapAccountingService {
             noDiscount = false;
         }
 
-
         if ((totalAmount != null) && KualiDecimal.ZERO.compareTo(totalAmount) != 0) {
 
             KualiDecimal accountTotal = KualiDecimal.ZERO;
@@ -1323,7 +1323,6 @@ public class PurapAccountingServiceImpl implements PurapAccountingService {
             List<SourceAccountingLine> origSourceAccounts = this.generateSummaryWithNoZeroTotals(useTaxContainer.getItems());
             KualiDecimal totalAmount = calculateSumTotal(origSourceAccounts);
             List<PurApAccountingLine> accountingLines = generateAccountDistributionForProration(origSourceAccounts, totalAmount, PurapConstants.PRORATION_SCALE, accountingLineClass);
-
 
             List<SourceAccountingLine> newSourceLines = new ArrayList<SourceAccountingLine>();
             // convert back to source

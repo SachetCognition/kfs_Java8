@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.NONE;
 
 import java.math.BigDecimal;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * the struts action for the salary setting for position
  */
 public class PositionSalarySettingAction extends DetailSalarySettingAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PositionSalarySettingAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PositionSalarySettingAction.class);
 
     private SalarySettingService salarySettingService = SpringContext.getBean(SalarySettingService.class);
     private BusinessObjectService businessObjectService = SpringContext.getBean(BusinessObjectService.class);
@@ -272,7 +274,6 @@ public class PositionSalarySettingAction extends DetailSalarySettingAction {
             salarySettingService.recalculateDerivedInformation(appointmentFunding);
 
         }
-
 
         // doing this just to do cleanup of the default object change flag
         // the rules will force the user to mark the line delete

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.LaborKeyConstants;
 import org.kuali.kfs.module.ld.businessobject.BenefitsCalculation;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class BenefitsCalculationDocumentRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BenefitsCalculationDocumentRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(BenefitsCalculationDocumentRule.class);
     protected BenefitsCalculation oldBenefitsCalculation;
     protected BenefitsCalculation newBenefitsCalculation;
 

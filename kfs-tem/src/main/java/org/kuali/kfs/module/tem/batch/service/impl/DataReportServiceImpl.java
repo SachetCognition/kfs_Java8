@@ -29,6 +29,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.batch.service.DataReportService;
 import org.kuali.kfs.module.tem.util.MessageUtils;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.bo.BusinessObject;
 import org.kuali.rice.krad.util.ErrorMessage;
 
 public class DataReportServiceImpl implements DataReportService {
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DataReportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(DataReportServiceImpl.class);
 
     public final static String REPORT_FILE_NAME_PATTERN = "{0}/{1}_{2}{3}";
 
@@ -124,7 +126,7 @@ public class DataReportServiceImpl implements DataReportService {
         }
         catch (FileNotFoundException e) {
             String errorMessage = "Cannot find the output file: " + reportFileName;
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage, e);
         }
     }

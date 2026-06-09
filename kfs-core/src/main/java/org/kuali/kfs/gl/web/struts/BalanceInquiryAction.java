@@ -33,6 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.ObjectHelper;
 import org.kuali.kfs.gl.businessobject.AccountBalance;
@@ -62,7 +64,7 @@ import org.kuali.rice.krad.util.KRADUtils;
  */
 
 public class BalanceInquiryAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceInquiryAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceInquiryAction.class);
 
     protected static final String TOTALS_TABLE_KEY = "totalsTable";
 
@@ -298,7 +300,6 @@ public class BalanceInquiryAction extends KualiAction {
         String backUrl = lookupForm.getBackLocation() + "?methodToCall=refresh&docFormKey=" + lookupForm.getFormKey();
         return new ActionForward(backUrl, true);
     }
-
 
     /**
      * Clears the values of all the fields on the jsp.

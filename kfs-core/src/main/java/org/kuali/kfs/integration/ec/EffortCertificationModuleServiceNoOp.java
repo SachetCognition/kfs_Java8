@@ -20,12 +20,12 @@ package org.kuali.kfs.integration.ec;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EffortCertificationModuleServiceNoOp implements EffortCertificationModuleService {
 
-    private Logger LOG = Logger.getLogger(getClass()); 
+    private Logger LOG = LoggerFactory.getLogger(getClass()); 
 
     public List<EffortCertificationReport> findReportDefinitionsForPeriod(Integer fiscalYear, String periodCode, String positionObjectGroupCode) {
         LOG.warn( "Using No-Op " + getClass().getSimpleName() + " service." );

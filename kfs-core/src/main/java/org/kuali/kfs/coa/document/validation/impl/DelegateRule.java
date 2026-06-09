@@ -26,6 +26,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.sys.KFSConstants;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class DelegateRule extends KfsMaintenanceDocumentRuleBase {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DelegateRule.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(DelegateRule.class);
 
     protected AccountDelegate oldDelegate;
     protected AccountDelegate newDelegate;
@@ -152,7 +154,6 @@ public class DelegateRule extends KfsMaintenanceDocumentRuleBase {
         // setup newAccount convenience objects, make sure all possible sub-objects are populated
         newDelegate = (AccountDelegate) super.getNewBo();
     }
-
 
     /**
      * This checks to see if

@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleService;
 import org.kuali.kfs.module.cg.CGConstants;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This Class provides implementation to the services required for inter module communication.
  */
 public class ContractsAndGrantsModuleServiceImpl implements ContractsAndGrantsModuleService {
-    protected org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsAndGrantsModuleServiceImpl.class);
+    protected Logger LOG = LoggerFactory.getLogger(ContractsAndGrantsModuleServiceImpl.class);
 
     protected AwardService awardService;
     protected ParameterService parameterService;

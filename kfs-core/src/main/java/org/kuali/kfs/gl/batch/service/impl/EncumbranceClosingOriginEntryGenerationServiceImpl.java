@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -64,7 +66,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * The default implementation of the EncumbranceClosingOriginEntryGenerationService
  */
 public class EncumbranceClosingOriginEntryGenerationServiceImpl implements EncumbranceClosingOriginEntryGenerationService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EncumbranceClosingOriginEntryGenerationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EncumbranceClosingOriginEntryGenerationServiceImpl.class);
     protected ParameterService parameterService;
     protected OffsetDefinitionService offsetDefinitionService;
     protected ObjectCodeService objectCodeService;
@@ -167,7 +169,6 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
             return pair;
 
         }
-
 
         entry.setFinancialSubObjectCode(KFSConstants.getDashFinancialSubObjectCode());
         entry.setFinancialBalanceTypeCode(KFSConstants.BALANCE_TYPE_COST_SHARE_ENCUMBRANCE);
@@ -294,7 +295,6 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
             }
 
         }
-
 
         else {
 
@@ -440,7 +440,6 @@ public class EncumbranceClosingOriginEntryGenerationServiceImpl implements Encum
      */
     protected List<String> getEncumbranceBalanceTypeCodes() {
         List<String> balanceTypeCodes = new ArrayList<String>();
-
 
         Map<String, Object> keys = new HashMap<String, Object>();
         keys.put("active", Boolean.TRUE);

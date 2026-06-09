@@ -18,9 +18,9 @@
  */
 package org.kuali.kfs.sys.context;
 
-
 import java.util.Arrays;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BatchStepTrigger writes .run files containing a job name and step name for BatchContainerStep to read. 
@@ -33,7 +33,7 @@ import java.util.Arrays;
  *
  */
 public class BatchStepTrigger {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchStepTrigger.class);
+    private static Logger LOG = LoggerFactory.getLogger(BatchStepTrigger.class);
     
     private static BatchStepTriggerParameters batchStepTriggerParameters;
     
@@ -130,7 +130,7 @@ public class BatchStepTrigger {
         catch (Throwable t) {
             System.err.println("ERROR: Exception caught: ");
             t.printStackTrace(System.err);
-            LOG.error(t);
+            LOG.error("{}", t);
             
             System.exit(8);
         }

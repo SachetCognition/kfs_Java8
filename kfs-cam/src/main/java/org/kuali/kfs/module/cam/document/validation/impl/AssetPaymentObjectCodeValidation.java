@@ -21,6 +21,8 @@ package org.kuali.kfs.module.cam.document.validation.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * This class validates object sub type code for the financial object for which payment is being made
  */
 public class AssetPaymentObjectCodeValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetPaymentObjectCodeValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetPaymentObjectCodeValidation.class);
 
     private AssetService assetService;
     private ParameterService parameterService;
@@ -104,6 +106,5 @@ public class AssetPaymentObjectCodeValidation extends GenericValidation {
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
 
 }

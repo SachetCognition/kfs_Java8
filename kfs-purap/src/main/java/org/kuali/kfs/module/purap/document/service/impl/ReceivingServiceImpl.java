@@ -29,6 +29,8 @@ import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PurchaseOrderDocTypes;
 import org.kuali.kfs.module.purap.PurapConstants.PurchaseOrderStatuses;
@@ -73,7 +75,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ReceivingServiceImpl implements ReceivingService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReceivingServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReceivingServiceImpl.class);
 
     protected PurchaseOrderService purchaseOrderService;
     protected ReceivingDao receivingDao;
@@ -352,7 +354,6 @@ public class ReceivingServiceImpl implements ReceivingService {
 
         return inProcessDocNumbers;
     }
-
 
     protected boolean isCorrectionReceivingDocumentInProcessForReceivingLine(String receivingDocumentNumber, String receivingCorrectionDocNumber) throws RuntimeException{
 

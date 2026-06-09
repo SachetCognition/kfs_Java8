@@ -26,9 +26,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.core.proxy.ProxyHelper;
 import org.apache.ojb.broker.query.Criteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.batch.dataaccess.FiscalYearMaker;
@@ -46,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * maker process by defining a spring bean and setting the businessObjectClass property.
  */
 public class FiscalYearMakerImpl extends PlatformAwareDaoBaseOjb implements FiscalYearMaker {
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(FiscalYearMakerImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FiscalYearMakerImpl.class);
 
     protected static final Long ONE = new Long(1);
 
@@ -159,7 +160,7 @@ public class FiscalYearMakerImpl extends PlatformAwareDaoBaseOjb implements Fisc
         }
         catch (Exception e) {
             String msg = String.format("Failed to set properties for class %s due to %s", businessObjectClass.getName(), e.getMessage());
-            LOG.error(msg);
+            LOG.error("{}", msg);
             throw new RuntimeException(msg, e);
         }
     }

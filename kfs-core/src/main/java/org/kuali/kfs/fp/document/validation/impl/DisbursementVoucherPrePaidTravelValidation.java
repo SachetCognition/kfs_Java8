@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPreConferenceDetail;
 import org.kuali.kfs.fp.document.DisbursementVoucherConstants;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.MessageMap;
 
 public class DisbursementVoucherPrePaidTravelValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherPrePaidTravelValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherPrePaidTravelValidation.class);
 
     private ParameterService parameterService;
     private AccountingDocument accountingDocumentForValidation;

@@ -20,6 +20,8 @@ package org.kuali.kfs.sys.service.impl;
 
 import javax.mail.MessagingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.mail.AttachmentMailMessage;
 import org.kuali.rice.core.api.mail.MailMessage;
 import org.kuali.rice.krad.exception.InvalidAddressException;
@@ -29,7 +31,7 @@ import org.kuali.rice.krad.exception.InvalidAddressException;
  * This version supports attachments.
  */
 public class AttachmentDevelopmentMailServiceImpl extends AttachmentMailServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AttachmentDevelopmentMailServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AttachmentDevelopmentMailServiceImpl.class);
 
     @Override
     public void sendMessage(MailMessage message) throws InvalidAddressException, MessagingException {

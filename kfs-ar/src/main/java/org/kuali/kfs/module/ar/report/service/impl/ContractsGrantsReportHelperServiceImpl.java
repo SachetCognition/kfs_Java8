@@ -37,6 +37,8 @@ import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.report.ContractsGrantsReportDataHolder;
@@ -69,7 +71,7 @@ import org.springframework.util.StringUtils;
  * A number of methods which help the C&G Billing reports build their PDFs and do look-ups
  */
 public class ContractsGrantsReportHelperServiceImpl implements ContractsGrantsReportHelperService {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsReportHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsGrantsReportHelperServiceImpl.class);
 
     protected DataDictionaryService dataDictionaryService;
     protected ReportGenerationService reportGenerationService;
@@ -233,7 +235,6 @@ public class ContractsGrantsReportHelperServiceImpl implements ContractsGrantsRe
         return null;
     }
 
-
     /**
      * @see org.kuali.kfs.module.ar.report.service.ContractsGrantsReportHelperService#lookupPrincipalIds(java.lang.String)
      */
@@ -302,7 +303,6 @@ public class ContractsGrantsReportHelperServiceImpl implements ContractsGrantsRe
     public void setDataDictionaryService(DataDictionaryService dataDictionaryService) {
         this.dataDictionaryService = dataDictionaryService;
     }
-
 
     /**
      * @return reportGenerationService

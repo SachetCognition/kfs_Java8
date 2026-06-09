@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ar.document.web.struts;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.CashControlDetail;
 import org.kuali.kfs.module.ar.document.CashControlDocument;
 import org.kuali.kfs.sys.KFSConstants;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
 public class CashControlDocumentForm extends FinancialSystemTransactionalDocumentFormBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashControlDocumentForm.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(CashControlDocumentForm.class);
 
     protected CashControlDetail newCashControlDetail;
     protected String processingChartOfAccCodeAndOrgCode;

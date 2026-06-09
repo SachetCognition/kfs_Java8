@@ -47,6 +47,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.CorrectionChange;
 import org.kuali.kfs.gl.businessobject.CorrectionChangeGroup;
@@ -84,7 +86,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 
 public class CorrectionAction extends KualiDocumentActionBase implements KualiTableRenderAction {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CorrectionAction.class);
 
     protected static OriginEntryGroupService originEntryGroupService;
     protected static OriginEntryService originEntryService;
@@ -1027,7 +1029,6 @@ public class CorrectionAction extends KualiDocumentActionBase implements KualiTa
             correctionForm.clearEntryForManualEdit();
         }
 
-
         // Calculate the debit/credit/row count
         updateDocumentSummary(document, correctionForm.getAllEntries(), correctionForm.isRestrictedFunctionalityMode());
 
@@ -1213,7 +1214,6 @@ public class CorrectionAction extends KualiDocumentActionBase implements KualiTa
         int maxRowsPerPage = CorrectionDocumentUtils.getRecordsPerPage();
         correctionForm.getOriginEntrySearchResultTableMetadata().jumpToFirstPage(correctionForm.getDisplayEntries().size(), maxRowsPerPage);
 
-
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
@@ -1396,7 +1396,6 @@ public class CorrectionAction extends KualiDocumentActionBase implements KualiTa
             return;
         }
 
-
         correctionForm.setPersistedOriginEntriesMissing(false);
 
         int recordCountFunctionalityLimit;
@@ -1447,7 +1446,6 @@ public class CorrectionAction extends KualiDocumentActionBase implements KualiTa
             originEntrySearchResultTableMetadata.setColumnToSortIndex(-1);
         }
     }
-
 
     /**
      * Validate that choose system and edit method are selected

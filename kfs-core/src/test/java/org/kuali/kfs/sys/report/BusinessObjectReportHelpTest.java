@@ -21,7 +21,8 @@ package org.kuali.kfs.sys.report;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -30,7 +31,7 @@ import org.kuali.kfs.sys.context.SpringContext;
 @ConfigureContext
 public class BusinessObjectReportHelpTest extends KualiTestBase {
 
-    private static final Logger LOG = Logger.getLogger(BusinessObjectReportHelpTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BusinessObjectReportHelpTest.class);
     
     private BusinessObjectReportHelper summaryReportHelper;
 

@@ -21,7 +21,8 @@ package org.kuali.kfs.module.tem.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.module.tem.businessobject.AccountingDistribution;
 import org.kuali.kfs.module.tem.businessobject.TemExpense;
@@ -34,7 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ActualExpenseServiceImpl extends ExpenseServiceBase implements TemExpenseService {
 
-    public static Logger LOG = Logger.getLogger(ActualExpenseServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(ActualExpenseServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.tem.service.impl.ExpenseServiceBase#calculateDistributionTotals(org.kuali.kfs.module.tem.document.TravelDocument, java.util.Map, java.util.List)

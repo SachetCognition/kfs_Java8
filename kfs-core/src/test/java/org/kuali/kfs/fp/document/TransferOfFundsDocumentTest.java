@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.document.AccountingDocumentTestUtils.testGetNewDocument_byDocumentClass;
 import static org.kuali.kfs.sys.fixture.AccountingLineFixture.LINE1;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
@@ -25,8 +27,8 @@ import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.DocumentTestUtils;
@@ -59,10 +61,9 @@ public class TransferOfFundsDocumentTest extends KualiTestBase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Logger.getLogger(ChangeMonitor.class).setLevel(Level.DEBUG);
-        Logger.getLogger(BlanketApproveAction.class).setLevel(Level.DEBUG);
+        Configurator.setLevel(ChangeMonitor.class.getName(), Level.DEBUG);
+        Configurator.setLevel(BlanketApproveAction.class.getName(), Level.DEBUG);
     }
-
 
     private Document getDocumentParameterFixture() throws Exception {
         return DocumentTestUtils.createDocument(SpringContext.getBean(DocumentService.class), TransferOfFundsDocument.class);
@@ -95,7 +96,6 @@ public class TransferOfFundsDocumentTest extends KualiTestBase {
         AccountingLineFixture.LINE2_TOF.addAsTargetTo(document);
         return document;
     }
-
 
     public final void testAddAccountingLine() throws Exception {
         List<SourceAccountingLine> sourceLines = generateSouceAccountingLines();

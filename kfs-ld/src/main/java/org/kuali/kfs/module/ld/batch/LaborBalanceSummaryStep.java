@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.batch.service.LaborBalanceSummaryReportService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
@@ -26,7 +28,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  * This class defines the batch step for labor balance summary report generation
  */
 public class LaborBalanceSummaryStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBalanceSummaryStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBalanceSummaryStep.class);
     private LaborBalanceSummaryReportService laborBalanceSummaryReportService;
 
     /**

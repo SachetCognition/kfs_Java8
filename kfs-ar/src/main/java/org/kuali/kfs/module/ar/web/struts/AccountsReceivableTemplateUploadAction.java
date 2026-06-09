@@ -36,6 +36,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.businessobject.TemplateBase;
@@ -58,7 +60,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AccountsReceivableTemplateUploadAction extends KualiAction {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsReceivableTemplateUploadAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountsReceivableTemplateUploadAction.class);
 
     private static volatile BusinessObjectService boService;
     private static volatile ConfigurationService kualiConfigurationService;

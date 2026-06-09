@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.Message;
 import org.kuali.kfs.sys.batch.service.WrappingBatchService;
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.sys.report.BusinessObjectReportHelper
  */
 public class ReportWriterTextServiceImpl implements ReportWriterService, WrappingBatchService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportWriterTextServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReportWriterTextServiceImpl.class);
 
     // Changing the initial line number would only affect that a page break occurs early. It does not actually print in the
     // middle of the page. Hence changing this has little use.
@@ -853,6 +855,5 @@ public class ReportWriterTextServiceImpl implements ReportWriterService, Wrappin
     public void setAggregationModeOn(boolean aggregationModeOn) {
         this.aggregationModeOn = aggregationModeOn;
     }
-
 
 }

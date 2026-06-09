@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.service.AccountService;
@@ -59,7 +61,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGeneralLedgerLookupableHelperServiceImpl {
 
-    private final static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CurrentAccountBalanceLookupableHelperServiceImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(CurrentAccountBalanceLookupableHelperServiceImpl.class);
 
     private final static String PRINCIPAL_ID_KEY = KFSPropertyConstants.ACCOUNT + "." + KFSPropertyConstants.ACCOUNT_FISCAL_OFFICER_SYSTEM_IDENTIFIER;
     private final static String PRINCIPAL_NAME_KEY = KFSPropertyConstants.ACCOUNT + "." + KFSPropertyConstants.ACCOUNT_FISCAL_OFFICER_USER + "." + KFSPropertyConstants.PERSON_USER_ID;
@@ -194,7 +196,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
         return localFieldValues;
     }
 
-
     /**
      * Build a search result list based on the given criteria.
      *
@@ -239,7 +240,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
         return currentBalanceList;
     }
 
-
     /**
      * This method retrieves qualified Balance records. If pending entries are
      * needed, they can be included.
@@ -257,7 +257,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
 
         return balanceList;
     }
-
 
     /**
      * This method updates the current balance with the given balance for the specified period.
@@ -378,7 +377,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
 
     }
 
-
     /**
      * This method ensures that:
      * 1. Both fiscalYear and fiscalPeriod are present and valid
@@ -424,7 +422,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
             throw new ValidationException("errors in search criteria");
         }
     }
-
 
     /**
      * This method accumulates a monthly amount up to the given period.
@@ -517,7 +514,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
         return balance.getAccountLineAnnualBalanceAmount();
     }
 
-
     /**
      * A null-safe addition helper method.
      *
@@ -531,7 +527,6 @@ public class CurrentAccountBalanceLookupableHelperServiceImpl extends AbstractGe
 
         return first.add(second);
     }
-
 
     /**
      * This method updates each Entry with its corresponding Balance object.

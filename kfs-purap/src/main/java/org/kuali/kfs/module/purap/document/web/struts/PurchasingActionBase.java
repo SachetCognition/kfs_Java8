@@ -33,6 +33,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.CapitalAssetLocation;
 import org.kuali.kfs.integration.purap.CapitalAssetSystem;
 import org.kuali.kfs.integration.purap.ItemCapitalAsset;
@@ -105,7 +107,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 
 public class PurchasingActionBase extends PurchasingAccountsPayableActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingActionBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchasingActionBase.class);
 
     /**
      * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#refresh(org.apache.struts.action.ActionMapping,
@@ -526,7 +528,6 @@ public class PurchasingActionBase extends PurchasingAccountsPayableActionBase {
         }
         // End
 
-
         purDocument.deleteItem(getSelectedLine(request));
 
         if (StringUtils.isNotBlank(purDocument.getCapitalAssetSystemTypeCode())) {
@@ -804,7 +805,6 @@ public class PurchasingActionBase extends PurchasingAccountsPayableActionBase {
         else {
             GlobalVariables.getMessageMap().putError(PurapConstants.ACCOUNT_DISTRIBUTION_ERROR_KEY, PurapKeyConstants.PURAP_GENERAL_NO_ACCOUNTS_TO_DISTRIBUTE);
         }
-
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
@@ -1134,7 +1134,6 @@ public class PurchasingActionBase extends PurchasingAccountsPayableActionBase {
         }
     }
 
-
     public ActionForward changeSystem(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         PurchasingAccountsPayableFormBase purchasingForm = (PurchasingAccountsPayableFormBase) form;
         PurchasingDocument document = (PurchasingDocument) purchasingForm.getDocument();
@@ -1187,14 +1186,12 @@ public class PurchasingActionBase extends PurchasingAccountsPayableActionBase {
             document.clearCapitalAssetFields();
             // saveDocumentNoValidationUsingClearErrorMap(document);
 
-
             SpringContext.getBean(PurapService.class).saveDocumentNoValidation(document);
             KNSGlobalVariables.getMessageList().add(PurapKeyConstants.PURCHASING_MESSAGE_SYSTEM_CHANGED);
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     public ActionForward updateCamsView(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         PurchasingAccountsPayableFormBase purchasingForm = (PurchasingAccountsPayableFormBase) form;
@@ -1207,7 +1204,6 @@ public class PurchasingActionBase extends PurchasingAccountsPayableActionBase {
         }
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     public ActionForward setManufacturerFromVendorByDocument(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         PurchasingAccountsPayableFormBase purchasingForm = (PurchasingAccountsPayableFormBase) form;

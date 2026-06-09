@@ -35,6 +35,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.batch.service.ExpenseImportByTripService;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.ErrorMessage;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class TemCorrectionAction extends KualiDocumentActionBase implements KualiTableRenderAction {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TemCorrectionAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TemCorrectionAction.class);
     public static final int DEFAULT_RECORD_COUNT_FUNCTIONALITY_LIMIT = 1000;
 
     public static final int DEFAULT_RECORDS_PER_PAGE = 10;
@@ -74,7 +76,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
 
     public static final String SYSTEM_AND_EDIT_METHOD_ERROR_KEY = "systemAndEditMethod";
     private static final int MAX_ROWS = 25;
-
 
     @Override
     public ActionForward switchToPage(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -202,8 +203,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
                 loadAllEntries(correctionForm.getInputGroupId(), rForm);
                 rForm.setDisplayEntries(new ArrayList<AgencyEntryFull>(rForm.getAllEntries()));
 
-
-
                 if (!KFSConstants.TableRenderConstants.SORT_METHOD.equals(rForm.getMethodToCall())) {
                     // if sorting, we'll let the action take care of the sorting
                     KualiTableRenderFormMetadata agencyEntrySearchResultTableMetadata = rForm.getAgencyEntrySearchResultTableMetadata();
@@ -268,7 +267,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
             correctionForm.clearEntryForManualEdit();
         }
 
-
         // Calculate the debit/credit/row count
         updateDocumentSummary(document, correctionForm.getAllEntries(), correctionForm.isRestrictedFunctionalityMode());
 
@@ -276,7 +274,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
 
         // we've modified the list of all entries, so repersist it
         correctionForm.setDisplayEntries(new ArrayList<AgencyEntryFull>(correctionForm.getAllEntries()));
-
 
         // list has changed, we'll need to repage and resort
         applyPagingAndSortingFromPreviousPageView(correctionForm);
@@ -316,7 +313,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * Save a changed row in the group
      */
@@ -341,7 +337,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
 
             // we've modified the list of all entries, so repersist it
             correctionForm.setDisplayEntries(new ArrayList<AgencyEntryFull>(correctionForm.getAllEntries()));
-
 
             // Clear out the additional row
             correctionForm.clearEntryForManualEdit();
@@ -531,7 +526,6 @@ public class TemCorrectionAction extends KualiDocumentActionBase implements Kual
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     protected void applyPagingAndSortingFromPreviousPageView(TemCorrectionForm correctionForm) {
         KualiTableRenderFormMetadata agencyEntrySearchResultTableMetadata = correctionForm.getAgencyEntrySearchResultTableMetadata();

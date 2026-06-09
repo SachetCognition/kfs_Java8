@@ -35,6 +35,8 @@ import org.apache.commons.lang.text.StrTokenizer;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
@@ -75,7 +77,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * Action class to display special budget lookup screens.
  */
 public class TempListLookupAction extends KualiLookupAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TempListLookupAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TempListLookupAction.class);
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#execute(org.apache.struts.action.ActionMapping,
@@ -480,7 +482,6 @@ public class TempListLookupAction extends KualiLookupAction {
         // refresh locks before returning
         return this.search(mapping, form, request, response);
     }
-
 
     /**
      * Gives a confirmation first time called. The next time will check the confirmation result. If the returned forward is not

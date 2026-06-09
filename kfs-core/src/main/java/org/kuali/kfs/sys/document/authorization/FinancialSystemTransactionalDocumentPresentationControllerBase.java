@@ -21,6 +21,8 @@ package org.kuali.kfs.sys.document.authorization;
 import java.util.Set;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.AmountTotaling;
@@ -44,7 +46,7 @@ import org.springframework.util.ObjectUtils;
  * Base class for all FinancialSystemDocumentPresentationControllers.
  */
 public class FinancialSystemTransactionalDocumentPresentationControllerBase extends TransactionalDocumentPresentationControllerBase implements FinancialSystemTransactionalDocumentPresentationController {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinancialSystemTransactionalDocumentPresentationControllerBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FinancialSystemTransactionalDocumentPresentationControllerBase.class);
 
     private static ParameterEvaluatorService parameterEvaluatorService;
     private static BankService bankService;

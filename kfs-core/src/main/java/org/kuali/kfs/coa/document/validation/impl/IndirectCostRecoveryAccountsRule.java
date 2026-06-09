@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21IndirectCostRecoveryAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -44,7 +46,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 abstract public class IndirectCostRecoveryAccountsRule extends KfsMaintenanceDocumentRuleBase {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IndirectCostRecoveryAccountsRule.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(IndirectCostRecoveryAccountsRule.class);
 
     protected static final BigDecimal BD100 = new BigDecimal(100);
     private List<? extends IndirectCostRecoveryAccount> activeIndirectCostRecoveryAccountList;

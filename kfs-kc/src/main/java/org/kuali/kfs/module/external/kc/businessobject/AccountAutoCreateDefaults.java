@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountType;
 import org.kuali.kfs.coa.businessobject.BudgetRecordingLevel;
@@ -53,7 +55,7 @@ import org.kuali.rice.location.framework.state.StateEbo;
  *
  */
 public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountAutoCreateDefaults.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountAutoCreateDefaults.class);
 
     protected Integer accountDefaultId;
     protected String kcUnit;
@@ -265,7 +267,6 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
         this.postalZipCode = postalZipCode;
     }
 
-
     /**
      * Gets the accountCityName attribute.
      * @return Returns the accountCityName.
@@ -320,7 +321,6 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
         }
         return accountState;
     }
-
 
     /**
      * Gets the accountStreetAddress attribute.
@@ -496,7 +496,6 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
         this.reportsToChartOfAccountsCode = reportsToChartOfAccountsCode;
     }
 
-
     /**
      * @return Returns the reportsToAccountNumber.
      */
@@ -590,7 +589,6 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     public String getAccountManagerSystemIdentifierForSearching() {
         return getAccountManagerSystemIdentifier();
     }
-
 
     /**
      * Sets the accountManagerSystemIdentifier attribute value.
@@ -874,7 +872,6 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     public void setFinancialObjectivePrsctrlIndicator(boolean financialObjectivePrsctrlIndicator) {
         this.financialObjectivePrsctrlIndicator = financialObjectivePrsctrlIndicator;
     }
-
 
     /**
      * Gets the contractsAndGrantsAccountResponsibilityId attribute.

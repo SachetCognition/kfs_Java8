@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelParameters.TRAVEL_COVERSHEET_INSTRUCTIONS;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.TRAVEL_DOCUMENT_IDENTIFIER;
 import static org.kuali.kfs.sys.KFSConstants.EXTERNALIZABLE_HELP_URL_KEY;
@@ -32,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.TemParameterConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
@@ -52,7 +53,7 @@ import org.kuali.rice.krad.service.DocumentService;
 
 public class TravelRelocationServiceImpl implements TravelRelocationService{
 
-    protected static Logger LOG = Logger.getLogger(TravelRelocationServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelRelocationServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private DocumentService documentService;

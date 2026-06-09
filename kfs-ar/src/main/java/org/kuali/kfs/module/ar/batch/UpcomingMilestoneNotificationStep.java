@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.ar.batch.service.UpcomingMilestoneNotificationService;
 import org.kuali.kfs.sys.batch.AbstractStep;
@@ -26,7 +28,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * Batch step for sending ACH Advice notifications to payees receiving an ACH payment
  */
 public class UpcomingMilestoneNotificationStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UpcomingMilestoneNotificationStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(UpcomingMilestoneNotificationStep.class);
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
     protected UpcomingMilestoneNotificationService upcomingMilestoneNotificationService;
 

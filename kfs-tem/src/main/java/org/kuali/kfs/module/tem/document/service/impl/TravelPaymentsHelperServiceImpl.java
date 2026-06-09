@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.TemProfile;
 import org.kuali.kfs.module.tem.businessobject.TravelPayment;
 import org.kuali.kfs.module.tem.businessobject.TravelerDetail;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Base implementation of the TravelPaymentsHelperService
  */
 public class TravelPaymentsHelperServiceImpl implements TravelPaymentsHelperService {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TravelPaymentsHelperServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(TravelPaymentsHelperServiceImpl.class);
 
     protected PersonService personService;
     protected WorkflowDocumentService workflowDocumentService;

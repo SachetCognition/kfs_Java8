@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ld.businessobject.inquiry;
 
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.businessobject.LedgerEntryForExpenseTransfer;
 import org.kuali.kfs.sys.KFSConstants;
@@ -30,7 +32,7 @@ import org.kuali.kfs.sys.KFSConstants;
  * implementation and customized implemetnation.
  */
 public class LedgerBalanceForExpenseTransferInquirableImpl extends LedgerBalanceInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerBalanceForExpenseTransferInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LedgerBalanceForExpenseTransferInquirableImpl.class);
 
     /**
      * @see org.kuali.module.labor.web.inquirable.AbstractGeneralLedgerInquirableImpl#getLookupableImplAttributeName()

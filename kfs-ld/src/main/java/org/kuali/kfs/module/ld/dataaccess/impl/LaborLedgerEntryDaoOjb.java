@@ -30,6 +30,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.gl.dataaccess.LedgerEntryBalancingDao;
 import org.kuali.kfs.module.ld.businessobject.LedgerEntry;
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.module.ld.businessobject.LedgerEntry
  */
 public class LaborLedgerEntryDaoOjb extends PlatformAwareDaoBaseOjb implements LaborLedgerEntryDao, LedgerEntryBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerEntryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerEntryDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.ld.dataaccess.LaborLedgerEntryDao#getMaxSquenceNumber(org.kuali.kfs.module.ld.businessobject.LedgerEntry)

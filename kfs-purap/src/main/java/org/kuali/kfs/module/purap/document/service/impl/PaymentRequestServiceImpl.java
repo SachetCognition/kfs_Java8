@@ -34,6 +34,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.ItemTypeCodes;
 import org.kuali.kfs.module.purap.PurapConstants.PREQDocumentsStrings;
@@ -113,7 +115,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 public class PaymentRequestServiceImpl implements PaymentRequestService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PaymentRequestServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected DocumentService documentService;
@@ -154,7 +156,6 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
                 PurapConstants.PaymentRequestStatuses.APPDOC_AUTO_APPROVED,
                 PurapConstants.PaymentRequestStatuses.APPDOC_DEPARTMENT_APPROVED);
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.document.service.PaymentRequestService#getPaymentRequestsToExtractByVendor(java.lang.String,
@@ -682,7 +683,6 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
         return paymentRequestResults;
     }
 
-
     /**
      * @see org.kuali.kfs.module.purap.document.service.PaymentRequestService#getPaymentRequestsByPOIdInvoiceAmountInvoiceDate(java.lang.Integer,
      *      org.kuali.rice.core.api.util.type.KualiDecimal, java.sql.Date)
@@ -840,7 +840,6 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
         distributeAccounting(paymentRequest);
     }
 
-
     /**
      * Calculates the discount item for this paymentRequest.
      *
@@ -910,7 +909,6 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
         }
 
     }
-
 
     @Override
     @NonTransactional
@@ -1790,7 +1788,7 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
             throw new RuntimeException(errorMessage, e);
         }
         else {
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage);
         }
     }
@@ -1839,7 +1837,6 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
         }
         return hasActivePreqs;
     }
-
 
     /**
      * This method was added as part of the move to rice20 as a way to get at application doc status. Since
@@ -1913,7 +1910,6 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
 
         return filteredPaymentRequestDocuments;
     }
-
 
     /**
      * Wrapper class to the filterPaymentRequestByAppDocStatus (Collection<PaymentRequestDocument>)

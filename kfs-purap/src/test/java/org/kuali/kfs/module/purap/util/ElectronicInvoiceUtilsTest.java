@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.math.BigDecimal;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.context.KualiTestBase;
 
 @ConfigureContext(session = khuntley, shouldCommitTransactions=false)
 public class ElectronicInvoiceUtilsTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceUtilsTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceUtilsTest.class);
     
     protected void setUp() throws Exception {
         super.setUp();

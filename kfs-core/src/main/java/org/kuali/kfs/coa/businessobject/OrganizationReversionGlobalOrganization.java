@@ -22,6 +22,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
@@ -30,7 +32,7 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
  * An organization which is related to a Global Organization Reversion Detail.
  */
 public class OrganizationReversionGlobalOrganization extends GlobalBusinessObjectDetailBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalOrganization.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalOrganization.class);
     private String documentNumber;
     private String chartOfAccountsCode;
     private String organizationCode;

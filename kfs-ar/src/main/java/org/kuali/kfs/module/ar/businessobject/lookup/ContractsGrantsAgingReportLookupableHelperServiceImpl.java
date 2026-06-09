@@ -32,6 +32,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAgency;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -76,7 +78,7 @@ import org.springframework.beans.factory.InitializingBean;
  * Lookupable Helper Service class for ContractsGrantsAgingReport.
  */
 public class ContractsGrantsAgingReportLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl implements InitializingBean {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingReportLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingReportLookupableHelperServiceImpl.class);
     protected DateTimeService dateTimeService;
     protected ContractsGrantsAgingReportService contractsGrantsAgingReportService;
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;
@@ -115,7 +117,6 @@ public class ContractsGrantsAgingReportLookupableHelperServiceImpl extends Kuali
     private String invoiceAmountFrom;
     private String invoiceAmountTo;
     private String invoiceNumber;
-
 
     private String orgCode;
     private String chartCode;
@@ -319,7 +320,6 @@ public class ContractsGrantsAgingReportLookupableHelperServiceImpl extends Kuali
 
                         // comparator
 
-
                         col.setComparator(CellComparatorHelper.getAppropriateComparatorForPropertyClass(propClass));
                         col.setValueComparator(CellComparatorHelper.getAppropriateValueComparatorForPropertyClass(propClass));
 
@@ -377,7 +377,6 @@ public class ContractsGrantsAgingReportLookupableHelperServiceImpl extends Kuali
 
                 lookupForm.setHasReturnableRow(hasReturnableRow);
             }
-
 
             if (displayList.size() != 0) {
                 ((ContractsGrantsAgingReportForm) lookupForm).setTotal0to30(total0to30.toString());

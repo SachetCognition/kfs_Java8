@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionDuration;
 import org.kuali.kfs.module.bc.service.BudgetConstructionDurationService;
@@ -30,7 +32,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * implements the service methods defined in BudgetConstructionDurationService
  */
 public class BudgetConstructionDurationServiceImpl implements BudgetConstructionDurationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionDurationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionDurationServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 

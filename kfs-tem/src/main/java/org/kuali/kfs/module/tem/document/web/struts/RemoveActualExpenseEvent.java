@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
 import org.kuali.kfs.module.tem.document.TravelDocument;
 import org.kuali.kfs.module.tem.document.service.TravelDocumentService;
@@ -32,7 +33,7 @@ import org.kuali.rice.krad.service.KualiRuleService;
 
 public class RemoveActualExpenseEvent implements Observer {
 
-    public static Logger LOG = Logger.getLogger(RemoveActualExpenseEvent.class);
+    public static Logger LOG = LoggerFactory.getLogger(RemoveActualExpenseEvent.class);
 
     private static final int WRAPPER_ARG_IDX       = 0;
     private static final int SELECTED_LINE_ARG_IDX = 1;
@@ -47,7 +48,7 @@ public class RemoveActualExpenseEvent implements Observer {
             return;
         }
         final Object[] args = (Object[]) arg1;
-        LOG.debug(args[WRAPPER_ARG_IDX]);
+        LOG.debug("{}", args[WRAPPER_ARG_IDX]);
         if (!(args[WRAPPER_ARG_IDX] instanceof TravelMvcWrapperBean)) {
             return;
         }

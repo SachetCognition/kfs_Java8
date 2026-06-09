@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.ld.LaborConstants.BalanceInquiries.BALANCE_TYPE_AC_AND_A21;
 
 import java.util.Collection;
@@ -48,7 +50,7 @@ import org.kuali.rice.krad.util.BeanPropertyComparator;
  * @see org.kuali.kfs.module.ld.businessobject.LedgerEntry
  */
 public class LedgerEntryLookupableHelperServiceImpl extends AbstractLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerEntryLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LedgerEntryLookupableHelperServiceImpl.class);
 
     private LaborInquiryOptionsService laborInquiryOptionsService;
 

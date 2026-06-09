@@ -30,6 +30,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.OriginEntryStatistics;
 import org.kuali.kfs.gl.service.OriginEntryGroupService;
@@ -49,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborOriginEntryServiceImpl extends OriginEntryGroupServiceImpl implements LaborOriginEntryService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginEntryServiceImpl.class);
 
     private OriginEntryGroupService originEntryGroupService;
     private DateTimeService dateTimeService;
@@ -376,8 +378,6 @@ public class LaborOriginEntryServiceImpl extends OriginEntryGroupServiceImpl imp
             
         return returnMessageMap;
     }
-
-
 
 //    public LedgerEntryHolder getSummaryByGroupId(Collection groupIdList) {
 //        LOG.debug("getSummaryByGroupId() started");

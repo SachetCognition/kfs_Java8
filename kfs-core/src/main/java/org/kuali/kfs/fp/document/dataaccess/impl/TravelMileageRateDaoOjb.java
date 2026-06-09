@@ -23,9 +23,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.TravelMileageRate;
 import org.kuali.kfs.fp.document.dataaccess.TravelMileageRateDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
@@ -34,7 +35,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * This class is the OJB implementation of the TravelMileageRate interface.
  */
 public class TravelMileageRateDaoOjb extends PlatformAwareDaoBaseOjb implements TravelMileageRateDao {
-    private static Logger LOG = Logger.getLogger(TravelMileageRateDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(TravelMileageRateDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.fp.document.dataaccess.TravelMileageRateDao#retrieveMostEffectiveMileageRates(java.sql.Timestamp)
@@ -60,6 +61,5 @@ public class TravelMileageRateDaoOjb extends PlatformAwareDaoBaseOjb implements 
 
         return mostEffectiveRates;
     }
-
 
 }

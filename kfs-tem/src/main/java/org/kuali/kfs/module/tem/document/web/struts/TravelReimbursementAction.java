@@ -20,6 +20,8 @@ package org.kuali.kfs.module.tem.document.web.struts;
 
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.apache.commons.lang.StringUtils.substringBetween;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.CERTIFICATION_STATEMENT_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.COVERSHEET_FILENAME_FORMAT;
 import static org.kuali.kfs.module.tem.TemConstants.EMPLOYEE_TEST_ATTRIBUTE;
@@ -49,7 +51,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -95,7 +96,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class TravelReimbursementAction extends TravelActionBase {
 
-    public static Logger LOG = Logger.getLogger(TravelReimbursementAction.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelReimbursementAction.class);
 
     /**
      * Refreshes all collections upon load
@@ -111,7 +112,6 @@ public class TravelReimbursementAction extends TravelActionBase {
         initializeAssignAccounts(reimbForm);
         reimbForm.setDistribution(getAccountingDistributionService().buildDistributionFrom(document));
     }
-
 
     protected void refreshCollectionsFor(final TravelReimbursementDocument reimbursement) {
         if (!reimbursement.getDocumentHeader().getWorkflowDocument().isInitiated()) {
@@ -276,7 +276,6 @@ public class TravelReimbursementAction extends TravelActionBase {
         return super.refresh(mapping, form, request, response);
     }
 
-
     @Override
     protected void performRequesterRefresh(TravelDocument document, TravelFormBase travelForm, HttpServletRequest request) {
         final String travelerTypeCode = request.getParameter("document.traveler.travelerTypeCode");
@@ -288,7 +287,6 @@ public class TravelReimbursementAction extends TravelActionBase {
         ((TravelReimbursementDocument)document).updatePayeeTypeForReimbursable();
         updateAccountsWithNewProfile(travelForm, document.getTemProfile());
     }
-
 
     protected Integer getPerDiemActionLineNumber(final HttpServletRequest request) {
         for (final String parameterKey : ((Map<String,String>) request.getParameterMap()).keySet()) {
@@ -394,7 +392,7 @@ public class TravelReimbursementAction extends TravelActionBase {
             if (ObjectUtils.isNull(rootDocument)) {
                 String errorMsg = "Retrieved null TravelDocument when searching by travelDocumentIdentifier: "+ document.getTravelDocumentIdentifier()
                                     + " Cannot create a new document";
-                LOG.error(errorMsg);
+                LOG.error("{}", errorMsg);
                 throw new RuntimeException(errorMsg);
             }
 
@@ -462,8 +460,6 @@ public class TravelReimbursementAction extends TravelActionBase {
 
             final AccountingDocumentRelationship relationship = buildRelationshipToProgenitorDocument(rootDocument, document);
             getBusinessObjectService().save(relationship);
-
-
 
         } else {
             // we have no parent document; blank out the trip begin and end dates
@@ -573,8 +569,6 @@ public class TravelReimbursementAction extends TravelActionBase {
         return retval;
     }
 
-
-
     /**
      * The action called when the "Remove Per Diem Table" buttons are clicked upon. This method will clear out the per diem objects
      * from the {@link TravelAuthorizationDocument} instance
@@ -679,7 +673,6 @@ public class TravelReimbursementAction extends TravelActionBase {
     }
     }
 
-
     /**
      * Parses the method to call attribute to pick off the line number which should have an action performed on it.
      *
@@ -737,8 +730,6 @@ public class TravelReimbursementAction extends TravelActionBase {
         return forward;
     }
 
-
-
     /**
      * This method calls addDateChangedNote() if this TR is created from a TA.
      *
@@ -760,7 +751,6 @@ public class TravelReimbursementAction extends TravelActionBase {
             }
         }
     }
-
 
     /**
      * Determines the object code for the next source accounting line, based on the distribution for the document
@@ -878,5 +868,4 @@ public class TravelReimbursementAction extends TravelActionBase {
         return SpringContext.getBean(DateTimeService.class);
     }
 }
-
 

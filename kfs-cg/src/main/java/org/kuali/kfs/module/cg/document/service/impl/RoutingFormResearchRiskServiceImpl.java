@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.CGPropertyConstants;
 import org.kuali.kfs.module.cg.businessobject.ResearchRiskType;
 import org.kuali.kfs.module.cg.document.service.RoutingFormResearchRiskService;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class RoutingFormResearchRiskServiceImpl implements RoutingFormResearchRiskService {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RoutingFormResearchRiskServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(RoutingFormResearchRiskServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 

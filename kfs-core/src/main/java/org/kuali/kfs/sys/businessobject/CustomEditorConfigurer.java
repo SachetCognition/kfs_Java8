@@ -24,11 +24,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CustomEditorConfigurer implements InitializingBean {
-    protected static final Logger LOG = Logger.getLogger(CustomEditorConfigurer.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(CustomEditorConfigurer.class);
 
     private Map customEditors;
 

@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.businessobject.AccountingLineOverride;
 import org.kuali.kfs.sys.businessobject.AccountingLineOverride.COMPONENT;
@@ -34,7 +36,7 @@ import org.kuali.kfs.sys.web.struts.KualiAccountingDocumentFormBase;
  */
 public class BudgetAdjustmentForm extends KualiAccountingDocumentFormBase {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetAdjustmentForm.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BudgetAdjustmentForm.class);
 
     
     /**

@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ld.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.service.LaborOriginEntryGroupService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.context.SpringContext;
  * Create Labor backup Batch Step.
  */
 public class CreateLaborBackupGroupStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CreateLaborBackupGroupStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(CreateLaborBackupGroupStep.class);
 
     /**
      * Invokes the method that creates labor backup group

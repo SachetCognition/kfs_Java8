@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.identity.OrganizationOptionalHierarchyRoleTypeServiceImpl;
 import org.kuali.kfs.module.bc.BCConstants;
@@ -50,7 +52,7 @@ import org.kuali.rice.kns.kim.role.RoleTypeServiceBase;
 import org.kuali.rice.krad.util.MessageMap;
 
 public class DocumentDerivedRoleTypeServiceImpl extends RoleTypeServiceBase implements BudgetConstructionNoAccessMessageSetting {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DocumentDerivedRoleTypeServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(DocumentDerivedRoleTypeServiceImpl.class);
 
     protected static final String UNMATCHABLE_QUALIFICATION = "!~!~!~!~!~";
 

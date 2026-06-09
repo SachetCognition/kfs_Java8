@@ -27,14 +27,15 @@ import java.util.HashMap;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
 import org.kuali.kfs.sys.context.SpringContext;
 
 @ConfigureContext
 public class DatabaseConsistencyTest extends KualiTestBase {
-    private static final Logger LOG = Logger.getLogger(DatabaseConsistencyTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DatabaseConsistencyTest.class);
     private Connection dbCon = null;
     private Statement dbAsk;
     private StringBuffer queryString;

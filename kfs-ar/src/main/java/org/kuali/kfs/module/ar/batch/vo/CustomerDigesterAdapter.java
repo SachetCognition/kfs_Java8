@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ar.batch.vo;
 import org.apache.commons.beanutils.ConversionException;
 import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.batch.report.CustomerLoadBatchErrors;
 import org.kuali.kfs.module.ar.businessobject.Customer;
 import org.kuali.kfs.module.ar.businessobject.CustomerAddress;
@@ -35,7 +37,7 @@ import org.kuali.rice.kns.service.MaintenanceDocumentDictionaryService;
  * Customer object.
  */
 public class CustomerDigesterAdapter {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerDigesterAdapter.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerDigesterAdapter.class);
 
     private static final Class<Customer> BO_CLASS = Customer.class;
     private static final String DD_ENTRY_NAME = BO_CLASS.getName();

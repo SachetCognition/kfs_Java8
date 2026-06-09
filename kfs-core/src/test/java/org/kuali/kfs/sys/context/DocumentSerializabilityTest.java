@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.rice.krad.datadictionary.DataDictionary;
 import org.kuali.rice.krad.datadictionary.DocumentEntry;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.service.DataDictionaryService;
  * Tests that every property on all KFS documents are either serializable or transient
  */
 public class DocumentSerializabilityTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DocumentSerializabilityTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(DocumentSerializabilityTest.class);
     /**
      * Tests that every property on all KFS documents are either serializable or transient
      */
@@ -83,7 +85,7 @@ public class DocumentSerializabilityTest extends KualiTestBase {
         }
 
         if (!StringUtils.isBlank(errorMessage)) {
-            LOG.info(errorMessage);
+            LOG.info("{}", errorMessage);
         }
         assertTrue(errorMessage, StringUtils.isEmpty(errorMessage) );
     }

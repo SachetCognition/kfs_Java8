@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ar.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.ar.batch.service.LetterOfCreditCreateService;
 import org.kuali.kfs.sys.batch.AbstractStep;
@@ -29,7 +31,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * for CG Invoices.
  */
 public class LetterOfCreditCreateAndRouteDocumentsStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LetterOfCreditCreateAndRouteDocumentsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LetterOfCreditCreateAndRouteDocumentsStep.class);
 
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
     protected LetterOfCreditCreateService letterOfCreditCreateService;

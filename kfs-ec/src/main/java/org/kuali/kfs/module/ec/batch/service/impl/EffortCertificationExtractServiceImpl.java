@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
 import org.kuali.kfs.integration.ld.LaborLedgerBalanceForEffortCertification;
 import org.kuali.kfs.integration.ld.LaborModuleService;
@@ -70,7 +72,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EffortCertificationExtractServiceImpl implements EffortCertificationExtractService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationExtractServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(EffortCertificationExtractServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected OptionsService optionsService;
@@ -109,7 +111,7 @@ public class EffortCertificationExtractServiceImpl implements EffortCertificatio
         String errorMessage = this.validateReportDefintion(fiscalYear, reportNumber);
         errorMessage = StringUtils.isNotEmpty(errorMessage) ? errorMessage : this.existEffortCertificationDocument(fieldValues);
         if (StringUtils.isNotEmpty(errorMessage)) {
-            LOG.fatal(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
 

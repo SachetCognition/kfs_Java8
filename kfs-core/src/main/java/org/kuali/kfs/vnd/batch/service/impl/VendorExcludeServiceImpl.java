@@ -28,6 +28,8 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.BatchInputFileType;
 import org.kuali.kfs.sys.batch.service.BatchInputFileService;
 import org.kuali.kfs.vnd.batch.dataaccess.DebarredVendorDao;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class VendorExcludeServiceImpl implements VendorExcludeService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorExcludeServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(VendorExcludeServiceImpl.class);
 
     private BatchInputFileService batchInputFileService;
     private BusinessObjectService businessObjectService;

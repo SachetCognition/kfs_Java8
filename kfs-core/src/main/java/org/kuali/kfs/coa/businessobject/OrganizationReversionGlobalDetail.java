@@ -25,6 +25,8 @@ import java.util.TreeSet;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
  * Organizations, that class could not be re-used for Globals.
  */
 public class OrganizationReversionGlobalDetail extends GlobalBusinessObjectDetailBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalDetail.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalDetail.class);
 
     private String documentNumber;
     private String organizationReversionCategoryCode;

@@ -20,11 +20,12 @@ package org.kuali.kfs.sys.batch;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 
 public class BatchSpringContext {
-    private static final Logger LOG = Logger.getLogger(BatchSpringContext.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchSpringContext.class);
 
     public static Step getStep(String beanId) {
         return SpringContext.getBean(Step.class, beanId);

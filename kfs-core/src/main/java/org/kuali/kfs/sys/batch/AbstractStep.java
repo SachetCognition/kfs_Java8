@@ -21,7 +21,8 @@ package org.kuali.kfs.sys.batch;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.springframework.beans.factory.BeanNameAware;
@@ -29,7 +30,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 public abstract class AbstractStep extends InitiateDirectoryBase implements Step, BeanNameAware, InitializingBean, InitiateDirectory{
 
-    private static final Logger LOG = Logger.getLogger(AbstractStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractStep.class);
 
     protected String name;
     protected ParameterService parameterService;
@@ -131,7 +132,6 @@ public abstract class AbstractStep extends InitiateDirectoryBase implements Step
     public void setBatchInputFileType(BatchInputFileType batchInputFileType) {
         this.batchInputFileType = batchInputFileType;
     }
-
 
     /**
      * Sets the interruped flag

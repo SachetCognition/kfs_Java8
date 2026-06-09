@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDetailBuild;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDocumentBuild;
@@ -42,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EffortCertificationDocumentBuildServiceImpl implements EffortCertificationDocumentBuildService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocumentBuildServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EffortCertificationDocumentBuildServiceImpl.class);
 
     protected EffortCertificationDetailBuildService effortCertificationDetailBuildService;
     protected BusinessObjectService businessObjectService;
@@ -138,8 +140,6 @@ public class EffortCertificationDocumentBuildServiceImpl implements EffortCertif
         }
         return ledgerBalanceGroups;
     }
-
-
 
     /**
      * update the given detail line if the given detail line is in the list; otherwise, add the given line into the list

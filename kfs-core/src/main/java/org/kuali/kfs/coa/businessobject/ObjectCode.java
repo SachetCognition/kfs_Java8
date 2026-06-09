@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.businessobject;
 import java.util.LinkedHashMap;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.SufficientFundRebuild;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
@@ -36,12 +38,11 @@ import org.kuali.rice.krad.service.impl.PersistenceStructureServiceImpl;
  */
 public class ObjectCode extends PersistableBusinessObjectBase implements KualiCode, FiscalYearBasedBusinessObject {
 
-
     static {
         PersistenceStructureServiceImpl.referenceConversionMap.put(ObjectCode.class, ObjectCodeCurrent.class);
     }
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectCode.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ObjectCode.class);
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "ObjectCode";
     
@@ -134,7 +135,6 @@ public class ObjectCode extends PersistableBusinessObjectBase implements KualiCo
     public MandatoryTransferEliminationCode getFinObjMandatoryTrnfrelim() {
         return finObjMandatoryTrnfrelim;
     }
-
 
     /**
      * Sets the finObjMandatoryTrnfrelim attribute value.

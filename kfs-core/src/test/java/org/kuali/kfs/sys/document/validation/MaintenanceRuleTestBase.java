@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.sys.document.validation;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -219,7 +220,7 @@ public abstract class MaintenanceRuleTestBase extends KualiTestBase {
     protected void assertFieldErrorExists(String fieldName, String errorKey) {
         boolean result = GlobalVariables.getMessageMap().fieldHasMessage(MaintenanceDocumentRuleBase.MAINTAINABLE_ERROR_PREFIX + fieldName, errorKey);
         if ( !result ) {
-            Logger.getLogger(getClass()).info("Messages in MessageMap: " + GlobalVariables.getMessageMap());
+            LoggerFactory.getLogger(getClass()).info("Messages in MessageMap: " + GlobalVariables.getMessageMap());
         }
         assertTrue("FieldName (" + fieldName + ") should contain errorKey: " + errorKey, result);
     }

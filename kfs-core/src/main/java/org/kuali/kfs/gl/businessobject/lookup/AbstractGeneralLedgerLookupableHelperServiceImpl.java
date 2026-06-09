@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.service.impl.StringHelper;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -50,11 +52,10 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public abstract class AbstractGeneralLedgerLookupableHelperServiceImpl extends AbstractLookupableHelperServiceImpl {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractGeneralLedgerLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractGeneralLedgerLookupableHelperServiceImpl.class);
 
     protected GeneralLedgerPendingEntryService generalLedgerPendingEntryService;
     protected DebitDeterminerService debitDeterminerService;
-
 
     /**
      * This method overides that in parent class so that the maintainance actions are surpressed
@@ -174,7 +175,6 @@ public abstract class AbstractGeneralLedgerLookupableHelperServiceImpl extends A
         return false;
     }
 
-
     /**
      * build the serach result list from the given collection and the number of all qualified search results
      *
@@ -204,8 +204,6 @@ public abstract class AbstractGeneralLedgerLookupableHelperServiceImpl extends A
         return displayList;
 
     }
-
-
 
     protected void updateByDebitCreditOption(Collection resultTable , String debitCreditOption) {
 
@@ -318,7 +316,5 @@ public abstract class AbstractGeneralLedgerLookupableHelperServiceImpl extends A
     public void setDebitDeterminerService(DebitDeterminerService debitDeterminerService) {
         this.debitDeterminerService = debitDeterminerService;
     }
-
-
 
 }

@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.gl.batch.service.ReconciliationParserService;
 import org.kuali.kfs.gl.batch.service.impl.ExceptionCaughtStatus;
@@ -75,7 +77,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Note: the feeding algorithm of this service will read the data file twice to minimize memory usage.
  */
 public class FileEnterpriseFeederHelperServiceImpl implements FileEnterpriseFeederHelperService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileEnterpriseFeederHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileEnterpriseFeederHelperServiceImpl.class);
 
     protected ReconciliationParserService reconciliationParserService;
     protected ReconciliationService reconciliationService;
@@ -481,7 +483,7 @@ public class FileEnterpriseFeederHelperServiceImpl implements FileEnterpriseFeed
 
 		feederReportData.incrementNumberOfErrorEncountered();
 
-		LOG.error(message);
+		LOG.error("{}", message);
 		errorStatisticsReport.writeError(wageEntry, new Message(message, Message.TYPE_FATAL));
 	}
 
@@ -500,7 +502,7 @@ public class FileEnterpriseFeederHelperServiceImpl implements FileEnterpriseFeed
 
 		feederReportData.incrementNumberOfErrorEncountered();
 
-		LOG.error(message);
+		LOG.error("{}", message);
 		errorStatisticsReport.writeError(wageEntry, new Message(message, Message.TYPE_FATAL));
 	}
 

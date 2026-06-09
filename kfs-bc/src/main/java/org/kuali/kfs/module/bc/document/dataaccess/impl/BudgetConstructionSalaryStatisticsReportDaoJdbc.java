@@ -20,6 +20,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionSalaryStatisticsReportDao;
@@ -29,7 +31,7 @@ import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionSalaryStati
  */
 
 public class BudgetConstructionSalaryStatisticsReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionSalaryStatisticsReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionSalaryStatisticsReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionSalaryStatisticsReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsSalaryStatisticsTable = new ArrayList<SQLForStep>(12);
 

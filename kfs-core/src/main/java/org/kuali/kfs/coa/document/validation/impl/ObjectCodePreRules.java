@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.document.validation.impl;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.ObjectLevel;
 import org.kuali.kfs.coa.service.ChartService;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.document.Document;
  * etc.
  */
 public class ObjectCodePreRules extends PromptBeforeValidationBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectCodePreRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ObjectCodePreRules.class);
 
     protected static ChartService chartService;
     protected static ObjectLevelService objectLevelService;

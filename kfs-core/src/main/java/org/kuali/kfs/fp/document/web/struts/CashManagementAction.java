@@ -25,10 +25,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.Check;
 import org.kuali.kfs.fp.businessobject.Deposit;
 import org.kuali.kfs.fp.document.CashManagementDocument;
@@ -63,7 +64,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * Action class for CashManagementForm
  */
 public class CashManagementAction extends KualiTransactionalDocumentActionBase {
-    protected static Logger LOG = Logger.getLogger(CashManagementAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CashManagementAction.class);
     protected static final String CASH_MANAGEMENT_STATUS_PAGE = "/cashManagementStatus.do";
 
     /**
@@ -71,7 +72,6 @@ public class CashManagementAction extends KualiTransactionalDocumentActionBase {
      */
     public CashManagementAction() {
     }
-
 
     /**
      * Overrides to call super, but also make sure the helpers are populated.
@@ -202,7 +202,6 @@ public class CashManagementAction extends KualiTransactionalDocumentActionBase {
         return wizardActionUrl;
     }
 
-
     /**
      * @param mapping
      * @param form
@@ -240,7 +239,6 @@ public class CashManagementAction extends KualiTransactionalDocumentActionBase {
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#reload(org.apache.struts.action.ActionMapping,
      *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -261,7 +259,6 @@ public class CashManagementAction extends KualiTransactionalDocumentActionBase {
         return dest;
     }
 
-
     /**
      * @param mapping
      * @param form
@@ -280,7 +277,6 @@ public class CashManagementAction extends KualiTransactionalDocumentActionBase {
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * Saves the document, then opens the cash drawer
@@ -451,7 +447,6 @@ public class CashManagementAction extends KualiTransactionalDocumentActionBase {
 
         int deleteIndex = getLineToDelete(request);
         Check oldCheck = cmDoc.getCurrentTransaction().getCheck(deleteIndex);
-
 
         boolean rulePassed = SpringContext.getBean(KualiRuleService.class).applyRules(new DeleteCheckEvent(KFSConstants.EXISTING_CHECK_PROPERTY_NAME, cmDoc, oldCheck));
 

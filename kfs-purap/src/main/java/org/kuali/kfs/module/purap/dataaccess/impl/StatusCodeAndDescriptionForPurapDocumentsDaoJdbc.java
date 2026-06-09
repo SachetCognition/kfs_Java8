@@ -21,6 +21,8 @@ package org.kuali.kfs.module.purap.dataaccess.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.dataaccess.StatusCodeAndDescriptionForPurapDocumentsDao;
 import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJdbc;
 import org.springframework.dao.DataAccessException;
@@ -30,7 +32,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * A class to do the database queries needed to prepare documents status codes and descriptions.
  */
 public class StatusCodeAndDescriptionForPurapDocumentsDaoJdbc extends PlatformAwareDaoBaseJdbc implements StatusCodeAndDescriptionForPurapDocumentsDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(StatusCodeAndDescriptionForPurapDocumentsDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(StatusCodeAndDescriptionForPurapDocumentsDaoJdbc.class);
     
     /**
      * @see org.kuali.kfs.module.purap.dataaccess.StatusCodeAndDescriptionForPurapDocumentsDao#getRequisitionDocumentStatuses()

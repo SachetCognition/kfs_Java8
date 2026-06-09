@@ -21,14 +21,15 @@ package org.kuali.kfs.module.cab.batch;
 import java.util.Collection;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.batch.service.BatchExtractService;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderAccount;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
 public class PreAssetTaggingStep extends AbstractStep {
-    private static final Logger LOG = Logger.getLogger(PreAssetTaggingStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PreAssetTaggingStep.class);
     private BatchExtractService batchExtractService;
     private DateTimeService dateTimeService;
 

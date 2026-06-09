@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ld.document.web.struts;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.document.web.struts.CorrectionForm;
 import org.kuali.kfs.module.ld.businessobject.LaborOriginEntry;
 import org.kuali.kfs.module.ld.document.LaborCorrectionDocument;
@@ -28,12 +30,11 @@ import org.kuali.kfs.module.ld.document.service.LaborCorrectionDocumentService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kns.web.ui.Column;
 
-
 /**
  * Struts Action Form for the Labor Ledger Correction Process.
  */
 public class LaborCorrectionForm extends CorrectionForm {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborCorrectionForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(LaborCorrectionForm.class);
 
     protected LaborOriginEntry laborEntryForManualEdit;
     protected String laborEntryUniversityFiscalYear;
@@ -292,6 +293,5 @@ public class LaborCorrectionForm extends CorrectionForm {
     public void setLaborEntryTransactionTotalHours(String laborEntryTransactionTotalHours) {
         this.laborEntryTransactionTotalHours = laborEntryTransactionTotalHours;
     }
-
 
 }

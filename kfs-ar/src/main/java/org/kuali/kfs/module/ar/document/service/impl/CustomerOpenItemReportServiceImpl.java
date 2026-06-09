@@ -31,6 +31,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader;
 import org.kuali.kfs.module.ar.businessobject.CustomerInvoiceDetail;
@@ -63,7 +65,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CustomerOpenItemReportServiceImpl implements CustomerOpenItemReportService {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerOpenItemReportServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerOpenItemReportServiceImpl.class);
 
     protected AccountsReceivableDocumentHeaderDao accountsReceivableDocumentHeaderDao;
     protected CustomerInvoiceDocumentService customerInvoiceDocumentService;
@@ -72,7 +74,6 @@ public class CustomerOpenItemReportServiceImpl implements CustomerOpenItemReport
     protected CustomerInvoiceDetailDao customerInvoiceDetailDao;
     protected NonAppliedHoldingDao nonAppliedHoldingDao;
     protected BusinessObjectService businessObjectService;
-
 
     @Override
     public List getPopulatedReportDetails(String customerNumber){
@@ -110,7 +111,6 @@ public class CustomerOpenItemReportServiceImpl implements CustomerOpenItemReport
 
             // Document Number
             detail.setDocumentNumber(docNumber);
-
 
             if (documentType.equals(KFSConstants.FinancialDocumentTypeCodes.CUSTOMER_INVOICE) || documentType.equals(ArConstants.ArDocumentTypeCodes.CONTRACTS_GRANTS_INVOICE)) {
                 invoiceIds.add(docNumber);
@@ -794,7 +794,6 @@ public class CustomerOpenItemReportServiceImpl implements CustomerOpenItemReport
         if (writeOffIds.size() > 0){
             populateReportDetailsForWriteOff(writeOffIds, results, details, refDocumentNumber);
         }
-
 
         return results;
     }

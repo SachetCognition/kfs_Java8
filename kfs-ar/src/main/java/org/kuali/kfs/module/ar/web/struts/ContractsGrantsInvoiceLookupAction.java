@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.web.ui.ContractsGrantsLookupResultRow;
 import org.kuali.rice.kns.web.ui.ResultRow;
@@ -31,7 +33,7 @@ import org.kuali.rice.kns.web.ui.ResultRow;
  */
 public class ContractsGrantsInvoiceLookupAction extends ContractsGrantsMultipleValueLookupAction {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceLookupAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceLookupAction.class);
 
     /**
      * Collects from the given resultTable - collecting ids from children rows for ContractsGrantsInvoiceResultRows

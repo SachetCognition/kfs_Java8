@@ -24,7 +24,8 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.module.tem.TemConstants;
@@ -54,7 +55,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 @SuppressWarnings("deprecation")
 public class ImportedExpensePendingEntryServiceImpl implements ImportedExpensePendingEntryService{
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(ImportedExpensePendingEntryServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ImportedExpensePendingEntryServiceImpl.class);
 
     DateTimeService dateTimeService;
     UniversityDateService universityDateService;
@@ -63,7 +64,6 @@ public class ImportedExpensePendingEntryServiceImpl implements ImportedExpensePe
     TravelDocumentService travelDocumentService;
     ObjectCodeService objectCodeService;
     DataDictionaryService dataDictionaryService;
-
 
     /**
      * @see org.kuali.kfs.module.tem.batch.service.ImportedExpensePendingEntryService#checkAndAddPendingEntriesToList(java.util.List, org.kuali.kfs.module.tem.businessobject.AgencyStagingData, boolean, boolean)
@@ -124,7 +124,6 @@ public class ImportedExpensePendingEntryServiceImpl implements ImportedExpensePe
     protected GeneralLedgerPendingEntry buildBasicDistributionPendingEntry(GeneralLedgerPendingEntrySequenceHelper sequenceHelper) {
         GeneralLedgerPendingEntry glpe = new GeneralLedgerPendingEntry();
         final String DIST_INCOME_DOC_TYPE = KFSConstants.FinancialDocumentTypeCodes.DISTRIBUTION_OF_INCOME_AND_EXPENSE;
-
 
         glpe.setVersionNumber(new Long(1));
         glpe.setUniversityFiscalYear(universityDateService.getCurrentFiscalYear());
@@ -232,7 +231,6 @@ public class ImportedExpensePendingEntryServiceImpl implements ImportedExpensePe
 
         return entries;
     }
-
 
     /**
      * @see org.kuali.kfs.module.tem.batch.service.ImportedExpensePendingEntryService#buildCreditPendingEntry(org.kuali.kfs.module.tem.businessobject.AgencyStagingData, org.kuali.kfs.module.tem.businessobject.TripAccountingInformation, org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySequenceHelper, java.lang.String, org.kuali.rice.kns.util.KualiDecimal, boolean)

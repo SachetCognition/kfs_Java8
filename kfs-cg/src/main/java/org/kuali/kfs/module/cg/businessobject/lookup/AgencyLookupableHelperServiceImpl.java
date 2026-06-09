@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.cg.CGPropertyConstants;
 import org.kuali.kfs.module.cg.businessobject.Agency;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * Helper service class for Agency lookup
  */
 public class AgencyLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AgencyLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AgencyLookupableHelperServiceImpl.class);
 
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
 
@@ -61,7 +63,6 @@ public class AgencyLookupableHelperServiceImpl extends KualiLookupableHelperServ
 
         return htmlDataList;
     }
-
 
     /**
      * This method adds a link to the look up FOR the awards associated with a given Agency.

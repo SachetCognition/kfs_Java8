@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cam.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.batch.service.AssetDepreciationService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -28,9 +30,8 @@ import java.util.Date;
  * A step in AssetYearEndDepreciation.  Runs {@link AssetDepreciationService}.runYearEndDepreciation
  */
 public class AssetYearEndDepreciationStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetYearEndDepreciationStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetYearEndDepreciationStep.class);
     private AssetDepreciationService assetDepreciationService;
-
 
     /**
      * @see org.kuali.kfs.sys.batch.Step#execute(java.lang.String, java.util.Date)

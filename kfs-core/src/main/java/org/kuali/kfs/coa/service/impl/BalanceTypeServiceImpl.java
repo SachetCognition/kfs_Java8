@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.dataaccess.BalanceTypeDao;
 import org.kuali.kfs.coa.service.BalanceTypeService;
@@ -38,7 +40,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 @NonTransactional
 public class BalanceTypeServiceImpl implements BalanceTypeService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceTypeServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceTypeServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected BalanceTypeDao balanceTypeDao;

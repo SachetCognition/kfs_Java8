@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cab.CapitalAssetBuilderModuleService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.AccountingDocument;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent;
  * validate the capital accounting lines associated with the accounting document for validation
  */
 public class ValidateCapitalAssetsExistForCapitalAccountingLinesProcessed extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ValidateCapitalAssetsExistForCapitalAccountingLinesProcessed.class);
+    private static Logger LOG = LoggerFactory.getLogger(ValidateCapitalAssetsExistForCapitalAccountingLinesProcessed.class);
 
     private CapitalAssetBuilderModuleService capitalAssetBuilderModuleService;
     private AccountingDocument accountingDocumentForValidation;

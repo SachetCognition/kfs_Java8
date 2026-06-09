@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.TransmitContractsAndGrantsInvoicesLookupDataHolder;
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
@@ -55,7 +57,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * LookupableHelperService class for Collection Activity Report.
  */
 public class TransmitContractsAndGrantsInvoicesLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TransmitContractsAndGrantsInvoicesLookupableHelperServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TransmitContractsAndGrantsInvoicesLookupableHelperServiceImpl.class);
 
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;
     protected PersonService personService;
@@ -94,7 +96,6 @@ public class TransmitContractsAndGrantsInvoicesLookupableHelperServiceImpl exten
         return new CollectionIncomplete<TransmitContractsAndGrantsInvoicesLookupDataHolder>(results, (long) results.size());
     }
 
-
     /**
      *
      * @param contractsGrantsInvoiceDocument
@@ -112,7 +113,6 @@ public class TransmitContractsAndGrantsInvoicesLookupableHelperServiceImpl exten
         result.setInvoiceTransmissionMethodCode(invoiceTransmissionMethodCode);
         return result;
     }
-
 
     /**
      * This method performs the lookup and returns a collection of lookup items
@@ -211,21 +211,17 @@ public class TransmitContractsAndGrantsInvoicesLookupableHelperServiceImpl exten
         this.contractsGrantsReportHelperService = contractsGrantsReportHelperService;
     }
 
-
     public PersonService getPersonService() {
         return personService;
     }
-
 
     public void setPersonService(PersonService personService) {
         this.personService = personService;
     }
 
-
     public TransmitContractsAndGrantsInvoicesService getTransmitContractsAndGrantsInvoicesService() {
         return transmitContractsAndGrantsInvoicesService;
     }
-
 
     public void setTransmitContractsAndGrantsInvoicesService(TransmitContractsAndGrantsInvoicesService transmitContractsAndGrantsInvoicesService) {
         this.transmitContractsAndGrantsInvoicesService = transmitContractsAndGrantsInvoicesService;

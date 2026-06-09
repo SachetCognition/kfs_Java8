@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ar.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.batch.service.LockboxService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.rice.kew.api.exception.WorkflowException;
@@ -27,7 +29,7 @@ import org.kuali.rice.kew.api.exception.WorkflowException;
 public class LockboxStep extends AbstractStep {
 
     private LockboxService lockboxService;
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LockboxStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LockboxStep.class);
 
     @Override
     public boolean execute(String jobName, Date jobRunDate) throws InterruptedException {

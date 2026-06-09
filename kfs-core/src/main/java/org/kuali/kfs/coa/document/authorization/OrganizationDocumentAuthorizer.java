@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * Document Authorizer for the Organization document.
  */
 public class OrganizationDocumentAuthorizer extends FinancialSystemMaintenanceDocumentAuthorizerBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationDocumentAuthorizer.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationDocumentAuthorizer.class);
     
     @Override
     public Set<String> getDocumentActions(Document document, Person user, Set<String> documentActions) {

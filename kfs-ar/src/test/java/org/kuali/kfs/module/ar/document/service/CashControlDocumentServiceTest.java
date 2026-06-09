@@ -18,9 +18,10 @@
  */
 package org.kuali.kfs.module.ar.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader;
 import org.kuali.kfs.module.ar.businessobject.CashControlDetail;
@@ -37,7 +38,7 @@ import org.kuali.rice.krad.service.DocumentService;
 
 @ConfigureContext(session = khuntley)
 public class CashControlDocumentServiceTest extends KualiTestBase {
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(CashControlDocumentServiceTest.class);;
+    private static final Logger LOG = LoggerFactory.getLogger(CashControlDocumentServiceTest.class);;
 
     protected static final String PROCESSING_CHART_CODE = "UA";
     protected static final String PROCESSING_ORG_CODE = "AR";

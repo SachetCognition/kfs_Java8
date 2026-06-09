@@ -21,6 +21,8 @@ package org.kuali.kfs.module.cam.util;
 import org.apache.commons.collections.Closure;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.businessobject.BarcodeInventoryErrorDetail;
 import org.kuali.kfs.module.cam.document.BarcodeInventoryErrorDocument;
@@ -30,7 +32,7 @@ import org.kuali.kfs.module.cam.document.BarcodeInventoryErrorDocument;
  * Helps filter out records from a collection of BCIE and replace its elements with the inputted data 
  */
 public class BarcodeInventoryErrorDetailPredicate implements Predicate, Closure {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorDetailPredicate.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorDetailPredicate.class);
     private BarcodeInventoryErrorDocument doc;
 
     /**

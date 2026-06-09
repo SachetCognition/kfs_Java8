@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.ScrubberService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
@@ -28,7 +30,7 @@ import org.springframework.util.StopWatch;
  */
 public class DemergerStep extends AbstractWrappedBatchStep {
     private ScrubberService scrubberService;
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DemergerStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(DemergerStep.class);
     
     /**
      * Overridden to run the scrubber demerger process.

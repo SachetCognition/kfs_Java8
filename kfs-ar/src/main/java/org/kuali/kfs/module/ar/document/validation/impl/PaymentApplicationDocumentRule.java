@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.ar.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.InvoicePaidApplied;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.MessageMap;
  */
 public class PaymentApplicationDocumentRule extends GeneralLedgerPostingDocumentRuleBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocumentRule.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentApplicationDocumentRule.class);
 
     /**
      * @see org.kuali.rice.krad.rules.DocumentRuleBase#processCustomSaveDocumentBusinessRules(org.kuali.rice.krad.document.Document)
@@ -187,7 +189,6 @@ public class PaymentApplicationDocumentRule extends GeneralLedgerPostingDocument
                 LOG.info("The payment application document was not fully applied.");
             }
         }
-
 
         return isValid;
     }

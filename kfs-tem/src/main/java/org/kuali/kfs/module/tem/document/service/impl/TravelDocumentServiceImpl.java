@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemKeyConstants.ERROR_UPLOADPARSER_INVALID_NUMERIC_VALUE;
 import static org.kuali.kfs.module.tem.TemKeyConstants.ERROR_UPLOADPARSER_LINE;
 import static org.kuali.kfs.module.tem.TemKeyConstants.ERROR_UPLOADPARSER_PROPERTY;
@@ -57,7 +59,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerInvoice;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
 import org.kuali.kfs.integration.ar.AccountsReceivableOrganizationOptions;
@@ -160,14 +161,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-
 /**
  * Travel Service Implementation
  */
 @Transactional
 public class TravelDocumentServiceImpl implements TravelDocumentService {
 
-    protected static Logger LOG = Logger.getLogger(TravelDocumentServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelDocumentServiceImpl.class);
 
     protected DataDictionaryService dataDictionaryService;
     protected DocumentService documentService;
@@ -190,7 +190,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
     protected NoteService noteService;
     protected TravelService travelService;
     protected MileageRateService mileageRateService;
-
 
     /**
      * Creates and populates an individual per diem item.
@@ -618,7 +617,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         return retval;
     }
 
-
     protected List<SpecialCircumstances> buildSpecialCircumstances(String documentNumber, Map<String, Object> criteria) {
         List<SpecialCircumstances> retval = new ArrayList<SpecialCircumstances>();
 
@@ -686,7 +684,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         }
         return resultDocumentLists;
     }
-
 
     /**
      *
@@ -945,7 +942,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         }
         return mileageTotal;
     }
-
 
     protected ActualExpense getParentActualExpense(final List<ActualExpense> actualExpenses, Long expenseId) {
         if (ObjectUtils.isNotNull(actualExpenses) && ObjectUtils.isNotNull(expenseId)) {
@@ -1299,7 +1295,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         return foundCode;
     }
 
-
     /**
      *
      * @see org.kuali.kfs.module.tem.document.service.TravelDocumentService#getAllStates(java.lang.String)
@@ -1544,7 +1539,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         }
         return "";
     }
-
 
     protected Integer nextBlankHeader(final String[] headers, final int start) {
         for (int i = start + 1; i < headers.length; i++) {
@@ -2074,8 +2068,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         return advances;
     }
 
-
-
     /**
      * Determines if the document with the given document number has been approved or not
      * @param documentNumber the document number of the document to check
@@ -2199,7 +2191,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
         return disabledPropertyMessages;
     }
 
-
     @Override
     public List<String> findMatchingTrips(TravelDocument travelDocument) {
 
@@ -2261,7 +2252,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
              LOG.error("Exception while parsing trip begin date" + pe);
          }
 
-
          return tripBegin;
 
      }
@@ -2279,7 +2269,6 @@ public class TravelDocumentServiceImpl implements TravelDocumentService {
           return tripEnd;
 
      }
-
 
     /**
      * Inner class to hold keys & messages for disabled properties

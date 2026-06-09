@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ld.batch.service;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.batch.LaborScrubberStep;
@@ -30,10 +32,9 @@ import org.kuali.kfs.sys.Message;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.context.TestUtils;
 
-
 @ConfigureContext
 public class LaborScrubberServiceTest extends LaborOriginEntryTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborScrubberServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborScrubberServiceTest.class);
 
     private LaborScrubberService laborScrubberService = null;
 
@@ -356,7 +357,6 @@ public class LaborScrubberServiceTest extends LaborOriginEntryTestBase {
         assertOriginEntries(4, outputTransactions);
     }
 
-
     /**
      * Test non-fringe, non-alt, non-closed
      * @throws Exception
@@ -387,14 +387,10 @@ public class LaborScrubberServiceTest extends LaborOriginEntryTestBase {
                 "2011UA6812756-----5625---ACEX06ST  LDNOWAGE2       0000000000001----------NO WAGE ACCOUNT                         +00000000000000125.00D2011-09-01                                                 2011-10-232011-08-09       102011010001537923   1RGNS12",
                 "2011UA6612160-----5625---ACEX06ST  LDNOFRINGE2     0000000000001----------NO FRINGE ACCOUNT                       +00000000000003500.00D2011-09-01                                                 2011-10-232011-08-09       102011010001537923   1RGNS12"
 
-
-
 //                "2011UA6812757-----2000---ACEX  ST  LDNOWAGE1            00000001----------NO WAGE ACCOUNT                         +00000000000001000.00D2011-09-01                                                 2011-10-232011-08-090000000102011010001537923 01 RGNS12",
 //                "2011UA6812757-----5625---ACEX  ST  LDNOWAGE2            00000001----------NO WAGE ACCOUNT                         +00000000000000125.00D2011-09-01                                                 2011-10-232011-08-090000000102011010001537923 01 RGNS12",
 //                "2011UA6612160-----5625---ACEX11ST  LDNOFRINGE2     0000000000001----------NO FRINGE ACCOUNT                       +00000000000003500.00D2011-09-01                                                 2011-10-232011-08-09       102011010001537923   1RGNS12"
         };
-
-
 
         EntryHolder[] outputTransactions = {
                 new EntryHolder(LaborConstants.BatchFileSystem.SCRUBBER_INPUT_FILE, inputTransactions[0]),

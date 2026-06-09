@@ -27,6 +27,8 @@ import java.io.Reader;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.FileEnterpriseFeederHelperService;
 import org.kuali.kfs.gl.batch.service.ReconciliationParserService;
 import org.kuali.kfs.gl.batch.service.ReconciliationService;
@@ -41,7 +43,7 @@ import org.kuali.kfs.sys.Message;
  * Note: the feeding algorithm of this service will read the data file twice to minimize memory usage.
  */
 public class FileEnterpriseFeederHelperServiceImpl implements FileEnterpriseFeederHelperService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileEnterpriseFeederHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileEnterpriseFeederHelperServiceImpl.class);
 
     protected ReconciliationParserService reconciliationParserService;
     protected ReconciliationService reconciliationService;

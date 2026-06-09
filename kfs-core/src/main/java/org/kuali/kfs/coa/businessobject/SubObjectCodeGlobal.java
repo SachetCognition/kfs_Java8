@@ -26,6 +26,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject, MutableInactivatable {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SubObjectCodeGlobal.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SubObjectCodeGlobal.class);
 
     protected String documentNumber;
     protected Integer universityFiscalYear;
@@ -63,7 +65,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
      * Default constructor.
      */
     public SubObjectCodeGlobal() {
-
 
         subObjCdGlobalDetails = new ArrayList<SubObjectCodeGlobalDetail>();
         accountGlobalDetails = new ArrayList<AccountGlobalDetail>();
@@ -88,7 +89,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the universityFiscalYear attribute.
      * 
@@ -106,7 +106,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     public void setUniversityFiscalYear(Integer universityFiscalYear) {
         this.universityFiscalYear = universityFiscalYear;
     }
-
 
     /**
      * Gets the chartOfAccountsCode attribute.
@@ -126,7 +125,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
 
-
     /**
      * Gets the financialSubObjectCode attribute.
      * 
@@ -144,7 +142,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     public void setFinancialSubObjectCode(String financialSubObjectCode) {
         this.financialSubObjectCode = financialSubObjectCode;
     }
-
 
     /**
      * Gets the financialSubObjectCodeName attribute.
@@ -164,7 +161,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.financialSubObjectCodeName = financialSubObjectCodeName;
     }
 
-
     /**
      * Gets the financialSubObjectCodeShortName attribute.
      * 
@@ -183,7 +179,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.financialSubObjectCodeShortName = financialSubObjectCdshortNm;
     }
 
-
     /**
      * Gets the active attribute.
      * 
@@ -193,7 +188,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         return active;
     }
 
-
     /**
      * Sets the active attribute.
      * 
@@ -202,7 +196,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     public void setActive(boolean active) {
         this.active = active;
     }
-
 
     /**
      * Gets the financialDocument attribute.
@@ -343,7 +336,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         old.setActive(update(old.isActive(), active));
     }
 
-
     /**
      * This method returns newvalue iff it is not empty
      * 
@@ -361,7 +353,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     protected boolean update(boolean oldValue, boolean newValue) {
         return newValue;
     }
-
 
     public boolean isPersistable() {
         return true;

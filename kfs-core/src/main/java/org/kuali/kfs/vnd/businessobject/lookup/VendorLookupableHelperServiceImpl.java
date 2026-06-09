@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.PurchasingAccountsPayableModuleService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -51,7 +53,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.util.UrlFactory;
 
 public class VendorLookupableHelperServiceImpl extends AbstractLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VendorLookupableHelperServiceImpl.class);
 
     protected VendorService vendorService;
     protected ParameterService parameterService;
@@ -177,7 +179,6 @@ public class VendorLookupableHelperServiceImpl extends AbstractLookupableHelperS
             // return results
             // if its a division, see if we already have the parent and if not, retrieve it and its divisions then add the parent to
             // the return results
-
 
             // If this vendor is not already in the processedSearchResults, let's do further processing (e.g. setting the state for
             // lookup from default address, etc)

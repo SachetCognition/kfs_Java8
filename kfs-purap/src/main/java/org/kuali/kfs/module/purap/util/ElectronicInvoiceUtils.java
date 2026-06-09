@@ -24,14 +24,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
 public class ElectronicInvoiceUtils {
     
-    private final static Logger LOG = Logger.getLogger(ElectronicInvoiceUtils.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceUtils.class);
     
     public static Date getDate(String invoiceDateString){
         

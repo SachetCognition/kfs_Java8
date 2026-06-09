@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.document.validation.impl.MaintenancePreRulesBase;
 import org.kuali.kfs.module.tem.businessobject.PerDiem;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -29,8 +31,7 @@ import org.kuali.rice.krad.document.Document;
  */
 public class PerDiemDocumentPreRules extends MaintenancePreRulesBase {
 
-
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PerDiemDocumentPreRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PerDiemDocumentPreRules.class);
 
     protected PerDiem newPerDiem;
 

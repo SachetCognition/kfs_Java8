@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemKeyConstants.AGENCY_SITES_URL;
 import static org.kuali.kfs.module.tem.TemKeyConstants.ENABLE_AGENCY_SITES_URL;
 import static org.kuali.kfs.module.tem.TemKeyConstants.PASS_TRIP_ID_TO_AGENCY_SITES;
@@ -44,7 +46,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.gl.service.SufficientFundsService;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
@@ -122,7 +123,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  */
 public abstract class TravelDocumentBase extends AccountingDocumentBase implements TravelDocument, Copyable {
 
-    protected static Logger LOG = Logger.getLogger(TravelDocumentBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelDocumentBase.class);
 
     private TripType tripType;
     private String tripTypeCode;
@@ -710,7 +711,6 @@ public abstract class TravelDocumentBase extends AccountingDocumentBase implemen
 
         return tempStr;
     }
-
 
     /**
      * @see org.kuali.kfs.sys.document.AccountingDocumentBase#toCopy()
@@ -2123,7 +2123,6 @@ public abstract class TravelDocumentBase extends AccountingDocumentBase implemen
         return isOpen;
     }
 
-
     /**
      * @see org.kuali.kfs.module.tem.document.TravelDocument#isSpecialCircumstancesDefaultOpen()
      */
@@ -2220,7 +2219,6 @@ public abstract class TravelDocumentBase extends AccountingDocumentBase implemen
        }
        return totalAccountingLineAmount;
     }
-
 
     /**
      * Applies the expense limit to the given amount - that is, if the expense limit exists and is less than the given amount, the expense limit

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.sys.KFSConstants;
@@ -35,13 +37,11 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
-
 /**
  * determine whether the Object code values associated with accounting lines are valid for the given document
  */
 public class AccountingLineObjectCodeRestrictionValidation extends GenericValidation {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingLineObjectCodeRestrictionValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountingLineObjectCodeRestrictionValidation.class);
     
     private AccountingDocument accountingDocumentForValidation;
     private AccountingLine accountingLineForValidation;
@@ -78,7 +78,7 @@ public class AccountingLineObjectCodeRestrictionValidation extends GenericValida
                    GlobalVariables.getMessageMap().putError(KFSConstants.ACCOUNTING_LINE_ERRORS,
                             KFSKeyConstants.ERROR_INVALID_INCOME_OBJCODE_SUB_FUND,documentLabel,accountingLineForValidation.getAccountKey());
                     
-                   LOG.error(GlobalVariables.getMessageMap().getErrorMessages());
+                   LOG.error("{}", GlobalVariables.getMessageMap().getErrorMessages());
                    return false;
                 }                         
             }            

@@ -31,6 +31,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.dataaccess.BalanceTypeDao;
@@ -52,7 +54,7 @@ import org.kuali.rice.kns.lookup.LookupUtils;
  *
  */
 public class GeneralLedgerPendingEntryDaoOjb extends PlatformAwareDaoBaseOjb implements GeneralLedgerPendingEntryDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerPendingEntryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(GeneralLedgerPendingEntryDaoOjb.class);
 
     protected final static String TRANSACTION_LEDGER_ENTRY_SEQUENCE_NUMBER = "transactionLedgerEntrySequenceNumber";
     protected final static String FINANCIAL_DOCUMENT_APPROVED_CODE = "financialDocumentApprovedCode";
@@ -381,7 +383,6 @@ public class GeneralLedgerPendingEntryDaoOjb extends PlatformAwareDaoBaseOjb imp
         return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
-
     /**
      * @see org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao#findPendingLedgerEntriesForEncumbrance(java.util.Map, boolean,
      *      java.lang.String, int, org.kuali.kfs.sys.businessobject.SystemOptions, java.util.List)
@@ -457,7 +458,6 @@ public class GeneralLedgerPendingEntryDaoOjb extends PlatformAwareDaoBaseOjb imp
         return criteria;
     }
 
-
     /**
      * @see org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao#findPendingLedgerEntriesForAccountBalance(Map, boolean,
      *      String, int, List)
@@ -474,7 +474,6 @@ public class GeneralLedgerPendingEntryDaoOjb extends PlatformAwareDaoBaseOjb imp
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
         return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
-
 
     /**
      * @see org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao#findPendingLedgerEntrySummaryForAccountBalance(java.util.Map,

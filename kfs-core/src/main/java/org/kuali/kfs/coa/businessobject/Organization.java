@@ -26,7 +26,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -46,7 +47,7 @@ import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
  *
  */
 public class Organization extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static final Logger LOG = Logger.getLogger(Organization.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Organization.class);
 
     private static final long serialVersionUID = 121873645110037203L;
 

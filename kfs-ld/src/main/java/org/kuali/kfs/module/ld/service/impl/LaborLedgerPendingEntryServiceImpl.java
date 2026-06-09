@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.businessobject.LaborLedgerPendingEntry;
 import org.kuali.kfs.module.ld.dataaccess.LaborLedgerPendingEntryDao;
 import org.kuali.kfs.module.ld.document.LaborLedgerPostingDocument;
@@ -44,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborLedgerPendingEntryServiceImpl implements LaborLedgerPendingEntryService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerPendingEntryServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerPendingEntryServiceImpl.class);
 
     private LaborLedgerPendingEntryDao laborLedgerPendingEntryDao;
     private BusinessObjectService businessObjectService;

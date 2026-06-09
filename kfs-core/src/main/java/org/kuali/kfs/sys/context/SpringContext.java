@@ -32,7 +32,8 @@ import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.MemoryMonitor;
 import org.kuali.kfs.sys.batch.Step;
@@ -54,7 +55,7 @@ import org.springframework.core.io.Resource;
 
 @SuppressWarnings("deprecation")
 public class SpringContext {
-    private static final Logger LOG = Logger.getLogger(SpringContext.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SpringContext.class);
     protected static final String MEMORY_MONITOR_THRESHOLD_KEY = "memory.monitor.threshold";
     protected static final String USE_QUARTZ_SCHEDULING_KEY = "use.quartz.scheduling";
     protected static final String KFS_BATCH_STEP_COMPONENT_SET_ID = "STEP:KFS";
@@ -262,17 +263,17 @@ public class SpringContext {
 
     private static void verifyProperInitialization() {
         if (!isInitialized()) {
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "Spring not initialized properly.  Initialization has begun and the application context is null.  Probably spring loaded bean is trying to use SpringContext.getBean() before the application context is initialized.", new IllegalStateException() );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
-            LOG.fatal( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "Spring not initialized properly.  Initialization has begun and the application context is null.  Probably spring loaded bean is trying to use SpringContext.getBean() before the application context is initialized.", new IllegalStateException() );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
+            LOG.error( "*****************************************************************" );
             throw new IllegalStateException("Spring not initialized properly.  Initialization has begun and the application context is null.  Probably spring loaded bean is trying to use SpringContext.getBean() before the application context is initialized.");
         }
     }
@@ -284,7 +285,7 @@ public class SpringContext {
                 MemoryMonitor.setPercentageUsageThreshold(Double.valueOf(KRADServiceLocator.getKualiConfigurationService().getPropertyValueAsString(MEMORY_MONITOR_THRESHOLD_KEY)));
                 memoryMonitor = new MemoryMonitor("KFS Memory Monitor: Over " + KRADServiceLocator.getKualiConfigurationService().getPropertyValueAsString(MEMORY_MONITOR_THRESHOLD_KEY) + "% Memory Used");
                 memoryMonitor.addListener(new MemoryMonitor.Listener() {
-                    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MemoryMonitor.class);
+                    Logger LOG = LoggerFactory.getLogger(MemoryMonitor.class);
 
                     @Override
                     public void memoryUsageLow(String springContextId, Map<String, String> memoryUsageStatistics, String deadlockedThreadIds) {
@@ -299,7 +300,7 @@ public class SpringContext {
                                 logStatement.append("\n\t\t\t").append(stackTraceElement);
                             }
                         }
-                        LOG.warn(logStatement);
+                        LOG.warn("{}", logStatement);
                         MemoryMonitor.setPercentageUsageThreshold(0.95);
                     }
                 });
@@ -413,7 +414,6 @@ public class SpringContext {
                 }
             }
         }
-
 
     }
 

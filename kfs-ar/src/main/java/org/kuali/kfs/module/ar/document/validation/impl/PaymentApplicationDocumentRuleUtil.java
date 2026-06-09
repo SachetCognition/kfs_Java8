@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -51,7 +53,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Document Rule Utility class for Payment Application.
  */
 public class PaymentApplicationDocumentRuleUtil {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocumentRuleUtil.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PaymentApplicationDocumentRuleUtil.class);
 
     /**
      * @param applicationDocument

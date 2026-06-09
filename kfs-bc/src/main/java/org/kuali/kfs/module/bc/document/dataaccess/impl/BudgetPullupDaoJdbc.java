@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetPullupDao;
 
 /**
@@ -25,7 +27,7 @@ import org.kuali.kfs.module.bc.document.dataaccess.BudgetPullupDao;
  */
 public class BudgetPullupDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetPullupDao {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetPullupDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetPullupDaoJdbc.class);
     protected static final int MAXLEVEL = 50;
 
     protected static String[] initPointOfViewTemplates = new String[1];

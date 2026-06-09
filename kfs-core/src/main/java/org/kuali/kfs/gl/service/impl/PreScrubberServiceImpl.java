@@ -29,6 +29,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
@@ -45,7 +47,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * Based on that assumption, this code will attempt to fill in the chart code for an origin entry if it is blank and the account number is valid
  */
 public class PreScrubberServiceImpl implements PreScrubberService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PreScrubberServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PreScrubberServiceImpl.class);
     
     private int maxCacheSize = 10000;
     private ParameterService parameterService;

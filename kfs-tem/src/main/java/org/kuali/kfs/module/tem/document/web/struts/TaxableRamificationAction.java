@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.TravelAdvance;
 import org.kuali.kfs.module.tem.document.TaxableRamificationDocument;
 import org.kuali.kfs.module.tem.document.TravelAuthorizationDocument;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.service.NoteService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class TaxableRamificationAction extends FinancialSystemTransactionalDocumentActionBase {
-    private final static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TaxableRamificationAction.class);
+    private final static Logger LOG = LoggerFactory.getLogger(TaxableRamificationAction.class);
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#loadDocument(org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase)

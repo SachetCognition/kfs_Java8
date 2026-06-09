@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.ContractManagerAssignmentDetail;
 import org.kuali.kfs.module.purap.document.ContractManagerAssignmentDocument;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Struts Action for Contract Manager Assignment document.
  */
 public class ContractManagerAssignmentAction extends FinancialSystemTransactionalDocumentActionBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractManagerAssignmentAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractManagerAssignmentAction.class);
 
     /**
      * Do initialization for a new <code>ContractManagerAssignmentDocument</code>.

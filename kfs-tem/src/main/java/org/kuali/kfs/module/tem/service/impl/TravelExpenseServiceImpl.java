@@ -33,6 +33,8 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.TravelExpenseTypeCode;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -80,7 +82,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class TravelExpenseServiceImpl implements TravelExpenseService {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TravelExpenseServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(TravelExpenseServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected DateTimeService dateTimeService;

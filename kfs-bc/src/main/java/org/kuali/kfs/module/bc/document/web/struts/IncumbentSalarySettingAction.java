@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
@@ -48,7 +50,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * the struts action for the salary setting for incumbent
  */
 public class IncumbentSalarySettingAction extends DetailSalarySettingAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IncumbentSalarySettingAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IncumbentSalarySettingAction.class);
 
     private BusinessObjectService businessObjectService = SpringContext.getBean(BusinessObjectService.class);
     private BudgetConstructionIntendedIncumbentService budgetConstructionIntendedIncumbentService = SpringContext.getBean(BudgetConstructionIntendedIncumbentService.class);

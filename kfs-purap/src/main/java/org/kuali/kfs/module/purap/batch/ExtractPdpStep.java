@@ -20,13 +20,15 @@ package org.kuali.kfs.module.purap.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.service.PdpExtractService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.kfs.sys.util.KfsDateUtils;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
 public class ExtractPdpStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExtractPdpStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExtractPdpStep.class);
 
     private PdpExtractService pdpExtractService;
     private DateTimeService dateTimeService;

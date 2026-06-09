@@ -35,6 +35,8 @@ import net.sf.jasperreports.engine.JRParameter;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCConstants.Report.ReportSelectMode;
 import org.kuali.kfs.module.bc.BCKeyConstants;
@@ -74,7 +76,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Struts Action Class for the Organization Report Selection Screen.
  */
 public class OrganizationReportSelectionAction extends BudgetExpansionAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReportSelectionAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReportSelectionAction.class);
 
     /**
      * Called from org select or account listing. Checks for needed control list build, makes call to build control list if
@@ -200,7 +202,6 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
         }
         return null;
     }
-
 
     /**
      * Checks and stores sub-fund, object code, or reason code list depenending on the report mode and which screen we are on.

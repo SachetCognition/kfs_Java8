@@ -22,7 +22,8 @@ package org.kuali.kfs.module.external.kc.businessobject;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -33,7 +34,7 @@ import org.springframework.beans.BeanUtils;
  * IndrectCostRecoveryAccount
  */
 public class IndirectCostRecoveryAutoDefAccount extends PersistableBusinessObjectBase implements MutableInactivatable{
-    private static Logger LOG = Logger.getLogger(IndirectCostRecoveryAutoDefAccount.class);
+    private static Logger LOG = LoggerFactory.getLogger(IndirectCostRecoveryAutoDefAccount.class);
 
     private Integer indirectCostRecoveryAccountGeneratedIdentifier;
     

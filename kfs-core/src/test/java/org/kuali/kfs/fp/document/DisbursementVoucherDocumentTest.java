@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.document.AccountingDocumentTestUtils.saveDocument;
 import static org.kuali.kfs.sys.document.AccountingDocumentTestUtils.testGetNewDocument_byDocumentClass;
 import static org.kuali.kfs.sys.fixture.AccountingLineFixture.LINE7;
@@ -32,7 +34,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonResidentAlienTax;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPayeeDetail;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -61,7 +62,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  */
 @ConfigureContext(session = hschrein)
 public class DisbursementVoucherDocumentTest extends KualiTestBase {
-    private static Logger LOG = Logger.getLogger(DisbursementVoucherDocumentTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherDocumentTest.class);
 
     public static final Class<DisbursementVoucherDocument> DOCUMENT_CLASS = DisbursementVoucherDocument.class;
     // The set of Route Nodes that the test document will progress through
@@ -71,7 +72,6 @@ public class DisbursementVoucherDocumentTest extends KualiTestBase {
     private static final String TAX_REVIEW = "Tax";
     private static final String CAMPUS_CODE = "Campus";
     private static final String PAYMENT_METHOD = "PaymentMethod";
-
 
     public final void testConvertIntoCopy_clear_additionalCodeInvalidVendor() throws Exception {
         // Clear both Message lists until rice drops the latter
@@ -253,7 +253,6 @@ public class DisbursementVoucherDocumentTest extends KualiTestBase {
         Assert.assertEquals(d1.getDisbVchrPayeePersonName(), d2.getDisbVchrPayeePersonName());
         Assert.assertEquals(d1.getDisbVchrPaymentReasonCode(), d2.getDisbVchrPaymentReasonCode());
     }
-
 
     public final void testAddAccountingLine() throws Exception {
         List<SourceAccountingLine> sourceLines = generateSouceAccountingLines();

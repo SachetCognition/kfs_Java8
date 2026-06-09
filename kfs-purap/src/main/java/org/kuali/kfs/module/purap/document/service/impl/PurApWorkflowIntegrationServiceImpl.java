@@ -26,6 +26,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.document.PurchasingAccountsPayableDocument;
 import org.kuali.kfs.module.purap.document.service.PurApWorkflowIntegrationService;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -50,12 +52,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PurApWorkflowIntegrationServiceImpl implements PurApWorkflowIntegrationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurApWorkflowIntegrationServiceImpl.class);
-
+    private static Logger LOG = LoggerFactory.getLogger(PurApWorkflowIntegrationServiceImpl.class);
 
     private WorkflowDocumentService workflowDocumentService;
     private PersonService personService;
-
 
     public void setWorkflowDocumentService(WorkflowDocumentService workflowDocumentService) {
         this.workflowDocumentService = workflowDocumentService;
@@ -152,7 +152,7 @@ public class PurApWorkflowIntegrationServiceImpl implements PurApWorkflowIntegra
                 else {
                     // no user to check and no super user given... cannot take actions on document
                     String errorMessage = "No super user network id and no user to check given.  Need at least one or both";
-                    LOG.error(errorMessage);
+                    LOG.error("{}", errorMessage);
                     throw new RuntimeException(errorMessage);
                 }
             }

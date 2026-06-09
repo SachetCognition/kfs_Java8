@@ -26,13 +26,15 @@ import java.util.List;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.filefilter.IOFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A directory walker which finds files to purge; it's relatively simple, simply adding a file to
  * the given results if the IOFileMatcher has matched it
  */
 public class FilePurgeDirectoryWalker extends DirectoryWalker {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(this.getClass());
+    private Logger LOG = LoggerFactory.getLogger(this.getClass());
     
     /**
      * Constructs a FilePurgeDirectoryWalker

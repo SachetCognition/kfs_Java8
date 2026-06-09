@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class CustomerTypeRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerTypeRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CustomerTypeRule.class);
 
     protected CustomerType newCustomerType;
 

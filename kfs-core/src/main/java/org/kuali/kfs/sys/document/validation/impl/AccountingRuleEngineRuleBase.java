@@ -20,6 +20,8 @@ package org.kuali.kfs.sys.document.validation.impl;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.rules.rule.event.BlanketApproveDocumentEvent;
  * A rule that uses the accounting rule engine to perform rule validations.
  */
 public class AccountingRuleEngineRuleBase extends DocumentRuleBase implements AccountingRuleEngineRule {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingRuleEngineRuleBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountingRuleEngineRuleBase.class);
     
     /**
      * Constructs a AccountingRuleEngineRuleBase.java.

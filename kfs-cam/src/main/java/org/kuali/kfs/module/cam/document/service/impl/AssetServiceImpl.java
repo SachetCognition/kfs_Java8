@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.module.cam.CamsConstants;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class AssetServiceImpl implements AssetService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AssetServiceImpl.class);
 
     private ParameterService parameterService;
     private PaymentSummaryService paymentSummaryService;
@@ -72,7 +74,6 @@ public class AssetServiceImpl implements AssetService {
         asset.refreshReferenceObject(CamsPropertyConstants.Asset.CAPITAL_ASSET_TYPE);
         return asset.getCapitalAssetType().isMovingIndicator();
     }
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetService#isAssetDepreciationStarted(org.kuali.kfs.module.cam.businessobject.Asset)
@@ -180,7 +181,6 @@ public class AssetServiceImpl implements AssetService {
         return false;
     }
 
-
     /**
      * This method calls the service codes to calculate the summary fields for each asset
      * 
@@ -265,7 +265,6 @@ public class AssetServiceImpl implements AssetService {
         }
         return activeMatches;
     }
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetService#findAssetsMatchingTagNumber(java.lang.String)
@@ -382,7 +381,6 @@ public class AssetServiceImpl implements AssetService {
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetService#getCurrentRouteLevels(org.kuali.rice.kew.api.WorkflowDocument)

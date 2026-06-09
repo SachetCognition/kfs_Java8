@@ -26,6 +26,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.businessobject.AutoClosePurchaseOrderView;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
@@ -42,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PurchaseOrderDaoOjb extends PlatformAwareDaoBaseOjb implements PurchaseOrderDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchaseOrderDaoOjb.class);
 
     @Override
     public Integer getPurchaseOrderIdForCurrentPurchaseOrderByRelatedDocId(Integer accountsPayablePurchasingDocumentLinkIdentifier) {
@@ -67,7 +69,6 @@ public class PurchaseOrderDaoOjb extends PlatformAwareDaoBaseOjb implements Purc
 
         return (PurchaseOrderDocument) getPersistenceBrokerTemplate().getObjectByQuery(new QueryByCriteria(PurchaseOrderDocument.class, criteria));
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.PurchaseOrderDao#getDocumentNumberForPurchaseOrderId(java.lang.Integer)
@@ -132,7 +133,7 @@ public class PurchaseOrderDaoOjb extends PlatformAwareDaoBaseOjb implements Purc
         if (returnList.size() > 1) {
             // the list should have held only a single doc id of data but it holds 2 or more
             String errorMsg = "Expected single document number for given criteria but multiple (at least 2) were returned";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException();
 
         } else {

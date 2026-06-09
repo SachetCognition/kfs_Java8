@@ -26,6 +26,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.mail.MailerImpl;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMailMessage;
@@ -35,7 +37,7 @@ import org.springframework.mail.javamail.MimeMailMessage;
  */
 public class AttachmentMailerImpl extends MailerImpl implements AttachmentMailer {
 
-    protected final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AttachmentMailerImpl.class);
+    protected final Logger LOG = LoggerFactory.getLogger(AttachmentMailerImpl.class);
 
     protected JavaMailSenderImpl mailSender;
 

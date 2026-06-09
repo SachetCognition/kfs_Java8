@@ -31,6 +31,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -51,7 +53,7 @@ import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
 public class CustomerProfile extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerProfile.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerProfile.class);
 
     protected String achPaymentDescription; // ACH_PMT_DESC
     protected String additionalCheckNoteTextLine1;
@@ -114,7 +116,6 @@ public class CustomerProfile extends PersistableBusinessObjectBase implements Mu
     protected ACHTransactionType transactionType;
 
     protected List<CustomerBank> customerBanks;
-
 
     public CustomerProfile() {
         super();
@@ -325,7 +326,6 @@ public class CustomerProfile extends PersistableBusinessObjectBase implements Mu
     public String getContactFullName() {
         return contactFullName;
     }
-
 
     /**
      * @hibernate.property column="CUST_DESC" length="50" not-null="false"
@@ -830,7 +830,6 @@ public class CustomerProfile extends PersistableBusinessObjectBase implements Mu
     public void setChartOfAccounts(Chart chartOfAccounts) {
         this.chartOfAccounts = chartOfAccounts;
     }
-
 
     /**
      * Gets the defaultProcessingCampus attribute.

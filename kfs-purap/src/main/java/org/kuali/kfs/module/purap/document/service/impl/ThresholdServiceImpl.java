@@ -20,7 +20,8 @@ package org.kuali.kfs.module.purap.document.service.impl;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ReceivingThreshold;
 import org.kuali.kfs.module.purap.document.dataaccess.ThresholdDao;
 import org.kuali.kfs.module.purap.document.service.ThresholdService;
@@ -29,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ThresholdServiceImpl implements ThresholdService{
 
-    private static Logger LOG = Logger.getLogger(ThresholdServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ThresholdServiceImpl.class);
 
     private ThresholdDao dao;
 

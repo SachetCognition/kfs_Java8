@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.businessobject.PurApItem;
 import org.kuali.kfs.module.purap.document.PurchasingDocument;
@@ -30,7 +32,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class ItemTypeTaxPolicyValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ItemTypeTaxPolicyValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(ItemTypeTaxPolicyValidation.class);
     protected PurapService purapService;
     
     public static final String ERROR_INVALID_ITEM_TYPE_FOR_ACCOUNT_TAX_POLICY="error.itemTypeCode.taxPolicy";
@@ -69,11 +71,9 @@ public class ItemTypeTaxPolicyValidation extends GenericValidation {
         return isValid;
     }
 
-
     public PurapService getPurapService() {
         return purapService;
     }
-
 
     public void setPurapService(PurapService purapService) {
         this.purapService = purapService;

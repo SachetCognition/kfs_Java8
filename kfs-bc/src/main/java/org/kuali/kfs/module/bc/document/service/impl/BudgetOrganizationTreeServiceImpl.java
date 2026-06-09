@@ -22,7 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants.OrgSelControlOption;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionPullup;
@@ -39,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class BudgetOrganizationTreeServiceImpl implements BudgetOrganizationTreeService {
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(BudgetOrganizationTreeServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetOrganizationTreeServiceImpl.class);
 
     protected BudgetConstructionOrganizationReportsService budgetConstructionOrganizationReportsService;
     protected BusinessObjectService businessObjectService;

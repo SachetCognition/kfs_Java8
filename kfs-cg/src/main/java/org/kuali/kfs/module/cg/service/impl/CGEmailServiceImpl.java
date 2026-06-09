@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cg.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.service.CGEmailService;
 import org.kuali.rice.core.mail.MailerImpl;
 
@@ -25,6 +27,6 @@ import org.kuali.rice.core.mail.MailerImpl;
  * This class implements the services in CGEmailservice.
  */
 public class CGEmailServiceImpl extends MailerImpl implements CGEmailService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CGEmailServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CGEmailServiceImpl.class);
 
 }

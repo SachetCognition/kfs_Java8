@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.businessobject.inquiry.EntryInquirableImpl;
 import org.kuali.kfs.gl.businessobject.inquiry.InquirableFinancialDocument;
@@ -53,7 +55,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * An extension of KualiLookupableImpl to support balance lookups
  */
 public class PendingEntryLookupableHelperServiceImpl extends AbstractGeneralLedgerLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PendingEntryLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PendingEntryLookupableHelperServiceImpl.class);
 
     private GeneralLedgerPendingEntryService generalLedgerPendingEntryService;
     private ParameterService parameterService;
@@ -78,7 +80,6 @@ public class PendingEntryLookupableHelperServiceImpl extends AbstractGeneralLedg
         return (new EntryInquirableImpl()).getInquiryUrl(businessObject, propertyName);
         //return super.getInquiryUrl(businessObject, propertyName);
     }
-
 
     /**
      * Validates the fiscal year searched for in the inquiry
@@ -129,7 +130,6 @@ public class PendingEntryLookupableHelperServiceImpl extends AbstractGeneralLedg
         final String documentNumber = (String)fieldValues.get("documentNumber");
         return !StringUtils.isBlank(fiscalYearAsString) && !StringUtils.isBlank(documentNumber);
     }
-
 
     /**
      * Generates the list of search results for this inquiry

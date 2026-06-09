@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.batch.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.dataaccess.OrganizationReversionUnitOfWorkDao;
 import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJdbc;
 
@@ -26,7 +28,7 @@ import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJd
  * truncated tables, which is something you can't do on tables with primary keys.
  */
 public class OrganizationReversionUnitOfWorkDaoJdbc extends PlatformAwareDaoBaseJdbc implements OrganizationReversionUnitOfWorkDao {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(getClass());
+    Logger LOG = LoggerFactory.getLogger(getClass());
 
     /**
      * Deletes all existing records in gl_org_rvrsn_ctgry_amt_t and gl_org_rvrsn_unit_wrk_t

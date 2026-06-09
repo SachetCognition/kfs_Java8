@@ -28,6 +28,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PREQDocumentsStrings;
 import org.kuali.kfs.module.purap.PurapConstants.PaymentRequestStatuses;
@@ -68,7 +70,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Struts Action for Payment Request document.
  */
 public class PaymentRequestAction extends AccountsPayableActionBase {
-    static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestAction.class);
+    static Logger LOG = LoggerFactory.getLogger(PaymentRequestAction.class);
 
     /**
      * Do initialization for a new payment request.
@@ -146,7 +148,6 @@ public class PaymentRequestAction extends AccountsPayableActionBase {
             return mapping.findForward(KFSConstants.MAPPING_BASIC);
         }
 
-
         PurchaseOrderDocument po = SpringContext.getBean(PurchaseOrderService.class).getCurrentPurchaseOrder(paymentRequestDocument.getPurchaseOrderIdentifier());
         if (ObjectUtils.isNotNull(po)) {
             // TODO figure out a more straightforward way to do this.  ailish put this in so the link id would be set and the perm check would work
@@ -188,7 +189,6 @@ public class PaymentRequestAction extends AccountsPayableActionBase {
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * Clears the initial fields on the <code>PaymentRequestDocument</code> which should be accessible from the given form.

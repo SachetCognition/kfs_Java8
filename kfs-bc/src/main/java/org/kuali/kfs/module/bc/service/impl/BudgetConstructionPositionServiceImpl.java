@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionPosition;
 import org.kuali.kfs.module.bc.businessobject.PendingBudgetConstructionAppointmentFunding;
 import org.kuali.kfs.module.bc.businessobject.Position;
@@ -35,7 +37,6 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 /**
  * Implementation of BudgetConstructionPositionService that uses the HumanResourcesPayrollService
  * 
@@ -43,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @see org.kuali.kfs.module.bc.service.HumanResourcesPayrollService
  */
 public class BudgetConstructionPositionServiceImpl implements BudgetConstructionPositionService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionPositionServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionPositionServiceImpl.class);
 
     private HumanResourcesPayrollService humanResourcesPayrollService;
     private BusinessObjectService businessObjectService;

@@ -20,11 +20,13 @@ package org.kuali.kfs.pdp.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.batch.service.ProcessPdpCancelPaidService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
 public class ProcessPdPCancelsAndPaidStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcessPdPCancelsAndPaidStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcessPdPCancelsAndPaidStep.class);
 
     private ProcessPdpCancelPaidService processPdpCancelPaidService;
 

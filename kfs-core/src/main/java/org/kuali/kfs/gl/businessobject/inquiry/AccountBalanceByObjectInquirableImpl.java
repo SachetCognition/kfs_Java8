@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.AccountBalanceByObject;
@@ -38,7 +40,7 @@ import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry;
  */
 public class AccountBalanceByObjectInquirableImpl extends AbstractGeneralLedgerInquirableImpl {
     @SuppressWarnings("unused")
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceByObjectInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountBalanceByObjectInquirableImpl.class);
 
     /**
      * Builds the keys for this inquiry.

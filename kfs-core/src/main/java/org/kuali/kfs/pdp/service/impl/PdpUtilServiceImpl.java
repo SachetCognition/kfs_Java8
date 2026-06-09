@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.pdp.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.businessobject.PaymentAccountDetail;
 import org.kuali.kfs.pdp.service.PdpUtilService;
 
@@ -25,7 +27,7 @@ import org.kuali.kfs.pdp.service.PdpUtilService;
  * Utility service for assisting in PDP processing.
  */
 public class PdpUtilServiceImpl implements PdpUtilService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PdpUtilServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PdpUtilServiceImpl.class);
 
     public PdpUtilServiceImpl() {
         super();

@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemConstants.TravelDocTypes;
 import org.kuali.kfs.module.tem.TemConstants.TravelReimbursementStatusCodeKeys;
@@ -54,7 +55,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class TravelReimbursementDocumentPresentationController extends TravelDocumentPresentationController {
 
-    public static Logger LOG = Logger.getLogger(TravelReimbursementDocumentPresentationController.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelReimbursementDocumentPresentationController.class);
 
     protected volatile static BusinessObjectService businessObjectService;
 

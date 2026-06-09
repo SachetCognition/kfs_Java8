@@ -20,10 +20,11 @@ package org.kuali.kfs.module.purap.document.dataaccess.impl;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.NegativePaymentRequestApprovalLimit;
 import org.kuali.kfs.module.purap.document.dataaccess.NegativePaymentRequestApprovalLimitDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -37,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class NegativePaymentRequestApprovalLimitDaoOjb extends PlatformAwareDaoBaseOjb implements NegativePaymentRequestApprovalLimitDao {
-    private static Logger LOG = Logger.getLogger(NegativePaymentRequestApprovalLimitDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(NegativePaymentRequestApprovalLimitDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.NegativePaymentRequestApprovalLimitDao#findByChart(java.lang.String)

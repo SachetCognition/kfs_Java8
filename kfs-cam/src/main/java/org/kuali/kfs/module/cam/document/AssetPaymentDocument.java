@@ -23,7 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cab.CapitalAssetBuilderModuleService;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cam.CamsConstants;
@@ -57,7 +58,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Capital assets document class for the asset payment document
  */
 public class AssetPaymentDocument extends AccountingDocumentBase implements Copyable, AmountTotaling {
-	protected static Logger LOG = Logger.getLogger(AssetPaymentDocument.class);
+	protected static Logger LOG = LoggerFactory.getLogger(AssetPaymentDocument.class);
 
 	protected List<AssetPaymentAssetDetail> assetPaymentAssetDetail;
 	protected Long capitalAssetNumber;
@@ -240,7 +241,6 @@ public class AssetPaymentDocument extends AccountingDocumentBase implements Copy
             // CSU 6702 END Inferred change            
         }
 	}
-
 
 	public List<AssetPaymentAssetDetail> getAssetPaymentAssetDetail() {
 		return assetPaymentAssetDetail;

@@ -19,7 +19,8 @@
 package org.kuali.kfs.sys.document.service.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.impl.StringHelper;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
@@ -36,7 +37,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  * Default implementation of the DebitDeterminerService.
  */
 public class DebitDeterminerServiceImpl implements DebitDeterminerService {
-    private static Logger LOG = Logger.getLogger(DebitDeterminerServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(DebitDeterminerServiceImpl.class);
     protected static final String isDebitCalculationIllegalStateExceptionMessage = "an invalid debit/credit check state was detected";
     protected static final String isErrorCorrectionIllegalStateExceptionMessage = "invalid (error correction) document not allowed";
     protected static final String isInvalidLineTypeIllegalArgumentExceptionMessage = "invalid accounting line type";
@@ -369,10 +370,6 @@ public class DebitDeterminerServiceImpl implements DebitDeterminerService {
         return amount;
     }
 
-
-
-
-
 /**
  * @see org.kuali.kfs.sys.document.service.DebitDeterminerService#isRevenue(org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySourceDetail)
  */
@@ -427,6 +424,5 @@ public String getErrorCorrectionIllegalStateExceptionMessage() {
 public String getInvalidLineTypeIllegalArgumentExceptionMessage() {
     return isInvalidLineTypeIllegalArgumentExceptionMessage;
 }
-
 
 }

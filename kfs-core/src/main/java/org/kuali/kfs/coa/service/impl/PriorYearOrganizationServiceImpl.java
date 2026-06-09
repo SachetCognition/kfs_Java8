@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.coa.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.dataaccess.PriorYearOrganizationDao;
 import org.kuali.kfs.coa.service.PriorYearOrganizationService;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PriorYearOrganizationServiceImpl implements PriorYearOrganizationService {
-    private static final Logger LOG = Logger.getLogger(PriorYearOrganizationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PriorYearOrganizationServiceImpl.class);
 
     private PriorYearOrganizationDao priorYearOrganizationDao;
 

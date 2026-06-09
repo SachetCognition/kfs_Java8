@@ -20,6 +20,8 @@ package org.kuali.kfs.module.bc.document.service.impl;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants.AccountSalarySettingOnlyCause;
 import org.kuali.kfs.module.bc.document.BudgetConstructionDocument;
 import org.kuali.kfs.module.bc.document.service.BudgetParameterService;
@@ -30,7 +32,7 @@ import org.kuali.kfs.module.bc.util.BudgetParameterFinder;
  * module.
  */
 public class BudgetParameterServiceImpl implements BudgetParameterService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetParameterService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetParameterService.class);
 
     /**
      * @see org.kuali.kfs.module.bc.document.service.BudgetParameterService#isSalarySettingOnlyAccount(org.kuali.kfs.module.bc.document.BudgetConstructionDocument)

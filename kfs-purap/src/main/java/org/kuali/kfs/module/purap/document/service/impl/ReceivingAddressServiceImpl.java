@@ -21,7 +21,8 @@ package org.kuali.kfs.module.purap.document.service.impl;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ReceivingAddress;
 import org.kuali.kfs.module.purap.document.dataaccess.ReceivingAddressDao;
 import org.kuali.kfs.module.purap.document.service.ReceivingAddressService;
@@ -29,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ReceivingAddressServiceImpl implements ReceivingAddressService {
-    private static Logger LOG = Logger.getLogger(ReceivingAddressServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReceivingAddressServiceImpl.class);
 
     private ReceivingAddressDao dao;
 

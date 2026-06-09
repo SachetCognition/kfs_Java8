@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.springframework.util.StopWatch;
@@ -31,7 +33,7 @@ import org.springframework.util.StopWatch;
  * A step to run the scrubber process.
  */
 public class FileRenameStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileRenameStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(FileRenameStep.class);
 
     private String batchFileDirectoryName;
 
@@ -75,7 +77,6 @@ public class FileRenameStep extends AbstractStep {
                 file.renameTo(new File(changedFileName + GeneralLedgerConstants.BatchFileSystem.EXTENSION));
             }
         }
-
 
         stopWatch.stop();
         if (LOG.isDebugEnabled()) {

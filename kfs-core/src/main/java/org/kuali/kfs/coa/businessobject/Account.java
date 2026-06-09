@@ -29,6 +29,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.SubFundGroupService;
 import org.kuali.kfs.gl.businessobject.SufficientFundRebuild;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsAccountAwardInformation;
@@ -55,7 +57,7 @@ import org.kuali.rice.location.framework.state.StateEbo;
  *
  */
 public class Account extends PersistableBusinessObjectBase implements AccountIntf, MutableInactivatable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(Account.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Account.class);
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Account";
 
@@ -1096,7 +1098,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         this.contractControlAccount = contractControlAccount;
     }
 
-
     /**
      * Gets the incomeStreamAccount attribute.
      *
@@ -1166,7 +1167,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         this.accountManagerUser = accountManagerUser;
     }
 
-
     @Override
     public Person getAccountSupervisoryUser() {
         accountSupervisoryUser = SpringContext.getBean(org.kuali.rice.kim.api.identity.PersonService.class).updatePersonIfNecessary(accountsSupervisorySystemsIdentifier, accountSupervisoryUser);
@@ -1183,7 +1183,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         this.accountSupervisoryUser = accountSupervisoryUser;
     }
 
-
     /**
      * @return Returns the continuationAccount.
      */
@@ -1191,7 +1190,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     public Account getContinuationAccount() {
         return continuationAccount;
     }
-
 
     /**
      * @param continuationAccount The continuationAccount to set.
@@ -1211,7 +1209,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         return accountGuideline;
     }
 
-
     /**
      * @param accountGuideline The accountGuideline to set.
      */
@@ -1219,7 +1216,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     public void setAccountGuideline(AccountGuideline accountGuideline) {
         this.accountGuideline = accountGuideline;
     }
-
 
     /**
      * Gets the accountDescription attribute.
@@ -1249,7 +1245,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         return subAccounts;
     }
 
-
     /**
      * @param subAccounts The subAccounts to set.
      */
@@ -1257,7 +1252,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     public void setSubAccounts(List subAccounts) {
         this.subAccounts = subAccounts;
     }
-
 
     /**
      * @return Returns the chartOfAccountsCode.
@@ -1267,7 +1261,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         return chartOfAccountsCode;
     }
 
-
     /**
      * @param chartOfAccountsCode The chartOfAccountsCode to set.
      */
@@ -1275,7 +1268,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     /**
      * @return Returns the accountFiscalOfficerSystemIdentifier.
@@ -1291,7 +1283,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     public String getAccountFiscalOfficerSystemIdentifierForSearching() {
         return getAccountFiscalOfficerSystemIdentifier();
     }
-
 
     /**
      * @param accountFiscalOfficerSystemIdentifier The accountFiscalOfficerSystemIdentifier to set.
@@ -1736,7 +1727,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
         return hashString.hashCode();
     }
 
-
     /**
      * Convenience method to make the primitive account fields from this Account easier to compare to the account fields from
      * another Account or an AccountingLine
@@ -1993,7 +1983,6 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     public void setLaborBenefitRateCategory(LaborBenefitRateCategory laborBenefitRateCategory) {
         this.laborBenefitRateCategory = laborBenefitRateCategory;
     }
-
 
     /**
      * Gets the fringeBenefitsChartOfAccount attribute.

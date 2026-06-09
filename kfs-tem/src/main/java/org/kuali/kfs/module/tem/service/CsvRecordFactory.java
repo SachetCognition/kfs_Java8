@@ -31,9 +31,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
-
 
 /**
  * Interface defining the structure for a CSV flat file record of stuff
@@ -42,7 +42,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 public class CsvRecordFactory<RecordType>  {
 
-    public static Logger LOG = Logger.getLogger(CsvRecordFactory.class);
+    public static Logger LOG = LoggerFactory.getLogger(CsvRecordFactory.class);
 
     final Class<RecordType> recordType;
     private Map<String,String> headerMap;

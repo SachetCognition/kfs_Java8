@@ -31,6 +31,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.batch.service.LockboxService;
 import org.kuali.kfs.module.ar.businessobject.CustomerAddress;
@@ -60,7 +62,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerInvoiceDocumentBatchStep extends AbstractStep implements TestingStep {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceDocumentBatchStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocumentBatchStep.class);
 
     protected static final long MAX_SEQ_NBR_OFFSET = 1000;
 
@@ -88,7 +90,6 @@ public class CustomerInvoiceDocumentBatchStep extends AbstractStep implements Te
 
     @Override
     public boolean execute(String jobName, Date jobRunDate) throws InterruptedException {
-
 
         Parameter runIndicatorParameter = getParameterService().getParameter(RUN_INDICATOR_PARAMETER_NAMESPACE_CODE, RUN_INDICATOR_PARAMETER_NAMESPACE_STEP, Job.STEP_RUN_PARM_NM);
         if (runIndicatorParameter == null || StringUtils.equals("Y", runIndicatorParameter.getValue())) {
@@ -157,8 +158,6 @@ public class CustomerInvoiceDocumentBatchStep extends AbstractStep implements Te
 //                    }
 //                }
 //            }
-
-
 
             // save runParameter as "N" so that the job won't run until DB has been cleared
             setInitiatedParameter();
@@ -446,27 +445,22 @@ public class CustomerInvoiceDocumentBatchStep extends AbstractStep implements Te
         customerInvoiceDetail.setAmount(amount);
         customerInvoiceDetail.setPostingYear(currentYear);
 
-
         return customerInvoiceDetail;
     }
-
 
     @Override
     public DateTimeService getDateTimeService() {
         return dateTimeService;
     }
 
-
     @Override
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
 
-
     public DocumentService getDocumentService() {
         return documentService;
     }
-
 
     public void setDocumentService(DocumentService documentService) {
         this.documentService = documentService;
@@ -476,16 +470,13 @@ public class CustomerInvoiceDocumentBatchStep extends AbstractStep implements Te
         return customerInvoiceDocumentService;
     }
 
-
     public void setCustomerInvoiceDocumentService(CustomerInvoiceDocumentService customerInvoiceDocumentService) {
         this.customerInvoiceDocumentService = customerInvoiceDocumentService;
     }
 
-
     public BusinessObjectService getBusinessObjectService() {
         return businessObjectService;
     }
-
 
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;

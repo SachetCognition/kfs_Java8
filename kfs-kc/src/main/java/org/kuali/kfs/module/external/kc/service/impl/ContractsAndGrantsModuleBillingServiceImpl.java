@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Implementation of Contracts & Grants module billing service which will allow AR to utilize KC functionality to perform CGB actions.
  */
 public class ContractsAndGrantsModuleBillingServiceImpl implements ContractsAndGrantsModuleBillingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsAndGrantsModuleBillingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsAndGrantsModuleBillingServiceImpl.class);
 
     protected ExternalizableLookupableBusinessObjectService awardService;
 
@@ -121,7 +123,6 @@ public class ContractsAndGrantsModuleBillingServiceImpl implements ContractsAndG
     public AwardWebService getAwardWebService() {
         return getWebService();
     }
-
 
     @Override
     public void setFinalBilledAndLastBilledDateToAwardAccount(Map<String, Object> mapKey, boolean finalBilled, boolean invoiceReversal, Date lastBilledDate) {

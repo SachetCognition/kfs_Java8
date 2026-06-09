@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -51,13 +53,12 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * This class overrides the base {KualiGlobalMaintainableImpl} to generate the specific maintenance locks for Global location assets
  */
 public class AssetYearEndDepreciationMaintainableImpl extends FinancialSystemMaintainable {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetYearEndDepreciationMaintainableImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetYearEndDepreciationMaintainableImpl.class);
     public static final String DOCUMENT_ERROR_PREFIX = "document.";
     public static final String MAINTAINABLE_ERROR_PATH = DOCUMENT_ERROR_PREFIX + "newMaintainableObject";
     public static final String DETAIL_ERROR_PATH = MAINTAINABLE_ERROR_PATH + ".add.assetYearEndDepreciationDetail";
@@ -72,7 +73,6 @@ public class AssetYearEndDepreciationMaintainableImpl extends FinancialSystemMai
     public List<MaintenanceLock> generateMaintenanceLocks() {
         return new ArrayList<MaintenanceLock>();
     }
-
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterEdit(org.kuali.rice.kns.document.MaintenanceDocument,
@@ -218,7 +218,6 @@ public class AssetYearEndDepreciationMaintainableImpl extends FinancialSystemMai
         super.refreshReferences("add.assetYearEndDepreciationDetails.asset");
         super.addNewLineToCollection(collectionName);
     }
-
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#populateNewCollectionLines(java.util.Map, org.kuali.rice.kns.document.MaintenanceDocument, java.lang.String)

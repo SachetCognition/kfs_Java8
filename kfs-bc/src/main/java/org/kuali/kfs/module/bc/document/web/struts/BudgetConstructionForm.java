@@ -26,6 +26,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.businessobject.BCKeyLabelPair;
@@ -48,9 +50,8 @@ import org.kuali.rice.krad.service.PersistenceService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 
-
 public class BudgetConstructionForm extends FinancialSystemTransactionalDocumentFormBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionForm.class);
 
     protected PendingBudgetConstructionGeneralLedger newRevenueLine;
     protected PendingBudgetConstructionGeneralLedger newExpenditureLine;
@@ -277,7 +278,6 @@ public class BudgetConstructionForm extends FinancialSystemTransactionalDocument
             }
         }
     }
-
 
     /**
      * This method iterates over all of the rev and exp lines in the BC document. This is called to refresh ref objects for use by

@@ -20,6 +20,8 @@ package org.kuali.kfs.module.purap.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.service.PdpExtractService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.rice.core.api.datetime.DateTimeService;
@@ -27,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ExtractPdpImmediatesStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExtractPdpImmediatesStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExtractPdpImmediatesStep.class);
 
     private PdpExtractService pdpExtractService;
     private DateTimeService dateTimeService;
@@ -45,7 +47,6 @@ public class ExtractPdpImmediatesStep extends AbstractStep {
         pdpExtractService.extractImmediatePaymentsOnly();
         return true;
     }
-
 
     public boolean execute() throws InterruptedException {
         try {
@@ -69,13 +70,5 @@ public class ExtractPdpImmediatesStep extends AbstractStep {
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
-
-
-
-
-
-
-
-
 
 }

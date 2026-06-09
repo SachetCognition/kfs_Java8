@@ -20,7 +20,8 @@ package org.kuali.kfs.module.bc.document.service.impl;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionMonthlyBudgetsCreateDeleteDao;
 import org.kuali.kfs.module.bc.document.service.BudgetConstructionMonthlyBudgetsCreateDeleteService;
 import org.kuali.kfs.module.bc.util.BudgetConstructionUtils;
@@ -33,8 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class BudgetConstructionMonthlyBudgetsCreateDeleteServiceImpl implements BudgetConstructionMonthlyBudgetsCreateDeleteService {
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionMonthlyBudgetsCreateDeleteService.class);
-
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionMonthlyBudgetsCreateDeleteService.class);
 
     protected BudgetConstructionMonthlyBudgetsCreateDeleteDao budgetConstructionMonthlyBudgetsCreateDeleteDao;
     protected PersistenceService persistenceServiceOjb; 

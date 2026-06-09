@@ -21,7 +21,8 @@ package org.kuali.kfs.sys.document;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountPersistenceStructureService;
 import org.kuali.kfs.coa.service.AccountService;
@@ -38,7 +39,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class...
  */
 public class FinancialSystemMaintainable extends KualiMaintainableImpl {
-    private static final Logger LOG = Logger.getLogger(FinancialSystemMaintainable.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FinancialSystemMaintainable.class);
 
     /**
      * Constructs a FinancialSystemMaintainable

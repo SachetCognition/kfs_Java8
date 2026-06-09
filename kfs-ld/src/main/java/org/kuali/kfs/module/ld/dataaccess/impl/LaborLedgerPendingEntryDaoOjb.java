@@ -27,6 +27,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.businessobject.LaborLedgerPendingEntry;
 import org.kuali.kfs.module.ld.dataaccess.LaborLedgerPendingEntryDao;
 import org.kuali.kfs.sys.dataaccess.impl.GeneralLedgerPendingEntryDaoOjb;
@@ -35,7 +37,7 @@ import org.kuali.kfs.sys.dataaccess.impl.GeneralLedgerPendingEntryDaoOjb;
  * OJB Implementation of LaborLedgerPendingEntryDao.
  */
 public class LaborLedgerPendingEntryDaoOjb extends GeneralLedgerPendingEntryDaoOjb implements LaborLedgerPendingEntryDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerPendingEntryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerPendingEntryDaoOjb.class);
     protected final static String FINANCIAL_DOCUMENT_APPROVED_CODE = "financialDocumentApprovedCode";
 
     /**
@@ -91,7 +93,6 @@ public class LaborLedgerPendingEntryDaoOjb extends GeneralLedgerPendingEntryDaoO
         getPersistenceBrokerTemplate().deleteByQuery(qbc);
         getPersistenceBrokerTemplate().clearCache();
     }
-
 
     /**
      * @see org.kuali.kfs.sys.dataaccess.impl.GeneralLedgerPendingEntryDaoOjb#findPendingEntries(java.util.Map, boolean,

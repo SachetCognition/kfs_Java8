@@ -27,7 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
@@ -69,7 +70,7 @@ import org.kuali.rice.krad.util.KRADConstants;
 
 public class AssetMaintainableImpl extends FinancialSystemMaintainable {
 
-    private static final Logger LOG = Logger.getLogger(AssetMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetMaintainableImpl.class);
 
     private Asset asset;
     private Asset copyAsset;
@@ -253,7 +254,6 @@ public class AssetMaintainableImpl extends FinancialSystemMaintainable {
         }
         super.saveBusinessObject();
     }
-
 
     @Override
     public void processAfterNew(MaintenanceDocument document, Map<String, String[]> parameters) {

@@ -27,7 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.SubObjectCode;
@@ -54,7 +55,7 @@ public class SubObjectTrickleDownInactivationServiceImpl implements SubObjectTri
 
     private static final int NO_OF_SUB_OBJECTS_PER_NOTE = 15;
 
-    private static final Logger LOG = Logger.getLogger(SubObjectTrickleDownInactivationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SubObjectTrickleDownInactivationServiceImpl.class);
     
     protected BusinessObjectService businessObjectService;
     protected MaintenanceDocumentDictionaryService maintenanceDocumentDictionaryService;

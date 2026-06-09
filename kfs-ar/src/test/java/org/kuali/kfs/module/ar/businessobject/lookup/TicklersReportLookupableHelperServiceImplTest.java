@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.wklykins;
 
 import java.sql.Date;
@@ -69,7 +71,7 @@ public class TicklersReportLookupableHelperServiceImplTest extends KualiTestBase
     private static final String CHART_OF_ACCOUNTS_CODE = "BL";
     private static final String ORGANIZATION_CODE = "SRS";
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TicklersReportLookupableHelperServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(TicklersReportLookupableHelperServiceImplTest.class);
 
     private Person user;
     private RoleService roleService;

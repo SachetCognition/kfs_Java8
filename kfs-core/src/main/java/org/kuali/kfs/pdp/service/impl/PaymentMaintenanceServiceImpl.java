@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
@@ -61,7 +63,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PaymentMaintenanceServiceImpl implements PaymentMaintenanceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentMaintenanceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentMaintenanceServiceImpl.class);
 
     private PaymentGroupDao paymentGroupDao;
     private PaymentDetailDao paymentDetailDao;
@@ -466,7 +468,6 @@ public class PaymentMaintenanceServiceImpl implements PaymentMaintenanceService 
             LOG.debug("reissueDisbursement() Enter method to reissue disbursement with id = " + paymentGroupId);
         }
 
-
         PaymentGroup paymentGroup = this.paymentGroupService.get(paymentGroupId);
         if (paymentGroup == null) {
             LOG.debug("reissueDisbursement() Disbursement not found; throw exception.");
@@ -491,7 +492,6 @@ public class PaymentMaintenanceServiceImpl implements PaymentMaintenanceService 
                         LOG.warn("cancelDisbursement() Payment does not allow disbursement action. This should not happen unless user is URL spoofing.");
                         throw new RuntimeException("cancelDisbursement() Payment does not allow disbursement action. This should not happen unless user is URL spoofing.");
                     }
-
 
                     pgh.setOrigProcessImmediate(pg.getProcessImmediate());
                     pgh.setOrigPmtSpecHandling(pg.getPymtSpecialHandling());
