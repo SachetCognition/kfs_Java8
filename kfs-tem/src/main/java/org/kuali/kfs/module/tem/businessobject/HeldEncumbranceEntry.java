@@ -49,6 +49,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TEM_HELD_ENCUM_ENTRY_T")
+@IdClass(HeldEncumbranceEntryId.class)
 public class HeldEncumbranceEntry extends PersistableBusinessObjectBase {
     @Id
     @Column(name = "FDOC_NBR")

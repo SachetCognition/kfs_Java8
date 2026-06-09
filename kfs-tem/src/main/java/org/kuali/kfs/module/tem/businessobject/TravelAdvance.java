@@ -38,14 +38,20 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
     @Id
     @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "TRVL_ID")
     private String travelDocumentIdentifier;
 
+    @Column(name = "TVL_ADV_REQ", precision = 19, scale = 2)
     private KualiDecimal travelAdvanceRequested = KualiDecimal.ZERO;
     private KualiDecimal amountDue;
 
+    @Column(name = "AR_CUST_ID")
     private String arCustomerId;
+    @Column(name = "AR_INV_DOC_NBR")
     private String arInvoiceDocNumber;
+    @Column(name = "DUE_DT")
     private Date dueDate;
+    @Column(name = "TAX_RAM_NTF_DT")
     private Date taxRamificationNotificationDate;
     private String advancePaymentReasonCode;
     private Boolean travelAdvancePolicy = Boolean.FALSE;
@@ -57,7 +63,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      *
      * @return Returns the documentNumber
      */
-    @Column(name = "FDOC_NBR")
     public String getDocumentNumber() {
         return documentNumber;
     }
@@ -75,7 +80,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      * @return the trip id for the travel document this is associated with.  We know this breaks normalization, but it will make it much easier for
      * travel reimbursement to find all related travel advances
      */
-    @Column(name="TRVL_ID")
     public String getTravelDocumentIdentifier() {
         return travelDocumentIdentifier;
     }
@@ -93,7 +97,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      *
      * @return travel advance requested amount
      */
-    @Column(name = "TVL_ADV_REQ", precision = 19, scale = 2)
     public KualiDecimal getTravelAdvanceRequested() {
         return travelAdvanceRequested;
     }
@@ -131,7 +134,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      *
      * @return customer ID
      */
-    @Column(name = "AR_CUST_ID")
     public String getArCustomerId() {
         return arCustomerId;
     }
@@ -151,7 +153,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      *
      * @return Returns the arInvoiceDocNumber.
      */
-    @Column(name = "AR_INV_DOC_NBR")
     public String getArInvoiceDocNumber() {
         return arInvoiceDocNumber;
     }
@@ -170,7 +171,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      *
      * @return Returns the dueDate.
      */
-    @Column(name = "DUE_DT")
     public Date getDueDate() {
         return dueDate;
     }
@@ -261,7 +261,6 @@ public class TravelAdvance extends PersistableBusinessObjectBase {
      * Gets the taxRamificationNotificationDate attribute.
      * @return Returns the taxRamificationNotificationDate.
      */
-    @Column(name = "TAX_RAM_NTF_DT")
     public Date getTaxRamificationNotificationDate() {
         return taxRamificationNotificationDate;
     }

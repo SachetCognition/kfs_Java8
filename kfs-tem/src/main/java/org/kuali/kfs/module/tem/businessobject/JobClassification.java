@@ -22,11 +22,11 @@ import java.util.LinkedHashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
-import javax.persistence.Id;
 
 /**
  * Relocation Reason
@@ -36,22 +36,22 @@ import javax.persistence.Id;
 @Table(name="TEM_JOB_CLASS_T")
 public class JobClassification extends PersistableBusinessObjectBase implements MutableInactivatable{
     @Id
-    @Column(name = "JOB_CLS_CD")
+    @Column(name = "JOB_CLS_CD", length = 3, nullable = false)
     private String jobClsCode;
+    @Column(name = "JOB_CLS_NM", length = 40, nullable = false)
     private String jobClsName;
+    @Column(name = "ROW_ACTV_IND", length = 1, nullable = false)
     private Boolean active = Boolean.TRUE;
 
     public void setJobClsCode(String jobClsCode){
         this.jobClsCode = jobClsCode;
     }
-    @Column(name="JOB_CLS_CD",length=3,nullable=false)
     public String getJobClsCode(){
         return this.jobClsCode;
     }
     public void setJobClsName(String jobClsName){
         this.jobClsName = jobClsName;
     }
-    @Column(name="JOB_CLS_NM",length=40,nullable=false)
     public String getJobClsName(){
         return this.jobClsName;
     }
@@ -62,12 +62,10 @@ public class JobClassification extends PersistableBusinessObjectBase implements 
     }
 
     @Override
-    @Column(name="ROW_ACTV_IND",length=1,nullable=false)
     public boolean isActive(){
         return this.active;
     }
 
-    @Column(name="ROW_ACTV_IND",length=1,nullable=false)
     public boolean getActive(){
         return this.active;
     }
