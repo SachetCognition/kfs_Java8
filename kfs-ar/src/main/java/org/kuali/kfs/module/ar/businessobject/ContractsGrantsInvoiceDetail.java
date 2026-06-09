@@ -20,6 +20,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -29,15 +36,28 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * This class represents a invoice detail on the customer invoice document.
  */
+@Entity
+@IdClass(ContractsGrantsInvoiceDetailId.class)
+@Table(name = "AR_CGB_INV_DTL_T")
 public class ContractsGrantsInvoiceDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "INV_DTL_ID")
     private Long invoiceDetailIdentifier;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Column(name = "TOT_BDGT_AMT")
     private KualiDecimal totalBudget = KualiDecimal.ZERO;
+    @Column(name = "INV_AMT")
     private KualiDecimal invoiceAmount = KualiDecimal.ZERO;
+    @Column(name = "CUM_EXPND_AMT")
     private KualiDecimal cumulativeExpenditures = KualiDecimal.ZERO;
+    @Column(name = "TOT_PREV_BILLED_AMT")
     private KualiDecimal totalPreviouslyBilled = KualiDecimal.ZERO;
+    @Column(name = "IND_CST_IND")
     private boolean indirectCostIndicator;
 
     private ContractsGrantsInvoiceDocument invoiceDocument;

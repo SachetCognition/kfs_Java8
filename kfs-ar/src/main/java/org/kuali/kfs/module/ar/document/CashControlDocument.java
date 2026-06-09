@@ -24,6 +24,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
@@ -64,17 +70,26 @@ import org.kuali.rice.krad.service.DocumentService;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_CSH_CTRL_T")
 public class CashControlDocument extends GeneralLedgerPostingDocumentBase implements AmountTotaling, GeneralLedgerPendingEntrySource, ElectronicPaymentClaiming, GeneralLedgerPostingDocument {
     protected static final String NODE_ASSOCIATED_WITH_ELECTRONIC_PAYMENT = "AssociatedWithElectronicPayment";
     protected static Logger LOG = org.apache.log4j.Logger.getLogger(CashControlDocument.class);
 
+    @Column(name = "FDOC_REF_NBR")
     protected String referenceFinancialDocumentNumber;
+    @Column(name = "PRPSL_NBR")
     protected Long proposalNumber;// When LOC Type = Award
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     protected String universityFiscalPeriodCode;
+    @Column(name = "CUST_PMT_MEDIUM_CD")
     protected String customerPaymentMediumCode;
+    @Column(name = "AR_CSHCTRL_TOT_AMT")
     protected KualiDecimal cashControlTotalAmount = KualiDecimal.ZERO;
     protected String lockboxNumber;
+    @Column(name = "BNK_CD")
     protected String bankCode;
 
     protected Bank bank;

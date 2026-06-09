@@ -20,18 +20,36 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * Business Object for Dunning Letter Distribution
  */
+@Entity
+@IdClass(DunningLetterDistributionId.class)
+@Table(name = "AR_DUN_LTR_DIST_T")
 public class DunningLetterDistribution extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CMPGN_ID")
     private String campaignID;
+    @Id
+    @Column(name = "DUN_LTR_DIST_ID")
     private Long dunningLetterDistributionID;
+    @Column(name = "DAYS_PST_DUE_TXT")
     private String daysPastDue;
+    @Column(name = "SND_DUN_LTR_IND")
     private boolean sendDunningLetterIndicator;
+    @Column(name = "LTR_TYP_CD")
     private String dunningLetterTemplate;
+    @Column(name = "ACTV_IND")
     private boolean activeIndicator;
     private DunningCampaign dunningCampaign;
 

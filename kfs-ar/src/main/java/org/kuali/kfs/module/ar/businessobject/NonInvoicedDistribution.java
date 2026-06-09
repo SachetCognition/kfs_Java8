@@ -20,17 +20,34 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(NonInvoicedDistributionId.class)
+@Table(name = "AR_NON_INV_DIST_T")
 public class NonInvoicedDistribution extends PersistableBusinessObjectBase {
 
+	@Id
+	@Column(name = "FDOC_NBR")
 	private String documentNumber; // ??? It's not the payment application document number
+	@Id
+	@Column(name = "FDOC_LINE_NBR")
 	private Integer financialDocumentLineNumber;
+	@Id
+	@Column(name = "FDOC_REF_NBR")
 	private String referenceFinancialDocumentNumber;
+	@Column(name = "FDOC_LINE_AMT")
 	private KualiDecimal financialDocumentLineAmount;
 
     private NonAppliedHolding nonAppliedHolding;

@@ -20,6 +20,12 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -28,10 +34,16 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * Defines collection activity that can be taken on an outstanding debt.
  *
  */
+@Entity
+@Table(name = "AR_CLCTN_ACTVY_TYP_T")
 public class CollectionActivityType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CLCTN_ACTVY_TYP_CD")
     private String activityCode;
+    @Column(name = "ACTVY_DESC")
     private String activityDescription;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     /**

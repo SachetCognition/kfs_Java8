@@ -22,6 +22,13 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
 import org.kuali.kfs.module.ar.document.service.SystemInformationService;
@@ -36,14 +43,26 @@ import org.kuali.rice.krad.service.DocumentService;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(InvoicePaidAppliedId.class)
+@Table(name = "AR_INV_PD_APLD_T")
 public class InvoicePaidApplied extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber; // document the payment is being applied FROM
+    @Id
+    @Column(name = "AR_PD_APLD_ITM_NBR")
     private Integer paidAppliedItemNumber;
+    @Column(name = "FDOC_REF_INV_NBR")
     private String financialDocumentReferenceInvoiceNumber; // document the payment is being applied TO
+    @Column(name = "AR_INV_ITM_NBR")
     private Integer invoiceItemNumber;
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Column(name = "AR_INV_ITMAPLD_AMT")
     private KualiDecimal invoiceItemAppliedAmount = KualiDecimal.ZERO;
 
     private CustomerInvoiceDetail invoiceDetail;

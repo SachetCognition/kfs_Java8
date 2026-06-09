@@ -20,6 +20,12 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddressType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -27,10 +33,16 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_CUST_ADDR_TYP_T")
 public class CustomerAddressType extends PersistableBusinessObjectBase implements MutableInactivatable, AccountsReceivableCustomerAddressType {
 
+	@Id
+	@Column(name = "CUST_ADDR_TYPE_CD")
 	private String customerAddressTypeCode;
+	@Column(name = "CUST_ADDR_TYP_DESC")
 	private String customerAddressTypeDescription;
+	@Column(name = "ROW_ACTV_IND")
 	private boolean active;
 
 	/**
