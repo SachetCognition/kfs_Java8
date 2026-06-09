@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.validation.event;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.PurApItem;
 import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEventBase;
 import org.kuali.rice.krad.document.Document;
@@ -29,7 +30,7 @@ import org.kuali.rice.krad.document.Document;
  * contains the base methods for item events
  */
 public class PurchasingAccountsPayableItemPreCalculateEvent extends AttributedDocumentEventBase {
-    private static final Logger LOG = Logger.getLogger(PurchasingAccountsPayableItemPreCalculateEvent.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableItemPreCalculateEvent.class);
 
     private final PurApItem item;
 

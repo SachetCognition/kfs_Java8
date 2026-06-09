@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
@@ -76,7 +78,7 @@ import org.kuali.rice.location.api.country.CountryService;
  * Base class for Purchasing Documents.
  */
 public abstract class PurchasingDocumentBase extends PurchasingAccountsPayableDocumentBase implements PurchasingDocument {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingDocumentBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchasingDocumentBase.class);
 
     // SHARED FIELDS BETWEEN REQUISITION AND PURCHASE ORDER
     protected String documentFundingSourceCode;
@@ -318,7 +320,6 @@ public abstract class PurchasingDocumentBase extends PurchasingAccountsPayableDo
         }
         return null;
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.document.PurchasingAccountsPayableDocumentBase#addItem(org.kuali.kfs.module.purap.businessobject.PurApItem)
@@ -688,7 +689,6 @@ public abstract class PurchasingDocumentBase extends PurchasingAccountsPayableDo
     public void setDeliveryCountryCode(String deliveryCountryCode) {
         this.deliveryCountryCode = deliveryCountryCode;
     }
-
 
     @Override
     public String getDeliveryInstructionText() {

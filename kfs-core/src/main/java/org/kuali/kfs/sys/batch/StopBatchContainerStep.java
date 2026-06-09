@@ -19,13 +19,15 @@
 package org.kuali.kfs.sys.batch;
 
 import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * StopBatchContainerStep triggers the BatchContainerStep to shut itself down.
  *
  */
 public class StopBatchContainerStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(StopBatchContainerStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(StopBatchContainerStep.class);
 
     /**
      * The BatchContainerStep recognizes the name of this Step and exits without executing this method.

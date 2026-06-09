@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.identity.KfsKimDocumentAttributeData;
 import org.kuali.kfs.coa.identity.OrgReviewRole;
 import org.kuali.kfs.coa.service.OrgReviewRoleService;
@@ -49,7 +50,7 @@ import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
  * This class represents the business rules for the maintenance of {@link AccountGlobal} business objects
  */
 public class OrgReviewRoleRule extends MaintenanceDocumentRuleBase {
-    private static final Logger LOG = Logger.getLogger(OrgReviewRoleRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrgReviewRoleRule.class);
 
     private transient static OrgReviewRoleService orgReviewRoleService;
 

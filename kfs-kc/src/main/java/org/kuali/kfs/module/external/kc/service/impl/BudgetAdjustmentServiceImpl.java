@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 public class BudgetAdjustmentServiceImpl implements BudgetAdjustmentService {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetAdjustmentServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetAdjustmentServiceImpl.class);
 
     protected DocumentService documentService;
     protected ParameterService parameterService;
@@ -154,7 +156,6 @@ public class BudgetAdjustmentServiceImpl implements BudgetAdjustmentService {
         }
         return true;
     }
-
 
     protected void setFailStatus(BudgetAdjustmentCreationStatusDTO budgetAdjustmentCreationStatusDTO, String message) {
         budgetAdjustmentCreationStatusDTO.getErrorMessages().add(message);
@@ -310,7 +311,6 @@ public class BudgetAdjustmentServiceImpl implements BudgetAdjustmentService {
         return true;
     }
 
-
     /**
      * This method will use the DocumentService to create a new document. The documentTypeName is gathered by using
      * MaintenanceDocumentDictionaryService which uses Account class to get the document type name.
@@ -327,7 +327,6 @@ public class BudgetAdjustmentServiceImpl implements BudgetAdjustmentService {
             budgetAdjustmentCreationStatusDTO.setErrorMessages(GlobalVariablesExtractHelper.extractGlobalVariableErrors());
             budgetAdjustmentCreationStatusDTO.setStatus(KcConstants.KcWebService.STATUS_KC_FAILURE);
             return null;
-
 
         }
     }
@@ -461,7 +460,6 @@ public class BudgetAdjustmentServiceImpl implements BudgetAdjustmentService {
             return false;
         }
     }
-
 
     /**
      * Gets the documentService attribute.

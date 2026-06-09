@@ -19,6 +19,8 @@
 package org.kuali.kfs.gl.dataaccess.impl;
 
 import org.apache.ojb.broker.metadata.MetadataManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.AccountBalance;
 import org.kuali.kfs.gl.businessobject.AccountBalanceHistory;
@@ -38,7 +40,7 @@ import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJd
  * BO objects that are essentially not necessary.
  */
 public class BalancingDaoJdbc extends PlatformAwareDaoBaseJdbc implements BalancingDao, LedgerBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalancingDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalancingDaoJdbc.class);
     
     protected static final String VER_NBR = "VER_NBR";
     protected static final String ROW_COUNT = "ROW_CNT";
@@ -68,7 +70,7 @@ public class BalancingDaoJdbc extends PlatformAwareDaoBaseJdbc implements Balanc
         + " WHERE " + GeneralLedgerConstants.ColumnNames.UNIVERSITY_FISCAL_YEAR + " >= " + universityFiscalYear
         + " GROUP BY " + ENTRY_KEY_FIELDS;
         
-        LOG.debug(sql);
+        LOG.debug("{}", sql);
         
         return getSimpleJdbcTemplate().update(sql);
     }
@@ -85,7 +87,7 @@ public class BalancingDaoJdbc extends PlatformAwareDaoBaseJdbc implements Balanc
         + " FROM " + balanceTableName
         + " WHERE " + GeneralLedgerConstants.ColumnNames.UNIVERSITY_FISCAL_YEAR + " >= " + universityFiscalYear;
         
-        LOG.debug(sql);
+        LOG.debug("{}", sql);
         
         return getSimpleJdbcTemplate().update(sql);
     }
@@ -102,7 +104,7 @@ public class BalancingDaoJdbc extends PlatformAwareDaoBaseJdbc implements Balanc
         + " FROM " + accountBalanceTableName
         + " WHERE " + GeneralLedgerConstants.ColumnNames.UNIVERSITY_FISCAL_YEAR + " >= " + universityFiscalYear;
         
-        LOG.debug(sql);
+        LOG.debug("{}", sql);
         
         return getSimpleJdbcTemplate().update(sql);
     }
@@ -119,7 +121,7 @@ public class BalancingDaoJdbc extends PlatformAwareDaoBaseJdbc implements Balanc
         + " FROM " + encumbranceTableName
         + " WHERE " + GeneralLedgerConstants.ColumnNames.UNIVERSITY_FISCAL_YEAR + " >= " + universityFiscalYear;
         
-        LOG.debug(sql);
+        LOG.debug("{}", sql);
         
         return getSimpleJdbcTemplate().update(sql);
     }

@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
 import org.kuali.kfs.module.cam.CamsConstants;
@@ -59,7 +61,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  * JDBC implementation of {@link DepreciationBatchDao}
  */
 public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implements DepreciationBatchDao {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DepreciationBatchDaoJdbc.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DepreciationBatchDaoJdbc.class);
 
     protected UniversityDateDao universityDateDao;
     protected ConfigurationService kualiConfigurationService;
@@ -112,7 +114,6 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
         });
     }
 
-
     /**
      * @see org.kuali.kfs.module.cam.document.dataaccess.DepreciationBatchDao#updateAssetsCreatedInLastFiscalPeriod(java.lang.Integer,
      *      java.lang.Integer)
@@ -150,7 +151,6 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
             }
         }
     }
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.dataaccess.DepreciationBatchDao#savePendingGLEntries(java.util.List)
@@ -536,7 +536,6 @@ public class DepreciationBatchDaoJdbc extends PlatformAwareDaoBaseJdbc implement
         }
         return federallyOwnedObjectSubTypes;
     }
-
 
     protected String buildCriteriaYearEnd(Integer fiscalYear, Integer fiscalMonth, Collection<String> depreciationMethodList, Collection<String> notAcceptedAssetStatus, Collection<String> federallyOwnedObjectSubTypes, boolean includeFederal, boolean includePending, boolean includeRetired) {
         if ( LOG.isInfoEnabled() ) {

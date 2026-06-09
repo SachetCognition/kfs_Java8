@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ld.batch.service.impl;
 import java.sql.Date;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.gl.batch.service.PostTransaction;
 import org.kuali.kfs.gl.businessobject.Transaction;
@@ -40,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborGLLedgerEntryPoster implements PostTransaction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborGLLedgerEntryPoster.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborGLLedgerEntryPoster.class);
     
     private LaborGeneralLedgerEntryService laborGeneralLedgerEntryService;
     private LaborAccountingCycleCachingService laborAccountingCycleCachingService;

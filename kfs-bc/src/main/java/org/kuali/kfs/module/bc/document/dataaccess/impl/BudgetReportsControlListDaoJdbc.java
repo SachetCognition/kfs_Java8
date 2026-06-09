@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants.Report.BuildMode;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionObjectPick;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionReasonCodePick;
@@ -33,7 +35,7 @@ import org.kuali.kfs.module.bc.document.dataaccess.BudgetReportsControlListDao;
  * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetReportsControlListDao
  */
 public class BudgetReportsControlListDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetReportsControlListDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetReportsControlListDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetReportsControlListDaoJdbc.class);
 
     protected static String[] updateReportsControlList = new String[5];
     protected static String updateReportsSubFundGroupSelectList = new String();

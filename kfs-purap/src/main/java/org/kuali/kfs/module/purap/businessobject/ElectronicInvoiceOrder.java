@@ -31,11 +31,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.util.ElectronicInvoiceUtils;
 
 public class ElectronicInvoiceOrder {
-  private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceOrder.class);
+  private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceOrder.class);
   
   public static boolean INVOICE_ORDER_REJECTED = true;
   public static boolean INVOICE_ORDER_NOT_REJECTED = false;
@@ -586,6 +588,5 @@ public class ElectronicInvoiceOrder {
       return toString.toString();
       
   }
-
 
 }

@@ -25,17 +25,17 @@ import java.util.List;
 
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.dataaccess.ObjectCodeDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
-
 
 /**
  * This class is the OJB implementation of the ObjectCodeDao interface.
  */
 public class ObjectCodeDaoOjb extends PlatformAwareDaoBaseOjb implements ObjectCodeDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectCodeDaoOjb.class);
-
+    private static Logger LOG = LoggerFactory.getLogger(ObjectCodeDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.ObjectCodeDao#getYearList(java.lang.String, java.lang.String)

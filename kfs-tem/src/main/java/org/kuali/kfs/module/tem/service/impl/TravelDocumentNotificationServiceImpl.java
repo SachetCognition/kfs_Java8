@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemConstants.NotificationPreference;
 import org.kuali.kfs.module.tem.TemParameterConstants;
@@ -51,7 +53,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * implement the notification to the traveler based on the email preferences stored in the traveler profile
  */
 public class TravelDocumentNotificationServiceImpl implements TravelDocumentNotificationService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TravelDocumentNotificationServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelDocumentNotificationServiceImpl.class);
 
     private String notificationTemplate;
     private ParameterService parameterService;

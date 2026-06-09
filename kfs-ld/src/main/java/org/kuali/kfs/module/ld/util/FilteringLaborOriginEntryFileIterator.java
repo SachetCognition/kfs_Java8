@@ -21,10 +21,12 @@ package org.kuali.kfs.module.ld.util;
 import java.io.BufferedReader;
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.businessobject.LaborOriginEntry;
 
 public class FilteringLaborOriginEntryFileIterator extends LaborOriginEntryFileIterator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FilteringLaborOriginEntryFileIterator.class);
+    private static Logger LOG = LoggerFactory.getLogger(FilteringLaborOriginEntryFileIterator.class);
     
     public static interface LaborOriginEntryFilter {
         public boolean accept(LaborOriginEntry originEntry);

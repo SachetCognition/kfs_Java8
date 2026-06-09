@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
 import org.kuali.kfs.module.cam.CamsConstants;
@@ -46,7 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class AssetLockServiceImpl implements AssetLockService {
-    private static Logger LOG = Logger.getLogger(AssetLockService.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetLockService.class);
 
     private CapitalAssetLockDao capitalAssetLockDao;
 
@@ -100,7 +101,6 @@ public class AssetLockServiceImpl implements AssetLockService {
         return capitalAssetLockDao;
     }
 
-
     /**
      * Sets the capitalAssetLockDao attribute value.
      *
@@ -109,7 +109,6 @@ public class AssetLockServiceImpl implements AssetLockService {
     public void setCapitalAssetLockDao(CapitalAssetLockDao capitalAssetLockDao) {
         this.capitalAssetLockDao = capitalAssetLockDao;
     }
-
 
 	/**
 	 * @param assetLocks
@@ -224,7 +223,6 @@ public class AssetLockServiceImpl implements AssetLockService {
         return assetLocks;
     }
 
-
     /**
      * Generating error messages and doc links for blocking documents.
      *
@@ -307,6 +305,5 @@ public class AssetLockServiceImpl implements AssetLockService {
         List<String> lockingDocumentNumbers = getCapitalAssetLockDao().getLockingDocumentNumbers(assetNumbers, blockingDocumentTypes, excludingDocumentNumber);
         return lockingDocumentNumbers;
     }
-
 
 }

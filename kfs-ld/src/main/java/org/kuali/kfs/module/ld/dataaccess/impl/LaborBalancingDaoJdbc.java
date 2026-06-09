@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.ld.dataaccess.impl;
 
 import org.apache.ojb.broker.metadata.MetadataManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.dataaccess.LedgerBalancingDao;
 import org.kuali.kfs.gl.dataaccess.impl.BalancingDaoJdbc;
 import org.kuali.kfs.module.ld.LaborConstants;
@@ -33,7 +35,7 @@ import org.kuali.kfs.module.ld.businessobject.LedgerEntry;
  * BO objects that are essentially not necessary.
  */
 public class LaborBalancingDaoJdbc extends BalancingDaoJdbc implements LedgerBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBalancingDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBalancingDaoJdbc.class);
     
     protected static final String BALANCE_LABOR_KEY_FIELDS = LaborConstants.ColumnNames.POSITION_NUMBER + ", " + LaborConstants.ColumnNames.EMPLOYEE_IDENTIFIER;
     
@@ -50,7 +52,7 @@ public class LaborBalancingDaoJdbc extends BalancingDaoJdbc implements LedgerBal
         + " WHERE " + LaborConstants.ColumnNames.UNIVERSITY_FISCAL_YEAR + " >= " + universityFiscalYear
         + " GROUP BY " + ENTRY_KEY_FIELDS;
         
-        LOG.debug(sql);
+        LOG.debug("{}", sql);
         
         return getSimpleJdbcTemplate().update(sql);
     }
@@ -67,7 +69,7 @@ public class LaborBalancingDaoJdbc extends BalancingDaoJdbc implements LedgerBal
         + " FROM " + laborBalanceTableName
         + " WHERE " + LaborConstants.ColumnNames.UNIVERSITY_FISCAL_YEAR + " >= " + universityFiscalYear;
         
-        LOG.debug(sql);
+        LOG.debug("{}", sql);
         
         return getSimpleJdbcTemplate().update(sql);
     }

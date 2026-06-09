@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerCreditMemo;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerCreditMemoDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling, AccountsReceivableCustomerCreditMemo {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerCreditMemoDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CustomerCreditMemoDocument.class);
 
     protected String statusCode;
     protected String financialDocumentReferenceInvoiceNumber;
@@ -661,7 +663,6 @@ public class CustomerCreditMemoDocument extends GeneralLedgerPostingDocumentBase
     public KualiDecimal getTotalDollarAmount() {
         return getFinancialSystemDocumentHeader().getFinancialDocumentTotalAmount();
     }
-
 
     public AccountsReceivableDocumentHeader getAccountsReceivableDocumentHeader() {
         return accountsReceivableDocumentHeader;

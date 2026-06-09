@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerCreditMemo;
@@ -80,7 +82,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * The KFS AR module implementation of the AccountsReceivableModuleService
  */
 public class AccountsReceivableModuleServiceImpl implements AccountsReceivableModuleService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsReceivableModuleServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountsReceivableModuleServiceImpl.class);
 
     protected AccountsReceivableDocumentHeaderService accountsReceivableDocumentHeaderService;
     protected AccountsReceivablePendingEntryService accountsReceivablePendingEntryService;

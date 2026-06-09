@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -49,12 +51,11 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * This class handles Actions for lookup flow for ContractsGrantsAging Report.
  */
 public class ContractsGrantsAgingReportAction extends ContractsGrantsReportLookupAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingReportAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingReportAction.class);
     private static volatile ContractsGrantsAgingReportService contractsGrantsAgingReportService;
     private static volatile ConfigurationService configurationService;
 
@@ -140,7 +141,6 @@ public class ContractsGrantsAgingReportAction extends ContractsGrantsReportLooku
             lookupForm.setTotalCredits(totalsList[6]);
             lookupForm.setTotalWriteOffs(totalsList[7]);
         }
-
 
         if (((ContractsGrantsAgingReportForm) form).getLookupable().getLookupableHelperService() instanceof ContractsGrantsAgingReportLookupableHelperServiceImpl) {
             Object totalsTable = GlobalVariables.getUserSession().retrieveObject(ArConstants.TOTALS_TABLE_KEY);

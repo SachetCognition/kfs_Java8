@@ -36,6 +36,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.ObjectType;
@@ -87,7 +89,6 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-
 /**
  * This is the default implementation of the ContractsGrantsInvoiceDocumentCreateService interface.
  *
@@ -95,7 +96,7 @@ import org.springframework.util.CollectionUtils;
  */
 @Transactional
 public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements ContractsGrantsInvoiceCreateDocumentService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceCreateDocumentServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceCreateDocumentServiceImpl.class);
 
     protected AccountService accountService;
     protected AccountingPeriodService accountingPeriodService;
@@ -235,7 +236,6 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
             }
         }
     }
-
 
     /**
      * Generates and saves Contracts & Grants Invoice Documents based on the given award's contract control accounts
@@ -456,7 +456,6 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
             BillingPeriod billingPeriod = verifyBillingFrequencyService.getStartDateAndEndDateOfPreviousBillingPeriod(award, currPeriod);
             invoiceGeneralDetail.setBillingPeriod(billingPeriod.getStartDate() + " to " + billingPeriod.getEndDate());
             invoiceGeneralDetail.setLastBilledDate(billingPeriod.getEndDate());
-
 
             populateInvoiceDetailFromAward(invoiceGeneralDetail, award);
             document.setInvoiceGeneralDetail(invoiceGeneralDetail);
@@ -1469,7 +1468,6 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
         }
     }
 
-
     /**
      * Perform validation for an award to determine if a CGB Invoice document can be created for the award.
      *
@@ -1881,7 +1879,6 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
         this.accountingPeriodService = accountingPeriodService;
     }
 
-
     /**
      * Sets the verifyBillingFrequencyService attribute value.
      *
@@ -1913,7 +1910,6 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
         this.workflowDocumentService = workflowDocumentService;
     }
 
-
     /**
      * Sets the documentService attribute value.
      *
@@ -1922,7 +1918,6 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
     public void setDocumentService(DocumentService documentService) {
         this.documentService = documentService;
     }
-
 
     /**
      * Sets the accountsReceivableDocumentHeaderService attribute value.
@@ -1950,11 +1945,9 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
         return dateTimeService;
     }
 
-
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
-
 
     /**
      * Sets the kualiModuleService attribute value.
@@ -1965,11 +1958,9 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
         this.kualiModuleService = kualiModuleService;
     }
 
-
     public ConfigurationService getConfigurationService() {
         return configurationService;
     }
-
 
     public void setConfigurationService(ConfigurationService configurationService) {
         this.configurationService = configurationService;
@@ -1987,16 +1978,13 @@ public class ContractsGrantsInvoiceCreateDocumentServiceImpl implements Contract
         return contractsAndGrantsModuleBillingService;
     }
 
-
     public void setContractsAndGrantsModuleBillingService(ContractsAndGrantsModuleBillingService contractsAndGrantsModuleBillingService) {
         this.contractsAndGrantsModuleBillingService = contractsAndGrantsModuleBillingService;
     }
 
-
     public FinancialSystemDocumentService getFinancialSystemDocumentService() {
         return financialSystemDocumentService;
     }
-
 
     public void setFinancialSystemDocumentService(FinancialSystemDocumentService financialSystemDocumentService) {
         this.financialSystemDocumentService = financialSystemDocumentService;

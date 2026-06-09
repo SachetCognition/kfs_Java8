@@ -28,6 +28,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.SubFundGroupService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -46,7 +48,7 @@ import org.kuali.rice.location.framework.state.StateEbo;
  *
  */
 public class PriorYearAccount extends PersistableBusinessObjectBase implements AccountIntf, MutableInactivatable {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PriorYearAccount.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PriorYearAccount.class);
 
     protected String chartOfAccountsCode;
     protected String accountNumber;
@@ -1035,7 +1037,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
         this.contractControlAccount = contractControlAccount;
     }
 
-
     /**
      * Gets the incomeStreamAccount attribute.
      *
@@ -1063,7 +1064,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
         return accountFiscalOfficerUser;
     }
 
-
     /**
      * @param accountFiscalOfficerUser The accountFiscalOfficerUser to set.
      * @deprecated
@@ -1088,13 +1088,11 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
         this.accountManagerUser = accountManagerUser;
     }
 
-
     @Override
     public Person getAccountSupervisoryUser() {
         accountSupervisoryUser = SpringContext.getBean(org.kuali.rice.kim.api.identity.PersonService.class).updatePersonIfNecessary(accountsSupervisorySystemsIdentifier, accountSupervisoryUser);
         return accountSupervisoryUser;
     }
-
 
     /**
      * @param accountSupervisoryUser The accountSupervisoryUser to set.
@@ -1105,7 +1103,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
         this.accountSupervisoryUser = accountSupervisoryUser;
     }
 
-
     /**
      * @return Returns the continuationAccount.
      */
@@ -1113,7 +1110,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     public Account getContinuationAccount() {
         return continuationAccount;
     }
-
 
     /**
      * @param continuationAccount The continuationAccount to set.
@@ -1123,7 +1119,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     public void setContinuationAccount(Account continuationAccount) {
         this.continuationAccount = continuationAccount;
     }
-
 
     /**
      * @return Returns the accountGuideline.
@@ -1141,7 +1136,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     public void setAccountGuideline(AccountGuideline accountGuideline) {
         this.accountGuideline = accountGuideline;
     }
-
 
     /**
      * Gets the accountDescription attribute.
@@ -1171,7 +1165,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
         return subAccounts;
     }
 
-
     /**
      * @param subAccounts The subAccounts to set.
      */
@@ -1179,7 +1172,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     public void setSubAccounts(List subAccounts) {
         this.subAccounts = subAccounts;
     }
-
 
     /**
      * @return Returns the chartOfAccountsCode.
@@ -1189,7 +1181,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
         return chartOfAccountsCode;
     }
 
-
     /**
      * @param chartOfAccountsCode The chartOfAccountsCode to set.
      */
@@ -1197,7 +1188,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     /**
      * @return Returns the accountFiscalOfficerSystemIdentifier.
@@ -1616,7 +1606,6 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
 
         return hashString.hashCode();
     }
-
 
     /**
      * Convenience method to make the primitive account fields from this Account easier to compare to the account fields from

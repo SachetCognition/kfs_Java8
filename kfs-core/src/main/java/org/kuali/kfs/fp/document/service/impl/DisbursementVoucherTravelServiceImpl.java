@@ -25,6 +25,8 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.TravelMileageRate;
 import org.kuali.kfs.fp.document.dataaccess.TravelMileageRateDao;
 import org.kuali.kfs.fp.document.service.DisbursementVoucherTravelService;
@@ -40,7 +42,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 @NonTransactional
 public class DisbursementVoucherTravelServiceImpl implements DisbursementVoucherTravelService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherTravelServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DisbursementVoucherTravelServiceImpl.class);
 
     protected TravelMileageRateDao travelMileageRateDao;
     protected DateTimeService dateTimeService;

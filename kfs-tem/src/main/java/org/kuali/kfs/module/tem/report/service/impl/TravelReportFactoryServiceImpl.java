@@ -66,7 +66,8 @@ import net.sf.jasperreports.engine.design.JRDesignTextElement;
 import net.sf.jasperreports.engine.design.JRDesignTextField;
 import net.sf.jasperreports.engine.design.JasperDesign;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.report.RString;
 import org.kuali.kfs.module.tem.report.RTextStyle;
 import org.kuali.kfs.module.tem.report.annotations.ColumnFooter;
@@ -91,7 +92,7 @@ import org.kuali.kfs.sys.report.ReportInfo;
 @SuppressWarnings("deprecation")
 public class TravelReportFactoryServiceImpl implements TravelReportFactoryService {
 
-    public static Logger LOG = Logger.getLogger(TravelReportFactoryServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelReportFactoryServiceImpl.class);
 
     private static final int MARGIN            = 10;
     private static final int PAGEHEADER_HEIGHT = 25;

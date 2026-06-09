@@ -18,13 +18,15 @@
  */
 package org.kuali.kfs.module.bc.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionMonthly;
 import org.kuali.kfs.module.bc.document.service.BenefitsCalculationService;
 import org.kuali.kfs.module.bc.document.service.SalarySettingService;
 import org.kuali.kfs.sys.context.SpringContext;
 
 public class MonthlyBudgetForm extends BudgetExpansionForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MonthlyBudgetForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MonthlyBudgetForm.class);
 
     private BudgetConstructionMonthly budgetConstructionMonthly;
     private boolean monthlyPersisted;

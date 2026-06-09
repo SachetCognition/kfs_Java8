@@ -20,12 +20,13 @@ package org.kuali.kfs.sys.batch;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.service.SchedulerService;
 
 public class ScheduleStep extends AbstractStep {
-    private static final Logger LOG = Logger.getLogger(ScheduleStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScheduleStep.class);
     private SchedulerService schedulerService;
 
     /**

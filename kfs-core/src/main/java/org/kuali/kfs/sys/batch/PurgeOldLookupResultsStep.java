@@ -22,6 +22,8 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
 import org.kuali.rice.kns.lookup.LookupResultsService;
@@ -29,7 +31,7 @@ import org.kuali.rice.kns.lookup.LookupResultsService;
 public class PurgeOldLookupResultsStep extends AbstractStep {
     private LookupResultsService lookupResultsService;
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurgeOldLookupResultsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurgeOldLookupResultsStep.class);
 
     /**
      * @see org.kuali.kfs.sys.batch.Step#execute(java.lang.String, java.util.Date)
@@ -62,6 +64,5 @@ public class PurgeOldLookupResultsStep extends AbstractStep {
     public void setLookupResultsService(LookupResultsService lookupResultsService) {
         this.lookupResultsService = lookupResultsService;
     }
-
 
 }

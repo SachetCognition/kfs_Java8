@@ -22,6 +22,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.document.BarcodeInventoryErrorDocument;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.web.struts.FinancialSystemTransactionalDocumentFormBase;
@@ -32,7 +34,7 @@ import org.kuali.rice.kns.service.BusinessObjectDictionaryService;
  * Action form for the asset barcode inventory error document
  */
 public class BarcodeInventoryErrorForm extends FinancialSystemTransactionalDocumentFormBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorForm.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorForm.class);
 
     protected int[] rowCheckbox; 
     protected boolean selectAllCheckbox;
@@ -80,11 +82,9 @@ public class BarcodeInventoryErrorForm extends FinancialSystemTransactionalDocum
         this.rowCheckbox = r;
     }
 
-
     public boolean isSelectAllCheckbox() {
         return selectAllCheckbox;
     }
-
 
     public void setSelectAllCheckbox(boolean selectAllCheckbox) {
         this.selectAllCheckbox = selectAllCheckbox;

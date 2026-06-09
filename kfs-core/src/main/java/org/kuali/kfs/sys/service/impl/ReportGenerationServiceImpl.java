@@ -31,6 +31,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSConstants.ReportGeneration;
 import org.kuali.kfs.sys.service.ReportGenerationService;
@@ -42,7 +44,7 @@ import org.springframework.ui.jasperreports.JasperReportsUtils;
  * To provide utilities that can generate reports with JasperReport
  */
 public class ReportGenerationServiceImpl implements ReportGenerationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportGenerationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReportGenerationServiceImpl.class);
 
     protected KfsDateTimeService dateTimeService;
 
@@ -89,7 +91,7 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
             JasperRunManager.runReportToPdfStream(jasperReport, new FileOutputStream(reportFileName), decorateReportData(reportData), jrDataSource);
         }
         catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
             throw new RuntimeException("Fail to generate report.", e);
         }
     }
@@ -131,7 +133,7 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
              JasperRunManager.runReportToPdfStream(jasperReport, baos, decorateReportData(reportData), jrDataSource);
         }
         catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
             throw new RuntimeException("Fail to generate report.", e);
         }
     }

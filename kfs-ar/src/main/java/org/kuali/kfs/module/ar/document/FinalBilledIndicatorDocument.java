@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ar.document;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.FinalBilledIndicatorEntry;
 import org.kuali.kfs.module.ar.document.service.ContractsGrantsInvoiceDocumentService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -36,7 +38,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class FinalBilledIndicatorDocument extends TransactionalDocumentBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinalBilledIndicatorDocument.class);
+    private static Logger LOG = LoggerFactory.getLogger(FinalBilledIndicatorDocument.class);
 
     private List<FinalBilledIndicatorEntry> invoiceEntries = new ArrayList<FinalBilledIndicatorEntry>();
 
@@ -74,8 +76,6 @@ public class FinalBilledIndicatorDocument extends TransactionalDocumentBase {
             }
         }
     }
-
-
 
     @Override
     public void doRouteStatusChange(DocumentRouteStatusChange statusChangeEvent) {

@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.businessobject.Asset;
@@ -43,7 +45,7 @@ import org.kuali.rice.location.api.state.State;
 import org.kuali.rice.location.api.state.StateService;
 
 public class AssetLocationServiceImpl implements AssetLocationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetLocationService.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetLocationService.class);
 
     private BusinessObjectService businessObjectService;
     private DataDictionaryService DataDictionaryService;
@@ -181,7 +183,6 @@ public class AssetLocationServiceImpl implements AssetLocationService {
         return valid;
     }
 
-
     protected boolean validateCapitalAssetLocation(AssetType assetType, Map<LocationField, String> fieldMap, String campusCode, String buildingCode, String roomNumber, String subRoomNumber, String contactName, String streetAddress, String cityName, String stateCode, String zipCode, String countryCode, boolean onCampus, boolean offCampus, DataDictionaryEntryBase businessObjectEntry) {
         boolean valid = true;
         if (ObjectUtils.isNull(assetType)) {
@@ -269,7 +270,6 @@ public class AssetLocationServiceImpl implements AssetLocationService {
         return valid;
     }
 
-
     /**
      * Convenience method to append the path prefix
      */
@@ -330,7 +330,6 @@ public class AssetLocationServiceImpl implements AssetLocationService {
             putError(fieldMap, LocationField.CITY_NAME, CamsKeyConstants.AssetLocation.ERROR_OFFCAMPUS_CITY_REQUIRED);
             valid &= false;
         }
-
 
         if (isCountryUS) {
             if (isBlank(fieldMap, LocationField.STATE_CODE, stateCode)) {

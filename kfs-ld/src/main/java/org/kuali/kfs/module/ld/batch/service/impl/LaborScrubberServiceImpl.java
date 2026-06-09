@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.coa.service.OffsetDefinitionService;
 import org.kuali.kfs.gl.service.OriginEntryGroupService;
@@ -41,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborScrubberServiceImpl implements LaborScrubberService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborScrubberServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborScrubberServiceImpl.class);
 
     private FlexibleOffsetAccountService flexibleOffsetAccountService;
     private LaborOriginEntryService laborOriginEntryService;
@@ -197,7 +199,6 @@ public class LaborScrubberServiceImpl implements LaborScrubberService {
     public void setFlexibleOffsetAccountService(FlexibleOffsetAccountService flexibleOffsetAccountService) {
         this.flexibleOffsetAccountService = flexibleOffsetAccountService;
     }
-
 
     public void setLaborAccountingCycleCachingService(LaborAccountingCycleCachingService laborAccountingCycleCachingService) {
         this.laborAccountingCycleCachingService = laborAccountingCycleCachingService;

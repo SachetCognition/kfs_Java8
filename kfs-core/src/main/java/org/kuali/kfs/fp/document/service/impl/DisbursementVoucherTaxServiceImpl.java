@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonResidentAlienTax;
 import org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent;
 import org.kuali.kfs.fp.document.DisbursementVoucherConstants;
@@ -57,7 +59,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * This class handles queries and validation on tax id numbers.
  */
 public class DisbursementVoucherTaxServiceImpl implements DisbursementVoucherTaxService, DisbursementVoucherConstants {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherTaxServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherTaxServiceImpl.class);
 
     private ParameterService parameterService;
     private BusinessObjectService businessObjectService;

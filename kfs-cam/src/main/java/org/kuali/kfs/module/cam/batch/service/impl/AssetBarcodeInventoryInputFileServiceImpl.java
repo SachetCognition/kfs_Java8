@@ -28,6 +28,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.batch.AssetBarcodeInventoryInputFileType;
 import org.kuali.kfs.module.cam.batch.service.AssetBarcodeInventoryInputFileService;
 import org.kuali.kfs.module.cam.document.web.struts.AssetBarCodeInventoryInputFileForm;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.exception.AuthorizationException;
 import org.kuali.rice.krad.exception.ValidationException;
 
 public class AssetBarcodeInventoryInputFileServiceImpl extends BatchInputFileSetServiceImpl implements  AssetBarcodeInventoryInputFileService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetBarcodeInventoryInputFileServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetBarcodeInventoryInputFileServiceImpl.class);
 
     public Map<String, String> save(Person user, AssetBarcodeInventoryInputFileType inputType, String fileUserIdentifier, Map<String, InputStream> typeToStreamMap, AssetBarCodeInventoryInputFileForm form) throws AuthorizationException, FileStorageException {
 

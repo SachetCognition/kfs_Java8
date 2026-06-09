@@ -20,12 +20,14 @@ package org.kuali.kfs.module.tem.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.service.TravelEncumbranceService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.springframework.util.StopWatch;
 
 public class TemReleaseHeldEncumbranceStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TemReleaseHeldEncumbranceStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(TemReleaseHeldEncumbranceStep.class);
     protected TravelEncumbranceService travelEncumbranceService;
 
     /**

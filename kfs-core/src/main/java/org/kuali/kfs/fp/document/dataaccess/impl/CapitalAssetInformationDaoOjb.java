@@ -21,9 +21,10 @@ package org.kuali.kfs.fp.document.dataaccess.impl;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.fp.document.dataaccess.CapitalAssetInformationDao;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
@@ -31,7 +32,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
 import org.springmodules.orm.ojb.PersistenceBrokerTemplate;
 
 public class CapitalAssetInformationDaoOjb extends PlatformAwareDaoBaseOjb implements CapitalAssetInformationDao {
-    protected static final Logger LOG = Logger.getLogger(CapitalAssetInformation.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(CapitalAssetInformation.class);
 
     @Override
     public int getNextCapitalAssetLineNumber(String financialDocumentNumber) {

@@ -20,13 +20,15 @@ package org.kuali.kfs.module.ar.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.batch.service.InvoiceRecurrenceService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
 public class InvoiceRecurrenceStep extends AbstractStep {
 
     private InvoiceRecurrenceService invoiceRecurrenceService;
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceRecurrenceStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(InvoiceRecurrenceStep.class);
 
     @Override
     public boolean execute(String jobName, Date jobRunDate) throws InterruptedException {

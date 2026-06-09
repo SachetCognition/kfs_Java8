@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.AccountsPayableDocumentBase;
 import org.kuali.kfs.sys.KFSParameterKeyConstants;
@@ -31,7 +33,7 @@ import org.kuali.rice.core.api.parameter.ParameterEvaluator;
 import org.kuali.rice.core.api.parameter.ParameterEvaluatorService;
 
 public class AccountsPayableBankCodeValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsPayableBankCodeValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountsPayableBankCodeValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
 

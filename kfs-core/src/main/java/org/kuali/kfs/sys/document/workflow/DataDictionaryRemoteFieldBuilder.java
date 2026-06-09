@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.core.api.exception.RiceRuntimeException;
 import org.kuali.rice.core.api.uif.DataType;
@@ -59,7 +61,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowAttributePropertyResolutionS
 
 //RICE20 This class is a temporary fix to support KNS attribute definitions. Should be deleted when rice2.0 adds support.
 public class DataDictionaryRemoteFieldBuilder {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DataDictionaryRemoteFieldBuilder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DataDictionaryRemoteFieldBuilder.class);
 
     /**
      * @see org.kuali.rice.krad.service.DataDictionaryRemoteFieldService#buildRemotableFieldFromAttributeDefinition(java.lang.String,
@@ -99,7 +101,7 @@ public class DataDictionaryRemoteFieldBuilder {
                 definition.setWidgets(Collections.<RemotableAbstractWidget.Builder> singletonList(qf));
             }
         } catch ( Exception ex ) {
-            LOG.warn(ex);
+            LOG.warn(ex.getMessage(), ex);
         }
 
         return definition.build();
@@ -277,6 +279,5 @@ public class DataDictionaryRemoteFieldBuilder {
     protected ConfigurationService getKualiConfigurationService() {
         return KRADServiceLocator.getKualiConfigurationService();
     }
-
 
 }

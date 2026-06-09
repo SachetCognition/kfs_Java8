@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAccountingLines;
 import org.kuali.kfs.fp.document.CapitalAccountingLinesDocumentBase;
 import org.kuali.kfs.fp.document.CapitalAssetEditable;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * validate the capital accounting lines object subtypes
  */
 public class CapitalAccountingLinesObjectSubtypeValidations extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAccountingLinesObjectSubtypeValidations.class);
+    private static Logger LOG = LoggerFactory.getLogger(CapitalAccountingLinesObjectSubtypeValidations.class);
 
     private AccountingDocument accountingDocumentForValidation;
 

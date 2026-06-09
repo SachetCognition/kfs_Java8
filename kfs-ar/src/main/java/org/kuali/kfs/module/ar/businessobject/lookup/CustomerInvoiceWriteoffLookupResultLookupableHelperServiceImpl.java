@@ -28,6 +28,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.CustomerInvoiceWriteoffLookupResult;
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
 import org.kuali.kfs.module.ar.document.service.CustomerInvoiceWriteoffDocumentService;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerInvoiceWriteoffLookupResultLookupableHelperServiceImpl extends AccountsReceivableLookupableHelperServiceImplBase {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceWriteoffLookupResultLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(CustomerInvoiceWriteoffLookupResultLookupableHelperServiceImpl.class);
     protected CustomerInvoiceWriteoffDocumentService customerInvoiceWriteoffDocumentService;
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;
 
@@ -156,7 +158,6 @@ public class CustomerInvoiceWriteoffLookupResultLookupableHelperServiceImpl exte
 
         col.setPropertyName(attributeName);
 
-
         String columnTitle = getDataDictionaryService().getAttributeLabel(element.getClass(), attributeName);
         if (StringUtils.isBlank(columnTitle)) {
             columnTitle = getDataDictionaryService().getCollectionLabel(element.getClass(), attributeName);
@@ -206,7 +207,6 @@ public class CustomerInvoiceWriteoffLookupResultLookupableHelperServiceImpl exte
         }
         return col;
     }
-
 
     /**
      * Constructs the list of columns for the search results. All properties for the column objects come from the DataDictionary.

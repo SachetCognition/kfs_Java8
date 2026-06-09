@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.gl.service.BalanceService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -31,7 +33,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * A step to run the process of purging old balances
  */
 public class PurgeBalanceStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurgeBalanceStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurgeBalanceStep.class);
     private ChartService chartService;
     private BalanceService balanceService;
 

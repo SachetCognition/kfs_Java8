@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.ar.document.validation;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * event.
  */
 public class CostCategoryRule extends KfsMaintenanceDocumentRuleBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CostCategoryRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CostCategoryRule.class);
 
     protected CostCategory oldCategories;
     protected CostCategory newCategories;

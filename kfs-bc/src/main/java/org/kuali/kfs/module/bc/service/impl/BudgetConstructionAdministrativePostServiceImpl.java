@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionAdministrativePost;
 import org.kuali.kfs.module.bc.service.BudgetConstructionAdministrativePostService;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -30,7 +32,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * implements the service methods defined in BudgetConstructionAdministrativePostService
  */
 public class BudgetConstructionAdministrativePostServiceImpl implements BudgetConstructionAdministrativePostService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionAdministrativePostServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionAdministrativePostServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 

@@ -22,6 +22,8 @@ package org.kuali.kfs.module.cg.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAwardAccount;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * way an award can maintain a collection of these references instead of owning accounts directly.
  */
 public class AwardAccount extends PersistableBusinessObjectBase implements CGProjectDirector, MutableInactivatable, ContractsAndGrantsBillingAwardAccount {
-	private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AwardAccount.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AwardAccount.class);
 
     private Long proposalNumber;
     private String chartOfAccountsCode;
@@ -107,7 +109,6 @@ public class AwardAccount extends PersistableBusinessObjectBase implements CGPro
         this.proposalNumber = proposalNumber;
     }
 
-
     /***
      * @see org.kuali.kfs.integration.businessobject.cg.ContractsAndGrantsAccountAwardInformation#getChartOfAccountsCode()
      */
@@ -124,7 +125,6 @@ public class AwardAccount extends PersistableBusinessObjectBase implements CGPro
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     /***
      * @see org.kuali.kfs.integration.businessobject.cg.ContractsAndGrantsAccountAwardInformation#getAccountNumber()

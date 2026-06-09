@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.FinancialSystemModuleConfiguration;
 import org.kuali.kfs.sys.batch.JobDescriptor;
@@ -47,7 +49,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 @ConfigureContext
 @AnnotationTestSuite(PreCommitSuite.class)
 public class SpringConfigurationConsistencyCheckTest extends KualiTestBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SpringConfigurationConsistencyCheckTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SpringConfigurationConsistencyCheckTest.class);
 
     public void testAllLookupablesArePrototypes() throws Exception {
         List<String> failingBeans = new ArrayList<String>();

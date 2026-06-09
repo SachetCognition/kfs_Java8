@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.ar.document;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.InvoiceRecurrence;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -30,7 +32,7 @@ import org.kuali.rice.kim.api.services.IdentityManagementService;
 import org.kuali.rice.krad.service.DocumentService;
 
 public class InvoiceRecurrenceMaintainable extends FinancialSystemMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceRecurrenceMaintainable.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InvoiceRecurrenceMaintainable.class);
 
     private static final String INACTIVATING_NODE_NAME = "InvoiceRecurrenceIsInactivating";
     private static final String INITIATED_BY_SYSTEM_USER = "InitiatedBySystemUser";

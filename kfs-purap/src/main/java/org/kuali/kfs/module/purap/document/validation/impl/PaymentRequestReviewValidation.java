@@ -20,13 +20,15 @@ package org.kuali.kfs.module.purap.document.validation.impl;
 
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.PaymentRequestItem;
 import org.kuali.kfs.module.purap.document.PaymentRequestDocument;
 import org.kuali.kfs.sys.document.validation.GenericValidation;
 import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent;
 
 public class PaymentRequestReviewValidation extends GenericValidation {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestReviewValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PaymentRequestReviewValidation.class);
 
     private PaymentRequestItem itemForValidation;
     
@@ -73,7 +75,6 @@ public class PaymentRequestReviewValidation extends GenericValidation {
         return valid;
     }
 
-
     public PaymentRequestItem getItemForValidation() {
         return itemForValidation;
     }
@@ -81,6 +82,5 @@ public class PaymentRequestReviewValidation extends GenericValidation {
     public void setItemForValidation(PaymentRequestItem itemForValidation) {
         this.itemForValidation = itemForValidation;
     }
-
 
 }

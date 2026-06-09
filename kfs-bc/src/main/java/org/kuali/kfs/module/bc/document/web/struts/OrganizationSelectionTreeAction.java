@@ -32,6 +32,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
@@ -63,7 +65,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * Handles organization budget action requests from menu.
  */
 public class OrganizationSelectionTreeAction extends BudgetExpansionAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationSelectionTreeAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationSelectionTreeAction.class);
 
     /**
      * @see org.kuali.kfs.module.bc.document.web.struts.BudgetExpansionAction#execute(org.apache.struts.action.ActionMapping,
@@ -228,7 +230,6 @@ public class OrganizationSelectionTreeAction extends BudgetExpansionAction {
 
         // reset any set pullflags in the database before navigation
         SpringContext.getBean(BudgetOrganizationTreeService.class).resetPullFlag(principalId);
-
 
         // push parent org onto the branch stack
         organizationSelectionTreeForm.getPreviousBranchOrgs().add(organizationSelectionTreeForm.getSelectionSubTreeOrgs().get(this.getSelectedLine(request)));
@@ -450,7 +451,6 @@ public class OrganizationSelectionTreeAction extends BudgetExpansionAction {
         else {
             GlobalVariables.getMessageMap().putError(BCConstants.SELECTION_SUB_TREE_ORGS, BCKeyConstants.ERROR_BUDGET_ORG_NOT_SELECTED);
         }
-
 
         return foundSelected;
     }

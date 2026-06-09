@@ -26,6 +26,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.CREDIT_MEMO_TYPE_LABELS;
 import org.kuali.kfs.module.purap.PurapConstants.CreditMemoStatuses;
@@ -63,7 +65,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Credit Memo Document Business Object. Contains the fields associated with the main document table.
  */
 public class VendorCreditMemoDocument extends AccountsPayableDocumentBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorCreditMemoDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(VendorCreditMemoDocument.class);
 
     protected Integer paymentRequestIdentifier;
     protected String creditMemoNumber;

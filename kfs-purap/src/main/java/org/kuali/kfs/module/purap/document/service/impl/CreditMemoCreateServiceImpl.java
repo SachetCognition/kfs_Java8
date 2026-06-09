@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.document.service.AccountsPayableService;
 import org.kuali.kfs.module.purap.document.service.CreditMemoCreateService;
 import org.kuali.kfs.module.purap.document.service.CreditMemoService;
@@ -28,12 +30,11 @@ import org.kuali.kfs.module.purap.service.PurapAccountingService;
 import org.kuali.kfs.vnd.document.service.VendorService;
 import org.kuali.rice.kns.service.DataDictionaryService;
 
-
 /**
  * Performs initial population of the credit memo document.
  */
 public class CreditMemoCreateServiceImpl implements CreditMemoCreateService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CreditMemoServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CreditMemoServiceImpl.class);
     private VendorService vendorService;
     private CreditMemoService creditMemoService;
     private AccountsPayableService accountsPayableService;

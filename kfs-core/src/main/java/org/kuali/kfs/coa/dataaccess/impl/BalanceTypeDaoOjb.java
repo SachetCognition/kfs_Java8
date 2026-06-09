@@ -23,6 +23,8 @@ import java.util.Collection;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.dataaccess.BalanceTypeDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
@@ -31,7 +33,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * This class implements the {@link BalanceTypeDao} data access methods using Ojb
  */
 public class BalanceTypeDaoOjb extends PlatformAwareDaoBaseOjb implements BalanceTypeDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceTypeDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalanceTypeDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.BalanceTypeDao#getEncumbranceBalanceTypes()

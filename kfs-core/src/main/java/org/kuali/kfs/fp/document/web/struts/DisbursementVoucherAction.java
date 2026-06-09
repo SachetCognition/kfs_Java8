@@ -33,6 +33,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeExpense;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeTravel;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPreConferenceRegistrant;
@@ -80,7 +82,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class handles Actions for the DisbursementVoucher.
  */
 public class DisbursementVoucherAction extends KualiAccountingDocumentActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherAction.class);
 
     /**
      * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#loadDocument(org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase)

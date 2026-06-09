@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sec.businessobject.SecurityDefinition;
 import org.kuali.kfs.sec.businessobject.SecurityModel;
 import org.kuali.kfs.sec.businessobject.SecurityModelDefinition;
@@ -46,13 +48,12 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.springframework.util.ObjectUtils;
 
-
 /**
  * Maintainable implementation for the Security Model maintenance document. Hooks into Post processing to create a KIM role from
  * Model and assigns users/permissions to role based on Model
  */
 public class SecurityModelMaintainableImpl extends AbstractSecurityModuleMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SecurityModelMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SecurityModelMaintainableImpl.class);
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#doRouteStatusChange(org.kuali.rice.krad.bo.DocumentHeader)
@@ -287,6 +288,5 @@ public class SecurityModelMaintainableImpl extends AbstractSecurityModuleMaintai
 
         super.processAfterCopy(document, parameters);
     }
-
 
 }

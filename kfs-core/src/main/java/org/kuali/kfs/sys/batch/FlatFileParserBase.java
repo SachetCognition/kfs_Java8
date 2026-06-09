@@ -23,7 +23,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStreamReader;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.impl.StringHelper;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.exception.ParseException;
@@ -33,7 +34,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
  * Implementation of BatchInputFileType which parses flat files
  */
 public class FlatFileParserBase extends BatchInputFileTypeBase {
-    protected static Logger LOG = Logger.getLogger(FlatFileParserBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(FlatFileParserBase.class);
     protected FlatFileSpecification flatFileSpecification;
     protected String fileNamePrefix;
     protected DateTimeService dateTimeService;
@@ -131,7 +132,6 @@ public class FlatFileParserBase extends BatchInputFileTypeBase {
                lineNumber++;
             }
             returnObject = tracker.getParsedObjects();
-
 
         }
         catch (Exception e) {

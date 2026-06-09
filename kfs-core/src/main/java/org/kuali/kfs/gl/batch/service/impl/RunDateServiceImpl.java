@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.ScrubberStep;
 import org.kuali.kfs.gl.batch.service.RunDateService;
@@ -32,7 +34,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * The default implementation of RunDateService
  */
 public class RunDateServiceImpl implements RunDateService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RunDateServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(RunDateServiceImpl.class);
 
     private ParameterService parameterService;
 

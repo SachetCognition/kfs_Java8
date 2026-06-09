@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cab.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.rice.core.api.criteria.PredicateFactory.and;
 import static org.kuali.rice.core.api.criteria.PredicateFactory.equal;
 
@@ -32,7 +34,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.fp.businessobject.CapitalAccountingLines;
 import org.kuali.kfs.fp.businessobject.CapitalAssetAccountsGroupDetails;
@@ -133,7 +134,7 @@ import org.kuali.rice.location.api.campus.Campus;
 import org.kuali.rice.location.api.campus.CampusService;
 
 public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilderModuleService {
-    private static final Logger LOG = Logger.getLogger(CapitalAssetBuilderModuleService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CapitalAssetBuilderModuleService.class);
 
     protected GlLineService glLineService;
     protected DataDictionaryService dataDictionaryService;
@@ -467,7 +468,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         // no need for error
         return true;
     }
-
 
     /**
      * Validates the capital asset field requirements based on system parameter and chart for individual system type. This also
@@ -1174,7 +1174,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         if ((capitalAssetTransactionType != null) && (capitalAssetTransactionType.getCapitalAssetTransactionTypeCode() != null)) {
             String recurringTransactionTypeCodes = this.getParameterService().getParameterValueAsString(KfsParameterConstants.CAPITAL_ASSET_BUILDER_DOCUMENT.class, CabParameterConstants.CapitalAsset.RECURRING_CAMS_TRAN_TYPES);
 
-
             if (StringUtils.isNotEmpty(recurringPaymentTypeCode)) { // If there is a recurring payment type ...
                 if (!StringUtils.contains(recurringTransactionTypeCodes, capitalAssetTransactionType.getCapitalAssetTransactionTypeCode())) {
                     // There should be a recurring tran type code.
@@ -1458,7 +1457,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         return accountCapitalObjectCode != null && !accountCapitalObjectCode.equals(AccountCapitalObjectCode.BOTH_NONCAP);
     }
 
-
     /**
      * To check if data exists on create new asset
      *
@@ -1623,7 +1621,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                 }
             }
 
-
             index++;
         }
 
@@ -1720,7 +1717,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                     valid = false;
                 }
             }
-
 
             index++;
         }
@@ -2504,7 +2500,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         return true;
     }
 
-
     /**
      * Activates PO Lines
      *
@@ -2539,7 +2534,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
             }
         }
     }
-
 
     /**
      * gets the document type based on the instance of a class
@@ -2799,7 +2793,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         return isValid;
     }
 
-
     /**
      * Check FP document eligibility by document type for CAB Extract batch.
      *
@@ -2816,7 +2809,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         }
         return eligible;
     }
-
 
     @Override
     public List<String> getBatchIncludedObjectSubTypes() {
@@ -2835,7 +2827,6 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         List<String> excludedSubFundCodes = new ArrayList<String>(parameterService.getParameterValuesAsString(KfsParameterConstants.CAPITAL_ASSET_BUILDER_BATCH.class, CabConstants.Parameters.SUB_FUND_GROUPS));
         return excludedSubFundCodes;
     }
-
 
     /**
      * Check FP document individual Capital Asset line eligibility for CAB Extract Batch

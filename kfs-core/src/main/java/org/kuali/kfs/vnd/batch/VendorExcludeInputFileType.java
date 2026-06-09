@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.BatchInputFileTypeBase;
 import org.kuali.kfs.sys.exception.ParseException;
 import org.kuali.kfs.vnd.VendorConstants;
@@ -39,7 +40,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import au.com.bytecode.opencsv.CSVReader;
 
 public class VendorExcludeInputFileType extends BatchInputFileTypeBase{
-    private static final Logger LOG = Logger.getLogger(VendorExcludeInputFileType.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VendorExcludeInputFileType.class);
 
     private static final String FILE_NAME_PREFIX = "epls_debarred_vendors_";
     public static final int[] FIELD_SIZES = {200, 150, 50, 50, 20, 2, 20, 1000, 1000}; //Size limits for the fields

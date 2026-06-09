@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CashDrawer;
 import org.kuali.kfs.fp.businessobject.CashieringItemInProcess;
 import org.kuali.kfs.fp.businessobject.CashieringTransaction;
@@ -64,7 +65,7 @@ import org.kuali.rice.location.api.campus.CampusService;
  */
 public class CashManagementDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource {
     protected static final long serialVersionUID = 7475843770851900297L;
-    protected static Logger LOG = Logger.getLogger(CashManagementDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CashManagementDocument.class);
 
     protected String campusCode;
 
@@ -92,7 +93,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     private KualiDecimal financialDocumentOneCentAmount;
     private KualiDecimal financialDocumentOtherCentAmount;
 
-
     /**
      * Default constructor.
      */
@@ -102,7 +102,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         checks = new ArrayList<Check>();
         this.resetCurrentTransaction();
     }
-
 
     /**
      * @return current value of campusCode.
@@ -183,7 +182,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return (Deposit) deposits.remove(index);
     }
 
-
     /**
      * @return true if one of the Deposits contained in this document has a type of "final"
      */
@@ -241,7 +239,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return managedLists;
     }
 
-
     /**
      * Gets the cashDrawer attribute.
      *
@@ -268,7 +265,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public CashieringTransaction getCurrentTransaction() {
         return currentTransaction;
     }
-
 
     /**
      * Sets the currentTransaction attribute value.
@@ -377,13 +373,11 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         }
     }
 
-
     /**
      * Does nothing, as there aren't any accounting lines on this doc, so no GeneralLedgerPendingEntrySourceDetail create GLPEs
      * @see org.kuali.kfs.document.GeneralLedgerPostingHelper#customizeExplicitGeneralLedgerPendingEntry(org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySourceDetail, org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry)
      */
     public void customizeExplicitGeneralLedgerPendingEntry(GeneralLedgerPendingEntrySourceDetail postable, GeneralLedgerPendingEntry explicitEntry) {}
-
 
     /**
      * Does nothing save return true, as this document has no GLPEs created from a source of GeneralLedgerPostables
@@ -392,7 +386,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public boolean customizeOffsetGeneralLedgerPendingEntry(GeneralLedgerPendingEntrySourceDetail accountingLine, GeneralLedgerPendingEntry explicitEntry, GeneralLedgerPendingEntry offsetEntry) {
         return true;
     }
-
 
     /**
      * Returns an empty list as this document has no GeneralLedgerPostables
@@ -403,7 +396,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return new ArrayList<GeneralLedgerPendingEntrySourceDetail>();
     }
 
-
     /**
      * Always returns true, as there are no GeneralLedgerPostables to create GLPEs
      * @see org.kuali.kfs.document.GeneralLedgerPostingHelper#isDebit(org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySourceDetail)
@@ -412,7 +404,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public boolean isDebit(GeneralLedgerPendingEntrySourceDetail postable) {
         return true;
     }
-
 
     /**
      * Generates bank offset GLPEs for deposits, if enabled.
@@ -497,7 +488,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return true;
     }
 
-
     /**
      * @see org.kuali.kfs.sys.document.GeneralLedgerPendingEntrySource#getGeneralLedgerPendingEntryAmountForGeneralLedgerPostable(org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySourceDetail)
      */
@@ -546,7 +536,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return campus = SpringContext.getBean(CampusService.class).getCampus(campusCode/*RICE_20_REFACTORME  criteria */);
     }
 
-
     /**
      * Gets the financialDocumentHundredDollarAmount attribute.
      * @return Returns the financialDocumentHundredDollarAmount.
@@ -554,7 +543,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public KualiDecimal getFinancialDocumentHundredDollarAmount() {
         return financialDocumentHundredDollarAmount;
     }
-
 
     /**
      * Sets the financialDocumentHundredDollarAmount attribute value.
@@ -572,7 +560,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentFiftyDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentFiftyDollarAmount attribute value.
      * @param financialDocumentFiftyDollarAmount The financialDocumentFiftyDollarAmount to set.
@@ -580,7 +567,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentFiftyDollarAmount(KualiDecimal financialDocumentFiftyDollarAmount) {
         this.financialDocumentFiftyDollarAmount = financialDocumentFiftyDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentTwentyDollarAmount attribute.
@@ -590,7 +576,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentTwentyDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentTwentyDollarAmount attribute value.
      * @param financialDocumentTwentyDollarAmount The financialDocumentTwentyDollarAmount to set.
@@ -598,7 +583,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentTwentyDollarAmount(KualiDecimal financialDocumentTwentyDollarAmount) {
         this.financialDocumentTwentyDollarAmount = financialDocumentTwentyDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentTenDollarAmount attribute.
@@ -608,7 +592,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentTenDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentTenDollarAmount attribute value.
      * @param financialDocumentTenDollarAmount The financialDocumentTenDollarAmount to set.
@@ -616,7 +599,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentTenDollarAmount(KualiDecimal financialDocumentTenDollarAmount) {
         this.financialDocumentTenDollarAmount = financialDocumentTenDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentFiveDollarAmount attribute.
@@ -626,7 +608,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentFiveDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentFiveDollarAmount attribute value.
      * @param financialDocumentFiveDollarAmount The financialDocumentFiveDollarAmount to set.
@@ -634,7 +615,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentFiveDollarAmount(KualiDecimal financialDocumentFiveDollarAmount) {
         this.financialDocumentFiveDollarAmount = financialDocumentFiveDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentTwoDollarAmount attribute.
@@ -644,7 +624,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentTwoDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentTwoDollarAmount attribute value.
      * @param financialDocumentTwoDollarAmount The financialDocumentTwoDollarAmount to set.
@@ -652,7 +631,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentTwoDollarAmount(KualiDecimal financialDocumentTwoDollarAmount) {
         this.financialDocumentTwoDollarAmount = financialDocumentTwoDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentOneDollarAmount attribute.
@@ -662,7 +640,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentOneDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentOneDollarAmount attribute value.
      * @param financialDocumentOneDollarAmount The financialDocumentOneDollarAmount to set.
@@ -670,7 +647,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentOneDollarAmount(KualiDecimal financialDocumentOneDollarAmount) {
         this.financialDocumentOneDollarAmount = financialDocumentOneDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentOtherDollarAmount attribute.
@@ -680,7 +656,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentOtherDollarAmount;
     }
 
-
     /**
      * Sets the financialDocumentOtherDollarAmount attribute value.
      * @param financialDocumentOtherDollarAmount The financialDocumentOtherDollarAmount to set.
@@ -688,7 +663,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentOtherDollarAmount(KualiDecimal financialDocumentOtherDollarAmount) {
         this.financialDocumentOtherDollarAmount = financialDocumentOtherDollarAmount;
     }
-
 
     /**
      * Gets the financialDocumentHundredCentAmount attribute.
@@ -698,7 +672,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentHundredCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentHundredCentAmount attribute value.
      * @param financialDocumentHundredCentAmount The financialDocumentHundredCentAmount to set.
@@ -706,7 +679,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentHundredCentAmount(KualiDecimal financialDocumentHundredCentAmount) {
         this.financialDocumentHundredCentAmount = financialDocumentHundredCentAmount;
     }
-
 
     /**
      * Gets the financialDocumentFiftyCentAmount attribute.
@@ -716,7 +688,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentFiftyCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentFiftyCentAmount attribute value.
      * @param financialDocumentFiftyCentAmount The financialDocumentFiftyCentAmount to set.
@@ -724,7 +695,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentFiftyCentAmount(KualiDecimal financialDocumentFiftyCentAmount) {
         this.financialDocumentFiftyCentAmount = financialDocumentFiftyCentAmount;
     }
-
 
     /**
      * Gets the financialDocumentTwentyFiveCentAmount attribute.
@@ -734,7 +704,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentTwentyFiveCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentTwentyFiveCentAmount attribute value.
      * @param financialDocumentTwentyFiveCentAmount The financialDocumentTwentyFiveCentAmount to set.
@@ -742,7 +711,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentTwentyFiveCentAmount(KualiDecimal financialDocumentTwentyFiveCentAmount) {
         this.financialDocumentTwentyFiveCentAmount = financialDocumentTwentyFiveCentAmount;
     }
-
 
     /**
      * Gets the financialDocumentTenCentAmount attribute.
@@ -752,7 +720,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentTenCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentTenCentAmount attribute value.
      * @param financialDocumentTenCentAmount The financialDocumentTenCentAmount to set.
@@ -760,7 +727,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentTenCentAmount(KualiDecimal financialDocumentTenCentAmount) {
         this.financialDocumentTenCentAmount = financialDocumentTenCentAmount;
     }
-
 
     /**
      * Gets the financialDocumentFiveCentAmount attribute.
@@ -770,7 +736,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentFiveCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentFiveCentAmount attribute value.
      * @param financialDocumentFiveCentAmount The financialDocumentFiveCentAmount to set.
@@ -778,7 +743,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentFiveCentAmount(KualiDecimal financialDocumentFiveCentAmount) {
         this.financialDocumentFiveCentAmount = financialDocumentFiveCentAmount;
     }
-
 
     /**
      * Gets the financialDocumentOneCentAmount attribute.
@@ -788,7 +752,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentOneCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentOneCentAmount attribute value.
      * @param financialDocumentOneCentAmount The financialDocumentOneCentAmount to set.
@@ -796,7 +759,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentOneCentAmount(KualiDecimal financialDocumentOneCentAmount) {
         this.financialDocumentOneCentAmount = financialDocumentOneCentAmount;
     }
-
 
     /**
      * Gets the financialDocumentOtherCentAmount attribute.
@@ -806,7 +768,6 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
         return financialDocumentOtherCentAmount;
     }
 
-
     /**
      * Sets the financialDocumentOtherCentAmount attribute value.
      * @param financialDocumentOtherCentAmount The financialDocumentOtherCentAmount to set.
@@ -814,6 +775,5 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
     public void setFinancialDocumentOtherCentAmount(KualiDecimal financialDocumentOtherCentAmount) {
         this.financialDocumentOtherCentAmount = financialDocumentOtherCentAmount;
     }
-
 
 }

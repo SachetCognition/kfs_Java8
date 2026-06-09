@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.businessobject.lookup.BusinessObjectFieldConverter;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.service.LookupService;
  * KualiInquirableImpl class, so it covers both the default implementation and customized implemetnation.
  */
 public class BalanceInquirableImpl extends AbstractGeneralLedgerInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceInquirableImpl.class);
 
     private BusinessObjectDictionaryService dataDictionary;
     private LookupService lookupService;

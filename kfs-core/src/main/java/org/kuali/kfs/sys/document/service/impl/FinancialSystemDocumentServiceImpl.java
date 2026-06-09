@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.kfs.sys.document.FinancialSystemTransactionalDocument;
@@ -64,8 +66,7 @@ public class FinancialSystemDocumentServiceImpl implements FinancialSystemDocume
 
     private static final int DEFAULT_FETCH_MORE_ITERATION_LIMIT = 10;
 
-    public static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinancialSystemDocumentServiceImpl.class);
-
+    public static final Logger LOG = LoggerFactory.getLogger(FinancialSystemDocumentServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.sys.document.service.FinancialSystemDocumentService#findByDocumentHeaderStatusCode(java.lang.Class,

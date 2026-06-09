@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.coa.service.OrganizationService;
@@ -39,7 +40,7 @@ import org.kuali.rice.kim.impl.common.delegate.DelegateMemberBo;
 import org.kuali.rice.kns.kim.role.RoleTypeServiceBase;
 
 public abstract class OrganizationHierarchyAwareRoleTypeServiceBase extends RoleTypeServiceBase implements DelegationTypeService {
-    private static final Logger LOG = Logger.getLogger(OrganizationHierarchyAwareRoleTypeServiceBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationHierarchyAwareRoleTypeServiceBase.class);
     protected ChartService chartService;
     protected OrganizationService organizationService;
     protected static final String DOCUMENT_TYPE_NAME = "ORR";
@@ -139,7 +140,6 @@ public abstract class OrganizationHierarchyAwareRoleTypeServiceBase extends Role
         return matchingMemberships;
     }
 
-
     public void setOrganizationService(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }
@@ -147,7 +147,6 @@ public abstract class OrganizationHierarchyAwareRoleTypeServiceBase extends Role
     public void setChartService(ChartService chartService) {
         this.chartService = chartService;
     }
-
 
     @Override
     public List<RoleMembership> sortRoleMembers(List<RoleMembership> roleMembers) {
@@ -200,7 +199,5 @@ public abstract class OrganizationHierarchyAwareRoleTypeServiceBase extends Role
             }
         }
     }
-
-
 
 }

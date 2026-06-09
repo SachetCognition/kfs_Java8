@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_ZERO_AMOUNT;
 
 import java.util.ArrayList;
@@ -69,7 +71,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * Base Struts Action class for Benefit Expense Transfer Document.
  */
 public class ExpenseTransferDocumentActionBase extends KualiAccountingDocumentActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExpenseTransferDocumentActionBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ExpenseTransferDocumentActionBase.class);
 
     /**
      * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#performBalanceInquiryForSourceLine(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -346,7 +348,6 @@ public class ExpenseTransferDocumentActionBase extends KualiAccountingDocumentAc
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * Copy a single accounting line
      *
@@ -458,7 +459,6 @@ public class ExpenseTransferDocumentActionBase extends KualiAccountingDocumentAc
      protected void processAccountingLineOverrides(AccountingDocument financialDocument ,List accountingLines) {
         if (!accountingLines.isEmpty()) {
 
-
             for (Iterator i = accountingLines.iterator(); i.hasNext();) {
                 AccountingLine line = (AccountingLine) i.next();
                // line.refreshReferenceObject("account");
@@ -467,8 +467,6 @@ public class ExpenseTransferDocumentActionBase extends KualiAccountingDocumentAc
             }
         }
     }
-
-
 
     /**
      * For given accounting line, set the corresponding override code

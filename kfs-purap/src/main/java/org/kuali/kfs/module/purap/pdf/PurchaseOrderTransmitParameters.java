@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderContractLanguage;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorQuote;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters  {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderTransmitParameters.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchaseOrderTransmitParameters.class);
 
     private String imageTempLocation;
     private String key;
@@ -76,7 +78,6 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
 
      @Override
     public void setPurchaseOrderPdfParameters(PurchaseOrderDocument po, PurchaseOrderVendorQuote povq) {
-
 
          this.key = povq == null ? po.getPurapDocumentIdentifier().toString() : po.getPurapDocumentIdentifier().toString() + povq.getPurchaseOrderVendorQuoteIdentifier().toString(); // key can be any string; chose to use the PO number.
          String campusCode = po.getDeliveryCampusCode().toLowerCase();
@@ -137,12 +138,10 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
           this.pdfFileName = povq != null ? "PURAP_PO_" + po.getPurapDocumentIdentifier().toString() + "_Quote" + povq.getPurchaseOrderVendorQuoteIdentifier().toString()+ "_"  +  environment + "_" + System.currentTimeMillis() + ".pdf" :
                                "PURAP_PO_" + po.getPurapDocumentIdentifier().toString() + "_" + environment + "_" + System.currentTimeMillis() + ".pdf";
 
-
           this.contractManagerCampusCode = po.getContractManager().getContractManagerPerson()!= null ? po.getContractManager().getContractManagerPerson().getCampusCode() : "";
           this.contractLanguage = contractLanguage.toString();
 
      }
-
 
      @Override
     public void setPurchaseOrderFaxParameters(PurchaseOrderDocument po, PurchaseOrderVendorQuote povq) {
@@ -153,10 +152,8 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
              throw new PurapConfigurationException("Application Setting PDF_DIRECTORY is missing.");
          }
 
-
          this.pdfFileName = povq != null ? "PURAP_PO_" + po.getPurapDocumentIdentifier().toString() + "_Quote" + povq.getPurchaseOrderVendorQuoteIdentifier().toString()+ "_"  + System.currentTimeMillis() + ".pdf" :
                               "PURAP_PO_" + po.getPurapDocumentIdentifier().toString() + "_" + System.currentTimeMillis() + ".pdf";
-
 
           this.faxDescription =  povq != null ? "PO: " + po.getPurapDocumentIdentifier() + " Quote ID: " + povq.getPurchaseOrderVendorQuoteIdentifier():
                                                   "PO: " + po.getPurapDocumentIdentifier() + " Cntrct Mgr: " + po.getContractManager().getContractManagerCode();
@@ -170,13 +167,7 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
 
           this.vendorName = povq != null ? povq.getVendorName() : po.getVendorName();
 
-
-
-
-
      }
-
-
 
      @Override
     public void setPurchaseOrderPdfAndFaxParameters(PurchaseOrderDocument po) {
@@ -247,7 +238,6 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
           this.pdfFileName = povq != null ? "PURAP_PO_" + po.getPurapDocumentIdentifier().toString() + "_Quote" + povq.getPurchaseOrderVendorQuoteIdentifier().toString()+ "_"  + System.currentTimeMillis() + ".pdf" :
                              "PURAP_PO_" + po.getPurapDocumentIdentifier().toString() + "_" + System.currentTimeMillis() + ".pdf";
 
-
           this.contractManagerCampusCode = po.getContractManager().getContractManagerPerson()!= null ? po.getContractManager().getContractManagerPerson().getCampusCode() : "";
 
          // get parameters to send fax
@@ -265,10 +255,7 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
           this.vendorName = povq != null ? povq.getVendorName() : po.getVendorName();
           this.recipientFaxNumber = povq == null ? po.getVendorFaxNumber(): povq.getVendorFaxNumber();
 
-
      }
-
-
 
     public String getContractManagerCampusCode() {
         return contractManagerCampusCode;
@@ -398,8 +385,5 @@ public class PurchaseOrderTransmitParameters implements PurchaseOrderParameters 
     public void setFaxDescription(String faxDescription) {
         this.faxDescription = faxDescription;
     }
-
-
-
 
 }

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ProjectCode;
 import org.kuali.rice.kns.document.MaintenanceDocument;
 import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
@@ -26,7 +28,7 @@ import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
  */
 public class ProjectCodeRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProjectCodeRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ProjectCodeRule.class);
 
     protected ProjectCode oldProjectCode;
     protected ProjectCode newProjectCode;

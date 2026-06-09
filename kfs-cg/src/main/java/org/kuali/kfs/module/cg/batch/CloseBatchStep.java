@@ -20,6 +20,8 @@ package org.kuali.kfs.module.cg.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.service.CloseService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * @see CloseService#close()
  */
 public class CloseBatchStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CloseBatchStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(CloseBatchStep.class);
 
     protected CloseService closeService;
 

@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.module.ar.report.service.impl;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,6 +36,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryRateDetail;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAgency;
@@ -99,7 +100,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This class implements the methods for report generation services for Contracts & Grants.
  */
 public class ContractsGrantsInvoiceReportServiceImpl implements ContractsGrantsInvoiceReportService {
-    private final static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceReportServiceImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceReportServiceImpl.class);
     protected DateTimeService dateTimeService;
     protected DataDictionaryService dataDictionaryService;
     protected PersonService personService;

@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.module.cab.document.validation.impl;
 
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabKeyConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
 import org.kuali.kfs.module.cab.businessobject.Pretag;
@@ -52,12 +53,11 @@ import org.kuali.rice.krad.maintenance.MaintenanceDocumentAuthorizer;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
-
 /**
  * This class represents the business rules for the maintenance of {@link AccountGlobal} business objects
  */
 public class PretagRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PretagRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PretagRule.class);
     protected PersistableBusinessObject bo;
     protected Pretag newPretag;
 

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase;
 import org.kuali.kfs.sys.web.struts.KualiAccountingDocumentFormBase;
@@ -28,7 +30,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * capital accounting lines.
  */
 public abstract class CapitalAssetInformationFormBase extends KualiAccountingDocumentFormBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiAccountingDocumentActionBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(KualiAccountingDocumentActionBase.class);
 
     // Indicates which result set we are using when refreshing/returning from a multi-value lookup.
     protected String lookupResultsSequenceNumber;

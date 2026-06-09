@@ -25,7 +25,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.TemConstants.AgencyStagingDataErrorCodes;
@@ -66,7 +67,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  *
  */
 public class AgencyStagingDataMaintainable extends FinancialSystemMaintainable {
-    static final Logger LOG = Logger.getLogger(AgencyStagingDataMaintainable.class);
+    static final Logger LOG = LoggerFactory.getLogger(AgencyStagingDataMaintainable.class);
 
     private volatile static AgencyDataImportService agencyDataImportService;
     private volatile static ExpenseImportByTravelerService expenseImportByTravelerService;
@@ -321,7 +322,7 @@ public class AgencyStagingDataMaintainable extends FinancialSystemMaintainable {
     	    Integer maxLength = getDataDictionaryService().getAttributeMaxLength(Note.class, KRADConstants.NOTE_TEXT_PROPERTY_NAME);
     	    if (errorText.length() > maxLength) {
     	        LOG.warn("Adding a truncated error text to Note due to space limitations. Original text:");
-    	        LOG.warn(errorText);
+    	        LOG.warn("{}", errorText);
     	        errorText = errorText.substring(0,maxLength);
     	    }
 

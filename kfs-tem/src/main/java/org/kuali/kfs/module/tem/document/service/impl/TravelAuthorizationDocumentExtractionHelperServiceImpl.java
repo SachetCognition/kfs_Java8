@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemParameterConstants;
 import org.kuali.kfs.module.tem.dataaccess.TravelDocumentDao;
@@ -53,7 +55,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class TravelAuthorizationDocumentExtractionHelperServiceImpl implements PaymentSourceToExtractService<TravelAuthorizationDocument> {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TravelAuthorizationDocumentExtractionHelperServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(TravelAuthorizationDocumentExtractionHelperServiceImpl.class);
     protected TravelDocumentDao travelDocumentDao;
     protected TravelPaymentsHelperService travelPaymentsHelperService;
     protected DocumentService documentService;
@@ -217,7 +219,6 @@ public class TravelAuthorizationDocumentExtractionHelperServiceImpl implements P
         final String unit = getParameterService().getParameterValueAsString(TemParameterConstants.TEM_DOCUMENT.class, KFSParameterKeyConstants.PdpExtractBatchParameters.PDP_ORG_CODE);
         return unit;
     }
-
 
     /**
      * Uses the value in the KFS-TEM / Document / PRE_DISBURSEMENT_EXTRACT_SUB_UNIT

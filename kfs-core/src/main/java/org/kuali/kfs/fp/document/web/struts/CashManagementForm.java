@@ -26,7 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CashDrawer;
 import org.kuali.kfs.fp.businessobject.CashieringItemInProcess;
 import org.kuali.kfs.fp.businessobject.Check;
@@ -58,7 +59,7 @@ import org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase;
  */
 public class CashManagementForm extends KualiDocumentFormBase {
     protected static final long serialVersionUID = 1L;
-    protected static Logger LOG = Logger.getLogger(CashManagementForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CashManagementForm.class);
 
     protected static final String CAMPUS_CODE_PROPERTY = "document.campusCode";
 
@@ -96,7 +97,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
     public CashManagementDocument getCashManagementDocument() {
         return (CashManagementDocument) getDocument();
     }
-
 
     /**
      * Creates a DepositHelper foreach Deposit associated with this form's document
@@ -541,7 +541,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public CashDrawerSummary() {
         }
 
-
         protected static final String[] INTERESTING_STATII = { CashReceipt.VERIFIED, CashReceipt.INTERIM, CashReceipt.FINAL };
 
         public void resummarize(CashManagementDocument cmDoc) {
@@ -549,7 +548,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             // get all interesting CRs
             String campusCode = cmDoc.getCampusCode();
             List<CashReceiptDocument> interestingReceipts = SpringContext.getBean(CashReceiptService.class).getCashReceipts(campusCode, INTERESTING_STATII);
-
 
             //
             // rather than separating into lists by status, gather statistics in one fell swoop
@@ -600,7 +598,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             }
             finalDepositCashTotal = finalDepositCashTotal.add(currencyDepositAmount).add(coinDepositAmount);
             finalDepositedCashieringChecksTotal = results.get(DepositConstants.DEPOSIT_TYPE_FINAL).add(finalDepositCashTotal);
-
 
             verifiedReceiptSumTotal = verifiedReceiptStats.getSumTotal();
             interimReceiptSumTotal = interimReceiptStats.getCheckTotal().add(interimDepositedCashieringChecksTotal);
@@ -672,7 +669,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             this.depositedReceiptCount = depositedReceiptCount;
         }
 
-
         /**
          * @return current value of finalReceiptSumTotal.
          */
@@ -688,7 +684,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public void setFinalReceiptSumTotal(KualiDecimal finalSumTotal) {
             this.finalReceiptSumTotal = finalSumTotal;
         }
-
 
         /**
          * @return current value of interimReceiptSumTotal.
@@ -706,7 +701,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             this.interimReceiptSumTotal = interimSumTotal;
         }
 
-
         /**
          * @return current value of overallReceiptCount.
          */
@@ -723,7 +717,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             this.overallReceiptCount = overallReceiptCount;
         }
 
-
         /**
          * @return current value of remainingCheckTotal.
          */
@@ -739,7 +732,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public void setRemainingCheckTotal(KualiDecimal remainingCheckTotal) {
             this.remainingCheckTotal = remainingCheckTotal;
         }
-
 
         /**
          * @return current value of remainingCoinTotal.
@@ -773,7 +765,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             this.remainingCurrencyTotal = remainingCurrencyTotal;
         }
 
-
         /**
          * @return current value of remainingSumTotal.
          */
@@ -789,7 +780,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public void setRemainingSumTotal(KualiDecimal remainingSumTotal) {
             this.remainingSumTotal = remainingSumTotal;
         }
-
 
         /**
          * @return current value of timeOpened.
@@ -807,7 +797,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             this.timeOpened = timeOpened;
         }
 
-
         /**
          * @return current value of timeRefreshed.
          */
@@ -823,7 +812,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public void setTimeRefreshed(Timestamp timeRefreshed) {
             this.timeRefreshed = timeRefreshed;
         }
-
 
         /**
          * @return current value of verifiedReceiptSumTotal.
@@ -841,7 +829,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             this.verifiedReceiptSumTotal = verifiedSumTotal;
         }
 
-
         /**
          * @return current value of overallReceiptSumTotal.
          */
@@ -857,7 +844,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public void setOverallReceiptSumTotal(KualiDecimal overallSumTotal) {
             this.overallReceiptSumTotal = overallSumTotal;
         }
-
 
         /**
          * @return current value of finalReceiptStats.
@@ -1058,7 +1044,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
                 coinTotal = KualiDecimal.ZERO;
             }
 
-
             /**
              * Returns total of all check, coin, and currency totals
              */
@@ -1078,7 +1063,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
                 // don't do anything. just be very quiet and maybe the POJO loader will be satisfied
             }
 
-
             /**
              * @return current value of checkTotal.
              */
@@ -1094,7 +1078,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             public void setCheckTotal(KualiDecimal checkTotal) {
                 this.checkTotal = checkTotal;
             }
-
 
             /**
              * @return current value of coinTotal.
@@ -1112,7 +1095,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
                 this.coinTotal = coinTotal;
             }
 
-
             /**
              * @return current value of currencyTotal.
              */
@@ -1129,7 +1111,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
                 this.currencyTotal = currencyTotal;
             }
 
-
             /**
              * @return current value of receiptCount.
              */
@@ -1145,7 +1126,6 @@ public class CashManagementForm extends KualiDocumentFormBase {
             public void setReceiptCount(int receiptCount) {
                 this.receiptCount = receiptCount;
             }
-
 
             /**
              * @see java.lang.Object#toString()
@@ -1174,6 +1154,5 @@ public class CashManagementForm extends KualiDocumentFormBase {
             getCashManagementDocument().setCashDrawer(SpringContext.getBean(CashDrawerService.class).getByCampusCode(campusCode));
         }
     }
-
 
 }

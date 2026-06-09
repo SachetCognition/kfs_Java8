@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.BulkReceivingDocument;
 import org.kuali.kfs.module.purap.document.dataaccess.BulkReceivingDao;
@@ -34,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BulkReceivingDaoOjb  extends PlatformAwareDaoBaseOjb implements BulkReceivingDao {
     
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BulkReceivingDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(BulkReceivingDaoOjb.class);
 
     public List<String> getDocumentNumbersByPurchaseOrderId(Integer id) {        
 

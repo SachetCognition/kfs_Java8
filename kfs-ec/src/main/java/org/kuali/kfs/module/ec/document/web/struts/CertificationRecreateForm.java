@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.EffortConstants;
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * To define an action form for effrot certification recreate process
  */
 public class CertificationRecreateForm extends EffortCertificationForm {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CertificationRecreateForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CertificationRecreateForm.class);
 
     protected String emplid;
     protected String personName;

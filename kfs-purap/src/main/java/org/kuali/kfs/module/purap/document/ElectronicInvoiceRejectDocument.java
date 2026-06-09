@@ -29,6 +29,8 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoice;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceContact;
@@ -63,7 +65,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ElectronicInvoiceRejectDocument extends FinancialSystemTransactionalDocumentBase implements SessionDocument
 {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceRejectDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceRejectDocument.class);
     protected static BigDecimal zero = new BigDecimal(0);
 
     // NOT NULL FIELDS

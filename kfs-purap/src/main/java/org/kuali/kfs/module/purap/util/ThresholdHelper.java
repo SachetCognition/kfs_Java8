@@ -27,7 +27,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.enums.Enum;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.PurApAccountingLine;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
@@ -47,7 +48,7 @@ public class ThresholdHelper {
     ////////////////////////////////////////////////////////////////////////
     //CLASS VARIABLES
     ////////////////////////////////////////////////////////////////////////
-    private static Logger LOG = Logger.getLogger(ThresholdHelper.class);
+    private static Logger LOG = LoggerFactory.getLogger(ThresholdHelper.class);
     
     public static final ThresholdCriteria CHART = new ThresholdCriteria("CHART");
     public static final ThresholdCriteria CHART_AND_ACCOUNTTYPE = new ThresholdCriteria("CHART_AND_ACCOUNT-TYPE");

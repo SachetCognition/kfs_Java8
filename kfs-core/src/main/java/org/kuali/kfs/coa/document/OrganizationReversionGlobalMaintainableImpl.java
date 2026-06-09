@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversion;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionCategory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionGlobal;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * processGlobalsAfterRetrieve - provides special handling for the details (which aren't a true collection)
  */
 public class OrganizationReversionGlobalMaintainableImpl extends FinancialSystemGlobalMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalMaintainableImpl.class);
 
     private static transient OrganizationReversionService organizationReversionService;
 
@@ -213,7 +215,6 @@ public class OrganizationReversionGlobalMaintainableImpl extends FinancialSystem
                     catch (Exception ex) {
                         throw new RuntimeException("Could not retrieve lookup results to populate fiscal year", ex);
                     }
-
 
                 }
             }

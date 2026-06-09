@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
 import org.kuali.kfs.module.cab.businessobject.GeneralLedgerEntry;
@@ -48,7 +50,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * This class overrides the base getActionUrls method
  */
 public class GeneralLedgerEntryLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerEntryLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(GeneralLedgerEntryLookupableHelperServiceImpl.class);
     private BusinessObjectService businessObjectService;
 
     /**
@@ -128,7 +130,6 @@ public class GeneralLedgerEntryLookupableHelperServiceImpl extends KualiLookupab
         }
         return new CollectionIncomplete(newList, matchingResultsCount);
     }
-
 
     /**
      * Update activity status code to the value used in DB. The reason is the value from user input will be 'Y' or 'N'. However,

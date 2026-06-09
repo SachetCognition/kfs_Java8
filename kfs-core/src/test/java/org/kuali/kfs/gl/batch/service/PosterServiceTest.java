@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.OriginEntryTestBase;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -37,7 +39,7 @@ import org.kuali.kfs.sys.context.TestUtils;
  */
 @ConfigureContext
 public class PosterServiceTest extends OriginEntryTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PosterServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(PosterServiceTest.class);
 
     private PosterService posterService;
 
@@ -294,7 +296,6 @@ public class PosterServiceTest extends OriginEntryTestBase {
         tesq = (BigDecimal) glEntry.get("TRN_ENTR_SEQ_NBR");
         assertEquals("TRN_ENTR_SEQ_NBR wrong", 2, tesq.intValue());
     }
-
 
     /**
      * Check valid and invalid reversal posting

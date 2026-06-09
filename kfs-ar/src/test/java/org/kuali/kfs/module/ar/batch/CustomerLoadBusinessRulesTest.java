@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ import org.springframework.util.AutoPopulatingList;
 
 @ConfigureContext(session = khuntley)
 public class CustomerLoadBusinessRulesTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerLoadBusinessRulesTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerLoadBusinessRulesTest.class);
 
     CustomerLoadService customerLoadService;
     

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.BalancingService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
@@ -26,7 +28,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  * Clears the LaborBalanceHistory data
  */
 public class LaborBalancingHistorySyncStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBalancingHistorySyncStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBalancingHistorySyncStep.class);
     
     private BalancingService balancingService;
 

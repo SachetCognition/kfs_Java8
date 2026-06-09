@@ -30,6 +30,8 @@ import org.apache.commons.beanutils.WrapDynaClass;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.service.KRADServiceLocatorWeb;
  * This class provides a set of utilities that can handle common tasks related to business objects.
  */
 public class OJBUtility {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OJBUtility.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OJBUtility.class);
 
     public static final String LOOKUP_DAO = "lookupDao";
 

@@ -28,6 +28,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
@@ -52,8 +54,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class OrgRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrgRule.class);
-
+    protected static Logger LOG = LoggerFactory.getLogger(OrgRule.class);
 
     protected static OrganizationService orgService;
 
@@ -408,7 +409,6 @@ public class OrgRule extends MaintenanceDocumentRuleBase {
         // HRMS Org Campus == Org Campus
         // HRMS Org campus code must be the same as Org campus code
 
-
         // if the
         return success;
     }
@@ -545,10 +545,8 @@ public class OrgRule extends MaintenanceDocumentRuleBase {
             }
         }
 
-
         return success;
     }
-
 
     /**
      * This checks that defaultAccount is present unless ( (orgType = U or C) and ( document is a "create new" or "edit" ))

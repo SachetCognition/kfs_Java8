@@ -24,6 +24,8 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSParameterKeyConstants;
 import org.kuali.kfs.sys.batch.AutoDisapproveDocumentsStep;
@@ -56,7 +58,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class AutoDisapproveDocumentsServiceImpl implements AutoDisapproveDocumentsService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AutoDisapproveDocumentsServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AutoDisapproveDocumentsServiceImpl.class);
     public static final String WORKFLOW_DOCUMENT_HEADER_ID_SEARCH_RESULT_KEY = "routeHeaderId";
 
     private DocumentService documentService;
@@ -539,7 +541,5 @@ public class AutoDisapproveDocumentsServiceImpl implements AutoDisapproveDocumen
     public void setFinancialSystemDocumentService(FinancialSystemDocumentService financialSystemDocumentService) {
         this.financialSystemDocumentService = financialSystemDocumentService;
     }
-
-
 
 }

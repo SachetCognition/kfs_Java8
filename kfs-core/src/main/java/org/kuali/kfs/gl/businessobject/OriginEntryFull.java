@@ -29,6 +29,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * This class represents a full origin entry
  */
 public class OriginEntryFull extends PersistableBusinessObjectBase implements Transaction, OriginEntryInformation, FlexibleAccountUpdateable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryFull.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginEntryFull.class);
     private static OriginEntryFieldUtil originEntryFieldUtil;
 
     public static final Pattern MATCH_CONTROL_CHARACTERS = Pattern.compile("\\p{Cntrl}");
@@ -69,7 +71,6 @@ public class OriginEntryFull extends PersistableBusinessObjectBase implements Tr
 
  // 17 characters while it is 19 character in DD. Don't change, it has to be 17.
     // KFSMI-3308 - changed to 20
-
 
     private Integer entryId;
     private Integer entryGroupId;
@@ -301,7 +302,6 @@ public class OriginEntryFull extends PersistableBusinessObjectBase implements Tr
 
         return returnList;
     }
-
 
     protected String getField(int size, String value) {
         if (value == null) {

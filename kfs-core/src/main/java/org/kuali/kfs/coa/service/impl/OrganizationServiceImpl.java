@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.ChartService;
@@ -44,7 +46,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 @NonTransactional
 public class OrganizationServiceImpl implements OrganizationService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 
     protected ParameterService parameterService;
     protected ChartService chartService;

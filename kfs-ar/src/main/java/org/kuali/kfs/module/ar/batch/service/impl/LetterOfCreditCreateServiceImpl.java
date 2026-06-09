@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -61,7 +63,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @NonTransactional
 public class LetterOfCreditCreateServiceImpl implements LetterOfCreditCreateService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LetterOfCreditCreateServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LetterOfCreditCreateServiceImpl.class);
     protected CashControlDocumentService cashControlDocumentService;
     protected ConfigurationService configService;
     protected ContractsGrantsInvoiceDocumentService contractsGrantsInvoiceDocumentService;
@@ -198,7 +200,6 @@ public class LetterOfCreditCreateServiceImpl implements LetterOfCreditCreateServ
 
         return cashControlDoc;
     }
-
 
     /**
      * This method created cashcontrol documents and payment application based on the loc creation type and loc value passed.

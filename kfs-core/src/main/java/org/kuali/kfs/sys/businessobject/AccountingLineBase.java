@@ -27,7 +27,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -53,7 +54,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * items necessary to create a pending entry to the G/L. All transaction documents will use this business object inherently.
  */
 public abstract class AccountingLineBase extends PersistableBusinessObjectBase implements Serializable, AccountingLine, GeneralLedgerPendingEntrySourceDetail {
-    private static final Logger LOG = Logger.getLogger(AccountingLineBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingLineBase.class);
 
     protected String documentNumber;
     protected Integer sequenceNumber; // relative to the grouping of acctng lines
@@ -112,7 +113,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
         // salesTax = new SalesTax();
         salesTaxRequired = false;
     }
-
 
     /**
      * @return Returns the account.
@@ -420,7 +420,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
         this.subObjectCode = subObjectCode;
     }
 
-
     /**
      * @see org.kuali.kfs.sys.businessobject.AccountingLine#getSalesTax()
      */
@@ -454,7 +453,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
     public void setSalesTaxRequired(boolean salesTaxRequired) {
         this.salesTaxRequired = salesTaxRequired;
     }
-
 
     /**
      * @param documentNumber The documentNumber to set.
@@ -733,7 +731,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
         return (this instanceof TargetAccountingLine);
     }
 
-
     /**
      * @see org.kuali.rice.krad.bo.AccountingLine#getAccountKey()
      */
@@ -742,7 +739,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
         String key = getChartOfAccountsCode() + ":" + getAccountNumber();
         return key;
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.AccountingLine#copyFrom(org.kuali.rice.krad.bo.AccountingLine)
@@ -813,7 +809,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
             setBalanceTyp(other.getBalanceTyp());
         }
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.AccountingLine#isLike(org.kuali.rice.krad.bo.AccountingLine)
@@ -1018,7 +1013,6 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
         return new HashCodeBuilder(37, 41).append(this.chartOfAccountsCode).append(this.accountNumber).append(this.subAccountNumber).append(this.financialObjectCode).append(this.financialSubObjectCode).append(this.projectCode).append(this.organizationReferenceId).toHashCode();
     }
 
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -1050,7 +1044,5 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
         builder.append("]");
         return builder.toString();
     }
-
-
 
 }

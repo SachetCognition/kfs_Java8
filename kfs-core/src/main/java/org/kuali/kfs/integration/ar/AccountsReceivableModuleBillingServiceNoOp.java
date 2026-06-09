@@ -21,11 +21,13 @@ package org.kuali.kfs.integration.ar;
 import java.sql.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 public class AccountsReceivableModuleBillingServiceNoOp implements AccountsReceivableModuleBillingService {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsReceivableModuleBillingServiceNoOp.class);
+    private Logger LOG = LoggerFactory.getLogger(AccountsReceivableModuleBillingServiceNoOp.class);
 
     /**
      * @see org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService#getAwardBilledToDateAmountForAward(org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward)
@@ -129,6 +131,5 @@ public class AccountsReceivableModuleBillingServiceNoOp implements AccountsRecei
         LOG.warn("Using No-Op " + getClass().getSimpleName() + " service.");
         return false;
     }
-
 
 }

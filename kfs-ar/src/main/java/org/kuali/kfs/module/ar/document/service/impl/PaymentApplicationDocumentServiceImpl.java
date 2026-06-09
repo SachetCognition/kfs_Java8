@@ -22,7 +22,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader;
 import org.kuali.kfs.module.ar.businessobject.AppliedPayment;
 import org.kuali.kfs.module.ar.businessobject.CashControlDetail;
@@ -55,7 +56,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PaymentApplicationDocumentServiceImpl implements PaymentApplicationDocumentService {
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocumentServiceImpl.class);;
+    private static Logger LOG = LoggerFactory.getLogger(PaymentApplicationDocumentServiceImpl.class);;
 
     private DocumentService documentService;
     private BusinessObjectService businessObjectService;

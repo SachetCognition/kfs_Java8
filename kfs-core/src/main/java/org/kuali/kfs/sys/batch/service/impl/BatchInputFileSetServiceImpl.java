@@ -31,6 +31,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSConstants.SystemGroupParameterNames;
 import org.kuali.kfs.sys.batch.BatchInputFileSetType;
@@ -51,7 +53,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Base implementation to manipulate batch input file sets from the batch upload screen
  */
 public class BatchInputFileSetServiceImpl extends InitiateDirectoryBase implements BatchInputFileSetService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchInputFileSetServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchInputFileSetServiceImpl.class);
 
     protected ConfigurationService kualiConfigurationService;
 

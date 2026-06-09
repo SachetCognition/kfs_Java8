@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.AMOUNT_PROPERTY_NAME;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_INVALID_NEGATIVE_AMOUNT_NON_CORRECTION;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_ZERO_AMOUNT;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Validates an accounting line that, if the line is not a correction document, the line amount is a positive amount
  */
 public class AccountingLineAmountPositiveValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingLineAmountPositiveValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountingLineAmountPositiveValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
     private AccountingLine accountingLineForValidation;

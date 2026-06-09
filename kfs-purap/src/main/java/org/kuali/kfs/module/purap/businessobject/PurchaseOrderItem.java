@@ -19,6 +19,8 @@
 
 package org.kuali.kfs.module.purap.businessobject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.rice.core.api.util.type.KualiDecimal.ZERO;
 
 import java.math.BigDecimal;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Purchase Order Item Business Object.
  */
 public class PurchaseOrderItem extends PurchasingItemBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderItem.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchaseOrderItem.class);
 
     private String documentNumber;
     private KualiDecimal itemInvoicedTotalQuantity;

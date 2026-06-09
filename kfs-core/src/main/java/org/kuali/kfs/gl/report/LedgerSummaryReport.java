@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.LedgerBalanceTypeSummaryTotalLine;
 import org.kuali.kfs.gl.businessobject.LedgerSummaryDetailLine;
 import org.kuali.kfs.gl.businessobject.LedgerSummaryTotalLine;
@@ -36,7 +38,7 @@ import org.kuali.kfs.sys.service.ReportWriterService;
  * Helper class which can summarize entries by balance type and then print out a ledger summary report
  */
 public class LedgerSummaryReport {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerSummaryReport.class);
+    private static Logger LOG = LoggerFactory.getLogger(LedgerSummaryReport.class);
     
     private LedgerSummaryTotalLine ledgerTotalLine;
     private Map<String, LedgerBalanceTypeSummaryTotalLine> balanceTypeTotals;

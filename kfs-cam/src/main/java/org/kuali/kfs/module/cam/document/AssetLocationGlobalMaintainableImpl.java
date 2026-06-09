@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AssetLocationGlobalMaintainableImpl extends KualiGlobalMaintainableImpl {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetLocationGlobalMaintainableImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetLocationGlobalMaintainableImpl.class);
 
     /**
      * Populates any empty fields from Asset primary key
@@ -129,7 +131,6 @@ public class AssetLocationGlobalMaintainableImpl extends KualiGlobalMaintainable
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
-
 
     @Override
     public Class<? extends PersistableBusinessObject> getPrimaryEditedBusinessObjectClass() {

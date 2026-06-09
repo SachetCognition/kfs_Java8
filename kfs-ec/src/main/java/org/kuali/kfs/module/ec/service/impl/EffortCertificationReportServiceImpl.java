@@ -24,6 +24,8 @@ import java.util.ResourceBundle;
 
 import net.sf.jasperreports.engine.JRParameter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.service.EffortCertificationReportService;
 import org.kuali.kfs.module.ec.util.ExtractProcessReportDataHolder;
 import org.kuali.kfs.sys.KFSConstants.ReportGeneration;
@@ -36,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EffortCertificationReportServiceImpl implements EffortCertificationReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationReportServiceImpl.class);
 
     private ReportGenerationService reportGenerationService;
     private ReportInfo effortExtractProcessReportInfo;

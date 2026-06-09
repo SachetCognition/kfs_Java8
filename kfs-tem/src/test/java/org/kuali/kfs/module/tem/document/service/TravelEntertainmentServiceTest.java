@@ -18,12 +18,13 @@
  */
 package org.kuali.kfs.module.tem.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class TravelEntertainmentServiceTest extends KualiTestBase {
     private TravelDocumentService service;
     private DocumentService documentService;
 
-    private static final Logger LOG = Logger.getLogger(TravelEntertainmentServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TravelEntertainmentServiceTest.class);
 
     @Override
     @Before
@@ -136,8 +137,6 @@ public class TravelEntertainmentServiceTest extends KualiTestBase {
         assertTrue(success);
     }
 
-
-
     /**
      * This method tests {@link TravelEntertainmentDocumentService#calculateTotalsFor(TravelEntertainmentDocument)}
      *
@@ -176,7 +175,6 @@ public class TravelEntertainmentServiceTest extends KualiTestBase {
         assertTrue(((KualiDecimal) resultMap.get(TemConstants.NON_REIMBURSABLE_ATTRIBUTE)).equals(new KualiDecimal(EXPENSE_AMOUNT)));
     }
      */
-
 
     /**
      * This method tests {@link TravelEntertainmentDocumentService#generateCoversheetFor(TravelEntertainmentDocument)}

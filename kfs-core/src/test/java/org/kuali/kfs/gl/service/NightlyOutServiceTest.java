@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -42,7 +44,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
  */
 @ConfigureContext
 public class NightlyOutServiceTest extends KualiTestBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NightlyOutServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NightlyOutServiceTest.class);
 
     private NightlyOutService nightlyOutService;
     private UnitTestSqlDao unitTestSqlDao;

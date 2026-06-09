@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderSensitiveData;
 import org.kuali.kfs.module.purap.businessobject.SensitiveData;
 import org.kuali.kfs.module.purap.businessobject.SensitiveDataAssignment;
@@ -35,7 +37,7 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class SensitiveDataServiceImpl implements SensitiveDataService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SensitiveDataServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(SensitiveDataServiceImpl.class);
     
     private SensitiveDataDao sensitiveDataDao;
     private PurchaseOrderDao purchaseOrderDao;

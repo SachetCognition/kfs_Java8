@@ -31,6 +31,8 @@ import java.util.Comparator;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
@@ -39,7 +41,7 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
  * This class...
  */
 public class BatchSortUtil {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchSortUtil.class);
+    private static Logger LOG = LoggerFactory.getLogger(BatchSortUtil.class);
 
     private static File tempDir;
 
@@ -59,7 +61,7 @@ public class BatchSortUtil {
         try {
             FileUtils.forceMkdir(tempSortDir);
         } catch (IOException ex) {
-            LOG.fatal( "Unable to create temporary sort directory", ex );
+            LOG.error( "Unable to create temporary sort directory", ex );
             throw new RuntimeException( "Unable to create temporary sort directory", ex );
         }
 
@@ -104,7 +106,7 @@ public class BatchSortUtil {
              inputFile = new BufferedReader(new FileReader(inputFileName));
              //LOG.info("Successfully opened input file " + inputFileName);
          } catch ( FileNotFoundException ex ) {
-             LOG.fatal( "Unable to find input file: " + inputFileName, ex );
+             LOG.error( "Unable to find input file: " + inputFileName, ex );
              throw new RuntimeException( "Unable to find input file: " + inputFileName, ex );
          }
          try {
@@ -139,7 +141,7 @@ public class BatchSortUtil {
              //LOG.info("Successfully closed input file " + inputFileName);
              return numFiles;
          } catch (Exception ex) {
-             LOG.fatal( "Exception processing sort to temp files.", ex );
+             LOG.error( "Exception processing sort to temp files.", ex );
              throw new RuntimeException( ex );
          }
     }

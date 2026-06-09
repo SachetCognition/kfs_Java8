@@ -28,6 +28,8 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 import com.lowagie.text.DocumentException;
@@ -45,7 +47,7 @@ import com.lowagie.text.pdf.PdfStamper;
  */
 public class PdfFormFillerUtil {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PdfFormFillerUtil.class);
+    private static Logger LOG = LoggerFactory.getLogger(PdfFormFillerUtil.class);
     private static final SimpleDateFormat FILE_NAME_TIMESTAMP = new SimpleDateFormat("_yyyy-MM-dd_hhmmss");
 
     /**
@@ -103,7 +105,6 @@ public class PdfFormFillerUtil {
         InputStream templateStream = new FileInputStream(template);
         return populateTemplate(templateStream, replacementList);
     }
-
 
     /**
      * This method stamps the values onto the pdf file from the replacement list

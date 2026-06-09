@@ -21,6 +21,8 @@ package org.kuali.kfs.module.purap.businessobject;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.document.AccountsPayableDocumentBase;
 import org.kuali.kfs.module.purap.document.LineItemReceivingDocument;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
@@ -41,7 +43,7 @@ public class LineItemReceivingItem extends ReceivingItemBase {
 
     private LineItemReceivingDocument lineItemReceivingDocument;
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsPayableDocumentBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountsPayableDocumentBase.class);
 
     /**
      * Default constructor.

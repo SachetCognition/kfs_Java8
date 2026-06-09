@@ -21,7 +21,8 @@ package org.kuali.kfs.module.cab.businessobject;
 import java.util.LinkedHashMap;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -30,7 +31,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 public class PurchasingAccountsPayableLineAssetAccount extends PersistableBusinessObjectBase {
-    private static final Logger LOG = Logger.getLogger(PurchasingAccountsPayableLineAssetAccount.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableLineAssetAccount.class);
 
     private String documentNumber;
     private Integer accountsPayableLineItemIdentifier;
@@ -110,7 +111,6 @@ public class PurchasingAccountsPayableLineAssetAccount extends PersistableBusine
     public boolean isActive() {
         return CabConstants.ActivityStatusCode.NEW.equalsIgnoreCase(this.getActivityStatusCode()) || CabConstants.ActivityStatusCode.MODIFIED.equalsIgnoreCase(this.getActivityStatusCode());
     }
-
 
     /**
      * Gets the activityStatusCode attribute.

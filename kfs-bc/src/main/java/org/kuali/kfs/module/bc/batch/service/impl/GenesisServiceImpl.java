@@ -21,7 +21,8 @@ package org.kuali.kfs.module.bc.batch.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.batch.dataaccess.GenesisDao;
 import org.kuali.kfs.module.bc.batch.service.BudgetConstructionHumanResourcesPayrollInterfaceService;
 import org.kuali.kfs.module.bc.batch.service.GenesisService;
@@ -36,7 +37,7 @@ public class GenesisServiceImpl implements GenesisService {
     protected GenesisDao genesisDao;
     protected BudgetConstructionHumanResourcesPayrollInterfaceService budgetConstructionHumanResourcesPayrollInterfaceService;
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(GenesisServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(GenesisServiceImpl.class);
 
     /*
      * here are some flag value routines

@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.batch;
 import java.io.File;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
@@ -30,7 +32,7 @@ import org.springframework.util.StopWatch;
  * This step sorts the ICR Encumbrance file
  */
 public class IcrEncumbranceSortStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IcrEncumbranceSortStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(IcrEncumbranceSortStep.class);
     protected String batchFileDirectoryName;
 
     /**

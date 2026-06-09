@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.module.cam.document.validation.impl;
 
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -44,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.state.StateContract;
 
 public class EquipmentLoanOrReturnDocumentRule extends TransactionalDocumentRuleBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EquipmentLoanOrReturnDocumentRule.class);
+    private static Logger LOG = LoggerFactory.getLogger(EquipmentLoanOrReturnDocumentRule.class);
 
     private AssetLockService assetLockService;
 

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants.BudgetConstructionPositionConstants;
 import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanConversion;
 
@@ -26,7 +28,7 @@ import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanCo
  * of A and I to java Y and N and back.
  */
 public class OjbBCPositionActiveIndicatorConversion extends OjbCharBooleanConversion {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OjbBCPositionActiveIndicatorConversion.class);
+    private static Logger LOG = LoggerFactory.getLogger(OjbBCPositionActiveIndicatorConversion.class);
 
     public final static String INDICATOR_NO = "N";
     public final static String INDICATOR_YES = "Y";

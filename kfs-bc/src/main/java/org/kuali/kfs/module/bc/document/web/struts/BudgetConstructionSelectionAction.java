@@ -32,6 +32,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.service.FiscalYearFunctionControlService;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
@@ -59,12 +61,11 @@ import org.kuali.rice.krad.service.KualiRuleService;
 import org.kuali.rice.krad.service.PersistenceService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
-
 /**
  * This class...
  */
 public class BudgetConstructionSelectionAction extends BudgetExpansionAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionSelectionAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionSelectionAction.class);
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#execute(org.apache.struts.action.ActionMapping,
@@ -138,7 +139,6 @@ public class BudgetConstructionSelectionAction extends BudgetExpansionAction {
             HttpSession sess = request.getSession(Boolean.FALSE);
             sess.removeAttribute(BCConstants.MAPPING_ATTRIBUTE_KUALI_FORM);
         }
-
 
         // get active BC year and complain when anything other than one year active for now
         List<Integer> activeBCYears = fiscalYearFunctionControlService.getActiveBudgetYear();
@@ -244,7 +244,6 @@ public class BudgetConstructionSelectionAction extends BudgetExpansionAction {
 
         return new ActionForward(lookupUrl, true);
     }
-
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#refresh(org.apache.struts.action.ActionMapping,

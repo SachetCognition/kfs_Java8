@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.coa.service.ObjectLevelService;
@@ -56,7 +58,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class SufficientFundsServiceImpl implements SufficientFundsService, SufficientFundsServiceConstants {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SufficientFundsServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(SufficientFundsServiceImpl.class);
 
     private AccountService accountService;
     private ObjectLevelService objectLevelService;

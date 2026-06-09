@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryExclusionType;
 import org.kuali.kfs.sys.document.FinancialSystemMaintainable;
 import org.kuali.rice.kns.datadictionary.MaintainableSectionDefinition;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class IndirectCostRecoveryTypeMaintainableImpl extends FinancialSystemMaintainable {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IndirectCostRecoveryTypeMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IndirectCostRecoveryTypeMaintainableImpl.class);
     public static final String DOCUMENT_ERROR_PREFIX = "document.";
     public static final String MAINTAINABLE_ERROR_PATH = DOCUMENT_ERROR_PREFIX + "newMaintainableObject";
     public static final String DETAIL_ERROR_PATH = MAINTAINABLE_ERROR_PATH + ".add.indirectCostRecoveryExclusionTypeDetails";

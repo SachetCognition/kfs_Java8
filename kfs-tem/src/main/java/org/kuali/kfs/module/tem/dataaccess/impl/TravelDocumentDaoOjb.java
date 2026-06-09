@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.TRAVEL_DOCUMENT_IDENTIFIER;
 
 import java.sql.Timestamp;
@@ -28,7 +30,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
@@ -59,7 +60,7 @@ import org.kuali.rice.krad.util.OjbCollectionAware;
  */
 public class TravelDocumentDaoOjb extends PlatformAwareDaoBaseOjb implements TravelDocumentDao, OjbCollectionAware {
 
-    public static Logger LOG = Logger.getLogger(TravelDocumentDaoOjb.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelDocumentDaoOjb.class);
 
     @Override
     public List<TravelDocument> findDocuments(final Class<?> travelDocumentClass, final String travelDocumentNumber) {
@@ -162,7 +163,6 @@ public class TravelDocumentDaoOjb extends PlatformAwareDaoBaseOjb implements Tra
 
         Iterator<Object[]> iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
         return TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iterator);
-
 
     }
 
@@ -277,10 +277,8 @@ public class TravelDocumentDaoOjb extends PlatformAwareDaoBaseOjb implements Tra
         return getPersistenceBrokerTemplate().getCollectionByQuery(new QueryByCriteria(documentClazz, criteria));
     }
 
-
     @Override
     public Collection<? extends TEMReimbursementDocument> findMatchingTrips (Integer temProfileId ,Timestamp tripBegin, Timestamp tripEnd)  {
-
 
         final Criteria criteria = new Criteria();
         final Criteria orEndDateCriteria = new Criteria();
@@ -291,7 +289,6 @@ public class TravelDocumentDaoOjb extends PlatformAwareDaoBaseOjb implements Tra
         criteria.addNotIn("documentHeader.financialDocumentStatusCode", Arrays.asList(DocumentStatusCodes.INITIATED));
 
         return  getPersistenceBrokerTemplate().getCollectionByQuery(new QueryByCriteria(TravelReimbursementDocument.class, criteria));
-
 
     }
 }

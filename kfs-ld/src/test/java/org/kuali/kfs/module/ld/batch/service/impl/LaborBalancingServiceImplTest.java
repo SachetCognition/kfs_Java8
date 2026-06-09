@@ -22,6 +22,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.impl.BalancingServiceBaseImpl;
 import org.kuali.kfs.gl.batch.service.impl.BalancingServiceImplTestBase;
@@ -43,13 +45,12 @@ import org.kuali.kfs.sys.context.TestUtils;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
-
 /**
  * LD LaborBalancingServiceImpl test cases
  */
 @ConfigureContext
 public class LaborBalancingServiceImplTest extends BalancingServiceImplTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBalancingServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBalancingServiceImplTest.class);
 
     private boolean batchFileDirectoryCreated = false;
 

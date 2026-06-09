@@ -23,6 +23,8 @@ import java.text.MessageFormat;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.CGConstants;
 import org.kuali.kfs.module.cg.CGKeyConstants;
 import org.kuali.kfs.module.cg.businessobject.Award;
@@ -44,7 +46,7 @@ public class CloseServiceImpl implements CloseService {
     protected DateTimeService dateTimeService;
     protected BusinessObjectService businessObjectService;
     protected DocumentService documentService;
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CloseServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CloseServiceImpl.class);
     protected ConfigurationService configService;
 
     /**

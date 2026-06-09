@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.CustomerOpenItemReportDetail;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.util.UrlFactory;
 
 public class CustomerOpenItemReportLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerOpenItemReportLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(CustomerOpenItemReportLookupableHelperServiceImpl.class);
     protected CustomerOpenItemReportService customerOpenItemReportService;
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;
 

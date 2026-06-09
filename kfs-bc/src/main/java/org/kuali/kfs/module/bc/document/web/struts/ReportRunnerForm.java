@@ -23,13 +23,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BudgetConstructionDocumentReportMode;
 
 /**
  * Form class to display document reports and dumps menu
  */
 public class ReportRunnerForm extends BudgetExpansionForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportRunnerForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReportRunnerForm.class);
 
     // url parameters sent from BCDoc
     private String documentNumber;

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.ld.document.validation.impl.SalaryExpenseTransferDocumentRuleConstants.DEFAULT_NUMBER_OF_FISCAL_PERIODS_ERROR_CERTIFICATION_TAB_REQUIRED;
 
 import java.util.List;
@@ -41,7 +43,7 @@ public class SalaryExpenseTransferErrorCertificationValidation extends GenericVa
     protected static ParameterService parameterService;
     protected static SalaryExpenseTransferTransactionAgeService salaryTransferTransactionAgeService;
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalaryExpenseTransferErrorCertificationValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(SalaryExpenseTransferErrorCertificationValidation.class);
 
     @Override
     public boolean validate(AttributedDocumentEvent event) {

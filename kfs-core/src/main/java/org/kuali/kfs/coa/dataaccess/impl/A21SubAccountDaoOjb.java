@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.dataaccess.impl;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.dataaccess.A21SubAccountDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
@@ -29,7 +31,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * This class provides data access to {@link A21SubAccount} through OJB
  */
 public class A21SubAccountDaoOjb extends PlatformAwareDaoBaseOjb implements A21SubAccountDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(A21SubAccountDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(A21SubAccountDaoOjb.class);
 
     public A21SubAccountDaoOjb() {
         super();

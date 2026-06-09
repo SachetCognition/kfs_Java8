@@ -36,6 +36,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader;
@@ -77,7 +79,7 @@ public class PaymentApplicationDocumentAction extends FinancialSystemTransaction
         return super.save(mapping, form, request, response);
     }
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocumentAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PaymentApplicationDocumentAction.class);
 
     protected BusinessObjectService businessObjectService;
     protected DocumentService documentService;
@@ -336,7 +338,6 @@ public class PaymentApplicationDocumentAction extends FinancialSystemTransaction
                 // selectedInvoiceDetailApplications[${ctr}].amountApplied
                 String fieldName = "selectedInvoiceDetailApplications[" + Integer.toString(simpleInvoiceDetailApplicationCounter) + "].amountApplied";
                 simpleInvoiceDetailApplicationCounter++; // needs to be incremented even if we skip this line
-
 
                 // handle the user clicking full apply
                 if (detailApplication.isFullApply()) {

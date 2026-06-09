@@ -26,7 +26,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.vnd.document.service.VendorService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -42,7 +43,7 @@ import org.kuali.rice.location.framework.state.StateEbo;
  * Address to be associated with a particular Vendor.
  */
 public class VendorAddress extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
-    private static final Logger LOG = Logger.getLogger(VendorAddress.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VendorAddress.class);
 
     protected Integer vendorAddressGeneratedIdentifier;
     protected Integer vendorHeaderGeneratedIdentifier;

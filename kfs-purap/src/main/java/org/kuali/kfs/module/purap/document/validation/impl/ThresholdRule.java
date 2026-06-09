@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ThresholdRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ThresholdRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ThresholdRule.class);
     protected ChartService chartService;
     protected AccountService accountService;
     protected ReceivingThreshold newThreshold;
@@ -202,7 +204,6 @@ public class ThresholdRule extends MaintenanceDocumentRuleBase {
         }
         return false;
     }
-
 
     /**
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#processCustomRouteDocumentBusinessRules(org.kuali.rice.kns.document.MaintenanceDocument)

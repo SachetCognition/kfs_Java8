@@ -18,12 +18,14 @@
  */
 package org.kuali.kfs.module.cg.businessobject.inquiry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.inquiry.KfsInquirableImpl;
 
 /**
  * Used for wiring up {@link Proposal} for inquiries.
  */
 public class ProposalInquirable extends KfsInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProposalInquirable.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProposalInquirable.class);
 }
 

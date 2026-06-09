@@ -37,6 +37,8 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
@@ -100,7 +102,7 @@ import org.springframework.util.StringUtils;
  * it's own instance variables instead of being shared.
  */
 public class ScrubberProcessImpl implements ScrubberProcess {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ScrubberProcessImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScrubberProcessImpl.class);
 
     protected static final String TRANSACTION_TYPE_COST_SHARE_ENCUMBRANCE = "CE";
     protected static final String TRANSACTION_TYPE_OFFSET = "O";
@@ -618,7 +620,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
         return TRANSACTION_TYPE_OTHER;
     }
 
-
     protected String getTransactionType(String financialBalanceTypeCode, String desc) {
         if (TRANSACTION_TYPE_COST_SHARE_ENCUMBRANCE.equals(financialBalanceTypeCode)) {
             return TRANSACTION_TYPE_COST_SHARE_ENCUMBRANCE;
@@ -647,7 +648,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
         }
         return TRANSACTION_TYPE_OTHER;
     }
-
 
     /**
      * This will process a group of origin entries. The COBOL code was refactored a lot to get this so there isn't a 1 to 1 section
@@ -721,7 +721,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
                     boolean laborIndicator = false;
                     tmperrors.addAll(scrubberValidator.validateTransaction(unscrubbedEntry, scrubbedEntry, universityRunDate, laborIndicator, accountingCycleCachingService));
                     transactionErrors.addAll(tmperrors);
-
 
                     Account unscrubbedEntryAccount = accountingCycleCachingService.getAccount(unscrubbedEntry.getChartOfAccountsCode(), unscrubbedEntry.getAccountNumber());
                     // KFSMI-173: both the expired and closed accounts rows are put in the expired account
@@ -1872,7 +1871,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
         return true;
     }
 
-
     protected void createOutputEntry(OriginEntryInformation entry, PrintStream ps) throws IOException {
         try {
             ps.printf("%s\n", entry.getLine());
@@ -2070,7 +2068,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
         return false;
     }
 
-
     protected String checkAndSetTransactionTypeCostShare (String financialBalanceTypeCode, String desc, String currentValidLine){
 
         // Read all the transactions in the valid group and update the cost share transactions
@@ -2095,7 +2092,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
         return currentValidLine;
 
     }
-
 
     /**
      * Generates the scrubber listing report for the GLCP document
@@ -2166,7 +2162,7 @@ public class ScrubberProcessImpl implements ScrubberProcess {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Errors on transaction: "+errorTransaction);
                 for (Message message: messages) {
-                    LOG.debug(message);
+                    LOG.debug("{}", message);
                 }
             }
             scrubberReportWriterService.writeError(errorTransaction, messages);
@@ -2475,7 +2471,6 @@ public class ScrubberProcessImpl implements ScrubberProcess {
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
-
 
     // Offset entry to have the same transaction date as the original transaction for Payroll Posting
     protected Date getTransactionDateForOffsetEntry(OriginEntryInformation scrubbedEntry) {

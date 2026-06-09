@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -38,7 +39,7 @@ import org.kuali.rice.kew.api.document.DocumentStatus;
 import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
 
 public class TemCTSCardApplicationDocument extends CardApplicationDocumentBase implements CardApplicationDocument {
-    protected static Logger LOG = Logger.getLogger(TemCTSCardApplicationDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TemCTSCardApplicationDocument.class);
 
     private Date bankAppliedDate;
     private Date bankApprovedDate;
@@ -98,6 +99,5 @@ public class TemCTSCardApplicationDocument extends CardApplicationDocumentBase i
     public String getUserAgreementText() {
         return SpringContext.getBean(ConfigurationService.class).getPropertyValueAsString(TemKeyConstants.CTS_CARD_DOCUMENT_USER_AGREEMENT);
     }
-
 
 }

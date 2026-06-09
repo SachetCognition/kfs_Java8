@@ -30,6 +30,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpParameterConstants;
 import org.kuali.kfs.pdp.util.HttpsTrustManager;
@@ -40,7 +42,7 @@ import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
  * Batch step to download a text file from an HTTPS URL to the specified target directory.
  */
 public class DownLoadFileViaHttpsStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DownLoadFileViaHttpsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(DownLoadFileViaHttpsStep.class);
 
     private String targetDirectoryPath;
 

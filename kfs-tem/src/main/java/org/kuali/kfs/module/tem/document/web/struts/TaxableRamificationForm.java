@@ -21,13 +21,15 @@ package org.kuali.kfs.module.tem.document.web.struts;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.document.TaxableRamificationDocument;
 import org.kuali.kfs.sys.document.web.struts.FinancialSystemTransactionalDocumentFormBase;
 import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.document.Document;
 
 public class TaxableRamificationForm extends FinancialSystemTransactionalDocumentFormBase {
-    private final static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TaxableRamificationForm.class);
+    private final static Logger LOG = LoggerFactory.getLogger(TaxableRamificationForm.class);
     
     private Map<String, List<Document>> relatedDocuments;
     private Map<String, List<Note>> relatedDocumentNotes;

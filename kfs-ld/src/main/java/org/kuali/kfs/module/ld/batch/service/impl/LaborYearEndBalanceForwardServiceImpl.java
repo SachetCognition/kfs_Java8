@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.ld.LaborConstants.DestinationNames.LEDGER_BALANCE;
 import static org.kuali.kfs.module.ld.LaborConstants.DestinationNames.ORIGN_ENTRY;
 
@@ -70,7 +72,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborYearEndBalanceForwardServiceImpl implements LaborYearEndBalanceForwardService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborYearEndBalanceForwardServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborYearEndBalanceForwardServiceImpl.class);
 
     private LaborLedgerBalanceService laborLedgerBalanceService;
     private OptionsService optionsService;
@@ -271,7 +273,7 @@ public class LaborYearEndBalanceForwardServiceImpl implements LaborYearEndBalanc
             }
         }
         catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
     }
 

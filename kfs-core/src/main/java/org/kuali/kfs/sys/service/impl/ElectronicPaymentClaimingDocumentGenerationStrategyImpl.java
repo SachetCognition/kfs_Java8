@@ -20,6 +20,8 @@ package org.kuali.kfs.sys.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.ElectronicPaymentClaim;
 import org.kuali.kfs.sys.service.ElectronicPaymentClaimingDocumentGenerationStrategy;
@@ -30,7 +32,7 @@ import org.kuali.rice.kim.api.identity.Person;
  * for those cases when admins claim a payment without an associated document
  */
 public class ElectronicPaymentClaimingDocumentGenerationStrategyImpl implements ElectronicPaymentClaimingDocumentGenerationStrategy {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicPaymentClaimingDocumentGenerationStrategyImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ElectronicPaymentClaimingDocumentGenerationStrategyImpl.class);
     
     private ElectronicPaymentClaimingService electronicPaymentClaimingService;
 

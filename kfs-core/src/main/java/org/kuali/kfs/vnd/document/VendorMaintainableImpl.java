@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.FinancialSystemMaintainable;
@@ -56,7 +58,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class VendorMaintainableImpl extends FinancialSystemMaintainable {
     protected static final String VENDOR_REQUIRES_APPROVAL_SPLIT_NODE = "RequiresApproval";
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VendorMaintainableImpl.class);
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#setGenerateDefaultValues(boolean)
@@ -249,7 +251,6 @@ public class VendorMaintainableImpl extends FinancialSystemMaintainable {
         vd.refreshNonUpdateableReferences();
         vd.setVendorHeader(tempHeader);
     }
-
 
     /**
      * Checks whether the vendor has already had a vendor detail assigned id. If not, it will call the private method to set the

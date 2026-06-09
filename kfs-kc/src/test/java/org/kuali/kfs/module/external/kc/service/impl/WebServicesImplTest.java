@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.external.kc.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.io.IOException;
@@ -39,7 +41,7 @@ import org.xml.sax.SAXException;
 
 @ConfigureContext(session = khuntley)
 public class WebServicesImplTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(WebServicesImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(WebServicesImplTest.class);
     static final String TEST_BASE_PACKAGE = "org.kuali.kfs.module.external";
     /**
      * @see junit.framework.TestCase#setUp()
@@ -56,7 +58,6 @@ public class WebServicesImplTest extends KualiTestBase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
-
 
     public boolean isValidfetchXML(URL location) throws SAXException, IOException {
         try {

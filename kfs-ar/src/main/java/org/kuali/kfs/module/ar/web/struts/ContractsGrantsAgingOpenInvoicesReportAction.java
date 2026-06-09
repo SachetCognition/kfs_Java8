@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.businessobject.lookup.ContractsGrantsAgingOpenInvoicesReportLookupableHelperServiceImpl;
 import org.kuali.kfs.sys.KFSConstants;
@@ -40,14 +42,12 @@ import org.kuali.rice.krad.lookup.CollectionIncomplete;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * This class handles Actions for lookup flow for ContractsGrantsAgingOpenInvoices Report.
  */
 
 public class ContractsGrantsAgingOpenInvoicesReportAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingOpenInvoicesReportAction.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingOpenInvoicesReportAction.class);
 
     /**
      * Search - sets the values of the data entered on the form on the jsp into a map and then searches for the results.

@@ -27,6 +27,8 @@ import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsSuspendedInvoiceSummaryReport;
@@ -44,7 +46,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class ContractsGrantsSuspendedInvoiceSummaryReportLookupableHelperServiceImpl extends ContractsGrantsSuspendedInvoiceReportLookupableHelperServiceImplBase {
 
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsSuspendedInvoiceSummaryReportLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsGrantsSuspendedInvoiceSummaryReportLookupableHelperServiceImpl.class);
 
     protected ConfigurationService configurationService;
     protected DocumentService documentService;

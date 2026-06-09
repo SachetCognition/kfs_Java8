@@ -23,6 +23,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDetail;
@@ -34,7 +36,7 @@ import org.kuali.rice.kns.lookup.HtmlData;
  * Action form for Effort Certification Document.
  */
 public class CertificationReportForm extends EffortCertificationForm {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CertificationReportForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CertificationReportForm.class);
 
     protected String sortOrder = SortOrder.ASC.name();
 

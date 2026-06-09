@@ -21,13 +21,15 @@ package org.kuali.kfs.fp.document;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAccountingLines;
 
 /**
  * class which defines behavior common for capital accounting lines.
  */
  public class CapitalAccountingLinesDocumentBase extends CapitalAssetInformationDocumentBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAccountingLinesDocumentBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CapitalAccountingLinesDocumentBase.class);
 
     //transient objects
     protected transient boolean capitalAccountingLinesExist = false;

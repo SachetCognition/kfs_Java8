@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.fp.businessobject.BudgetAdjustmentAccountingLine;
@@ -68,7 +70,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This is the business object that represents the BudgetAdjustment document in Kuali.
  */
 public class BudgetAdjustmentDocument extends AccountingDocumentBase implements Copyable, Correctable, AmountTotaling {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetAdjustmentDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(BudgetAdjustmentDocument.class);
 
     protected static final String REQUIRES_FULL_APPROVAL_SPLIT_NODE_NAME = "RequiresFullApproval";
 
@@ -81,7 +83,6 @@ public class BudgetAdjustmentDocument extends AccountingDocumentBase implements 
     public BudgetAdjustmentDocument() {
         super();
     }
-
 
     /*******************************************************************************************************************************
      * BA Documents should only do SF checking on PLEs with a Balance Type of 'CB' - not 'BB' or 'MB'.
@@ -300,7 +301,6 @@ public class BudgetAdjustmentDocument extends AccountingDocumentBase implements 
 
         return baseBudgetTotal;
     }
-
 
     /**
      * This method retrieves the total base budget amount formatted as currency.
@@ -782,7 +782,6 @@ public class BudgetAdjustmentDocument extends AccountingDocumentBase implements 
                     // increment the sequence counter
                     sequenceHelper.increment();
 
-
                     // ////////////////// now create actual TOF entry //////////////////////////////////////////////
                     /* set amount in line so Debit/Credit code can be set correctly */
                     accountingLine.setAmount(streamAmount);
@@ -911,7 +910,6 @@ public class BudgetAdjustmentDocument extends AccountingDocumentBase implements 
     protected String getTransferDocumentType() {
         return TransferOfFundsDocumentRuleConstants.TRANSFER_OF_FUNDS_DOC_TYPE_CODE;
     }
-
 
     /**
      * @see org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase#answerSplitNodeQuestion(java.lang.String)

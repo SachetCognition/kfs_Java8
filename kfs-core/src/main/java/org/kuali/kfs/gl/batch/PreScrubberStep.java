@@ -25,6 +25,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.report.PreScrubberReport;
 import org.kuali.kfs.gl.report.PreScrubberReportData;
@@ -38,7 +40,7 @@ import org.springframework.util.StopWatch;
  * A step to run the scrubber process.
  */
 public class PreScrubberStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PreScrubberStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PreScrubberStep.class);
     private String batchFileDirectoryName;
     private PreScrubberService preScrubberService;
     private ReportWriterService preScrubberReportWriterService;

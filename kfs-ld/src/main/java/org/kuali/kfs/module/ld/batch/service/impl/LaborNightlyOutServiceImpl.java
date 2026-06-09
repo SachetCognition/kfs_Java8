@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.gl.businessobject.OriginEntryGroup;
@@ -51,7 +53,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborNightlyOutServiceImpl implements LaborNightlyOutService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborNightlyOutServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LaborNightlyOutServiceImpl.class);
 
     protected LaborLedgerPendingEntryService laborLedgerPendingEntryService;
     protected OriginEntryGroupService originEntryGroupService;
@@ -346,6 +348,5 @@ public class LaborNightlyOutServiceImpl implements LaborNightlyOutService {
     public void setLaborClearGeneralLedgerEntryDao(LaborClearGeneralLedgerEntryDao laborClearGeneralLedgerEntryDao) {
         this.laborClearGeneralLedgerEntryDao = laborClearGeneralLedgerEntryDao;
     }
-
 
 }

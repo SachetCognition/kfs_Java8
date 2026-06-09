@@ -25,6 +25,8 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.businessobject.CollectionEvent;
@@ -55,7 +57,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ContractsGrantsInvoiceDocument extends CustomerInvoiceDocument {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceDocument.class);
     private KualiDecimal paymentAmount = KualiDecimal.ZERO;
     private KualiDecimal balanceDue = KualiDecimal.ZERO;
     private List<ContractsGrantsInvoiceDetail> invoiceDetails;
@@ -315,7 +317,6 @@ public class ContractsGrantsInvoiceDocument extends CustomerInvoiceDocument {
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()

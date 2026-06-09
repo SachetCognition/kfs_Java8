@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.service.impl;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.dataaccess.EntryDao;
@@ -31,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EntryServiceImpl implements EntryService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EntryServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EntryServiceImpl.class);
 
     private EntryDao entryDao;
 

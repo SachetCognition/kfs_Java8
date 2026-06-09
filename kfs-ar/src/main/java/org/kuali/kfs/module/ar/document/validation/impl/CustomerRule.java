@@ -24,7 +24,8 @@ import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.Customer;
@@ -45,7 +46,7 @@ import org.kuali.rice.krad.util.MessageMap;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerRule extends MaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(CustomerRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CustomerRule.class);
     protected Customer oldCustomer;
     protected Customer newCustomer;
     protected DateTimeService dateTimeService = SpringContext.getBean(DateTimeService.class);

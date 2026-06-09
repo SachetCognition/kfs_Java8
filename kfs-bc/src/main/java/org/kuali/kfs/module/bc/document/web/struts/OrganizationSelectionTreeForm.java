@@ -27,6 +27,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionPullup;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.service.PersistenceService;
  * ActionForm that supports the Organization Selection Tree page
  */
 public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationSelectionTreeForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationSelectionTreeForm.class);
 
     private BudgetConstructionOrganizationReports pointOfViewOrg;
     private List<BudgetConstructionPullup> selectionSubTreeOrgs;

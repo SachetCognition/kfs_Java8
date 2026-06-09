@@ -18,13 +18,14 @@
  */
 package org.kuali.kfs.module.tem.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TEM_PROFILE_LOOKUPABLE;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -39,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class TravelArrangerAction extends KualiTransactionalDocumentActionBase {
 
-    public static Logger LOG = Logger.getLogger(TravelArrangerAction.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelArrangerAction.class);
 
     @Override
     protected void createDocument(KualiDocumentFormBase kualiDocumentFormBase) throws WorkflowException {
@@ -119,6 +120,5 @@ public class TravelArrangerAction extends KualiTransactionalDocumentActionBase {
     protected TravelDocumentService getTravelDocumentService() {
         return SpringContext.getBean(TravelDocumentService.class);
     }
-
 
 }

@@ -23,8 +23,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.metadata.ClassDescriptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.dataaccess.FieldMetaData;
 import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbKualiEncryptDecryptFieldConversion;
 import org.kuali.rice.krad.bo.BusinessObject;
@@ -33,7 +34,7 @@ import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.MetaDataAccessException;
 
 public class FieldMetaDataImpl implements DatabaseMetaDataCallback, FieldMetaData {
-    private static final Logger LOG = Logger.getLogger(FieldMetaDataImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FieldMetaDataImpl.class);
     
     private Class businessObjectClass;
     private String propertyName;

@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
 import org.kuali.kfs.module.ec.EffortConstants;
@@ -40,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EffortCertificationDetailBuildServiceImpl implements EffortCertificationDetailBuildService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDetailBuildServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationDetailBuildServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.ec.service.EffortCertificationDetailBuildService#generateDetailBuild(java.lang.Integer,
@@ -118,7 +120,7 @@ public class EffortCertificationDetailBuildServiceImpl implements EffortCertific
             }
         }
         catch (NullPointerException npe) {
-            LOG.debug(npe);
+            LOG.debug(npe.getMessage(), npe);
         }
         return a21SubAccount;
     }

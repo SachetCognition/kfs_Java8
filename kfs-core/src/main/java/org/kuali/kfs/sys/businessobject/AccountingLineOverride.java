@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * codes. Instances break the code into components. Static methods help with the AccountingLine.
  */
 public class AccountingLineOverride {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingLineOverride.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingLineOverride.class);
 
     /**
      * These codes are the way the override is persisted in the AccountingLine.

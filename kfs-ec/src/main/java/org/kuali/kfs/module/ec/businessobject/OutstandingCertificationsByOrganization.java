@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.ObjectUtil;
@@ -38,7 +40,7 @@ import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 @COMPONENT(component = "OutstandingCertificationsByOrganization")
 public class OutstandingCertificationsByOrganization extends EffortCertificationDocument {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OutstandingCertificationsByOrganization.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(OutstandingCertificationsByOrganization.class);
 
     /**
      * gets a string representation of the document's chart and organization.
@@ -71,7 +73,6 @@ public class OutstandingCertificationsByOrganization extends EffortCertification
      */
     public String getNextApprovers() {
         String nextApprovers = "";
-
 
         List<ActionItem> actionList = KewApiServiceLocator.getActionListService().getAllActionItems(getDocumentHeader().getDocumentNumber());
         for (ActionItem actionItem : actionList) {

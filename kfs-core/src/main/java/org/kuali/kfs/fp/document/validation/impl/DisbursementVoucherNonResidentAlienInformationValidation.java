@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonResidentAlienTax;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPayeeDetail;
 import org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent;
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.MessageMap;
 
 public class DisbursementVoucherNonResidentAlienInformationValidation extends GenericValidation implements DisbursementVoucherConstants {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherNonResidentAlienInformationValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherNonResidentAlienInformationValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
     private String validationType;
@@ -360,9 +362,6 @@ public class DisbursementVoucherNonResidentAlienInformationValidation extends Ge
         }
         return false;
     }
-
-
-
 
     /**
      * determine whether the give user has permission to any edit mode defined in the given candidate edit modes

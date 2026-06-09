@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.CERTIFICATION_STATEMENT_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.DELINQUENT_TEST_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.EMPLOYEE_TEST_ATTRIBUTE;
@@ -59,7 +61,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -152,7 +153,7 @@ import com.lowagie.text.pdf.SimpleBookmark;
  */
 public abstract class TravelActionBase extends KualiAccountingDocumentActionBase {
 
-    public static Logger LOG = Logger.getLogger(TravelActionBase.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelActionBase.class);
 
     protected static final String[] methodToCallExclusionArray = { "recalculate", "calculate", "recalculateTripDetailTotal", "save", "route", "approve", "blanketApprove", "updatePerDiemExpenses" };
 
@@ -160,7 +161,6 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
     protected volatile static DocumentTypeService documentTypeService;
 
     protected static final String ACCOUNTING_LINES_TOTALS_VALIDATION_BEAN = "TravelDocument-accountingLineTotalsValidation";
-
 
     @Override
     protected DocumentService getDocumentService() {
@@ -220,7 +220,6 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
         }
         return documentTypeService;
     }
-
 
     /**
      * When the approver only wants the accounting lines to be changed but the trip information is acceptable, routes the document
@@ -666,7 +665,6 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
         }
         reqForm.getNewSourceLine().setAmount(this.getAccountingLineAmountToFillIn(reqForm));
 
-
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
@@ -919,7 +917,6 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
         }
     }
 
-
     protected KualiDecimal getAccountingLineAmountToFillIn(TravelFormBase travelReqForm) {
         KualiDecimal amount = KualiDecimal.ZERO;
 
@@ -949,8 +946,6 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
 
         return amount;
     }
-
-
 
     /**
      * This method calculates trip detail total for both TA and TR
@@ -1185,7 +1180,6 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * This method removes a group traveler from this collection

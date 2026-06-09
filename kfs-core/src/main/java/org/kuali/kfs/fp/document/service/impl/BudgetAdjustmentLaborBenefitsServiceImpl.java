@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.fp.businessobject.BudgetAdjustmentAccountingLine;
 import org.kuali.kfs.fp.document.BudgetAdjustmentDocument;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class BudgetAdjustmentLaborBenefitsServiceImpl implements BudgetAdjustmentLaborBenefitsService {
     private BusinessObjectService businessObjectService;
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetAdjustmentLaborBenefitsServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetAdjustmentLaborBenefitsServiceImpl.class);
 
     /**
      * This method generated labor benefit accounting lines to be added to the BudgetDocument provided.
@@ -145,7 +147,6 @@ public class BudgetAdjustmentLaborBenefitsServiceImpl implements BudgetAdjustmen
                         // if sysParam == Y then Labor Benefit Rate Category should be used in the search
                         if (sysParam.equalsIgnoreCase("Y")) {
 
-
                             if (StringUtils.isBlank(line.getSubAccount().getSubAccountNumber())) {
                                 laborBenefitsRateCategoryCode = lookupAccount.getLaborBenefitRateCategoryCode();
                             }
@@ -163,7 +164,6 @@ public class BudgetAdjustmentLaborBenefitsServiceImpl implements BudgetAdjustmen
                                     laborBenefitsRateCategoryCode = "";
                                 }
                             }
-
 
                         }
                     }
@@ -229,7 +229,6 @@ public class BudgetAdjustmentLaborBenefitsServiceImpl implements BudgetAdjustmen
         return fringeLines;
     }
 
-
     /**
      * @param budgetDocument
      * @return
@@ -255,7 +254,6 @@ public class BudgetAdjustmentLaborBenefitsServiceImpl implements BudgetAdjustmen
 
         return hasLaborObjectCodes;
     }
-
 
     /**
      * Formats the stored percentage to be used in multiplication. For example if the percentage is 18.66 it will return 0.1866. The
@@ -292,6 +290,5 @@ public class BudgetAdjustmentLaborBenefitsServiceImpl implements BudgetAdjustmen
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
-
 
 }

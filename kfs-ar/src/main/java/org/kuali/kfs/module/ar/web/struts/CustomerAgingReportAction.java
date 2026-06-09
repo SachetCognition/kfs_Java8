@@ -33,6 +33,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.lookup.CustomerAgingReportLookupableHelperServiceImpl;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -48,13 +50,12 @@ import org.kuali.rice.krad.lookup.CollectionIncomplete;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * This class handles Actions for lookup flow for CustomerAgingReport.
  */
 
 public class CustomerAgingReportAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerAgingReportAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerAgingReportAction.class);
 
     private static final String TOTALS_TABLE_KEY = "totalsTable";
 
@@ -94,7 +95,6 @@ public class CustomerAgingReportAction extends KualiAction {
             displayList = lookupable.performLookup(lookupForm, resultTable, true);
 
             Object[] resultTableAsArray = resultTable.toArray();
-
 
             CollectionIncomplete incompleteDisplayList = (CollectionIncomplete) displayList;
             Long totalSize = ((CollectionIncomplete) displayList).getActualSizeIfTruncated();
@@ -194,7 +194,6 @@ public class CustomerAgingReportAction extends KualiAction {
     public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         return mapping.findForward(KFSConstants.MAPPING_CANCEL);
     }
-
 
     /**
      * Clears the values of all the fields on the jsp.

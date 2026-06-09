@@ -20,6 +20,8 @@ package org.kuali.kfs.sys.document.workflow;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.datadictionary.FinancialSystemTransactionalDocumentEntry;
 import org.kuali.rice.kew.api.KewApiServiceLocator;
@@ -38,8 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class...
  */
 public class SensitiveDataSecurityAttribute implements DocumentSecurityAttribute {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SensitiveDataSecurityAttribute.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(SensitiveDataSecurityAttribute.class);
 
     @Override
     public boolean isAuthorizedForDocument(String principalId, org.kuali.rice.kew.api.document.Document document) {

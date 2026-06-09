@@ -25,6 +25,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.businessobject.ExpenseTransferAccountingLine;
 import org.kuali.kfs.module.ld.businessobject.LaborLedgerPendingEntry;
@@ -37,7 +39,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  * Struts Action class for the Benefit Expense Transfer Document.
  */
 public class BenefitExpenseTransferAction extends ExpenseTransferDocumentActionBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BenefitExpenseTransferAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BenefitExpenseTransferAction.class);
 
     /**
      * Gets the Business object class name

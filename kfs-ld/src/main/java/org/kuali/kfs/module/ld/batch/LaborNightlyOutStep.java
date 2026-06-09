@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ld.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.batch.service.LaborNightlyOutService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * Labor Batch Step.
  */
 public class LaborNightlyOutStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborNightlyOutStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborNightlyOutStep.class);
 
     private LaborNightlyOutService laborNightlyOutService;
 

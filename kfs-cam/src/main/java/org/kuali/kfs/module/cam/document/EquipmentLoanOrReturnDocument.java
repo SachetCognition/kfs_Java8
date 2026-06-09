@@ -25,6 +25,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.businessobject.Asset;
@@ -50,9 +52,8 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
-
 public class EquipmentLoanOrReturnDocument extends FinancialSystemTransactionalDocumentBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EquipmentLoanOrReturnDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(EquipmentLoanOrReturnDocument.class);
 
     protected String hiddenFieldForError;
     protected String documentNumber;

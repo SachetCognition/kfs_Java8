@@ -21,16 +21,17 @@ package org.kuali.kfs.sec.service.impl;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sec.SecConstants;
 import org.kuali.kfs.sec.service.AccessPermissionEvaluator;
 import org.kuali.rice.kim.api.identity.Person;
-
 
 /**
  * @see org.kuali.kfs.sec.service.AccessPermissionEvaluator
  */
 public class AccessPermissionEvaluatorImpl implements AccessPermissionEvaluator {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccessPermissionEvaluatorImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccessPermissionEvaluatorImpl.class);
 
     protected String constraintCode;
     protected String operatorCode;

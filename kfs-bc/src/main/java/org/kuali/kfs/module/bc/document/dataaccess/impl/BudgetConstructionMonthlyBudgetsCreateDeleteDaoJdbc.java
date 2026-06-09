@@ -20,14 +20,14 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionMonthlyBudgetsCreateDeleteDao;
 
-
 public class BudgetConstructionMonthlyBudgetsCreateDeleteDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionMonthlyBudgetsCreateDeleteDao {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionMonthlyBudgetsCreateDeleteDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionMonthlyBudgetsCreateDeleteDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> deleteAllSql = new ArrayList<SQLForStep>(2);
     protected static ArrayList<SQLForStep> spreadRevenueSql = new ArrayList<SQLForStep>(2);
@@ -223,7 +223,6 @@ public class BudgetConstructionMonthlyBudgetsCreateDeleteDaoJdbc extends BudgetC
         ArrayList<String> inSqlString = new ArrayList<String>();
         inSqlString.add(revenueINList);
 
-
         // delete what is there now for this document for the revenue object classes
         int returnCount = getSimpleJdbcTemplate().update(spreadRevenueSql.get(0).getSQL(inSqlString), documentNumber, fiscalYear, chartCode, accountNumber, subAccountNumber);
         LOG.warn(String.format("\n%s\n RevenueSpread rows deleted for (%s,%d,%s,%s,%s) = %d", getDbPlatform().toString(), documentNumber, fiscalYear, chartCode, accountNumber, subAccountNumber, returnCount));
@@ -233,7 +232,6 @@ public class BudgetConstructionMonthlyBudgetsCreateDeleteDaoJdbc extends BudgetC
         LOG.warn(String.format("\n%s\n RevenueSpread rows inserted for (%s,%d,%s,%s,%s) = %d", getDbPlatform().toString(), documentNumber, fiscalYear, chartCode, accountNumber, subAccountNumber, returnCount));
 
     }
-
 
     /**
      * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionMonthlyBudgetsCreateDeleteDao#BudgetConstructionMonthlyBudgetsSpreadExpenditure(java.lang.String,

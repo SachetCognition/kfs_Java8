@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.cg.service.ContractsAndGrantsBillingService;
 import org.kuali.kfs.sys.businessobject.inquiry.KfsInquirableImpl;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Used for wiring up {@link Agency} for inquiries.
  */
 public class AgencyInquirableImpl extends KfsInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AgencyInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AgencyInquirableImpl.class);
 
     /**
      * Don't process Contracts & Grants Billing (CGB) related sections if CGB is disabled.

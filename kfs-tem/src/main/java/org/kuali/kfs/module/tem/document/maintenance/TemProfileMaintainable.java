@@ -18,13 +18,14 @@
  */
 package org.kuali.kfs.module.tem.document.maintenance;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.EMP_TRAVELER_TYP_CD;
 import static org.kuali.kfs.module.tem.TemConstants.NONEMP_TRAVELER_TYP_CD;
 
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
@@ -61,7 +62,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class TemProfileMaintainable extends FinancialSystemMaintainable {
 
-    private static final Logger LOG = Logger.getLogger(TemProfileMaintainable.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TemProfileMaintainable.class);
     protected transient TemProfileAuthorizer authorizer;
 
 	/**
@@ -161,7 +162,6 @@ public class TemProfileMaintainable extends FinancialSystemMaintainable {
         return StringUtils.equals(principalId, currentUser.getPrincipalId());
     }
 
-
     /**
      * Populate the TemProfile details
      *
@@ -171,7 +171,6 @@ public class TemProfileMaintainable extends FinancialSystemMaintainable {
         SpringContext.getBean(TravelerService.class).populateTemProfile(profile);
         SpringContext.getBean(TemProfileService.class).updateACHAccountInfo(profile);
     }
-
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterEdit(org.kuali.rice.kns.document.MaintenanceDocument, java.util.Map)
@@ -345,8 +344,6 @@ public class TemProfileMaintainable extends FinancialSystemMaintainable {
         return newReference;
     }
 
-
-
 	/**
 	 *
 	 * This method trims the descriptionText to 40 characters.
@@ -382,7 +379,6 @@ public class TemProfileMaintainable extends FinancialSystemMaintainable {
         note = getNoteService().createNote(note, temProfile, kualiUser.getPrincipalId());
         return note;
 	}
-
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#getNewCollectionLine(java.lang.String)

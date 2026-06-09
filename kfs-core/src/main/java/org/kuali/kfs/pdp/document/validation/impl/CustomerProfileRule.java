@@ -23,7 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
@@ -43,7 +44,7 @@ import org.kuali.rice.location.api.postalcode.PostalCode;
 import org.kuali.rice.location.api.postalcode.PostalCodeService;
 
 public class CustomerProfileRule extends MaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(CustomerProfileRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CustomerProfileRule.class);
 
     /**
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#processCustomAddCollectionLineBusinessRules(org.kuali.rice.kns.document.MaintenanceDocument, java.lang.String, org.kuali.rice.krad.bo.PersistableBusinessObject)

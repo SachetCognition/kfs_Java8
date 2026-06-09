@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.EMP_TRAVELER_TYP_CD;
 import static org.kuali.kfs.module.tem.TemConstants.NONEMP_TRAVELER_TYP_CD;
 import static org.kuali.kfs.module.tem.TemConstants.TemProfileParameters.VALID_KIM_TYPE_AFFILIATION_BY_TRAVER_TYPE;
@@ -34,7 +36,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrTokenizer;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.coa.service.OrganizationService;
@@ -92,7 +93,7 @@ public class TravelerServiceImpl implements TravelerService {
     protected RoleService roleService;
     protected AccountsReceivableModuleService accountsReceivableModuleService;
 
-    protected static Logger LOG = Logger.getLogger(TravelerServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelerServiceImpl.class);
 
     /**
      * Creates a {@link TravelerDetail} from a {@link Person} instance
@@ -259,7 +260,6 @@ public class TravelerServiceImpl implements TravelerService {
 
         return newTravelerDetail;
     }
-
 
     /**
      *
@@ -625,7 +625,6 @@ public class TravelerServiceImpl implements TravelerService {
             profile.setDateOfBirth(dateOfBirth);
             profile.setGender(kimEntity.getBioDemographics().getGenderCode());
 
-
         }
         List<EntityCitizenship> citizenships = kimEntity.getCitizenships();
         if (ObjectUtils.isNotNull(citizenships) && citizenships.size() > 0) {
@@ -633,12 +632,7 @@ public class TravelerServiceImpl implements TravelerService {
         }
         }
 
-
-
-
     }
-
-
 
     /**
      * @see org.kuali.kfs.module.tem.service.TravelerService#isCustomerEmployee(org.kuali.kfs.integration.ar.AccountsReceivableCustomer)

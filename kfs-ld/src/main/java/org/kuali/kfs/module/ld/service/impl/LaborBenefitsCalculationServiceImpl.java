@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
@@ -51,7 +53,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborBenefitsCalculationServiceImpl implements LaborBenefitsCalculationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBenefitsCalculationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBenefitsCalculationServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private LaborPositionObjectBenefitService laborPositionObjectBenefitService;
@@ -359,8 +361,6 @@ public class LaborBenefitsCalculationServiceImpl implements LaborBenefitsCalcula
     public String getCostSharingSourceSubAccountNumber() {
         return costSharingSourceSubAccountNumber;
     }
-
-
 
     /**
      * Sets the costSharingSourceSubAccountNumber attribute value.

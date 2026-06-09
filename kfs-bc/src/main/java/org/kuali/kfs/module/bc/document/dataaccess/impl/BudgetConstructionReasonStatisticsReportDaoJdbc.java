@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionReasonStatisticsReportDao;
@@ -31,7 +33,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 
 public class BudgetConstructionReasonStatisticsReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionReasonStatisticsReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionReasonStatisticsReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionReasonStatisticsReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsReasonStatisticsTable = new ArrayList<SQLForStep>(10);
     protected static ArrayList<SQLForStep> reportReasonStatisticsWithThreshold = new ArrayList<SQLForStep>(3);
@@ -397,7 +399,6 @@ public class BudgetConstructionReasonStatisticsReportDaoJdbc extends BudgetConst
         // salaries and FTE by EMPLID and organization for people in the payroll in the base budget year
         getSimpleJdbcTemplate().update(updateReportsReasonStatisticsTable.get(8).getSQL(), idForSession, principalName, idForSession);
     }
-
 
     /**
      * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionReasonStatisticsReportDao#reportReasonStatisticsWithAThreshold(java.lang.String,

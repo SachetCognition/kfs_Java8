@@ -31,6 +31,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpParameterConstants;
 import org.kuali.kfs.pdp.service.PaymentGroupService;
@@ -45,7 +47,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class PaymentDetail extends TimestampedBusinessObjectBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentDetail.class);
     private static KualiDecimal zero = KualiDecimal.ZERO;
 
     private KualiInteger id;

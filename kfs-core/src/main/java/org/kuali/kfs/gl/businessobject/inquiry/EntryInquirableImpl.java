@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.kns.lookup.HtmlData;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.bo.BusinessObject;
  * KualiInquirableImpl class, so it covers both the default implementation and customized implemetnation.
  */
 public class EntryInquirableImpl extends AbstractGeneralLedgerInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EntryInquirableImpl.class);  // this class, which does *nothing* has a Log?  Funny.
+    private static final Logger LOG = LoggerFactory.getLogger(EntryInquirableImpl.class);  // this class, which does *nothing* has a Log?  Funny.
 
     /**
      * Since there are no user defined attributes, returns null

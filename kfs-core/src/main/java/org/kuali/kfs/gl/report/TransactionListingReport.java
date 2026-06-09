@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.report;
 
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.service.ReportWriterService;
@@ -31,7 +33,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  * one.
  */
 public class TransactionListingReport {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TransactionListingReport.class);
+    private static Logger LOG = LoggerFactory.getLogger(TransactionListingReport.class);
 
     protected int transactionCount;
     protected KualiDecimal debitTotal;

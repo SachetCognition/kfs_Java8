@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsFundManager;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.membership.MemberType;
@@ -39,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class FundsManagerDerivedRoleTypeServiceImpl extends DerivedRoleTypeServiceBase {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(FundsManagerDerivedRoleTypeServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(FundsManagerDerivedRoleTypeServiceImpl.class);
     protected KualiModuleService kualiModuleService;
 
     @Override

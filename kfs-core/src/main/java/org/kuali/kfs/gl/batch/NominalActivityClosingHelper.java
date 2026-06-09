@@ -24,7 +24,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ObjectTypeService;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.ObjectHelper;
@@ -54,7 +55,7 @@ public class NominalActivityClosingHelper {
     private ParameterService parameterService;
     private ConfigurationService configurationService;
     private FlexibleOffsetAccountService flexibleOffsetService;
-    private Logger LOG = Logger.getLogger(NominalActivityClosingHelper.class);
+    private Logger LOG = LoggerFactory.getLogger(NominalActivityClosingHelper.class);
     private int nonFatalErrorCount;
     private List<String> varCharts;
 

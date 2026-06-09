@@ -21,6 +21,8 @@ package org.kuali.kfs.sec.document.validation.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sec.SecKeyConstants;
 import org.kuali.kfs.sec.businessobject.SecurityDefinition;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -29,12 +31,11 @@ import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 
-
 /**
  * Implements business rules checks on the SecurityDefinition maintenance document
  */
 public class SecurityDefinitionRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SecurityDefinitionRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(SecurityDefinitionRule.class);
 
     protected SecurityDefinition oldSecurityDefinition;
     protected SecurityDefinition newSecurityDefinition;
@@ -125,6 +126,5 @@ public class SecurityDefinitionRule extends MaintenanceDocumentRuleBase {
 
         return isValid;
     }
-
 
 }

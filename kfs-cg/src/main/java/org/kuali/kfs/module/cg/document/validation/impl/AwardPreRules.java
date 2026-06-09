@@ -21,6 +21,8 @@ package org.kuali.kfs.module.cg.document.validation.impl;
 import java.sql.Date;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.document.validation.impl.MaintenancePreRulesBase;
 import org.kuali.kfs.module.cg.businessobject.Award;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AwardPreRules extends MaintenancePreRulesBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AwardPreRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AwardPreRules.class);
 
     protected ConfigurationService configService;
     protected DataDictionaryService dataDictionaryService;

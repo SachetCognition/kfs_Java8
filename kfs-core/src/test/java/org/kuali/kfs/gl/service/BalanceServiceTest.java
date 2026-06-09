@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -34,7 +36,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 @ConfigureContext
 public class BalanceServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalanceServiceTest.class);
     private final static String ACCOUNT_NUMBER = "6812735";
     private final static String CHART = "UA";
     private final static String SUB_ACCT_NUMBER = "sub";
@@ -56,7 +58,6 @@ public class BalanceServiceTest extends KualiTestBase {
         chart.setChartOfAccountsCode(CHART);
         account.setChartOfAccounts(chart);
     }
-
 
     private UnitTestSqlDao unitTestSqlDao;
 
@@ -145,7 +146,6 @@ public class BalanceServiceTest extends KualiTestBase {
         assertFalse("should ignore 9899 balance", SpringContext.getBean(BalanceService.class).hasAssetLiabilityFundBalanceBalances(account));
         insertBalance("LI", "AC", "9900", new KualiDecimal(1.5), new KualiDecimal(2.5));
         assertTrue("expect nonzero balance for non-9899 balance", SpringContext.getBean(BalanceService.class).hasAssetLiabilityFundBalanceBalances(account));
-
 
     }
 

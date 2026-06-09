@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.pdp.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.batch.service.InactivatePayeeAchAccountsService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  * Payee active status is obtained from the associated Person or Vendor, depending on the payee ID type.
  */
 public class InactivatePayeeAchAccountsStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(InactivatePayeeAchAccountsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(InactivatePayeeAchAccountsStep.class);
 
     private InactivatePayeeAchAccountsService inactivatePayeeAchAccountsService;
     

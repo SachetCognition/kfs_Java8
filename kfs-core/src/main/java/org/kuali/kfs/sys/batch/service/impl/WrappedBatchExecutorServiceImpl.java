@@ -20,13 +20,14 @@ package org.kuali.kfs.sys.batch.service.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService;
 import org.kuali.kfs.sys.batch.service.WrappingBatchService;
 import org.springframework.transaction.annotation.Transactional;
 
 public class WrappedBatchExecutorServiceImpl implements WrappedBatchExecutorService {
-    private static final Logger LOG = Logger.getLogger(WrappedBatchExecutorServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WrappedBatchExecutorServiceImpl.class);
 
     @Transactional
     public boolean execute(List<WrappingBatchService> wrappingBatchServices, CustomBatchExecutor customBatchExecutor) {

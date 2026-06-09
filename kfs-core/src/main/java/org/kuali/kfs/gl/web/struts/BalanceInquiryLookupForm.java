@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.web.struts;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry;
@@ -44,7 +46,7 @@ import org.kuali.rice.kns.web.struts.form.MultipleValueLookupForm;
 public class BalanceInquiryLookupForm extends MultipleValueLookupForm {
     private static final long serialVersionUID = 1L;
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceInquiryForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceInquiryForm.class);
 
     private Lookupable pendingEntryLookupable;
     private LookupResultsSelectable selectable;
@@ -75,14 +77,12 @@ public class BalanceInquiryLookupForm extends MultipleValueLookupForm {
         setPendingEntryLookupable(localPendingEntryLookupable);
     }
 
-
     /**
      * @param pendingEntryLookupable
      */
     public void setPendingEntryLookupable(Lookupable pendingEntryLookupable) {
         this.pendingEntryLookupable = pendingEntryLookupable;
     }
-
 
     /**
      * @return Returns the pendingEntryLookupable.

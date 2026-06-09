@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.batch.service.ProcurementCardLoadTransactionsService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.kfs.sys.batch.BatchInputFileType;
@@ -39,7 +41,7 @@ import org.kuali.kfs.sys.service.ReportWriterService;
  * within a single transaction. Step can be restarted as needed.
  */
 public class ProcurementCardLoadStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardLoadStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcurementCardLoadStep.class);
 
     protected ProcurementCardLoadTransactionsService procurementCardLoadTransactionsService;
     protected BatchInputFileService batchInputFileService;

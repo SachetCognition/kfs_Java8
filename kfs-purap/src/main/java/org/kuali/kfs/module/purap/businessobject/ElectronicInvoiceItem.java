@@ -32,14 +32,15 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.document.ElectronicInvoiceRejectDocument;
 import org.kuali.kfs.module.purap.util.PurApDateFormatUtils;
 import org.kuali.kfs.module.purap.util.cxml.CxmlExtrinsic;
 
-
 public class ElectronicInvoiceItem {
-  private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceItem.class);
+  private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceItem.class);
   
   // this class is equiped to hold InvoiceDetailItem values as well as a few rudimentary
   // InvoiceDetailServiceItem values

@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class BudgetConstructionDocument extends FinancialSystemTransactionalDocumentBase {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionDocument.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionDocument.class);
 
     protected Integer universityFiscalYear;
     protected String chartOfAccountsCode;
@@ -125,7 +127,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
      * BudgetConstructionAction
      */
     public void initiateDocument() {
-
 
         Map fieldValues = new HashMap();
         // fieldValues.put("UNIV_FISCAL_YR", new Integer(2008));
@@ -228,7 +229,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
         setPreviousUniversityFiscalYear(universityFiscalYear - 1);
     }
 
-
     /**
      * Gets the chartOfAccountsCode attribute.
      *
@@ -246,7 +246,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     /**
      * Gets the accountNumber attribute.
@@ -274,7 +273,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
         }
     }
 
-
     /**
      * Gets the subAccountNumber attribute.
      *
@@ -292,7 +290,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
     public void setSubAccountNumber(String subAccountNumber) {
         this.subAccountNumber = subAccountNumber;
     }
-
 
     /**
      * Gets the organizationLevelCode attribute.
@@ -312,7 +309,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
         this.organizationLevelCode = organizationLevelCode;
     }
 
-
     /**
      * Gets the organizationLevelChartOfAccountsCode attribute.
      *
@@ -330,7 +326,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
     public void setOrganizationLevelChartOfAccountsCode(String organizationLevelChartOfAccountsCode) {
         this.organizationLevelChartOfAccountsCode = organizationLevelChartOfAccountsCode;
     }
-
 
     /**
      * Gets the organizationLevelOrganizationCode attribute.
@@ -350,7 +345,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
         this.organizationLevelOrganizationCode = organizationLevelOrganizationCode;
     }
 
-
     /**
      * Gets the budgetLockUserIdentifier attribute.
      *
@@ -369,7 +363,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
         this.budgetLockUserIdentifier = budgetLockUserIdentifier;
     }
 
-
     /**
      * Gets the budgetTransactionLockUserIdentifier attribute.
      *
@@ -387,7 +380,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
     public void setBudgetTransactionLockUserIdentifier(String budgetTransactionLockUserIdentifier) {
         this.budgetTransactionLockUserIdentifier = budgetTransactionLockUserIdentifier;
     }
-
 
     /**
      * Gets the chartOfAccounts attribute.
@@ -852,7 +844,6 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
         }
         LOG.info("Status is: " + getFinancialSystemDocumentHeader().getFinancialDocumentStatusCode());
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()

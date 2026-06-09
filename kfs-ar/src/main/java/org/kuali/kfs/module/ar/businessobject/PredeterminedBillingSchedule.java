@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivablePredeterminedBillingSchedule;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -32,14 +34,12 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
-
 /**
  * Created a Predetermined Billing Schedule maintenance Document parameter
  */
 public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase implements AccountsReceivablePredeterminedBillingSchedule {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PredeterminedBillingSchedule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PredeterminedBillingSchedule.class);
 
     private static final String PREDETERMINED_BILLING_SCHEDULE_INQUIRY_TITLE_PROPERTY = "message.inquiry.predetermined.billing.schedule.title";
     private Long proposalNumber;
@@ -54,7 +54,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
         bills = new ArrayList<Bill>();
     }
 
-
     /**
      * Constructs an Milestone Schedule with parameter Award
      *
@@ -63,7 +62,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
     public PredeterminedBillingSchedule(ContractsAndGrantsBillingAward award) {
         this();
     }
-
 
     /**
      * Gets the proposalNumber attribute.
@@ -74,7 +72,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
     public Long getProposalNumber() {
         return proposalNumber;
     }
-
 
     /**
      * Sets the proposalNumber attribute value.
@@ -127,7 +124,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
 
     }
 
-
     /**
      * Sets the predeterminedBillingScheduleInquiryTitle attribute value.
      *
@@ -136,7 +132,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
     public void setPredeterminedBillingScheduleInquiryTitle(String predeterminedBillingScheduleInquiryTitle) {
         this.predeterminedBillingScheduleInquiryTitle = predeterminedBillingScheduleInquiryTitle;
     }
-
 
     /**
      * Gets the bills attribute.
@@ -147,7 +142,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
         return bills;
     }
 
-
     /**
      * Sets the bills attribute value.
      *
@@ -156,7 +150,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
     public void setBills(List<Bill> bills) {
         this.bills = bills;
     }
-
 
     /**
      * Gets the award attribute.
@@ -169,7 +162,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
         return award;
     }
 
-
     /**
      * Sets the award attribute value.
      *
@@ -178,7 +170,6 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
     public void setAward(ContractsAndGrantsBillingAward award) {
         this.award = award;
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
@@ -190,6 +181,5 @@ public class PredeterminedBillingSchedule extends PersistableBusinessObjectBase 
         m.put("totalAmountRemaining", getTotalAmountRemaining().toString());
         return m;
     }
-
 
 }

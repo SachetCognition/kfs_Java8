@@ -28,6 +28,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorQuote;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
 import org.kuali.kfs.module.purap.document.authorization.DocumentInitiationException;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Struts Action for printing Purap documents outside of a document action
  */
 public class PrintAction extends KualiAction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PrintAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(PrintAction.class);
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

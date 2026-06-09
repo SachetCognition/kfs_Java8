@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.TemProfileAccount;
 import org.kuali.kfs.module.tem.service.TemProfileService;
 import org.kuali.kfs.module.tem.service.TravelService;
@@ -36,7 +37,7 @@ import org.kuali.rice.krad.util.KRADConstants;
 @SuppressWarnings("deprecation")
 public class TemProfileAccountLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    public static Logger LOG = Logger.getLogger(TemProfileAccountLookupableHelperServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TemProfileAccountLookupableHelperServiceImpl.class);
 
     private TravelerService travelerService;
     private TravelService travelService;
@@ -90,7 +91,6 @@ public class TemProfileAccountLookupableHelperServiceImpl extends KualiLookupabl
     public void setTravelerService(TravelerService travelerService) {
         this.travelerService = travelerService;
     }
-
 
     /**
      * Sets the personService attribute value.

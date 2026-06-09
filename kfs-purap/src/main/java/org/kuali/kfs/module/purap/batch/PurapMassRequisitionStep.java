@@ -27,6 +27,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.directwebremoting.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.CapitalAssetLocation;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.POCostSources;
@@ -69,7 +71,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class PurapMassRequisitionStep extends AbstractStep implements TestingStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapMassRequisitionStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurapMassRequisitionStep.class);
 
     private DocumentService documentService;
     private RequisitionService requisitionService;
@@ -128,7 +130,6 @@ public class PurapMassRequisitionStep extends AbstractStep implements TestingSte
                 }
                 Thread.sleep(5000);
             }
-
 
             // TODO leaving CAMS docs commented out until problem is fixed
             // for (int i = 0; i < NUM_DOCS_TO_CREATE; i++) {

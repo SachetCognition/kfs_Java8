@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.integration.ld.LaborLedgerPendingEntryForSearching;
@@ -67,7 +69,7 @@ import org.kuali.rice.krad.workflow.attribute.DataDictionarySearchableAttribute;
 
 //RICE20 This class needs to be fixed to support pre-rice2.0 features
 public class FinancialSystemSearchableAttribute extends DataDictionarySearchableAttribute {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinancialSystemSearchableAttribute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FinancialSystemSearchableAttribute.class);
 
     protected static final String DISPLAY_TYPE_SEARCH_ATTRIBUTE_LABEL = "Search Result Type";
     protected static final String WORKFLOW_DISPLAY_TYPE_LABEL = "Workflow Data";
@@ -299,7 +301,6 @@ public class FinancialSystemSearchableAttribute extends DataDictionarySearchable
         return searchAttrValues;
     }
 
-
     /**
      * Pulls the default searchable attributes - chart code, account number, and account organization code - from a given accounting line and populates
      * the searchable attribute values in the given list
@@ -372,7 +373,6 @@ public class FinancialSystemSearchableAttribute extends DataDictionarySearchable
 
         return new Row(Collections.singletonList(searchField));
     }
-
 
     // RICE20: fixes to allow document search to function until Rice 2.0.1
 //    @Override

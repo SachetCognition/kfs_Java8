@@ -26,6 +26,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.kns.lookup.LookupUtils;
 import org.kuali.rice.kns.web.struts.form.KualiTableRenderFormMetadata;
@@ -36,7 +38,7 @@ import org.kuali.rice.kns.web.struts.form.LookupForm;
  * 
  */
 public class BalanceInquiryLookupResults extends LookupForm implements LookupResultsSelectable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceInquiryLookupResults.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceInquiryLookupResults.class);
 
     private KualiTableRenderFormMetadata tableMetadata;
 

@@ -20,6 +20,8 @@ package org.kuali.kfs.coa.document.authorization;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -28,7 +30,7 @@ import org.kuali.rice.kns.document.MaintenanceDocument;
 
 public class AccountDocumentPresentationController extends FinancialSystemMaintenanceDocumentPresentationControllerBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDocumentPresentationController.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountDocumentPresentationController.class);
 
     @Override
     public Set<String> getConditionallyReadOnlyPropertyNames(MaintenanceDocument document) {

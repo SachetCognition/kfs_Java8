@@ -21,7 +21,8 @@ package org.kuali.kfs.coa.document;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryRateDetail;
 import org.kuali.kfs.coa.service.AccountService;
@@ -34,7 +35,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class IndirectCostRecoveryRateMaintainableImpl extends FinancialSystemMaintainable {
-    private static final Logger LOG = Logger.getLogger(IndirectCostRecoveryRateMaintainableImpl.class);  
+    private static final Logger LOG = LoggerFactory.getLogger(IndirectCostRecoveryRateMaintainableImpl.class);  
 
     private Integer indirectCostRecoveryRateNextEntryNumber;
 

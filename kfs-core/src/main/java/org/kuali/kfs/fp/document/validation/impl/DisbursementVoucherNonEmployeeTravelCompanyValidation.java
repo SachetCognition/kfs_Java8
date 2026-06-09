@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document.validation.impl;
 import java.text.MessageFormat;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeExpense;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeTravel;
 import org.kuali.kfs.fp.businessobject.TravelCompanyCode;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.MessageMap;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class DisbursementVoucherNonEmployeeTravelCompanyValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherNonEmployeeTravelCompanyValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherNonEmployeeTravelCompanyValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
 

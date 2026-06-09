@@ -28,6 +28,8 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Action form for Effort Certification Document.
  */
 public class EffortCertificationForm extends FinancialSystemTransactionalDocumentFormBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(EffortCertificationForm.class);
 
     protected EffortCertificationDetail newDetailLine;
 

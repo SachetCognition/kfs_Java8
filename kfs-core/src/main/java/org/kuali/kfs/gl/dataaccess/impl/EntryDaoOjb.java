@@ -25,6 +25,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.gl.dataaccess.EntryDao;
@@ -39,7 +41,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * An OJB implementation of EntryDao
  */
 public class EntryDaoOjb extends PlatformAwareDaoBaseOjb implements EntryDao, LedgerEntryBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EntryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(EntryDaoOjb.class);
 
     private final static String UNIVERISITY_FISCAL_YEAR = "universityFiscalYear";
     private final static String CHART_OF_ACCOUNTS_CODE = "chartOfAccountsCode";
@@ -53,7 +55,6 @@ public class EntryDaoOjb extends PlatformAwareDaoBaseOjb implements EntryDao, Le
     private final static String FINANCIAL_DOCUMENT_TYPE_CODE = "financialDocumentTypeCode";
     private final static String FINANCIAL_SYSTEM_ORIGINATION_CODE = "financialSystemOriginationCode";
     private final static String MAX_CONSTANT = "max(documentNumber)";
-
 
     /**
      * Constructs a EntryDaoOjb instance

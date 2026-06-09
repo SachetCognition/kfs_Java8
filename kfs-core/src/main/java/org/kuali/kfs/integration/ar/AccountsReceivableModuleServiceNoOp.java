@@ -23,7 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAgency;
 import org.kuali.kfs.sys.businessobject.ElectronicPaymentClaim;
@@ -35,7 +36,7 @@ import org.kuali.rice.krad.document.Document;
 
 public class AccountsReceivableModuleServiceNoOp implements AccountsReceivableModuleService {
 
-    private Logger LOG = Logger.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
     @Override
     public ElectronicPaymentClaimingDocumentGenerationStrategy getAccountsReceivablePaymentClaimingStrategy() {

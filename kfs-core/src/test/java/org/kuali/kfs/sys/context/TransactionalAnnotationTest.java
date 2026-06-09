@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.suite.AnnotationTestSuite;
 import org.kuali.kfs.sys.suite.PreCommitSuite;
@@ -43,7 +45,7 @@ import org.springframework.beans.factory.BeanIsAbstractException;
  */
 public class TransactionalAnnotationTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TransactionalAnnotationTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(TransactionalAnnotationTest.class);
 
     Map<Class<? extends Object>, Boolean> seenClasses = new HashMap<Class<? extends Object>, Boolean>();
     List<String> excludedClasses = new ArrayList<String>();
@@ -162,7 +164,6 @@ public class TransactionalAnnotationTest extends KualiTestBase {
             if (beanClass.getAnnotation(org.kuali.kfs.sys.service.NonTransactional.class) != null){
                 hasClassAnnotation =  true;
             }
-
 
             boolean hasMethodAnnotation;
 

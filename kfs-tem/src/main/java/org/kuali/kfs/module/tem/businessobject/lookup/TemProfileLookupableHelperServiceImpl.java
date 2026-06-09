@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants.TemProfileProperties;
@@ -64,7 +65,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 
 public class TemProfileLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    public static Logger LOG = Logger.getLogger(TemProfileLookupableHelperServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TemProfileLookupableHelperServiceImpl.class);
 
     private TemRoleService temRoleService;
     private TravelerService travelerService;
@@ -182,7 +183,6 @@ public class TemProfileLookupableHelperServiceImpl extends KualiLookupableHelper
         }
         return htmlDataList;
     }
-
 
     /**
      * This method searches through fieldValues for a not null value. Returns true if a not null value is found. Use this to
@@ -371,7 +371,6 @@ public class TemProfileLookupableHelperServiceImpl extends KualiLookupableHelper
     public void setTravelerService(TravelerService travelerService) {
         this.travelerService = travelerService;
     }
-
 
     /**
      * Sets the personService attribute value.

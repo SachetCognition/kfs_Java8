@@ -29,8 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
@@ -143,7 +143,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     private FunctionControlCode functionControlCode;
 
     /*  turn on the logger for the persistence broker */
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(GenesisDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GenesisDaoOjb.class);
 
     /*
      *   version number for new rows
@@ -1462,7 +1462,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     //  two test routines to display the field values in the two business objects
     //  produced from the GL read.  these are primarily here for initial testing
     protected void info() {
-        if (!LOG.isEnabledFor(Level.INFO)) {
+        if (!LOG.isInfoEnabled()) {
             return;
         }
         ;
@@ -1493,7 +1493,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     }
 
     protected void debug() {
-        if (!LOG.isEnabledFor(Level.DEBUG)) {
+        if (!LOG.isDebugEnabled()) {
             return;
         }
         ;

@@ -33,6 +33,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.AccountingCycleCachingService;
@@ -53,7 +55,7 @@ import org.kuali.rice.krad.service.PersistenceService;
  */
 @ConfigureContext
 public class OriginEntryTestBase extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryTestBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginEntryTestBase.class);
 
     protected ConfigurableDateService dateTimeService;
     protected PersistenceService persistenceService;

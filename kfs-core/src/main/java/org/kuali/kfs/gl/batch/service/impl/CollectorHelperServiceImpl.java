@@ -36,7 +36,8 @@ import java.util.Set;
 import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.ObjectType;
@@ -79,7 +80,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.gl.batch.service.CollectorService
  */
 public class CollectorHelperServiceImpl implements CollectorHelperService {
-    private static Logger LOG = Logger.getLogger(CollectorHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorHelperServiceImpl.class);
 
     private static final String CURRENCY_SYMBOL = "$";
 

@@ -25,10 +25,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
@@ -45,7 +46,7 @@ import org.kuali.rice.core.api.util.type.KualiInteger;
 public class GeneralLedgerBudgetLoadDaoOjb extends BudgetConstructionBatchHelperDaoOjb implements GeneralLedgerBudgetLoadDao {
 
     /* turn on the logger for the persistence broker */
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerBudgetLoadDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(GeneralLedgerBudgetLoadDaoOjb.class);
 
     /*
      * see GeneralLedgerBudgetLoadDao.LoadGeneralLedgerFromBudget
@@ -335,7 +336,6 @@ public class GeneralLedgerBudgetLoadDaoOjb extends BudgetConstructionBatchHelper
             }
         }
     }
-
 
     /*******************************************************************************************************************************
      * * This section build the list of accounts that SHOULD NOT be loaded to the general ledger * (This may seem strange--why build

@@ -22,7 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -44,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.springframework.util.AutoPopulatingList;
 
 public class OrganizationOptionsRule extends MaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationOptionsRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationOptionsRule.class);
 
     protected OrganizationOptions newOrganizationOptions;
     protected OrganizationOptions oldOrganizationOptions;

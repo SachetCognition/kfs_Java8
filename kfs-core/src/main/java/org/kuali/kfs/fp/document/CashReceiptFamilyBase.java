@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAccountingLines;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Abstract class which defines behavior common to CashReceipt-like documents.
  */
 abstract public class CashReceiptFamilyBase extends CapitalAccountingLinesDocumentBase implements CapitalAssetEditable {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashReceiptFamilyBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CashReceiptFamilyBase.class);
     protected String campusLocationCode; // TODO Needs to be an actual object - also need to clarify this
     protected Date depositDate;
 
@@ -96,7 +98,6 @@ abstract public class CashReceiptFamilyBase extends CapitalAccountingLinesDocume
     public void setDepositDate(Date depositDate) {
         this.depositDate = depositDate;
     }
-
 
     /**
      * Total for a Cash Receipt according to the spec should be the sum of the amounts on accounting lines belonging to object codes

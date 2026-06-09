@@ -25,7 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.CapitalAssetSystem;
 import org.kuali.kfs.integration.purap.ItemCapitalAsset;
 import org.kuali.kfs.module.cab.CabConstants;
@@ -55,12 +56,11 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * This class provides default implementations of {@link PurApLineService}
  */
 public class PurApInfoServiceImpl implements PurApInfoService {
-    private static final Logger LOG = Logger.getLogger(PurApInfoServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurApInfoServiceImpl.class);
     private BusinessObjectService businessObjectService;
 
     protected static final String PURCHASE_ORDER_CURRENT_INDICATOR = "purchaseOrderCurrentIndicator";
@@ -113,7 +113,6 @@ public class PurApInfoServiceImpl implements PurApInfoService {
         purApLineForm.setRequisitionIdentifier(purchaseOrderDocument.getRequisitionIdentifier());
 
     }
-
 
     /**
      * Set CAMS transaction type code the user entered in PurAp
@@ -325,7 +324,6 @@ public class PurApInfoServiceImpl implements PurApInfoService {
         return matchingItems;
     }
 
-
     /**
      * Set CAB line item information from PurAp PaymentRequestItem or CreditMemoItem.
      * 
@@ -384,7 +382,6 @@ public class PurApInfoServiceImpl implements PurApInfoService {
         }
     }
 
-
     /**
      * Retreives a purchase order item for a given CreditMemoItem by inspecting the item type to see if its above the line or below
      * the line and returns the appropriate type.
@@ -430,7 +427,6 @@ public class PurApInfoServiceImpl implements PurApInfoService {
             throw new PurError("Credit Memo Object in Purchase Order item line number " + item.getItemLineNumber() + "or itemType " + item.getItemTypeCode() + " is null");
         }
     }
-
 
     public List<Long> retrieveValidAssetNumberForLocking(Integer poId, String capitalAssetSystemTypeCode, PurApItem purApItem) {
         List<Long> capitalAssetNumbers = new ArrayList<Long>();
@@ -509,7 +505,6 @@ public class PurApInfoServiceImpl implements PurApInfoService {
         return businessObjectService;
     }
 
-
     /**
      * Sets the businessObjectService attribute value.
      * 
@@ -519,7 +514,6 @@ public class PurApInfoServiceImpl implements PurApInfoService {
         this.businessObjectService = businessObjectService;
     }
 
-
     /**
      * Gets the purchaseOrderService attribute.
      * 
@@ -528,6 +522,5 @@ public class PurApInfoServiceImpl implements PurApInfoService {
     public PurchaseOrderService getPurchaseOrderService() {
         return SpringContext.getBean(PurchaseOrderService.class);
     }
-
 
 }

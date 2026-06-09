@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationReversionService;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.service.PersistenceStructureService;
  * 2. A list of the appropriate Object Reversion Details 3. A list of Organizations to apply the Organization Reversion to
  */
 public class OrganizationReversionGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobal.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobal.class);
     protected String documentNumber;
 
     protected Integer universityFiscalYear;

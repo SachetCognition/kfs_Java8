@@ -18,13 +18,15 @@
  */
 package org.kuali.kfs.coa.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.kuali.kfs.coa.identity.OrgReviewRole;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -44,8 +46,8 @@ public class OrgReviewRoleServiceImplTest extends OrgReviewRoleTestBase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Logger.getLogger(OrgReviewRoleServiceImpl.class).setLevel(Level.DEBUG);
-        Logger.getLogger("log4j.logger.p6spy").setLevel(Level.INFO);
+        Configurator.setLevel(OrgReviewRoleServiceImpl.class.getName(), Level.DEBUG);
+        Configurator.setLevel("log4j.logger.p6spy", Level.INFO);
     }
 
     public void testSaveOrgReviewRoleToKim_OrgReview_New() throws Exception {

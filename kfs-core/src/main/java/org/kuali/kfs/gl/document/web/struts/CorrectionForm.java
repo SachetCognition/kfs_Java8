@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.gl.document.GeneralLedgerCorrectionProcessDocument;
 import org.kuali.kfs.gl.document.service.CorrectionDocumentService;
@@ -38,17 +40,15 @@ import org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase;
 import org.kuali.rice.kns.web.struts.form.KualiTableRenderFormMetadata;
 import org.kuali.rice.kns.web.ui.Column;
 
-
 /**
  * This class represents the action form for the Correction Document
  */
 public class CorrectionForm extends KualiDocumentFormBase implements CorrectionDocumentEntryMetadata {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CorrectionForm.class);
 
     protected String docTitle;
     protected String htmlFormAction;
     protected String documentType;
-
 
     protected String chooseSystem;
     /**
@@ -105,7 +105,6 @@ public class CorrectionForm extends KualiDocumentFormBase implements CorrectionD
     protected String entryTransactionDate;
     protected String entryTransactionLedgerEntrySequenceNumber;
     protected String entryTransactionLedgerEntryAmount;
-
 
     /**
      * Used to identify the search results on the form

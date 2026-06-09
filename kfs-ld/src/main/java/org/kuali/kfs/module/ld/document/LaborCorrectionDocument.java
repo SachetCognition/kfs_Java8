@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ld.document;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.document.GeneralLedgerCorrectionProcessDocument;
 import org.kuali.kfs.gl.service.OriginEntryGroupService;
@@ -38,7 +40,7 @@ import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
  * labor Document class for the Labor Ledger Correction Process.
  */
 public class LaborCorrectionDocument extends GeneralLedgerCorrectionProcessDocument {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborCorrectionDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LaborCorrectionDocument.class);
 
     /**
      * Constructs a LaborCorrectionDocument.java.

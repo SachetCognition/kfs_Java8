@@ -20,7 +20,8 @@ package org.kuali.kfs.sys.businessobject.defaultvalue;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.MessageOfTheDay;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.service.BusinessObjectService;
@@ -38,7 +39,7 @@ public class MessageOfTheDayFinder implements ValueFinder {
                 return collection.iterator().next().getFinancialSystemMessageOfTheDayText();
             }
         } catch ( Exception ex ) {
-            Logger.getLogger(getClass()).error("Unable to retrieve the message of the day",ex);
+            LoggerFactory.getLogger(getClass()).error("Unable to retrieve the message of the day",ex);
         }
         return "unable to retrieve message of the day";
     }

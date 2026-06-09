@@ -37,6 +37,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.WrapDynaClass;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * This class provides a set of facilities that can be used to manipulate objects, for example, object population
  */
 public class ObjectUtil {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectUtil.class);
+    private static Logger LOG = LoggerFactory.getLogger(ObjectUtil.class);
 
     /**
      * create an object of the specified type
@@ -60,11 +62,11 @@ public class ObjectUtil {
             object = clazz.newInstance();
         }
         catch (InstantiationException ie) {
-            LOG.error(ie);
+            LOG.error(ie.getMessage(), ie);
             throw new RuntimeException(ie);
         }
         catch (IllegalAccessException iae) {
-            LOG.error(iae);
+            LOG.error(iae.getMessage(), iae);
             throw new RuntimeException(iae);
         }
 
@@ -91,7 +93,7 @@ public class ObjectUtil {
                     PropertyUtils.setProperty(targetObject, propertyName, propertyValue);
                 }
                 catch (Exception e) {
-                    LOG.debug(e);
+                    LOG.debug(e.getMessage(), e);
                 }
             }
         }
@@ -123,7 +125,7 @@ public class ObjectUtil {
                     }
                 }
                 catch (Exception e) {
-                    LOG.debug(e);
+                    LOG.debug(e.getMessage(), e);
                 }
             }
             indexOfArray++;
@@ -136,7 +138,7 @@ public class ObjectUtil {
             simpleTypeName = PropertyUtils.getPropertyType(targetObject, propertyName).getSimpleName();
         }
         catch (Exception e) {
-            LOG.debug(e);
+            LOG.debug(e.getMessage(), e);
         }
         
         return simpleTypeName;
@@ -354,7 +356,7 @@ public class ObjectUtil {
                 }
             }
             catch (Exception e) {
-                LOG.info(e);
+                LOG.info(e.getMessage(), e);
                 return false;
             }
         }
@@ -381,7 +383,7 @@ public class ObjectUtil {
                 result = prime * result + ((propertyValue == null) ? 0 : propertyValue.hashCode());
             }
             catch (Exception e) {
-                LOG.info(e);
+                LOG.info(e.getMessage(), e);
             }
         }
         return result;
@@ -411,7 +413,7 @@ public class ObjectUtil {
                     }
                 }
                 catch (Exception e) {
-                    LOG.info(e);
+                    LOG.info(e.getMessage(), e);
                 }
             }
         }
@@ -433,7 +435,7 @@ public class ObjectUtil {
                     propertyAsString.append(PropertyUtils.getProperty(object, field));
                 }
                 catch (Exception e) {
-                    LOG.error(e);
+                    LOG.error(e.getMessage(), e);
                 }
             }
         }
@@ -562,7 +564,7 @@ public class ObjectUtil {
                     }
                 }
                 catch (Exception e) {
-                    LOG.info(e);
+                    LOG.info(e.getMessage(), e);
                     return false;
                 }
             }
@@ -590,7 +592,7 @@ public class ObjectUtil {
                 nestedAttributes.put(currentClass, propertyName);
             }
             catch (Exception e) {
-                LOG.info(e);
+                LOG.info(e.getMessage(), e);
                 break;
             }
         }

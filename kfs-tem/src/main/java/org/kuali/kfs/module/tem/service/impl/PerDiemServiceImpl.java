@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.LODGING_OBJECT_CODE;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.PER_DIEM_OBJECT_CODE;
 
@@ -31,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemConstants.PerDiemParameter;
@@ -79,7 +80,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PerDiemServiceImpl extends ExpenseServiceBase implements PerDiemService, TemExpenseService {
 
-    private static Logger LOG = Logger.getLogger(PerDiemServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PerDiemServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected ParameterService parameterService;
@@ -92,7 +93,6 @@ public class PerDiemServiceImpl extends ExpenseServiceBase implements PerDiemSer
     protected TravelExpenseService travelExpenseService;
 
     List<PerDiem> persistedPerDiems;
-
 
     /**
      * @see org.kuali.kfs.module.tem.service.PerDiemService#breakDownMealsIncidental(java.util.List)
@@ -129,7 +129,6 @@ public class PerDiemServiceImpl extends ExpenseServiceBase implements PerDiemSer
 
         return (List<T>) this.getBusinessObjectService().findMatching(PerDiem.class, fieldValues);
     }
-
 
     /**
      * @see org.kuali.kfs.module.tem.service.PerDiemService#updateTripType(java.util.List)
@@ -179,7 +178,6 @@ public class PerDiemServiceImpl extends ExpenseServiceBase implements PerDiemSer
         return (List<PerDiem>)  perDiemDao.findSimilarPerDiems(perDiem);
     }
 
-
     /**
      * check whether the given per diem exists in the database
      *
@@ -191,7 +189,6 @@ public class PerDiemServiceImpl extends ExpenseServiceBase implements PerDiemSer
         if (ObjectUtils.isNull(persistedPerDiems)) {
             persistedPerDiems = (List<PerDiem>)businessObjectService.findAll(PerDiem.class);
         }
-
 
         boolean retval = persistedPerDiems.contains(perDiem);
 
@@ -731,7 +728,6 @@ public class PerDiemServiceImpl extends ExpenseServiceBase implements PerDiemSer
         seasonBeginCal.set(Calendar.YEAR, year);
         return seasonBeginCal;
     }
-
 
     @Override
     public void processExpense(TravelDocument travelDocument, GeneralLedgerPendingEntrySequenceHelper sequenceHelper) {

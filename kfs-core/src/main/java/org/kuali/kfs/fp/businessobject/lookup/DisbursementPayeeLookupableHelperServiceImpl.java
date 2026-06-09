@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementPayee;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.BeanPropertyComparator;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class DisbursementPayeeLookupableHelperServiceImpl extends AbstractPayeeLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementPayeeLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementPayeeLookupableHelperServiceImpl.class);
     private static final int NAME_REQUIRED_FILLED_WITH_WILDCARD = 4;
 
     private AccountsReceivableModuleService accountsReceivableModuleService;
@@ -211,7 +213,6 @@ public class DisbursementPayeeLookupableHelperServiceImpl extends AbstractPayeeL
            }
        }
    }
-
 
     /**
      * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#performLookup(org.kuali.rice.kns.web.struts.form.LookupForm,

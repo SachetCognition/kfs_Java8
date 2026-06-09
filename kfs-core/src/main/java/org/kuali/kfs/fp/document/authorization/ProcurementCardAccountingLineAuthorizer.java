@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document.authorization;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.ProcurementCardTargetAccountingLine;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSConstants.RouteLevelNames;
@@ -30,7 +32,7 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.util.KRADConstants;
 
 public class ProcurementCardAccountingLineAuthorizer extends CapitalAccountingLinesAuthorizerBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardAccountingLineAuthorizer.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcurementCardAccountingLineAuthorizer.class);
 
     /**
      * @see org.kuali.kfs.sys.document.authorization.AccountingLineAuthorizerBase#getKimHappyPropertyNameForField(java.lang.String)

@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.EffortConstants;
 import org.kuali.kfs.module.ec.EffortKeyConstants;
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
@@ -47,7 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EffortCertificationCreateServiceImpl implements EffortCertificationCreateService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationCreateServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationCreateServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private EffortCertificationDocumentService effortCertificationDocumentService;
@@ -72,7 +74,7 @@ public class EffortCertificationCreateServiceImpl implements EffortCertification
 
         String errorMessage = this.validateReportDefintion(fieldValues);
         if (StringUtils.isNotEmpty(errorMessage)) {
-            LOG.fatal(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
 

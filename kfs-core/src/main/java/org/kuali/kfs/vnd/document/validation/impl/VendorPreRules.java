@@ -19,6 +19,8 @@
 package org.kuali.kfs.vnd.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.document.validation.impl.MaintenancePreRulesBase;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class VendorPreRules extends MaintenancePreRulesBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorPreRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(VendorPreRules.class);
 
     protected VendorDetail newVendorDetail;
     protected String personId;
@@ -155,7 +157,6 @@ public class VendorPreRules extends MaintenancePreRulesBase {
         String result = str.replaceAll(VendorConstants.NAME_DELIM, KFSConstants.BLANK_SPACE);
         return result;
     }
-
 
     /**
      * Displays a review if indicated by the vendor type and the associated text from that type

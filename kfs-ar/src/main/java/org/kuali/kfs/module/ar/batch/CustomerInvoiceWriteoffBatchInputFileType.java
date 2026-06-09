@@ -21,12 +21,14 @@ package org.kuali.kfs.module.ar.batch;
 import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.sys.batch.XmlBatchInputFileTypeBase;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
 public class CustomerInvoiceWriteoffBatchInputFileType extends XmlBatchInputFileTypeBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceWriteoffBatchInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceWriteoffBatchInputFileType.class);
 
     private static final String FILE_NAME_PREFIX = "customer_invoice_writeoff";
     private static final String FILE_NAME_DELIM = "_";

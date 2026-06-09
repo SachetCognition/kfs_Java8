@@ -20,10 +20,11 @@ package org.kuali.kfs.module.purap.document.dataaccess.impl;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.businessobject.ReceivingAddress;
 import org.kuali.kfs.module.purap.document.dataaccess.ReceivingAddressDao;
@@ -36,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ReceivingAddressDaoOjb extends PlatformAwareDaoBaseOjb implements ReceivingAddressDao {
-    private static Logger LOG = Logger.getLogger(ReceivingAddressDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReceivingAddressDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.ReceivingAddressDao#findActiveByChartOrg(java.lang.String,java.lang.String)

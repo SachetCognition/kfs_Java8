@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cam.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.bomiddle;
 
 import java.text.DateFormat;
@@ -28,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
 import org.kuali.kfs.module.cam.businessobject.AssetPayment;
 import org.kuali.kfs.module.cam.businessobject.AssetPaymentAssetDetail;
@@ -53,7 +54,7 @@ import org.kuali.rice.krad.util.KRADPropertyConstants;
 
 @ConfigureContext(session = bomiddle)
 public class AssetPaymentServiceTest extends KualiTestBase {
-    private static Logger LOG = Logger.getLogger(AssetPaymentServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetPaymentServiceTest.class);
 
     private DateTimeService dateTimeService;
     private UniversityDateService universityDateService;
@@ -124,7 +125,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
         List<AssetPaymentAssetDetail> assetPaymentAssetDetails = document.getAssetPaymentAssetDetail();
         List<AssetPaymentDetail> assetPaymentDetails = document.getSourceAccountingLines();
 
-
         for(AssetPaymentDetail assetPaymentDetail:assetPaymentDetails){
             detailRows++;
             totalDocument = totalDocument.add(assetPaymentDetail.getAmount());
@@ -145,7 +145,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
 
             LOG.info("***Asset:"+assetPaymentAssetDetail.getCapitalAssetNumber().toString()+" Previous Cost:"+assetPaymentAssetDetail.getAsset().getTotalCostAmount());
         }
-
 
         LOG.info("***Saving Document:"+document.getDocumentHeader().getDocumentNumber());
 
@@ -169,7 +168,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
         KualiDecimal calculatedAssetNewCost;
         KualiDecimal assetOldCost;
 
-
         // Getting the number of records in the asset payment
         key = new HashMap();
         key.put(KRADPropertyConstants.DOCUMENT_NUMBER, document.getDocumentNumber());
@@ -177,7 +175,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
 
         // Checking that all rows were saved
         assertEquals(assetPayments.size(), (assetRows*detailRows));
-
 
         //Comparing records by record
         for (int x = 0; x < document.getAssetPaymentAssetDetail().size(); x++) {
@@ -209,7 +206,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
                 //                LOG.info("***Calculated Amount:"+amount);
                 //                LOG.info("***Calculated new cost:"+calculatedAssetNewCost);
                 //                LOG.info("*****************************************************************************");
-
 
                 // Checking fields were saved in the asset payment table
                 AssetPayment assetPayment = assetPayments.get(i);
@@ -247,7 +243,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
         return documentHeader;
     }
 
-
     public void testExtractPostedDatePeriod() throws Exception {
         Calendar currentDate = Calendar.getInstance();
 
@@ -265,8 +260,6 @@ public class AssetPaymentServiceTest extends KualiTestBase {
 
         assetPaymentDetail.setExpenditureFinancialDocumentPostedDate(jsqlD);
         assertEquals(assetPaymentService.extractPostedDatePeriod(assetPaymentDetail),true);
-
-
 
         currentDate.setTime(dateFormat.parse(testYear+"-01-01"));
         jsqlD = new java.sql.Date(currentDate.getTime().getTime());

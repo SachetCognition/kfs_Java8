@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.document.validation.impl;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCKeyConstants;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
 import org.kuali.kfs.module.bc.BCConstants.SynchronizationCheckType;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * the rule implementation for the actions of salary setting component
  */
 public class SalarySettingRules implements SalarySettingRule {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalarySettingRules.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SalarySettingRules.class);
 
     protected BudgetConstructionRuleHelperService budgetConstructionRuleHelperService = SpringContext.getBean(BudgetConstructionRuleHelperService.class);
     protected SalarySettingRuleHelperService salarySettingRuleHelperService = SpringContext.getBean(SalarySettingRuleHelperService.class);

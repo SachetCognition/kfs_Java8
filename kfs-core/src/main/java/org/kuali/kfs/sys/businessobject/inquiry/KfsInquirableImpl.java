@@ -20,6 +20,8 @@ package org.kuali.kfs.sys.businessobject.inquiry;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.kns.inquiry.KualiInquirableImpl;
 import org.kuali.rice.kns.lookup.HtmlData;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Base KFS Inquirable Implementation
  */
 public class KfsInquirableImpl extends KualiInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KfsInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KfsInquirableImpl.class);
     /**
      * Helper method to build an inquiry url for a result field. Special implementation to not build an inquiry link if the value is
      * all dashes.

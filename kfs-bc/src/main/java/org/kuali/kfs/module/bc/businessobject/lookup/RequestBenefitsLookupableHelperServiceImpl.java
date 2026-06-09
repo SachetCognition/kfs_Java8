@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.integration.ld.LaborLedgerBenefitsCalculation;
 import org.kuali.kfs.integration.ld.LaborLedgerPositionObjectBenefit;
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Implements custom search for showing single request line benefits impact
  */
 public class RequestBenefitsLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequestBenefitsLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(RequestBenefitsLookupableHelperServiceImpl.class);
     private LaborModuleService laborModuleService;
     private BusinessObjectService businessObjectService;
 

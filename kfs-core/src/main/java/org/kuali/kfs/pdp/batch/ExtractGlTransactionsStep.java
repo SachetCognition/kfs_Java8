@@ -18,12 +18,14 @@
  */
 package org.kuali.kfs.pdp.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.batch.service.ExtractTransactionsService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
 
 public class ExtractGlTransactionsStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExtractGlTransactionsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExtractGlTransactionsStep.class);
 
     private ExtractTransactionsService extractGlTransactionService;
 

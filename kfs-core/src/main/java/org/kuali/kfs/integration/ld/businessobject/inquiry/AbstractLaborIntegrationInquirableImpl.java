@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.integration.ld.businessobject.inquiry;
 
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -49,7 +50,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  */
 public abstract class AbstractLaborIntegrationInquirableImpl extends KfsInquirableImpl {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractLaborIntegrationInquirableImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AbstractLaborIntegrationInquirableImpl.class);
 
     public AbstractLaborIntegrationInquirableImpl() {
         super();
@@ -255,6 +256,5 @@ public abstract class AbstractLaborIntegrationInquirableImpl extends KfsInquirab
      * @return the FinancialBalanceTypeCode keyValue
      */
     protected abstract String getFinancialBalanceTypeCodeKeyValue();
-
 
 }

@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.businessobject.AssetStatus;
 import org.kuali.rice.kns.lookup.KualiLookupableHelperServiceImpl;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * This class overrids the base getActionUrls method
  */
 public class AssetStatusLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetStatusLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetStatusLookupableHelperServiceImpl.class);
 
     @Override
     protected List<? extends BusinessObject> getSearchResultsHelper(Map<String, String> fieldValues, boolean unbounded) {        

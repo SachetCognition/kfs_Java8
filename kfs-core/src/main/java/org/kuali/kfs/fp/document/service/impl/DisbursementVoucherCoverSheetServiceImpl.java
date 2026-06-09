@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document.service.impl;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.PaymentReasonCode;
 import org.kuali.kfs.fp.document.DisbursementVoucherConstants;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
@@ -45,7 +47,7 @@ import com.lowagie.text.pdf.PdfStamper;
  * This is the default implementation of the DisbursementVoucherCoverSheetService interface.
  */
 public class DisbursementVoucherCoverSheetServiceImpl implements DisbursementVoucherCoverSheetService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherCoverSheetServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DisbursementVoucherCoverSheetServiceImpl.class);
 
     protected ParameterService parameterService;
     protected BusinessObjectService businessObjectService;

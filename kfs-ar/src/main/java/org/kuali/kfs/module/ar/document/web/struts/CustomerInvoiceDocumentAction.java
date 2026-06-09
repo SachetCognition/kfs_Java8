@@ -30,6 +30,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.CustomerAddress;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 
 public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentActionBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceDocumentAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocumentAction.class);
 
     /**
      * Overriding to make it easier to distinguish discount lines and lines that are associated to discounts
@@ -155,7 +157,6 @@ public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentAction
         return forward;
     }
 
-
     /**
      * This method checks if the user wants to copy a document that contains a discount line.  If yes, this method returns null. If no,
      * this method returns the "basic" forward.
@@ -217,7 +218,6 @@ public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentAction
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * This method is the action for recalculating the amount added line assuming that the unit price or quantity has changed
      *
@@ -252,7 +252,6 @@ public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentAction
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * This method is used for inserting a discount line based on a selected source line.
@@ -289,7 +288,6 @@ public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentAction
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * Removed salesTax checking. Need to verify if this check has be moved out later of the KualiAccountingDocumentActionBase
@@ -329,7 +327,6 @@ public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentAction
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * Overrides method to delete accounting line. If line to be deleted has a corresponding discount line, the corresponding
@@ -452,7 +449,6 @@ public class CustomerInvoiceDocumentAction extends KualiAccountingDocumentAction
             customerInvoiceDocument.setCustomerShipToAddressOnInvoice(null);
             customerInvoiceDocument.setCustomerShipToAddressIdentifier(null);
         }
-
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }

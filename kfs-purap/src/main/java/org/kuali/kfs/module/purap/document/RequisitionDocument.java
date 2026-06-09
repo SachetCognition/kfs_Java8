@@ -30,6 +30,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.RequisitionStatuses;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -87,7 +89,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Document class for the Requisition.
  */
 public class RequisitionDocument extends PurchasingDocumentBase implements Copyable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequisitionDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RequisitionDocument.class);
 
     protected String requisitionOrganizationReference1Text;
     protected String requisitionOrganizationReference2Text;
@@ -103,7 +105,6 @@ public class RequisitionDocument extends PurchasingDocumentBase implements Copya
     // non-persistent property used for controlling validation for accounting lines when doc is request for blanket approve.
     protected boolean isBlanketApproveRequest = false;
     private static final int ALLOW_REQS_UNLIMITED_COPY_DAYS=9999;
-
 
     /**
      * Default constructor.
@@ -277,7 +278,6 @@ public class RequisitionDocument extends PurchasingDocumentBase implements Copya
         // Load Requistion Statuses
         RequisitionStatusValuesFinder requisitionStatusValuesFinder = new RequisitionStatusValuesFinder();
         reqStatusList = requisitionStatusValuesFinder.getKeyValues();
-
 
         SpringContext.getBean(PurapService.class).addBelowLineItems(this);
         this.refreshNonUpdateableReferences();

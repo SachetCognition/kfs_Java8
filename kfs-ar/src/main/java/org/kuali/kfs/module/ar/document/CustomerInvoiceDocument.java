@@ -27,6 +27,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
@@ -73,7 +75,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerInvoiceDocument extends AccountingDocumentBase implements AmountTotaling, Copyable, Correctable, Comparable<CustomerInvoiceDocument>, AccountsReceivableCustomerInvoice {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocument.class);
 
     protected static final String HAS_RECCURENCE_NODE = "HasReccurence";
     protected static final String BATCH_GENERATED_NODE = "BatchGenerated";
@@ -170,7 +172,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the invoiceHeaderText attribute.
      *
@@ -188,7 +189,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setInvoiceHeaderText(String invoiceHeaderText) {
         this.invoiceHeaderText = invoiceHeaderText;
     }
-
 
     /**
      * Gets the invoiceAttentionLineText attribute.
@@ -209,7 +209,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.invoiceAttentionLineText = invoiceAttentionLineText;
     }
 
-
     /**
      * Gets the invoiceDueDate attribute.
      *
@@ -229,7 +228,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setInvoiceDueDate(Date invoiceDueDate) {
         this.invoiceDueDate = invoiceDueDate;
     }
-
 
     /**
      * Gets the billingDate attribute.
@@ -269,7 +267,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.billingDate = billingDate;
     }
 
-
     /**
      * Gets the invoiceTermsText attribute.
      *
@@ -289,7 +286,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setInvoiceTermsText(String invoiceTermsText) {
         this.invoiceTermsText = invoiceTermsText;
     }
-
 
     /**
      * Gets the organizationInvoiceNumber attribute.
@@ -365,7 +361,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerPurchaseOrderDate = customerPurchaseOrderDate;
     }
 
-
     /**
      * Gets the billByChartOfAccountCode attribute.
      *
@@ -424,7 +419,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerShipToAddressIdentifier = customerShipToAddressIdentifier;
     }
 
-
     /**
      * Gets the customerBillToAddressIdentifier attribute.
      *
@@ -444,7 +438,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerBillToAddressIdentifier = customerBillToAddressIdentifier;
     }
 
-
     /**
      * Gets the customerSpecialProcessingCode attribute.
      *
@@ -463,7 +456,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerSpecialProcessingCode = customerSpecialProcessingCode;
     }
 
-
     /**
      * Gets the customerRecordAttachmentIndicator attribute.
      *
@@ -481,7 +473,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setCustomerRecordAttachmentIndicator(boolean customerRecordAttachmentIndicator) {
         this.customerRecordAttachmentIndicator = customerRecordAttachmentIndicator;
     }
-
 
     /**
      * Gets the openInvoiceIndicator attribute.
@@ -719,10 +710,8 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
             addSalesTaxGLPEs(sequenceHelper, glpeSourceDetail);
         }
 
-
         return true;
     }
-
 
     /**
      * This method creates the receivable GLPEs for each invoice detail line.
@@ -1091,7 +1080,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         }
     }
 
-
     /**
      * This method...
      */
@@ -1176,7 +1164,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         }
         return null;
     }
-
 
     /**
      * This method is called on CustomerInvoiceDocumentAction.execute() to set isDiscount to true if it truly is a discount line
@@ -1713,7 +1700,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
 //    public void setQuickApply(boolean quickApply) {
 //        this.quickApply = quickApply;
 //    }
-
 
     /**
      * Answers true when invoice recurrence details are provided by the user

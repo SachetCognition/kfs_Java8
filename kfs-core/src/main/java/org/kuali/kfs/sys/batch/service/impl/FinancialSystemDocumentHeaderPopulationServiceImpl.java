@@ -27,7 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.dataaccess.FinancialSystemDocumentHeaderPopulationDao;
 import org.kuali.kfs.sys.batch.service.FinancialSystemDocumentHeaderPopulationService;
@@ -47,7 +48,7 @@ import org.springframework.transaction.annotation.Transactional;
  * The base implementation of the FinancialSystemDocumentHeaderPopulationService
  */
 public class FinancialSystemDocumentHeaderPopulationServiceImpl implements FinancialSystemDocumentHeaderPopulationService {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinancialSystemDocumentHeaderPopulationServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(FinancialSystemDocumentHeaderPopulationServiceImpl.class);
 
     protected WorkflowDocumentService workflowDocumentService;
     protected BusinessObjectService businessObjectService;

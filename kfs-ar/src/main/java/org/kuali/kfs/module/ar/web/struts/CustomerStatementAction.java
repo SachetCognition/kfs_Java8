@@ -33,6 +33,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.document.service.CustomerInvoiceDocumentService;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class handles Actions for lookup flow
  */
 public class CustomerStatementAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerStatementAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerStatementAction.class);
 
     public ActionForward start(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         return mapping.findForward(KFSConstants.MAPPING_BASIC);

@@ -24,6 +24,8 @@ package org.kuali.kfs.gl.batch.service.impl;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.AccountingCycleCachingService;
 import org.kuali.kfs.gl.batch.service.PostTransaction;
@@ -38,7 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PostReversal implements PostTransaction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PostReversal.class);
+    private static Logger LOG = LoggerFactory.getLogger(PostReversal.class);
 
     private AccountingCycleCachingService accountingCycleCachingService;
     private PersistenceStructureService persistenceStructureService;

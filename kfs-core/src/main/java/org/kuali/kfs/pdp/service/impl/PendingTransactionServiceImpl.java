@@ -28,6 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
@@ -67,7 +69,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PendingTransactionServiceImpl implements PendingTransactionService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PendingTransactionServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PendingTransactionServiceImpl.class);
 
     protected static String FDOC_TYP_CD_PROCESS_ACH = "ACHD";
     protected static String FDOC_TYP_CD_PROCESS_CHECK = "CHKD";
@@ -183,7 +185,6 @@ public class PendingTransactionServiceImpl implements PendingTransactionService 
             //Changes for Research Participant Upload
             String trnDesc = StringUtils.EMPTY;
             CustomerProfile customerProfile = paymentGroup.getBatch().getCustomerProfile();
-
 
             if (researchParticipantPaymentValidationService.isResearchParticipantPayment(customerProfile)) {
                 BusinessObjectEntry businessObjectEntry = dataDictionaryService.getDataDictionary().getBusinessObjectEntry(PaymentDetail.class.getName());
@@ -405,7 +406,6 @@ public class PendingTransactionServiceImpl implements PendingTransactionService 
     public void setResearchParticipantPaymentValidationService(ResearchParticipantPaymentValidationService researchParticipantPaymentValidationService) {
         this.researchParticipantPaymentValidationService = researchParticipantPaymentValidationService;
     }
-
 
     /**
      * Sets the pdp util service

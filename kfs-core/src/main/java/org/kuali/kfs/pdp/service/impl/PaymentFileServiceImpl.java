@@ -32,6 +32,8 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.businessobject.Batch;
 import org.kuali.kfs.pdp.businessobject.CustomerProfile;
 import org.kuali.kfs.pdp.businessobject.LoadPaymentStatus;
@@ -62,7 +64,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PaymentFileServiceImpl extends InitiateDirectoryBase implements PaymentFileService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentFileServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentFileServiceImpl.class);
 
     private String outgoingDirectoryName;
 
@@ -349,7 +351,6 @@ public class PaymentFileServiceImpl extends InitiateDirectoryBase implements Pay
 
         return batch;
     }
-
 
     /**
      * @returns the file name from the file full path.

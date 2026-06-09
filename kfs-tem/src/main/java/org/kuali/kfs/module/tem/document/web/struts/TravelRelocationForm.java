@@ -26,7 +26,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.businessobject.AccountingDistribution;
 import org.kuali.kfs.module.tem.document.TravelRelocationDocument;
@@ -46,7 +47,7 @@ import org.kuali.rice.kns.web.ui.ExtraButton;
  */
 public class TravelRelocationForm extends TravelFormBase implements TravelRelocationMvcWrapperBean {
 
-    public static Logger LOG = Logger.getLogger(TravelRelocationForm.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelRelocationForm.class);
 
     private List<Serializable> history;
     private List<AccountingDistribution> distribution;
@@ -128,7 +129,6 @@ public class TravelRelocationForm extends TravelFormBase implements TravelReloca
 
         return extraButtons;
     }
-
 
     @Override
     public boolean isDefaultOpenPaymentInfoTab() {

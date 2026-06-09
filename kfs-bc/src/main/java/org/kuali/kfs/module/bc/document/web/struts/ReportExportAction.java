@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BudgetConstructionReportMode;
 import org.kuali.kfs.module.bc.document.service.ReportExportService;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Struts action class for report dumps.
  */
 public class ReportExportAction extends BudgetConstructionImportExportAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportExportAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReportExportAction.class);
 
     /**
      * Sets up params for export screen based on the dump mode.

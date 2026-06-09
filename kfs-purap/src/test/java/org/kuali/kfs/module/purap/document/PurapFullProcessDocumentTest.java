@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.appleton;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.ferland;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.service.impl.DocumentServiceImpl;
  */
 @ConfigureContext(session = khuntley)
 public class PurapFullProcessDocumentTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DocumentServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
     private static final String SUB_ACCOUNT_REVIEW = "SubAccount";
     private static final String ACCOUNT_REVIEW = "Account";
@@ -114,8 +116,6 @@ public class PurapFullProcessDocumentTest extends KualiTestBase {
         LOG.info("Amend PO document: " + amendDoc.getDocumentNumber());
         LOG.info("Close PO document: " + closeDoc.getDocumentNumber());
     }
-
-
 
     @ConfigureContext(session = appleton, shouldCommitTransactions=true)
     public final PaymentRequestDocument routePREQDocumentToFinal(PurchaseOrderDocument POdoc) throws Exception {

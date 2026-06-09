@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.NightlyOutService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * A step to clear pending ledger entries.
  */
 public class ClearPendingStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ClearPendingStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ClearPendingStep.class);
     private NightlyOutService nightlyOutService;
 
     /**

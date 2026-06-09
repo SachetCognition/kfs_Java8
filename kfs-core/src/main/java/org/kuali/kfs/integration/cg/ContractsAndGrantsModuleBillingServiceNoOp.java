@@ -22,12 +22,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Do nothing implementation of the ContractsAndGrantsModuleBillingService interface
  */
 public class ContractsAndGrantsModuleBillingServiceNoOp implements ContractsAndGrantsModuleBillingService {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsAndGrantsModuleBillingServiceNoOp.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsAndGrantsModuleBillingServiceNoOp.class);
 
     /**
      * @see org.kuali.kfs.integration.cg.ContractsAndGrantsModuleRetrieveService#getSearchResultsHelper(java.util.Map, boolean)

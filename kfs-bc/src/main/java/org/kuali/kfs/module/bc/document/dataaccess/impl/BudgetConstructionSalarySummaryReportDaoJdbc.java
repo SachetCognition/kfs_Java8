@@ -22,6 +22,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionSalarySummaryReportDao;
@@ -32,7 +34,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 
 public class BudgetConstructionSalarySummaryReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionSalarySummaryReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionSalarySummaryReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionSalarySummaryReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsSalarySummaryThreshold = new ArrayList<SQLForStep>(7);
     protected static ArrayList<SQLForStep> salarySummaryAboveThreshold = new ArrayList<SQLForStep>(1);
@@ -213,7 +215,6 @@ public class BudgetConstructionSalarySummaryReportDaoJdbc extends BudgetConstruc
 
         salarySummaryBelowThreshold.add(new SQLForStep(sqlText));
         sqlText.delete(0, sqlText.length());
-
 
         /* get EMPLIDs with at least one reason rec from the list of select reasons */
         sqlText.append("INSERT INTO LD_BCN_BUILD_SALSUMM05_MT\n");
@@ -413,7 +414,6 @@ public class BudgetConstructionSalarySummaryReportDaoJdbc extends BudgetConstruc
         // clear out the common work table for this session
         clearCommonWorkTable(idForSession);
     }
-
 
     /**
      * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionSalarySummaryReportDao#reasonSummaryReports(java.lang.String,

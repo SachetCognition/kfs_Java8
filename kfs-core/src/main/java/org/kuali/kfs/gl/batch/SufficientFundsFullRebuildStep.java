@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.SufficientFundsFullRebuildService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.kfs.sys.batch.TestingStep;
@@ -30,7 +32,7 @@ import org.kuali.kfs.sys.batch.TestingStep;
  * However, if that information has not been built, this job will generate that information.
  */
 public class SufficientFundsFullRebuildStep extends AbstractStep implements TestingStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SufficientFundsFullRebuildStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(SufficientFundsFullRebuildStep.class);
     private SufficientFundsFullRebuildService sufficientFundsFullRebuildService;
 
     /**

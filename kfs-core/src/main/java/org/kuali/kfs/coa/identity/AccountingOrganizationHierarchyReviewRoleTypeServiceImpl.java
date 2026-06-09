@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.identity.KfsKimAttributes;
 import org.kuali.rice.core.api.uif.RemotableAttributeError;
 import org.kuali.rice.core.api.uif.RemotableAttributeError.Builder;
@@ -35,7 +36,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADUtils;
 
 public class AccountingOrganizationHierarchyReviewRoleTypeServiceImpl extends OrganizationHierarchyReviewRoleTypeServiceImpl {
-    private static final Logger LOG = Logger.getLogger(AccountingOrganizationHierarchyReviewRoleTypeServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingOrganizationHierarchyReviewRoleTypeServiceImpl.class);
     /**
      * Create role type service - org.kuali.kfs.coa.identity.AccountingOrganizationHierarchyReviewRoleTypeService for
      * KFS-COA/"Organization: Always Hierarchical, Document Type & Accounting" Attributes: Chart Code (required) Organization Code
@@ -131,7 +132,6 @@ public class AccountingOrganizationHierarchyReviewRoleTypeServiceImpl extends Or
         Builder toBuilder = RemotableAttributeError.Builder.create(KfsKimAttributes.TO_AMOUNT);
 
         if(attributeErrors!=null){
-
 
             for(String err: attributeErrors){
                 toBuilder.getErrors().add(err);

@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.batch.service;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.coa.service.OrganizationReversionService;
@@ -33,7 +35,7 @@ import org.kuali.kfs.sys.context.TestUtils;
  */
 @ConfigureContext
 public class OrganizationReversionCategoryTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionCategoryTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationReversionCategoryTest.class);
 
     private OrganizationReversionService organizationReversionService;
     private Map<String, OrganizationReversionCategoryLogic> categories;

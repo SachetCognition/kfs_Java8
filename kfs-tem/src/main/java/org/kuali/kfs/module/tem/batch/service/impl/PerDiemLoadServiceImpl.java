@@ -37,6 +37,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemConstants.PerDiemParameter;
 import org.kuali.kfs.module.tem.TemKeyConstants;
@@ -68,7 +70,7 @@ import org.springframework.transaction.annotation.Transactional;
  * the TXT and XML files in ZIP file, which includes the file format definition as well.
  */
 public class PerDiemLoadServiceImpl implements PerDiemLoadService {
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PerDiemLoadServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(PerDiemLoadServiceImpl.class);
 
     public final static String REPORT_FILE_NAME_PATTERN = "{0}/{1}_{2}{3}";
 
@@ -274,7 +276,6 @@ public class PerDiemLoadServiceImpl implements PerDiemLoadService {
 
         String seasonBeginMonthAndDay = perDiem.getSeasonBeginDateAsString();
         perDiem.setSeasonBeginMonthAndDay(seasonBeginMonthAndDay);
-
 
     }
 
@@ -530,7 +531,7 @@ public class PerDiemLoadServiceImpl implements PerDiemLoadService {
         catch (FileNotFoundException e) {
             String errorMessage = "Cannot find the output file: " + reportFileName;
 
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage, e);
         }
     }

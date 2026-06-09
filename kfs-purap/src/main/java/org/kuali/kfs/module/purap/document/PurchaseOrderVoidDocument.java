@@ -19,6 +19,8 @@
 
 package org.kuali.kfs.module.purap.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Purchase Order Void Document
  */
 public class PurchaseOrderVoidDocument extends PurchaseOrderDocument {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderVoidDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchaseOrderVoidDocument.class);
 
     /**
      * General Ledger pending entries are not created on save for this document. They are created when the document has been finally

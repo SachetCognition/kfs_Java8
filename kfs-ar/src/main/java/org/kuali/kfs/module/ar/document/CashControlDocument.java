@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.gl.service.EntryService;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -66,7 +67,7 @@ import org.kuali.rice.krad.service.DocumentService;
  */
 public class CashControlDocument extends GeneralLedgerPostingDocumentBase implements AmountTotaling, GeneralLedgerPendingEntrySource, ElectronicPaymentClaiming, GeneralLedgerPostingDocument {
     protected static final String NODE_ASSOCIATED_WITH_ELECTRONIC_PAYMENT = "AssociatedWithElectronicPayment";
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(CashControlDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CashControlDocument.class);
 
     protected String referenceFinancialDocumentNumber;
     protected Long proposalNumber;// When LOC Type = Award
@@ -138,7 +139,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the referenceFinancialDocumentNumber attribute.
      *
@@ -156,7 +156,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
     public void setReferenceFinancialDocumentNumber(String referenceFinancialDocumentNumber) {
         this.referenceFinancialDocumentNumber = referenceFinancialDocumentNumber;
     }
-
 
     /**
      * Gets the universityFiscalYear attribute.
@@ -176,7 +175,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
         this.universityFiscalYear = universityFiscalYear;
     }
 
-
     /**
      * Gets the universityFiscalPeriodCode attribute.
      *
@@ -195,7 +193,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
         this.universityFiscalPeriodCode = universityFiscalPeriodCode;
     }
 
-
     /**
      * Gets the customerPaymentMediumCode attribute.
      *
@@ -213,7 +210,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
     public void setCustomerPaymentMediumCode(String customerPaymentMediumCode) {
         this.customerPaymentMediumCode = customerPaymentMediumCode;
     }
-
 
     /**
      * Gets the cashControlTotalAmount attribute.
@@ -484,7 +480,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
         return new ArrayList<GeneralLedgerPendingEntrySourceDetail>();
     }
 
-
     /**
      * The Cash Control document doesn't generate general ledger pending entries based off of the accounting lines on the document
      *
@@ -640,7 +635,6 @@ public class CashControlDocument extends GeneralLedgerPostingDocumentBase implem
     public void setBankCode(String bankCode) {
         this.bankCode = bankCode;
     }
-
 
     /**
      * Answers true when document payment medium is WIRE transfer

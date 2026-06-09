@@ -26,6 +26,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
@@ -39,12 +41,11 @@ import org.kuali.rice.kns.service.BusinessObjectDictionaryService;
 import org.kuali.rice.krad.service.PersistenceService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
-
 /**
  * This class...
  */
 public class BudgetConstructionSelectionForm extends BudgetExpansionForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionSelectionForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionSelectionForm.class);
 
     protected BudgetConstructionHeader budgetConstructionHeader;
     protected boolean hideDetails = false;

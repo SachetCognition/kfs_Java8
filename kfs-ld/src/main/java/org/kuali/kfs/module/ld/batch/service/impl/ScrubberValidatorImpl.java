@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.SubAccount;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Service implementation of ScrubberValidator.
  */
 public class ScrubberValidatorImpl implements ScrubberValidator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ScrubberValidatorImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ScrubberValidatorImpl.class);
 
     private ConfigurationService kualiConfigurationService;
     private BusinessObjectService businessObjectService;
@@ -238,7 +240,6 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
                 return MessageBuilder.buildMessage(KFSKeyConstants.ERROR_PAYROLL_END_DATE_FISCAL_PERIOD, laborOriginEntry.getPayrollEndDateFiscalPeriodCode(), Message.TYPE_FATAL);
             }
         }
-
 
         return null;
     }

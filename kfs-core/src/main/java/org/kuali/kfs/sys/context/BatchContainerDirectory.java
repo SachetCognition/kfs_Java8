@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BatchContainerDirectory knows the path to the directory for the BatchContainerStep and BatchStepTrigger semaphore files.
@@ -38,7 +38,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class BatchContainerDirectory {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchContainerDirectory.class);
+    private static Logger LOG = LoggerFactory.getLogger(BatchContainerDirectory.class);
 
 	private static final String BATCH_CONTAINER_SEMAPHORE_EXTENSION = "runlock";
 
@@ -165,7 +165,6 @@ public class BatchContainerDirectory {
     	writeBatchStepFileToSystem(errorFile, null);
     }
 
-
     /**
      * Writes the error file for the Step specified in the descriptor. The stack trace in the Throwable will be written to the file.
      *
@@ -276,7 +275,6 @@ public class BatchContainerDirectory {
 
             return new BatchStepFileDescriptor(errorFile);
         }
-
 
         return null;
     }
@@ -423,7 +421,6 @@ public class BatchContainerDirectory {
     	return file.length() == 0;
     }
 
-
     private void writeMessageToFile(File runFile , String message) {
         PrintStream printStream = initializePrintStream(runFile);
 
@@ -493,7 +490,7 @@ public class BatchContainerDirectory {
     		printStream = new PrintStream(errorFile);
     	}
     	catch (FileNotFoundException e) {
-    		LOG.error(e);
+    		LOG.error(e.getMessage(), e);
     		throw new RuntimeException(e);
     	}
 

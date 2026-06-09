@@ -28,7 +28,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.vnd.VendorPropertyConstants;
 import org.kuali.kfs.vnd.document.service.VendorService;
@@ -46,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.vnd.businessobject.VendorHeader
  */
 public class VendorDetail extends PersistableBusinessObjectBase implements VendorRoutingComparable {
-    private static Logger LOG = Logger.getLogger(VendorDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(VendorDetail.class);
 
     private Integer vendorHeaderGeneratedIdentifier;
     private Integer vendorDetailAssignedIdentifier;
@@ -704,7 +705,6 @@ public class VendorDetail extends PersistableBusinessObjectBase implements Vendo
         this.defaultFaxNumber = defaultFaxNumber;
     }
 
-
     /**
      * @see org.kuali.kfs.vnd.document.routing.VendorRoutingComparable#isEqualForRouting(java.lang.Object)
      */
@@ -790,7 +790,6 @@ public class VendorDetail extends PersistableBusinessObjectBase implements Vendo
         this.vendorParentName = vendorParentName;
     }
 
-
     public String getVendorAliasesAsString() {
         StringBuilder sb = new StringBuilder("[");
 
@@ -808,7 +807,6 @@ public class VendorDetail extends PersistableBusinessObjectBase implements Vendo
         sb.append(']');
         return sb.toString();
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()

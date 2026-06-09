@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
@@ -64,7 +66,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetRetirementGlobalRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetRetirementGlobalRule.class);
 
     protected PersistableBusinessObject bo;
 
@@ -101,7 +103,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
 
         return valid;
     }
-
 
     /**
      * Processes rules when saving this global.
@@ -187,7 +188,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
-
 
     /**
      * Check if all asset payments are federal owned.
@@ -413,7 +413,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         return success;
     }
 
-
     /**
      * This method validates one asset is a valid asset and no duplicate with target asset when merge.
      *
@@ -487,7 +486,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         return success;
     }
 
-
     /**
      * Validate Asset Retirement Global and Details.
      *
@@ -509,7 +507,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
 
     /**
      * Validate mergedTargetCapitalAsset. Only valid and active capital asset is allowed.
@@ -552,7 +549,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         return valid;
     }
 
-
     /**
      * Only active capital equipment can be retired using the asset retirement document.
      *
@@ -577,7 +573,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
 
         return valid;
     }
-
 
     /**
      * Validate required fields for given retirement reason code
@@ -633,7 +628,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         return valid;
     }
 
-
     /**
      * Validates whether or not asset is on loan status
      *
@@ -648,7 +642,6 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         }
         return success;
     }
-
 
     protected AssetService getAssetService() {
         return SpringContext.getBean(AssetService.class);

@@ -25,6 +25,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
 import org.kuali.kfs.sys.dataaccess.UniversityDateDao;
@@ -34,7 +36,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * The OJB implementation of the UniversityDateDao
  */
 public class UniversityDateDaoOjb extends PlatformAwareDaoBaseOjb implements UniversityDateDao {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UniversityDateDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UniversityDateDaoOjb.class);
 
     /**
      * Converts a java.util.Date to a java.sql.Date

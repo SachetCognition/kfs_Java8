@@ -27,6 +27,8 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.batch.businessobject.PerDiemForLoad;
 import org.kuali.kfs.module.tem.batch.service.PerDiemFileParsingService;
 import org.kuali.kfs.sys.ObjectUtil;
@@ -35,7 +37,7 @@ import au.com.bytecode.opencsv.CSVReader;
 
 public class PerDiemFileParsingServiceImpl implements PerDiemFileParsingService {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PerDiemFileParsingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PerDiemFileParsingServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.tem.batch.service.PerDiemFileParsingService#buildPerDiemsFromFlatFile(java.lang.String,
@@ -90,7 +92,7 @@ public class PerDiemFileParsingServiceImpl implements PerDiemFileParsingService 
                     csvReader.close();
                 }
                 catch (IOException ex) {
-                    LOG.info(ex);
+                    LOG.info(ex.getMessage(), ex);
                 }
             }
             

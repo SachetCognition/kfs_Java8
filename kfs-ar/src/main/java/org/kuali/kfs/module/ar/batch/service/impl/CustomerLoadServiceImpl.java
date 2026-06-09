@@ -40,6 +40,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
@@ -89,7 +91,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 @Transactional
 public class CustomerLoadServiceImpl extends InitiateDirectoryBase implements CustomerLoadService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerLoadServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerLoadServiceImpl.class);
 
     private static final String MAX_RECORDS_PARM_NAME = "MAX_NUMBER_OF_RECORDS_PER_DOCUMENT";
     private static final String NA = "-- N/A --";
@@ -1127,7 +1129,7 @@ public class CustomerLoadServiceImpl extends InitiateDirectoryBase implements Cu
      * @param errorMessage
      */
     private void criticalError(String errorMessage){
-        LOG.error(errorMessage);
+        LOG.error("{}", errorMessage);
         throw new RuntimeException(errorMessage);
     }
 

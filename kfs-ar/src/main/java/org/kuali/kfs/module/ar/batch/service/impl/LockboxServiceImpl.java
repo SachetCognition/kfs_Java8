@@ -32,7 +32,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.batch.service.LockboxService;
@@ -86,9 +87,8 @@ import com.lowagie.text.pdf.PdfWriter;
  *
  */
 
-
 public class LockboxServiceImpl implements LockboxService {
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(LockboxServiceImpl.class);;
+    private static Logger LOG = LoggerFactory.getLogger(LockboxServiceImpl.class);;
 
     private DocumentService documentService;
     private SystemInformationService systemInformationService;
@@ -106,8 +106,6 @@ public class LockboxServiceImpl implements LockboxService {
     Lockbox ctrlLockbox;
     CashControlDocument cashControlDocument;
     boolean anyRecordsFound = false;
-
-
 
     @Override
     @NonTransactional
@@ -427,7 +425,6 @@ public class LockboxServiceImpl implements LockboxService {
 
             //  load up the PayApp document that was created
             LOG.info("   loading the generated PayApp [" + payAppDocNumber + "], so we can route or approve it.");
-
 
             //  create paidapplieds on the PayApp doc for all the Invoice details
             LOG.info("   attempting to create paidApplieds on the PayAppDoc for every detail on the invoice.");

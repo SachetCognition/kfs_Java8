@@ -24,6 +24,8 @@ import java.util.Set;
 
 import junit.framework.Assert;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.fixture.UserNameFixture;
 import org.kuali.kfs.sys.monitor.ChangeMonitor;
@@ -39,7 +41,7 @@ import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
 public class WorkflowTestUtils {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(WorkflowTestUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorkflowTestUtils.class);
     protected static final int INITIAL_PAUSE_SECONDS = 5;
     protected static final int MAX_WAIT_SECONDS = 60;
 

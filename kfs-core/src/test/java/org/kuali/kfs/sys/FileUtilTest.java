@@ -21,6 +21,8 @@ package org.kuali.kfs.sys;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.sys.context.KualiTestBase;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -29,7 +31,7 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
 
 @ConfigureContext
 public class FileUtilTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileUtilTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(FileUtilTest.class);
     
     protected String stagingDirectory;
     

@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSParameterKeyConstants;
 import org.kuali.kfs.sys.batch.service.FinancialSystemDocumentHeaderPopulationService;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
@@ -34,7 +36,7 @@ import org.kuali.rice.kew.api.document.DocumentStatus;
  * from workflow document headers on to the FinancialSystemDocumentHeader
  */
 public class PopulateFinancialSystemDocumentHeadersFromKewStep extends AbstractStep implements TestingStep {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PopulateFinancialSystemDocumentHeadersFromKewStep.class);
+    Logger LOG = LoggerFactory.getLogger(PopulateFinancialSystemDocumentHeadersFromKewStep.class);
 
     protected final int DEFAULT_BATCH_SIZE = 1000;
     protected FinancialSystemDocumentHeaderPopulationService populationService;

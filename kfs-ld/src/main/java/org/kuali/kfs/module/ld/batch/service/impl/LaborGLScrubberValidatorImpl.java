@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.gl.batch.service.AccountingCycleCachingService;
 import org.kuali.kfs.gl.businessobject.OriginEntryInformation;
@@ -35,7 +37,7 @@ import org.springframework.util.StringUtils;
  * to GL code can be found here.
  */
 public class LaborGLScrubberValidatorImpl extends ScrubberValidatorImpl implements ScrubberValidator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborGLScrubberValidatorImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborGLScrubberValidatorImpl.class);
 
     /**
      * @see org.kuali.kfs.gl.service.impl.ScrubberValidatorImpl#validateUniversityFiscalPeriodCode(org.kuali.kfs.gl.businessobject.OriginEntryInformation, org.kuali.kfs.gl.businessobject.OriginEntryInformation, org.kuali.kfs.sys.businessobject.UniversityDate, org.kuali.kfs.gl.batch.service.AccountingCycleCachingService)

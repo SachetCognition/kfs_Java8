@@ -32,12 +32,12 @@ import javax.management.ListenerNotFoundException;
 import javax.management.Notification;
 import javax.management.NotificationEmitter;
 import javax.management.NotificationListener;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MemoryMonitor {
     private final Collection<Listener> listeners = new ArrayList<Listener>();
-    private static final Logger LOG = Logger.getLogger(MemoryMonitor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MemoryMonitor.class);
     private String springContextId;
 
     public interface Listener {

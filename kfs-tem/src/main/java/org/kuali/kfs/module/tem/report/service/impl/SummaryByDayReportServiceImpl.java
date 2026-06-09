@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.report.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.LODGING_TYPE_CODES;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.TRANSPORTATION_TYPE_CODES;
 
@@ -30,7 +32,6 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
 import org.kuali.kfs.module.tem.businessobject.PerDiemExpense;
@@ -53,7 +54,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SummaryByDayReportServiceImpl implements SummaryByDayReportService {
 
-    public static Logger LOG = Logger.getLogger(SummaryByDayReportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(SummaryByDayReportServiceImpl.class);
 
     protected ConfigurationService configurationService;
     protected ParameterService parameterService;

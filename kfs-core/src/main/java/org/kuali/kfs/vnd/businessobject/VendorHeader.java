@@ -29,7 +29,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.BusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -48,7 +49,7 @@ import org.kuali.rice.location.framework.country.CountryEbo;
  * @see org.kuali.kfs.vnd.businessobject.VendorDetail
  */
 public class VendorHeader extends PersistableBusinessObjectBase {
-    private static Logger LOG = Logger.getLogger(VendorHeader.class);
+    private static Logger LOG = LoggerFactory.getLogger(VendorHeader.class);
 
     private Integer vendorHeaderGeneratedIdentifier;
     private String vendorTypeCode;
@@ -311,7 +312,6 @@ public class VendorHeader extends PersistableBusinessObjectBase {
      *
      * @return Returns the vendorCorpCitizenCode
      */
-
 
     public String getVendorCorpCitizenCode() {
         return vendorCorpCitizenCode;

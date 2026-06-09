@@ -34,6 +34,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAccountingLines;
 import org.kuali.kfs.fp.businessobject.CapitalAssetAccountsGroupDetails;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
@@ -64,7 +66,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This is the action class for the CapitalAssetInformationActionBase.
  */
 public abstract class CapitalAssetInformationActionBase extends KualiAccountingDocumentActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAssetInformationActionBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CapitalAssetInformationActionBase.class);
 
     /**
      * Multi-value asset lookup is implemented through the integration package by module's service
@@ -187,7 +189,6 @@ public abstract class CapitalAssetInformationActionBase extends KualiAccountingD
     protected KualiDecimal getCapitalAssetsAmountAllocated(List<CapitalAssetInformation> currentCapitalAssetInformation, CapitalAccountingLines capitalAccountingLine) {
         //check the capital assets records totals
         KualiDecimal capitalAssetsAmount = KualiDecimal.ZERO;
-
 
         for (CapitalAssetInformation capitalAsset : currentCapitalAssetInformation) {
             List<CapitalAssetAccountsGroupDetails> groupAccountLines = capitalAsset.getCapitalAssetAccountsGroupDetails();
@@ -1397,7 +1398,6 @@ public abstract class CapitalAssetInformationActionBase extends KualiAccountingD
         return existingCapitalAsset;
     }
 
-
     /**
      *
      * @param capitalAssetInformation
@@ -1633,7 +1633,6 @@ public abstract class CapitalAssetInformationActionBase extends KualiAccountingD
         KualiForm kualiForm = (KualiForm) form;
 
         CapitalAccountingLinesFormBase capitalAccountingLinesFormBase = (CapitalAccountingLinesFormBase) form;
-
 
         Map<String, String> tabStates = kualiForm.getTabStates();
         Map<String, String> newTabStates = new HashMap<String, String>();
@@ -1938,7 +1937,6 @@ public abstract class CapitalAssetInformationActionBase extends KualiAccountingD
         KualiAccountingDocumentFormBase kadfb = calfb;
 
         List<CapitalAssetInformation> currentCapitalAssetInformation =  this.getCurrentCapitalAssetInformationObject(kadfb);
-
 
         List<CapitalAccountingLines> selectedCapitalAccountingLines = new ArrayList<CapitalAccountingLines>();
 

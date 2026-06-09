@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.sys.spring.datadictionary;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -30,7 +31,7 @@ import org.w3c.dom.NodeList;
 
 public class AttributeBeanDefinitionParser extends KualiBeanDefinitionParserBase {
 
-    private static Logger LOG = Logger.getLogger(AttributeBeanDefinitionParser.class);
+    private static Logger LOG = LoggerFactory.getLogger(AttributeBeanDefinitionParser.class);
     
     
     @Override
@@ -221,7 +222,7 @@ public class AttributeBeanDefinitionParser extends KualiBeanDefinitionParserBase
             try {
                 validatorBean = BeanDefinitionBuilder.rootBeanDefinition(Class.forName(validationPatternClass));
             } catch ( ClassNotFoundException ex ) {
-                LOG.fatal( "Invalid class name given for validationPattern bean: " + validationPatternClass );
+                LOG.error( "Invalid class name given for validationPattern bean: " + validationPatternClass );
                 throw new RuntimeException( "Invalid class name given for validationPattern bean: " + validationPatternClass, ex );
             }
         }

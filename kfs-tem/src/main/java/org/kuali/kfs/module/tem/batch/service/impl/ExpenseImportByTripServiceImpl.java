@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.module.tem.batch.service.impl;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemParameterConstants;
@@ -72,7 +72,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ExpenseImportByTripServiceImpl extends ExpenseImportServiceBase implements ExpenseImportByTripService  {
 
-    public static Logger LOG = Logger.getLogger(ExpenseImportByTripServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(ExpenseImportByTripServiceImpl.class);
 
     private TravelAuthorizationService travelAuthorizationService;
     private TemProfileService temProfileService;
@@ -334,7 +334,7 @@ public class ExpenseImportByTripServiceImpl extends ExpenseImportServiceBase imp
                 }
             }
             if (isDuplicate) {
-                LOG.error(errorMessage);
+                LOG.error("{}", errorMessage);
 
                 ErrorMessage error = new ErrorMessage(TemKeyConstants.MESSAGE_AGENCY_DATA_TRIP_DUPLICATE_RECORD, agencyData.getTripId(), agencyData.getAgency(),
                         agencyData.getTransactionPostingDate().toString(), agencyData.getTripExpenseAmount().toString(), agencyData.getItineraryDataString());

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertGlobalMessageMapEmpty;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertGlobalMessageMapSize;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 @ConfigureContext(session = khuntley)
 public class SubAccountRuleTest extends ChartRuleTestBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SubAccountRuleTest.class);
+    protected static Logger LOG = LoggerFactory.getLogger(SubAccountRuleTest.class);
 
     private static final String GOOD_CHART = "UA";
     private static final String GOOD_ACCOUNT = "1912201";

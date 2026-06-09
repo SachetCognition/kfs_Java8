@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.SufficientFundBalances;
 import org.kuali.kfs.gl.businessobject.SufficientFundRebuild;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.service.PersistenceService;
  */
 @ConfigureContext(shouldCommitTransactions=true)
 public class SufficientFundsAccountUpdateServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SufficientFundsAccountUpdateServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(SufficientFundsAccountUpdateServiceTest.class);
 
     private SufficientFundsAccountUpdateService sufficientFundsAccountUpdateService = null;
     private SufficientFundRebuildDao sufficientFundRebuildDao = null;

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -36,7 +38,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * This class will help extract the error messages from GlobalVariables object and creates a list of string.
  */
 public class GlobalVariablesExtractHelper {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GlobalVariablesExtractHelper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GlobalVariablesExtractHelper.class);
 
     /**
      * Extracts errors for error report writing.
@@ -77,7 +79,7 @@ public class GlobalVariablesExtractHelper {
                 else {
                     errorString = errorKeyString;
                 }
-                LOG.debug(errorString);
+                LOG.debug("{}", errorString);
                 if (errorString.matches("^.*\\{\\d\\}.*$")) {
                     errorString = MessageFormat.format(errorString, messageParams);
                 }

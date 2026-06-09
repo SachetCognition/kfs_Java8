@@ -21,14 +21,15 @@ package org.kuali.kfs.module.cab.batch;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.batch.service.BatchExtractReportService;
 import org.kuali.kfs.module.cab.batch.service.BatchExtractService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
 public class ExtractStep extends AbstractStep {
-    private static final Logger LOG = Logger.getLogger(ExtractStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ExtractStep.class);
     private BatchExtractService batchExtractService;
     private DateTimeService dateTimeService;
     private BatchExtractReportService batchExtractReportService;
@@ -133,6 +134,5 @@ public class ExtractStep extends AbstractStep {
     public void setBatchExtractReportService(BatchExtractReportService batchExtractReportService) {
         this.batchExtractReportService = batchExtractReportService;
     }
-
 
 }

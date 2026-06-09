@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.document.AccountsPayableDocument;
 import org.kuali.kfs.sys.KFSConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.kns.kim.role.DerivedRoleTypeServiceBase;
 import org.kuali.rice.krad.service.DocumentService;
 
 public class AccountsPayableDocumentDerivedRoleTypeServiceImpl extends DerivedRoleTypeServiceBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsPayableDocumentDerivedRoleTypeServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountsPayableDocumentDerivedRoleTypeServiceImpl.class);
 
     protected static final String FISCAL_OFFICER_ROLE_NAME = "Fiscal Officer";
     protected static final String SUB_ACCOUNT_ROLE_NAME = "Sub-Account Reviewer";
@@ -86,6 +88,5 @@ public class AccountsPayableDocumentDerivedRoleTypeServiceImpl extends DerivedRo
 
         return false;
     }
-
 
 }

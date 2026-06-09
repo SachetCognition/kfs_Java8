@@ -30,6 +30,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
@@ -83,7 +85,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborModuleServiceImpl implements LaborModuleService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborModuleServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborModuleServiceImpl.class);
 
     private final static String LINK_DOCUMENT_NUMBER_TO_LABOR_ORIGIN_CODES_PARAM_NAME = "LINK_DOCUMENT_NUMBER_TO_LABOR_ORIGIN_CODES";
     private final static String GL_LABOR_ENTRY_SUMMARIZATION_INQUIRY_BASE_URL = "laborGLLaborEntrySummarizationInquiry.do";

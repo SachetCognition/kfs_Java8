@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.LWPA;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.LWPF;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.NONE;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * provide a set of rule elements for salary setting.
  */
 public class SalarySettingRuleHelperServiceImpl implements SalarySettingRuleHelperService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalarySettingRuleHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SalarySettingRuleHelperServiceImpl.class);
 
     protected SalarySettingService salarySettingService;
     protected HumanResourcesPayrollService humanResourcesPayrollService;

@@ -26,6 +26,8 @@ import java.util.Map;
 
 import javax.xml.ws.WebServiceException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kfs.module.external.kc.businessobject.Agency;
 import org.kuali.kfs.module.external.kc.dto.SponsorCriteriaDto;
@@ -48,7 +50,7 @@ import org.kuali.rice.krad.bo.ExternalizableBusinessObject;
  */
 
 public class SponsorServiceImpl implements ExternalizableLookupableBusinessObjectService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SponsorServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(SponsorServiceImpl.class);
 
     protected ConfigurationService configurationService;
 

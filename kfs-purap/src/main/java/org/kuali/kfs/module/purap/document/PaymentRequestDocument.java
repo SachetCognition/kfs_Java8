@@ -30,6 +30,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PaymentRequestStatuses;
 import org.kuali.kfs.module.purap.PurapConstants.PurapDocTypeCodes;
@@ -86,7 +88,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Payment Request Document Business Object. Contains the fields associated with the main document table.
  */
 public class PaymentRequestDocument extends AccountsPayableDocumentBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PaymentRequestDocument.class);
 
     protected Date invoiceDate;
     protected String invoiceNumber;
@@ -173,7 +175,6 @@ public class PaymentRequestDocument extends AccountsPayableDocumentBase {
         // don't allow prior; use CURRENT
         return SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear();
     }
-
 
     /**
      * Overrides the method in PurchasingAccountsPayableDocumentBase to add the criteria specific to Payment Request Document.
@@ -522,7 +523,6 @@ public class PaymentRequestDocument extends AccountsPayableDocumentBase {
         populatePaymentRequestFromPurchaseOrder(po, new HashMap<String, ExpiredOrClosedAccountEntry>());
     }
 
-
     /**
      * Populates a preq from a PO
      *
@@ -729,7 +729,6 @@ public class PaymentRequestDocument extends AccountsPayableDocumentBase {
         }
         return "";
     }
-
 
     /**
      * @see org.kuali.rice.krad.document.DocumentBase#doRouteStatusChange()
@@ -1382,7 +1381,6 @@ public class PaymentRequestDocument extends AccountsPayableDocumentBase {
     public boolean getReceivingDocumentRequiredIndicatorForSearching() {
         return receivingDocumentRequiredIndicator;
     }
-
 
     public String getRequestCancelIndicatorForResult() {
         return isPaymentRequestedCancelIndicator() ? "Yes" : "No";

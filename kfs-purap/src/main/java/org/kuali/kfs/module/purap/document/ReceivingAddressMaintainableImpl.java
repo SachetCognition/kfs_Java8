@@ -22,6 +22,8 @@ import java.security.GeneralSecurityException;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ReceivingAddress;
 import org.kuali.kfs.module.purap.document.service.ReceivingAddressService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * and updates the ones affected during post-processing to enforce certain contraints among these objects. 
  */
 public class ReceivingAddressMaintainableImpl extends FinancialSystemMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReceivingAddressMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReceivingAddressMaintainableImpl.class);
     
     /**
      * Generates the appropriate maintenance locks for {@link ReceivingAddress}

@@ -21,7 +21,8 @@ package org.kuali.kfs.module.tem.document.lookup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.document.TravelAuthorizationDocument;
@@ -42,7 +43,7 @@ import org.kuali.rice.krad.service.DocumentService;
 
 public class TravelDocumentSearchCustomizer extends KFSDocumentSearchCustomizer {
 
-    public static Logger LOG = Logger.getLogger(TravelDocumentSearchCustomizer.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelDocumentSearchCustomizer.class);
 
     /**
      * @see org.kuali.kfs.sys.document.workflow.KFSDocumentSearchCustomizer#customizeResults(org.kuali.rice.kew.api.document.search.DocumentSearchCriteria,

@@ -27,6 +27,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountDescription;
 import org.kuali.kfs.coa.businessobject.AccountGuideline;
@@ -67,7 +69,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AccountRule extends IndirectCostRecoveryAccountsRule {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountRule.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AccountRule.class);
 
     protected static final String ACCT_PREFIX_RESTRICTION = "PREFIXES";
     protected static final String ACCT_CAPITAL_SUBFUNDGROUP = "CAPITAL_SUB_FUND_GROUPS";
@@ -120,7 +122,6 @@ public class AccountRule extends IndirectCostRecoveryAccountsRule {
         setActiveIndirectCostRecoveryAccountList(newAccount.getActiveIndirectCostRecoveryAccounts());
         setBoFieldPath(KFSPropertyConstants.INDIRECT_COST_RECOVERY_ACCOUNTS);
     }
-
 
     /**
      * Refreshes the references of account
@@ -458,7 +459,6 @@ public class AccountRule extends IndirectCostRecoveryAccountsRule {
         }
         return success;
     }
-
 
     /**
      * This method tests whether the account and continuation account are same.

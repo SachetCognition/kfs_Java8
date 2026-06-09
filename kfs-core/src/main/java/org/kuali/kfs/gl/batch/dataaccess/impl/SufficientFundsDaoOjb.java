@@ -25,6 +25,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.dataaccess.SufficientFundsDao;
 import org.kuali.kfs.gl.businessobject.SufficientFundBalances;
 import org.kuali.kfs.sys.KFSConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * An OJB implementation of SufficientFundsDao
  */
 public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements SufficientFundsDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SufficientFundsDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(SufficientFundsDaoOjb.class);
 
     private static final String YEAR_END_DOC_PREFIX = "YE%";
 
@@ -67,7 +69,6 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
 
         ReportQueryByCriteria reportQuery = QueryFactory.newReportQuery(SufficientFundBalances.class, criteria);
         reportQuery.setAttributes(new String[] { KFSConstants.CURRENT_BUDGET_BALANCE_AMOUNT_PROPERTY_NAME });
-
 
         return executeReportQuery(reportQuery);
     }
@@ -223,7 +224,6 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
         sub1.addOrCriteria(sub1_1);
         criteria.addOrCriteria(sub1);
 
-
         criteria.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, universityFiscalYear);
         criteria.addEqualTo(KFSConstants.CHART_OF_ACCOUNTS_CODE_PROPERTY_NAME, chartOfAccountsCode);
         criteria.addEqualTo(KFSConstants.ACCOUNT_NUMBER_PROPERTY_NAME, accountNumber);
@@ -250,7 +250,6 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
         reportQuery.setAttributes(new String[] { "sum(" + KFSConstants.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")" });
 
         return executeReportQuery(reportQuery);
-
 
     }
 

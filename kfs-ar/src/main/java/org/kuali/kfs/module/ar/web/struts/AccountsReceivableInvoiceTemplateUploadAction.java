@@ -19,6 +19,8 @@
 package org.kuali.kfs.module.ar.web.struts;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.businessobject.TemplateBase;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  */
 public class AccountsReceivableInvoiceTemplateUploadAction extends AccountsReceivableTemplateUploadAction {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsReceivableInvoiceTemplateUploadAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountsReceivableInvoiceTemplateUploadAction.class);
 
     @Override
     protected void performAdditionalAuthorizationChecks(TemplateBase template) {

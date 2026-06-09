@@ -20,6 +20,8 @@ package org.kuali.kfs.sec.document;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sec.businessobject.SecurityDefinition;
 import org.kuali.kfs.sec.businessobject.SecurityModelMember;
 import org.kuali.kfs.sec.businessobject.SecurityPrincipal;
@@ -36,13 +38,12 @@ import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.KRADConstants;
 
-
 /**
  * Maintainable implementation for the Security Principal maintenance document. Hooks into Post processing to create the KIM permissions for the principal and assign security role
  * members
  */
 public class SecurityPrincipalMaintainableImpl extends AbstractSecurityModuleMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SecurityPrincipalMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SecurityPrincipalMaintainableImpl.class);
 
     /**
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#doRouteStatusChange(org.kuali.rice.krad.bo.DocumentHeader)

@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.CollectorHelperService;
 import org.kuali.kfs.gl.batch.service.CollectorScrubberService;
@@ -49,7 +50,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CollectorServiceImpl extends InitiateDirectoryBase implements CollectorService {
-    private static Logger LOG = Logger.getLogger(CollectorServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorServiceImpl.class);
 
     private CollectorHelperService collectorHelperService;
     private BatchInputFileService batchInputFileService;

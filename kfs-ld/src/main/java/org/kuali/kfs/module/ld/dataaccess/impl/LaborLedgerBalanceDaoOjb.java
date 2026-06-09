@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.ld.LaborPropertyConstants.AccountingPeriodProperties.APRIL;
 import static org.kuali.kfs.module.ld.LaborPropertyConstants.AccountingPeriodProperties.AUGUST;
 import static org.kuali.kfs.module.ld.LaborPropertyConstants.AccountingPeriodProperties.DECEMBER;
@@ -69,7 +71,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * @see org.kuali.kfs.module.ld.businessobject.LedgerBalance
  */
 public class LaborLedgerBalanceDaoOjb extends PlatformAwareDaoBaseOjb implements LaborLedgerBalanceDao, LedgerBalanceBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerBalanceDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerBalanceDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.ld.dataaccess.LaborLedgerBalanceDao#findBalancesForFiscalYear(java.lang.Integer)

@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAssetAccountsGroupDetails;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformationDetail;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * class which defines behavior common for capital asset information lines.
  */
  public class CapitalAssetInformationDocumentBase extends AccountingDocumentBase implements CapitalAssetEditable {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAssetInformationDocumentBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CapitalAssetInformationDocumentBase.class);
     protected Integer nextCapitalAssetLineNumber;
 
     // capital asset

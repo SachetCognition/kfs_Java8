@@ -24,6 +24,8 @@ import java.util.Iterator;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.dataaccess.LedgerEntryHistoryBalancingDao;
 import org.kuali.kfs.module.ld.businessobject.LaborEntryHistory;
 import org.kuali.kfs.module.ld.util.ConsolidationUtil;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.module.ld.businessobject.LaborEntryHistory
  */
 public class LaborLedgerEntryHistoryDaoOjb extends PlatformAwareDaoBaseOjb implements LedgerEntryHistoryBalancingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborLedgerEntryHistoryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborLedgerEntryHistoryDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.gl.dataaccess.LedgerEntryBalancingDao#findSumRowCountGreaterOrEqualThan(java.lang.Integer)

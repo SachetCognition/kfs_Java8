@@ -21,13 +21,13 @@ package org.kuali.kfs.sys.batch;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService;
 import org.kuali.kfs.sys.batch.service.WrappingBatchService;
 
-
 public abstract class AbstractWrappedBatchStep extends AbstractStep {
-    private static final Logger LOG = Logger.getLogger(AbstractWrappedBatchStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractWrappedBatchStep.class);
     private WrappedBatchExecutorService wrappedBatchExecutorService;
     private List<WrappingBatchService> wrappingBatchServices;
 

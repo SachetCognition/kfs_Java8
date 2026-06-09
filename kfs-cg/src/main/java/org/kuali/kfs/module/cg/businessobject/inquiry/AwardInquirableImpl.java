@@ -26,6 +26,8 @@ import java.util.Properties;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableMilestoneSchedule;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.integration.ar.AccountsReceivablePredeterminedBillingSchedule;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * Used for wiring up {@link Award} for inquiries.
  */
 public class AwardInquirableImpl extends KfsInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AwardInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AwardInquirableImpl.class);
 
     /**
      * Helper method to build an inquiry URLs for MilestoneSchedule or PredeterminedBillingSchedule links.

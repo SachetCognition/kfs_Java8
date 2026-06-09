@@ -41,7 +41,8 @@ import java.util.List;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryFileIterator;
 import org.kuali.kfs.gl.businessobject.CorrectionChangeGroup;
@@ -79,7 +80,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase implements CorrectionDocumentService {
-    protected static Logger LOG = Logger.getLogger(CorrectionDocumentServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CorrectionDocumentServiceImpl.class);
 
     protected CorrectionChangeGroupDao correctionChangeGroupDao;
     protected CorrectionChangeDao correctionChangeDao;
@@ -411,7 +412,6 @@ public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase impleme
         persistOriginEntries(fullPathUniqueFileName, entries);
     }
 
-
     /**
      * This method persists an Iterator of output origin entries for a document that is in the initiated or saved state
      * 
@@ -478,7 +478,6 @@ public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase impleme
         return new BufferedOutputStream(new FileOutputStream(fullPathUniqueFileName));
     }
 
-
     /**
      * Removes input origin entries that were saved to the database associated with the given document
      * 
@@ -500,7 +499,6 @@ public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase impleme
         String fullPathUniqueFileName = generateOutputOriginEntryFileName(document);
         removePersistedOriginEntries(fullPathUniqueFileName);
     }
-
 
     /**
      * Removes input origin entries that were saved to the database associated with the given document
@@ -696,7 +694,6 @@ public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase impleme
         return file.exists();
     }
 
-
     /**
      * Writes out the persisted input origin entries in an {@link OutputStream} in a flat file format\
      * 
@@ -784,7 +781,6 @@ public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase impleme
         String formattedDateTime = dateTimeService.toDateTimeStringForFilename(date);
         return "." + formattedDateTime + GeneralLedgerConstants.BatchFileSystem.EXTENSION;
 
-
     }
 
     /**
@@ -819,7 +815,6 @@ public class CorrectionDocumentServiceImpl extends InitiateDirectoryBase impleme
             // we haven't saved the origin entry group yet, so let's load the entries from the DB and persist them for the document
             // this could be because we've previously saved the doc, but now we are now using a new input group, so we have to
             // repersist the input group
-
 
             // OriginEntryGroup group = originEntryGroupService.getExactMatchingEntryGroup(document.getCorrectionInputGroupId());
             

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertEquality;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertInequality;
 
@@ -27,7 +29,6 @@ import java.util.List;
 import junit.framework.Assert;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
@@ -55,7 +56,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
 public final class AccountingDocumentTestUtils {
-    private static final Logger LOG = Logger.getLogger(AccountingDocumentTestUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingDocumentTestUtils.class);
 
     protected static final int ROUTE_STATUS_CHANGE_WAIT_TIME_SECONDS = 30;
     protected static final int ROUTE_STATUS_CHANGE_INITIAL_WAIT_TIME_SECONDS = 5;
@@ -424,7 +425,6 @@ public final class AccountingDocumentTestUtils {
     public static <T extends Document> void assertMatch(T document1, T document2) {
         Assert.assertEquals("Document number does not match", document1.getDocumentNumber(), document2.getDocumentNumber());
         Assert.assertEquals("Document type does not match", document1.getDocumentHeader().getWorkflowDocument().getDocumentTypeName(), document2.getDocumentHeader().getWorkflowDocument().getDocumentTypeName());
-
 
         AccountingDocument d1 = (AccountingDocument) document1;
         AccountingDocument d2 = (AccountingDocument) document2;

@@ -27,6 +27,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.bc.BCConstants;
@@ -57,7 +59,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * the base struts form for the detail salary setting: by position or by incumbent
  */
 public abstract class DetailSalarySettingForm extends SalarySettingBaseForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DetailSalarySettingForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DetailSalarySettingForm.class);
 
     private PendingBudgetConstructionAppointmentFunding newBCAFLine;
     private boolean addLine;

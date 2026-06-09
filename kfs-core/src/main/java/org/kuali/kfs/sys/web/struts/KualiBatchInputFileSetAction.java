@@ -30,6 +30,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.batch.BatchInputFileSetType;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * This class is the struts action for the batch upload screen that supports file sets
  */
 public class KualiBatchInputFileSetAction extends KualiAction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiBatchInputFileSetAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(KualiBatchInputFileSetAction.class);
     private static IdentityManagementService identityManagementService;
     private IdentityManagementService getIdentityManagementService() {
         if (identityManagementService == null) {

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.AccountingLineFixture.LINE18;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.mhkozlow;
 
@@ -25,8 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.kuali.kfs.fp.businessobject.Check;
 import org.kuali.kfs.fp.businessobject.CheckBase;
 import org.kuali.kfs.fp.document.CashReceiptDocument;
@@ -56,10 +58,10 @@ public class CheckServiceTest extends KualiTestBase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Logger.getLogger(PermissionServiceImpl.class).setLevel(Level.DEBUG);
-        Logger.getLogger(RoleServiceImpl.class).setLevel(Level.DEBUG);
-        Logger.getLogger(IdentityManagementServiceImpl.class).setLevel(Level.DEBUG);
-        Logger.getLogger(CashReceiptInitiatorDerivedRoleTypeServiceImpl.class).setLevel(Level.DEBUG);
+        Configurator.setLevel(PermissionServiceImpl.class.getName(), Level.DEBUG);
+        Configurator.setLevel(RoleServiceImpl.class.getName(), Level.DEBUG);
+        Configurator.setLevel(IdentityManagementServiceImpl.class.getName(), Level.DEBUG);
+        Configurator.setLevel(CashReceiptInitiatorDerivedRoleTypeServiceImpl.class.getName(), Level.DEBUG);
 
         documentNumber = createDocument();
         // setup check

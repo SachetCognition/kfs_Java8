@@ -24,9 +24,14 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.NDC;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.batch.service.SchedulerService;
@@ -39,7 +44,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 public class JobListener implements org.quartz.JobListener {
-    private static final Logger LOG = Logger.getLogger(JobListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JobListener.class);
     protected static final String NAME = "jobListener";
     public static final String REQUESTOR_EMAIL_ADDRESS_KEY = "requestorEmailAdress";
     protected SchedulerService schedulerService;
@@ -97,20 +102,38 @@ public class JobListener implements org.quartz.JobListener {
         try {
             Calendar startTimeCalendar = dateTimeService.getCurrentCalendar();
             StringBuilder nestedDiagnosticContext = new StringBuilder(StringUtils.substringAfter(BatchSpringContext.getJobDescriptor(jobExecutionContext.getJobDetail().getName()).getNamespaceCode(), "-").toLowerCase()).append(File.separator).append(jobExecutionContext.getJobDetail().getName()).append("-").append(dateTimeService.toDateTimeStringForFilename(dateTimeService.getCurrentDate()));
-            ((Job) jobExecutionContext.getJobInstance()).setNdcAppender(new FileAppender(Logger.getRootLogger().getAppender("StdOut").getLayout(), getLogFileName(nestedDiagnosticContext.toString())));
-            ((Job) jobExecutionContext.getJobInstance()).getNdcAppender().addFilter(new NDCFilter(nestedDiagnosticContext.toString()));
-            Logger.getRootLogger().addAppender(((Job) jobExecutionContext.getJobInstance()).getNdcAppender());
-            NDC.push(nestedDiagnosticContext.toString());
+
+            LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+            Configuration config = ctx.getConfiguration();
+            Appender stdOutAppender = config.getAppender("StdOut");
+
+            FileAppender fileAppender = FileAppender.newBuilder()
+                .setName("ndcAppender-" + nestedDiagnosticContext)
+                .withFileName(getLogFileName(nestedDiagnosticContext.toString()))
+                .setLayout(stdOutAppender != null ? stdOutAppender.getLayout() : KFSConstants.BATCH_LOGGER_DEFAULT_PATTERN_LAYOUT)
+                .setFilter(new NDCFilter(nestedDiagnosticContext.toString()))
+                .build();
+            fileAppender.start();
+
+            ((Job) jobExecutionContext.getJobInstance()).setNdcAppender(fileAppender);
+            config.getRootLogger().addAppender(fileAppender, null, null);
+            ctx.updateLoggers();
+            ThreadContext.push(nestedDiagnosticContext.toString());
         }
-        catch (IOException e) {
+        catch (Exception e) {
             LOG.warn("Could not initialize special custom logging for job: " + jobExecutionContext.getJobDetail().getName(), e);
         }
     }
 
     private void completeLogging(JobExecutionContext jobExecutionContext) {
-        ((Job) jobExecutionContext.getJobInstance()).getNdcAppender().close();
-        Logger.getRootLogger().removeAppender(((Job) jobExecutionContext.getJobInstance()).getNdcAppender());
-        NDC.pop();
+        Appender appender = ((Job) jobExecutionContext.getJobInstance()).getNdcAppender();
+        if (appender != null) {
+            appender.stop();
+            LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+            ctx.getConfiguration().getRootLogger().removeAppender(appender.getName());
+            ctx.updateLoggers();
+        }
+        ThreadContext.pop();
     }
 
     protected String getLogFileName(String nestedDiagnosticContext) {
@@ -129,7 +152,7 @@ public class JobListener implements org.quartz.JobListener {
                 mailMessage.addToAddress(mailService.getBatchMailingList());
             }
             mailMessageSubject.append(": ").append(jobStatus);
-            String messageText = MessageFormat.format(configurationService.getPropertyValueAsString(KFSKeyConstants.MESSAGE_BATCH_FILE_LOG_EMAIL_BODY), getLogFileName(NDC.peek()));
+            String messageText = MessageFormat.format(configurationService.getPropertyValueAsString(KFSKeyConstants.MESSAGE_BATCH_FILE_LOG_EMAIL_BODY), getLogFileName(ThreadContext.peek()));
             mailMessage.setMessage(messageText);
             if (mailMessage.getToAddresses().size() > 0) {
                 mailMessage.setSubject(mailMessageSubject.toString());

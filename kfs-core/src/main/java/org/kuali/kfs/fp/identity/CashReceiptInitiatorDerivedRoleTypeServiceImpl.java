@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.kim.api.role.RoleService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
@@ -33,7 +35,7 @@ import org.kuali.rice.kns.kim.role.DerivedRoleTypeServiceBase;
  * users which belong to KFS-SYS User but NOT KFS-FP Cash Manager.
  */
 public class CashReceiptInitiatorDerivedRoleTypeServiceImpl extends DerivedRoleTypeServiceBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashReceiptInitiatorDerivedRoleTypeServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CashReceiptInitiatorDerivedRoleTypeServiceImpl.class);
 
     private RoleService roleManagementService;
 
