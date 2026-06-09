@@ -37,17 +37,16 @@ import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 /**
  * Accounting line for the asset payment document.
+ *
+ * NOTE: Not annotated as @Entity because its parent class SourceAccountingLine
+ * is not yet @MappedSuperclass. JPA column annotations are retained as mapping
+ * documentation for when the parent hierarchy is migrated.
  */
-@Entity
-@Table(name = "CM_AST_PMT_DTL_T")
 public class AssetPaymentDetail extends SourceAccountingLine {
     private static Logger LOG = Logger.getLogger(AssetPaymentDetail.class);
 

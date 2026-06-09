@@ -38,7 +38,7 @@
         <class>org.kuali.kfs.module.cam.businessobject.AssetPayment</class>
         <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentAllocationType</class>
         <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentAssetDetail</class>
-        <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentDetail</class>
+        <!-- AssetPaymentDetail deferred: extends SourceAccountingLine (not yet @MappedSuperclass) -->
         <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentDocumentType</class>
         <class>org.kuali.kfs.module.cam.businessobject.AssetRepairHistory</class>
         <class>org.kuali.kfs.module.cam.businessobject.AssetRetirementGlobal</class>
