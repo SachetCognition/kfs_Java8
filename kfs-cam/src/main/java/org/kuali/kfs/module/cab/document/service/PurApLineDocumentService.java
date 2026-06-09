@@ -24,8 +24,6 @@ import org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableDocument
 import org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableItemAsset;
 import org.kuali.kfs.module.cab.document.web.PurApLineSession;
 import org.kuali.rice.kew.api.exception.WorkflowException;
-
-
 /**
  * This class declares methods used by CAB PurAp Line process
  */

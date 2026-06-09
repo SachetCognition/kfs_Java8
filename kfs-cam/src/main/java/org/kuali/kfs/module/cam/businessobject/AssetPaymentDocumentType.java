@@ -25,81 +25,69 @@ import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  *
  * This class is to store document type use by the asset global document - Asset Payment tab.
  */
 
+@Entity
+
+@Table(name = "CM_AST_PMT_DOC_TYP_T")
+
 public class AssetPaymentDocumentType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CM_AST_PMT_DOC_TYP_SEQ")
+    @SequenceGenerator(name = "CM_AST_PMT_DOC_TYP_SEQ", sequenceName = "CM_AST_PMT_DOC_TYP_SEQ")
+    @Column(name = "DOC_TYP_ID")
     private Long documentTypeId;
+    @Column(name = "DOC_TYP_NM")
     private String expenditureFinancialDocumentTypeCode;
     private String label;
+    @Column(name = "ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
-
-
     public Long getDocumentTypeId() {
         return documentTypeId;
     }
-
-
-
-
     public void setDocumentTypeId(Long documentTypeId) {
         this.documentTypeId = documentTypeId;
     }
-
-
-
-
-
-
     public String getExpenditureFinancialDocumentTypeCode() {
         return expenditureFinancialDocumentTypeCode;
     }
-
-
-
-
     public void setExpenditureFinancialDocumentTypeCode(String expenditureFinancialDocumentTypeCode) {
         this.expenditureFinancialDocumentTypeCode = expenditureFinancialDocumentTypeCode;
     }
-
-
-
-
     public String getLabel() {
         if(!ObjectUtils.isNull(getFinancialSystemDocumentTypeCode())) {
             return  getFinancialSystemDocumentTypeCode().getLabel();
         }
         return "";
     }
-
-
-
-
     public void setLabel(String label) {
         this.label = label;
     }
-
-
     @Override
     public boolean isActive() {
         return active;
     }
-
-
     @Override
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
-
-
     /**
      * Gets the financialSystemDocumentTypeCode attribute.
      * @return Returns the financialSystemDocumentTypeCode.

@@ -23,15 +23,33 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.coa.businessobject.ObjectSubType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_DEPR_CNVNTN_T")
 public class AssetDepreciationConvention extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "FIN_OBJ_SUB_TYPE_CD")
+
     private String financialObjectSubTypeCode;
+    @Column(name = "CPTL_AST_DEPR_CNVNTN_CD")
     private String depreciationConventionCode;
+    @Column(name = "ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
+
+    @Transient
 
     private ObjectSubType financialObjectSubType;
 
@@ -59,8 +77,6 @@ public class AssetDepreciationConvention extends PersistableBusinessObjectBase i
     public void setFinancialObjectSubTypeCode(String financialObjectSubTypeCode) {
         this.financialObjectSubTypeCode = financialObjectSubTypeCode;
     }
-
-
     /**
      * Gets the depreciationConventionCode attribute.
      * 

@@ -58,98 +58,192 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.util.UrlFactory;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@MappedSuperclass
 
 public class AssetBase extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CPTLAST_NBR_SEQ")
+
+    @SequenceGenerator(name = "CPTLAST_NBR_SEQ", sequenceName = "CPTLAST_NBR_SEQ")
+
+    @Column(name = "CPTLAST_NBR")
+
     protected Long capitalAssetNumber;
+    @Column(name = "CPTLAST_DESC")
     protected String capitalAssetDescription;
+    @Column(name = "CPTLAST_TYP_CD")
     protected String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_COND_CD")
     protected String conditionCode;
+    @Column(name = "CPTLAST_CRT_DT")
     protected Date createDate;
+    @Column(name = "CPTLAST_RECEIVE_DT")
     protected Date receiveDate;
+    @Column(name = "CPTLAST_LN_RTRN_DT")
     protected Date loanReturnDate;
+    @Column(name = "CPTLAST_LOAN_DT")
     protected Date loanDate;
+    @Column(name = "AST_EXPCTRETURN_DT")
     protected Date expectedReturnDate;
+    @Column(name = "FDOC_POST_PRD_CD")
     protected String financialDocumentPostingPeriodCode;
+    @Column(name = "FDOC_POST_YR")
     protected Integer financialDocumentPostingYear;
+    @Column(name = "ORG_OWNER_ACCT_NBR")
     protected String organizationOwnerAccountNumber;
+    @Column(name = "ORG_OWNER_COA_CD")
     protected String organizationOwnerChartOfAccountsCode;
+    @Column(name = "CPTLAST_VENDOR_NM")
     protected String vendorName;
+    @Column(name = "CPTLAST_ACQ_TYP_CD")
     protected String acquisitionTypeCode;
+    @Column(name = "CPTLAST_TOTCST_AMT")
     protected KualiDecimal totalCostAmount;
+    @Column(name = "CPTLAST_RPLC_AMT")
     protected KualiDecimal replacementAmount;
+    @Column(name = "CPTLAST_SALE_PRC")
     protected KualiDecimal salePrice;
+    @Column(name = "AST_EST_SELL_PRC")
     protected KualiDecimal estimatedSellingPrice;
+    @Column(name = "CPTLAST_SALVAG_AMT")
     protected KualiDecimal salvageAmount;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     protected String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     protected String buildingSubRoomNumber;
+    @Column(name = "AST_RETIR_COA_CD")
     protected String retirementChartOfAccountsCode;
+    @Column(name = "AST_RETIR_ACCT_NBR")
     protected String retirementAccountNumber;
+    @Column(name = "AST_RETIRE_REAS_CD")
     protected String retirementReasonCode;
+    @Column(name = "AST_RETIR_PRD_CD")
     protected String retirementPeriodCode;
+    @Column(name = "AST_RETIR_FSCL_YR")
     protected Integer retirementFiscalYear;
+    @Column(name = "CASH_RCPT_FDOC_NBR")
     protected String cashReceiptFinancialDocumentNumber;
+    @Column(name = "AST_DEPR_MTHD1_CD")
     protected String primaryDepreciationMethodCode;
+    @Column(name = "AST_ESTFABRCMPL_DT")
     protected Date estimatedFabricationCompletionDate;
+    @Column(name = "AST_FABRESTTOT_AMT")
     protected KualiDecimal fabricationEstimatedTotalAmount;
+    @Column(name = "TRNFR_FND_FDOC_NBR")
     protected String transferOfFundsFinancialDocumentNumber;
+    @Column(name = "AST_INVN_STAT_CD")
     protected String inventoryStatusCode;
+    @Column(name = "CPTLAST_TAG_NBR")
     protected String campusTagNumber;
+    @Column(name = "CPTLAST_LSTINVN_DT")
     protected Timestamp lastInventoryDate;
+    @Column(name = "ORG_INVN_NM")
     protected String organizationInventoryName;
+    @Column(name = "CPTLAST_OLDTAG_NBR")
     protected String oldTagNumber;
+    @Column(name = "CPTLAST_MFR_NM")
     protected String manufacturerName;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     protected String manufacturerModelNumber;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     protected String serialNumber;
+    @Column(name = "AST_REP_UNVL_ID")
     protected String representativeUniversalIdentifier;
+    @Column(name = "CG_AGENCY_NBR")
     protected String agencyNumber;
+    @Column(name = "AST_PD_CASE_NBR")
     protected String campusPoliceDepartmentCaseNumber;
+    @Column(name = "AST_INVN_SCAN_CD")
     protected String inventoryScannedCode;
     protected boolean active;
+    @Column(name = "CPTL_AST_IN_SRVC_DT")
     protected Date capitalAssetInServiceDate;
+    @Column(name = "CPTL_AST_GOV_TAG_NBR")
     protected String governmentTagNumber;
+    @Column(name = "CPTL_AST_NTL_STOCK_NBR")
     protected String nationalStockNumber;
+    @Column(name = "CPTL_AST_LAND_CNTY_NM")
     protected String landCountyName;
+    @Column(name = "CPTL_AST_LAND_ACRG_SZ")
     protected Integer landAcreageSize;
+    @Column(name = "CPTL_AST_LAND_PRCL_NBR")
     protected String landParcelNumber;
+    @Column(name = "CPTL_AST_DEPR_DT")
     protected Date depreciationDate;
+    @Column(name = "FIN_OBJ_SUB_TYP_CD")
     protected String financialObjectSubTypeCode;
+    @Column(name = "AST_FABR_EST_RETN_YRS")
     protected Integer fabricationEstimatedRetentionYears;
 
+    @Transient
+
     protected AssetType capitalAssetType;
+    @Transient
     protected Account organizationOwnerAccount;
+    @Transient
     protected Chart organizationOwnerChartOfAccounts;
     protected CampusEbo campus;
+    @Transient
     protected Room buildingRoom;
     protected Account retirementAccount;
+    @Transient
     protected Chart retirementChartOfAccounts;
+    @Transient
     protected AccountingPeriod financialDocumentPostingPeriod;
+    @Transient
     protected Building building;
     protected AccountingPeriod retirementPeriod;
+    @Transient
     protected AssetRetirementReason retirementReason;
+    @Transient
     protected DocumentHeader cashReceiptFinancialDocument;
+    @Transient
     protected DocumentHeader transferOfFundsFinancialDocument;
+    @Transient
     protected AssetCondition condition;
+    @Transient
     protected AssetStatus inventoryStatus;
+    @Transient
     protected List<AssetPayment> assetPayments;
     protected Person assetRepresentative;
     protected Person borrowerPerson;
+    @Transient
     protected AssetOrganization assetOrganization;
     protected String organizationTagNumber;
+    @Transient
     protected List<AssetRepairHistory> assetRepairHistory;
+    @Transient
     protected AssetWarranty assetWarranty;
+    @Transient
     protected List<AssetComponent> assetComponents;
+    @Transient
     protected List<AssetLocation> assetLocations;
+    @Transient
     protected List<AssetRetirementGlobalDetail> assetRetirementHistory;
+    @Transient
     protected AssetDepreciationMethod assetPrimaryDepreciationMethod;
+    @Transient
     protected List<AssetRetirementGlobal> retirementGlobals;
+    @Transient
     protected ObjectSubType financialObjectSubType;
+    @Transient
     protected AssetAcquisitionType acquisitionType;
     protected ContractsAndGrantsAgency agency;
-
-
     // Non-persisted attributes:
     protected KualiDecimal paymentTotalCost;
     protected transient AssetGlobal separateHistory;
@@ -330,8 +424,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setYearToDateDepreciation(KualiDecimal yearToDateDepreciation) {
         this.yearToDateDepreciation = yearToDateDepreciation;
     }
-
-
     /**
      * Gets the capitalAssetNumber attribute.
      *
@@ -349,8 +441,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCapitalAssetNumber(Long capitalAssetNumber) {
         this.capitalAssetNumber = capitalAssetNumber;
     }
-
-
     /**
      * Gets the capitalAssetDescription attribute
      *
@@ -368,8 +458,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCapitalAssetDescription(String capitalAssetDescription) {
         this.capitalAssetDescription = capitalAssetDescription;
     }
-
-
     /**
      * Gets the capitalAssetTypeCode attribute.
      *
@@ -387,8 +475,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCapitalAssetTypeCode(String capitalAssetTypeCode) {
         this.capitalAssetTypeCode = capitalAssetTypeCode;
     }
-
-
     /**
      * Gets the conditionCode attribute.
      *
@@ -406,8 +492,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setConditionCode(String conditionCode) {
         this.conditionCode = conditionCode;
     }
-
-
     /**
      * Gets the createDate attribute.
      *
@@ -425,8 +509,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
-
     /**
      * Gets the receiveDate attribute.
      *
@@ -444,8 +526,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setReceiveDate(Date receiveDate) {
         this.receiveDate = receiveDate;
     }
-
-
     /**
      * Gets the loanReturnDate attribute.
      *
@@ -463,8 +543,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setLoanReturnDate(Date loanReturnDate) {
         this.loanReturnDate = loanReturnDate;
     }
-
-
     /**
      * Gets the loanDate attribute.
      *
@@ -482,8 +560,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setLoanDate(Date loanDate) {
         this.loanDate = loanDate;
     }
-
-
     /**
      * Gets the expectedReturnDate attribute.
      *
@@ -501,8 +577,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setExpectedReturnDate(Date expectedReturnDate) {
         this.expectedReturnDate = expectedReturnDate;
     }
-
-
     /**
      * Gets the financialDocumentPostingPeriodCode attribute.
      *
@@ -520,8 +594,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setFinancialDocumentPostingPeriodCode(String financialDocumentPostingPeriodCode) {
         this.financialDocumentPostingPeriodCode = financialDocumentPostingPeriodCode;
     }
-
-
     /**
      * Gets the financialDocumentPostingYear attribute.
      *
@@ -539,8 +611,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setFinancialDocumentPostingYear(Integer financialDocumentPostingYear) {
         this.financialDocumentPostingYear = financialDocumentPostingYear;
     }
-
-
     /**
      * Gets the organizationOwnerAccountNumber attribute.
      *
@@ -558,8 +628,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setOrganizationOwnerAccountNumber(String organizationOwnerAccountNumber) {
         this.organizationOwnerAccountNumber = organizationOwnerAccountNumber;
     }
-
-
     /**
      * Gets the organizationOwnerChartOfAccountsCode attribute.
      *
@@ -577,8 +645,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setOrganizationOwnerChartOfAccountsCode(String organizationOwnerChartOfAccountsCode) {
         this.organizationOwnerChartOfAccountsCode = organizationOwnerChartOfAccountsCode;
     }
-
-
     /**
      * Gets the vendorName attribute.
      *
@@ -596,8 +662,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
     }
-
-
     /**
      * Gets the acquisitionTypeCode attribute.
      *
@@ -615,8 +679,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setAcquisitionTypeCode(String acquisitionTypeCode) {
         this.acquisitionTypeCode = acquisitionTypeCode;
     }
-
-
     /**
      * Gets the totalCostAmount attribute.
      *
@@ -634,8 +696,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setTotalCostAmount(KualiDecimal totalCostAmount) {
         this.totalCostAmount = totalCostAmount;
     }
-
-
     /**
      * Gets the replacementAmount attribute.
      *
@@ -653,8 +713,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setReplacementAmount(KualiDecimal replacementAmount) {
         this.replacementAmount = replacementAmount;
     }
-
-
     /**
      * Gets the salePrice attribute.
      *
@@ -672,8 +730,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setSalePrice(KualiDecimal salePrice) {
         this.salePrice = salePrice;
     }
-
-
     /**
      * Gets the estimatedSellingPrice attribute.
      *
@@ -691,8 +747,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setEstimatedSellingPrice(KualiDecimal estimatedSellingPrice) {
         this.estimatedSellingPrice = estimatedSellingPrice;
     }
-
-
     /**
      * Gets the salvageAmount attribute.
      *
@@ -713,8 +767,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setSalvageAmount(KualiDecimal salvageAmount) {
         this.salvageAmount = salvageAmount;
     }
-
-
     /**
      * Gets the campusCode attribute.
      *
@@ -732,8 +784,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCampusCode(String campusCode) {
         this.campusCode = campusCode;
     }
-
-
     /**
      * Gets the buildingCode attribute.
      *
@@ -751,8 +801,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setBuildingCode(String buildingCode) {
         this.buildingCode = buildingCode;
     }
-
-
     /**
      * Gets the buildingRoomNumber attribute.
      *
@@ -770,8 +818,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setBuildingRoomNumber(String buildingRoomNumber) {
         this.buildingRoomNumber = buildingRoomNumber;
     }
-
-
     /**
      * Gets the buildingSubRoomNumber attribute.
      *
@@ -789,8 +835,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
         this.buildingSubRoomNumber = buildingSubRoomNumber;
     }
-
-
     /**
      * Gets the retirementChartOfAccountsCode attribute.
      *
@@ -808,8 +852,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setRetirementChartOfAccountsCode(String retirementChartOfAccountsCode) {
         this.retirementChartOfAccountsCode = retirementChartOfAccountsCode;
     }
-
-
     /**
      * Gets the retirementAccountNumber attribute.
      *
@@ -827,8 +869,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setRetirementAccountNumber(String retirementAccountNumber) {
         this.retirementAccountNumber = retirementAccountNumber;
     }
-
-
     /**
      * Gets the retirementReasonCode attribute.
      *
@@ -846,8 +886,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setRetirementReasonCode(String retirementReasonCode) {
         this.retirementReasonCode = retirementReasonCode;
     }
-
-
     /**
      * Gets the retirementPeriodCode attribute.
      *
@@ -865,8 +903,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setRetirementPeriodCode(String retirementPeriodCode) {
         this.retirementPeriodCode = retirementPeriodCode;
     }
-
-
     /**
      * Gets the retirementFiscalYear attribute.
      *
@@ -902,8 +938,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCashReceiptFinancialDocumentNumber(String cashReceiptFinancialDocumentNumber) {
         this.cashReceiptFinancialDocumentNumber = cashReceiptFinancialDocumentNumber;
     }
-
-
     /**
      * Gets the primaryDepreciationMethodCode attribute.
      *
@@ -921,8 +955,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setPrimaryDepreciationMethodCode(String primaryDepreciationMethodCode) {
         this.primaryDepreciationMethodCode = primaryDepreciationMethodCode;
     }
-
-
     /**
      * Gets the estimatedFabricationCompletionDate attribute.
      *
@@ -940,8 +972,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setEstimatedFabricationCompletionDate(Date estimatedFabricationCompletionDate) {
         this.estimatedFabricationCompletionDate = estimatedFabricationCompletionDate;
     }
-
-
     /**
      * Gets the fabricationEstimatedTotalAmount attribute.
      *
@@ -1013,8 +1043,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCampusTagNumber(String campusTagNumber) {
         this.campusTagNumber = campusTagNumber;
     }
-
-
     /**
      * Gets the lastInventoryDate attribute.
      *
@@ -1032,8 +1060,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setLastInventoryDate(Timestamp lastInventoryDate) {
         this.lastInventoryDate = lastInventoryDate;
     }
-
-
     /**
      * Gets the organizationInventoryName attribute.
      *
@@ -1051,8 +1077,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setOrganizationInventoryName(String organizationInventoryName) {
         this.organizationInventoryName = organizationInventoryName;
     }
-
-
     /**
      * Gets the oldTagNumber attribute.
      *
@@ -1070,8 +1094,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setOldTagNumber(String oldTagNumber) {
         this.oldTagNumber = oldTagNumber;
     }
-
-
     /**
      * Gets the manufacturerName attribute.
      *
@@ -1089,8 +1111,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setManufacturerName(String manufacturerName) {
         this.manufacturerName = manufacturerName;
     }
-
-
     /**
      * Gets the manufacturerModelNumber attribute.
      *
@@ -1108,8 +1128,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setManufacturerModelNumber(String manufacturerModelNumber) {
         this.manufacturerModelNumber = manufacturerModelNumber;
     }
-
-
     /**
      * Gets the serialNumber attribute.
      *
@@ -1127,8 +1145,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
-
-
     /**
      * Gets the representativeUniversalIdentifier attribute.
      *
@@ -1146,8 +1162,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setRepresentativeUniversalIdentifier(String representativeUniversalIdentifier) {
         this.representativeUniversalIdentifier = representativeUniversalIdentifier;
     }
-
-
     /**
      * Gets the agencyNumber attribute.
      *
@@ -1165,8 +1179,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setAgencyNumber(String agencyNumber) {
         this.agencyNumber = agencyNumber;
     }
-
-
     /**
      * Gets the campusPoliceDepartmentCaseNumber attribute.
      *
@@ -1184,8 +1196,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setCampusPoliceDepartmentCaseNumber(String campusPoliceDepartmentCaseNumber) {
         this.campusPoliceDepartmentCaseNumber = campusPoliceDepartmentCaseNumber;
     }
-
-
     /**
      * Gets the inventoryScannedCode attribute.
      *
@@ -1688,8 +1698,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setAssetRepresentative(Person assetRepresentative) {
         this.assetRepresentative = assetRepresentative;
     }
-
-
     /**
      * Gets the borrowerPerson attribute.
      *
@@ -1864,8 +1872,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public void setFabricationEstimatedRetentionYears(Integer fabricationEstimatedRetentionYears) {
         this.fabricationEstimatedRetentionYears = fabricationEstimatedRetentionYears;
     }
-
-
     public List<AssetRetirementGlobal> getRetirementGlobals() {
         return retirementGlobals;
     }
@@ -2135,8 +2141,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public String getAssetMergeOrRetirementDocumentLookup() {
         return getUrlForAssetDocumentLookup( CamsConstants.DocumentTypeName.ASSET_RETIREMENT_GLOBAL );
     }
-
-
     /**
      * Gets the camsComplexMaintenanceDocumentLookup attribute.
      *
@@ -2145,8 +2149,6 @@ public class AssetBase extends PersistableBusinessObjectBase {
     public String getCamsComplexMaintenanceDocumentLookup() {
         return getUrlForAssetDocumentLookup( CamsConstants.DocumentTypeName.COMPLEX_MAINTENANCE_DOC_BASE );
     }
-
-
     /**
      * override this method so we can remove the offcampus location
      *

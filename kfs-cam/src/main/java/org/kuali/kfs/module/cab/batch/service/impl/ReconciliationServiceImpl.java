@@ -281,6 +281,4 @@ public class ReconciliationServiceImpl implements ReconciliationService {
     public Collection<GlAccountLineGroup> getMisMatchedGroups() {
         return this.misMatchedGroups;
     }
-
-
 }

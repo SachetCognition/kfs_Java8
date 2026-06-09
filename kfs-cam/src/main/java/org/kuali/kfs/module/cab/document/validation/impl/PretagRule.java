@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.kuali.kfs.module.cab.document.validation.impl;
-
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -51,8 +49,6 @@ import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.maintenance.MaintenanceDocumentAuthorizer;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
-
-
 /**
  * This class represents the business rules for the maintenance of {@link AccountGlobal} business objects
  */

@@ -21,15 +21,33 @@ package org.kuali.kfs.module.cab.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CB_GL_ENTRY_AST_T")
+@IdClass(GeneralLedgerEntryAssetId.class)
 public class GeneralLedgerEntryAsset extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "CB_GL_ACCT_ID")
+
     private Long generalLedgerAccountIdentifier;
+    @Id
+    @Column(name = "CB_LN_NBR")
     private Integer capitalAssetBuilderLineNumber;
+    @Column(name = "CM_FDOC_NBR")
     private String capitalAssetManagementDocumentNumber;
+    @Transient
     private GeneralLedgerEntry generalLedgerEntry;
 
     /**
@@ -67,8 +85,6 @@ public class GeneralLedgerEntryAsset extends PersistableBusinessObjectBase {
     public void setCapitalAssetBuilderLineNumber(Integer capitalAssetBuilderLineNumber) {
         this.capitalAssetBuilderLineNumber = capitalAssetBuilderLineNumber;
     }
-
-
     /**
      * Gets the capitalAssetManagementDocumentNumber attribute.
      * 

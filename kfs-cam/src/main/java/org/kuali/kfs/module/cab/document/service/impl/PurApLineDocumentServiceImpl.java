@@ -68,8 +68,6 @@ import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.campus.Campus;
 import org.kuali.rice.location.api.campus.CampusService;
-
-
 /**
  * This class provides default implementations of {@link PurApLineService}
  */
@@ -108,8 +106,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         postProcessCreatingDocument(selectedItem, purApDocs, purApLineSession, newDocument.getDocumentNumber());
         return newDocument.getDocumentNumber();
     }
-
-
     /**
      * Create AssetPaymentAssetDetail List for assetPaymentDocument.
      *
@@ -138,8 +134,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             }
         }
     }
-
-
     /**
      * Check the asset table if given capitalAssetNumber is valid or not.
      *
@@ -155,8 +149,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
 
         return ObjectUtils.isNotNull(asset);
     }
-
-
     /**
      * @see org.kuali.kfs.module.cab.document.service.PurApLineService#processCreateAsset(org.kuali.kfs.module.cab.businessobject.PurchasingAccountsPayableItemAsset,
      *      org.kuali.kfs.module.cab.document.web.struts.PurApLineForm)
@@ -191,8 +183,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         }
         return newDocument.getDocumentNumber();
     }
-
-
     /**
      * Process item line, cab document after creating CAMs document.
      *
@@ -227,8 +217,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             businessObjectService.save(glEntryUpdatesList);
         }
     }
-
-
     /**
      * set doc status as enroute when all its items are in CAMs
      *
@@ -243,8 +231,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
 
         selectedDoc.setActivityStatusCode(CabConstants.ActivityStatusCode.ENROUTE);
     }
-
-
     /**
      * Update transactionLedgerSubmitAmount in the associated generalLedgerEntry for each item account.
      *
@@ -268,8 +254,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             glEntryList.add(glEntry);
         }
     }
-
-
     /**
      * Build asset details/shared details/unique details lists for new asset global document
      *
@@ -326,8 +310,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         }
         return false;
     }
-
-
     /**
      * Set asset global detail location information from PurAp input. In this method, no grouping for shared location because
      * AssetGlobalMaintainableImpl.processAfterRetrieve() will group the shared location anyway...
@@ -413,8 +395,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             }
         }
     }
-
-
     /**
      * Check the given buildingCode and campusCode valid.
      *
@@ -431,8 +411,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         Room room = this.getBusinessObjectService().findByPrimaryKey(Room.class, pKeys);
         return ObjectUtils.isNotNull(room) && room.isActive();
     }
-
-
     /**
      * Check the given buildingCode and campusCode valid.
      *
@@ -446,8 +424,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         Building building = this.getBusinessObjectService().findByPrimaryKey(Building.class, pKeys);
         return ObjectUtils.isNotNull(building) && building.isActive();
     }
-
-
     /**
      * check the given campus code existing and active status.
      *
@@ -562,8 +538,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             }
         }
     }
-
-
     /**
      * In-activate item, item Account and generalLedgerEntry active indicator.
      *
@@ -610,8 +584,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         }
         return glEntryUpdateList;
     }
-
-
     protected String replaceFiller(String val) {
         return val == null ? "" : val.trim().replaceAll("-", "");
     }
@@ -690,8 +662,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             }
         }
     }
-
-
     /**
      * check if item is pre-tagged already.
      *
@@ -701,8 +671,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
     protected boolean isItemPretagged(Pretag preTag) {
         return ObjectUtils.isNotNull(preTag) && preTag.isActive() && ObjectUtils.isNotNull(preTag.getPretagDetails()) && !preTag.getPretagDetails().isEmpty();
     }
-
-
     /**
      * Set asset information from PurAp PurchaseOrderCapitalAssetSystem.
      *
@@ -717,8 +685,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             assetGlobal.setCapitalAssetTypeCode(capitalAssetSystem.getCapitalAssetTypeCode());
         }
     }
-
-
     /**
      * check the given capital asset type code exists in CAM
      *
@@ -731,8 +697,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         AssetType assetType = this.getBusinessObjectService().findByPrimaryKey(AssetType.class, pKeys);
         return ObjectUtils.isNotNull(assetType);
     }
-
-
     /**
      * Get PurAp PurchaseOrderCapitalAssetSystem Object if exists.
      *
@@ -745,8 +709,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
         pKeys.put(PurapPropertyConstants.CAPITAL_ASSET_SYSTEM_IDENTIFIER, capitalAssetSystemIdentifier);
         return businessObjectService.findByPrimaryKey(PurchaseOrderCapitalAssetSystem.class, pKeys);
     }
-
-
     /**
      * Set Asset Global org owner account and chart code. It's assigned by selecting the account that contributed the most dollars
      * on the payment request.
@@ -767,8 +729,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
             assetGlobal.setOrganizationOwnerChartOfAccountsCode(maxCostPayment.getChartOfAccountsCode());
         }
     }
-
-
     /**
      * Set Asset Global total cost amount.
      *
@@ -782,8 +742,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
 
         assetGlobal.setTotalCostAmount(totalCost);
     }
-
-
     /**
      * Feeding data from preTag and set into asset global for shared information. PreTag data may override PurAp asset data since
      * the strategy choose to respect Pretagging
@@ -837,8 +795,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
     public DocumentService getDocumentService() {
         return documentService;
     }
-
-
     /**
      * Sets the documentService attribute value.
      *
@@ -865,8 +821,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
     public void setPurApLineService(PurApLineService purApLineService) {
         this.purApLineService = purApLineService;
     }
-
-
     /**
      * Gets the purApInfoService attribute.
      *
@@ -875,8 +829,6 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
     public PurApInfoService getPurApInfoService() {
         return purApInfoService;
     }
-
-
     /**
      * Sets the purApInfoService attribute value.
      *
@@ -885,13 +837,9 @@ public class PurApLineDocumentServiceImpl implements PurApLineDocumentService {
     public void setPurApInfoService(PurApInfoService purApInfoService) {
         this.purApInfoService = purApInfoService;
     }
-
-
     private AssetGlobalService getAssetGlobalService() {
         return assetGlobalService;
     }
-
-
     public void setAssetGlobalService(AssetGlobalService assetGlobalService) {
         this.assetGlobalService = assetGlobalService;
     }

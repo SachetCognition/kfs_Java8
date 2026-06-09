@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.kuali.kfs.module.cab.batch.service;
-
-
 /**
  * The interface defines loading and cleanup methods for nightly batch jobs
  */

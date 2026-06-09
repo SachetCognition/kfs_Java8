@@ -49,29 +49,54 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
-
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+@Entity
+@Table(name = "CM_EQPLNRTRN_DOC_T")
 public class EquipmentLoanOrReturnDocument extends FinancialSystemTransactionalDocumentBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EquipmentLoanOrReturnDocument.class);
 
     protected String hiddenFieldForError;
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "CPTLAST_LOAN_DT")
     protected Date loanDate;
+    @Column(name = "AST_EXPCTRETURN_DT")
     protected Date expectedReturnDate;
+    @Column(name = "CPTLAST_LN_RTRN_DT")
     protected Date loanReturnDate;
+    @Column(name = "AST_BORWR_UNVL_ID")
     protected String borrowerUniversalIdentifier;
+    @Column(name = "AST_BORWR_ADDR")
     protected String borrowerAddress;
+    @Column(name = "AST_BORWR_CITY_NM")
     protected String borrowerCityName;
+    @Column(name = "AST_BORWR_STATE_CD")
     protected String borrowerStateCode;
+    @Column(name = "AST_BORWR_ZIP_CD")
     protected String borrowerZipCode;
+    @Column(name = "AST_BORWR_CNTRY_CD")
     protected String borrowerCountryCode;
+    @Column(name = "AST_BORWR_PHN_NBR")
     protected String borrowerPhoneNumber;
+    @Column(name = "AST_BORWRSTRG_ADDR")
     protected String borrowerStorageAddress;
+    @Column(name = "AST_BORWRSTRGCT_NM")
     protected String borrowerStorageCityName;
+    @Column(name = "AST_BORWRSTRGST_CD")
     protected String borrowerStorageStateCode;
+    @Column(name = "AST_BORWRSTRGZP_CD")
     protected String borrowerStorageZipCode;
+    @Column(name = "AST_BORWRSTRCNT_CD")
     protected String borrowerStorageCountryCode;
+    @Column(name = "AST_BORWRSTRPH_NBR")
     protected String borrowerStoragePhoneNumber;
+    @Column(name = "CPTLAST_NBR")
     protected Long capitalAssetNumber;
 
     protected StateEbo borrowerState;
@@ -79,6 +104,7 @@ public class EquipmentLoanOrReturnDocument extends FinancialSystemTransactionalD
     protected CountryEbo borrowerCountry;
     protected CountryEbo borrowerStorageCountry;
     protected Person borrowerPerson;
+    @Transient
     protected Asset asset;
     protected PostalCodeEbo borrowerPostalZipCode;
     protected PostalCodeEbo borrowerStoragePostalZipCode;

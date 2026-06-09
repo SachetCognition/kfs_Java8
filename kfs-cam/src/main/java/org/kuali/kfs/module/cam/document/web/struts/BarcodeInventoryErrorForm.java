@@ -79,13 +79,9 @@ public class BarcodeInventoryErrorForm extends FinancialSystemTransactionalDocum
     public void setRowCheckbox(int r[]) {
         this.rowCheckbox = r;
     }
-
-
     public boolean isSelectAllCheckbox() {
         return selectAllCheckbox;
     }
-
-
     public void setSelectAllCheckbox(boolean selectAllCheckbox) {
         this.selectAllCheckbox = selectAllCheckbox;
     }

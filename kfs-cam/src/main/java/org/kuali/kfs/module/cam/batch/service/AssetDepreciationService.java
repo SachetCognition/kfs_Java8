@@ -28,8 +28,6 @@ public interface AssetDepreciationService {
      * This method runs depreciation process
      */
     public void runDepreciation();
-
-
     // CSU 6702 BEGIN
     /**
      * This method runs depreciation process

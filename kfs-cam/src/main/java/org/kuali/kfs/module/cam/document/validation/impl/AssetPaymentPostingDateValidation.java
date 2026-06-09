@@ -50,8 +50,6 @@ public class AssetPaymentPostingDateValidation extends GenericValidation {
     private DataDictionaryService dataDictionaryService;
     private UniversityDateService universityDateService;
     private AssetPaymentService assetPaymentService;
-
-
     /**
      * Validates asset payment posting date
      * 

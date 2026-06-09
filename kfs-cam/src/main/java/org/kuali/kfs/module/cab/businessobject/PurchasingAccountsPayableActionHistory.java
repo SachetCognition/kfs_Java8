@@ -22,23 +22,54 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CB_PUR_ACTN_HIST_T")
 public class PurchasingAccountsPayableActionHistory extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CB_ACTN_ID_SEQ")
+
+    @SequenceGenerator(name = "CB_ACTN_ID_SEQ", sequenceName = "CB_ACTN_ID_SEQ")
+
+    @Column(name = "ACTN_ID")
+
     private Long actionIdentifier;
+    @Column(name = "ACTN_TYP_CD")
     private String actionTypeCode;
+    @Column(name = "FRM_FDOC_NBR")
     private String fromDocumentNumber;
+    @Column(name = "FRM_PUR_ITM_ID")
     private Integer fromPurApLineItemIdentifier;
+    @Column(name = "FRM_CB_LN_NBR")
     private Integer fromCabLineNumber;
+    @Column(name = "TO_FDOC_NBR")
     private String toDocumentNumber;
+    @Column(name = "TO_PUR_ITM_ID")
     private Integer toPurApLineItemIdentifier;
+    @Column(name = "TO_CB_LN_NBR")
     private Integer toCabLineNumber;
+    @Column(name = "CB_GL_ACCT_ID")
     private Long generalLedgerAccountIdentifier;
+    @Column(name = "ITM_ACCT_TOT_AMT")
     private KualiDecimal itemAccountTotalAmount;
+    @Column(name = "PUR_ITM_QTY")
     private KualiDecimal accountsPayableItemQuantity;
+    @Column(name = "ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     public PurchasingAccountsPayableActionHistory() {
@@ -67,8 +98,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public Long getActionIdentifier() {
         return actionIdentifier;
     }
-
-
     /**
      * Sets the actionIdentifier attribute value.
      * 
@@ -77,8 +106,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setActionIdentifier(Long actionIdentifier) {
         this.actionIdentifier = actionIdentifier;
     }
-
-
     /**
      * Gets the actionTypeCode attribute.
      * 
@@ -87,8 +114,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public String getActionTypeCode() {
         return actionTypeCode;
     }
-
-
     /**
      * Sets the actionTypeCode attribute value.
      * 
@@ -97,8 +122,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setActionTypeCode(String actionTypeCode) {
         this.actionTypeCode = actionTypeCode;
     }
-
-
     /**
      * Gets the fromDocumentNumber attribute.
      * 
@@ -107,8 +130,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public String getFromDocumentNumber() {
         return fromDocumentNumber;
     }
-
-
     /**
      * Sets the fromDocumentNumber attribute value.
      * 
@@ -117,8 +138,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setFromDocumentNumber(String fromDocumentNumber) {
         this.fromDocumentNumber = fromDocumentNumber;
     }
-
-
     /**
      * Gets the fromPurApLineItemIdentifier attribute.
      * 
@@ -127,8 +146,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public Integer getFromPurApLineItemIdentifier() {
         return fromPurApLineItemIdentifier;
     }
-
-
     /**
      * Sets the fromPurApLineItemIdentifier attribute value.
      * 
@@ -137,8 +154,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setFromPurApLineItemIdentifier(Integer fromPurApLineItemIdentifier) {
         this.fromPurApLineItemIdentifier = fromPurApLineItemIdentifier;
     }
-
-
     /**
      * Gets the fromCabLineNumber attribute.
      * 
@@ -147,8 +162,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public Integer getFromCabLineNumber() {
         return fromCabLineNumber;
     }
-
-
     /**
      * Sets the fromCabLineNumber attribute value.
      * 
@@ -157,8 +170,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setFromCabLineNumber(Integer fromCabLineNumber) {
         this.fromCabLineNumber = fromCabLineNumber;
     }
-
-
     /**
      * Gets the toDocumentNumber attribute.
      * 
@@ -167,8 +178,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public String getToDocumentNumber() {
         return toDocumentNumber;
     }
-
-
     /**
      * Sets the toDocumentNumber attribute value.
      * 
@@ -177,8 +186,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setToDocumentNumber(String toDocumentNumber) {
         this.toDocumentNumber = toDocumentNumber;
     }
-
-
     /**
      * Gets the toPurApLineItemIdentifier attribute.
      * 
@@ -187,8 +194,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public Integer getToPurApLineItemIdentifier() {
         return toPurApLineItemIdentifier;
     }
-
-
     /**
      * Sets the toPurApLineItemIdentifier attribute value.
      * 
@@ -197,8 +202,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setToPurApLineItemIdentifier(Integer toPurApLineItemIdentifier) {
         this.toPurApLineItemIdentifier = toPurApLineItemIdentifier;
     }
-
-
     /**
      * Gets the toCabLineNumber attribute.
      * 
@@ -207,8 +210,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public Integer getToCabLineNumber() {
         return toCabLineNumber;
     }
-
-
     /**
      * Sets the toCabLineNumber attribute value.
      * 
@@ -217,8 +218,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setToCabLineNumber(Integer toCabLineNumber) {
         this.toCabLineNumber = toCabLineNumber;
     }
-
-
     /**
      * Gets the generalLedgerAccountIdentifier attribute.
      * 
@@ -227,8 +226,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public Long getGeneralLedgerAccountIdentifier() {
         return generalLedgerAccountIdentifier;
     }
-
-
     /**
      * Sets the generalLedgerAccountIdentifier attribute value.
      * 
@@ -237,8 +234,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setGeneralLedgerAccountIdentifier(Long generalLedgerAccountIdentifier) {
         this.generalLedgerAccountIdentifier = generalLedgerAccountIdentifier;
     }
-
-
     /**
      * Gets the itemAccountTotalAmount attribute.
      * 
@@ -247,8 +242,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public KualiDecimal getItemAccountTotalAmount() {
         return itemAccountTotalAmount;
     }
-
-
     /**
      * Sets the itemAccountTotalAmount attribute value.
      * 
@@ -257,8 +250,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setItemAccountTotalAmount(KualiDecimal itemAccountTotalAmount) {
         this.itemAccountTotalAmount = itemAccountTotalAmount;
     }
-
-
     /**
      * Gets the accountsPayableItemQuantity attribute.
      * 
@@ -267,8 +258,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public KualiDecimal getAccountsPayableItemQuantity() {
         return accountsPayableItemQuantity;
     }
-
-
     /**
      * Sets the accountsPayableItemQuantity attribute value.
      * 
@@ -277,8 +266,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setAccountsPayableItemQuantity(KualiDecimal accountsPayableItemQuantity) {
         this.accountsPayableItemQuantity = accountsPayableItemQuantity;
     }
-
-
     /**
      * Gets the active attribute.
      * 
@@ -287,8 +274,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public boolean isActive() {
         return active;
     }
-
-
     /**
      * Sets the active attribute value.
      * 
@@ -297,8 +282,6 @@ public class PurchasingAccountsPayableActionHistory extends PersistableBusinessO
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */

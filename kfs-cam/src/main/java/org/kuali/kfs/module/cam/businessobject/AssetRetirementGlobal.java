@@ -58,46 +58,90 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+
+@Table(name = "CM_AST_RETIRE_DOC_T")
+
 public class AssetRetirementGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     protected String documentNumber;
+    @Column(name = "MERGED_TGT_CPTLAST_NBR")
     protected Long mergedTargetCapitalAssetNumber;
+    @Column(name = "MERGED_TGT_CPTLAST_DESC")
     protected String mergedTargetCapitalAssetDescription;
+    @Column(name = "AST_RETIRE_REAS_CD")
     protected String retirementReasonCode;
+    @Column(name = "AST_RETIR_COA_CD")
     protected String retirementChartOfAccountsCode;
+    @Column(name = "AST_RETIR_ACCT_NBR")
     protected String retirementAccountNumber;
+    @Column(name = "AST_RETIR_CNTCT_NM")
     protected String retirementContactName;
+    @Column(name = "AST_RETIR_INST_NM")
     protected String retirementInstitutionName;
+    @Column(name = "AST_RETIRSTRT_ADDR")
     protected String retirementStreetAddress;
+    @Column(name = "AST_RETIR_CITY_NM")
     protected String retirementCityName;
+    @Column(name = "AST_RETIR_STATE_CD")
     protected String retirementStateCode;
+    @Column(name = "AST_RETIR_ZIP_CD")
     protected String retirementZipCode;
+    @Column(name = "AST_RETIR_CNTRY_CD")
     protected String retirementCountryCode;
+    @Column(name = "AST_RETIR_PHN_NBR")
     protected String retirementPhoneNumber;
+    @Column(name = "AST_EST_SELL_PRC")
     protected KualiDecimal estimatedSellingPrice;
+    @Column(name = "CPTLAST_SALE_PRC")
     protected KualiDecimal salePrice;
+    @Column(name = "CASH_RCPT_FDOC_NBR")
     protected String cashReceiptFinancialDocumentNumber;
+    @Column(name = "AST_HANDLG_FEE_AMT")
     protected KualiDecimal handlingFeeAmount;
+    @Column(name = "AST_PRVNTMAINT_AMT")
     protected KualiDecimal preventiveMaintenanceAmount;
+    @Column(name = "CPTLAST_BUYER_DESC")
     protected String buyerDescription;
+    @Column(name = "AST_PD_CASE_NBR")
     protected String paidCaseNumber;
     // persistent relationship
+    @Column(name = "CPTLAST_RETIRE_DT")
     protected Date retirementDate;
+    @Transient
     protected Asset mergedTargetCapitalAsset;
+    @Transient
     protected AssetRetirementReason retirementReason;
+    @Transient
     protected FinancialSystemDocumentHeader documentHeader;
+    @Transient
     protected List<AssetRetirementGlobalDetail> assetRetirementGlobalDetails;
+    @Transient
     protected Account retirementAccount;
+    @Transient
     protected Chart retirementChartOfAccounts;
+    @Transient
     protected DocumentHeader cashReceiptFinancialDocument;
     protected StateEbo retirementState;
     protected CountryEbo retirementCountry;
     protected PostalCodeEbo postalZipCode;
+
+    @Transient
 
     protected List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
 
@@ -116,8 +160,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
         this.assetRetirementGlobalDetails = new ArrayList<AssetRetirementGlobalDetail>();
         this.generalLedgerPendingEntries = new ArrayList<GeneralLedgerPendingEntry>();
     }
-
-
     @Override
     public List<PersistableBusinessObject> generateDeactivationsToPersist() {
         return null;
@@ -169,8 +211,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
             asset.setRetirementFiscalYear(universityDateService.getCurrentUniversityDate().getUniversityFiscalYear());
             asset.setRetirementPeriodCode(universityDateService.getCurrentUniversityDate().getUniversityFiscalAccountingPeriod());
         }
-
-
         if (retirementService.isAssetRetiredByTheft(this) && StringUtils.isNotBlank(this.getPaidCaseNumber())) {
             asset.setCampusPoliceDepartmentCaseNumber(this.getPaidCaseNumber());
         }
@@ -258,8 +298,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
         mergedTargetCapitalAsset.setCapitalAssetDescription(this.getMergedTargetCapitalAssetDescription());
         persistables.add(mergedTargetCapitalAsset);
     }
-
-
     @Override
     public List<? extends GlobalBusinessObjectDetail> getAllDetailObjects() {
         return getAssetRetirementGlobalDetails();
@@ -289,8 +327,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
-
-
     /**
      * Gets the mergedTargetCapitalAssetNumber attribute.
      *
@@ -308,8 +344,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setMergedTargetCapitalAssetNumber(Long mergedTargetCapitalAssetNumber) {
         this.mergedTargetCapitalAssetNumber = mergedTargetCapitalAssetNumber;
     }
-
-
     /**
      * Gets the retirementReasonCode attribute.
      *
@@ -327,8 +361,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementReasonCode(String retirementReasonCode) {
         this.retirementReasonCode = retirementReasonCode;
     }
-
-
     /**
      * Gets the retirementDate attribute.
      *
@@ -384,8 +416,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementReason(AssetRetirementReason retirementReason) {
         this.retirementReason = retirementReason;
     }
-
-
     public FinancialSystemDocumentHeader getDocumentHeader() {
         return documentHeader;
     }
@@ -401,18 +431,12 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setAssetRetirementGlobalDetails(List<AssetRetirementGlobalDetail> assetRetirementGlobalDetails) {
         this.assetRetirementGlobalDetails = assetRetirementGlobalDetails;
     }
-
-
     public List<GeneralLedgerPendingEntry> getGeneralLedgerPendingEntries() {
         return generalLedgerPendingEntries;
     }
-
-
     public void setGeneralLedgerPendingEntries(List<GeneralLedgerPendingEntry> glPendingEntries) {
         this.generalLedgerPendingEntries = glPendingEntries;
     }
-
-
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
@@ -421,13 +445,9 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
         m.put("documentNumber", this.documentNumber);
         return m;
     }
-
-
     public String getMergedTargetCapitalAssetDescription() {
         return mergedTargetCapitalAssetDescription;
     }
-
-
     public void setMergedTargetCapitalAssetDescription(String mergedTargetCapitalAssetDescription) {
         this.mergedTargetCapitalAssetDescription = mergedTargetCapitalAssetDescription;
     }
@@ -449,8 +469,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementChartOfAccountsCode(String retirementChartOfAccountsCode) {
         this.retirementChartOfAccountsCode = retirementChartOfAccountsCode;
     }
-
-
     /**
      * Gets the retirementAccountNumber attribute.
      *
@@ -468,8 +486,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementAccountNumber(String retirementAccountNumber) {
         this.retirementAccountNumber = retirementAccountNumber;
     }
-
-
     /**
      * Gets the retirementContactName attribute.
      *
@@ -487,8 +503,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementContactName(String retirementContactName) {
         this.retirementContactName = retirementContactName;
     }
-
-
     /**
      * Gets the retirementInstitutionName attribute.
      *
@@ -506,8 +520,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementInstitutionName(String retirementInstitutionName) {
         this.retirementInstitutionName = retirementInstitutionName;
     }
-
-
     /**
      * Gets the retirementStreetAddress attribute.
      *
@@ -525,8 +537,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementStreetAddress(String retirementStreetAddress) {
         this.retirementStreetAddress = retirementStreetAddress;
     }
-
-
     /**
      * Gets the retirementCityName attribute.
      *
@@ -544,8 +554,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementCityName(String retirementCityName) {
         this.retirementCityName = retirementCityName;
     }
-
-
     /**
      * Gets the retirementStateCode attribute.
      *
@@ -563,8 +571,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementStateCode(String retirementStateCode) {
         this.retirementStateCode = retirementStateCode;
     }
-
-
     /**
      * Gets the retirementZipCode attribute.
      *
@@ -582,8 +588,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementZipCode(String retirementZipCode) {
         this.retirementZipCode = retirementZipCode;
     }
-
-
     /**
      * Gets the postalZipCode attribute.
      *
@@ -635,8 +639,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementCountryCode(String retirementCountryCode) {
         this.retirementCountryCode = retirementCountryCode;
     }
-
-
     /**
      * Gets the retirementPhoneNumber attribute.
      *
@@ -654,8 +656,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementPhoneNumber(String retirementPhoneNumber) {
         this.retirementPhoneNumber = retirementPhoneNumber;
     }
-
-
     /**
      * Gets the estimatedSellingPrice attribute.
      *
@@ -673,8 +673,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setEstimatedSellingPrice(KualiDecimal estimatedSellingPrice) {
         this.estimatedSellingPrice = estimatedSellingPrice;
     }
-
-
     /**
      * Gets the salePrice attribute.
      *
@@ -692,8 +690,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setSalePrice(KualiDecimal salePrice) {
         this.salePrice = salePrice;
     }
-
-
     /**
      * Gets the cashReceiptFinancialDocumentNumber attribute.
      *
@@ -711,8 +707,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setCashReceiptFinancialDocumentNumber(String cashReceiptFinancialDocumentNumber) {
         this.cashReceiptFinancialDocumentNumber = cashReceiptFinancialDocumentNumber;
     }
-
-
     /**
      * Gets the handlingFeeAmount attribute.
      *
@@ -730,8 +724,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setHandlingFeeAmount(KualiDecimal handlingFeeAmount) {
         this.handlingFeeAmount = handlingFeeAmount;
     }
-
-
     /**
      * Gets the preventiveMaintenanceAmount attribute.
      *
@@ -749,8 +741,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setPreventiveMaintenanceAmount(KualiDecimal preventiveMaintenanceAmount) {
         this.preventiveMaintenanceAmount = preventiveMaintenanceAmount;
     }
-
-
     /**
      * Gets the buyerDescription attribute.
      *
@@ -768,8 +758,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setBuyerDescription(String buyerDescription) {
         this.buyerDescription = buyerDescription;
     }
-
-
     /**
      * Gets the paidCaseNumber attribute.
      *
@@ -825,8 +813,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementAccount(Account retirementAccount) {
         this.retirementAccount = retirementAccount;
     }
-
-
     /**
      * Gets the cashReceiptFinancialDocument attribute.
      *
@@ -845,8 +831,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setCashReceiptFinancialDocument(DocumentHeader cashReceiptFinancialDocument) {
         this.cashReceiptFinancialDocument = cashReceiptFinancialDocument;
     }
-
-
     /**
      * Gets the retirementCountry attribute.
      *
@@ -915,8 +899,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
     public void setRetirementState(StateEbo retirementState) {
         this.retirementState = retirementState;
     }
-
-
     /**
      * Gets the calculatedTotal attribute.
      *
@@ -962,8 +944,6 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
         }
         return accountingPeriodService;
     }
-
-
     /**
      * Creates a composite of postingPeriodCode and postingyear.
      * @return composite or an empty string if either postingPeriodCode or postingYear is null

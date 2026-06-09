@@ -44,22 +44,47 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.util.UrlFactory;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CB_PUR_ITM_AST_T")
+@IdClass(PurchasingAccountsPayableItemAssetId.class)
 public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjectBase implements Comparable<PurchasingAccountsPayableItemAsset> {
     private static final Logger LOG = Logger.getLogger(PurchasingAccountsPayableItemAsset.class);
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Id
+    @Column(name = "PUR_ITM_ID")
     private Integer accountsPayableLineItemIdentifier;
+    @Id
+    @Column(name = "CB_LN_NBR")
     private Integer capitalAssetBuilderLineNumber;
+    @Column(name = "PUR_ITM_DESC")
     private String accountsPayableLineItemDescription;
+    @Column(name = "PUR_ITM_QTY")
     private KualiDecimal accountsPayableItemQuantity;
+    @Column(name = "CM_FDOC_NBR")
     private String capitalAssetManagementDocumentNumber;
+    @Column(name = "ACTV_IND")
     private String activityStatusCode;
 
+    @Transient
+
     private PurchasingAccountsPayableDocument purchasingAccountsPayableDocument;
+    @Transient
     private List<PurchasingAccountsPayableLineAssetAccount> purchasingAccountsPayableLineAssetAccounts;
 
     // non persistent fields
@@ -120,8 +145,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
         this.purchasingAccountsPayableDocument = initialItemAsset.getPurchasingAccountsPayableDocument();
         this.lockingInformation = initialItemAsset.getLockingInformation();
     }
-
-
     /**
      * Gets the lockingInformation attribute.
      * @return Returns the lockingInformation.
@@ -173,8 +196,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
     public void setPurchaseOrderItemIdentifier(Integer purchaseOrderItemIdentifier) {
         this.purchaseOrderItemIdentifier = purchaseOrderItemIdentifier;
     }
-
-
     /**
      * Gets the capitalAssetNumbers attribute.
      *
@@ -204,8 +225,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
         }
         return getPurApItemAssets().get(index);
     }
-
-
     /**
      * Gets the createAssetIndicator attribute.
      *
@@ -349,8 +368,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
     public void setSplitQty(KualiDecimal splitQty) {
         this.splitQty = splitQty;
     }
-
-
     /**
      * Gets the purchasingAccountsPayableLineAssetAccounts attribute.
      *
@@ -458,8 +475,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
     public void setCapitalAssetBuilderLineNumber(Integer capitalAssetBuilderLineNumber) {
         this.capitalAssetBuilderLineNumber = capitalAssetBuilderLineNumber;
     }
-
-
     /**
      * Gets the capitalAssetManagementDocumentNumber attribute.
      *

@@ -24,8 +24,6 @@ import org.kuali.kfs.module.cam.document.AssetPaymentDocument;
 import org.kuali.kfs.sys.document.validation.GenericValidation;
 import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent;
 import org.kuali.rice.krad.util.GlobalVariables;
-
-
 /**
  * This class validates to make sure that at least one payment line is available for the document
  */

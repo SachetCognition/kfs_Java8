@@ -36,8 +36,6 @@ public class AssetPaymentManuallyAddAccountingLineEvent extends AttributedDocume
         super("adding asset payment asset detail to asset payment document " + getDocumentId(document), errorPathPrefix, document);
         this.accountingLine = accountingLine;
     }
-
-
     public AccountingLine getAccountingLine() {
         return accountingLine;
     }

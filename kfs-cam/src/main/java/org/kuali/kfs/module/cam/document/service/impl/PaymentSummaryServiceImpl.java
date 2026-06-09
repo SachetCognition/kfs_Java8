@@ -39,8 +39,6 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class implements PaymentSummaryService
  */
 public class PaymentSummaryServiceImpl implements PaymentSummaryService {
-
-
     private static Map<Integer, Method> DEPR_AMT_FIELDS = new HashMap<Integer, Method>();
     /**
      * Map will store getter method mapped to each primary depreciation period column. Based on the current fiscal month, current
@@ -94,8 +92,6 @@ public class PaymentSummaryServiceImpl implements PaymentSummaryService {
             asset.setCurrentMonthDepreciation(calculatePrimaryCurrentMonthDepreciation(asset));
         }
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.PaymentSummaryService#calculateFederalContribution(org.kuali.kfs.module.cam.businessobject.Asset)
      */
@@ -154,8 +150,6 @@ public class PaymentSummaryServiceImpl implements PaymentSummaryService {
         }
         return amount;
     }
-
-
     /**
      * Sums up primary base amount for an asset
      * 
@@ -191,8 +185,6 @@ public class PaymentSummaryServiceImpl implements PaymentSummaryService {
         }
         return baseAmount.subtract(accumDeprAmount);
     }
-
-
     /**
      * Sums current month depreciation amount for an asset
      * 
@@ -212,8 +204,6 @@ public class PaymentSummaryServiceImpl implements PaymentSummaryService {
         }
         return amount;
     }
-
-
     /**
      * Sums up previous year depreciation amount for an asset
      * 
@@ -232,8 +222,6 @@ public class PaymentSummaryServiceImpl implements PaymentSummaryService {
         }
         return amount;
     }
-
-
     /**
      * Sums up year to date depreciation amount for an asset
      * 

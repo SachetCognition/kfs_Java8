@@ -19,8 +19,6 @@
 package org.kuali.kfs.module.cab.dataaccess;
 
 import org.kuali.kfs.gl.businessobject.Entry;
-
-
 public interface ReconciliationDao {
     /**
      * This method checks for duplicate entries

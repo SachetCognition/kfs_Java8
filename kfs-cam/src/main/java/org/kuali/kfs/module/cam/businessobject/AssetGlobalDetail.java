@@ -39,33 +39,73 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_DTL_T")
+@IdClass(AssetGlobalDetailId.class)
 public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CPTLAST_NBR_SEQ")
+    @SequenceGenerator(name = "CPTLAST_NBR_SEQ", sequenceName = "CPTLAST_NBR_SEQ")
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "BLDG_CD")
     private String buildingCode;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     private String serialNumber;
+    @Column(name = "BLDG_ROOM_NBR")
     private String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     private String buildingSubRoomNumber;
+    @Column(name = "CPTLAST_TAG_NBR")
     private String campusTagNumber;
+    @Column(name = "ORG_INVN_NM")
     private String organizationInventoryName;
+    @Column(name = "ORG_CPTLAST_TYP_ID")
     private String organizationAssetTypeIdentifier;
+    @Column(name = "AST_OFFCMP_NM")
     private String offCampusName;
+    @Column(name = "AST_OFFCMP_ADDR")
     private String offCampusAddress;
+    @Column(name = "AST_OFFCMP_CITY_NM")
     private String offCampusCityName;
+    @Column(name = "AST_OFFCMP_ST_CD")
     private String offCampusStateCode;
+    @Column(name = "AST_OFFCMP_ZIP_CD")
     private String offCampusZipCode;
+    @Column(name = "AST_OFFCMP_CNTRY_CD")
     private String offCampusCountryCode;
+    @Column(name = "CPTL_AST_GOV_TAG_NBR")
     private String governmentTagNumber;
+    @Column(name = "CPTL_AST_NTL_STOCK_NBR")
     private String nationalStockNumber;
+
+    @Transient
 
     private Asset asset;
     private CampusEbo campus;
+    @Transient
     private Building building;
     private Room buildingRoom;
     private StateEbo offCampusState;
@@ -73,15 +113,25 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     private PostalCodeEbo postalZipCode;
 
     private Integer locationQuantity;
+    @Column(name = "AST_REP_UNVL_ID")
     private String representativeUniversalIdentifier;
 
+    @Column(name = "CPTLAST_TYP_CD")
+
     private String capitalAssetTypeCode;
+    @Transient
     private AssetType capitalAssetType;
 
+    @Column(name = "CPTLAST_DESC")
+
     private String capitalAssetDescription;
+    @Column(name = "CPTLAST_MFR_NM")
     private String manufacturerName;
+    @Column(name = "ORG_TXT")
     private String organizationText;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     private String manufacturerModelNumber;
+    @Column(name = "SEP_SRC_AMT")
     private KualiDecimal separateSourceAmount; 
 
     // Non persistent
@@ -176,8 +226,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setCampusCode(String campusCode) {
         this.campusCode = campusCode;
     }
-
-
     /**
      * Gets the buildingCode attribute.
      * 
@@ -195,8 +243,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setBuildingCode(String buildingCode) {
         this.buildingCode = buildingCode;
     }
-
-
     /**
      * Gets the serialNumber attribute.
      * 
@@ -214,8 +260,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
-
-
     /**
      * Gets the buildingRoomNumber attribute.
      * 
@@ -233,8 +277,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setBuildingRoomNumber(String buildingRoomNumber) {
         this.buildingRoomNumber = buildingRoomNumber;
     }
-
-
     /**
      * Gets the buildingSubRoomNumber attribute.
      * 
@@ -252,8 +294,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
         this.buildingSubRoomNumber = buildingSubRoomNumber;
     }
-
-
     /**
      * Gets the campusTagNumber attribute.
      * 
@@ -271,8 +311,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setCampusTagNumber(String campusTagNumber) {
         this.campusTagNumber = campusTagNumber;
     }
-
-
     /**
      * Gets the organizationInventoryName attribute.
      * 
@@ -290,8 +328,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setOrganizationInventoryName(String organizationInventoryName) {
         this.organizationInventoryName = organizationInventoryName;
     }
-
-
     /**
      * Gets the organizationAssetTypeIdentifier attribute.
      * 
@@ -309,8 +345,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setOrganizationAssetTypeIdentifier(String organizationAssetTypeIdentifier) {
         this.organizationAssetTypeIdentifier = organizationAssetTypeIdentifier;
     }
-
-
     /**
      * Gets the offCampusAddress attribute.
      * 
@@ -328,8 +362,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setOffCampusAddress(String offCampusAddress) {
         this.offCampusAddress = offCampusAddress;
     }
-
-
     /**
      * Gets the offCampusCityName attribute.
      * 
@@ -347,8 +379,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setOffCampusCityName(String offCampusCityName) {
         this.offCampusCityName = offCampusCityName;
     }
-
-
     /**
      * Gets the offCampusStateCode attribute.
      * 
@@ -366,8 +396,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setOffCampusStateCode(String offCampusStateCode) {
         this.offCampusStateCode = offCampusStateCode;
     }
-
-
     /**
      * Gets the offCampusZipCode attribute.
      * 
@@ -439,8 +467,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setGovernmentTagNumber(String governmentTagNumber) {
         this.governmentTagNumber = governmentTagNumber;
     }
-
-
     /**
      * Gets the nationalStockNumber attribute.
      * 
@@ -649,8 +675,6 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setAsset(Asset asset) {
         this.asset = asset;
     }
-
-
     /**
      * Gets the assetGlobalUniqueDetails attribute.
      * 

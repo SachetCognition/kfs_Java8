@@ -22,16 +22,37 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+
+@Table(name = "CM_AST_RETIRE_DTL_T")
+
+@IdClass(AssetRetirementGlobalDetailId.class)
+
 public class AssetRetirementGlobalDetail extends GlobalBusinessObjectDetailBase {
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Transient
     private DocumentHeader documentHeader;
+    @Transient
     private Asset asset;
     private AssetRetirementGlobal assetRetirementGlobal;
 
@@ -58,8 +79,6 @@ public class AssetRetirementGlobalDetail extends GlobalBusinessObjectDetailBase 
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
-
-
     /**
      * Gets the capitalAssetNumber attribute.
      * 
@@ -96,8 +115,6 @@ public class AssetRetirementGlobalDetail extends GlobalBusinessObjectDetailBase 
     public void setAsset(Asset asset) {
         this.asset = asset;
     }
-
-
     public AssetRetirementGlobal getAssetRetirementGlobal() {
         return assetRetirementGlobal;
     }
@@ -105,8 +122,6 @@ public class AssetRetirementGlobalDetail extends GlobalBusinessObjectDetailBase 
     public void setAssetRetirementGlobal(AssetRetirementGlobal assetRetirementGlobal) {
         this.assetRetirementGlobal = assetRetirementGlobal;
     }
-
-
     public DocumentHeader getDocumentHeader() {
         return documentHeader;
     }

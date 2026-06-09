@@ -27,14 +27,37 @@ import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@Entity
+
+@Table(name = "CM_AST_PMT_AST_DTL_T")
+
+@IdClass(AssetPaymentAssetDetailId.class)
 
 public class AssetPaymentAssetDetail extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Column(name = "CPTLAST_PREV_TOT_CST_AMT")
     private KualiDecimal previousTotalCostAmount;
+    @Column(name = "CPTLAST_ALLOC_AMT")
     private KualiDecimal allocatedAmount = KualiDecimal.ZERO;
+    @Column(name = "CPTLAST_ALLOC_VAL")
     private KualiDecimal allocatedUserValue = KualiDecimal.ZERO;
+    @Column(name = "CPTLAST_ALLOC_VAL_PCT")
     private BigDecimal allocatedUserValuePct = BigDecimal.ZERO;
+
+    @Transient
 
     private Asset asset;
     private List<AssetPaymentDetail> assetPaymentDetails;

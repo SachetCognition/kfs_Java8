@@ -25,24 +25,47 @@ import org.apache.log4j.Logger;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CB_PUR_LN_AST_ACCT_T")
+@IdClass(PurchasingAccountsPayableLineAssetAccountId.class)
 public class PurchasingAccountsPayableLineAssetAccount extends PersistableBusinessObjectBase {
     private static final Logger LOG = Logger.getLogger(PurchasingAccountsPayableLineAssetAccount.class);
 
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Id
+    @Column(name = "PUR_ITM_ID")
     private Integer accountsPayableLineItemIdentifier;
+    @Id
+    @Column(name = "CB_LN_NBR")
     private Integer capitalAssetBuilderLineNumber;
+    @Id
+    @Column(name = "CB_GL_ACCT_ID")
     private Long generalLedgerAccountIdentifier;
+    @Column(name = "ITM_ACCT_TOT_AMT")
     private KualiDecimal itemAccountTotalAmount;
+    @Column(name = "ACTV_IND")
     private String activityStatusCode;
 
     // non-persistent field
     private boolean active;
 
     // References
+    @Transient
     private GeneralLedgerEntry generalLedgerEntry;
     private PurchasingAccountsPayableItemAsset purchasingAccountsPayableItemAsset;
 
@@ -110,8 +133,6 @@ public class PurchasingAccountsPayableLineAssetAccount extends PersistableBusine
     public boolean isActive() {
         return CabConstants.ActivityStatusCode.NEW.equalsIgnoreCase(this.getActivityStatusCode()) || CabConstants.ActivityStatusCode.MODIFIED.equalsIgnoreCase(this.getActivityStatusCode());
     }
-
-
     /**
      * Gets the activityStatusCode attribute.
      * 

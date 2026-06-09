@@ -37,6 +37,4 @@ public class AssetFabrication extends Asset {
     public void setAssetOrganization(AssetOrganization assetOrganization) {
         this.assetOrganization = assetOrganization;
     }
-
-
 }

@@ -17,8 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.kuali.kfs.module.cam.document.service;
-
-
 public interface AssetAcquisitionTypeService {
     /**
      * @param acquisitionTypeCode

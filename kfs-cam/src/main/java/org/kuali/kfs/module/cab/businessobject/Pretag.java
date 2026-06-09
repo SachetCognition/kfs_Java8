@@ -31,39 +31,73 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CB_PRTG_T")
+@IdClass(PretagId.class)
 public class Pretag extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "PO_NUMBER")
+
     private String purchaseOrderNumber;
+    @Id
+    @Column(name = "ITM_LN_NBR")
     private Integer itemLineNumber;
+    @Column(name = "CPTLAST_INV_QTY")
     private KualiDecimal quantityInvoiced;
+    @Column(name = "CPTLAST_TYP_CD")
     private String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_MFR_NM")
     private String manufacturerName;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     private String manufacturerModelNumber;
+    @Column(name = "VENDOR_NAME")
     private String vendorName;
+    @Column(name = "CPTLAST_TOPS_DESC")
     private String assetTopsDescription;
+    @Column(name = "CPTLAST_ORG_TXT")
     private String organizationText;
+    @Column(name = "ORG_INVN_NM")
     private String organizationInventoryName;
+    @Column(name = "AST_REP_UNVL_ID")
     private String representativeUniversalIdentifier;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "CM_PRTG_CRT_DT")
     private Date pretagCreateDate;
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
+
+    @Transient
 
     private Chart chartOfAccounts;
     private Organization organization;
+    @Transient
     private AssetType capitalAssetType;
     private Person personUniversal;
 
     private List<String> campusTagNumbers;
     private List<String> serialNumbers;
 
+    @Transient
+
     private List<PretagDetail> pretagDetails;
-
-
     /**
      * Default constructor.
      */
@@ -88,8 +122,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setPurchaseOrderNumber(String purchaseOrderNumber) {
         this.purchaseOrderNumber = purchaseOrderNumber;
     }
-
-
     /**
      * Gets the itemLineNumber attribute.
      * 
@@ -125,8 +157,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setQuantityInvoiced(KualiDecimal quantityInvoiced) {
         this.quantityInvoiced = quantityInvoiced;
     }
-
-
     /**
      * Gets the capitalAssetTypeCode attribute.
      * 
@@ -144,8 +174,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setCapitalAssetTypeCode(String capitalAssetTypeCode) {
         this.capitalAssetTypeCode = capitalAssetTypeCode;
     }
-
-
     /**
      * Gets the manufacturerName attribute.
      * 
@@ -163,8 +191,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setManufacturerName(String manufacturerName) {
         this.manufacturerName = manufacturerName;
     }
-
-
     /**
      * Gets the manufacturerModelNumber attribute.
      * 
@@ -182,8 +208,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setManufacturerModelNumber(String manufacturerModelNumber) {
         this.manufacturerModelNumber = manufacturerModelNumber;
     }
-
-
     /**
      * Gets the vendorName attribute.
      * 
@@ -201,8 +225,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setVendorName(String vendorName) {
         this.vendorName = vendorName;
     }
-
-
     /**
      * Gets the assetTopsDescription attribute.
      * 
@@ -238,8 +260,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setOrganizationText(String organizationText) {
         this.organizationText = organizationText;
     }
-
-
     /**
      * Gets the organizationInventoryName attribute.
      * 
@@ -284,8 +304,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setRepresentativeUniversalIdentifier(String representativeUniversalIdentifier) {
         this.representativeUniversalIdentifier = representativeUniversalIdentifier;
     }
-
-
     /**
      * Gets the chartOfAccountsCode attribute.
      * 
@@ -303,8 +321,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
-
     /**
      * Gets the pretagCreateDate attribute.
      * 
@@ -322,8 +338,6 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     public void setPretagCreateDate(Date pretagCreateDate) {
         this.pretagCreateDate = pretagCreateDate;
     }
-
-
     /**
      * Gets the organizationCode attribute.
      * 

@@ -23,8 +23,6 @@ import java.util.List;
 
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.krad.keyvalues.KeyValuesBase;
-
-
 public class YesNoValuesFinder extends KeyValuesBase {
 
     /*

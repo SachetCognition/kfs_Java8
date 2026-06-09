@@ -133,6 +133,4 @@ public class ExtractStep extends AbstractStep {
     public void setBatchExtractReportService(BatchExtractReportService batchExtractReportService) {
         this.batchExtractReportService = batchExtractReportService;
     }
-
-
 }

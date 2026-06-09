@@ -22,14 +22,29 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.hibernate.annotations.Type;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_STATUS_T")
 public class AssetStatus extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "AST_INVN_STAT_CD")
+
     private String inventoryStatusCode;
+    @Column(name = "AST_INVN_STAT_NM")
     private String inventoryStatusName;
+    @Column(name = "ROW_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     /**
@@ -56,8 +71,6 @@ public class AssetStatus extends PersistableBusinessObjectBase implements Mutabl
     public void setInventoryStatusCode(String inventoryStatusCode) {
         this.inventoryStatusCode = inventoryStatusCode;
     }
-
-
     /**
      * Gets the inventoryStatusName attribute.
      * 
@@ -75,8 +88,6 @@ public class AssetStatus extends PersistableBusinessObjectBase implements Mutabl
     public void setInventoryStatusName(String inventoryStatusName) {
         this.inventoryStatusName = inventoryStatusName;
     }
-
-
     /**
      * Gets the active attribute.
      * 
@@ -94,8 +105,6 @@ public class AssetStatus extends PersistableBusinessObjectBase implements Mutabl
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */

@@ -34,8 +34,6 @@ public class BarcodeInventory implements Serializable {
     private String buildingSubRoomNumber;
     private String conditionCode;
     private String inventoryStatusCode;
-
-
     /**
      * Constructs a CollectorBatch
      */
@@ -105,8 +103,6 @@ public class BarcodeInventory implements Serializable {
     public void setConditionCode(String conditionCode) {
         this.conditionCode = conditionCode;
     }
-
-
     public String getInventoryStatusCode() {
         return inventoryStatusCode;
     }

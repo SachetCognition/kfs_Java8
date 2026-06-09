@@ -299,8 +299,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
         }
         return valid;
     }
-
-
     protected boolean isCapitalStatus(AssetGlobal assetGlobal) {
         return getParameterService().getParameterValuesAsString(Asset.class, CamsConstants.Parameters.CAPITAL_ASSET_STATUS_CODES).contains(assetGlobal.getInventoryStatusCode());
     }
@@ -343,8 +341,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
                 success &= checkNegativeOrZeroPayment(document, assetPaymentDetail);
             }
         }
-
-
         // only for "Asset Separate" document
         if (getAssetGlobalService().isAssetSeparate(assetGlobal)) {
             // total cost must be > 0
@@ -447,8 +443,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
 
         assetPaymentDetail.refreshReferenceObject(KFSPropertyConstants.OBJECT_CODE);
         success &= validateObjectCode(assetPaymentDetail.getObjectCode(), assetGlobal);
-
-
         return success;
     }
 
@@ -652,8 +646,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
         success &= validateTagDuplication(assetSharedDetails);
         return success;
     }
-
-
     /**
      * Validate all separate source amount is above the capital asset threshold amount.
      *
@@ -1004,8 +996,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
             }
             index++;
         }
-
-
         // Creates locking representation for this global document. The locking is only applicable for assets that are being split.
         // The assets that are being created do not need to be locked since they don't exist yet.
         if (valid && getAssetGlobalService().isAssetSeparate(assetGlobal)) {
@@ -1036,8 +1026,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
         }
         return success;
     }
-
-
     /**
      * Check if organization owner account is set from CAB. We honor all accounting lines from CAB are valid payments even thougth
      * they are expired.
@@ -1191,8 +1179,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
 
         return true;
     }
-
-
     /**
      *
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#dataDictionaryValidate(org.kuali.rice.kns.document.MaintenanceDocument)

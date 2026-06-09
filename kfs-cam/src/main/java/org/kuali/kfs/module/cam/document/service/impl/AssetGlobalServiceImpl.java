@@ -483,8 +483,6 @@ public class AssetGlobalServiceImpl implements AssetGlobalService {
         return parameterService.getParameterValueAsString(AssetGlobal.class,
                 CamsConstants.AssetGlobal.NON_NEW_ACQUISITION_GROUP_PARAM);
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetGlobalService#getFiscalYearEndDayAndMonth()
      */

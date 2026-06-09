@@ -99,8 +99,6 @@ public class AssetLockServiceImpl implements AssetLockService {
     public CapitalAssetLockDao getCapitalAssetLockDao() {
         return capitalAssetLockDao;
     }
-
-
     /**
      * Sets the capitalAssetLockDao attribute value.
      *
@@ -109,8 +107,6 @@ public class AssetLockServiceImpl implements AssetLockService {
     public void setCapitalAssetLockDao(CapitalAssetLockDao capitalAssetLockDao) {
         this.capitalAssetLockDao = capitalAssetLockDao;
     }
-
-
 	/**
 	 * @param assetLocks
 	 *            All asset locks must be owned by the same documentNumber and having the same
@@ -223,8 +219,6 @@ public class AssetLockServiceImpl implements AssetLockService {
         }
         return assetLocks;
     }
-
-
     /**
      * Generating error messages and doc links for blocking documents.
      *
@@ -307,6 +301,4 @@ public class AssetLockServiceImpl implements AssetLockService {
         List<String> lockingDocumentNumbers = getCapitalAssetLockDao().getLockingDocumentNumbers(assetNumbers, blockingDocumentTypes, excludingDocumentNumber);
         return lockingDocumentNumbers;
     }
-
-
 }

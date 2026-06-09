@@ -39,6 +39,4 @@ public interface AssetTransferService {
      * Creates GL Postables using the source plant account number and target plant account number
      */
     void createGLPostables(AssetTransferDocument document);
-
-
 }

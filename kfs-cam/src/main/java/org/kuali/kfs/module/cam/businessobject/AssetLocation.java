@@ -31,23 +31,50 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_LOC_T")
+@IdClass(AssetLocationId.class)
 public class AssetLocation extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "CPTLAST_NBR")
+
     protected Long capitalAssetNumber;
+    @Id
+    @Column(name = "AST_LOC_TYP_CD")
     protected String assetLocationTypeCode;
+    @Column(name = "AST_LOC_CNTCT_NM")
     protected String assetLocationContactName;
+    @Column(name = "AST_LOC_CNTCT_ID")
     protected String assetLocationContactIdentifier;
+    @Column(name = "AST_LOC_INST_NM")
     protected String assetLocationInstitutionName;
+    @Column(name = "AST_LOC_PHN_NBR")
     protected String assetLocationPhoneNumber;
+    @Column(name = "AST_LOC_STRT_ADDR")
     protected String assetLocationStreetAddress;
+    @Column(name = "AST_LOC_CITY_NM")
     protected String assetLocationCityName;
+    @Column(name = "AST_LOC_STATE_CD")
     protected String assetLocationStateCode;
+    @Column(name = "AST_LOC_CNTRY_CD")
     protected String assetLocationCountryCode;
+    @Column(name = "AST_LOC_ZIP_CD")
     protected String assetLocationZipCode;
+
+    @Transient
 
     protected Asset asset;
     protected AssetLocationType assetLocationType;
@@ -98,8 +125,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setCapitalAssetNumber(Long capitalAssetNumber) {
         this.capitalAssetNumber = capitalAssetNumber;
     }
-
-
     /**
      * Gets the assetLocationTypeCode attribute.
      *
@@ -117,8 +142,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationTypeCode(String assetLocationTypeCode) {
         this.assetLocationTypeCode = assetLocationTypeCode;
     }
-
-
     /**
      * Gets the assetLocationContactName attribute.
      *
@@ -136,8 +159,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationContactName(String assetLocationContactName) {
         this.assetLocationContactName = assetLocationContactName;
     }
-
-
     /**
      * Gets the assetLocationContactIdentifier attribute.
      *
@@ -155,8 +176,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationContactIdentifier(String assetLocationContactIdentifier) {
         this.assetLocationContactIdentifier = assetLocationContactIdentifier;
     }
-
-
     /**
      * Gets the assetLocationInstitutionName attribute.
      *
@@ -174,8 +193,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationInstitutionName(String assetLocationInstitutionName) {
         this.assetLocationInstitutionName = assetLocationInstitutionName;
     }
-
-
     /**
      * Gets the assetLocationPhoneNumber attribute.
      *
@@ -193,8 +210,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationPhoneNumber(String assetLocationPhoneNumber) {
         this.assetLocationPhoneNumber = assetLocationPhoneNumber;
     }
-
-
     /**
      * Gets the assetLocationStreetAddress attribute.
      *
@@ -212,8 +227,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationStreetAddress(String assetLocationStreetAddress) {
         this.assetLocationStreetAddress = assetLocationStreetAddress;
     }
-
-
     /**
      * Gets the assetLocationCityName attribute.
      *
@@ -231,8 +244,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationCityName(String assetLocationCityName) {
         this.assetLocationCityName = assetLocationCityName;
     }
-
-
     /**
      * Gets the assetLocationStateCode attribute.
      *
@@ -250,8 +261,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationStateCode(String assetLocationStateCode) {
         this.assetLocationStateCode = assetLocationStateCode;
     }
-
-
     /**
      * Gets the assetLocationCountryCode attribute.
      *
@@ -269,8 +278,6 @@ public class AssetLocation extends PersistableBusinessObjectBase {
     public void setAssetLocationCountryCode(String assetLocationCountryCode) {
         this.assetLocationCountryCode = assetLocationCountryCode;
     }
-
-
     /**
      * Gets the assetLocationZipCode attribute.
      *

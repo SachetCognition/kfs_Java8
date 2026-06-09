@@ -45,8 +45,6 @@ public interface AssetBarcodeInventoryLoadService {
      * @return
      */
     public boolean processFile(File file, AssetBarCodeInventoryInputFileForm form);
-
-
     /**
      * This method updates the asset table
      * 

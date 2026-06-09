@@ -72,8 +72,6 @@ public class AssetServiceImpl implements AssetService {
         asset.refreshReferenceObject(CamsPropertyConstants.Asset.CAPITAL_ASSET_TYPE);
         return asset.getCapitalAssetType().isMovingIndicator();
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetService#isAssetDepreciationStarted(org.kuali.kfs.module.cam.businessobject.Asset)
      */
@@ -179,8 +177,6 @@ public class AssetServiceImpl implements AssetService {
         }
         return false;
     }
-
-
     /**
      * This method calls the service codes to calculate the summary fields for each asset
      * 
@@ -265,8 +261,6 @@ public class AssetServiceImpl implements AssetService {
         }
         return activeMatches;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetService#findAssetsMatchingTagNumber(java.lang.String)
      */
@@ -382,8 +376,6 @@ public class AssetServiceImpl implements AssetService {
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
-
-
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetService#getCurrentRouteLevels(org.kuali.rice.kew.api.WorkflowDocument)
      */
