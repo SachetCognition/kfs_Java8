@@ -34,7 +34,7 @@ import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSConstants.ReportGeneration;
 import org.kuali.kfs.sys.service.ReportGenerationService;
-import org.kuali.rice.core.api.datetime.DateTimeService;
+import org.kuali.kfs.sys.rice.KfsDateTimeService;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ui.jasperreports.JasperReportsUtils;
 
@@ -44,7 +44,7 @@ import org.springframework.ui.jasperreports.JasperReportsUtils;
 public class ReportGenerationServiceImpl implements ReportGenerationService {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportGenerationServiceImpl.class);
 
-    protected DateTimeService dateTimeService;
+    protected KfsDateTimeService dateTimeService;
 
     /**
      * @see org.kuali.kfs.sys.batch.service.ReportGenerationService#generateReportToPdfFile(java.util.Map, java.lang.String, java.lang.String)
@@ -214,7 +214,7 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
      * 
      * @param dateTimeService The dateTimeService to set.
      */
-    public void setDateTimeService(DateTimeService dateTimeService) {
+    public void setDateTimeService(KfsDateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
 }
