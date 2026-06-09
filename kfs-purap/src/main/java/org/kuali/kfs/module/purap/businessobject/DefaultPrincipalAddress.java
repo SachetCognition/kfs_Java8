@@ -23,13 +23,36 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.sys.businessobject.Building;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
+@Entity
+@Table(name = "PUR_DFLT_PRNCPL_ADDR_T")
 public class DefaultPrincipalAddress extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "PRNCPL_ID")
     private  String principalId;
+    @Column(name = "CAMPUS_CD")
     private  String campusCode;
+    @Column(name = "BLDG_CD")
     private  String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     private  String buildingRoomNumber;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false),
+            @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+    })
     private Building building;
     
     public DefaultPrincipalAddress() {

@@ -28,20 +28,58 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Negative Payment Request Approval Limit Business Object. Maintenance document for setting limits for the auto-approve PREQ batch
  * job.
  */
+@Entity
+@Table(name = "AP_NEG_PMT_RQST_APRVL_LMT_T")
 public class NegativePaymentRequestApprovalLimit extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "AP_NEG_PMT_RQST_APRVL_LMT_ID")
     private Integer negativePaymentRequestApprovalLimitIdentifier;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "ACCT_NBR")
     private String accountNumber;
+    @Column(name = "NEG_PMT_RQST_APRVL_LMT_AMT")
     private KualiDecimal negativePaymentRequestApprovalLimitAmount;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+            @JoinColumn(name = "ACCT_NBR", insertable = false, updatable = false)
+    })
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+            @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+            @JoinColumn(name = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
 
     /**

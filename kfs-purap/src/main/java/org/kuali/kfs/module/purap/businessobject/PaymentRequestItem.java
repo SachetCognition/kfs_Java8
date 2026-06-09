@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.PaymentRequestDocument;
@@ -40,14 +38,35 @@ import org.kuali.kfs.sys.util.ObjectPopulationUtils;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Payment Request Item Business Object.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_ITM_T")
 public class PaymentRequestItem extends AccountsPayableItemBase {
-    private static Logger LOG = LoggerFactory.getLogger(PaymentRequestItem.class);
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestItem.class);
 
+    @Column(name = "PO_ITM_UNIT_PRC")
     private BigDecimal purchaseOrderItemUnitPrice;
+    @Column(name = "ITM_OSTND_INV_QTY")
     private KualiDecimal itemOutstandingInvoiceQuantity;
+    @Column(name = "ITM_OSTND_INV_AMT")
     private KualiDecimal itemOutstandingInvoiceAmount;
 
     /**
@@ -221,6 +240,7 @@ public class PaymentRequestItem extends AccountsPayableItemBase {
         // do nothing
     }
 
+
     public KualiDecimal getPoOutstandingQuantity() {
         PurchaseOrderItem poi = getPurchaseOrderItem();
         if (poi == null) {
@@ -385,5 +405,6 @@ public class PaymentRequestItem extends AccountsPayableItemBase {
     public Class getUseTaxClass() {
         return PaymentRequestItemUseTax.class;
     }
+
 
 }

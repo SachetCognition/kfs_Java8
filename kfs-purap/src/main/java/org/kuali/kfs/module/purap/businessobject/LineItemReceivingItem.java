@@ -30,17 +30,34 @@ import org.kuali.kfs.module.purap.exception.PurError;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "PUR_RCVNG_LN_ITM_T")
 public class LineItemReceivingItem extends ReceivingItemBase {
 
+    @Column(name = "ITM_ORD_QTY")
     private KualiDecimal itemOrderedQuantity;
 
     // not stored in db
     private KualiDecimal itemReceivedPriorQuantity;
     private KualiDecimal itemReceivedToBeQuantity;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private LineItemReceivingDocument lineItemReceivingDocument;
 
     private static Logger LOG = LoggerFactory.getLogger(AccountsPayableDocumentBase.class);

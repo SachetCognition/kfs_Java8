@@ -28,51 +28,108 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.module.purap.document.ElectronicInvoiceRejectDocument;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
 
+
+
+@Entity
+@Table(name = "AP_ELCTRNC_INV_RJT_ITM_T")
 public class ElectronicInvoiceRejectItem extends PersistableBusinessObjectBase {
 
     // NOT NULL FIELDS
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "INV_RJT_ITM_ID")
     private Integer invoiceRejectItemIdentifier;
+    @Column(name = "INV_RJT_ID")
     private Integer purapDocumentIdentifier;
 
+    @Column(name = "INV_ITM_LN_NBR")
     private Integer invoiceItemLineNumber;
+    @Column(name = "INV_ITM_QTY")
     private BigDecimal invoiceItemQuantity;
+    @Column(name = "INV_ITM_UOM_CD")
     private String invoiceItemUnitOfMeasureCode;
+    @Column(name = "INV_CATLG_NBR")
     private String invoiceItemCatalogNumber;
 
+    @Column(name = "INV_ITM_UNIT_PRC_CRNCY_CD")
     private String invoiceItemUnitPriceCurrencyCode;
+    @Column(name = "INV_ITM_SUB_TOT_CRNCY_CD")
     private String invoiceItemSubTotalCurrencyCode;
+    @Column(name = "INV_ITM_SPCL_HANDLG_CRNCY_CD")
     private String invoiceItemSpecialHandlingCurrencyCode;
+    @Column(name = "INV_ITM_SHP_CRNCY_CD")
     private String invoiceItemShippingCurrencyCode;
+    @Column(name = "INV_ITM_SHP_DESC")
     private String invoiceItemShippingDescription;
+    @Column(name = "INV_ITM_TAX_CRNCY_CD")
     private String invoiceItemTaxCurrencyCode;
+    @Column(name = "INV_ITM_TAX_DESC")
     private String invoiceItemTaxDescription;
+    @Column(name = "INV_ITM_GRS_CRNCY_CD")
     private String invoiceItemGrossCurrencyCode;
+    @Column(name = "INV_ITM_DSCT_CRNCY_CD")
     private String invoiceItemDiscountCurrencyCode;
+    @Column(name = "INV_ITM_NET_CRNCY_CD")
     private String invoiceItemNetCurrencyCode;
 
+    @Column(name = "INV_ITM_UNIT_PRC")
     private BigDecimal invoiceItemUnitPrice;
+    @Column(name = "INV_ITM_SUB_TOT_AMT")
     private BigDecimal invoiceItemSubTotalAmount;
+    @Column(name = "INV_ITM_SPCL_HANDLG_AMT")
     private BigDecimal invoiceItemSpecialHandlingAmount;
+    @Column(name = "INV_ITM_SHP_AMT")
     private BigDecimal invoiceItemShippingAmount;
+    @Column(name = "INV_ITM_TAX_AMT")
     private BigDecimal invoiceItemTaxAmount;
+    @Column(name = "INV_ITM_GRS_AMT")
     private BigDecimal invoiceItemGrossAmount;
+    @Column(name = "INV_ITM_DSCT_AMT")
     private BigDecimal invoiceItemDiscountAmount;
+    @Column(name = "INV_ITM_NET_AMT")
     private BigDecimal invoiceItemNetAmount;
 
+    @Column(name = "INV_REF_ITM_LN_NBR")
     private Integer invoiceReferenceItemLineNumber;
+    @Column(name = "INV_REF_ITM_SERIAL_NBR")
     private String invoiceReferenceItemSerialNumber;
+    @Column(name = "INV_REF_ITM_SUPP_PART_ID")
     private String invoiceReferenceItemSupplierPartIdentifier;
+    @Column(name = "INV_REF_ITM_SUPP_PART_AUX_ID")
     private String invoiceReferenceItemSupplierPartAuxiliaryIdentifier;
+    @Column(name = "INV_REF_ITM_DESC")
     private String invoiceReferenceItemDescription;
+    @Column(name = "INV_REF_ITM_MFR_PART_ID")
     private String invoiceReferenceItemManufacturerPartIdentifier;
+    @Column(name = "INV_REF_ITM_MFR_NM")
     private String invoiceReferenceItemManufacturerName;
+    @Column(name = "INV_REF_ITM_CNTRY_CD")
     private String invoiceReferenceItemCountryCode;
+    @Column(name = "INV_REF_ITM_CNTRY_NM")
     private String invoiceReferenceItemCountryName;
 
+    @Column(name = "INV_UOM_ACPT_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean unitOfMeasureAcceptIndicator = false;
+    @Column(name = "INV_CATLG_NBR_ACPT_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean catalogNumberAcceptIndicator = false;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INV_RJT_ID", insertable = false, updatable = false)
     private ElectronicInvoiceRejectDocument electronicInvoiceRejectDocument;
 
 

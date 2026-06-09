@@ -18,7 +18,18 @@
  */
 package org.kuali.kfs.module.purap.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
+
+
+@Entity
+@Table(name = "PUR_REQS_ITM_USE_TAX_T")
 public class PurchaseRequisitionItemUseTax  extends PurApItemUseTaxBase {
 
 }

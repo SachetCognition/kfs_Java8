@@ -21,13 +21,26 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 
 /**
  * Purchase Order Quote Status Business Object.
  * 
  */
+@Entity
+@Table(name = "PUR_PO_QT_STAT_T")
 public class PurchaseOrderQuoteStatus extends Status implements MutableInactivatable{
 
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
     
     /**

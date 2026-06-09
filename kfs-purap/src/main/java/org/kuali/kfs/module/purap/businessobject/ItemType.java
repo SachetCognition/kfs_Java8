@@ -25,16 +25,38 @@ import org.kuali.kfs.module.purap.PurapConstants.ItemTypeCodes;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Item Type Business Object. Defines various types of items.
  */
+@Entity
+@Table(name = "PUR_AP_ITM_TYP_T")
 public class ItemType extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "ITM_TYP_CD")
     private String itemTypeCode;
+    @Column(name = "ITM_TYP_DESC")
     private String itemTypeDescription;
+    @Column(name = "QTY_BSD_GL_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean quantityBasedGeneralLedgerIndicator;
+    @Column(name = "ITM_TYP_ADDL_CHRG_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean additionalChargeIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "TAXABLE_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean taxableIndicator;
 
     /**
