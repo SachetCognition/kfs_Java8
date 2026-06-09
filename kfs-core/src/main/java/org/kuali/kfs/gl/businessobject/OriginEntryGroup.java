@@ -42,7 +42,7 @@ public class OriginEntryGroup extends PersistableBusinessObjectBase {
 
     // This does not normally get populated. It only gets populated if
     // getAllOriginEntryGroup() is called
-    private Integer rows = new Integer(0);
+    private Integer rows = Integer.valueOf(0);
 
     private OriginEntrySource source;
 

@@ -63,7 +63,7 @@ public enum AssetDepreciationServiceFixture {
 
     @SuppressWarnings("deprecation")
     public List<Asset> getAssets() {
-        Integer numOfRecords = new Integer(properties.getProperty(ASSET + "." + NUM_OF_REC));
+        Integer numOfRecords = Integer.valueOf(properties.getProperty(ASSET + "." + NUM_OF_REC));
         List<Asset> assets = new ArrayList<Asset>();
 
         String deliminator = properties.getProperty(DELIMINATOR);
@@ -85,7 +85,7 @@ public enum AssetDepreciationServiceFixture {
 
     @SuppressWarnings("deprecation")
     public List<AssetPayment> getAssetPaymentsFromPropertiesFile() {
-        Integer numOfRecords = new Integer(properties.getProperty(ASSET_PAYMENT + "." + NUM_OF_REC));
+        Integer numOfRecords = Integer.valueOf(properties.getProperty(ASSET_PAYMENT + "." + NUM_OF_REC));
         List<AssetPayment> assetPayments = new ArrayList<AssetPayment>();
 
         String deliminator = properties.getProperty(DELIMINATOR);
@@ -102,7 +102,7 @@ public enum AssetDepreciationServiceFixture {
 
     @SuppressWarnings("deprecation")
     public List<AssetPayment> getResultsFromPropertiesFile() {
-        Integer numOfRecords = new Integer(properties.getProperty(RESULT + "." + NUM_OF_REC));
+        Integer numOfRecords = Integer.valueOf(properties.getProperty(RESULT + "." + NUM_OF_REC));
         List<AssetPayment> assetPayments = new ArrayList<AssetPayment>();
 
         String deliminator = properties.getProperty(DELIMINATOR);

@@ -409,7 +409,7 @@ public class VendorMaintainableImpl extends FinancialSystemMaintainable {
     private void setDetailAssignedId(VendorDetail vendorDetail) {
         // If this is a new parent, let's set the detail id to 0.
         if (ObjectUtils.isNull(vendorDetail.getVendorHeaderGeneratedIdentifier())) {
-            vendorDetail.setVendorDetailAssignedIdentifier(new Integer(0));
+            vendorDetail.setVendorDetailAssignedIdentifier(Integer.valueOf(0));
         }
         else {
             // Try to get the count of all the vendor whose header id is the same as this header id.
@@ -428,7 +428,7 @@ public class VendorMaintainableImpl extends FinancialSystemMaintainable {
                 else {
                     // count is a validId, so we'll use count as our vendor detail assigned id
                     validId = true;
-                    vendorDetail.setVendorDetailAssignedIdentifier(new Integer(count));
+                    vendorDetail.setVendorDetailAssignedIdentifier(Integer.valueOf(count));
                 }
             }
         }

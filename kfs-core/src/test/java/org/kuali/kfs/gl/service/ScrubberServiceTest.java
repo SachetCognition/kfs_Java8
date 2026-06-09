@@ -501,7 +501,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         final String docTypeOffsetDate = new SimpleDateFormat("MM/dd").format(scrubberDate);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] input = new String[] { testingYear + "BL4631625CS0016000---ACEX07DI  EUCSHRTRAV      00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                       ",
                 testingYear + "BL4631625CS0018000---ACAS07DI  EUCSHRTRAV      00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                       " };
@@ -619,7 +619,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         final String docTypeOffsetDate = new SimpleDateFormat("MM/dd").format(scrubberDate);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] input = new String[] { testingYear + "BL4631625CS0017900---ACEX07DI  EUCSHRRESV      00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                       ",
                 testingYear + "BL4631625CS0018000---ACAS07DI  EUCSHRRESV      00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                       " };
@@ -735,7 +735,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         final String docTypeOffsetDate = new SimpleDateFormat("MM/dd").format(scrubberDate);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] input = new String[] { testingYear + "BL4631625CS0015500---ACEX07DI  EUCSHRICOE      00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                       ",
                 testingYear + "BL4631625CS0018000---ACAS07DI  EUCSHRICOE      00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                       " };
@@ -778,7 +778,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         final String docTypeOffsetDate = new SimpleDateFormat("MM/dd").format(scrubberDate);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] input = new String[] { testingYear + "BL4631625CS0014110---EXEX07PE  EUNOCSHREX      00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                      D                                ",
                 testingYear + "BL4631625CS0018000---EXAS07PE  EUNOCSHREX      00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                      D                                " };
@@ -1058,7 +1058,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         final String docTypeOffsetDate = new SimpleDateFormat("MM/dd").format(scrubberDate);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] input = new String[] { testingYear + "BA6044913-----1800---ACIN07CR  01OFFSETREV     00000Poplars Garage Fees                                     20.00D" + testingYear + "-01-05          ----------                            " + previousTestingYear + "-01-31                                 ",
                 testingYear + "BA6044913-----8000---ACAS07CR  01OFFSETREV     00000TP Generated Offset                                     20.00C" + testingYear + "-01-05          ----------                            " + previousTestingYear + "-02-01                                 " };
@@ -1175,7 +1175,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         String originalParamValue = setObjectTypeBypassOriginForTest("EU");
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "BL1031420-----4110---IEEX07PAYEEUINVALENCC     00000NOV-05 IMU Business Office          2224               241.75C" + previousTestingYear + "-11-30          ----------                                      X                                        ",
                 testingYear + "BL1031420-----9892---IEAS07PAYEEUINVALENCC     00000NOV-05 IMU Business Office          2237               241.75D" + previousTestingYear + "-11-30          ----------                                      X                                        " };
@@ -1351,7 +1351,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
      */
     public void testInvalidDebitCreditCode() throws Exception {
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "BL1031420-----4110---ACEX07DI  EUINVALDBCR     00000NOV-05 IMU Business Office          2224               241.75X" + previousTestingYear + "-11-30          ----------                                                                               ",
                 testingYear + "BL1031420-----8000---ACAS07DI  EUINVALDBCR     00000NOV-05 IMU Business Office          2237               241.75X" + previousTestingYear + "-11-30          ----------                                                                               " };
@@ -1652,7 +1652,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
      */
     public void testInvalidBalanceType() throws Exception {
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         final java.sql.Date scrubberDate = new java.sql.Date((SpringContext.getBean(RunDateService.class).calculateRunDate(dateTimeService.getCurrentDate())).getTime());
         final String formattedRunDate = new SimpleDateFormat(DATE_FORMAT).format(scrubberDate);
@@ -1762,7 +1762,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
      */
     public void testInvalidChart() throws Exception {
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "XX1031420-----4110---ACEX07DI  EUINVALCHAR     00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                               ",
                 testingYear + "XX1031420-----8000---ACAS07DI  EUINVALCHAR     00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                               " };
@@ -1842,7 +1842,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         this.deactivate(BalanceType.class, primaryKeys);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "BL1031420-----4110---ACEX07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                               ",
                 testingYear + "BL1031420-----8000---ACAS07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                               " };
@@ -1865,7 +1865,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         this.deactivate(OriginationCode.class, primaryKeys);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "BL1031420-----4110---ACEX07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                               ",
                 testingYear + "BL1031420-----8000---ACAS07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                               " };
@@ -1890,7 +1890,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         this.deactivate(ObjectCode.class, primaryKeys);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "BL1031420-----4110---ACEX07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                               ",
                 testingYear + "BL1031420-----8000---ACAS07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                               " };
@@ -1918,7 +1918,7 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
         this.deactivate(ObjectType.class, primaryKeys);
 
         final int testingYearAsInt = Integer.parseInt(testingYear);
-        final String previousTestingYear = new Integer(testingYearAsInt - 1).toString();
+        final String previousTestingYear = Integer.valueOf(testingYearAsInt - 1).toString();
 
         String[] inputTransactions = { testingYear + "BL1031420-----4110---ACEX07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2224               241.75D" + previousTestingYear + "-11-30          ----------                                                                               ",
                 testingYear + "BL1031420-----8000---ACAS07DI  EUINVALBALT     00000NOV-05 IMU Business Office          2237               241.75C" + previousTestingYear + "-11-30          ----------                                                                               " };

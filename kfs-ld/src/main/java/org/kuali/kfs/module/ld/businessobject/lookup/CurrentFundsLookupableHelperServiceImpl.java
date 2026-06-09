@@ -100,7 +100,7 @@ public class CurrentFundsLookupableHelperServiceImpl extends AbstractLookupableH
         LOG.info("getSearchResults() - Entry");
 
         boolean unbounded = false;
-        Long actualCountIfTruncated = new Long(0);
+        Long actualCountIfTruncated = Long.valueOf(0);
 
         setBackLocation(fieldValues.get(KFSConstants.BACK_LOCATION));
         setDocFormKey(fieldValues.get(KFSConstants.DOC_FORM_KEY));
@@ -235,7 +235,7 @@ public class CurrentFundsLookupableHelperServiceImpl extends AbstractLookupableH
                     LOG.warn("Using " + AccountStatusCurrentFunds.class + " for results because I couldn't instantiate the " + getBusinessObjectClass());
                 }
 
-                cf.setUniversityFiscalYear(new Integer(array[i++].toString()));
+                cf.setUniversityFiscalYear(Integer.valueOf(array[i++].toString()));
                 cf.setChartOfAccountsCode(array[i++].toString());
                 cf.setAccountNumber(array[i++].toString());
 

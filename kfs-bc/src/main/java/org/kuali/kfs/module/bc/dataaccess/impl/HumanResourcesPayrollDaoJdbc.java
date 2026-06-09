@@ -185,29 +185,29 @@ public class HumanResourcesPayrollDaoJdbc extends BudgetConstructionDaoJdbcBase 
         String salaryPlan = position.getPositionSalaryPlanDefault();
 
         if ("AC1".equals(salaryPlan)) {
-            position.setIuNormalWorkMonths(new Integer(10));
-            position.setIuPayMonths(new Integer(10));
+            position.setIuNormalWorkMonths(Integer.valueOf(10));
+            position.setIuPayMonths(Integer.valueOf(10));
             position.setIuPositionType("AC");
             position.setIuDefaultObjectCode("2000");
         }
 
         else if ("PAO".equals(salaryPlan) || "PAU".equals(salaryPlan)) {
-            position.setIuNormalWorkMonths(new Integer(12));
-            position.setIuPayMonths(new Integer(12));
+            position.setIuNormalWorkMonths(Integer.valueOf(12));
+            position.setIuPayMonths(Integer.valueOf(12));
             position.setIuPositionType("SM");
             position.setIuDefaultObjectCode("2480");
         }
 
         else if (salaryPlan.startsWith("P")) {
-            position.setIuNormalWorkMonths(new Integer(12));
-            position.setIuPayMonths(new Integer(12));
+            position.setIuNormalWorkMonths(Integer.valueOf(12));
+            position.setIuPayMonths(Integer.valueOf(12));
             position.setIuPositionType("SM");
             position.setIuDefaultObjectCode("2400");
         }
 
         else {
-            position.setIuNormalWorkMonths(new Integer(12));
-            position.setIuPayMonths(new Integer(12));
+            position.setIuNormalWorkMonths(Integer.valueOf(12));
+            position.setIuPayMonths(Integer.valueOf(12));
             position.setIuPositionType("SB");
             position.setIuDefaultObjectCode("2500");
             position.setPositionUnionCode("B1");

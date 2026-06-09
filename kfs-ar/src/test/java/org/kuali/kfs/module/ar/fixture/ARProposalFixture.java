@@ -25,7 +25,7 @@ import org.kuali.kfs.integration.cg.businessobject.Proposal;
  */
 public enum ARProposalFixture {
 
-    CG_PRPSL1(new Long(11));
+    CG_PRPSL1(Long.valueOf(11));
 
 
     private Long proposalNumber;

@@ -36,7 +36,7 @@ public class BalanceTypServiceTest extends KualiTestBase {
     private static final String BAL_TYPE_CODE = "ZZ";
     private static final String BAL_TYPE_NAME = "Z NAME";
     private static final String GUID = "123456789012345678901234567890123456";
-    private static final Long VER_NBR = new Long(1);
+    private static final Long VER_NBR = Long.valueOf(1);
     private static final boolean OFFSET_GEN = false;
     private static final String SHORT_NAME = "Z SHORT";
 

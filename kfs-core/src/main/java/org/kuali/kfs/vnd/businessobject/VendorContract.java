@@ -378,8 +378,8 @@ public class VendorContract extends PersistableBusinessObjectBase implements Ven
                 String vndrHdrGenId = vendorNumber.substring(0, dashInd);
                 String vndrDetailAssgnedId = vendorNumber.substring(dashInd + 1);
                 if (!StringUtils.isEmpty(vndrHdrGenId) && !StringUtils.isEmpty(vndrDetailAssgnedId)) {
-                    this.vendorHeaderGeneratedIdentifier = new Integer(vndrHdrGenId);
-                    this.vendorDetailAssignedIdentifier = new Integer(vndrDetailAssgnedId);
+                    this.vendorHeaderGeneratedIdentifier = Integer.valueOf(vndrHdrGenId);
+                    this.vendorDetailAssignedIdentifier = Integer.valueOf(vndrDetailAssgnedId);
                 }
             }
         }

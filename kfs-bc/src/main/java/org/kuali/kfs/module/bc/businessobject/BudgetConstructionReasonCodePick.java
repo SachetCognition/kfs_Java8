@@ -38,7 +38,7 @@ public class BudgetConstructionReasonCodePick extends PersistableBusinessObjectB
      * Default constructor.
      */
     public BudgetConstructionReasonCodePick() {
-        selectFlag = new Integer(0);
+        selectFlag = Integer.valueOf(0);
     }
 
     /**

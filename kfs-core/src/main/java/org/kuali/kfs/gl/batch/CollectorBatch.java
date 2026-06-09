@@ -388,7 +388,7 @@ public class CollectorBatch extends PersistableBusinessObjectBase {
         RunDateService runDateService = SpringContext.getBean(RunDateService.class);
         Date createDate = new java.sql.Date((runDateService.calculateRunDate(nowDate).getTime()));
         
-        Integer sequenceNumber = new Integer(0);
+        Integer sequenceNumber = Integer.valueOf(0);
         Integer nextSequence = collectorDetailService.getNextCreateSequence(createDate);
         if (nextSequence != null) {
             sequenceNumber = nextSequence;
@@ -447,9 +447,9 @@ public class CollectorBatch extends PersistableBusinessObjectBase {
 
         group.setSourceCode(OriginEntrySource.COLLECTOR);
         group.setDate(new java.sql.Date(SpringContext.getBean(DateTimeService.class).getCurrentDate().getTime()));
-        group.setProcess(new Boolean(true));
-        group.setScrub(new Boolean(true));
-        group.setValid(new Boolean(true));
+        group.setProcess(Boolean.valueOf(true));
+        group.setScrub(Boolean.valueOf(true));
+        group.setValid(Boolean.valueOf(true));
 
         return group;
     }
@@ -692,7 +692,7 @@ public class CollectorBatch extends PersistableBusinessObjectBase {
             String batchNumber = org.apache.commons.lang.StringUtils.trim(getValue(headerLine, pMap.get(KFSPropertyConstants.BATCH_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.EMAIL_ADDRESS)));
             
             if (ObjectUtil.isInteger(batchNumber)) { 
-                setBatchSequenceNumber(new Integer(batchNumber));
+                setBatchSequenceNumber(Integer.valueOf(batchNumber));
             } else {
                 setBatchSequenceNumber(0);
             }
@@ -721,7 +721,7 @@ public class CollectorBatch extends PersistableBusinessObjectBase {
         final Map<String, Integer> pMap = getCollectorBatchTrailerRecordFieldUtil().getFieldBeginningPositionMap();
 
         trailerLine = org.apache.commons.lang.StringUtils.rightPad(trailerLine, GeneralLedgerConstants.getSpaceAllCollectorBatchTrailerFields().length(), ' ');
-        setTotalRecords(new Integer(org.apache.commons.lang.StringUtils.trim(getValue(trailerLine, pMap.get(KFSPropertyConstants.TOTAL_RECORDS), pMap.get(KFSPropertyConstants.TRAILER_RECORD_SECOND_EMPTY_FIELD)))));
+        setTotalRecords(Integer.valueOf(org.apache.commons.lang.StringUtils.trim(getValue(trailerLine, pMap.get(KFSPropertyConstants.TOTAL_RECORDS), pMap.get(KFSPropertyConstants.TRAILER_RECORD_SECOND_EMPTY_FIELD)))));
         
         String trailerAmount = org.apache.commons.lang.StringUtils.trim(getValue(trailerLine, pMap.get(KFSPropertyConstants.TOTAL_AMOUNT), GeneralLedgerConstants.getSpaceAllCollectorBatchTrailerFields().length()));
         

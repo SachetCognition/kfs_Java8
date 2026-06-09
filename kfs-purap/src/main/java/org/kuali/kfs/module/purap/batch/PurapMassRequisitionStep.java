@@ -256,7 +256,7 @@ public class PurapMassRequisitionStep extends AbstractStep implements TestingSte
 
             // set item attributes
             RequisitionItem item1 = new RequisitionItem();
-            item1.setItemLineNumber(new Integer(1));
+            item1.setItemLineNumber(Integer.valueOf(1));
             item1.setItemUnitOfMeasureCode("PCS");
             item1.setItemCatalogNumber("P10M980");
             item1.setItemDescription("Copy Paper - 8 1/2 x 11, White, 92, 20lb");
@@ -336,7 +336,7 @@ public class PurapMassRequisitionStep extends AbstractStep implements TestingSte
 
             // set item attributes
             RequisitionItem item1 = new RequisitionItem();
-            item1.setItemLineNumber(new Integer(1));
+            item1.setItemLineNumber(Integer.valueOf(1));
             item1.setItemUnitOfMeasureCode("");
             item1.setItemCatalogNumber("");
             item1.setItemDescription("consulting");
@@ -414,7 +414,7 @@ public class PurapMassRequisitionStep extends AbstractStep implements TestingSte
 
             // set item attributes
             RequisitionItem item1 = new RequisitionItem();
-            item1.setItemLineNumber(new Integer(1));
+            item1.setItemLineNumber(Integer.valueOf(1));
             item1.setItemUnitOfMeasureCode("EA");
             item1.setItemCatalogNumber("P10M980");
             item1.setItemDescription("Gas Chromatograph");
@@ -542,7 +542,7 @@ public class PurapMassRequisitionStep extends AbstractStep implements TestingSte
 
             // set item attributes
             RequisitionItem item1 = new RequisitionItem();
-            item1.setItemLineNumber(new Integer(1));
+            item1.setItemLineNumber(Integer.valueOf(1));
             item1.setItemUnitOfMeasureCode("EA");
             item1.setItemCatalogNumber("");
             item1.setItemDescription("Gas Chromatograph");
@@ -640,7 +640,7 @@ public class PurapMassRequisitionStep extends AbstractStep implements TestingSte
             acmDoc = (ContractManagerAssignmentDocument) documentService.getNewDocument(ContractManagerAssignmentDocument.class);
             List<ContractManagerAssignmentDetail> contractManagerAssignmentDetails = new ArrayList<ContractManagerAssignmentDetail>();
             ContractManagerAssignmentDetail detail = new ContractManagerAssignmentDetail(acmDoc, reqDoc);
-            detail.setContractManagerCode(new Integer("10"));
+            detail.setContractManagerCode(Integer.valueOf("10"));
             detail.refreshReferenceObject("contractManager");
             contractManagerAssignmentDetails.add(detail);
             acmDoc.setContractManagerAssignmentDetailss(contractManagerAssignmentDetails);

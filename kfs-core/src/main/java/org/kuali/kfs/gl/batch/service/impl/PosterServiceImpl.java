@@ -255,9 +255,9 @@ public class PosterServiceImpl implements PosterService {
         Map reportSummary = new HashMap();
         for (Iterator posterIter = transactionPosters.iterator(); posterIter.hasNext();) {
             PostTransaction poster = (PostTransaction) posterIter.next();
-            reportSummary.put(poster.getDestinationName() + "," + GeneralLedgerConstants.DELETE_CODE, new Integer(0));
-            reportSummary.put(poster.getDestinationName() + "," + GeneralLedgerConstants.INSERT_CODE, new Integer(0));
-            reportSummary.put(poster.getDestinationName() + "," + GeneralLedgerConstants.UPDATE_CODE, new Integer(0));
+            reportSummary.put(poster.getDestinationName() + "," + GeneralLedgerConstants.DELETE_CODE, Integer.valueOf(0));
+            reportSummary.put(poster.getDestinationName() + "," + GeneralLedgerConstants.INSERT_CODE, Integer.valueOf(0));
+            reportSummary.put(poster.getDestinationName() + "," + GeneralLedgerConstants.UPDATE_CODE, Integer.valueOf(0));
         }
         int ecount = 0;
 
@@ -439,7 +439,7 @@ public class PosterServiceImpl implements PosterService {
                 }
                 // Make sure the row will be unique when adding to the entries table by adjusting the transaction sequence id
                 int maxSequenceId = accountingCycleCachingService.getMaxSequenceNumber(reversal);
-                reversal.setTransactionLedgerEntrySequenceNumber(new Integer(maxSequenceId + 1));
+                reversal.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(maxSequenceId + 1));
 
                 PersistenceService ps = SpringContext.getBean(PersistenceService.class);
                 ps.retrieveNonKeyFields(reversal);
@@ -463,7 +463,7 @@ public class PosterServiceImpl implements PosterService {
 
                 // Make sure the row will be unique when adding to the entries table by adjusting the transaction sequence id
                 int maxSequenceId = accountingCycleCachingService.getMaxSequenceNumber(tran);
-                ((OriginEntryFull) tran).setTransactionLedgerEntrySequenceNumber(new Integer(maxSequenceId + 1));
+                ((OriginEntryFull) tran).setTransactionLedgerEntrySequenceNumber(Integer.valueOf(maxSequenceId + 1));
             }
 
             // verify accounting period
@@ -1055,10 +1055,10 @@ public class PosterServiceImpl implements PosterService {
         }
         if (reporting.containsKey(key)) {
             Integer c = (Integer) reporting.get(key);
-            reporting.put(key, new Integer(c.intValue() + 1));
+            reporting.put(key, Integer.valueOf(c.intValue() + 1));
         }
         else {
-            reporting.put(key, new Integer(1));
+            reporting.put(key, Integer.valueOf(1));
         }
     }
 

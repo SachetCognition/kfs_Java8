@@ -103,7 +103,7 @@ public class AccountBalanceByConsolidationLookupableHelperServiceImpl extends Ab
         } 
 
         // TODO Deal with invalid numbers
-        Integer universityFiscalYear = new Integer(Integer.parseInt(ufy));
+        Integer universityFiscalYear = Integer.valueOf(Integer.parseInt(ufy));
 
         List results = accountBalanceService.findAccountBalanceByConsolidation(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, isCostShareExcluded, isConsolidated, pendingEntryCode);
 
@@ -118,6 +118,6 @@ public class AccountBalanceByConsolidationLookupableHelperServiceImpl extends Ab
             dbo.setPendingEntryOption(pendingEntryOption);
             dbo.setLinkButtonOption(Constant.LOOKUP_BUTTON_VALUE);
         }
-        return new CollectionIncomplete(results, new Long(results.size()));
+        return new CollectionIncomplete(results, Long.valueOf(results.size()));
     }
 }

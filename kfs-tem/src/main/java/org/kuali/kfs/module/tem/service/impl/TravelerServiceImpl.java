@@ -273,7 +273,7 @@ public class TravelerServiceImpl implements TravelerService {
                 TravelerDetailEmergencyContact newEmergencyContact = new TravelerDetailEmergencyContact();
                 BeanUtils.copyProperties(emergencyContact, newEmergencyContact);
                 newEmergencyContact.setDocumentNumber(documentNumber);
-                newEmergencyContact.setVersionNumber(new Long(1));
+                newEmergencyContact.setVersionNumber(Long.valueOf(1));
                 newEmergencyContact.setObjectId(null);
                 newEmergencyContact.setId(null);
                 newEmergencyContacts.add(newEmergencyContact);

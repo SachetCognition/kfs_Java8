@@ -87,7 +87,7 @@ public abstract class BusinessObjectStringParserFieldUtils {
         int lengthTracker = 0;
    
         for (String property : getOrderedProperties()) {
-            fieldBeginningPositionMap.put(property, new Integer(lengthTracker));
+            fieldBeginningPositionMap.put(property, Integer.valueOf(lengthTracker));
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Finding position for property: "+property+"; length = "+lengthMap.get(property));
             }

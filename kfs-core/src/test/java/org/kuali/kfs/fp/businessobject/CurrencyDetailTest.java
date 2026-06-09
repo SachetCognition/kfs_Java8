@@ -61,7 +61,7 @@ public class CurrencyDetailTest extends KualiTestBase {
     }
 
     public enum CurrencyDetailCountFixture {
-        GOOD_POSITIVE_COUNT(new Integer(5), new Integer(10), new Integer(25), new Integer(50), new Integer(100), new Integer(250), new Integer(500)), ALL_FIVE_HUNDREDS_COUNT(new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5)), NULL_COUNT, ZERO_COUNT(new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0)), NEGATIVE_COUNT(new Integer(-5), new Integer(-5), new Integer(-5), new Integer(-5), new Integer(-5), new Integer(-5), new Integer(-5));
+        GOOD_POSITIVE_COUNT(Integer.valueOf(5), Integer.valueOf(10), Integer.valueOf(25), Integer.valueOf(50), Integer.valueOf(100), Integer.valueOf(250), Integer.valueOf(500)), ALL_FIVE_HUNDREDS_COUNT(Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5)), NULL_COUNT, ZERO_COUNT(Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0)), NEGATIVE_COUNT(Integer.valueOf(-5), Integer.valueOf(-5), Integer.valueOf(-5), Integer.valueOf(-5), Integer.valueOf(-5), Integer.valueOf(-5), Integer.valueOf(-5));
 
         private Integer hundredDollarCount;
         private Integer fiftyDollarCount;
@@ -100,13 +100,13 @@ public class CurrencyDetailTest extends KualiTestBase {
 
     public void testAmountToCountConversion() {
         CurrencyDetail goodAmount = CurrencyDetailAmountFixture.GOOD_POSITIVE_AMOUNT.convertToCurrencyDetail();
-        assertEquals(goodAmount.getHundredDollarCount(), new Integer(5));
-        assertEquals(goodAmount.getFiftyDollarCount(), new Integer(5));
-        assertEquals(goodAmount.getTwentyDollarCount(), new Integer(5));
-        assertEquals(goodAmount.getTenDollarCount(), new Integer(5));
-        assertEquals(goodAmount.getFiveDollarCount(), new Integer(5));
-        assertEquals(goodAmount.getTwoDollarCount(), new Integer(5));
-        assertEquals(goodAmount.getOneDollarCount(), new Integer(5));
+        assertEquals(goodAmount.getHundredDollarCount(), Integer.valueOf(5));
+        assertEquals(goodAmount.getFiftyDollarCount(), Integer.valueOf(5));
+        assertEquals(goodAmount.getTwentyDollarCount(), Integer.valueOf(5));
+        assertEquals(goodAmount.getTenDollarCount(), Integer.valueOf(5));
+        assertEquals(goodAmount.getFiveDollarCount(), Integer.valueOf(5));
+        assertEquals(goodAmount.getTwoDollarCount(), Integer.valueOf(5));
+        assertEquals(goodAmount.getOneDollarCount(), Integer.valueOf(5));
     }
 
     public void testCountToAmountConversion() {

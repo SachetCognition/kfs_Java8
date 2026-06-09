@@ -40,7 +40,7 @@ public class PendingLedgerServiceHelperServiceTest extends AbstractGeneralLedger
         getPendingEntryService().delete("TEST69999");
         getPendingEntryService().save(pendingEntry);
 
-        GeneralLedgerPendingEntry entry = getPendingEntryService().getByPrimaryId(new Integer(9876), "TEST69999");
+        GeneralLedgerPendingEntry entry = getPendingEntryService().getByPrimaryId(Integer.valueOf(9876), "TEST69999");
 
         assertEquals(pendingEntry.getAccountNumber(), entry.getAccountNumber());
         assertEquals(pendingEntry.getSubAccountNumber(), entry.getSubAccountNumber());

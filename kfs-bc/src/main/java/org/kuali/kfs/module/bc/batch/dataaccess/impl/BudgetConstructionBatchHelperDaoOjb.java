@@ -132,7 +132,7 @@ public class BudgetConstructionBatchHelperDaoOjb extends PlatformAwareDaoBaseOjb
         {
             return(hashCapacity(((Number)((Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(resultRows))[0]).intValue()));
         }
-        return (new Integer(1));
+        return (Integer.valueOf(1));
     }
     
     protected Integer hashObjectSize(Class classID, Criteria criteriaID,
@@ -143,7 +143,7 @@ public class BudgetConstructionBatchHelperDaoOjb extends PlatformAwareDaoBaseOjb
         // if the field is not found, return the default
         if (selectList[0] == null)
         {
-            return (new Integer(this.DEFAULT_QUERY_RETURN_COUNT));
+            return (Integer.valueOf(this.DEFAULT_QUERY_RETURN_COUNT));
         }
         ReportQueryByCriteria queryID = 
             new ReportQueryByCriteria(classID, selectList, criteriaID);
@@ -153,7 +153,7 @@ public class BudgetConstructionBatchHelperDaoOjb extends PlatformAwareDaoBaseOjb
         {
             return(hashCapacity(((Number)((Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(resultRows))[0]).intValue()));
         }
-        return (new Integer(1));
+        return (Integer.valueOf(1));
     }
     
     protected Integer hashObjectSize(Class classID, Criteria criteriaID, 
@@ -260,7 +260,7 @@ public class BudgetConstructionBatchHelperDaoOjb extends PlatformAwareDaoBaseOjb
         // we return the default if there were no field names in the select list
         if (countDistinctElement[0] == null)
         {
-            return (new Integer(this.DEFAULT_QUERY_RETURN_COUNT));
+            return (Integer.valueOf(this.DEFAULT_QUERY_RETURN_COUNT));
         }
         Class targetClass = originalQuery.getSearchClass();
         Criteria criteriaID = originalQuery.getCriteria();
@@ -272,7 +272,7 @@ public class BudgetConstructionBatchHelperDaoOjb extends PlatformAwareDaoBaseOjb
         {
             return((Integer) (((Number)((Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(resultRows))[0]).intValue()));
         }
-        return (new Integer(this.DEFAULT_QUERY_RETURN_COUNT));
+        return (Integer.valueOf(this.DEFAULT_QUERY_RETURN_COUNT));
     }
     
     public String getOjbPlatform()

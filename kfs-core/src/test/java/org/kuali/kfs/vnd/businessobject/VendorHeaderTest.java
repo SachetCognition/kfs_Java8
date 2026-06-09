@@ -29,7 +29,7 @@ public class VendorHeaderTest extends KualiTestBase {
 
     public void testToString() {
         VendorHeader vendorHeader = new VendorHeader();
-        vendorHeader.setVendorHeaderGeneratedIdentifier(new Integer(1010101010));
+        vendorHeader.setVendorHeaderGeneratedIdentifier(Integer.valueOf(1010101010));
         vendorHeader.setVendorTaxNumber("999999999");
         vendorHeader.setVendorTypeCode("XXXX");
         vendorHeader.setVendorOwnershipCategoryCode("XX");

@@ -48,8 +48,8 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 
 @ConfigureContext
 public class SalaryExpenseTransferTransactionAgeServiceTest extends KualiTestBase {
-    private static final Integer DEFAULT_PARM_FISCAL_PERIODS = new Integer("3");
-    private static final Integer SUBFUND_PARM_FISCAL_PERIODS = new Integer("2");
+    private static final Integer DEFAULT_PARM_FISCAL_PERIODS = Integer.valueOf("3");
+    private static final Integer SUBFUND_PARM_FISCAL_PERIODS = Integer.valueOf("2");
     private static final String DEFAULT_PARM_SUBFUND = "FEDERA=2";
     private static final String YOUNGER_FISCAL_PER = "11";
     private static final String OLDER_FISCAL_PER = "7";

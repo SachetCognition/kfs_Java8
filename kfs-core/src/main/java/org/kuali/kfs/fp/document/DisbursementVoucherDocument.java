@@ -175,7 +175,7 @@ public class DisbursementVoucherDocument extends AccountingDocumentBase implemen
     public DisbursementVoucherDocument() {
         super();
         exceptionIndicator = false;
-        finDocNextRegistrantLineNbr = new Integer(1);
+        finDocNextRegistrantLineNbr = Integer.valueOf(1);
         dvNonEmployeeTravel = new DisbursementVoucherNonEmployeeTravel();
         dvNonResidentAlienTax = new DisbursementVoucherNonResidentAlienTax();
         dvPayeeDetail = new DisbursementVoucherPayeeDetail();
@@ -827,7 +827,7 @@ public class DisbursementVoucherDocument extends AccountingDocumentBase implemen
     public void addDvPrePaidRegistrantLine(DisbursementVoucherPreConferenceRegistrant line) {
         line.setFinancialDocumentLineNumber(getFinDocNextRegistrantLineNbr());
         this.getDvPreConferenceDetail().getDvPreConferenceRegistrants().add(line);
-        this.finDocNextRegistrantLineNbr = new Integer(getFinDocNextRegistrantLineNbr().intValue() + 1);
+        this.finDocNextRegistrantLineNbr = Integer.valueOf(getFinDocNextRegistrantLineNbr().intValue() + 1);
     }
 
     /**

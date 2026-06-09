@@ -43,7 +43,7 @@ public class YearEndBudgetAdjustmentDocumentPresentationController extends Budge
     @Override
     public boolean canInitiate(String documentTypeName) {
         List allowedYears = SpringContext.getBean(FiscalYearFunctionControlService.class).getBudgetAdjustmentAllowedYears();
-        Integer previousPostingYear = new Integer(SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear().intValue() - 1);
+        Integer previousPostingYear = Integer.valueOf(SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear().intValue() - 1);
         boolean previousActive = false;
 		if (allowedYears != null) {
             for (Iterator iter = allowedYears.iterator(); iter.hasNext();) {

@@ -51,7 +51,7 @@ public class TemCorrectionProcessDocument extends FinancialSystemTransactionalDo
     
     public TemCorrectionProcessDocument() {
         super();
-        correctionChangeGroupNextLineNumber = new Integer(0);
+        correctionChangeGroupNextLineNumber = Integer.valueOf(0);
 
         correctionChangeGroup = new ArrayList<AgencyCorrectionChangeGroup>();
     }

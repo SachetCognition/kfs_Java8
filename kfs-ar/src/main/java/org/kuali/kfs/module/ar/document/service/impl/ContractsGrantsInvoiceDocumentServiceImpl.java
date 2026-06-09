@@ -169,7 +169,7 @@ public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrant
             if (ObjectUtils.isNotNull(award) && ObjectUtils.isNotNull(organizationAccountingDefault)) {
                 if (StringUtils.equalsIgnoreCase(award.getInvoicingOptionCode(), ArConstants.INV_ACCOUNT)) {
                     // If its bill by Account , irrespective of it is by contract control account, there would be a single source accounting line with award account specified by the user.
-                    CustomerInvoiceDetail cide = createSourceAccountingLine(contractsGrantsInvoiceDocument.getDocumentNumber(), awardAccounts.get(0).getChartOfAccountsCode(), awardAccounts.get(0).getAccountNumber(), organizationAccountingDefault.getDefaultInvoiceFinancialObjectCode(), getAccountingLineAmountForDocument(contractsGrantsInvoiceDocument), new Integer(1));
+                    CustomerInvoiceDetail cide = createSourceAccountingLine(contractsGrantsInvoiceDocument.getDocumentNumber(), awardAccounts.get(0).getChartOfAccountsCode(), awardAccounts.get(0).getAccountNumber(), organizationAccountingDefault.getDefaultInvoiceFinancialObjectCode(), getAccountingLineAmountForDocument(contractsGrantsInvoiceDocument), Integer.valueOf(1));
                     contractsGrantsInvoiceDocument.getSourceAccountingLines().add(cide);
                 }
                 else if (StringUtils.equalsIgnoreCase(award.getInvoicingOptionCode(), ArConstants.INV_CONTRACT_CONTROL_ACCOUNT)) {
@@ -283,7 +283,7 @@ public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrant
         String coaCode = contractsGrantsInvoiceDocument.getBillByChartOfAccountCode();
         String objectCode = organizationAccountingDefault.getDefaultInvoiceFinancialObjectCode();
 
-        CustomerInvoiceDetail cide = createSourceAccountingLine(contractsGrantsInvoiceDocument.getDocumentNumber(), coaCode, accountNumber, objectCode, getAccountingLineAmountForDocument(contractsGrantsInvoiceDocument), new Integer(1));
+        CustomerInvoiceDetail cide = createSourceAccountingLine(contractsGrantsInvoiceDocument.getDocumentNumber(), coaCode, accountNumber, objectCode, getAccountingLineAmountForDocument(contractsGrantsInvoiceDocument), Integer.valueOf(1));
         return cide;
     }
 

@@ -333,7 +333,7 @@ public class NightlyOutServiceImpl implements NightlyOutService {
             }
             
             reportWriterService.writeNewLines(1);
-            reportWriterService.writeFormattedMessageLine("                        Grand Totals Cnt %6d: %"+amountLength+"s %"+amountLength+"s %"+amountLength+"s", new Integer(entryCount), formatter.format(totalLine.getCreditAmount()), formatter.format(totalLine.getDebitAmount()), formatter.format(totalLine.getBudgetAmount()));
+            reportWriterService.writeFormattedMessageLine("                        Grand Totals Cnt %6d: %"+amountLength+"s %"+amountLength+"s %"+amountLength+"s", Integer.valueOf(entryCount), formatter.format(totalLine.getCreditAmount()), formatter.format(totalLine.getDebitAmount()), formatter.format(totalLine.getBudgetAmount()));
         }
         
         /**

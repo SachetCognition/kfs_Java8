@@ -30,7 +30,7 @@ public class AccountingLineViewCountedSequenceNumberField extends AccountingLine
      */
     @Override
     protected String getDisplaySequenceNumber(AccountingLineRenderingContext renderingContext) {
-        return new Integer(renderingContext.getCurrentLineCount().intValue()+1).toString();
+        return Integer.valueOf(renderingContext.getCurrentLineCount().intValue()+1).toString();
     }
 
 }

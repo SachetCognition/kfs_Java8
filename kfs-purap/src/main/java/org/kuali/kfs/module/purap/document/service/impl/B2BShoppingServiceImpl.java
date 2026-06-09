@@ -402,7 +402,7 @@ public class B2BShoppingServiceImpl implements B2BShoppingService {
         List vendorItems = new ArrayList();
         for (Iterator iter = scItems.iterator(); iter.hasNext();) {
             B2BShoppingCartItem item = (B2BShoppingCartItem) iter.next();
-            RequisitionItem reqItem = createRequisitionItem(item, new Integer(itemLine), defaultCommodityCode);
+            RequisitionItem reqItem = createRequisitionItem(item, Integer.valueOf(itemLine), defaultCommodityCode);
             itemLine = itemLine + 1;
             vendorItems.add(reqItem);
         }

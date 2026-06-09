@@ -76,7 +76,7 @@ public enum PurchaseOrderItemAccountsFixture {
         this.poItem.setItemUnitPrice(this.unitPrice);
         this.poItem.setItemTypeCode(itemTypeCode);
         this.poItem.setItemQuantity(new KualiDecimal(1));
-        this.poItem.setItemLineNumber(new Integer(1));
+        this.poItem.setItemLineNumber(Integer.valueOf(1));
         this.poItem.refreshNonUpdateableReferences();
 
         if (ObjectUtils.isNotNull(this.poAccount)) {

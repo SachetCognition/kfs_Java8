@@ -133,7 +133,7 @@ public class CsvRecordFactory<RecordType>  {
             }
             else if (Boolean.class.equals(method.getReturnType())
                      || boolean.class.equals(method.getReturnType())) {
-                retval = new Boolean(value.toString().trim());
+                retval = Boolean.valueOf(value.toString().trim());
                 LOG.debug(headerField + " is " + retval);
             }
             else if (java.sql.Date.class.equals(method.getReturnType())) {

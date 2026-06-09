@@ -64,8 +64,8 @@ public class PerDiemRule extends MaintenanceDocumentRuleBase {
         if (!StringUtils.isBlank(perDiem.getSeasonBeginMonthAndDay())) { // let the required validation catch the case of a blank begin month/day
             Matcher seasonBeginMonthDayMatcher = seasonBeginMonthDayPattern.matcher(perDiem.getSeasonBeginMonthAndDay());
             if (seasonBeginMonthDayMatcher.matches()) {
-                final Integer month = new Integer(seasonBeginMonthDayMatcher.group(1));
-                final Integer day = new Integer(seasonBeginMonthDayMatcher.group(2));
+                final Integer month = Integer.valueOf(seasonBeginMonthDayMatcher.group(1));
+                final Integer day = Integer.valueOf(seasonBeginMonthDayMatcher.group(2));
                 if (month.intValue() > 12 || month.intValue() < 1 || day.intValue() < 1 || day.intValue() > 31) {
                     valid = false;
                     putFieldError(TemPropertyConstants.SEASON_BEGIN_MONTH_AND_DAY, TemKeyConstants.ERROR_PER_DIEM_INVALID_DATE_SEASON_BEGIN_MONTH_DAY, new String[] { perDiem.getSeasonBeginMonthAndDay() });

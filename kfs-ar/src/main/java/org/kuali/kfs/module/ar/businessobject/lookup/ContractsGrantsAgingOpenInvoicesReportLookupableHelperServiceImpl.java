@@ -61,7 +61,7 @@ public class ContractsGrantsAgingOpenInvoicesReportLookupableHelperServiceImpl e
         setBackLocation((String) fieldValues.get(KFSConstants.BACK_LOCATION));
         setDocFormKey((String) fieldValues.get(KFSConstants.DOC_FORM_KEY));
         results = getContractsGrantsAgingOpenInvoicesReportService().getPopulatedReportDetails(getParameters());
-        return new CollectionIncomplete(results, new Long(results.size()));
+        return new CollectionIncomplete(results, Long.valueOf(results.size()));
     }
 
     /**

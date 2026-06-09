@@ -126,13 +126,13 @@ public class ImportedExpensePendingEntryServiceImpl implements ImportedExpensePe
         final String DIST_INCOME_DOC_TYPE = KFSConstants.FinancialDocumentTypeCodes.DISTRIBUTION_OF_INCOME_AND_EXPENSE;
 
 
-        glpe.setVersionNumber(new Long(1));
+        glpe.setVersionNumber(Long.valueOf(1));
         glpe.setUniversityFiscalYear(universityDateService.getCurrentFiscalYear());
         glpe.setFinancialBalanceTypeCode(KFSConstants.BALANCE_TYPE_ACTUAL);
         glpe.setFinancialDocumentTypeCode(DIST_INCOME_DOC_TYPE);
         glpe.setFinancialSystemOriginationCode(TemConstants.TEM_IMPORTED_SYS_ORIG_CD);
         glpe.setTransactionLedgerEntryDescription(TemConstants.TEM_IMPORTED_GLPE_DESC);
-        glpe.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        glpe.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
         glpe.setOrganizationReferenceId(DIST_INCOME_DOC_TYPE +TemConstants.IMPORTED_FLAG);
 
         sequenceHelper.increment();

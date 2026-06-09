@@ -55,13 +55,13 @@ public class PurchaseOrderQuotePdfTest extends KualiTestBase {
         BusinessObjectService businessObjectService = SpringContext.getBean(BusinessObjectService.class);
         CountryService countryService = SpringContext.getBean(CountryService.class);
         // Map poCriteria = new HashMap();
-        // poCriteria.put("documentNumber", new Integer(291190));
+        // poCriteria.put("documentNumber", Integer.valueOf(291190));
         // Iterator resultIter = (businessObjectService.findMatching(PurchaseOrderDocument.class, poCriteria)).iterator();
         // po = (PurchaseOrderDocument)(resultIter.next());
 
         po = new PurchaseOrderDocument();
         po.setDeliveryCampusCode("BL");
-        po.setPurapDocumentIdentifier(new Integer(1000));
+        po.setPurapDocumentIdentifier(Integer.valueOf(1000));
         ContractManager contractManager = new ContractManager();
         contractManager.setContractManagerCode(10);
         contractManager.setContractManagerName("Julia Child");

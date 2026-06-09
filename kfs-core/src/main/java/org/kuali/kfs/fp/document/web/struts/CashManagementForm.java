@@ -252,7 +252,7 @@ public class CashManagementForm extends KualiDocumentFormBase {
         public DepositHelper() {
             cashReceiptSummarys = new ArrayList<CashReceiptSummary>();
             cashieringChecks = new ArrayList<Check>();
-            depositLineNumber = new Integer(1);
+            depositLineNumber = Integer.valueOf(1);
         }
 
         /**

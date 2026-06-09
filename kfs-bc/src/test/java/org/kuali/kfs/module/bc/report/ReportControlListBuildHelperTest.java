@@ -63,8 +63,8 @@ public class ReportControlListBuildHelperTest extends KualiTestBase {
     private BusinessObjectService businessObjectService;
     private OrganizationService organizationService;
 
-    private Integer pullupFlag = new Integer(0);
-    private Long versionNumber = new Long(0);
+    private Integer pullupFlag = Integer.valueOf(0);
+    private Long versionNumber = Long.valueOf(0);
 
     StringBuilder messageBuffer = new StringBuilder("Testing ReportControlListBuilder.isBuildNeeded: ");
 

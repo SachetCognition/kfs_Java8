@@ -32,8 +32,8 @@ public enum PurchasingAccountsPayableItemAssetFixture {
         public PurchasingAccountsPayableItemAsset newRecord() {
             PurchasingAccountsPayableItemAsset itemAsset = new PurchasingAccountsPayableItemAsset();
             itemAsset.setAccountsPayableItemQuantity(new KualiDecimal(0.7));
-            itemAsset.setAccountsPayableLineItemIdentifier(new Integer(100));
-            itemAsset.setCapitalAssetBuilderLineNumber(new Integer(1));
+            itemAsset.setAccountsPayableLineItemIdentifier(Integer.valueOf(100));
+            itemAsset.setCapitalAssetBuilderLineNumber(Integer.valueOf(1));
             itemAsset.setActivityStatusCode(CabConstants.ActivityStatusCode.NEW);
             return itemAsset;
         }
@@ -43,8 +43,8 @@ public enum PurchasingAccountsPayableItemAssetFixture {
         public PurchasingAccountsPayableItemAsset newRecord() {
             PurchasingAccountsPayableItemAsset itemAsset = new PurchasingAccountsPayableItemAsset();
             itemAsset.setAccountsPayableItemQuantity(new KualiDecimal(2));
-            itemAsset.setAccountsPayableLineItemIdentifier(new Integer(101));
-            itemAsset.setCapitalAssetBuilderLineNumber(new Integer(1));
+            itemAsset.setAccountsPayableLineItemIdentifier(Integer.valueOf(101));
+            itemAsset.setCapitalAssetBuilderLineNumber(Integer.valueOf(1));
             itemAsset.setActivityStatusCode(CabConstants.ActivityStatusCode.NEW);
             return itemAsset;
         }
@@ -54,8 +54,8 @@ public enum PurchasingAccountsPayableItemAssetFixture {
         public PurchasingAccountsPayableItemAsset newRecord() {
             PurchasingAccountsPayableItemAsset itemAsset = new PurchasingAccountsPayableItemAsset();
             itemAsset.setAccountsPayableItemQuantity(new KualiDecimal(3));
-            itemAsset.setAccountsPayableLineItemIdentifier(new Integer(102));
-            itemAsset.setCapitalAssetBuilderLineNumber(new Integer(1));
+            itemAsset.setAccountsPayableLineItemIdentifier(Integer.valueOf(102));
+            itemAsset.setCapitalAssetBuilderLineNumber(Integer.valueOf(1));
             itemAsset.setActivityStatusCode(CabConstants.ActivityStatusCode.NEW);
             return itemAsset;
         }
@@ -64,9 +64,9 @@ public enum PurchasingAccountsPayableItemAssetFixture {
     REC4 {
         public PurchasingAccountsPayableItemAsset newRecord() {
             PurchasingAccountsPayableItemAsset itemAsset = new PurchasingAccountsPayableItemAsset();
-            itemAsset.setAccountsPayableLineItemIdentifier(new Integer(200));
+            itemAsset.setAccountsPayableLineItemIdentifier(Integer.valueOf(200));
             itemAsset.setAccountsPayableItemQuantity(new KualiDecimal(4));
-            itemAsset.setCapitalAssetBuilderLineNumber(new Integer(1));
+            itemAsset.setCapitalAssetBuilderLineNumber(Integer.valueOf(1));
             itemAsset.setActivityStatusCode(CabConstants.ActivityStatusCode.NEW);
             return itemAsset;
         }

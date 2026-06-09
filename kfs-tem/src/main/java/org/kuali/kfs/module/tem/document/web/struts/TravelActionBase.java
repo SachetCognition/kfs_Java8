@@ -853,10 +853,10 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
 
                 String[] priDestId = (String[])parameters.get(parameterKey);
                 PerDiem perDiem = null;
-                if (expense.getPrimaryDestinationId() != TemConstants.CUSTOM_PRIMARY_DESTINATION_ID && expense.getPrimaryDestinationId().equals(new Integer(priDestId[0]))) {
+                if (expense.getPrimaryDestinationId() != TemConstants.CUSTOM_PRIMARY_DESTINATION_ID && expense.getPrimaryDestinationId().equals(Integer.valueOf(priDestId[0]))) {
                     perDiem = getPerDiemService().getPerDiem(expense.getPrimaryDestinationId(), expense.getMileageDate(), document.getEffectiveDateForPerDiem(expense.getMileageDate()));
                 } else {
-                    perDiem = getPerDiemService().getPerDiem(new Integer(priDestId[0]), expense.getMileageDate(), document.getEffectiveDateForPerDiem(expense.getMileageDate()));
+                    perDiem = getPerDiemService().getPerDiem(Integer.valueOf(priDestId[0]), expense.getMileageDate(), document.getEffectiveDateForPerDiem(expense.getMileageDate()));
                 }
 
                 // now copy info over to estimate
@@ -1371,7 +1371,7 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
         TravelDocument travelDocument = travelForm.getTravelDocument();
         TemDistributionAccountingLine newLine = getAccountingDistributionService().distributionToDistributionAccountingLine(travelForm.getDistribution());
         travelForm.setAccountDistributionsourceAccountingLines(new ArrayList<TemDistributionAccountingLine>());
-        travelForm.setAccountDistributionnextSourceLineNumber(new Integer(1));
+        travelForm.setAccountDistributionnextSourceLineNumber(Integer.valueOf(1));
         newLine.setAccountLinePercent(new BigDecimal(100));
         newLine.setCardType(travelDocument.getDefaultAccountingLineCardAgencyType());
 
@@ -1398,7 +1398,7 @@ public abstract class TravelActionBase extends KualiAccountingDocumentActionBase
     public ActionForward resetAccountingLines(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TravelFormBase travelForm = (TravelFormBase) form;
         TravelDocument document = travelForm.getTravelDocument();
-        document.setNextSourceLineNumber(new Integer(1));
+        document.setNextSourceLineNumber(Integer.valueOf(1));
         document.setSourceAccountingLines(new ArrayList<TemSourceAccountingLine>());
         travelForm.setDistribution(new ArrayList<AccountingDistribution>());
         travelForm.setDistribution(getAccountingDistributionService().buildDistributionFrom(document));

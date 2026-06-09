@@ -75,7 +75,7 @@ public class ContractsGrantsCollectionActivityDocumentServiceTest extends KualiT
         // To create AWard as fixture.
         ContractsAndGrantsBillingAward award = ARAwardFixture.CG_AWARD1.createAward();
         ARAwardFixture.CG_AWARD1.setAgencyFromFixture((Award) award);
-        ContractsAndGrantsBillingAward awd = contractsGrantsCollectionActivityDocumentService.retrieveAwardByProposalNumber(new Long(11));
+        ContractsAndGrantsBillingAward awd = contractsGrantsCollectionActivityDocumentService.retrieveAwardByProposalNumber(Long.valueOf(11));
         assertNotNull(awd);
         assertEquals(new String("11505"), award.getAgencyNumber());
     }

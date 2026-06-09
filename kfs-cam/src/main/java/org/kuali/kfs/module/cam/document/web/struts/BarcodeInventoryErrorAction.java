@@ -251,7 +251,7 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
         if (!(selectedCheckboxes == null)) {
             for (int i = 0; i < selectedCheckboxes.length; i++) {
                 for (BarcodeInventoryErrorDetail detail : barcodeInventoryErrorDetails) {
-                    if (detail.getUploadRowNumber().compareTo(new Long(selectedCheckboxes[i])) == 0) {
+                    if (detail.getUploadRowNumber().compareTo(Long.valueOf(selectedCheckboxes[i])) == 0) {
                         detail.setErrorCorrectionStatusCode(CamsConstants.BarCodeInventoryError.STATUS_CODE_DELETED);
                         detail.setInventoryCorrectionTimestamp(getDateTimeService().getCurrentTimestamp());
                         detail.setCorrectorUniversalIdentifier(currentUserID);

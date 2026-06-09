@@ -79,7 +79,7 @@ public class TransactionReport {
                 cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
                 head.addCell(cell);
 
-                cell = new PdfPCell(new Phrase("Page: " + new Integer(writer.getPageNumber()), headerFont));
+                cell = new PdfPCell(new Phrase("Page: " + Integer.valueOf(writer.getPageNumber()), headerFont));
                 cell.setBorder(Rectangle.NO_BORDER);
                 cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
                 head.addCell(cell);

@@ -83,7 +83,7 @@ public enum AssetRetirementGlobalMaintainableFixture {
         List<Asset> assets = new ArrayList<Asset>();
         String deliminator = properties.getProperty("deliminator");
         String fieldNames = properties.getProperty("asset.fieldNames");
-        Integer dataRows = new Integer(properties.getProperty("asset.numOfData"));
+        Integer dataRows = Integer.valueOf(properties.getProperty("asset.numOfData"));
         testDataPos=1;
         for (int i=1; i<= dataRows.intValue(); i++) {
             String propertyKey = "asset.testData" +i;
@@ -103,7 +103,7 @@ public enum AssetRetirementGlobalMaintainableFixture {
         List<AssetPayment> assetPayments = new ArrayList<AssetPayment>();
         String deliminator = properties.getProperty("deliminator");
         String fieldNames = properties.getProperty("assetPayment.fieldNames");
-        Integer dataRows = new Integer(properties.getProperty("assetPayment.numOfData"));
+        Integer dataRows = Integer.valueOf(properties.getProperty("assetPayment.numOfData"));
         for (int i=testDataPos;i<=dataRows.intValue() && i<testDataPos+2;i++) {
             String propertyKey = "assetPayment.testData" + i;
             AssetPayment assetPayment = CamsFixture.DATA_POPULATOR.buildTestDataObject(AssetPayment.class, properties, propertyKey, fieldNames, deliminator);

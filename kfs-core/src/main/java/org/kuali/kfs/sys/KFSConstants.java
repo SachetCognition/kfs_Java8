@@ -1400,8 +1400,8 @@ public class KFSConstants {
         public static final String DISTRIBUTE_COST_BY_INDIVIDUAL_ASSET_AMOUNT_CODE = "1";
         public static final String DISTRIBUTE_COST_BY_INDIVIDUAL_ASSET_AMOUNT_DESCRIPTION = "Distribute cost by amount";
 
-        public static final Integer PERCENT_SCALE = new Integer(2);
-        public static final Integer CAPITAL_ACCOUNT_LINE_PERCENT_SCALE = new Integer(20);
+        public static final Integer PERCENT_SCALE = Integer.valueOf(2);
+        public static final Integer CAPITAL_ACCOUNT_LINE_PERCENT_SCALE = Integer.valueOf(20);
     }
 
     public static final String YEAR_END_ACCOUNTING_PERIOD_EDIT_PERMISSION = "Edit Accounting Period";

@@ -45,7 +45,7 @@ public class YearEndObjectCodePersistenceUtils {
     protected static void persistPreviousYearObjectCode(AccountingLine accountingLine, Set<String> storedObjectCodes) {
         ObjectCode objectCode = new ObjectCode();
         
-        final Integer postingYear = new Integer(SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear().intValue() - 1);
+        final Integer postingYear = Integer.valueOf(SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear().intValue() - 1);
         final ObjectCodeService objectCodeService = SpringContext.getBean(ObjectCodeService.class);
         
         final ObjectCode existingObjectCode = objectCodeService.getByPrimaryId(postingYear, accountingLine.getChartOfAccountsCode(), accountingLine.getFinancialObjectCode());
@@ -152,7 +152,7 @@ public class YearEndObjectCodePersistenceUtils {
         Matcher mat = pat.matcher(objectCodeRepresenation);
         if (mat.matches()) {
             ObjectCode objectCode = new ObjectCode();
-            objectCode.setUniversityFiscalYear(new Integer(mat.group(1)));
+            objectCode.setUniversityFiscalYear(Integer.valueOf(mat.group(1)));
             objectCode.setChartOfAccountsCode(mat.group(2));
             objectCode.setFinancialObjectCode(mat.group(3));
             objectCode.setVersionNumber(1L);

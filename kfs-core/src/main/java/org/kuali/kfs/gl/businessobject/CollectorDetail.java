@@ -565,7 +565,7 @@ public class CollectorDetail extends PersistableBusinessObjectBase {
             setCreateDate(curDate);
             if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(detailLine.substring(pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE)))) {
                 try {
-                    setUniversityFiscalYear(new Integer(getValue(detailLine, pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE))));
+                    setUniversityFiscalYear(Integer.valueOf(getValue(detailLine, pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE))));
                 }
                 catch (NumberFormatException e) {
                     messageMap.putError(KFSConstants.GLOBAL_ERRORS, KFSKeyConstants.ERROR_CUSTOM, "Collector detail university fiscal year " + lineNumber + " string " + detailLine.substring(pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE)));

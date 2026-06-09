@@ -62,7 +62,7 @@ public class PaymentGroupDaoOjb extends PlatformAwareDaoBaseOjb implements Payme
         while ( i.hasNext() ) {
             Object[] data = (Object[])i.next();
             BigDecimal d = (BigDecimal)data[0];
-            results.add( new Integer(d.intValue()) );
+            results.add( Integer.valueOf(d.intValue()) );
         }
         return results;
     }
@@ -91,7 +91,7 @@ public class PaymentGroupDaoOjb extends PlatformAwareDaoBaseOjb implements Payme
         while ( i.hasNext() ) {
             Object[] data = (Object[])i.next();
             BigDecimal d = (BigDecimal)data[0];
-            results.add( new Integer(d.intValue()) );
+            results.add( Integer.valueOf(d.intValue()) );
         }
         return results;
     }

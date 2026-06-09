@@ -494,7 +494,7 @@ public class DepositWizardAction extends KualiAction {
         // make a list of cashiering checks to deposit
         List<Integer> selectedCashieringChecks = new ArrayList<Integer>();
         for (DepositWizardCashieringCheckHelper helper : dform.getDepositWizardCashieringCheckHelpers()) {
-            if (helper.getSequenceId() != null && !helper.getSequenceId().equals(new Integer(-1))) {
+            if (helper.getSequenceId() != null && !helper.getSequenceId().equals(Integer.valueOf(-1))) {
                 selectedCashieringChecks.add(helper.getSequenceId());
             }
         }

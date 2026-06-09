@@ -48,9 +48,9 @@ public class CloseServiceTest extends KualiTestBase {
 
     private static final String VALID_AWARD_STATUS_CODE = "R";
     private static final String INVALID_AWARD_STATUS_CODE = "U";
-    private static final Long thirteen = new Long(13);
-    private static final Long fourteen = new Long(14);
-    private static final Long fifteen = new Long(15);
+    private static final Long thirteen = Long.valueOf(13);
+    private static final Long fourteen = Long.valueOf(14);
+    private static final Long fifteen = Long.valueOf(15);
 
     private DateFormat dateFormat;
     private Date today;

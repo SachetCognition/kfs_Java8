@@ -28,9 +28,9 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 public enum InvoiceMilestoneFixture {
 
-    INV_MLSTN_1("5030", new Long(1), new Long(1), "Milestone 1", new KualiDecimal(1), null),
-    INV_MLSTN_2("5030", new Long(2), new Long(2), "Milestone 2", new KualiDecimal(1), new Date(System.currentTimeMillis())),
-    INV_MLSTN_3("5030", new Long(1), new Long(1), "Milestone 3", new KualiDecimal(5), null);
+    INV_MLSTN_1("5030", Long.valueOf(1), Long.valueOf(1), "Milestone 1", new KualiDecimal(1), null),
+    INV_MLSTN_2("5030", Long.valueOf(2), Long.valueOf(2), "Milestone 2", new KualiDecimal(1), new Date(System.currentTimeMillis())),
+    INV_MLSTN_3("5030", Long.valueOf(1), Long.valueOf(1), "Milestone 3", new KualiDecimal(5), null);
 
     private String documentNumber;
     private Long milestoneNumber;

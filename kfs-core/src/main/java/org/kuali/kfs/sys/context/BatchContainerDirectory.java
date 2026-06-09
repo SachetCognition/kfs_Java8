@@ -142,7 +142,7 @@ public class BatchContainerDirectory {
     	    throw new RuntimeException(successFile.getName() + " shouldn't exist yet before Step is run");
     	}
 
-    	writeBatchStepFileToSystem(runFile, new Integer(stepIndex));
+    	writeBatchStepFileToSystem(runFile, Integer.valueOf(stepIndex));
     }
 
     /**

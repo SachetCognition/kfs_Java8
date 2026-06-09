@@ -124,7 +124,7 @@ public class PaymentSourceHelperServiceImpl implements PaymentSourceHelperServic
 
         // grab the explicit entry for the first accounting line and adjust for wire charge entry
         GeneralLedgerPendingEntry explicitEntry = new GeneralLedgerPendingEntry(paymentSource.getGeneralLedgerPendingEntry(0));
-        explicitEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        explicitEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
         explicitEntry.setFinancialObjectCode(wireCharge.getExpenseFinancialObjectCode());
         explicitEntry.setFinancialSubObjectCode(GENERAL_LEDGER_PENDING_ENTRY_CODE.getBlankFinancialSubObjectCode());
         explicitEntry.setTransactionDebitCreditCode(GL_DEBIT_CODE);
@@ -173,7 +173,7 @@ public class PaymentSourceHelperServiceImpl implements PaymentSourceHelperServic
 
         // copy the charge entry and adjust for credit
         GeneralLedgerPendingEntry explicitEntry = new GeneralLedgerPendingEntry(chargeEntry);
-        explicitEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        explicitEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
         explicitEntry.setChartOfAccountsCode(wireCharge.getChartOfAccountsCode());
         explicitEntry.setAccountNumber(wireCharge.getAccountNumber());
         explicitEntry.setFinancialObjectCode(wireCharge.getIncomeFinancialObjectCode());

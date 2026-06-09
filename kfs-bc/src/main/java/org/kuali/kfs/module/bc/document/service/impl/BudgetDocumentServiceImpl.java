@@ -1073,7 +1073,7 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
                 String[] rootNode = organizationService.getRootOrganizationCode();
                 String rootChart = rootNode[0];
                 String rootOrganization = rootNode[1];
-                Integer currentLevel = new Integer(1);
+                Integer currentLevel = Integer.valueOf(1);
                 String organizationChartOfAccountsCode = accountReports.getReportsToChartOfAccountsCode();
                 String organizationCode = accountReports.getReportsToOrganizationCode();
                 boolean overFlow = budgetConstructionDao.insertAccountIntoAccountOrganizationHierarchy(rootChart, rootOrganization, universityFiscalYear, chartOfAccountsCode, accountNumber, currentLevel, organizationChartOfAccountsCode, organizationCode);

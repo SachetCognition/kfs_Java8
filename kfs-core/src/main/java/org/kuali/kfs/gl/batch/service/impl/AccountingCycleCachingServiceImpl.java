@@ -93,7 +93,7 @@ public class AccountingCycleCachingServiceImpl extends AbstractBatchTransactiona
     public boolean isCurrentActiveAccountingDocumentType(String documentTypeCode) {
         Boolean documentTypeValid = documentTypeValidCache.get(documentTypeCode);
         if (documentTypeValid == null) {
-            documentTypeValid = new Boolean(financialSystemDocumentTypeService.isCurrentActiveAccountingDocumentType(documentTypeCode));
+            documentTypeValid = Boolean.valueOf(financialSystemDocumentTypeService.isCurrentActiveAccountingDocumentType(documentTypeCode));
             documentTypeValidCache.put(documentTypeCode, documentTypeValid);
         }
         return documentTypeValid.booleanValue();

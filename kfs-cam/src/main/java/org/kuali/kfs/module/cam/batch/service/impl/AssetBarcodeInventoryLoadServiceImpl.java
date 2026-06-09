@@ -124,7 +124,7 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
 
         // Getting the length of each field that needs to be validated
         Integer campusTagNumberMaxLength = dataDictionaryService.getAttributeMaxLength(Asset.class, CamsPropertyConstants.Asset.CAMPUS_TAG_NUMBER);
-        Integer inventoryScannedCodeMaxLength = new Integer(1);
+        Integer inventoryScannedCodeMaxLength = Integer.valueOf(1);
         Integer InventoryDateMaxLength = dataDictionaryService.getAttributeMaxLength(BarcodeInventoryErrorDetail.class, CamsPropertyConstants.BarcodeInventory.INVENTORY_DATE);
         Integer campusCodeMaxLength = dataDictionaryService.getAttributeMaxLength(Asset.class, CamsPropertyConstants.Asset.CAMPUS_CODE);
         Integer buildingCodeMaxLength = dataDictionaryService.getAttributeMaxLength(Asset.class, CamsPropertyConstants.Asset.BUILDING_CODE);
@@ -282,7 +282,7 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
 
         List<BarcodeInventoryErrorDocument> barcodeInventoryErrorDocuments = new ArrayList<BarcodeInventoryErrorDocument>();
         try {
-            Long ln = new Long(1);
+            Long ln = Long.valueOf(1);
             input = new BufferedReader(new FileReader(file));
             String line = null;
 
@@ -379,7 +379,7 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
      * @param barcodeInventoryErrorDetails
      */
     protected void processBarcodeInventory(List<BarcodeInventoryErrorDetail> barcodeInventoryErrorDetails, AssetBarCodeInventoryInputFileForm form) throws Exception {
-        Long lineNumber = new Long(0);
+        Long lineNumber = Long.valueOf(0);
         boolean docCreated = false;
         int errorRecCount = 0;
         int totalRecCount = 0;
@@ -443,7 +443,7 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
 
         try {
             if (parameterService.parameterExists(BarcodeInventoryErrorDocument.class, CamsConstants.Parameters.MAX_NUMBER_OF_RECORDS_PER_DOCUMENT)) {
-                maxNumberRecordsPerDocument = new Integer(parameterService.getParameterValueAsString(BarcodeInventoryErrorDocument.class, CamsConstants.Parameters.MAX_NUMBER_OF_RECORDS_PER_DOCUMENT)).intValue();
+                maxNumberRecordsPerDocument = Integer.valueOf(parameterService.getParameterValueAsString(BarcodeInventoryErrorDocument.class, CamsConstants.Parameters.MAX_NUMBER_OF_RECORDS_PER_DOCUMENT)).intValue();
             }
 
             while (true) {

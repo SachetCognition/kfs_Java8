@@ -303,7 +303,7 @@ public class DepreciationReport {
                 cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
                 head.addCell(cell);
 
-                cell = new PdfPCell(new Phrase("Page: " + new Integer(writer.getPageNumber()), font));
+                cell = new PdfPCell(new Phrase("Page: " + Integer.valueOf(writer.getPageNumber()), font));
                 cell.setBorder(Rectangle.NO_BORDER);
                 cell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
                 head.addCell(cell);

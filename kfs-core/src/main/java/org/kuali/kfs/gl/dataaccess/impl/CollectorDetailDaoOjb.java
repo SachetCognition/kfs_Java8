@@ -60,7 +60,7 @@ public class CollectorDetailDaoOjb extends PlatformAwareDaoBaseOjb implements Co
 
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
-        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(universityFiscalYear));
+        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, Integer.valueOf(universityFiscalYear));
         
         getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(CollectorDetail.class, criteria));
 
@@ -101,7 +101,7 @@ public class CollectorDetailDaoOjb extends PlatformAwareDaoBaseOjb implements Co
         if (iter.hasNext()) {
             Object[] result = iter.next();
             if (result[0] != null) {
-                return new Integer(((BigDecimal)result[0]).intValue());
+                return Integer.valueOf(((BigDecimal)result[0]).intValue());
             }
         }
         return null;

@@ -293,8 +293,8 @@ public class OrganizationReversionProcessImpl implements OrganizationReversionPr
         this.paramFiscalYear = (Integer) jobParameters.get(KFSConstants.UNIV_FISCAL_YR);
 
         organizationReversionCounts.put("balancesRead", balanceService.countBalancesForFiscalYear(paramFiscalYear));
-        organizationReversionCounts.put("balancesSelected", new Integer(0));
-        organizationReversionCounts.put("recordsWritten", new Integer(0));
+        organizationReversionCounts.put("balancesSelected", Integer.valueOf(0));
+        organizationReversionCounts.put("recordsWritten", Integer.valueOf(0));
 
         this.systemOptions = SpringContext.getBean(OptionsService.class).getOptions(paramFiscalYear);
         
@@ -992,9 +992,9 @@ public class OrganizationReversionProcessImpl implements OrganizationReversionPr
                     LOG.info(" YOU HAVE ACHIEVED 367471 ORIGIN ENTRIES INSERTED!  TRIUMPH IS YOURS!  ");
                 }
             }
-            organizationReversionCounts.put(countName, new Integer(countAsInt));
+            organizationReversionCounts.put(countName, Integer.valueOf(countAsInt));
         } else {
-            organizationReversionCounts.put(countName, new Integer(count.intValue() + increment));
+            organizationReversionCounts.put(countName, Integer.valueOf(count.intValue() + increment));
         }
     }
     

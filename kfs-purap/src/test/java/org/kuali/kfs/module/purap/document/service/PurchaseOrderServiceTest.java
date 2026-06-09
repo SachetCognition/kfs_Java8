@@ -264,7 +264,7 @@ public class PurchaseOrderServiceTest extends KualiTestBase {
         String poDocId = requisitionDocument.getRelatedViews().getRelatedPurchaseOrderViews().get(0).getDocumentNumber();
         PurchaseOrderDocument purchaseOrderDocument = (PurchaseOrderDocument)SpringContext.getBean(DocumentService.class).getByDocumentHeaderId(poDocId);
         assertTrue(purchaseOrderDocument.getPurchaseOrderAutomaticIndicator());
-        assertEquals(purchaseOrderDocument.getContractManagerCode(), new Integer(99));
+        assertEquals(purchaseOrderDocument.getContractManagerCode(), Integer.valueOf(99));
     }
 
     /**
@@ -277,7 +277,7 @@ public class PurchaseOrderServiceTest extends KualiTestBase {
         RequisitionDocument req = RequisitionDocumentFixture.REQ_NO_APO_VALID.createRequisitionDocument();
         routeRequisition(req);
         String docId = req.getDocumentNumber();
-        Integer contractManagerCode = new Integer(12);
+        Integer contractManagerCode = Integer.valueOf(12);
         poService.createPurchaseOrderDocument(req, "parke", contractManagerCode);
         RequisitionDocument requisitionDocument = (RequisitionDocument) SpringContext.getBean(DocumentService.class).getByDocumentHeaderId(docId);
         String poDocId = requisitionDocument.getRelatedViews().getRelatedPurchaseOrderViews().get(0).getDocumentNumber();
@@ -626,7 +626,7 @@ public class PurchaseOrderServiceTest extends KualiTestBase {
     @ConfigureContext(session = appleton, shouldCommitTransactions=true)
     public void testIsPurchaseOrderOpenForProcessing_With_PREQ() throws Exception {
         PaymentRequestDocumentTest preqDocTest = new PaymentRequestDocumentTest();
-        PurchaseOrderDocument purchaseOrderDocument = preqDocTest.createPurchaseOrderDocument(PurchaseOrderDocumentFixture.PO_APPROVAL_REQUIRED, true, new Integer(SpringContext.getBean(SequenceAccessorService.class).getNextAvailableSequenceNumber("AP_PUR_DOC_LNK_ID").toString()));
+        PurchaseOrderDocument purchaseOrderDocument = preqDocTest.createPurchaseOrderDocument(PurchaseOrderDocumentFixture.PO_APPROVAL_REQUIRED, true, Integer.valueOf(SpringContext.getBean(SequenceAccessorService.class).getNextAvailableSequenceNumber("AP_PUR_DOC_LNK_ID").toString()));
         PaymentRequestDocument paymentRequestDocument = preqDocTest.createPaymentRequestDocument(PaymentRequestDocumentFixture.PREQ_APPROVAL_REQUIRED,
                 purchaseOrderDocument, true, new KualiDecimal[] {new KualiDecimal(100)});
         paymentRequestDocument.setAccountsPayablePurchasingDocumentLinkIdentifier(purchaseOrderDocument.getAccountsPayablePurchasingDocumentLinkIdentifier());

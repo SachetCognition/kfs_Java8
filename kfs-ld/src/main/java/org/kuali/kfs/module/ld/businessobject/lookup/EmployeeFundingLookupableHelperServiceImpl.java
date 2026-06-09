@@ -121,7 +121,7 @@ public class EmployeeFundingLookupableHelperServiceImpl extends AbstractLookupab
         updateByPendingLedgerEntry(searchResultsCollection, fieldValues, pendingEntryOption, isConsolidated);
         searchResultsCollection = consolidateObjectTypeCode(searchResultsCollection);
         // get the actual size of all qualified search results
-        Long actualSize = new Long(searchResultsCollection.size());
+        Long actualSize = Long.valueOf(searchResultsCollection.size());
 
         return this.buildSearchResultList(searchResultsCollection, actualSize);
     }

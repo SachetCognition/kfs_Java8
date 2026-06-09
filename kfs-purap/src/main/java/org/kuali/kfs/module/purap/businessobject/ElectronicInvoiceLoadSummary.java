@@ -37,9 +37,9 @@ public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase 
   private Integer vendorHeaderGeneratedIdentifier;
   private Integer vendorDetailAssignedIdentifier;
   private String vendorName;
-  private Integer invoiceLoadSuccessCount = new Integer(0);
+  private Integer invoiceLoadSuccessCount = Integer.valueOf(0);
   private KualiDecimal invoiceLoadSuccessAmount = new KualiDecimal(0.00);
-  private Integer invoiceLoadFailCount = new Integer(0);
+  private Integer invoiceLoadFailCount = Integer.valueOf(0);
   private KualiDecimal invoiceLoadFailAmount = new KualiDecimal(0.00);
   private Boolean isEmpty = Boolean.TRUE;
   private Timestamp fileProcessTimestamp;
@@ -56,7 +56,7 @@ public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase 
   public void addSuccessfulInvoiceOrder(KualiDecimal amount, 
                                         ElectronicInvoice eInvoice) {
     isEmpty = Boolean.FALSE;
-    invoiceLoadSuccessCount = new Integer(invoiceLoadSuccessCount.intValue() + 1);
+    invoiceLoadSuccessCount = Integer.valueOf(invoiceLoadSuccessCount.intValue() + 1);
     fileProcessTimestamp = SpringContext.getBean(DateTimeService.class).getCurrentTimestamp();
     
     if (amount != null) {
@@ -69,7 +69,7 @@ public class ElectronicInvoiceLoadSummary extends PersistableBusinessObjectBase 
   public void addFailedInvoiceOrder(KualiDecimal amount, 
                                     ElectronicInvoice eInvoice) {
     isEmpty = Boolean.FALSE;
-    invoiceLoadFailCount = new Integer(invoiceLoadFailCount.intValue() + 1);
+    invoiceLoadFailCount = Integer.valueOf(invoiceLoadFailCount.intValue() + 1);
     fileProcessTimestamp = SpringContext.getBean(DateTimeService.class).getCurrentTimestamp();
     
     if (amount != null) {

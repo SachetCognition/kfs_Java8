@@ -145,7 +145,7 @@ public class PurchasingCapitalAssetValidation extends GenericValidation {
                     String assetTypeCode = capitalAssetItem.getPurchasingCapitalAssetSystem().getCapitalAssetTypeCode();
                     if (StringUtils.isNotBlank(assetTypeCode) && !capitalAssetBuilderModuleService.isAssetTypeExisting(assetTypeCode)) {
                         valid = false;
-                        String errorPath = ERROR_PATH_PREFIX_FOR_IND_SYSTEM + new Integer(i).toString() + ERROR_PATH_SUFFIX_FOR_IND_SYSTEM;
+                        String errorPath = ERROR_PATH_PREFIX_FOR_IND_SYSTEM + Integer.valueOf(i).toString() + ERROR_PATH_SUFFIX_FOR_IND_SYSTEM;
                         addAssetTypeErrorWithFullErrorPath(errorPath);
                     }
                 }

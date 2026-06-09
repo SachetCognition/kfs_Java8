@@ -135,7 +135,7 @@ public class ContractsGrantsInvoiceLookupableHelperServiceImpl extends AccountsR
         // Convert to suitable list
         searchResultsCollection = getContractsGrantsInvoiceReportService().getPopulatedContractsGrantsInvoiceLookupResults(searchResultsCollection);
         filterSearchResults(searchResultsCollection);
-        return this.buildSearchResultList(searchResultsCollection, new Long(searchResultsCollection.size()));
+        return this.buildSearchResultList(searchResultsCollection, Long.valueOf(searchResultsCollection.size()));
     }
 
     /**

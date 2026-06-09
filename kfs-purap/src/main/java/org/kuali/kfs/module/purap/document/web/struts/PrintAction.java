@@ -51,7 +51,7 @@ public class PrintAction extends KualiAction {
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         //get parameters
         String poDocNumber = request.getParameter("poDocNumber");
-        Integer vendorQuoteId = new Integer(request.getParameter("vendorQuoteId"));
+        Integer vendorQuoteId = Integer.valueOf(request.getParameter("vendorQuoteId"));
         if (StringUtils.isEmpty(poDocNumber) || StringUtils.isEmpty(poDocNumber)) {
             throw new RuntimeException();
         }

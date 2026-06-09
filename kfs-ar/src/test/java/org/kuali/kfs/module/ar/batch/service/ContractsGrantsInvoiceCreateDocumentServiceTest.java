@@ -103,7 +103,7 @@ public class ContractsGrantsInvoiceCreateDocumentServiceTest extends ContractsGr
     public void testValidateManualAwardsTwoValidAwards() {
         List<ContractsAndGrantsBillingAward> awards = setupAwards();
         List<ContractsAndGrantsBillingAward> awards2 = setupAwards();
-        ((Award)awards2.get(0)).setProposalNumber(new Long(11));
+        ((Award)awards2.get(0)).setProposalNumber(Long.valueOf(11));
         awards.addAll(awards2);
         Collection<ContractsGrantsInvoiceDocumentErrorLog> contractsGrantsInvoiceDocumentErrorLogs = new ArrayList<ContractsGrantsInvoiceDocumentErrorLog>();
 
@@ -123,7 +123,7 @@ public class ContractsGrantsInvoiceCreateDocumentServiceTest extends ContractsGr
         ((Award)awards.get(0)).setExcludedFromInvoicing(true);
         List<ContractsAndGrantsBillingAward> awards2 = setupAwards();
         ((Award)awards2.get(0)).setExcludedFromInvoicing(true);
-        ((Award)awards2.get(0)).setProposalNumber(new Long(11));
+        ((Award)awards2.get(0)).setProposalNumber(Long.valueOf(11));
         awards.addAll(awards2);
         List<ContractsGrantsInvoiceDocumentErrorLog> contractsGrantsInvoiceDocumentErrorLogs = new ArrayList<ContractsGrantsInvoiceDocumentErrorLog>();
 
@@ -145,7 +145,7 @@ public class ContractsGrantsInvoiceCreateDocumentServiceTest extends ContractsGr
         List<ContractsAndGrantsBillingAward> awards = setupAwards();
         List<ContractsAndGrantsBillingAward> awards2 = setupAwards();
         ((Award)awards2.get(0)).setExcludedFromInvoicing(true);
-        ((Award)awards2.get(0)).setProposalNumber(new Long(11));
+        ((Award)awards2.get(0)).setProposalNumber(Long.valueOf(11));
         awards.addAll(awards2);
         List<ContractsGrantsInvoiceDocumentErrorLog> contractsGrantsInvoiceDocumentErrorLogs = new ArrayList<ContractsGrantsInvoiceDocumentErrorLog>();
 
@@ -200,7 +200,7 @@ public class ContractsGrantsInvoiceCreateDocumentServiceTest extends ContractsGr
     public void testValidateBatchAwardsTwoValidAwards() {
         List<ContractsAndGrantsBillingAward> awards = setupAwards();
         List<ContractsAndGrantsBillingAward> awards2 = setupAwards();
-        ((Award)awards2.get(0)).setProposalNumber(new Long(11));
+        ((Award)awards2.get(0)).setProposalNumber(Long.valueOf(11));
         awards.addAll(awards2);
 
         Collection<ContractsAndGrantsBillingAward> validAwards = contractsGrantsInvoiceCreateDocumentService.validateAwards(awards, null, errorOutputFile, ArConstants.ContractsAndGrantsInvoiceDocumentCreationProcessType.BATCH.getCode());
@@ -221,7 +221,7 @@ public class ContractsGrantsInvoiceCreateDocumentServiceTest extends ContractsGr
         ((Award)awards.get(0)).setExcludedFromInvoicing(true);
         List<ContractsAndGrantsBillingAward> awards2 = setupAwards();
         ((Award)awards2.get(0)).setExcludedFromInvoicing(true);
-        ((Award)awards2.get(0)).setProposalNumber(new Long(11));
+        ((Award)awards2.get(0)).setProposalNumber(Long.valueOf(11));
         awards.addAll(awards2);
 
         Collection<ContractsAndGrantsBillingAward> validAwards = contractsGrantsInvoiceCreateDocumentService.validateAwards(awards, null, errorOutputFile, ArConstants.ContractsAndGrantsInvoiceDocumentCreationProcessType.BATCH.getCode());
@@ -243,7 +243,7 @@ public class ContractsGrantsInvoiceCreateDocumentServiceTest extends ContractsGr
         List<ContractsAndGrantsBillingAward> awards = setupAwards();
         List<ContractsAndGrantsBillingAward> awards2 = setupAwards();
         ((Award)awards2.get(0)).setExcludedFromInvoicing(true);
-        ((Award)awards2.get(0)).setProposalNumber(new Long(11));
+        ((Award)awards2.get(0)).setProposalNumber(Long.valueOf(11));
         awards.addAll(awards2);
 
         Collection<ContractsAndGrantsBillingAward> validAwards = contractsGrantsInvoiceCreateDocumentService.validateAwards(awards, null, errorOutputFile, ArConstants.ContractsAndGrantsInvoiceDocumentCreationProcessType.BATCH.getCode());

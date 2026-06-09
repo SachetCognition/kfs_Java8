@@ -131,7 +131,7 @@ public class OrganizationReversionProcessServiceImpl implements OrganizationReve
             throw new IllegalArgumentException("TRANSACTION_DT is an invalid date");
         }
         try {
-            jobParameters.put(KFSConstants.UNIV_FISCAL_YR, new Integer(strUniversityFiscalYear));
+            jobParameters.put(KFSConstants.UNIV_FISCAL_YR, Integer.valueOf(strUniversityFiscalYear));
         }
         catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("UNIV_FISCAL_YR is an invalid year");

@@ -199,7 +199,7 @@ public class BudgetConstructionSalarySummaryReportServiceImpl implements BudgetC
         if (appointmentFundingEntry.getBcnCalculatedSalaryFoundationTracker().size() > 0) {
             budgetConstructionCalculatedSalaryFoundationTracker = appointmentFundingEntry.getBcnCalculatedSalaryFoundationTracker().get(0);
             orgSalarySummaryReportEntry.setCsfTimePercent(BudgetConstructionReportHelper.setDecimalDigit(budgetConstructionCalculatedSalaryFoundationTracker.getCsfTimePercent(), 2, false));
-            orgSalarySummaryReportEntry.setCsfAmount(new Integer(budgetConstructionCalculatedSalaryFoundationTracker.getCsfAmount().intValue()));
+            orgSalarySummaryReportEntry.setCsfAmount(Integer.valueOf(budgetConstructionCalculatedSalaryFoundationTracker.getCsfAmount().intValue()));
 
             // calculate amountChange and percentChange
             if (appointmentFundingEntry.getAppointmentRequestedFteQuantity().equals(budgetConstructionCalculatedSalaryFoundationTracker.getCsfFullTimeEmploymentQuantity())) {

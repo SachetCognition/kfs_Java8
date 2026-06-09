@@ -48,7 +48,7 @@ public class YearEndBudgetAdjustmentDocument extends BudgetAdjustmentDocument im
      */
     @Override
     public void initiateDocument() {
-        Integer previousYearParam = new Integer(SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear().intValue() - 1);
+        Integer previousYearParam = Integer.valueOf(SpringContext.getBean(UniversityDateService.class).getCurrentFiscalYear().intValue() - 1);
         setPostingYear(previousYearParam);
     }
 

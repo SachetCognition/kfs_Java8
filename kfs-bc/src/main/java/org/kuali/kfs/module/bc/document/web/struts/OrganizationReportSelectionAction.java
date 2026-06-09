@@ -344,7 +344,7 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
     public ActionForward selectAllSubFunds(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         OrganizationReportSelectionForm organizationReportSelectionForm = (OrganizationReportSelectionForm) form;
         for (BudgetConstructionSubFundPick budgetConstructionSubFundPick : organizationReportSelectionForm.getSubFundPickList()) {
-            budgetConstructionSubFundPick.setReportFlag(new Integer(1));
+            budgetConstructionSubFundPick.setReportFlag(Integer.valueOf(1));
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
@@ -356,7 +356,7 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
     public ActionForward selectAllObjectCodes(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         OrganizationReportSelectionForm organizationReportSelectionForm = (OrganizationReportSelectionForm) form;
         for (BudgetConstructionObjectPick budgetConstructionObjectPick : organizationReportSelectionForm.getObjectCodePickList()) {
-            budgetConstructionObjectPick.setSelectFlag(new Integer(1));
+            budgetConstructionObjectPick.setSelectFlag(Integer.valueOf(1));
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
@@ -368,7 +368,7 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
     public ActionForward selectAllReasonCodes(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         OrganizationReportSelectionForm organizationReportSelectionForm = (OrganizationReportSelectionForm) form;
         for (BudgetConstructionReasonCodePick budgetConstructionReasonCodePick : organizationReportSelectionForm.getReasonCodePickList()) {
-            budgetConstructionReasonCodePick.setSelectFlag(new Integer(1));
+            budgetConstructionReasonCodePick.setSelectFlag(Integer.valueOf(1));
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
@@ -380,7 +380,7 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
     public ActionForward unselectAllSubFunds(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         OrganizationReportSelectionForm organizationReportSelectionForm = (OrganizationReportSelectionForm) form;
         for (BudgetConstructionSubFundPick budgetConstructionSubFundPick : organizationReportSelectionForm.getSubFundPickList()) {
-            budgetConstructionSubFundPick.setReportFlag(new Integer(0));
+            budgetConstructionSubFundPick.setReportFlag(Integer.valueOf(0));
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
@@ -392,7 +392,7 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
     public ActionForward unselectAllObjectCodes(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         OrganizationReportSelectionForm organizationReportSelectionForm = (OrganizationReportSelectionForm) form;
         for (BudgetConstructionObjectPick budgetConstructionObjectPick : organizationReportSelectionForm.getObjectCodePickList()) {
-            budgetConstructionObjectPick.setSelectFlag(new Integer(0));
+            budgetConstructionObjectPick.setSelectFlag(Integer.valueOf(0));
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
@@ -404,7 +404,7 @@ public class OrganizationReportSelectionAction extends BudgetExpansionAction {
     public ActionForward unselectAllReasonCodes(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         OrganizationReportSelectionForm organizationReportSelectionForm = (OrganizationReportSelectionForm) form;
         for (BudgetConstructionReasonCodePick budgetConstructionReasonCodePick : organizationReportSelectionForm.getReasonCodePickList()) {
-            budgetConstructionReasonCodePick.setSelectFlag(new Integer(0));
+            budgetConstructionReasonCodePick.setSelectFlag(Integer.valueOf(0));
         }
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);

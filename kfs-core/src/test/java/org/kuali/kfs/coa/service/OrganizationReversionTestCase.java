@@ -31,7 +31,7 @@ public class OrganizationReversionTestCase extends KualiTestBase {
         OrganizationReversionService organizationReversionService = SpringContext.getBean(OrganizationReversionService.class);
         assertNotNull("Service shouldn't be null", organizationReversionService);
 
-        Integer fiscalYear = new Integer("2004");
+        Integer fiscalYear = Integer.valueOf("2004");
 
         OrganizationReversion notexist = organizationReversionService.getByPrimaryId(fiscalYear, "BL", "TEST");
         assertNull("BL-TEST org reversion shouldn't exist in table", notexist);

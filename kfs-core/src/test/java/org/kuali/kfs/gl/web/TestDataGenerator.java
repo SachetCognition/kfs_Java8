@@ -215,10 +215,10 @@ public class TestDataGenerator {
             finalPropertyValue = null;
         }
         else if (propertyTypeName.indexOf("Integer") >= 0) {
-            finalPropertyValue = new Integer(propertyValue.trim());
+            finalPropertyValue = Integer.valueOf(propertyValue.trim());
         }
         else if (propertyTypeName.indexOf("Boolean") >= 0) {
-            finalPropertyValue = new Boolean(propertyValue.trim());
+            finalPropertyValue = Boolean.valueOf(propertyValue.trim());
         }
         else if (propertyTypeName.indexOf("KualiDecimal") >= 0) {
             finalPropertyValue = new KualiDecimal(propertyValue.trim());

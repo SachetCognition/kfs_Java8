@@ -74,7 +74,7 @@ public class PurchaseOrderAccountingLineAuthorizer extends PurapAccountingLineAu
         int openBracketPos = accountingGroupProperty.indexOf("[");
         int closeBracketPos = accountingGroupProperty.indexOf("]");
         String itemNumberString = accountingGroupProperty.substring(openBracketPos + 1, closeBracketPos);
-        int itemNumber = new Integer(itemNumberString).intValue();
+        int itemNumber = Integer.valueOf(itemNumberString).intValue();
         return itemNumber;
     }
 

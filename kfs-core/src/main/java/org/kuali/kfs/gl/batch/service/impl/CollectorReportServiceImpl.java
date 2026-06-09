@@ -448,10 +448,10 @@ public class CollectorReportServiceImpl implements CollectorReportService {
      */
     protected List<Summary> buildDemergerReportSummary(ScrubberReportData scrubberReportData, DemergerReportData demergerReport) {
         List<Summary> reportSummary = new ArrayList<Summary>();
-        reportSummary.add(new Summary(1, "ERROR RECORDS READ", new Integer(scrubberReportData.getNumberOfErrorRecordsWritten())));
-        reportSummary.add(new Summary(2, "VALID RECORDS READ", new Integer(scrubberReportData.getNumberOfScrubbedRecordsWritten())));
-        reportSummary.add(new Summary(3, "ERROR RECORDS REMOVED FROM PROCESSING", new Integer(demergerReport.getErrorTransactionsSaved())));
-        reportSummary.add(new Summary(4, "VALID RECORDS ENTERED INTO ORIGIN ENTRY", new Integer(demergerReport.getValidTransactionsSaved())));
+        reportSummary.add(new Summary(1, "ERROR RECORDS READ", Integer.valueOf(scrubberReportData.getNumberOfErrorRecordsWritten())));
+        reportSummary.add(new Summary(2, "VALID RECORDS READ", Integer.valueOf(scrubberReportData.getNumberOfScrubbedRecordsWritten())));
+        reportSummary.add(new Summary(3, "ERROR RECORDS REMOVED FROM PROCESSING", Integer.valueOf(demergerReport.getErrorTransactionsSaved())));
+        reportSummary.add(new Summary(4, "VALID RECORDS ENTERED INTO ORIGIN ENTRY", Integer.valueOf(demergerReport.getValidTransactionsSaved())));
 
         return reportSummary;
     }

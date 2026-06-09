@@ -50,7 +50,7 @@ public class AgencyRuleTest extends MaintenanceRuleTestBase {
 
     public void setUp() throws Exception {
         super.setUp();
-        agencyNumber = new Long(12500);
+        agencyNumber = Long.valueOf(12500);
         boService = SpringContext.getBean(BusinessObjectService.class);
         agency = new Agency();
         agencyAddress = new AgencyAddress();

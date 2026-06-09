@@ -783,7 +783,7 @@ public class LaborScrubberProcess {
         scrubbedEntry.setReferenceFinancialDocumentNumber(unscrubbedEntry.getReferenceFinancialDocumentNumber());
 
         Integer transactionNumber = unscrubbedEntry.getTransactionLedgerEntrySequenceNumber();
-        scrubbedEntry.setTransactionLedgerEntrySequenceNumber(null == transactionNumber ? new Integer(0) : transactionNumber);
+        scrubbedEntry.setTransactionLedgerEntrySequenceNumber(null == transactionNumber ? Integer.valueOf(0) : transactionNumber);
         scrubbedEntry.setTransactionLedgerEntryDescription(unscrubbedEntry.getTransactionLedgerEntryDescription());
         scrubbedEntry.setTransactionLedgerEntryAmount(unscrubbedEntry.getTransactionLedgerEntryAmount());
         scrubbedEntry.setTransactionDebitCreditCode(unscrubbedEntry.getTransactionDebitCreditCode());

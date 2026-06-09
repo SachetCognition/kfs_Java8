@@ -234,7 +234,7 @@ public class AssetPaymentDocument extends AccountingDocumentBase implements Copy
             List<AssetPaymentDetail> apdList = assetDetail.getAssetPaymentDetails();
             for (AssetPaymentDetail apd : apdList) {                
                 String accountingPeriodCompositeString = getAccountingPeriodCompositeString();                
-                apd.setPostingYear(new Integer(StringUtils.right(accountingPeriodCompositeString, 4)));
+                apd.setPostingYear(Integer.valueOf(StringUtils.right(accountingPeriodCompositeString, 4)));
                 apd.setPostingPeriodCode(StringUtils.left(accountingPeriodCompositeString, 2));
             }
             // CSU 6702 END Inferred change            

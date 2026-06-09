@@ -78,7 +78,7 @@ public class LaborCalculatedSalaryFoundationTrackerLookupableHelperServiceImpl e
 
         Collection searchResultsCollection = laborCalculatedSalaryFoundationTrackerService.findCSFTrackerWithJuly1(fieldValues, false);
 
-        return new CollectionIncomplete(searchResultsCollection, new Long(searchResultsCollection.size()));
+        return new CollectionIncomplete(searchResultsCollection, Long.valueOf(searchResultsCollection.size()));
     }
 
     /**

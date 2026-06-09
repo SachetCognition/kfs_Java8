@@ -38,7 +38,7 @@ public class MilestoneScheduleRuleUtilTest extends KualiTestBase {
 
     @Override
     public void setUp() throws Exception {
-        proposalNumber = new Long(39928);
+        proposalNumber = Long.valueOf(39928);
         boService = SpringContext.getBean(BusinessObjectService.class);
         mSchedule = boService.findBySinglePrimaryKey(MilestoneSchedule.class, proposalNumber);
     }

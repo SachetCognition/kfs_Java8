@@ -275,7 +275,7 @@ public class AccountingLineGroupTag extends TagSupport {
         List<AccountingLine> lines = getAccountingLineCollection();
         Collections.sort(lines, getGroupDefinition().getAccountingLineComparator());
         for (AccountingLine accountingLine : lines) {
-            final RenderableAccountingLineContainer container = buildContainerForLine(groupDefinition, document, accountingLine, currentUser, new Integer(count), (addedTopLine ? false : true));
+            final RenderableAccountingLineContainer container = buildContainerForLine(groupDefinition, document, accountingLine, currentUser, Integer.valueOf(count), (addedTopLine ? false : true));
             containers.add(container);
             anyEditableLines = anyEditableLines || container.isEditableLine() || isMessageMapContainingErrorsOnLine(container.getAccountingLinePropertyPath());
             count += 1;

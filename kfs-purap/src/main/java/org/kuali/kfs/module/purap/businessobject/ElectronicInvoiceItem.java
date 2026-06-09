@@ -95,7 +95,7 @@ public class ElectronicInvoiceItem {
   
   public Integer getReferenceLineNumberInteger() {
     if (this.referenceLineNumber != null) {
-      return new Integer(Integer.parseInt(referenceLineNumber));
+      return Integer.valueOf(Integer.parseInt(referenceLineNumber));
     }
     return null;
   }

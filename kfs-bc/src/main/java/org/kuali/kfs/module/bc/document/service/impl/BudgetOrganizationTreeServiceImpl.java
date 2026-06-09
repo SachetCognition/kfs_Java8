@@ -75,7 +75,7 @@ public class BudgetOrganizationTreeServiceImpl implements BudgetOrganizationTree
         bcPullup.setOrganizationCode(bcOrgRpts.getOrganizationCode());
         bcPullup.setReportsToChartOfAccountsCode(bcOrgRpts.getReportsToChartOfAccountsCode());
         bcPullup.setReportsToOrganizationCode(bcOrgRpts.getReportsToOrganizationCode());
-        bcPullup.setPullFlag(new Integer(0));
+        bcPullup.setPullFlag(Integer.valueOf(0));
         businessObjectService.save(bcPullup);
 
         if (curLevel <= MAXLEVEL) {

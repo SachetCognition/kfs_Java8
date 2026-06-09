@@ -78,7 +78,7 @@ public class AccountLineGroupTest extends KualiTestBase {
     }
 
     public void testHashcode() throws Exception {
-        GlAccountLineGroup first = createAccountLineGroup(new Integer(2008), new String("BL"), "BL002323", "--", "7000", "12121", "01", "1001", "A", "C");
+        GlAccountLineGroup first = createAccountLineGroup(Integer.valueOf(2008), new String("BL"), "BL002323", "--", "7000", "12121", "01", "1001", "A", "C");
         GlAccountLineGroup second = createAccountLineGroup(2008, "BL", "BL002323", "--", new String("7000"), "12121", "01", "1001", "A", "C");
         GlAccountLineGroup third = createAccountLineGroup(2008, "BL", new String("BL002323"), "", "7000", "12121", "01", "1001", "A", "D");
         assertEquals(first.hashCode(), second.hashCode());

@@ -234,7 +234,7 @@ public class PurapConstants {
 
     public static String[] AUTO_CLOSE_EXCLUSION_VNDR_CHOICE_CODES = {VendorChoice.SUBCONTRACT};
 
-    public static Integer APO_CONTRACT_MANAGER = new Integer(99);
+    public static Integer APO_CONTRACT_MANAGER = Integer.valueOf(99);
 
     // Requisition/Purchase Order Tab Errors
     public static final String DELIVERY_TAB_ERRORS = "document.delivery*";
@@ -1054,8 +1054,8 @@ public class PurapConstants {
         public static final String PO_VOID_DOCUMENT = "POV";
     }
 
-    public static final Integer PRORATION_SCALE = new Integer(6);
-    public static final Integer CREDITMEMO_PRORATION_SCALE = new Integer(20);
+    public static final Integer PRORATION_SCALE = Integer.valueOf(6);
+    public static final Integer CREDITMEMO_PRORATION_SCALE = Integer.valueOf(20);
 
     @Deprecated // This information needs to be looked up from the DD
     private static HashMap<String, String> getPurapParameterDetailTypeCodes() {

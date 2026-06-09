@@ -436,7 +436,7 @@ public class LaborJournalVoucherDetail extends VoucherSourceAccountingLine {
      */
     public void setPayrollEndDateFiscalPeriodCode(String payrollEndDateFiscalPeriodCode) {
         try {
-            Integer i = new Integer(payrollEndDateFiscalPeriodCode);
+            Integer i = Integer.valueOf(payrollEndDateFiscalPeriodCode);
             if (i < 10 && payrollEndDateFiscalPeriodCode.length() == 1) {
                 payrollEndDateFiscalPeriodCode = "0" + payrollEndDateFiscalPeriodCode;
             }

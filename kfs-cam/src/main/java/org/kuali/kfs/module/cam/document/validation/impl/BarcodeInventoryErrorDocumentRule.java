@@ -83,7 +83,7 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         List<BarcodeInventoryErrorDetail> barcodeInventoryErrorDetails = document.getBarcodeInventoryErrorDetail();
         List<BarcodeInventoryErrorDetail> inventory = new ArrayList<BarcodeInventoryErrorDetail>();
 
-        Long lineNumber = new Long(0);
+        Long lineNumber = Long.valueOf(0);
         for (BarcodeInventoryErrorDetail barcodeInventoryErrorDetail : barcodeInventoryErrorDetails) {
             barcodeInventoryErrorDetail.setErrorDescription("");
             if (barcodeInventoryErrorDetail.getErrorCorrectionStatusCode().equals(CamsConstants.BarCodeInventoryError.STATUS_CODE_ERROR)) {

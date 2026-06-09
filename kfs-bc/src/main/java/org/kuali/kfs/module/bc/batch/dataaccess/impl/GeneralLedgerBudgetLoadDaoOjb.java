@@ -111,7 +111,7 @@ public class GeneralLedgerBudgetLoadDaoOjb extends BudgetConstructionBatchHelper
         Iterator documentNumbersToLoad = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(queryID);
         while (documentNumbersToLoad.hasNext()) {
             Object[] resultRow = (Object[]) documentNumbersToLoad.next();
-            nextEntrySequenceNumber.put((String) resultRow[0], new Integer(0));
+            nextEntrySequenceNumber.put((String) resultRow[0], Integer.valueOf(0));
         }
 
         return nextEntrySequenceNumber;
@@ -455,7 +455,7 @@ public class GeneralLedgerBudgetLoadDaoOjb extends BudgetConstructionBatchHelper
             getPersistenceBrokerTemplate().store(periodToOpen);
             periodsOpened = periodsOpened + 1;
         }
-        LOG.warn(String.format("\n\naccounting periods for %d changed to open status: %d", requestYear, new Integer(periodsOpened)));
+        LOG.warn(String.format("\n\naccounting periods for %d changed to open status: %d", requestYear, Integer.valueOf(periodsOpened)));
     }
 
     /*******************************************************************************************************************************
@@ -551,7 +551,7 @@ public class GeneralLedgerBudgetLoadDaoOjb extends BudgetConstructionBatchHelper
          */
         public Integer getNextSequenceNumber(String seqKey) {
             Integer newSeqNumber = entrySequenceNumber.get(seqKey);
-            entrySequenceNumber.put(seqKey, new Integer(newSeqNumber.intValue() + 1));
+            entrySequenceNumber.put(seqKey, Integer.valueOf(newSeqNumber.intValue() + 1));
             return newSeqNumber;
         }
 

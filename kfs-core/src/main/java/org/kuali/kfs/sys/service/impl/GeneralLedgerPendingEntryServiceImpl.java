@@ -286,8 +286,8 @@ public class GeneralLedgerPendingEntryServiceImpl implements GeneralLedgerPendin
         }
 
         explicitEntry.setFinancialDocumentTypeCode(glpeSource.getFinancialDocumentTypeCode());
-        explicitEntry.setVersionNumber(new Long(1));
-        explicitEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        explicitEntry.setVersionNumber(Long.valueOf(1));
+        explicitEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
         Timestamp transactionTimestamp = new Timestamp(dateTimeService.getCurrentDate().getTime());
         explicitEntry.setTransactionDate(new java.sql.Date(transactionTimestamp.getTime()));
         explicitEntry.setTransactionEntryProcessedTs(transactionTimestamp);
@@ -382,8 +382,8 @@ public class GeneralLedgerPendingEntryServiceImpl implements GeneralLedgerPendin
 
         GeneralLedgerPendingEntry explicitEntry = new GeneralLedgerPendingEntry();
         explicitEntry.setFinancialDocumentTypeCode(document.getDocumentHeader().getWorkflowDocument().getDocumentTypeName());
-        explicitEntry.setVersionNumber(new Long(1));
-        explicitEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        explicitEntry.setVersionNumber(Long.valueOf(1));
+        explicitEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
         Timestamp transactionTimestamp = new Timestamp(dateTimeService.getCurrentDate().getTime());
         explicitEntry.setTransactionDate(new java.sql.Date(transactionTimestamp.getTime()));
         explicitEntry.setTransactionEntryProcessedTs(transactionTimestamp);
@@ -453,7 +453,7 @@ public class GeneralLedgerPendingEntryServiceImpl implements GeneralLedgerPendin
         }
 
         // update offset entry fields that are different from the explicit entry that it was created from
-        offsetEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        offsetEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
         offsetEntry.setTransactionDebitCreditCode(getOffsetEntryDebitCreditCode(explicitEntry));
 
         String offsetObjectCode = getOffsetFinancialObjectCode(offsetDefinition);
@@ -948,7 +948,7 @@ public class GeneralLedgerPendingEntryServiceImpl implements GeneralLedgerPendin
         // parse the fiscal year (it's not a required field on the lookup screens
         String universityFiscalYearStr = (String) localFieldValues.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR);
         if (StringUtils.isNotBlank(universityFiscalYearStr)) {
-            Integer universityFiscalYear = new Integer(universityFiscalYearStr);
+            Integer universityFiscalYear = Integer.valueOf(universityFiscalYearStr);
             return balanceTypeService.getEncumbranceBalanceTypes(universityFiscalYear);
         }
         else {

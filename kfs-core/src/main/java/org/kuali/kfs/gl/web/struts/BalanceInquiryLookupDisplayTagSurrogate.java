@@ -318,7 +318,7 @@ public class BalanceInquiryLookupDisplayTagSurrogate implements LookupDisplayTag
         Integer appMaxRowsPerPage = LookupUtils.getApplicationMaximumSearchResulsPerPageForMultipleValueLookups();
         if (appMaxRowsPerPage == null) {
             LOG.warn("Couldn't find application results per page for MV lookups.  Using default of " + DEFAULT_MAX_ROWS_PER_PAGE);
-            appMaxRowsPerPage = new Integer(DEFAULT_MAX_ROWS_PER_PAGE);
+            appMaxRowsPerPage = Integer.valueOf(DEFAULT_MAX_ROWS_PER_PAGE);
         }
         return appMaxRowsPerPage;
     }

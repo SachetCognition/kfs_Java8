@@ -212,7 +212,7 @@ public class CashManagementServiceTest extends KualiTestBase {
                 // deposit exists in database
                 Map<String,Object> depositPK = new HashMap<String, Object>(2);
                 depositPK.put(KFSPropertyConstants.DOCUMENT_NUMBER, testDocumentId);
-                depositPK.put("financialDocumentDepositLineNumber", new Integer(0));
+                depositPK.put("financialDocumentDepositLineNumber", Integer.valueOf(0));
 
                 assertEquals( "number of deposits does not match the database", 1, SpringContext.getBean(BusinessObjectService.class).countMatching(Deposit.class, depositPK));
 
@@ -446,7 +446,7 @@ public class CashManagementServiceTest extends KualiTestBase {
             // deposit exists in database
             Map<String, Object> depositPK = new HashMap<String, Object>();
             depositPK.put(KFSPropertyConstants.DOCUMENT_NUMBER, testDocumentId);
-            depositPK.put("financialDocumentDepositLineNumber", new Integer(0));
+            depositPK.put("financialDocumentDepositLineNumber", Integer.valueOf(0));
 
             assertEquals( "number of deposits does not match database", 1, SpringContext.getBean(BusinessObjectService.class).countMatching(Deposit.class, depositPK));
 
@@ -544,7 +544,7 @@ public class CashManagementServiceTest extends KualiTestBase {
                 // deposit exists in database
                 Map depositPK = new HashMap();
                 depositPK.put(KFSPropertyConstants.DOCUMENT_NUMBER, testDocumentId);
-                depositPK.put("financialDocumentDepositLineNumber", new Integer(0));
+                depositPK.put("financialDocumentDepositLineNumber", Integer.valueOf(0));
 
                 assertEquals( "number of deposits does not match database", 1, SpringContext.getBean(BusinessObjectService.class).countMatching(Deposit.class, depositPK));
 
@@ -579,7 +579,7 @@ public class CashManagementServiceTest extends KualiTestBase {
                 // deposit doesn't exist in database
                 Map depositPK = new HashMap();
                 depositPK.put(KFSPropertyConstants.DOCUMENT_NUMBER, testDocumentId);
-                depositPK.put("financialDocumentDepositLineNumber", new Integer(0));
+                depositPK.put("financialDocumentDepositLineNumber", Integer.valueOf(0));
 
                 assertEquals(0, SpringContext.getBean(BusinessObjectService.class).countMatching(Deposit.class, depositPK));
 

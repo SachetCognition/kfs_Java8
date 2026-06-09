@@ -46,7 +46,7 @@ public interface KualiTestConstants {
             public final static String OBJECT_CODE = "9912";
             public final static String ORGANIZATION_CODE = "PARK";
             public final static String PERSON_UNIVERSAL_IDENTIFIER = "4219606069";
-            public final static Integer UNIVERSITY_FISCAL_YEAR = new Integer(2004);
+            public final static Integer UNIVERSITY_FISCAL_YEAR = Integer.valueOf(2004);
 
             public static final String OBJECT_TYPE_CODE = "AS";
         }
@@ -57,7 +57,7 @@ public interface KualiTestConstants {
         }
 
         public static class Data3 {
-            public static final Long DOC_HDR_ID = new Long(100000);
+            public static final Long DOC_HDR_ID = Long.valueOf(100000);
             public static final String CHART = "UA";
             public static final String ACCOUNT = "1912610";
             public static final String SUBACCOUNT = "AUCAP";
@@ -71,13 +71,13 @@ public interface KualiTestConstants {
             public static final String DEBIT_CREDIT_CODE = "D";
             public static final String ENCUMBRANCE_UPDATE_CODE = "Y";
 
-            public static final Integer BILLING_ITEM_QUANTITY = new Integer(5);
+            public static final Integer BILLING_ITEM_QUANTITY = Integer.valueOf(5);
             public static final String BILLING_ITEM_STOCK_DESCRIPTION = "steer";
             public static final String BILLIING_ITEM_STOCK_NUMBER = "M000";
             public static final Double BILLING_ITEM_UNIT_AMOUNT = new Double("2.0");
             public static final String BILLING_ITEM_UNIT_OF_MEASUREMENT_CODE = "hd";
-            public static final Integer POSTING_YEAR = new Integer(2004);
-            public static final Integer SEQUENCE_NUMBER = new Integer(1);
+            public static final Integer POSTING_YEAR = Integer.valueOf(2004);
+            public static final Integer SEQUENCE_NUMBER = Integer.valueOf(1);
         }
 
         public static class Data4 {
@@ -93,7 +93,7 @@ public interface KualiTestConstants {
             public static final String OBJECT_CODE2 = "5099";
             public static final Integer POSTING_YEAR = TestUtils.getFiscalYearForTesting();
             public static final String PROJECT_CODE = "KUL";
-            public static final Integer SEQUENCE_NUMBER = new Integer(1);
+            public static final Integer SEQUENCE_NUMBER = Integer.valueOf(1);
             public static final String SUBACCOUNT = "AUCAP";
             public static final String SUBACCOUNT2 = "ADV";
             public static final String SUBOBJECT_CODE = "WTS";

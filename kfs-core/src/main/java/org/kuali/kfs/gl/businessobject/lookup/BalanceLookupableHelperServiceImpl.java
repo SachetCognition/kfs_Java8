@@ -149,7 +149,7 @@ public class BalanceLookupableHelperServiceImpl extends AbstractGeneralLedgerLoo
                 Object[] array = (Object[]) collectionEntry;
                 Balance balance = new Balance();
 
-                balance.setUniversityFiscalYear(new Integer(array[i++].toString()));
+                balance.setUniversityFiscalYear(Integer.valueOf(array[i++].toString()));
                 balance.setChartOfAccountsCode(array[i++].toString());
                 balance.setAccountNumber(array[i++].toString());
 

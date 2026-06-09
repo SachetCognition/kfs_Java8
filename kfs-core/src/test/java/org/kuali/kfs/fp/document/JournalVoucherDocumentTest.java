@@ -162,7 +162,7 @@ public class JournalVoucherDocumentTest extends KualiTestBase {
         {
             VoucherSourceAccountingLine sourceLine = new VoucherSourceAccountingLine();
             sourceLine.setDocumentNumber(document.getDocumentNumber());
-            sourceLine.setSequenceNumber(new Integer(1));
+            sourceLine.setSequenceNumber(Integer.valueOf(1));
             sourceLine.setChartOfAccountsCode("BL");
             sourceLine.setAccountNumber("1031400");
             sourceLine.setFinancialObjectCode("1663");

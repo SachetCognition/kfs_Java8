@@ -156,7 +156,7 @@ public class AssetPaymentServiceImpl implements AssetPaymentService {
         List<AssetPaymentDetail> assetPaymentDetailLines = document.getSourceAccountingLines();
         List<AssetPaymentAssetDetail> assetPaymentAssetDetails = document.getAssetPaymentAssetDetail();
         List<PersistableBusinessObject> assetPayments = new ArrayList<PersistableBusinessObject>();
-        Integer maxSequenceNo = new Integer(0);
+        Integer maxSequenceNo = Integer.valueOf(0);
 
         //instantiate asset payment distributor
         AssetDistribution paymentDistributor = document.getAssetPaymentDistributor();

@@ -57,11 +57,11 @@ public class AccountingPeriodFiscalYearMakerImpl extends FiscalYearMakerImpl {
         // update fiscal period name which contains the fiscal year
         String fiscalPeriodName = accountingPeriod.getUniversityFiscalPeriodName();
 
-        String oldCalendarStartYear = new Integer(accountingPeriod.getUniversityFiscalYear() - 2).toString();
-        String oldCalendarEndYear = new Integer(accountingPeriod.getUniversityFiscalYear() - 1).toString();
+        String oldCalendarStartYear = Integer.valueOf(accountingPeriod.getUniversityFiscalYear() - 2).toString();
+        String oldCalendarEndYear = Integer.valueOf(accountingPeriod.getUniversityFiscalYear() - 1).toString();
 
-        String newCalendarStartYear = new Integer(accountingPeriod.getUniversityFiscalYear() - 1).toString();
-        String newCalendarEndYear = new Integer(accountingPeriod.getUniversityFiscalYear()).toString();
+        String newCalendarStartYear = Integer.valueOf(accountingPeriod.getUniversityFiscalYear() - 1).toString();
+        String newCalendarEndYear = Integer.valueOf(accountingPeriod.getUniversityFiscalYear()).toString();
 
         // replace 4 digit year in name if found, else replace 2 digit
         if (StringUtils.contains(fiscalPeriodName, oldCalendarEndYear)) {

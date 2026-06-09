@@ -553,7 +553,7 @@ public class LaborCorrectionAction extends CorrectionAction {
             // new entryId is always 0, so give it a unique Id, SequenceAccessorService is used.
             //Long newEntryId = SpringContext.getBean(SequenceAccessorService.class).getNextAvailableSequenceNumber("GL_ORIGIN_ENTRY_T_SEQ");
             int newEntryId = getMaxEntryId(laborCorrectionForm.getAllEntries()) + 1;
-            laborCorrectionForm.getEntryForManualEdit().setEntryId(new Integer(newEntryId));
+            laborCorrectionForm.getEntryForManualEdit().setEntryId(Integer.valueOf(newEntryId));
             
             laborCorrectionForm.getAllEntries().add(laborCorrectionForm.getLaborEntryForManualEdit());
 

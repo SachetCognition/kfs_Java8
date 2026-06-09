@@ -25,9 +25,9 @@ import org.kuali.kfs.module.cg.businessobject.AgencyAddress;
  */
 public enum AgencyAddressFixture {
 
-    CG_AGENCY_ADD1("11505", new Long(26), "P"),
-    CG_AGENCY_ADD2("11505", new Long(26), "A"),
-    CG_AGENCY_ADD3("12851", new Long(26), "P");
+    CG_AGENCY_ADD1("11505", Long.valueOf(26), "P"),
+    CG_AGENCY_ADD2("11505", Long.valueOf(26), "A"),
+    CG_AGENCY_ADD3("12851", Long.valueOf(26), "P");
 
     private String agencyNumber;
     private Long agencyAddressIdentifier;

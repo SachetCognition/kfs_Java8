@@ -49,8 +49,8 @@ public class CGMaintenanceDocumentRuleBaseTest extends MaintenanceRuleTestBase {
     @Override
     public void setUp() throws Exception {
         rule = new CGMaintenanceDocumentRuleBase();
-        agencyNumber = new Long(55076);
-        proposalNumber = new Long(39603);
+        agencyNumber = Long.valueOf(55076);
+        proposalNumber = Long.valueOf(39603);
         boService = SpringContext.getBean(BusinessObjectService.class);
         award = boService.findBySinglePrimaryKey(Award.class, proposalNumber);
         agency = boService.findBySinglePrimaryKey(Agency.class, agencyNumber);

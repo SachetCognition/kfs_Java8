@@ -120,7 +120,7 @@ public class CustomerInvoiceWriteoffLookupResultLookupableHelperServiceImpl exte
         setDocFormKey(fieldValues.get(KFSConstants.DOC_FORM_KEY));
         Collection searchResultsCollection = customerInvoiceWriteoffDocumentService.getCustomerInvoiceDocumentsForInvoiceWriteoffLookup(fieldValues);
 
-        return this.buildSearchResultList(searchResultsCollection, new Long(searchResultsCollection.size()));
+        return this.buildSearchResultList(searchResultsCollection, Long.valueOf(searchResultsCollection.size()));
     }
 
     /**

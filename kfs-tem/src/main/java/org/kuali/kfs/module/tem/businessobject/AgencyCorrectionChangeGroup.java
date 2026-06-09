@@ -38,8 +38,8 @@ public class AgencyCorrectionChangeGroup extends PersistableBusinessObjectBase i
 
         correctionCriteria = new ArrayList<AgencyCorrectionCriteria>();
         correctionChange = new ArrayList<AgencyCorrectionChange>();
-        correctionCriteriaNextLineNumber = new Integer(0);
-        correctionChangeNextLineNumber = new Integer(0);
+        correctionCriteriaNextLineNumber = Integer.valueOf(0);
+        correctionChangeNextLineNumber = Integer.valueOf(0);
 
         setDocumentNumber(documentNumber);
     }
@@ -48,8 +48,8 @@ public class AgencyCorrectionChangeGroup extends PersistableBusinessObjectBase i
         super();
         correctionCriteria = new ArrayList<AgencyCorrectionCriteria>();
         correctionChange = new ArrayList<AgencyCorrectionChange>();
-        correctionCriteriaNextLineNumber = new Integer(0);
-        correctionChangeNextLineNumber = new Integer(0);
+        correctionCriteriaNextLineNumber = Integer.valueOf(0);
+        correctionChangeNextLineNumber = Integer.valueOf(0);
     }
 
     @SuppressWarnings("rawtypes")

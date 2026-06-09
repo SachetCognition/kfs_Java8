@@ -23,7 +23,7 @@ import org.kuali.kfs.module.purap.businessobject.PurchasingCapitalAssetItem;
 public enum PurchasingCapitalAssetItemFixture {
   
     ASSET_ITEM_BASIC ( 
-            new Integer(1), //itemIdentifier
+            Integer.valueOf(1), //itemIdentifier
             "CO", //capitalAssetTransactionTypeCode
             null  //capitalAssetSystemIdentifier
             ),                       

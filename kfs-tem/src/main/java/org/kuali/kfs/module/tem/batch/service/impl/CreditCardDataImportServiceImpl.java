@@ -188,7 +188,7 @@ public class CreditCardDataImportServiceImpl implements CreditCardDataImportServ
 
                             //Set Traveler Id
                             if(ObjectUtils.isNull(creditCardData.getTravelerId()) || creditCardData.getTravelerId() == 0){
-                                Integer travelerId = new Integer(temProfileAccount.getProfile().getEmployeeId()).intValue();
+                                Integer travelerId = Integer.valueOf(temProfileAccount.getProfile().getEmployeeId()).intValue();
                                 creditCardData.setTravelerId(travelerId);
                             }
 

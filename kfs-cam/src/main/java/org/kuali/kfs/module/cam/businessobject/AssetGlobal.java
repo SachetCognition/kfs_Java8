@@ -1171,7 +1171,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     public String getUniversityFiscalPeriodName() {
         if (StringUtils.isNotBlank(universityFiscalPeriodName)) {        
             this.setFinancialDocumentPostingPeriodCode(StringUtils.left(universityFiscalPeriodName, 2));
-            this.setFinancialDocumentPostingYear(new Integer(StringUtils.right(universityFiscalPeriodName, 4)));
+            this.setFinancialDocumentPostingYear(Integer.valueOf(StringUtils.right(universityFiscalPeriodName, 4)));
         }
         
         if (StringUtils.isBlank(universityFiscalPeriodName)) {
@@ -1198,7 +1198,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         String THIRTEEN = "13";
         if (StringUtils.isNotBlank(universityFiscalPeriodName) && StringUtils.left(universityFiscalPeriodName, 2).equals(THIRTEEN)) {
             String period = StringUtils.left(universityFiscalPeriodName, 2);
-            Integer year = new Integer(StringUtils.right(universityFiscalPeriodName, 4));
+            Integer year = Integer.valueOf(StringUtils.right(universityFiscalPeriodName, 4));
             AccountingPeriod accountingPeriod = getAccountingPeriodService().getByPeriod(period, year);
             setAccountingPeriod(accountingPeriod);
         }
@@ -1228,7 +1228,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
         String THIRTEEN = "13";
         if (StringUtils.isNotBlank(accountingPeriodString) && StringUtils.left(accountingPeriodString, 2).equals(THIRTEEN)) {
             String period = StringUtils.left(accountingPeriodString, 2);
-            Integer year = new Integer(StringUtils.right(accountingPeriodString, 4));
+            Integer year = Integer.valueOf(StringUtils.right(accountingPeriodString, 4));
             AccountingPeriod accountingPeriod = getAccountingPeriodService().getByPeriod(period, year);
             setAccountingPeriod(accountingPeriod);
         }

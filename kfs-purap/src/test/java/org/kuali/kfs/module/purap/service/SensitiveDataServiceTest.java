@@ -64,11 +64,11 @@ public class SensitiveDataServiceTest extends KualiTestBase {
             po = PurchaseOrderDocumentFixture.PO_ONLY_REQUIRED_FIELDS_MULTI_ITEMS.createPurchaseOrderDocument();
         }
         if (po.getPurapDocumentIdentifier() == null) {
-            po.setPurapDocumentIdentifier(new Integer(9001));
+            po.setPurapDocumentIdentifier(Integer.valueOf(9001));
         }
 
         if (po.getRequisitionIdentifier() == null) {
-            po.setRequisitionIdentifier(new Integer(9001));
+            po.setRequisitionIdentifier(Integer.valueOf(9001));
         }
         
         // create a new sensitive data entry and save it (if not exists yet), to make sure that at least one entry exist

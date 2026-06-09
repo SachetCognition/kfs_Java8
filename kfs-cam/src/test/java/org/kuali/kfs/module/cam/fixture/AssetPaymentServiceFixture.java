@@ -83,7 +83,7 @@ public enum AssetPaymentServiceFixture {
 
         String fieldNames   = properties.getProperty(ASSET_PAYMENT_DETAIL+"."+FIELD_NAMES);        
         String deliminator  = properties.getProperty("deliminator");
-        Integer dataRows    = new Integer(properties.getProperty(ASSET_PAYMENT_DETAIL+"."+NUM_OF_DATA));                
+        Integer dataRows    = Integer.valueOf(properties.getProperty(ASSET_PAYMENT_DETAIL+"."+NUM_OF_DATA));                
         String propertyKey="";
 
         for(int i=1;i<=dataRows.intValue();i++) {
@@ -94,7 +94,7 @@ public enum AssetPaymentServiceFixture {
 
         fieldNames   = properties.getProperty(CamsPropertyConstants.AssetPaymentDocument.ASSET_PAYMENT_ASSET_DETAIL+"."+FIELD_NAMES);        
         deliminator  = properties.getProperty("deliminator");
-        dataRows    = new Integer(properties.getProperty(CamsPropertyConstants.AssetPaymentDocument.ASSET_PAYMENT_ASSET_DETAIL+"."+NUM_OF_DATA));                
+        dataRows    = Integer.valueOf(properties.getProperty(CamsPropertyConstants.AssetPaymentDocument.ASSET_PAYMENT_ASSET_DETAIL+"."+NUM_OF_DATA));                
         propertyKey="";
 
         for(int i=1;i<=dataRows.intValue();i++) {

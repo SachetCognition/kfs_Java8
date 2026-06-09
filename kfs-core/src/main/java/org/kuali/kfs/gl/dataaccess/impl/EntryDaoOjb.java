@@ -115,7 +115,7 @@ public class EntryDaoOjb extends PlatformAwareDaoBaseOjb implements EntryDao, Le
 
         Criteria criteria = new Criteria();
         criteria.addEqualTo(CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
-        criteria.addLessThan(UNIVERISITY_FISCAL_YEAR, new Integer(year));
+        criteria.addLessThan(UNIVERISITY_FISCAL_YEAR, Integer.valueOf(year));
 
         getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(Entry.class, criteria));
 

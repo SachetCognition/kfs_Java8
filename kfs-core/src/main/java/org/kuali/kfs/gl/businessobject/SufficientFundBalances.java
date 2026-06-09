@@ -80,7 +80,7 @@ public class SufficientFundBalances extends PersistableBusinessObjectBase {
         line = line + "                   ";
 
         if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(line.substring(0, 4))) {
-            setUniversityFiscalYear(new Integer(line.substring(0, 4)));
+            setUniversityFiscalYear(Integer.valueOf(line.substring(0, 4)));
         }
         else {
             setUniversityFiscalYear(null);
