@@ -27,11 +27,22 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * A record which matches an expense type, document type, trip type, and traveler type with an object code and other information about the expense in the specific context
  */
+@Entity
+@Table(name = "TEM_EXP_TYP_FIN_OBJ_CD_T")
 public class ExpenseTypeObjectCode extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "EXP_TYP_OBJ_CD_ID")
     private Long expenseTypeObjectCodeId;
 
     private String expenseTypeCode;

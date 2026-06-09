@@ -22,7 +22,17 @@ import java.sql.Date;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_CC_IMP_EXP_CLR_DTL_T")
 public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjectDetailBase {
     private Integer creditCardStagingDataId;
 

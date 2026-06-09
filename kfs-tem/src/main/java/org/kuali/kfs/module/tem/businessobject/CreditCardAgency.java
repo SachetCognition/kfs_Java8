@@ -29,10 +29,16 @@ import org.kuali.kfs.vnd.businessobject.VendorDetail;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Id;
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "TEM_CREDIT_CARD_AGENCY_T")
 public class CreditCardAgency extends PersistableBusinessObjectBase implements MutableInactivatable {
+
+    @Id
+
+    @Column(name = "CREDIT_CARD_AGENCY_CODE")
 
     private String creditCardOrAgencyCode;
     private String travelCardTypeCode;

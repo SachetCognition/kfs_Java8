@@ -28,10 +28,15 @@ import javax.persistence.Table;
 
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "TEM_TRANS_MD_DTL_T")
 public class TransportationModeDetail extends PersistableBusinessObjectBase {
+
+    @Id
+
+    @Column(name = "FDOC_NBR")
 
     private String documentNumber;
     private String transportationModeCode;

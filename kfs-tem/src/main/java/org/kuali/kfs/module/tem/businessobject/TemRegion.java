@@ -24,10 +24,15 @@ import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 @Entity
 @Table(name="TEM_PER_DIEM_REGION_T")
 public class TemRegion extends PersistableBusinessObjectBase implements MutableInactivatable, Comparable<TemRegion> {
+
+    @Id
+
+    @Column(name = "REGION_CD")
 
     private String regionCode;
     private String regionName;

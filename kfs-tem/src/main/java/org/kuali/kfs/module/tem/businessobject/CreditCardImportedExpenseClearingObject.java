@@ -32,8 +32,19 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetail;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_CC_IMP_EXP_CLR_T")
 public class CreditCardImportedExpenseClearingObject extends PersistableBusinessObjectBase implements GlobalBusinessObject{
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
 
 

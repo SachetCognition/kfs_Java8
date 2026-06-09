@@ -36,11 +36,20 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.service.BusinessObjectService;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * if the cash advance is not cleared on an expense report, the system will generate a tax ramification document showing all taxable
  * income of travelers/hosts.
  */
+@Entity
+@Table(name = "TEM_TAX_RAM_DOC_T")
 public class TaxableRamificationDocument extends FinancialSystemTransactionalDocumentBase {
     private final static Logger LOG = Logger.getLogger(TaxableRamificationDocument.class);
 

@@ -28,6 +28,9 @@ import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @Table(name = "TEM_PROFILE_ACCOUNT_T")
@@ -36,6 +39,10 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
     private Integer profileId;
     private TemProfile profile;
     private String creditCardOrAgencyCode;
+    @Id
+    @GeneratedValue(generator = "TEM_PROFILE_ACCOUNT_ID_SEQ")
+    @SequenceGenerator(name = "TEM_PROFILE_ACCOUNT_ID_SEQ", sequenceName = "TEM_PROFILE_ACCOUNT_ID_SEQ")
+    @Column(name = "ACCOUNT_ID")
     private Integer accountId;
     private String name;
     private String accountNumber;

@@ -26,6 +26,7 @@ import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 /**
  * Relocation Reason
@@ -34,6 +35,8 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Entity
 @Table(name="TEM_JOB_CLASS_T")
 public class JobClassification extends PersistableBusinessObjectBase implements MutableInactivatable{
+    @Id
+    @Column(name = "JOB_CLS_CD")
     private String jobClsCode;
     private String jobClsName;
     private Boolean active = Boolean.TRUE;

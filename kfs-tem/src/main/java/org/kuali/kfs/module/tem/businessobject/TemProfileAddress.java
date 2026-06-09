@@ -25,6 +25,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "TEM_PROFILE_ADDR_T")
@@ -34,6 +35,8 @@ public class TemProfileAddress extends PersistableBusinessObjectBase {
 	 * Comment for <code>serialVersionUID</code>
 	 */
 	private static final long serialVersionUID = 7958366500696148370L;
+	@Id
+	@Column(name = "TEM_PROFILE_ID")
 	private Integer profileId;
     private String streetAddressLine1;
     private String streetAddressLine2;

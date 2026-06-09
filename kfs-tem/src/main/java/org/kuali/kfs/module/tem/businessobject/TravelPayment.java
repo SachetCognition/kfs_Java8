@@ -25,11 +25,22 @@ import org.kuali.kfs.sys.businessobject.options.PaymentDocumentationLocationValu
 import org.kuali.kfs.sys.businessobject.options.PaymentMethodValuesFinder;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * BusinessObject which holds fields representing those a travel document needs to make a payment
  */
+@Entity
+@Table(name = "TEM_TRVL_PMT_T")
 public class TravelPayment extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
     private KualiDecimal checkTotalAmount;  //editable on TA, read only on TR, RELO, ENT
     private boolean attachmentCode;

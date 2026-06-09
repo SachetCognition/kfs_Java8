@@ -29,6 +29,8 @@ import javax.persistence.Table;
 @Table(name = "TEM_EM_CONT_T")
 public class TravelerDetailEmergencyContact extends EmergencyContact {
     private TravelerDetail traveler;
+    @Column(name = "TRAVELER_DTL_ID")
+
     private Integer travelerDetailId;
     private String documentNumber;
     private Integer financialDocumentLineNumber;

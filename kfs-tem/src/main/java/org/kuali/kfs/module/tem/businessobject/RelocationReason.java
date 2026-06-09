@@ -26,6 +26,7 @@ import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 /**
  * Relocation Reason
@@ -34,6 +35,8 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Entity
 @Table(name="TEM_RELO_REASON_T")
 public class RelocationReason extends PersistableBusinessObjectBase implements MutableInactivatable{
+    @Id
+    @Column(name = "RELO_REASON_CD")
     private String reloReasonCode;
     private String reloReasonName;
     private String reloReasonDescription;

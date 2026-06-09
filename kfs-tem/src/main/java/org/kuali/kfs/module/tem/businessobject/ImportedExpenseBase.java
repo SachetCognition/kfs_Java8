@@ -27,7 +27,9 @@ import javax.persistence.ManyToOne;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class ImportedExpenseBase extends PersistableBusinessObjectBase {
 
     protected Long id;

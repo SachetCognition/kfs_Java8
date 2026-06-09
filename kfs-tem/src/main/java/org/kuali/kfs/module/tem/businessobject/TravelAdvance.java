@@ -30,10 +30,13 @@ import org.kuali.kfs.module.tem.document.service.TravelDocumentService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "TEM_TRVL_ADV_T")
 public class TravelAdvance extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
     private String travelDocumentIdentifier;
 

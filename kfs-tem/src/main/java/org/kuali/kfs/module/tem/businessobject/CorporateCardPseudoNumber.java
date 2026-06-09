@@ -21,8 +21,25 @@ package org.kuali.kfs.module.tem.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_CORP_CARD_PSEUDO_NUM_T")
 public class CorporateCardPseudoNumber extends PersistableBusinessObjectBase {
+
+    @Id
+
+    @GeneratedValue(generator = "TEM_CORP_CARD_PSEUDO_NUM_SEQ")
+
+    @SequenceGenerator(name = "TEM_CORP_CARD_PSEUDO_NUM_SEQ", sequenceName = "TEM_CORP_CARD_PSEUDO_NUM_SEQ")
+
+    @Column(name = "NUM")
 
     private Integer number;
 

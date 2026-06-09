@@ -26,6 +26,7 @@ import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 /**
  * Entertainment Purpose
@@ -34,6 +35,8 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Entity
 @Table(name="TEM_ENT_PURPOSE_T")
 public class EntertainmentPurpose extends PersistableBusinessObjectBase implements MutableInactivatable{
+    @Id
+    @Column(name = "PURPOSE_CODE")
     private String purposeCode;
     private String purposeName;
     private String purposeDescription;

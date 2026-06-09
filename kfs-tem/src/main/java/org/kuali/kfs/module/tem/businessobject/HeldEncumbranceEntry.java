@@ -35,11 +35,23 @@ import org.kuali.rice.kew.api.doctype.DocumentTypeService;
 import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Table which holds travel encumbrances waiting for the next fiscal year to be created
  */
+@Entity
+@Table(name = "TEM_HELD_ENCUM_ENTRY_T")
 public class HeldEncumbranceEntry extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
     private Integer transactionLedgerEntrySequenceNumber;
     private String travelDocumentIdentifier;

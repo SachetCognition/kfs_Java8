@@ -31,10 +31,15 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
 
 @Entity
 @Table(name="TEM_PER_DIEM_MIE_BREAK_DOWN_T")
 public class PerDiemMealIncidentalBreakDown extends PersistableBusinessObjectBase implements MutableInactivatable {
+
+    @Id
+
+    @Column(name = "MEALS_INC")
 
     private KualiDecimal mealsAndIncidentals;
 
