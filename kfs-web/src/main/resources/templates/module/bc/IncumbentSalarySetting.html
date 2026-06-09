@@ -1,0 +1,63 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Incumbent Salary Setting</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="readOnly=${KualiForm.viewOnlyEntry || KualiForm.salarySettingClosed}" -->
+<c:set var="accountsCanCrossCharts"
+	value="<span th:text="${SpringContext.getBean(AccountService.class).accountsCanCrossCharts()}"></span>" />
+
+<div class="kfs-page" data-header-title="" data-doc-title="${KualiForm.documentTitle}">
+<h1></h1>
+<form th:action="@{budgetIncumbentSalarySetting}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+
+    <input type="hidden" th:field="*{mainWindow}" />
+
+    <div th:replace="~{fragments/bc/incumbentSalarySetting :: incumbentSalarySetting}" th:with="readOnly=${readOnly},accountsCanCrossCharts=${accountsCanCrossCharts}"></div>	
+    
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+    <div id="globalbuttons" class="globalbuttons">
+        <th:block th:if="${not readOnly}">
+	        <input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_save.gif}" 
+	        	styleClass="globalbuttons" property="methodToCall.save" title="save" alt="save"/>
+        </th:block>
+    	    
+	    <input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif}" 
+       		styleClass="globalbuttons" property="methodToCall.close" title="close" alt="close"/>
+    </div>
+
+	
+	<SCRIPT type="text/javascript">
+	  subObjectCodeNameSuffix = ".financialSubObject.financialSubObjectCdshortNm";
+	  var kualiForm = document.forms['KualiForm'];
+	  var kualiElements = kualiForm.elements;
+	</SCRIPT>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="navigation" id="navigation">
+    <ul id="portal-tabs">
+        <li th:each="tab : ${portalTabs}" th:classappend="${tab.selected ? 'active' : ''}">
+            <a th:href="${tab.url}" th:text="${tab.label}">Tab</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

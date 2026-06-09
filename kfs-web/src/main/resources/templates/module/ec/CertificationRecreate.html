@@ -1,0 +1,78 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Certification Recreate</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="documentAttributes=${DataDictionary.EffortCertificationDocument.attributes}" -->
+<!-- th:with="detailAttributes=${DataDictionary.EffortCertificationDetail.attributes}" -->
+
+<!-- th:with="detailLines=${KualiForm.detailLines}" -->
+
+<!-- th:with="documentTypeName=EffortCertificationDocument" -->
+<!-- th:with="htmlFormAction=effortCertificationRecreate" -->
+
+<!-- th:with="readOnly=${empty KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+<div class="document-page" data-document-type="${documentTypeName}" data-form-action="${htmlFormAction}" data-show-document-info="true">
+<form th:action="@{${htmlFormAction}}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+    
+    <sys:hiddenDocumentFields isFinancialDocument="false" />
+    
+    <div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+    
+    <!-- th:with="hiddenFieldNames=emplid,universityFiscalYear,effortCertificationReportNumber,effortCertificationDocumentCode,totalOriginalPayrollAmount" -->
+	<c:forTokens var="fieldName" items="${hiddenFieldNames}" delims=",">	
+		<input type="hidden" name="document.${fieldName}" id="document.${fieldName}" value="${KualiForm.document[fieldName]}"/>		  
+	</c:forTokens>
+    
+	<div class="tab-container" th:data-tab-title="Effort Detail">
+    <h3 th:text="Effort Detail">Effort Detail</h3>
+		
+		<div class="tab-container" align=center>
+			<h3>Retrieve Data</h3>
+			<div th:replace="~{fragments/ec/detailLineImport :: detailLineImport}" th:with="readOnly=${readOnly},attributes=${documentAttributes}"></div>				
+		</div>
+		
+		<div class="tab-container-error"><div class="left-errmsg-tab"><kul:errors keyMatch="${EffortConstants.EFFORT_CERTIFICATION_TAB_ERRORS}"/></div></div>
+					
+		<div class="tab-container" align=center>			
+			<h3>Effort Detail Lines</h3>
+			
+			<div th:replace="~{fragments/ec/detailLines :: detailLines}" th:with="detailLines=${detailLines},attributes=${detailAttributes},detailFieldNames='chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,sourceChartOfAccountsCode,sourceAccountNumber,positionNumber,effortCertificationCalculatedOverallPercent,effortCertificationOriginalPayrollAmount',detailFieldNamesWithHiddenFormWhenReadonly='chartOfAccountsCode,accountNumber,subAccountNumber,financialObjectCode,sourceChartOfAccountsCode,sourceAccountNumber,positionNumber,effortCertificationOriginalPayrollAmount,effortCertificationCalculatedOverallPercent',hiddenFieldNames='universityFiscalYear,effortCertificationUpdatedOverallPercent,effortCertificationPayrollAmount,costShareSourceSubAccountNumber,versionNumber',inquirableUrl=${KualiForm.detailLineFieldInquiryUrl},fieldInfo=${KualiForm.fieldInfo}"></div>
+		</div>		
+	</div>
+	
+    <div th:replace="~{fragments/notes :: notes}"></div>
+    <div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+    <div th:replace="~{fragments/routeLog :: routeLog}"></div>
+    <div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+    <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+    <div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

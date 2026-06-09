@@ -16,4 +16,6 @@
    - You should have received a copy of the GNU Affero General Public License
    - along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
+<%-- @deprecated This JSP is deprecated. Use the equivalent Thymeleaf template instead. See migration/S-4B. --%>
+
 <% response.sendRedirect("portal.jsp"); %>

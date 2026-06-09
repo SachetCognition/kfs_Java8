@@ -1,0 +1,84 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Contracts Grants Invoice Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="readOnlyForCorrectionDocument=${KualiForm.document.correctionDocument}" -->
+	<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] || readOnlyForCorrectionDocument}" -->
+	
+	
+		
+<div class="document-page" data-document-type="CINV" data-form-action="arContractsGrantsInvoiceDocument" data-show-document-info="true">
+<form th:action="@{arContractsGrantsInvoiceDocument}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+	<div th:replace="~{fragments/hiddenDocumentFields :: hiddenDocumentFields}"></div>
+
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+	
+	<div th:replace="~{fragments/ar/contractsGrantsInvoiceOrganization :: contractsGrantsInvoiceOrganization}" th:with="documentAttributes=${DataDictionary.ContractsGrantsInvoiceDocument.attributes},readOnly=${readOnly}"></div>
+	
+	<div th:replace="~{fragments/ar/invoiceGeneral :: invoiceGeneral}" th:with="readOnly=${readOnly}"></div>
+		
+	<th:block th:switch="${true}">
+		<th:block th:case="${KualiForm.document.invoiceGeneralDetail.billingFrequencyCode == ArConstants.MILESTONE_BILLING_SCHEDULE_CODE}">
+			<div th:replace="~{fragments/ar/invoiceMilestones :: invoiceMilestones}"></div>
+		</th:block>
+		<th:block th:case="${KualiForm.document.invoiceGeneralDetail.billingFrequencyCode == ArConstants.PREDETERMINED_BILLING_SCHEDULE_CODE}">
+			<div th:replace="~{fragments/ar/invoiceBills :: invoiceBills}"></div>
+		</th:block>
+		<th:block th:case="*">
+			<div th:replace="~{fragments/ar/invoiceDetails :: invoiceDetails}" th:with="readOnly=${readOnly}"></div>
+			<div th:replace="~{fragments/ar/invoiceAccountDetails :: invoiceAccountDetails}"></div>
+		</th:block>
+	</th:block>
+
+	<th:block th:if="${!KualiForm.document.correctionDocument}">
+		<div th:replace="~{fragments/ar/invoiceSuspensionCategories :: invoiceSuspensionCategories}"></div>
+	</th:block>
+
+	<th:block th:if="${!KualiForm.document.correctionDocument && KualiForm.document.invoiceGeneralDetail.billingFrequencyCode != ArConstants.LOC_BILLING_SCHEDULE_CODE}">
+		<div th:replace="~{fragments/ar/invoiceTransmissionDetails :: invoiceTransmissionDetails}" th:with="readOnly=${readOnly}"></div>
+	</th:block>
+
+	<div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+
+	<div th:replace="~{fragments/notes :: notes}"></div>
+
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

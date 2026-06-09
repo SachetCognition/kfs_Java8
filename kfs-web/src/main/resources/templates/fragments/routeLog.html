@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="routeLog" class="tab-container">
+    <h3>Route Log</h3>
+    <div id="routeLogDiv">
+        <iframe th:src="@{/kew/RouteLog.do(documentId=${KualiForm.document.documentNumber})}"
+                width="100%" height="500" frameborder="0" title="Route Log"></iframe>
+    </div>
+</div>
+</body>
+</html>

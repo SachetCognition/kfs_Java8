@@ -1,0 +1,68 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Quick Salary Setting</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="readOnly=${KualiForm.viewOnlyEntry || KualiForm.salarySettingClosed}" -->
+
+<div class="kfs-page" data-header-title="" data-doc-title="Quick Salary Setting">
+<h1></h1>
+<form th:action="@{budgetQuickSalarySetting}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+	
+
+    <input type="hidden" th:field="*{mainWindow}" />
+    
+	<kul:tabTop tabTitle="Quick Salary Setting" defaultOpen="true" tabErrorKey="${BCConstants.ErrorKey.QUICK_SALARY_SETTING_TAB_ERRORS}">
+		<div class="tab-container" align=center>
+			<div th:replace="~{fragments/bc/expenditureSalaryLine :: expenditureSalaryLine}" th:with="readOnly=${readOnly}"></div>	
+			
+			<br/>
+						
+			<div th:replace="~{fragments/bc/expenditureSalaryLineDetails :: expenditureSalaryLineDetails}" th:with="readOnly=${readOnly}"></div>
+		</div>
+	</kul:tabTop>
+
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+    
+    <kul:errors keyMatch="${T(org.kuali.rice.krad.util.KRADConstants).GLOBAL_ERRORS}" errorTitle=" " />
+    <kul:errors keyMatch="${BCConstants.ErrorKey.RETURNED_DETAIL_SALARY_SETTING_TAB_ERRORS}" errorTitle=" " />
+    
+    <div id="globalbuttons" class="globalbuttons">
+        <th:block th:if="${not readOnly}">
+	        <input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_save.gif}" 
+	        	styleClass="globalbuttons" property="methodToCall.save" title="save" alt="save"/>
+	    </th:block>    	
+	        	
+        <input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif}" 
+       		styleClass="globalbuttons" property="methodToCall.close" title="close" alt="close"/>	
+
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>

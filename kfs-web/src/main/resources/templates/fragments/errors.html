@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="errors(errorKey)" class="error-container" th:if="${errors != null and !errors.isEmpty()}">
+    <div class="error">
+        <ul>
+            <li th:each="error : ${errors}" th:text="${error.message}">Error message</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Temp List Lookup</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="csfTrackerAttributes=${DataDictionary.BudgetConstructionCalculatedSalaryFoundationTracker.attributes}" -->
+
+<c:set var="headerMenu" value="" />
+<th:block th:if="${KualiForm.suppressActions!=true}">
+    <!-- th:with="headerMenu=${KualiForm.lookupable.createNewUrl}   ${KualiForm.lookupable.htmlMenuBar}" -->
+</th:block>
+<div class="kfs-page" data-header-title="Lookup" data-doc-title="">
+<h1>Lookup</h1>
+<form th:action="@{budgetTempListLookup}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+
+	<SCRIPT type="text/javascript">
+    var kualiForm = document.forms['KualiForm'];
+    var kualiElements = kualiForm.elements;
+  </SCRIPT>
+
+	<div class="headerarea-small" id="headerarea-small">
+	<h1><span th:text="${KualiForm.lookupable.title}"></span><kul:help
+		resourceKey="lookupHelpText" altText="lookup help" /></h1>
+	</div>
+	<kul:enterKey methodToCall="search" />
+
+	<html-el:hidden name="KualiForm" property="backLocation" />
+	<html-el:hidden name="KualiForm" property="formKey" />
+	<html-el:hidden name="KualiForm" property="lookupableImplServiceName" />
+	<html-el:hidden name="KualiForm" property="businessObjectClassName" />
+	<html-el:hidden name="KualiForm" property="conversionFields" />
+	<html-el:hidden name="KualiForm" property="hideReturnLink" />
+	<html-el:hidden name="KualiForm" property="suppressActions" />
+	<html-el:hidden name="KualiForm" property="multipleValues" />
+	<html-el:hidden name="KualiForm" property="lookupAnchor" />
+	<html-el:hidden name="KualiForm" property="readOnlyFields" />
+	<html-el:hidden name="KualiForm" property="referencesToRefresh" />
+	<html-el:hidden name="KualiForm" property="reportMode" />
+	<html-el:hidden name="KualiForm" property="currentPointOfViewKeyCode" />
+	<html-el:hidden name="KualiForm" property="buildControlList" />
+	<html-el:hidden name="KualiForm" property="reportConsolidation" />
+	<html-el:hidden name="KualiForm" property="tempListLookupMode" />
+	<html-el:hidden name="KualiForm" property="forceToAccountListScreen" />
+	<html-el:hidden name="KualiForm" property="showSalaryByPositionAction" />
+	<html-el:hidden name="KualiForm" property="addLine" />
+	<html-el:hidden name="KualiForm" property="showSalaryByIncumbentAction" />
+	<html-el:hidden name="KualiForm" property="budgetByAccountMode" />
+	<html-el:hidden name="KualiForm" property="mainWindow" />
+
+    
+    <th:block th:if="${KualiForm.tempListLookupMode != BCConstants.TempListLookupMode.DEFAULT_LOOKUP_MODE}">
+      <html-el:hidden name="KualiForm" property="universityFiscalYear" />
+    </th:block>
+
+	<c:forEach items="${KualiForm.extraButtons}" varStatus="status">
+		<html-el:hidden name="KualiForm" property="extraButtons[${status.index}].extraButtonSource" />
+		<html-el:hidden name="KualiForm" property="extraButtons[${status.index}].extraButtonParams" />
+	</th:block>
+
+   	<table width="100%">
+		<tr>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="20"
+				height="20"></td>
+			<td>
+			<td>
+			   <br/>
+	           <kul:errors errorTitle="Errors Found:" />
+	           <kul:messages/>
+	
+	           <th:block th:each="message : ${KualiForm.messages}">
+	             ${message}
+	          </th:block>
+            </td>
+         </tr>
+    </table>
+            
+	<table width="100%">
+		<tr>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="20"
+				height="20"></td>
+			<td>
+
+			<div id="lookup" align="center"><br />
+			<br />
+			<table align="center" cellpadding=0 cellspacing=0 class="datatable-100">
+				<c:set var="FormName" value="KualiForm" scope="request" />
+				<c:set var="FieldRows" value="${KualiForm.lookupable.rows}" scope="request" />
+				<c:set var="ActionName" value="budgetTempListLookup.do" scope="request" />
+				<c:set var="IsLookupDisplay" value="true" scope="request" />
+				<c:set var="cellWidth" value="50%" scope="request" />
+
+                <kul:rowDisplay rows="${FieldRows}" skipTheOldNewBar="true" />
+
+				<!-- changed cancel to call cancel action where the call to clean up temp table is located 
+						alt="clear" title="clear" border="0" /> <th:block th:if="${KualiForm.formKey!=''}">
+						<a
+							href='<c:out value="${KualiForm.backLocation}?methodToCall=refresh&docFormKey=${KualiForm.formKey}&anchor=${KualiForm.lookupAnchor}" />'  title="cancel">
+						<img src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" class="tinybutton" alt="cancel" title="cancel" 
+							border="0" /></a>
+					</th:block>
+                --> 					
+				<tr align=center>
+					<td height="30" colspan=2 class="infoline">
+					<th:block th:if="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.ACCOUNT_SELECT_ABOVE_POV}">
+					  <html:image
+					  	  property="methodToCall.submitReport" value="submit"
+						  src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_submit.gif" styleClass="tinybutton"
+						  alt="submit" title="submit" border="0" onblur="formHasAlreadyBeenSubmitted = false"/>
+					</th:block>
+					<th:block th:if="${KualiForm.tempListLookupMode != BCConstants.TempListLookupMode.SHOW_BENEFITS}">
+					<html:image
+						property="methodToCall.search" value="search"
+						src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_search.gif" styleClass="tinybutton"
+						alt="search" title="search" border="0" /> 
+						<html:image
+						property="methodToCall.clearValues" value="clearValues"
+						src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_clear.gif" styleClass="tinybutton"
+						alt="clear" title="clear" border="0" /> 
+					</th:block>
+					<th:block th:switch="${true}">
+						<th:block th:case="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.CSF_TRACKER_POSITION_LOOKUP}">
+							<html:image
+							property="methodToCall.refresh" value="cancel"
+							src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" styleClass="tinybutton"
+							onclick="window.close()" alt="cancel" title="cancel" border="0" />
+						</th:block>
+						<th:block th:case="*">
+							<html:image
+							property="methodToCall.cancel" value="cancel"
+							src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" styleClass="tinybutton"
+							alt="cancel" title="cancel" border="0" />
+						</th:block>
+	            	</th:block>
+	                <th:block th:if="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.POSITION_SELECT}">
+					  <html:image
+					  	  property="methodToCall.performExtendedPositionSearch" value="submit"
+						  src="${ConfigProperties.externalizable.images.url}buttonsmall_extended.gif" styleClass="tinybutton"
+						  alt="perform extended search" title="perform extended search" border="0"/>
+					</th:block>
+					
+	                <th:block th:if="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.INTENDED_INCUMBENT_SELECT}">
+					  <html:image
+					  	  property="methodToCall.performExtendedIncumbentSearch" value="submit"
+						  src="${ConfigProperties.externalizable.images.url}buttonsmall_extended.gif" styleClass="tinybutton"
+						  alt="perform extended search" title="perform extended search" border="0"/>
+					</th:block>
+					
+			        <th:block th:if="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.BUDGET_POSITION_LOOKUP}">
+					  <th:block th:if="${KualiForm.getNewPositionEnabled}">
+					    <html:image
+					  	    property="methodToCall.getNewPosition" value="submit"
+						    src="${ConfigProperties.externalizable.images.url}buttonsmall_getnew.gif" styleClass="tinybutton"
+						    alt="get new position" title="get new position" border="0"/>
+					  </th:block>	
+					  <th:block th:if="${KualiForm.addLine}">
+					  	<html-el:hidden name="KualiForm" property="chartOfAccountsCode" />
+	                    <html-el:hidden name="KualiForm" property="accountNumber" />
+	                    <html-el:hidden name="KualiForm" property="subAccountNumber" />
+	                    <html-el:hidden name="KualiForm" property="financialObjectCode" />
+	                    <html-el:hidden name="KualiForm" property="financialSubObjectCode" />
+					  </th:block>
+					</th:block>
+					
+					<th:block th:if="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.INTENDED_INCUMBENT}">
+					  <th:block th:if="${KualiForm.getNewIncumbentEnabled}">
+					    <html:image
+					  	    property="methodToCall.getNewIncumbent" value="submit"
+						    src="${ConfigProperties.externalizable.images.url}buttonsmall_getnew.gif" styleClass="tinybutton"
+						    alt="get new incumbent" title="get new incumbent" border="0"/>
+					  </th:block>
+					  <th:block th:if="${KualiForm.addLine}">
+					  	<html-el:hidden name="KualiForm" property="chartOfAccountsCode" />
+	                    <html-el:hidden name="KualiForm" property="accountNumber" />
+	                    <html-el:hidden name="KualiForm" property="subAccountNumber" />
+	                    <html-el:hidden name="KualiForm" property="financialObjectCode" />
+	                    <html-el:hidden name="KualiForm" property="financialSubObjectCode" />
+					  </th:block>
+					</th:block>
+				
+					<!-- Optional extra buttons --> 					
+					<th:block th:each="extraButton,status : ${KualiForm.extraButtons}">
+						<th:block th:if="${!empty extraButton.extraButtonSource && !empty extraButton.extraButtonParams}">
+							<a href='<c:out value="${KualiForm.backLocation}?methodToCall=refresh&refreshCaller=kualiLookupable&docFormKey=${KualiForm.formKey}&anchor=${KualiForm.lookupAnchor}" /><span th:text="${extraButton.extraButtonParams}"></span>'>
+							<img src='<span th:text="${extraButton.extraButtonSource}"></span>'
+								class="tinybutton" border="0" /></a>
+						</th:block> 
+					</th:block>
+					<th:block th:if="${KualiForm.multipleValues }">
+						<a
+							href='<c:out value="${KualiForm.backLocation}?methodToCall=refresh&docFormKey=${KualiForm.formKey}&anchor=${KualiForm.lookupAnchor}" />'>
+						<img src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_retnovalue.gif" class="tinybutton"
+							border="0" /></a>
+						<a
+							href='<c:out value="${KualiForm.backLocation}?methodToCall=refresh&docFormKey=${KualiForm.formKey}&refreshCaller=multipleValues&searchResultKey=${searchResultKey}&searchResultDataKey=${searchResultDataKey}&anchor=${KualiForm.lookupAnchor}"/>'>
+						<img src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_returnthese.gif" class="tinybutton"
+							border="0" /></a>
+					</th:block>						
+					</td>
+				</tr>
+				
+			</table>
+			</div>
+			<th:block th:if="${KualiForm.tempListLookupMode == BCConstants.TempListLookupMode.CSF_TRACKER_POSITION_LOOKUP}">
+				<br>
+				<table bgcolor="#C0C0C0" cellpadding="30" >
+					
+					<tr>
+						<td> 
+                            <!-- hiddens for search criteria merging -->
+                            <html-el:hidden name="KualiForm" property="financialObjectCode" />
+                            <html-el:hidden name="KualiForm" property="financialSubObjectCode" />
+                            
+							<b><label th:text="${csfTrackerAttributes.universityFiscalYear.label}"></label></b>
+								<kul:htmlControlAttribute property="universityFiscalYear" readOnly="true" attributeEntry="${csfTrackerAttributes.universityFiscalYear}"/>
+						</td> 
+						<td> 
+							<b><label th:text="${csfTrackerAttributes.chartOfAccountsCode.label}"></label></b>
+							<kul:htmlControlAttribute property="chartOfAccountsCode" readOnly="true" attributeEntry="${csfTrackerAttributes.chartOfAccountsCode}"/>
+						</td>
+						<td> 
+							<b><label th:text="${csfTrackerAttributes.accountNumber.label}"></label></b>
+							<kul:htmlControlAttribute property="accountNumber" readOnly="true" attributeEntry="${csfTrackerAttributes.accountNumber}"/>
+						</td>
+						<td> 
+							<b><label th:text="${csfTrackerAttributes.subAccountNumber.label}"></label></b>
+							<kul:htmlControlAttribute property="subAccountNumber" readOnly="true" attributeEntry="${csfTrackerAttributes.subAccountNumber}"/>
+						</td>
+					<tr>
+				</table>
+			</th:block>
+			<br>
+			<br>
+			<th:block th:if="${reqSearchResultsActualSize>0}">
+				<span th:text="${reqSearchResultsActualSize}"></span> items found.  Please refine your search criteria to narrow down your search.
+          </th:block> 
+			<th:block th:if="${!empty reqSearchResultsActualSize }">
+			    <th:block th:if="${KualiForm.searchUsingOnlyPrimaryKeyValues}">
+			    	<bean-el:message key="lookup.using.primary.keys" arg0="${KualiForm.primaryKeyFieldLabels}"/>
+			    	<br/><br/>
+			    </th:block>
+				<display:table class="datatable-100" cellspacing="0"
+				requestURIcontext="false" cellpadding="0" name="${reqSearchResults}"
+				id="row" export="true" pagesize="100"
+				requestURI="budgetTempListLookup.do?methodToCall=viewResults&reqSearchResultsActualSize=${reqSearchResultsActualSize}&searchResultKey=${searchResultKey}&searchUsingOnlyPrimaryKeyValues=${KualiForm.searchUsingOnlyPrimaryKeyValues}">
+
+				<th:block th:if="${param['d-16544-e'] == null}">
+			  	  <logic:present name="KualiForm" property="formKey">
+					  <th:block th:if="${KualiForm.formKey!='' && KualiForm.hideReturnLink!=true && !KualiForm.multipleValues}">
+						<display:column class="infocell" property="returnUrl" media="html" />
+					  </th:block>
+					  <th:block th:if="${row.actionUrls!='' && KualiForm.suppressActions!=true}">
+						<display:column class="infocell" property="actionUrls"
+							title="Actions" media="html" />
+					  </th:block>
+				  </logic:present>
+				</th:block>
+				
+				<th:block th:each="column,loopStatus : ${row.columns}">
+          <!-- th:with="colClass=${ fn:startsWith(column.formatter, 'org.kuali.rice.core.web.format.CurrencyFormatter') ? 'numbercell' : 'infocell' }" -->
+					<th:block th:switch="${true}">
+						
+						<th:block th:case="${param['d-16544-e'] != null}">
+								<display:column class="${colClass}" sortable="${column.sortable}"
+									title="${column.columnTitle}" comparator="${column.comparator}"
+									maxLength="${column.maxLength}"><c:out value="${column.propertyValue}" escapeXml="false" default="" /></display:column>
+						</th:block>
+						<th:block th:case="${!empty column.propertyURL}">
+							<display:column class="${colClass}" sortable="${column.sortable}"
+								title="${column.columnTitle}" comparator="${column.comparator}">
+								<a href="<span th:text="${column.propertyURL}"></span>" target="_blank" title="${column.propertyValue}"><span th:text="${fn:substring(column.propertyValue, 0, column.maxLength)}"></span><th:block th:if="${column.maxLength gt 0 && fn:length(column.propertyValue) gt column.maxLength}">...</th:block></a> &nbsp;
+                            </display:column>
+						</th:block>
+
+						<th:block th:case="${column.columnTitle == 'Project Code'}">
+							<display:column class="${colClass}" sortable="${column.sortable}"
+								title="${column.columnTitle}" comparator="${column.comparator}"
+								maxLength="${column.maxLength}" decorator="org.kuali.rice.kns.web.ui.FormatAwareDecorator"><div style="white-space: nowrap"><span th:text="${column.propertyValue}"></span>&nbsp;</div></display:column>
+                        </th:block>
+						<th:block th:case="*">
+							<display:column class="${colClass}" sortable="${column.sortable}"
+								title="${column.columnTitle}" comparator="${column.comparator}"
+								maxLength="${column.maxLength}" decorator="org.kuali.rice.kns.web.ui.FormatAwareDecorator"><span th:text="${column.propertyValue}"></span>&nbsp;</display:column>
+                        </th:block>
+					</th:block>
+				</th:block>
+
+			</display:table>
+			</th:block></td>
+			<td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="20"
+				height="20"></td>
+		</tr>
+	</table>
+</div>
+</div>
+</div>
+</body>
+</html>

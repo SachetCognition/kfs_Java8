@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="electronicPaymentClaims" class="tab-container">
+    <h3>Electronic Payments to Claim</h3>
+    <table class="datatable" summary="electronic payment claims"
+           th:if="${KualiForm.electronicPaymentClaims != null and !KualiForm.electronicPaymentClaims.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Claim</th>
+                <th>Generating Document</th>
+                <th>Amount</th>
+                <th>Reference Document</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="claim,iterStat : ${KualiForm.electronicPaymentClaims}">
+                <td>
+                    <input type="checkbox"
+                           th:name="'claimedByCheckboxHelper[' + ${iterStat.index} + '].electronicPaymentClaimRepresentation'"
+                           th:id="'claimedByCheckboxHelper[' + ${iterStat.index} + '].electronicPaymentClaimRepresentation'"
+                           th:checked="${claim.claimed}"/>
+                </td>
+                <td th:text="${claim.generatingDocumentNumber}"></td>
+                <td th:text="${claim.financialDocumentLineAmount}"></td>
+                <td>
+                    <input type="text"
+                           th:name="'claim[' + ${iterStat.index} + '].referenceFinancialDocumentNumber'"
+                           th:id="'claim[' + ${iterStat.index} + '].referenceFinancialDocumentNumber'"
+                           th:value="${claim.referenceFinancialDocumentNumber}"
+                           th:onchange="'toggleclaimedcheckbox(' + ${iterStat.index} + ')'"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${KualiForm.electronicPaymentClaims == null or KualiForm.electronicPaymentClaims.isEmpty()}">
+        No electronic payments available to claim.
+    </p>
+</div>
+</body>
+</html>

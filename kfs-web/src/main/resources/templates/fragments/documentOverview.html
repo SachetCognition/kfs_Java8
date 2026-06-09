@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="documentOverview(editingMode)" class="tab-container">
+    <h3>Document Overview</h3>
+    <table class="datatable" summary="document overview">
+        <tr>
+            <th><label for="document.documentHeader.documentDescription">Description:</label></th>
+            <td>
+                <input th:if="${editingMode.containsKey('fullEntry')}" type="text"
+                       name="document.documentHeader.documentDescription"
+                       id="document.documentHeader.documentDescription"
+                       th:value="${KualiForm.document.documentHeader.documentDescription}"
+                       maxlength="40" size="40"/>
+                <span th:unless="${editingMode.containsKey('fullEntry')}"
+                      th:text="${KualiForm.document.documentHeader.documentDescription}"></span>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="document.documentHeader.explanation">Explanation:</label></th>
+            <td>
+                <textarea th:if="${editingMode.containsKey('fullEntry')}"
+                          name="document.documentHeader.explanation"
+                          id="document.documentHeader.explanation"
+                          rows="3" cols="40"
+                          th:text="${KualiForm.document.documentHeader.explanation}"></textarea>
+                <span th:unless="${editingMode.containsKey('fullEntry')}"
+                      th:text="${KualiForm.document.documentHeader.explanation}"></span>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="document.documentHeader.organizationDocumentNumber">Org Doc #:</label></th>
+            <td>
+                <input th:if="${editingMode.containsKey('fullEntry')}" type="text"
+                       name="document.documentHeader.organizationDocumentNumber"
+                       id="document.documentHeader.organizationDocumentNumber"
+                       th:value="${KualiForm.document.documentHeader.organizationDocumentNumber}"
+                       maxlength="10" size="10"/>
+                <span th:unless="${editingMode.containsKey('fullEntry')}"
+                      th:text="${KualiForm.document.documentHeader.organizationDocumentNumber}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

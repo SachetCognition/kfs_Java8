@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="notes" class="tab-container">
+    <h3>Notes and Attachments</h3>
+    <table class="datatable" summary="notes">
+        <thead>
+            <tr>
+                <th>Posted Timestamp</th>
+                <th>Author</th>
+                <th>Note Text</th>
+                <th>Attached File</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="note : ${KualiForm.document.notes}">
+                <td th:text="${note.notePostedTimestamp}"></td>
+                <td th:text="${note.authorUniversalIdentifier}"></td>
+                <td th:text="${note.noteText}"></td>
+                <td>
+                    <a th:if="${note.attachment != null}" th:href="@{/attachment(attachmentIdentifier=${note.attachment.attachmentIdentifier})}"
+                       th:text="${note.attachment.attachmentFileName}">file</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

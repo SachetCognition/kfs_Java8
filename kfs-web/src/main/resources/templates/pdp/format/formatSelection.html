@@ -1,0 +1,66 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>format Selection</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="disbursementNumberRangeAttributes=${DataDictionary.DisbursementNumberRange.attributes}" -->
+<!-- th:with="bankAttributes=${DataDictionary.Bank.attributes}" -->
+<!-- th:with="customerProfileAttributes=${DataDictionary.CustomerProfile.attributes}" -->
+<!-- th:with="paymentGroupAttributes=${DataDictionary.PaymentGroup.attributes}" -->
+<!-- th:with="dummyAttributes=${DataDictionary.AttributeReferenceDummy.attributes}" -->
+
+<div class="kfs-page" data-header-title="Format Disbursements" data-doc-title="Format Disbursements">
+<h1>Format Disbursements</h1>
+<form th:action="@{pdp/format}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+	<th:block th:if="${empty ErrorPropertyList}">
+	
+    <table width="100%" border="0"><tr><td>	
+	  <kul:errors keyMatch="${T(org.kuali.rice.krad.util.KRADConstants).GLOBAL_ERRORS}" errorTitle="Errors Found On Page:"/>
+	</td></tr></table>  
+	</br>
+
+	<div th:replace="~{fragments/pdp/formatDisbursementRanges :: formatDisbursementRanges}" th:with="disbursementNumberRangeAttributes=${disbursementNumberRangeAttributes},bankAttributes=${bankAttributes}"></div>
+	<div th:replace="~{fragments/pdp/formatOptions :: formatOptions}" th:with="paymentGroupAttributes=${paymentGroupAttributes}"></div>
+	<div th:replace="~{fragments/pdp/formatCustomers :: formatCustomers}" th:with="customerProfileAttributes=${customerProfileAttributes},dummyAttributes=${dummyAttributes}"></div>
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	<div id="globalbuttons" class="globalbuttons">
+		<input type="image" th:src="@{${ConfigProperties.externalizable.images.url}buttonsmall_beginformat.gif}"
+			styleClass="globalbuttons" property="methodToCall.prepare"
+			title="begin format" alt="begin format" />
+		<input type="image" th:src="@{${ConfigProperties.externalizable.images.url}buttonsmall_reset.gif}"
+			styleClass="globalbuttons" property="methodToCall.start"
+			title="reset" alt="reset" />
+		<input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_clear.gif}"
+			styleClass="globalbuttons" property="methodToCall.clear"
+			title="clear" alt="clear" />			
+	</div>
+	</th:block>
+
+</div>
+</div>
+</div>
+</body>
+</html>

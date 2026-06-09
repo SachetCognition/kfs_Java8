@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="panelFooter" class="panel-footer">
+    <div class="left">
+        <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_openall.gif'}"
+               name="methodToCall.showAllTabs" title="open all panels" alt="open all panels" class="globalbuttons"/>
+        <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_closeall.gif'}"
+               name="methodToCall.hideAllTabs" title="close all panels" alt="close all panels" class="globalbuttons"/>
+    </div>
+</div>
+</body>
+</html>
