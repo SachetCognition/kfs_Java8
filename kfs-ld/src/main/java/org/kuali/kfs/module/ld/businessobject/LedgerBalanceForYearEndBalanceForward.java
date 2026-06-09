@@ -27,26 +27,117 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_LDGR_BAL_T")
+@IdClass(LedgerBalanceForYearEndBalanceForwardId.class)
 public class LedgerBalanceForYearEndBalanceForward extends PersistableBusinessObjectBase {
 
+    @Id
+
+
+    @Column(name = "UNIV_FISCAL_YR")
+
+
     private Integer universityFiscalYear;
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+
+    @Column(name = "ACCOUNT_NBR")
+
     private String accountNumber;
+    @Id
+
+    @Column(name = "SUB_ACCT_NBR")
+
     private String subAccountNumber;
+    @Id
+
+    @Column(name = "FIN_OBJECT_CD")
+
     private String financialObjectCode;
+    @Id
+
+    @Column(name = "FIN_SUB_OBJ_CD")
+
     private String financialSubObjectCode;
+    @Id
+
+    @Column(name = "FIN_BALANCE_TYP_CD")
+
     private String financialBalanceTypeCode;
+    @Id
+
+    @Column(name = "FIN_OBJ_TYP_CD")
+
     private String financialObjectTypeCode;
+    @Id
+
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Id
+
+    @Column(name = "EMPLID")
+
     private String emplid;
     private String financialObjectFringeOrSalaryCode;
+    @Column(name = "ACLN_ANNL_BAL_AMT")
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
     private KualiDecimal accountLineAnnualBalanceAmount;
+    @Column(name = "FIN_BEG_BAL_LN_AMT")
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
     private KualiDecimal financialBeginningBalanceLineAmount;
+    @Column(name = "CONTR_GR_BB_AC_AMT")
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
     private KualiDecimal contractsGrantsBeginningBalanceAmount;
+    @Column(name = "TIMESTAMP")
+
     private Timestamp transactionDateTimeStamp;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+    })
+
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
+
     private SystemOptions option;
 
     /**

@@ -25,14 +25,40 @@ import org.kuali.kfs.integration.ld.LaborLedgerBenefitsType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbCharBooleanConverter;
+
+@Entity
+@Table(name = "LD_BENEFITS_TYPE_T")
 /**
  * Labor business object for Benefits Type
  */
 public class BenefitsType extends PersistableBusinessObjectBase implements LaborLedgerBenefitsType, MutableInactivatable {
 
+    @Id
+
+
+    @Column(name = "POS_BENEFIT_TYP_CD")
+
+
     private String positionBenefitTypeCode;
+    @Column(name = "POS_BENE_TYP_DESC")
+
     private String positionBenefitTypeDescription;
+    @Column(name = "POS_BENE_RETIRE_CD")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean positionBenefitRetirementIndicator;
+    @Column(name = "ACTV_IND")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean active;
 
     /**

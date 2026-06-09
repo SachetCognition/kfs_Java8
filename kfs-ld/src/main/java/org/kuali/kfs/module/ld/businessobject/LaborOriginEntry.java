@@ -47,6 +47,20 @@ import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_LBR_ORIGIN_ENTRY_T")
 /**
  * Labor business object for LaborOriginEntry.
  */
@@ -54,32 +68,94 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborOriginEntry.class);
     private static LaborOriginEntryFieldUtil laborOriginEntryFieldUtil;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Column(name = "TRN_POST_DT")
+
     private Date transactionPostingDate;
+    @Column(name = "PAY_PERIOD_END_DT")
+
     private Date payPeriodEndDate;
+    @Column(name = "TRN_TOTAL_HR")
+
     private BigDecimal transactionTotalHours;
+    @Column(name = "PYRL_DT_FSCL_YR")
+
     private Integer payrollEndDateFiscalYear;
+    @Column(name = "PYRL_DT_FSCLPRD_CD")
+
     private String payrollEndDateFiscalPeriodCode;
+    @Column(name = "FDOC_APPROVED_CD")
+
     private String financialDocumentApprovedCode;
+    @Column(name = "TRN_ENTR_OFST_CD")
+
     private String transactionEntryOffsetCode;
+    @Column(name = "TRNENTR_PROCESS_TM")
+
     private Timestamp transactionEntryProcessedTimestamp;
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Column(name = "EMPL_RCD")
+
     private Integer employeeRecord;
+    @Column(name = "ERNCD")
+
     private String earnCode;
+    @Column(name = "PAYGROUP")
+
     private String payGroup;
+    @Column(name = "SAL_ADMIN_PLAN")
+
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
+
     private String grade;
+    @Column(name = "RUN_ID")
+
     private String runIdentifier;
+    @Column(name = "LL_ORIG_FIN_COA_CD")
+
     private String laborLedgerOriginalChartOfAccountsCode;
+    @Column(name = "LL_ORIG_ACCT_NBR")
+
     private String laborLedgerOriginalAccountNumber;
+    @Column(name = "LL_ORIG_SUB_ACCT_NBR")
+
     private String laborLedgerOriginalSubAccountNumber;
+    @Column(name = "LL_ORIG_FIN_OBJECT_CD")
+
     private String laborLedgerOriginalFinancialObjectCode;
+    @Column(name = "LL_ORIG_FIN_SUB_OBJ_CD")
+
     private String laborLedgerOriginalFinancialSubObjectCode;
+    @Column(name = "COMPANY")
+
     private String hrmsCompany;
+    @Column(name = "SETID")
+
     private String setid;
+    @Column(name = "TIMESTAMP")
+
     private Date transactionDateTimeStamp;
     private DocumentTypeEBO  referenceFinancialSystemDocumentTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FS_REF_ORIGIN_CD", insertable = false, updatable = false)
+
     private OriginationCode referenceFinancialSystemOrigination;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "PYRL_DT_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "PYRL_DT_FSCLPRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
+
+    })
+
     private AccountingPeriod payrollEndDateFiscalPeriod;
 
     public LaborOriginEntry(LaborLedgerPendingEntry pendingEntry){
@@ -864,7 +940,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String fiscalYearString = line.substring(pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE));
         if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(fiscalYearString)) {
             try {
-                setUniversityFiscalYear(Integer.valueOf(fiscalYearString));
+                setUniversityFiscalYear(new Integer(fiscalYearString));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Fiscal year '" + fiscalYearString + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -901,7 +977,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String sequenceNumberString = line.substring(pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.POSITION_NUMBER));
         if (!GeneralLedgerConstants.getSpaceTransactionEntrySequenceNumber().equals(sequenceNumberString) && !GeneralLedgerConstants.getZeroTransactionEntrySequenceNumber().equals(sequenceNumberString)) {
             try {
-                setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceNumberString.trim()));
+                setTransactionLedgerEntrySequenceNumber(new Integer(sequenceNumberString.trim()));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Transaction Sequence Number '" + sequenceNumberString + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -1007,7 +1083,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String payEndFisYrStr = line.substring(pMap.get(KFSPropertyConstants.PAYROLL_END_DATE_FISCAL_YEAR), pMap.get(LaborPropertyConstants.PAYROLL_END_DATE_FISCAL_PERIOD_CODE));
         if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(payEndFisYrStr)) {
             try {
-                setPayrollEndDateFiscalYear(Integer.valueOf(org.springframework.util.StringUtils.trimTrailingWhitespace(payEndFisYrStr)));
+                setPayrollEndDateFiscalYear(new Integer(org.springframework.util.StringUtils.trimTrailingWhitespace(payEndFisYrStr)));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Payroll End Date Fiscal Year '" + payEndFisYrStr + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -1024,7 +1100,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String empRecordStr = line.substring(pMap.get(KFSPropertyConstants.EMPLOYEE_RECORD), pMap.get(KFSPropertyConstants.EARN_CODE));
         if (!empRecordStr.trim().equals(GeneralLedgerConstants.EMPTY_CODE)){
             try {
-                setEmployeeRecord(Integer.valueOf(empRecordStr.trim()));
+                setEmployeeRecord(new Integer(empRecordStr.trim()));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Employee Record '" + empRecordStr.trim() + "' contains an invalid value." , Message.TYPE_FATAL));

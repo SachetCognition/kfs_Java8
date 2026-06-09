@@ -28,13 +28,39 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_JULY1_POS_FND_T")
+@IdClass(July1PositionFundingId.class)
 /**
  * Labor business object for July 1 Position Funding
  */
 public class July1PositionFunding extends LedgerBalance {
 
+    @Column(name = "JULY1_BDGT_AMT")
+
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
+
     private KualiDecimal july1BudgetAmount;
+    @Column(name = "JULY1_BDGT_FTE_QTY")
+
     private BigDecimal july1BudgetFteQuantity;
+    @Column(name = "JULY1_BDGT_TM_PCT")
+
     private BigDecimal july1BudgetTimePercent;
     private String personName;
     private TransientBalanceInquiryAttributes dummyBusinessObject;

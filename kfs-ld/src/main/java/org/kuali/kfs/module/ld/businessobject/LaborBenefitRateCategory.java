@@ -23,15 +23,40 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbCharBooleanConverter;
+
+@Entity
+@Table(name = "LD_LBR_BFT_RT_CAT_T")
 /**
  * BO for the Labor Benefit Rate Category Fringe Benefit
  *
  */
 public class LaborBenefitRateCategory extends PersistableBusinessObjectBase implements org.kuali.kfs.integration.ld.LaborBenefitRateCategory, MutableInactivatable {
 
+    @Id
+
+
+    @Column(name = "LBR_BEN_RT_CAT_CD")
+
+
     private String laborBenefitRateCategoryCode;//the BO code
 
+    @Column(name = "actv_ind")
+
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
+
     private Boolean active = false;     //indicates active status of this BO
+
+    @Column(name = "LBR_BEN_RT_CAT_NM")
+
 
     private String codeDesc;                    //description for the BO
 

@@ -21,6 +21,19 @@ package org.kuali.kfs.module.ld.document;
 import org.kuali.kfs.fp.document.YearEndDocument;
 import org.kuali.kfs.sys.document.AccountingDocument;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table(name = "LD_EXP_TRNFR_DOC_T")
 /**
  * Labor Document Class for the Year End Salary Expense Transfer Document.
  */

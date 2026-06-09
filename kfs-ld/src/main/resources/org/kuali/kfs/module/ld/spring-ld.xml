@@ -51,7 +51,7 @@
         </property>
         <property name="databaseRepositoryFilePaths">
             <list>
-                <value>org/kuali/kfs/module/ld/ojb-ld.xml</value>
+                <!-- OJB mapping removed - now using JPA annotations -->
             </list>
         </property>
         <property name="scriptConfigurationFilePaths">
@@ -226,13 +226,13 @@
 
     <!-- <bean id="laborOriginEntryDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborOriginEntryDaoOjb"> 
         <property name="entryClass" value="org.kuali.kfs.module.ld.businessobject.LaborOriginEntry"/> </bean> -->
-    <bean id="laborLedgerEntryDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerEntryDaoOjb" />
+    <bean id="laborLedgerEntryDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerEntryDaoJpa" />
 
     <bean id="laborLedgerEntryHistoryDao" parent="platformAwareDao"
-        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerEntryHistoryDaoOjb" />
+        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerEntryHistoryDaoJpa" />
 
     <bean id="laborLedgerBalanceHistoryDao" parent="platformAwareDao"
-        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerBalanceHistoryDaoOjb" />
+        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerBalanceHistoryDaoJpa" />
 
     <bean id="laborLedgerEntryBalanceCachingDao" parent="platformAwareDaoJdbc"
         class="org.kuali.kfs.module.ld.batch.dataaccess.impl.LaborLedgerEntryBalanceCachingDaoJdbc"
@@ -241,17 +241,17 @@
     <bean id="laborBalancingDao" parent="platformAwareDaoJdbc" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborBalancingDaoJdbc" />
 
     <bean id="laborGeneralLedgerEntryDao" parent="platformAwareDao"
-        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborGeneralLedgerEntryDaoOjb" />
+        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborGeneralLedgerEntryDaoJpa" />
 
-    <bean id="laborLedgerBalanceDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerBalanceDaoOjb"/>
+    <bean id="laborLedgerBalanceDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerBalanceDaoJpa"/>
 
-    <bean id="laborBaseFundsDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborBaseFundsDaoOjb" />
+    <bean id="laborBaseFundsDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborBaseFundsDaoJpa" />
     <bean id="laborCalculatedSalaryFoundationTrackerDao" parent="platformAwareDao"
-        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborCalculatedSalaryFoundationTrackerDaoOjb" />
+        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborCalculatedSalaryFoundationTrackerDaoJpa" />
     <bean id="laborLedgerPendingEntryDao" parent="platformAwareDao"
-        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerPendingEntryDaoOjb" />
+        class="org.kuali.kfs.module.ld.dataaccess.impl.LaborLedgerPendingEntryDaoJpa" />
 
-    <bean id="laborObjectDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborObjectDaoOjb" />
+    <bean id="laborObjectDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborObjectDaoJpa" />
 
     <bean id="laborClearGeneralLedgerEntryDao" parent="platformAwareDaoJdbc"
         class="org.kuali.kfs.module.ld.dataaccess.impl.LaborClearGeneralLedgerEntryDaoJdbc" />
@@ -1458,7 +1458,7 @@
         </property>
     </bean>
 
-    <bean id="laborDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborDaoOjb" />
+    <bean id="laborDao" parent="platformAwareDao" class="org.kuali.kfs.module.ld.dataaccess.impl.LaborDaoJpa" />
     <bean id="laborCorrectionDocumentService" parent="laborCorrectionDocumentService-parentBean" />
 
     <bean id="laborCorrectionDocumentService-parentBean" class="org.kuali.kfs.module.ld.document.service.impl.LaborCorrectionDocumentServiceImpl" abstract="true">
