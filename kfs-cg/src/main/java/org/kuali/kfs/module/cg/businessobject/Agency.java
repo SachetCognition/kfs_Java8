@@ -46,7 +46,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * This class defines an agency as it is used and referenced within the Contracts & Grants portion of a college or university

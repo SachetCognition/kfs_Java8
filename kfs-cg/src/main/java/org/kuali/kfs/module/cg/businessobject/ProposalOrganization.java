@@ -32,7 +32,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * Represents a relationship between a {@link Proposal} and an {@Org}.

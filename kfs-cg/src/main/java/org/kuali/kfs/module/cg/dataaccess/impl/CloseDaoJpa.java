@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.kuali.kfs.module.cg.businessobject.Award;
@@ -41,15 +42,16 @@ public class CloseDaoJpa implements CloseDao {
     private EntityManager entityManager;
 
     @Override
+    @SuppressWarnings("unchecked")
     public String getMaxApprovedClose(Date currentSqlMidnight) {
-        TypedQuery<String> query = entityManager.createQuery(
-                "SELECT d.documentNumber FROM ProposalAwardCloseDocument d " +
-                "WHERE d.userInitiatedCloseDate = :closeDate " +
-                "AND d.documentHeader.workflowDocumentStatusCode = :statusCode " +
-                "ORDER BY d.documentNumber DESC",
-                String.class);
-        query.setParameter("closeDate", currentSqlMidnight);
-        query.setParameter("statusCode", KFSConstants.DocumentStatusCodes.ENROUTE);
+        Query query = entityManager.createNativeQuery(
+                "SELECT c.FDOC_NBR FROM CG_PRPSL_CLOSE_T c " +
+                "INNER JOIN FS_DOC_HEADER_T h ON c.FDOC_NBR = h.FDOC_NBR " +
+                "WHERE c.CG_USR_INITIATE_DT = ?1 " +
+                "AND h.FDOC_HDR_STAT_CD = ?2 " +
+                "ORDER BY c.FDOC_NBR DESC");
+        query.setParameter(1, currentSqlMidnight);
+        query.setParameter(2, KFSConstants.DocumentStatusCodes.ENROUTE);
         query.setMaxResults(1);
 
         List<String> results = query.getResultList();
@@ -57,15 +59,16 @@ public class CloseDaoJpa implements CloseDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public String getMostRecentClose(Date currentSqlMidnight) {
-        TypedQuery<String> query = entityManager.createQuery(
-                "SELECT d.documentNumber FROM ProposalAwardCloseDocument d " +
-                "WHERE d.userInitiatedCloseDate = :closeDate " +
-                "AND d.documentHeader.workflowDocumentStatusCode = :statusCode " +
-                "ORDER BY d.documentNumber DESC",
-                String.class);
-        query.setParameter("closeDate", currentSqlMidnight);
-        query.setParameter("statusCode", KFSConstants.DocumentStatusCodes.APPROVED);
+        Query query = entityManager.createNativeQuery(
+                "SELECT c.FDOC_NBR FROM CG_PRPSL_CLOSE_T c " +
+                "INNER JOIN FS_DOC_HEADER_T h ON c.FDOC_NBR = h.FDOC_NBR " +
+                "WHERE c.CG_USR_INITIATE_DT = ?1 " +
+                "AND h.FDOC_HDR_STAT_CD = ?2 " +
+                "ORDER BY c.FDOC_NBR DESC");
+        query.setParameter(1, currentSqlMidnight);
+        query.setParameter(2, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setMaxResults(1);
 
         List<String> results = query.getResultList();

@@ -32,7 +32,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * Represents a relationship between a {@link Proposal} and a {@link ResearchRisk}.

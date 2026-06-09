@@ -41,7 +41,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * This class represents an association between an award and an account. It's like a reference to the account from the award. This

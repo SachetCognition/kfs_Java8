@@ -34,7 +34,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * This class represents an association between an award and a fund manager. It's like a reference to the fund manager from the

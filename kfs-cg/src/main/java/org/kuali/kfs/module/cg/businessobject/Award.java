@@ -58,7 +58,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * Defines a financial award object.
@@ -137,7 +136,7 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     private String analystTelephoneNumber;
     @Column(name = "BILL_FREQ_CD")
     private String billingFrequencyCode;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BILL_FREQ_CD", insertable = false, updatable = false)
     private BillingFrequency billingFrequency;
     @Column(name = "CGAWD_PROJ_TTL")

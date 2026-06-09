@@ -48,7 +48,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * See functional documentation.
@@ -129,6 +128,7 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     @OrderBy("principalId ASC")
     private List<ProposalProjectDirector> proposalProjectDirectors;
     @OneToMany(mappedBy = "proposal", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @org.hibernate.annotations.OrderBy(clause = "RSRCH_RSK_TYP_CD ASC")
     private List<ProposalResearchRisk> proposalResearchRisks;
 
     @ManyToOne(fetch = FetchType.LAZY)

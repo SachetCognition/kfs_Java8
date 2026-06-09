@@ -33,7 +33,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * This class represents an association between an award and an organization. It's like a reference to the organization from the
