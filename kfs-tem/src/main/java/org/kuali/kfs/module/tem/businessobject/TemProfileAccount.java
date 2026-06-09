@@ -42,7 +42,7 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
     @Id
     @GeneratedValue(generator = "TEM_PROFILE_ACCOUNT_ID_SEQ")
     @SequenceGenerator(name = "TEM_PROFILE_ACCOUNT_ID_SEQ", sequenceName = "TEM_PROFILE_ACCOUNT_ID_SEQ")
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "account_id", nullable = false, length = 19)
     private Integer accountId;
     private String name;
     private String accountNumber;

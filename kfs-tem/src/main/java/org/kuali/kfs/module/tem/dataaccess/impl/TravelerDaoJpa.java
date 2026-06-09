@@ -28,6 +28,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
@@ -49,6 +51,8 @@ public class TravelerDaoJpa implements TravelerDao {
     private LookupDao lookupDao;
     private AccountsReceivableModuleService accountsReceivableModuleService;
 
+    private static final String CUSTOMER_ADDRESSES_ATTR_PREFIX = "customerAddresses.";
+
     @Override
     public Collection<AccountsReceivableCustomer> findCustomersBy(final Map<String, String> criteria) {
         Class<? extends AccountsReceivableCustomer> customerClass =
@@ -59,18 +63,35 @@ public class TravelerDaoJpa implements TravelerDao {
         Root root = cq.from(customerClass);
 
         List<Predicate> predicates = new ArrayList<Predicate>();
+        Join addressJoin = null;
+
         for (final Map.Entry<String, String> entry : criteria.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
 
-            if (!key.contains("customerAddresses.")) {
-                predicates.add(cb.equal(root.get(key), value));
+            if (key.contains(CUSTOMER_ADDRESSES_ATTR_PREFIX)) {
+                if (addressJoin == null) {
+                    addressJoin = root.join("customerAddresses", JoinType.INNER);
+                }
+                String addressField = key.substring(CUSTOMER_ADDRESSES_ATTR_PREFIX.length());
+                if (value.contains("*") || value.contains("%")) {
+                    predicates.add(cb.like(addressJoin.get(addressField), value.replace('*', '%')));
+                } else {
+                    predicates.add(cb.equal(addressJoin.get(addressField), value));
+                }
+            } else {
+                if (value.contains("*") || value.contains("%")) {
+                    predicates.add(cb.like(root.get(key), value.replace('*', '%')));
+                } else {
+                    predicates.add(cb.equal(root.get(key), value));
+                }
             }
         }
 
         if (!predicates.isEmpty()) {
             cq.where(predicates.toArray(new Predicate[0]));
         }
+        cq.distinct(true);
 
         return entityManager.createQuery(cq).getResultList();
     }
