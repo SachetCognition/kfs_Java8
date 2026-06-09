@@ -21,7 +21,7 @@ package org.kuali.kfs.module.bc.document.web.struts;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.fp.service.FiscalYearFunctionControlService;
@@ -101,7 +101,7 @@ public class TempListLookupForm extends LookupForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.LookupForm#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.LookupForm#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

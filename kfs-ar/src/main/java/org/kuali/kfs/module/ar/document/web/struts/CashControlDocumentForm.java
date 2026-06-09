@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.module.ar.document.web.struts;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.kuali.kfs.module.ar.businessobject.CashControlDetail;
 import org.kuali.kfs.module.ar.document.CashControlDocument;
@@ -57,7 +57,7 @@ public class CashControlDocumentForm extends FinancialSystemTransactionalDocumen
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

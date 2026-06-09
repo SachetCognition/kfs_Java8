@@ -24,10 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.Tag;
-import javax.servlet.jsp.tagext.TagSupport;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.tagext.JspFragment;
+import jakarta.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
@@ -148,7 +148,7 @@ public class AccountingLineGroupTag extends TagSupport {
     }
     
     /**
-     * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
+     * @see jakarta.servlet.jsp.tagext.TagSupport#doStartTag()
      */
     @Override
     public int doStartTag() throws JspException {
@@ -165,7 +165,7 @@ public class AccountingLineGroupTag extends TagSupport {
     
     /**
      * If our parent isn't AccountingLinesTag, then we should render all the group
-     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
+     * @see jakarta.servlet.jsp.tagext.TagSupport#doEndTag()
      */
     @Override
     public int doEndTag() throws JspException {
@@ -321,7 +321,7 @@ public class AccountingLineGroupTag extends TagSupport {
 
     /**
      * Clean up state held by this tag
-     * @see javax.servlet.jsp.tagext.TagSupport#release()
+     * @see jakarta.servlet.jsp.tagext.TagSupport#release()
      */
     @Override
     public void release() {

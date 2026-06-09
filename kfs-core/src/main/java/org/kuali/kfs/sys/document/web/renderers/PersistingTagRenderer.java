@@ -18,9 +18,9 @@
  */
 package org.kuali.kfs.sys.document.web.renderers;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.apache.struts.taglib.html.HiddenTag;
 
@@ -76,7 +76,7 @@ public class PersistingTagRenderer extends StringRenderer {
     }
     
     /**
-     * @see org.kuali.kfs.sys.document.web.renderers.StringRenderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.StringRenderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
      */
     @Override
     public void render(PageContext pageContext, Tag parentTag) throws JspException {

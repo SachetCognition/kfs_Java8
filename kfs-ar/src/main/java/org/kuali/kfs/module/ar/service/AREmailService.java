@@ -21,7 +21,7 @@ package org.kuali.kfs.module.ar.service;
 import java.util.Collection;
 import java.util.List;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.module.ar.businessobject.Milestone;

@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports;
@@ -75,7 +75,7 @@ public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {
@@ -322,7 +322,7 @@ public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
 
     /**
      * @see org.kuali.rice.kns.web.struts.form.KualiForm#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String,
-     *      javax.servlet.http.HttpServletRequest)
+     *      jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldMethodToCallParameterBeUsed(String methodToCallParameterName, String methodToCallParameterValue, HttpServletRequest request) {
@@ -335,7 +335,7 @@ public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
 
     /**
      * @see org.kuali.rice.kns.web.struts.form.KualiForm#reset(org.apache.struts.action.ActionMapping,
-     *      javax.servlet.http.HttpServletRequest) resets check box fields if not returning from a child expansion screen
+     *      jakarta.servlet.http.HttpServletRequest) resets check box fields if not returning from a child expansion screen
      */
     @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {

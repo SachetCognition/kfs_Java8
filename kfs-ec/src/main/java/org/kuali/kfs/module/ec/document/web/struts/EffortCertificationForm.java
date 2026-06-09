@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
@@ -118,7 +118,7 @@ public class EffortCertificationForm extends FinancialSystemTransactionalDocumen
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

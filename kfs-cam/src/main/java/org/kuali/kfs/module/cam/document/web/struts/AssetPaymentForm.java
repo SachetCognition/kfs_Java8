@@ -20,7 +20,7 @@ package org.kuali.kfs.module.cam.document.web.struts;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -141,7 +141,7 @@ public class AssetPaymentForm extends KualiAccountingDocumentFormBase {
 	}
 
 	/**
-	 * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
+	 * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
 	 */
 	@Override
 	public void populate(HttpServletRequest request) {

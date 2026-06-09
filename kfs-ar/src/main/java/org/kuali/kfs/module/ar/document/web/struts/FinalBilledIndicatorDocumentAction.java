@@ -18,8 +18,8 @@
  */
 package org.kuali.kfs.module.ar.document.web.struts;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -79,7 +79,7 @@ public class FinalBilledIndicatorDocumentAction extends KualiTransactionalDocume
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#doProcessingAfterPost(org.kuali.rice.kns.web.struts.form.KualiForm,
-     *      javax.servlet.http.HttpServletRequest)
+     *      jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     protected void doProcessingAfterPost(KualiForm actionForm, HttpServletRequest request) {

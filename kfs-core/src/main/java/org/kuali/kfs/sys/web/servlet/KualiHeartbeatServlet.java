@@ -23,9 +23,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Collection;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.sys.KFSConstants;

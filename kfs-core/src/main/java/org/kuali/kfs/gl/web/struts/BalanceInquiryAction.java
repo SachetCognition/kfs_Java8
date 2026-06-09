@@ -26,9 +26,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -223,7 +223,7 @@ public class BalanceInquiryAction extends KualiAction {
      * Refresh - is called when one quickFinder returns to the previous one. Sets all the values and performs the new search.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#refresh(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      *
      * KRAD Conversion: Lookupable performs customization of the fields and check for additional fields.
      *

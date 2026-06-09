@@ -20,7 +20,7 @@ package org.kuali.rice.core.util.jaxb;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.CoreApiServiceLocator;
@@ -34,7 +34,7 @@ import org.kuali.rice.core.api.CoreApiServiceLocator;
 public class StringToDateTimeAdapter extends XmlAdapter<String,Date> {
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public Date unmarshal(String v) throws Exception {
@@ -42,7 +42,7 @@ public class StringToDateTimeAdapter extends XmlAdapter<String,Date> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(Date v) throws Exception {

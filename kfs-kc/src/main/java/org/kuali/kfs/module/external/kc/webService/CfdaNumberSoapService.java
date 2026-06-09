@@ -25,9 +25,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.WebEndpoint;
-import javax.xml.ws.WebServiceClient;
-import javax.xml.ws.WebServiceFeature;
+import jakarta.xml.ws.WebEndpoint;
+import jakarta.xml.ws.WebServiceClient;
+import jakarta.xml.ws.WebServiceFeature;
 
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kra.external.Cfda.service.CfdaNumberService;
@@ -72,7 +72,7 @@ public class CfdaNumberSoapService extends KfsKcSoapService {
     /**
      * 
      * @param features
-     *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
+     *     A list of {@link jakarta.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
      *     returns CfdaNumberService
      */

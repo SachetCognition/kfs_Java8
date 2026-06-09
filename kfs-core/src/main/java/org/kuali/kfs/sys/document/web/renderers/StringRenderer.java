@@ -20,9 +20,9 @@ package org.kuali.kfs.sys.document.web.renderers;
 
 import java.io.IOException;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 /**
  * Don't you love it when you've got to write silly code, just because of some arbitrary rule within the
@@ -42,7 +42,7 @@ public class StringRenderer implements Renderer {
 
     /**
      * Renders stringToRender
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
         if (stringToRender != null) {

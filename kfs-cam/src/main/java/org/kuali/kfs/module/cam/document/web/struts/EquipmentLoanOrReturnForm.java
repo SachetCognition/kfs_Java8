@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.module.cam.document.web.struts;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.kuali.kfs.module.cam.document.EquipmentLoanOrReturnDocument;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -50,7 +50,7 @@ public class EquipmentLoanOrReturnForm extends FinancialSystemTransactionalDocum
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

@@ -21,8 +21,8 @@ package org.kuali.kfs.sys.document.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyTagSupport;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.tagext.BodyTagSupport;
 
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.AccountingDocument;
@@ -76,7 +76,7 @@ public class AccountingLinesTag extends BodyTagSupport {
     }
     
     /**
-     * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
+     * @see jakarta.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
     @Override
     public int doStartTag() throws JspException {
@@ -84,7 +84,7 @@ public class AccountingLinesTag extends BodyTagSupport {
     }
 
     /**
-     * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
+     * @see jakarta.servlet.jsp.tagext.BodyTagSupport#doEndTag()
      */
     @Override
     public int doEndTag() throws JspException {
@@ -173,7 +173,7 @@ public class AccountingLinesTag extends BodyTagSupport {
 
     /**
      * Removes the document from the tag
-     * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
+     * @see jakarta.servlet.jsp.tagext.BodyTagSupport#release()
      */
     @Override
     public void release() {

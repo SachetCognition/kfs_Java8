@@ -21,9 +21,9 @@ package org.kuali.kfs.module.external.kc.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlType;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 

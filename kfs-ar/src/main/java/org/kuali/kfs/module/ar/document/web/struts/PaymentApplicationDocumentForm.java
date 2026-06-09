@@ -28,8 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -101,7 +101,7 @@ public class PaymentApplicationDocumentForm extends FinancialSystemTransactional
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.ServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#reset(org.apache.struts.action.ActionMapping, jakarta.servlet.ServletRequest)
      */
     @Override
     public void reset(ActionMapping mapping, ServletRequest request) {
@@ -112,7 +112,7 @@ public class PaymentApplicationDocumentForm extends FinancialSystemTransactional
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiTransactionalDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiTransactionalDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {
@@ -721,7 +721,7 @@ public class PaymentApplicationDocumentForm extends FinancialSystemTransactional
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiTransactionalDocumentFormBase#populateFalseCheckboxes(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiTransactionalDocumentFormBase#populateFalseCheckboxes(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     protected void populateFalseCheckboxes(HttpServletRequest request) {

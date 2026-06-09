@@ -20,10 +20,10 @@ package org.kuali.kfs.sys.document.web;
 
 import java.util.List;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.JspFragment;
+import jakarta.servlet.jsp.tagext.Tag;
 
 
 public interface AccountingLineGroup {

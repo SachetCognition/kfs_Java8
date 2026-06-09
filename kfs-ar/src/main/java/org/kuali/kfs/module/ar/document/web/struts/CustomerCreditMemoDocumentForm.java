@@ -21,7 +21,7 @@ package org.kuali.kfs.module.ar.document.web.struts;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.ArAuthorizationConstants;
@@ -119,7 +119,7 @@ public class CustomerCreditMemoDocumentForm extends FinancialSystemTransactional
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String, javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String, jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldMethodToCallParameterBeUsed(String methodToCallParameterName, String methodToCallParameterValue, HttpServletRequest request) {

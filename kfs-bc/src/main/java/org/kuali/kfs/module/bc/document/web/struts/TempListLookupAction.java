@@ -26,9 +26,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrTokenizer;
@@ -79,7 +79,7 @@ public class TempListLookupAction extends KualiLookupAction {
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#execute(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -127,7 +127,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * parameter showInitialResults is true, an initial search will be performed before display of the screen.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#start(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward start(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -205,7 +205,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * BC temp tables that use principalId to operate on the set of rows associated with the current user.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#clearValues(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward clearValues(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -230,7 +230,7 @@ public class TempListLookupAction extends KualiLookupAction {
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#cancel(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -260,7 +260,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * Forwards to budget position lookup.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#start(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward performExtendedPositionSearch(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TempListLookupForm tempListLookupForm = (TempListLookupForm) form;
@@ -301,7 +301,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * Validates the get new action for position then calls BudgetPositionService to pull the new position record.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#start(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward getNewPosition(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TempListLookupForm tempListLookupForm = (TempListLookupForm) form;
@@ -338,7 +338,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * Forwards to intended incumbent lookup.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#start(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward performExtendedIncumbentSearch(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TempListLookupForm tempListLookupForm = (TempListLookupForm) form;
@@ -376,7 +376,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * Validates the get new action for incumbent then calls BudgetPositionService to pull the new incumbent record.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#start(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward getNewIncumbent(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TempListLookupForm tempListLookupForm = (TempListLookupForm) form;
@@ -413,7 +413,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * Continues the organization report action after viewing the account list.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#start(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward submitReport(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TempListLookupForm tempListLookupForm = (TempListLookupForm) form;
@@ -441,7 +441,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * Unlocks a current budget lock and returns back to lock monitor with refreshed locks.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#execute(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward unlock(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TempListLookupForm tempListLookupForm = (TempListLookupForm) form;
@@ -488,7 +488,7 @@ public class TempListLookupAction extends KualiLookupAction {
      * unlock page.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#execute(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward doUnlockConfirmation(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response, String lockType, String lockKeyMessage) throws Exception {
         TempListLookupForm lookupForm = (TempListLookupForm) form;
@@ -573,7 +573,7 @@ public class TempListLookupAction extends KualiLookupAction {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.action.KualiAction#performLookup(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.rice.kns.web.struts.action.KualiAction#performLookup(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward performLookup(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

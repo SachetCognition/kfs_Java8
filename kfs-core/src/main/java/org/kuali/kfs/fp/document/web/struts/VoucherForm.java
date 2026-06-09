@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
@@ -93,7 +93,7 @@ public class VoucherForm extends KualiAccountingDocumentFormBase {
      * lists on the page. In addition, this also makes sure that the credit and debit amounts are filled in for situations where
      * validation errors occur and the page reposts.
      * 
-     * @see org.kuali.rice.kns.web.struts.pojo.PojoForm#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.pojo.PojoForm#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

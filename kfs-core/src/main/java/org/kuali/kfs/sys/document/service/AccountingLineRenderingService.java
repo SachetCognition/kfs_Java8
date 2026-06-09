@@ -21,7 +21,7 @@ package org.kuali.kfs.sys.document.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.PageContext;
 
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.document.AccountingDocument;

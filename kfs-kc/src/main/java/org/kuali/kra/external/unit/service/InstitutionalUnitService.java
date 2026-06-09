@@ -18,11 +18,11 @@
  */
 package org.kuali.kra.external.unit.service;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.xml.ws.RequestWrapper;
-import javax.xml.ws.ResponseWrapper;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.xml.ws.RequestWrapper;
+import jakarta.xml.ws.ResponseWrapper;
 
 import org.kuali.kfs.integration.cg.dto.HashMapElement;
 import org.kuali.kfs.module.external.kc.KcConstants;

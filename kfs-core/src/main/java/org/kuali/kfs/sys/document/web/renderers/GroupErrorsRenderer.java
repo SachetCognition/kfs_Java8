@@ -22,10 +22,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.apache.struts.Globals;
 import org.apache.struts.taglib.html.ErrorsTag;
@@ -71,7 +71,7 @@ public class GroupErrorsRenderer implements Renderer {
 
     /**
      * Renders the errors, warnings, and messages for this page
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
         renderMessages(pageContext, parentTag, KFSKeyConstants.MESSAGE_ACCOUNTING_LINES_ERROR_SECTION_TITLE, getErrorPropertyList(pageContext), "errormark.gif", "error", getErrorsRendered(), Globals.ERROR_KEY);

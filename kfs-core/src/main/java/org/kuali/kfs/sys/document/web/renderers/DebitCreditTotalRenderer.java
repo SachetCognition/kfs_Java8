@@ -20,10 +20,10 @@ package org.kuali.kfs.sys.document.web.renderers;
 
 import java.io.IOException;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.apache.struts.taglib.bean.WriteTag;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -71,7 +71,7 @@ public class DebitCreditTotalRenderer extends TotalRendererBase {
 
     /**
      * Uses a Struts write tag to dump out the total
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
         JspWriter out = pageContext.getOut();

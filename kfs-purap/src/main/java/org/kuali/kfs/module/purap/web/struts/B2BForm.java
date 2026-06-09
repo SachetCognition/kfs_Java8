@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.module.purap.web.struts;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.kuali.rice.kns.web.struts.form.KualiForm;
 import org.kuali.rice.krad.util.KRADConstants;
@@ -38,7 +38,7 @@ public class B2BForm extends KualiForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String, javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String, jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldMethodToCallParameterBeUsed(String methodToCallParameterName, String methodToCallParameterValue, HttpServletRequest request) {

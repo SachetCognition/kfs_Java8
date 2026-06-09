@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.kfs.sys.mail.AttachmentMailMessage;
 import org.kuali.kfs.sys.mail.AttachmentMailer;

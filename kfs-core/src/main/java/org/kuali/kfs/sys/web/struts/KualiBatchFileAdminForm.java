@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.web.struts;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.kns.web.struts.form.KualiForm;
@@ -28,7 +28,7 @@ public class KualiBatchFileAdminForm extends KualiForm {
     private String filePath;
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

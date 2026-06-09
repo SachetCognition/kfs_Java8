@@ -18,7 +18,7 @@
  */
 package org.kuali.rice.core.util.jaxb;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -33,7 +33,7 @@ import org.apache.commons.lang.StringUtils;
 public class StringTrimmingAdapter extends XmlAdapter<String,String> {
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public String unmarshal(String v) throws Exception {
@@ -41,7 +41,7 @@ public class StringTrimmingAdapter extends XmlAdapter<String,String> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(String v) throws Exception {

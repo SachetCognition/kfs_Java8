@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.UnmarshalException;
+import jakarta.xml.bind.UnmarshalException;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;

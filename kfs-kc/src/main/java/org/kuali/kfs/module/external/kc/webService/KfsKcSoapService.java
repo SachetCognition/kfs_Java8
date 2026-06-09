@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.List;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
+import jakarta.xml.ws.Service;
 
 import org.apache.log4j.Logger;
 import org.kuali.kfs.sys.KFSConstants;

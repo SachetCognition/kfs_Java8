@@ -21,7 +21,7 @@ package org.kuali.kfs.module.bc.document.web.struts;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
@@ -205,7 +205,7 @@ public class OrganizationReportSelectionForm extends BudgetExpansionForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#reset(org.apache.struts.action.ActionMapping, jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {
@@ -224,7 +224,7 @@ public class OrganizationReportSelectionForm extends BudgetExpansionForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#shouldPropertyBePopulatedInForm(java.lang.String, javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#shouldPropertyBePopulatedInForm(java.lang.String, jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldPropertyBePopulatedInForm(String requestParameterName, HttpServletRequest request) {

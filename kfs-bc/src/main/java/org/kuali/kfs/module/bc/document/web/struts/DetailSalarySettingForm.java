@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Organization;
@@ -84,7 +84,7 @@ public abstract class DetailSalarySettingForm extends SalarySettingBaseForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {
@@ -578,7 +578,7 @@ public abstract class DetailSalarySettingForm extends SalarySettingBaseForm {
 
     /**
      * @see org.kuali.rice.kns.web.struts.form.KualiForm#shouldPropertyBePopulatedInForm(java.lang.String,
-     *      javax.servlet.http.HttpServletRequest)
+     *      jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldPropertyBePopulatedInForm(String requestParameterName, HttpServletRequest request) {

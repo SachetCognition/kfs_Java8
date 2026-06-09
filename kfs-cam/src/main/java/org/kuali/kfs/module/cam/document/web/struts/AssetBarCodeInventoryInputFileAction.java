@@ -24,8 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
@@ -60,7 +60,7 @@ public class AssetBarCodeInventoryInputFileAction extends KualiBatchInputFileSet
 
     /**
      * 
-     * @see org.kuali.kfs.sys.web.struts.KualiBatchInputFileSetAction#save(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.kfs.sys.web.struts.KualiBatchInputFileSetAction#save(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      * 
      * Overridden because I needed to validate the file type is correct.
      */

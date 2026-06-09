@@ -21,7 +21,7 @@ package org.kuali.kfs.module.bc.document.web.struts;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.kuali.kfs.module.bc.BudgetConstructionDocumentReportMode;
 
@@ -48,7 +48,7 @@ public class ReportRunnerForm extends BudgetExpansionForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

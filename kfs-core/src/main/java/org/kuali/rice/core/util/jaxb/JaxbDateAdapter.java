@@ -20,7 +20,7 @@ package org.kuali.rice.core.util.jaxb;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Marshall/unmarshall java.util.Date
@@ -33,7 +33,7 @@ public class JaxbDateAdapter extends XmlAdapter<String, Date> {
 	/**
 	 * This overridden method ...
 	 * 
-	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+	 * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
 	@Override
 	public String marshal(Date date) throws Exception {
@@ -43,7 +43,7 @@ public class JaxbDateAdapter extends XmlAdapter<String, Date> {
 	/**
 	 * This overridden method ...
 	 * 
-	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+	 * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
 	 */
 	@Override
 	public Date unmarshal(String dateStr) throws Exception {

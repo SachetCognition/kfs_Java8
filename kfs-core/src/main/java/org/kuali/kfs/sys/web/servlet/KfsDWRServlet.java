@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
 import org.directwebremoting.Container;
@@ -57,7 +57,7 @@ public class KfsDWRServlet extends DwrServlet {
      * This method calls the super version then loads the dwr config file
      * specified in the loaded module definitions.
      * 
-     * @see uk.ltd.getahead.dwr.DWRServlet#configure(javax.servlet.ServletConfig,
+     * @see uk.ltd.getahead.dwr.DWRServlet#configure(jakarta.servlet.ServletConfig,
      *      uk.ltd.getahead.dwr.Configuration)
      */
     protected List<NamedOrderedListBean> getDwrNamedOrderedListBeans(String listName) {
@@ -145,7 +145,7 @@ public class KfsDWRServlet extends DwrServlet {
     }
 
     /**
-     * @see javax.servlet.GenericServlet#init()
+     * @see jakarta.servlet.GenericServlet#init()
      */
 
     @Override

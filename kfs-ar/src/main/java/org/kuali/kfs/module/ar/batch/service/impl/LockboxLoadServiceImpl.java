@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;

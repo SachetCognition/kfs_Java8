@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionMessage;
@@ -111,8 +111,8 @@ public class SecAccountingLineGroupImpl extends DefaultAccountingLineGroupImpl {
     /**
      * Adds info message if we have restricted view of any accounting lines and adds an additional key to match on
      *
-     * @see org.kuali.kfs.sys.document.web.DefaultAccountingLineGroupImpl#renderErrors(javax.servlet.jsp.PageContext,
-     *      javax.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.DefaultAccountingLineGroupImpl#renderErrors(jakarta.servlet.jsp.PageContext,
+     *      jakarta.servlet.jsp.tagext.Tag)
      */
     @Override
     protected void renderErrors(PageContext pageContext, Tag parentTag) throws JspException {

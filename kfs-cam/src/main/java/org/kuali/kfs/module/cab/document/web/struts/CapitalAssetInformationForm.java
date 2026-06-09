@@ -20,7 +20,7 @@ package org.kuali.kfs.module.cab.document.web.struts;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionMapping;

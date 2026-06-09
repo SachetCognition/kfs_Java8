@@ -22,10 +22,10 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import org.kuali.kfs.fp.businessobject.TravelCompanyCode;
 import org.kuali.rice.core.api.util.type.KualiDecimal;

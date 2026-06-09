@@ -21,7 +21,7 @@ package org.kuali.kfs.gl.businessobject.inquiry;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.PageContext;
 
 import org.displaytag.decorator.TableDecorator;
 import org.displaytag.properties.MediaTypeEnum;

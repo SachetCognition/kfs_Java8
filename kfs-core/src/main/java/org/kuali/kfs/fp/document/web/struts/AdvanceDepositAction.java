@@ -20,8 +20,8 @@ package org.kuali.kfs.fp.document.web.struts;
 
 import java.util.Iterator;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -43,7 +43,7 @@ public class AdvanceDepositAction extends CapitalAccountingLinesActionBase {
      * Adds handling for advance deposit detail amount updates.
      * 
      * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm,
-     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         AdvanceDepositForm adForm = (AdvanceDepositForm) form;

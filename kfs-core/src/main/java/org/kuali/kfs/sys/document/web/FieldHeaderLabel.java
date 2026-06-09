@@ -18,9 +18,9 @@
  */
 package org.kuali.kfs.sys.document.web;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.document.web.renderers.LabelRenderer;
@@ -142,7 +142,7 @@ public class FieldHeaderLabel extends HeaderLabel {
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
+     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
      */
     public void renderElement(PageContext pageContext, Tag parentTag, AccountingLineRenderingContext renderingContext) throws JspException {
         headerLabelPopulator.populateHeaderLabel(this, renderingContext);

@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.rice.core.api.mail.MailMessage;
 import org.kuali.rice.krad.exception.InvalidAddressException;

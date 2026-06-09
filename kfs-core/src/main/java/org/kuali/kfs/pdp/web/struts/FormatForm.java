@@ -21,7 +21,7 @@ package org.kuali.kfs.pdp.web.struts;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.kuali.kfs.pdp.businessobject.CustomerProfile;
@@ -224,7 +224,7 @@ public class FormatForm extends KualiForm {
     }
 
     /**
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public void reset(ActionMapping arg0, HttpServletRequest arg1) {

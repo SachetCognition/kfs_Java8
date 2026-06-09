@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.PageContext;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
@@ -368,7 +368,7 @@ public class AccountingLineRenderingServiceImpl implements AccountingLineRenderi
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.service.AccountingLineRenderingService#findForm(javax.servlet.jsp.PageContext)
+     * @see org.kuali.kfs.sys.document.service.AccountingLineRenderingService#findForm(jakarta.servlet.jsp.PageContext)
      */
     public KualiAccountingDocumentFormBase findForm(PageContext pageContext) {
         if (pageContext.getRequest().getAttribute(KUALI_FORM_NAME) != null) return (KualiAccountingDocumentFormBase)pageContext.getRequest().getAttribute(KUALI_FORM_NAME);

@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.Calendar;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
+import jakarta.xml.ws.Service;
 
 import junit.framework.TestCase;
 

@@ -21,9 +21,9 @@ package org.kuali.rice.kim.api.jaxb;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.UnmarshalException;
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.UnmarshalException;
+import jakarta.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.util.jaxb.MapStringStringAdapter;
@@ -39,7 +39,7 @@ import org.kuali.rice.core.api.util.jaxb.MapStringStringAdapter;
 public class PermissionDetailListAdapter extends XmlAdapter<PermissionDetailList,Map<String, String>> {
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public Map<String, String> unmarshal(PermissionDetailList v) throws Exception {
@@ -60,7 +60,7 @@ public class PermissionDetailListAdapter extends XmlAdapter<PermissionDetailList
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public PermissionDetailList marshal(Map<String, String> v) throws Exception {

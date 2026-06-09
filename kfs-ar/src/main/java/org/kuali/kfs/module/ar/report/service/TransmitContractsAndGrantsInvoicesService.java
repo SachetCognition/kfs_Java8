@@ -24,7 +24,7 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.rice.kew.api.exception.WorkflowException;

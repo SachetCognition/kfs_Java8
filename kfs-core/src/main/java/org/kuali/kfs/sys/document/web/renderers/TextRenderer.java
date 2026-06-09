@@ -18,9 +18,9 @@
  */
 package org.kuali.kfs.sys.document.web.renderers;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.kns.web.taglib.html.KNSTextTag;
@@ -52,7 +52,7 @@ public class TextRenderer extends FieldRendererBase {
 
     /**
      * Uses a struts html:text tag to render this field
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
         tag.setPageContext(pageContext);

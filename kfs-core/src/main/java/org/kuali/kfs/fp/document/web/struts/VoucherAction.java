@@ -22,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
@@ -62,7 +62,7 @@ public class VoucherAction extends KualiAccountingDocumentActionBase {
      * Overrides to call super, and then to repopulate the credit/debit amounts b/c the credit/debit code might change during a
      * voucher error correction.
      * 
-     * @see org.kuali.kfs.sys.document.web.struts.FinancialSystemTransactionalDocumentActionBase#correct(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.kfs.sys.document.web.struts.FinancialSystemTransactionalDocumentActionBase#correct(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward correct(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -81,7 +81,7 @@ public class VoucherAction extends KualiAccountingDocumentActionBase {
      * implementation.
      * 
      * @see org.kuali.module.financial.web.struts.action.KualiFinancialDocumentActionBase#insertSourceLine(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward insertSourceLine(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -109,7 +109,7 @@ public class VoucherAction extends KualiAccountingDocumentActionBase {
      * Overrides parent to remove the associated helper line also, and then it call the parent's implementation.
      * 
      * @see org.kuali.module.financial.web.struts.action.KualiFinancialDocumentActionBase#deleteSourceLine(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward deleteSourceLine(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -338,7 +338,7 @@ public class VoucherAction extends KualiAccountingDocumentActionBase {
 
     /**
      * Overridden to reset the available and selected accounting periods on the form, so that copies are moved forward to the current accounting period correctly
-     * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#copy(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#copy(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward copy(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

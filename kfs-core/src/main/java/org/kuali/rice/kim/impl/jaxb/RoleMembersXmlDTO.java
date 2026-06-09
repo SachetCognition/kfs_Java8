@@ -26,14 +26,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.UnmarshalException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.UnmarshalException;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlType;
 
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
 import org.kuali.rice.core.util.jaxb.RiceXmlExportList;
@@ -165,7 +165,7 @@ public abstract class RoleMembersXmlDTO<T extends RoleMemberXmlDTO> implements R
         }
 
         /**
-         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#beforeUnmarshal(javax.xml.bind.Unmarshaller, java.lang.Object)
+         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#beforeUnmarshal(jakarta.xml.bind.Unmarshaller, java.lang.Object)
          */
         @Override
         void beforeUnmarshal(Unmarshaller unmarshaller, Object parent) throws UnmarshalException {
@@ -184,7 +184,7 @@ public abstract class RoleMembersXmlDTO<T extends RoleMemberXmlDTO> implements R
         /**
          * This overridden method ...
          * 
-         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#afterUnmarshal(javax.xml.bind.Unmarshaller, java.lang.Object)
+         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#afterUnmarshal(jakarta.xml.bind.Unmarshaller, java.lang.Object)
          */
         @Override
         void afterUnmarshal(Unmarshaller unmarshaller, Object parent) throws UnmarshalException {

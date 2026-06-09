@@ -18,10 +18,10 @@
  */
 package org.kuali.rice.core.util.jaxb;
 
-import javax.xml.bind.MarshalException;
-import javax.xml.bind.UnmarshalException;
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.MarshalException;
+import jakarta.xml.bind.UnmarshalException;
+import jakarta.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.coreservice.api.CoreServiceApiServiceLocator;
@@ -36,7 +36,7 @@ import org.kuali.rice.coreservice.api.CoreServiceApiServiceLocator;
 public class NameAndNamespacePairValidatingAdapter extends XmlAdapter<NameAndNamespacePair,NameAndNamespacePair> {
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public NameAndNamespacePair unmarshal(NameAndNamespacePair v) throws Exception {
@@ -58,7 +58,7 @@ public class NameAndNamespacePairValidatingAdapter extends XmlAdapter<NameAndNam
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public NameAndNamespacePair marshal(NameAndNamespacePair v) throws Exception {

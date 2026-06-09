@@ -18,9 +18,9 @@
  */
 package org.kuali.kfs.module.external.kc.service;
 
-import javax.jws.WebParam;
-import javax.jws.WebService;
-import javax.jws.soap.SOAPBinding;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
+import jakarta.jws.soap.SOAPBinding;
 
 import org.kuali.kfs.integration.cg.dto.AccountCreationStatusDTO;
 import org.kuali.kfs.integration.cg.dto.AccountParametersDTO;

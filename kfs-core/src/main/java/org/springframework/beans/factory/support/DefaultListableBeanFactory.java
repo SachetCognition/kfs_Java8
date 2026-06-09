@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.inject.Provider;
+import jakarta.inject.Provider;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;

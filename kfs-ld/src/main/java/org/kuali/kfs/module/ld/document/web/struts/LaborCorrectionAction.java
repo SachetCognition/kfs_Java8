@@ -35,8 +35,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
@@ -92,7 +92,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * This needs to be done just in case they decide to execute.
      * 
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#excute(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      *
      * KRAD Conversion: Lookupable performs customized sort on search results.
      * 
@@ -170,7 +170,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * This needs to be done just in case they decide to save.
      * 
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#save(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -223,7 +223,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * Called when the document is loaded from action list or doc search or a new document is created.
      * 
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#docHandler(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward docHandler(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -315,7 +315,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * This handles the action for uploading a file
      * 
      * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#uploadFile(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward uploadFile(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException, Exception {
         LOG.debug("uploadFile() started");
@@ -491,7 +491,7 @@ public class LaborCorrectionAction extends CorrectionAction {
     /**
      * Save a changed row in the group
      *
-     * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#saveManualEntry(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#saveManualEntry(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward saveManualEntry(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         LOG.debug("saveManualEdit() started");
@@ -539,7 +539,7 @@ public class LaborCorrectionAction extends CorrectionAction {
     /**
      * Add a new row to the group
      *
-     * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#addManualEntry(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#addManualEntry(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward addManualEntry(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         LOG.debug("addManualEdit() started");
@@ -584,7 +584,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * Handles manual edit of labor correction form
      * 
      * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#manualEdit(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward manualEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
@@ -607,7 +607,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * Handles edit of manual entry
      * 
      * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#editManualEntry(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward editManualEntry(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -1002,7 +1002,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * Save labor correction form as a text document (.txt)
      * 
      * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#saveToDesktop(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward saveToDesktop(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws IOException {
         LOG.debug("saveToDesktop() started");
@@ -1065,7 +1065,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * Sort labor correction document by selected column
      * 
      * @see org.kuali.rice.kns.web.struts.action.KualiTableRenderAction#sort(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      *      
      * KRAD Conversion: Performs sorting of the results based on column to sort.
      * 
@@ -1152,7 +1152,7 @@ public class LaborCorrectionAction extends CorrectionAction {
      * Called when selecting the system and method. If this button is pressed, the document should be reset as if it is the first
      * time it was pressed.
      *
-     * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#selectSystemEditMethod(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     * @see org.kuali.kfs.gl.document.web.struts.CorrectionAction#selectSystemEditMethod(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
      */
     public ActionForward selectSystemEditMethod(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         LOG.debug("selectSystemEditMethod() started");

@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.ObjectCode;

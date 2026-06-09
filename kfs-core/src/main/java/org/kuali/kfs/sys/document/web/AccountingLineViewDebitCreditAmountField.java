@@ -20,9 +20,9 @@ package org.kuali.kfs.sys.document.web;
 
 import java.util.List;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.Tag;
 
 import org.kuali.kfs.fp.document.web.struts.VoucherForm;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -101,7 +101,7 @@ public class AccountingLineViewDebitCreditAmountField implements RenderableEleme
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
+     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
      */
     public void renderElement(PageContext pageContext, Tag parentTag, AccountingLineRenderingContext renderingContext) throws JspException {
         if (!renderingContext.isFieldModifyable(debitOrCreditField.getPropertyName())) {
