@@ -228,4 +228,29 @@ class CashDrawerServiceImplTest extends KfsUnitTestBase {
 
         assertThat(drawer.getStatusCode()).isEqualTo(KFSConstants.CashDrawerConstants.STATUS_OPEN);
     }
+
+    @Test
+    void getCoinTotalAlwaysReturnsZeroDueToImmutableAddBug() {
+        // Pre-existing bug: CashDrawerServiceImpl.getCoinTotal() calls sum.add(...)
+        // but discards the return value. KualiDecimal (like BigDecimal) is immutable,
+        // so sum is never updated. The correct pattern would be sum = sum.add(...).
+        CashDrawer populatedDrawer = new CashDrawer();
+        populatedDrawer.setFinancialDocumentHundredCentAmount(new KualiDecimal(5.00));
+        populatedDrawer.setFinancialDocumentFiftyCentAmount(new KualiDecimal(2.50));
+        populatedDrawer.setFinancialDocumentTwentyFiveCentAmount(new KualiDecimal(1.25));
+
+        // Documents current (buggy) behavior — always returns zero
+        assertThat(cashDrawerService.getCoinTotal(populatedDrawer)).isEqualTo(KualiDecimal.ZERO);
+    }
+
+    @Test
+    void getCurrencyTotalAlwaysReturnsZeroDueToImmutableAddBug() {
+        // Pre-existing bug: same immutable add pattern as getCoinTotal().
+        CashDrawer populatedDrawer = new CashDrawer();
+        populatedDrawer.setFinancialDocumentHundredDollarAmount(new KualiDecimal(500.00));
+        populatedDrawer.setFinancialDocumentFiftyDollarAmount(new KualiDecimal(250.00));
+
+        // Documents current (buggy) behavior — always returns zero
+        assertThat(cashDrawerService.getCurrencyTotal(populatedDrawer)).isEqualTo(KualiDecimal.ZERO);
+    }
 }

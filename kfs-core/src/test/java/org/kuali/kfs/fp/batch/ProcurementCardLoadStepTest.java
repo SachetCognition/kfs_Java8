@@ -97,4 +97,31 @@ class ProcurementCardLoadStepTest extends KfsUnitTestBase {
 
         verify(procurementCardLoadTransactionsService).cleanTransactionsTable();
     }
+
+    @Test
+    void executeReturnsTrueWhenFirstFileFailsButLastSucceeds() {
+        // Pre-existing bug: processSuccess is overwritten each iteration (line 72),
+        // so only the last file's result determines the return value.
+        List<String> files = Arrays.asList("file1.xml", "file2.xml");
+        when(batchInputFileService.listInputFileNamesWithDoneFile(any())).thenReturn(files);
+        when(procurementCardLoadTransactionsService.loadProcurementCardFile(eq("file1.xml"), any())).thenReturn(false);
+        when(procurementCardLoadTransactionsService.loadProcurementCardFile(eq("file2.xml"), any())).thenReturn(true);
+
+        boolean result = step.execute("testJob", new Date());
+
+        // Returns true despite file1.xml failure — documents current (buggy) behavior
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void executeReturnsFalseWhenLastFileFails() {
+        List<String> files = Arrays.asList("file1.xml", "file2.xml");
+        when(batchInputFileService.listInputFileNamesWithDoneFile(any())).thenReturn(files);
+        when(procurementCardLoadTransactionsService.loadProcurementCardFile(eq("file1.xml"), any())).thenReturn(true);
+        when(procurementCardLoadTransactionsService.loadProcurementCardFile(eq("file2.xml"), any())).thenReturn(false);
+
+        boolean result = step.execute("testJob", new Date());
+
+        assertThat(result).isFalse();
+    }
 }
