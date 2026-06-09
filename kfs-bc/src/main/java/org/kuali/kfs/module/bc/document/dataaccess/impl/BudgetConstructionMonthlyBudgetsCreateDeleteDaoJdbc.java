@@ -265,7 +265,7 @@ public class BudgetConstructionMonthlyBudgetsCreateDeleteDaoJdbc extends BudgetC
      */
     protected boolean budgetConstructionMonthlyBudgetContainsBenefitsExpenditure(String BenefitsObjectsCheckSQL, String documentNumber, Integer fiscalYear, String chartCode, String accountNumber, String subAccountNumber) {
 
-        Long numberOfBenefitsEligibleRows = getSimpleJdbcTemplate().queryForLong(BenefitsObjectsCheckSQL, documentNumber, fiscalYear, chartCode, accountNumber, subAccountNumber);
+        Long numberOfBenefitsEligibleRows = getSimpleJdbcTemplate().queryForObject(BenefitsObjectsCheckSQL, Long.class, documentNumber, fiscalYear, chartCode, accountNumber, subAccountNumber);
         return (numberOfBenefitsEligibleRows != 0);
     }
 

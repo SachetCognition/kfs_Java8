@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!--
+   - ============================================================================
+   - DEPRECATED: This Struts 1.x configuration is retained for reference only.
+   - All action mappings have been migrated to Spring MVC controllers in:
+   -   org.kuali.kfs.web.spring.controller.*
+   - See KfsWebMvcConfig.java for the Spring MVC configuration.
+   - This file will be removed in a future release.
+   - ============================================================================
+   -
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
    - Copyright 2005-2014 The Kuali Foundation
