@@ -21,6 +21,15 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -31,21 +40,38 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "AR_DOC_RCURRNC_T")
 public class InvoiceRecurrence extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FDOC_NBR")
 	protected String invoiceNumber;
+    @Column(name = "CUST_NBR")
 	protected String customerNumber;
+    @Column(name = "DOC_RCURRNC_BEG_DT")
 	protected Date documentRecurrenceBeginDate;
+    @Column(name = "DOC_RCURRNC_END_DT")
 	protected Date documentRecurrenceEndDate;
+    @Column(name = "DOC_TOT_RCURRNC_NBR")
 	protected Integer documentTotalRecurrenceNumber;
+    @Column(name = "DOC_RCURRNC_INTRV_CD")
 	protected String documentRecurrenceIntervalCode;
+    @Column(name = "DOC_INITR_USR_ID")
 	protected String documentInitiatorUserIdentifier;
+    @Column(name = "DOC_LST_CRTE_DT")
 	protected Date documentLastCreateDate;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
 	protected boolean active;
 
+	@Transient
 	protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Transient
     protected CustomerInvoiceDocument customerInvoiceDocument;
+    @Transient
     protected Customer customer;
+    @Transient
     protected Person documentInitiatorUser;
 
     /**

@@ -25,6 +25,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,21 +69,32 @@ import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+@Entity
+@Table(name = "AR_CRDT_MEMO_DOC_T")
 public class CustomerCreditMemoDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling, AccountsReceivableCustomerCreditMemo {
     protected static Logger LOG = LoggerFactory.getLogger(CustomerCreditMemoDocument.class);
 
+    @Transient
     protected String statusCode;
+    @Column(name = "FDOC_REF_INV_NBR")
     protected String financialDocumentReferenceInvoiceNumber;
 
+    @Transient
     protected KualiDecimal crmTotalItemAmount = KualiDecimal.ZERO;
+    @Transient
     protected KualiDecimal crmTotalTaxAmount = KualiDecimal.ZERO;
+    @Transient
     protected KualiDecimal crmTotalAmount = KualiDecimal.ZERO;
 
+    @Transient
     protected Integer invOutstandingDays;
 
+    @Transient
     protected CustomerInvoiceDocument invoice;
+    @Transient
     protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
 
+    @Transient
     protected List<CustomerCreditMemoDetail> creditMemoDetails;
 
     protected transient TaxService taxService;

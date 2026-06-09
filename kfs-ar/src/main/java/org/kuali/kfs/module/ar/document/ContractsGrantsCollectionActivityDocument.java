@@ -23,8 +23,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsCollectionActivityInvoiceDetail;
 import org.kuali.kfs.module.ar.document.service.ContractsGrantsCollectionActivityDocumentService;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -35,21 +40,34 @@ import org.kuali.rice.kns.service.DataDictionaryService;
 /**
  * Collection Activity Document class. This transactional document is used to store events related to customers.
  */
+@Entity
+@Table(name = "AR_CGB_CLCTN_ACTVY_DOC_T")
 public class ContractsGrantsCollectionActivityDocument extends FinancialSystemTransactionalDocumentBase {
 
-    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsCollectionActivityDocument.class);
+    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsCollectionActivityDocument.class);
 
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "AGENCY_NM")
     private String agencyName;
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Column(name = "CUST_NM")
     private String customerName;
+    @Column(name = "ACTVY_CD")
     private String activityCode;
+    @Column(name = "ACTVY_DT")
     private Date activityDate;
+    @Column(name = "ACTVY_TXT")
     private String activityText;
+    @Column(name = "FLLW_UP_DT")
     private Date followupDate;
+    @Column(name = "CMPLTD_DT")
     private Date completedDate;
 
+    @Transient
     private List<ContractsGrantsCollectionActivityInvoiceDetail> invoiceDetails;
 
     /**

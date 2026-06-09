@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.module.ar.businessobject;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 
 
@@ -25,9 +33,14 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
  * Defines Invoice Template used for generation of Contracts & Grants Invoice PDFs.
  */
 
+@Entity
+@Table(name = "AR_INV_TMPLT_T")
 public class InvoiceTemplate extends TemplateBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "INV_TMPLT_CD")
     private String invoiceTemplateCode;
+    @Column(name = "INV_TMPLT_DESC")
     private String invoiceTemplateDescription;
 
     public String getInvoiceTemplateCode() {

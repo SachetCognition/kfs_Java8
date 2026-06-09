@@ -24,6 +24,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,27 +72,44 @@ import org.kuali.rice.krad.service.DocumentService;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "AR_CSH_CTRL_T")
 public class CashControlDocument extends GeneralLedgerPostingDocumentBase implements AmountTotaling, GeneralLedgerPendingEntrySource, ElectronicPaymentClaiming, GeneralLedgerPostingDocument {
     protected static final String NODE_ASSOCIATED_WITH_ELECTRONIC_PAYMENT = "AssociatedWithElectronicPayment";
     protected static Logger LOG = LoggerFactory.getLogger(CashControlDocument.class);
 
+    @Column(name = "FDOC_REF_NBR")
     protected String referenceFinancialDocumentNumber;
+    @Column(name = "PRPSL_NBR")
     protected Long proposalNumber;// When LOC Type = Award
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     protected String universityFiscalPeriodCode;
+    @Column(name = "CUST_PMT_MEDIUM_CD")
     protected String customerPaymentMediumCode;
+    @Column(name = "AR_CSHCTRL_TOT_AMT")
     protected KualiDecimal cashControlTotalAmount = KualiDecimal.ZERO;
+    @Transient
     protected String lockboxNumber;
+    @Column(name = "BNK_CD")
     protected String bankCode;
 
+    @Transient
     protected Bank bank;
+    @Transient
     protected PaymentMedium customerPaymentMedium;
+    @Transient
     protected AccountingPeriod universityFiscalPeriod;
+    @Transient
     protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
 
+    @Transient
     protected List<CashControlDetail> cashControlDetails;
+    @Transient
     protected List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
     protected final static String GENERAL_LEDGER_POSTING_HELPER_BEAN_ID = "kfsGenericGeneralLedgerPostingHelper";
+    @Transient
     protected List<ElectronicPaymentClaim> electronicPaymentClaims;
 
     /**

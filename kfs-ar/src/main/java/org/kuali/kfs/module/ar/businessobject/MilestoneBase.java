@@ -21,6 +21,10 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
@@ -28,12 +32,19 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Base class so the Milestone and InvoiceMilestone BOs don't have to duplicate code.
  */
+@MappedSuperclass
 public abstract class MilestoneBase extends PersistableBusinessObjectBase  {
 
+    @Column(name = "MLSTN_NBR")
     protected Long milestoneNumber;
+    @Id
+    @Column(name = "MLSTN_ID")
     protected Long milestoneIdentifier;
+    @Column(name = "MLSTN_DESC")
     protected String milestoneDescription;
+    @Column(name = "MLSTN_AMT")
     protected KualiDecimal milestoneAmount;
+    @Column(name = "MLSTN_COMPLTN_DT")
     protected Date milestoneActualCompletionDate;
 
     /**

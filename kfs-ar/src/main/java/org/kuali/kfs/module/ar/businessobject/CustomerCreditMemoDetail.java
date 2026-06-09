@@ -21,6 +21,13 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -38,20 +45,37 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "AR_CRDT_MEMO_DTL_T")
 public class CustomerCreditMemoDetail extends PersistableBusinessObjectBase implements GeneralLedgerPendingEntrySourceDetail, AppliedPayment {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "REF_INV_ITM_NBR")
     private Integer referenceInvoiceItemNumber;
+    @Column(name = "CRDT_MEMO_ITM_QTY")
     private BigDecimal creditMemoItemQuantity;
+    @Column(name = "CRDT_MEMO_ITM_TAX_AMT")
     private KualiDecimal creditMemoItemTaxAmount;
+    @Column(name = "CRDT_MEMO_ITM_TOT_AMT")
     private KualiDecimal creditMemoItemTotalAmount;
+    @Transient
     private KualiDecimal duplicateCreditMemoItemTotalAmount; // not in DB
+    @Transient
     private KualiDecimal invoiceLineTotalAmount; // not in DB
+    @Transient
     private KualiDecimal creditMemoLineTotalAmount; // not in DB
+    @Transient
     private KualiDecimal invoiceOpenItemAmount; // not in DB
+    @Transient
     private BigDecimal invoiceOpenItemQuantity; // not in DB
+    @Transient
     private CustomerInvoiceDetail customerInvoiceDetail; // not in DB
+    @Transient
     private String financialDocumentReferenceInvoiceNumber; // not in DB
+    @Transient
     private boolean invoiceOpenItemQuantityZero; // not in DB
 
     /**

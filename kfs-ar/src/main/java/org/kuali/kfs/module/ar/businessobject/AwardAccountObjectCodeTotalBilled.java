@@ -20,6 +20,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -30,16 +37,30 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 /**
  * This class represents a invoice detail on the customer invoice document.
  */
+@Entity
+@Table(name = "AR_AWD_ACCT_OBJ_TOT_BLLD_T")
 public class AwardAccountObjectCodeTotalBilled extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_CD")
     private String financialObjectCode;
+    @Column(name = "TOT_BILLED_AMT")
     private KualiDecimal totalBilled = KualiDecimal.ZERO;
 
+    @Transient
     private Account account;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private ObjectCode objectCode;
 
 

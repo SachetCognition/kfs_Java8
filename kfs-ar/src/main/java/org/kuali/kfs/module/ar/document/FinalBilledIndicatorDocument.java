@@ -21,8 +21,13 @@ package org.kuali.kfs.module.ar.document;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.module.ar.businessobject.FinalBilledIndicatorEntry;
 import org.kuali.kfs.module.ar.document.service.ContractsGrantsInvoiceDocumentService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -36,10 +41,13 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * This class unfinalizes the invoices that have previously been finalized.
  */
+@Entity
+@Table(name = "AR_FNL_BILLED_IND_DOC_T")
 public class FinalBilledIndicatorDocument extends TransactionalDocumentBase {
 
-    private static Logger LOG = LoggerFactory.getLogger(FinalBilledIndicatorDocument.class);
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FinalBilledIndicatorDocument.class);
 
+    @Transient
     private List<FinalBilledIndicatorEntry> invoiceEntries = new ArrayList<FinalBilledIndicatorEntry>();
 
     /**
@@ -76,6 +84,8 @@ public class FinalBilledIndicatorDocument extends TransactionalDocumentBase {
             }
         }
     }
+
+
 
     @Override
     public void doRouteStatusChange(DocumentRouteStatusChange statusChangeEvent) {

@@ -27,6 +27,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,14 +64,22 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Contracts & Grants LOC Review Document.
  */
+@Entity
+@Table(name = "AR_LTRCR_RVW_DOC_T")
 public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystemTransactionalDocumentBase {
     private static final Logger LOG = LoggerFactory.getLogger(ContractsGrantsLetterOfCreditReviewDocument.class);
 
+    @Column(name = "LTRCR_FND_CD")
     private String letterOfCreditFundCode;
+    @Transient
     private ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
+    @Column(name = "LTRCR_FNDGRP_CD")
     private String letterOfCreditFundGroupCode;
+    @Transient
     private ContractsAndGrantsLetterOfCreditFundGroup letterOfCreditFundGroup;
+    @Transient
     private List<ContractsGrantsLetterOfCreditReviewDetail> headerReviewDetails;
+    @Transient
     private List<ContractsGrantsLetterOfCreditReviewDetail> accountReviewDetails;
 
     private transient static volatile ContractsGrantsLetterOfCreditReviewDocumentService contractsGrantsLetterOfCreditReviewDocumentService;

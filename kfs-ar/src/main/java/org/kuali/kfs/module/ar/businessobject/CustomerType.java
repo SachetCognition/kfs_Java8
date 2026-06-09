@@ -20,6 +20,14 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -28,10 +36,17 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "AR_CUST_TYP_T")
 public class CustomerType extends PersistableBusinessObjectBase implements MutableInactivatable, AccountsReceivableCustomerType {
 
+    @Id
+    @Column(name = "CUST_TYP_CD")
 	private String customerTypeCode;
+    @Column(name = "CUST_TYP_DESC")
 	private String customerTypeDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
 	private boolean active;
 
 	/**

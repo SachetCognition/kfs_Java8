@@ -21,6 +21,13 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.Arrays;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
@@ -32,13 +39,22 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Defines a Collection Activity Invoice Detail object.
  */
+@Entity
+@Table(name = "AR_CGB_CLCTN_ACTVY_INV_DTL_T")
 public class ContractsGrantsCollectionActivityInvoiceDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "INV_FDOC_NBR")
     private String invoiceNumber;
+    @Column(name = "BILL_DT")
     private Date billingDate;
+    @Column(name = "BILLNG_PRD")
     private String billingPeriod;
 
+    @Transient
     private ContractsGrantsInvoiceDocument invoiceDocument;
 
     public String getDocumentNumber() {

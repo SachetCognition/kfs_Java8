@@ -21,6 +21,12 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -31,9 +37,15 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+@Entity
+@Table(name = "AR_INV_SUSP_CTGRY_T")
 public class InvoiceSuspensionCategory extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "SUSP_CTGRY_CD")
     private String suspensionCategoryCode;
 
     public InvoiceSuspensionCategory() {
