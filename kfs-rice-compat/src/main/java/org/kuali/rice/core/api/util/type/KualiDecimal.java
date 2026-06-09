@@ -58,6 +58,6 @@ public class KualiDecimal extends AbstractKualiDecimal<KualiDecimal> implements 
         if (obj instanceof KualiDecimal) return this.value.compareTo(((KualiDecimal) obj).value) == 0;
         return false;
     }
-    public int hashCode() { return value.hashCode(); }
+    public int hashCode() { return value.stripTrailingZeros().hashCode(); }
     public String toString() { return value.toString(); }
 }
