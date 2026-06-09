@@ -10,12 +10,15 @@ import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
 
 public abstract class VelocityEngineUtils {
 
     public static String mergeTemplateIntoString(VelocityEngine velocityEngine,
             String templateLocation, Map<String, Object> model) {
-        return mergeTemplateIntoString(velocityEngine, templateLocation, "UTF-8", model);
+        Object enc = velocityEngine.getProperty(RuntimeConstants.INPUT_ENCODING);
+        String encoding = (enc != null) ? enc.toString() : "UTF-8";
+        return mergeTemplateIntoString(velocityEngine, templateLocation, encoding, model);
     }
 
     public static String mergeTemplateIntoString(VelocityEngine velocityEngine,
