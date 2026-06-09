@@ -60,10 +60,14 @@ public class AccountsReceivableDocumentHeaderDaoJpa implements AccountsReceivabl
 
     @Override
     public Collection<AccountsReceivableDocumentHeader> getARDocumentHeadersIncludingHiddenApplicationByCustomerNumber(String customerNumber) {
+        Collection<String> documentNumbers = getARDocumentNumbersIncludingHiddenApplicationByCustomerNumber(customerNumber);
+        if (documentNumbers.isEmpty()) {
+            return new ArrayList<AccountsReceivableDocumentHeader>();
+        }
         TypedQuery<AccountsReceivableDocumentHeader> query = entityManager.createQuery(
-                "SELECT h FROM AccountsReceivableDocumentHeader h WHERE h.customerNumber = :customerNumber",
+                "SELECT h FROM AccountsReceivableDocumentHeader h WHERE h.documentNumber IN :docNumbers",
                 AccountsReceivableDocumentHeader.class);
-        query.setParameter("customerNumber", customerNumber);
+        query.setParameter("docNumbers", documentNumbers);
         return query.getResultList();
     }
 

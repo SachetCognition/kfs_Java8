@@ -60,6 +60,7 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), objectConsolidation.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.FIN_CONSOLIDATION_OBJECT_CODE), objectConsolidation.getFinConsolidationObjectCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -82,6 +83,13 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), consolidation.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        // Filter: objectLevel's consolidation code must match
+        predicates.add(root.get(KFSPropertyConstants.FINANCIAL_OBJECT_LEVEL_CODE).in(
+            entityManager.createNativeQuery("SELECT FIN_OBJ_LEVEL_CD FROM CA_OBJ_LEVEL_T WHERE FIN_COA_CD = ?1 AND FIN_CONS_OBJ_CD = ?2 AND ROW_ACTV_IND = 'Y'")
+                .setParameter(1, consolidation.getChartOfAccountsCode())
+                .setParameter(2, consolidation.getFinConsolidationObjectCode())
+                .getResultList()));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -104,6 +112,16 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), consolidation.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        // Filter: objectCode's level's consolidation code must match
+        predicates.add(root.get(KFSPropertyConstants.FINANCIAL_OBJECT_CODE).in(
+            entityManager.createNativeQuery(
+                "SELECT oc.FIN_OBJECT_CD FROM CA_OBJECT_CODE_T oc " +
+                "JOIN CA_OBJ_LEVEL_T lvl ON oc.FIN_COA_CD = lvl.FIN_COA_CD AND oc.FIN_OBJ_LEVEL_CD = lvl.FIN_OBJ_LEVEL_CD " +
+                "WHERE oc.FIN_COA_CD = ?1 AND lvl.FIN_CONS_OBJ_CD = ?2")
+                .setParameter(1, consolidation.getChartOfAccountsCode())
+                .setParameter(2, consolidation.getFinConsolidationObjectCode())
+                .getResultList()));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -127,6 +145,7 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), objectLevel.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.FINANCIAL_OBJECT_LEVEL_CODE), objectLevel.getFinancialObjectLevelCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -148,7 +167,14 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
             predicates.add(cb.notEqual(root.get(ArPropertyConstants.CATEGORY_CODE), level.getCategoryCode()));
         }
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), level.getChartOfAccountsCode()));
+        // Filter: consolidation code must match the level's parent consolidation
+        predicates.add(root.get(KFSPropertyConstants.FIN_CONSOLIDATION_OBJECT_CODE).in(
+            entityManager.createNativeQuery("SELECT FIN_CONS_OBJ_CD FROM CA_OBJ_LEVEL_T WHERE FIN_COA_CD = ?1 AND FIN_OBJ_LEVEL_CD = ?2 AND ROW_ACTV_IND = 'Y'")
+                .setParameter(1, level.getChartOfAccountsCode())
+                .setParameter(2, level.getFinancialObjectLevelCode())
+                .getResultList()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -171,6 +197,13 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), level.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        // Filter: objectCode's level code must match
+        predicates.add(root.get(KFSPropertyConstants.FINANCIAL_OBJECT_CODE).in(
+            entityManager.createNativeQuery("SELECT FIN_OBJECT_CD FROM CA_OBJECT_CODE_T WHERE FIN_COA_CD = ?1 AND FIN_OBJ_LEVEL_CD = ?2")
+                .setParameter(1, level.getChartOfAccountsCode())
+                .setParameter(2, level.getFinancialObjectLevelCode())
+                .getResultList()));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -194,6 +227,7 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), objectCode.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.FINANCIAL_OBJECT_CODE), objectCode.getFinancialObjectCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -216,6 +250,13 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), objectCode.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        // Filter: level code must match the objectCode's level
+        predicates.add(root.get(KFSPropertyConstants.FINANCIAL_OBJECT_LEVEL_CODE).in(
+            entityManager.createNativeQuery("SELECT FIN_OBJ_LEVEL_CD FROM CA_OBJECT_CODE_T WHERE FIN_COA_CD = ?1 AND FIN_OBJECT_CD = ?2")
+                .setParameter(1, objectCode.getChartOfAccountsCode())
+                .setParameter(2, objectCode.getFinancialObjectCode())
+                .getResultList()));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -238,6 +279,16 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
         }
         predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), objectCode.getChartOfAccountsCode()));
         predicates.add(cb.equal(root.get(KFSPropertyConstants.ACTIVE), Boolean.TRUE));
+        // Filter: consolidation code must match the objectCode's consolidation
+        predicates.add(root.get(KFSPropertyConstants.FIN_CONSOLIDATION_OBJECT_CODE).in(
+            entityManager.createNativeQuery(
+                "SELECT lvl.FIN_CONS_OBJ_CD FROM CA_OBJECT_CODE_T oc " +
+                "JOIN CA_OBJ_LEVEL_T lvl ON oc.FIN_COA_CD = lvl.FIN_COA_CD AND oc.FIN_OBJ_LEVEL_CD = lvl.FIN_OBJ_LEVEL_CD " +
+                "WHERE oc.FIN_COA_CD = ?1 AND oc.FIN_OBJECT_CD = ?2")
+                .setParameter(1, objectCode.getChartOfAccountsCode())
+                .setParameter(2, objectCode.getFinancialObjectCode())
+                .getResultList()));
+        predicates.add(root.get(ArPropertyConstants.CATEGORY_CODE).in(getActiveCostCategoryCodes()));
 
         cq.where(predicates.toArray(new Predicate[0]));
         cq.select(root);
@@ -451,6 +502,11 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
             sb.append("?" + (startIdx + i));
         }
         return sb.toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<String> getActiveCostCategoryCodes() {
+        return entityManager.createNativeQuery("SELECT CTGRY_CD FROM AR_CST_CTGRY_T WHERE ROW_ACTV_IND = 'Y'").getResultList();
     }
 
     public void setEntityManager(EntityManager entityManager) {

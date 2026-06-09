@@ -20,8 +20,10 @@ package org.kuali.kfs.module.ar.document.dataaccess.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,6 +36,8 @@ import javax.persistence.criteria.Root;
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.kfs.module.ar.document.dataaccess.ContractsGrantsInvoiceDocumentDao;
 import org.kuali.kfs.sys.KFSConstants;
+import org.kuali.rice.kew.api.document.DocumentStatus;
+import org.kuali.rice.kew.api.document.DocumentStatusCategory;
 
 public class ContractsGrantsInvoiceDocumentDaoJpa implements ContractsGrantsInvoiceDocumentDao {
 
@@ -65,10 +69,11 @@ public class ContractsGrantsInvoiceDocumentDaoJpa implements ContractsGrantsInvo
                 predicates.add(cb.equal(root.get((String) key), value));
             }
         }
+        // Exclude cancelled and disapproved documents
+        predicates.add(cb.notEqual(root.get("documentHeader").get("financialDocumentStatusCode"), KFSConstants.DocumentStatusCodes.CANCELLED));
+        predicates.add(cb.notEqual(root.get("documentHeader").get("financialDocumentStatusCode"), KFSConstants.DocumentStatusCodes.DISAPPROVED));
 
-        if (!predicates.isEmpty()) {
-            cq.where(predicates.toArray(new Predicate[0]));
-        }
+        cq.where(predicates.toArray(new Predicate[0]));
 
         TypedQuery<ContractsGrantsInvoiceDocument> query = entityManager.createQuery(cq);
         return query.getResultList();
@@ -76,13 +81,32 @@ public class ContractsGrantsInvoiceDocumentDaoJpa implements ContractsGrantsInvo
 
     @Override
     public Collection<ContractsGrantsInvoiceDocument> getCollectionEligibleContractsGrantsInvoicesByProposalNumber(Long proposalNumber) {
+        if (proposalNumber == null) {
+            throw new IllegalArgumentException("Cannot find Contracts & Grants Invoices for blank proposal number");
+        }
+
+        Set<String> successfulDocumentStatuses = new HashSet<String>();
+        for (DocumentStatus docStatus : DocumentStatus.getStatusesForCategory(DocumentStatusCategory.SUCCESSFUL)) {
+            successfulDocumentStatuses.add(docStatus.getCode());
+        }
+
         TypedQuery<ContractsGrantsInvoiceDocument> query = entityManager.createQuery(
-                "SELECT d FROM ContractsGrantsInvoiceDocument d WHERE d.proposalNumber = :proposalNumber " +
-                "AND d.openInvoiceIndicator = true " +
-                "AND d.documentHeader.financialDocumentStatusCode = :status",
+                "SELECT d FROM ContractsGrantsInvoiceDocument d WHERE d.invoiceGeneralDetail.proposalNumber = :proposalNumber " +
+                "AND d.documentHeader.workflowDocumentStatusCode IN :statuses " +
+                "AND d.documentHeader.financialDocumentInErrorNumber IS NULL " +
+                "AND d.documentNumber NOT IN (SELECT e.documentHeader.financialDocumentInErrorNumber FROM ContractsGrantsInvoiceDocument e " +
+                "WHERE e.documentHeader.financialDocumentInErrorNumber IS NOT NULL " +
+                "AND e.documentHeader.workflowDocumentStatusCode NOT IN :unsuccessfulStatuses)",
                 ContractsGrantsInvoiceDocument.class);
         query.setParameter("proposalNumber", proposalNumber);
-        query.setParameter("status", KFSConstants.DocumentStatusCodes.APPROVED);
+        query.setParameter("statuses", successfulDocumentStatuses);
+
+        Set<String> unsuccessfulDocumentStatuses = new HashSet<String>();
+        for (DocumentStatus docStatus : DocumentStatus.getStatusesForCategory(DocumentStatusCategory.UNSUCCESSFUL)) {
+            unsuccessfulDocumentStatuses.add(docStatus.getCode());
+        }
+        query.setParameter("unsuccessfulStatuses", unsuccessfulDocumentStatuses);
+
         return query.getResultList();
     }
 
