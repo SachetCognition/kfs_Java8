@@ -130,9 +130,9 @@ public class LaborLedgerPendingEntry extends GeneralLedgerPendingEntry implement
 
     @JoinColumns({
 
-        @JoinColumn(name = "PYRL_DT_FSCL_YR", referencedColumnName = "PYRL_DT_FSCL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "PYRL_DT_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
 
-        @JoinColumn(name = "PYRL_DT_FSCLPRD_CD", referencedColumnName = "PYRL_DT_FSCLPRD_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "PYRL_DT_FSCLPRD_CD", referencedColumnName = "UNIV_FISCAL_PRD_CD", insertable = false, updatable = false)
 
     })
 
