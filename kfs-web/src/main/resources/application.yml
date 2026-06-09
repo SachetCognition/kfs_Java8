@@ -1,0 +1,55 @@
+# KFS Spring Boot Configuration (S-4C)
+server:
+  port: 8080
+  servlet:
+    context-path: /kfs
+
+spring:
+  application:
+    name: kfs
+
+  datasource:
+    url: ${kfs.datasource.url:jdbc:mysql://localhost:3306/kfs}
+    username: ${kfs.datasource.username:kfs}
+    password: ${kfs.datasource.password:kfs}
+    driver-class-name: ${kfs.datasource.driver.name:com.mysql.cj.jdbc.Driver}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 25
+        order_inserts: true
+        order_updates: true
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+logging:
+  level:
+    root: INFO
+    org.kuali.kfs: INFO
+    org.hibernate.SQL: WARN
+    org.springframework: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

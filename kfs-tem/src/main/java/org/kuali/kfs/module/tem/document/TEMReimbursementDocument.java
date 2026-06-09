@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.Column;
+import jakarta.persistence.Column;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
