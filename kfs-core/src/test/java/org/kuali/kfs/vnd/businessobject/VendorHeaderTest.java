@@ -2,12 +2,21 @@ package org.kuali.kfs.vnd.businessobject;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.kuali.rice.krad.service.DataDictionaryService;
 import org.kuali.kfs.sys.context.KfsUnitTestBase;
+import org.kuali.kfs.sys.context.SpringContext;
+import org.kuali.rice.krad.datadictionary.AttributeSecurity;
+import org.mockito.MockedStatic;
 
 import java.sql.Date;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
 class VendorHeaderTest extends KfsUnitTestBase {
 
@@ -156,5 +165,35 @@ class VendorHeaderTest extends KfsUnitTestBase {
         ArrayList<VendorSupplierDiversity> diversities = new ArrayList<>();
         vendorHeader.setVendorSupplierDiversities(diversities);
         assertThat(vendorHeader.getVendorSupplierDiversities()).isSameAs(diversities);
+    }
+
+    @Test
+    void toStringExcludesMaskedSensitiveFields() {
+        vendorHeader.setVendorHeaderGeneratedIdentifier(1010101010);
+        vendorHeader.setVendorTaxNumber("999999999");
+        vendorHeader.setVendorTaxTypeCode("SSN");
+        vendorHeader.setVendorTypeCode("PO");
+
+        DataDictionaryService ddService = mock(DataDictionaryService.class);
+        AttributeSecurity maskedSecurity = new AttributeSecurity();
+        maskedSecurity.setMask(true);
+
+        when(ddService.getAttributeSecurity(eq(VendorHeader.class.getName()), anyString()))
+                .thenReturn(null);
+        when(ddService.getAttributeSecurity(eq(VendorHeader.class.getName()), eq("vendorTaxNumber")))
+                .thenReturn(maskedSecurity);
+        when(ddService.getAttributeSecurity(eq(VendorHeader.class.getName()), eq("vendorTaxTypeCode")))
+                .thenReturn(maskedSecurity);
+
+        try (MockedStatic<SpringContext> springCtx = mockStatic(SpringContext.class)) {
+            springCtx.when(() -> SpringContext.getBean(DataDictionaryService.class))
+                    .thenReturn(ddService);
+
+            String result = vendorHeader.toString();
+
+            assertThat(result).doesNotContain("vendorTaxNumber");
+            assertThat(result).doesNotContain("vendorTaxTypeCode");
+            assertThat(result).contains("vendorHeaderGeneratedIdentifier");
+        }
     }
 }

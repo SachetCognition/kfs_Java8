@@ -86,6 +86,26 @@ class VendorExcludeInputFileTypeTest extends KfsUnitTestBase {
     }
 
     @Test
+    void parseUsesNamePartsWhenNameFieldEmpty() {
+        // When name (index 0) is empty, the code falls into the else branch
+        // that concatenates first/middle/last/prefix (indices 1-4) and suffix (index 5).
+        // NOTE: Production code has inverted conditions at indices 1-4:
+        //   `!StringUtils.isNotEmpty(nextLine[i])` == `isEmpty(nextLine[i])`
+        // so non-empty first/middle/last/prefix values are NOT appended (pre-existing bug).
+        // Only suffix (index 5) uses the correct condition `StringUtils.isNotEmpty`.
+        String header = "\"H0\",\"H1\",\"H2\",\"H3\",\"H4\",\"H5\",\"H6\",\"H7\",\"H8\",\"H9\",\"H10\",\"H11\",\"H12\",\"H13\",\"H14\",\"H15\",\"H16\",\"H17\",\"H18\"\n";
+        String data = "\"\",\"John\",\"M\",\"Doe\",\"Mr\",\"Jr\",\"123 Main\",\"\",\"City\",\"\",\"IL\",\"60601\",\"\",\"\",\"\",\"\",\"\",\"\",\"\"\n";
+        byte[] content = (header + data).getBytes(StandardCharsets.UTF_8);
+
+        @SuppressWarnings("unchecked")
+        List<DebarredVendorDetail> result = (List<DebarredVendorDetail>) fileType.parse(content);
+
+        assertThat(result).hasSize(1);
+        // Due to the inverted conditions bug, only suffix (index 5) is appended
+        assertThat(result.get(0).getName()).isEqualTo(" Jr");
+    }
+
+    @Test
     void parseHandlesMultipleLines() {
         String csv = "\"Header1\",\"H2\",\"H3\",\"H4\",\"H5\",\"H6\",\"H7\",\"H8\",\"H9\",\"H10\",\"H11\",\"H12\",\"H13\",\"H14\",\"H15\",\"H16\",\"H17\",\"H18\",\"H19\"\n"
                 + "\"Vendor A\",\"\",\"\",\"\",\"\",\"\",\"Addr A\",\"\",\"City A\",\"\",\"CA\",\"90001\",\"\",\"\",\"\",\"\",\"\",\"\",\"Desc A\"\n"
