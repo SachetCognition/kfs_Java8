@@ -62,13 +62,10 @@ public class CamConfig {
         ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/cam/businessobject/datadictionary/*.xml",
-            "classpath:org/kuali/kfs/module/cam/document/datadictionary/*.xml",
-            "classpath:org/kuali/kfs/module/cab/businessobject/datadictionary/*.xml",
-            "classpath:org/kuali/kfs/module/cab/document/datadictionary/*.xml"
+            "classpath:org/kuali/kfs/module/cam/document/datadictionary/*.xml"
         ));
-        config.setDatabaseRepositoryFilePaths(Arrays.asList(
-            "org/kuali/kfs/module/cam/ojb-cam.xml",
-            "org/kuali/kfs/module/cab/ojb-cab.xml"
+        config.setDatabaseRepositoryFilePaths(List.of(
+            "org/kuali/kfs/module/cam/ojb-cam.xml"
         ));
         config.setScriptConfigurationFilePaths(List.of(
             "org/kuali/kfs/module/cam/dwr-cam.xml"
@@ -84,6 +81,49 @@ public class CamConfig {
             FinancialSystemModuleConfiguration camModuleConfiguration) {
         KfsModuleServiceImpl service = new KfsModuleServiceImpl();
         service.setModuleConfiguration(camModuleConfiguration);
+        return service;
+    }
+
+    /**
+     * Module configuration for the Capital Asset Builder (CAB) module.
+     */
+    @Bean(name = "cabModuleConfiguration")
+    public FinancialSystemModuleConfiguration cabModuleConfiguration() {
+        FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
+        config.setNamespaceCode("KFS-CAB");
+        config.setInitializeDataDictionary(true);
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.cab",
+            "org.kuali.kfs.integration.cab"
+        ));
+        config.setDataDictionaryPackages(Arrays.asList(
+            "classpath:org/kuali/kfs/module/cab/businessobject/datadictionary/*.xml",
+            "classpath:org/kuali/kfs/module/cab/document/datadictionary/*.xml"
+        ));
+        config.setDatabaseRepositoryFilePaths(List.of(
+            "org/kuali/kfs/module/cab/ojb-cab.xml"
+        ));
+        config.setScriptConfigurationFilePaths(List.of(
+            "org/kuali/kfs/module/cab/dwr-cab.xml"
+        ));
+        config.setJobNames(Arrays.asList(
+            "cabExtractJob",
+            "preAssetTaggingExtractJob"
+        ));
+        config.setTriggerNames(List.of(
+            "preAssetTaggingExtractJobTrigger"
+        ));
+        return config;
+    }
+
+    /**
+     * Module service for the CAB module.
+     */
+    @Bean(name = "cabModuleService")
+    public KfsModuleServiceImpl cabModuleService(
+            FinancialSystemModuleConfiguration cabModuleConfiguration) {
+        KfsModuleServiceImpl service = new KfsModuleServiceImpl();
+        service.setModuleConfiguration(cabModuleConfiguration);
         return service;
     }
 }
