@@ -42,7 +42,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.persistence.Version;
 
 /**
  * Records any changes to a Vendor's Tax Number or Type. Not shown on the screen.
