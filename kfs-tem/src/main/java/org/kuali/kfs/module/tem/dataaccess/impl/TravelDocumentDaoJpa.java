@@ -129,8 +129,6 @@ public class TravelDocumentDaoJpa implements TravelDocumentDao {
 
     @Override
     public Object[] findLatestTaxableRamificationNotificationDate() {
-        entityManager.clear();
-
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
         Root<TravelAdvance> root = cq.from(TravelAdvance.class);

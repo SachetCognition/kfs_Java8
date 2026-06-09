@@ -35,10 +35,10 @@ import javax.persistence.Id;
 public class TransportationModeDetail extends PersistableBusinessObjectBase {
 
     @Id
-
     @Column(name = "FDOC_NBR")
-
     private String documentNumber;
+    @Id
+    @Column(name = "TRANS_MODE_CD")
     private String transportationModeCode;
     private TransportationMode transportationMode;
 
