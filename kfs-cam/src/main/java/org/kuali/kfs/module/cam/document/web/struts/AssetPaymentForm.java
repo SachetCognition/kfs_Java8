@@ -20,7 +20,7 @@ package org.kuali.kfs.module.cam.document.web.struts;
 
 import java.util.Map;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

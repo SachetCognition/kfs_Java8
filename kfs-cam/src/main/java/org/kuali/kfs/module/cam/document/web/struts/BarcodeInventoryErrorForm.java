@@ -20,7 +20,7 @@ package org.kuali.kfs.module.cam.document.web.struts;
 
 import java.util.HashMap;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.kuali.kfs.module.cam.document.BarcodeInventoryErrorDocument;
 import org.kuali.kfs.sys.context.SpringContext;

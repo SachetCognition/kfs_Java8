@@ -18,7 +18,7 @@
  */
 package org.kuali.rice.core.util.jaxb;
 
-import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 

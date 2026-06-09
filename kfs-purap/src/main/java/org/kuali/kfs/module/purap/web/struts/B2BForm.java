@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.module.purap.web.struts;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.kuali.rice.kns.web.struts.form.KualiForm;
 import org.kuali.rice.krad.util.KRADConstants;

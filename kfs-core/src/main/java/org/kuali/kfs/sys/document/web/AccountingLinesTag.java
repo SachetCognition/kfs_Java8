@@ -21,8 +21,8 @@ package org.kuali.kfs.sys.document.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.servlet.jsp.JspException;
-import jakarta.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.AccountingDocument;

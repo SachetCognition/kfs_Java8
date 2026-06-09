@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.Session;
+import javax.mail.MessagingException;
+import javax.mail.Session;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;

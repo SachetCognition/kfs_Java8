@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.module.cam.document.web.struts;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.kuali.kfs.module.cam.document.AssetTransferDocument;

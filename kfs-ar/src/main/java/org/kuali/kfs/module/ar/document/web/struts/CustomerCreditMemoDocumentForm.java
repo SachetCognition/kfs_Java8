@@ -21,7 +21,7 @@ package org.kuali.kfs.module.ar.document.web.struts;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.ArAuthorizationConstants;

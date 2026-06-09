@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 
-import jakarta.mail.MessagingException;
+import javax.mail.MessagingException;
 
 import org.apache.log4j.Logger;
 import org.kuali.kfs.module.cg.businessobject.CfdaUpdateResults;

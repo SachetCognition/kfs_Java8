@@ -20,7 +20,7 @@ package org.kuali.kfs.sys.context;
 
 import java.util.Arrays;
 
-import jakarta.servlet.ServletContextEvent;
+import javax.servlet.ServletContextEvent;
 
 import org.kuali.rice.core.web.listener.KualiInitializeListener;
 

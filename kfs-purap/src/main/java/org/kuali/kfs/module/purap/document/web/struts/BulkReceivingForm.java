@@ -20,7 +20,7 @@ package org.kuali.kfs.module.purap.document.web.struts;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.kuali.kfs.module.purap.PurapAuthorizationConstants;

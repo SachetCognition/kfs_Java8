@@ -28,7 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.mail.MessagingException;
+import javax.mail.MessagingException;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.pdp.PdpConstants;

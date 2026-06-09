@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
 import org.directwebremoting.Container;

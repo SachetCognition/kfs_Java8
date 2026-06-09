@@ -21,7 +21,7 @@ package org.kuali.kfs.fp.document.web.struts;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.kuali.kfs.fp.businessobject.AdvanceDepositDetail;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;

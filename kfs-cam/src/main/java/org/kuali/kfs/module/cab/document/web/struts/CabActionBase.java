@@ -18,8 +18,8 @@
  */
 package org.kuali.kfs.module.cab.document.web.struts;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ojb.broker.OptimisticLockException;
 import org.apache.struts.action.ActionForm;

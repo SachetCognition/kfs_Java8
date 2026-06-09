@@ -21,8 +21,8 @@ package org.kuali.kfs.module.ar.web.struts;
 import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;

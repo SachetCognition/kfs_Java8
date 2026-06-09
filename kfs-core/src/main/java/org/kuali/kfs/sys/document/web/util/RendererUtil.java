@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.document.web.util;
 
-import jakarta.servlet.jsp.PageContext;
+import javax.servlet.jsp.PageContext;
 
 import org.kuali.rice.kns.util.KNSGlobalVariables;
 import org.kuali.rice.kns.util.WebUtils;

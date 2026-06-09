@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.web.struts;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.kns.web.struts.form.KualiForm;

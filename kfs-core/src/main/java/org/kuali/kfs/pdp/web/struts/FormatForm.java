@@ -21,7 +21,7 @@ package org.kuali.kfs.pdp.web.struts;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionMapping;
 import org.kuali.kfs.pdp.businessobject.CustomerProfile;

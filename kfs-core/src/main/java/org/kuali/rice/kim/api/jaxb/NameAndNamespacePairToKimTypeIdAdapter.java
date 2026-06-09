@@ -18,10 +18,10 @@
  */
 package org.kuali.rice.kim.api.jaxb;
 
-import jakarta.xml.bind.MarshalException;
-import jakarta.xml.bind.UnmarshalException;
-import jakarta.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.MarshalException;
+import javax.xml.bind.UnmarshalException;
+import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.util.jaxb.NameAndNamespacePair;

@@ -21,7 +21,7 @@ package org.kuali.kfs.gl.web.struts;
 import java.util.Map;
 import java.util.Set;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 public interface LookupResultsSelectable {
     public void populate(HttpServletRequest request);

@@ -21,9 +21,9 @@ package org.kuali.rice.kim.api.jaxb;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.xml.bind.UnmarshalException;
-import jakarta.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.UnmarshalException;
+import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.util.jaxb.MapStringStringAdapter;
