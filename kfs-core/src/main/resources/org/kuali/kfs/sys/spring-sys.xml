@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+   - DEPRECATED: This XML configuration is retained for backward compatibility during the
+   - Spring Boot migration. Bean definitions are being migrated to
+   - org.kuali.kfs.sys.context.SysConfig (Java @Configuration).
+   - This file is loaded via @ImportResource and will be removed once all beans
+   - are fully migrated to Java configuration.
+   -
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
    - Copyright 2005-2014 The Kuali Foundation
