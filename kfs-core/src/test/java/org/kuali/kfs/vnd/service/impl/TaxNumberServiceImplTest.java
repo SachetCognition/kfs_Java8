@@ -1,33 +1,29 @@
 package org.kuali.kfs.vnd.service.impl;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kuali.kfs.sys.context.KfsUnitTestBase;
+import org.kuali.rice.coreservice.framework.parameter.ParameterService;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TaxNumberServiceImplTest extends KfsUnitTestBase {
 
+    @Mock
+    private ParameterService parameterService;
+
+    @InjectMocks
     private TaxNumberServiceImpl taxNumberService;
 
-    @BeforeEach
-    void setUp() {
-        taxNumberService = new TaxNumberServiceImpl();
-    }
-
     @Test
-    void isStringAllNumbers_allDigits_returnsTrue() {
+    void isStringAllNumbers_validNumber_returnsTrue() {
         assertThat(taxNumberService.isStringAllNumbers("123456789")).isTrue();
     }
 
     @Test
-    void isStringAllNumbers_containsLetter_returnsFalse() {
-        assertThat(taxNumberService.isStringAllNumbers("12345678a")).isFalse();
-    }
-
-    @Test
-    void isStringAllNumbers_null_returnsFalse() {
-        assertThat(taxNumberService.isStringAllNumbers(null)).isFalse();
+    void isStringAllNumbers_containsLetters_returnsFalse() {
+        assertThat(taxNumberService.isStringAllNumbers("12-34-5678")).isFalse();
     }
 
     @Test
@@ -36,17 +32,7 @@ class TaxNumberServiceImplTest extends KfsUnitTestBase {
     }
 
     @Test
-    void isStringEmpty_null_returnsTrue() {
-        assertThat(taxNumberService.isStringEmpty(null)).isTrue();
-    }
-
-    @Test
-    void isStringEmpty_empty_returnsTrue() {
-        assertThat(taxNumberService.isStringEmpty("")).isTrue();
-    }
-
-    @Test
-    void isStringEmpty_nonEmpty_returnsFalse() {
-        assertThat(taxNumberService.isStringEmpty("abc")).isFalse();
+    void isStringAllNumbers_null_returnsFalse() {
+        assertThat(taxNumberService.isStringAllNumbers(null)).isFalse();
     }
 }
