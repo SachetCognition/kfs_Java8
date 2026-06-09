@@ -140,14 +140,10 @@
     <plugin.tomcat.version>2.2</plugin.tomcat.version>
 
     <!-- logging properties -->
-    <!-- slf4j.version and log4j.version need to be changed together -->
     <slf4j.version>1.6.4</slf4j.version>
-    <log4j.version>1.2.16</log4j.version>
-    <!-- switch these scopes to runtime if/when KFS gets all internal logging statements issued via slf4j -->
-    <log4j.scope>compile</log4j.scope>
+    <log4j2.version>2.23.1</log4j2.version>
     <jcl-over-slf4j.scope>compile</jcl-over-slf4j.scope>
     <slf4j-api.version>${slf4j.version}</slf4j-api.version>
-    <slf4j-log4j12.version>${slf4j.version}</slf4j-log4j12.version>
     <jcl-over-slf4j.version>${slf4j.version}</jcl-over-slf4j.version>
     <jul-to-slf4j.version>${slf4j.version}</jul-to-slf4j.version>
 
@@ -871,19 +867,28 @@
       <version>${jul-to-slf4j.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!-- bind to log4j as the implementation -->
+    <!-- Log4j 2 core -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j-log4j12.version}</version>
-      <scope>runtime</scope>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j2.version}</version>
     </dependency>
-    <!-- included here as a dependency so we can explicitly set scope to "runtime" (down the road at some point) -->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
-      <scope>${log4j.scope}</scope>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <!-- Bridge: routes Log4j 1.x calls to Log4j 2 -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <!-- Bridge: routes SLF4J to Log4j 2 -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j2.version}</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
