@@ -18,8 +18,17 @@
  */
 package org.kuali.kfs.module.purap.businessobject;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "PUR_PO_ITM_USE_TAX_T")
 public class PurchaseOrderItemUseTax extends PurApItemUseTaxBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
 
     public PurchaseOrderItemUseTax() {

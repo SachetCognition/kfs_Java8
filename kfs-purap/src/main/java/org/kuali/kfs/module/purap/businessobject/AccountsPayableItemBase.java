@@ -29,12 +29,20 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 /**
  * Base class for Accounts Payable Item Business Objects.
  */
+@MappedSuperclass
 public abstract class AccountsPayableItemBase extends PurApItemBase implements AccountsPayableItem {
+    @Column(name = "ITM_EXTND_PRC")
     private KualiDecimal extendedPrice;
+    @Column(name = "CPTL_AST_TRN_TYP_CD")
     private String capitalAssetTransactionTypeCode;
+    @Transient
     private CapitalAssetBuilderAssetTransactionType capitalAssetTransactionType;
     
     /**

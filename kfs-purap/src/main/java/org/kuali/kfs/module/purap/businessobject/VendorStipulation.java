@@ -24,14 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Vendor Stipulation Business Object.
  */
+@Entity
+@Table(name = "PUR_VNDR_STPLTN_T")
 public class VendorStipulation extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "VNDR_STPLTN_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer vendorStipulationIdentifier;
+    @Column(name = "VNDR_STPLTN_NM")
     private String vendorStipulationName;
+    @Column(name = "VNDR_STPLTN_DESC")
     private String vendorStipulationDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

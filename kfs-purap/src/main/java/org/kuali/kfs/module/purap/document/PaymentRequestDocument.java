@@ -82,54 +82,104 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Payment Request Document Business Object. Contains the fields associated with the main document table.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_T")
 public class PaymentRequestDocument extends AccountsPayableDocumentBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestDocument.class);
 
+    @Column(name = "INV_DT")
     protected Date invoiceDate;
+    @Column(name = "INV_NBR")
     protected String invoiceNumber;
+    @Column(name = "VNDR_INV_AMT")
     protected KualiDecimal vendorInvoiceAmount;
+    @Column(name = "VNDR_PMT_TERMS_CD")
     protected String vendorPaymentTermsCode;
+    @Column(name = "VNDR_SHP_PMT_TERM_CD")
     protected String vendorShippingPaymentTermsCode;
+    @Column(name = "PMT_RQST_PAY_DT")
     protected Date paymentRequestPayDate;
+    @Column(name = "PMT_RQST_CST_SRC_CD")
     protected String paymentRequestCostSourceCode;
+    @Column(name = "PMT_RQST_CNCL_IND")
     protected boolean paymentRequestedCancelIndicator;
+    @Column(name = "PMT_ATT_IND")
     protected boolean paymentAttachmentIndicator;
+    @Column(name = "IMD_PMT_IND")
     protected boolean immediatePaymentIndicator;
+    @Column(name = "PMT_SPCL_HANDLG_INSTRC_LN1_TXT")
     protected String specialHandlingInstructionLine1Text;
+    @Column(name = "PMT_SPCL_HANDLG_INSTRC_LN2_TXT")
     protected String specialHandlingInstructionLine2Text;
+    @Column(name = "PMT_SPCL_HANDLG_INSTRC_LN3_TXT")
     protected String specialHandlingInstructionLine3Text;
+    @Column(name = "PMT_PD_DT")
     protected Timestamp paymentPaidTimestamp;
+    @Column(name = "PMT_RQST_ELCTRNC_INV_IND")
     protected boolean paymentRequestElectronicInvoiceIndicator;
+    @Column(name = "AP_RQST_CNCL_ID")
     protected String accountsPayableRequestCancelIdentifier;
+    @Column(name = "ORIG_VNDR_HDR_GNRTD_ID")
     protected Integer originalVendorHeaderGeneratedIdentifier;
+    @Column(name = "ORIG_VNDR_DTL_ASND_ID")
     protected Integer originalVendorDetailAssignedIdentifier;
+    @Column(name = "ALTRNT_VNDR_HDR_GNRTD_ID")
     protected Integer alternateVendorHeaderGeneratedIdentifier;
+    @Column(name = "ALTRNT_VNDR_DTL_ASND_ID")
     protected Integer alternateVendorDetailAssignedIdentifier;
     protected String purchaseOrderNotes;
+    @Column(name = "PO_CLSIF_TYP_DESC")
     protected String recurringPaymentTypeCode;
+    @Column(name = "RCVNG_DOC_REQ_IND")
     protected boolean receivingDocumentRequiredIndicator;
+    @Column(name = "PMT_RQST_PSTV_APRVL_IND")
     protected boolean paymentRequestPositiveApprovalIndicator;
 
     //KFSCNTRB-1207 - UMD - Muddu -- start
     //the indicator which tells if the preq has been auto approved and this value will be used
     //by the doRouteStatus method to change the app doc status.
+    @Column(name = "AUTO_APPROVED_IND")
     protected boolean autoApprovedIndicator;
     //KFSCNTRB-1207 - UMD - Muddu -- end
 
     // TAX EDIT AREA FIELDS
+    @Column(name = "TAX_CLSIF_CD")
     protected String taxClassificationCode;
+    @Column(name = "TAX_CNTRY_CD")
     protected String taxCountryCode;
+    @Column(name = "NQI_CUST_TAX_ID")
     protected String taxNQIId;
+    @Column(name = "FTX_PCT")
     protected BigDecimal taxFederalPercent; // number is in whole form so 5% is 5.00
+    @Column(name = "STX_PCT")
     protected BigDecimal taxStatePercent; // number is in whole form so 5% is 5.00
+    @Column(name = "SPCL_W4_INC_AMT")
     protected KualiDecimal taxSpecialW4Amount;
+    @Column(name = "GRS_UP_IND")
     protected Boolean taxGrossUpIndicator;
+    @Column(name = "TRTY_EXMPT_IND")
     protected Boolean taxExemptTreatyIndicator;
+    @Column(name = "FRGN_SRC_IND")
     protected Boolean taxForeignSourceIndicator;
+    @Column(name = "USAID_DIEM_IND")
     protected Boolean taxUSAIDPerDiemIndicator;
+    @Column(name = "INC_TAX_EXMPT_CD_OTHR_IND")
     protected Boolean taxOtherExemptIndicator;
 
     protected String justification;
@@ -143,9 +193,17 @@ public class PaymentRequestDocument extends AccountsPayableDocumentBase {
     protected Integer requisitionIdentifier;
 
     // REFERENCE OBJECTS
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_PMT_TERMS_CD", insertable = false, updatable = false)
     protected PaymentTermType vendorPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_PMT_TERM_CD", insertable = false, updatable = false)
     protected ShippingPaymentTerms vendorShippingPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_RQST_CST_SRC_CD", insertable = false, updatable = false)
     protected PurchaseOrderCostSource paymentRequestCostSource;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PO_CLSIF_TYP_DESC", insertable = false, updatable = false)
     protected RecurringPaymentType recurringPaymentType;
 
     /**

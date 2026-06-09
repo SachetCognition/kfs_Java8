@@ -31,28 +31,68 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PUR_THRSHLD_T")
 public class ReceivingThreshold extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "PUR_THRSHLD_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer thresholdIdentifier;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCT_TYP_CD")
     private String accountTypeCode;
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "PUR_THRSHLD_AMT")
     private KualiDecimal thresholdAmount;
+    @Column(name = "PUR_COMM_CD")
     private String purchasingCommodityCode;
     
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
 
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_TYP_CD", insertable = false, updatable = false)
     private AccountType accountType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     private SubFundGroup subFundGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false), @JoinColumn(name = "FIN_OBJECT_CD", insertable = false, updatable = false)})
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false), @JoinColumn(name = "ORG_CD", insertable = false, updatable = false)})
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false), @JoinColumn(name = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)})
     private VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PUR_COMM_CD", insertable = false, updatable = false)
     private CommodityCode commodityCode;
     
     public ReceivingThreshold(){

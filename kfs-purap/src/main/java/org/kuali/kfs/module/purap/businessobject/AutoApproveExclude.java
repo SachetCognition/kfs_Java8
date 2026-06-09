@@ -26,17 +26,37 @@ import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Auto Approve Exclude Business Object. Defines attributes in maintenance document for excluding payment request from automatic
  * approval.
  */
+@Entity
+@Table(name = "AP_AUTO_APRV_EXCL_T")
 public class AutoApproveExclude extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false), @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)})
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
     /**

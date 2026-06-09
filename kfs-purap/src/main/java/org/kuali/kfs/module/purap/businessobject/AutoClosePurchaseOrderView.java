@@ -20,12 +20,21 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Auto Close Purchase Order View Business Object. 
  */
+@Entity
+@Table(name = "PUR_PO_V")
 public class AutoClosePurchaseOrderView extends PurchaseOrderView {
 
+    @Column(name = "TOTAL_ENCUMBRANCE")
     private KualiDecimal totalEncumbrance;
+    @Column(name = "TOTAL_AMOUNT")
     private KualiDecimal totalAmount;
     
     public KualiDecimal getTotalEncumbrance() {

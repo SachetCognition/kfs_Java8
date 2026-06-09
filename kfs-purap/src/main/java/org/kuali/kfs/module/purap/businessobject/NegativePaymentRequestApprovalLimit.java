@@ -28,20 +28,47 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Negative Payment Request Approval Limit Business Object. Maintenance document for setting limits for the auto-approve PREQ batch
  * job.
  */
+@Entity
+@Table(name = "AP_NEG_PMT_RQST_APRVL_LMT_T")
 public class NegativePaymentRequestApprovalLimit extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "AP_NEG_PMT_RQST_APRVL_LMT_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer negativePaymentRequestApprovalLimitIdentifier;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "ACCT_NBR")
     private String accountNumber;
+    @Column(name = "NEG_PMT_RQST_APRVL_LMT_AMT")
     private KualiDecimal negativePaymentRequestApprovalLimitAmount;
+    @Column(name = "ACTV_IND")
     private boolean active;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false), @JoinColumn(name = "ACCT_NBR", insertable = false, updatable = false)})
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false), @JoinColumn(name = "ORG_CD", insertable = false, updatable = false)})
     private Organization organization;
 
     /**

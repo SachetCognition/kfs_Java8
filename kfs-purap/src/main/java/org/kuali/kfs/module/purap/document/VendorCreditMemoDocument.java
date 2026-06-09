@@ -59,19 +59,41 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Credit Memo Document Business Object. Contains the fields associated with the main document table.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_T")
 public class VendorCreditMemoDocument extends AccountsPayableDocumentBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorCreditMemoDocument.class);
 
+    @Column(name = "PMT_RQST_ID")
     protected Integer paymentRequestIdentifier;
+    @Column(name = "CRDT_MEMO_NBR")
     protected String creditMemoNumber;
+    @Column(name = "CRDT_MEMO_DT")
     protected Date creditMemoDate;
+    @Column(name = "CRDT_MEMO_AMT")
     protected KualiDecimal creditMemoAmount;
+    @Column(name = "CRDT_MEMO_PD_TS")
     protected Timestamp creditMemoPaidTimestamp;
+    @Column(name = "ITM_MISC_CRDT_DESC")
     protected String itemMiscellaneousCreditDescription;
     protected Date purchaseOrderEndDate;
+    @Column(name = "VNDR_ATTN_NM")
     protected String vendorAttentionName;
 
     protected PaymentRequestDocument paymentRequestDocument;

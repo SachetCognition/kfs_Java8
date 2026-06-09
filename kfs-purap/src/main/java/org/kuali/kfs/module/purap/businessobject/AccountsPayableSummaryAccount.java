@@ -25,13 +25,29 @@ import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Payment Request Summary Account Business Object.
  */
+@Entity
+@Table(name = "AP_SUM_ACCT_T")
 public class AccountsPayableSummaryAccount extends PaymentRequestAccount {
 
+    @Column(name = "PMT_RQST_ID")
     private Integer paymentRequestIdentifier;
+    @Column(name = "CRDT_MEMO_ID")
     private Integer creditMemoIdentifier;
+    @Column(name = "LST_UPDT_TS")
     private Timestamp updateTimestamp;
     
     public AccountsPayableSummaryAccount() {

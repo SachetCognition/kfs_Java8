@@ -28,15 +28,32 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
+
 /**
  * Purchase Order View Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "PO_ID"))
 public class PurchaseOrderView extends AbstractRelatedView {
 
+    @Column(name = "PO_CUR_IND")
     private Boolean purchaseOrderCurrentIndicator;
+    @Column(name = "RECUR_PMT_TYP_CD")
     private String recurringPaymentTypeCode;
+    @Column(name = "PO_VNDR_CHC_CD")
     private String vendorChoiceCode;
+    @Column(name = "PO_END_DT")
     private Timestamp recurringPaymentEndDate;
+    @Column(name = "PO_INIT_OPEN_DT")
     private Timestamp purchaseOrderInitialOpenTimestamp;
 
     private List<Note> notes;

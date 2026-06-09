@@ -20,7 +20,20 @@ package org.kuali.kfs.module.purap.document;
 
 import org.kuali.kfs.sys.document.AccountingDocument;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "PUR_PO_T")
 public class PurchaseOrderSplitDocument extends PurchaseOrderDocument {
     
     /**

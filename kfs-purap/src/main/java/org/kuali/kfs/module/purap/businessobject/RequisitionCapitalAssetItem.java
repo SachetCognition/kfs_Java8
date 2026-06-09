@@ -22,8 +22,21 @@ import org.kuali.kfs.integration.purap.ItemCapitalAsset;
 import org.kuali.kfs.module.purap.document.PurchasingDocument;
 import org.kuali.kfs.module.purap.document.RequisitionDocument;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PUR_REQS_CPTL_AST_ITM_T")
 public class RequisitionCapitalAssetItem extends PurchasingCapitalAssetItemBase {
     
+    @Column(name = "REQS_ID")
     private Integer purapDocumentIdentifier;        
     
     public RequisitionCapitalAssetItem(){

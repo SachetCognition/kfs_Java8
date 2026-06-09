@@ -61,118 +61,227 @@ import org.kuali.rice.krad.document.SessionDocument;
 import org.kuali.rice.krad.util.NoteType;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "AP_ELCTRNC_INV_RJT_DOC_T")
 public class ElectronicInvoiceRejectDocument extends FinancialSystemTransactionalDocumentBase implements SessionDocument
 {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceRejectDocument.class);
     protected static BigDecimal zero = new BigDecimal(0);
 
     // NOT NULL FIELDS
+    @Id
+    @Column(name = "INV_RJT_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer purapDocumentIdentifier;
+    @Column(name = "AP_PUR_DOC_LNK_ID")
     protected Integer accountsPayablePurchasingDocumentLinkIdentifier;
+    @Column(name = "INV_LOAD_SUM_ID")
     protected Integer invoiceLoadSummaryIdentifier;
+    @Column(name = "INV_PROC_DT")
     protected Timestamp invoiceProcessTimestamp;
+    @Column(name = "INV_FL_HDR_TYP_IND")
     protected Boolean invoiceFileHeaderTypeIndicator = Boolean.FALSE;
+    @Column(name = "INV_FL_INFO_ONLY_IND")
     protected Boolean invoiceFileInformationOnlyIndicator = Boolean.FALSE;
+    @Column(name = "INV_FL_TAX_IN_LN_IND")
     protected Boolean invoiceFileTaxInLineIndicator = Boolean.FALSE;
+    @Column(name = "INV_FL_SPCL_HANDLG_IN_LN_IND")
     protected Boolean invoiceFileSpecialHandlingInLineIndicator = Boolean.FALSE;
+    @Column(name = "INV_FL_SHP_IN_LN_IND")
     protected Boolean invoiceFileShippingInLineIndicator = Boolean.FALSE;
+    @Column(name = "INV_FL_DSCT_IN_LN_IND")
     protected Boolean invoiceFileDiscountInLineIndicator = Boolean.FALSE;
 
+    @Column(name = "INV_FL_NM")
     protected String invoiceFileName;
+    @Column(name = "VNDR_DUNS_NBR")
     protected String vendorDunsNumber;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     protected Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     protected Integer vendorDetailAssignedIdentifier;
+    @Column(name = "INV_FL_DT_TXT")
     protected String invoiceFileDate;
+    @Column(name = "INV_FL_NBR")
     protected String invoiceFileNumber;
+    @Column(name = "INV_FL_PRPS_ID")
     protected String invoiceFilePurposeIdentifier;
+    @Column(name = "INV_FL_OPRN_ID")
     protected String invoiceFileOperationIdentifier;
+    @Column(name = "INV_FL_DPLMNT_MODE_VAL")
     protected String invoiceFileDeploymentModeValue;
+    @Column(name = "INV_ORD_REF_ORD_ID")
     protected String invoiceOrderReferenceOrderIdentifier;
+    @Column(name = "INV_ORD_REF_DOC_REF_PYLD_ID")
     protected String invoiceOrderReferenceDocumentReferencePayloadIdentifier;
+    @Column(name = "INV_ORD_REF_DOC_REF_TXT")
     protected String invoiceOrderReferenceDocumentReferenceText;
+    @Column(name = "INV_ORD_MSTR_AGRMN_REF_ID")
     protected String invoiceOrderMasterAgreementReferenceIdentifier;
+    @Column(name = "INV_ORD_MSTR_AGRMN_REF_DT_TXT")
     protected String invoiceOrderMasterAgreementReferenceDate;
+    @Column(name = "INV_ORD_MSTR_AGRMN_INFO_ID")
     protected String invoiceOrderMasterAgreementInformationIdentifier;
+    @Column(name = "INV_ORD_MSTR_AGRMN_INFO_DT_TXT")
     protected String invoiceOrderMasterAgreementInformationDate;
+    @Column(name = "INV_ORD_PO_ORD_ID")
     protected String invoiceOrderPurchaseOrderIdentifier;
+    @Column(name = "INV_ORD_PO_ORD_DT_TXT")
     protected String invoiceOrderPurchaseOrderDate;
+    @Column(name = "INV_ORD_SUPP_ORD_INFO_ID")
     protected String invoiceOrderSupplierOrderInformationIdentifier;
+    @Column(name = "INV_SHP_DT_TXT")
     protected String invoiceShipDate;
+    @Column(name = "INV_ADDR_NM")
     protected String invoiceShipToAddressName;
+    @Column(name = "INV_SHP_TO_ADDR_TYP_NM")
     protected String invoiceShipToAddressType;
+    @Column(name = "INV_SHP_TO_LN1_ADDR")
     protected String invoiceShipToAddressLine1;
+    @Column(name = "INV_SHP_TO_LN2_ADDR")
     protected String invoiceShipToAddressLine2;
+    @Column(name = "INV_SHP_TO_LN3_ADDR")
     protected String invoiceShipToAddressLine3;
+    @Column(name = "INV_SHP_TO_CTY_NM")
     protected String invoiceShipToAddressCityName;
+    @Column(name = "INV_SHP_TO_ST_CD")
     protected String invoiceShipToAddressStateCode;
+    @Column(name = "INV_SHP_TO_PSTL_CD")
     protected String invoiceShipToAddressPostalCode;
+    @Column(name = "INV_SHP_TO_CNTRY_CD")
     protected String invoiceShipToAddressCountryCode;
+    @Column(name = "INV_SHP_TO_CNTRY_NM")
     protected String invoiceShipToAddressCountryName;
+    @Column(name = "INV_BILL_TO_ADDR_NM")
     protected String invoiceBillToAddressName;
+    @Column(name = "INV_BILL_TO_ADDR_TYP_NM")
     protected String invoiceBillToAddressType;
+    @Column(name = "INV_BILL_TO_LN1_ADDR")
     protected String invoiceBillToAddressLine1;
+    @Column(name = "INV_BILL_TO_LN2_ADDR")
     protected String invoiceBillToAddressLine2;
+    @Column(name = "INV_BILL_TO_LN3_ADDR")
     protected String invoiceBillToAddressLine3;
+    @Column(name = "INV_BILL_TO_CTY_NM")
     protected String invoiceBillToAddressCityName;
+    @Column(name = "INV_BILL_TO_ST_CD")
     protected String invoiceBillToAddressStateCode;
+    @Column(name = "INV_BILL_TO_PSTL_CD")
     protected String invoiceBillToAddressPostalCode;
+    @Column(name = "INV_BILL_TO_CNTRY_CD")
     protected String invoiceBillToAddressCountryCode;
+    @Column(name = "INV_BILL_TO_CNTRY_NM")
     protected String invoiceBillToAddressCountryName;
+    @Column(name = "INV_RMT_TO_ADDR_NM")
     protected String invoiceRemitToAddressName;
+    @Column(name = "INV_RMT_TO_ADDR_TYP_NM")
     protected String invoiceRemitToAddressType;
+    @Column(name = "INV_RMT_TO_LN1_ADDR")
     protected String invoiceRemitToAddressLine1;
+    @Column(name = "INV_RMT_TO_LN2_ADDR")
     protected String invoiceRemitToAddressLine2;
+    @Column(name = "INV_RMT_TO_LN3_ADDR")
     protected String invoiceRemitToAddressLine3;
+    @Column(name = "INV_RMT_TO_CTY_NM")
     protected String invoiceRemitToAddressCityName;
+    @Column(name = "INV_RMT_TO_ST_CD")
     protected String invoiceRemitToAddressStateCode;
+    @Column(name = "INV_RMT_TO_PSTL_CD")
     protected String invoiceRemitToAddressPostalCode;
+    @Column(name = "INV_RMT_TO_CNTRY_CD")
     protected String invoiceRemitToAddressCountryCode;
+    @Column(name = "INV_RMT_TO_CNTRY_NM")
     protected String invoiceRemitToAddressCountryName;
 
+    @Column(name = "PREQ_ID")
     protected Integer paymentRequestIdentifier;
 
+    @Column(name = "INV_CUST_NBR")
     protected String invoiceCustomerNumber;
+    @Column(name = "INV_PO_NBR")
     protected String invoicePurchaseOrderNumber;
+    @Column(name = "PO_ID")
     protected Integer purchaseOrderIdentifier;
+    @Column(name = "PO_DLVY_CMP_CD")
     protected String purchaseOrderDeliveryCampusCode;
 
+    @Column(name = "INV_ITM_SUB_TOT_CRNCY_CD")
     protected String invoiceItemSubTotalCurrencyCode;
+    @Column(name = "INV_ITM_SPCL_HANDLG_CRNCY_CD")
     protected String invoiceItemSpecialHandlingCurrencyCode;
     protected String invoiceItemSpecialHandlingDescription;
+    @Column(name = "INV_ITM_SHP_CRNCY_CD")
     protected String invoiceItemShippingCurrencyCode;
+    @Column(name = "INV_ITM_SHP_DESC")
     protected String invoiceItemShippingDescription;
+    @Column(name = "INV_ITM_TAX_CRNCY_CD")
     protected String invoiceItemTaxCurrencyCode;
+    @Column(name = "INV_ITM_TAX_DESC")
     protected String invoiceItemTaxDescription;
+    @Column(name = "INV_ITM_GRS_CRNCY_CD")
     protected String invoiceItemGrossCurrencyCode;
+    @Column(name = "INV_ITM_DSCT_CRNCY_CD")
     protected String invoiceItemDiscountCurrencyCode;
+    @Column(name = "INV_ITM_NET_CRNCY_CD")
     protected String invoiceItemNetCurrencyCode;
 
+    @Column(name = "INV_ITM_SUB_TOT_AMT")
     protected BigDecimal invoiceItemSubTotalAmount;
+    @Column(name = "INV_ITM_SPCL_HANDLG_AMT")
     protected BigDecimal invoiceItemSpecialHandlingAmount;
+    @Column(name = "INV_ITM_SHP_AMT")
     protected BigDecimal invoiceItemShippingAmount;
+    @Column(name = "INV_ITM_TAX_AMT")
     protected BigDecimal invoiceItemTaxAmount;
+    @Column(name = "INV_ITM_GRS_AMT")
     protected BigDecimal invoiceItemGrossAmount;
+    @Column(name = "INV_ITM_DSCT_AMT")
     protected BigDecimal invoiceItemDiscountAmount;
+    @Column(name = "INV_ITM_NET_AMT")
     protected BigDecimal invoiceItemNetAmount;
 
+    @Column(name = "INV_NUM_ACPT_IND")
     protected boolean invoiceNumberAcceptIndicator = false;
+    @Column(name = "INV_RJT_RSRCH_IND")
     protected boolean invoiceResearchIndicator = false;
     protected Timestamp invoiceFileTimeStampForSearch;
 
+    @Column(name = "AP_APRVL_DT")
     protected Timestamp accountsPayableApprovalTimestamp;
 
     protected transient PurApRelatedViews relatedViews;
     protected PurchaseOrderDocument currentPurchaseOrderDocument;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false), @JoinColumn(name = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)})
     protected VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumns({@JoinColumn(name = "INV_LOAD_SUM_ID", insertable = false, updatable = false), @JoinColumn(name = "VNDR_DUNS_NBR", insertable = false, updatable = false)})
     protected ElectronicInvoiceLoadSummary invoiceLoadSummary;
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purapDocumentIdentifier")
     protected List<ElectronicInvoiceRejectItem> invoiceRejectItems = new ArrayList<ElectronicInvoiceRejectItem>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purapDocumentIdentifier")
     protected List<ElectronicInvoiceRejectReason> invoiceRejectReasons = new ArrayList<ElectronicInvoiceRejectReason>();
 
     protected boolean isDocumentCreationInProgress = false;
 
     protected String vendorNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PO_DLVY_CMP_CD", insertable = false, updatable = false)
     protected CampusParameter purchaseOrderDeliveryCampus;
 
     /**

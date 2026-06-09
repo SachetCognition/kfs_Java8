@@ -24,13 +24,24 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Vendor Choice Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_VNDR_CHC_T")
 public class PurchaseOrderVendorChoice extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "PO_VNDR_CHC_CD")
     private String purchaseOrderVendorChoiceCode;
+    @Column(name = "PO_VNDR_CHC_DESC")
     private String purchaseOrderVendorChoiceDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

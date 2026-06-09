@@ -19,10 +19,15 @@
 
 package org.kuali.kfs.module.purap.businessobject;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 /**
  * Accounting line Business Object for a credit memo item line.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_ACCT_T")
 public class CreditMemoAccount extends PurApAccountingLineBase {
 
     /**

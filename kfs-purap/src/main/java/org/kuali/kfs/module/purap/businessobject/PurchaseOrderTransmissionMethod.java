@@ -24,14 +24,26 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Transmission Method Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_TRNS_MTHD_T")
 public class PurchaseOrderTransmissionMethod extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "PO_TRNS_MTHD_CD")
     private String purchaseOrderTransmissionMethodCode;
+    @Column(name = "PO_TRNS_MTHD_DESC")
     private String purchaseOrderTransmissionMethodDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
+    @Column(name = "DISPLAY_TO_USER_IND")
     private boolean displayToUser;
 
     /**
