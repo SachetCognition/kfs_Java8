@@ -7,7 +7,7 @@ public class LaborJournalVoucherDetailId implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String documentNumber;
-    private String sequenceNumber;
+    private Integer sequenceNumber;
 
     public LaborJournalVoucherDetailId() {
     }
