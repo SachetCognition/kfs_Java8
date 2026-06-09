@@ -58,9 +58,9 @@ public class PayrateExportDaoJpa implements PayrateExportDao {
             "JOIN LD_BCN_INTINCBNT_T i ON f.EMPLID = i.EMPLID " +
             "WHERE f.UNIV_FISCAL_YR = ?2 " +
             "AND f.EMPLID <> ?3 " +
-            "AND f.APPT_FND_DLT_CD = 'N' " +
+            "AND f.APPT_FND_DLT_CD = 'Y' " +
             "AND p.POS_UNION_CD = ?4 " +
-            "AND p.POS_CONFIDENTIAL = 'N'");
+            "AND p.CONFIDENTIAL_POSN = 'N'");
         insertQuery.setParameter(1, principalId);
         insertQuery.setParameter(2, budgetYear);
         insertQuery.setParameter(3, BCConstants.VACANT_EMPLID);
