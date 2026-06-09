@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Spring JPA configuration for KFS.
+   Defines EntityManagerFactory, JPA TransactionManager, and repository scanning.
+   Coexists with existing OJB persistence and JTA transaction configuration.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/data/jpa
+         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+  <!-- EntityManagerFactory backed by Hibernate, reusing the existing KFS dataSource -->
+  <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="persistenceUnitName" value="kfs-pu"/>
+    <!--
+      packagesToScan is intentionally omitted: the codebase has ~47 legacy @Entity
+      classes (mostly in kfs-tem) with incomplete JPA mappings that would break
+      Hibernate initialization. Instead, entity classes are registered explicitly
+      in persistence.xml as they are migrated from OJB — giving full control over
+      the incremental migration.
+    -->
+    <property name="jpaVendorAdapter">
+      <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="showSql" value="false"/>
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      </bean>
+    </property>
+    <property name="jpaProperties">
+      <props>
+        <prop key="hibernate.hbm2ddl.auto">none</prop>
+      </props>
+    </property>
+  </bean>
+
+  <!-- JPA-specific TransactionManager (separate from existing JTA/OJB transaction manager) -->
+  <bean id="jpaTransactionManager"
+        class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+  </bean>
+
+  <!--
+    NOTE: tx:annotation-driven is intentionally omitted to avoid hijacking the
+    361 existing @Transactional beans that route through the JTA transactionManager.
+    New JPA service classes should use @Transactional("jpaTransactionManager")
+    to explicitly opt in to the JPA transaction manager.
+  -->
+
+  <!-- Scan for Spring Data JPA repositories under org.kuali.kfs -->
+  <jpa:repositories base-package="org.kuali.kfs"
+                    entity-manager-factory-ref="entityManagerFactory"
+                    transaction-manager-ref="jpaTransactionManager"/>
+
+</beans>

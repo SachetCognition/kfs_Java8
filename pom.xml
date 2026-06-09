@@ -139,6 +139,11 @@
     <wstx-asl.version>3.2.9</wstx-asl.version>
     <xapool.version>1.5.0-patch4</xapool.version>
 
+    <!-- JPA/Hibernate versions (coexists with OJB during migration) -->
+    <hibernate.version>5.6.15.Final</hibernate.version>
+    <spring.orm.version>5.3.31</spring.orm.version>
+    <spring.data.jpa.version>2.7.18</spring.data.jpa.version>
+
     <db.groupId>${mysql.groupId}</db.groupId>
     <db.artifactId>${mysql.artifactId}</db.artifactId>
     <db.version>${mysql.version}</db.version>
@@ -1137,6 +1142,28 @@
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
+    </dependency>
+
+    <!-- JPA/Hibernate infrastructure (coexists with OJB during migration) -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.orm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${spring.data.jpa.version}</version>
     </dependency>
 
   </dependencies>
