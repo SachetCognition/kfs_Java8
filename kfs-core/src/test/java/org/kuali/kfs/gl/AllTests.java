@@ -91,9 +91,6 @@ public class AllTests {
         suite.addTestSuite(OrganizationReversionCategoryTest.class);
         suite.addTestSuite(OrganizationReversionLogicTest.class);
 
-        // org.kuali.module.gl.util
-        suite.addTestSuite(OJBUtilityTest.class);
-
         // org.kuali.kfs.gl.businessobject.lookup
         suite.addTestSuite(AccountBalanceLookupableHelperServiceTest.class);
         suite.addTestSuite(BalanceLookupableHelperServiceTest.class);

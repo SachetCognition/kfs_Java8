@@ -113,10 +113,10 @@
     <commons-transaction.version>1.2</commons-transaction.version>
     <itext.version>1.4.8</itext.version>
     <jasperreports.version>2.0.4</jasperreports.version>
-    <javamelody.core.version>1.49.0</javamelody.core.version>
+    <spring-boot.version>2.7.18</spring-boot.version>
     <javax.resource.connector.api.version>1.5</javax.resource.connector.api.version>
-    <jaxb.version>2.3.9</jaxb.version>
-    <jrobin.version>1.5.9</jrobin.version>
+    <jaxb.version>2.2.6</jaxb.version>
+
     <jsp-api.version>2.1</jsp-api.version>
     <jstl-api.version>1.2</jstl-api.version>
     <jta.version>2.0.1</jta.version>
@@ -126,10 +126,10 @@
     <testcontainers.version>1.19.7</testcontainers.version>
     <jacoco.version>0.8.12</jacoco.version>
     <kfs.help.version>5.4.0</kfs.help.version>
-    <liquibase.version>3.3.2</liquibase.version>
-    <mysql.groupId>com.mysql</mysql.groupId>
-    <mysql.artifactId>mysql-connector-j</mysql.artifactId>
-    <mysql.version>8.3.0</mysql.version>
+    <liquibase.version>4.27.0</liquibase.version>
+    <mysql.groupId>mysql</mysql.groupId>
+    <mysql.artifactId>mysql-connector-java</mysql.artifactId>
+    <mysql.version>5.1.25</mysql.version>
     <opencsv.version>2.3</opencsv.version>
     <oracle.groupId>com.oracle</oracle.groupId>
     <oracle.artifactId>ojdbc6</oracle.artifactId>
@@ -218,9 +218,29 @@
           <version>2.6</version>
 
         </plugin>
+        <plugin>
+          <groupId>org.kuali.maven.plugins</groupId>
+          <artifactId>guice-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>metadata</id>
+              <phase>none</phase>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.kuali.maven.plugins</groupId>
+        <artifactId>guice-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>metadata</id>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
@@ -907,14 +927,42 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>net.bull.javamelody</groupId>
-      <artifactId>javamelody-core</artifactId>
-      <version>${javamelody.core.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <version>${spring-boot.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.jrobin</groupId>
-      <artifactId>jrobin</artifactId>
-      <version>${jrobin.version}</version>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-vault-config</artifactId>
+      <version>3.1.4</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>net.sf.opencsv</groupId>
@@ -1108,6 +1156,7 @@
       <artifactId>spring-data-jpa</artifactId>
       <version>${spring.data.jpa.version}</version>
     </dependency>
+
 
   </dependencies>
 

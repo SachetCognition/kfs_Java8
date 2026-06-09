@@ -28,30 +28,6 @@
 	
     <!--  FILTER DEFINITIONS -->
   <filter>
-    <filter-name>monitoring</filter-name>
-    <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-    <init-param>
-      <param-name>url-exclude-pattern</param-name>
-      <param-value>/static/.*|/kr/static/.*|/kr/images/.*|/images-portal/.*</param-value>
-    </init-param>
-    <init-param>
-      <param-name>system-actions-enabled</param-name>
-      <param-value>true</param-value>
-    </init-param>
-    <init-param>
-      <param-name>http-transform-pattern</param-name>
-      <param-value>\\d+</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>monitoring</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <listener>
-    <listener-class>net.bull.javamelody.SessionListener</listener-class>
-  </listener>
-
-  <filter>
     <filter-name>DummyLoginFilter</filter-name>
     <filter-class>org.kuali.kfs.sys.web.filter.DevelopmentLoginFilter</filter-class>
     <init-param>
@@ -235,27 +211,7 @@
 
     <!-- SERVLET DEFINITIONS -->
 
-  <servlet>
-    <servlet-name>action</servlet-name>
-    <servlet-class>org.kuali.rice.kns.web.struts.action.KualiActionServlet</servlet-class>
-    <init-param>
-      <param-name>config</param-name>
-      <param-value>/WEB-INF/struts-config.xml</param-value>
-    </init-param>
-    <init-param>
-      <param-name>config/core</param-name>
-      <param-value>/core/WEB-INF/struts-config.xml</param-value>
-    </init-param>
-    <init-param>
-      <param-name>debug</param-name>
-      <param-value>3</param-value>
-    </init-param>
-    <init-param>
-      <param-name>detail</param-name>
-      <param-value>3</param-value>
-    </init-param>
-    <load-on-startup>0</load-on-startup>
-  </servlet>
+  <!-- Struts action servlet removed as part of Java 21 migration -->
 
   <!-- Notification system servlets -->
   <!-- Notification System Spring MVC UI -->
@@ -357,10 +313,7 @@
     <url-pattern>/remoting/*</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
+  <!-- Struts action mapping removed as part of Java 21 migration -->
 
 <!-- 
   <servlet-mapping>
@@ -428,38 +381,8 @@
 		<session-timeout>60</session-timeout>
 	</session-config>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
 	    <welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-  <!-- only need to include this for the kuali tlds
-       since tld file will only be searched from within other jars -->
-  <jsp-config>
-    <taglib>
-      <taglib-uri>http://www.kuali.org/jsp/jstl/functions</taglib-uri>
-      <taglib-location>/WEB-INF/tld/kuali-func.tld</taglib-location>
-    </taglib>
-
-    <!-- customized struts tags -->
-    <taglib>
-      <taglib-uri>http://www.kuali.org/struts.apache.org/tags-html</taglib-uri>
-      <taglib-location>/WEB-INF/tld/kuali-struts-html.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>http://www.kuali.org/struts.apache.org/tags-html-el</taglib-uri>
-      <taglib-location>/WEB-INF/tld/kuali-struts-html-el.tld</taglib-location>
-    </taglib>
-  </jsp-config>
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>ProtectedFolder</web-resource-name>
-			<url-pattern>/jsp/*</url-pattern>
-			<http-method>DELETE</http-method>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
-			<http-method>PUT</http-method>
-		</web-resource-collection>
-		<auth-constraint />
-	</security-constraint>
 
     <error-page>
         <location>/error.html</location>
