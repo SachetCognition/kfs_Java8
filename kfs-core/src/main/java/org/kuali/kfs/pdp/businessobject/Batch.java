@@ -27,8 +27,6 @@ import java.util.LinkedHashMap;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -45,7 +43,6 @@ import org.kuali.rice.kim.api.identity.Person;
 public class Batch extends TimestampedBusinessObjectBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PDP_PMT_FIL_ID_SEQ")
     @Column(name = "PMT_FIL_ID")
     private KualiInteger id;
 

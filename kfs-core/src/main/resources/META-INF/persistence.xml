@@ -23,7 +23,6 @@
         <class>org.kuali.kfs.pdp.businessobject.ACHBank</class>
         <class>org.kuali.kfs.pdp.businessobject.ACHTransactionCode</class>
         <class>org.kuali.kfs.pdp.businessobject.ACHTransactionType</class>
-        <class>org.kuali.kfs.pdp.businessobject.BankChangeHistory</class>
         <class>org.kuali.kfs.pdp.businessobject.Batch</class>
         <class>org.kuali.kfs.pdp.businessobject.CustomerBank</class>
         <class>org.kuali.kfs.pdp.businessobject.CustomerProfile</class>
@@ -44,7 +43,6 @@
         <class>org.kuali.kfs.pdp.businessobject.PaymentStatus</class>
         <class>org.kuali.kfs.pdp.businessobject.PaymentType</class>
         <class>org.kuali.kfs.pdp.businessobject.ProcessSummary</class>
-        <class>org.kuali.kfs.pdp.businessobject.PurchasingPaymentDetail</class>
 
         <properties>
             <!-- DataSource connection -->

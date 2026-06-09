@@ -18,9 +18,6 @@
  */
 package org.kuali.kfs.pdp.businessobject;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
 import org.apache.commons.lang.StringUtils;
 
 
@@ -28,8 +25,6 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Report object for the bank change lookup
  */
-@Entity
-@Table(name = "PDP_PMT_DTL_T")
 public class BankChangeHistory extends PaymentDetail {
 
     public BankChangeHistory() {
