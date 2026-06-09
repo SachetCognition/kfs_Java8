@@ -27,9 +27,9 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase;
 import org.kuali.rice.kim.api.identity.Person;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -37,6 +37,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CG_PRPSL_CLOSE_T")
+@AttributeOverride(name = "documentNumber", column = @Column(name = "CG_PRPSL_CLOSE_NBR"))
 public class ProposalAwardCloseDocument extends FinancialSystemTransactionalDocumentBase {
 
     @Column(name = "CG_LAST_CLOSED_DT")

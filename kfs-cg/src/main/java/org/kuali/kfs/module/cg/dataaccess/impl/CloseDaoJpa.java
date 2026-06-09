@@ -45,11 +45,11 @@ public class CloseDaoJpa implements CloseDao {
     @SuppressWarnings("unchecked")
     public String getMaxApprovedClose(Date currentSqlMidnight) {
         Query query = entityManager.createNativeQuery(
-                "SELECT c.FDOC_NBR FROM CG_PRPSL_CLOSE_T c " +
-                "INNER JOIN FS_DOC_HEADER_T h ON c.FDOC_NBR = h.FDOC_NBR " +
+                "SELECT c.CG_PRPSL_CLOSE_NBR FROM CG_PRPSL_CLOSE_T c " +
+                "INNER JOIN FS_DOC_HEADER_T h ON c.CG_PRPSL_CLOSE_NBR = h.FDOC_NBR " +
                 "WHERE c.CG_USR_INITIATE_DT = ?1 " +
                 "AND h.FDOC_HDR_STAT_CD = ?2 " +
-                "ORDER BY c.FDOC_NBR DESC");
+                "ORDER BY c.CG_PRPSL_CLOSE_NBR DESC");
         query.setParameter(1, currentSqlMidnight);
         query.setParameter(2, KFSConstants.DocumentStatusCodes.ENROUTE);
         query.setMaxResults(1);
@@ -62,11 +62,11 @@ public class CloseDaoJpa implements CloseDao {
     @SuppressWarnings("unchecked")
     public String getMostRecentClose(Date currentSqlMidnight) {
         Query query = entityManager.createNativeQuery(
-                "SELECT c.FDOC_NBR FROM CG_PRPSL_CLOSE_T c " +
-                "INNER JOIN FS_DOC_HEADER_T h ON c.FDOC_NBR = h.FDOC_NBR " +
+                "SELECT c.CG_PRPSL_CLOSE_NBR FROM CG_PRPSL_CLOSE_T c " +
+                "INNER JOIN FS_DOC_HEADER_T h ON c.CG_PRPSL_CLOSE_NBR = h.FDOC_NBR " +
                 "WHERE c.CG_USR_INITIATE_DT = ?1 " +
                 "AND h.FDOC_HDR_STAT_CD = ?2 " +
-                "ORDER BY c.FDOC_NBR DESC");
+                "ORDER BY c.CG_PRPSL_CLOSE_NBR DESC");
         query.setParameter(1, currentSqlMidnight);
         query.setParameter(2, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setMaxResults(1);

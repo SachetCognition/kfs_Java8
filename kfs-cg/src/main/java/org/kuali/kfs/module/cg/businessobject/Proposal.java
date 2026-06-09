@@ -128,7 +128,7 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     @OrderBy("principalId ASC")
     private List<ProposalProjectDirector> proposalProjectDirectors;
     @OneToMany(mappedBy = "proposal", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @org.hibernate.annotations.OrderBy(clause = "RSRCH_RSK_TYP_CD ASC")
+    @org.hibernate.annotations.OrderBy(clause = "(SELECT rt.RSRCH_RSK_TYP_SORT_NBR FROM ER_RSRCH_RSK_TYP_T rt WHERE rt.RSRCH_RSK_TYP_CD = RSRCH_RSK_TYP_CD) ASC")
     private List<ProposalResearchRisk> proposalResearchRisks;
 
     @ManyToOne(fetch = FetchType.LAZY)
