@@ -22,16 +22,27 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 
 /**
  * This class is the business object for the Balance Type object.
  */
+@Entity
+@Table(name = "CA_BALANCE_TYPE_T")
 public class BalanceType extends KualiCodeBase implements MutableInactivatable {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "BalanceType";
 
+    @Column(name = "FIN_BALTYP_SHRT_NM")
     protected String financialBalanceTypeShortNm;
+    @Column(name = "FIN_OFFST_GNRTN_CD")
     protected boolean financialOffsetGenerationIndicator;
+    @Column(name = "FIN_BALTYP_ENC_CD")
     protected boolean finBalanceTypeEncumIndicator;
 
     /**

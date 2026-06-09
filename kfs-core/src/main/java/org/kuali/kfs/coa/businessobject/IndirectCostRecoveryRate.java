@@ -30,13 +30,33 @@ import org.kuali.kfs.sys.service.UniversityDateService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@Table(name = "CA_ICR_RATE_T")
 public class IndirectCostRecoveryRate extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
     
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_SERIES_ID")
     private String financialIcrSeriesIdentifier;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
+    @OneToMany(fetch = FetchType.LAZY)
     private List indirectCostRecoveryRateDetails;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
     
     public IndirectCostRecoveryRate() {

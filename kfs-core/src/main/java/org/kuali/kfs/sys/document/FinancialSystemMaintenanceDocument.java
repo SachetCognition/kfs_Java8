@@ -35,9 +35,20 @@ import org.kuali.rice.kns.document.MaintenanceDocumentBase;
 import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used by the system to use financial specific objects and data for maintenance documents
  */
+@Entity
+@Table(name = "KRNS_MAINT_DOC_T")
 public class FinancialSystemMaintenanceDocument extends MaintenanceDocumentBase implements FinancialSystemDocument {
     private static final Logger LOG = Logger.getLogger(FinancialSystemMaintenanceDocument.class);
 

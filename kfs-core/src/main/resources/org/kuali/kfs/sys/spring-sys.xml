@@ -42,8 +42,7 @@
         </property>
         <property name="databaseRepositoryFilePaths">
             <list>
-                <value>org/kuali/kfs/sys/ojb-sys.xml</value>
-            </list>
+					</list>
         </property>
         <property name="scriptConfigurationFilePaths">
             <list>
@@ -469,7 +468,7 @@
 	
     <bean id="universityDateDao" parent="universityDateDao-parentBean"/>
 
-	<bean id="universityDateDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.UniversityDateDaoOjb" abstract="true" />
+	<bean id="universityDateDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.UniversityDateDaoJpa" abstract="true" />
     <bean id="universityDateService" parent="universityDateService-parentBean"/>
 
 	<bean id="universityDateService-parentBean" class="org.kuali.kfs.sys.service.impl.UniversityDateServiceImpl" abstract="true">
@@ -480,20 +479,20 @@
 
 	<bean id="accountingLineService-parentBean" class="org.kuali.kfs.sys.service.impl.AccountingLineServiceImpl" abstract="true">
 		<property name="accountingLineDao">
-			<bean parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.AccountingLineDaoOjb" />
+			<bean parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.AccountingLineDaoJpa" />
 		</property>
 	</bean>
 	
     <bean id="originationCodeDao" parent="originationCodeDao-parentBean"/>
-	<bean id="originationCodeDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.OriginationCodeDaoOjb" abstract="true" />
+	<bean id="originationCodeDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.OriginationCodeDaoJpa" abstract="true" />
 
 	<bean id="generalLedgerPendingEntryDao" parent="generalLedgerPendingEntryDao-parentBean"/>
-	<bean id="generalLedgerPendingEntryDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.GeneralLedgerPendingEntryDaoOjb" abstract="true">
+	<bean id="generalLedgerPendingEntryDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.dataaccess.impl.GeneralLedgerPendingEntryDaoJpa" abstract="true">
 		<property name="balanceTypeDao" ref="balanceTypeDao"/>
 	</bean>
 	
 	<bean id="fiscalYearMakersDao" parent="fiscalYearMakersDao-parentBean"/>	
-	<bean id="fiscalYearMakersDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.batch.dataaccess.impl.FiscalYearMakersDaoOjb" abstract="true" />
+	<bean id="fiscalYearMakersDao-parentBean" parent="platformAwareDao" class="org.kuali.kfs.sys.batch.dataaccess.impl.FiscalYearMakersDaoJpa" abstract="true" />
 
 	<bean id="fiscalYearMakerService" parent="fiscalYearMakerService-parentBean"/>
 	
@@ -903,7 +902,7 @@
 	</bean>
 	
 	<bean id="financialSystemDocumentDao" parent="financialSystemDocumentDao-parentBean" />
-	<bean id="financialSystemDocumentDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.sys.document.dataaccess.impl.FinancialSystemDocumentDaoOjb">
+	<bean id="financialSystemDocumentDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.sys.document.dataaccess.impl.FinancialSystemDocumentDaoJpa">
 	</bean>
 	<bean id="financialSystemDocumentService" parent="financialSystemDocumentService-parentBean"/>
 	
@@ -1242,7 +1241,7 @@
     </bean>
     
     <bean id="financialSystemDocumentHeaderPopulationDao" parent="financialSystemDocumentHeaderPopulationDao-parentBean"/>
-	<bean id="financialSystemDocumentHeaderPopulationDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.sys.batch.dataaccess.impl.FinancialSystemDocumentHeaderPopulationDaoOjb"/>
+	<bean id="financialSystemDocumentHeaderPopulationDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.sys.batch.dataaccess.impl.FinancialSystemDocumentHeaderPopulationDaoJpa"/>
 	<!-- **** -->
        
 	<bean id="attachmentMailer" parent="attachmentMailer-parentBean"/>

@@ -24,11 +24,20 @@ import java.sql.Timestamp;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * General Ledger business object for LedgerEntryHistory
  */
+@Entity
+@Table(name = "GL_ENTRY_HIST_T")
 public class EntryHistory extends Entry implements LedgerEntryHistory {
 
+    @Column(name = "ROW_CNT")
     private Integer rowCount;
 
     /**

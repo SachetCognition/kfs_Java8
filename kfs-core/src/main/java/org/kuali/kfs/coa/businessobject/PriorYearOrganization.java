@@ -33,46 +33,98 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.country.CountryEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_PRIOR_YR_ORG_T")
 public class PriorYearOrganization extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "ORG_MGR_UNVL_ID")
     protected String organizationManagerUniversalId;
+    @Column(name = "ORG_NM")
     protected String organizationName;
+    @Column(name = "RC_CD")
     protected String responsibilityCenterCode;
+    @Column(name = "ORG_PHYS_CMP_CD")
     protected String organizationPhysicalCampusCode;
+    @Column(name = "ORG_TYP_CD")
     protected String organizationTypeCode;
+    @Column(name = "ORG_DFLT_ACCT_NBR")
     protected String organizationDefaultAccountNumber;
+    @Column(name = "ORG_CITY_NM")
     protected String organizationCityName;
+    @Column(name = "ORG_STATE_CD")
     protected String organizationStateCode;
+    @Column(name = "ORG_ZIP_CD")
     protected String organizationZipCode;
+    @Column(name = "ORG_BEGIN_DT")
     protected Date organizationBeginDate;
+    @Column(name = "ORG_END_DT")
     protected Date organizationEndDate;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ORG_CD")
     protected String reportsToOrganizationCode;
+    @Transient
     protected boolean active;
+    @Column(name = "ORG_IN_FP_CD")
     protected boolean organizationInFinancialProcessingIndicator;
+    @Column(name = "ORG_PLNT_ACCT_NBR")
     protected String organizationPlantAccountNumber;
+    @Column(name = "CMP_PLNT_ACCT_NBR")
     protected String campusPlantAccountNumber;
+    @Column(name = "ORG_PLNT_COA_CD")
     protected String organizationPlantChartCode;
+    @Column(name = "CMP_PLNT_COA_CD")
     protected String campusPlantChartCode;
+    @Column(name = "ORG_CNTRY_CD")
     protected String organizationCountryCode;
+    @Column(name = "ORG_LN1_ADDR")
     protected String organizationLine1Address;
+    @Column(name = "ORG_LN2_ADDR")
     protected String organizationLine2Address;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account organizationDefaultAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Organization organization;
+    @Transient
     protected CampusEbo organizationPhysicalCampus;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Organization reportsToOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart reportsToChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account organizationPlantAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account campusPlantAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORG_PLNT_COA_CD", insertable = false, updatable = false)
     protected Chart organizationPlantChart;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CMP_PLNT_COA_CD", insertable = false, updatable = false)
     protected Chart campusPlantChart;
+    @Transient
     protected CountryEbo organizationCountry;
 
     /**

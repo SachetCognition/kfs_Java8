@@ -25,17 +25,35 @@ import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * A class that represents a change to any origin entry that was altered within a GLCP Document
  */
+@Entity
+@Table(name = "GL_COR_CHG_T")
 public class CorrectionChange extends PersistableBusinessObjectBase implements Comparable {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_GRP_LN_NBR")
     private Integer correctionChangeGroupLineNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_LN_NBR")
     private Integer correctionChangeLineNumber;
+    @Column(name = "GL_COR_STRT_POS")
     private Integer correctionStartPosition;
+    @Column(name = "GL_COR_END_POS")
     private Integer correctionEndPosition;
+    @Column(name = "GL_COR_FIELD_VAL")
     private String correctionFieldValue;
+    @Column(name = "GL_COR_FIELD_NM")
     private String correctionFieldName;
 
     public CorrectionChange() {

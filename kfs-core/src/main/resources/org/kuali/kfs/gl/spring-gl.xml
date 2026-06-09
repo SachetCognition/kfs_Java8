@@ -45,8 +45,7 @@
 		</property>
 		<property name="databaseRepositoryFilePaths">
 			<list>
-				<value>org/kuali/kfs/gl/ojb-gl.xml</value>
-			</list>
+					</list>
 		</property>
 		<property name="jobNames">
 			<list>
@@ -1154,7 +1153,7 @@
 		</property>
 	</bean>
 
-	<bean id="glAccountBalanceDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.AccountBalanceDaoOjb">
+	<bean id="glAccountBalanceDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.AccountBalanceDaoJpa">
 		<property name="accountBalanceConsolidationDao" ref="glAccountBalanceConsolidationDao" />
 		<property name="accountBalanceLevelDao" ref="glAccountBalanceLevelDao" />
 		<property name="accountBalanceObjectDao" ref="glAccountBalanceObjectDao" />
@@ -1168,13 +1167,13 @@
 
 	<bean id="glAccountBalanceObjectDao" parent="glAccountBalanceDaoBase" class="org.kuali.kfs.gl.dataaccess.impl.AccountBalanceObjectDaoJdbc"/>
 
-	<bean id="glSufficientFundBalancesDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.SufficientFundBalancesDaoOjb" />
+	<bean id="glSufficientFundBalancesDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.SufficientFundBalancesDaoJpa" />
 
-	<bean id="glEntryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.EntryDaoOjb" />
+	<bean id="glEntryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.EntryDaoJpa" />
 
-	<bean id="glEntryHistoryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.EntryHistoryDaoOjb" />
+	<bean id="glEntryHistoryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.EntryHistoryDaoJpa" />
 
-	<bean id="glBalanceHistoryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.BalanceHistoryDaoOjb" />
+	<bean id="glBalanceHistoryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.BalanceHistoryDaoJpa" />
 	
 	<bean id="glLedgerEntryBalanceCachingDao" parent="platformAwareDaoJdbc" class="org.kuali.kfs.gl.batch.dataaccess.impl.LedgerEntryBalanceCachingDaoJdbc" />
 
@@ -1182,17 +1181,17 @@
 
 	<bean id="glBalancingDao" parent="platformAwareDaoJdbc" class="org.kuali.kfs.gl.dataaccess.impl.BalancingDaoJdbc" />
 
-	<bean id="glEncumbranceDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.EncumbranceDaoOjb">
+	<bean id="glEncumbranceDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.EncumbranceDaoJpa">
 		<property name="balanceTypeDao" ref="balanceTypeDao"/>
 	</bean>
 
-	<bean id="originEntryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.OriginEntryDaoOjb">
+	<bean id="originEntryDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.OriginEntryDaoJpa">
 		<property name="entryClass" value="org.kuali.kfs.gl.businessobject.OriginEntryFull"/>
    			</bean>
 
-	<bean id="glBalanceDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.BalanceDaoOjb"/>
+	<bean id="glBalanceDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.BalanceDaoJpa"/>
 
-	<bean id="glExpenditureTransactionDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.ExpenditureTransactionDaoOjb" />
+	<bean id="glExpenditureTransactionDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.ExpenditureTransactionDaoJpa" />
 	
 	<bean id="glExpenditureTransactionService" parent="glExpenditureTransactionService-parentBean"/>
 	<bean id="glExpenditureTransactionService-parentBean" abstract="true"  class="org.kuali.kfs.gl.service.impl.ExpenditureTransactionServiceImpl">
@@ -1220,13 +1219,13 @@
 		<property name="batchFileDirectoryName" value="${staging.directory}/gl/originEntry"/>		
 	</bean>
 	
-	<bean id="glReversalDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.ReversalDaoOjb" />
+	<bean id="glReversalDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.ReversalDaoJpa" />
 
 	<bean id="glSufficientFundRebuildDao" parent="platformAwareDaoJdbc" class="org.kuali.kfs.gl.dataaccess.impl.SufficientFundRebuildDaoJdbc" />
 
-	<bean id="glCollectorDetailDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CollectorDetailDaoOjb" />
+	<bean id="glCollectorDetailDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CollectorDetailDaoJpa" />
 
-	<bean id="glCorrectionDocumentDao" parent="platformAwareDao" class="org.kuali.kfs.gl.document.dataaccess.impl.CorrectionDocumentDaoOjb" />
+	<bean id="glCorrectionDocumentDao" parent="platformAwareDao" class="org.kuali.kfs.gl.document.dataaccess.impl.CorrectionDocumentDaoJpa" />
 	
 	<!-- SUFFICIENT FUNDS SERVICE/DAO -->
 	<bean id="sufficientFundsService" parent="sufficientFundsService-parentBean"/> 
@@ -1257,7 +1256,7 @@
 		</property>
 	</bean>
 
-	<bean id="glSufficientFundsDao" parent="platformAwareDao" class="org.kuali.kfs.gl.batch.dataaccess.impl.SufficientFundsDaoOjb" />
+	<bean id="glSufficientFundsDao" parent="platformAwareDao" class="org.kuali.kfs.gl.batch.dataaccess.impl.SufficientFundsDaoJpa" />
 
 	<bean id="correctionDocumentService" parent="correctionDocumentService-parentBean"/>
 	<bean id="correctionDocumentService-parentBean" abstract="true"  class="org.kuali.kfs.gl.document.service.impl.CorrectionDocumentServiceImpl">
@@ -1297,11 +1296,11 @@
 		<property name="reportAggregatorService" ref="reportAggregatorService"/>
 	</bean>
 
-	<bean id="glCorrectionChangeDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CorrectionChangeDaoOjb" />
+	<bean id="glCorrectionChangeDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CorrectionChangeDaoJpa" />
 
-	<bean id="glCorrectionChangeGroupDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CorrectionChangeGroupDaoOjb" />
+	<bean id="glCorrectionChangeGroupDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CorrectionChangeGroupDaoJpa" />
 
-	<bean id="glCorrectionCriteriaDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CorrectionCriteriaDaoOjb" />
+	<bean id="glCorrectionCriteriaDao" parent="platformAwareDao" class="org.kuali.kfs.gl.dataaccess.impl.CorrectionCriteriaDaoJpa" />
 
 	<bean id="collectorJob" parent="scheduledJobDescriptor">
 		<property name="steps">
@@ -2301,7 +2300,7 @@
 	<bean id="glReconciliationParserService-parentBean" abstract="true"  class="org.kuali.kfs.gl.batch.service.impl.ReconciliationParserServiceImpl">
 	</bean>
 	
-	<bean id="glReconciliationDao" parent="platformAwareDao" class="org.kuali.kfs.gl.batch.dataaccess.impl.ReconciliationDaoOjb">
+	<bean id="glReconciliationDao" parent="platformAwareDao" class="org.kuali.kfs.gl.batch.dataaccess.impl.ReconciliationDaoJpa">
 	</bean>
 	
 	<bean id="glReconciliationService" parent="glReconciliationService-parentBean"/>

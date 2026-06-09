@@ -27,20 +27,41 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.springframework.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class represents a check in the system. It is a generalized check business object that will be used by the Cash Receipts
  * document, the Cashier document, etc.
  */
 
+@Entity
+@Table(name = "FP_CHECK_DTL_T")
 public class CheckBase extends PersistableBusinessObjectBase implements Check {
+    @Column(name = "FDOC_CHCK_NBR")
     private String checkNumber;
+    @Column(name = "FDOC_CHCK_DT")
     private Date checkDate;
+    @Column(name = "FDOC_CHCK_DESC")
     private String description;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer sequenceId;
+    @Column(name = "FDOC_CHCK_AMT")
     private KualiDecimal amount;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "CSHR_STAT_CD")
     private String cashieringStatus;
+    @Column(name = "FDOC_DPST_LN_NBR")
     private Integer financialDocumentDepositLineNumber;
 
     /**

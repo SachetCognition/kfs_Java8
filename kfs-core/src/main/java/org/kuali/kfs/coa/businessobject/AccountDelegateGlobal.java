@@ -37,21 +37,40 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.service.PersistenceStructureService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+
 /**
  * This class simply acts as a container to hold the List of Delegate Changes and the list of Account entries, for the Global
  * Delegate Change Document.
  */
+@Entity
+@Table(name = "CA_ACCT_DELEGATE_GBL_T")
 public class AccountDelegateGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
 
+    @Transient
     protected String modelName;
+    @Transient
     protected String modelChartOfAccountsCode;
+    @Transient
     protected String modelOrganizationCode;
 
+    @Transient
     protected AccountDelegateModel model;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<AccountGlobalDetail> accountGlobalDetails;
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<AccountDelegateGlobalDetail> delegateGlobals;
 
     /**

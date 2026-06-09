@@ -26,21 +26,44 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_OBJ_LEVEL_T")
 public class ObjectLevel extends PersistableBusinessObjectBase implements MutableInactivatable {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectLevel.class);
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     private String financialObjectLevelCode;
+    @Column(name = "FIN_OBJ_LEVEL_NM")
     private String financialObjectLevelName;
+    @Column(name = "FIN_OBJLVL_SHRT_NM")
     private String financialObjectLevelShortNm;
+    @Column(name = "FIN_OBJLVL_ACTV_CD")
     private boolean active;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String financialConsolidationObjectCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectConsolidation financialConsolidationObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
 

@@ -24,9 +24,20 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_FUND_GRP_T")
 public class SubFundGroup extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -38,18 +49,34 @@ public class SubFundGroup extends PersistableBusinessObjectBase implements Mutab
 
     private static final long serialVersionUID = 3304324942061886270L;
 
+    @Id
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Column(name = "SUB_FUND_GRP_DESC")
     private String subFundGroupDescription;
+    @Column(name = "SUBFUNDGRP_ACTV_CD")
     private boolean active;
+    @Column(name = "SUB_FUNDGRP_TYP_CD")
     private String subFundGroupTypeCode;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
+    @Column(name = "SUB_FUND_GRP_WAGE_IND")
     private boolean subFundGroupWagesIndicator;
+    @Column(name = "FUND_GRP_CD")
     private String fundGroupCode;
+    @Column(name = "FND_GRP_BA_RSTR_LVL_CD")
     private String fundGroupBudgetAdjustmentRestrictionLevelCode;
+    @Column(name = "ACCT_RSTRC_STAT_CD")
     private String accountRestrictedStatusCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FUND_GRP_CD", insertable = false, updatable = false)
     private FundGroup fundGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUNDGRP_TYP_CD", insertable = false, updatable = false)
     private SubFundGroupType subFundGroupType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_RSTRC_STAT_CD", insertable = false, updatable = false)
     private RestrictedStatus accountRestrictedStatus;
 
     /**

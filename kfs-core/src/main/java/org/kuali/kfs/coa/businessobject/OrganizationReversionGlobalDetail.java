@@ -31,21 +31,42 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This is a representation of an Organization Reversion Detail, made specifically for Global Organization Reversions. However, as
  * OrganizationReversionDetail lists Organization as a primary key and Global Organization Reversions deal with several
  * Organizations, that class could not be re-used for Globals.
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CHG_DTL_T")
 public class OrganizationReversionGlobalDetail extends GlobalBusinessObjectDetailBase {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalDetail.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_OBJ_CD")
     private String organizationReversionObjectCode;
+    @Column(name = "ORG_RVRSN_CD")
     private String organizationReversionCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORG_RVRSN_CTGRY_CD", insertable = false, updatable = false)
     private OrganizationReversionCategory organizationReversionCategory;
+    @Transient
     private OrganizationReversionGlobal parentGlobalOrganizationReversion;
+    @Transient
     private ObjectCode organizationReversionObject;
 
     /**

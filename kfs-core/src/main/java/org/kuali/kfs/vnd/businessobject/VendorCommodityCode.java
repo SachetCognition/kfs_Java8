@@ -21,15 +21,37 @@ package org.kuali.kfs.vnd.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PUR_VNDR_COMM_T")
 public class VendorCommodityCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+	@Column(name = "VNDR_HDR_GNRTD_ID")
 	private Integer vendorHeaderGeneratedIdentifier;
+	@Id
+	@Column(name = "VNDR_DTL_ASND_ID")
 	private Integer vendorDetailAssignedIdentifier;
+	@Id
+	@Column(name = "PUR_COMM_CD")
 	private String purchasingCommodityCode;
+	@Column(name = "PUR_COMM_DFLT_IND")
 	private boolean commodityDefaultIndicator;
+	@Column(name = "DOBJ_MAINT_CD_ACTV_IND")
 	private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PUR_COMM_CD", insertable = false, updatable = false)
     private CommodityCode commodityCode;
     
 	/**

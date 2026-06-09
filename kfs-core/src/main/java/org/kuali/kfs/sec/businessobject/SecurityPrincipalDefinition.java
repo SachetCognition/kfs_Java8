@@ -26,12 +26,29 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * Attribute Security Principal Definition
  */
+@Entity
+@Table(name = "SEC_SCRTY_PRNCPL_DEFN_T")
 public class SecurityPrincipalDefinition extends AbstractSecurityModelDefinition {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PRNCPL_DEFN_ID")
     protected KualiInteger principalDefinitionId;
+    @Column(name = "PRNCPL_ID")
     protected String principalId;
 
     /**

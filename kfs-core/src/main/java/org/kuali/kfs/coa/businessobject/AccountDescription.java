@@ -31,18 +31,40 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "CA_ACCT_DESC_T")
 public class AccountDescription extends PersistableBusinessObjectBase {
     private static final long serialVersionUID = 6233459415790165510L;
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "CAMPUS_DESC")
     protected String campusDescription;
+    @Column(name = "ORG_DESC")
     protected String organizationDescription;
+    @Column(name = "RC_DESC")
     protected String responsibilityCenterDescription;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
     
+    @Transient
     protected CampusEbo campus;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Building building;
 
     public String getChartOfAccountsCode() {

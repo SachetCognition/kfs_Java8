@@ -27,24 +27,55 @@ import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class represents a organization reversion unit of work category amount
  */
+@Entity
+@Table(name = "GL_ORG_RVRSN_CTGRY_AMT_T")
 public class OrgReversionUnitOfWorkCategoryAmount extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String categoryCode;
+    @Column(name = "ORG_TOT_ACTL_AMT")
     private KualiDecimal actual = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_BDGT_AMT")
     private KualiDecimal budget = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_ENCUM_AMT")
     private KualiDecimal encumbrance = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_CF_AMT")
     private KualiDecimal carryForward = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_AVAIL_AMT")
     private KualiDecimal available = KualiDecimal.ZERO;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORG_RVRSN_CTGRY_CD", insertable = false, updatable = false)
     private OrganizationReversionCategory organizationReversionCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
     private OrgReversionUnitOfWork organizationReversionUnitOfWork;
 
     public OrgReversionUnitOfWorkCategoryAmount(String cat) {

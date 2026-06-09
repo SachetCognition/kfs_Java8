@@ -24,18 +24,37 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * This class represents a sufficient fund rebuild
  */
+@Entity
+@Table(name = "GL_SF_REBUILD_T")
 public class SufficientFundRebuild extends PersistableBusinessObjectBase {
 
     public static final String REBUILD_ACCOUNT = "A";
     public static final String REBUILD_OBJECT = "O";
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCT_FOBJ_TYP_CD")
     private String accountFinancialObjectTypeCode;
+    @Id
+    @Column(name = "ACCT_NBR_FOBJ_CD")
     private String accountNumberFinancialObjectCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
 
     /**

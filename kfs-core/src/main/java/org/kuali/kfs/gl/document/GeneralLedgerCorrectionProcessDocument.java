@@ -48,27 +48,51 @@ import org.kuali.rice.kew.framework.postprocessor.DocumentRouteLevelChange;
 import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * The General Ledger Correction Document, a document that allows editing and processing of origin entry groups and the origin
  * entries within them.
  */
+@Entity
+@Table(name = "GL_COR_DOC_T")
 public class GeneralLedgerCorrectionProcessDocument extends FinancialSystemTransactionalDocumentBase implements AmountTotaling {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerCorrectionProcessDocument.class);
 
+    @Column(name = "GL_COR_TYP_CD")
     protected String correctionTypeCode; // CorrectionDocumentService.CORRECTION_TYPE_MANUAL or
+    @Column(name = "GL_COR_SELECT_IND")
     protected boolean correctionSelection; // false if all input rows should be in the output, true if only selected rows should be
     // in the output
+    @Column(name = "GL_COR_FL_DEL_IND")
     protected boolean correctionFileDelete; // false if the file should be processed by scrubber, true if the file should not be
     // processed by scrubber
+    @Column(name = "GL_COR_ROW_CNT")
     protected Integer correctionRowCount; // Row count in output group
+    @Column(name = "GL_COR_DEBIT_TOT_AMT")
     protected KualiDecimal correctionDebitTotalAmount; // Debit amount total in output group
+    @Column(name = "GL_COR_CRDT_TOT_AMT")
     protected KualiDecimal correctionCreditTotalAmount; // Credit amount total in output group
+    @Column(name = "GL_COR_BDGT_TOT_AMT")
     protected KualiDecimal correctionBudgetTotalAmount; // Budget amount total in output group
+    @Column(name = "GL_COR_INP_FL_NM")
     protected String correctionInputFileName; // input file name
+    @Column(name = "GL_COR_OUT_FL_NM")
     protected String correctionOutputFileName; // output file name
+    @Column(name = "GL_COR_SCR_TXT")
     protected String correctionScriptText; // Not used
+    @Column(name = "GL_COR_CHG_GRP_NXT_LN_NBR")
     protected Integer correctionChangeGroupNextLineNumber;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<CorrectionChangeGroup> correctionChangeGroup;
 
        public GeneralLedgerCorrectionProcessDocument() {

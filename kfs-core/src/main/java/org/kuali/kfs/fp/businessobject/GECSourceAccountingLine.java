@@ -20,10 +20,21 @@ package org.kuali.kfs.fp.businessobject;
 
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * Extends SourceAccountingLine so that, ultimately, GEC can generate different help text since it marks a field as 
  * required which is otherwise optional.
  */
+@Entity
+@Table(name = "FP_ACCT_LINES_T")
 public class GECSourceAccountingLine extends SourceAccountingLine {
 }

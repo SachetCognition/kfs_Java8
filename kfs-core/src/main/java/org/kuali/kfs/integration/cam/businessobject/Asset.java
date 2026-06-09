@@ -21,22 +21,47 @@ package org.kuali.kfs.integration.cam.businessobject;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementAsset;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_T")
 public class Asset extends PersistableBusinessObjectBase implements CapitalAssetManagementAsset {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CPTLAST_NBR")
     protected Long capitalAssetNumber;
+    @Column(name = "CPTLAST_DESC")
     protected String capitalAssetDescription;
+    @Column(name = "CPTLAST_TYP_CD")
     protected String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_VENDOR_NM")
     protected String vendorName;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     protected String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     protected String buildingSubRoomNumber;
+    @Column(name = "CPTLAST_TAG_NBR")
     protected String campusTagNumber;
+    @Column(name = "CPTLAST_MFR_NM")
     protected String manufacturerName;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     protected String manufacturerModelNumber;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     protected String serialNumber;
+    @Transient
     protected Integer quantity;
 
     /**

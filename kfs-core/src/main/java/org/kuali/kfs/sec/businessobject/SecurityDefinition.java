@@ -27,28 +27,61 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * Defines a restriction that can be given to a model or principal. A restriction defines the attribute that is restricted on, and the action(s) that are being restricted. A KIM
  * permission and role is created from a definition record
  */
+@Entity
+@Table(name = "SEC_SCRTY_DEFN_T")
 public class SecurityDefinition extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "DEFN_ID")
     private KualiInteger id;
+    @Column(name = "DEFN_NM")
     private String name;
+    @Column(name = "DEFN_DESC_TXT")
     private String description;
+    @Column(name = "ROLE_ID")
     private String roleId;
+    @Column(name = "ATTR_ID")
     private KualiInteger attributeId;
+    @Column(name = "RSTR_VIEW_ACCT_LINE_IND")
     private boolean restrictViewAccountingLine;
+    @Column(name = "RSTR_EDIT_ACCT_LINE_IND")
     private boolean restrictEditAccountingLine;
+    @Column(name = "RSTR_VIEW_DOC_IND")
     private boolean restrictViewDocument;
+    @Column(name = "RSTR_EDIT_DOC_IND")
     private boolean restrictEditDocument;
+    @Column(name = "RSTR_VIEW_NTE_ATT_IND")
     private boolean restrictViewNotesAndAttachments;
+    @Column(name = "RSTR_LU_IND")
     private boolean restrictLookup;
+    @Column(name = "RSTR_GL_INQ_IND")
     private boolean restrictGLInquiry;
+    @Column(name = "RSTR_LD_INQ_IND")
     private boolean restrictLaborInquiry;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ATTR_ID", insertable = false, updatable = false)
     private SecurityAttribute securityAttribute;
 
+    @OneToMany(fetch = FetchType.LAZY)
     private List<SecurityDefinitionDocumentType> definitionDocumentTypes;
 
     public SecurityDefinition() {

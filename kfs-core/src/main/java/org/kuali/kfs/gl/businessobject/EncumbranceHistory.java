@@ -31,9 +31,17 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Encumbrance BO for Balancing process. I.e. a shadow representation.
 */
+@Entity
+@Table(name = "GL_ENCUMBRANCE_HIST_T")
 public class EncumbranceHistory extends Encumbrance {
 
     public EncumbranceHistory() {

@@ -26,19 +26,40 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Relationship between a Vendor and a <code>ShippingSpecialCondition</code>.
  * 
  * @see org.kuali.kfs.vnd.businessobject.ShippingSpecialCondition
  */
+@Entity
+@Table(name = "PUR_VNDR_SHP_SPCL_COND_T")
 public class VendorShippingSpecialCondition extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Id
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Id
+    @Column(name = "VNDR_SHP_SPCL_COND_CD")
     private String vendorShippingSpecialConditionCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_SPCL_COND_CD", insertable = false, updatable = false)
     private ShippingSpecialCondition vendorShippingSpecialCondition;
 
     /**

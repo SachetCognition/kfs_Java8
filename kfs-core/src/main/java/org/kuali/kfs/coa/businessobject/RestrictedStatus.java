@@ -23,9 +23,17 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_RESTRICT_STAT_T")
 public class RestrictedStatus extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,8 +43,12 @@ public class RestrictedStatus extends PersistableBusinessObjectBase implements M
 
     }
 
+    @Id
+    @Column(name = "ACCT_RSTRC_STAT_CD")
     private String accountRestrictedStatusCode;
+    @Column(name = "ACCT_RSTRC_STAT_NM")
     private String accountRestrictedStatusName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

@@ -45,53 +45,113 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_ACCT_CHG_DOC_T")
 public class AccountGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "ACCT_FSC_OFC_UID")
     protected String accountFiscalOfficerSystemIdentifier;
+    @Column(name = "ACCT_SPVSR_UNVL_ID")
     protected String accountsSupervisorySystemsIdentifier;
+    @Column(name = "ACCT_MGR_UNVL_ID")
     protected String accountManagerSystemIdentifier;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "SUB_FUND_GRP_CD")
     protected String subFundGroupCode;
+    @Column(name = "ACCT_CITY_NM")
     protected String accountCityName;
+    @Column(name = "ACCT_STATE_CD")
     protected String accountStateCode;
+    @Column(name = "ACCT_STREET_ADDR")
     protected String accountStreetAddress;
+    @Column(name = "ACCT_ZIP_CD")
     protected String accountZipCode;
+    @Column(name = "ACCT_EXPIRATION_DT")
     protected Date accountExpirationDate;
+    @Column(name = "CONT_FIN_COA_CD")
     protected String continuationFinChrtOfAcctCd;
+    @Column(name = "CONT_ACCOUNT_NBR")
     protected String continuationAccountNumber;
+    @Column(name = "INCOME_FIN_COA_CD")
     protected String incomeStreamFinancialCoaCode;
+    @Column(name = "INCOME_ACCOUNT_NBR")
     protected String incomeStreamAccountNumber;
+    @Column(name = "CG_CFDA_NBR")
     protected String accountCfdaNumber;
+    @Column(name = "FIN_HGH_ED_FUNC_CD")
     protected String financialHigherEdFunctionCd;
+    @Column(name = "ACCT_SF_CD")
     protected String accountSufficientFundsCode;
+    @Column(name = "ACCT_PND_SF_CD")
     protected Boolean pendingAcctSufficientFundsIndicator;
+    @Column(name = "ACCT_SRCH_CRTA_TXT")
     protected String accountSearchCriteriaTxt;
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<AccountGlobalDetail> accountGlobalDetails;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DocumentHeader financialDocument;
+    @Transient
     protected Person accountFiscalOfficerUser;
+    @Transient
     protected Person accountSupervisoryUser;
+    @Transient
     protected Person accountManagerUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONT_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart continuationFinChrtOfAcct;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account continuationAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account incomeStreamAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INCOME_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart incomeStreamFinancialCoa;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     protected SubFundGroup subFundGroup;
+    @Transient
     protected StateEbo accountState;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_HGH_ED_FUNC_CD", insertable = false, updatable = false)
     protected HigherEducationFunction financialHigherEdFunction;
+    @Transient
     protected PostalCodeEbo postalZipCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_SF_CD", insertable = false, updatable = false)
     protected SufficientFundsCode sufficientFundsCode;
+    @Transient
     protected ContractsAndGrantsCfda cfda;
 
     // added for the employee labor benefit calculation
+    @Column(name = "LBR_BEN_RT_CAT_CD")
     protected String laborBenefitRateCategoryCode;
+    @Transient
     protected LaborBenefitRateCategory laborBenefitRateCategory;
 
     /**

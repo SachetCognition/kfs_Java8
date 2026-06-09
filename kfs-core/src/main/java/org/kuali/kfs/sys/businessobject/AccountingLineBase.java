@@ -48,52 +48,97 @@ import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This is the generic class which contains all the elements on a typical line of accounting elements. These are all the accounting
  * items necessary to create a pending entry to the G/L. All transaction documents will use this business object inherently.
  */
+@Entity
+@Table(name = "")
 public abstract class AccountingLineBase extends PersistableBusinessObjectBase implements Serializable, AccountingLine, GeneralLedgerPendingEntrySourceDetail {
     private static final Logger LOG = Logger.getLogger(AccountingLineBase.class);
 
+    @Transient
     protected String documentNumber;
+    @Transient
     protected Integer sequenceNumber; // relative to the grouping of acctng lines
+    @Transient
     protected Integer postingYear;
+    @Transient
     protected KualiDecimal amount;
+    @Transient
     protected String referenceOriginCode;
+    @Transient
     protected String referenceNumber;
+    @Transient
     protected String referenceTypeCode;
+    @Transient
     protected String overrideCode = AccountingLineOverride.CODE.NONE;
+    @Transient
     protected boolean accountExpiredOverride; // for the UI, persisted in overrideCode
+    @Transient
     protected boolean accountExpiredOverrideNeeded; // for the UI, not persisted
+    @Transient
     protected boolean nonFringeAccountOverride; // for the UI, persisted in overrideCode
+    @Transient
     protected boolean nonFringeAccountOverrideNeeded; // for the UI, not persisted
+    @Transient
     protected boolean objectBudgetOverride;
+    @Transient
     protected boolean objectBudgetOverrideNeeded;
+    @Transient
     protected String organizationReferenceId;
+    @Transient
     protected String debitCreditCode; // should only be set by the Journal Voucher or Auxiliary Voucher document
+    @Transient
     protected String encumbranceUpdateCode; // should only be set by the Journal Voucher document
+    @Transient
     protected String financialDocumentLineTypeCode;
+    @Transient
     protected String financialDocumentLineDescription;
+    @Transient
     protected boolean salesTaxRequired;
 
+    @Transient
     protected String chartOfAccountsCode;
+    @Transient
     protected String accountNumber;
+    @Transient
     protected String financialObjectCode;
+    @Transient
     protected String subAccountNumber;
+    @Transient
     protected String financialSubObjectCode;
+    @Transient
     protected String projectCode;
+    @Transient
     protected String balanceTypeCode;
 
     // bo references
+    @Transient
     protected Chart chart;
+    @Transient
     protected Account account;
+    @Transient
     protected ObjectCode objectCode;
+    @Transient
     protected SubAccount subAccount;
+    @Transient
     protected SubObjectCode subObjectCode;
+    @Transient
     protected ProjectCode project;
+    @Transient
     protected BalanceType balanceTyp;
+    @Transient
     protected OriginationCode referenceOrigin;
+    @Transient
     protected DocumentTypeEBO referenceFinancialSystemDocumentTypeCode;
+    @Transient
     protected SalesTax salesTax;
 
     /**

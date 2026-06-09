@@ -24,18 +24,41 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Phone number for a Vendor Contact.
  */
+@Entity
+@Table(name = "PUR_VNDR_CNTCT_PHN_NBR_T")
 public class VendorContactPhoneNumber extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_CNTCT_PHN_GNRTD_ID")
     private Integer vendorContactPhoneGeneratedIdentifier;
+    @Column(name = "VNDR_CNTCT_GNRTD_ID")
     private Integer vendorContactGeneratedIdentifier;
+    @Column(name = "VNDR_PHN_TYP_CD")
     private String vendorPhoneTypeCode;
+    @Column(name = "VNDR_PHN_NBR")
     private String vendorPhoneNumber;
+    @Column(name = "VNDR_PHN_EXTNS_NBR")
     private String vendorPhoneExtensionNumber;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_PHN_TYP_CD", insertable = false, updatable = false)
     private PhoneType vendorPhoneType;
 
     /**

@@ -20,12 +20,21 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  * Represents a payment type code
  */
+@Entity
+@Table(name = "PDP_PAYEE_TYP_T")
 public class PayeeType extends KualiCodeBase {
 
+    @Column(name = "ACH_ELGBL_IND")
     private boolean achEligible;
     
     public PayeeType() {

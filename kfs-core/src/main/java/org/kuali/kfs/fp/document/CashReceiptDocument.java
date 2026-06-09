@@ -61,12 +61,24 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the CashReceiptDocument in Kuali. This is a transactional document that will
  * eventually post transactions to the G/L. It integrates with workflow. Since a Cash Receipt is a one sided transactional document,
  * only accepting funds into the university, the accounting line data will be held in the source accounting line data structure
  * only.
  */
+@Entity
+@Table(name = "FP_CASH_RCPT_DOC_T")
 public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyable, AmountTotaling, CapitalAssetEditable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashReceiptDocument.class);
 
@@ -77,44 +89,68 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
     public static final String REQUIRE_REVIEW_SPLIT = "RequireChangeRequestReview";
 
     // child object containers - for all the different reconciliation detail sections
+    @Transient
     protected String checkEntryMode = CHECK_ENTRY_DETAIL;
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<Check> checks = new ArrayList<Check>();
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<Check> confirmedChecks = new ArrayList<Check>();
 
     // deposit controls
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<DepositCashReceiptControl> depositCashReceiptControl = new ArrayList<DepositCashReceiptControl>();
 
     // incrementers for detail lines
-    protected Integer nextCheckSequenceId = Integer.valueOf(1);
-    protected Integer nextConfirmedCheckSequenceId = Integer.valueOf(1);
+    @Column(name = "FDOC_NXT_CK_LN_NBR")
+    protected Integer nextCheckSequenceId = new Integer(1);
+    @Transient
+    protected Integer nextConfirmedCheckSequenceId = new Integer(1);
 
     // monetary attributes
 
     // These total amount fields except the check ones aren't needed, since their values are computed by the getters;
     // the setters are never used and aren't needed; also these fields exist in DB, but the values are never set.
+    @Column(name = "FDOC_CASH_AMT")
     protected KualiDecimal totalCurrencyAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_TOTL_CHCK_AMT")
     protected KualiDecimal totalCheckAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_TOTL_COIN_AMT")
     protected KualiDecimal totalCoinAmount = KualiDecimal.ZERO;
+    @Transient
     protected KualiDecimal sumTotalAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_CNFRMD_CASH_AMT")
     protected KualiDecimal totalConfirmedCurrencyAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_CNFRMD_CHCK_AMT")
     protected KualiDecimal totalConfirmedCheckAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_CNFRMD_COIN_AMT")
     protected KualiDecimal totalConfirmedCoinAmount = KualiDecimal.ZERO;
+    @Transient
     protected KualiDecimal totalChangeAmount = KualiDecimal.ZERO;
 
+    @Transient
     protected CurrencyDetail currencyDetail;
+    @Transient
     protected CoinDetail coinDetail;
 
+    @Transient
     protected CurrencyDetail confirmedCurrencyDetail;
+    @Transient
     protected CoinDetail confirmedCoinDetail;
 
+    @Transient
     protected CurrencyDetail changeCurrencyDetail;
+    @Transient
     protected CoinDetail changeCoinDetail;
 
+    @Transient
     protected CurrencyDetail confirmedChangeCurrencyDetail;
+    @Transient
     protected CoinDetail confirmedChangeCoinDetail;
 
+    @Transient
     protected boolean recategorized;
 
+    @Transient
     protected String createDate;
 
     /**
@@ -345,7 +381,7 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
 
         this.checks.add(check);
 
-        this.nextCheckSequenceId = Integer.valueOf(this.nextCheckSequenceId.intValue() + 1);
+        this.nextCheckSequenceId = new Integer(this.nextCheckSequenceId.intValue() + 1);
 
         setTotalCheckAmount(getTotalCheckAmount().add(check.getAmount()));
     }
@@ -360,7 +396,7 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
 
         this.confirmedChecks.add(check);
 
-        this.nextConfirmedCheckSequenceId = Integer.valueOf(this.nextConfirmedCheckSequenceId.intValue() + 1);
+        this.nextConfirmedCheckSequenceId = new Integer(this.nextConfirmedCheckSequenceId.intValue() + 1);
 
         setTotalConfirmedCheckAmount(getTotalConfirmedCheckAmount().add(check.getAmount()));
     }

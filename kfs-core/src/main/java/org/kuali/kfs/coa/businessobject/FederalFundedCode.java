@@ -21,9 +21,17 @@ package org.kuali.kfs.coa.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Federal Funded Code Business Object
  */
+@Entity
+@Table(name = "CA_FED_FND_T")
 public class FederalFundedCode extends KualiCodeBase implements MutableInactivatable {
 
     private static final long serialVersionUID = -3582946967647008777L;

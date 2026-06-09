@@ -22,9 +22,20 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "FS_TAX_REGION_TYPE_T")
 public class TaxRegionType extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "TAX_REGION_TYP_CD")
     private String taxRegionTypeCode;
+    @Column(name = "TAX_REGION_TYP_NM")
     private String taxRegionTypeName;
 
     public String getTaxRegionTypeCode() {

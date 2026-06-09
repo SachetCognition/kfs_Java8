@@ -29,28 +29,65 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_REVERSION_T")
 public class OrganizationReversion extends PersistableBusinessObjectBase implements MutableInactivatable, CarryForwardReversionProcessOrganizationInfo, FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "BDGT_RVRSN_COA_CD")
     private String budgetReversionChartOfAccountsCode;
+    @Column(name = "BDGT_RVRSNACCT_NBR")
     private String budgetReversionAccountNumber;
+    @Column(name = "CF_BY_OBJ_CD_IND")
     private boolean carryForwardByObjectCodeIndicator;
+    @Column(name = "CSH_RVRSNFINCOA_CD")
     private String cashReversionFinancialChartOfAccountsCode;
+    @Column(name = "CSH_RVRSN_ACCT_NBR")
     private String cashReversionAccountNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account cashReversionAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account budgetReversionAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BDGT_RVRSN_COA_CD", insertable = false, updatable = false)
     private Chart budgetReversionChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CSH_RVRSNFINCOA_CD", insertable = false, updatable = false)
     private Chart cashReversionFinancialChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
+    @Transient
     private List<Organization> organizations; // This is only used by the "global" document
+    @OneToMany(fetch = FetchType.LAZY)
     private List<OrganizationReversionDetail> organizationReversionDetail;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

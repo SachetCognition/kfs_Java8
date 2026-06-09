@@ -31,22 +31,52 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "PDP_PROC_SUM_T")
 public class ProcessSummary extends TimestampedBusinessObjectBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PROC_SUM_ID")
     private KualiInteger id;
+    @Column(name = "CUST_ID")
     private KualiInteger customerId;
+    @Column(name = "DISB_TYP_CD")
     private String disbursementTypeCode;
+    @Column(name = "PROC_ID")
     private KualiInteger processId;
+    @Column(name = "PMT_SORT_ORD_VAL")
     private KualiInteger sortGroupId;
+    @Column(name = "BEG_DISB_NBR")
     private KualiInteger beginDisbursementNbr;
+    @Column(name = "END_DISB_NBR")
     private KualiInteger endDisbursementNbr;
+    @Column(name = "PROC_TOT_AMT")
     private KualiDecimal processTotalAmount;
+    @Column(name = "PROC_TOT_CNT")
     private KualiInteger processTotalCount;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DISB_TYP_CD", insertable = false, updatable = false)
     private DisbursementType disbursementType;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PROC_ID", insertable = false, updatable = false)
     private PaymentProcess process;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUST_ID", insertable = false, updatable = false)
     private CustomerProfile customer;
     
     public ProcessSummary() {

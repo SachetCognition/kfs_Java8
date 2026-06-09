@@ -31,15 +31,30 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 import org.kuali.rice.krad.service.PersistenceStructureService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Business Object representing the account change details entity
  */
+@Entity
+@Table(name = "CA_ACCT_CHG_DTL_T")
 public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     private static final long serialVersionUID = -6329389744704772474L;
     private static final Logger LOG = Logger.getLogger(AccountGlobalDetail.class);
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
 
     // jkeller: made these transient to prevent post processor serialization errors

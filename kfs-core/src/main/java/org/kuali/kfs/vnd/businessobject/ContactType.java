@@ -24,16 +24,28 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Types of Contacts for Vendor Contacts. Typically, these types reflect the Contact's position and/or function within the Vendor's
  * organization.
  * 
  * @see org.kuali.kfs.vnd.businessobject.VendorContact
  */
+@Entity
+@Table(name = "PUR_CNTCT_TYP_T")
 public class ContactType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_CNTCT_TYP_CD")
     private String vendorContactTypeCode;
+    @Column(name = "VNDR_CNTCT_TYP_DESC")
     private String vendorContactTypeDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

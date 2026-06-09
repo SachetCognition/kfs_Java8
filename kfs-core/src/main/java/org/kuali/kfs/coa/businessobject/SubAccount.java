@@ -25,38 +25,74 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_ACCT_T")
 public class SubAccount extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     private static final long serialVersionUID = 6853259976912014273L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "SubAccount";
     
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "SUB_ACCT_NM")
     private String subAccountName;
+    @Column(name = "SUB_ACCT_ACTV_CD")
     private boolean active;
+    @Column(name = "FIN_RPT_CHRT_CD")
     private String financialReportChartCode;
+    @Column(name = "FIN_RPT_ORG_CD")
     private String finReportOrganizationCode;
+    @Column(name = "FIN_RPT_CD")
     private String financialReportingCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private A21SubAccount a21SubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ReportingCode reportingCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization org;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_RPT_CHRT_CD", insertable = false, updatable = false)
     private Chart financialReportChart;
 
 
     // Several kinds of Dummy Attributes for dividing sections on Inquiry page
+    @Transient
     private String financialReportingCodeSectionBlank;
+    @Transient
     private String financialReportingCodeSection;
+    @Transient
     private String cgCostSharingSectionBlank;
+    @Transient
     private String cgCostSharingSection;
+    @Transient
     private String cgICRSectionBlank;
+    @Transient
     private String cgICRSection;
 
     /**

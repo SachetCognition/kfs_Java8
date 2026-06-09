@@ -28,15 +28,31 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+
 /**
  * Represents the assignment of one or more security definitions and one or more models to a principal
  */
+@Entity
+@Table(name = "SEC_SCRTY_PRNCPL_T")
 public class SecurityPrincipal extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "PRNCPL_ID")
     protected String principalId;
 
+    @Transient
     protected Person securityPerson;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<SecurityPrincipalDefinition> principalDefinitions = new ArrayList<SecurityPrincipalDefinition>();
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<SecurityModelMember> principalModels = new ArrayList<SecurityModelMember>();
 
     /**

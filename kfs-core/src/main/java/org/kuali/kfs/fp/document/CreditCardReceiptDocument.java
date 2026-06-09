@@ -45,24 +45,42 @@ import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the CreditCardReceipt document in Kuali. This is a transactional document that will
  * eventually post transactions to the G/L. It integrates with workflow. Since a Credit Card Receipt is a one sided transactional
  * document, only accepting funds into the university, the accounting line data will be held in the source accounting line data
  * structure only.
  */
+@Entity
+@Table(name = "FP_CASH_RCPT_DOC_T")
 public class CreditCardReceiptDocument extends CashReceiptFamilyBase implements Copyable, AmountTotaling, Correctable {
     public static final String CREDIT_CARD_RECEIPT_DOCUMENT_TYPE_CODE = "CCR";
 
     // holds details about each credit card receipt
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<CreditCardDetail> creditCardReceipts = new ArrayList<CreditCardDetail>();
 
     // incrementers for detail lines
-    protected Integer nextCcCrLineNumber = Integer.valueOf(1);
+    @Column(name = "FDC_NXTCC_CRLN_NBR")
+    protected Integer nextCcCrLineNumber = new Integer(1);
 
     // monetary attributes
+    @Column(name = "FDOC_CRDT_CARD_AMT")
     protected KualiDecimal totalCreditCardAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_BNK_CD")
     protected String creditCardReceiptBankCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_BNK_CD", insertable = false, updatable = false)
     protected Bank bank;
 
     /**
@@ -149,7 +167,7 @@ public class CreditCardReceiptDocument extends CashReceiptFamilyBase implements 
         this.creditCardReceipts.add(creditCardReceiptDetail);
 
         // increment line number
-        this.nextCcCrLineNumber = Integer.valueOf(this.nextCcCrLineNumber.intValue() + 1);
+        this.nextCcCrLineNumber = new Integer(this.nextCcCrLineNumber.intValue() + 1);
 
         // update the overall amount
         this.totalCreditCardAmount = this.totalCreditCardAmount.add(creditCardReceiptDetail.getCreditCardAdvanceDepositAmount());
@@ -374,7 +392,7 @@ public class CreditCardReceiptDocument extends CashReceiptFamilyBase implements 
      */
     protected void correctCreditCardReceipts() {
         for (CreditCardDetail receipt: creditCardReceipts) {
-            receipt.setVersionNumber(Long.valueOf(1));
+            receipt.setVersionNumber(new Long(1));
             receipt.setDocumentNumber(documentNumber);
             receipt.setCreditCardAdvanceDepositAmount(receipt.getCreditCardAdvanceDepositAmount().negated());
         }

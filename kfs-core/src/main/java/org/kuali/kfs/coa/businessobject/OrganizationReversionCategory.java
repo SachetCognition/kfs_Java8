@@ -24,14 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CTGRY_T")
 public class OrganizationReversionCategory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_CTGRY_NM")
     private String organizationReversionCategoryName;
+    @Column(name = "ORG_RVRSN_SORT_CD")
     private String organizationReversionSortCode;
+    @Column(name = "ORG_RVRSN_CTGRY_ACTV_IND")
     private boolean active;
 
     /**

@@ -24,18 +24,34 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class represents a pending balances move
  * 
  */
+@Entity
+@Table(name = "GL_PENDING_BALANCES_MT")
 public class PendingBalancesMove extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Column(name = "APPR_BUDGET")
     private KualiDecimal appropriationBudget;
+    @Column(name = "APPR_ACTUAL")
     private KualiDecimal appropriationActual;
+    @Column(name = "APPR_ENCUM")
     private KualiDecimal appropriationEncumbrance;
+    @Column(name = "PEND_BUDGET")
     private KualiDecimal pendingBudget;
+    @Column(name = "PEND_ACTUAL")
     private KualiDecimal pendingActual;
+    @Column(name = "PEND_ENCUM")
     private KualiDecimal pendingEncumbrance;
 
     /**

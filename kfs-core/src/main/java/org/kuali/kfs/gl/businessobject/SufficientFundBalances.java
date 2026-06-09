@@ -33,22 +33,50 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class represents sufficient fund balances
  */
+@Entity
+@Table(name = "GL_SF_BALANCES_T")
 public class SufficientFundBalances extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "ACCT_SF_CD")
     private String accountSufficientFundsCode;
+    @Column(name = "CURR_BDGT_BAL_AMT")
     private KualiDecimal currentBudgetBalanceAmount;
+    @Column(name = "ACCT_ACTL_XPND_AMT")
     private KualiDecimal accountActualExpenditureAmt;
+    @Column(name = "ACCT_ENCUM_AMT")
     private KualiDecimal accountEncumbranceAmount;
+    @Column(name = "TIMESTAMP")
     private Date transactionDateTimeStamp;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode objectCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
 
     public static final String BLANKS = "                 ";

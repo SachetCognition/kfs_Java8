@@ -32,19 +32,43 @@ import org.kuali.rice.krad.datadictionary.AttributeSecurity;
 import org.kuali.rice.krad.service.DataDictionaryService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Records any changes to a Vendor's Tax Number or Type. Not shown on the screen.
  */
+@Entity
+@Table(name = "PUR_VNDR_TAX_CHG_T")
 public class VendorTaxChange extends PersistableBusinessObjectBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_TAX_CHG_GNRTD_ID")
     private Integer vendorTaxChangeGeneratedIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_TAX_CHG_DT")
     private Timestamp vendorTaxChangeTimestamp;
+    @Column(name = "VNDR_PREV_TAX_NBR")
     private String vendorPreviousTaxNumber;
+    @Column(name = "VNDR_PREV_TAX_TYP_CD")
     private String vendorPreviousTaxTypeCode;
+    @Column(name = "VNDR_TAX_CHG_PRSN_ID")
     private String vendorTaxChangePersonIdentifier;
 
+    @Transient
     private Person vendorTaxChangePerson;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false)
     private VendorHeader vendorHeader;
 
     /**

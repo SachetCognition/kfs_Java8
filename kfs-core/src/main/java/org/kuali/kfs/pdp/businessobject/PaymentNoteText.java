@@ -28,14 +28,35 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PDP_PMT_NTE_TXT_T")
 public class PaymentNoteText extends TimestampedBusinessObjectBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_NTE_ID")
     private KualiInteger id; // PMT_NTE_ID
 
+    @Column(name = "PMT_DTL_ID")
     private KualiInteger paymentDetailId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_DTL_ID", insertable = false, updatable = false)
     private PaymentDetail paymentDetail; // PMT_DTL_ID
 
+    @Column(name = "CUST_NTE_LN_NBR")
     private KualiInteger customerNoteLineNbr; // CUST_NTE_LN_NBR
+    @Column(name = "CUST_NTE_TXT")
     private String customerNoteText; // CUST_NTE_TXT
     
     public PaymentNoteText() {

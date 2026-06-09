@@ -34,6 +34,16 @@ import org.kuali.kfs.sys.document.service.DebitDeterminerService;
 import org.kuali.kfs.sys.service.OptionsService;
 import org.kuali.rice.krad.document.Copyable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * The Transfer of Funds (TF) document is used to transfer funds (cash) between accounts. There are two kinds of transfer
  * transactions, mandatory and non-mandatory. Mandatory transfers are required to meet contractual agreements. Specific object codes
@@ -42,6 +52,8 @@ import org.kuali.rice.krad.document.Copyable;
  * fund groups which are not required either by the terms of a loan or by other external agreements. These transfers are the most
  * commonly used throughout the university.
  */
+@Entity
+@Table(name = "FP_FND_TRNFR_DOC_T")
 public class TransferOfFundsDocument extends AccountingDocumentBase implements Copyable, Correctable, AmountTotaling {
     protected static final long serialVersionUID = -3871133713027969492L;
 

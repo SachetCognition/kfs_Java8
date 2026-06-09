@@ -43,19 +43,36 @@ import org.kuali.rice.kns.service.DataDictionaryService;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the Procurement Card Document Class. The procurement cards distributes expenses from clearing accounts. It is a two-sided
  * document, but only target lines are displayed because source lines cannot be changed. Transaction, Card, and Vendor information
  * are associated with the document to help better distribute the expense.
  */
+@Entity
+@Table(name = "FP_PRCRMNT_DOC_T")
 public class ProcurementCardDocument extends CapitalAccountingLinesDocumentBase implements AmountTotaling, CapitalAssetEditable {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardDocument.class);
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected ProcurementCardHolder procurementCardHolder;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List transactionEntries;
+    @Transient
     protected ProcurementCardTargetAccountingLine newTargetLine;
     protected transient CapitalAssetManagementModuleService capitalAssetManagementModuleService;
+    @Column(name = "AUTO_APPROVED_IND")
     protected boolean autoApprovedIndicator;
 
     /**

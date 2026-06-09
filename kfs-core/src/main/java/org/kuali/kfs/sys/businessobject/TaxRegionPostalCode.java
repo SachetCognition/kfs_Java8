@@ -32,15 +32,37 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "FS_TAX_POSTAL_CD_T")
 public class TaxRegionPostalCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "POSTAL_CNTRY_CD")
     protected String postalCountryCode;
+	@Id
+	@Column(name = "POSTAL_CD")
 	protected String postalCode;
+	@Id
+	@Column(name = "TAX_REGION_CD")
 	protected String taxRegionCode;
+	@Column(name = "ACTV_IND")
 	protected boolean active;
 
+	@Transient
 	protected CountryEbo country;
+	@Transient
 	protected PostalCodeEbo postalZip;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TAX_REGION_CD", insertable = false, updatable = false)
 	protected TaxRegion taxRegion;
 
 	public PostalCodeEbo getPostalZip() {

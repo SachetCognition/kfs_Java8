@@ -42,9 +42,20 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_ORG_T")
 public class Organization extends PersistableBusinessObjectBase implements MutableInactivatable {
     private static final Logger LOG = Logger.getLogger(Organization.class);
 
@@ -52,57 +63,109 @@ public class Organization extends PersistableBusinessObjectBase implements Mutab
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Organization";
 
+    @Id
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "ORG_NM")
     protected String organizationName;
+    @Column(name = "ORG_CITY_NM")
     protected String organizationCityName;
+    @Column(name = "ORG_STATE_CD")
     protected String organizationStateCode;
+    @Column(name = "ORG_ZIP_CD")
     protected String organizationZipCode;
+    @Column(name = "ORG_BEGIN_DT")
     protected Date organizationBeginDate;
+    @Column(name = "ORG_END_DT")
     protected Date organizationEndDate;
+    @Column(name = "ORG_IN_FP_CD")
     protected boolean organizationInFinancialProcessingIndicator = false;
+    @Column(name = "ORG_MGR_UNVL_ID")
     protected String organizationManagerUniversalId;
+    @Column(name = "RC_CD")
     protected String responsibilityCenterCode;
+    @Column(name = "ORG_PHYS_CMP_CD")
     protected String organizationPhysicalCampusCode;
+    @Column(name = "ORG_TYP_CD")
     protected String organizationTypeCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ORG_CD")
     protected String reportsToOrganizationCode;
+    @Column(name = "ORG_PLNT_ACCT_NBR")
     protected String organizationPlantAccountNumber;
+    @Column(name = "CMP_PLNT_ACCT_NBR")
     protected String campusPlantAccountNumber;
+    @Column(name = "ORG_PLNT_COA_CD")
     protected String organizationPlantChartCode;
+    @Column(name = "CMP_PLNT_COA_CD")
     protected String campusPlantChartCode;
+    @Column(name = "ORG_CNTRY_CD")
     protected String organizationCountryCode;
+    @Column(name = "ORG_LN1_ADDR")
     protected String organizationLine1Address;
+    @Column(name = "ORG_LN2_ADDR")
     protected String organizationLine2Address;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @Transient
     protected Organization hrisOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account organizationDefaultAccount;
+    @Transient
     protected Person organizationManagerUniversal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RC_CD", insertable = false, updatable = false)
     protected ResponsibilityCenter responsibilityCenter;
+    @Transient
     protected CampusEbo organizationPhysicalCampus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORG_TYP_CD", insertable = false, updatable = false)
     protected OrganizationType organizationType;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Organization reportsToOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart reportsToChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account organizationPlantAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account campusPlantAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORG_PLNT_COA_CD", insertable = false, updatable = false)
     protected Chart organizationPlantChart;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CMP_PLNT_COA_CD", insertable = false, updatable = false)
     protected Chart campusPlantChart;
+    @Transient
     protected PostalCodeEbo postalZip;
+    @Transient
     protected CountryEbo organizationCountry;
 
     // HRMS Org fields
+    @ManyToOne(fetch = FetchType.LAZY)
     protected OrganizationExtension organizationExtension;
+    @Transient
     protected String editHrmsUnitSectionBlank;
+    @Transient
     protected String editHrmsUnitSection;
 
     // fields for mixed anonymous keys
+    @Column(name = "ORG_DFLT_ACCT_NBR")
     protected String organizationDefaultAccountNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
 
     // Several kinds of Dummy Attributes for dividing sections on Inquiry page
+    @Transient
     protected String editPlantAccountsSectionBlank;
+    @Transient
     protected String editPlantAccountsSection;
 
+    @Column(name = "ORG_ACTIVE_CD")
     protected boolean active = true;
 
     /**

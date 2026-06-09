@@ -33,40 +33,87 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.kim.api.identity.Person;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PDP_PMT_GRP_HIST_T")
 public class PaymentGroupHistory extends TimestampedBusinessObjectBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_GRP_HIST_ID")
     private KualiInteger id; // PMT_GRP_HIST_ID
 
+    @Column(name = "PMT_CHG_NTE_TXT")
     private String changeNoteText; // PMT_CHG_NTE_TXT VARCHAR2 250
+    @Transient
     private Person changeUser;
+    @Column(name = "PMT_CHG_USR_ID")
     private String changeUserId; // PMT_CHG_USR_ID VARCHAR2 8
+    @Column(name = "PMT_CHG_TS")
     private Timestamp changeTime; // PMT_CHG_TS DATE 7
+    @Column(name = "ORIG_PMT_DT")
     private Date origPaymentDate; // ORIG_PMT_DT DATE 7
+    @Column(name = "ORIG_ACH_BNK_RTNG_NBR")
     private String origAchBankRouteNbr; // ORIG_ACH_BNK_RTNG_NBR VARCHAR2 17 0
+    @Column(name = "ORIG_ADV_EMAIL_ADDR")
     private String origAdviceEmail; // ORIG_ADV_EMAIL_ADDR VARCHAR2 50
+    @Column(name = "ORIG_DISB_NBR")
     private KualiInteger origDisburseNbr; // ORIG_DISB_NBR NUMBER 9 0
+    @Column(name = "ORIG_DISB_TS")
     private Timestamp origDisburseDate; // ORIG_DISB_TS DATE 7
+    @Column(name = "ORIG_PROC_IMD_IND")
     private Boolean origProcessImmediate; // ORIG_PROC_IMD_IND VARCHAR2 1
+    @Column(name = "ORIG_PMT_SPCL_HANDLG_IND")
     private Boolean origPmtSpecHandling; // ORIG_PMT_SPCL_HANDLG_IND VARCHAR2 1
+    @Column(name = "PMT_CNCL_EXTRT_STAT_IND")
     private Boolean pmtCancelExtractStat; // PMT_CNCL_EXTRT_STAT_IND VARCHAR2 1
+    @Column(name = "PMT_CNCL_EXTRT_TS")
     private Timestamp pmtCancelExtractDate; // PMT_CNCL_EXTRT_TS
 
+    @Column(name = "ORIG_DISB_TYP_CD")
     private String disbursementTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIG_DISB_TYP_CD", insertable = false, updatable = false)
     private DisbursementType disbursementType;
 
+    @Column(name = "ORIG_BNK_CD")
     private String origBankCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIG_BNK_CD", insertable = false, updatable = false)
     private Bank bank;
 
+    @Column(name = "ORIG_PMT_STAT_CD")
     private String paymentStatusCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIG_PMT_STAT_CD", insertable = false, updatable = false)
     private PaymentStatus origPaymentStatus; // ORIG_PMT_STAT_CD VARCHAR2 4
 
+    @Column(name = "ORIG_PROC_ID")
     private KualiInteger processId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIG_PROC_ID", insertable = false, updatable = false)
     private PaymentProcess paymentProcess;
 
+    @Column(name = "PMT_CHG_CD")
     private String paymentChangeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_CHG_CD", insertable = false, updatable = false)
     private PaymentChangeCode paymentChange; // PMT_CHG_CD VARCHAR2 4
 
+    @Column(name = "PMT_GRP_ID")
     private KualiInteger paymentGroupId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PMT_GRP_ID", insertable = false, updatable = false)
     private PaymentGroup paymentGroup; // PMT_GRP_ID
 
     public PaymentGroupHistory() {

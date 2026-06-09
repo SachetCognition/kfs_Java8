@@ -22,16 +22,31 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 
 /**
  * Account Guideline Business Object
  */
+@Entity
+@Table(name = "CA_ACCT_GDLNPRPS_T")
 public class AccountGuideline extends PersistableBusinessObjectBase {
     private static final long serialVersionUID = 807136405105252199L;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "ACCT_EXP_GDLN_TXT")
     private String accountExpenseGuidelineText;
+    @Column(name = "ACCT_INC_GDLN_TXT")
     private String accountIncomeGuidelineText;
+    @Column(name = "ACCT_PURPOSE_TXT")
     private String accountPurposeText;
 
 

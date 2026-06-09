@@ -41,48 +41,91 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a disbursement voucher payee detail.
  */
+@Entity
+@Table(name = "FP_DV_PAYEE_DTL_T")
 public class DisbursementVoucherPayeeDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "DV_PMT_REAS_CD")
     private String disbVchrPaymentReasonCode;
 
+    @Column(name = "DV_PAYEE_ID_NBR")
     private String disbVchrPayeeIdNumber;
+    @Column(name = "DV_PAYEE_PRSN_NM")
     private String disbVchrPayeePersonName;
 
+    @Column(name = "DV_PAYEE_LN1_ADDR")
     private String disbVchrPayeeLine1Addr;
+    @Column(name = "DV_PAYEE_LN2_ADDR")
     private String disbVchrPayeeLine2Addr;
+    @Column(name = "DV_PAYEE_CTY_NM")
     private String disbVchrPayeeCityName;
+    @Column(name = "DV_PAYEE_ST_CD")
     private String disbVchrPayeeStateCode;
+    @Column(name = "DV_PAYEE_ZIP_CD")
     private String disbVchrPayeeZipCode;
+    @Column(name = "DV_PAYEE_CNTRY_CD")
     private String disbVchrPayeeCountryCode;
 
+    @Column(name = "DV_RMT_PRSN_NM")
     private String disbVchrSpecialHandlingPersonName;
+    @Column(name = "DV_RMT_LN1_ADDR")
     private String disbVchrSpecialHandlingLine1Addr;
+    @Column(name = "DV_RMT_LN2_ADDR")
     private String disbVchrSpecialHandlingLine2Addr;
+    @Column(name = "DV_RMT_CTY_NM")
     private String disbVchrSpecialHandlingCityName;
+    @Column(name = "DV_RMT_ST_CD")
     private String disbVchrSpecialHandlingStateCode;
+    @Column(name = "DV_RMT_ZIP_CD")
     private String disbVchrSpecialHandlingZipCode;
+    @Column(name = "DV_RMT_CNTRY_CD")
     private String disbVchrSpecialHandlingCountryCode;
 
+    @Transient
     private Boolean dvPayeeSubjectPaymentCode;
+    @Column(name = "DV_ALIEN_PMT_IND")
     private Boolean disbVchrAlienPaymentCode;
+    @Column(name = "DV_PAYEE_EMP_IND")
     private Boolean disbVchrPayeeEmployeeCode;
+    @Transient
     private Boolean disbVchrEmployeePaidOutsidePayrollCode;
+    @Column(name = "DV_PAYEE_TYP_CD")
     private String disbursementVoucherPayeeTypeCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DV_PMT_REAS_CD", insertable = false, updatable = false)
     private PaymentReasonCode disbVchrPaymentReason;
 
     // The following vendor-associated attributes are for convenience only and are not mapped to OJB or the DB.
+    @Transient
     private String disbVchrVendorHeaderIdNumber;
+    @Transient
     private String disbVchrVendorDetailAssignedIdNumber;
+    @Transient
     private String disbVchrVendorAddressIdNumber;
+    @Transient
     private boolean hasMultipleVendorAddresses = false;
 
+    @Transient
     private StateEbo disbVchrPayeeState;
+    @Transient
     private CountryEbo disbVchrPayeeCountry;
+    @Transient
     private PostalCodeEbo disbVchrPayeePostalZipCode;
 
     /**
