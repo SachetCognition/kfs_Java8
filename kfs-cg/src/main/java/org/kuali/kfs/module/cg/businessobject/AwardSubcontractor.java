@@ -26,23 +26,58 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.sys.persistence.KualiDecimalConverter;
+
 /**
  * This class represents an association between an award and a subcontractor. It's like a reference to the subcontractor from the
  * award. This way an award can maintain a collection of these references instead of owning subcontractors directly.
  */
+@Entity
+@Table(name = "CG_AWD_SUBCN_T")
+@IdClass(AwardSubcontractor.AwardSubcontractorId.class)
 public class AwardSubcontractor extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "AWD_SUBCN_AMND_NBR")
     private String awardSubcontractorAmendmentNumber;
+    @Id
+    @Column(name = "CGAWD_SUBCN_NBR")
     private String awardSubcontractorNumber;
+    @Id
+    @Column(name = "CG_SUBCNR_NBR")
     private String subcontractorNumber;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CG_SUBCN_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal subcontractorAmount;
+    @Column(name = "SUBCNR_CNTCT_F_NM")
     private String subcontractorContactFirstName;
+    @Column(name = "SUBCNR_CNTCT_L_NM")
     private String subcontractorContactLastName;
+    @Column(name = "SUBCN_AUDTHIST_TXT")
     private String subcontractorAuditHistoryText;
+    @Column(name = "CGAWD_SUBCN_DESC")
     private String awardSubcontractorDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_SUBCNR_NBR", insertable = false, updatable = false)
     private SubContractor subcontractor;
 
     /**
@@ -265,6 +300,30 @@ public class AwardSubcontractor extends PersistableBusinessObjectBase implements
             m.put(KFSPropertyConstants.PROPOSAL_NUMBER, this.proposalNumber.toString());
         }
         return m;
+    }
+
+
+    public static class AwardSubcontractorId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String awardSubcontractorAmendmentNumber;
+        private String awardSubcontractorNumber;
+        private String subcontractorNumber;
+        private Long proposalNumber;
+
+        public AwardSubcontractorId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AwardSubcontractorId that = (AwardSubcontractorId) o;
+            return java.util.Objects.equals(awardSubcontractorAmendmentNumber, that.awardSubcontractorAmendmentNumber) && java.util.Objects.equals(awardSubcontractorNumber, that.awardSubcontractorNumber) && java.util.Objects.equals(subcontractorNumber, that.subcontractorNumber) && java.util.Objects.equals(proposalNumber, that.proposalNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(awardSubcontractorAmendmentNumber, awardSubcontractorNumber, subcontractorNumber, proposalNumber);
+        }
     }
 
 }

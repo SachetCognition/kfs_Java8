@@ -29,19 +29,44 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Represents a relationship between a {@link Proposal} and a {@link ProjectDirector}.
  */
+@Entity
+@Table(name = "CG_PRPSL_PRJDR_T")
+@IdClass(ProposalProjectDirector.ProposalProjectDirectorId.class)
 public class ProposalProjectDirector extends PersistableBusinessObjectBase implements Primaryable, CGProjectDirector, MutableInactivatable {
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "PRPSL_PRMPRJDR_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean proposalPrimaryProjectDirectorIndicator;
+    @Column(name = "PRPSL_PRJDRPRJ_TTL")
     private String proposalProjectDirectorProjectTitle;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private Person projectDirector;
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     /**
@@ -201,5 +226,27 @@ public class ProposalProjectDirector extends PersistableBusinessObjectBase imple
     public String getUserLookupRoleName() {
         return userLookupRoleName;
     }
+
+    public static class ProposalProjectDirectorId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String principalId;
+        private Long proposalNumber;
+
+        public ProposalProjectDirectorId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ProposalProjectDirectorId that = (ProposalProjectDirectorId) o;
+            return java.util.Objects.equals(principalId, that.principalId) && java.util.Objects.equals(proposalNumber, that.proposalNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(principalId, proposalNumber);
+        }
+    }
+
 }
 

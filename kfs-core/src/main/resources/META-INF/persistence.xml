@@ -352,6 +352,34 @@
         <class>org.kuali.kfs.module.cam.businessobject.AssetYearEndDepreciationDetail</class>
         <class>org.kuali.kfs.module.cam.businessobject.BarcodeInventoryErrorDetail</class>
 
+        <!-- CG module entities (S-2-CG) -->
+        <class>org.kuali.kfs.module.cg.businessobject.Agency</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AgencyAddress</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AgencyType</class>
+        <class>org.kuali.kfs.module.cg.businessobject.Award</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AwardAccount</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AwardFundManager</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AwardOrganization</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AwardProjectDirector</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AwardStatus</class>
+        <class>org.kuali.kfs.module.cg.businessobject.AwardSubcontractor</class>
+        <class>org.kuali.kfs.module.cg.businessobject.BillingFrequency</class>
+        <class>org.kuali.kfs.module.cg.businessobject.CFDA</class>
+        <class>org.kuali.kfs.module.cg.businessobject.GrantDescription</class>
+        <class>org.kuali.kfs.module.cg.businessobject.InstrumentType</class>
+        <class>org.kuali.kfs.module.cg.businessobject.LetterOfCreditFund</class>
+        <class>org.kuali.kfs.module.cg.businessobject.LetterOfCreditFundGroup</class>
+        <class>org.kuali.kfs.module.cg.businessobject.Proposal</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalAwardType</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalOrganization</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalProjectDirector</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalPurpose</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalResearchRisk</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalStatus</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ProposalSubcontractor</class>
+        <class>org.kuali.kfs.module.cg.businessobject.ResearchRiskType</class>
+        <class>org.kuali.kfs.module.cg.businessobject.SubContractor</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>

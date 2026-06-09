@@ -24,15 +24,41 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Represents a relationship between a {@link Proposal} and a {@link ResearchRisk}.
  */
+@Entity
+@Table(name = "CG_PRPSL_RSRCH_RSK_T")
+@IdClass(ProposalResearchRisk.ProposalResearchRiskId.class)
 public class ProposalResearchRisk extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "RSRCH_RSK_TYP_CD")
     private String researchRiskTypeCode;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "RSRCH_RSK_TYP_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Proposal proposal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RSRCH_RSK_TYP_CD", insertable = false, updatable = false)
     private ResearchRiskType researchRiskType;
 
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
@@ -135,6 +161,28 @@ public class ProposalResearchRisk extends PersistableBusinessObjectBase implemen
      */
     public void setResearchRiskTypeCode(String researchRiskTypeCode) {
         this.researchRiskTypeCode = researchRiskTypeCode;
+    }
+
+
+    public static class ProposalResearchRiskId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private Long proposalNumber;
+        private String researchRiskTypeCode;
+
+        public ProposalResearchRiskId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ProposalResearchRiskId that = (ProposalResearchRiskId) o;
+            return java.util.Objects.equals(proposalNumber, that.proposalNumber) && java.util.Objects.equals(researchRiskTypeCode, that.researchRiskTypeCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(proposalNumber, researchRiskTypeCode);
+        }
     }
 
 }

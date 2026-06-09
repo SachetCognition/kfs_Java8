@@ -29,18 +29,41 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * This class represents an association between an award and a fund manager. It's like a reference to the fund manager from the
  * award. This way an award can maintain a collection of these references instead of owning fund managers directly.
  */
+@Entity
+@Table(name = "CG_AWD_FNDMGR_T")
+@IdClass(AwardFundManager.AwardFundManagerId.class)
 public class AwardFundManager extends PersistableBusinessObjectBase implements Primaryable, MutableInactivatable, ContractsAndGrantsFundManager {
 
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "PRI_FNDMGR_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean primaryFundManagerIndicator;
+    @Column(name = "PROJECT_TTL")
     private String projectTitle;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private Person fundManager;
 
     /**
@@ -151,6 +174,28 @@ public class AwardFundManager extends PersistableBusinessObjectBase implements P
             m.put(KFSPropertyConstants.PROPOSAL_NUMBER, this.proposalNumber.toString());
         }
         return m;
+    }
+
+
+    public static class AwardFundManagerId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String principalId;
+        private Long proposalNumber;
+
+        public AwardFundManagerId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AwardFundManagerId that = (AwardFundManagerId) o;
+            return java.util.Objects.equals(principalId, that.principalId) && java.util.Objects.equals(proposalNumber, that.proposalNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(principalId, proposalNumber);
+        }
     }
 
 }

@@ -24,9 +24,19 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Class representing a ResearchRiskType.
  */
+@Entity
+@Table(name = "ER_RSRCH_RSK_TYP_T")
 public class ResearchRiskType extends PersistableBusinessObjectBase implements MutableInactivatable {
     /**
      * Constant values for research risk type notification values
@@ -36,10 +46,17 @@ public class ResearchRiskType extends PersistableBusinessObjectBase implements M
     public static final String ALL = "A";
     public static final String NEVER = "X";
 
+    @Id
+    @Column(name = "RSRCH_RSK_TYP_CD")
     private String researchRiskTypeCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "RSRCH_RSK_TYP_DESC")
     private String researchRiskTypeDescription;
+    @Column(name = "RSRCH_RSK_TYP_SORT_NBR")
     private Integer researchRiskTypeSortNumber;
+    @Column(name = "RSRCH_RSK_TYP_NTFCTN_VAL")
     private String researchRiskTypeNotificationValue;
 
     /**

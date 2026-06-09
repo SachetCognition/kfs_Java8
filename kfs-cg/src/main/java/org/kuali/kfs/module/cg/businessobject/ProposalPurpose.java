@@ -24,12 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * A generalized purpose for a proposal.
  */
+@Entity
+@Table(name = "CG_PRPSL_PURPOSE_T")
 public class ProposalPurpose extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CGPRPSL_PURPOSE_CD")
     private String proposalPurposeCode;
+    @Column(name = "PRPSL_PURPOSE_DESC")
     private String proposalPurposeDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

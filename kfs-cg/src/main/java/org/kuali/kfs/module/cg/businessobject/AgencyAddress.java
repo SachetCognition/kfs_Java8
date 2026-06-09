@@ -33,30 +33,69 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.framework.country.CountryEbo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "CG_AGENCY_ADDR_T")
+@IdClass(AgencyAddress.AgencyAddressId.class)
 public class AgencyAddress extends PersistableBusinessObjectBase implements Primaryable, ContractsAndGrantsAgencyAddress {
 
+    @Id
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Id
+    @Column(name = "CG_AGENCY_ADDR_ID")
     private Long agencyAddressIdentifier;
+    @Column(name = "CG_AGENCY_ADDR_NM")
     private String agencyAddressName;
+    @Column(name = "CNTCT_NM")
     private String agencyContactName;
+    @Column(name = "CG_AGENCY_LINE_1_ADDR")
     private String agencyLine1StreetAddress;
+    @Column(name = "CG_AGENCY_LINE_2_ADDR")
     private String agencyLine2StreetAddress;
+    @Column(name = "CG_AGENCY_LINE_3_ADDR")
     private String agencyLine3StreetAddress;
+    @Column(name = "CG_AGENCY_LINE_4_ADDR")
     private String agencyLine4StreetAddress;
+    @Column(name = "CG_AGENCY_CITY_NM")
     private String agencyCityName;
+    @Column(name = "CG_AGENCY_STATE_CD")
     private String agencyStateCode;
+    @Column(name = "CG_AGENCY_ZIP_CD")
     private String agencyZipCode;
+    @Column(name = "CG_AGENCY_CNTRY_CD")
     private String agencyCountryCode;
+    @Column(name = "PHN_NBR")
     private String agencyPhoneNumber;
+    @Column(name = "FAX_NBR")
     private String agencyFaxNumber;
+    @Column(name = "CG_AGENCY_ADDR_INTL_PROV_NM")
     private String agencyAddressInternationalProvinceName;
+    @Column(name = "CG_AGENCY_INTL_MAIL_CD")
     private String agencyInternationalMailCode;
+    @Column(name = "AGENCY_CNTCT_EMAIL_ADDR")
     private String agencyContactEmailAddress;
+    @Column(name = "CG_AGENCY_ADDR_TYPE_CD")
     private String customerAddressTypeCode;
+    @Column(name = "CG_AGENCY_ADDR_END_DT")
     private Date agencyAddressEndDate;
 
+    @Transient
     private AccountsReceivableCustomerAddressType customerAddressType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_NBR", insertable = false, updatable = false)
     private Agency agency;
+    @Transient
     private CountryEbo agencyCountry;
 
      /**
@@ -497,4 +536,26 @@ public class AgencyAddress extends PersistableBusinessObjectBase implements Prim
         }
         return false;
     }
+
+    public static class AgencyAddressId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String agencyNumber;
+        private Long agencyAddressIdentifier;
+
+        public AgencyAddressId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AgencyAddressId that = (AgencyAddressId) o;
+            return java.util.Objects.equals(agencyNumber, that.agencyNumber) && java.util.Objects.equals(agencyAddressIdentifier, that.agencyAddressIdentifier);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(agencyNumber, agencyAddressIdentifier);
+        }
+    }
+
 }

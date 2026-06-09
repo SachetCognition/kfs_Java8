@@ -24,12 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Represents the status of a {@link Proposal}.
  */
+@Entity
+@Table(name = "CG_PRPSL_STAT_T")
 public class ProposalStatus extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CGPRPSL_STAT_CD")
     private String proposalStatusCode;
+    @Column(name = "CGPRPSL_STAT_DESC")
     private String proposalStatusDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**
