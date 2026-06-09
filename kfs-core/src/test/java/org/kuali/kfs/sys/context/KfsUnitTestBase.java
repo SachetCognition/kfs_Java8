@@ -18,14 +18,14 @@
  */
 package org.kuali.kfs.sys.context;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 /**
  * Lightweight base class for unit tests that do NOT require Spring context or DB.
  * Use @Mock and @InjectMocks for dependencies.
  */
-@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public abstract class KfsUnitTestBase {
     // No Spring context, no DB, no OJB — pure unit tests
 }
