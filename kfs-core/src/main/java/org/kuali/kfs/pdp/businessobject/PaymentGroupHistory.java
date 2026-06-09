@@ -26,6 +26,15 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.Bank;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
@@ -33,41 +42,91 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.kim.api.identity.Person;
 
+@Entity
+@Table(name = "PDP_PMT_GRP_HIST_T")
 public class PaymentGroupHistory extends TimestampedBusinessObjectBase {
 
-    private KualiInteger id; // PMT_GRP_HIST_ID
+    @Id
+    @Column(name = "PMT_GRP_HIST_ID")
+    private KualiInteger id;
 
-    private String changeNoteText; // PMT_CHG_NTE_TXT VARCHAR2 250
+    @Column(name = "PMT_CHG_NTE_TXT")
+    private String changeNoteText;
+
+    @Transient
     private Person changeUser;
-    private String changeUserId; // PMT_CHG_USR_ID VARCHAR2 8
-    private Timestamp changeTime; // PMT_CHG_TS DATE 7
-    private Date origPaymentDate; // ORIG_PMT_DT DATE 7
-    private String origAchBankRouteNbr; // ORIG_ACH_BNK_RTNG_NBR VARCHAR2 17 0
-    private String origAdviceEmail; // ORIG_ADV_EMAIL_ADDR VARCHAR2 50
-    private KualiInteger origDisburseNbr; // ORIG_DISB_NBR NUMBER 9 0
-    private Timestamp origDisburseDate; // ORIG_DISB_TS DATE 7
-    private Boolean origProcessImmediate; // ORIG_PROC_IMD_IND VARCHAR2 1
-    private Boolean origPmtSpecHandling; // ORIG_PMT_SPCL_HANDLG_IND VARCHAR2 1
-    private Boolean pmtCancelExtractStat; // PMT_CNCL_EXTRT_STAT_IND VARCHAR2 1
-    private Timestamp pmtCancelExtractDate; // PMT_CNCL_EXTRT_TS
 
+    @Column(name = "PMT_CHG_USR_ID")
+    private String changeUserId;
+
+    @Column(name = "PMT_CHG_TS")
+    private Timestamp changeTime;
+
+    @Column(name = "ORIG_PMT_DT")
+    private Date origPaymentDate;
+
+    @Column(name = "ORIG_ACH_BNK_RTNG_NBR")
+    private String origAchBankRouteNbr;
+
+    @Column(name = "ORIG_ADV_EMAIL_ADDR")
+    private String origAdviceEmail;
+
+    @Column(name = "ORIG_DISB_NBR")
+    private KualiInteger origDisburseNbr;
+
+    @Column(name = "ORIG_DISB_TS")
+    private Timestamp origDisburseDate;
+
+    @Column(name = "ORIG_PROC_IMD_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean origProcessImmediate;
+
+    @Column(name = "ORIG_PMT_SPCL_HANDLG_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean origPmtSpecHandling;
+
+    @Column(name = "PMT_CNCL_EXTRT_STAT_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean pmtCancelExtractStat;
+
+    @Column(name = "PMT_CNCL_EXTRT_TS")
+    private Timestamp pmtCancelExtractDate;
+
+    @Column(name = "ORIG_DISB_TYP_CD")
     private String disbursementTypeCode;
+
+    @Transient
     private DisbursementType disbursementType;
 
+    @Column(name = "ORIG_BNK_CD")
     private String origBankCode;
+
+    @Transient
     private Bank bank;
 
+    @Column(name = "ORIG_PMT_STAT_CD")
     private String paymentStatusCode;
-    private PaymentStatus origPaymentStatus; // ORIG_PMT_STAT_CD VARCHAR2 4
 
+    @Transient
+    private PaymentStatus origPaymentStatus;
+
+    @Column(name = "ORIG_PROC_ID")
     private KualiInteger processId;
+
+    @Transient
     private PaymentProcess paymentProcess;
 
+    @Column(name = "PMT_CHG_CD")
     private String paymentChangeCode;
-    private PaymentChangeCode paymentChange; // PMT_CHG_CD VARCHAR2 4
 
+    @Transient
+    private PaymentChangeCode paymentChange;
+
+    @Column(name = "PMT_GRP_ID")
     private KualiInteger paymentGroupId;
-    private PaymentGroup paymentGroup; // PMT_GRP_ID
+
+    @Transient
+    private PaymentGroup paymentGroup;
 
     public PaymentGroupHistory() {
         super();

@@ -24,6 +24,16 @@ package org.kuali.kfs.pdp.businessobject;
 
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.Bank;
@@ -31,15 +41,30 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "PDP_CUST_BNK_T")
 public class CustomerBank extends PersistableBusinessObjectBase implements MutableInactivatable {
+
+    @Id
+    @Column(name = "CUST_ID")
     private KualiInteger customerId;
+
+    @Column(name = "BNK_CD")
     private String bankCode;
+
+    @Id
+    @Column(name = "DISB_TYP_CD")
     private String disbursementTypeCode;
-    
-    private CustomerProfile customerProfile; 
-    private Bank bank; 
+
+    @Transient
+    private CustomerProfile customerProfile;
+    @Transient
+    private Bank bank;
+    @Transient
     private DisbursementType disbursementType;
-    
+
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     public CustomerBank() {

@@ -18,6 +18,11 @@
  */
 package org.kuali.kfs.pdp.businessobject;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "PDP_PMT_DTL_T")
 public class PurchasingPaymentDetail extends PaymentDetail {
 
 }

@@ -24,19 +24,35 @@ package org.kuali.kfs.pdp.businessobject;
 
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+@Entity
+@Table(name = "PDP_PMT_NTE_TXT_T")
 public class PaymentNoteText extends TimestampedBusinessObjectBase {
 
-    private KualiInteger id; // PMT_NTE_ID
+    @Id
+    @Column(name = "PMT_NTE_ID")
+    private KualiInteger id;
 
+    @Column(name = "PMT_DTL_ID")
     private KualiInteger paymentDetailId;
-    private PaymentDetail paymentDetail; // PMT_DTL_ID
 
-    private KualiInteger customerNoteLineNbr; // CUST_NTE_LN_NBR
-    private String customerNoteText; // CUST_NTE_TXT
+    @Transient
+    private PaymentDetail paymentDetail;
+
+    @Column(name = "CUST_NTE_LN_NBR")
+    private KualiInteger customerNoteLineNbr;
+
+    @Column(name = "CUST_NTE_TXT")
+    private String customerNoteText;
     
     public PaymentNoteText() {
         super();

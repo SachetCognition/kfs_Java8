@@ -25,6 +25,14 @@ package org.kuali.kfs.pdp.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -39,37 +47,101 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * General Ledger Pending Table for PDP
  */
+@Entity
+@Table(name = "PDP_GL_PENDING_ENTRY_T")
 public class GlPendingTransaction extends PersistableBusinessObjectBase implements FlexibleAccountUpdateable {
-    private KualiInteger id; // GL_PENDING_ENTRY_ID NUMBER 8 0
-    private String fsOriginCd; // FS_ORIGIN_CD VARCHAR2 2
-    private String fdocNbr; // FDOC_NBR VARCHAR2 9
-    private KualiInteger sequenceNbr; // TRN_ENTR_SEQ_NBR NUMBER 5 0
-    private String chartOfAccountsCode; // FIN_COA_CD VARCHAR2 2
-    private String accountNumber; // ACCOUNT_NBR VARCHAR2 7
-    private String subAccountNumber; // SUB_ACCOUNT_NBR VARCHAR2 5
-    private String financialObjectCode; // FIN_OBJECT_CD VARCHAR2 4
-    private String financialSubObjectCode; // FIN_SUB_OBJ_CD VARCHAR2 3
-    private String financialBalanceTypeCode; // FIN_BALANCE_TYP_CD VARCHAR2 2
-    private String finObjTypCd; // FIN_OBJ_TYP_CD VARCHAR2 2
-    private Integer universityFiscalYear; // UNIV_FISCAL_YR NUMBER 4 0
-    private String univFiscalPrdCd; // UNIV_FISCAL_PRD_CD VARCHAR2 2
-    private String description; // TRN_LDGR_ENTR_DESC VARCHAR2 40
-    private KualiDecimal amount; // TRN_LDGR_ENTR_AMT NUMBER 19 2
-    private String debitCrdtCd; // TRN_DEBIT_CRDT_CD VARCHAR2 1
-    private Date transactionDt; // TRANSACTION_DT DATE 7
-    private String financialDocumentTypeCode; // FDOC_TYP_CD VARCHAR2 4
-    private String orgDocNbr; // ORG_DOC_NBR VARCHAR2 10
-    private String projectCd; // PROJECT_CD VARCHAR2 10
-    private String orgReferenceId; // ORG_REFERENCE_ID VARCHAR2 8
-    private String fdocRefTypCd; // FDOC_REF_TYP_CD VARCHAR2 4
-    private String fsRefOriginCd; // FS_REF_ORIGIN_CD VARCHAR2 2
-    private String fdocRefNbr; // FDOC_REF_NBR VARCHAR2 9
-    private Date fdocReversalDt; // FDOC_REVERSAL_DT DATE 7
-    private String trnEncumUpdtCd; // TRN_ENCUM_UPDT_CD VARCHAR2 1
-    private String fdocApprovedCd; // FDOC_APPROVED_CD VARCHAR2 1
-    private String acctSfFinObjCd; // ACCT_SF_FINOBJ_CD VARCHAR2 4
-    private String trnEntrOfstCd; // TRN_ENTR_OFST_CD VARCHAR2 1
-    private boolean processInd; // TRN_EXTRT_IND VARCHAR2 7
+
+    @Id
+    @Column(name = "GL_PENDING_ENTRY_ID")
+    private KualiInteger id;
+
+    @Column(name = "FS_ORIGIN_CD")
+    private String fsOriginCd;
+
+    @Column(name = "FDOC_NBR")
+    private String fdocNbr;
+
+    @Column(name = "TRN_ENTR_SEQ_NBR")
+    private KualiInteger sequenceNbr;
+
+    @Column(name = "FIN_COA_CD")
+    private String chartOfAccountsCode;
+
+    @Column(name = "ACCOUNT_NBR")
+    private String accountNumber;
+
+    @Column(name = "SUB_ACCOUNT_NBR")
+    private String subAccountNumber;
+
+    @Column(name = "FIN_OBJECT_CD")
+    private String financialObjectCode;
+
+    @Column(name = "FIN_SUB_OBJ_CD")
+    private String financialSubObjectCode;
+
+    @Column(name = "FIN_BALANCE_TYP_CD")
+    private String financialBalanceTypeCode;
+
+    @Column(name = "FIN_OBJ_TYP_CD")
+    private String finObjTypCd;
+
+    @Column(name = "UNIV_FISCAL_YR")
+    private Integer universityFiscalYear;
+
+    @Column(name = "UNIV_FISCAL_PRD_CD")
+    private String univFiscalPrdCd;
+
+    @Column(name = "TRN_LDGR_ENTR_DESC")
+    private String description;
+
+    @Column(name = "TRN_LDGR_ENTR_AMT")
+    private KualiDecimal amount;
+
+    @Column(name = "TRN_DEBIT_CRDT_CD")
+    private String debitCrdtCd;
+
+    @Column(name = "TRANSACTION_DT")
+    private Date transactionDt;
+
+    @Column(name = "FDOC_TYP_CD")
+    private String financialDocumentTypeCode;
+
+    @Column(name = "ORG_DOC_NBR")
+    private String orgDocNbr;
+
+    @Column(name = "PROJECT_CD")
+    private String projectCd;
+
+    @Column(name = "ORG_REFERENCE_ID")
+    private String orgReferenceId;
+
+    @Column(name = "FDOC_REF_TYP_CD")
+    private String fdocRefTypCd;
+
+    @Column(name = "FS_REF_ORIGIN_CD")
+    private String fsRefOriginCd;
+
+    @Column(name = "FDOC_REF_NBR")
+    private String fdocRefNbr;
+
+    @Column(name = "FDOC_REVERSAL_DT")
+    private Date fdocReversalDt;
+
+    @Column(name = "TRN_ENCUM_UPDT_CD")
+    private String trnEncumUpdtCd;
+
+    @Column(name = "FDOC_APPROVED_CD")
+    private String fdocApprovedCd;
+
+    @Column(name = "ACCT_SF_FINOBJ_CD")
+    private String acctSfFinObjCd;
+
+    @Column(name = "TRN_ENTR_OFST_CD")
+    private String trnEntrOfstCd;
+
+    @Column(name = "TRN_EXTRT_IND")
+    @Convert(converter = YesNoConverter.class)
+    private boolean processInd;
 
     public GlPendingTransaction() {
         super();

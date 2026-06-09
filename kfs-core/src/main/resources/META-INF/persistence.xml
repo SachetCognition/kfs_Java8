@@ -17,6 +17,35 @@
         <!-- Migrated entity classes (add here as OJB mappings are converted) -->
         <class>org.kuali.kfs.coa.businessobject.Chart</class>
 
+        <!-- PDP module entities -->
+        <class>org.kuali.kfs.pdp.businessobject.AccountingChangeCode</class>
+        <class>org.kuali.kfs.pdp.businessobject.AchAccountNumber</class>
+        <class>org.kuali.kfs.pdp.businessobject.ACHBank</class>
+        <class>org.kuali.kfs.pdp.businessobject.ACHTransactionCode</class>
+        <class>org.kuali.kfs.pdp.businessobject.ACHTransactionType</class>
+        <class>org.kuali.kfs.pdp.businessobject.BankChangeHistory</class>
+        <class>org.kuali.kfs.pdp.businessobject.Batch</class>
+        <class>org.kuali.kfs.pdp.businessobject.CustomerBank</class>
+        <class>org.kuali.kfs.pdp.businessobject.CustomerProfile</class>
+        <class>org.kuali.kfs.pdp.businessobject.DisbursementNumberRange</class>
+        <class>org.kuali.kfs.pdp.businessobject.DisbursementType</class>
+        <class>org.kuali.kfs.pdp.businessobject.FormatProcess</class>
+        <class>org.kuali.kfs.pdp.businessobject.GlPendingTransaction</class>
+        <class>org.kuali.kfs.pdp.businessobject.PayeeACHAccount</class>
+        <class>org.kuali.kfs.pdp.businessobject.PayeeType</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentAccountDetail</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentAccountHistory</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentChangeCode</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentDetail</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentGroup</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentGroupHistory</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentNoteText</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentProcess</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentStatus</class>
+        <class>org.kuali.kfs.pdp.businessobject.PaymentType</class>
+        <class>org.kuali.kfs.pdp.businessobject.ProcessSummary</class>
+        <class>org.kuali.kfs.pdp.businessobject.PurchasingPaymentDetail</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>

@@ -24,9 +24,32 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "PDP_ACCTG_CHG_CD_T")
 public class AccountingChangeCode extends KualiCodeBase {
     
     public AccountingChangeCode() {
     }
     
+
+    @Override
+    @Id
+    @Column(name = "ACCTG_CHG_CD")
+    @jakarta.persistence.Access(jakarta.persistence.AccessType.PROPERTY)
+    public String getCode() {
+        return super.getCode();
+    }
+
+    @Override
+    @Column(name = "ACCTG_CHG_CD_DESC")
+    @jakarta.persistence.Access(jakarta.persistence.AccessType.PROPERTY)
+    public String getName() {
+        return super.getName();
+    }
+
 }
