@@ -58,6 +58,22 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  */
 public class LedgerBalance extends Balance implements LaborLedgerBalance{
     @Id
+    @Column(name = "UNIV_FISCAL_YR")
+    private Integer universityFiscalYear;
+
+    @Id
+    @Column(name = "FIN_COA_CD")
+    private String chartOfAccountsCode;
+
+    @Id
+    @Column(name = "ACCOUNT_NBR")
+    private String accountNumber;
+
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
+    private String subAccountNumber;
+
+    @Id
 
     @Column(name = "FIN_OBJECT_CD")
 

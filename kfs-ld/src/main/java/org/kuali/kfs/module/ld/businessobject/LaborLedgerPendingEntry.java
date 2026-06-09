@@ -49,6 +49,18 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  * Labor business object for LaborLedgerPendingEntry.
  */
 public class LaborLedgerPendingEntry extends GeneralLedgerPendingEntry implements LaborTransaction, LaborLedgerPendingEntryForSearching {
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
+    private String financialSystemOriginationCode;
+
+    @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
+    private Integer transactionLedgerEntrySequenceNumber;
+
     @Column(name = "POSITION_NBR")
 
     private String positionNumber;

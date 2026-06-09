@@ -50,6 +50,14 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  * <code>{@link org.kuali.module.labor.document.ExpenseTransferDocument}</code>
  */
 public class ExpenseTransferTargetAccountingLine extends TargetAccountingLine implements ExpenseTransferAccountingLine, LaborLedgerExpenseTransferTargetAccountingLine, Comparable<ExpenseTransferTargetAccountingLine> {
+    @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
+    private Integer sequenceNumber;
+
     @Column(name = "POSITION_NBR")
 
     private String positionNumber;

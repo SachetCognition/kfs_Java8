@@ -46,6 +46,15 @@ import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConvert
  */
 public class LaborJournalVoucherDetail extends VoucherSourceAccountingLine {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborJournalVoucherDetail.class);
+
+    @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
+    private Integer sequenceNumber;
+
     @Column(name = "POSITION_NBR")
 
     private String positionNumber;
