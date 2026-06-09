@@ -61,20 +61,21 @@ class PerDiemServiceImplTest extends KfsUnitTestBase {
     @Test
     @DisplayName("should break down meals and incidentals for a list of per diems")
     void testBreakDownMealsIncidentalList() {
+        MealBreakDownStrategy mockStrategy = org.mockito.Mockito.mock(MealBreakDownStrategy.class);
+        Map<String, MealBreakDownStrategy> strategies = new HashMap<>();
+        strategies.put("Y", mockStrategy);
+        perDiemService.setMealBreakDownStrategies(strategies);
+
         PerDiem perDiem1 = new PerDiem();
+        perDiem1.setConusIndicator("Y");
         perDiem1.setMealsAndIncidentals(new KualiDecimal(62.50));
-        perDiem1.setBreakfast(KualiDecimal.ZERO);
-        perDiem1.setLunch(KualiDecimal.ZERO);
-        perDiem1.setDinner(KualiDecimal.ZERO);
-        perDiem1.setIncidentals(KualiDecimal.ZERO);
 
         List<PerDiem> perDiems = new ArrayList<>();
         perDiems.add(perDiem1);
 
-        // breakDownMealsIncidental iterates and calls per-item method
-        // The per-item method looks for strategies by conusIndicator
-        // Without strategies configured, it should handle gracefully
-        assertThat(perDiems).hasSize(1);
+        perDiemService.breakDownMealsIncidental(perDiems);
+
+        verify(mockStrategy).breakDown(perDiem1);
     }
 
     @Test
