@@ -22,6 +22,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
@@ -44,29 +51,55 @@ import org.kuali.rice.location.framework.state.StateEbo;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(OrganizationOptionsId.class)
+@Table(name = "AR_ORG_OPTION_T")
 public class OrganizationOptions extends PersistableBusinessObjectBase implements AccountsReceivableOrganizationOptions {
 
+	@Id
+	@Column(name = "FIN_COA_CD")
 	protected String chartOfAccountsCode;
+	@Id
+	@Column(name = "ORG_CD")
 	protected String organizationCode;
+	@Column(name = "PRCS_FIN_COA_CD")
 	protected String processingChartOfAccountCode;
+	@Column(name = "PRCS_ORG_CD")
 	protected String processingOrganizationCode;
+	@Column(name = "AR_PRN_INV_IND")
 	protected String printInvoiceIndicator;
+	@Column(name = "ORG_PMT_TERMS_TXT")
 	protected String organizationPaymentTermsText;
+	@Column(name = "ORG_MSG_TXT")
 	protected String organizationMessageText;
+	@Column(name = "ORG_REMIT_ADDR_NM")
 	protected String organizationRemitToAddressName;
+	@Column(name = "ORG_REMIT_LN1_ADDR")
 	protected String organizationRemitToLine1StreetAddress;
+	@Column(name = "ORG_REMIT_LN2_ADDR")
 	protected String organizationRemitToLine2StreetAddress;
+	@Column(name = "ORG_REMIT_CITY_NM")
 	protected String organizationRemitToCityName;
+	@Column(name = "ORG_REMIT_ST_CD")
 	protected String organizationRemitToStateCode;
+	@Column(name = "ORG_REMIT_ZIP_CD")
 	protected String organizationRemitToZipCode;
     protected String organizationRemitToCountryCode = KFSConstants.COUNTRY_CODE_UNITED_STATES;
+	@Column(name = "ORG_PHONE_NBR")
 	protected String organizationPhoneNumber;
+	@Column(name = "ORG_800_PHONE_NBR")
 	protected String organization800PhoneNumber;
+	@Column(name = "ORG_FAX_NBR")
 	protected String organizationFaxNumber;
+	@Column(name = "UNIV_NM")
 	protected String universityName;
+	@Column(name = "ORG_CHCK_PAY_TO_NM")
 	protected String organizationCheckPayableToName;
+    @Column(name = "ORG_POSTAL_ZIP_CD")
     protected String organizationPostalZipCode;
+    @Column(name = "ORG_POSTAL_CNTRY_CD")
     protected String organizationPostalCountryCode;
+    @Column(name = "CG_BILLER_IND")
     private boolean cgBillerIndicator;
     protected Organization organization;
 	protected Chart chartOfAccounts;

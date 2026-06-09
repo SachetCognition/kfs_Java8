@@ -20,13 +20,25 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 
 /**
  * This class represents a point in time snapshot of a Bill associated with a Contracts & Grants Invoice Document.
  */
+@Entity
+@IdClass(InvoiceBillId.class)
+@Table(name = "AR_INV_BILL_T")
 public class InvoiceBill extends BillBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
 
     /**

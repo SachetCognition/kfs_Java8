@@ -20,6 +20,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -34,32 +41,63 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(OrganizationAccountingDefaultId.class)
+@Table(name = "AR_ORG_ACCTGDFLT_T")
 public class OrganizationAccountingDefault extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
+	@Id
+	@Column(name = "UNIV_FISCAL_YR")
 	protected Integer universityFiscalYear;
+	@Id
+	@Column(name = "FIN_COA_CD")
 	protected String chartOfAccountsCode;
+	@Id
+	@Column(name = "ORG_CD")
 	protected String organizationCode;
+	@Column(name = "ORG_LT_CHRG_OBJ_CD")
 	protected String organizationLateChargeObjectCode;
+	@Column(name = "INV_FIN_COA_CD")
 	protected String defaultInvoiceChartOfAccountsCode;
+	@Column(name = "INV_ACCT_NBR")
 	protected String defaultInvoiceAccountNumber;
+	@Column(name = "INV_SUB_ACCT_NBR")
 	protected String defaultInvoiceSubAccountNumber;
+	@Column(name = "INV_FIN_OBJ_CD")
 	protected String defaultInvoiceFinancialObjectCode;
+	@Column(name = "INV_FIN_SUB_OBJ_CD")
 	protected String defaultInvoiceFinancialSubObjectCode;
+	@Column(name = "INV_PROJECT_CD")
 	protected String defaultInvoiceProjectCode;
+	@Column(name = "INV_ORG_REF_ID")
 	protected String defaultInvoiceOrganizationReferenceIdentifier;
+	@Column(name = "PMT_FIN_COA_CD")
 	protected String defaultPaymentChartOfAccountsCode;
+	@Column(name = "PMT_ACCT_NBR")
 	protected String defaultPaymentAccountNumber;
+	@Column(name = "PMT_SUB_ACCT_NBR")
 	protected String defaultPaymentSubAccountNumber;
+    @Column(name = "PMT_FIN_OBJ_CD")
     protected String defaultPaymentFinancialObjectCode;
+    @Column(name = "PMT_FIN_SUB_OBJ_CD")
     protected String defaultPaymentFinancialSubObjectCode;
+    @Column(name = "PMT_PROJECT_CD")
     protected String defaultPaymentProjectCode;
+	@Column(name = "PMT_ORG_REF_ID")
 	protected String defaultPaymentOrganizationReferenceIdentifier;
+    @Column(name = "WRITEOFF_FIN_COA_CD")
     protected String writeoffChartOfAccountsCode;
+    @Column(name = "WRITEOFF_ACCT_NBR")
     protected String writeoffAccountNumber;
+    @Column(name = "WRITEOFF_SUB_ACCT_NBR")
     protected String writeoffSubAccountNumber;
+    @Column(name = "WRITEOFF_FIN_OBJ_CD")
     protected String writeoffFinancialObjectCode;
+    @Column(name = "WRITEOFF_FIN_SUB_OBJ_CD")
     protected String writeoffFinancialSubObjectCode;
+    @Column(name = "WRITEOFF_PROJECT_CD")
     protected String writeoffProjectCode;
+    @Column(name = "WRITEOFF_ORG_REF_ID")
     protected String writeoffOrganizationReferenceIdentifier;
 
     protected ObjectCode defaultInvoiceFinancialObject;

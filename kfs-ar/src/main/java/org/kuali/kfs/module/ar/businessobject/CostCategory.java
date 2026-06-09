@@ -22,17 +22,30 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * Defines a Category on Contracts & Grants Invoices.
  */
+@Entity
+@Table(name = "AR_CST_CTGRY_T")
 public class CostCategory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Column(name = "CTGRY_NM")
     private String categoryName;
+    @Column(name = "IND_CST_IND")
     private boolean indirectCostIndicator;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     private List<CostCategoryObjectCode> objectCodes = new ArrayList<>();

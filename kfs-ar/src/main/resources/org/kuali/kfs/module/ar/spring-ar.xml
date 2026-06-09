@@ -63,9 +63,7 @@
 			</list>
 		</property>
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/ar/ojb-ar.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="jobNames">
 			<list>
@@ -242,18 +240,40 @@
 		</property>
 	</bean>
 	
-	<!--  AR DAOs  -->
-	<bean id="lockboxDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.dataaccess.impl.LockboxDaoOjb" />
-	<bean id="customerInvoiceDocumentDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CustomerInvoiceDocumentDaoOjb" />
-	<bean id="accountsReceivableDocumentHeaderDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.AccountsReceivableDocumentHeaderDaoOjb" />
-	<bean id="customerInvoiceDetailDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CustomerInvoiceDetailDaoOjb" />
-	<bean id="cashControlDetailDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CashControlDetailDaoOjb" />
-	<bean id="nonAppliedHoldingDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.NonAppliedHoldingDaoOjb" />
-	<bean id="customerAgingReportDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.dataaccess.impl.CustomerAgingReportDaoOjb" />
-	<bean id="contractsGrantsInvoiceDocumentDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.ContractsGrantsInvoiceDocumentDaoOjb" />
-	<bean id="awardAccountObjectCodeTotalBilledDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.dataaccess.impl.AwardAccountObjectCodeTotalBilledDaoOjb" />
-	<bean id="cashControlDocumentDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CashControlDocumentDaoOjb" />
-	<bean id="milestoneDao" parent="platformAwareDao" class="org.kuali.kfs.module.ar.dataaccess.impl.MilestoneDaoOjb" />
+	<!--  AR DAOs (JPA implementations)  -->
+	<bean id="lockboxDao" class="org.kuali.kfs.module.ar.dataaccess.impl.LockboxDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="customerInvoiceDocumentDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CustomerInvoiceDocumentDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="accountsReceivableDocumentHeaderDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.AccountsReceivableDocumentHeaderDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="customerInvoiceDetailDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CustomerInvoiceDetailDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="cashControlDetailDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CashControlDetailDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="nonAppliedHoldingDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.NonAppliedHoldingDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="customerAgingReportDao" class="org.kuali.kfs.module.ar.dataaccess.impl.CustomerAgingReportDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="contractsGrantsInvoiceDocumentDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.ContractsGrantsInvoiceDocumentDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="awardAccountObjectCodeTotalBilledDao" class="org.kuali.kfs.module.ar.dataaccess.impl.AwardAccountObjectCodeTotalBilledDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="cashControlDocumentDao" class="org.kuali.kfs.module.ar.document.dataaccess.impl.CashControlDocumentDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
+	<bean id="milestoneDao" class="org.kuali.kfs.module.ar.dataaccess.impl.MilestoneDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 
 	<bean id="contractsGrantsInvoiceCreateDocumentService" parent="contractsGrantsInvoiceCreateDocumentService-parentBean"/>
 	<bean id="contractsGrantsInvoiceCreateDocumentService-parentBean" class="org.kuali.kfs.module.ar.service.impl.ContractsGrantsInvoiceCreateDocumentServiceImpl" abstract="true">
@@ -2590,7 +2610,9 @@
 	</bean>
 	
 	<bean id="costCategoryDao" parent="costCategoryDao-parentBean"/>
-	<bean id="costCategoryDao-parentBean" abstract="true" class="org.kuali.kfs.module.ar.dataaccess.impl.CostCategoryDaoOjb" parent="platformAwareDao"/>
+	<bean id="costCategoryDao-parentBean" abstract="true" class="org.kuali.kfs.module.ar.dataaccess.impl.CostCategoryDaoJpa">
+		<property name="entityManager" ref="entityManager" />
+	</bean>
 	
 	<bean id="costCategoryService" parent="costCategoryService-parentBean"/>
 	<bean id="costCategoryService-parentBean" abstract="true" class="org.kuali.kfs.module.ar.service.impl.CostCategoryServiceImpl">

@@ -22,13 +22,30 @@ import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectLevel;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * An object level associated with a contracts & grants category
  */
+@Entity
+@IdClass(CostCategoryObjectLevelId.class)
+@Table(name = "AR_CST_CTGRY_FIN_OBJ_LEVEL_T")
 public class CostCategoryObjectLevel extends PersistableBusinessObjectBase implements CostCategoryDetail {
+    @Id
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     private String financialObjectLevelCode;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     private Chart chart;

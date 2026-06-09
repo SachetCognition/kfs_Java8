@@ -21,6 +21,14 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.IdClass;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.ar.document.CashControlDocument;
 import org.kuali.kfs.module.ar.document.PaymentApplicationDocument;
@@ -34,15 +42,28 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@IdClass(CashControlDetailId.class)
+@Table(name = "AR_CSH_CTRL_DTL_T")
 public class CashControlDetail extends PersistableBusinessObjectBase {
 
+	@Id
+	@Column(name = "FDOC_NBR")
 	private String documentNumber;
+	@Id
+	@Column(name = "FDOC_REF_NBR")
 	private String referenceFinancialDocumentNumber;
+	@Column(name = "CUST_PMT_MEDIUM_ID")
 	private String customerPaymentMediumIdentifier;
+	@Column(name = "FDOC_LINE_AMT")
 	private KualiDecimal financialDocumentLineAmount;
+	@Column(name = "CUST_PMT_DESC")
 	private String customerPaymentDescription;
+	@Column(name = "CUST_NBR")
 	private String customerNumber;
+    @Transient
     private String status;
+	@Column(name = "CUST_PMT_DT")
 	private Date customerPaymentDate;
 
     private transient PaymentApplicationDocument referenceFinancialDocument;
