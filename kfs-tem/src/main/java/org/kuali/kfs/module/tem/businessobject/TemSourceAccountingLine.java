@@ -23,7 +23,17 @@ import java.util.Map;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_ACCT_LINES_T")
 public class TemSourceAccountingLine extends SourceAccountingLine implements TemAccountingLine {
     private String cardType;
 

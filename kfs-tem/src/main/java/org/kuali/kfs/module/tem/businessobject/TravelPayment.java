@@ -25,34 +25,67 @@ import org.kuali.kfs.sys.businessobject.options.PaymentDocumentationLocationValu
 import org.kuali.kfs.sys.businessobject.options.PaymentMethodValuesFinder;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * BusinessObject which holds fields representing those a travel document needs to make a payment
  */
+@Entity
+@Table(name = "TEM_TRVL_PMT_T")
 public class TravelPayment extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "CHK_TOT_AMT", precision = 19, scale = 2)
     private KualiDecimal checkTotalAmount;  //editable on TA, read only on TR, RELO, ENT
+    @Column(name = "ATTCH_IND")
     private boolean attachmentCode;
+    @Column(name = "SPCL_HANDLG_IND")
     private boolean specialHandlingCode;
+    @Column(name = "CHK_STUB_TXT")
     private String checkStubText;
+    @Column(name = "DOC_LOC_CD")
     protected String documentationLocationCode;
+    @Column(name = "DUE_DT")
     protected Date dueDate;
+    @Column(name = "PMT_MTHD_CD")
     protected String paymentMethodCode;
+    @Column(name = "IMD_PMT_IND")
     private boolean immediatePaymentIndicator;
+    @Column(name = "EXTRT_DT")
     private Date extractDate;
+    @Column(name = "PAID_DT")
     private Date paidDate;
+    @Column(name = "CNCL_DT")
     private Date cancelDate;
+    @Column(name = "ALIEN_PMT_IND")
     private boolean alienPaymentCode;
+    @Column(name = "RMT_PRSN_NM")
     private String specialHandlingPersonName;
+    @Column(name = "RMT_LN1_ADDR")
     private String specialHandlingLine1Addr;
+    @Column(name = "RMT_LN2_ADDR")
     private String specialHandlingLine2Addr;
+    @Column(name = "RMT_CTY_NM")
     private String specialHandlingCityName;
+    @Column(name = "RMT_ST_CD")
     private String specialHandlingStateCode;
+    @Column(name = "RMT_ZIP_CD")
     private String specialHandlingZipCode;
+    @Column(name = "RMT_CNTRY_CD")
     private String specialHandlingCountryCode;
-    protected boolean editW9W8BENbox; // do we need this?
+    protected transient boolean editW9W8BENbox;
+    @Column(name = "W9_CMPLT_IND")
     protected boolean payeeW9CompleteCode;
+    @Column(name = "PAYEE_TYP_CD")
     private String payeeTypeCode;
+    @Column(name = "EXCPT_IND")
     protected boolean exceptionAttachedIndicator;
 
     private PaymentDocumentationLocation paymentDocumentationLocation;

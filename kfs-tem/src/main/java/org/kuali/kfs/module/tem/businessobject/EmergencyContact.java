@@ -26,11 +26,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.MappedSuperclass;
 
 /**
  * Emergency Contact
  *
  */
+@MappedSuperclass
 public abstract class EmergencyContact extends PersistableBusinessObjectBase {
 
     private Integer id;

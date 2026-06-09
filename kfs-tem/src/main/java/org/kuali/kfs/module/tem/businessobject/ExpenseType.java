@@ -20,16 +20,27 @@ package org.kuali.kfs.module.tem.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * A record encapsulating information about a category of expense - airfare or lodging for instance
  */
+@Entity
+@Table(name = "TEM_EXP_TYP_T")
 public class ExpenseType extends KualiCodeBase implements MutableInactivatable {
+    @Column(name = "GRP_TRVL_IND")
     private boolean groupTravel;
+    @Column(name = "EXP_DETAIL_REQ_IND")
     private boolean expenseDetailRequired;
+    @Column(name = "EXP_PRPY_IND")
     private boolean prepaidExpense;
+    @Column(name = "HOSTED_IND")
     private boolean hosted;
+    @Column(name = "EXP_TYP_META_CTGRY_CD")
     private String expenseTypeMetaCategoryCode;
+    @Column(name = "CTGRY_DFLT_IND")
     private boolean categoryDefault;
 
     public boolean isGroupTravel() {

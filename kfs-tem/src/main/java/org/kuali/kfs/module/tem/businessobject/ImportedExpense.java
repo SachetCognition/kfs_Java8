@@ -20,7 +20,11 @@ package org.kuali.kfs.module.tem.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.kuali.kfs.module.tem.TemConstants;
@@ -45,6 +49,7 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
     }
 
     @Override
+    @Column(name = "EXP_LN_TYP_CD")
     public String getExpenseLineTypeCode(){
         return expenseLineTypeCode;
     }
@@ -53,6 +58,7 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
      * Gets the historicalTravelExpenseId attribute.
      * @return Returns the historicalTravelExpenseId.
      */
+    @Column(name = "HIST_EXP_ID")
     public Long getHistoricalTravelExpenseId() {
         return historicalTravelExpenseId;
     }
@@ -69,6 +75,7 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
      * Gets the cardType attribute.
      * @return Returns the cardType.
      */
+    @Column(name = "CARD_TYPE")
     public String getCardType() {
         return cardType;
     }
@@ -149,6 +156,8 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
         return false;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HIST_EXP_ID", insertable = false, updatable = false)
     public HistoricalTravelExpense getHistoricalTravelExpense() {
         return historicalTravelExpense;
     }

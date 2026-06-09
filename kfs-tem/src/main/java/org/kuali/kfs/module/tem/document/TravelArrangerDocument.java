@@ -30,15 +30,30 @@ import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TEM_TRVL_ARRANGER_DOC_T")
 public class TravelArrangerDocument extends FinancialSystemTransactionalDocumentBase {
 
+    @Column(name = "profile_id")
     private Integer profileId;
+    @Column(name = "ARRANGER_ID")
     private String arrangerId;
-    private String travelerName;
+    private transient String travelerName;
+    @Column(name = "TA_IND")
     private Boolean taInd = Boolean.FALSE;
+    @Column(name = "TR_IND")
     private Boolean trInd = Boolean.FALSE;
+    @Column(name = "RESIGN_IND")
     private Boolean resign = Boolean.FALSE;
+    @Column(name = "PRIMARY_IND")
     private Boolean primaryInd = Boolean.FALSE;
 
     private TemProfile profile;

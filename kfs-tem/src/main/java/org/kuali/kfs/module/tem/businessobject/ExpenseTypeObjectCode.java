@@ -27,32 +27,60 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * A record which matches an expense type, document type, trip type, and traveler type with an object code and other information about the expense in the specific context
  */
+@Entity
+@Table(name = "TEM_EXP_TYP_FIN_OBJ_CD_T")
 public class ExpenseTypeObjectCode extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "EXP_TYP_OBJ_CD_ID")
     private Long expenseTypeObjectCodeId;
 
+    @Column(name = "EXP_TYP_CD")
     private String expenseTypeCode;
+    @Column(name = "TRIP_TYP_CD")
     private String tripTypeCode;
+    @Column(name = "TRAVELER_TYP_CD")
     private String travelerTypeCode;
+    @Column(name = "DOC_TYP_NM")
     private String documentTypeName;
 
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "MAX_AMT", precision = 19, scale = 2)
     private KualiDecimal maximumAmount;
+    @Column(name = "MAX_AMT_SUM_CD")
     private String maximumAmountSummationCode;
+    @Column(name = "ERR_TYP_CD")
     private String errorTypeCode;
+    @Column(name = "NOTE_REQ_IND")
     private boolean noteRequired;
+    @Column(name = "RCPT_REQ_IND")
     private boolean receiptRequired;
+    @Column(name = "RCPT_REQ_THRSH", precision = 19, scale = 2)
     private KualiDecimal receiptRequirementThreshold;
+    @Column(name = "TAXABLE_IND")
     private boolean taxable;
+    @Column(name = "SPCL_RQST_REQ_IND")
     private boolean specialRequestRequired;
+    @Column(name = "ACTV_IND")
     private boolean active;
 
     /* fields for lookup, set to access="readonly" in ojb descriptor */
+    @Column(name = "TRIP_TYP_CD", insertable = false, updatable = false)
     private String tripTypeCodeForLookup;
+    @Column(name = "TRAVELER_TYP_CD", insertable = false, updatable = false)
     private String travelerTypeCodeForLookup;
+    @Column(name = "DOC_TYP_NM", insertable = false, updatable = false)
     private String documentTypeNameForLookup;
     private transient DocumentTypeEBO documentTypeForLookup;
     private transient TripType tripTypeForLookup;
@@ -60,6 +88,8 @@ public class ExpenseTypeObjectCode extends PersistableBusinessObjectBase impleme
 
     private transient DocumentTypeEBO documentType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_TYP_CD", insertable = false, updatable = false)
     private ExpenseType expenseType;
 
     public Long getExpenseTypeObjectCodeId() {

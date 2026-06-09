@@ -22,12 +22,15 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class ImportedExpenseBase extends PersistableBusinessObjectBase {
 
     protected Long id;
@@ -56,6 +59,7 @@ public abstract class ImportedExpenseBase extends PersistableBusinessObjectBase 
      * Gets the id attribute.
      * @return Returns the id.
      */
+    @Id
     @Column(name = "ID", nullable = false)
     public Long getId() {
         return id;
@@ -91,7 +95,7 @@ public abstract class ImportedExpenseBase extends PersistableBusinessObjectBase 
      * @return Returns the creditCardAgency.
      */
     @ManyToOne
-    @JoinColumn(name="CREDIT_AGENCY_CD")
+    @JoinColumn(name = "CCA_CD", insertable = false, updatable = false)
     public CreditCardAgency getCreditCardAgency() {
         return creditCardAgency;
     }

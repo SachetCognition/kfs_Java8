@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -34,50 +35,49 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Entity
 @Table(name="TEM_ENT_PURPOSE_T")
 public class EntertainmentPurpose extends PersistableBusinessObjectBase implements MutableInactivatable{
+    @Id
+    @Column(name = "PURPOSE_CODE", length = 4, nullable = false)
     private String purposeCode;
+    @Column(name = "PURPOSE_NAME", length = 40, nullable = true)
     private String purposeName;
+    @Column(name = "PURPOSE_DESCRIPTION", length = 100, nullable = true)
     private String purposeDescription;
+    @Column(name = "REVIEW_REQUIRED_IND", length = 1, nullable = true)
     private Boolean reviewRequiredIndicator;
+    @Column(name = "ROW_ACTV_IND", length = 1, nullable = false)
     private Boolean active = Boolean.TRUE;
 
-    @Column(name="PURPOSE_CODE",length=4,nullable=false)
     public String getPurposeCode() {
         return purposeCode;
     }
     public void setPurposeCode(String purposeCode) {
         this.purposeCode = purposeCode;
     }
-    @Column(name="PURPOSE_NAME",length=40,nullable=true)
     public String getPurposeName() {
         return purposeName;
     }
     public void setPurposeName(String purposeName) {
         this.purposeName = purposeName;
     }
-    @Column(name="PURPOSE_DESCRIPTION",length=100,nullable=true)
     public String getPurposeDescription() {
         return purposeDescription;
     }
     public void setPurposeDescription(String purposeDescription) {
         this.purposeDescription = purposeDescription;
     }
-    @Column(name="REVIEW_REQUIRED_IND",length=1,nullable=true)
     public Boolean getReviewRequiredIndicator() {
         return reviewRequiredIndicator;
     }
     public void setReviewRequiredIndicator(Boolean reviewRequiredIndicator) {
         this.reviewRequiredIndicator = reviewRequiredIndicator;
     }
-    @Column(name="REVIEW_REQUIRED_IND",length=1,nullable=true)
     public Boolean isReviewRequiredIndicator(){
         return getReviewRequiredIndicator();
     }
     @Override
-    @Column(name="ROW_ACTV_IND",length=1, nullable=false)
     public boolean isActive() {
         return this.active;
     }
-    @Column(name="ROW_ACTV_IND",length=1, nullable=false)
     public boolean getActive(){
         return this.active;
     }

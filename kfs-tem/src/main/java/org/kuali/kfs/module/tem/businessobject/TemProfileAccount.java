@@ -28,20 +28,35 @@ import javax.persistence.Table;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @Table(name = "TEM_PROFILE_ACCOUNT_T")
 public class TemProfileAccount extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Column(name = "PROFILE_ID", nullable = false)
     private Integer profileId;
     private TemProfile profile;
+    @Column(name = "CREDIT_CARD_AGENCY_CODE")
     private String creditCardOrAgencyCode;
+    @Id
+    @GeneratedValue(generator = "TEM_PROFILE_ACCOUNT_ID_SEQ")
+    @SequenceGenerator(name = "TEM_PROFILE_ACCOUNT_ID_SEQ", sequenceName = "TEM_PROFILE_ACCOUNT_ID_SEQ")
+    @Column(name = "ACCOUNT_ID", nullable = false)
     private Integer accountId;
+    @Column(name = "NAME", nullable = false)
     private String name;
+    @Column(name = "ACCOUNT_NBR", nullable = false)
     private String accountNumber;
+    @Column(name = "EXP_DATE")
     private Date expirationDate;
+    @Column(name = "EFFECTIVE_DATE")
     private Date effectiveDate;
+    @Column(name = "NOTE")
     private String note;
+    @Column(name = "ACTV_IND", nullable = false, length = 1)
     private Boolean active = Boolean.TRUE;
 
     private CreditCardAgency creditCardAgency;
@@ -52,7 +67,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the accountId.
      */
-    @Column(name = "account_id", nullable = false, length = 19)
     public Integer getAccountId() {
         return accountId;
     }
@@ -71,7 +85,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the name.
      */
-    @Column(name = "name", nullable = false, length = 50)
     public String getName() {
         return name;
     }
@@ -90,7 +103,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the accountNumber.
      */
-    @Column(name = "account_nbr", nullable = false, length = 50)
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -109,7 +121,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the expirationDate.
      */
-    @Column(name = "effective_date", nullable = true)
     public Date getEffectiveDate() {
         return effectiveDate;
     }
@@ -128,7 +139,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the expirationDate.
      */
-    @Column(name = "exp_date", nullable = true)
     public Date getExpirationDate() {
         return expirationDate;
     }
@@ -147,7 +157,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the note.
      */
-    @Column(name = "note", nullable = true, length = 500)
     public String getNote() {
         return note;
     }
@@ -167,7 +176,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      * @return Returns the active.
      */
     @Override
-    @Column(name = "ACTV_IND", nullable = false, length = 1)
     public boolean isActive() {
         return active;
     }
@@ -187,7 +195,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the profileId.
      */
-    @Column(name = "profile_id", nullable = false, length = 19)
     public Integer getProfileId() {
         return profileId;
     }
@@ -206,7 +213,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the profile.
      */
-    @JoinColumn(name = "profile_id")
     public TemProfile getProfile() {
         return profile;
     }
@@ -225,7 +231,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the creditCardAgencyCode.
      */
-    @Column(name = "credit_card_agency_code", nullable = false, length = 19)
     public String getCreditCardOrAgencyCode() {
         return creditCardOrAgencyCode;
     }
@@ -244,7 +249,6 @@ public class TemProfileAccount extends PersistableBusinessObjectBase implements 
      *
      * @return Returns the creditCardAgency.
      */
-    @JoinColumn(name = "credit_card_agency_code")
     public CreditCardAgency getCreditCardAgency() {
         return creditCardAgency;
     }

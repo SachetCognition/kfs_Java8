@@ -22,6 +22,8 @@ import java.util.LinkedHashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -31,10 +33,17 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 @Entity
 @Table(name = "TEM_TRANS_MD_DTL_T")
+@IdClass(TransportationModeDetailId.class)
 public class TransportationModeDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "TRANS_MODE_CD")
     private String transportationModeCode;
+    @ManyToOne
+    @JoinColumn(name = "TRANS_MODE_CD", insertable = false, updatable = false)
     private TransportationMode transportationMode;
 
     /**
@@ -42,7 +51,6 @@ public class TransportationModeDetail extends PersistableBusinessObjectBase {
      * This method returns the document number this TransportationModeDetail object is associated with
      * @return document number
      */
-    @Column(name="doc_nbr")
     public String getDocumentNumber() {
         return documentNumber;
     }
@@ -56,7 +64,6 @@ public class TransportationModeDetail extends PersistableBusinessObjectBase {
         this.documentNumber = documentNumber;
     }
 
-    @Column(name="TRANS_MODE_CD",length=3, nullable=false)
     public String getTransportationModeCode() {
         return transportationModeCode;
     }
@@ -66,8 +73,6 @@ public class TransportationModeDetail extends PersistableBusinessObjectBase {
         this.transportationModeCode = transportationModeCode;
     }
 
-    @ManyToOne
-    @JoinColumn(name="TRANS_MODE_CD")
     public TransportationMode getTransportationMode() {
         return transportationMode;
     }
