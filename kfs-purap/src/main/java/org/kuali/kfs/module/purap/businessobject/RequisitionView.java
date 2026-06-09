@@ -23,6 +23,8 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.Note;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,6 +33,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 /**
@@ -40,6 +43,7 @@ import jakarta.persistence.Table;
 @Table(name = "PUR_REQS_T")
 @IdClass(RequisitionViewId.class)
 public class RequisitionView extends AbstractRelatedView {
+    @Transient
     private Integer requisitionIdentifier;
 
     public Integer getRequisitionIdentifier() {
@@ -56,6 +60,9 @@ public class RequisitionView extends AbstractRelatedView {
      *
      * @see org.kuali.kfs.module.purap.businessobject.AbstractRelatedView#getPurapDocumentIdentifier()
      */
+    @Id
+    @Column(name = "REQS_ID")
+    @Access(AccessType.PROPERTY)
     @Override
     public Integer getPurapDocumentIdentifier() {
         return super.getPurapDocumentIdentifier();

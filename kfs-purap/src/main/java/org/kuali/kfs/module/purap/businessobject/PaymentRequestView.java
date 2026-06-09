@@ -31,6 +31,8 @@ import org.kuali.rice.core.web.format.DateFormatter;
 import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.service.NoteService;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -49,6 +51,14 @@ import org.hibernate.type.YesNoConverter;
 @Table(name = "AP_PMT_RQST_T")
 @IdClass(PaymentRequestViewId.class)
 public class PaymentRequestView extends AbstractRelatedView {
+
+    @Id
+    @Column(name = "PMT_RQST_ID")
+    @Access(AccessType.PROPERTY)
+    @Override
+    public Integer getPurapDocumentIdentifier() {
+        return super.getPurapDocumentIdentifier();
+    }
 
     @Column(name = "INV_NBR")
     private String invoiceNumber;
@@ -153,15 +163,6 @@ public class PaymentRequestView extends AbstractRelatedView {
      */
     public String getDocumentType() {
         return KFSConstants.FinancialDocumentTypeCodes.PAYMENT_REQUEST;
-    }
-
-    /**
-     * The next three methods are overridden but shouldnt be! If they arent overridden, they dont show up in the tag, not sure why
-     * at this point! (AAP)
-     */
-    @Override
-    public Integer getPurapDocumentIdentifier() {
-        return super.getPurapDocumentIdentifier();
     }
 
     @Override

@@ -23,6 +23,8 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.Note;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,6 +49,14 @@ public class ElectronicInvoiceRejectView extends AbstractRelatedView {
     @Id
     @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+
+    @Id
+    @Column(name = "INV_RJT_ID")
+    @Access(AccessType.PROPERTY)
+    @Override
+    public Integer getPurapDocumentIdentifier() {
+        return super.getPurapDocumentIdentifier();
+    }
 
     @Override
     public String getDocumentIdentifierString() {
@@ -75,17 +85,6 @@ public class ElectronicInvoiceRejectView extends AbstractRelatedView {
 
     public void setPurchaseOrderIdentifier(Integer purchaseOrderIdentifier) {
         this.purchaseOrderIdentifier = purchaseOrderIdentifier;
-    }
-
-    /**
-     * The next three methods are overridden but shouldn't be! If they aren't
-     * overridden, they don't show up in the tag, not sure why at this point! (AAP)
-     *
-     * @see org.kuali.kfs.module.purap.businessobject.AbstractRelatedView#getPurapDocumentIdentifier()
-     */
-    @Override
-    public Integer getPurapDocumentIdentifier() {
-        return super.getPurapDocumentIdentifier();
     }
 
     /**

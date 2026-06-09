@@ -28,6 +28,8 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -64,6 +66,14 @@ public class PurchaseOrderView extends AbstractRelatedView {
     private Timestamp purchaseOrderInitialOpenTimestamp;
 
     private List<Note> notes;
+
+    @Id
+    @Column(name = "PO_ID")
+    @Access(AccessType.PROPERTY)
+    @Override
+    public Integer getPurapDocumentIdentifier() {
+        return super.getPurapDocumentIdentifier();
+    }
 
     public boolean isPurchaseOrderCurrentIndicator() {
         return purchaseOrderCurrentIndicator;
@@ -131,17 +141,6 @@ public class PurchaseOrderView extends AbstractRelatedView {
         }
 
         return notes;
-    }
-
-    /**
-     * The next four methods are overridden but shouldn't be! If they aren't overridden, they don't show up in the tag, not sure why at
-     * this point! (AAP)
-     *
-     * @see org.kuali.kfs.module.purap.businessobject.AbstractRelatedView#getPurapDocumentIdentifier()
-     */
-    @Override
-    public Integer getPurapDocumentIdentifier() {
-        return super.getPurapDocumentIdentifier();
     }
 
     @Override

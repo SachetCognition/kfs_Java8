@@ -56,8 +56,7 @@ public abstract class AbstractRelatedView extends PersistableBusinessObjectBase 
     @Id
     @Column(name = "AP_PUR_DOC_LNK_ID")
     private Integer accountsPayablePurchasingDocumentLinkIdentifier;
-    @Id
-    @Column(name = "PO_ID")
+    @Transient
     private Integer purapDocumentIdentifier;
     @Id
     @Column(name = "FDOC_NBR")
