@@ -1042,12 +1042,12 @@
       <version>${log4j2.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!-- Keep log4j 1.x JAR for compile-time compatibility with Rice (will be removed in Phase 3) -->
+    <!-- Keep log4j 1.x JAR for compile-time only; log4j-1.2-api bridges at runtime -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>
-      <scope>${log4j.scope}</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
