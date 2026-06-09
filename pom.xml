@@ -107,7 +107,7 @@
     <commons-transaction.version>1.2</commons-transaction.version>
     <itext.version>1.4.8</itext.version>
     <jasperreports.version>2.0.4</jasperreports.version>
-    <spring-boot.version>3.3.0</spring-boot.version>
+    <spring-boot.version>2.7.18</spring-boot.version>
     <javax.resource.connector.api.version>1.5</javax.resource.connector.api.version>
     <jaxb.version>2.2.6</jaxb.version>
 
@@ -152,18 +152,6 @@
     <jul-to-slf4j.version>${slf4j.version}</jul-to-slf4j.version>
 
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <build>
     <finalName>${project.artifactId}</finalName>
     <pluginManagement>
@@ -190,9 +178,29 @@
           <version>2.6</version>
 
         </plugin>
+        <plugin>
+          <groupId>org.kuali.maven.plugins</groupId>
+          <artifactId>guice-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>metadata</id>
+              <phase>none</phase>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.kuali.maven.plugins</groupId>
+        <artifactId>guice-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>metadata</id>
+            <phase>none</phase>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
@@ -772,11 +780,40 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
+      <version>${spring-boot.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-beans</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-vault-config</artifactId>
-      <version>4.1.1</version>
+      <version>3.1.4</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>net.sf.opencsv</groupId>
@@ -936,11 +973,7 @@
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-      <optional>true</optional>
-    </dependency>
+
 
   </dependencies>
 
