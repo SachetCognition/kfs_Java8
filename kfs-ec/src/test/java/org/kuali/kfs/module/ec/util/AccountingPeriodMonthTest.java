@@ -1,161 +1,115 @@
-/*
- * The Kuali Financial System, a comprehensive financial management system for higher education.
- * 
- * Copyright 2005-2014 The Kuali Foundation
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * 
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package org.kuali.kfs.module.ec.util;
 
-import java.util.EnumSet;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.kuali.kfs.sys.context.KfsUnitTestBase;
+
 import java.util.Map;
 import java.util.Set;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class AccountingPeriodMonthTest extends TestCase {
+class AccountingPeriodMonthTest extends KfsUnitTestBase {
 
-    /**
-     * @see junit.framework.TestCase#setUp()
-     */
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
+    @Nested
+    @DisplayName("findAccountingPeriod")
+    class FindAccountingPeriod {
 
-    /**
-     * test the AccountingPeriodMonth.findAccountingPeriod method
-     * 
-     * @see AccountingPeriodMonth.findAccountingPeriod
-     */
-    public void testFindAccountingPeriod() throws Exception {
-        AccountingPeriodMonth month1 = AccountingPeriodMonth.findAccountingPeriod(AccountingPeriodMonth.MONTH1.periodCode);
-        assertEquals(AccountingPeriodMonth.MONTH1, month1);
-
-        AccountingPeriodMonth month12 = AccountingPeriodMonth.findAccountingPeriod(AccountingPeriodMonth.MONTH12.periodCode);
-        assertEquals(AccountingPeriodMonth.MONTH12, month12);
-
-        AccountingPeriodMonth month6 = AccountingPeriodMonth.findAccountingPeriod(AccountingPeriodMonth.MONTH6.periodCode);
-        assertEquals(AccountingPeriodMonth.MONTH6, month6);
-        assertFalse(AccountingPeriodMonth.MONTH1.compareTo(month6) == 0);
-        assertFalse(AccountingPeriodMonth.MONTH12.compareTo(month6) == 0);
-
-        AccountingPeriodMonth unknownMonth = AccountingPeriodMonth.findAccountingPeriod("UNKNOWN");
-        assertNull(unknownMonth);
-        
-        AccountingPeriodMonth emptyMonth = AccountingPeriodMonth.findAccountingPeriod("");
-        assertNull(emptyMonth);
-    }
-
-    /**
-     * test the AccountingPeriodMonth.findAccountingPeriodsBetween method
-     * 
-     * @see AccountingPeriodMonth.findAccountingPeriodsBetween
-     */
-    public void testFindAccountingPeriodsBetween_WithinSameYear() throws Exception {
-        Integer year = 2008;
-
-        this.assertAccountingPeriodsWithinYear(year, AccountingPeriodMonth.MONTH1, AccountingPeriodMonth.MONTH12);
-
-        this.assertAccountingPeriodsWithinYear(year, AccountingPeriodMonth.MONTH1, AccountingPeriodMonth.MONTH3);
-        this.assertAccountingPeriodsWithinYear(year, AccountingPeriodMonth.MONTH4, AccountingPeriodMonth.MONTH8);
-        this.assertAccountingPeriodsWithinYear(year, AccountingPeriodMonth.MONTH9, AccountingPeriodMonth.MONTH12);
-
-        try {
-            this.assertAccountingPeriodsWithinYear(year, AccountingPeriodMonth.MONTH9, AccountingPeriodMonth.MONTH5);
-            fail();
+        @Test
+        void shouldFindMonth1() {
+            AccountingPeriodMonth result = AccountingPeriodMonth.findAccountingPeriod("01");
+            assertThat(result).isEqualTo(AccountingPeriodMonth.MONTH1);
         }
-        catch (IllegalArgumentException e) {
+
+        @Test
+        void shouldFindMonth12() {
+            AccountingPeriodMonth result = AccountingPeriodMonth.findAccountingPeriod("12");
+            assertThat(result).isEqualTo(AccountingPeriodMonth.MONTH12);
+        }
+
+        @Test
+        void shouldReturnNullForInvalidCode() {
+            AccountingPeriodMonth result = AccountingPeriodMonth.findAccountingPeriod("99");
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnNullForNull() {
+            AccountingPeriodMonth result = AccountingPeriodMonth.findAccountingPeriod(null);
+            assertThat(result).isNull();
         }
     }
 
-    /**
-     * test the AccountingPeriodMonth.findAccountingPeriodsBetween method
-     * 
-     * @see AccountingPeriodMonth.findAccountingPeriodsBetween
-     */
-    public void testFindAccountingPeriodsBetween_AcrossMultipleYears() throws Exception {
-        Integer beginYear = 2008;
-        Integer endYear = 2010;
+    @Nested
+    @DisplayName("findAccountingPeriodsBetween")
+    class FindPeriodsBetween {
 
-        this.assertAccountingPeriodsAcrossYears(beginYear, AccountingPeriodMonth.MONTH1, endYear, AccountingPeriodMonth.MONTH12);
-
-        this.assertAccountingPeriodsAcrossYears(beginYear, AccountingPeriodMonth.MONTH1, endYear, AccountingPeriodMonth.MONTH4);
-        this.assertAccountingPeriodsAcrossYears(beginYear, AccountingPeriodMonth.MONTH5, endYear, AccountingPeriodMonth.MONTH12);
-        this.assertAccountingPeriodsAcrossYears(beginYear, AccountingPeriodMonth.MONTH5, endYear, AccountingPeriodMonth.MONTH4);
-
-        try {
-            this.assertAccountingPeriodsAcrossYears(endYear, AccountingPeriodMonth.MONTH5, beginYear, AccountingPeriodMonth.MONTH4);
-            fail();
+        @Test
+        void shouldReturnPeriodsWithinSameYear() {
+            Map<Integer, Set<String>> periods = AccountingPeriodMonth.findAccountingPeriodsBetween(
+                    2024, "01", 2024, "06");
+            assertThat(periods).containsKey(2024);
+            assertThat(periods.get(2024)).containsExactlyInAnyOrder("01", "02", "03", "04", "05", "06");
         }
-        catch (IllegalArgumentException e) {
+
+        @Test
+        void shouldReturnPeriodsAcrossYears() {
+            Map<Integer, Set<String>> periods = AccountingPeriodMonth.findAccountingPeriodsBetween(
+                    2023, "10", 2024, "03");
+            assertThat(periods).containsKeys(2023, 2024);
+            assertThat(periods.get(2023)).contains("10", "11", "12");
+            assertThat(periods.get(2024)).contains("01", "02", "03");
         }
-    }
 
-    /**
-     * test the AccountingPeriodMonth.buildPeriodCodeSetWithinRange method
-     * 
-     * @see AccountingPeriodMonth.buildPeriodCodeSetWithinRange
-     */
-    public void testBuildPeriodCodeSetWithinRange() throws Exception {
-        this.assertAccountingPeriodsWithinRange(AccountingPeriodMonth.MONTH1, AccountingPeriodMonth.MONTH12);
-
-        this.assertAccountingPeriodsWithinRange(AccountingPeriodMonth.MONTH1, AccountingPeriodMonth.MONTH3);
-        this.assertAccountingPeriodsWithinRange(AccountingPeriodMonth.MONTH4, AccountingPeriodMonth.MONTH8);
-        this.assertAccountingPeriodsWithinRange(AccountingPeriodMonth.MONTH9, AccountingPeriodMonth.MONTH12);
-
-        try {
-            this.assertAccountingPeriodsWithinRange(AccountingPeriodMonth.MONTH9, AccountingPeriodMonth.MONTH5);
-            fail();
+        @Test
+        void shouldReturnSinglePeriodWhenStartEqualsEnd() {
+            Map<Integer, Set<String>> periods = AccountingPeriodMonth.findAccountingPeriodsBetween(
+                    2024, "06", 2024, "06");
+            assertThat(periods.get(2024)).containsExactly("06");
         }
-        catch (IllegalArgumentException e) {
+
+        @Test
+        void shouldReturnAllPeriodsForFullYear() {
+            Map<Integer, Set<String>> periods = AccountingPeriodMonth.findAccountingPeriodsBetween(
+                    2024, "01", 2024, "12");
+            assertThat(periods.get(2024)).hasSize(12);
         }
     }
 
-    private void assertAccountingPeriodsWithinYear(Integer year, AccountingPeriodMonth beginPeriod, AccountingPeriodMonth endPeriod) {
-        Map<Integer, Set<String>> periods = AccountingPeriodMonth.findAccountingPeriodsBetween(year, beginPeriod.periodCode, year, endPeriod.periodCode);
+    @Nested
+    @DisplayName("buildPeriodCodeSetWithinRange")
+    class BuildPeriodCodeSet {
 
-        Set<String> periodCodes = periods.get(year);
-        this.assertAccountingPeriodMonthEqual(periodCodes, beginPeriod, endPeriod);
-    }
-    
-    private void assertAccountingPeriodsWithinRange(AccountingPeriodMonth beginPeriod, AccountingPeriodMonth endPeriod) {       
-        Set<String> periodCodes = AccountingPeriodMonth.buildPeriodCodeSetWithinRange(beginPeriod, endPeriod);
-        this.assertAccountingPeriodMonthEqual(periodCodes, beginPeriod, endPeriod);
-    }
-    
-    private void assertAccountingPeriodsAcrossYears(Integer beginYear, AccountingPeriodMonth beginPeriod, Integer endYear, AccountingPeriodMonth endPeriod) {
-        Map<Integer, Set<String>> periods = AccountingPeriodMonth.findAccountingPeriodsBetween(beginYear, beginPeriod.periodCode, endYear, endPeriod.periodCode);
-
-        Set<String> beginPeriodCodes = periods.get(beginYear);
-        this.assertAccountingPeriodMonthEqual(beginPeriodCodes, beginPeriod, AccountingPeriodMonth.MONTH12);
-
-        for (int year = beginYear + 1; year <= endYear - 1; year++) {
-            Set<String> periodCodes = periods.get(year);
-            this.assertAccountingPeriodMonthEqual(periodCodes, AccountingPeriodMonth.MONTH1, AccountingPeriodMonth.MONTH12);
+        @Test
+        void shouldBuildFromRange() {
+            Set<String> codes = AccountingPeriodMonth.buildPeriodCodeSetWithinRange(
+                    AccountingPeriodMonth.MONTH1, AccountingPeriodMonth.MONTH6);
+            assertThat(codes).containsExactlyInAnyOrder("01", "02", "03", "04", "05", "06");
         }
 
-        Set<String> endPeriodCodes = periods.get(endYear);
-        this.assertAccountingPeriodMonthEqual(endPeriodCodes, AccountingPeriodMonth.MONTH1, endPeriod);
+        @Test
+        void shouldBuildSingleElement() {
+            Set<String> codes = AccountingPeriodMonth.buildPeriodCodeSetWithinRange(
+                    AccountingPeriodMonth.MONTH5, AccountingPeriodMonth.MONTH5);
+            assertThat(codes).containsExactly("05");
+        }
     }
 
-    private void assertAccountingPeriodMonthEqual(Set<String> periodCodes, AccountingPeriodMonth beginPeriod, AccountingPeriodMonth endPeriod) {
-        Set<AccountingPeriodMonth> accountingPeriodMonth = EnumSet.range(beginPeriod, endPeriod);
-        assertTrue(periodCodes.size() == accountingPeriodMonth.size());
+    @Nested
+    @DisplayName("Enum properties")
+    class EnumProperties {
 
-        for (String code : periodCodes) {
-            AccountingPeriodMonth month = AccountingPeriodMonth.findAccountingPeriod(code);
-            assertTrue(accountingPeriodMonth.contains(month));
+        @Test
+        void shouldHave12Values() {
+            assertThat(AccountingPeriodMonth.values()).hasSize(12);
+        }
+
+        @Test
+        void shouldReturnCorrectPeriodCode() {
+            assertThat(AccountingPeriodMonth.MONTH1.periodCode).isEqualTo("01");
+            assertThat(AccountingPeriodMonth.MONTH6.periodCode).isEqualTo("06");
+            assertThat(AccountingPeriodMonth.MONTH12.periodCode).isEqualTo("12");
         }
     }
 }
