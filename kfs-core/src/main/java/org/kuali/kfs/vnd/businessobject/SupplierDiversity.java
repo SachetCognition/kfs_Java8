@@ -24,14 +24,28 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Ways in which chosen Vendors are demonstrably diverse, including having certification as a Minority-owned or Woman-owned Business
  * Enterprise (M/WBE), as a Small Business Enterprise (SBE), etc.
  */
+@Entity
+@Table(name = "PUR_SUPP_DVRST_T")
 public class SupplierDiversity extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "VNDR_SUPP_DVRST_CD")
     private String vendorSupplierDiversityCode;
+    @Column(name = "VNDR_SUPP_DVRST_DESC")
     private String vendorSupplierDiversityDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

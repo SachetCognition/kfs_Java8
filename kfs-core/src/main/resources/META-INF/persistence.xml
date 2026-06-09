@@ -211,6 +211,46 @@
         <class>org.kuali.kfs.pdp.businessobject.PaymentType</class>
         <class>org.kuali.kfs.pdp.businessobject.ProcessSummary</class>
 
+        <!-- VND module entities -->
+        <class>org.kuali.kfs.vnd.businessobject.AddressType</class>
+        <class>org.kuali.kfs.vnd.businessobject.CampusParameter</class>
+        <class>org.kuali.kfs.vnd.businessobject.Chapter3Status</class>
+        <class>org.kuali.kfs.vnd.businessobject.Chapter4Status</class>
+        <class>org.kuali.kfs.vnd.businessobject.CommodityCode</class>
+        <class>org.kuali.kfs.vnd.businessobject.CommodityContractManager</class>
+        <class>org.kuali.kfs.vnd.businessobject.ContactType</class>
+        <class>org.kuali.kfs.vnd.businessobject.ContractManager</class>
+        <class>org.kuali.kfs.vnd.businessobject.DebarredVendorDetail</class>
+        <class>org.kuali.kfs.vnd.businessobject.DebarredVendorMatch</class>
+        <class>org.kuali.kfs.vnd.businessobject.OwnershipCategory</class>
+        <class>org.kuali.kfs.vnd.businessobject.OwnershipType</class>
+        <class>org.kuali.kfs.vnd.businessobject.PaymentTermType</class>
+        <class>org.kuali.kfs.vnd.businessobject.PhoneType</class>
+        <class>org.kuali.kfs.vnd.businessobject.PurchaseOrderCostSource</class>
+        <class>org.kuali.kfs.vnd.businessobject.ShippingPaymentTerms</class>
+        <class>org.kuali.kfs.vnd.businessobject.ShippingSpecialCondition</class>
+        <class>org.kuali.kfs.vnd.businessobject.ShippingTitle</class>
+        <class>org.kuali.kfs.vnd.businessobject.SupplierDiversity</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorAddress</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorAlias</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorCommodityCode</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorContact</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorContactPhoneNumber</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorContract</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorContractOrganization</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorCustomerNumber</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorDefaultAddress</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorDetail</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorHeader</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorInactiveReason</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorPhoneNumber</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorShippingSpecialCondition</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorSupplierDiversity</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorTaxChange</class>
+        <class>org.kuali.kfs.vnd.businessobject.VendorType</class>
+        <class>org.kuali.kfs.vnd.businessobject.W8Type</class>
+        <class>org.kuali.kfs.vnd.businessobject.W8TypeOwnershipType</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>
