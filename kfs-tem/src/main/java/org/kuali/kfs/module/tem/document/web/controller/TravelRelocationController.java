@@ -20,7 +20,6 @@ package org.kuali.kfs.module.tem.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.tem.document.web.struts.TravelRelocationAction;
 import org.kuali.kfs.module.tem.document.web.struts.TravelRelocationForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TravelRelocationAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/travelRelocation")
 public class TravelRelocationController {
 
-    private final TravelRelocationAction delegate = new TravelRelocationAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("TravelRelocationForm") TravelRelocationForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

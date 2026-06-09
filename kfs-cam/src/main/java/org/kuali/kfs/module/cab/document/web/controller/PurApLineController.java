@@ -20,7 +20,6 @@ package org.kuali.kfs.module.cab.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.cab.document.web.struts.PurApLineAction;
 import org.kuali.kfs.module.cab.document.web.struts.PurApLineForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -33,13 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing PurApLineAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/purApLine")
 public class PurApLineController {
 
-    private final PurApLineAction delegate = new PurApLineAction();
 
     @RequestMapping(params = "methodToCall=start")
     public String start(@ModelAttribute("PurApLineForm") PurApLineForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

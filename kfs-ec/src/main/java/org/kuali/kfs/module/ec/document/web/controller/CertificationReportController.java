@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ec.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ec.document.web.struts.CertificationReportAction;
 import org.kuali.kfs.module.ec.document.web.struts.EffortCertificationForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing CertificationReportAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/certificationReport")
 public class CertificationReportController {
 
-    private final CertificationReportAction delegate = new CertificationReportAction();
 
     @RequestMapping(params = "methodToCall=recalculate")
     public String recalculate(@ModelAttribute("EffortCertificationForm") EffortCertificationForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

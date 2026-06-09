@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.web.struts.CustomerInvoiceWriteoffLookupSummaryAction;
 import org.kuali.kfs.module.ar.web.struts.CustomerInvoiceWriteoffLookupSummaryForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -33,13 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing CustomerInvoiceWriteoffLookupSummaryAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/customerInvoiceWriteoffLookupSummary")
 public class CustomerInvoiceWriteoffLookupSummaryController {
 
-    private final CustomerInvoiceWriteoffLookupSummaryAction delegate = new CustomerInvoiceWriteoffLookupSummaryAction();
 
     @RequestMapping(params = "methodToCall=viewSummary")
     public String viewSummary(@ModelAttribute("CustomerInvoiceWriteoffLookupSummaryForm") CustomerInvoiceWriteoffLookupSummaryForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

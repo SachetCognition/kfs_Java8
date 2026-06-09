@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.document.web.struts.ContractsGrantsCollectionActivityDocumentAction;
 import org.kuali.kfs.module.ar.document.web.struts.ContractsGrantsCollectionActivityDocumentForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ContractsGrantsCollectionActivityDocumentAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/contractsGrantsCollectionActivityDocument")
 public class ContractsGrantsCollectionActivityDocumentController {
 
-    private final ContractsGrantsCollectionActivityDocumentAction delegate = new ContractsGrantsCollectionActivityDocumentAction();
 
     @RequestMapping(params = "methodToCall=deleteInvoice")
     public String deleteInvoice(@ModelAttribute("ContractsGrantsCollectionActivityDocumentForm") ContractsGrantsCollectionActivityDocumentForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

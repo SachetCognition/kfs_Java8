@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ld.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ld.document.web.struts.BenefitExpenseTransferAction;
 import org.kuali.kfs.module.ld.document.web.struts.BenefitExpenseTransferForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.springframework.stereotype.Controller;
@@ -29,13 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing BenefitExpenseTransferAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/benefitExpenseTransfer")
 public class BenefitExpenseTransferController {
 
-    private final BenefitExpenseTransferAction delegate = new BenefitExpenseTransferAction();
 
     @RequestMapping(params = "methodToCall=performLookup")
     public String performLookup(@ModelAttribute("BenefitExpenseTransferForm") BenefitExpenseTransferForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.LineItemReceivingAction;
 import org.kuali.kfs.module.purap.document.web.struts.LineItemReceivingForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing LineItemReceivingAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/lineItemReceiving")
 public class LineItemReceivingController {
 
-    private final LineItemReceivingAction delegate = new LineItemReceivingAction();
 
     @RequestMapping(params = "methodToCall=continueReceivingLine")
     public String continueReceivingLine(@ModelAttribute("LineItemReceivingForm") LineItemReceivingForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

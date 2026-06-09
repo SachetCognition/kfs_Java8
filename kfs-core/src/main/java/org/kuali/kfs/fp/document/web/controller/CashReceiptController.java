@@ -20,7 +20,6 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.CashReceiptAction;
 import org.kuali.kfs.fp.document.web.struts.CashReceiptForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing CashReceiptAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/cashReceipt")
 public class CashReceiptController {
 
-    private final CashReceiptAction delegate = new CashReceiptAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("CashReceiptForm") CashReceiptForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

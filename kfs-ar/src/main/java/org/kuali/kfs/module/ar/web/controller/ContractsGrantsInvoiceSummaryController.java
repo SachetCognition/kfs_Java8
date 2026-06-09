@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.web.struts.ContractsGrantsInvoiceSummaryAction;
 import org.kuali.kfs.module.ar.web.struts.ContractsGrantsInvoiceSummaryForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -33,13 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ContractsGrantsInvoiceSummaryAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/contractsGrantsInvoiceSummary")
 public class ContractsGrantsInvoiceSummaryController {
 
-    private final ContractsGrantsInvoiceSummaryAction delegate = new ContractsGrantsInvoiceSummaryAction();
 
     @RequestMapping(params = "methodToCall=viewSummary")
     public String viewSummary(@ModelAttribute("ContractsGrantsInvoiceSummaryForm") ContractsGrantsInvoiceSummaryForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

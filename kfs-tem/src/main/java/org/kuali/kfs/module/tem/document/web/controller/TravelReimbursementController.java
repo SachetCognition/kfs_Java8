@@ -20,7 +20,6 @@ package org.kuali.kfs.module.tem.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.tem.document.web.struts.TravelReimbursementAction;
 import org.kuali.kfs.module.tem.document.web.struts.TravelReimbursementForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TravelReimbursementAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/travelReimbursement")
 public class TravelReimbursementController {
 
-    private final TravelReimbursementAction delegate = new TravelReimbursementAction();
 
     @RequestMapping(params = "methodToCall=printCoversheet")
     public void printCoversheet(@ModelAttribute("TravelReimbursementForm") TravelReimbursementForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

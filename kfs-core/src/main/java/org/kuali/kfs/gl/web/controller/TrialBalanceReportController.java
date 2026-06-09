@@ -20,7 +20,6 @@ package org.kuali.kfs.gl.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.gl.web.struts.TrialBalanceReportAction;
 import org.kuali.kfs.gl.web.struts.TrialBalanceReportForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TrialBalanceReportAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/trialBalanceReport")
 public class TrialBalanceReportController {
 
-    private final TrialBalanceReportAction delegate = new TrialBalanceReportAction();
 
     @RequestMapping(params = "methodToCall=search")
     public String search(@ModelAttribute("TrialBalanceReportForm") TrialBalanceReportForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

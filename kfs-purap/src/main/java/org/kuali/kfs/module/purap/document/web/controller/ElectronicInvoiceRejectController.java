@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.ElectronicInvoiceRejectAction;
 import org.kuali.kfs.module.purap.document.web.struts.ElectronicInvoiceRejectForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ElectronicInvoiceRejectAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/electronicInvoiceReject")
 public class ElectronicInvoiceRejectController {
 
-    private final ElectronicInvoiceRejectAction delegate = new ElectronicInvoiceRejectAction();
 
     @RequestMapping(params = "methodToCall=startResearch")
     public String startResearch(@ModelAttribute("ElectronicInvoiceRejectForm") ElectronicInvoiceRejectForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

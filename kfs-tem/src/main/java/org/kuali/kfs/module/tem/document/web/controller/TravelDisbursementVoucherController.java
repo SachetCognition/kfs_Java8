@@ -20,7 +20,6 @@ package org.kuali.kfs.module.tem.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.tem.document.web.struts.TravelDisbursementVoucherAction;
 import org.kuali.kfs.module.tem.document.web.struts.TravelDisbursementVoucherForm;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.springframework.stereotype.Controller;
@@ -29,13 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TravelDisbursementVoucherAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/travelDisbursementVoucher")
 public class TravelDisbursementVoucherController {
 
-    private final TravelDisbursementVoucherAction delegate = new TravelDisbursementVoucherAction();
 
     @RequestMapping(params = "methodToCall=docHandler")
     public String docHandler(@ModelAttribute("TravelDisbursementVoucherForm") TravelDisbursementVoucherForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

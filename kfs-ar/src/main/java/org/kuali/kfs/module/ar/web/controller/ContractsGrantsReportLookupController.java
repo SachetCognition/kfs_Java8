@@ -21,7 +21,6 @@ package org.kuali.kfs.module.ar.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.kuali.kfs.module.ar.web.struts.ContractsGrantsReportLookupAction;
 
 /**
  * Abstract Spring MVC controller base replacing ContractsGrantsReportLookupAction.

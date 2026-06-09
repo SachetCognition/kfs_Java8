@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.web.struts.B2BAction;
 import org.kuali.kfs.module.purap.web.struts.B2BForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing B2BAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/b2B")
 public class B2BController {
 
-    private final B2BAction delegate = new B2BAction();
 
     @RequestMapping(params = "methodToCall=shopCatalogs")
     public String shopCatalogs(@ModelAttribute("B2BForm") B2BForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

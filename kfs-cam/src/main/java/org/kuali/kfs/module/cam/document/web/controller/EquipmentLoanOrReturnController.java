@@ -20,7 +20,6 @@ package org.kuali.kfs.module.cam.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.cam.document.web.struts.EquipmentLoanOrReturnAction;
 import org.kuali.kfs.module.cam.document.web.struts.EquipmentLoanOrReturnForm;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.springframework.stereotype.Controller;
@@ -29,13 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing EquipmentLoanOrReturnAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/equipmentLoanOrReturn")
 public class EquipmentLoanOrReturnController {
 
-    private final EquipmentLoanOrReturnAction delegate = new EquipmentLoanOrReturnAction();
 
     @RequestMapping(params = "methodToCall=docHandler")
     public String docHandler(@ModelAttribute("EquipmentLoanOrReturnForm") EquipmentLoanOrReturnForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -20,7 +20,6 @@ package org.kuali.kfs.gl.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.gl.web.struts.BalanceInquiryLookupAction;
 import org.kuali.kfs.gl.web.struts.BalanceInquiryLookupForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing BalanceInquiryLookupAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/balanceInquiryLookup")
 public class BalanceInquiryLookupController {
 
-    private final BalanceInquiryLookupAction delegate = new BalanceInquiryLookupAction();
 
     @RequestMapping(params = "methodToCall=search")
     public String search(@ModelAttribute("BalanceInquiryLookupForm") BalanceInquiryLookupForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

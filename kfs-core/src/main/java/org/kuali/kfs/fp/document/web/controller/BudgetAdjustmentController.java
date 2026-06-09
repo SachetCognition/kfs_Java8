@@ -20,7 +20,6 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.BudgetAdjustmentAction;
 import org.kuali.kfs.fp.document.web.struts.BudgetAdjustmentForm;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kns.util.KNSGlobalVariables;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing BudgetAdjustmentAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/budgetAdjustment")
 public class BudgetAdjustmentController {
 
-    private final BudgetAdjustmentAction delegate = new BudgetAdjustmentAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("BudgetAdjustmentForm") BudgetAdjustmentForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

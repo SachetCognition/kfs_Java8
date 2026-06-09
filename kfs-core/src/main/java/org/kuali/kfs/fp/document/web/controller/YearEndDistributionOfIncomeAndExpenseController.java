@@ -20,20 +20,18 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.YearEndDistributionOfIncomeAndExpenseAction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing YearEndDistributionOfIncomeAndExpenseAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/yearEndDistributionOfIncomeAndExpense")
 public class YearEndDistributionOfIncomeAndExpenseController {
 
-    private final YearEndDistributionOfIncomeAndExpenseAction delegate = new YearEndDistributionOfIncomeAndExpenseAction();
 
     @RequestMapping
     public String execute(HttpServletRequest request, HttpServletResponse response) {

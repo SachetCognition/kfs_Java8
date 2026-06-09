@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.web.struts.ContractsGrantsAgingOpenInvoicesReportAction;
 import org.kuali.kfs.module.ar.web.struts.ContractsGrantsAgingOpenInvoicesReportForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ContractsGrantsAgingOpenInvoicesReportAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/contractsGrantsAgingOpenInvoicesReport")
 public class ContractsGrantsAgingOpenInvoicesReportController {
 
-    private final ContractsGrantsAgingOpenInvoicesReportAction delegate = new ContractsGrantsAgingOpenInvoicesReportAction();
 
     @RequestMapping(params = "methodToCall=search")
     public String search(@ModelAttribute("ContractsGrantsAgingOpenInvoicesReportForm") ContractsGrantsAgingOpenInvoicesReportForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

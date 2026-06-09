@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.document.web.struts.CustomerInvoiceDocumentAction;
 import org.kuali.kfs.module.ar.document.web.struts.CustomerInvoiceDocumentForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing CustomerInvoiceDocumentAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/customerInvoiceDocument")
 public class CustomerInvoiceDocumentController {
 
-    private final CustomerInvoiceDocumentAction delegate = new CustomerInvoiceDocumentAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("CustomerInvoiceDocumentForm") CustomerInvoiceDocumentForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

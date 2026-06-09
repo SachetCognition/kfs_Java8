@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.document.web.struts.PaymentApplicationDocumentAction;
 import org.kuali.kfs.module.ar.document.web.struts.PaymentApplicationDocumentForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing PaymentApplicationDocumentAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/paymentApplicationDocument")
 public class PaymentApplicationDocumentController {
 
-    private final PaymentApplicationDocumentAction delegate = new PaymentApplicationDocumentAction();
 
     @RequestMapping(params = "methodToCall=save")
     public String save(@ModelAttribute("PaymentApplicationDocumentForm") PaymentApplicationDocumentForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

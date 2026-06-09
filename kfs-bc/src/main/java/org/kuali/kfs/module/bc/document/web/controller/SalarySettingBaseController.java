@@ -21,7 +21,6 @@ package org.kuali.kfs.module.bc.document.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.kuali.kfs.module.bc.document.web.struts.SalarySettingBaseAction;
 
 /**
  * Abstract Spring MVC controller base replacing SalarySettingBaseAction.

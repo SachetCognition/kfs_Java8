@@ -20,7 +20,6 @@ package org.kuali.kfs.module.cam.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.cam.document.web.struts.AssetBarCodeInventoryInputFileAction;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kns.util.KNSGlobalVariables;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing AssetBarCodeInventoryInputFileAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/assetBarCodeInventoryInputFile")
 public class AssetBarCodeInventoryInputFileController {
 
-    private final AssetBarCodeInventoryInputFileAction delegate = new AssetBarCodeInventoryInputFileAction();
 
     @RequestMapping(params = "methodToCall=save")
     public String save(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -20,7 +20,6 @@ package org.kuali.kfs.module.tem.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.tem.document.web.struts.TemCardApplicationAction;
 import org.kuali.kfs.module.tem.document.web.struts.TemCardApplicationForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TemCardApplicationAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/temCardApplication")
 public class TemCardApplicationController {
 
-    private final TemCardApplicationAction delegate = new TemCardApplicationAction();
 
     @RequestMapping(params = "methodToCall=docHandler")
     public String docHandler(@ModelAttribute("TemCardApplicationForm") TemCardApplicationForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

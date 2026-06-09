@@ -20,7 +20,6 @@ package org.kuali.kfs.module.bc.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.bc.document.web.struts.TempListLookupAction;
 import org.kuali.kfs.module.bc.document.web.struts.TempListLookupForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -33,13 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TempListLookupAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/tempListLookup")
 public class TempListLookupController {
 
-    private final TempListLookupAction delegate = new TempListLookupAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("TempListLookupForm") TempListLookupForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

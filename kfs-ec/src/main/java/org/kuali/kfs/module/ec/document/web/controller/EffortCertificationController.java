@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ec.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ec.document.web.struts.EffortCertificationAction;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,13 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing EffortCertificationAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/effortCertification")
 public class EffortCertificationController {
 
-    private final EffortCertificationAction delegate = new EffortCertificationAction();
 
     @RequestMapping
     public String execute(HttpServletRequest request, HttpServletResponse response) {

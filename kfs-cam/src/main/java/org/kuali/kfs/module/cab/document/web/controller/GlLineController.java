@@ -20,7 +20,6 @@ package org.kuali.kfs.module.cab.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.cab.document.web.struts.GlLineAction;
 import org.kuali.kfs.module.cab.document.web.struts.GlLineForm;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.util.KRADConstants;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing GlLineAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/glLine")
 public class GlLineController {
 
-    private final GlLineAction delegate = new GlLineAction();
 
     @RequestMapping(params = "methodToCall=process")
     public String process(@ModelAttribute("GlLineForm") GlLineForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

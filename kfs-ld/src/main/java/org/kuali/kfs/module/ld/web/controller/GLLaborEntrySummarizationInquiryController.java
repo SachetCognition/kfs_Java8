@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ld.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ld.web.struts.GLLaborEntrySummarizationInquiryAction;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing GLLaborEntrySummarizationInquiryAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/gLLaborEntrySummarizationInquiry")
 public class GLLaborEntrySummarizationInquiryController {
 
-    private final GLLaborEntrySummarizationInquiryAction delegate = new GLLaborEntrySummarizationInquiryAction();
 
     @RequestMapping(params = "methodToCall=viewResults")
     public String viewResults(HttpServletRequest request, HttpServletResponse response) throws Exception {

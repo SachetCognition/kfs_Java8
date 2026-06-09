@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.PrintAction;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing PrintAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/print")
 public class PrintController {
 
-    private final PrintAction delegate = new PrintAction();
 
     @RequestMapping
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

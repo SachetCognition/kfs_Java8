@@ -20,7 +20,6 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.InternalBillingAction;
 import org.kuali.kfs.fp.document.web.struts.InternalBillingForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing InternalBillingAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/internalBilling")
 public class InternalBillingController {
 
-    private final InternalBillingAction delegate = new InternalBillingAction();
 
     @RequestMapping(params = "methodToCall=insertItem")
     public String insertItem(@ModelAttribute("InternalBillingForm") InternalBillingForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

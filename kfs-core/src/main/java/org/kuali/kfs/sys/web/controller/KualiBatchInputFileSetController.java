@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.BatchSpringContext;
 import org.kuali.kfs.sys.context.SpringContext;
-import org.kuali.kfs.sys.web.struts.KualiBatchInputFileSetAction;
 import org.kuali.rice.kns.util.KNSGlobalVariables;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
@@ -33,13 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing KualiBatchInputFileSetAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/kualiBatchInputFileSet")
 public class KualiBatchInputFileSetController {
 
-    private final KualiBatchInputFileSetAction delegate = new KualiBatchInputFileSetAction();
 
     @RequestMapping
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

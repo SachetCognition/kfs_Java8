@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.VendorCreditMemoAction;
 import org.kuali.kfs.module.purap.document.web.struts.VendorCreditMemoForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing VendorCreditMemoAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/vendorCreditMemo")
 public class VendorCreditMemoController {
 
-    private final VendorCreditMemoAction delegate = new VendorCreditMemoAction();
 
     @RequestMapping(params = "methodToCall=continueCreditMemo")
     public String continueCreditMemo(@ModelAttribute("VendorCreditMemoForm") VendorCreditMemoForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

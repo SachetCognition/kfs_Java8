@@ -20,7 +20,6 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.AdvanceDepositAction;
 import org.kuali.kfs.fp.document.web.struts.AdvanceDepositForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing AdvanceDepositAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/advanceDeposit")
 public class AdvanceDepositController {
 
-    private final AdvanceDepositAction delegate = new AdvanceDepositAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("AdvanceDepositForm") AdvanceDepositForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

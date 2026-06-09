@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.ElectronicInvoiceTestAction;
 import org.kuali.kfs.module.purap.document.web.struts.ElectronicInvoiceTestForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ElectronicInvoiceTestAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/electronicInvoiceTest")
 public class ElectronicInvoiceTestController {
 
-    private final ElectronicInvoiceTestAction delegate = new ElectronicInvoiceTestAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("ElectronicInvoiceTestForm") ElectronicInvoiceTestForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

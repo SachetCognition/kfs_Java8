@@ -20,7 +20,6 @@ package org.kuali.kfs.module.bc.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.bc.document.web.struts.QuickSalarySettingAction;
 import org.kuali.kfs.module.bc.document.web.struts.QuickSalarySettingForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing QuickSalarySettingAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/quickSalarySetting")
 public class QuickSalarySettingController {
 
-    private final QuickSalarySettingAction delegate = new QuickSalarySettingAction();
 
     @RequestMapping(params = "methodToCall=refresh")
     public String refresh(@ModelAttribute("QuickSalarySettingForm") QuickSalarySettingForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

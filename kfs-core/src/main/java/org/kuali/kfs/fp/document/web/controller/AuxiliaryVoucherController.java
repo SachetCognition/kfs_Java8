@@ -20,7 +20,6 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.AuxiliaryVoucherAction;
 import org.kuali.kfs.fp.document.web.struts.AuxiliaryVoucherForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.springframework.stereotype.Controller;
@@ -29,13 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing AuxiliaryVoucherAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/auxiliaryVoucher")
 public class AuxiliaryVoucherController {
 
-    private final AuxiliaryVoucherAction delegate = new AuxiliaryVoucherAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("AuxiliaryVoucherForm") AuxiliaryVoucherForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

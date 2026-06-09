@@ -20,7 +20,6 @@ package org.kuali.kfs.module.ar.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.ar.web.struts.ContractsGrantsLOCReportLookupAction;
 import org.kuali.rice.kns.web.struts.form.LookupForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,13 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ContractsGrantsLOCReportLookupAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/contractsGrantsLOCReportLookup")
 public class ContractsGrantsLOCReportLookupController {
 
-    private final ContractsGrantsLOCReportLookupAction delegate = new ContractsGrantsLOCReportLookupAction();
 
     @RequestMapping(params = "methodToCall=print")
     public String print(@ModelAttribute("LookupForm") LookupForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

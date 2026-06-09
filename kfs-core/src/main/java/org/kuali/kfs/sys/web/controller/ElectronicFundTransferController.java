@@ -21,7 +21,6 @@ package org.kuali.kfs.sys.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.kuali.kfs.sys.context.SpringContext;
-import org.kuali.kfs.sys.web.struts.ElectronicFundTransferAction;
 import org.kuali.kfs.sys.web.struts.ElectronicFundTransferForm;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.springframework.stereotype.Controller;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing ElectronicFundTransferAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/electronicFundTransfer")
 public class ElectronicFundTransferController {
 
-    private final ElectronicFundTransferAction delegate = new ElectronicFundTransferAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("ElectronicFundTransferForm") ElectronicFundTransferForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

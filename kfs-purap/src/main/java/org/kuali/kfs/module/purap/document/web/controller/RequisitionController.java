@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.RequisitionAction;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kns.util.KNSGlobalVariables;
@@ -33,13 +32,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing RequisitionAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/requisition")
 public class RequisitionController {
 
-    private final RequisitionAction delegate = new RequisitionAction();
 
     @RequestMapping(params = "methodToCall=save")
     public String save(@ModelAttribute("KualiDocumentFormBase") KualiDocumentFormBase form, HttpServletRequest request, HttpServletResponse response) throws Exception {

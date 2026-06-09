@@ -21,7 +21,6 @@ package org.kuali.kfs.vnd.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.kuali.kfs.sys.context.SpringContext;
-import org.kuali.kfs.vnd.web.struts.VendorExclusionAction;
 import org.kuali.kfs.vnd.web.struts.VendorExclusionForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,13 +28,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing VendorExclusionAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/vendorExclusion")
 public class VendorExclusionController {
 
-    private final VendorExclusionAction delegate = new VendorExclusionAction();
 
     @RequestMapping
     public String execute(HttpServletRequest request, HttpServletResponse response) {

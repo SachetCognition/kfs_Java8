@@ -21,7 +21,6 @@ package org.kuali.kfs.module.ld.document.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.kuali.kfs.gl.document.web.struts.CorrectionForm;
-import org.kuali.kfs.module.ld.document.web.struts.LaborCorrectionAction;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing LaborCorrectionAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/laborCorrection")
 public class LaborCorrectionController {
 
-    private final LaborCorrectionAction delegate = new LaborCorrectionAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("CorrectionForm") CorrectionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -20,7 +20,6 @@ package org.kuali.kfs.module.purap.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.purap.document.web.struts.PaymentRequestAction;
 import org.kuali.kfs.module.purap.document.web.struts.PaymentRequestForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing PaymentRequestAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/paymentRequest")
 public class PaymentRequestController {
 
-    private final PaymentRequestAction delegate = new PaymentRequestAction();
 
     @RequestMapping(params = "methodToCall=refresh")
     public String refresh(@ModelAttribute("PaymentRequestForm") PaymentRequestForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

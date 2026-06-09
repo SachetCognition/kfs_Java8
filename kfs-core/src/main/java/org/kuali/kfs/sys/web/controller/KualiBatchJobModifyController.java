@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
-import org.kuali.kfs.sys.web.struts.KualiBatchJobModifyAction;
 import org.kuali.kfs.sys.web.struts.KualiBatchJobModifyForm;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
@@ -32,13 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing KualiBatchJobModifyAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/kualiBatchJobModify")
 public class KualiBatchJobModifyController {
 
-    private final KualiBatchJobModifyAction delegate = new KualiBatchJobModifyAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("KualiBatchJobModifyForm") KualiBatchJobModifyForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

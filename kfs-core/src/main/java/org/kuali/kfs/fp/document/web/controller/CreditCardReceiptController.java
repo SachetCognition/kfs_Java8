@@ -20,7 +20,6 @@ package org.kuali.kfs.fp.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.fp.document.web.struts.CreditCardReceiptAction;
 import org.kuali.kfs.fp.document.web.struts.CreditCardReceiptForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing CreditCardReceiptAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/creditCardReceipt")
 public class CreditCardReceiptController {
 
-    private final CreditCardReceiptAction delegate = new CreditCardReceiptAction();
 
     @RequestMapping
     public String execute(@ModelAttribute("CreditCardReceiptForm") CreditCardReceiptForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

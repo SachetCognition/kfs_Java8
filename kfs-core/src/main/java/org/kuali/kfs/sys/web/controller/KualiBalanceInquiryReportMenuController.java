@@ -21,7 +21,6 @@ package org.kuali.kfs.sys.web.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.kuali.kfs.sys.KFSConstants;
-import org.kuali.kfs.sys.web.struts.KualiBalanceInquiryReportMenuAction;
 import org.kuali.kfs.sys.web.struts.KualiBalanceInquiryReportMenuForm;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.springframework.stereotype.Controller;
@@ -30,13 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing KualiBalanceInquiryReportMenuAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/kualiBalanceInquiryReportMenu")
 public class KualiBalanceInquiryReportMenuController {
 
-    private final KualiBalanceInquiryReportMenuAction delegate = new KualiBalanceInquiryReportMenuAction();
 
     @RequestMapping(params = "methodToCall=start")
     public String start(@ModelAttribute("KualiBalanceInquiryReportMenuForm") KualiBalanceInquiryReportMenuForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

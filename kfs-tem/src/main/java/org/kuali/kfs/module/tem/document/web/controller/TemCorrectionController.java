@@ -20,7 +20,6 @@ package org.kuali.kfs.module.tem.document.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.kuali.kfs.module.tem.document.web.struts.TemCorrectionAction;
 import org.kuali.kfs.module.tem.document.web.struts.TemCorrectionForm;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Spring MVC controller replacing TemCorrectionAction.
- * Delegates to the original Struts Action for business logic.
+ * Stub controller for phased migration from Struts Action.
  */
 @Controller
 @RequestMapping("/temCorrection")
 public class TemCorrectionController {
 
-    private final TemCorrectionAction delegate = new TemCorrectionAction();
 
     @RequestMapping(params = "methodToCall=switchToPage")
     public String switchToPage(@ModelAttribute("TemCorrectionForm") TemCorrectionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
