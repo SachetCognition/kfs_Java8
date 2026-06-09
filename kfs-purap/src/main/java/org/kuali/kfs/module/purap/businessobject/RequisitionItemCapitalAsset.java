@@ -32,6 +32,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -41,6 +42,7 @@ import javax.persistence.Table;
 @Table(name = "PUR_REQS_CPTL_AST_ITM_AST_T")
 public class RequisitionItemCapitalAsset extends PurchasingItemCapitalAssetBase {
 
+    @Transient
     private CapitalAssetManagementAsset asset;
 
     /**

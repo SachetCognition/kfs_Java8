@@ -38,6 +38,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Purchase Order Quote List Business Object.
@@ -54,6 +55,7 @@ public class PurchaseOrderQuoteList extends PersistableBusinessObjectBase implem
     private String purchaseOrderQuoteListName;
     @Column(name = "CONTR_MGR_CD")
     private Integer contractManagerCode;
+    @Transient
     private String contractManagerName;
     @Column(name = "ACTV_IND")
     private boolean active;

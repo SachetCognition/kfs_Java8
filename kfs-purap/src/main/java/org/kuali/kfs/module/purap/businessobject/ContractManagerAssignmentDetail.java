@@ -42,6 +42,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Assign Contract Manager Detail Business Object. Defines attributes in Assign Contract Manager tab.
@@ -58,7 +59,9 @@ public class ContractManagerAssignmentDetail extends PersistableBusinessObjectBa
     private Integer requisitionIdentifier;
     @Column(name = "CONTR_MGR_CD")
     private Integer contractManagerCode;
+    @Transient
     private String deliveryCampusCode;
+    @Transient
     private String vendorName;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -71,6 +74,7 @@ public class ContractManagerAssignmentDetail extends PersistableBusinessObjectBa
     @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private ContractManagerAssignmentDocument contractManagerAssignmentDocument;
     
+    @Transient
     private String createDate;
     
     /**

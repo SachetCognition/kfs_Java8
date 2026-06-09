@@ -27,6 +27,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Billing Address Business Object.
@@ -59,6 +60,7 @@ public class BillingAddress extends PersistableBusinessObjectBase implements Mut
     @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     protected boolean active;
 
+    @Transient
     protected CampusParameter billingCampus;
 
     /**

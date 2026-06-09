@@ -44,6 +44,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Purchase Order Vendor Quote Business Object.
@@ -99,6 +100,7 @@ public class PurchaseOrderVendorQuote extends PersistableBusinessObjectBase {
     private String vendorCountryCode;
     @Column(name = "VNDR_ADDR_INTL_PROV_NM")
     private String vendorAddressInternationalProvinceName;
+    @Transient
     private boolean isTransmitPrintDisplayed = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -107,9 +109,11 @@ public class PurchaseOrderVendorQuote extends PersistableBusinessObjectBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PO_QT_STAT_CD", insertable = false, updatable = false)
     private PurchaseOrderQuoteStatus purchaseOrderQuoteStatus;
+    @Transient
     private CountryEbo vendorCountry;
 
     //non-persisted variables
+    @Transient
     protected boolean isPdfDisplayedToUserOnce;
     
     /**
