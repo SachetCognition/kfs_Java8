@@ -33,11 +33,7 @@
     <module>kfs-bc</module>
     <module>kfs-web</module>
   </modules>
-  <parent>
-    <groupId>org.kuali.pom</groupId>
-    <artifactId>kuali-common</artifactId>
-    <version>5.0.4</version>
-  </parent>
+
   <groupId>org.kuali.kfs</groupId>
   <artifactId>kfs</artifactId>
   <version>6.0.1-SNAPSHOT</version>
@@ -70,9 +66,16 @@
   </prerequisites>
   <properties>
 
+    <!-- Default empty argLine so ${argLine} resolves when JaCoCo is skipped -->
+    <argLine></argLine>
+    <!-- Shared JVM flags for surefire: add-opens for OJB CGLIB on Java 21 -->
+    <surefire.jvm.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</surefire.jvm.args>
+
     <!-- maven properties -->
     <maven.require.version>3.0</maven.require.version>
     <enforcer.phase>validate</enforcer.phase>
+    <plugin.javadoc.version>3.6.3</plugin.javadoc.version>
+    <kuali.site.hostname>site.kuali.org</kuali.site.hostname>
 
     <!-- release properties -->
     <kuali.release.arguments>-DskipTests</kuali.release.arguments>
@@ -114,12 +117,16 @@
     <jsp-api.version>2.1</jsp-api.version>
     <jstl-api.version>1.2</jstl-api.version>
     <jta.version>1.1</jta.version>
-    <junit.version>4.9</junit.version>
+    <junit.version>5.10.2</junit.version>
+    <mockito.version>5.11.0</mockito.version>
+    <testcontainers.version>1.19.7</testcontainers.version>
+    <jacoco.version>0.8.12</jacoco.version>
+    <assertj.version>3.25.3</assertj.version>
     <kfs.help.version>5.4.0</kfs.help.version>
     <liquibase.version>3.3.2</liquibase.version>
-    <mysql.groupId>mysql</mysql.groupId>
-    <mysql.artifactId>mysql-connector-java</mysql.artifactId>
-    <mysql.version>5.1.25</mysql.version>
+    <mysql.groupId>com.mysql</mysql.groupId>
+    <mysql.artifactId>mysql-connector-j</mysql.artifactId>
+    <mysql.version>8.3.0</mysql.version>
     <opencsv.version>2.3</opencsv.version>
     <oracle.groupId>com.oracle</oracle.groupId>
     <oracle.artifactId>ojdbc6</oracle.artifactId>
@@ -127,6 +134,12 @@
     <p6spy.version>1.3-patched</p6spy.version>
     <rice.version>2.1.9</rice.version>
     <servlet-api.version>2.5</servlet-api.version>
+
+    <!-- Java version -->
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.java.version>[21,)</project.java.version>
     <velocity.version>1.5</velocity.version>
     <wss4j.version>1.6.18</wss4j.version>
     <wstx-asl.version>3.2.9</wstx-asl.version>
@@ -141,17 +154,23 @@
 
     <!-- logging properties -->
     <!-- slf4j.version and log4j.version need to be changed together -->
-    <slf4j.version>1.6.4</slf4j.version>
+    <slf4j.version>2.0.12</slf4j.version>
     <log4j.version>1.2.16</log4j.version>
+    <log4j2.version>2.23.1</log4j2.version>
     <!-- switch these scopes to runtime if/when KFS gets all internal logging statements issued via slf4j -->
     <log4j.scope>compile</log4j.scope>
     <jcl-over-slf4j.scope>compile</jcl-over-slf4j.scope>
     <slf4j-api.version>${slf4j.version}</slf4j-api.version>
     <slf4j-log4j12.version>${slf4j.version}</slf4j-log4j12.version>
+    <!-- slf4j-log4j12 is replaced by log4j-slf4j2-impl in S-0B -->
     <jcl-over-slf4j.version>${slf4j.version}</jcl-over-slf4j.version>
     <jul-to-slf4j.version>${slf4j.version}</jul-to-slf4j.version>
 
   </properties>
+  <!-- NOTE: Spring Boot BOM (3.3.5) will be added to <dependencyManagement> in Phase 4 (S-4A)
+       when Rice is fully removed and Spring Boot is adopted. Adding it now would override
+       Spring 3.x transitives from Rice with Spring 6.x, breaking compilation. -->
+
   <build>
     <finalName>${project.artifactId}</finalName>
     <pluginManagement>
@@ -165,8 +184,8 @@
           </configuration>
           <dependencies>
             <dependency>
-              <groupId>mysql</groupId>
-              <artifactId>mysql-connector-java</artifactId>
+              <groupId>${mysql.groupId}</groupId>
+              <artifactId>${mysql.artifactId}</artifactId>
               <version>${mysql.version}</version>
               <scope>provided</scope>
             </dependency>
@@ -183,15 +202,93 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
         <configuration>
-          <argLine>-Xms1024m -Xmx1024m</argLine>
+          <argLine>-Xms1024m -Xmx1024m ${argLine}
+            --add-opens java.base/java.lang=ALL-UNNAMED
+            --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+            --add-opens java.base/java.util=ALL-UNNAMED
+            --add-opens java.base/java.math=ALL-UNNAMED
+            --add-opens java.base/java.io=ALL-UNNAMED</argLine>
           <includes>
             <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+            <include>**/*IT.java</include>
           </includes>
+          <excludes>
+            <exclude>**/AllTests.java</exclude>
+            <exclude>**/BatchAllTests.java</exclude>
+            <exclude>**/AllAccountsReceivableTests.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <goals><goal>prepare-agent</goal></goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals><goal>report</goal></goals>
+          </execution>
+          <execution>
+            <id>check</id>
+            <phase>verify</phase>
+            <goals><goal>check</goal></goals>
+            <configuration>
+              <rules><rule>
+                <element>BUNDLE</element>
+                <limits><limit>
+                  <counter>BRANCH</counter>
+                  <value>COVEREDRATIO</value>
+                  <minimum>0.85</minimum>
+                </limit></limits>
+              </rule></rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.12.1</version>
+        <configuration>
+          <release>21</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openrewrite.maven</groupId>
+        <artifactId>rewrite-maven-plugin</artifactId>
+        <version>5.30.0</version>
+        <configuration>
+          <activeRecipes>
+            <recipe>org.openrewrite.java.migrate.UpgradeToJava21</recipe>
+          </activeRecipes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-migrate-java</artifactId>
+            <version>2.15.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-testing-frameworks</artifactId>
+            <version>2.10.0</version>
+          </dependency>
+          <dependency>
+            <groupId>org.openrewrite.recipe</groupId>
+            <artifactId>rewrite-logging-frameworks</artifactId>
+            <version>2.8.0</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.4.1</version>
         <executions>
           <execution>
             <id>enforce-rules</id>
@@ -807,9 +904,57 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>mysql</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -871,19 +1016,38 @@
       <version>${jul-to-slf4j.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!-- bind to log4j as the implementation -->
+    <!-- Log4j 2.x core + API (replaces log4j 1.x) -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j-log4j12.version}</version>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j2.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!-- included here as a dependency so we can explicitly set scope to "runtime" (down the road at some point) -->
+    <!-- Bridge: routes Log4j 1.x API calls to Log4j 2.x -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>${log4j2.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- SLF4J → Log4j 2.x binding -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <version>${log4j2.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- Keep log4j 1.x JAR for compile-time only; log4j-1.2-api bridges at runtime -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>
-      <scope>${log4j.scope}</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
@@ -898,10 +1062,41 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
       <groupId>com.sun.xml.bind</groupId>
       <artifactId>jaxb-impl</artifactId>
-      <version>${jaxb.version}</version>
+      <version>2.3.9</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-core</artifactId>
+      <version>2.3.0.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.xml.ws</groupId>
+      <artifactId>jaxws-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>1.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>javax.activation-api</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.jws</groupId>
+      <artifactId>javax.jws-api</artifactId>
+      <version>1.1</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
