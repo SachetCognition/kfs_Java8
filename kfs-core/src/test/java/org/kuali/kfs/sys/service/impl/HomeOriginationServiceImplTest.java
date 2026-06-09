@@ -7,7 +7,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -22,10 +22,11 @@ class HomeOriginationServiceImplTest extends KfsUnitTestBase {
 
     @Test
     void getHomeOrigination_returnsFirstResult() {
-        HomeOrigination expected = new HomeOrigination();
-        when(businessObjectService.findAll(HomeOrigination.class)).thenReturn(Arrays.asList(expected));
+        HomeOrigination ho = new HomeOrigination();
+        when(businessObjectService.findAll(HomeOrigination.class))
+                .thenReturn(Collections.singletonList(ho));
 
         HomeOrigination result = homeOriginationService.getHomeOrigination();
-        assertThat(result).isSameAs(expected);
+        assertThat(result).isSameAs(ho);
     }
 }

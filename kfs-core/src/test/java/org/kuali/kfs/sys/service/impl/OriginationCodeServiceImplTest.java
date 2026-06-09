@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class OriginationCodeServiceImplTest extends KfsUnitTestBase {
@@ -19,12 +20,13 @@ class OriginationCodeServiceImplTest extends KfsUnitTestBase {
     private OriginationCodeServiceImpl originationCodeService;
 
     @Test
-    void getByPrimaryKey_returnsOriginationCode() {
+    void getByPrimaryKey_delegatesToDao() {
         OriginationCode expected = new OriginationCode();
         when(originationCodeDao.findByCode("01")).thenReturn(expected);
 
         OriginationCode result = originationCodeService.getByPrimaryKey("01");
         assertThat(result).isSameAs(expected);
+        verify(originationCodeDao).findByCode("01");
     }
 
     @Test
