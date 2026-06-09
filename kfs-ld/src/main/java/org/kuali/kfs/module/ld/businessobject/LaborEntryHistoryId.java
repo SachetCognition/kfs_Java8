@@ -8,10 +8,17 @@ public class LaborEntryHistoryId implements Serializable {
 
     private Integer universityFiscalYear;
     private String chartOfAccountsCode;
+    private String accountNumber;
+    private String subAccountNumber;
     private String financialObjectCode;
+    private String financialSubObjectCode;
     private String financialBalanceTypeCode;
+    private String financialObjectTypeCode;
     private String universityFiscalPeriodCode;
-    private String transactionDebitCreditCode;
+    private String financialDocumentTypeCode;
+    private String financialSystemOriginationCode;
+    private String documentNumber;
+    private Integer transactionLedgerEntrySequenceNumber;
 
     public LaborEntryHistoryId() {
     }
@@ -21,11 +28,11 @@ public class LaborEntryHistoryId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LaborEntryHistoryId other = (LaborEntryHistoryId) o;
-        return Objects.equals(universityFiscalYear, other.universityFiscalYear) && Objects.equals(chartOfAccountsCode, other.chartOfAccountsCode) && Objects.equals(financialObjectCode, other.financialObjectCode) && Objects.equals(financialBalanceTypeCode, other.financialBalanceTypeCode) && Objects.equals(universityFiscalPeriodCode, other.universityFiscalPeriodCode) && Objects.equals(transactionDebitCreditCode, other.transactionDebitCreditCode);
+        return Objects.equals(universityFiscalYear, other.universityFiscalYear) && Objects.equals(chartOfAccountsCode, other.chartOfAccountsCode) && Objects.equals(accountNumber, other.accountNumber) && Objects.equals(subAccountNumber, other.subAccountNumber) && Objects.equals(financialObjectCode, other.financialObjectCode) && Objects.equals(financialSubObjectCode, other.financialSubObjectCode) && Objects.equals(financialBalanceTypeCode, other.financialBalanceTypeCode) && Objects.equals(financialObjectTypeCode, other.financialObjectTypeCode) && Objects.equals(universityFiscalPeriodCode, other.universityFiscalPeriodCode) && Objects.equals(financialDocumentTypeCode, other.financialDocumentTypeCode) && Objects.equals(financialSystemOriginationCode, other.financialSystemOriginationCode) && Objects.equals(documentNumber, other.documentNumber) && Objects.equals(transactionLedgerEntrySequenceNumber, other.transactionLedgerEntrySequenceNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(universityFiscalYear, chartOfAccountsCode, financialObjectCode, financialBalanceTypeCode, universityFiscalPeriodCode, transactionDebitCreditCode);
+        return Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, financialObjectCode, financialSubObjectCode, financialBalanceTypeCode, financialObjectTypeCode, universityFiscalPeriodCode, financialDocumentTypeCode, financialSystemOriginationCode, documentNumber, transactionLedgerEntrySequenceNumber);
     }
 }
