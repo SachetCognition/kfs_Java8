@@ -1,0 +1,54 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/assetPayments.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+<!--/*/ <th:block th:with="requiredCapitalAssetNumber=* Asset Number"> /*/-->
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(subTabTitle)}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Assets" data-default-open="true">
+  <h3>Assets</h3>
+	<div class="tab-container" id="assets" align="center">		
+		<table class="datatable" width="100%" border="0" cellpadding="0" cellspacing="0" border="1">
+			<tr>
+				<td colspan="3" class="subhead">
+			    	<span class="subhead-left">Assets</span>
+			  	</td>
+			</tr>			
+			<th:block th:if="${!readOnly}">
+			    <tr>
+				    <th width="10%">${requiredCapitalAssetNumber }</th>
+					<td class="infoline" valign="top" width="84%">															   
+						<input type="text" name="capitalAssetNumber" th:field="*{capitalAssetNumber}" data-attribute-entry="${assetAttributes.capitalAssetNumber}" />				
+						<kul:multipleValueLookup boClassName="org.kuali.kfs.module.cam.businessobject.Asset" lookedUpCollectionName="assetPaymentAssetDetail"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+					    <input type="image" property="methodToCall.insertAssetPaymentAssetDetail" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" styleClass="tinybutton" alt="Add an asset" title="Add an asset"/>
+					</td>
+			    </tr>
+			</th:block>
+			<tr>
+				<td colspan="7" style="padding: 0px;border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none;">
+					<div th:replace="~{fragments/cams/assetPaymentsAssetInformation :: content}"></div>
+				</td>
+			</tr>
+		</table>
+    </div>    
+</section>
+</div>

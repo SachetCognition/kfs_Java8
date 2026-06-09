@@ -1,0 +1,80 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/budgetConstructionOrgSelection.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="pointOfViewOrgAttributes=${DataDictionary.BudgetConstructionOrganizationReports.attributes}"> /*/-->
+
+ <table border="0" cellpadding="0" cellspacing="0" class="datatable" summary="">
+ <tbody>
+ 	<tr>
+ 		<td class="subhead">Current Point of View Organization Selection</td>
+ 	</tr>
+ 	<tr>
+	 	<td>
+		 	<div align=center><br>   
+				<table style="width:auto" border="0" cellpadding="0" cellspacing="0" class="nobord">
+			    	<tr>
+						<td width="200" style="border-style:solid; border-color:#999999; border-width:1px; padding:6px; background-color:#EAE9E9">
+			            	<div align="center">
+			                     <strong>Select Point of View: <br><br>
+			                        <input type="text" name="currentPointOfViewKeyCode" th:field="*{currentPointOfViewKeyCode}" data-attribute-entry="${pointOfViewOrgAttributes.selectionKeyCode}" onchange="refreshPointOfView(this.form)" />
+			                      	<br>
+			                     </strong>
+			                </div>
+			            </td>
+			            <th:block th:if="${!empty KualiForm.pointOfViewOrg.chartOfAccountsCode}"> 	                    
+			            <td width="30" class="nobord" >&nbsp;</td>
+				        <td class="nobord" >
+			    			<div align="left">
+			            		 <p align="center"><strong>Currently Selected:</strong><strong><br><br></strong>
+				                 <input type="text" name="pointOfViewOrg.chartOfAccountsCode" th:field="*{pointOfViewOrg.chartOfAccountsCode}" data-attribute-entry="${pointOfViewOrgAttributes.chartOfAccountsCode}" readonly="readonly" />
+				    	             <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${pointOfViewOrg.chartOfAccountsCode}">
+				    	             ${KualiForm.pointOfViewOrg.chartOfAccountsCode}
+				    	         	 </span>
+			        	         </div><!-- /kul:htmlControlAttribute -->
+			            	     -
+			                	 <input type="text" name="pointOfViewOrg.organizationCode" th:field="*{pointOfViewOrg.organizationCode}" data-attribute-entry="${pointOfViewOrgAttributes.organizationCode}" readonly="readonly" />
+			                   	 	<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${KualiForm.pointOfViewOrg.chartOfAccountsCode}&amp;organizationCode=${KualiForm.pointOfViewOrg.organizationCode}">
+				    	             ${KualiForm.pointOfViewOrg.organizationCode}
+			      			        </span>
+				                 </div><!-- /kul:htmlControlAttribute -->
+				                 <span class="fineprint">
+				                 	(
+				                 		<input type="text" name="pointOfViewOrg.organizationCode" th:field="*{pointOfViewOrg.organizationCode}" data-attribute-entry="${pointOfViewOrgAttributes.organizationCode}" readonly="readonly" />${KualiForm.pointOfViewOrg.organization.organizationName}&nbsp;</div><!-- /kul:htmlControlAttribute -->
+				                 	)
+			    	             </span>
+			        		</div>
+			            </td>
+			            </th:block>
+			        </tr>
+			    </table><br/>
+	        </div>
+	 	</td>
+	</tr>
+ <tbody>	
+</table>
+
+<th:block th:if="${!empty KualiForm.previousBranchOrgs}">
+	<div th:replace="~{fragments/bc/budgetConstructionOrgSelectionPreviousBranches :: content}"></div>
+</th:block>
+		
+<th:block th:if="${!empty KualiForm.selectionSubTreeOrgs}">
+	<div th:replace="~{fragments/bc/budgetConstructionOrgSelectionSubTreeOrgs :: content}"></div>
+</th:block>
+</div>

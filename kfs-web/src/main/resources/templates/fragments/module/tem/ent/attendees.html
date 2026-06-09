@@ -1,0 +1,180 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/ent/attendees.tag -->
+<!-- Fragment parameters: attendeeAttributes, entertainmentAttributes, extraHiddenAttendeeFields -->
+<div th:fragment="content (attendeeAttributes, entertainmentAttributes, extraHiddenAttendeeFields)" xmlns:th="http://www.thymeleaf.org">
+<script language="JavaScript" type="text/javascript" src="dwr/interface/CommodityCodeService.js"></script>
+<script language="JavaScript" type="text/javascript" src="scripts/vnd/objectInfo.js"></script>
+
+<!--/*/ <th:block th:with="hasAttendeeLines=${fn:length(KualiForm.document.attendee) > 0}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=50"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Attendees" data-default-open="true">
+  <h3>Attendees</h3>
+	<div class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Items Section">
+			<tr>
+				<td colspan="2" class="subhead">
+					<span class="subhead-left">Attendee Information</span>
+				</td>
+			</tr>
+			<tr>
+				<th class="bord-l-b" style="width:325px;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${entertainmentAttributes.numberOfAttendees}"></label>
+					</div>
+				</th>
+				<td class="datacell">
+					<input type="text" name="document.numberOfAttendees" th:field="*{document.numberOfAttendees}" data-attribute-entry="${entertainmentAttributes.numberOfAttendees}" />
+				</td>			
+			</tr>
+			<tr>
+				<th class="bord-l-b" style="width:325px;">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${entertainmentAttributes.attendeeListAttached}"></label>
+					</div>
+				</th>
+				<td class="datacell">
+					<input type="text" name="document.attendeeListAttached" th:field="*{document.attendeeListAttached}" data-attribute-entry="${entertainmentAttributes.attendeeListAttached}" />
+				</td>			
+			</tr>
+		</table>
+		<br />			
+		<th:block th:if="${fullEntryMode}">
+			<table cellpadding="0" cellspacing="0" class="datatable" summary="Items Section">
+				<tr>
+					<td colspan="4" class="subhead">
+						<span class="subhead-left">
+							Add Attendee 
+							<a href="${KualiForm.uploadParserInstructionsUrl}" target="helpWindow">
+								<img src="${ConfigProperties.kr.externalizable.images.url}my_cp_inf.gif" title="Attendee Import Help" src="Attendee Import Help" hspace="5" border="0" align="middle" />
+							</a>
+						</span>
+					</td>
+					<td class="subhead" align="right" nowrap="nowrap" style="border-left:none;">
+						<script type="text/javascript">
+	                 		function hideImport() {
+	                     		document.getElementById("showLink").style.display="inline";
+	                     		document.getElementById("uploadDiv").style.display="none";
+	                 		}
+	                 		function showImport() {
+	                     		document.getElementById("showLink").style.display="none";
+	                     		document.getElementById("uploadDiv").style.display="inline";
+	                 		}
+	                 		document.write(
+	                   		'<a id="showLink" href="#" onclick="showImport();return false;">' +
+	                     		'<img src="${ConfigProperties.externalizable.images.url}tinybutton-importlines.gif" title="import Attendee from file" alt="import Attendee from file"' +
+	                     		'     width=72 height=15 border=0 align="right" class="det-button">' +
+	                   		'<\/a>' +
+	                   		'<div id="uploadDiv" style="display:none;" >' +
+	                     		'<html:file size="30" property="attendeesImportFile" />' +
+	                     		'<input type="image" property="methodToCall.importAttendees" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+	                                   styleClass="tinybutton" alt="add imported Attendees" title="add imported Attendees" />' +
+	                     		'<input type="image" property="methodToCall.cancel" src="${ConfigProperties.externalizable.images.url}tinybutton-cancelimport.gif"
+	                                   styleClass="tinybutton" alt="cancel import" title="cancel import" onclick="hideImport();return false;" />' +
+	                   		'<\/div>');
+	               		</script>
+						<NOSCRIPT>
+							Import Attendees
+							<html:file size="30" property="attendeesImportFile" style="font:10px;height:16px;" />
+							<input type="image" property="methodToCall.importAttendees" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="add imported items" title="add imported items" />
+						</NOSCRIPT>					
+					</td>
+				</tr>
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.attendeeType}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.company}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.title}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.name}"></th>
+					<th>&nbsp;</th>
+				</tr>
+				<tr>
+					<td class="infoline">
+						<input type="text" name="newAttendeeLines[0].attendeeType" th:field="*{newAttendeeLines[0].attendeeType}" data-attribute-entry="${attendeeAttributes.attendeeType}" />
+					</td>
+					<td class="infoline">
+						<input type="text" name="newAttendeeLines[0].company" th:field="*{newAttendeeLines[0].company}" data-attribute-entry="${attendeeAttributes.company}" />
+					</td>
+					<td class="infoline">
+						<input type="text" name="newAttendeeLines[0].title" th:field="*{newAttendeeLines[0].title}" data-attribute-entry="${attendeeAttributes.title}" />
+					</td>
+					<td class="infoline">
+						<input type="text" name="newAttendeeLines[0].name" th:field="*{newAttendeeLines[0].name}" data-attribute-entry="${attendeeAttributes.name}" />
+						<th:block th:if="${fullEntryMode}">
+							<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.TemProfile" th:replace="~{fragments/kul/lookup :: content}"></span>
+						</th:block>
+					</td>
+					<td class="infoline">
+						<div align="center">
+							<input type="image" property="methodToCall.addAttendeeLine.line0"
+								src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+								alt="Insert an Attendee" title="Add an Item"
+								styleClass="tinybutton" tabindex="${tabindexOverrideBase + 0}" />
+						</div>
+					</td>
+				</tr>
+			</table>
+			<br />
+		</th:block>
+		<th:block th:if="${hasAttendeeLines}">
+			<table cellpadding="0" cellspacing="0" class="datatable" summary="Items Added Section">			
+				<tr>
+					<td colspan="5" class="subhead"><span class="subhead-left">Attendees Added </td>
+				</tr>
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.attendeeType}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.company}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.title}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${attendeeAttributes.name}"></th>
+					<th>&nbsp;</th>
+				</tr>
+				<logic:iterate indexId="ctr" name="KualiForm" property="document.attendee" id="attendeeLine">
+					<tr>
+						<td class="infoline">
+							<input type="text" name="document.attendee[${ctr}].attendeeType" th:field="*{document.attendee[${ctr}].attendeeType}" data-attribute-entry="${attendeeAttributes.attendeeType}" readonly="readonly" />
+						</td>
+						<td class="infoline">
+							<input type="text" name="document.attendee[${ctr}].company" th:field="*{document.attendee[${ctr}].company}" data-attribute-entry="${attendeeAttributes.company}" readonly="readonly" />
+						</td>
+						<td class="infoline">
+							<input type="text" name="document.attendee[${ctr}].title" th:field="*{document.attendee[${ctr}].title}" data-attribute-entry="${attendeeAttributes.title}" readonly="readonly" />
+						</td>
+						<td class="infoline">
+							<input type="text" name="document.attendee[${ctr}].name" th:field="*{document.attendee[${ctr}].name}" data-attribute-entry="${attendeeAttributes.name}" readonly="readonly" />
+						</td>
+						<td class="infoline">
+							<th:block th:switch="${true}">
+								<th:block th:case="${fullEntryMode}">							
+									<div align="center">
+										<input type="image" property="methodToCall.deleteAttendeeLine.line${ctr}"
+											src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+											alt="Delete Attendee ${ctr+1}" title="Delete Attendee ${ctr+1}"
+											styleClass="tinybutton" />
+									</div>
+								</th:block>
+								<th:block th:case="*">&nbsp;</th:block>
+							</th:block>
+						</td>						
+					</tr>
+				</tr>
+			</table>
+		</th:block>
+	</div>
+</section>
+</div>

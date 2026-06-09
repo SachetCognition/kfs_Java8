@@ -1,0 +1,296 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/bulkReceivingDelivery.tag -->
+<!-- Fragment parameters: documentAttributes, deliveryReadOnly -->
+<div th:fragment="content (documentAttributes, deliveryReadOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="notOtherDeliveryBuilding=${not KualiForm.document.deliveryBuildingOtherIndicator}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+              
+<section class="kfs-tab" data-tab-title="Delivery" data-default-open="true">
+  <h3>Delivery</h3>
+    <div class="tab-container" align=center>
+    
+        <h3>Delivery Information</h3>
+        		
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Delivery Section">
+        <%-- If PO available, display the delivery information from the PO --%>
+        	<th:block th:if="${isPOAvailable}">
+	        	<tr>
+	        		<th align=right valign=middle  class="bord-l-b">
+	                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell"> 
+	                	<input type="text" name="document.deliveryToName" th:field="*{document.deliveryToName}" data-attribute-entry="${documentAttributes.deliveryToName}" readonly="readonly" /><br>
+	                	<input type="text" name="document.deliveryBuildingName" th:field="*{document.deliveryBuildingName}" data-attribute-entry="${documentAttributes.deliveryBuildingName}" readonly="readonly" /><br>
+	                   	<input type="text" name="document.deliveryBuildingLine1Address" th:field="*{document.deliveryBuildingLine1Address}" data-attribute-entry="${documentAttributes.deliveryBuildingLine1Address}" readonly="readonly" />&nbsp;
+	                   	<th:block th:if="${! empty KualiForm.document.deliveryBuildingLine2Address}">                   	
+	                   		<input type="text" name="document.deliveryBuildingLine2Address" th:field="*{document.deliveryBuildingLine2Address}" data-attribute-entry="${documentAttributes.deliveryBuildingLine2Address}" readonly="readonly" />,&nbsp;
+	                   	</th:block>
+		            	<span th:text="Room "></span><input type="text" name="document.deliveryBuildingRoomNumber" th:field="*{document.deliveryBuildingRoomNumber}" data-attribute-entry="${documentAttributes.deliveryBuildingRoomNumber}" readonly="readonly" /><br>
+	                   	<th:block th:if="${! empty KualiForm.document.deliveryCityName}">                   	
+	    	           		<input type="text" name="document.deliveryCityName" th:field="*{document.deliveryCityName}" data-attribute-entry="${documentAttributes.deliveryCityName}" readonly="readonly" />,&nbsp;
+	                   	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.deliveryStateCode}">                   	
+		                    <input type="text" name="document.deliveryStateCode" th:field="*{document.deliveryStateCode}" data-attribute-entry="${documentAttributes.deliveryStateCode}" readonly="readonly" />&nbsp;
+	                  	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.deliveryPostalCode}">                   	
+		                    <input type="text" name="document.deliveryPostalCode" th:field="*{document.deliveryPostalCode}" data-attribute-entry="${documentAttributes.deliveryPostalCode}" readonly="readonly" />
+	                   	</th:block>
+	                   	<th:block th:if="${! empty KualiForm.document.deliveryCountryCode}">                   	
+		                    <input type="text" name="document.deliveryCountryCode" th:field="*{document.deliveryCountryCode}" data-attribute-entry="${documentAttributes.deliveryCountryCode}" readonly="readonly" />
+	                   	</th:block>
+	            	</td>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryInstructionText}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryInstructionText" th:field="*{document.deliveryInstructionText}" data-attribute-entry="${documentAttributes.deliveryInstructionText}" />
+	                </td>
+	            </tr>
+	            <tr>
+	            	<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.preparerPersonName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.preparerPersonName" th:field="*{document.preparerPersonName}" data-attribute-entry="${documentAttributes.preparerPersonName}" />
+	                </td>
+	                <th align=right valign=middle class="bord-l-b" rowspan="4">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryAdditionalInstructionText}"></label></div>
+	                </th>
+	                <td align=right valign=middle class="bord-l-b" rowspan="4">
+	                    <input type="text" name="document.deliveryAdditionalInstructionText" th:field="*{document.deliveryAdditionalInstructionText}" data-attribute-entry="${documentAttributes.deliveryAdditionalInstructionText}" />
+	                </td>
+	            </tr>
+				<tr>
+		            <th align=left valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requestorPersonName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.requestorPersonName" th:field="*{document.requestorPersonName}" data-attribute-entry="${documentAttributes.requestorPersonName}" />
+	                </td>
+	            </tr>
+        		<tr>
+        			<th align=left valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requestorPersonPhoneNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.requestorPersonPhoneNumber" th:field="*{document.requestorPersonPhoneNumber}" data-attribute-entry="${documentAttributes.requestorPersonPhoneNumber}" />
+	                </td>
+	            </tr>
+	            <tr>
+        			<th align=left valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.institutionContactName" th:field="*{document.institutionContactName}" data-attribute-entry="${documentAttributes.institutionContactName}" />
+	                </td>
+	            </tr>
+	            <tr>
+        			<th align=left valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactPhoneNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.institutionContactPhoneNumber" th:field="*{document.institutionContactPhoneNumber}" data-attribute-entry="${documentAttributes.institutionContactPhoneNumber}" />
+	                </td>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCampusName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryCampus.campus.name" th:field="*{document.deliveryCampus.campus.name}" data-attribute-entry="${documentAttributes.deliveryCampusName}" readonly="readonly" />
+               	 	</td>
+	            </tr>
+	            <tr>
+        			<th align=left valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactEmailAddress}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.institutionContactEmailAddress" th:field="*{document.institutionContactEmailAddress}" data-attribute-entry="${documentAttributes.institutionContactEmailAddress}" />
+	                </td>
+	                <th align=left valign=middle class="bord-l-b">
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                </td>
+	            </tr>
+	           
+        	</th:block>
+        	
+        	
+        	<%-- If PO not available --%>
+        	
+        	<th:block th:if="${!isPOAvailable}">
+        	
+	            <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCampusCode}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.deliveryCampusCode" th:field="*{document.deliveryCampusCode}" data-attribute-entry="${documentAttributes.deliveryCampusCode}" readonly="readonly" />                
+	                    <th:block th:if="${fullEntryMode}">
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.CampusParameter" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                    </th:block>
+                    </td>               
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryToName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryToName" th:field="*{document.deliveryToName}" data-attribute-entry="${documentAttributes.deliveryToName}" />
+	                    <th:block th:if="${fullEntryMode}">
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                    </th:block>
+	                </td>
+	            </tr>
+	            <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingName}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.deliveryBuildingName" th:field="*{document.deliveryBuildingName}" data-attribute-entry="${documentAttributes.deliveryBuildingName}" readonly="readonly" />&nbsp;
+                        <th:block th:if="${fullEntryMode}">
+                            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>&nbsp;&nbsp;
+                            <input type="image" property="methodToCall.useOtherDeliveryBuilding" src="${ConfigProperties.externalizable.images.url}tinybutton-buildingnotfound.gif" alt="building not found" styleClass="tinybutton"/>
+                        </th:block>
+                    </td>           
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryToPhoneNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryToPhoneNumber" th:field="*{document.deliveryToPhoneNumber}" data-attribute-entry="${documentAttributes.deliveryToPhoneNumber}" />
+	                </td>
+	            </tr>
+				
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingLine1Address}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryBuildingLine1Address" th:field="*{document.deliveryBuildingLine1Address}" data-attribute-entry="${documentAttributes.deliveryBuildingLine1Address}" />
+	                </td>
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryToEmailAddress}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryToEmailAddress" th:field="*{document.deliveryToEmailAddress}" data-attribute-entry="${documentAttributes.deliveryToEmailAddress}" />
+	                </td>
+				</tr>
+				
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingLine2Address}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryBuildingLine2Address" th:field="*{document.deliveryBuildingLine2Address}" data-attribute-entry="${documentAttributes.deliveryBuildingLine2Address}" />
+	                </td>			
+	                <th align=right valign=middle class="bord-l-b" rowspan="3">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryInstructionText}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell"  rowspan="3">
+	                    <input type="text" name="document.deliveryInstructionText" th:field="*{document.deliveryInstructionText}" data-attribute-entry="${documentAttributes.deliveryInstructionText}" />
+	                </td>
+				</tr>
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingRoomNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryBuildingRoomNumber" th:field="*{document.deliveryBuildingRoomNumber}" data-attribute-entry="${documentAttributes.deliveryBuildingRoomNumber}" />
+	                </td>	
+				</tr>
+				
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCityName}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryCityName" th:field="*{document.deliveryCityName}" data-attribute-entry="${documentAttributes.deliveryCityName}" />
+	                </td>
+	            </tr>
+	            <tr>			
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryStateCode}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryStateCode" th:field="*{document.deliveryStateCode}" data-attribute-entry="${documentAttributes.deliveryStateCode}" />
+	                </td>
+	                <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+					<td align=left valign=middle class="datacell">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryPostalCode}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryPostalCode" th:field="*{document.deliveryPostalCode}" data-attribute-entry="${documentAttributes.deliveryPostalCode}" />
+	                </td>
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+				</tr>
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCountryCode}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell">
+                        <input type="text" name="document.deliveryCountryCode" th:field="*{document.deliveryCountryCode}" data-attribute-entry="${documentAttributes.deliveryCountryCode}" />
+                    </td>
+                    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+                    <td align=left valign=middle class="datacell">&nbsp;</td>
+                </tr>
+                
+				<tr>
+    	            <td colspan="4" class="subhead">Additional</td>
+	            </tr> 
+	            
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+                    	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactName}"></label></div>
+                 	</th>
+                	<td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.institutionContactName" th:field="*{document.institutionContactName}" data-attribute-entry="${documentAttributes.institutionContactName}" />
+	                    <th:block th:if="${(fullEntryMode)}">
+	                        <span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span>
+	                    </th:block>
+                	</td>
+                	<th align=right valign=middle class="bord-l-b" rowspan="4">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryAdditionalInstructionText}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell"  rowspan="4">
+	                    <input type="text" name="document.deliveryAdditionalInstructionText" th:field="*{document.deliveryAdditionalInstructionText}" data-attribute-entry="${documentAttributes.deliveryAdditionalInstructionText}" />
+	                </td>	
+				</tr>
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactPhoneNumber}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.institutionContactPhoneNumber" th:field="*{document.institutionContactPhoneNumber}" data-attribute-entry="${documentAttributes.institutionContactPhoneNumber}" />
+	                </td>
+				</tr>
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.institutionContactEmailAddress}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.institutionContactEmailAddress" th:field="*{document.institutionContactEmailAddress}" data-attribute-entry="${documentAttributes.institutionContactEmailAddress}" />
+	                </td>
+				</tr>
+			</th:block>	
+        </table>
+	</div>
+</section>
+</div>

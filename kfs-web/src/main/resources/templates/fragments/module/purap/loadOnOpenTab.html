@@ -1,0 +1,203 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/loadOnOpenTab.tag -->
+<!-- Fragment parameters: tabTitle, spanForLongTabTitle, tabDescription, defaultOpen, tabErrorKey, innerTabErrorKey, auditCluster, tabAuditKey, tabItemCount, helpUrl, leftSideHtmlProperty, leftSideHtmlAttribute, leftSideHtmlDisabled, rightSideHtmlProperty, rightSideHtmlAttribute, transparentBackground, highlightTab, extraButtonSource, useCurrentTabIndexAsKey, hidden, useRiceAuditMode, midTabClassReplacement, boClassName, keyValues, alwaysOpen -->
+<div th:fragment="content (tabTitle, spanForLongTabTitle, tabDescription, defaultOpen, tabErrorKey, innerTabErrorKey, auditCluster, tabAuditKey, tabItemCount, helpUrl, leftSideHtmlProperty, leftSideHtmlAttribute, leftSideHtmlDisabled, rightSideHtmlProperty, rightSideHtmlAttribute, transparentBackground, highlightTab, extraButtonSource, useCurrentTabIndexAsKey, hidden, useRiceAuditMode, midTabClassReplacement, boClassName, keyValues, alwaysOpen)" xmlns:th="http://www.thymeleaf.org">
+<%@ variable name-given="tabKey" scope="NESTED" description="forces the tabKey variable to nested scope" %>
+
+<!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+<!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+
+<th:block th:switch="${true}">
+    <th:block th:case="${(useCurrentTabIndexAsKey)}">
+        <!--/*/ <th:block th:with="tabKey=${currentTabIndex}"> /*/-->
+    </th:block>
+    <th:block th:case="*">
+        <!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(tabTitle)}"> /*/-->
+    </th:block>
+</th:block>
+
+<!--  hit form method to increment tab index -->
+<!--/*/ <th:block th:with="doINeedThis=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+
+<!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+<th:block th:switch="${true}">
+    <th:block th:case="${empty currentTab}">
+        <!--/*/ <th:block th:with="isOpen=${defaultOpen}"> /*/-->
+    </th:block>
+    <th:block th:case="${!empty currentTab}">
+        <!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+    </th:block>
+</th:block>
+
+<!-- if the section has errors, override and set isOpen to true -->
+<th:block th:if="${!empty tabErrorKey or not empty tabAuditKey}">
+  <kul:checkErrors keyMatch="${tabErrorKey}" auditMatch="${tabAuditKey}"/>
+  <!--/*/ <th:block th:with="isOpen=${hasErrors ? true : isOpen}"> /*/-->
+</th:block>
+
+<th:block th:if="${isOpen != 'true' and !empty innerTabErrorKey}">
+    <kul:checkErrors keyMatch="${innerTabErrorKey}" />
+    <!--/*/ <th:block th:with="isOpen=${hasErrors ? true : isOpen}"> /*/-->
+</th:block>
+
+<th:block th:if="${hidden}">
+	<!--/*/ <th:block th:with="isOpen=false"> /*/-->
+</th:block>
+
+<html:hidden property="tabStates(${tabKey})" value="${(isOpen ? 'OPEN' : 'CLOSE')}" />
+<th:block th:if="${empty currentTab}">
+	<!--/*/ <th:block th:with="currentTab=${(isOpen ? 'OPEN' : 'CLOSE')}"> /*/-->
+</th:block>
+<!-- TAB -->
+
+<th:block th:if="${! empty tabItemCount}">
+  <!--/*/ <th:block th:with="tabTitle=${tabTitle} (${tabItemCount})"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="tabTitleSpan=1"> /*/-->
+<th:block th:if="${! empty spanForLongTabTitle && spanForLongTabTitle eq true}">
+	<!--/*/ <th:block th:with="tabTitleSpan=${tabTitleSpan + 1}"> /*/-->
+</th:block>
+
+
+<!--/*/ <th:block th:with="leftTabImage=${ConfigProperties.kr.externalizable.images.url}tab-topleft1.gif"> /*/-->
+<!--/*/ <th:block th:with="rightTabImage=${ConfigProperties.kr.externalizable.images.url}tab-topright1.gif"> /*/-->
+<!--/*/ <th:block th:with="rightTabClass=tabtable2-right"> /*/-->
+<!--/*/ <th:block th:with="midTabClass=tabtable2-mid"> /*/-->
+<th:block th:if="${transparentBackground}">
+  <!--/*/ <th:block th:with="leftTabImage=${ConfigProperties.kr.externalizable.images.url}tab-topleft.gif"> /*/-->
+  <!--/*/ <th:block th:with="rightTabImage=${ConfigProperties.kr.externalizable.images.url}tab-topright.gif"> /*/-->
+  <!--/*/ <th:block th:with="rightTabClass=tabtable1-right"> /*/-->
+  <!--/*/ <th:block th:with="midTabClass=tabtable1-mid"> /*/-->
+</th:block>
+
+
+        <table width="100%" class="tab" cellpadding="0" cellspacing="0" summary="" border="1" <th:block th:if="${hidden}">style="display:none;"</th:block>>
+          <tr>
+              <th:block th:switch="${true}">
+	          <th:block th:case="${tabTitleSpan > 1}">
+				<td class="tabtable1-left-colspan" colspan="${tabTitleSpan}">
+			  </th:block>
+			  <th:block th:case="*">
+			  	<td class="tabtable1-left">
+			  </th:block>
+			  </th:block>
+
+              <img src="${leftTabImage}" alt="" width="12" height="29" align="absmiddle" />
+              <th:block th:if="${not empty leftSideHtmlProperty and not empty leftSideHtmlAttribute}"><input type="text" name="${leftSideHtmlProperty}" th:field="*{${leftSideHtmlProperty}}" data-attribute-entry="${leftSideHtmlAttribute}" /></th:block>
+              <a name="${tabKey}" ></a>
+              <th:block th:switch="${true}">
+                <th:block th:case="${not empty boClassName && not empty keyValues}">
+                  <h2><span class="kfs-inquiry" data-bo-class="${boClassName}" data-key-values="${keyValues}"><span th:text="${tabTitle}"></span></span></h2>
+                </th:block>
+                <th:block th:case="*">
+                  <h2><span th:text="${tabTitle}"></span></h2>
+                </th:block>
+              </th:block>
+              <th:block th:if="${not empty helpUrl }">
+              	<span class="kfs-help" th:replace="~{fragments/kul/help :: content}"></span>
+              </th:block>
+              <%--<h2><span th:text="${tabTitle}"></span></h2>--%>
+              <th:block th:if="${highlightTab}">
+                &nbsp;<img src="${ConfigProperties.kr.externalizable.images.url}asterisk_orange.png" alt="changed"/>
+              </th:block>
+            </td>
+            <th:block th:if="${not empty tabDescription}">
+              <td class="tabtable1-mid1"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" align="absmiddle" height="29" width="1" />${tabDescription}</td>
+      		</th:block>
+
+            <th:block th:if="${not empty rightSideHtmlProperty and not empty rightSideHtmlAttribute}">
+              <td class="tabtable1-mid1"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" align="absmiddle" height="29" width="1" /><input type="text" name="${rightSideHtmlProperty}" th:field="*{${rightSideHtmlProperty}}" data-attribute-entry="${rightSideHtmlAttribute}" /></td>
+      		</th:block>
+
+      		<th:block th:if="${not empty extraButtonSource}">
+				<c:forTokens items="${extraButtonSource}" delims=";" var="token">
+					<th:block th:switch="${true}">
+						<th:block th:case="${#strings.contains(token, 'property=')}">
+							<!--/*/ <th:block th:with="ebProperty=${#strings.substringAfter(token, 'property=')}"> /*/-->
+						</th:block>
+						<th:block th:case="${#strings.contains(token, 'src=')}">
+							<!--/*/ <th:block th:with="ebSrc=${#strings.substringAfter(token, 'src=')}"> /*/-->
+						</th:block>
+						<th:block th:case="${#strings.contains(token, 'title=')}">
+							<!--/*/ <th:block th:with="ebTitle=${#strings.substringAfter(token, 'title=')}"> /*/-->
+						</th:block>
+						<th:block th:case="${#strings.contains(token, 'alt=')}">
+							<!--/*/ <th:block th:with="ebAlt=${#strings.substringAfter(token, 'alt=')}"> /*/-->
+						</th:block>
+					</th:block>
+				</c:forTokens>
+				<td class="tabtable1-mid1">
+					<input type="image" property="${ebProperty}" src="${ConfigProperties.kr.externalizable.images.url}${ebSrc}" title="${ebTitle}" alt="${ebAlt}" styleClass="tinybutton" tabindex="-1" />
+				</td>
+      		</th:block>
+
+            <td class="${midTabClass}">
+
+            <th:block th:switch="${true}">
+    		<th:block th:case="${empty midTabClassReplacement}">
+               <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE' || alwaysOpen == 'TRUE'}">
+                 <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" title="close ${tabTitle}" alt="close ${tabTitle}" styleClass="tinybutton"  styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}');" tabindex="-1" />
+               </th:block>
+               <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE' && alwaysOpen != 'TRUE'}">
+			   <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" title="open ${tabTitle}" alt="open ${tabTitle}" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleAndPost('${tabKey}')" tabindex="-1"/>
+               </th:block>
+               </th:block>
+                <th:block th:case="*">
+                	${midTabClassReplacement}
+                </th:block>
+                </th:block>
+
+            </td>
+            <td class="${rightTabClass}"><img src="${rightTabImage}" alt="" width="12" height="29" align="middle" /></td>
+          </tr>
+        </table>
+
+
+<th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+<div style="display: block;" id="tab-${tabKey}-div">
+</th:block>
+<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+<div style="display: none;" id="tab-${tabKey}-div">
+</th:block>
+
+
+        <!-- display errors for this tab -->
+        <th:block th:if="${! (empty tabErrorKey)}">
+          <div class="tab-container-error"><div class="left-errmsg-tab"><div class="kfs-errors" data-key-match="${tabErrorKey}" th:if="${#fields.hasErrors('${tabErrorKey}')}"><h4></h4></div></div></div>
+        </th:block>
+
+        <!-- comment for reference by KRA devs during KNS extraction -->
+        <th:block th:if="${! (empty tabAuditKey) && (useRiceAuditMode == 'true')}">
+        	<div class="tab-container-error"><div class="left-errmsg-tab">
+				<c:forEach items="${fn:split(auditCluster,',')}" var="cluster">
+        	   		<kul:auditErrors cluster="${cluster}" keyMatch="${tabAuditKey}" isLink="false" includesTitle="true"/>
+				</tr>
+        	</div></div>
+      	</th:block>
+
+
+        <!-- Before the jsp:doBody of the kul:tab tag -->
+        <jsp:doBody/>
+        <!-- After the jsp:doBody of the kul:tab tag -->
+
+
+</div>
+</div>

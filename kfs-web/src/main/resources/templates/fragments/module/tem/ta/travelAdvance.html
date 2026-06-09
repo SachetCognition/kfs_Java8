@@ -1,0 +1,108 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/ta/travelAdvance.tag -->
+<!-- Fragment parameters: travelAdvanceProperty -->
+<div th:fragment="content (travelAdvanceProperty)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelAuthorizationDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="travelAdvanceAttributes=${DataDictionary.TravelAdvance.attributes}"> /*/-->
+<!--/*/ <th:block th:with="advanceAttributes=${DataDictionary.AdvancePaymentReason.attributes}"> /*/-->
+<!--/*/ <th:block th:with="docType=${KualiForm.document.dataDictionaryEntry.documentTypeName }"> /*/-->
+<!--/*/ <th:block th:with="policyDisabled=${!KualiForm.waitingOnTraveler && !fullEntryMode}"> /*/-->
+<!--/*/ <th:block th:with="advancePolicyMode=${KualiForm.editingMode['advancePolicyEntry']}"> /*/-->
+
+
+<table cellpadding="0" cellspacing="0" class="datatable"
+	summary="Travel Advance Section">
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.travelAdvanceRequested}"></label>
+			</div>
+		</th>
+		<td class="datacell">
+			<input type="text" name="${travelAdvanceProperty}.travelAdvanceRequested" th:field="*{${travelAdvanceProperty}.travelAdvanceRequested}" data-attribute-entry="${travelAdvanceAttributes.travelAdvanceRequested}" />
+		</td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.arCustomerId}"></label>
+			</div>
+		</th>
+		<td class="datacell">
+			<input type="text" name="${travelAdvanceProperty}.arCustomerId" th:field="*{${travelAdvanceProperty}.arCustomerId}" data-attribute-entry="${travelAdvanceAttributes.arCustomerId}" readonly="readonly" />
+		</td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.arInvoiceDocNumber}"></label>
+			</div>
+		</th>
+		<td class="datacell">
+			<input type="text" name="${travelAdvanceProperty}.arInvoiceDocNumber" th:field="*{${travelAdvanceProperty}.arInvoiceDocNumber}" data-attribute-entry="${travelAdvanceAttributes.arInvoiceDocNumber}" readonly="readonly" />
+		</td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.dueDate}"></label>
+			</div>
+		</th>
+		<td class="datacell">
+			<input type="text" name="${travelAdvanceProperty}.dueDate" th:field="*{${travelAdvanceProperty}.dueDate}" data-attribute-entry="${travelAdvanceAttributes.dueDate}" />
+		</td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.advancePaymentReasonCode}"></label>
+			</div>
+		</th>
+		<td class="datacell">
+			<input type="text" name="${travelAdvanceProperty}.advancePaymentReasonCode" th:field="*{${travelAdvanceProperty}.advancePaymentReasonCode}" data-attribute-entry="${travelAdvanceAttributes.advancePaymentReasonCode}" />
+		</td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.travelAdvancePolicy}"></label>
+			</div>
+		</th>
+		<td class="datacell"><input type="text" name="${travelAdvanceProperty}.travelAdvancePolicy" th:field="*{${travelAdvanceProperty}.travelAdvancePolicy}" data-attribute-entry="${travelAdvanceAttributes.travelAdvancePolicy}" />${KualiForm.policyURL}</td>
+	</tr>
+	<tr>
+		<th class="bord-l-b">
+			<div align="right">
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelAdvanceAttributes.additionalJustification}"></label>
+			</div>
+		</th>
+		<td class="datacell">
+			<input type="text" name="${travelAdvanceProperty}.additionalJustification" th:field="*{${travelAdvanceProperty}.additionalJustification}" data-attribute-entry="${travelAdvanceAttributes.additionalJustification}" />
+		</td>
+	</tr>
+	<th:block th:if="${clearAdvanceMode}">
+		<tr>
+			<td class="datacell" colspan="2">
+				<div align="center"><input type="image" property="methodToCall.clearAdvance" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-clear1.gif" title="Clear Advance" alt="Clear Advance" styleClass="tinybutton" /></div>
+			</td>
+		</tr>
+	</th:block>
+</table>
+</div>

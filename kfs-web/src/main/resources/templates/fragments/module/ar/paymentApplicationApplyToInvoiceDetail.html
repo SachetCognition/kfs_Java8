@@ -1,0 +1,261 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/paymentApplicationApplyToInvoiceDetail.tag -->
+<!-- Fragment parameters: customerAttributes, customerInvoiceDetailAttributes, invoiceAttributes, readOnly -->
+<div th:fragment="content (customerAttributes, customerInvoiceDetailAttributes, invoiceAttributes, readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="arDocHeaderAttributes=${DataDictionary.AccountsReceivableDocumentHeader.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Apply to Invoice Detail" data-default-open="true">
+  <h3>Apply to Invoice Detail</h3>
+	<div class="tab-container" align="center">
+	    <h3>Apply to Invoice Detail</h3>
+        <table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+			<tr>
+				<th>
+					Customer
+				</th>
+				<td>
+					<input type="text" name="selectedCustomerNumber" th:field="*{selectedCustomerNumber}" data-attribute-entry="${customerAttributes.customerNumber}" />
+					<th:block th:if="${readOnly ne true}">
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ar.businessobject.Customer" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</th:block>
+				</td>
+			</tr>
+			<tr>
+				<th width='50%'>
+					Invoice
+				</th>
+				<td>
+					<kul:checkErrors keyMatch="${KFSConstants.PaymentApplicationTabErrorCodes.APPLY_TO_INVOICE_DETAIL_TAB}"/>
+					<th:block th:switch="${true}">						
+						<th:block th:case="${empty KualiForm.enteredInvoiceDocumentNumber || hasErrors }">
+								<input type="text" name="enteredInvoiceDocumentNumber" th:field="*{enteredInvoiceDocumentNumber}" data-attribute-entry="${invoiceAttributes.organizationInvoiceNumber}" />
+						</th:block>
+						<th:block th:case="*">
+							<a href="${ConfigProperties.workflow.url}/DocHandler.do?docId=${KualiForm.enteredInvoiceDocumentNumber}&command=displayDocSearchView" target="blank">
+								<input type="text" name="enteredInvoiceDocumentNumber" th:field="*{enteredInvoiceDocumentNumber}" data-attribute-entry="${invoiceAttributes.organizationInvoiceNumber}" readonly="readonly" />
+							</a>
+						</th:block>	
+					</th:block>
+				</td>
+			</tr>
+			<th:block th:if="${readOnly ne true}">
+				<tr>
+					<td colspan='2'>
+						<center>
+							<input type="image" property="methodToCall.loadInvoices"
+								src="${ConfigProperties.externalizable.images.url}tinybutton-load.gif"
+								alt="Load Invoices" title="Load Invoices" styleClass="tinybutton" />
+						</center>
+					</td>
+				</tr>
+			</th:block>
+		</table>
+		<th:block th:switch="${true}">
+			<th:block th:case="${empty KualiForm.selectedCustomerNumber}">
+			</th:block>
+			<th:block th:case="*">
+				<table width="100%" cellpadding="0" cellspacing="0"
+					class="datatable">
+					<tr id='beta_zeta'>
+						<td>
+							<table width="100%" cellpadding="0" cellspacing="0"
+								class="datatable">
+								<tr>
+									<td colspan='2' class='tab-subhead'>
+										<label for="selectedInvoiceDocumentNumber">Invoices</label>
+										<th:block th:if="${readOnly ne true}">
+											<select th:field="*{selectedInvoiceDocumentNumber}">
+												<c:forEach items="${KualiForm.invoiceApplications}" var="invoiceApplication">
+													<html:option value="${invoiceApplication.documentNumber}">
+														<span th:text="${invoiceApplication.documentNumber}"></span>
+													</html:option>
+												</tr>
+											</select>
+											<th:block th:if="${!empty invoiceApplications}">
+												<tr th:each="invoiceApplication : ${KualiForm.invoiceApplications}" indexId="ctr">
+												</tr>
+											</th:block>
+											<input type="image" property="methodToCall.goToInvoice"
+												src="${ConfigProperties.externalizable.images.url}tinybutton-load.gif"
+												alt="Go To Invoice" title="Go To Invoice"
+												styleClass="tinybutton" />
+										</th:block>
+									</td>
+								</tr>
+								<tr>
+									<th colspan='2' class='tab-subhead'>
+										<span th:text="Invoice ${KualiForm.selectedInvoiceDocumentNumber}"></span>
+										&nbsp;
+										<th:block th:if="${!empty KualiForm.previousInvoiceDocumentNumber}">
+											<input type="image" property="methodToCall.goToPreviousInvoice"
+												src="${ConfigProperties.externalizable.images.url}tinybutton-prev.gif"
+												alt="Go To Previous Invoice" title="Go To Previous Invoice"
+												styleClass="tinybutton" />
+										</th:block>
+										<th:block th:if="${!empty KualiForm.previousInvoiceDocumentNumber && !empty KualiForm.nextInvoiceDocumentNumber}">|</th:block>
+										<th:block th:if="${!empty KualiForm.nextInvoiceDocumentNumber}">
+											<input type="image" property="methodToCall.goToNextInvoice"
+												src="${ConfigProperties.externalizable.images.url}tinybutton-next.gif"
+												alt="Go To Next Invoice" title="Go To Next Invoice"
+												styleClass="tinybutton" />
+										</th:block>
+									</th>
+								</tr>
+								<tr>
+									<td colspan='2'>
+										<table width='100%' cellpadding='0' cellspacing='0'
+											class='datatable'>
+											<tr>
+												<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+												<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+												<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+												<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+											</tr>
+											<tr>
+												<td>
+												<th:block th:switch="${true}">
+												<th:block th:case="${KualiForm.enteredInvoiceDocumentNumber}">
+													<a href="${ConfigProperties.workflow.url}/DocHandler.do?docId=${KualiForm.enteredInvoiceDocumentNumber}&command=displayDocSearchView" target="blank">
+														<input type="text" name="selectedInvoiceDocumentNumber" th:field="*{selectedInvoiceDocumentNumber}" data-attribute-entry="${invoiceAttributes.organizationInvoiceNumber}" readonly="readonly" />
+													</a>
+												</th:block>
+												<th:block th:case="*">								
+														<input type="text" name="selectedInvoiceDocumentNumber" th:field="*{selectedInvoiceDocumentNumber}" data-attribute-entry="${invoiceAttributes.organizationInvoiceNumber}" readonly="readonly" />
+												</th:block>
+												</th:block>
+												</td>
+												<td>
+													<span th:text="${KualiForm.selectedInvoiceApplication.invoice.invoiceHeaderText}"></span>
+													&nbsp;
+												</td>
+												<td style="text-align: right;">
+													<input type="text" name="selectedInvoiceBalance" th:field="*{selectedInvoiceBalance}" data-attribute-entry="${invoiceAttributes.openAmount}" readonly="readonly" />
+												</td>
+												<td rowspan='2' style='vertical-align: top; text-align: right;'>
+													<input type="text" name="amountAppliedDirectlyToInvoice" th:field="*{amountAppliedDirectlyToInvoice}" data-attribute-entry="${invoiceAttributes.openAmount}" readonly="readonly" />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<span th:text="${KualiForm.selectedInvoiceApplication.invoice.billingDate}"></span>
+												</td>
+												<td>
+													<span th:text="${KualiForm.selectedInvoiceApplication.invoice.accountsReceivableDocumentHeader.customer.customerName}"></span>
+												</td>
+												<td style="text-align: right;">
+													<input type="text" name="selectedInvoiceTotalAmount" th:field="*{selectedInvoiceTotalAmount}" data-attribute-entry="${invoiceAttributes.sourceTotal}" readonly="readonly" />
+												</td>
+											</tr>
+											<tr>
+												<td colspan='4' class='tab-subhead'>
+													Invoice Detail
+												</td>
+											</tr>
+											<tr>
+												<td colspan='4'>
+													<table width='100%' cellpadding='0' cellspacing='0'
+														class='datatable' id="selectedCustomerInvoiceDetails">
+														<tr>
+															<th>
+																&nbsp;
+															</th>
+															<th>
+																Chart
+															</th>
+															<th>
+																Account
+															</th>
+															<th>
+																Item Desc
+															</th>
+															<th>
+																Item Total Amount
+															</th>
+															<th>
+																Item Open Amount
+															</th>
+															<th>
+																Apply Amount
+															</th>
+															<th:block th:if="${readOnly ne true}">
+																<th>
+																	Apply Full Amount
+																</th>
+															</th:block>
+														</tr>
+														<th:block th:if="${!empty KualiForm.selectedInvoiceDetailApplications}">
+														<tr th:each="invoiceDetailApplication : ${KualiForm.selectedInvoiceDetailApplications}" indexId="ctr">
+															<tr>
+																<td>
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].sequenceNumber" th:field="*{selectedInvoiceDetailApplications[${ctr}].sequenceNumber}" data-attribute-entry="${customerInvoiceDetailAttributes.sequenceNumber}" readonly="readonly" />
+																</td>
+																<td>
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].chartOfAccountsCode" th:field="*{selectedInvoiceDetailApplications[${ctr}].chartOfAccountsCode}" data-attribute-entry="${customerInvoiceDetailAttributes.chartOfAccountsCode}" readonly="readonly" />
+																</td>
+																<td>
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].accountNumber" th:field="*{selectedInvoiceDetailApplications[${ctr}].accountNumber}" data-attribute-entry="${customerInvoiceDetailAttributes.accountNumber}" readonly="readonly" />
+																</td>
+																<td>
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].invoiceItemDescription" th:field="*{selectedInvoiceDetailApplications[${ctr}].invoiceItemDescription}" data-attribute-entry="${customerInvoiceDetailAttributes.invoiceItemDescription}" readonly="readonly" />
+																</td>
+																<td style="text-align: right;">
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].amount" th:field="*{selectedInvoiceDetailApplications[${ctr}].amount}" data-attribute-entry="${customerInvoiceDetailAttributes.amount}" readonly="readonly" />
+																</td>
+																<td style="text-align: right;">
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].amountOpen" th:field="*{selectedInvoiceDetailApplications[${ctr}].amountOpen}" data-attribute-entry="${customerInvoiceDetailAttributes.amountOpen}" readonly="readonly" />
+																</td>
+																<td style="text-align: right;">
+																	<input type="text" name="selectedInvoiceDetailApplications[${ctr}].amountApplied" th:field="*{selectedInvoiceDetailApplications[${ctr}].amountApplied}" data-attribute-entry="${customerInvoiceDetailAttributes.amountApplied}" />
+																</td>
+																<th:block th:if="${readOnly ne true}">
+																	<td>
+																		<center>
+																			<input type="text" name="selectedInvoiceDetailApplications[${ctr}].fullApply" th:field="*{selectedInvoiceDetailApplications[${ctr}].fullApply}" data-attribute-entry="${customerInvoiceDetailAttributes.taxableIndicator}" />
+																		</center>
+																	</td>
+																</th:block>
+															</tr>
+														</tr>
+														</th:block>
+													</table>
+												</td>
+											</tr>
+											<th:block th:if="${readOnly ne true}">
+											<tr>
+												<td style='text-align: right;' colspan='4'>
+													<input type="image" property="methodToCall.applyAllAmounts"
+														src="${ConfigProperties.externalizable.images.url}tinybutton-apply.gif"
+														alt="Apply" title="Apply" styleClass="tinybutton" />
+												</td>
+											</tr>
+											</th:block>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+				</table>
+			</th:block>
+		</th:block>
+	</div>
+</section>
+</div>

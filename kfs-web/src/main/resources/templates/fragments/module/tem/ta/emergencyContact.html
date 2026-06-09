@@ -1,0 +1,150 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/ta/emergencyContact.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="${TemConstants.TabTitles.EMERGENCY_CONTACT_INFORMATION_TAB_TITLE}" data-default-open="${KualiForm.document.emergencyContactDefaultOpen}">
+  <h3>${TemConstants.TabTitles.EMERGENCY_CONTACT_INFORMATION_TAB_TITLE}</h3>
+	<div class="tab-container" align="center">
+		<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelAuthorizationDocument.attributes}"> /*/-->
+		<!--/*/ <th:block th:with="travelerAttributes=${DataDictionary.TravelerDetail.attributes}"> /*/--> 
+		<!--/*/ <th:block th:with="emergencyContactAttributes=${DataDictionary.TravelerDetailEmergencyContact.attributes}"> /*/--> 
+		<!--/*/ <th:block th:with="contactRelationTypeAttributes=${DataDictionary.ContactRelationType.attributes}"> /*/-->
+
+	<h3>Emergency Contact Information</h3>
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Emergency Contact Section">
+		<tr>
+			<th class="bord-l-b">
+				<div align="right">
+					<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.cellPhoneNumber}"></label>
+				</div>
+			</th>
+			<td class="datacell">
+				<input type="text" name="document.cellPhoneNumber" th:field="*{document.cellPhoneNumber}" data-attribute-entry="${documentAttributes.cellPhoneNumber}" />
+ 			</td>
+		</tr>
+		<tr>
+			<th class="bord-l-b">
+				<div align="right">
+					<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${travelerAttributes.citizenship}"></label>
+				</div>
+			</th>
+			<td class="datacell">
+				<input type="text" name="document.traveler.citizenship" th:field="*{document.traveler.citizenship}" data-attribute-entry="${travelerAttributes.citizenship}" readonly="readonly" />
+			</td>
+		</tr>
+	</table>
+
+	<table cellpadding="0" class="datatable" summary="Emergency Contacts">
+		<tbody>
+			<tr>
+				<td colspan="7" class="tab-subhead">Emergency Contact(s) for
+				Travelers:<br /></td>
+			</tr>
+			<tr>
+				<th width="10">&nbsp;</th>
+				<th>
+				<div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${emergencyContactAttributes.contactRelationTypeCode}"></label></div>
+				</th>
+				<th>
+				<div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${emergencyContactAttributes.contactName}"></label></div>
+				</th>
+				<th>
+				<div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${emergencyContactAttributes.phoneNumber}"></label></div>
+				</th>
+				<th>
+				<div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${emergencyContactAttributes.emailAddress}"></label></div>
+				</th>
+				<th>
+				<div align=left><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${emergencyContactAttributes.primary}"></label></div>
+				</th>
+				<th:block th:if="${fullEntryMode}">				
+				<th>
+				<div align=center>Actions</div>
+				</th>
+				</th:block>
+			</tr>
+			<th:block th:if="${fullEntryMode}">
+				<tr>
+					<th scope="row">
+					<div align="right">add:</div>
+					
+					</th>
+					<td>
+					<div align="center"><input type="text" name="newEmergencyContactLine.contactRelationTypeCode" th:field="*{newEmergencyContactLine.contactRelationTypeCode}" data-attribute-entry="${emergencyContactAttributes.contactRelationTypeCode}" /></div>
+	                </td>
+					<td valign=top class="infoline"><input type="text" name="newEmergencyContactLine.contactName" th:field="*{newEmergencyContactLine.contactName}" data-attribute-entry="${emergencyContactAttributes.contactName}" /></td>
+					<td valign=top class="infoline"><input type="text" name="newEmergencyContactLine.phoneNumber" th:field="*{newEmergencyContactLine.phoneNumber}" data-attribute-entry="${emergencyContactAttributes.phoneNumber}" /></td>
+					<td valign=top class="infoline"><input type="text" name="newEmergencyContactLine.emailAddress" th:field="*{newEmergencyContactLine.emailAddress}" data-attribute-entry="${emergencyContactAttributes.emailAddress}" /></td>
+					<td valign=top class="infoline"><input type="text" name="newEmergencyContactLine.primary" th:field="*{newEmergencyContactLine.primary}" data-attribute-entry="${emergencyContactAttributes.primary}" /></td>											
+					<td class="infoline">
+					<div align=center><input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif"
+						styleClass="tinybutton"
+						property="methodToCall.addEmergencyContactLine"
+						alt="Add Emergency Contact Line" title="Add Emergency Contact Line" />
+					</div>
+					</td>
+				</tr>
+			</th:block>
+			
+			<th:block th:if="${KualiForm.document.traveler.emergencyContacts != null && !empty KualiForm.document.traveler.emergencyContacts}">
+			<logic:iterate indexId="ctr" name="KualiForm"
+				property="document.traveler.emergencyContacts" id="currentLine">
+				<tr>
+					<th scope="row">
+					<div align="right"><input type="text" name="document.traveler.emergencyContacts[${ctr}].financialDocumentLineNumber" th:field="*{document.traveler.emergencyContacts[${ctr}].financialDocumentLineNumber}" data-attribute-entry="${emergencyContactAttributes.financialDocumentLineNumber}" readonly="readonly" /></div>
+					</th>
+					<td valign=top nowrap>
+					<div align="center"><input type="text" name="document.traveler.emergencyContacts[${ctr}].contactRelationTypeCode" th:field="*{document.traveler.emergencyContacts[${ctr}].contactRelationTypeCode}" data-attribute-entry="${emergencyContactAttributes.contactRelationTypeCode}" /></div>
+					</td>
+					<td valign=top><input type="text" name="document.traveler.emergencyContacts[${ctr}].contactName" th:field="*{document.traveler.emergencyContacts[${ctr}].contactName}" data-attribute-entry="${emergencyContactAttributes.contactName}" /></td>
+					<td valign=top><input type="text" name="document.traveler.emergencyContacts[${ctr}].phoneNumber" th:field="*{document.traveler.emergencyContacts[${ctr}].phoneNumber}" data-attribute-entry="${emergencyContactAttributes.phoneNumber}" /></td>
+					<td valign=top><input type="text" name="document.traveler.emergencyContacts[${ctr}].emailAddress" th:field="*{document.traveler.emergencyContacts[${ctr}].emailAddress}" data-attribute-entry="${emergencyContactAttributes.emailAddress}" /></td>
+					<td valign=top><input type="text" name="document.traveler.emergencyContacts[${ctr}].primary" th:field="*{document.traveler.emergencyContacts[${ctr}].primary}" data-attribute-entry="${emergencyContactAttributes.primary}" /></td>						
+					<th:block th:if="${fullEntryMode}">
+						<td>
+							<div align=center><input type="image" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+								styleClass="tinybutton"
+								property="methodToCall.deleteEmergencyContactLine.line${ctr}"
+								alt="Delete Emergency Contact Line"
+								title="Delete Emergency Contact Line" /></div>
+						</td>
+					</th:block>
+				</tr>
+			</tr>
+			</th:block>
+		</tbody>
+	</table>
+	<table cellpadding="0" class="datatable" summary="Modes of Transportation">
+		<tbody>
+			<tr>
+				<td colspan="5" class="tab-subhead">Modes of Transportation
+				while out-of-country:</td>
+			</tr>
+			<logic:iterate indexId="ctr2" name="KualiForm"
+				property="modesOfTransportation" id="currentMode">
+				<th:block th:if="${ctr2 == 0 || ctr2%5 == 0}">
+					<tr>
+				</th:block>
+				<td><div th:replace="~{fragments/tem/html/multibox :: content}" data-property="selectedTransportationModes" data-disabled="${!fullEntryMode}" data-text="${currentMode.key}" data-text="${currentMode.value}" data-if="${ctr2 == 4 || ctr2 == 9}" data-class="bord-l-b" data-align="right" data-class="kfs-label" data-name="" data-entry="${documentAttributes.regionFamiliarity}" data-class="datacell" data-type="text" data-name="document.regionFamiliarity" data-field="*{document.regionFamiliarity}" data-entry="${documentAttributes.regionFamiliarity}"></div></td>
+		</tr>
+	</table>
+
+	</div>
+</section>
+</div>

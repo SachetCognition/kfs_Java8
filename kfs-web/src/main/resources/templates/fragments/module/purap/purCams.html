@@ -1,0 +1,102 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/purCams.tag -->
+<!-- Fragment parameters: documentAttributes, itemAttributes, camsItemAttributes, camsSystemAttributes, camsAssetAttributes, camsLocationAttributes, isRequisition, isPurchaseOrder, fullEntryMode -->
+<div th:fragment="content (documentAttributes, itemAttributes, camsItemAttributes, camsSystemAttributes, camsAssetAttributes, camsLocationAttributes, isRequisition, isPurchaseOrder, fullEntryMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="tabindexOverrideBase=60"> /*/-->
+
+<th:block th:if="${empty isRequisition}">
+	<!--/*/ <th:block th:with="isRequisition=false"> /*/-->
+</th:block>
+
+<th:block th:if="${empty isPurchaseOrder}">
+	<!--/*/ <th:block th:with="isPurchaseOrder=false"> /*/-->
+</th:block>
+
+<section class="kfs-tab" data-tab-title="Capital Asset" data-default-open="false">
+  <h3>Capital Asset</h3>
+	<!--/*/ <th:block th:with="systemSelectionReadOnly=${not empty KualiForm.document.capitalAssetSystemTypeCode && not empty KualiForm.document.capitalAssetSystemStateCode}"> /*/-->
+	<div class="tab-container" align=center>
+		
+    <table cellpadding="0" cellspacing="0" class="datatable" summary="System Selection">
+	<tr>
+		<td colspan="2" class="subhead">System Selection</td>
+	</tr>
+
+	<tr>
+ 		<th width="20%" align=right valign=middle class="bord-l-b">
+			<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.capitalAssetSystemTypeCode}"></label></div>
+		</th>
+        <td align=left valign=middle class="datacell">
+			<input type="text" name="document.capitalAssetSystemTypeCode" th:field="*{document.capitalAssetSystemTypeCode}" data-attribute-entry="${documentAttributes.capitalAssetSystemTypeCode}" />
+		</td>
+	</tr>
+	<tr>
+		<th align=right valign=middle class="bord-l-b">
+			<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.capitalAssetSystemStateCode}"></label></div>
+		</th>
+        <td align=left valign=middle class="datacell">
+			<input type="text" name="document.capitalAssetSystemStateCode" th:field="*{document.capitalAssetSystemStateCode}" data-attribute-entry="${documentAttributes.capitalAssetSystemStateCode}" />
+		</td>
+	</tr>
+    <th:block th:if="${fullEntryMode or amendmentEntry}">
+		<tr>
+			<th align=right valign=middle class="bord-l-b">
+				Action:
+	       </th>
+		   <td align=left valign=middle class="datacell">
+				<th:block th:switch="${true}">
+					<th:block th:case="${empty KualiForm.document.purchasingCapitalAssetItems}">
+						<input type="image" property="methodToCall.selectSystem" src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif" alt="select system" styleClass="tinybutton"/>
+					</th:block>
+					<th:block th:case="*">
+						<input type="image" property="methodToCall.changeSystem" src="${ConfigProperties.externalizable.images.url}tinybutton-change.gif" alt="select system" styleClass="tinybutton"/>
+						<input type="image" property="methodToCall.updateCamsView" src="${ConfigProperties.externalizable.images.url}tinybutton-updateview.gif" alt="Update Cams View" styleClass="tinybutton"/>
+					</th:block>
+				</th:block>
+			</td>
+		</tr>
+    </th:block>
+
+	</table>
+
+	<!--/*/ <th:block th:with="availabilityOnce=${PurapConstants.CapitalAssetAvailability.ONCE}"> /*/-->
+
+	<th:block th:if="${!empty KualiForm.document.purchasingCapitalAssetItems and ( (KualiForm.purchasingItemCapitalAssetAvailability eq availabilityOnce) or (KualiForm.purchasingCapitalAssetSystemCommentsAvailability eq availabilityOnce) or (KualiForm.purchasingCapitalAssetSystemDescriptionAvailability eq availabilityOnce) or (KualiForm.purchasingCapitalAssetSystemAvailability eq availabilityOnce) )}">
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Capital Asset Systems" style="width:100%">
+	<tr>
+		<td colspan="12" class="subhead">System Detail</td>
+	</tr>	
+	<tr>
+	<td colspan="12" class="datacell" style="padding:0;">
+		<logic:iterate indexId="ctr" name="KualiForm" property="document.purchasingCapitalAssetSystems" id="systemLine">
+			<div th:replace="~{fragments/purap/camsDetail :: content}" data-ctr="${ctr}" data-cams-item-index="0" data-cams-system-attributes="${camsSystemAttributes}" data-cams-asset-attributes="${camsAssetAttributes}" data-cams-location-attributes="${camsLocationAttributes}" data-cams-asset-system-property="document.purchasingCapitalAssetSystems[${ctr}]" data-availability="${PurapConstants.CapitalAssetAvailability.ONCE}" data-is-requisition="${isRequisition}" data-is-purchase-order="${isPurchaseOrder}" data-full-entry-mode="${fullEntryMode}"></div>
+		</tr>
+	</td>		
+	</tr>
+	</table>
+	</th:block>
+
+	<th:block th:if="${!empty KualiForm.document.purchasingCapitalAssetItems}">
+		<div th:replace="~{fragments/purap/camsItems :: content}" data-item-attributes="${itemAttributes}" data-cams-item-attributes="${camsItemAttributes}" data-cams-system-attributes="${camsSystemAttributes}" data-cams-asset-attributes="${camsAssetAttributes}" data-cams-location-attributes="${camsLocationAttributes}" data-is-requisition="${isRequisition}" data-is-purchase-order="${isPurchaseOrder}" data-full-entry-mode="${fullEntryMode}"></div>
+	</th:block>
+
+	</div>
+</section>
+</div>

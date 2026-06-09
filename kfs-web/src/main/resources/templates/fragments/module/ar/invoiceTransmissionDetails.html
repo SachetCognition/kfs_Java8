@@ -1,0 +1,90 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/invoiceTransmissionDetails.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber}">
+	<section class="kfs-tab" data-tab-title="Transmission Details" data-default-open="true">
+  <h3>Transmission Details</h3>
+		<!--/*/ <th:block th:with="invoiceAddressDetailsAttributes=${DataDictionary.InvoiceAddressDetail.attributes}"> /*/-->
+		
+		<div class="tab-container" align="center">
+			<h3>Transmission Details</h3>
+			<table cellpadding=0 class="datatable" summary="Transmission Details section">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAddressDetailsAttributes.customerAddressTypeCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAddressDetailsAttributes.customerAddressName}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAddressDetailsAttributes.customerInvoiceTemplateCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAddressDetailsAttributes.invoiceTransmissionMethodCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAddressDetailsAttributes.customerEmailAddress}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${invoiceAddressDetailsAttributes.initialTransmissionDate}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				</tr>
+				
+				<tr th:each="invoiceAddressDetail, loopCounter : ${KualiForm.document.invoiceAddressDetails}">
+    				<tr>
+						<td class="datacell"><input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].customerAddressTypeCode" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].customerAddressTypeCode}" data-attribute-entry="${invoiceAddressDetailsAttributes.customerAddressTypeCode}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].customerAddressName" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].customerAddressName}" data-attribute-entry="${invoiceAddressDetailsAttributes.customerAddressName}" readonly="readonly" /></td>
+						<td class="datacell">
+							${invoiceAddressDetail.customerLine1StreetAddress}<br/>
+							<th:block th:if="${not empty invoiceAddressDetail.customerLine2StreetAddress}">${invoiceAddressDetail.customerLine2StreetAddress}<br/></th:block>
+							<th:block th:if="${not empty invoiceAddressDetail.customerCityName}">${invoiceAddressDetail.customerCityName},</th:block>
+							<th:block th:if="${not empty invoiceAddressDetail.customerStateCode || not empty invoiceAddressDetail.customerZipCode}">${invoiceAddressDetail.customerStateCode}, ${invoiceAddressDetail.customerZipCode}<br/></th:block>
+							<th:block th:if="${not empty invoiceAddressDetail.customerAddressInternationalProvinceName || not empty invoiceAddressDetail.customerInternationalMailCode}">${invoiceAddressDetail.customerAddressInternationalProvinceName}, ${invoiceAddressDetail.customerInternationalMailCode}<br/></th:block>
+							<input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].customerCountryCode" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].customerCountryCode}" data-attribute-entry="${invoiceAddressDetailsAttributes.customerCountryCode}" readonly="readonly" />
+						</td>
+						<td class="datacell"><input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].customerInvoiceTemplateCode" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].customerInvoiceTemplateCode}" data-attribute-entry="${invoiceAddressDetailsAttributes.customerInvoiceTemplateCode}" /></td>
+						<td class="datacell"><input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].invoiceTransmissionMethodCode" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].invoiceTransmissionMethodCode}" data-attribute-entry="${invoiceAddressDetailsAttributes.invoiceTransmissionMethodCode}" /></td>
+						<td class="datacell"><input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].customerEmailAddress" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].customerEmailAddress}" data-attribute-entry="${invoiceAddressDetailsAttributes.customerEmailAddress}" /></td>
+						<td class="datacell"><input type="text" name="document.invoiceAddressDetails[${loopCounter.index}].initialTransmissionDate" th:field="*{document.invoiceAddressDetails[${loopCounter.index}].initialTransmissionDate}" data-attribute-entry="${invoiceAddressDetailsAttributes.initialTransmissionDate}" readonly="readonly" /></td>
+						<th:block th:switch="${true}">
+							<th:block th:case="${KualiForm.showTransmissionDateButton}">
+								<th:block th:switch="${true}">
+									<th:block th:case="${empty invoiceAddressDetail.initialTransmissionDate}">
+										<td class="datacell-nowrap">
+											<input type="image" property="methodToCall.setInitialTransmissionDate.line${loopCounter.index}"
+												src="${ConfigProperties.externalizable.images.url}tinybutton-settransmissiondate.gif"
+												alt="Set Transmission Date"
+												title="Set Transmission Date"
+												styleClass="tinybutton" />
+										</td>
+									</th:block>
+									<th:block th:case="*">
+										<td class="datacell-nowrap">
+											<input type="image" property="methodToCall.clearInitialTransmissionDate.line${loopCounter.index}"
+												src="${ConfigProperties.externalizable.images.url}tinybutton-cleartransmissiondate.gif"
+												alt="Clear Transmission Date"
+												title="Clear Transmission Date"
+												styleClass="tinybutton" />
+										</td>
+									</th:block>
+								</th:block>
+							</th:block>
+							<th:block th:case="*">
+								<td>&nbsp;</td>
+							</th:block>
+						</th:block>
+					</tr>
+				</tr>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

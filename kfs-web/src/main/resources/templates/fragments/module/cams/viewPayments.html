@@ -1,0 +1,93 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/viewPayments.tag -->
+<!-- Fragment parameters: assetPayments, defaultTabHide, assetValueObj, assetValue -->
+<div th:fragment="content (assetPayments, defaultTabHide, assetValueObj, assetValue)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${fn:length(assetPayments) <= CamsConstants.Asset.ASSET_MAXIMUM_NUMBER_OF_PAYMENT_DISPLAY}">
+	<th:block th:if="${assetValueObj==null}">
+		<!--/*/ <th:block th:with="assetValueObj=document.asset"> /*/-->
+		<!--/*/ <th:block th:with="assetValue=${KualiForm.document.asset}"> /*/-->
+	</th:block>
+	<!--/*/ <th:block th:with="assetPaymentAttributes=${DataDictionary.AssetPayment.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="pos=-1"> /*/-->
+
+	<section class="kfs-tab" data-tab-title="Processed Payments" data-default-open="${!defaultTabHide}">
+  <h3>Processed Payments</h3>
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">								
+			<tr>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.chartOfAccountsCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.accountNumber}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.subAccountNumber}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialObjectCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialSubObjectCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.projectCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.organizationReferenceId}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.documentNumber}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialDocumentTypeCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.purchaseOrderNumber}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.requisitionNumber}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialDocumentPostingDate}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialDocumentPostingYear}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.financialDocumentPostingPeriodCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.transferPaymentCode}"></label></th>
+				<th class="grid" align="center"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAttributes.accountChargeAmount}"></label></th>
+			</tr>
+			<!--/*/ <th:block th:with="totalPayments=${0}"> /*/-->
+			<tr th:each="payment : ${assetPayments}">
+			
+				<!--/*/ <th:block th:with="totalPayments=${totalPayments + payment.accountChargeAmount}"> /*/-->									 				
+			 	<!--/*/ <th:block th:with="pos=${pos+1}"> /*/-->
+			 	<!--/*/ <th:block th:with="posValue=${pos}"> /*/-->			 	
+					<tr>
+		 				<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].chartOfAccountsCode" th:field="*{${assetValueObj}.assetPayments[${pos}].chartOfAccountsCode}" data-attribute-entry="${assetPaymentAttributes.chartOfAccountsCode}" readonly="readonly" /></td>									
+						<td class="grid">
+							<input type="text" name="${assetValueObj}.assetPayments[${pos}].accountNumber" th:field="*{${assetValueObj}.assetPayments[${pos}].accountNumber}" data-attribute-entry="${assetPaymentAttributes.accountNumber}" readonly="readonly" />								
+								<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${assetValue.assetPayments[posValue].chartOfAccountsCode}&amp;accountNumber=${assetValue.assetPayments[posValue].accountNumber}">
+		                			<html:hidden write="true" property="${assetValueObj}.assetPayments[${pos}].accountNumber" />
+		                		</span>&nbsp;
+		            		</div><!-- /kul:htmlControlAttribute -->
+				      	</td>		
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].subAccountNumber" th:field="*{${assetValueObj}.assetPayments[${pos}].subAccountNumber}" data-attribute-entry="${assetPaymentAttributes.subAccountNumber}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].financialObjectCode" th:field="*{${assetValueObj}.assetPayments[${pos}].financialObjectCode}" data-attribute-entry="${assetPaymentAttributes.financialObjectCode}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].financialSubObjectCode" th:field="*{${assetValueObj}.assetPayments[${pos}].financialSubObjectCode}" data-attribute-entry="${assetPaymentAttributes.financialSubObjectCode}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].projectCode" th:field="*{${assetValueObj}.assetPayments[${pos}].projectCode}" data-attribute-entry="${assetPaymentAttributes.projectCode}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].organizationReferenceId" th:field="*{${assetValueObj}.assetPayments[${pos}].organizationReferenceId}" data-attribute-entry="${assetPaymentAttributes.organizationReferenceId}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].documentNumber" th:field="*{${assetValueObj}.assetPayments[${pos}].documentNumber}" data-attribute-entry="${assetPaymentAttributes.documentNumber}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].financialDocumentTypeCode" th:field="*{${assetValueObj}.assetPayments[${pos}].financialDocumentTypeCode}" data-attribute-entry="${assetPaymentAttributes.financialDocumentTypeCode}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].purchaseOrderNumber" th:field="*{${assetValueObj}.assetPayments[${pos}].purchaseOrderNumber}" data-attribute-entry="${assetPaymentAttributes.purchaseOrderNumber}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].requisitionNumber" th:field="*{${assetValueObj}.assetPayments[${pos}].requisitionNumber}" data-attribute-entry="${assetPaymentAttributes.requisitionNumber}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].financialDocumentPostingDate" th:field="*{${assetValueObj}.assetPayments[${pos}].financialDocumentPostingDate}" data-attribute-entry="${assetPaymentAttributes.financialDocumentPostingDate}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].financialDocumentPostingYear" th:field="*{${assetValueObj}.assetPayments[${pos}].financialDocumentPostingYear}" data-attribute-entry="${assetPaymentAttributes.financialDocumentPostingYear}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].financialDocumentPostingPeriodCode" th:field="*{${assetValueObj}.assetPayments[${pos}].financialDocumentPostingPeriodCode}" data-attribute-entry="${assetPaymentAttributes.financialDocumentPostingPeriodCode}" readonly="readonly" /></td>								
+						<td class="grid"><input type="text" name="${assetValueObj}.assetPayments[${pos}].transferPaymentCode" th:field="*{${assetValueObj}.assetPayments[${pos}].transferPaymentCode}" data-attribute-entry="${assetPaymentAttributes.transferPaymentCode}" readonly="readonly" /></td>								
+						<td class="grid"><div align="right"><input type="text" name="${assetValueObj}.assetPayments[${pos}].accountChargeAmount" th:field="*{${assetValueObj}.assetPayments[${pos}].accountChargeAmount}" data-attribute-entry="${assetPaymentAttributes.accountChargeAmount}" readonly="readonly" /></div></td>								
+					</tr>
+			</tr>
+			<tr>
+				<th class="grid" align="right" colspan="15"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.paymentTotalCost}"></label></th>								
+				<td class="grid"><div align="right"><fmt:formatNumber value="${totalPayments}" maxFractionDigits="2" minFractionDigits="2"/></div></td>
+			</tr>						
+		</table>
+		</div>
+</section>
+</th:block>
+<div th:replace="~{fragments/cams/assetPaymentsLookupLink :: content}" data-capital-asset-number="${assetValue.capitalAssetNumber}"></div>
+</div>

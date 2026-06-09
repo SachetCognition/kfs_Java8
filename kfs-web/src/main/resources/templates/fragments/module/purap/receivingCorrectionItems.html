@@ -1,0 +1,141 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/receivingCorrectionItems.tag -->
+<!-- Fragment parameters: itemAttributes -->
+<div th:fragment="content (itemAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="documentType=${KualiForm.document.documentHeader.workflowDocument.documentTypeName}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=10"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Items" data-default-open="true">
+  <h3>Items</h3>
+	<div class="tab-container" align=center>
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Items Section">
+		<tr>
+			<td colspan="12" class="subhead">
+			    <span class="subhead-left">Receiving Correction Items</span>
+			</td>
+		</tr>
+
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemLineNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemCatalogNumber}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDescription}"></th>				
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemOriginalReceivedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemOriginalReturnedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemOriginalDamagedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReceivedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemReturnedTotalQuantity}"></th>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${itemAttributes.itemDamagedTotalQuantity}"></th>
+		</tr>
+		<logic:iterate indexId="ctr" name="KualiForm" property="document.items" id="itemLine">
+			<!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+			<!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+			
+			<th:block th:switch="${true}">
+				<th:block th:case="${itemLine.objectId == null}">
+					<!--/*/ <th:block th:with="newObjectId=[[${__EXPR__}]]"> /*/-->
+                    <!--/*/ <th:block th:with="tabKey=Item-${newObjectId}"> /*/-->
+			    </th:block>
+			    <th:block th:case="${itemLine.objectId != null}">
+			        <!--/*/ <th:block th:with="tabKey=Item-${itemLine.objectId}"> /*/-->
+			    </th:block>
+			</th:block>
+			
+            <!--  hit form method to increment tab index -->
+            <!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+
+            <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+
+			<%-- default to closed --%>
+			<th:block th:switch="${true}">
+				<th:block th:case="${empty currentTab}">
+					<!--/*/ <th:block th:with="isOpen=true"> /*/-->
+				</th:block>
+				<th:block th:case="${!empty currentTab}">
+					<!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+				</th:block>
+			</th:block>
+		<tr>
+			<td colspan="12" class="tab-subhead" style="border-right: none;">				 
+		    <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+			    <input type="image" property="methodToCall.toggleTab.tab${tabKey}"
+				    src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif"
+				    alt="hide" title="toggle" styleClass="tinybutton"
+				    styleId="tab-${tabKey}-imageToggle"
+				    onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+		    </th:block> 
+		    <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			    <input type="image" property="methodToCall.toggleTab.tab${tabKey}"
+				    src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif"
+				    alt="show" title="toggle" styleClass="tinybutton"
+				    styleId="tab-${tabKey}-imageToggle"
+				    onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+			</th:block>
+			</td>
+		</tr>
+
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			<tbody style="display: none;" id="tab-${tabKey}-div">
+		</th:block>
+	
+		<tr>				
+			<td class="infoline" nowrap="nowrap">
+			    <input type="text" name="document.item[${ctr}].itemLineNumber" th:field="*{document.item[${ctr}].itemLineNumber}" data-attribute-entry="${itemAttributes.itemLineNumber}" />			    
+			</td>					
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemCatalogNumber" th:field="*{document.item[${ctr}].itemCatalogNumber}" data-attribute-entry="${itemAttributes.itemCatalogNumber}" />
+			</td>
+			<td class="infoline">
+				<input type="text" name="document.item[${ctr}].itemDescription" th:field="*{document.item[${ctr}].itemDescription}" data-attribute-entry="${itemAttributes.itemDescription}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemUnitOfMeasureCode" th:field="*{document.item[${ctr}].itemUnitOfMeasureCode}" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}" />
+		    </td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemOriginalReceivedTotalQuantity" th:field="*{document.item[${ctr}].itemOriginalReceivedTotalQuantity}" data-attribute-entry="${itemAttributes.itemOriginalReceivedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemOriginalReturnedTotalQuantity" th:field="*{document.item[${ctr}].itemOriginalReturnedTotalQuantity}" data-attribute-entry="${itemAttributes.itemOriginalReturnedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemOriginalDamagedTotalQuantity" th:field="*{document.item[${ctr}].itemOriginalDamagedTotalQuantity}" data-attribute-entry="${itemAttributes.itemOriginalDamagedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemReceivedTotalQuantity" th:field="*{document.item[${ctr}].itemReceivedTotalQuantity}" data-attribute-entry="${itemAttributes.itemReceivedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemReturnedTotalQuantity" th:field="*{document.item[${ctr}].itemReturnedTotalQuantity}" data-attribute-entry="${itemAttributes.itemReturnedTotalQuantity}" />
+			</td>
+			<td class="infoline">
+			    <input type="text" name="document.item[${ctr}].itemDamagedTotalQuantity" th:field="*{document.item[${ctr}].itemDamagedTotalQuantity}" data-attribute-entry="${itemAttributes.itemDamagedTotalQuantity}" />
+			</td>
+		</tr>
+
+		<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+			</tbody>
+		</th:block>
+
+		</tr>
+		
+	</table>
+	</div>
+</section>
+</div>

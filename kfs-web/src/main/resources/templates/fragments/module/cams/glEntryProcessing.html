@@ -1,0 +1,87 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/glEntryProcessing.tag -->
+<!-- Fragment parameters: defaultTabHide, generalLedgerEntry -->
+<div th:fragment="content (defaultTabHide, generalLedgerEntry)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="entryAttributes=${DataDictionary.GeneralLedgerEntry.attributes}"> /*/-->
+
+<div class="tab-container" align=center>
+	<div align="center" vAlign="middle">
+	<h3>GL Entry Processing Line</h3>
+	<table width="95%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.universityFiscalYear}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.universityFiscalPeriodCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.chartOfAccountsCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.accountNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.subAccountNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialObjectCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialSubObjectCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialDocumentTypeCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialSystemOriginationCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.documentNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.transactionLedgerEntryDescription}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.organizationDocumentNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.organizationReferenceId}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.referenceFinancialSystemOriginationCode}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.referenceFinancialDocumentNumber}"></th>
+		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.amount}"></th>
+		</tr>
+		<tr>
+			<td class="grid"><input type="text" name="generalLedgerEntry.universityFiscalYear" th:field="*{generalLedgerEntry.universityFiscalYear}" data-attribute-entry="${entryAttributes.universityFiscalYear}" readonly="readonly" /></td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.universityFiscalPeriodCode" th:field="*{generalLedgerEntry.universityFiscalPeriodCode}" data-attribute-entry="${entryAttributes.universityFiscalPeriodCode}" readonly="readonly" /></td>
+			<td class="grid">
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${generalLedgerEntry.chartOfAccountsCode}">
+					<input type="text" name="generalLedgerEntry.chartOfAccountsCode" th:field="*{generalLedgerEntry.chartOfAccountsCode}" data-attribute-entry="${entryAttributes.chartOfAccountsCode}" readonly="readonly" />
+				</span>
+			</td>
+			<td class="grid">
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${generalLedgerEntry.chartOfAccountsCode}&accountNumber=${generalLedgerEntry.accountNumber}">
+					<input type="text" name="generalLedgerEntry.accountNumber" th:field="*{generalLedgerEntry.accountNumber}" data-attribute-entry="${entryAttributes.accountNumber}" readonly="readonly" />
+				</span>
+			</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.subAccountNumber" th:field="*{generalLedgerEntry.subAccountNumber}" data-attribute-entry="${entryAttributes.subAccountNumber}" readonly="readonly" /></td>
+			<td class="grid">
+				<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.ObjectCode" data-key-values="universityFiscalYear=${generalLedgerEntry.universityFiscalYear}&chartOfAccountsCode=${generalLedgerEntry.chartOfAccountsCode}&financialObjectCode=${generalLedgerEntry.financialObjectCode}">
+					<input type="text" name="generalLedgerEntry.financialObjectCode" th:field="*{generalLedgerEntry.financialObjectCode}" data-attribute-entry="${entryAttributes.financialObjectCode}" readonly="readonly" />
+				</span>
+			</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.financialSubObjectCode" th:field="*{generalLedgerEntry.financialSubObjectCode}" data-attribute-entry="${entryAttributes.financialSubObjectCode}" readonly="readonly" /></td>
+			<td class="grid">
+				<span class="kfs-inquiry" data-bo-class="org.kuali.rice.kew.doctype.bo.DocumentTypeEBO" data-key-values="documentTypeId=${generalLedgerEntry.financialSystemDocumentTypeCode.documentTypeId}">
+					<input type="text" name="generalLedgerEntry.financialDocumentTypeCode" th:field="*{generalLedgerEntry.financialDocumentTypeCode}" data-attribute-entry="${entryAttributes.financialDocumentTypeCode}" readonly="readonly" />
+				</span>
+			</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.financialSystemOriginationCode" th:field="*{generalLedgerEntry.financialSystemOriginationCode}" data-attribute-entry="${entryAttributes.financialSystemOriginationCode}" readonly="readonly" /></td>
+			<td class="grid">
+				<html:link target="_blank" href="cabGlLine.do?methodToCall=viewDoc&documentNumber=${generalLedgerEntry.documentNumber}">
+					<input type="text" name="generalLedgerEntry.documentNumber" th:field="*{generalLedgerEntry.documentNumber}" data-attribute-entry="${entryAttributes.documentNumber}" readonly="readonly" />
+				</html:link>
+			</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.transactionLedgerEntryDescription" th:field="*{generalLedgerEntry.transactionLedgerEntryDescription}" data-attribute-entry="${entryAttributes.transactionLedgerEntryDescription}" readonly="readonly" /></td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.organizationDocumentNumber" th:field="*{generalLedgerEntry.organizationDocumentNumber}" data-attribute-entry="${entryAttributes.organizationDocumentNumber}" readonly="readonly" /></td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.organizationReferenceId" th:field="*{generalLedgerEntry.organizationReferenceId}" data-attribute-entry="${entryAttributes.organizationReferenceId}" readonly="readonly" />&nbsp;</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.referenceFinancialSystemOriginationCode" th:field="*{generalLedgerEntry.referenceFinancialSystemOriginationCode}" data-attribute-entry="${entryAttributes.referenceFinancialSystemOriginationCode}" readonly="readonly" />&nbsp;</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.referenceFinancialDocumentNumber" th:field="*{generalLedgerEntry.referenceFinancialDocumentNumber}" data-attribute-entry="${entryAttributes.referenceFinancialDocumentNumber}" readonly="readonly" />&nbsp;</td>
+			<td class="grid"><input type="text" name="generalLedgerEntry.amount" th:field="*{generalLedgerEntry.amount}" data-attribute-entry="${entryAttributes.amount}" readonly="readonly" /></td>
+		</tr>
+    </table>
+	</div>
+</div>
+</div>

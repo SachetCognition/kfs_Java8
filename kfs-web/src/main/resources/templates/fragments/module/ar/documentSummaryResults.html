@@ -1,0 +1,56 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/documentSummaryResults.tag -->
+<!-- Fragment parameters: lookupResultsProperty, lookupResultTitleProperties, tabTitleName -->
+<div th:fragment="content (lookupResultsProperty, lookupResultTitleProperties, tabTitleName)" xmlns:th="http://www.thymeleaf.org">
+<tr th:each="result : ${KualiForm.${lookupResultsProperty}}" indexId="ctr">
+	<!--/*/ <th:block th:with="useTabTop=${ctr == 0}"> /*/-->
+	
+	<%-- generate tab titles --%>
+	<!--/*/ <th:block th:with="tabTitleValues="> /*/-->
+	<c:forTokens items="${lookupResultTitleProperties}" delims=";" var="titleProperty">
+		<!--/*/ <th:block th:with="tabTitleValues=${tabTitleValues},${result[titleProperty]}"> /*/-->
+	</c:forTokens>
+	<!--/*/ <th:block th:with="tabTitleValues=${fn:substring(tabTitleValues,1,fn:length(tabTitleValues))}"> /*/-->
+	<th:block th:if="${!empty tabTitleName}">
+		<!--/*/ <th:block th:with="tabTitleName=${tabTitleName} "> /*/-->
+	</th:block>
+	<!--/*/ <th:block th:with="tabTitle=${tabTitleName}${tabTitleValues}"> /*/-->
+	
+	<c:set var="propertyName" scope="request" value="${lookupResultsProperty}[${ctr}]"/>
+	<!--/*/ <th:block th:with="tabErrorKey=${requestScope.propertyName}.*"> /*/-->
+
+	<div id="workarea">
+		<th:block th:switch="${true}">
+			<th:block th:case="${useTabTop}">
+				<section class="kfs-tab" data-tab-title="${tabTitle}" data-default-open="true">
+  <h3>${tabTitle}</h3>
+					<jsp:doBody/>
+				</section>
+			</th:block>
+			<th:block th:case="*">
+				<section class="kfs-tab" data-tab-title="${tabTitle}" data-default-open="true">
+  <h3>${tabTitle}</h3>
+					<jsp:doBody/>
+				</section>
+			</th:block>
+		</th:block>
+	</div>
+</tr>
+</div>

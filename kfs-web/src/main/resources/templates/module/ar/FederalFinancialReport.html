@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/ar/FederalFinancialReport.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/ar/FederalFinancialReport</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="award=${DataDictionary.Award.attributes}"> /*/-->
+<!--/*/ <th:block th:with="agency=${DataDictionary.Agency.attributes}"> /*/-->
+<!--/*/ <th:block th:with="organization=${DataDictionary.OrganizationAccountingDefault.attributes}"> /*/-->
+
+<div class="kfs-page" data-header-title="Federal Financial Report Generation" data-doc-title="Federal Financial Report Generation">
+  <form action="arFederalFinancialReport.do" method="post">
+
+	<table cellpadding="0" cellspacing="0" class="datatable-80"
+		summary="Federal Financial Report Generation"">
+
+		<tr>
+			<th align=right valign=middle class="grid">
+				<div align="right">Federal Form:</div>
+			</th>
+			<td align=left valign=middle class="grid"><html-el:select
+					property="federalForm">
+					<html-el:option value=""></html-el:option>
+					<html-el:option value="425">SF425</html-el:option>
+					<html-el:option value="425A">SF425A</html-el:option>
+				</html-el:select>
+			</td>
+		</tr>
+
+		<tr>
+			<th align=right valign=middle class="grid" style="width: 25%;">
+				<div align="right">
+					<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${award.proposalNumber}"></label>
+				</div></th>
+			<td align=left valign=middle class="grid" style="width: 25%;"><input type="text" name="proposalNumber" th:field="*{proposalNumber}" data-attribute-entry="${award.proposalNumber}" />
+				<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.cg.businessobject.Award" th:replace="~{fragments/kul/lookup :: content}"></span></td>
+
+		</tr>
+		<tr>
+			<th align=right valign=middle class="grid" style="width: 25%;">
+				<div align="right">
+					<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${agency.agencyNumber}"></label>
+				</div></th>
+			<td align=left valign=middle class="grid" style="width: 25%;"><input type="text" name="agencyNumber" th:field="*{agencyNumber}" data-attribute-entry="${agency.agencyNumber}" />
+				<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.cg.businessobject.Agency" th:replace="~{fragments/kul/lookup :: content}"></span></td>
+
+		</tr>
+		<tr>
+			<th align=right valign=middle class="grid">
+				<div align="right">Print invoices for Calendar Year:</div></th>
+			<td align=left valign=middle class="grid"><input type="text" name="fiscalYear" th:field="*{fiscalYear}" data-attribute-entry="${organization.universityFiscalYear}" /></td>
+
+		</tr>
+		<tr>
+			<th align=right valign=middle class="grid">
+				<div align="right">Reporting Period:</div>
+			</th>
+			<td align=left valign=middle class="grid"><html-el:select
+					property="reportingPeriod">
+					<html-el:option value=""></html-el:option>
+					<html-el:option value="q1">Quarter 1</html-el:option>
+					<html-el:option value="q2">Quarter 2</html-el:option>
+					<html-el:option value="q3">Quarter 3</html-el:option>
+					<html-el:option value="q4">Quarter 4</html-el:option>
+					<html-el:option value="sa">Semi Annually</html-el:option>
+					<html-el:option value="F">Final</html-el:option>
+				</html-el:select>
+			</td>
+		</tr>
+
+	</table>
+
+
+	<!--/*/ <th:block th:with="extraButtons=${KualiForm.extraButtons}"> /*/-->
+
+
+	<div id="globalbuttons" class="globalbuttons">
+
+		<th:block th:if="${!empty extraButtons}">
+			<c:forEach items="${extraButtons}" var="extraButton">
+				<input type="image" src="${extraButton.extraButtonSource}"
+					styleClass="globalbuttons"
+					property="${extraButton.extraButtonProperty}"
+					title="${extraButton.extraButtonAltText}"
+					alt="${extraButton.extraButtonAltText}" />
+			</tr>
+		</th:block>
+	</div>
+
+	<div>
+		<th:block th:if="${!empty KualiForm.error }">
+ 			${KualiForm.error }	
+      </th:block>
+	</div>
+
+  </form>
+</div>
+</body>
+</html>

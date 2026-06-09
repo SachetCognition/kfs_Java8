@@ -1,0 +1,54 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/administration/configuration.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Configuration"></div>
+<div class="body">
+	<strong>KFS</strong></br>
+	<ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Data Mapping Field Definition" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.sys.businessobject.DataMappingFieldDefinition&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Functional Field Description" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.sys.businessobject.FunctionalFieldDescription&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Message Of The Day" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.fp.businessobject.MessageOfTheDay&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="System Options" data-url="${ConfigProperties.application.url}/kr/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.sys.businessobject.SystemOptions&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+	</ul>
+	<strong>Workflow</strong> </br>
+	<ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Document Type" data-url="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kew.doctype.bo.DocumentType&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Routing & Identity Management Document Type Hierarchy" data-url="${ConfigProperties.workflow.url}/RuleQuickLinks.do"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Workflow Attribute" data-url="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.kew.rule.bo.RuleAttribute&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="XML Ingester" data-url="${ConfigProperties.core.url}/Ingester.do"></div></li>
+	</ul>
+	<strong>Parameters</strong> </br>
+	<ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Namespace" data-url="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.coreservice.impl.namespace.NamespaceBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Parameter" data-url="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.coreservice.impl.parameter.ParameterBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Parameter Component" data-url="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.coreservice.impl.component.ComponentBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Parameter Type" data-url="${ConfigProperties.kr.url}/lookup.do?methodToCall=start&businessObjectClassName=org.kuali.rice.coreservice.impl.parameter.ParameterTypeBo&docFormKey=88888888&returnLocation=${ConfigProperties.application.url}/portal.do&hideReturnLink=true"></div></li>
+	</ul>
+	<strong>Technical</strong> </br>
+	<ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Configuration Viewer" data-url="${ConfigProperties.ksb.client.url}/ConfigViewer.do"></div></li>
+		<th:block th:if="${ConfigProperties.ksb.mode != 'LOCAL'}">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Rice Server Configuration Viewer" data-url="${ConfigProperties.ksb.server.url}/ConfigViewer.do"></div></li>
+		</th:block>
+	    <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Cache Admin" data-url="${ConfigProperties.application.url}/kr-krad/core/admin/cache?viewId=CacheAdmin-view1&methodToCall=start"></div></li>
+	</ul>
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

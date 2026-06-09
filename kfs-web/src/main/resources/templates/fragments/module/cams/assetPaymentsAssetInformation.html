@@ -1,0 +1,203 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/assetPaymentsAssetInformation.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountAttributes=${DataDictionary.Account.attributes}"> /*/-->
+<!--/*/ <th:block th:with="assetPaymentAssetDetailAttributes=${DataDictionary.AssetPaymentAssetDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="totalHistoricalAmount=${KualiForm.document.assetsTotalHistoricalCost}"> /*/-->
+<!--/*/ <th:block th:with="globalTotalAllocated=${0.00}"> /*/-->
+<!--/*/ <th:block th:with="globalTotalHistoricalCost=${0.00}"> /*/-->
+<!--/*/ <th:block th:with="viewOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+<!--/*/ <th:block th:with="assetAllocationLabel=${KualiForm.allocationLabel}"> /*/-->
+<!--/*/ <th:block th:with="isAllocationEditable=${KualiForm.allocationEditable}"> /*/-->
+<!--/*/ <th:block th:with="isAllocationEditablePct=${KualiForm.allocationEditablePct}"> /*/-->
+<!--/*/ <th:block th:with="sourceLineCount=${KualiForm.sourceLineCount}"> /*/-->
+
+
+<tr th:each="assetPaymentAssetDetail : ${KualiForm.document.assetPaymentAssetDetail}" indexId="ctr"> 
+		<!--/*/ <th:block th:with="capitalAssetNumber=${KualiForm.document.assetPaymentAssetDetail[ctr].capitalAssetNumber}"> /*/-->
+		<!--/*/ <th:block th:with="assetObject=document.assetPaymentAssetDetail[${ctr}].asset"> /*/-->
+		<!--/*/ <th:block th:with="assetValue=${KualiForm.document.assetPaymentAssetDetail[ctr].asset}"> /*/-->
+		<!--/*/ <th:block th:with="assetPayments=${KualiForm.document.assetPaymentAssetDetail[ctr].asset.assetPayments}"> /*/-->
+		<!--/*/ <th:block th:with="assetPaymentsAssetDetail=${KualiForm.document.assetPaymentAssetDetail[ctr]}"> /*/-->
+		
+		<!--/*/ <th:block th:with="totalAllocated=${0.00}"> /*/-->
+		<!--/*/ <th:block th:with="newTotal=${KualiForm.document.assetPaymentAssetDetail[ctr].newTotal}"> /*/-->
+		<!--/*/ <th:block th:with="previousCost=${KualiForm.document.assetPaymentAssetDetail[ctr].previousTotalCostAmount}"> /*/-->
+		
+		<!--/*/ <th:block th:with="totalAllocated=${KualiForm.document.assetPaymentAssetDetail[ctr].allocatedAmount}"> /*/-->		
+		<th:block th:if="${totalAllocated != 0.00 }">
+	    	<fmt:formatNumber var="sTotalAllocated" value="${totalAllocated }" maxFractionDigits="2" minFractionDigits="2" type="number"/>			 		 	
+			<fmt:parseNumber value="${sTotalAllocated}" type="number" var="totalAllocated"/>
+		</th:block>
+
+		<table borders="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td style="padding: 0px;border-bottom-style: solid; border-bottom-width: 2px;border-top-style: solid; border-top-width: 1px;">
+		
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="AssetSummary" borders="1">
+				<tr>					
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetNumber}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetDescription}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${accountAttributes.organizationCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${assetPaymentAssetDetailAttributes.previousTotalCostAmount}"></th>
+
+			        <th class="grid" width="10%" align="center" style="padding: border-top-style:solid;">${assetAllocationLabel}</th>
+			        <th class="grid" width="10%" align="center">New Total</th>
+					<th class="grid" width="8%" align="center"><th:block th:if="${!viewOnly}">Actions</th:block></th>			
+				</tr>
+		
+			    <tr>
+			      	<td class="grid" width="10%">
+			      		<input type="text" name="document.assetPaymentAssetDetail[${ctr}].capitalAssetNumber" th:field="*{document.assetPaymentAssetDetail[${ctr}].capitalAssetNumber}" data-attribute-entry="${assetAttributes.capitalAssetNumber}" readonly="readonly" />
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.Asset" data-key-values="capitalAssetNumber=${KualiForm.document.assetPaymentAssetDetail[ctr].capitalAssetNumber}">
+		              			<html:hidden write="true" property="document.assetPaymentAssetDetail[${ctr}].capitalAssetNumber" />
+			           		</span>&nbsp;
+			       		</div><!-- /kul:htmlControlAttribute -->
+			   		</td>
+		   			
+					<td class="grid" width="40%">
+						<input type="text" name="${assetObject}.capitalAssetDescription" th:field="*{${assetObject}.capitalAssetDescription}" data-attribute-entry="${assetAttributes.capitalAssetDescription}" readonly="readonly" />
+					</td>
+					   		
+			        <td class="grid" width="10%"><div align="center">
+			        	${KualiForm.document.assetPaymentAssetDetail[ctr].asset.organizationOwnerAccount.organizationCode}</div> 
+				    </td>
+				    
+			        <td class="grid" width="10%"><div align="right">
+				        <input type="text" name="document.assetPaymentAssetDetail[${ctr}].previousTotalCostAmount" th:field="*{document.assetPaymentAssetDetail[${ctr}].previousTotalCostAmount}" data-attribute-entry="${assetPaymentAssetDetailAttributes.previousTotalCostAmount}" readonly="readonly" />
+			        </div></td>
+
+					<%-- Allocated Amount  --%>
+					<td class="grid" width="10%">
+						<div align="right">
+							<th:block th:if="${isAllocationEditable}">
+								<th:block th:if="${isAllocationEditablePct}">
+									<input type="text" name="document.assetPaymentAssetDetail[${ctr}].allocatedUserValuePct" th:field="*{document.assetPaymentAssetDetail[${ctr}].allocatedUserValuePct}" data-attribute-entry="${assetPaymentAssetDetailAttributes.allocatedUserValuePct}" /> 0)}"/>
+								</th:block>
+								<th:block th:if="${!isAllocationEditablePct}">
+									<input type="text" name="document.assetPaymentAssetDetail[${ctr}].allocatedUserValue" th:field="*{document.assetPaymentAssetDetail[${ctr}].allocatedUserValue}" data-attribute-entry="${assetPaymentAssetDetailAttributes.allocatedUserValue}" /> 0)}"/>	
+								</th:block>
+							</th:block>
+							<th:block th:if="${!isAllocationEditable}">
+								<input type="text" name="document.assetPaymentAssetDetail[${ctr}].allocatedAmount" th:field="*{document.assetPaymentAssetDetail[${ctr}].allocatedAmount}" data-attribute-entry="${assetPaymentAssetDetailAttributes.allocatedAmount}" readonly="readonly" />
+							</th:block>
+						</div>
+					</td>
+
+			        <td class="grid" width="10%"><div align="right">${newTotal}</div></td>
+			               		
+					<th class="datacell" rowspan="" nowrap="nowrap" width="5%">
+						<th:block th:if="${!viewOnly}">			               		
+				            <div align="center">
+					            <th:block th:if="${isAllocationEditable && !readOnly}">
+					            	<input type="image" property="methodToCall.updateAssetPaymentAssetDetail.line${ctr}" src="${ConfigProperties.externalizable.images.url}tinybutton-updateview.gif" styleClass="tinybutton" alt="Update Allocations" title="Update Allocations"/>
+					            	<br/> 					            	
+					            </th:block>
+				            	<input type="image" property="methodToCall.deleteAssetPaymentAssetDetail.line${ctr}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" styleClass="tinybutton" alt="Delete asset" title="Delete asset"/>
+				            </div>
+						</th:block>			        				            
+			        </th>
+			    </tr>
+		</table>
+
+		<!--/*/ <th:block th:with="globalTotalAllocated=${globalTotalAllocated + totalAllocated}"> /*/-->
+		<!--/*/ <th:block th:with="globalTotalHistoricalCost=${globalTotalHistoricalCost + previousCost}"> /*/-->
+
+		<section class="kfs-tab" data-tab-title="Asset Information" data-default-open="false">
+  <h3>Asset Information</h3> 		    
+			<div class="tab-container" align="center" id="tab-AssetInformation-div">
+				<table cellpadding="0" cellspacing="0" class="datatable" summary="Asset">
+						<tr>
+							<td  colspan="12" style="padding: 0px;">		
+					
+								<table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+									<tr>
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.organizationOwnerAccountNumber}"></label></th>
+										<td class="grid" width="25%">
+											<input type="text" name="${assetObject}.organizationOwnerAccountNumber" th:field="*{${assetObject}.organizationOwnerAccountNumber}" data-attribute-entry="${assetAttributes.organizationOwnerAccountNumber}" readonly="readonly" />								
+												<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${assetValue.organizationOwnerChartOfAccountsCode}&amp;accountNumber=${assetValue.organizationOwnerAccountNumber}">
+						                			<html:hidden write="true" property="${assetObject}.organizationOwnerAccountNumber" />
+						                		</span>&nbsp;
+						            		</div><!-- /kul:htmlControlAttribute -->
+								      	</td>
+											
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.organizationOwnerChartOfAccountsCode}"></label></th>
+										<td class="grid" width="25%">
+											<input type="text" name="${assetObject}.organizationOwnerChartOfAccountsCode" th:field="*{${assetObject}.organizationOwnerChartOfAccountsCode}" data-attribute-entry="${assetAttributes.organizationOwnerChartOfAccountsCode}" readonly="readonly" />								
+								      			<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${assetValue.organizationOwnerChartOfAccountsCode}">
+						                			<html:hidden write="true" property="${assetObject}.organizationOwnerChartOfAccountsCode" />
+						                		</span>&nbsp;
+						            		</div><!-- /kul:htmlControlAttribute -->
+								      	</td>
+									</tr>			    
+					
+								    <tr>
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetTypeCode}"></label></th>
+										<td class="grid" width="25%">
+										   	<input type="text" name="${assetObject}.capitalAssetTypeCode" th:field="*{${assetObject}.capitalAssetTypeCode}" data-attribute-entry="${assetAttributes.capitalAssetTypeCode}" readonly="readonly" /> 
+												<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetType" data-key-values="capitalAssetTypeCode=${assetValue.capitalAssetTypeCode}">
+								            		<html:hidden write="true" property="${assetObject}.capitalAssetTypeCode" />
+								                </span>&nbsp;
+								            </div><!-- /kul:htmlControlAttribute -->
+										 </td>
+												 
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.vendorName}"></label></th>
+										<td class="grid" width="25%"><input type="text" name="${assetObject}.vendorName" th:field="*{${assetObject}.vendorName}" data-attribute-entry="${assetAttributes.vendorName}" readonly="readonly" /></td>								
+								    </tr>
+								            
+								    <tr>
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetInServiceDate}"></label></th>
+										<td class="grid" width="25%"><input type="text" name="${assetObject}.capitalAssetInServiceDate" th:field="*{${assetObject}.capitalAssetInServiceDate}" data-attribute-entry="${assetAttributes.capitalAssetInServiceDate}" readonly="readonly" /></td>								
+							
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.manufacturerName}"></label></th>
+										<td class="grid" width="25%"><input type="text" name="${assetObject}.manufacturerName" th:field="*{${assetObject}.manufacturerName}" data-attribute-entry="${assetAttributes.manufacturerName}" readonly="readonly" /></td>		
+								    </tr>
+								    <tr>
+										<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetDescription}"></label></th>
+										<td class="grid" width="75%" colspan="3" ><input type="text" name="${assetObject}.capitalAssetDescription" th:field="*{${assetObject}.capitalAssetDescription}" data-attribute-entry="${assetAttributes.capitalAssetDescription}" readonly="readonly" /></td>							
+								    </tr>	            			            
+								</table>
+						  </td>
+						</tr>
+				</table>				
+				<div th:replace="~{fragments/cams/viewPayments :: content}" data-default-tab-hide="true" data-asset-payments="${assetPayments}" data-asset-value-obj="${assetObject}" data-asset-value="${assetValue}"></div>	
+				
+				<div th:replace="~{fragments/cams/viewPaymentInProcess :: content}" data-default-tab-hide="true" data-asset-payment-details="${KualiForm.document.sourceAccountingLines}" data-asset-payment-asset-detail="${assetPaymentsAssetDetail}" data-asset-payments-total="${totalAllocated}" data-asset-payment-distribution="${KualiForm.document.assetPaymentDistributor.assetPaymentDistributions}"></div>
+			</div>
+		</section>
+		</td>
+		</tr>
+		</table>				 
+</tr>
+
+<th:block th:if="${fn:length(KualiForm.document.assetPaymentAssetDetail) > 0}">
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="AssetSummary" borders="1">
+		<tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+			<th class="grid" align="right" width="10%"><fmt:formatNumber value="${globalTotalHistoricalCost}" maxFractionDigits="2" minFractionDigits="2"/></th>
+			<th class="grid" align="right" width="10%"><fmt:formatNumber value="${globalTotalAllocated}" maxFractionDigits="2" minFractionDigits="2"/></th>
+			<th class="grid" align="right" width="10%"><fmt:formatNumber value="${globalTotalAllocated + globalTotalHistoricalCost}" maxFractionDigits="2" minFractionDigits="2"/></th>
+			<th class="grid" width="8%">&nbsp;</th>	
+		</tr>
+	</table>
+</th:block>
+</div>

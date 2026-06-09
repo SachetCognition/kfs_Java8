@@ -1,0 +1,50 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/travelerCertification.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Traveler Certification" data-default-open="true">
+  <h3>Traveler Certification</h3>
+	<!--/*/ <th:block th:with="trmbTravCertAttributes=${DataDictionary.TravelReimbursementDocument.attributes}"> /*/-->
+    <div class="tab-container" align=center>
+    <h3>Statement</h3>
+
+	<table cellpadding=0 class="datatable" summary="Traveler Certification">
+              <tr>
+                <td colspan=4 align=left valign=middle class="datacell">${certificationStatement}</td>
+              </tr>
+              <tr>                
+                <th scope=row class="bord-l-b"><div align="right">
+<th:block th:switch="${true}">
+<th:block th:case="${isEmployee}">
+<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${trmbTravCertAttributes.employeeCertification}"></label>
+</th:block><th:block th:case="*">
+<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${trmbTravCertAttributes.nonEmployeeCertification}"></label>
+</th:block>
+</th:block>
+              </div>
+</th>
+                <td class="datacell">
+                  <input type="text" name="document.employeeCertification" th:field="*{document.employeeCertification}" data-attribute-entry="${trmbTravCertAttributes.employeeCertification}" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+</section>
+</div>

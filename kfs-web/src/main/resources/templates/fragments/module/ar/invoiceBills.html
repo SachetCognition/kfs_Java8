@@ -1,0 +1,63 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/invoiceBills.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!empty KualiForm.document.invoiceGeneralDetail.proposalNumber}">
+
+	<!-- If there are no bills, this section should not be displayed -->
+	<section class="kfs-tab" data-tab-title="Bills" data-default-open="true">
+  <h3>Bills</h3>
+		<!--/*/ <th:block th:with="invoiceBillAttributes=${DataDictionary.Bill.attributes}"> /*/-->
+		<!--/*/ <th:block th:with="billAttributes=${DataDictionary.Bill.attributes}"> /*/-->
+
+		<div class="tab-container" align="center">
+			<h3>Bills</h3>
+
+			<table cellpadding=0 class="datatable" summary="Bills section">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${billAttributes.billNumber}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${billAttributes.billDescription}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${billAttributes.billDate}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${billAttributes.estimatedAmount}"></th>
+				</tr>
+
+				<logic:iterate indexId="ctr" name="KualiForm" property="document.invoiceBills" id="bill">
+					<tr>
+						<td class="datacell"><a
+							href="${ConfigProperties.application.url}/kr/inquiry.do?businessObjectClassName=org.kuali.kfs.module.ar.businessobject.Bill&proposalNumber=${KualiForm.document.invoiceGeneralDetail.proposalNumber}&billIdentifier=${KualiForm.document.invoiceBills[ctr].billIdentifier}&billNumber=${KualiForm.document.invoiceBills[ctr].billNumber}&methodToCall=start"
+							target="_blank"> <input type="text" name="document.invoiceBills[${ctr}].billNumber" th:field="*{document.invoiceBills[${ctr}].billNumber}" data-attribute-entry="${invoiceBillAttributes.billNumber}" readonly="readonly" />
+						</a></td>
+						<td class="datacell"><input type="text" name="document.invoiceBills[${ctr}].billDescription" th:field="*{document.invoiceBills[${ctr}].billDescription}" data-attribute-entry="${invoiceBillAttributes.billDescription}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.invoiceBills[${ctr}].billDate" th:field="*{document.invoiceBills[${ctr}].billDate}" data-attribute-entry="${invoiceBillAttributes.billDate}" readonly="readonly" /></td>
+						<td class="datacell"><input type="text" name="document.invoiceBills[${ctr}].estimatedAmount" th:field="*{document.invoiceBills[${ctr}].estimatedAmount}" data-attribute-entry="${invoiceBillAttributes.estimatedAmount}" readonly="readonly" /></td>
+					</tr>
+
+				</tr>
+
+				<tr>
+
+					<td colspan="3" style="text-align: right" class="datacell"><b>Total</b></td>
+					<td class="datacell"><b>${KualiForm.currentTotal }</b></td>
+				</tr>
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

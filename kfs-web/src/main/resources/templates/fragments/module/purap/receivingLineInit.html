@@ -1,0 +1,74 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/receivingLineInit.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Line Item Receiving Initiation" data-default-open="true">
+  <h3>Line Item Receiving Initiation</h3>
+	
+    <div class="tab-container" align=center>
+            <h3>Line Item Receiving Initiation</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Receiving Line Init Section">
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b" style="width: 50%;">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderIdentifier}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.purchaseOrderIdentifier" th:field="*{document.purchaseOrderIdentifier}" data-attribute-entry="${documentAttributes.purchaseOrderIdentifier}" />
+                </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentReceivedDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.shipmentReceivedDate" th:field="*{document.shipmentReceivedDate}" data-attribute-entry="${documentAttributes.shipmentReceivedDate}" />
+                </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentPackingSlipNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.shipmentPackingSlipNumber" th:field="*{document.shipmentPackingSlipNumber}" data-attribute-entry="${documentAttributes.shipmentPackingSlipNumber}" />
+                </td>
+            </tr>                
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.shipmentBillOfLadingNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.shipmentBillOfLadingNumber" th:field="*{document.shipmentBillOfLadingNumber}" data-attribute-entry="${documentAttributes.shipmentBillOfLadingNumber}" />
+                </td>
+            </tr>                
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.carrierCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.carrierCode" th:field="*{document.carrierCode}" data-attribute-entry="${documentAttributes.carrierCode}" />
+                </td>
+            </tr>
+		</table> 
+    </div>
+
+</section>
+</div>

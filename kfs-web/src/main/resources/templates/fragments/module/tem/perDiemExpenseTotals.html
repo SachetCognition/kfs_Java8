@@ -1,0 +1,65 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/perDiemExpenseTotals.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<table cellpadding="0" class="datatable" summary="Per Diem Totals">
+	<tr>
+		<td colspan="10" class="subhead"><span
+			class="subhead-left">Grand Totals</span>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" class="total-line">
+			<div class="right">
+				<strong>Grand Totals:</strong>
+			</div>
+		</td>
+		<td class="total-line">
+			<div align="right">
+				Meals & Incidentals:
+				<span th:text="${KualiForm.document.mealsAndIncidentalsGrandTotal}"></span>
+			</div>
+		</td>
+		<td class="total-line">
+			<div align="right">
+				Lodging:
+				<span th:text="${KualiForm.document.lodgingGrandTotal}"></span>
+			</div>
+		</td>
+		<td class="total-line">
+			<div align="right">
+				Miles:
+				<span th:text="${KualiForm.document.milesGrandTotal}"></span>
+			</div>
+		</td>
+		<td class="total-line">
+			<div align="right">
+				Mileage Total:
+				<span th:text="${KualiForm.document.mileageTotalGrandTotal}"></span>
+			</div>
+		</td>
+		<td class="total-line">
+			<div align="right">
+				Daily Total:
+				<span th:text="${KualiForm.document.dailyTotalGrandTotal}"></span>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>

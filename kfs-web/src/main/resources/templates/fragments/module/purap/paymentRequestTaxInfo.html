@@ -1,0 +1,144 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/paymentRequestTaxInfo.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="tabindexOverrideBase=45"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Tax Information" data-default-open="true">
+  <h3>Tax Information</h3>
+    <div class="tab-container" align=center>
+    	<th:block th:if="${taxAreaEditable}">
+    		<h3>Tax Area Edits</h3>  
+    	</th:block>  	
+    	<th:block th:if="${!taxAreaEditable}">
+    		<h3>Tax Information</h3>
+    	</th:block>  	
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Tax Info Section">
+
+        	<tr>
+            	<th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxClassificationCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxClassificationCode" th:field="*{document.taxClassificationCode}" data-attribute-entry="${documentAttributes.taxClassificationCode}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxForeignSourceIndicator}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxForeignSourceIndicator" th:field="*{document.taxForeignSourceIndicator}" data-attribute-entry="${documentAttributes.taxForeignSourceIndicator}" />
+                </td>
+            </tr>
+            
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxFederalPercent}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxFederalPercent" th:field="*{document.taxFederalPercent}" data-attribute-entry="${documentAttributes.taxFederalPercent}" />
+					&nbsp;                
+                    <th:block th:if="${taxAreaEditable}">
+                   		<span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent" th:replace="~{fragments/kul/lookup :: content}"></span>   
+                    </th:block>                
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxExemptTreatyIndicator}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxExemptTreatyIndicator" th:field="*{document.taxExemptTreatyIndicator}" data-attribute-entry="${documentAttributes.taxExemptTreatyIndicator}" />
+                </td>
+            </tr>
+                        
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxStatePercent}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxStatePercent" th:field="*{document.taxStatePercent}" data-attribute-entry="${documentAttributes.taxStatePercent}" />
+					&nbsp;                
+                    <th:block th:if="${taxAreaEditable}">
+                   		<span class="kfs-lookup" data-bo-class="org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent" th:replace="~{fragments/kul/lookup :: content}"></span>   
+                    </th:block>                
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxOtherExemptIndicator}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxOtherExemptIndicator" th:field="*{document.taxOtherExemptIndicator}" data-attribute-entry="${documentAttributes.taxOtherExemptIndicator}" />
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxCountryCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxCountryCode" th:field="*{document.taxCountryCode}" data-attribute-entry="${documentAttributes.taxCountryCode}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxGrossUpIndicator}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxGrossUpIndicator" th:field="*{document.taxGrossUpIndicator}" data-attribute-entry="${documentAttributes.taxGrossUpIndicator}" />
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxNQIId}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxNQIId" th:field="*{document.taxNQIId}" data-attribute-entry="${documentAttributes.taxNQIId}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxUSAIDPerDiemIndicator}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxUSAIDPerDiemIndicator" th:field="*{document.taxUSAIDPerDiemIndicator}" data-attribute-entry="${documentAttributes.taxUSAIDPerDiemIndicator}" />
+                </td>
+            </tr>
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right">&nbsp;</div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    &nbsp;
+                </td>                
+                <th align=right valign=middle class="bord-l-b">
+                	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.taxSpecialW4Amount}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                	<input type="text" name="document.taxSpecialW4Amount" th:field="*{document.taxSpecialW4Amount}" data-attribute-entry="${documentAttributes.taxSpecialW4Amount}" />
+                </td>
+            </tr>
+			<tr>
+				<td class="infoline" colspan="4">
+					<center>	
+						<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-clearall.gif" styleClass="tinybutton" property="methodToCall.clearTaxInfo" title="Clear All Info From NRA Tax Entries" alt="Clear All Info From NRA Tax Entries"/>
+	    			</center>
+   				</td>
+    		</tr>
+		</table> 				
+
+    </div>
+</section>
+</div>

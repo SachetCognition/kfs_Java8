@@ -1,0 +1,310 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/perDiemExpenses.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelAuthorizationDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="perDiemAttributes=${DataDictionary.PerDiem.attributes}"> /*/-->
+<!--/*/ <th:block th:with="perDiemExpensesAttributes=${DataDictionary.PerDiemExpense.attributes}"> /*/-->
+<!--/*/ <th:block th:with="mileageRateAttributes=${DataDictionary.MileageRate.attributes}"> /*/-->
+
+<jsp:useBean id="paramMap" class="java.util.HashMap" />
+
+<!--/*/ <th:block th:with="showLodging=${KualiForm.showLodging}"> /*/-->
+<!--/*/ <th:block th:with="showMiles=${KualiForm.showMileage}"> /*/-->
+<!--/*/ <th:block th:with="showPerDiem=${KualiForm.showPerDiem}"> /*/-->
+<!--/*/ <th:block th:with="showPerDiemBreakdown=${KualiForm.showPerDiemBreakdown}"> /*/-->
+<!--/*/ <th:block th:with="isTR=${KualiForm.docTypeName == TemConstants.TravelDocTypes.TRAVEL_REIMBURSEMENT_DOCUMENT}"> /*/-->
+<!--/*/ <th:block th:with="showAllPerDiemCategories=${KualiForm.showAllPerDiemCategories}"> /*/-->
+<!--/*/ <th:block th:with="masterMealsAndIncidentalsTotal=0.00"> /*/-->
+<!--/*/ <th:block th:with="masterMilesTotal=0"> /*/-->
+<!--/*/ <th:block th:with="masterMileageTotal=0.00"> /*/-->
+<!--/*/ <th:block th:with="masterLodgingTotal=0.00"> /*/-->
+<!--/*/ <th:block th:with="masterDailyTotal=0.00"> /*/-->
+
+<th:block th:if="${showAllPerDiemCategories}">
+	<section class="kfs-tab" data-tab-title="${KualiForm.perDiemLabel}" data-default-open="true">
+  <h3>${KualiForm.perDiemLabel}</h3>
+		<div class="tab-container" align=center>
+			<h3>${KualiForm.perDiemLabel}</h3>
+			<table cellpadding="0" class="datatable" summary="Destination, Miles and Meals">
+				<c:forEach items="${KualiForm.document.perDiemExpenses}" var="perDiemExpense" varStatus="perDiemIndex">
+					<!--/*/ <th:block th:with="queryDate=${perDiemExpense.mileageDate}"> /*/-->
+					<!--/*/ <th:block th:with="isCustom=${perDiemExpense.primaryDestinationId == TemConstants.CUSTOM_PRIMARY_DESTINATION_ID}"> /*/-->
+					<!--/*/ <th:block th:with="colspan=${!showPerDiemBreakdown && !isCustom && !isTR ? 10 : 14}"> /*/-->
+					<!--/*/ <th:block th:with="mileageDate=${KualiForm.document.perDiemExpenses[perDiemIndex.count - 1].mileageDate}"> /*/-->
+					
+					<tr>
+						<td colspan="<span th:text="${colspan}"></span>" class="tab-subhead">Trip Detail: <fmt:formatDate value="${mileageDate}" type="date" pattern="MM/dd/yyyy"/>
+						</td>
+					</tr>
+					<tr>
+			
+						<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.countryState}"></th>
+						<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.county}"></th>
+						<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.primaryDestination}"></th>
+						<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.personal}"></th>
+
+						<th:block th:if="${showPerDiemBreakdown || isCustom || isTR}">
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.breakfast}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.lunch}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.dinner}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.incidentalsValue}"></th>
+						</th:block>
+						
+						<th:block th:if="${showPerDiem}">
+							<th colspan="1" rowspan="1">&nbsp;Meals and Incidentals</th>
+						</th:block>
+						
+						<th:block th:if="${showLodging}">
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.lodging}"></th>
+						</th:block>
+						
+						<th:block th:if="${showMiles}">
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.miles}"></th>
+							<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.mileageRateExpenseTypeCode}"></th>
+							<th colspan="1" rowspan="1">&nbsp;Mileage Total</th>
+						</th:block>
+
+						<th colspan="1" rowspan="1">&nbsp;Daily Total</th>
+					</tr>
+					<tr>
+					<td valign=top class="datacell">
+						<th:block th:switch="${true}">
+							<th:block th:case="${isCustom}">
+								<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].countryState" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].countryState}" data-attribute-entry="${perDiemExpensesAttributes.countryStateText}" />
+								
+							</th:block>
+							<th:block th:case="*">
+								<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].countryState" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].countryState}" data-attribute-entry="${perDiemExpensesAttributes.countryState}" readonly="readonly" />
+							</th:block>
+						</th:block>
+						</td>
+						<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].county" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].county}" data-attribute-entry="${perDiemExpensesAttributes.county}" />
+						</td>
+						<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].primaryDestination" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].primaryDestination}" data-attribute-entry="${perDiemExpensesAttributes.primaryDestination}" /> 
+							<th:block th:if="${fullEntryMode}">
+								<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.PrimaryDestination" th:replace="~{fragments/kul/lookup :: content}"></span>
+								<th:block th:if="${!isCustom && enablePrimaryDestination}">
+									<br />
+									<br />
+									<input type="image" property="methodToCall.customPerDiemExpenses.line${perDiemIndex.count - 1}"
+										src="${ConfigProperties.externalizable.images.url}tinybutton-destinationnotfound.gif"
+										alt="Manually Enter Per Diem Expense"
+										title="Manually Enter Per Diem Expense"
+										styleClass="tinybutton" />
+								</th:block>
+							</th:block>
+						</td>
+						<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].personal" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].personal}" data-attribute-entry="${perDiemExpensesAttributes.personal}" />
+						</td>
+						<th:block th:if="${showPerDiemBreakdown || isCustom || isTR}">
+							<!--/*/ <th:block th:with="breakfastDisabled=document.perDiemExpenses[${perDiemIndex.count - 1}].breakfast"> /*/-->
+							<!--/*/ <th:block th:with="lunchDisabled=document.perDiemExpenses[${perDiemIndex.count - 1}].lunch"> /*/-->
+							<!--/*/ <th:block th:with="dinnerDisabled=document.perDiemExpenses[${perDiemIndex.count - 1}].dinner"> /*/-->						
+							<th:block th:switch="${true}">
+								<th:block th:case="${showPerDiemBreakdown || isCustom}">
+									<td valign=top class="datacell">
+										<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].breakfastValue.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].breakfastValue}"></span>" />
+										<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredBreakfastValue" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredBreakfastValue}" data-attribute-entry="${perDiemExpensesAttributes.breakfastValue}" />
+									</td>
+									<td valign=top class="datacell">
+										<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].lunchValue.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].lunchValue}"></span>" />
+										<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredLunchValue" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredLunchValue}" data-attribute-entry="${perDiemExpensesAttributes.lunchValue}" />
+									</td>
+									<td valign=top class="datacell">
+										<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].dinnerValue.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].dinnerValue}"></span>" />
+										<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredDinnerValue" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredDinnerValue}" data-attribute-entry="${perDiemExpensesAttributes.dinnerValue}" />
+									</td>
+									<td valign=top class="datacell">
+										<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].incidentalsValue.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].incidentalsValue}"></span>" />
+										<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredIncidentalsValue" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredIncidentalsValue}" data-attribute-entry="${perDiemExpensesAttributes.incidentalsValue}" />
+									</td>								
+								</th:block>					
+								<th:block th:case="${isTR}">
+									<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].breakfast" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].breakfast}" data-attribute-entry="${perDiemExpensesAttributes.breakfast}" />
+									</td>
+									<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].lunch" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].lunch}" data-attribute-entry="${perDiemExpensesAttributes.lunch}" />
+									</td>
+									<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].dinner" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].dinner}" data-attribute-entry="${perDiemExpensesAttributes.dinner}" />
+									</td>
+									<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredIncidentalsValue" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredIncidentalsValue}" data-attribute-entry="${perDiemExpensesAttributes.incidentalsValue}" />
+									</td>									
+								</th:block>
+							</th:block>
+						</th:block>
+						<th:block th:if="${showPerDiem}">
+							<td valign=top class="datacell">
+								<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].mealsAndIncidentals.holder" value="${KualiForm.document.perDiemExpenseTotals[perDiemIndex.count - 1]['mealsAndIncidentalsTotal']}" />								
+								<div id="document.perDiemExpenses[${perDiemIndex.count - 1}].mealsAndIncidentals">${KualiForm.document.perDiemExpenseTotals[perDiemIndex.count-1]['mealsAndIncidentalsTotal']}</div>
+							</td>
+						</th:block>
+						<th:block th:if="${showLodging}">
+							<!--/*/ <th:block th:with="lodgingDisabled=document.perDiemExpenses[${perDiemIndex.count- 1}].lodging"> /*/-->
+							<td valign=top class="datacell">
+								<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].lodging.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].lodging}"></span>" />                                    
+								<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredLodging" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredLodging}" data-attribute-entry="${perDiemExpensesAttributes.lodging}" />
+							</td>
+						</th:block>
+						<th:block th:if="${showMiles}">
+							<td valign=top class="datacell">
+									<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].miles.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].miles}"></span>" />
+									<input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredMiles" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].unfilteredMiles}" data-attribute-entry="${perDiemExpensesAttributes.miles}" />
+							</td>
+							<td valign=top class="datacell">
+								<!--/*/ <th:block th:with="selectedMileageRateExpenseTypeCode=${KualiForm.document.perDiemExpenses[perDiemIndex.count - 1].mileageRateExpenseTypeCode}"> /*/-->
+								<th:block th:if="${empty selectedMileageRateExpenseTypeCode}">
+									<!--/*/ <th:block th:with="selectedMileageRateExpenseTypeCode=${KualiForm.defaultPerDiemMileageExpenseType}"> /*/-->
+								</th:block>
+								<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].mileageRateExpenseTypeCode.holder" value="<span th:text="${KualiForm.document.perDiemExpenses[${perDiemIndex.count - 1}].mileageRateExpenseTypeCode}"></span>" />                               
+								<html:select
+									styleId="document.perDiemExpenses[${perDiemIndex.count - 1}].mileageRateExpenseTypeCode"
+									property="document.perDiemExpenses[${perDiemIndex.count - 1}].mileageRateExpenseTypeCode"
+									disabled="${!fullEntryMode}">
+									<c:forEach
+										items="${temfunc:getOptionList('org.kuali.kfs.module.tem.businessobject.options.MileageRateValuesFinder', paramMap)}"
+										var="option">
+										<!--/*/ <th:block th:with="mileageSelected="> /*/-->
+
+										<th:block th:if="${option.key == selectedMileageRateExpenseTypeCode}">
+											<!--/*/ <th:block th:with="mileageSelected=selected"> /*/-->
+										</th:block>
+
+										<option value="${option.key}"${mileageSelected}>${option.value}</option>
+									</tr>
+								</select> 
+								<th:block th:if="${fn:length(temfunc:getOptionList('org.kuali.kfs.module.tem.businessobject.options.MileageRateValuesFinder', paramMap)) == 0}">
+									<div align="left">No Rates Available</div>
+								</th:block>
+								<th:block th:if="${fullEntryMode}">
+									<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.MileageRate" th:replace="~{fragments/kul/lookup :: content}"></span>
+								</th:block>
+							</td>
+							<td valign=top class="datacell">
+								<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].mileageTotal.holder" value="<span th:text="${KualiForm.document.perDiemExpenseTotals[${perDiemIndex.count - 1}].mileageTotal}"></span>" />
+								<div id="document.perDiemExpenses[${perDiemIndex.count - 1}].mileageTotal">${KualiForm.document.perDiemExpenseTotals[perDiemIndex.count - 1]['mileageTotal']}</div>
+							</td>
+						</th:block>
+						<td valign=top class="datacell">
+							<input type="hidden" id="document.perDiemExpenses[${perDiemIndex.count - 1}].total.holder" value="<span th:text="${KualiForm.document.perDiemExpenseTotals[${perDiemIndex.count - 1}].dailyTotal}"></span>" />
+							<div id="document.perDiemExpenses[${perDiemIndex.count - 1}].total">${KualiForm.document.perDiemExpenseTotals[perDiemIndex.count - 1]['dailyTotal']}</div>
+						</td>
+					</tr>
+					<th:block th:if="${KualiForm.document.tripTypeCode == 'INT'}">
+						<tr>
+							<td colspan="${colspan}">
+								<table cellpadding="0" class="datatable" summary="International Accommodation Information">
+									<tr>
+										<td colspan="6" class="tab-subhead">International Accommodation Information</td>
+									</tr>
+									<tr>
+										<th class="bord-l-b">
+											<div align="right">
+												<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.accommodationTypeCode}"></label>
+											</div>
+										</th>
+										<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationTypeCode" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationTypeCode}" data-attribute-entry="${perDiemExpensesAttributes.accommodationTypeCode}" />
+										</td>
+										<th class="bord-l-b">
+											<div align="right">
+												<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.accommodationName}"></label>
+											</div>
+										</th>
+										<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationName" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationName}" data-attribute-entry="${perDiemExpensesAttributes.accommodationName}" />
+										</td>
+										<th class="bord-l-b" rowspan="2">
+											<div align="right">
+												<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.accommodationAddress}"></label>
+											</div>
+										</th>
+										<td valign=top class="datacell" rowspan="2"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationAddress" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationAddress}" data-attribute-entry="${perDiemExpensesAttributes.accommodationAddress}" />
+										</td>
+									</tr>
+									<tr>
+										<td valign=top class="infoline" colspan="2">&nbsp;</td>
+										<th class="bord-l-b">
+											<div align="right">
+												<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${perDiemExpensesAttributes.accommodationPhoneNum}"></label>
+											</div>
+										</th>
+										<td valign=top class="datacell"><input type="text" name="document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationPhoneNum" th:field="*{document.perDiemExpenses[${perDiemIndex.count - 1}].accommodationPhoneNum}" data-attribute-entry="${perDiemExpensesAttributes.accommodationPhoneNum}" />
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${(fn:length(KualiForm.document.perDiemExpenses) != (perDiemIndex.count)) && fullEntryMode}">
+						<tr>
+							<td colspan="${colspan}">
+								<div align="center">
+									<input type="image" property="methodToCall.copyDownPerDiemExpenses.line${perDiemIndex.count - 1}"
+										src="${ConfigProperties.externalizable.images.url}tinybutton-copydown.gif"
+										alt="Copy Down Per Diem Expense"
+										title="Copy Down Per Diem Expense" styleClass="tinybutton" />
+								</div>
+							</td>
+						</tr>
+					</th:block>
+					<th:block th:if="${KualiForm.document.perDiemExpenses[perDiemIndex.count - 1].personal}">
+						<script>checkPersonal(${perDiemIndex.count - 1});</script>
+					</th:block>
+				</tr>
+			</table>
+			<th:block th:if="${KualiForm.perDiemCreatable}">
+				<div id="perdiem-buttons" align="center" valign="bottom">
+					<th:block th:switch="${true}">
+						<th:block th:case="${fullEntryMode}">
+							<th:block th:switch="${true}">
+								<th:block th:case="${fn:length(KualiForm.document.perDiemExpenses) < 1}">
+									<th:block th:switch="${true}">
+										<th:block th:case="${KualiForm.document.tripType.usePerDiem}">
+											<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-createperdiem.gif"
+												styleClass="tinybutton"
+												property="methodToCall.updatePerDiemExpenses"
+												alt="Create Per Diem Rows" title="Create Per Diem Rows" />
+										</th:block>
+										<th:block th:case="*">
+											<div>Per Diem entry is not allowed for this Trip Type [${KualiForm.document.tripType.code}].</div>
+										</th:block>
+									</th:block>
+								</th:block>
+								<th:block th:case="*">
+									<div th:replace="~{fragments/tem/perDiemExpenseTotals :: content}"></div>
+									<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-updateperdiem.gif"
+										styleClass="tinybutton"
+										property="methodToCall.updatePerDiemExpenses"
+										alt="Create Per Diem Rows" title="Create Per Diem Rows" />
+									<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-removeperdiem.gif"
+										styleClass="tinybutton"
+										property="methodToCall.clearPerDiemExpenses"
+										alt="Remove Per Diem Rows" title="Remove Per Diem Rows" />
+								</th:block>
+							</th:block>
+						</th:block>
+						<th:block th:case="*">
+							<div th:replace="~{fragments/tem/perDiemExpenseTotals :: content}"></div>
+						</th:block>
+					</th:block>
+				</div>
+			</th:block>
+
+		</div>
+	</section>
+</th:block>
+</div>

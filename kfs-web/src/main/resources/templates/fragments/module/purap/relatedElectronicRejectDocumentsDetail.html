@@ -1,0 +1,113 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/relatedElectronicRejectDocumentsDetail.tag -->
+<!-- Fragment parameters: documentAttributes, viewList, limitByPoId -->
+<div th:fragment="content (documentAttributes, viewList, limitByPoId)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentType=${KualiForm.document.documentHeader.workflowDocument.documentTypeName}"> /*/-->
+
+<th:block th:unless="${#lists.isEmpty(KualiForm.${viewList})}">
+    <tr th:each="view : ${KualiForm.${viewList}}" indexId="viewCtr">
+        <th:block th:if="${(empty limitByPoId) or (limitByPoId eq view.purchaseOrderIdentifier)}">
+        
+            <!-- Local variables, used for each iteration cycle. -->
+            <!--/*/ <th:block th:with="paymentRequestId=${view.paymentRequestIdentifier}"> /*/-->
+            <!--/*/ <th:block th:with="documentTitle=${view.documentLabel}${view.documentIdentifierString}"> /*/-->
+            <!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(documentTitle)}"> /*/-->
+            <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+                  
+            <%-- default to close --%>
+            <th:block th:switch="${true}">
+                <th:block th:case="${empty currentTab}">
+                    <!--/*/ <th:block th:with="isOpen=false"> /*/-->
+                </th:block>
+                <th:block th:case="${!empty currentTab}">
+                    <!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+                </th:block>
+            </th:block>
+
+            <html:hidden property="tabStates(${tabKey})" value="${(isOpen ? 'OPEN' : 'CLOSE')}" />
+
+            <th:block th:switch="${true}">
+                <th:block th:case="${paymentRequestId == null}">
+                    <h3>${view.documentLabel} - <a href="<span th:text="${view.url}"></span>" style="color: #FFF" target="_BLANK"><span th:text="${view.documentIdentifierString}"></span></a>
+                </th:block>
+                <th:block th:case="*">
+                    <h3>${view.documentLabel} - <a href="<span th:text="${view.url}"></span>" style="color: #FFF" target="_BLANK"><span th:text="${view.documentIdentifierString}"></span></a>
+                        (Payment Request - ${view.paymentRequestIdentifier})
+                </th:block>
+            </th:block>                   
+            <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+            <input type="image" property="methodToCall.toggleTab.tab${tabKey}" 
+                src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" 
+                alt="hide" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle"
+                onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+            </th:block>
+            <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+            <input type="image" property="methodToCall.toggleTab.tab${tabKey}" 
+                src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" 
+                alt="show" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle"
+                onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+            </th:block>
+            </h3>
+            
+            <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+                <div style="display: block;" id="tab-${tabKey}-div">
+            </th:block>
+            <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+                <div style="display: none;" id="tab-${tabKey}-div">
+            </th:block>
+            <table cellpadding="0" cellspacing="0" class="datatable" summary="Notes">
+                <th:block th:if="${!empty view.notes}">
+                    <tr>
+                        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Date</div><!-- /kul:htmlAttributeHeaderCell -->
+                        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>User</div><!-- /kul:htmlAttributeHeaderCell -->
+                        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Note</div><!-- /kul:htmlAttributeHeaderCell -->
+                    </tr>
+                    <c:forEach items="${view.notes}" var="note" >
+                        <tr>
+                            <td align="center" valign="middle" class="datacell">
+                                <span th:text="${note.notePostedTimestamp}"></span>
+                            </td>
+                            <td align="center" valign="middle" class="datacell">
+                                <span th:text="${note.authorUniversal.name}"></span>
+                            </td>
+                            <td align="left" valign="middle" class="datacell">
+                                <span th:text="${note.noteText}"></span>
+                            </td>
+                        </tr>
+                    </tr>
+                </th:block> 
+                <th:block th:if="${empty view.notes}">
+                    <tr>
+                        <th align="center" valign="middle" class="bord-l-b">No Notes</th>
+                    </tr>
+                </th:block> 
+            </table>
+            </div>
+            
+            <!--/*/ <th:block th:with="viewShown=true"> /*/-->
+        </th:block>     
+    </tr>
+    
+    <th:block th:if="${viewShown}">
+        <br />
+        <br />
+    </th:block>
+</th:block>
+</div>

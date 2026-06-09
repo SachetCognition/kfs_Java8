@@ -1,0 +1,203 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/quoteVendor.tag -->
+<!-- Fragment parameters: documentAttributes, vendorQuoteAttributes, ctr, isPurchaseOrderAwarded, isSysVendor, isAwarded, isTransmitPrintDisplayed, isTrasnmitted, isPdfDisplayedToUserOnce -->
+<div th:fragment="content (documentAttributes, vendorQuoteAttributes, ctr, isPurchaseOrderAwarded, isSysVendor, isAwarded, isTransmitPrintDisplayed, isTrasnmitted, isPdfDisplayedToUserOnce)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="tabindexOverrideBase=60"> /*/-->
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="poOutForQuote=${KualiForm.document.applicationDocumentStatus eq 'Out for Quote'}"> /*/-->
+<!--/*/ <th:block th:with="quoteEditable=${poOutForQuote && !isPurchaseOrderAwarded && fullEntryMode}"> /*/-->
+
+<tr>
+	<td colspan="4" class="subhead">
+		<span class="subhead-left">Vendor ${ctr + 1}</span>
+        <th:block th:if="${quoteEditable && !isTrasnmitted}">
+		<span class="subhead-right">
+			<input type="image" property="methodToCall.deleteVendor.line${ctr}"
+					src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+					alt="delete vendor" title="delete vendor"
+					styleClass="tinybutton" />&nbsp;
+		</th:block>				
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorName}"></label></div>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorName" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorName}" data-attribute-entry="${vendorQuoteAttributes.vendorName}" />
+	</td>	
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorNumber}"></label></div>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<th:block th:if="${not isSysVendor}">N/A</th:block>
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorNumber" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorNumber}" data-attribute-entry="${vendorQuoteAttributes.vendorNumber}" readonly="readonly" />
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorLine1Address}"></label></div>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorLine1Address" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorLine1Address}" data-attribute-entry="${vendorQuoteAttributes.vendorLine1Address}" />		
+		<th:block th:if="${quoteEditable}">
+		   <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.VendorAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+        </th:block>
+	</td>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorPhoneNumber}"></label></div>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorPhoneNumber" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorPhoneNumber}" data-attribute-entry="${vendorQuoteAttributes.vendorPhoneNumber}" />
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorLine2Address}"></label></div>
+	</th>
+	<td align=left valign=middle class="datacell">
+       	<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorLine2Address" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorLine2Address}" data-attribute-entry="${vendorQuoteAttributes.vendorLine2Address}" />
+	</td>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorFaxNumber}"></label></div>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorFaxNumber" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorFaxNumber}" data-attribute-entry="${vendorQuoteAttributes.vendorFaxNumber}" />
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorCityName}"></label>/
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorStateCode}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorCityName" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorCityName}" data-attribute-entry="${vendorQuoteAttributes.vendorCityName}" /> / 
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorStateCode" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorStateCode}" data-attribute-entry="${vendorQuoteAttributes.vendorStateCode}" />
+	</td>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorAttentionName}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorAttentionName" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorAttentionName}" data-attribute-entry="${vendorQuoteAttributes.vendorAttentionName}" />
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorPostalCode}"></label>/
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.vendorCountryCode}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorPostalCode" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorPostalCode}" data-attribute-entry="${vendorQuoteAttributes.vendorPostalCode}" />/ 
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].vendorCountryCode" th:field="*{document.purchaseOrderVendorQuote[${ctr}].vendorCountryCode}" data-attribute-entry="${vendorQuoteAttributes.vendorCountryCode}" />
+	</td>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteTransmitTypeCode}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteTransmitTypeCode" th:field="*{document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteTransmitTypeCode}" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteTransmitTypeCode}" />
+		<th:block th:if="${quoteEditable}">
+		<input type="image" property="methodToCall.transmitPurchaseOrderQuote.line${ctr}"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-transmit.gif"
+					alt="transmit quote" title="transmit quote" 
+					styleClass="tinybutton" />
+		<th:block th:if="${isTransmitPrintDisplayed}">
+			<th:block th:if="${isPdfDisplayedToUserOnce eq false}">		
+			<script language ="javascript">
+				window.onload = dothis();
+	    		function dothis() {
+					_win = window.open('purapPrint.do?poDocNumber=${KualiForm.document.documentHeader.documentNumber}&vendorQuoteId=${KualiForm.document.purchaseOrderVendorQuotes[ctr].purchaseOrderVendorQuoteIdentifier}', 'printpopdf');
+				}
+			</script>
+			</th:block>
+			Transmit information saved.
+			<a href="purapPrint.do?poDocNumber=${KualiForm.document.documentHeader.documentNumber}&vendorQuoteId=${KualiForm.document.purchaseOrderVendorQuotes[ctr].purchaseOrderVendorQuoteIdentifier}" target="_BLANK">
+				Click here to print Quote.
+			</a>
+		</th:block>
+		</th:block>
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuotePriceExpirationDate}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuotePriceExpirationDate" th:field="*{document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuotePriceExpirationDate}" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuotePriceExpirationDate}" />
+	</td>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteTransmitTimestamp}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteTransmitTimestamp" th:field="*{document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteTransmitTimestamp}" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteTransmitTimestamp}" readonly="readonly" />
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteStatusCode}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteStatusCode" th:field="*{document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteStatusCode}" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteStatusCode}" />
+	</td> 
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteRankNumber}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteRankNumber" th:field="*{document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteRankNumber}" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteRankNumber}" />
+	</td>
+</tr>
+
+<tr>
+	<th align=right valign=middle class="bord-l-b">
+		<th:block th:if="${isPurchaseOrderAwarded}">
+			Awarded:
+		</th:block>
+		<th:block th:if="${!isPurchaseOrderAwarded}">
+			Award:
+		</th:block>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<th:block th:if="${isSysVendor && !isPurchaseOrderAwarded}">
+			<html:radio property="awardedVendorNumber" value="${ctr}" disabled="${!quoteEditable}" />
+		</th:block>
+		<th:block th:if="${isPurchaseOrderAwarded}">
+			<th:block th:if="${!isAwarded}">
+				No
+			</th:block>
+			<th:block th:if="${isAwarded}">
+				Yes
+			</th:block>
+		</th:block>
+		&nbsp;
+	</td>
+	<th align=right valign=middle class="bord-l-b">
+		<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteAwardTimestamp}"></label>
+	</th>
+	<td align=left valign=middle class="datacell">
+		<input type="text" name="document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteAwardTimestamp" th:field="*{document.purchaseOrderVendorQuote[${ctr}].purchaseOrderQuoteAwardTimestamp}" data-attribute-entry="${vendorQuoteAttributes.purchaseOrderQuoteAwardTimestamp}" readonly="readonly" />
+	</td>
+</tr>
+</div>

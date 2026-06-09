@@ -1,0 +1,134 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/camsLocation.tag -->
+<!-- Fragment parameters: camsLocationAttributes, ctr, ctr2, camsAssetLocationProperty, availability, poItemInactive, fullEntryMode -->
+<div th:fragment="content (camsLocationAttributes, ctr, ctr2, camsAssetLocationProperty, availability, poItemInactive, fullEntryMode)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${empty availability}">
+    <!--/*/ <th:block th:with="availability=${PurapConstants.CapitalAssetAvailability.EACH}"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="offCampus=false"> /*/-->
+<th:block th:if="${KualiForm.${camsAssetLocationProperty}.offCampusIndicator == &apos;Yes&apos;}">
+    <!--/*/ <th:block th:with="offCampus=true"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="deleteLocationUrl=methodToCall.deleteCapitalAssetLocationByItem.(((${ctr}))).((#${ctr2}#))"> /*/-->
+<!--/*/ <th:block th:with="refreshAssetLocationBuildingUrl=methodToCall.useOffCampusAssetLocationBuildingByItem.(((${ctr}))).((#${ctr2}#))"> /*/-->
+<th:block th:if="${PurapConstants.CapitalAssetAvailability.ONCE eq availability}">
+    <!--/*/ <th:block th:with="deleteLocationUrl=methodToCall.deleteCapitalAssetLocationByDocument.(((${ctr}))).((#${ctr2}#))"> /*/-->
+    <!--/*/ <th:block th:with="refreshAssetLocationBuildingUrl=methodToCall.useOffCampusAssetLocationBuildingByDocument.(((${ctr}))).((#${ctr2}#))"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="tabindexOverrideBase=60"> /*/-->
+
+<table class="datatable" summary="" border="0" cellpadding="0" cellspacing="0" style="width:100%">
+<tr>
+    <td colspan="4" class="subhead">
+        <span class="left">Location</span>
+        <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive and !(ctr2 eq 'new')}">
+	        <span class="right">
+	            <input type="image" property="${deleteLocationUrl}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" alt="Delete a Asset Location" title="Delete a Asset Location" styleClass="tinybutton" />
+	        </span>
+        </th:block>
+    </td>
+</tr>
+<tr>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.itemQuantity}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.itemQuantity" th:field="*{${camsAssetLocationProperty}.itemQuantity}" data-attribute-entry="${camsLocationAttributes.itemQuantity}" />
+    </td>
+    <th>&nbsp;</th>
+    <td class="datacell">&nbsp;</td>
+</tr>
+<tr>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.campusCode}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.campusCode" th:field="*{${camsAssetLocationProperty}.campusCode}" data-attribute-entry="${camsLocationAttributes.campusCode}" readonly="readonly" />&nbsp;
+        <th:block th:if="${(fullEntryMode or amendmentEntry) && !poItemInactive}">
+            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.CampusParameter" th:replace="~{fragments/kul/lookup :: content}"></span>
+        </th:block>
+    </td>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.capitalAssetCityName}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.capitalAssetCityName" th:field="*{${camsAssetLocationProperty}.capitalAssetCityName}" data-attribute-entry="${camsLocationAttributes.capitalAssetCityName}" />
+    </td>
+</tr>
+<tr>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.buildingCode}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.buildingCode" th:field="*{${camsAssetLocationProperty}.buildingCode}" data-attribute-entry="${camsLocationAttributes.buildingCode}" readonly="readonly" />&nbsp;
+        <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>&nbsp;&nbsp;
+            <input type="image" property="${refreshAssetLocationBuildingUrl}" src="${ConfigProperties.externalizable.images.url}tinybutton-offcampus.gif" alt="building not found" styleClass="tinybutton"/>
+        </th:block>
+    </td>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.capitalAssetStateCode}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.capitalAssetStateCode" th:field="*{${camsAssetLocationProperty}.capitalAssetStateCode}" data-attribute-entry="${camsLocationAttributes.capitalAssetStateCode}" />
+    </td>
+</tr>
+<tr>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.capitalAssetLine1Address}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.capitalAssetLine1Address" th:field="*{${camsAssetLocationProperty}.capitalAssetLine1Address}" data-attribute-entry="${camsLocationAttributes.capitalAssetLine1Address}" />
+    </td>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.capitalAssetPostalCode}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.capitalAssetPostalCode" th:field="*{${camsAssetLocationProperty}.capitalAssetPostalCode}" data-attribute-entry="${camsLocationAttributes.capitalAssetPostalCode}" />
+    </td>
+</tr>
+<tr>
+<th:block th:unless="${#lists.isEmpty(KualiForm.${camsAssetLocationProperty}.buildingCode)}">
+    <!--/*/ <th:block th:with="buildingSelected=true"> /*/-->
+</th:block>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.buildingRoomNumber}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.buildingRoomNumber" th:field="*{${camsAssetLocationProperty}.buildingRoomNumber}" data-attribute-entry="${camsLocationAttributes.buildingRoomNumber}" />&nbsp;
+        <th:block th:if="${(fullEntryMode or amendmentEntry) && !poItemInactive && !offCampus && buildingSelected}">
+            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Room" th:replace="~{fragments/kul/lookup :: content}"></span>
+        </th:block>
+    </td>
+    <th width="20%" align=right valign=middle class="bord-l-b">
+       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsLocationAttributes.capitalAssetCountryCode}"></label></div>
+    </th>
+    <td class="datacell">
+        <input type="text" name="${camsAssetLocationProperty}.capitalAssetCountryCode" th:field="*{${camsAssetLocationProperty}.capitalAssetCountryCode}" data-attribute-entry="${camsLocationAttributes.capitalAssetCountryCode}" />
+    </td>
+</tr>
+
+</tr>
+<tr>
+</tr>
+</table>
+</div>

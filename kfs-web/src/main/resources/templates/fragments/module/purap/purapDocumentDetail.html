@@ -1,0 +1,203 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/purapDocumentDetail.tag -->
+<!-- Fragment parameters: documentAttributes, purchaseOrder, paymentRequest, detailSectionLabel, editableFundingSource, tabErrorKey, editableAccountDistributionMethod -->
+<div th:fragment="content (documentAttributes, purchaseOrder, paymentRequest, detailSectionLabel, editableFundingSource, tabErrorKey, editableAccountDistributionMethod)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<th:block th:if="${empty editableFundingSource}">
+	<!--/*/ <th:block th:with="editableFundingSource=false"> /*/-->
+</th:block>
+
+<th:block th:if="${amendmentEntry}">
+	<th:block th:if="${KualiForm.readOnlyReceivingRequired eq 'true'}">	
+		<!--/*/ <th:block th:with="readOnlyReceivingRequired=true"> /*/-->
+	</th:block>
+</th:block>
+
+<!--/*/ <th:block th:with="useTaxIndicatorButton=changeusetax"> /*/-->
+<th:block th:if="${KualiForm.document.useTaxIndicator}">
+	<!--/*/ <th:block th:with="useTaxIndicatorButton=changesalestax"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="purapTaxEnabled=${(not empty KualiForm.editingMode['purapTaxEnabled'])}"> /*/-->
+<!--/*/ <th:block th:with="contentReadOnly=${(not empty KualiForm.editingMode['lockContentEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="internalPurchasingReadOnly=${(not empty KualiForm.editingMode['lockInternalPurchasingEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=10"> /*/-->
+<!--/*/ <th:block th:with="poOutForQuote=${KualiForm.document.applicationDocumentStatus eq 'Out for Quote'}"> /*/-->
+
+<h3><span th:text="${detailSectionLabel}"></span> </h3>
+<div class="tab-container-error"><div class="left-errmsg-tab"><div class="kfs-errors" data-key-match="document.assignedUserPrincipalName,document.purchaseOrderPreviousIdentifier" th:if="${#fields.hasErrors('document.assignedUserPrincipalName,document.purchaseOrderPreviousIdentifier')}"><h4></h4></div></div></div>		        
+
+
+<table cellpadding="0" cellspacing="0" class="datatable" summary="Detail Section">
+    <%-- only display on REQ and PO --%>
+    <th:block th:if="${not paymentRequest}">
+	    <tr>
+	        <th align=right valign=middle class="bord-l-b">
+	            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.organizationCode}"></label></div>
+	        </th>
+	        <td align=left valign=middle class="datacell">
+	            <input type="text" name="document.chartOfAccountsCode" th:field="*{document.chartOfAccountsCode}" data-attribute-entry="${documentAttributes.chartOfAccountsCode}" readonly="readonly" />
+	            &nbsp;/&nbsp;<input type="text" name="document.organizationCode" th:field="*{document.organizationCode}" data-attribute-entry="${documentAttributes.organizationCode}" readonly="readonly" />
+	            <th:block th:if="${(fullEntryMode or amendmentEntry) and not (contentReadOnly or internalPurchasingReadOnly)}">
+	                <span class="kfs-lookup" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" th:replace="~{fragments/kul/lookup :: content}"></span>
+	            </th:block>
+	        </td>
+	        <th align=right valign=middle class="bord-l-b">
+	            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.documentFundingSourceCode}"></label></div>
+	        </th>
+	        <td align=left valign=middle class="datacell">
+	            <input type="text" name="document.documentFundingSourceCode" th:field="*{document.documentFundingSourceCode}" data-attribute-entry="${documentAttributes.documentFundingSourceCode}" />
+	        </td>
+	    </tr>
+    </th:block>
+	
+	<%-- no need to display this row if both fields are hidden; when available, fields display on all doc types (REQ, PO, PREQ) --%>
+	<th:block th:if="${KualiForm.document.enableReceivingDocumentRequiredIndicator or KualiForm.document.enablePaymentRequestPositiveApprovalIndicator}">
+		<tr>
+		  <th:block th:if="${KualiForm.document.enableReceivingDocumentRequiredIndicator}">			
+	        <th align=right valign=middle class="bord-l-b">         
+	            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.receivingDocumentRequiredIndicator}"></label></div>
+	        </th>
+	        <td align=left valign=middle class="datacell">
+	            <input type="text" name="document.receivingDocumentRequiredIndicator" th:field="*{document.receivingDocumentRequiredIndicator}" data-attribute-entry="${documentAttributes.receivingDocumentRequiredIndicator}" />
+	        </td>
+	      </th:block>
+		  <th:block th:if="${not KualiForm.document.enableReceivingDocumentRequiredIndicator}">	
+		    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+		    <td align=left valign=middle class="datacell">&nbsp;</td>
+		  </th:block>
+		  <th:block th:if="${KualiForm.document.enablePaymentRequestPositiveApprovalIndicator}">				        
+			<th align=right valign=middle class="bord-l-b">
+			  <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.paymentRequestPositiveApprovalIndicator}"></label></div>
+			</th>
+			<td align=left valign=middle class="datacell">
+			  <input type="text" name="document.paymentRequestPositiveApprovalIndicator" th:field="*{document.paymentRequestPositiveApprovalIndicator}" data-attribute-entry="${documentAttributes.paymentRequestPositiveApprovalIndicator}" />
+			</td>
+		  </th:block>
+		  <th:block th:if="${not KualiForm.document.enablePaymentRequestPositiveApprovalIndicator}">
+		    <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+		    <td align=left valign=middle class="datacell">&nbsp;</td>	          				        
+	      </th:block>			  
+		</tr>  
+	</th:block>
+
+	<%-- the following rows only need to be displayed for the PO --%>
+	<th:block th:if="${purchaseOrder}">
+		<tr>
+            <th align=right valign=middle class="bord-l-b">
+                <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.contractManager}"></label></div>
+            </th>
+            <td align=left valign=middle class="datacell">
+                <input type="text" name="document.contractManager.contractManagerName" th:field="*{document.contractManager.contractManagerName}" data-attribute-entry="${documentAttributes.contractManagerName}" readonly="readonly" />
+                <th:block th:if="${preRouteChangeMode}">
+                    <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.ContractManager" th:replace="~{fragments/kul/lookup :: content}"></span>
+                </th:block>                     
+            </td>
+		   	<th align=right valign=middle class="bord-l-b">
+		        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderPreviousIdentifier}"></label></div>
+		    </th>
+		    <td align=left valign=middle class="datacell">
+		       	<input type="text" name="document.purchaseOrderPreviousIdentifier" th:field="*{document.purchaseOrderPreviousIdentifier}" data-attribute-entry="${documentAttributes.purchaseOrderPreviousIdentifier}" />
+		    </td>
+		</tr>
+	    <tr>
+            <th align=right valign=middle class="bord-l-b">
+                <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.assignedUserPrincipalName}"></label></div>
+            </th>
+            <td align=left valign=middle class="datacell">
+             	<input type="text" name="document.assignedUserPrincipalName" th:field="*{document.assignedUserPrincipalName}" data-attribute-entry="${documentAttributes.assignedUserPrincipalName}" />
+                <th:block th:if="${fullEntryMode or amendmentEntry}">
+                    <span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span></div>
+                </th:block>                     
+            </td>
+            <th align=right valign=middle class="bord-l-b">
+                <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderConfirmedIndicator}"></label></div>
+            </th>
+            <td align=left valign=middle class="datacell">
+                <input type="text" name="document.purchaseOrderConfirmedIndicator" th:field="*{document.purchaseOrderConfirmedIndicator}" data-attribute-entry="${documentAttributes.purchaseOrderConfirmedIndicator}" />
+            </td> 
+		</tr>		
+	</th:block>
+
+    <%-- row only needs to be displayed if tax is enabled or if the doc is a PO --%>
+    <th:block th:if="${purapTaxEnabled or purchaseOrder}">
+	    <tr>
+	        <th:block th:if="${purapTaxEnabled}">
+		        <th align=right valign=middle class="bord-l-b">
+		            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.useTaxIndicator}"></label></div>
+		        </th>
+		        <td align=left valign=middle class="datacell">
+		            <input type="text" name="document.useTaxIndicator" th:field="*{document.useTaxIndicator}" data-attribute-entry="${documentAttributes.useTaxIndicator}" readonly="readonly" />&nbsp;
+		            <th:block th:if="${fullEntryMode and paymentRequest}">          
+		                <input type="image" property="methodToCall.changeUseTaxIndicator" src="${ConfigProperties.externalizable.images.url}tinybutton-${useTaxIndicatorButton}.gif" alt="Change Use Tax Indicator" title="Change Use Tax Indicator" styleClass="tinybutton"  tabindex="${tabindexOverrideBase + 0}" />
+		            </th:block>
+		        </td>
+	        </th:block>
+	        <th:block th:if="${not purapTaxEnabled}">
+	            <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+	            <td align=left valign=middle class="datacell">&nbsp;</td>
+	        </th:block>
+			<th:block th:if="${purchaseOrder}">
+	            <th align=right valign=middle class="bord-l-b">
+	                <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.requisitionSource}"></label></div>
+	            </th>
+	            <td align=left valign=middle class="datacell">
+	                <input type="text" name="document.requisitionSource.requisitionSourceDescription" th:field="*{document.requisitionSource.requisitionSourceDescription}" data-attribute-entry="${documentAttributes.requisitionSource}" readonly="readonly" />
+	            </td>                   
+			</th:block>
+	        <th:block th:if="${not purchaseOrder}">
+	            <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+	            <td align=left valign=middle class="datacell">&nbsp;</td>
+	        </th:block>
+	    </tr>
+	  </th:block>
+
+      <%-- always display this row --%>
+	  <tr>
+	      <th align=right valign=middle class="bord-l-b">
+	          <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.accountDistributionMethod}"></label></div>
+	      </th>
+	      <td align=left valign=middle class="datacell">
+	          <input type="text" name="document.accountDistributionMethod" th:field="*{document.accountDistributionMethod}" data-attribute-entry="${documentAttributes.accountDistributionMethod}" />
+	      </td>
+          <th align=right valign=middle class="bord-l-b">&nbsp;</th>
+          <td align=left valign=middle class="datacell">&nbsp;</td>
+	  </tr>  
+
+
+</table>
+	
+<th:block th:if="${purchaseOrder and preRouteChangeMode and !poOutForQuote and !amendmentEntry}">
+	<h3>Status Changes</h3>
+		
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Status Changes Section">
+		<tr>
+			<th align=right valign=middle class="bord-l-b">
+	            <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.statusChange}"></label></div>
+	        </th>
+	        <td align=left valign=middle class="datacell">&nbsp;
+		        <html:radio title="${documentAttributes.statusChange.label} - None" property="statusChange" value="${PurapConstants.PurchaseOrderStatuses.APPDOC_IN_PROCESS}" tabindex="${tabindexOverrideBase + 9}" />&nbsp;None&nbsp;
+				<html:radio title="${documentAttributes.statusChange.label} - Department" property="statusChange" value="${PurapConstants.PurchaseOrderStatuses.APPDOC_WAITING_FOR_DEPARTMENT}" tabindex="${tabindexOverrideBase + 9}" />&nbsp;Department&nbsp;
+				<html:radio title="${documentAttributes.statusChange.label} - Vendor" property="statusChange" value="${PurapConstants.PurchaseOrderStatuses.APPDOC_WAITING_FOR_VENDOR}" tabindex="${tabindexOverrideBase + 9}" />&nbsp;Vendor&nbsp;
+			</td>
+		</tr>
+	</table>
+</th:block>
+</div>

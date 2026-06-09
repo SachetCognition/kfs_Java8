@@ -1,0 +1,82 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/paymentRequestInit.tag -->
+<!-- Fragment parameters: documentAttributes, displayPaymentRequestInitFields -->
+<div th:fragment="content (documentAttributes, displayPaymentRequestInitFields)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Payment Request Initiation" data-default-open="true">
+  <h3>Payment Request Initiation</h3>
+	
+	
+
+    <div class="tab-container" align=center>
+            <h3>Payment Request Initiation</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Payment Request Initiation Section">
+
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderIdentifier}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.purchaseOrderIdentifier" th:field="*{document.purchaseOrderIdentifier}" data-attribute-entry="${documentAttributes.purchaseOrderIdentifier}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.invoiceNumber" th:field="*{document.invoiceNumber}" data-attribute-entry="${documentAttributes.invoiceNumber}" />
+                </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.invoiceDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.invoiceDate" th:field="*{document.invoiceDate}" data-attribute-entry="${documentAttributes.invoiceDate}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorInvoiceAmount}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.vendorInvoiceAmount" th:field="*{document.vendorInvoiceAmount}" data-attribute-entry="${documentAttributes.vendorInvoiceAmount}" />
+                </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine1Text}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.specialHandlingInstructionLine1Text" th:field="*{document.specialHandlingInstructionLine1Text}" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine1Text}" />
+                   <br/> 
+                   <input type="text" name="document.specialHandlingInstructionLine2Text" th:field="*{document.specialHandlingInstructionLine2Text}" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine2Text}" />
+                   <br/>
+                   <input type="text" name="document.specialHandlingInstructionLine3Text" th:field="*{document.specialHandlingInstructionLine3Text}" data-attribute-entry="${documentAttributes.specialHandlingInstructionLine3Text}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b" colspan="2">
+                   <div align="right">&nbsp;</div>
+                </th>
+            </tr>
+		</table> 
+		
+		
+
+    </div>
+
+</section>
+</div>

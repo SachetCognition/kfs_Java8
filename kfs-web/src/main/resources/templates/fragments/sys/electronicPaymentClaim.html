@@ -1,0 +1,55 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/electronicPaymentClaim.tag -->
+<!-- Fragment parameters: claimIndex, electronicPaymentClaim, allowAdministration -->
+<div th:fragment="content (claimIndex, electronicPaymentClaim, allowAdministration)" xmlns:th="http://www.thymeleaf.org">
+<c:set var="accessibleTitle"><span th:text="#{${__MSG_KEY__}}"></span></c:set>
+
+<!--/*/ <th:block th:with="claimProperty=claim[${claimIndex}]"> /*/-->
+
+<tr>
+  <td>
+    <html:hidden property="${claimProperty}.documentNumber" write="true" />
+    <html:hidden property="${claimProperty}.versionNumber" write="false" />
+    <html:hidden property="${claimProperty}.objectId" write="false" />
+    <html:hidden property="${claimProperty}.financialDocumentPostingYear" write="false" />
+    <html:hidden property="${claimProperty}.financialDocumentPostingPeriodCode" write="false" />
+  </td>
+  <td>
+    <html:hidden property="${claimProperty}.financialDocumentLineNumber" write="true" />
+  </td>
+  <td>
+    
+  </td>
+  <td>
+    <html:hidden property="${claimProperty}.generatingAccountingLine.financialDocumentLineDescription" write="true" />
+  </td>
+  <td>
+    <html:hidden property="${claimProperty}.generatingAccountingLine.amount" write="true" />
+  </td>
+  <th:block th:if="${allowAdministration}">
+    <td>
+      <input type="text" name="${claimProperty}.referenceFinancialDocumentNumber" th:field="*{${claimProperty}.referenceFinancialDocumentNumber}" data-attribute-entry="${DataDictionary.ElectronicPaymentClaim.attributes.referenceFinancialDocumentNumber}" />
+    </td>
+    <td>
+      <html:checkbox title="${accessibleTitle}" property="claimedByCheckboxHelper[${claimIndex}].electronicPaymentClaimRepresentation" value="${electronicPaymentClaim.electronicPaymentClaimRepresentation}" />
+    </td>
+  </th:block>
+</tr>
+</div>

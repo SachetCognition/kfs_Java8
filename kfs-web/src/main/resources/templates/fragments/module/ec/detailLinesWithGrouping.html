@@ -1,0 +1,140 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ec/detailLinesWithGrouping.tag -->
+<!-- Fragment parameters: id, detailLines, attributes, detailFieldNames, detailFieldNamesWithHiddenFormWhenReadonly, hiddenFieldNames, detailLineFormName, inquirableUrl, fieldInfo, relationshipMetadata, editableFieldNames, extraEditableFieldNames, onchangeForEditableFieldNames, onchangeForExtraEditableFieldNames, onchangeableInfoFieldNames, onchangeableExtraInfoFieldNames, sortableFieldNames, hasActions, actionSuffix, readOnlySection, ferderalTotalFieldNames, nonFerderalTotalFieldNames, grandTotalFieldNames -->
+<div th:fragment="content (id, detailLines, attributes, detailFieldNames, detailFieldNamesWithHiddenFormWhenReadonly, hiddenFieldNames, detailLineFormName, inquirableUrl, fieldInfo, relationshipMetadata, editableFieldNames, extraEditableFieldNames, onchangeForEditableFieldNames, onchangeForExtraEditableFieldNames, onchangeableInfoFieldNames, onchangeableExtraInfoFieldNames, sortableFieldNames, hasActions, actionSuffix, readOnlySection, ferderalTotalFieldNames, nonFerderalTotalFieldNames, grandTotalFieldNames)" xmlns:th="http://www.thymeleaf.org">
+<%@ tag description="display all detail lines of current document in a table. The detail lines will be displayed in two groups: federal and nonfederal" %>
+
+<!--/*/ <th:block th:with="commaDeliminator=,"> /*/-->
+<!--/*/ <th:block th:with="semicolonDeliminator=;"> /*/-->
+
+<!--/*/ <th:block th:with="countOfColumns=${fn:length(fn:split(detailFieldNames, commaDeliminator))}"> /*/-->
+<!--/*/ <th:block th:with="countOfColumns=${hasActions ? countOfColumns + 2: countOfColumns + 1}"> /*/-->
+
+<!--/*/ <th:block th:with="countOfTotalColumns=${fn:length(fn:split(grandTotalFieldNames, commaDeliminator))}"> /*/-->
+<!--/*/ <th:block th:with="countOfTotalColumns=${hasActions ? countOfTotalColumns + 2 : countOfTotalColumns + 1}"> /*/-->
+
+<!--/*/ <th:block th:with="colspanOfTotalLabel=${countOfColumns - countOfTotalColumns + 1}"> /*/-->
+
+<!--/*/ <th:block th:with="completeEditableFieldNames=${extraEditableFieldNames}${commaDeliminator}${editableFieldNames}"> /*/-->
+<!--/*/ <th:block th:with="completeOnchangeForEditableFieldNames=${onchangeForExtraEditableFieldNames}${commaDeliminator}${onchangeForEditableFieldNames}"> /*/-->
+<!--/*/ <th:block th:with="completeOnchangeableInfoFieldNames=${onchangeableExtraInfoFieldNames}${commaDeliminator}${onchangeableInfoFieldNames}"> /*/-->
+
+<!--/*/ <th:block th:with="actionForExistingLine=recalculate${actionSuffix},revert${actionSuffix}"> /*/-->
+<!--/*/ <th:block th:with="actionForExistingLineImageFileName=tinybutton-recalculate.gif,tinybutton-revert1.gif"> /*/-->
+
+<!--/*/ <th:block th:with="actionForNewLine=recalculate${actionSuffix},delete${actionSuffix}"> /*/-->
+<!--/*/ <th:block th:with="actionForNewLineImageFileName=tinybutton-recalculate.gif,tinybutton-delete1.gif"> /*/-->
+
+<!--/*/ <th:block th:with="countOfFerderalFunding=0"> /*/-->
+<!--/*/ <th:block th:with="countOfOtherFunding=0"> /*/--> 
+<tr th:each="detailLine, status : ${detailLines}">
+	<th:block th:if="${detailLine.federalOrFederalPassThroughIndicator}">
+		<!--/*/ <th:block th:with="countOfFerderalFunding=${countOfFerderalFunding + 1}"> /*/-->
+	</th:block>
+	<th:block th:if="${!detailLine.federalOrFederalPassThroughIndicator}">
+		<!--/*/ <th:block th:with="countOfOtherFunding=${countOfOtherFunding + 1}"> /*/-->
+	</th:block>
+</tr>
+
+<!--/*/ <th:block th:with="federalFund=${countOfFerderalFunding > 0 ? 'true' : ''}"> /*/-->
+<!--/*/ <th:block th:with="otherFund=${countOfOtherFunding > 0 ? 'false' : ''}"> /*/-->
+<!--/*/ <th:block th:with="federalFundingType=${federalFund}${commaDeliminator}${otherFund}"> /*/--> 
+<!--/*/ <th:block th:with="federalFundingIndicators=${fn:split(federalFundingType, commaDeliminator)}"> /*/-->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable" id="${id}">
+	<tr th:each="federalFunding, indicatorStatus : ${federalFundingIndicators}">
+				
+		<!--/*/ <th:block th:with="subtotalGroup="> /*/-->
+		<!--/*/ <th:block th:with="groupDescription="> /*/-->
+		<th:block th:if="${federalFunding}">
+			<!--/*/ <th:block th:with="groupDescription=Federal and Federal Pass Through Accounts"> /*/-->
+			<!--/*/ <th:block th:with="subtotalGroup=${ferderalTotalFieldNames}"> /*/-->
+		</th:block>
+		
+		<th:block th:if="${!federalFunding}">
+			<!--/*/ <th:block th:with="groupDescription=Other Sponsored and Non-sponsored Accounts"> /*/-->
+			<!--/*/ <th:block th:with="subtotalGroup=${nonFerderalTotalFieldNames}"> /*/-->
+		</th:block>
+	
+		<tr>
+			<td colspan="${countOfColumns}" class="subhead">	
+				<span class="subhead-left">${groupDescription}</span>
+			</td>		
+		</tr>
+	
+		<tr>
+			<!--/*/ <th:block th:with="actualSortableFieldNames=${indicatorStatus.index == 0 ? sortableFieldNames : '' }"> /*/-->
+			<div th:replace="~{fragments/ec/detailLineHeader :: content}" data-attributes="${attributes}" data-detail-field-names="${detailFieldNames}" data-has-actions="${hasActions}"></div>
+		</tr> 
+	
+		<!-- populate the table with the given deatil lines -->
+		<!--/*/ <th:block th:with="lineIndex=0"> /*/-->		
+		<tr th:each="detailLine, status : ${detailLines}">
+			<th:block th:if="${detailLine.federalOrFederalPassThroughIndicator == federalFunding}">
+			<tr>
+				<!--/*/ <th:block th:with="lineIndex=${lineIndex + 1}"> /*/-->
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+				
+				<!--/*/ <th:block th:with="editable=${detailLine.editable || detailLine.newLineIndicator}"> /*/-->
+				
+				<th:block th:if="${editable}">		
+					<!--/*/ <th:block th:with="existing=${!detailLine.newLineIndicator}"> /*/-->
+					<!--/*/ <th:block th:with="actualEditableFieldNames=${existing ? editableFieldNames : completeEditableFieldNames}"> /*/-->
+					<!--/*/ <th:block th:with="actualOnchangeForEditableFieldNames=${existing ? onchangeForEditableFieldNames : completeOnchangeForEditableFieldNames}"> /*/-->
+					<!--/*/ <th:block th:with="actualOnchangeableInfoFieldNames=${existing ? onchangeableInfoFieldNames : completeOnchangeableInfoFieldNames}"> /*/-->
+					<!--/*/ <th:block th:with="actions=${existing ? actionForExistingLine : actionForNewLine}"> /*/-->
+					<!--/*/ <th:block th:with="actionImageFileNames=${existing ? actionForExistingLineImageFileName : actionForNewLineImageFileName}"> /*/-->
+				</th:block>
+				
+				<th:block th:if="${!editable}">		
+					<!--/*/ <th:block th:with="actualEditableFieldNames="> /*/-->
+					<!--/*/ <th:block th:with="actualOnchangeForEditableFieldNames="> /*/-->
+					<!--/*/ <th:block th:with="actualOnchangebleInfoFieldNames="> /*/-->
+					<!--/*/ <th:block th:with="actions="> /*/-->
+					<!--/*/ <th:block th:with="actionImageFileNames="> /*/-->
+				</th:block>			
+				
+				<div th:replace="~{fragments/ec/detailLine :: content}" data-detail-line="${detailLine}" data-detail-line-form-name="${detailLineFormName}[${status.index}]" data-attributes="${attributes}" data-detail-field-names="${detailFieldNames}" data-detail-field-names-with-hidden-form-when-readonly="${detailFieldNamesWithHiddenFormWhenReadonly}" data-editable-field-names="${actualEditableFieldNames}" data-hidden-field-names="${hiddenFieldNames}" data-onchange-for-editable-field-names="${actualOnchangeForEditableFieldNames}" data-onchangeable-info-field-names="${actualOnchangeableInfoFieldNames}" data-inquirable-url="${inquirableUrl[status.index]}" data-field-info="${fieldInfo[status.index]}" data-read-only-section="${readOnlySection}" data-has-actions="${hasActions}" data-index="${status.index}" data-actions="${actions}" data-action-image-file-names="${actionImageFileNames}"></div>			
+			</tr>
+			</th:block>		
+		</tr>
+		
+		<th:block th:if="${fn:length(subtotalGroup) > 0}">
+			<tr>
+				<td colspan="${colspanOfTotalLabel}" class="infoline"><div class="right"><strong>Subtotals:</strong></div></td>
+				<div th:replace="~{fragments/ec/detailLineTotal :: content}" data-total-field-names="${subtotalGroup}" data-read-only-section="${readOnlySection}" data-has-actions="${hasActions}"></div>						
+			</tr>
+		</th:block>	
+	</tr>
+
+	<th:block th:if="${fn:length(grandTotalFieldNames) > 0}">
+		<tr>
+			<td colspan="${countOfColumns}" class="subhead">	
+				<span class="subhead-left">Grand Totals</span>
+			</td>		
+		</tr>
+	
+		<tr>				
+			<td colspan="${colspanOfTotalLabel}" class="infoline"><div class="right"><strong>Grand Totals:</strong></div></td>
+			<div th:replace="~{fragments/ec/detailLineTotal :: content}" data-total-field-names="${grandTotalFieldNames}" data-read-only-section="${readOnlySection}" data-has-actions="${hasActions}"></div>		
+		</tr>
+	</th:block>
+</table>
+</div>

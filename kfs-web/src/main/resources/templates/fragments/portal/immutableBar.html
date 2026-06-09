@@ -1,0 +1,55 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/immutableBar.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<%-- JSTLConstants magic doesn't work for nested class KRADConstants.DetailTypes, hence the following uglyness: --%>
+<!--/*/ <th:block th:with="backdoorEnabled=[[${__EXPR__}]]"> /*/-->
+<th:block th:if="${backdoorEnabled}">
+	<th:block th:switch="${true}"> 
+		<th:block th:case="${empty UserSession.loggedInUserPrincipalName}"> 
+			<!--/*/ <th:block th:with="backdoorIdUrl="> /*/--> 			
+		</th:block> 
+		<th:block th:case="*"> 			
+			<th:block th:switch="${true}">
+				<th:block th:case="${UserSession.backdoorInUse}">
+					<!--/*/ <th:block th:with="backdoorIdUrl=backdoorId=${UserSession.principalName}"> /*/--> 					
+				</th:block>
+				<th:block th:case="*">
+					<!--/*/ <th:block th:with="backdoorIdUrl=backdoorId=${UserSession.loggedInUserPrincipalName}"> /*/-->
+				</th:block>
+			</th:block>				 			
+		</th:block> 
+	</th:block>
+</th:block>
+
+<div class="header2">
+  <div class="header2-left-focus">
+    <div class="breadcrumb-focus"><a href="asdf.html"> 
+    	<div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="false" data-src="images-portal/icon-port-actionlist.gif" data-alt="action list" data-width="91" data-height="19" data-border="0" data-display-title="false" data-src="images-portal/icon-port-docsearch.gif" data-alt="doc search" data-width="96" data-height="19" data-border="0" data-id="login-info" data-switch="${true}" data-case="${empty UserSession.loggedInUserPrincipalName}" data-case="*" data-if="${UserSession.backdoorInUse}" data-id="search" data-switch="${true}" data-case="${empty UserSession.loggedInUserPrincipalName}" data-case="${fn:trim(ConfigProperties.environment) == fn:trim(ConfigProperties.production.environment.code)}" data-action="@{/logout.do}" data-method="post" data-method="post" data-style="margin:0; display:inline" data-name="imageField" data-type="submit" data-value="Logout" data-class="go" data-title="Click to logout." data-case="*" data-if="${backdoorEnabled}" data-action="@{/backdoorlogin.do}" data-method="post" data-method="post" data-style="margin:0; display:inline" data-name="backdoorId" data-type="text" data-class="searchbox" data-size="10" data-title="Enter your backdoor ID here." data-name="imageField" data-type="submit" data-value="Login" data-class="go" data-title="Click to login." data-name="methodToCall" data-type="hidden" data-value="login"></div>
+        </form>
+      </th:block>
+      
+      <form th:action="@{/backdoorlogin.do}" method="post" method="post" style="margin:0; display:inline">
+        <input name="imageField" type="submit" value="Logout" class="go" title="Click to logout.">
+        <input name="methodToCall" type="hidden" value="logout" />
+      </form> 
+    </th:block> 
+  </th:block> 
+</div>
+</div>

@@ -1,0 +1,129 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/appointmentFundingLineForIncumbent.tag -->
+<!-- Fragment parameters: fundingLine, fundingLineName, lineIndex, hasBeenAdded, countOfMajorColumns, readOnly, isKeyFieldsLocked, accountsCanCrossCharts -->
+<div th:fragment="content (fundingLine, fundingLineName, lineIndex, hasBeenAdded, countOfMajorColumns, readOnly, isKeyFieldsLocked, accountsCanCrossCharts)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!accountingLineScriptsLoaded}">	
+    <script type='text/javascript' src="dwr/interface/ChartService.js"></script>
+    <script type='text/javascript' src="dwr/interface/AccountService.js"></script>
+    <script type='text/javascript' src="dwr/interface/SubAccountService.js"></script>
+    <script type='text/javascript' src="dwr/interface/ObjectCodeService.js"></script>
+    <script type='text/javascript' src="dwr/interface/SubObjectCodeService.js"></script>    
+    
+	<script type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+	<script type="text/javascript" src="scripts/module/bc/objectInfo.js"></script>
+	
+	<!--/*/ <th:block th:with="accountingLineScriptsLoaded=true"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="pbcafAttributes=${DataDictionary['PendingBudgetConstructionAppointmentFunding'].attributes}"> /*/-->  
+<!--/*/ <th:block th:with="positionAttributes=${DataDictionary['BudgetConstructionPosition'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="adminPostAttributes=${DataDictionary['BudgetConstructionAdministrativePost'].attributes}"> /*/--> 
+
+<!--/*/ <th:block th:with="colspan=${countOfMajorColumns}"> /*/-->
+
+<%-- FIXME: remove when JS lookup use is fixed --%>
+<input type="hidden" th:field="*{${fundingLineName}.universityFiscalYear}" />
+<input type="hidden" th:field="*{${fundingLineName}.emplid}" />
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: ${tableWidth}; text-align: left; margin-left: auto; margin-right: auto;">    
+	<tr>
+	    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.appointmentFundingDeleteIndicator}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.chartOfAccountsCode}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.accountNumber}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.subAccountNumber}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.financialObjectCode}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbcafAttributes.financialSubObjectCode}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionNumber}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.iuNormalWorkMonths}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.iuPayMonths}"></th>
+	   	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${positionAttributes.positionFullTimeEquivalency}"></th>
+	    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${adminPostAttributes.administrativePost}"></th>
+	</tr>
+	
+	<tr> 
+	  	<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-data-field-css-class="nobord" data-accounting-line="${fundingLineName}" data-cell-property="${fundingLineName}.appointmentFundingDeleteIndicator" data-attributes="${pbcafAttributes}" data-field="appointmentFundingDeleteIndicator" data-read-only="false" data-field-align="center" data-disabled="true" data-anchor="salaryexistingLineLineAnchor${lineIndex}"></div>
+		 <th:block th:if="${!accountsCanCrossCharts}">
+            <input type="hidden" th:field="*{${fundingLineName}.chartOfAccountsCode}" />
+		 	<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="chartOfAccountsCode" data-detail-field="chartOfAccounts.finChartOfAccountDescription" data-detail-function="loadChartInfo" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Chart" data-read-only="true" data-display-hidden="false" data-div-id="newBCAFLine.chartOfAccountsCode.div" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>
+			      
+			 <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="accountNumber" data-detail-function="budgetObjectInfoUpdator.loadChartAccountInfo" data-detail-field="account.accountName" data-attributes="${pbcafAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Account" data-read-only="${hasBeenAdded || isKeyFieldsLocked}" data-display-hidden="false" data-lookup-or-inquiry-keys="chartOfAccountsCode,accountNumber" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>
+		 </th:block>
+		  <th:block th:if="${accountsCanCrossCharts}">   
+			 <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-attributes="${pbcafAttributes}" data-field="chartOfAccountsCode" data-detail-field="chartOfAccounts.finChartOfAccountDescription" data-detail-function="loadChartInfo" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Chart" data-read-only="${hasBeenAdded || isKeyFieldsLocked}" data-display-hidden="false" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>
+			      
+			 <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="accountNumber" data-detail-function="loadAccountInfo" data-detail-field="account.accountName" data-attributes="${pbcafAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Account" data-read-only="${hasBeenAdded || isKeyFieldsLocked}" data-display-hidden="false" data-lookup-or-inquiry-keys="chartOfAccountsCode,accountNumber" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>
+	 	</th:block> 
+		<!--/*/ <th:block th:with="doAccountLookupOrInquiry=false"> /*/-->
+	  	<th:block th:if="${fundingLine.subAccountNumber ne KualiForm.dashSubAccountNumber}">
+	      	<!--/*/ <th:block th:with="doAccountLookupOrInquiry=true"> /*/-->
+	  	</th:block>
+	  	
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="subAccountNumber" data-detail-function="loadSubAccountInfo" data-detail-field="subAccount.subAccountName" data-attributes="${pbcafAttributes}" data-lookup="true" data-inquiry="${doAccountLookupOrInquiry}" data-bo-class-simple-name="SubAccount" data-read-only="${hasBeenAdded || isKeyFieldsLocked}" data-display-hidden="false" data-lookup-or-inquiry-keys="chartOfAccountsCode,accountNumber" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>
+	
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="financialObjectCode" data-detail-function="loadObjectInfo" data-detail-function-extra-param="${fundingLine.universityFiscalYear}, '${fundingLineName}.financialObject.financialObjectType.name', '${fundingLineName}.financialObject.financialObjectTypeCode'," data-detail-field="financialObject.financialObjectCodeShortName" data-attributes="${pbcafAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="ObjectCode" data-read-only="${hasBeenAdded || isKeyFieldsLocked}" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode" data-accounting-line-values-map="${fundingLine.valuesMap}" data-inquiry-extra-key-values="universityFiscalYear=${fundingLine.universityFiscalYear}"></div>
+	
+	  	<!--/*/ <th:block th:with="doLookupOrInquiry=false"> /*/-->
+	  	<th:block th:if="${fundingLine.financialSubObjectCode ne KualiForm.dashFinancialSubObjectCode}">
+	      	<!--/*/ <th:block th:with="doLookupOrInquiry=true"> /*/-->
+	  	</th:block>
+	  	
+	  	<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="financialSubObjectCode" data-detail-function="loadSubObjectInfo" data-detail-function-extra-param="${fundingLine.universityFiscalYear}, " data-detail-field="financialSubObject.financialSubObjectCdshortNm" data-attributes="${pbcafAttributes}" data-lookup="true" data-inquiry="${doLookupOrInquiry}" data-bo-class-simple-name="SubObjectCode" data-read-only="${hasBeenAdded || isKeyFieldsLocked}" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode,financialObjectCode,accountNumber" data-accounting-line-values-map="${fundingLine.valuesMap}" data-inquiry-extra-key-values="universityFiscalYear=${fundingLine.universityFiscalYear}"></div>
+		
+		<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="${fundingLineName}" data-field="positionNumber" data-detail-function="budgetObjectInfoUpdator.loadPositionInfo" data-detail-field="budgetConstructionPosition.positionDescription" data-detail-function-extra-param="'${fundingLineName}.universityFiscalYear', '${fundingLineName}.emplid',
+            	'${fundingLineName}.budgetConstructionPosition.iuNormalWorkMonths',
+            	'${fundingLineName}.budgetConstructionPosition.iuPayMonths',
+				'${fundingLineName}.budgetConstructionPosition.positionFullTimeEquivalency', 
+				'${fundingLineName}.budgetConstructionAdministrativePost.administrativePost'," data-attributes="${pbcafAttributes}" data-inquiry="true" data-lookup="true" data-bo-class-simple-name="BudgetConstructionPosition" data-bo-package-name="org.kuali.kfs.module.bc.businessobject" data-read-only="${hasBeenAdded}" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,positionNumber" data-accounting-line-values-map="${fundingLine.valuesMap}"></div>
+        
+        <td class="datacell" rowSpan="1">        		
+		    <div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="budgetConstructionPosition.iuNormalWorkMonths" data-accounting-line="${fundingLineName}" data-data-field-css-class="nowrap"></div>
+		</td>
+           	
+        <td class="datacell" rowSpan="1">        		
+		    <div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="budgetConstructionPosition.iuPayMonths" data-accounting-line="${fundingLineName}" data-data-field-css-class="nowrap"></div>
+		</td> 
+           	          	
+        <td class="datacell" rowSpan="1">        		
+		    <div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="budgetConstructionPosition.positionFullTimeEquivalency" data-accounting-line="${fundingLineName}" data-data-field-css-class="nowrap"></div>
+		</td> 
+		
+		<td class="datacell" rowSpan="1">        		
+		    <div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="budgetConstructionAdministrativePost.administrativePost" data-accounting-line="${fundingLineName}" data-data-field-css-class="nowrap"></div>
+		</td>
+	</tr>
+	                                
+	<tr id="${fundingLineName}">
+		<td colspan="${colspan}" class="infoline" style="border-bottom: none;">
+			<center><br/>
+			<!--/*/ <th:block th:with="detailReadOnly=${readOnly || fundingLine.displayOnlyMode || fundingLine.appointmentFundingDeleteIndicator || fundingLine.purged}"> /*/-->
+			<div th:replace="~{fragments/bc/appointmentFundingDetail :: content}" data-funding-line="${fundingLine}" data-funding-line-name="${fundingLineName}" data-line-index="${lineIndex}" data-has-been-added="${hasBeenAdded}" data-read-only="${detailReadOnly}" data-is-setteing-by-incumbent="true"></div>
+			<br/></center>
+		</td>            
+	</tr>
+	
+	<tr>
+		<td colspan="${colspan}" class="datacell">
+			<div class="right">
+				<jsp:doBody/>
+			</div>
+		</td>            
+	</tr>
+</table>
+</div>

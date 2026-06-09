@@ -1,0 +1,122 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/paymentinfo.tag -->
+<!-- Fragment parameters: displayPurchaseOrderFields, documentAttributes -->
+<div th:fragment="content (displayPurchaseOrderFields, documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="amendmentEntry=${(!empty KualiForm.editingMode['amendmentEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="lockB2BEntry=${(not empty KualiForm.editingMode['lockB2BEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=70"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Payment Info" data-default-open="false">
+  <h3>Payment Info</h3>
+    <div class="tab-container" align=center>
+
+    <th:block th:if="${!lockB2BEntry}">
+            <h3>Payment Info</h3>
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Payment Info Section">
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.recurringPaymentTypeCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.recurringPaymentTypeCode" th:field="*{document.recurringPaymentTypeCode}" data-attribute-entry="${documentAttributes.recurringPaymentTypeCode}" />
+                </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderBeginDate}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell"> from:
+                   <input type="text" name="document.purchaseOrderBeginDate" th:field="*{document.purchaseOrderBeginDate}" data-attribute-entry="${documentAttributes.purchaseOrderBeginDate}" />
+                 	&nbsp;&nbsp;
+                  to:
+                    <input type="text" name="document.purchaseOrderEndDate" th:field="*{document.purchaseOrderEndDate}" data-attribute-entry="${documentAttributes.purchaseOrderEndDate}" />
+               </td> 
+            </tr>
+            <th:block th:if="${displayPurchaseOrderFields}">
+                <tr>
+                    <th align=left valign=middle colspan="2" class="bord-l-b"> Please provide the following recurring payment information if the type of recurring payment is Fixed Schedule, Fixed Amount</th>
+                </tr> 
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.recurringPaymentAmount}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell"> Amount:
+                       <input type="text" name="document.recurringPaymentAmount" th:field="*{document.recurringPaymentAmount}" data-attribute-entry="${documentAttributes.recurringPaymentAmount}" />
+                        &nbsp;&nbsp;
+                        First Payment Date:
+                        <input type="text" name="document.recurringPaymentDate" th:field="*{document.recurringPaymentDate}" data-attribute-entry="${documentAttributes.recurringPaymentDate}" />
+                        &nbsp;&nbsp;
+                        Frequency:
+                       <input type="text" name="document.recurringPaymentFrequencyCode" th:field="*{document.recurringPaymentFrequencyCode}" data-attribute-entry="${documentAttributes.recurringPaymentFrequencyCode}" />
+                    </td> 
+                </tr>
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.initialPaymentAmount}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell"> Amount:
+                       <input type="text" name="document.initialPaymentAmount" th:field="*{document.initialPaymentAmount}" data-attribute-entry="${documentAttributes.initialPaymentAmount}" />
+                        &nbsp;&nbsp;
+                      Date:
+                        <input type="text" name="document.initialPaymentDate" th:field="*{document.initialPaymentDate}" data-attribute-entry="${documentAttributes.initialPaymentDate}" />
+                   </td> 
+                </tr>
+                <tr>
+                    <th align=right valign=middle class="bord-l-b">
+                       <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.finalPaymentAmount}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell"> Amount:
+                       <input type="text" name="document.finalPaymentAmount" th:field="*{document.finalPaymentAmount}" data-attribute-entry="${documentAttributes.finalPaymentAmount}" />
+                        &nbsp;&nbsp;
+                      Date:
+                       <input type="text" name="document.finalPaymentDate" th:field="*{document.finalPaymentDate}" data-attribute-entry="${documentAttributes.finalPaymentDate}" />
+                   </td> 
+                </tr>
+            </th:block>
+		</table> 
+    </th:block>
+		
+		
+           	<h3>Billing Address</h3>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Payment Info Section">	 
+			<tr>
+                <th align=right valign=top  class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.billingName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.billingName" th:field="*{document.billingName}" data-attribute-entry="${documentAttributes.billingName}" readonly="readonly" /><br>
+                   <input type="text" name="document.billingLine1Address" th:field="*{document.billingLine1Address}" data-attribute-entry="${documentAttributes.billingLine1Address}" readonly="readonly" /><br>
+	        		<th:block th:if="${!empty documentAttributes.billingLine2Address}">
+	                   	<input type="text" name="document.billingLine2Address" th:field="*{document.billingLine2Address}" data-attribute-entry="${documentAttributes.billingLine2Address}" readonly="readonly" /><br>
+	        		</th:block>
+               		<input type="text" name="document.billingCityName" th:field="*{document.billingCityName}" data-attribute-entry="${documentAttributes.billingCityName}" readonly="readonly" />,&nbsp;
+                    <input type="text" name="document.billingStateCode" th:field="*{document.billingStateCode}" data-attribute-entry="${documentAttributes.billingStateCode}" readonly="readonly" />&nbsp;&nbsp;
+                    <input type="text" name="document.billingPostalCode" th:field="*{document.billingPostalCode}" data-attribute-entry="${documentAttributes.billingPostalCode}" readonly="readonly" /><br>
+             		<th:block th:if="${!empty documentAttributes.billingCountryCode}">       
+               			<input type="text" name="document.billingCountryCode" th:field="*{document.billingCountryCode}" data-attribute-entry="${documentAttributes.billingCountryCode}" readonly="readonly" />
+            		</th:block>
+            	</td>
+            </tr>
+        </table>
+
+    </div>
+</section>
+</div>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/ar/CustomerAgingReportLookup.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/ar/CustomerAgingReportLookup</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="orgAttributes=${DataDictionary.Organization.attributes}"> /*/-->
+
+<div class="kfs-page" data-header-title="Lookup" data-doc-title="">
+  <form action="arCustomerAgingReportLookup.do" method="post">
+
+    <div class="headerarea-small" id="headerarea-small">
+        <h1><span th:text="${KualiForm.lookupable.title}"></span> <span class="kfs-help" th:replace="~{fragments/kul/help :: content}"></span></h1>
+    </div>
+
+    <kul:enterKey methodToCall="search"/>
+
+    <html-el:hidden name="KualiForm" property="backLocation"/>
+    <html-el:hidden name="KualiForm" property="formKey"/>
+    <html-el:hidden name="KualiForm" property="lookupableImplServiceName"/>
+    <html-el:hidden name="KualiForm" property="businessObjectClassName"/>
+    <html-el:hidden name="KualiForm" property="conversionFields"/>
+    <html-el:hidden name="KualiForm" property="hideReturnLink"/>
+
+    <div class="kfs-errors" data-key-match="*" th:if="${#fields.hasErrors('*')}"><h4>Errors found in Search Criteria:</h4></div>
+
+    <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="20"
+                                height="20"/></td>
+            <td>
+                <div id="lookup" align="center"><br/>
+                    <br/>
+                    <table class="datatable-100" align="center" cellpadding="0"
+                           cellspacing="0">
+                        <!--/*/ <th:block th:with="FormName=KualiForm"> /*/-->
+                        <!--/*/ <th:block th:with="FieldRows=${KualiForm.lookupable.rows}"> /*/-->
+                        <!--/*/ <th:block th:with="ActionName=glModifiedInquiry.do"> /*/-->
+                        <!--/*/ <th:block th:with="IsLookupDisplay=true"> /*/-->
+
+                        <div class="kfs-row-display"></div> `
+
+                        <tr align=center>
+                            <td height="30" colspan=2 class="infoline">
+                                <input type="image" property="methodToCall.search" value="search"
+                                            src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_search.gif"
+                                            styleClass="tinybutton" alt="search" title="search" border="0"/>
+                                <input type="image" property="methodToCall.clearValues" value="clearValues"
+                                            src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_clear.gif"
+                                            styleClass="tinybutton" alt="clear" title="clear" border="0"/>
+
+
+                                <input type="image" property="methodToCall.cancel" value="cancel"
+                                            src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif"
+                                            styleClass="tinybutton" alt="cancel" title="cancel" border="0"/>
+
+                                <!-- Optional extra button -->
+                                <th:block th:if="${not empty KualiForm.lookupable.extraButtonSource}">
+                                    <a
+                                            href='<span th:text="${KualiForm.backLocation}?methodToCall=refresh&refreshCaller=org.kuali.rice.kns.lookup.KualiLookupableImpl&docFormKey=${KualiForm.formKey}"></span><span th:text="${KualiForm.lookupable.extraButtonParams}"></span>'
+                                            title="cancel">
+                                        <img src='<span th:text="${KualiForm.lookupable.extraButtonSource}"></span>'
+                                             class="tinybutton" border="0" alt="cancel"/></a>
+                                </th:block></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <th:block th:if="${!empty reqSearchResultsSize }">
+                    <!--/*/ <th:block th:with="offset=0"> /*/-->
+                    <display:table class="datatable-100" cellspacing="0" cellpadding="0" name="${reqSearchResults}"
+                                   id="row" export="true" pagesize="100" offset="${offset}"
+                                   requestURI="arCustomerAgingReportLookup.do?methodToCall=viewResults&reqSearchResultsSize=${reqSearchResultsSize}&searchResultKey=${searchResultKey}">
+                        <c:forEach items="${row.columns}" var="column" varStatus="status">
+                            <display:column
+                                    class="${ fn:startsWith(column.columnTitle, 'Customer') ? 'infocell' : 'numbercell' }"
+                                    title="${column.columnTitle}" comparator="${column.comparator}"
+                                    sortable="${('dummyBusinessObject.linkButtonOption' ne column.propertyName) && column.sortable}">
+                                <th:block th:switch="${true}">
+                                    <th:block th:case="${column.propertyURL != \"\" && param['d-16544-e'] == null}">
+                                        <a href="<span th:text="${column.propertyURL}"></span>" title="${column.propertyValue}"
+                                        target="blank"><span th:text="${column.propertyValue}"></span></a>
+                                    </th:block>
+                                    <th:block th:case="*">
+                                        <span th:text="${column.propertyValue}"></span>
+                                    </th:block>
+                                </th:block>
+                            </display:column>
+                        </tr>
+
+
+                        <display:footer>
+                            <th><span class="grid">TOTALS:</span></th>
+                            <th:block th:if="${reqSearchResultsSize == '1'}">
+                                <td class="numbercell">&nbsp; <span th:text="${reqSearchResultsSize}"></span> customer</td>
+                            </th:block>
+                            <th:block th:if="${reqSearchResultsSize != '1'}">
+                                <td class="numbercell">&nbsp; <span th:text="${reqSearchResultsSize}"></span> customers</td>
+                            </th:block>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total0to30}"></span></td>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total31to60}"></span></td>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total61to90}"></span></td>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.total91toSYSPR}"></span></td>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalSYSPRplus1orMore}"></span></td>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalOpenInvoices}"></span></td>
+                            <td class="numbercell">&nbsp; $<span th:text="${KualiForm.totalWriteOffs}"></span></td>
+                        </display:footer>
+
+                    </display:table>
+
+            </td>
+            </th:block>
+            <td width="1%"><img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" height="20"
+                                width="20"></td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+  </form>
+</div>
+</body>
+</html>

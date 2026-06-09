@@ -1,0 +1,57 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/contractsGrantsLetterOfCreditReviewGeneral.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.ContractsGrantsLetterOfCreditReviewDocument.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="General" data-default-open="true">
+  <h3>General</h3>
+	<div class="tab-container" align=center>
+		<h3>General</h3>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="General Section">
+
+			<tr>
+				<th align=right valign=middle class="bord-l-b">
+					<div align="right">
+						<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.letterOfCreditFundGroupCode}"></label>
+					</div>
+				</th>
+				<td><a
+					href="${ConfigProperties.application.url}/kr/inquiry.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.LetterOfCreditFundGroup&letterOfCreditFundGroupCode=${KualiForm.document.letterOfCreditFundGroupCode}"
+					target="_blank"> <input type="text" name="document.letterOfCreditFundGroupCode" th:field="*{document.letterOfCreditFundGroupCode}" data-attribute-entry="${documentAttributes.letterOfCreditFundGroupCode}" readonly="readonly" />
+				</a></td>
+			</tr>
+			<th:block th:if="${! empty KualiForm.document.letterOfCreditFundCode}">
+				<tr>
+					<th align=right valign=middle class="bord-l-b">
+						<div align="right">
+							<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.letterOfCreditFundCode}"></label>
+						</div>
+					</th>
+
+					<td align=left valign=middle class="datacell" style="width: 50%;"><a
+						href="${ConfigProperties.application.url}/kr/inquiry.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.cg.businessobject.LetterOfCreditFund&letterOfCreditFundCode=${KualiForm.document.letterOfCreditFundCode}"
+						target="_blank"> <input type="text" name="document.letterOfCreditFundCode" th:field="*{document.letterOfCreditFundCode}" data-attribute-entry="${documentAttributes.letterOfCreditFundCode}" readonly="readonly" />
+					</a></td>
+				</tr>
+			</th:block>
+		</table>
+	</div>
+</section>
+</div>

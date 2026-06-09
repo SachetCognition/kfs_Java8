@@ -1,0 +1,57 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/maintenanceTab.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<td class="content" valign="top">
+      <div th:replace="~{fragments/maintenanceChannel/chartOfAccounts :: content}"></div>
+      <div th:replace="~{fragments/maintenanceChannel/financialProcessing :: content}"></div>
+      <div th:replace="~{fragments/maintenanceChannel/preDisbursementProcessor :: content}"></div>
+</td>
+<td class="content" valign="top">
+	<th:block th:if="${ConfigProperties.module.accounts.receivable.enabled == 'true'}">
+      <div th:replace="~{fragments/maintenanceChannel/accountsReceivable :: content}"></div>
+    </th:block>
+      <div th:replace="~{fragments/maintenanceChannel/vendor :: content}"></div>
+    <th:block th:if="${ConfigProperties.module.purchasing.enabled == 'true'}">
+      <div th:replace="~{fragments/maintenanceChannel/purchasingAccountsPayable :: content}"></div>
+    </th:block>
+    <th:block th:if="${ConfigProperties.module.capital.asset.enabled == 'true'}">
+      <div th:replace="~{fragments/maintenanceChannel/capitalAsset :: content}"></div>
+    </th:block>
+</td>
+<td class="content" valign="top">
+	<th:block th:switch="${true}">
+    <th:block th:case="${ConfigProperties['module.contracts.and.grants.enabled'] == 'true'}">
+    	<div th:replace="~{fragments/maintenanceChannel/contractsAndGrants :: content}"></div>
+    </th:block>
+    <th:block th:case="${ConfigProperties['module.external.kuali.coeus.enabled'] == 'true'}">
+     	<div th:replace="~{fragments/maintenanceChannel/contractsAndGrants :: content}"></div>
+    </th:block>
+   	</th:block>
+    <th:block th:if="${ConfigProperties.module.labor.distribution.enabled == 'true'}"> 
+      <div th:replace="~{fragments/maintenanceChannel/effortCertification :: content}"></div>
+      <div th:replace="~{fragments/maintenanceChannel/laborDistribution :: content}"></div> 
+      <div th:replace="~{fragments/maintenanceChannel/budgetConstruction :: content}"></div> 
+    </th:block>
+      <div th:replace="~{fragments/maintenanceChannel/system :: content}"></div> 
+    <th:block th:if="${ConfigProperties.module.travel.enabled == 'true'}"> 
+      <div th:replace="~{fragments/maintenanceChannel/tem :: content}"></div>
+    </th:block>
+</td>
+</div>

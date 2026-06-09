@@ -1,0 +1,38 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/administration/monitoring.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Monitoring"></div>
+<div class="body">
+	<strong>Service Bus</strong></br>
+   	<ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Message Queue" data-url="${ConfigProperties.ksb.client.url}/${ConfigProperties.message.queue.url}"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Service Registry" data-url="${ConfigProperties.ksb.server.url}/${ConfigProperties.service.registry.url}"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Thread Pool" data-url="${ConfigProperties.ksb.client.url}/${ConfigProperties.thread.pool.url}"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Quartz" data-url="${ConfigProperties.ksb.client.url}/Quartz.do"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Security Management" data-url="${ConfigProperties.ksb.client.url}/JavaSecurityManagement.do"></div></li>
+	</ul>
+	<strong>Workflow</strong></br>
+   	<ul class="chan">
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Document Operation" data-url="${ConfigProperties.kew.url}/DocumentOperation.do"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Statistics Report" data-url="${ConfigProperties.kew.url}/Stats.do"></div></li>
+	</ul>	
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>

@@ -85,6 +85,12 @@
   </build>
 
   <dependencies>
+    <!-- Thymeleaf Spring5 integration (JSP→Thymeleaf migration) -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>3.1.2.RELEASE</version>
+    </dependency>
     <dependency>
       <groupId>org.kuali.kfs</groupId>
       <artifactId>kfs-core</artifactId>

@@ -1,0 +1,111 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/contractsGrantsCollectionActivityGlobalCollectionEvent.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="ContractsGrantsCollectionActivityAttributes=${DataDictionary.ContractsGrantsCollectionActivityDocument.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Global Collection Event" data-default-open="true">
+  <h3>Global Collection Event</h3>
+	<div class="tab-container" align="center">
+		<h3>New</h3>
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.activityCode}"></th>
+				<td>
+					<div id="document.activityCode.div">
+						<th:block th:switch="${true}">
+							<th:block th:case="${not empty KualiForm.document.proposalNumber}">
+								<input type="text" name="document.activityCode" th:field="*{document.activityCode}" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.activityCode}" />
+								<th:block th:if="${not readOnly}">
+									&nbsp;
+									<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ar.businessobject.CollectionActivityType" th:replace="~{fragments/kul/lookup :: content}"></span>
+								</th:block>
+							</th:block>
+							<th:block th:case="*">
+								&nbsp;
+							</th:block>
+						</th:block>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.activityDate}"></th>
+				<td>
+					<div id="document.activityDate.div">
+						<th:block th:switch="${true}">
+							<th:block th:case="${not empty KualiForm.document.proposalNumber}">
+								<input type="text" name="document.activityDate" th:field="*{document.activityDate}" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.activityDate}" />				
+							</th:block>
+							<th:block th:case="*">
+								&nbsp;
+							</th:block>
+						</th:block>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.activityText}"></th>
+				<td>
+					<div id="document.activityText.div">
+						<th:block th:switch="${true}">
+							<th:block th:case="${not empty KualiForm.document.proposalNumber}">
+								<input type="text" name="document.activityText" th:field="*{document.activityText}" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.activityText}" />						
+							</th:block>
+							<th:block th:case="*">
+								&nbsp;
+							</th:block>
+						</th:block>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.followupDate}"></th>
+				<td>
+					<div id="document.followupDate.div">
+						<th:block th:switch="${true}">
+							<th:block th:case="${not empty KualiForm.document.proposalNumber}">
+								<input type="text" name="document.followupDate" th:field="*{document.followupDate}" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.followupDate}" />						
+							</th:block>
+							<th:block th:case="*">
+								&nbsp;
+							</th:block>
+						</th:block>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.completedDate}"></th>
+				<td>
+					<div id="document.completedDate.div">
+						<th:block th:switch="${true}">
+							<th:block th:case="${not empty KualiForm.document.proposalNumber}">
+								<input type="text" name="document.completedDate" th:field="*{document.completedDate}" data-attribute-entry="${ContractsGrantsCollectionActivityAttributes.completedDate}" />						
+							</th:block>
+							<th:block th:case="*">
+								&nbsp;
+							</th:block>
+						</th:block>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</section>
+</div>

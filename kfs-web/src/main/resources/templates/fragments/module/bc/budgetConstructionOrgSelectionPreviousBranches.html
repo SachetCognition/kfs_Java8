@@ -1,0 +1,65 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/budgetConstructionOrgSelectionPreviousBranches.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="pullupOrgAttributes=${DataDictionary.BudgetConstructionPullup.attributes}"> /*/-->
+<!--/*/ <th:block th:with="organizationAttributes=${DataDictionary.Organization.attributes}"> /*/-->
+
+    <table cellpadding=0 cellspacing="0"  summary="">
+      <tr>
+        <td class="subhead" colspan="4">Previous Branches</td>
+      </tr>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Chart/Org</th>
+        <th>Organization</th>
+        <th>&nbsp;</th>
+      </tr>
+      <%-- previous branches --%>
+      <c:forEach items="${KualiForm.previousBranchOrgs}" var="item" varStatus="status" >
+      <tr>
+        <td>
+          <div align="center">
+            <input type="image" property="methodToCall.navigateUp.line${status.index}.anchorpreviousBranchOrgsAnchor${status.index}" src="${ConfigProperties.externalizable.images.url}purap-up.gif" title="Return Previous" alt="Return Previous" styleClass="tinybutton" />
+          </div>
+        </td>
+        <td>
+          <input type="text" name="previousBranchOrgs[${status.index}].chartOfAccountsCode" th:field="*{previousBranchOrgs[${status.index}].chartOfAccountsCode}" data-attribute-entry="${pullupOrgAttributes.chartOfAccountsCode}" readonly="readonly" />
+            <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${item.chartOfAccountsCode}">
+            ${KualiForm.previousBranchOrgs[status.index].chartOfAccountsCode}
+            </span>&nbsp;
+          </div><!-- /kul:htmlControlAttribute -->
+      		-
+          <input type="text" name="previousBranchOrgs[${status.index}].organizationCode" th:field="*{previousBranchOrgs[${status.index}].organizationCode}" data-attribute-entry="${pullupOrgAttributes.organizationCode}" readonly="readonly" />
+            <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${item.chartOfAccountsCode}&amp;organizationCode=${item.organizationCode}">
+            ${KualiForm.previousBranchOrgs[status.index].organizationCode}
+	        </span>&nbsp;
+          </div><!-- /kul:htmlControlAttribute -->
+        </td>
+        <td>
+          <input type="text" name="previousBranchOrgs[${status.index}].organization.organizationName" th:field="*{previousBranchOrgs[${status.index}].organization.organizationName}" data-attribute-entry="${organizationAttributes.organizationName}" readonly="readonly" />
+            ${KualiForm.previousBranchOrgs[status.index].organization.organizationName}&nbsp;
+          </div><!-- /kul:htmlControlAttribute -->
+        </td>
+        <td>&nbsp;
+        </td>
+      </tr>
+      </tr>
+    </table>
+</div>

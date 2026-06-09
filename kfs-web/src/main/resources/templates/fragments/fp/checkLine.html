@@ -1,0 +1,106 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/checkLine.tag -->
+<!-- Fragment parameters: readOnly, rowHeading, propertyName, baselinePropertyName, actionMethod, actionImage, actionAlt, cssClass, displayHidden -->
+<div th:fragment="content (readOnly, rowHeading, propertyName, baselinePropertyName, actionMethod, actionImage, actionAlt, cssClass, displayHidden)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="checkBaseAttributes=${DataDictionary.CheckBase.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=200"> /*/-->
+
+<tr>
+    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+        <th:block th:if="${displayHidden}">
+			 <span th:text="${KualiForm.${propertyName}.documentNumber}"></span>
+        	 <span th:text="${KualiForm.${propertyName}.sequenceId}"></span>
+        	 <span th:text="${KualiForm.${propertyName}.financialDocumentDepositLineNumber}"></span>
+             <span th:text="${KualiForm.${propertyName}.versionNumber}"></span>
+             <span th:text="${KualiForm.${propertyName}.financialDocumentTypeCode}"></span>
+             <span th:text="${KualiForm.${propertyName}.cashieringRecordSource}"></span>
+
+        	<th:block th:if="${!empty baselinePropertyName}">
+            	<span th:text="${KualiForm.${baselinePropertyName}.documentNumber}"></span>
+            	<span th:text="${KualiForm.${baselinePropertyName}.sequenceId}"></span>
+            	<span th:text="${KualiForm.${baselinePropertyName}.financialDocumentDepositLineNumber}"></span>
+            	<span th:text="${KualiForm.${baselinePropertyName}.versionNumber}"></span>
+        	</th:block>
+		</th:block>
+       
+    </div><!-- /kul:htmlAttributeHeaderCell -->
+    <td class="${cssClass}" nowrap>
+    	<th:block th:if="${!readOnly}">
+        	<input type="text" name="${propertyName}.checkNumber" th:field="*{${propertyName}.checkNumber}" data-attribute-entry="${checkBaseAttributes.checkNumber}" />
+        </th:block>
+        <th:block th:if="${readOnly}">
+			<span th:text="${KualiForm.${propertyName}.checkNumber}"></span>
+        </th:block>
+        <th:block th:if="${!empty baselinePropertyName}">
+			 <th:block th:if="${displayHidden}">
+				<span th:text="${KualiForm.${baselinePropertyName}.checkNumber}"></span>
+			 </th:block>
+        </th:block>
+    </td>
+    <td class="${cssClass}" nowrap>
+    	<th:block th:if="${!readOnly}">
+	    	<input type="text" name="${propertyName}.checkDate" th:field="*{${propertyName}.checkDate}" data-attribute-entry="${checkBaseAttributes.checkDate}" />
+        </th:block>
+        <th:block th:if="${readOnly}">
+			<span th:text="${KualiForm.${propertyName}.checkDate}"></span>
+        </th:block>
+        <th:block th:if="${!empty baselinePropertyName}">
+			<th:block th:if="${displayHidden}">
+				<span th:text="${KualiForm.${baselinePropertyName}.checkDate}"></span>
+			 </th:block>
+        </th:block>
+    </td>
+    <td class="${cssClass}" nowrap>
+    	<th:block th:if="${!readOnly}">
+        	<input type="text" name="${propertyName}.description" th:field="*{${propertyName}.description}" data-attribute-entry="${checkBaseAttributes.description}" />
+        </th:block>
+        <th:block th:if="${readOnly}">
+			<span th:text="${KualiForm.${propertyName}.description}"></span>
+        </th:block>
+        <th:block th:if="${!empty baselinePropertyName}">
+			<th:block th:if="${displayHidden}">
+				<span th:text="${KualiForm.${baselinePropertyName}.description}"></span>
+			 </th:block>
+
+        </th:block>
+    </td>
+    <td class="${cssClass}" nowrap>
+    	<th:block th:if="${!readOnly}">
+	    	<input type="text" name="${propertyName}.amount" th:field="*{${propertyName}.amount}" data-attribute-entry="${checkBaseAttributes.amount}" />
+        </th:block>
+        <th:block th:if="${readOnly}">
+			<span th:text="${KualiForm.${propertyName}.amount}"></span>
+        </th:block>
+        <th:block th:if="${!empty baselinePropertyName}">
+			<th:block th:if="${displayHidden}">
+				<span th:text="${KualiForm.${baselinePropertyName}.amount}"></span>
+			 </th:block>
+        </th:block>
+    </td>
+    
+    <th:block th:if="${!readOnly}">
+        <td class="${cssClass}" nowrap>
+            <div align="center">
+                <input type="image" property="methodToCall.${actionMethod}" tabindex="${tabindexOverrideBase} + 20" styleClass="tinybutton" src="${actionImage}" title="${actionAlt}" alt="${actionAlt}"/>
+            </div>
+        </td>
+    </th:block>
+</tr>
+</div>

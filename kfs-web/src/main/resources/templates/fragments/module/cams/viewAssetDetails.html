@@ -1,0 +1,179 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/viewAssetDetails.tag -->
+<!-- Fragment parameters: defaultTabHide, assetValueObj, assetValue -->
+<div th:fragment="content (defaultTabHide, assetValueObj, assetValue)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${assetValueObj==null}">
+	<!--/*/ <th:block th:with="assetValueObj=document.asset"> /*/-->
+	<!--/*/ <th:block th:with="assetValue=${KualiForm.document.asset}"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountAttributes=${DataDictionary.Account.attributes}"> /*/-->
+	<section class="kfs-tab" data-tab-title="Asset" data-default-open="${!defaultTabHide}">
+  <h3>Asset</h3> 
+		<div class="tab-container" align="center">		
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">								
+	      	<tr>
+				<td class="tab-subhead"  width="100%" colspan="4">Asset Information</td>
+			</tr>	
+		    <tr>
+		      	<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetNumber}"></label></th>
+		      	<td class="grid" width="75%" colspan="3">
+		      		<input type="text" name="${assetValueObj}.capitalAssetNumber" th:field="*{${assetValueObj}.capitalAssetNumber}" data-attribute-entry="${assetAttributes.capitalAssetNumber}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.Asset" data-key-values="capitalAssetNumber=${assetValue.capitalAssetNumber}">
+                			<html:hidden write="true" property="${assetValueObj}.capitalAssetNumber" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+		    </tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetDescription}"></label></th>
+				<td class="grid" width="75%" colspan="3"><input type="text" name="${assetValueObj}.capitalAssetDescription" th:field="*{${assetValueObj}.capitalAssetDescription}" data-attribute-entry="${assetAttributes.capitalAssetDescription}" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.organizationOwnerChartOfAccountsCode}"></label></th>
+				<td class="grid" width="25%">
+					<input type="text" name="${assetValueObj}.organizationOwnerChartOfAccountsCode" th:field="*{${assetValueObj}.organizationOwnerChartOfAccountsCode}" data-attribute-entry="${assetAttributes.organizationOwnerChartOfAccountsCode}" readonly="readonly" />								
+		      			<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=">
+                			<html:hidden write="true" property="${assetValueObj}.organizationOwnerChartOfAccountsCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.organizationOwnerAccountNumber}"></label></th>
+				<td class="grid" width="25%">
+					<input type="text" name="${assetValueObj}.organizationOwnerAccountNumber" th:field="*{${assetValueObj}.organizationOwnerAccountNumber}" data-attribute-entry="${assetAttributes.organizationOwnerAccountNumber}" readonly="readonly" />								
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${assetValue.organizationOwnerChartOfAccountsCode}&amp;accountNumber=${assetValue.organizationOwnerAccountNumber}">
+                			<html:hidden write="true" property="${assetValueObj}.organizationOwnerAccountNumber" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.agencyNumber}"></label></th>
+				<td class="grid" width="25%">
+					<input type="text" name="${assetValueObj}.agencyNumber" th:field="*{${assetValueObj}.agencyNumber}" data-attribute-entry="${assetAttributes.agencyNumber}" readonly="readonly" />								
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.integration.cg.ContractsAndGrantsAgency" data-key-values="agencyNumber=${assetValue.agencyNumber}">
+                			<html:hidden write="true" property="${assetValueObj}.agencyNumber" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+		        <th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.organizationCode}"></label></th>
+	   	        <td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.organizationOwnerAccount.organizationCode" th:field="*{${assetValueObj}.organizationOwnerAccount.organizationCode}" data-attribute-entry="${assetAttributes['organizationOwnerAccount.organizationCode']}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${assetValue.organizationOwnerChartOfAccountsCode}&amp;accountNumber=${assetValue.organizationOwnerAccountNumber}&amp;organizationCode=${assetValue.organizationOwnerAccount.organizationCode}">
+                			<html:hidden write="true" property="${assetValueObj}.organizationOwnerAccount.organizationCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.inventoryStatusCode}"></label></th>
+				<td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.inventoryStatusCode" th:field="*{${assetValueObj}.inventoryStatusCode}" data-attribute-entry="${assetAttributes.inventoryStatusCode}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetStatus" data-key-values="inventoryStatusCode=${assetValue.inventoryStatusCode}">
+                			<html:hidden write="true" property="${assetValueObj}.inventoryStatusCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.conditionCode}"></label></th>
+				<td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.conditionCode" th:field="*{${assetValueObj}.conditionCode}" data-attribute-entry="${assetAttributes.conditionCode}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetCondition" data-key-values="assetConditionCode=${assetValue.conditionCode}">
+                			<html:hidden write="true" property="${assetValueObj}.conditionCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.acquisitionTypeCode}"></label></th>
+				<td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.acquisitionTypeCode" th:field="*{${assetValueObj}.acquisitionTypeCode}" data-attribute-entry="${assetAttributes.acquisitionTypeCode}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetAcquisitionType" data-key-values="acquisitionTypeCode=${assetValue.acquisitionTypeCode}">
+                			<html:hidden write="true" property="${assetValueObj}.acquisitionTypeCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetTypeCode}"></label></th>
+				<td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.capitalAssetTypeCode" th:field="*{${assetValueObj}.capitalAssetTypeCode}" data-attribute-entry="${assetAttributes.capitalAssetTypeCode}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetType" data-key-values="capitalAssetTypeCode=${assetValue.capitalAssetTypeCode}">
+                			<html:hidden write="true" property="${assetValueObj}.capitalAssetTypeCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.vendorName}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.vendorName" th:field="*{${assetValueObj}.vendorName}" data-attribute-entry="${assetAttributes.vendorName}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.manufacturerName}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.manufacturerName" th:field="*{${assetValueObj}.manufacturerName}" data-attribute-entry="${assetAttributes.manufacturerName}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.manufacturerModelNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.manufacturerModelNumber" th:field="*{${assetValueObj}.manufacturerModelNumber}" data-attribute-entry="${assetAttributes.manufacturerModelNumber}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.serialNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.serialNumber" th:field="*{${assetValueObj}.serialNumber}" data-attribute-entry="${assetAttributes.serialNumber}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.campusTagNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.campusTagNumber" th:field="*{${assetValueObj}.campusTagNumber}" data-attribute-entry="${assetAttributes.campusTagNumber}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.oldTagNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.oldTagNumber" th:field="*{${assetValueObj}.oldTagNumber}" data-attribute-entry="${assetAttributes.oldTagNumber}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.governmentTagNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.governmentTagNumber" th:field="*{${assetValueObj}.governmentTagNumber}" data-attribute-entry="${assetAttributes.governmentTagNumber}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.nationalStockNumber}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.nationalStockNumber" th:field="*{${assetValueObj}.nationalStockNumber}" data-attribute-entry="${assetAttributes.nationalStockNumber}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.capitalAssetInServiceDate}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.capitalAssetInServiceDate" th:field="*{${assetValueObj}.capitalAssetInServiceDate}" data-attribute-entry="${assetAttributes.capitalAssetInServiceDate}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.createDate}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.createDate" th:field="*{${assetValueObj}.createDate}" data-attribute-entry="${assetAttributes.createDate}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.financialDocumentPostingYear}"></label></th>
+				<td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.financialDocumentPostingYear" th:field="*{${assetValueObj}.financialDocumentPostingYear}" data-attribute-entry="${assetAttributes.financialDocumentPostingYear}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.sys.businessobject.SystemOptions" data-key-values="universityFiscalYear=${assetValue.financialDocumentPostingYear}">
+                			<html:hidden write="true" property="${assetValueObj}.financialDocumentPostingYear" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.lastInventoryDate}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.lastInventoryDate" th:field="*{${assetValueObj}.lastInventoryDate}" data-attribute-entry="${assetAttributes.lastInventoryDate}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.financialDocumentPostingPeriodCode}"></label></th>
+				<td class="grid" width="25%">
+	   	        	<input type="text" name="${assetValueObj}.financialDocumentPostingPeriodCode" th:field="*{${assetValueObj}.financialDocumentPostingPeriodCode}" data-attribute-entry="${assetAttributes.financialDocumentPostingPeriodCode}" readonly="readonly" /> 
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.AccountingPeriod" data-key-values="universityFiscalYear=${assetValue.financialDocumentPostingYear}&amp;universityFiscalPeriodCode=${assetValue.financialDocumentPostingPeriodCode}">
+                			<html:hidden write="true" property="${assetValueObj}.financialDocumentPostingPeriodCode" />
+                		</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+		      	</td>
+				<th class="grid" width="50%" colspan="2"></th>
+			</tr>
+
+		</table>
+		</div>
+	</section>
+</div>

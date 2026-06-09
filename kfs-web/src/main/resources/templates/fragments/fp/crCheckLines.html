@@ -1,0 +1,109 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: fp/crCheckLines.tag -->
+<!-- Fragment parameters: checkDetailMode, editingMode, totalAmount, totalConfirmedAmount, displayHidden, confirmMode -->
+<div th:fragment="content (checkDetailMode, editingMode, totalAmount, totalConfirmedAmount, displayHidden, confirmMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="checkBaseAttributes=${DataDictionary.CheckBase.attributes}"> /*/-->
+
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="columnCount=5"> /*/-->
+<th:block th:if="${!readOnly}">
+    <!--/*/ <th:block th:with="columnCount=${columnCount + 1}"> /*/-->
+</th:block>
+
+<th:block th:if="${checkDetailMode}">
+    <section class="kfs-tab" data-tab-title="Check Detail" data-default-open="true">
+  <h3>Check Detail</h3>
+        <div class="tab-container" align=center>
+        
+			<h3>Check Detail</h3>
+            <table cellpadding=0 class="datatable" summary="check detail information">
+                
+                <tr>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.checkNumber}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.checkDate}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.description}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.amount}"></th>
+                                
+                    <th:block th:if="${!readOnly}">
+                        <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                    </th:block>
+                </tr>
+    			<th:block th:if="${!readOnly}">
+                <div th:replace="~{fragments/fp/checkLine :: content}" data-read-only="${readOnly}" data-row-heading="add" data-property-name="newCheck" data-action-image="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" data-action-alt="add" data-action-method="addCheck" data-css-class="infoline" data-display-hidden="${displayHidden}"></div>
+                </th:block> 
+                <tr th:each="check : ${KualiForm.document.checks}" indexId="ctr">
+                    <div th:replace="~{fragments/fp/checkLine :: content}" data-read-only="${readOnly}" data-row-heading="${ctr + 1}" data-property-name="document.check[${ctr}]" data-baseline-property-name="baselineCheck[${ctr}]" data-action-image="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" data-action-alt="delete" data-action-method="deleteCheck.line${ctr}" data-css-class="datacell" data-display-hidden="${displayHidden}"></div>
+                </tr>
+    
+                <th:block th:if="${!empty totalAmount}">
+                    <tr>
+                        <td class="total-line" colspan="4">&nbsp;</td>
+                        <td class="total-line"><strong>Total: <span th:text="${totalAmount}"></span></strong></td>
+                        <th:block th:if="${!readOnly}">
+                            <td class="total-line">&nbsp;</td>
+                        </th:block>
+                    </tr>
+                </th:block>
+            </table>
+        </div>	
+    
+    <th:block th:if="${confirmMode}">
+        <div class="tab-container" align="center">
+    	    <input type="image" align="left" property="methodToCall.copyAllChecks" src="${ConfigProperties.externalizable.images.url}tinybutton-copyall.gif" title="Copy all original checks to confirmed checks" alt="Copy all checks" styleClass="tinybutton"/>
+    	</div>
+    	<div class="tab-container" align=center>
+    		<h3>Cash Manager Confirmed Check Detail</h3>
+    		<table cellpadding=0 class="datatable" summary="confirmed check detail information">
+    			<tr>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.checkNumber}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.checkDate}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.description}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${checkBaseAttributes.amount}"></th>
+                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                </tr>
+                <div th:replace="~{fragments/fp/checkLine :: content}" data-read-only="false" data-row-heading="add" data-property-name="newConfirmedCheck" data-action-image="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" data-action-alt="add" data-action-method="addConfirmedCheck" data-css-class="infoline" data-display-hidden="${displayHidden}"></div>
+                <tr th:each="confirmedCheck : ${KualiForm.document.confirmedChecks}" indexId="ct">
+                    <div th:replace="~{fragments/fp/checkLine :: content}" data-read-only="false" data-row-heading="${ct + 1}" data-property-name="document.confirmedCheck[${ct}]" data-action-image="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" data-action-alt="delete" data-action-method="deleteConfirmedCheck.line${ct}" data-css-class="datacell" data-display-hidden="${displayHidden}"></div>
+                </tr>	
+                	
+                <th:block th:if="${!empty totalConfirmedAmount}">
+                    <tr>
+                        <td class="total-line" colspan="4">&nbsp;</td>
+                        <td class="total-line"><strong>Total: <span th:text="${totalConfirmedAmount}"></span></strong></td>
+                        <td class="total-line">&nbsp;</td>
+                    </tr>
+                </th:block>
+    		</table>
+    	</div>
+    </th:block>
+    </section>
+</th:block>
+
+<th:block th:if="${!checkDetailMode}">
+    <kul:hiddenTab forceOpen="true">
+        <%-- maintain state of hidden checkLines --%>
+        <tr th:each="check : ${KualiForm.document.checks}" indexId="ctr">
+            <div th:replace="~{fragments/fp/hiddenCheckLine :: content}" data-property-name="document.check[${ctr}]" data-baseline-property-name="baselineCheck[${ctr}]" data-display-hidden="${displayHidden}"></div>
+        </tr>
+    </div><!-- /kul:hiddenTab -->
+</th:block>
+</div>

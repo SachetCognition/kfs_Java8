@@ -1,0 +1,109 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/purchaseOrderRetransmit.tag -->
+<!-- Fragment parameters: documentAttributes, itemAttributes, displayPurchaseOrderFields -->
+<div th:fragment="content (documentAttributes, itemAttributes, displayPurchaseOrderFields)" xmlns:th="http://www.thymeleaf.org">
+<section class="kfs-tab" data-tab-title="Purchase Order Retransmit" data-default-open="true">
+  <h3>Purchase Order Retransmit</h3>
+	
+    <div class="tab-container" align=center>
+            <h3>Purchase Order Retransmit</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Purchase Order Retransmit Section">
+            <tr>
+                <th align=left valign=top class="datacell" colspan=6>
+                    <br><p><strong>&nbsp;&nbsp;Please accept or change the Transmission Method, Fax Number and PO Header, and check the line item(s) to be transmitted.</strong><br><br></p>
+                </th>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.purchaseOrderRetransmissionMethodCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.purchaseOrderRetransmissionMethodCode" th:field="*{document.purchaseOrderRetransmissionMethodCode}" data-attribute-entry="${documentAttributes.purchaseOrderRetransmissionMethodCode}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.vendorFaxNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.vendorFaxNumber" th:field="*{document.vendorFaxNumber}" data-attribute-entry="${documentAttributes.vendorFaxNumber}" />
+                </td>
+                <th align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.retransmitHeader}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                   <input type="text" name="document.retransmitHeader" th:field="*{document.retransmitHeader}" data-attribute-entry="${documentAttributes.retransmitHeader}" />
+                </td>
+            </tr>
+
+		</table> 
+
+        <table width="100%" border=0 align=center cellpadding=0 cellspacing=0 class="bord-r-t" id="itemsTable">
+            <tbody>
+                <tr>
+                    <th align=left valign=top class="datacell" colspan=8>
+                        <p><strong><br>Items<br><br></strong></p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align=left valign=top class="datacell" colspan=8>
+	                    <input type="image" property="methodToCall.selectAllForRetransmit" 
+	                    			src="${ConfigProperties.externalizable.images.url}tinybutton-selectall.gif" 
+									alt="Select all items." align="absmiddle"/>
+						&nbsp;&nbsp;
+	  	  		        <input type="image" property="methodToCall.deselectAllForRetransmit" 
+	            			        src="${ConfigProperties.externalizable.images.url}tinybutton-deselectall.gif" 
+									alt="Deselect all items." align="absmiddle"/>   
+                    </th>
+                </tr>
+                <tr>
+                    <th width=20 align=center><b>Select</b></th>
+                    <th width=20 align=center><b>Item Type Code</b></th>
+                    <th width=72 align=center><b>Qty</b></th>
+                    <th width=48 align=center><b>UOM</b></th>
+                    <th width=112 align=center><b>Catalog Number</b></th>
+                    <th align=center><b>Description</b></th>
+                    <th width=89 align=center><b>Unit Cost</b></th>
+                    <th width=141 align=center><b>Extended Cost</b></th>
+                </tr>
+                <logic:iterate indexId="ctr" name="KualiForm" property="document.items" id="itemLine">
+                    <th:block th:if="${ ((itemLine.itemType.additionalChargeIndicator and (not empty itemLine.itemDescription)) or (itemLine.itemType.lineItemIndicator and itemLine.itemActiveIndicator)) }">
+                        <tr>
+			
+                            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                                <div align="center"><input type="text" name="document.item[${ctr}].itemSelectedForRetransmitIndicator" th:field="*{document.item[${ctr}].itemSelectedForRetransmitIndicator}" data-attribute-entry="${itemAttributes.itemSelectedForRetransmitIndicator}" /></div>
+                            </div><!-- /kul:htmlAttributeHeaderCell -->
+
+                            <td class="datacell"><input type="text" name="document.item[${ctr}].itemTypeCode" th:field="*{document.item[${ctr}].itemTypeCode}" data-attribute-entry="${itemAttributes.itemTypeCode}" readonly="readonly" /></td>
+                            <td class="datacell"><input type="text" name="document.item[${ctr}].itemQuantity" th:field="*{document.item[${ctr}].itemQuantity}" data-attribute-entry="${itemAttributes.itemQuantity}" readonly="readonly" /></td>			
+ 				            <td class="datacell"><input type="text" name="document.item[${ctr}].itemUnitOfMeasureCode" th:field="*{document.item[${ctr}].itemUnitOfMeasureCode}" data-attribute-entry="${itemAttributes.itemUnitOfMeasureCode}" readonly="readonly" /></td>
+ 				            <td class="datacell"><input type="text" name="document.item[${ctr}].itemCatalogNumber" th:field="*{document.item[${ctr}].itemCatalogNumber}" data-attribute-entry="${itemAttributes.itemCatalogNumber}" readonly="readonly" /></td>
+ 				            <td class="datacell"><input type="text" name="document.item[${ctr}].itemDescription" th:field="*{document.item[${ctr}].itemDescription}" data-attribute-entry="${itemAttributes.itemDescription}" readonly="readonly" /></td>
+ 				            <td class="datacell"><input type="text" name="document.item[${ctr}].itemUnitPrice" th:field="*{document.item[${ctr}].itemUnitPrice}" data-attribute-entry="${itemAttributes.itemUnitPrice}" readonly="readonly" /></td>
+ 				            <td class="datacell"><input type="text" name="document.item[${ctr}].extendedPrice" th:field="*{document.item[${ctr}].extendedPrice}" data-attribute-entry="${itemAttributes.extendedPrice}" readonly="readonly" /></td>
+                        </tr>
+                    </th:block>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</section>
+</div>

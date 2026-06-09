@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: fp/DisbursementVoucher.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">fp/DisbursementVoucher</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="DisbursementVoucherDocument">
+  <form action="financialDisbursementVoucher.do" method="post" enctype="multipart/form-data">
+	
+	<div th:replace="~{fragments/fp/dvPrintCoverSheet :: content}"></div>
+	<script type="text/javascript">
+		function clearSpecialHandlingTab() {
+		var prefix = "document.dvPayeeDetail.";
+		var ctrl;
+		
+		ctrl = kualiElements[prefix+"disbVchrSpecialHandlingPersonName"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "disbVchrSpecialHandlingCityName"]
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "disbVchrSpecialHandlingLine1Addr"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "disbVchrSpecialHandlingStateCode"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "disbVchrSpecialHandlingLine2Addr"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "disbVchrSpecialHandlingZipCode"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "disbVchrSpecialHandlingCountryCode"];
+		ctrl.value = "";
+	   }
+	</script>
+	<div th:replace="~{fragments/sys/paymentMessages :: content}"></div>
+	
+	<!--/*/ <th:block th:with="canEdit=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+	<!--/*/ <th:block th:with="fullEntryMode=${canEdit && KualiForm.editingMode['fullEntry']}"> /*/-->
+
+	<!--/*/ <th:block th:with="frnEntryMode=${canEdit && KualiForm.editingMode['frnEntry']}"> /*/-->
+	<!--/*/ <th:block th:with="travelEntryMode=${canEdit && KualiForm.editingMode['travelEntry']}"> /*/-->
+	
+	<!--/*/ <th:block th:with="wireEntryMode=${canEdit && KualiForm.editingMode['wireEntry']}"> /*/-->
+	<!--/*/ <th:block th:with="taxEntryMode=${canEdit && KualiForm.editingMode['taxEntry']}"> /*/-->
+	
+	<!--/*/ <th:block th:with="payeeEntryMode=${canEdit && KualiForm.editingMode['payeeEntry']}"> /*/-->
+	
+	<!--/*/ <th:block th:with="paymentHandlingEntryMode=${canEdit && KualiForm.editingMode['paymentHandlingEntry']}"> /*/-->
+	<!--/*/ <th:block th:with="voucherDeadlineEntryMode=${canEdit && KualiForm.editingMode['voucherDeadlineEntry']}"> /*/-->
+	<!--/*/ <th:block th:with="specialHandlingChangingEntryMode=${canEdit && KualiForm.editingMode['specialHandlingChangingEntry']}"> /*/-->
+	<!--/*/ <th:block th:with="immediateDisbursementEntryMode=${canEdit && KualiForm.editingMode['immediateDisbursementEntryMode']}"> /*/-->
+	
+	<div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}" data-include-bank-code="true" data-bank-property="document.disbVchrBankCode" data-bank-object-property="document.bank" data-disbursement-only="true"></div>
+	  
+	<div th:replace="~{fragments/fp/dvPayment :: content}"></div>
+
+	<section class="kfs-tab" data-tab-title="Accounting Lines" data-default-open="true">
+  <h3>Accounting Lines</h3>
+		<div class="kfs-sys-java-accountingLines" th:include="~{fragments/sys/java/accountingLines :: content}">
+			<div th:replace="~{fragments/sys/java/accountingLineGroup :: content}" data-new-line-property-name="newSourceLine" data-collection-property-name="document.sourceAccountingLines" data-collection-item-property-name="document.sourceAccountingLine" data-attribute-group-name="source"></div>
+		</div><!-- /kfs-sys-java-accountingLines -->
+	</section>
+	
+	<div th:replace="~{fragments/fp/dvContact :: content}"></div>
+    <div th:replace="~{fragments/fp/dvSpecialHandling :: content}"></div>
+	<div th:replace="~{fragments/fp/dvNRATax :: content}"></div>
+	<div th:replace="~{fragments/fp/wireTransfer :: content}"></div>
+	<div th:replace="~{fragments/fp/foreignDraft :: content}"></div>
+	<div th:replace="~{fragments/fp/dvNonEmployeeTravel :: content}"></div>
+	<div th:replace="~{fragments/fp/dvPrePaidTravel :: content}"></div>
+    <div th:replace="~{fragments/fp/dvPDPStatus :: content}"></div>
+	<div th:replace="~{fragments/gl/generalLedgerPendingEntries :: content}"></div>
+	<kul:notes attachmentTypesValuesFinderClass="${documentEntry.attachmentTypesValuesFinderClass}" />
+	<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+
+	<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+
+	<div class="kfs-panel-footer"></div>
+	
+	<div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="${documentEntry.transactionalDocument}" data-extra-buttons="${KualiForm.extraButtons}"></div>
+  </form>
+</div>
+</body>
+</html>

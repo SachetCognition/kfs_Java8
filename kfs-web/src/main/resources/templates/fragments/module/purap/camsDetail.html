@@ -1,0 +1,260 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/camsDetail.tag -->
+<!-- Fragment parameters: camsItemIndex, camsSystemAttributes, camsAssetAttributes, camsLocationAttributes, ctr, camsAssetSystemProperty, availability, isRequisition, isPurchaseOrder, poItemInactive, fullEntryMode -->
+<div th:fragment="content (camsItemIndex, camsSystemAttributes, camsAssetAttributes, camsLocationAttributes, ctr, camsAssetSystemProperty, availability, isRequisition, isPurchaseOrder, poItemInactive, fullEntryMode)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="addItemAssetUrl=methodToCall.addItemCapitalAssetByItem.line${ctr}"> /*/-->
+<!--/*/ <th:block th:with="deleteItemAssetUrl=methodToCall.deleteItemCapitalAssetByItem.line${camsItemIndex}.(((${ctr})))"> /*/-->
+<!--/*/ <th:block th:with="setManufacturerFromVendorUrl=methodToCall.setManufacturerFromVendorByItem.line${ctr}"> /*/-->
+<!--/*/ <th:block th:with="selectNotCurrentYearUrl=methodToCall.selectNotCurrentYearByItem.line${ctr}"> /*/-->
+<!--/*/ <th:block th:with="clearNotCurrentYearUrl=methodToCall.clearNotCurrentYearByItem.line${ctr}"> /*/-->
+<th:block th:if="${PurapConstants.CapitalAssetAvailability.ONCE eq availability}">
+	<!--/*/ <th:block th:with="addItemAssetUrl=methodToCall.addItemCapitalAssetByDocument.line${ctr}"> /*/-->
+	<!--/*/ <th:block th:with="deleteItemAssetUrl=methodToCall.deleteItemCapitalAssetByDocument.line${camsItemIndex}.(((${ctr})))"> /*/-->
+	<!--/*/ <th:block th:with="setManufacturerFromVendorUrl=methodToCall.setManufacturerFromVendorByDocument.line${ctr}"> /*/-->	
+    <!--/*/ <th:block th:with="selectNotCurrentYearUrl=methodToCall.selectNotCurrentYearByDocument.line${ctr}"> /*/-->    
+    <!--/*/ <th:block th:with="clearNotCurrentYearUrl=methodToCall.clearNotCurrentYearByDocument.line${ctr}"> /*/-->    
+</th:block>
+<!--/*/ <th:block th:with="tabindexOverrideBase=60"> /*/-->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+  <tr>
+    <td colspan="4"  align="right" valign="middle" style="padding:0px">
+      <table class="datatable" summary="System Detail" cellpadding=0 cellspacing=0 style="width:100%">
+
+	    <th:block th:if="${KualiForm.purchasingItemCapitalAssetAvailability eq availability}">
+	    <tr>
+          <th align="right" valign="middle" class="datacell">Add Asset Number:</th>
+	      <td class="datacell" align="left" colspan="3">
+			<input type="text" name="document.purchasingCapitalAssetItems[${camsItemIndex}].newPurchasingItemCapitalAssetLine.capitalAssetNumber" th:field="*{document.purchasingCapitalAssetItems[${camsItemIndex}].newPurchasingItemCapitalAssetLine.capitalAssetNumber}" data-attribute-entry="${camsAssetAttributes.capitalAssetNumber}" />
+              <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+                  <span class="kfs-lookup" data-bo-class="org.kuali.kfs.integration.cam.CapitalAssetManagementAsset" th:replace="~{fragments/kul/lookup :: content}"></span>
+              </th:block>
+					
+	      	&nbsp;
+	      	<th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+			    <input type="image" property="${addItemAssetUrl}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="Insert an Item Capital Asset" title="Add an Item Capital Asset" styleClass="tinybutton" />
+			</th:block>
+		  </td>
+	    </tr>
+	    <tr>  
+          <th width="20%" align=right valign=middle class="bord-l-b">
+             <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsAssetAttributes.capitalAssetNumber}"></label></div>
+          </th>
+	      <td class="datacell" valign="top" colspan="3">
+            <table class="datatable" summary="System Detail" cellpadding=0 cellspacing=0 style="width:25%">
+	            <logic:iterate indexId="idx" name="KualiForm" property="${camsAssetSystemProperty}.itemCapitalAssets" id="asset">
+	               <tr>
+	                 <td class="datacell" align="left">
+	                     <input type="text" name="${camsAssetSystemProperty}.itemCapitalAssets[${idx}].capitalAssetNumber" th:field="*{${camsAssetSystemProperty}.itemCapitalAssets[${idx}].capitalAssetNumber}" data-attribute-entry="${camsAssetAttributes.capitalAssetNumber}" readonly="readonly" />
+	                 </td>
+	                 <td class="datacell" align="left">
+	                     <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+	                         <input type="image" property="${deleteItemAssetUrl}.((#${idx}#))" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" alt="Delete an Asset Number" title="Delete an Asset Number" styleClass="tinybutton" />
+	                     </th:block>
+	                 </td>
+	               </tr>
+	            </tr>
+            </table>
+		  </td>
+	    </tr>
+	    </th:block>
+	
+	    <th:block th:if="${(KualiForm.purchasingCapitalAssetSystemCommentsAvailability eq availability) or (KualiForm.purchasingCapitalAssetSystemDescriptionAvailability eq availability)}">
+        <tr>
+	  	    <th:block th:if="${KualiForm.purchasingCapitalAssetSystemCommentsAvailability eq availability}">
+	            <bean:define id="capitalAssetNoteTextValue" property="${camsAssetSystemProperty}.capitalAssetNoteText" name="KualiForm" />
+	            <th width="20%" align=right valign=middle class="bord-l-b">
+	               <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetNoteText}"></label></div>
+  	            </th>
+		        <td class="datacell">
+			   	    <input type="text" name="${camsAssetSystemProperty}.capitalAssetNoteText" th:field="*{${camsAssetSystemProperty}.capitalAssetNoteText}" data-attribute-entry="${camsSystemAttributes.capitalAssetNoteText}" />')}"		 
+			   	        tabindexOverride="${tabindexOverrideBase + 0}"/>
+			    </td>		
+		    </th:block>
+	        <th:block th:if="${!(KualiForm.purchasingCapitalAssetSystemCommentsAvailability eq availability)}">
+			    <th>&nbsp;</th>
+			    <td class="datacell">&nbsp;</td>
+	        </th:block>
+			<th:block th:if="${KualiForm.purchasingCapitalAssetSystemDescriptionAvailability eq availability}">
+			    <bean:define id="capitalAssetSystemDescriptionValue" property="${camsAssetSystemProperty}.capitalAssetSystemDescription" name="KualiForm" />
+                <th width="20%" align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetSystemDescription}"></label></div>
+                </th>
+	            <td class="datacell">
+		    		<input type="text" name="${camsAssetSystemProperty}.capitalAssetSystemDescription" th:field="*{${camsAssetSystemProperty}.capitalAssetSystemDescription}" data-attribute-entry="${camsSystemAttributes.capitalAssetSystemDescription}" />')}"		    		    
+		    		    tabindexOverride="${tabindexOverrideBase + 3}"/>
+			    </td>
+			</th:block>
+	        <th:block th:if="${!(KualiForm.purchasingCapitalAssetSystemDescriptionAvailability eq availability)}">
+	            <th>&nbsp;</th>
+	            <td class="datacell">&nbsp;</td>
+	        </th:block>
+        </tr>
+        </th:block>
+
+		<th:block th:if="${KualiForm.purchasingCapitalAssetSystemAvailability eq availability}">
+        <tr>
+          <th width="20%" align=right valign=middle class="bord-l-b">
+             <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetNotReceivedCurrentFiscalYearIndicator}"></label></div>
+          </th>
+          <td align="right" class="datacell">
+			<input type="text" name="${camsAssetSystemProperty}.capitalAssetNotReceivedCurrentFiscalYearIndicator" th:field="*{${camsAssetSystemProperty}.capitalAssetNotReceivedCurrentFiscalYearIndicator}" data-attribute-entry="${camsSystemAttributes.capitalAssetNotReceivedCurrentFiscalYearIndicator}" readonly="readonly" />&nbsp;
+            <!--/*/ <th:block th:with="notCurrentYear=false"> /*/-->
+            <th:block th:if="${KualiForm.${camsAssetSystemProperty}.capitalAssetNotReceivedCurrentFiscalYearIndicator == &apos;Yes&apos;}">
+                <!--/*/ <th:block th:with="notCurrentYear=true"> /*/-->
+            </th:block>
+            <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive and !notCurrentYear}">
+                <input type="image" property="${selectNotCurrentYearUrl}" src="${ConfigProperties.externalizable.images.url}tinybutton-select.gif" alt="Select" styleClass="tinybutton"/>
+            </th:block>
+            <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive and notCurrentYear}">
+                <input type="image" property="${clearNotCurrentYearUrl}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-clear1.gif" alt="Clear Selection" styleClass="tinybutton"/>
+            </th:block>
+		  </td>
+          <th width="20%" align=right valign=middle class="bord-l-b">
+             <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetManufacturerName}"></label></div>
+          </th>
+          <td align="right" class="datacell">
+            <input type="text" name="${camsAssetSystemProperty}.capitalAssetManufacturerName" th:field="*{${camsAssetSystemProperty}.capitalAssetManufacturerName}" data-attribute-entry="${camsSystemAttributes.capitalAssetManufacturerName}" />
+            <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+            	<input type="image" property="${setManufacturerFromVendorUrl}" src="${ConfigProperties.externalizable.images.url}tinybutton-sameasvendor.gif" alt="Manufacturer Same as Vendor" styleClass="tinybutton"/>
+            </th:block>
+          </td>
+        </tr>
+        <tr>
+          <th width="20%" align=right valign=middle class="bord-l-b">
+             <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetTypeCode}"></label></div>
+          </th>
+          <td align="right" valign="middle" class="datacell">
+              <input type="text" name="${camsAssetSystemProperty}.capitalAssetTypeCode" th:field="*{${camsAssetSystemProperty}.capitalAssetTypeCode}" data-attribute-entry="${camsSystemAttributes.capitalAssetTypeCode}" />		
+              <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive and !notCurrentYear}">
+                  <span class="kfs-lookup" data-bo-class="org.kuali.kfs.integration.cam.CapitalAssetManagementAssetType" th:replace="~{fragments/kul/lookup :: content}"></span>
+              </th:block>
+          </td>
+          <th width="20%" align=right valign=middle class="bord-l-b">
+             <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetModelDescription}"></label></div>
+          </th>
+          <td align="right" class="datacell">
+            <input type="text" name="${camsAssetSystemProperty}.capitalAssetModelDescription" th:field="*{${camsAssetSystemProperty}.capitalAssetModelDescription}" data-attribute-entry="${camsSystemAttributes.capitalAssetModelDescription}" />
+		  </td>
+        </tr>
+        <th:block th:if="${KualiForm.purchasingCapitalAssetCountAssetNumberAvailability eq availability}">
+	        <tr>
+                <th width="20%" align=right valign=middle class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${camsSystemAttributes.capitalAssetCountAssetNumber}"></label></div>
+                </th>
+	            <td class="datacell">
+	                <input type="text" name="${camsAssetSystemProperty}.capitalAssetCountAssetNumber" th:field="*{${camsAssetSystemProperty}.capitalAssetCountAssetNumber}" data-attribute-entry="${camsSystemAttributes.capitalAssetCountAssetNumber}" />
+	            </td>       
+	            <th>&nbsp;</th>
+	            <td class="datacell">&nbsp;</td>
+	        </tr>
+        </th:block>
+
+        <tr>
+          <td colspan="4" align="right" valign="middle" style="padding:0px" >
+
+			<!--/*/ <th:block th:with="locationPrefix="> /*/-->
+			<!--/*/ <th:block th:with="addCapitalAssetLocationUrl=methodToCall.addCapitalAssetLocationByDocument.line${ctr}"> /*/-->			
+			<th:block th:if="${availability eq PurapConstants.CapitalAssetAvailability.EACH}">
+				<!--/*/ <th:block th:with="locationPrefix=${camsAssetSystemProperty}."> /*/-->
+				<!--/*/ <th:block th:with="addCapitalAssetLocationUrl=methodToCall.addCapitalAssetLocationByItem.line${ctr}"> /*/-->
+			</th:block>
+
+			<!-- Cams Location Entry -->
+            <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+    			<div th:replace="~{fragments/purap/camsLocation :: content}" data-cams-location-attributes="${camsLocationAttributes}" data-ctr="${ctr}" data-ctr2="new" data-cams-asset-location-property="${locationPrefix}newPurchasingCapitalAssetLocationLine" data-availability="${availability}" data-po-item-inactive="${poItemInactive}" data-full-entry-mode="${fullEntryMode}"></div>
+    	    </th:block>
+			
+			<table class="datatable" summary="" border="0" cellpadding="0" cellspacing="0" style="width:100%">
+            <th:block th:if="${(fullEntryMode or amendmentEntry) and !poItemInactive}">
+	            <tr>
+	            	<td colspan="4" class="datacell" style="text-align:center;"> 
+	                	<input type="image" property="${addCapitalAssetLocationUrl}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" alt="Add a Asset Location" title="Add a Asset Location" styleClass="tinybutton" />
+					</td>
+	            </tr>
+	        </th:block>
+
+			<logic:iterate indexId="ctr2" name="KualiForm" property="${camsAssetSystemProperty}.capitalAssetLocations" id="location">				
+								
+				<!-- Cams Locations -->
+			    <!--/*/ <th:block th:with="currentTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+			    <!--/*/ <th:block th:with="topLevelTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+			    <!--/*/ <th:block th:with="tabTitle=AccountingLines-${currentTabIndex}"> /*/-->
+			    <!--/*/ <th:block th:with="tabKey=${kfunc:generateTabKey(tabTitle)}"> /*/-->
+			    <!--  hit form method to increment tab index -->
+			    <!--/*/ <th:block th:with="dummyIncrementer=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+			    <!--/*/ <th:block th:with="currentTab=${kfunc:getTabState(KualiForm, tabKey)}"> /*/-->
+			
+			    <%-- default to closed --%>
+			    <th:block th:switch="${true}">
+			        <th:block th:case="${empty currentTab}">
+			            <!--/*/ <th:block th:with="isOpen=true"> /*/-->
+			        </th:block>
+			        <th:block th:case="${!empty currentTab}">
+			            <!--/*/ <th:block th:with="isOpen=${currentTab == 'OPEN'}"> /*/-->
+			        </th:block>
+			    </th:block>
+				
+			    <html:hidden property="tabStates(${tabKey})" value="${(isOpen ? 'OPEN' : 'CLOSE')}" />
+			
+				<tr>
+					<td class="infoline" valign="middle" colspan="4">
+					<table border="0" cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<th colspan="10" style="padding: 0px; border-right: none;">
+						    <div align=left>
+						  	    <th:block th:if="${isOpen == 'true' || isOpen == 'TRUE'}">
+						         <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-hide.gif" alt="hide" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+						     </th:block>
+						     <th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+						         <input type="image" property="methodToCall.toggleTab.tab${tabKey}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-show.gif" alt="show" title="toggle" styleClass="tinybutton" styleId="tab-${tabKey}-imageToggle" onclick="javascript: return toggleTab(document, '${tabKey}'); " />
+						     </th:block>
+						    	Address ${ctr2+1}
+						    </div>
+						</th>
+					</tr>
+				
+					<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+					<tr style="display: none;"  id="tab-${tabKey}-div">
+					</th:block>   
+				        <th colspan="10" style="padding:0;">
+							<!-- Cams Location List -->
+							<div th:replace="~{fragments/purap/camsLocation :: content}" data-cams-location-attributes="${camsLocationAttributes}" data-ctr="${ctr}" data-ctr2="${ctr2}" data-cams-asset-location-property="${camsAssetSystemProperty}.capitalAssetLocations[${ctr2}]" data-availability="${availability}" data-po-item-inactive="${poItemInactive}" data-full-entry-mode="${fullEntryMode}"></div>
+				        </th>
+				    
+					<th:block th:if="${isOpen != 'true' && isOpen != 'TRUE'}">
+					</tr>
+					</th:block>
+				
+					</table>
+					</td>
+				</tr>
+					
+			</tr>
+			</table>
+          </td>
+        </tr>
+	    </th:block>
+
+      </table>
+      </td>
+  </tr>
+</table>
+</div>

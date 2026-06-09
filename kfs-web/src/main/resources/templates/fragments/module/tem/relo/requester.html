@@ -1,0 +1,168 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/relo/requester.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.TravelRelocationDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="requesterAttributes=${DataDictionary.TravelerDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=8"> /*/-->
+
+	<h3>Payee (Person to be Reimbursed)</h3>
+
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Requester Section">
+		<th:block th:if="${fullEntryMode && lookupRequesterMode}">
+        <tr>
+            <th class="bord-l-b"><div align="right">Payee Lookup:</div></th>
+            <td class="datacell" colspan="3">
+            	<div align="left">
+			    	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.TravelerProfileForLookup" th:replace="~{fragments/kul/lookup :: content}"></span>
+				</div>
+            </td>
+        </tr>
+        </th:block>
+        <tr>
+            <th class="bord-l-b"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.principalId}"></label></div></th>
+            <td class="datacell" colspan="3">
+            	<div align="left">
+			    	<input type="text" name="document.traveler.principalId" th:field="*{document.traveler.principalId}" data-attribute-entry="${requesterAttributes.principalId}" readonly="readonly" />
+				</div>
+            </td>
+        </tr>
+        <tr>
+            <th class="bord-l-b"><div align="right">Payee Type:</div></th>
+            <td class="datacell" colspan="3">
+            	<div align="left">
+			    	<input type="text" name="document.traveler.travelerType.name" th:field="*{document.traveler.travelerType.name}" data-attribute-entry="${DataDictionary.TravelerType.attributes.name}" readonly="readonly" />
+				</div>
+            </td>
+        </tr>
+        <tr>
+        	<th class="bord-l-b">
+	            <div align="right">
+	            	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.temProfileId}"></label> 
+	           	</div>
+            </th>
+            <td class="datacell">
+            	<input type="text" name="document.traveler.principalName" th:field="*{document.traveler.principalName}" data-attribute-entry="${requesterAttributes.principalName}" readonly="readonly" />            
+            </td>
+            <th>
+            	<div align="right">Preparer:</div>
+            </th>
+            <td class="datacell">
+            	${KualiForm.document.preparer}
+			</td>            
+		</tr>
+       	<tr>
+            <th class="bord-l-b">
+            	<div align="right"> <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.firstName}"></label></div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.firstName" th:field="*{document.traveler.firstName}" data-attribute-entry="${requesterAttributes.firstName}" readonly="readonly" />        
+            </td>
+            <th class="bord-l-b">
+            	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.lastName}"></label></div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.lastName" th:field="*{document.traveler.lastName}" data-attribute-entry="${requesterAttributes.lastName}" readonly="readonly" />          
+            </td>
+        </tr>              
+        <th:block th:if="${fullEntryMode}">
+		<tr>
+			<th class="bord-l-b"><div align="right">Address Lookup:</div> </th>
+			<td class="datacell" colspan="3">
+            	<div align="left">&nbsp;
+			    	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.tem.businessobject.TemProfileAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+				</div>
+			</td>
+		</tr>
+		</th:block>       
+        <tr>
+            <th class="bord-l-b">
+	            <div align="right">
+	            	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.streetAddressLine1}"></label>
+	           	</div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.streetAddressLine1" th:field="*{document.traveler.streetAddressLine1}" data-attribute-entry="${requesterAttributes.streetAddressLine1}" readonly="readonly" />            
+            </td>
+            <th class="bord-l-b">
+            	<div align="right">
+            		<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.streetAddressLine2}"></label>
+                </div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.streetAddressLine2" th:field="*{document.traveler.streetAddressLine2}" data-attribute-entry="${requesterAttributes.streetAddressLine2}" readonly="readonly" />            
+            </td>
+        </tr>      
+        <tr>
+            <th class="bord-l-b">
+            	<div align="right">
+            		<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.cityName}"></label>
+                </div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.cityName" th:field="*{document.traveler.cityName}" data-attribute-entry="${requesterAttributes.cityName}" readonly="readonly" />            
+            </td>
+            <th class="bord-l-b">
+            	<div align="right">
+            		<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.stateCode}"></label>
+                </div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.stateCode" th:field="*{document.traveler.stateCode}" data-attribute-entry="${requesterAttributes.stateCode}" readonly="readonly" />           
+            </td>
+        </tr>       
+        <tr>
+            <th class="bord-l-b">
+            	<div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.countryCode}"></label></div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.countryCode" th:field="*{document.traveler.countryCode}" data-attribute-entry="${requesterAttributes.countryCode}" readonly="readonly" onchange="javascript: getAllStates();" />           
+            </td>
+            <th class="bord-l-b">
+           		<div align="right">
+           			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.zipCode}"></label>
+                </div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.zipCode" th:field="*{document.traveler.zipCode}" data-attribute-entry="${requesterAttributes.zipCode}" readonly="readonly" />
+				<th:block th:if="${!readOnly  && fullEntryMode}">
+              		<span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.postalcode.PostalCodeEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+              	</th:block>
+            </td>
+        </tr>        
+        <tr>
+            <th class="bord-l-b">
+            	<div align="right">
+	            	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.emailAddress}"></label>
+                </div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.emailAddress" th:field="*{document.traveler.emailAddress}" data-attribute-entry="${requesterAttributes.emailAddress}" readonly="readonly" />            
+            </td>
+            <th class="bord-l-b">
+            	<div align="right">
+            		<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${requesterAttributes.phoneNumber}"></label>
+            	</div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.traveler.phoneNumber" th:field="*{document.traveler.phoneNumber}" data-attribute-entry="${requesterAttributes.phoneNumber}" readonly="readonly" />            
+            </td>
+        </tr>
+	</table>
+</div>

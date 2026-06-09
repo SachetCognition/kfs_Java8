@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: fp/DepositWizard.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">fp/DepositWizard</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="rawDepositTypeCode=${KualiForm.depositTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="docTitle=Create a New ${KualiForm.depositTypeString} Deposit"> /*/-->
+
+<!--/*/ <th:block th:with="depositAttributes=${DataDictionary.Deposit.attributes}"> /*/-->
+<!--/*/ <th:block th:with="cashReceiptAttributes=${DataDictionary.CashReceiptDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="checkAttributes=${DataDictionary.CheckBase.attributes}"> /*/-->
+<!--/*/ <th:block th:with="dummyAttributes=${DataDictionary.AttributeReferenceDummy.attributes}"> /*/-->
+<!--/*/ <th:block th:with="documentHeaderAttributes=${DataDictionary.FinancialSystemDocumentHeader.attributes}"> /*/-->
+
+
+<div class="kfs-page" data-header-title="${docTitle}" data-doc-title="${docTitle}">
+  <form action="depositWizard.do" method="post">
+	<script type="text/javascript">
+function checkCRAllOrNone() {
+  var masterCRCheckBox = document.getElementById('masterCRCheckBox');
+  if (masterCRCheckBox) {
+    for(var i = 0; i < document.KualiForm.elements.length; i++) {
+      var e = document.KualiForm.elements[i];
+      if((e.name.match(/^depositWizardHelper/)) && (e.type == 'checkbox') && (!e.disabled)) {
+        e.checked = masterCRCheckBox.checked;
+      }
+    }
+  }
+}
+
+function checkCheckAllOrNone() {
+  var masterCheckCheckBox = document.getElementById('masterCheckCheckBox');
+  if (masterCheckCheckBox) {
+    for(var i = 0; i < document.KualiForm.elements.length; i++) {
+      var e = document.KualiForm.elements[i];
+      if((e.name.match(/^depositWizardCashieringCheckHelper/)) && (e.type == 'checkbox') && (!e.disabled)) {
+        e.checked = masterCheckCheckBox.checked;
+      }
+    }
+  }
+}
+</script>
+
+	<input type="hidden" th:field="*{cashDrawerCampusCode}" />
+	<input type="hidden" th:field="*{cashManagementDocId}" />
+	<input type="hidden" th:field="*{depositTypeCode}" />
+	<input type="hidden" th:field="*{currencyDetail.documentNumber}" />
+	<input type="hidden" th:field="*{currencyDetail.cashieringStatus}" />
+	<input type="hidden" th:field="*{currencyDetail.financialDocumentTypeCode}" />
+	<input type="hidden" th:field="*{coinDetail.documentNumber}" />
+	<input type="hidden" th:field="*{coinDetail.cashieringStatus}" />
+	<input type="hidden" th:field="*{coinDetail.financialDocumentTypeCode}" />
+
+	<th:block th:if="${!empty KualiForm.depositableCashReceipts || !empty KualiForm.depositableCashieringChecks || !empty KualiForm.checkFreeCashReceipts}">
+		<section class="kfs-tab" data-tab-title="Deposit Header" data-default-open="true">
+  <h3>Deposit Header</h3>
+			<div class="tab-container" align=center>
+			<h3>Deposit Header</h3>
+
+			<!-- deposit header fields -->
+			<div id="workarea">
+			<table cellpadding="0" cellspacing="0" class="datatable"
+				summary="deposit header info">
+				<tr>
+				    <div th:replace="~{fragments/sys/bankLabel :: content}" data-align="left"></div>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${depositAttributes.depositTypeCode}"></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${depositAttributes.depositTicketNumber}"></th>
+					<th><th:block th:switch="${true}">
+						<th:block th:case="${KualiForm.depositFinal}"><span th:text="#{cashManagement.document.deposit.depositTargetAmount}"></span></th:block>
+						<th:block th:case="*"><span th:text="#{cashManagement.document.deposit.undepositedCheckTotal}"></span></th:block>
+					</th:block></th>
+				</tr>
+				<tr>
+                    <div th:replace="~{fragments/sys/bankControl :: content}" data-property="bankCode" data-object-property="bank" data-deposit-only="true" data-read-only="${readOnly}" data-style="infoline"></div>				
+					<td class="infoline"><input type="text" name="depositTypeCode" th:field="*{depositTypeCode}" data-attribute-entry="${depositAttributes.depositTypeCode}" readonly="readonly" /> <br />
+					&nbsp;</td>
+					<td class="infoline"><input type="text" name="depositTicketNumber" th:field="*{depositTicketNumber}" data-attribute-entry="${depositAttributes.depositTicketNumber}" /> <br />
+					&nbsp;</td>
+					<td class="infoline">$&nbsp;<th:block th:switch="${true}">
+						<th:block th:case="${KualiForm.depositFinal}"><span th:text="${KualiForm.targetDepositAmount}"></span></th:block>
+						<th:block th:case="*"><span th:text="${KualiForm.currentCheckTotal}"></span></th:block>
+					</th:block></td>
+				</tr>
+			</table>
+			</div>
+			</div>
+		</section>
+
+		<th:block th:if="${KualiForm.depositFinal}">
+			<section class="kfs-tab" data-tab-title="Currency and Coin Detail" data-default-open="true">
+  <h3>Currency and Coin Detail</h3>
+				<div class="tab-container" align="center">
+				<h3>Currency and Coin Detail</h3>
+				<div th:replace="~{fragments/fp/currencyCoinLine :: content}" data-currency-property="currencyDetail" data-coin-property="coinDetail" data-read-only="false"></div></div>
+				<div class="tab-container" align="center">
+				<table>
+					<tbody>
+						<tr>
+							<th width="23%">
+							<div align="right"><strong><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${cashReceiptAttributes.totalCashInAmount}"></label></strong></div>
+							</th>
+							<td width="11%" align="left" valign="middle"><span th:text="${KualiForm.currencyFormattedSumTotalAmount}"></span>&nbsp;&nbsp;&nbsp;
+							</td>
+							<td width="18%">
+							<th:block th:if="${!readOnly}">
+								<input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif"
+									styleClass="tinybutton" alt="recalculate total"
+									title="recalculate total" />
+							</th:block> <th:block th:if="${readOnly}"> &nbsp; </th:block></td>
+							<th></th>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</section>
+		</th:block>
+
+	<!--/*/ <th:block th:with="crCounter=0"> /*/-->
+    <th:block th:if="${!empty KualiForm.depositableCashReceipts || !empty KualiForm.checkFreeCashReceipts}">
+		<section class="kfs-tab" data-tab-title="Cash Receipts" data-default-open="true">
+  <h3>Cash Receipts</h3>
+			<div class="tab-container" align="center">
+			<div width="100%" align="left"
+				style="padding-left: 10px; padding-bottom: 10px"><b>Please select
+			the Cash Receipt documents that you would like to deposit.</b></div>
+			<h3>Cash Receipts Available for Deposit</h3>
+			<div id="workarea">
+			<table cellpadding="0" cellspacing="0" class="datatable"
+				summary="cash receipts available for deposit">
+				<tr>
+					<td>
+					<div align="center"><input type="checkbox" title="Check All or None" name="masterCRCheckBox"
+						onclick="checkCRAllOrNone();" id="masterCRCheckBox" /></div>
+					</td>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					<th:block th:if="${rawDepositTypeCode == 'F'}">
+						<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+					</th:block>
+					
+				</tr>
+
+      <th:block th:if="${!empty KualiForm.depositableCashReceipts}">
+				<logic:iterate name="KualiForm" id="cashReceipt" property="depositableCashReceipts" indexId="ctr">
+          <!--/*/ <th:block th:with="crCounter=${crCounter + 1}"> /*/-->
+					<tr>
+						<td colspan="7"
+							style="background-color: gray; border-bottom: 1px solid gray; padding: 0px"><img
+							src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="1" height="1" /></td>
+					</tr>
+
+					<tr>
+						<td>
+						<div align="center"><html:checkbox
+							styleId="depositWizardHelper[${ctr}].selectedValue" property="depositWizardHelper[${ctr}].selectedValue"
+							value="${cashReceipt.documentNumber}" /></div>
+						</td>
+						<td>
+						<div align="center"><b><label for="depositWizardHelper[<span th:text="${ctr}"></span>].selectedValue"><span th:text="${(ctr + 1)}"></span></label></b></div>
+						</td>
+						<td>
+						<div align="center"><a
+							href="financialCashReceipt.do?methodToCall=docHandler&docId=${cashReceipt.documentHeader.documentNumber}&command=displayDocSearchView"
+							target="new"> <input type="text" name="depositableCashReceipt[${ctr}].documentHeader.documentNumber" th:field="*{depositableCashReceipt[${ctr}].documentHeader.documentNumber}" data-attribute-entry="${cashReceiptAttributes.documentNumber}" readonly="readonly" /> </a> <input type="hidden" th:field="*{depositableCashReceipt[${ctr}].documentHeader.documentNumber}" />
+						</div>
+						</td>
+						<td>
+						<div align="center"><input type="text" name="depositableCashReceipt[${ctr}].documentHeader.documentDescription" th:field="*{depositableCashReceipt[${ctr}].documentHeader.documentDescription}" data-attribute-entry="${documentHeaderAttributes.documentDescription}" readonly="readonly" /></div>
+						</td>
+						<td>
+						<div align="center"><input type="text" name="depositWizardHelper[${ctr}].cashReceiptCreateDate" th:field="*{depositWizardHelper[${ctr}].cashReceiptCreateDate}" data-attribute-entry="${dummyAttributes.genericTimestamp}" readonly="readonly" /></div>
+						</td>
+						<td>
+						<div align="center">
+						$&nbsp;<span th:text="${cashReceipt.currencyFormattedTotalConfirmedCheckAmount}"></span> <input type="hidden" th:field="*{depositableCashReceipt[${ctr}].totalConfirmedCheckAmount}" /></div>
+						</td>
+						<th:block th:if="${rawDepositTypeCode == 'F'}">
+						<td>
+							<div align="center">
+							$&nbsp;<span th:text="${cashReceipt.currencyFormattedGrandTotalConfirmedCashAmount}"></span> <input type="hidden" th:field="*{depositableCashReceipt[${ctr}].grandTotalConfirmedCashAmount}" /></div> 
+							</td>
+						</th:block>
+						
+					</tr>
+
+					<th:block th:if="${cashReceipt.confirmedCheckCount > 0}">
+						<tr>
+							<td class="infoline" rowspan="${cashReceipt.confirmedCheckCount + 1}"
+								colspan="2">&nbsp;</td>
+							<td class="infoline"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.checkNumber}"></label>
+							</td>
+							<td class="infoline"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.checkDate}"></label>
+							</td>
+							<td class="infoline"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.description}"></label>
+							</td>
+							<td class="infoline"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${checkAttributes.amount}"></label></td>
+							
+						</tr>
+
+						<tr th:each=" : ${cashReceipt.confirmedChecks}" id="confirmedCheck"
+							indexId="checkIndex">
+							<tr>
+								<td><input type="text" name="depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].checkNumber" th:field="*{depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].checkNumber}" data-attribute-entry="${checkAttributes.checkNumber}" readonly="readonly" />
+								</td>
+								<td><input type="text" name="depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].checkDate" th:field="*{depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].checkDate}" data-attribute-entry="${checkAttributes.checkDate}" readonly="readonly" />
+								</td>
+								<td><input type="text" name="depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].description" th:field="*{depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].description}" data-attribute-entry="${checkAttributes.description}" readonly="readonly" />
+								</td>
+								<td>$<input type="text" name="depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].amount" th:field="*{depositableCashReceipt[${ctr}].confirmedCheck[${checkIndex}].amount}" data-attribute-entry="${checkAttributes.amount}" readonly="readonly" />
+								</td>
+							</tr>
+						</tr>
+					</th:block>
+				</tr>
+      </th:block>
+        
+        <%-- check free cash receipts - only show on final deposit, when they are automatically deposited --%>
+        <th:block th:if="${!empty KualiForm.checkFreeCashReceipts && KualiForm.depositFinal}">
+        <tr>
+          <td colspan="7"><strong>The following Cash Receipts had no checks associated with them; they are automatically deposited as part of the final deposit.</strong></td> 
+        </tr>
+        <logic:iterate name="KualiForm" id="cashReceipt"
+					property="checkFreeCashReceipts" indexId="ctr">
+          <!--/*/ <th:block th:with="crCounter=${crCounter + 1}"> /*/-->
+					<tr>
+						<td colspan="7"
+							style="background-color: gray; border-bottom: 1px solid gray; padding: 0px"><img
+							src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="1" height="1" /></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+						<div align="center"><b>${crCounter}</b></div>
+						</td>
+						<td>
+						<div align="center"><a
+							href="financialCashReceipt.do?methodToCall=docHandler&docId=${cashReceipt.documentHeader.documentNumber}&command=displayDocSearchView"
+							target="new"> <input type="text" name="checkFreeCashReceipt[${ctr}].documentHeader.documentNumber" th:field="*{checkFreeCashReceipt[${ctr}].documentHeader.documentNumber}" data-attribute-entry="${cashReceiptAttributes.documentNumber}" readonly="readonly" /> </a> <input type="hidden" th:field="*{checkFreeCashReceipt[${ctr}].documentHeader.documentNumber}" />
+						</div>
+						</td>
+						<td>
+						<div align="center"><input type="text" name="checkFreeCashReceipt[${ctr}].documentHeader.documentDescription" th:field="*{checkFreeCashReceipt[${ctr}].documentHeader.documentDescription}" data-attribute-entry="${documentHeaderAttributes.documentDescription}" readonly="readonly" /></div>
+						</td>
+						<td>
+						<div align="center">
+							<input type="text" name="checkFreeCashReceipt[${ctr}].createDate" th:field="*{checkFreeCashReceipt[${ctr}].createDate}" data-attribute-entry="${dummyAttributes.genericTimestamp}" readonly="readonly" />
+							</div>
+						</td>
+						<td>&nbsp;</td>
+						<td>
+						<div align="center">
+						$&nbsp;<span th:text="${cashReceipt.currencyFormattedGrandTotalConfirmedCashAmount}"></span></div>
+						</td>
+					</tr>
+				</tr>
+        </th:block>
+
+				<tr>
+					<td colspan="7"
+						style="background-color: gray; border-bottom: 1px solid gray; padding: 0px"><img
+						src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" alt="" width="1" height="1" /></td>
+				</tr>
+
+			</table>
+			</div>
+      </section>
+			
+    </th:block>
+    
+    <th:block th:if="${!empty KualiForm.depositableCashieringChecks}">
+    
+      <section class="kfs-tab" data-tab-title="Cashiering Transaction Checks" data-default-open="true">
+  <h3>Cashiering Transaction Checks</h3>
+        <div class="tab-container" align="center">
+        <div width="100%" align="left" style="padding-left: 10px; padding-bottom: 10px">
+          <strong>Please select Cashiering Checks to deposit.</strong>
+        </div>
+          <h3>Cashiering Checks Available for Deposit</h3>
+        <div id="workarea">
+          <table cellpadding="0" cellspacing="0" class="datatable" summary="cashiering checks available for deposit">
+            <tr>
+              <td>
+                <div align="center"><input type="checkbox" title="Check All or None" name="masterCheckCheckBox" onclick="checkCheckAllOrNone();" id="masterCheckCheckBox" /></div>
+              </td>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+            </tr>
+
+            <logic:iterate name="KualiForm" id="cashieringCheck" property="depositableCashieringChecks" indexId="ctr">
+              <tr>
+                <td>
+                  <div style="text-align: center">
+                    <html:checkbox name="KualiForm" property="depositWizardCashieringCheckHelper[${ctr}].sequenceId" value="${KualiForm.depositableCashieringChecks[ctr].sequenceId}" />
+                  </div>
+                </td>
+                <%-- if you change the spacing of the table cell below to put the different elements on different lines, giant monkeys will hurt you. Also, the DepositWizard form won't look quite as good --%>
+                <td><strong><span th:text="${ctr + 1}"></span></strong><html:hidden name="KualiForm" property="depositableCashieringCheck[${ctr}].sequenceId" /></td>
+                <td>
+                  <input type="text" name="depositableCashieringCheck[${ctr}].checkNumber" th:field="*{depositableCashieringCheck[${ctr}].checkNumber}" data-attribute-entry="${checkAttributes.checkNumber}" readonly="readonly" />
+                </td>
+                <td>
+                  <input type="text" name="depositableCashieringCheck[${ctr}].description" th:field="*{depositableCashieringCheck[${ctr}].description}" data-attribute-entry="${checkAttributes.description}" readonly="readonly" />
+                </td>
+                <td>
+                  <input type="text" name="depositableCashieringCheck[${ctr}].checkDate" th:field="*{depositableCashieringCheck[${ctr}].checkDate}" data-attribute-entry="${checkAttributes.checkDate}" readonly="readonly" />
+                </td>
+                <td>
+                  <input type="text" name="depositableCashieringCheck[${ctr}].amount" th:field="*{depositableCashieringCheck[${ctr}].amount}" data-attribute-entry="${checkAttributes.amount}" readonly="readonly" />
+                </td>
+              </tr>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </th:block>
+    
+    </div>
+			<div class="kfs-panel-footer"></div>
+
+			<div id="globalbuttons" class="globalbuttons"><input type="image" property="methodToCall.createDeposit"
+				src="${ConfigProperties.externalizable.images.url}buttonsmall_create.gif" alt="create" title="create"
+				styleClass="tinybutton" /> <input type="image" property="methodToCall.refresh" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_refresh.gif"
+				alt="refresh" title="refresh" styleClass="tinybutton" /> <input type="image" property="methodToCall.cancel" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif"
+				alt="cancel" title="cancel" styleClass="tinybutton" /></div>
+	</th:block>
+
+	<th:block th:if="${empty KualiForm.depositableCashReceipts && empty KualiForm.depositableCashieringChecks && empty KualiForm.checkFreeCashReceipts}">
+		<table width="100%">
+			<tr>
+				<td align="center">${KualiForm.noVerifiedCashErrorMessage}</td>
+			</tr>
+		</table>
+
+		<div id="globalbuttons" class="globalbuttons"><input type="image" property="methodToCall.refresh" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_refresh.gif"
+			alt="refresh" title="refresh" styleClass="tinybutton" /> <input type="image" property="methodToCall.cancel" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif"
+			alt="cancel" title="cancel" styleClass="tinybutton" /></div>
+	</th:block>
+  </form>
+</div>
+</body>
+</html>

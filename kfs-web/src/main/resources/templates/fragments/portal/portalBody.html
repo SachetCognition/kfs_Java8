@@ -1,0 +1,74 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/portalBody.tag -->
+<!-- Fragment parameters: channelTitle, channelUrl, selectedTab -->
+<div th:fragment="content (channelTitle, channelUrl, selectedTab)" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/portal/immutableBar :: content}"></div>
+
+<%-- first try to check if they are focusing in --%>
+<th:block th:switch="${true}">
+  <c:when test='${!empty channelTitle && !empty channelUrl}'>
+	  <div id="iframe_portlet_container_div">
+	  	<div th:replace="~{fragments/portal/iframePortletContainer :: content}" data-channel-title="${channelTitle}" data-channel-url="${channelUrl}"></div>
+	  </div>
+  </th:block>
+  <th:block th:case="*">
+	<table border="0" width="100%"  cellspacing="0" cellpadding="0" id="iframe_portlet_container_table">
+	<th:block th:if="${empty channelTitle && empty channelUrl}">
+		<!--/*/ <th:block th:with="motd=[[${__EXPR__}]]"> /*/-->
+		<th:block th:if="${!empty pageScope.motd}">
+		  	<tr valign="top" bgcolor="#FFFFFF">
+				<td width="15" class="leftback-focus">&nbsp;</td>
+				<td colspan="3">
+				    <div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Message Of The Day"></div>
+					    <div class="body">
+				    	    <strong><span th:text="${pageScope.motd}"></span></strong>
+		    		    </div>
+		    		<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+				</td>
+		   	</tr>
+	   	</th:block>
+	</th:block>
+ 	<tr valign="top" bgcolor="#FFFFFF">
+       <td width="15" class="leftback-focus">&nbsp;</td>
+        <th:block th:switch="${true}">
+          <%-- then default to tab based actions if they are not focusing in --%>
+          <c:when test='${selectedTab == "main"}'>
+              <div th:replace="~{fragments/portal/mainTab :: content}"></div>
+          </th:block>
+          <c:when test='${selectedTab == "maintenance"}'>
+              <div th:replace="~{fragments/portal/maintenanceTab :: content}"></div>
+          </th:block>
+          <c:when test='${selectedTab == "administration"}'>
+              <div th:replace="~{fragments/portal/administrationTab :: content}"></div>
+          </th:block>
+          
+          <%-- as backup go to the main menu index --%>
+          <th:block th:case="*">
+              <div th:replace="~{fragments/portal/mainTab :: content}"></div>
+          </th:block>
+        </th:block>
+    </tr>
+</table>
+  </th:block>
+</th:block>
+
+ <div class="footerbevel">&nbsp;</div>
+  <div id="footer-copyright"> <bean:message key="app.copyright" arg0="${ConfigProperties.current.year}" /></div>
+</div>

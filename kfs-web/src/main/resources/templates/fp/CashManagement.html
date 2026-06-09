@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: fp/CashManagement.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">fp/CashManagement</title>
+</head>
+<body>
+<%--
+  HACK: CashManagementDocument isn't a transactionalDocument, but its XML file claims that it is,
+  which is why this JSP abuses some of the standard transactionalDocument tags
+--%>
+<!--/*/ <th:block th:with="allowAdditionalDeposits=${KualiForm.editingMode['allowAdditionalDeposits']}"> /*/-->
+<!--/*/ <th:block th:with="showDeposits=${allowAdditionalDeposits || (!empty KualiForm.document.deposits)}"> /*/-->
+
+<div class="kfs-document-page" data-document-type="CashManagementDocument">
+  <form action="financialCashManagement.do" method="post" enctype="multipart/form-data">
+    <div th:replace="~{fragments/sys/hiddenDocumentFields :: content}" data-is-financial-document="false"></div>
+    
+    <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+    
+    <th:block th:if="${!empty KualiForm.document.checks}">
+      <logic:iterate indexId="ctr" name="KualiForm" property="document.checks" id="currentCheck">
+        <div th:replace="~{fragments/fp/hiddenCheckLine :: content}" data-property-name="document.checks[${ctr}]" data-display-hidden="false"></div>
+      </tr>
+    </th:block>
+    
+    <div th:replace="~{fragments/fp/cashDrawerActivity :: content}"></div>
+    
+    <th:block th:if="${!showDeposits}">
+        <kul:hiddenTab forceOpen="true" />
+    </th:block>
+    <th:block th:if="${showDeposits}">
+        <div th:replace="~{fragments/fp/deposits :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+    </th:block>
+
+    <div th:replace="~{fragments/fp/cashieringActivity :: content}"></div>
+    
+    <th:block th:if="${!empty KualiForm.recentlyClosedItemsInProcess}">
+      <div th:replace="~{fragments/fp/recentlyClosedMiscAdvances :: content}"></div>
+    </th:block>
+
+    <th:block th:if="${KualiForm.document.bankCashOffsetEnabled}">
+        <div th:replace="~{fragments/gl/generalLedgerPendingEntries :: content}"></div>
+    </th:block>
+    
+    <div th:replace="~{fragments/kul/notes :: content}"></div>
+    <div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+    <div th:replace="~{fragments/kul/routeLog :: content}"></div>
+    <div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+    <div class="kfs-panel-footer"></div>
+    
+    <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="false"></div>
+  </form>
+</div>
+</body>
+</html>

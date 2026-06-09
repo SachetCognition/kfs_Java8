@@ -1,0 +1,107 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/expenses/actualExpenseDetailHeader.tag -->
+<!-- Fragment parameters: detailObject -->
+<div th:fragment="content (detailObject)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="otherExpenseAttributes=${DataDictionary.ActualExpense.attributes}"> /*/-->
+<!--/*/ <th:block th:with="temExtension=${DataDictionary.ExpenseTypeObjectCode.attributes}"> /*/-->
+<!--/*/ <th:block th:with="isTA=${KualiForm.isTravelAuthorizationDoc}"> /*/-->
+
+<jsp:useBean id="paramMap" class="java.util.HashMap" />
+<!--/*/ <th:block th:with="tripType=${KualiForm.document.tripTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="travelerType=${KualiForm.document.traveler.travelerTypeCode}"> /*/-->
+<!--/*/ <th:block th:with="documentType=${KualiForm.docTypeName}"> /*/-->
+
+<tr>
+	<th scope="row">&nbsp;</th>
+	<th>
+		<div align="left">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.expenseDate}"></label>
+		</div>
+	</th>
+	<th>
+		<div align="left">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.expenseTypeCode}"></label>
+		</div>
+	</th>
+	<%-- Show Mileage --%>
+	<th:block th:if="${detailObject.mileageIndicator}">
+		<th>
+			<div align=center>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.miles}"></label>
+			</div></th>
+		<th>
+			<div align=center>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes['mileageRate.rate']}"></label>
+			</div>
+		</th>
+	</th:block>
+	<th>
+		<div align="left">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.expenseAmount}"></label>
+		</div>
+	</th>
+	<th>
+		<div align="left">$US</div>
+	</th>
+	<th>
+		<div align="left">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.nonReimbursable}"></label>
+		</div>
+	</th>
+	<th>
+		<div align="left">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.taxable}"></label>
+		</div>
+	</th>
+	<th>
+		<div align="left">
+			<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.missingReceipt}"></label>
+		</div>
+	</th>
+	<%-- Show Airfare --%>
+	<th:block th:if="${detailObject.airfareIndicator}">
+		<th>
+			<div align=left>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.airfareSourceCode}"></label>
+			</div></th>
+		<th>
+			<div align=left>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.classOfServiceCode}"></label>
+			</div>
+		</th>
+	</th:block>
+
+	<%-- Show Car Rental--%>
+	<th:block th:if="${detailObject.rentalCarIndicator}">
+		<th>
+			<div align=left>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.classOfServiceCode}"></label>
+			</div></th>
+		<th>
+			<div align=left>
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${otherExpenseAttributes.rentalCarInsurance}"></label>
+			</div>
+		</th>
+	</th:block>
+	<th>
+		<div align="center">Actions</div>
+	</th>
+</tr>
+</div>

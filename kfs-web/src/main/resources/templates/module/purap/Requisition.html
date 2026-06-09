@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/purap/Requisition.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/purap/Requisition</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="camsFullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && not empty KualiForm.editingMode['allowCapitalAssetEdit']}"> /*/-->
+
+<div class="kfs-document-page" data-document-type="RequisitionDocument">
+  <form action="purapRequisition.do" method="post" enctype="multipart/form-data">
+
+    <!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+ 
+	<div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}" data-include-posting-year="true" data-fiscal-year-read-only="${not KualiForm.editingMode['allowPostingYearEntry']}" data-posting-year-attributes="${DataDictionary.RequisitionDocument.attributes}" data-document-attributes="${DataDictionary.RequisitionDocument.attributes}" data-detail-section-label="Requisition Detail" data-editable-funding-source="true" data-editable-account-distribution-method="${KualiForm.readOnlyAccountDistributionMethod}"></div>
+    </div><!-- /sys:documentOverview -->
+
+    <div th:replace="~{fragments/purap/delivery :: content}" data-document-attributes="${DataDictionary.RequisitionDocument.attributes}" data-show-default-building-option="true"></div>
+
+    <div th:replace="~{fragments/purap/vendor :: content}" data-document-attributes="${DataDictionary.RequisitionDocument.attributes}" data-display-requisition-fields="true"></div>
+ 
+    <div th:replace="~{fragments/purap/puritems :: content}" data-item-attributes="${DataDictionary.RequisitionItem.attributes}" data-accounting-line-attributes="${DataDictionary.RequisitionAccount.attributes}" data-display-requisition-fields="true"></div>
+    	
+ 	<div th:replace="~{fragments/purap/purCams :: content}" data-document-attributes="${DataDictionary.RequisitionDocument.attributes}" data-item-attributes="${DataDictionary.RequisitionItem.attributes}" data-cams-item-attributes="${DataDictionary.RequisitionCapitalAssetItem.attributes}" data-cams-system-attributes="${DataDictionary.RequisitionCapitalAssetSystem.attributes}" data-cams-asset-attributes="${DataDictionary.RequisitionItemCapitalAsset.attributes}" data-cams-location-attributes="${DataDictionary.RequisitionCapitalAssetLocation.attributes}" data-is-requisition="true" data-full-entry-mode="${camsFullEntryMode}"></div>
+
+    <div th:replace="~{fragments/purap/paymentinfo :: content}" data-document-attributes="${DataDictionary.RequisitionDocument.attributes}"></div>
+
+    <div th:replace="~{fragments/purap/additional :: content}" data-document-attributes="${DataDictionary.RequisitionDocument.attributes}" data-display-requisition-fields="true"></div>
+         
+    <div th:replace="~{fragments/purap/summaryaccounts :: content}" data-item-attributes="${DataDictionary.RequisitionItem.attributes}" data-document-attributes="${DataDictionary.SourceAccountingLine.attributes}"></div>
+
+    <div th:replace="~{fragments/purap/customRelatedDocuments :: content}" data-document-attributes="${DataDictionary.RelatedDocuments.attributes}"></div>
+    
+    <div th:replace="~{fragments/purap/customPaymentHistory :: content}" data-document-attributes="${DataDictionary.RelatedDocuments.attributes}"></div>
+	     
+	<div th:replace="~{fragments/kul/notes :: content}"></div>         
+
+	<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+
+	<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+
+	<div class="kfs-panel-footer"></div>
+	
+	<!--/*/ <th:block th:with="extraButtons=${KualiForm.extraButtons}"> /*/-->  	
+
+	<div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="true" data-extra-buttons="${extraButtons}"></div>
+
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/systemInformation.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentAttributes=${DataDictionary.BudgetConstructionDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountAttributes=${DataDictionary.Account.attributes}"> /*/-->
+<!--/*/ <th:block th:with="subFundGroupAttributes=${DataDictionary.SubFundGroup.attributes}"> /*/-->
+<!--/*/ <th:block th:with="orgAttributes=${DataDictionary.Organization.attributes}"> /*/-->
+<!--/*/ <th:block th:with="orgVals=${KualiForm.document.account.organization}"> /*/-->
+<!--/*/ <th:block th:with="orgPropString=document.account.organization"> /*/-->
+
+<th:block th:if="${KualiForm.accountReportsExist}">
+<!--/*/ <th:block th:with="accountRptsAttributes=${DataDictionary.BudgetConstructionAccountReports.attributes}"> /*/-->
+<!--/*/ <th:block th:with="orgRptsAttributes=${DataDictionary.BudgetConstructionOrganizationReports.attributes}"> /*/-->
+<!--/*/ <th:block th:with="orgRptsVals=${KualiForm.document.budgetConstructionAccountReports.budgetConstructionOrganizationReports}"> /*/-->
+<!--/*/ <th:block th:with="orgRptsPropString=document.budgetConstructionAccountReports.budgetConstructionOrganizationReports"> /*/-->
+</th:block>
+
+<section class="kfs-tab" data-tab-title="System Information" data-default-open="true">
+  <h3>System Information</h3>
+<div class="tab-container" align=center>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable" title="view system information" summary="view system information">
+    	<tr>
+		    <td colspan="4" class="subhead">
+			<span class="subhead-left">System Information</span>
+		    </td>
+		</tr>
+		<tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td>&nbsp;</td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.previousUniversityFiscalYear" th:field="*{document.previousUniversityFiscalYear}" data-attribute-entry="${documentAttributes.universityFiscalYear}" />
+	      	    ${KualiForm.document.previousUniversityFiscalYear}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td>&nbsp;</td>
+		</tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.chartOfAccountsCode" th:field="*{document.chartOfAccountsCode}" data-attribute-entry="${documentAttributes.chartOfAccountsCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.document.chartOfAccountsCode}">
+				    ${KualiForm.document.chartOfAccountsCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.accountNumber" th:field="*{document.accountNumber}" data-attribute-entry="${documentAttributes.accountNumber}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${KualiForm.document.chartOfAccountsCode}&amp;accountNumber=${KualiForm.document.accountNumber}">
+				    ${KualiForm.document.accountNumber}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.account.accountName" th:field="*{document.account.accountName}" data-attribute-entry="${accountAttributes.accountName}" />
+	      	    ${KualiForm.document.account.accountName}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td>&nbsp;</td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.subAccountNumber" th:field="*{document.subAccountNumber}" data-attribute-entry="${documentAttributes.subAccountNumber}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubAccount" data-key-values="chartOfAccountsCode=${KualiForm.document.chartOfAccountsCode}&amp;accountNumber=${KualiForm.document.accountNumber}&amp;subAccountNumber=${KualiForm.document.subAccountNumber}">
+				    ${KualiForm.document.subAccountNumber}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+
+          <c:catch var="sa">
+              <!--/*/ <th:block th:with="badSubAccount=${empty KualiForm.document.subAccount.subAccountName}"> /*/-->
+          </c:catch>
+          <th:block th:if="${sa!=null}">
+              <!--/*/ <th:block th:with="badSubAccount=true"> /*/-->
+          </th:block>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.subAccount.subAccountName" th:field="*{document.subAccount.subAccountName}" data-attribute-entry="${DataDictionary.SubAccount.attributes.subAccountName}" />
+                <th:block th:if="${KualiForm.document.subAccountNumber ne '-----'}">
+                <th:block th:if="${!badSubAccount}">
+                  ${KualiForm.document.subAccount.subAccountName}
+                </th:block>
+                <th:block th:if="${badSubAccount}">
+                  Not Found
+                </th:block>
+		        </th:block>&nbsp;
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td>&nbsp;</td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.account.subFundGroupCode" th:field="*{document.account.subFundGroupCode}" data-attribute-entry="${accountAttributes.subFundGroupCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubFundGroup" data-key-values="subFundGroupCode=${KualiForm.document.account.subFundGroupCode}">
+				    ${KualiForm.document.account.subFundGroupCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.account.subFundGroup.subFundGroupDescription" th:field="*{document.account.subFundGroup.subFundGroupDescription}" data-attribute-entry="${subFundGroupAttributes['subFundGroupDescription']}" />
+			    ${KualiForm.document.account.subFundGroup.subFundGroupDescription}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td>&nbsp;</td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.account.organizationCode" th:field="*{document.account.organizationCode}" data-attribute-entry="${accountAttributes.organizationCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${KualiForm.document.account.chartOfAccountsCode}&amp;organizationCode=${KualiForm.document.account.organizationCode}">
+				    ${KualiForm.document.account.organizationCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.account.organization.organizationName" th:field="*{document.account.organization.organizationName}" data-attribute-entry="${orgAttributes['organizationName']}" />
+	      	    ${KualiForm.document.account.organization.organizationName}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+        </tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td align="center" valign="middle">
+		      	<input type="text" name="document.account.organization.reportsToChartOfAccountsCode" th:field="*{document.account.organization.reportsToChartOfAccountsCode}" data-attribute-entry="${orgAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.document.account.organization.reportsToChartOfAccountsCode}">
+				    ${KualiForm.document.account.organization.reportsToChartOfAccountsCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="${orgPropString}.reportsToOrganizationCode" th:field="*{${orgPropString}.reportsToOrganizationCode}" data-attribute-entry="${orgAttributes.reportsToOrganizationCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${orgVals.reportsToChartOfAccountsCode}&amp;organizationCode=${orgVals.reportsToOrganizationCode}">
+				    ${orgVals.reportsToOrganizationCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="${orgPropString}.reportsToOrganization.organizationName" th:field="*{${orgPropString}.reportsToOrganization.organizationName}" data-attribute-entry="${orgAttributes['organizationName']}" />
+	      	    ${orgVals.reportsToOrganization.organizationName}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+
+    	<tr>
+		    <td colspan="4" class="subhead">
+			<span class="subhead-left">Next Year Data</span>
+		    </td>
+	    </tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td>&nbsp;</td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.universityFiscalYear" th:field="*{document.universityFiscalYear}" data-attribute-entry="${documentAttributes.universityFiscalYear}" />
+			    ${KualiForm.document.universityFiscalYear}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td>&nbsp;</td>
+        </tr>
+	    <tr>
+        <th:block th:if="${!KualiForm.accountReportsExist}">
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td  colspan="3" align="center" valign="middle">No Account Reports To mapping found!
+	      </td>
+        </tr>
+        </th:block>
+        <th:block th:if="${KualiForm.accountReportsExist}">
+		<tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.budgetConstructionAccountReports.reportsToChartOfAccountsCode" th:field="*{document.budgetConstructionAccountReports.reportsToChartOfAccountsCode}" data-attribute-entry="${accountRptsAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.document.budgetConstructionAccountReports.reportsToChartOfAccountsCode}">
+				    ${KualiForm.document.budgetConstructionAccountReports.reportsToChartOfAccountsCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.budgetConstructionAccountReports.reportsToOrganizationCode" th:field="*{document.budgetConstructionAccountReports.reportsToOrganizationCode}" data-attribute-entry="${accountRptsAttributes.reportsToOrganizationCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports" data-key-values="chartOfAccountsCode=${KualiForm.document.budgetConstructionAccountReports.reportsToChartOfAccountsCode}&amp;organizationCode=${KualiForm.document.budgetConstructionAccountReports.reportsToOrganizationCode}">
+				    ${KualiForm.document.budgetConstructionAccountReports.reportsToOrganizationCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.organization.organizationName" th:field="*{document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.organization.organizationName}" data-attribute-entry="${orgAttributes.organizationName}" />
+			    ${KualiForm.document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.organization.organizationName}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToChartOfAccountsCode" th:field="*{document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToChartOfAccountsCode}" data-attribute-entry="${orgRptsAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToChartOfAccountsCode}">
+				    ${KualiForm.document.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToChartOfAccountsCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="${orgRptsPropString}.reportsToOrganizationCode" th:field="*{${orgRptsPropString}.reportsToOrganizationCode}" data-attribute-entry="${orgRptsAttributes.reportsToOrganizationCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports" data-key-values="chartOfAccountsCode=${orgRptsVals.reportsToChartOfAccountsCode}&amp;organizationCode=${orgRptsVals.reportsToOrganizationCode}">
+				    ${orgRptsVals.reportsToOrganizationCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="${orgRptsPropString}.reportsToOrganization.organizationName" th:field="*{${orgRptsPropString}.reportsToOrganization.organizationName}" data-attribute-entry="${orgAttributes['organizationName']}" />
+	      	    ${orgRptsVals.reportsToOrganization.organizationName}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+        </th:block>
+
+
+    	<tr>
+		    <td colspan="4" class="subhead">
+			<span class="subhead-left">Approval Level Data</span>
+		    </td>
+	    </tr>
+	    <tr>
+	   	  <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.organizationLevelCode" th:field="*{document.organizationLevelCode}" data-attribute-entry="${documentAttributes.organizationLevelCode}" />
+	      	    ${KualiForm.document.organizationLevelCode}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td>&nbsp;</td>
+	      <td align="center" valign="middle">
+		  	<th:block th:if="${KualiForm.document.organizationLevelCode == 0}">
+				Account Level Update Access
+		  	</th:block>&nbsp;
+	      </td>
+		</tr>
+	    <tr>
+	      <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.organizationLevelChartOfAccountsCode" th:field="*{document.organizationLevelChartOfAccountsCode}" data-attribute-entry="${documentAttributes.organizationLevelChartOfAccountsCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.document.organizationLevelChartOfAccountsCode}">
+				    ${KualiForm.document.organizationLevelChartOfAccountsCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+	      <td align="center" valign="middle">
+          <th:block th:if="${KualiForm.accountReportsExist}">
+	      	<input type="text" name="document.organizationLevelOrganizationCode" th:field="*{document.organizationLevelOrganizationCode}" data-attribute-entry="${documentAttributes.organizationLevelOrganizationCode}" readonly="readonly" />
+	      		<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports" data-key-values="chartOfAccountsCode=${KualiForm.document.organizationLevelChartOfAccountsCode}&amp;organizationCode=${KualiForm.document.organizationLevelOrganizationCode}">
+				    ${KualiForm.document.organizationLevelOrganizationCode}
+				</span>
+	      	</div><!-- /kul:htmlControlAttribute -->
+          </th:block>&nbsp;
+	      </td>
+	      <td align="center" valign="middle">
+	      	<input type="text" name="document.organizationLevelOrganization.organizationName" th:field="*{document.organizationLevelOrganization.organizationName}" data-attribute-entry="${orgAttributes.organizationName}" />
+	      	    ${KualiForm.document.organizationLevelOrganization.organizationName}
+	      	</div><!-- /kul:htmlControlAttribute -->
+	      </td>
+		</tr>
+
+    	<tr>
+		    <td colspan="4" class="subhead">
+			<span class="subhead-left">Controls</span>
+		    </td>
+	    </tr>
+
+    	<tr>
+          <td colspan="4" class="datacell" nowrap>
+            <div align="center">
+
+            <%-- pullup functionality allowed anytime --%>
+            <%-- But a lock must be acquired (if not already locked) before the actual pullup --%>
+            <%-- display potential pullup candidates regardless of editingMode --%>
+            <th:block th:if="${!empty KualiForm.pullupLevelKeyLabels}">
+
+              <select th:field="*{pullupKeyCode}">
+                  <html:optionsCollection property="pullupLevelKeyLabels" label="label" value="key" />
+              </select>
+            
+              <input type="image" property="methodToCall.performAccountPullup.anchorsystemControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-pullup.gif" title="Account Pull Up" alt="Account Pull Up" styleClass="tinybutton"/>
+
+            </th:block>
+
+            <%-- pushdown functionality only allowed when user has full access --%>
+            <%-- display potential pushdown candidates if editingMode is full access --%>
+            <%-- the list is populated only when fullEntry, but checking anyway --%>
+            <th:block th:if="${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && !empty KualiForm.pushdownLevelKeyLabels}">
+
+              <select th:field="*{pushdownKeyCode}">
+                  <html:optionsCollection property="pushdownLevelKeyLabels" label="label" value="key" />
+              </select>
+
+              <input type="image" property="methodToCall.performAccountPushdown.anchorsystemControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-pushdown.gif" title="Account Push Down" alt="Account Push Down" styleClass="tinybutton"/>
+
+            </th:block>
+            <input type="image" property="methodToCall.performReportDump.anchorsystemControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-reportdump.gif" title="Account Report/Dump" alt="Account Report/Dump" styleClass="tinybutton"/>
+            </div>
+          </td>
+	    </tr>
+	    
+	</table>
+</div>
+</section>
+</div>

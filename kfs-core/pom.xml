@@ -56,4 +56,13 @@
     </plugins>
   </build>
 
+  <dependencies>
+    <!-- Thymeleaf Spring5 integration for KFS custom dialect processors -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>3.1.2.RELEASE</version>
+    </dependency>
+  </dependencies>
+
 </project>

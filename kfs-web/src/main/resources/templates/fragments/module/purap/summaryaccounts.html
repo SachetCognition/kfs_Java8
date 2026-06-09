@@ -1,0 +1,159 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/summaryaccounts.tag -->
+<!-- Fragment parameters: documentAttributes, itemAttributes -->
+<div th:fragment="content (documentAttributes, itemAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="summaryItemAttributes=${DataDictionary.PurApSummaryItem.attributes}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Account Summary" data-default-open="false">
+  <h3>Account Summary</h3>
+
+	<div class="tab-container" align="center" valign="middle">
+        <th:block th:if="${!KualiForm.document.inquiryRendered}">
+	        <div align="left">
+	            Object Code and Sub-Object Code inquiries and descriptions have been removed because this is a prior year document.
+            </div>
+            <br>
+        </th:block>
+    
+		<h3>Account Summary   <input type="image" property="methodToCall.refreshAccountSummary" src="${ConfigProperties.externalizable.images.url}tinybutton-refaccsum.gif" alt="refresh account summary"/></h3>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="view/edit pending entries">
+			<th:block th:if="${#lists.isEmpty(KualiForm.summaryAccounts)}">
+				<h4>No Accounts</h4>
+			</th:block>
+			<th:block th:unless="${#lists.isEmpty(KualiForm.summaryAccounts)}">
+				<tr th:each="summaryAccount : ${KualiForm.summaryAccounts}" indexId="ctr">		
+				    <tr>
+					    <td colspan="9" class="tab-subhead" style="border-right: none;">
+					        Account Summary ${ctr+1} 
+					    </td>
+				    </tr>		
+				
+				    <tr>
+                		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.chartOfAccountsCode}"></th>
+                		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.accountNumber}"></th>
+                		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.subAccountNumber}"></th>
+                		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.financialObjectCode}"></th>
+            	    	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.financialSubObjectCode}"></th>
+            		    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.projectCode}"></th>
+                		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.organizationReferenceId}"></th>
+ 	    				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.DocumentHeader.attributes.organizationDocumentNumber}"></th>           		
+                		<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.amount}"></th>
+			    	</tr>
+								    		    
+					<tr>
+						<td class="datacell center">
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${summaryAccount.account.chartOfAccountsCode}">
+								<span th:text="${KualiForm.summaryAccounts[${ctr}].account.chartOfAccountsCode}"></span>
+							</span>
+							&nbsp;
+						</td>
+						<td class="datacell center">
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${summaryAccount.account.chartOfAccountsCode}&accountNumber=${summaryAccount.account.accountNumber}">
+								<span th:text="${KualiForm.summaryAccounts[${ctr}].account.accountNumber}"></span>
+							</span>
+							&nbsp;
+						</td>
+						<td class="datacell center">
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubAccount" data-key-values="chartOfAccountsCode=${summaryAccount.account.chartOfAccountsCode}&accountNumber=${summaryAccount.account.accountNumber}&subAccountNumber=${summaryAccount.account.subAccountNumber}">
+								<span th:text="${KualiForm.summaryAccounts[${ctr}].account.subAccountNumber}"></span>
+							</span>
+							&nbsp;
+						</td>
+						<td class="datacell center">
+						    <th:block th:switch="${true}">
+  						        <th:block th:case="${KualiForm.document.inquiryRendered}">
+							        <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.ObjectCode" data-key-values="financialObjectCode=${summaryAccount.account.financialObjectCode}&chartOfAccountsCode=${summaryAccount.account.chartOfAccountsCode}&universityFiscalYear=${KualiForm.document.postingYear}">
+								        <span th:text="${KualiForm.summaryAccounts[${ctr}].account.financialObjectCode}"></span>
+							        </span>
+							        &nbsp;
+						        </th:block>
+						        <th:block th:case="*">
+						            <span th:text="${KualiForm.summaryAccounts[${ctr}].account.financialObjectCode}"></span>&nbsp;
+						        </th:block>
+						    </th:block>	
+						</td>
+						<td class="datacell center">
+						    <th:block th:switch="${true}">
+  						        <th:block th:case="${KualiForm.document.inquiryRendered}">
+							        <span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubObjectCode" data-key-values="accountNumber=${summaryAccount.account.accountNumber}&financialSubObjectCode=${summaryAccount.account.financialSubObjectCode}&financialObjectCode=${summaryAccount.account.financialObjectCode}&chartOfAccountsCode=${summaryAccount.account.chartOfAccountsCode}&universityFiscalYear=${KualiForm.document.postingYear}">
+								        <span th:text="${KualiForm.summaryAccounts[${ctr}].account.financialSubObjectCode}"></span>
+							        </span>
+							        &nbsp;
+							    </th:block>
+							    <th:block th:case="*">
+							        <span th:text="${KualiForm.summaryAccounts[${ctr}].account.financialSubObjectCode}"></span>&nbsp;
+							    </th:block>
+							</th:block>
+						</td>
+						<td class="datacell center">
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.ProjectCode" data-key-values="projectCode=${summaryAccount.account.projectCode}">
+								<span th:text="${KualiForm.summaryAccounts[${ctr}].account.projectCode}"></span>
+							</span>
+							&nbsp;
+						</td>
+					    <td class="datacell center">
+							<span th:text="${KualiForm.summaryAccounts[${ctr}].account.organizationReferenceId}"></span>&nbsp;
+						</td>
+					    <td class="datacell center">
+							<span th:text="${KualiForm.document.documentHeader.organizationDocumentNumber}"></span>&nbsp;
+						</td>
+						<td class="datacell center"><div align="right">
+							<span th:text="${KualiForm.summaryAccounts[${ctr}].account.amount}"></span>&nbsp;</div>
+						</td> 
+					</tr>
+					
+                    <tr>
+                        <td colspan="9" height=30 style="padding: 20px;">
+                            <div align="center">
+                            <table width="75%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+                                <tr>
+                                    <th colspan="3" style="padding: 0px; border-right: none; border-top: 1px solid #999999;">
+                                        <div align="left">Items of Account Summary ${ctr+1} </div>
+                                    </th>
+                                </tr>            
+                                <tr>
+                                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Item</div><!-- /kul:htmlAttributeHeaderCell -->
+                                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${summaryItemAttributes.itemDescription}"></th>
+                                    <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${summaryItemAttributes.estimatedEncumberanceAmount}"></th>
+                                </tr>           
+                                <tr th:each="itemValue : ${KualiForm.summaryAccounts[${ctr}].items}" indexId="ctrItem">
+                                    <tr>
+                                        <td width="25%" class="datacell center">
+                                            <input type="text" name="summaryAccounts[${ctr}].items[${ctrItem}].itemIdentifierString" th:field="*{summaryAccounts[${ctr}].items[${ctrItem}].itemIdentifierString}" data-attribute-entry="${summaryItemAttributes.itemLineNumber}" readonly="readonly" />&nbsp;
+                                        </td>	                                        
+                                        <td width="50%" class="datacell center">
+                                            <input type="text" name="summaryAccounts[${ctr}].items[${ctrItem}].itemDescription" th:field="*{summaryAccounts[${ctr}].items[${ctrItem}].itemDescription}" data-attribute-entry="${summaryItemAttributes.itemDescription}" readonly="readonly" />&nbsp;
+                                        </td>
+                                        <td width="25%" class="datacell center">
+                                            <input type="text" name="summaryAccounts[${ctr}].items[${ctrItem}].estimatedEncumberanceAmount" th:field="*{summaryAccounts[${ctr}].items[${ctrItem}].estimatedEncumberanceAmount}" data-attribute-entry="${summaryItemAttributes.estimatedEncumberanceAmount}" readonly="readonly" />&nbsp;
+                                        </td>
+                                    </tr>
+                                </tr>
+                            </table>
+                            </div>
+                        </td>
+                    </tr>
+
+				</tr>
+			</th:block>
+		</table>
+	</div>
+</section>
+</div>

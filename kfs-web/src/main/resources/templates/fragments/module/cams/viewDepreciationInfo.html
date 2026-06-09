@@ -1,0 +1,69 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/viewDepreciationInfo.tag -->
+<!-- Fragment parameters: defaultTabHide, assetValueObj -->
+<div th:fragment="content (defaultTabHide, assetValueObj)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${assetValueObj==null}">
+	<!--/*/ <th:block th:with="assetValueObj=document.asset"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="assetAttributes=${DataDictionary.Asset.attributes}"> /*/-->
+<section class="kfs-tab" data-tab-title="View Asset Depreciation" data-default-open="${!defaultTabHide}">
+  <h3>View Asset Depreciation</h3> 
+		<div class="tab-container" align="center">
+		<table width="100%" cellpadding="0" cellspacing="0" class="datatable">								
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.primaryDepreciationMethodCode}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.primaryDepreciationMethodCode" th:field="*{${assetValueObj}.primaryDepreciationMethodCode}" data-attribute-entry="${assetAttributes.primaryDepreciationMethodCode}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.baseAmount}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.baseAmount" th:field="*{${assetValueObj}.baseAmount}" data-attribute-entry="${assetAttributes.baseAmount}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right">Depreciable Lifelimit:</th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.capitalAssetType.depreciableLifeLimit" th:field="*{${assetValueObj}.capitalAssetType.depreciableLifeLimit}" data-attribute-entry="${assetAttributes['capitalAssetType.depreciableLifeLimit']}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.salvageAmount}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.salvageAmount" th:field="*{${assetValueObj}.salvageAmount}" data-attribute-entry="${assetAttributes.salvageAmount}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.depreciationDate}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.depreciationDate" th:field="*{${assetValueObj}.depreciationDate}" data-attribute-entry="${assetAttributes.depreciationDate}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.accumulatedDepreciation}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.accumulatedDepreciation" th:field="*{${assetValueObj}.accumulatedDepreciation}" data-attribute-entry="${assetAttributes.accumulatedDepreciation}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.yearToDateDepreciation}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.yearToDateDepreciation" th:field="*{${assetValueObj}.yearToDateDepreciation}" data-attribute-entry="${assetAttributes.yearToDateDepreciation}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.bookValue}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.bookValue" th:field="*{${assetValueObj}.bookValue}" data-attribute-entry="${assetAttributes.bookValue}" readonly="readonly" /></td>								
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.currentMonthDepreciation}"></label></th>
+				<td class="grid" width="25%" ><input type="text" name="${assetValueObj}.currentMonthDepreciation" th:field="*{${assetValueObj}.currentMonthDepreciation}" data-attribute-entry="${assetAttributes.currentMonthDepreciation}" readonly="readonly" /></td>								
+				<th class="grid" width="25%" align="right">&nbsp;</th>
+				<td class="grid" width="25%">&nbsp;</td>
+			</tr>
+			<tr>
+				<th class="grid" width="25%" align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${assetAttributes.prevYearDepreciation}"></label></th>
+				<td class="grid" width="25%"><input type="text" name="${assetValueObj}.prevYearDepreciation" th:field="*{${assetValueObj}.prevYearDepreciation}" data-attribute-entry="${assetAttributes.prevYearDepreciation}" readonly="readonly" /></td>
+				<th class="grid" width="25%" align="right">&nbsp;</th>
+				<td class="grid" width="25%">&nbsp;</td>								
+			</tr>
+		</table>
+		</div>
+</section>
+</div>

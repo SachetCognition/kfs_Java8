@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/bc/BudgetConstructionSelection.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/bc/BudgetConstructionSelection</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="bcHeaderAttributes=${DataDictionary.BudgetConstructionHeader.attributes}"> /*/-->
+<!--/*/ <th:block th:with="accountAttributes=${DataDictionary.Account.attributes}"> /*/-->
+<!--/*/ <th:block th:with="subFundGroupAttributes=${DataDictionary.SubFundGroup.attributes}"> /*/-->
+<!--/*/ <th:block th:with="orgAttributes=${DataDictionary.Organization.attributes}"> /*/-->
+<!--/*/ <th:block th:with="orgPropString=budgetConstructionHeader.account.organization"> /*/-->
+<!--/*/ <th:block th:with="accountsCanCrossCharts=[[${__EXPR__}]]"> /*/-->
+
+<th:block th:if="${KualiForm.accountReportsExist}">
+	<!--/*/ <th:block th:with="accountRptsAttributes=${DataDictionary.BudgetConstructionAccountReports.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="accountRptsPropString=budgetConstructionHeader.budgetConstructionAccountReports"> /*/-->
+	<!--/*/ <th:block th:with="orgRptsAttributes=${DataDictionary.BudgetConstructionOrganizationReports.attributes}"> /*/-->
+	<!--/*/ <th:block th:with="orgRptsPropString=budgetConstructionHeader.budgetConstructionAccountReports.budgetConstructionOrganizationReports"> /*/-->
+</th:block>
+
+<%-- hack to get around ojb retrieve problems when account key is bad, don't show the info fields --%>
+<c:catch var="e">
+	<!--/*/ <th:block th:with="showTheDetail=${!empty KualiForm.budgetConstructionHeader.account.subFundGroupCode}"> /*/-->
+
+</c:catch>
+<th:block th:if="${e!=null}">
+	<!--/*/ <th:block th:with="showTheDetail=false"> /*/-->
+</th:block>
+
+<div class="kfs-page" data-header-title="" data-doc-title="">
+  <form action="budgetBudgetConstructionSelection.do" method="post">
+
+    <th:block th:if="${!accountingLineScriptsLoaded}">
+        <script type='text/javascript' src="dwr/interface/ChartService.js"></script>
+        <script type='text/javascript' src="dwr/interface/AccountService.js"></script>
+        <script type='text/javascript' src="dwr/interface/SubAccountService.js"></script>
+        <script language="JavaScript" type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+        <script language="JavaScript" type="text/javascript" src="scripts/module/bc/objectInfo.js"></script>
+        <!--/*/ <th:block th:with="accountingLineScriptsLoaded=true"> /*/-->
+    </th:block>
+
+	<strong>
+	<h2>Budget Construction Selection<a
+		href="${ConfigProperties.externalizable.help.url}default.htm?turl=WordDocuments%2Fbudgetconstructionselection.htm"
+		tabindex="${KualiForm.nextArbitrarilyHighIndex}" target="helpWindow"
+		title="[Help]Upload"> <img
+		src="${ConfigProperties.kr.externalizable.images.url}my_cp_inf.gif"
+		title="[Help] Upload" alt="[Help] Upload" hspace=5 border=0
+		align="middle"></a></h2>
+	</strong>
+	</br>
+	<%--	<div th:replace="~{fragments/sys/hiddenDocumentFields :: content}"></div> --%>
+
+	<div class="kfs-errors" data-key-match="${BCConstants.BUDGET_CONSTRUCTION_SELECTION_ERRORS}" th:if="${#fields.hasErrors('${BCConstants.BUDGET_CONSTRUCTION_SELECTION_ERRORS}')}"><h4>Errors found in Search Criteria:</h4></div>
+	<c:forEach items="${KualiForm.messages}" var="message">
+	   ${message}
+	</tr>
+
+	<th:block th:if="${!empty KualiForm.universityFiscalYear && !KualiForm.sessionInProgressDetected}">
+		<table align="center" cellpadding="0" cellspacing="0"
+			class="datatable-100">
+			<tr>
+				<th class="grid" align="right" width="10%" colspan="1"><span
+					class="nowrap">BC Fiscal Year:</span> <input type="hidden" th:field="*{universityFiscalYear}" /></th>
+				<td class="grid" valign="center" rowspan="1" colspan="1"><span
+					class="nowrap"> ${KualiForm.universityFiscalYear}&nbsp; </span></td>
+				<th class="grid" colspan="5">&nbsp;</th>
+			</tr>
+			<tr>
+				<th class="grid" colspan="7" align="left"><br>
+				Budget Construction Document Open <br>
+				<br>
+				</th>
+			</tr>
+			<tr>
+				<td class="grid" colspan="4">
+				<div align="center"><input type="image" property="methodToCall.performMyAccounts.anchoraccountControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-myaccounts.gif"
+					title="Find My Budgeted Accounts" alt="Find My Budgeted Accounts"
+					styleClass="tinybutton" />&nbsp;&nbsp;&nbsp; <input type="image" property="methodToCall.performMyOrganization.anchoraccountControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-myorg.gif"
+					title="Find My Organization Budgeted Accounts"
+					alt="Find My Organization Budgeted Accounts"
+					styleClass="tinybutton" /></div>
+				</td>
+				<td class="grid" colspan="3">&nbsp;</td>
+			</tr>
+			<tr>
+				<th class="grid" colspan="2" rowspan="2">&nbsp;</th>
+				<th class="grid" align="center" colspan="1">
+				<input type="hidden" th:field="*{budgetConstructionHeader.universityFiscalYear}" /> 
+				<input type="hidden" th:field="*{budgetConstructionHeader.documentNumber}" />
+				<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcHeaderAttributes.chartOfAccountsCode}"></label></th>
+				<th class="grid" align="center" colspan="1"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcHeaderAttributes.accountNumber}"></label></th>
+				<th class="grid" align="center" colspan="1"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcHeaderAttributes.subAccountNumber}"></label></th>
+				<th class="grid" align="center" colspan="2">Action</th>
+			</tr>
+			<tr>
+				<%--first cell in row above spans two rows --%>
+				<th:block th:if="${!accountsCanCrossCharts}">
+				<input type="hidden" th:field="*{budgetConstructionHeader.chartOfAccountsCode}" />
+					<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="grid" data-accounting-line="budgetConstructionHeader" data-field="chartOfAccountsCode" data-detail-field="chartOfAccounts.finChartOfAccountDescription" data-attributes="${bcHeaderAttributes}" data-inquiry="true" data-bo-class-simple-name="Chart" data-read-only="true" data-display-hidden="false" data-col-span="1" data-accounting-line-values-map="${KualiForm.budgetConstructionHeader.valuesMap}" data-anchor="budgetConstructionHeaderAnchor" data-div-id="budgetConstructionHeader.chartOfAccountsCode.div"></div>
+					<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="grid" data-accounting-line="budgetConstructionHeader" data-field="accountNumber" data-detail-function="budgetObjectInfoUpdator.loadChartAccountInfo" data-detail-field="account.accountName" data-attributes="${bcHeaderAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Account" data-read-only="false" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.budgetConstructionHeader.valuesMap}" data-anchor="budgetConstructionHeaderAccountAnchor"></div>
+				</th:block>
+				<th:block th:if="${accountsCanCrossCharts}">
+					<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="grid" data-accounting-line="budgetConstructionHeader" data-field="chartOfAccountsCode" data-detail-function="loadChartInfo" data-detail-field="chartOfAccounts.finChartOfAccountDescription" data-attributes="${bcHeaderAttributes}" data-inquiry="true" data-bo-class-simple-name="Chart" data-read-only="false" data-display-hidden="false" data-col-span="1" data-accounting-line-values-map="${KualiForm.budgetConstructionHeader.valuesMap}" data-anchor="budgetConstructionHeaderAnchor"></div>
+					<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="grid" data-accounting-line="budgetConstructionHeader" data-field="accountNumber" data-detail-function="loadAccountInfo" data-detail-field="account.accountName" data-attributes="${bcHeaderAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="Account" data-read-only="false" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.budgetConstructionHeader.valuesMap}" data-anchor="budgetConstructionHeaderAccountAnchor"></div>
+				</th:block>
+				<div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="grid" data-accounting-line="budgetConstructionHeader" data-field="subAccountNumber" data-detail-function="loadSubAccountInfo" data-detail-field="subAccount.subAccountName" data-attributes="${bcHeaderAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="SubAccount" data-read-only="false" data-display-hidden="false" data-col-span="1" data-lookup-or-inquiry-keys="chartOfAccountsCode,accountNumber" data-accounting-line-values-map="${KualiForm.budgetConstructionHeader.valuesMap}" data-anchor="budgetConstructionHeaderSubAccountAnchor"></div>
+                <!--/*/ <th:block th:with="refreshTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+                <!--/*/ <th:block th:with="dummyIncrementVar=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+                <!--/*/ <th:block th:with="loadTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+                <!--/*/ <th:block th:with="dummyIncrementVar=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+				<td class="grid" nowrap colspan="2">
+				<div align="center"><input type="image" property="methodToCall.refresh.anchorbudgetConstructionHeaderAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-refresh.gif"
+					title="Refresh" alt="Refresh" tabindex="${loadTabIndex}" styleClass="tinybutton" /> <input type="image" property="methodToCall.performBCDocumentOpen.anchorbudgetConstructionHeaderAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-loaddoc.gif"
+					title="Load Budget Construction Document" alt="Load Budget Construction Document"
+					tabindex="${refreshTabIndex}" styleClass="tinybutton" />
+				</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="grid" align="right" colspan="2">Sub-Fund Group:</th>
+				<td class="grid" valign="center" rowspan="1" colspan="2">
+				<th:block th:if="${showTheDetail}">
+					<input type="text" name="budgetConstructionHeader.account.subFundGroupCode" th:field="*{budgetConstructionHeader.account.subFundGroupCode}" data-attribute-entry="${accountAttributes.subFundGroupCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubFundGroup" data-key-values="subFundGroupCode=${KualiForm.budgetConstructionHeader.account.subFundGroupCode}">
+							<html:hidden write="true"
+								property="budgetConstructionHeader.account.subFundGroupCode" />
+						</span>&nbsp;
+                    </div><!-- /kul:htmlControlAttribute -->
+				</th:block>&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="3">
+				<th:block th:if="${showTheDetail}">
+                    <input type="text" name="budgetConstructionHeader.account.subFundGroup.subFundGroupDescription" th:field="*{budgetConstructionHeader.account.subFundGroup.subFundGroupDescription}" data-attribute-entry="${subFundGroupAttributes['subFundGroupDescription']}" readonly="readonly" />
+				</th:block>&nbsp;</td>
+			</tr>
+			<tr>
+				<th class="grid" align="right" colspan="2">Current Year Org:</th>
+				<td class="grid" valign="center" rowspan="1" colspan="1">
+				&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+					<input type="text" name="budgetConstructionHeader.account.organizationCode" th:field="*{budgetConstructionHeader.account.organizationCode}" data-attribute-entry="${accountAttributes.organizationCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.account.chartOfAccountsCode}&amp;organizationCode=${KualiForm.budgetConstructionHeader.account.organizationCode}">
+							<html:hidden write="true"
+								property="budgetConstructionHeader.account.organizationCode" />
+						</span>&nbsp;
+	      	</div><!-- /kul:htmlControlAttribute -->
+				</th:block>&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="3"><th:block th:if="${showTheDetail}">
+					<input type="text" name="${orgPropString}.organizationName" th:field="*{${orgPropString}.organizationName}" data-attribute-entry="${orgAttributes.organizationName}" readonly="readonly" />
+				</th:block>&nbsp;</td>
+			</tr>
+			<tr>
+				<th class="grid" align="right" colspan="2">Rpts To:</th>
+				<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+					<input type="text" name="${orgPropString}.reportsToChartOfAccountsCode" th:field="*{${orgPropString}.reportsToChartOfAccountsCode}" data-attribute-entry="${orgAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.account.organization.reportsToChartOfAccountsCode}">
+							<html:hidden write="true"
+								property="${orgPropString}.reportsToChartOfAccountsCode" />
+						</span>&nbsp;
+	      	</div><!-- /kul:htmlControlAttribute -->
+				</th:block>&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+					<input type="text" name="${orgPropString}.reportsToOrganizationCode" th:field="*{${orgPropString}.reportsToOrganizationCode}" data-attribute-entry="${orgAttributes.reportsToOrganizationCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.account.organization.reportsToChartOfAccountsCode}&amp;organizationCode=${KualiForm.budgetConstructionHeader.account.organization.reportsToOrganizationCode}">
+							<html:hidden write="true"
+								property="${orgPropString}.reportsToOrganizationCode" />
+						</span>&nbsp;
+	      	</div><!-- /kul:htmlControlAttribute -->
+				</th:block>&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="3"><th:block th:if="${showTheDetail}">
+ 					<input type="text" name="${orgPropString}.reportsToOrganizationCode" th:field="*{${orgPropString}.reportsToOrganizationCode}" data-attribute-entry="${orgAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+				</th:block>&nbsp;</td>
+			</tr>
+
+			<th:block th:if="${!KualiForm.accountReportsExist}">
+				<tr>
+					<th class="grid" align="right" colspan="2">Next Year Org:</th>
+					<td class="grid" valign="center" rowspan="1" colspan="5"><th:block th:if="${!empty KualiForm.budgetConstructionHeader.chartOfAccountsCode && !empty KualiForm.budgetConstructionHeader.accountNumber}">
+                    No Account Reports To mapping found!
+              </th:block>&nbsp;</td>
+				</tr>
+			</th:block>
+			<th:block th:if="${KualiForm.accountReportsExist}">
+				<tr>
+					<th class="grid" align="right" colspan="2">Next Year Org:</th>
+					<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+						<input type="text" name="${accountRptsPropString}.reportsToChartOfAccountsCode" th:field="*{${accountRptsPropString}.reportsToChartOfAccountsCode}" data-attribute-entry="${accountRptsAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.budgetConstructionAccountReports.reportsToChartOfAccountsCode}">
+								<html:hidden write="true"
+									property="${accountRptsPropString}.reportsToChartOfAccountsCode" />
+							</span>&nbsp;
+            </div><!-- /kul:htmlControlAttribute -->
+					</th:block>&nbsp;</td>
+					<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+						<input type="text" name="${accountRptsPropString}.reportsToOrganizationCode" th:field="*{${accountRptsPropString}.reportsToOrganizationCode}" data-attribute-entry="${accountRptsAttributes.reportsToOrganizationCode}" readonly="readonly" />
+							<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.module.bc.businessobject.BudgetConstructionOrganizationReports" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.budgetConstructionAccountReports.reportsToChartOfAccountsCode}&amp;organizationCode=${KualiForm.budgetConstructionHeader.budgetConstructionAccountReports.reportsToOrganizationCode}">
+								<html:hidden write="true"
+									property="${accountRptsPropString}.reportsToOrganizationCode" />
+							</span>&nbsp;
+            </div><!-- /kul:htmlControlAttribute -->
+					</th:block>&nbsp;</td>
+					<td class="grid" valign="center" rowspan="1" colspan="3"><th:block th:if="${showTheDetail}">
+						<input type="text" name="${accountRptsPropString}.budgetConstructionOrganizationReports.organization.organizationName" th:field="*{${accountRptsPropString}.budgetConstructionOrganizationReports.organization.organizationName}" data-attribute-entry="${orgAttributes.organizationName}" readonly="readonly" /></td>
+			</th:block>
+			&nbsp;
+			</tr>
+			<tr>
+				<th class="grid" align="right" colspan="2">Rpts To:</th>
+				<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+					<input type="text" name="${orgRptsPropString}.reportsToChartOfAccountsCode" th:field="*{${orgRptsPropString}.reportsToChartOfAccountsCode}" data-attribute-entry="${orgRptsAttributes.reportsToChartOfAccountsCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToChartOfAccountsCode}">
+							<html:hidden write="true"
+								property="${orgRptsPropString}.reportsToChartOfAccountsCode" />
+						</span>&nbsp;
+            		</div><!-- /kul:htmlControlAttribute -->
+				</th:block>&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="1"><th:block th:if="${showTheDetail}">
+					<input type="text" name="${orgRptsPropString}.reportsToOrganizationCode" th:field="*{${orgRptsPropString}.reportsToOrganizationCode}" data-attribute-entry="${orgRptsAttributes.reportsToOrganizationCode}" readonly="readonly" />
+						<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Organization" data-key-values="chartOfAccountsCode=${KualiForm.budgetConstructionHeader.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToChartOfAccountsCode}&amp;organizationCode=${KualiForm.budgetConstructionHeader.budgetConstructionAccountReports.budgetConstructionOrganizationReports.reportsToOrganizationCode}">
+							<html:hidden write="true"
+								property="${orgRptsPropString}.reportsToOrganizationCode" />
+						</span>&nbsp;
+	      	</div><!-- /kul:htmlControlAttribute -->
+				</th:block>&nbsp;</td>
+				<td class="grid" valign="center" rowspan="1" colspan="3"><th:block th:if="${showTheDetail}">
+ 					<input type="text" name="${orgRptsPropString}.reportsToOrganization.organizationName" th:field="*{${orgRptsPropString}.reportsToOrganization.organizationName}" data-attribute-entry="${orgAttributes.organizationName}" />
+						</td>
+				</th:block>
+				&nbsp;
+			</tr>
+			</th:block>
+
+			<tr>
+				<th class="grid" colspan="7" align="left"><br>
+				Budget Construction Organization Salary Setting/Report/Control <br>
+				<br>
+				</th>
+			</tr>
+			<tr>
+				<td class="grid" colspan="4">
+				<div align="center"><th:block th:if="${!KualiForm.salarySettingDisabled}">
+					<input type="image" property="methodToCall.performOrgSalarySetting.anchororgControlsAnchor"
+						src="${ConfigProperties.externalizable.images.url}tinybutton-orgsalsettings.gif"
+						title="Organization Salary Setting"
+						alt="Organization Salary Setting" styleClass="tinybutton" />&nbsp;&nbsp;&nbsp;
+              </th:block> <input type="image" property="methodToCall.performReportDump.anchororgControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-orgrepdump.gif"
+					title="Organization Report Export" alt="Organization Report/Dump"
+					styleClass="tinybutton" />&nbsp;&nbsp;&nbsp; <input type="image" property="methodToCall.performRequestImport.anchororgControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-requestimport.gif"
+					title="Organization Request Import"
+					alt="Organization Request Import" styleClass="tinybutton" />&nbsp;&nbsp;&nbsp;
+				<input type="image" property="methodToCall.performLockMonitor.anchororgControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-lockmonitor.gif"
+					title="Lock Monitor" alt="Lock Monitor" styleClass="tinybutton" />&nbsp;&nbsp;&nbsp;
+				<th:block th:if="${KualiForm.canPerformPayrateImportExport}">
+					<th:block th:if="${!KualiForm.salarySettingDisabled}">
+						<input type="image" property="methodToCall.performPayrateImportExport.anchororgControlsAnchor"
+							src="${ConfigProperties.externalizable.images.url}tinybutton-payrateimpexp.gif"
+							title="Payrate Import/Export" alt="Payrate Import/Export"
+							styleClass="tinybutton" />
+					</th:block>
+				</th:block></div>
+				</td>
+				<td class="grid" colspan="3">
+				<div align="center"><input type="image" property="methodToCall.performOrgPullup.anchororgControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-orgpullup.gif"
+					title="Organization Pull Up" alt="Organization Pull Up"
+					styleClass="tinybutton" />&nbsp;&nbsp;&nbsp; <input type="image" property="methodToCall.performOrgPushdown.anchororgControlsAnchor"
+					src="${ConfigProperties.externalizable.images.url}tinybutton-orgpushdown.gif"
+					title="Organization Push Down" alt="Organization Push Down"
+					styleClass="tinybutton" /></div>
+				</td>
+			</tr>
+		</table>
+	</th:block>
+
+	<div id="globalbuttons" class="globalbuttons"><input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif"
+		styleClass="globalbuttons" property="methodToCall.returnToCaller"
+		title="close" alt="close" /></div>
+
+	<%-- Need these here to override and initialize vars used by objectinfo.js to BC specific --%>
+	<SCRIPT type="text/javascript">
+  var kualiForm = document.forms['KualiForm'];
+  var kualiElements = kualiForm.elements;
+</SCRIPT>
+  </form>
+</div>
+</body>
+</html>

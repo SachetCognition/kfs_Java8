@@ -1,0 +1,232 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/budgetConstructionRevenueLines.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${!accountingLineScriptsLoaded}">
+    <script type='text/javascript' src="dwr/interface/ObjectCodeService.js"></script>
+    <script type='text/javascript' src="dwr/interface/SubObjectCodeService.js"></script> 
+	<script language="JavaScript" type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+	<!--/*/ <th:block th:with="accountingLineScriptsLoaded=true"> /*/-->
+</th:block>
+
+<!--/*/ <th:block th:with="pbglRevenueAttributes=${DataDictionary.PendingBudgetConstructionGeneralLedger.attributes}"> /*/-->
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] || KualiForm.systemViewOnly}"> /*/-->
+<!--/*/ <th:block th:with="pbglRevPropertyName=document.pendingBudgetConstructionGeneralLedgerRevenueLines"> /*/-->
+
+<fmt:formatNumber value="${KualiForm.document.revenueAccountLineAnnualBalanceAmountTotal}" 
+        	var="formattedRevReqTotal" type="number" groupingUsed="true" />
+        		
+<section class="kfs-tab" data-tab-title="Revenue" data-default-open="false">
+  <h3>Revenue</h3>
+<div class="tab-container" align=center>
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+            <div th:replace="~{fragments/bc/subheadingWithDetailToggleRow :: content}" data-column-count="7" data-subheading="Revenue" data-use-percent-adj="${KualiForm.budgetableDocument}" data-read-only="${readOnly}"></div>
+			<tr>
+				<th>
+				    &nbsp;	
+				</th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglRevenueAttributes.financialObjectCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglRevenueAttributes.financialSubObjectCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglRevenueAttributes.financialBeginningBalanceLineAmount}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglRevenueAttributes.accountLineAnnualBalanceAmount}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglRevenueAttributes.percentChange}"></th>
+				<th>
+					Action
+				</th>
+			</tr>
+
+            <th:block th:if="${!readOnly && KualiForm.budgetableDocument}">
+              <!--/*/ <th:block th:with="valuesMap=${KualiForm.newRevenueLine.valuesMap}"> /*/-->
+                
+			<tr>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+<%-- FIXME: hidden for JS lookups to work and to have fully qualified newline remove when fix is in place --%>
+                  <%-- these hidden fields are inside a table cell to keep the HTML valid --%>
+                  <input type="hidden" th:field="*{newRevenueLine.documentNumber}" />
+                  <input type="hidden" th:field="*{newRevenueLine.universityFiscalYear}" />
+                  <input type="hidden" th:field="*{newRevenueLine.chartOfAccountsCode}" />
+                  <input type="hidden" th:field="*{newRevenueLine.accountNumber}" />
+                  <input type="hidden" th:field="*{newRevenueLine.subAccountNumber}" />
+                  <input type="hidden" th:field="*{newRevenueLine.financialBalanceTypeCode}" />
+                  <input type="hidden" th:field="*{newRevenueLine.financialObjectTypeCode}" />
+                  <input type="hidden" th:field="*{newRevenueLine.versionNumber}" />
+                  <input type="hidden" th:field="*{newRevenueLine.financialBeginningBalanceLineAmount}" />
+              </div><!-- /kul:htmlAttributeHeaderCell -->
+
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="infoline" data-accounting-line="newRevenueLine" data-field="financialObjectCode" data-detail-function="loadObjectCodeInfo" data-detail-field="financialObject.financialObjectCodeName" data-attributes="${pbglRevenueAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="ObjectCode" data-read-only="false" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode" data-lookup-parameters="revenueObjectTypeCodesLookup:financialObjectTypeCode" data-accounting-line-values-map="${newRevenueLine.valuesMap}" data-inquiry-extra-key-values="universityFiscalYear=${KualiForm.document.universityFiscalYear}" data-anchor="revenuenewLineLineAnchor"></div>
+
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="infoline" data-accounting-line="newRevenueLine" data-field="financialSubObjectCode" data-detail-function="loadSubObjectInfo" data-detail-function-extra-param="'${KualiForm.document.universityFiscalYear}', " data-detail-field="financialSubObject.financialSubObjectCodeName" data-attributes="${pbglRevenueAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="SubObjectCode" data-read-only="false" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode,financialObjectCode,accountNumber" data-accounting-line-values-map="${newRevenueLine.valuesMap}" data-inquiry-extra-key-values="universityFiscalYear=${KualiForm.document.universityFiscalYear}" data-lookup-anchor="revenuenewLineLineAnchor"></div>
+
+              <td class="infoline" nowrap><div align="right"><span>
+                  &nbsp;
+              </span></div></td>
+
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="newRevenueLine" data-cell-property="newRevenueLine.accountLineAnnualBalanceAmount" data-attributes="${pbglRevenueAttributes}" data-field="accountLineAnnualBalanceAmount" data-field-align="right" data-read-only="false" data-row-span="1" data-data-field-css-class="amount"></div>
+
+              <td class="infoline" nowrap><div align="right"><span>
+                  &nbsp;
+              </span></div></td>
+              <!--/*/ <th:block th:with="addTabIndex=${KualiForm.currentTabIndex}"> /*/-->
+              <!--/*/ <th:block th:with="dummyIncrementVar=${kfunc:incrementTabIndex(KualiForm, tabKey)}"> /*/-->
+              <td class="infoline" nowrap><div align="center">
+                  <input type="image" property="methodToCall.insertRevenueLine.anchorrevenuenewLineLineAnchor" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-add1.gif" title="Add a Revenue Line" alt="Add a Revenue Line" tabindex="${addTabIndex}" styleClass="tinybutton"/>
+              </div></td>
+			</tr>
+            </th:block>
+            
+			<c:forEach items="${KualiForm.document.pendingBudgetConstructionGeneralLedgerRevenueLines}" var="item" varStatus="status" >
+			<!--/*/ <th:block th:with="itemLineName=${pbglRevPropertyName}[${status.index}]"> /*/-->	
+
+             <th:block th:switch="${true}">
+                <th:block th:case="${readOnly}">
+                    <!--/*/ <th:block th:with="lineIsEditable=false"> /*/-->
+                </th:block>
+                <th:block th:case="*">
+                    <!--/*/ <th:block th:with="lineIsEditable=true"> /*/-->
+                </th:block>
+            </th:block>
+            <!--/*/ <th:block th:with="rowspan=${ (!KualiForm.hideAdjustmentMeasurement && (lineIsEditable && !(empty item.financialBeginningBalanceLineAmount || item.financialBeginningBalanceLineAmount == 0))) ? 2: 1}"> /*/-->
+ 
+            <tr>
+              <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+              </div><!-- /kul:htmlAttributeHeaderCell -->
+
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}]" data-field="financialObjectCode" data-detail-function="loadObjectCodeInfo" data-detail-field="financialObject.financialObjectCodeShortName" data-attributes="${pbglRevenueAttributes}" data-lookup="true" data-inquiry="true" data-bo-class-simple-name="ObjectCode" data-read-only="true" data-display-hidden="false" data-row-span="${rowspan}" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-lookup-unkeyed-field-conversions="financialObjectTypeCode:document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}].objectTypeCode," data-accounting-line-values-map="${item.valuesMap}" data-inquiry-extra-key-values="universityFiscalYear=${KualiForm.document.universityFiscalYear}" data-anchor="revenueexistingLineLineAnchor${status.index}"></div>
+
+              <!--/*/ <th:block th:with="doLookupOrInquiry=false"> /*/-->
+              <th:block th:if="${item.financialSubObjectCode ne KualiForm.dashFinancialSubObjectCode}">
+                  <!--/*/ <th:block th:with="doLookupOrInquiry=true"> /*/-->
+              </th:block>
+
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}]" data-field="financialSubObjectCode" data-detail-function="loadSubObjectInfo" data-detail-function-extra-param="'${KualiForm.document.universityFiscalYear}', " data-detail-field="financialSubObject.financialSubObjectCdshortNm" data-attributes="${pbglRevenueAttributes}" data-lookup="${doLookupOrInquiry}" data-inquiry="${doLookupOrInquiry}" data-bo-class-simple-name="SubObjectCode" data-read-only="true" data-display-hidden="false" data-row-span="${rowspan}" data-lookup-or-inquiry-keys="chartOfAccountsCode,financialObjectCode,accountNumber" data-accounting-line-values-map="${item.valuesMap}" data-inquiry-extra-key-values="universityFiscalYear=${KualiForm.document.universityFiscalYear}"></div>
+
+              <!--/*/ <th:block th:with="fieldTrailerValue="> /*/-->
+              <th:block th:if="${empty item.financialBeginningBalanceLineAmount}">
+                  <!--/*/ <th:block th:with="fieldTrailerValue=&nbsp;"> /*/-->
+              </th:block>
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}]" data-cell-property="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}].financialBeginningBalanceLineAmount" data-attributes="${pbglRevenueAttributes}" data-field="financialBeginningBalanceLineAmount" data-field-align="right" data-read-only="true" data-field-trailer-value="${fieldTrailerValue}" data-row-span="1" data-data-field-css-class="amount"></div>
+
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}]" data-cell-property="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}].accountLineAnnualBalanceAmount" data-attributes="${pbglRevenueAttributes}" data-field="accountLineAnnualBalanceAmount" data-field-align="right" data-read-only="${!lineIsEditable}" data-row-span="1" data-data-field-css-class="amount"></div>
+
+              <!--/*/ <th:block th:with="fieldTrailerValue="> /*/-->
+              <th:block th:if="${empty item.percentChange}">
+                  <!--/*/ <th:block th:with="fieldTrailerValue=&nbsp;"> /*/-->
+              </th:block>
+			  <fmt:formatNumber value="${item.percentChange}" var="formattedNumber" type="number" groupingUsed="true" minFractionDigits="2" />
+              <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}].percentChange" data-cell-property="document.pendingBudgetConstructionGeneralLedgerRevenueLines[${status.index}].percentChange" data-attributes="${pbglRevenueAttributes}" data-field="percentChange" data-formatted-number-value="${formattedNumber}" data-field-trailer-value="${fieldTrailerValue}" data-field-align="right" data-read-only="true" data-row-span="1" data-data-field-css-class="amount"></div>
+
+             <td class="datacell" rowspan="${rowspan}" nowrap>
+                 <div align="center">
+				   <th:block th:switch="${true}">
+					 <th:block th:case="${empty item.budgetConstructionMonthly[0]}"> 
+                       <th:block th:if="${lineIsEditable && KualiForm.budgetableDocument}">
+						 <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-createmonth.gif" styleClass="tinybutton" property="methodToCall.performMonthlyRevenueBudget.line${status.index}.anchorrevenueexistingLineLineAnchor${status.index}" title="Create Month" alt="Create Month"/>
+                       </th:block>
+                       <th:block th:if="${!(lineIsEditable && KualiForm.budgetableDocument)}">
+						 <html:img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" styleClass="tinybutton" alt="" width="80" height="15"/>
+                       </th:block>
+					 </th:block> 
+					 <th:block th:case="*"> 
+                       <th:block th:switch="${true}">
+                         <th:block th:case="${lineIsEditable}">
+                           <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-editmonth.gif" styleClass="tinybutton" property="methodToCall.performMonthlyRevenueBudget.line${status.index}.anchorrevenueexistingLineLineAnchor${status.index}" title="Edit Month" alt="Edit Month"/>
+                         </th:block> 
+                         <th:block th:case="*"> 
+                           <input type="image" src="${ConfigProperties.externalizable.images.url}tinybutton-viewmonth.gif" styleClass="tinybutton" property="methodToCall.performMonthlyRevenueBudget.line${status.index}.anchorrevenueexistingLineLineAnchor${status.index}" title="View Month" alt="View Month"/>
+                         </th:block> 
+                       </th:block>
+						
+					 </th:block> 
+				   </th:block>
+
+                   <input type="image" property="methodToCall.performBalanceInquiryForRevenueLine.line${status.index}.anchorrevenueexistingLineLineAnchor${status.index}" src="${ConfigProperties.externalizable.images.url}tinybutton-balinquiry.gif" title="Balance Inquiry For Revenue Line ${status.index}" alt="Balance Inquiry For Revenue Line ${status.index}" styleClass="tinybutton" />
+
+				   <th:block th:switch="${true}">
+                     <th:block th:case="${lineIsEditable && (empty item.financialBeginningBalanceLineAmount || item.financialBeginningBalanceLineAmount == 0)}">
+                       <input type="image" property="methodToCall.deleteRevenueLine.line${status.index}.anchorrevenueexistingLineLineAnchor${status.index}" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif" title="Delete Revenue Line ${status.index}" alt="Delete Revenue Line ${status.index}" styleClass="tinybutton"/>
+                     </th:block>
+					 <th:block th:case="*"> 
+					   <html:img src="${ConfigProperties.kr.externalizable.images.url}pixel_clear.gif" styleClass="tinybutton" alt="" width="40" height="15"/>
+					 </th:block> 
+				   </th:block>
+                 </div>
+             </td>
+            </tr>
+
+            <th:block th:if="${rowspan == 2}">
+              <tr>
+               <td class="datacell" colspan = "3" nowrap><center>
+				 <div th:replace="~{fragments/bc/requestAdjustment :: content}" data-attributes="${pbglRevenueAttributes}" data-adjustment-amount-field-name="${itemLineName}.adjustmentAmount" data-method-to-call="adjustRevenueLinePercent" data-anchor="anchorrevenueeexistingLineLineAnchor${status.index}"></div>
+				 </center>
+               </td>
+              </tr>
+            </th:block>
+
+			</tr>
+
+			<tr>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+                <div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="infoline" data-cell-property="document.revenueFinancialBeginningBalanceLineAmountTotal" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-disable-hidden-field="true"></div>
+                <div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="infoline" data-cell-property="document.revenueAccountLineAnnualBalanceAmountTotal" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-disable-hidden-field="true"></div>
+                <div th:replace="~{fragments/bc/columnTotalCell :: content}" data-data-cell-css-class="infoline" data-cell-property="document.revenuePercentChangeTotal" data-text-style="${textStyle}" data-field-align="right" data-col-span="1" data-disable-hidden-field="true"></div>
+				<td class="infoline">&nbsp;</td>
+			</tr>
+
+            <th:block th:if="${!readOnly}">
+	    	<tr>
+			    <td colspan="7" class="subhead">
+					<span class="subhead-left">Global Revenue Actions</span>
+			    </td>
+			</tr>
+
+            <tr>
+            <th:block th:if="${KualiForm.budgetableDocument}">
+              <th colspan="3" nowrap>&nbsp;
+		    	<a name="anchorrevenueControlsAnchor"></a>
+              </th>
+              <td colspan="3" class="datacell" nowrap><center>
+				<div th:replace="~{fragments/bc/requestAdjustment :: content}" data-attributes="${pbglRevenueAttributes}" data-adjustment-amount-field-name="revenueAdjustmentAmount" data-method-to-call="adjustAllRevenueLinesPercent" data-anchor="anchorrevenueControlsAnchor"></div>
+				</center>
+              </td>
+              <td colspan="1" class="datacell" nowrap>
+                <div align="center">
+                  <input type="image" property="methodToCall.refresh.anchorrevenueControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-refresh.gif" title="Refresh" alt="Refresh" styleClass="tinybutton" />
+                  <input type="image" property="methodToCall.performRevMonthSpread.anchorrevenueControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-monthspread.gif" title="Monthly Spread" alt="Monthly Spread" styleClass="tinybutton" />
+                  <input type="image" property="methodToCall.performRevMonthDelete.anchorrevenueControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-monthdelete.gif" title="Monthly Delete" alt="Monthly Delete" styleClass="tinybutton"/>
+                </div>
+              </td>
+	        </th:block>
+            <th:block th:if="${!KualiForm.budgetableDocument}">
+              <td colspan="6" class="datacell" nowrap>&nbsp;
+              </td>
+              <td colspan="1" class="datacell" nowrap>
+                <div align="center">
+                  <input type="image" property="methodToCall.performRevMonthDelete.anchorrevenueControlsAnchor" src="${ConfigProperties.externalizable.images.url}tinybutton-monthdelete.gif" title="Monthly Delete" alt="Monthly Delete" styleClass="tinybutton"/>
+                </div>
+              </td>
+	        </th:block>
+	        </tr>
+	        </th:block>
+
+		</table>
+
+</div>
+</section>
+</div>

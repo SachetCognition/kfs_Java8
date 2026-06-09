@@ -1,0 +1,78 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/tem/arranger/request.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="arrangerAttributes=${DataDictionary.TravelArrangerDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=8"> /*/-->
+<section class="kfs-tab" data-tab-title="Edit Request" data-default-open="true">
+  <h3>Edit Request</h3>
+    <div class="tab-container" align="center">
+    <h3>Edit Request </h3>
+    <table cellpadding="0" cellspacing="0" class="datatable" summary="Edit Request">
+        
+        <tr>
+            <th class="bord-l-b" colspan="2" width="35%">
+                <div align="left">
+                    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arrangerAttributes.resign}"></label>
+                </div>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.resign" th:field="*{document.resign}" data-attribute-entry="${arrangerAttributes.resign}" />          
+            </td>
+        </tr>
+        <tr>
+            <th class="bord-l-b" rowspan="3" width="35%">
+                <div align="left">
+                    Request to become an arranger:
+                </div>
+            </th>
+            
+            <th  class="bord-l-b">
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arrangerAttributes.taInd}"></label>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.taInd" th:field="*{document.taInd}" data-attribute-entry="${arrangerAttributes.taInd}" />          
+            </td>
+            
+        </tr>
+        <tr>
+            <th  class="bord-l-b" width="25%">
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arrangerAttributes.trInd}"></label>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.trInd" th:field="*{document.trInd}" data-attribute-entry="${arrangerAttributes.trInd}" />          
+            </td>
+            
+        </tr>
+        <tr>
+            <th  class="bord-l-b">
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${arrangerAttributes.primaryInd}"></label>
+            </th>
+            <td class="datacell">
+                <input type="text" name="document.primaryInd" th:field="*{document.primaryInd}" data-attribute-entry="${arrangerAttributes.primaryInd}" />          
+            </td>
+            
+        </tr>
+        
+    </table> 
+    
+   
+    </div>
+</section>
+</div>

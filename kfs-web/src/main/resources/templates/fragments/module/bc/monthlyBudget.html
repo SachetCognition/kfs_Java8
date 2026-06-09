@@ -1,0 +1,144 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/monthlyBudget.tag -->
+<!-- Fragment parameters: readOnly -->
+<div th:fragment="content (readOnly)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="monthlyBudgetAttributes=${DataDictionary['BudgetConstructionMonthly'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="monthlyBudget=${KualiForm.budgetConstructionMonthly}"> /*/-->
+<!--/*/ <th:block th:with="pbglAttributes=${DataDictionary['PendingBudgetConstructionGeneralLedger'].attributes}"> /*/-->
+<!--/*/ <th:block th:with="pbgl=${KualiForm.budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger}"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Monthly Budget Construction" data-default-open="true">
+  <h3>Monthly Budget Construction</h3>
+<div class="tab-container" align=center>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+
+      <div th:replace="~{fragments/bc/subheadingWithDetailToggleRow :: content}" data-column-count="9" data-subheading="Monthly Amounts"></div>
+
+      <tr>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.universityFiscalYear}"></th>
+          </div><!-- /kul:htmlAttributeHeaderCell -->
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.chartOfAccountsCode}"></th>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.accountNumber}"></th>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.subAccountNumber}"></th>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.financialObjectCode}"></th>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.financialSubObjectCode}"></th>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${pbglAttributes.accountLineAnnualBalanceAmount}"></th>
+      </tr>
+
+      <tr>
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-cell-property="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger.universityFiscalYear" data-field="universityFiscalYear" data-attributes="${pbglAttributes}" data-read-only="true" data-display-hidden="false"></div>
+
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-field="chartOfAccountsCode" data-detail-field="chartOfAccounts.finChartOfAccountDescription" data-attributes="${pbglAttributes}" data-inquiry="true" data-bo-class-simple-name="Chart" data-read-only="true" data-display-hidden="$false" data-accounting-line-values-map="${KualiForm.budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger.valuesMap}"></div>
+
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-field="accountNumber" data-detail-field="account.accountName" data-attributes="${pbglAttributes}" data-inquiry="true" data-bo-class-simple-name="Account" data-read-only="true" data-display-hidden="false" data-lookup-or-inquiry-keys="chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger.valuesMap}"></div>
+          
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-field="subAccountNumber" data-detail-field="subAccount.subAccountName" data-attributes="${pbglAttributes}" data-inquiry="${pbgl.subAccountNumber ne '-----'}" data-bo-class-simple-name="SubAccount" data-read-only="true" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode,accountNumber" data-accounting-line-values-map="${pbgl.valuesMap}"></div>
+          
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-field="financialObjectCode" data-detail-field="financialObject.financialObjectCodeShortName" data-attributes="${pbglAttributes}" data-inquiry="true" data-bo-class-simple-name="ObjectCode" data-read-only="true" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode" data-accounting-line-values-map="${KualiForm.budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger.valuesMap}"></div>
+
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-field="financialSubObjectCode" data-detail-field="financialSubObject.financialSubObjectCdshortNm" data-attributes="${pbglAttributes}" data-inquiry="${pbgl.financialSubObjectCode ne '---'}" data-bo-class-simple-name="SubObjCd" data-read-only="true" data-display-hidden="false" data-lookup-or-inquiry-keys="universityFiscalYear,chartOfAccountsCode,financialObjectCode,accountNumber" data-accounting-line-values-map="${pbgl.valuesMap}"></div>
+
+          <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger" data-cell-property="budgetConstructionMonthly.pendingBudgetConstructionGeneralLedger.accountLineAnnualBalanceAmount" data-attributes="${pbglAttributes}" data-field="accountLineAnnualBalanceAmount" data-field-align="right" data-read-only="true" data-row-span="1" data-data-field-css-class="amount"></div>
+      </tr>
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="datatable">
+
+      <tr>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+          
+      </tr>
+      
+      <tr>
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+          </div><!-- /kul:htmlAttributeHeaderCell -->
+          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+      </tr>
+
+      <th:block th:if="${monthlyBudget != null}">
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth1LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth1LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth1LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount" data-anchor="monthlyBudgetLineLineAnchor"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth2LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth2LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth2LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth3LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth3LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth3LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth4LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth4LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth4LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth5LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth5LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth5LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth6LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth6LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth6LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth7LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth7LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth7LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth8LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth8LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth8LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth9LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth9LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth9LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth10LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth10LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth10LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth11LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth11LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth11LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+        <tr>
+			<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${monthlyBudgetAttributes.financialDocumentMonth12LineAmount}"></th>
+            <div th:replace="~{fragments/bc/pbglLineDataCell :: content}" data-data-cell-css-class="datacell" data-accounting-line="budgetConstructionMonthly" data-cell-property="budgetConstructionMonthly.financialDocumentMonth12LineAmount" data-attributes="${monthlyBudgetAttributes}" data-field="financialDocumentMonth12LineAmount" data-field-align="left" data-read-only="${readOnly}" data-row-span="1" data-data-field-css-class="amount"></div>
+        </tr>
+
+      </th:block>
+        <tr>
+            <td colspan="2" class="datacell" nowrap>
+              <div align="center"><span>
+              <th:block th:if="${!readOnly}">
+                <th:block th:if="${KualiForm.budgetableDocument}">
+                  <input type="image" src="${ConfigProperties.externalizable.images.url}buttonsmall_monthspread.gif" styleClass="tinybutton" property="methodToCall.performMonthlySpread.anchormonthlyBudgetLineLineAnchor" title="Spread Evenly To Months" alt="Spread Evenly To Months"/>
+                  <input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_clear.gif" styleClass="tinybutton" property="methodToCall.performMonthlyZero.anchormonthlyBudgetLineLineAnchor" title="Set Months To Zero" alt="Set Months To Zero"/>
+                </th:block>
+                <th:block th:if="${KualiForm.monthlyPersisted}">
+                  <input type="image" src="${ConfigProperties.externalizable.images.url}buttonsmall_monthdel.gif" styleClass="tinybutton" property="methodToCall.performMonthlyDelete.anchormonthlyBudgetLineLineAnchor" title="Delete Monthly" alt="Delete Monthly"/>
+                </th:block>
+              </th:block>
+              &nbsp;
+              </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</section>
+</div>

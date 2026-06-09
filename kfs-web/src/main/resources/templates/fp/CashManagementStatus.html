@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: fp/CashManagementStatus.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">fp/CashManagementStatus</title>
+</head>
+<body>
+<div class="kfs-page" data-header-title="Cash Management status" data-doc-title="Cash Management status">
+  <form action="cashManagementStatus.do" method="post">
+
+	<input type="hidden" th:field="*{verificationUnit}" />
+	<input type="hidden" th:field="*{controllingDocumentId}" />
+	<input type="hidden" th:field="*{currentDrawerStatus}" />
+	<input type="hidden" th:field="*{desiredDrawerStatus}" />
+
+	<br>
+	<table width="100%" border=0 cellspacing=0 cellpadding=0>
+		<html:messages id="msg" message="true">
+			<tr>
+				<td><bean:write filter="false" name="msg" /></td>
+			</tr>
+		</html:messages>
+	</table>
+	<br>
+
+	<div id="globalbuttons" class="globalbuttons"><input type="image" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_returnToIndex.gif" styleClass="globalbuttons"
+		property="methodToCall.returnToIndex" alt="Return to Index" title="Return to Index" />
+	&nbsp;&nbsp; <input type="image" src="${ConfigProperties.externalizable.images.url}buttonsmall_openExisting.gif"
+		styleClass="globalbuttons" property="methodToCall.openExisting"
+		alt="Open Existing Cash Management Document" title="Open Existing Cash Management Document" /></div>
+
+  </form>
+</div>
+</body>
+</html>

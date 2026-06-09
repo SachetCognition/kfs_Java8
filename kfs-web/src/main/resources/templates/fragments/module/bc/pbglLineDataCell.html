@@ -1,0 +1,124 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/bc/pbglLineDataCell.tag -->
+<!-- Fragment parameters: dataCellCssClass, dataFieldCssClass, field, attributes, readOnly, disabled, fieldAlign, accountingLine, baselineAccountingLine, cellProperty, detailFunction, detailFunctionExtraParam, detailField, lookup, inquiry, csfInquiry, boClassSimpleName, boPackageName, conversionField, labelFontWeight, displayHidden, overrideField, lookupOrInquiryKeys, lookupUnkeyedFieldConversions, lookupParameters, accountingLineValuesMap, inquiryExtraKeyValues, lookupAnchor, rowSpan, colSpan, anchor, detailFields, formattedNumberValue, fieldTrailerValue, excludedFromTotal, encryptValue, displayMask, divId -->
+<div th:fragment="content (dataCellCssClass, dataFieldCssClass, field, attributes, readOnly, disabled, fieldAlign, accountingLine, baselineAccountingLine, cellProperty, detailFunction, detailFunctionExtraParam, detailField, lookup, inquiry, csfInquiry, boClassSimpleName, boPackageName, conversionField, labelFontWeight, displayHidden, overrideField, lookupOrInquiryKeys, lookupUnkeyedFieldConversions, lookupParameters, accountingLineValuesMap, inquiryExtraKeyValues, lookupAnchor, rowSpan, colSpan, anchor, detailFields, formattedNumberValue, fieldTrailerValue, excludedFromTotal, encryptValue, displayMask, divId)" xmlns:th="http://www.thymeleaf.org">
+<th:block th:if="${empty fieldAlign}">
+    <!--/*/ <th:block th:with="fieldAlign=left"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="qualifiedField=${accountingLine}.${field}"> /*/-->
+<th:block th:if="${empty cellProperty}">
+    <!--/*/ <th:block th:with="cellProperty=${qualifiedField}"> /*/-->
+</th:block>
+<th:block th:if="${empty conversionField}">
+    <!--/*/ <th:block th:with="conversionField=${field}"> /*/-->
+</th:block>
+<th:block th:if="${empty excludedFromTotal}">
+    <!--/*/ <th:block th:with="excludedFromTotal=false"> /*/-->
+</th:block>
+<th:block th:if="${empty dataFieldCssClass}">
+    <!--/*/ <th:block th:with="dataFieldCssClass="> /*/-->
+</th:block>
+<th:block th:switch="${true}">
+    <th:block th:case="${empty boPackageName}">
+        <!--/*/ <th:block th:with="boClassName=org.kuali.kfs.coa.businessobject.${boClassSimpleName}"> /*/-->
+    </th:block>
+    <th:block th:case="*">
+        <!--/*/ <th:block th:with="boClassName=${boPackageName}.${boClassSimpleName}"> /*/-->
+    </th:block>
+</th:block>
+<th:block th:if="${empty lookupParameters}">
+    <!--/*/ <th:block th:with="lookupParameters="> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="rowSpan=${empty rowSpan ? 1 : rowSpan}"> /*/-->
+<!--/*/ <th:block th:with="colSpan=${empty colSpan ? 1 : colSpan}"> /*/-->
+<!--/*/ <th:block th:with="useXmlHttp=${(!readOnly) && (!empty detailFunction)}"> /*/-->
+<%-- test to see if we are dealing with the extra JV fields here --%>
+<!--/*/ <th:block th:with="specialRequiredField=${(field eq 'referenceOriginCode') || (field eq 'referenceNumber') || (field eq 'referenceTypeCode')}"> /*/-->
+<td class="${dataCellCssClass}" valign="top" rowspan="${rowSpan}" colspan="${colSpan}">
+<div align="${fieldAlign}">
+    <th:block th:if="${not empty anchor}">
+    	<a name="${anchor}"></a>
+    </th:block>
+<span class="nowrap">
+    <th:block th:if="${!empty labelFontWeight}">
+        <span style="font-weight: ${labelFontWeight}">
+            <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${attributes[field]}"></label>
+        </span>
+        <%-- The following nbsp has breakable space around it, but nevertheless it accomplishes something,
+            by preventing this label from touching its input control (consistent with the cellpadding for
+            labels that are not in the same cell as their input control).  --%>
+        &nbsp;
+    </th:block>
+
+    <th:block th:switch="${true}">
+        <th:block th:case="${useXmlHttp}">
+            <!--/*/ <th:block th:with="onblur=${detailFunction}(${detailFunctionExtraParam} this.name, '${accountingLine}.${detailField}');"> /*/-->
+        </th:block>
+        <th:block th:case="*">
+            <!--/*/ <th:block th:with="onblur="> /*/-->
+        </th:block>
+    </th:block>
+    <th:block th:if="${csfInquiry == 'true'}">
+    	<a href="${ConfigProperties.application.url}/budgetTempListLookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.bc.businessobject.CalculatedSalaryFoundationTracker&universityFiscalYear=${KualiForm.universityFiscalYear}&chartOfAccountsCode=${KualiForm.chartOfAccountsCode}&accountNumber=${KualiForm.accountNumber}&subAccountNumber=${KualiForm.subAccountNumber}&hideReturnLink=true&suppressActions=true&tempListLookupMode=6&showInitialResults=true&docFormKey=${KualiForm.returnFormKey}&backLocation=${KualiForm.backLocation}"  target="_blank">
+    </th:block>
+    <th:block th:if="${!excludedFromTotal}">
+    <div id="${divId}" >
+    	<input type="text" name="${cellProperty}" th:field="*{${cellProperty}}" data-attribute-entry="${attributes[field]}" />
+        <div th:replace="~{fragments/bc/pbglLineReadOnlyCellProperty :: content}" data-property="${cellProperty}" data-text-style="${textStyle}" data-inquiry="${inquiry}" data-bo-class-name="${boClassName}" data-field="${field}" data-conversion-field="${conversionField}" data-inquiry-keys="${lookupOrInquiryKeys}" data-accounting-line-values-map="${accountingLineValuesMap}" data-inquiry-extra-key-values="${inquiryExtraKeyValues}" data-formatted-number-value="${formattedNumberValue}"></div>
+    </div>
+    </div><!-- /kul:htmlControlAttribute -->
+    </th:block>
+    <th:block th:if="${excludedFromTotal}">
+      *
+    </th:block>
+    <th:block th:if="${csfInquiry == 'true'}">
+    	</a>
+    </th:block>${fieldTrailerValue}
+
+    <%-- lookup control --%>
+    <th:block th:if="${!readOnly}">
+        <th:block th:if="${lookup}">
+            <th:block th:if="${empty lookupAnchor}">
+                <!--/*/ <th:block th:with="lookupAnchor=${anchor}"> /*/-->
+            </th:block>
+            <!--/*/ <th:block th:with="fieldConversions=${lookupUnkeyedFieldConversions}"> /*/-->
+            <c:forTokens var="key" items="${lookupOrInquiryKeys}" delims=",">
+                <!--/*/ <th:block th:with="withAccountingLine=${accountingLine}.${key}"> /*/-->
+                <th:block th:if="${!empty lookupParameters}">
+                    <!--/*/ <th:block th:with="lookupParameters=${lookupParameters},"> /*/-->
+                </th:block>
+                <!--/*/ <th:block th:with="lookupParameters=${lookupParameters}${withAccountingLine}:${key}"> /*/-->
+                <!--/*/ <th:block th:with="fieldConversions=${fieldConversions}${key}:${withAccountingLine},"> /*/-->
+            </c:forTokens>
+            <span class="kfs-lookup" data-bo-class="${boClassName}" th:replace="~{fragments/kul/lookup :: content}"></span>
+        </th:block>
+    </th:block>
+</span>
+</div>
+<th:block th:if="${!empty baselineAccountingLine}">
+    <div th:replace="~{fragments/bc/hiddenPbglLineField :: content}" data-accounting-line="${baselineAccountingLine}" data-is-baseline="true" data-hidden-field="${field}" data-display-hidden="${displayHidden}"></div>
+</th:block>
+<th:block th:if="${!empty overrideField}">
+    <div th:replace="~{fragments/bc/pbglLineOverrideField :: content}" data-override-field="${overrideField}" data-attributes="${attributes}" data-read-only="${readOnly}" data-accounting-line="${accountingLine}" data-baseline-accounting-line="${baselineAccountingLine}" data-display-hidden="${displayHidden}"></div>
+</th:block>
+<div th:replace="~{fragments/bc/pbglLineDataCellDetail :: content}" data-detail-field="${detailField}" data-accounting-line="${accountingLine}" data-detail-fields="${detailFields}"></div>
+    <jsp:doBody></jsp:doBody>
+</td>
+</div>

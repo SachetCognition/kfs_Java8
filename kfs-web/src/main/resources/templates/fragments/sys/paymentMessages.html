@@ -1,0 +1,72 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: sys/paymentMessages.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<%-- helpful messages --%>
+<script type="text/javascript">
+  function paymentMethodMessages(selectedMethod) {
+    if (selectedMethod == 'W') {
+		alert('<span th:text="#{message.payment.feewarning}"></span>');
+    }
+		  
+    if (selectedMethod == 'F') {
+		alert('<span th:text="#{message.payment.foreigndraft}"></span>');
+    }
+   }
+		
+   function exceptionMessage(exceptionIndicator) {
+	 if (exceptionIndicator.checked == true) {
+		alert('<span th:text="#{message.payment.exception}"></span>');
+     } 
+   }
+		
+   function specialHandlingMessage(specialHandlingIndicator) {
+     if (specialHandlingIndicator.checked == true) {
+		alert('<span th:text="#{message.payment.specialhandling}"></span>');
+     } else {
+		<th:block th:if="${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && KualiForm.editingMode['specialHandlingChangingEntry']}">
+			clearSpecialHandlingTab();
+		</th:block>
+	 }
+   }
+		
+   function documentationMessage(selectedDocumentationLocation) {
+     if (selectedDocumentationLocation == 'N') {
+     	// Reference error message because this error can occur via multiple paths and
+     	// it didn't make sense to duplicate the error text under multiple names in ApplicationResources.properties
+     	// simply for the sake of naming consistency.
+		alert('<span th:text="#{error.document.noDocumentationNote}"></span>');
+     } 
+     if (selectedDocumentationLocation == 'O') {
+		alert('<span th:text="#{message.document.initiatingOrgDocumentation}"></span>');
+     }
+    }
+		
+   function paymentReasonMessages(selectedPaymentReason) {
+	/* commenting out as part of the fix for KULRNE-5891
+	Leaving this here as it will be used in future release for dynamic pop-up message
+	  if (selectedPaymentReason == 'N') {
+		 alert('<span th:text="#{message.dv.travelnonemployee}"></span>');
+	  } 
+	  if (selectedPaymentReason == 'P') {
+		 alert('<span th:text="#{message.dv.travelprepaid}"></span>');
+	  } */
+    }
+</script>
+</div>

@@ -1,0 +1,143 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: gl/generalLedgerPendingEntries.tag -->
+<!-- Fragment parameters: generalLedgerPendingEntries, generalLedgerPendingEntriesProperty, generalLedgerPendingEntryProperty -->
+<div th:fragment="content (generalLedgerPendingEntries, generalLedgerPendingEntriesProperty, generalLedgerPendingEntryProperty)" xmlns:th="http://www.thymeleaf.org">
+<!--  BEGIN RSMART CUSTOMIZATION -->
+<!--  END RSMART CUSTOMIZATION -->
+<!--/*/ <th:block th:with="generalLedgerPendingEntriesList=${generalLedgerPendingEntries}"> /*/-->
+<th:block th:if="${empty generalLedgerPendingEntries}">
+	<!--/*/ <th:block th:with="generalLedgerPendingEntriesList=${KualiForm.document.generalLedgerPendingEntries}"> /*/-->
+</th:block>
+<th:block th:if="${empty generalLedgerPendingEntriesProperty}">
+	<!--/*/ <th:block th:with="generalLedgerPendingEntriesProperty=document.generalLedgerPendingEntries"> /*/-->
+</th:block>
+<th:block th:if="${empty generalLedgerPendingEntryProperty}">
+	<!--/*/ <th:block th:with="generalLedgerPendingEntryProperty=document.generalLedgerPendingEntry"> /*/-->
+</th:block>
+
+<%-- are we in a maint doc? --%>
+<!--/*/ <th:block th:with="maintenanceViewMode=${requestScope[Constants.PARAM_MAINTENANCE_VIEW_MODE]}"> /*/-->
+<!--/*/ <th:block th:with="isMaintenance=${KualiForm['class'].name eq 'org.kuali.rice.kns.web.struts.form.KualiMaintenanceForm' || maintenanceViewMode eq Constants.PARAM_MAINTENANCE_VIEW_MODE_MAINTENANCE}"> /*/-->
+
+<%-- if we are maintenance, then we need to rename the generalLedgerPendingEntryProperty, where document.newMaintainableObject actually gives us the business object --%>
+<!--/*/ <th:block th:with="realGeneralLedgerPendingEntryProperty=${generalLedgerPendingEntryProperty}"> /*/-->
+<th:block th:if="${isMaintenance}">
+  <!--/*/ <th:block th:with="generalLedgerPendingEntryProperty=${kfs.renamePropertyForMaintenanceFramework(generalLedgerPendingEntryProperty)}"> /*/-->
+</th:block>
+
+<section class="kfs-tab" data-tab-title="General Ledger Pending Entries" data-default-open="false">
+  <h3>General Ledger Pending Entries</h3>
+<div class="tab-container" align=center>
+		<h3>General Ledger Pending Entries <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry" th:replace="~{fragments/kul/lookup :: content}"></span></h3>
+	 <table cellpadding="0" cellspacing="0" class="datatable" summary="view/edit pending entries">
+
+	<th:block th:if="${empty generalLedgerPendingEntriesList}">
+		<tr>
+			<td class="datacell" height="50"colspan="12"><div align="center">There are currently no General Ledger Pending Entries associated with this Transaction Processing document.</div></td>
+		</tr>
+	</th:block>
+	<th:block th:if="${!empty generalLedgerPendingEntriesList}">
+        <!--/*/ <th:block th:with="entryAttributes=${DataDictionary.GeneralLedgerPendingEntry.attributes}"> /*/-->
+		<tr>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.transactionLedgerEntrySequenceNumber}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.universityFiscalYear}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.chartOfAccountsCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.accountNumber}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.subAccountNumber}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialObjectCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialSubObjectCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.projectCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialDocumentTypeCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialBalanceTypeCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.financialObjectTypeCode}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.transactionLedgerEntryAmount}"></th>
+            <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${entryAttributes.transactionDebitCreditCode}"></th>
+		</tr>
+		<tr th:each="generalLedgerPendingEntry : ${KualiForm.${generalLedgerPendingEntriesProperty}}" indexId="ctr">
+		  <!--  BEGIN RSMART CUSTOMIZATION -->
+          <th:block th:if="${sec:canViewGLPE(KualiForm.document, generalLedgerPendingEntry)}">
+          <!--  END RSMART CUSTOMIZATION -->
+			<tr>
+				<th class="datacell center"><html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].transactionLedgerEntrySequenceNumber" write="true" value="${generalLedgerPendingEntry.transactionLedgerEntrySequenceNumber}" /></th>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.sys.businessobject.SystemOptions" data-key-values="universityFiscalYear=${generalLedgerPendingEntry.universityFiscalYear}">
+            <html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].universityFiscalYear" value="${generalLedgerPendingEntry.universityFiscalYear}" write="true" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Chart" data-key-values="chartOfAccountsCode=${generalLedgerPendingEntry.chartOfAccountsCode}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].chartOfAccountsCode" write="true" value="${generalLedgerPendingEntry.chartOfAccountsCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.Account" data-key-values="chartOfAccountsCode=${generalLedgerPendingEntry.chartOfAccountsCode}&accountNumber=${generalLedgerPendingEntry.accountNumber}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].accountNumber" write="true" value="${generalLedgerPendingEntry.accountNumber}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubAccount" data-key-values="chartOfAccountsCode=${generalLedgerPendingEntry.chartOfAccountsCode}&accountNumber=${generalLedgerPendingEntry.accountNumber}&subAccountNumber=${generalLedgerPendingEntry.subAccountNumber}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].subAccountNumber" write="true" value="${generalLedgerPendingEntry.subAccountNumber}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.ObjectCode" data-key-values="financialObjectCode=${generalLedgerPendingEntry.financialObjectCode}&chartOfAccountsCode=${generalLedgerPendingEntry.chartOfAccountsCode}&universityFiscalYear=${generalLedgerPendingEntry.universityFiscalYear}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].financialObjectCode" write="true" value="${generalLedgerPendingEntry.financialObjectCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.SubObjCd" data-key-values="financialSubObjectCode=${generalLedgerPendingEntry.financialSubObjectCode}&financialObjectCode=${generalLedgerPendingEntry.financialObjectCode}&chartOfAccountsCode=${generalLedgerPendingEntry.chartOfAccountsCode}&universityFiscalYear=${generalLedgerPendingEntry.universityFiscalYear}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].financialSubObjectCode" write="true" value="${generalLedgerPendingEntry.financialSubObjectCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.ProjectCode" data-key-values="code=${generalLedgerPendingEntry.projectCode}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].projectCode" write="true" value="${generalLedgerPendingEntry.projectCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.rice.kew.doctype.bo.DocumentTypeEBO" data-key-values="documentTypeId=${generalLedgerPendingEntry.financialSystemDocumentTypeCode.documentTypeId}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].financialDocumentTypeCode" write="true" value="${generalLedgerPendingEntry.financialDocumentTypeCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.BalanceType" data-key-values="code=${generalLedgerPendingEntry.financialBalanceTypeCode}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].financialBalanceTypeCode" write="true" value="${generalLedgerPendingEntry.financialBalanceTypeCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<span class="kfs-inquiry" data-bo-class="org.kuali.kfs.coa.businessobject.ObjectType" data-key-values="code=${generalLedgerPendingEntry.financialObjectTypeCode}">
+						<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].financialObjectTypeCode" write="true" value="${generalLedgerPendingEntry.financialObjectTypeCode}" />
+					</span>
+				</td>
+				<td class="datacell center">
+					<html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].transactionLedgerEntryAmount" value="${generalLedgerPendingEntry.transactionLedgerEntryAmount}" />
+					<span th:text="${KualiForm.${realGeneralLedgerPendingEntryProperty}[${ctr}].currencyFormattedTransactionLedgerEntryAmount}"></span>
+				</td>
+				<td class="datacell center"><html:hidden property="${generalLedgerPendingEntryProperty}[${ctr}].transactionDebitCreditCode" write="true" value="${generalLedgerPendingEntry.transactionDebitCreditCode}" />&nbsp;</td>
+			</tr>
+		  <!--  BEGIN RSMART CUSTOMIZATION -->
+          </th:block>
+          <!--  END RSMART CUSTOMIZATION -->	
+		</tr>
+	</th:block>
+	</table>
+</div>
+</section>
+</div>

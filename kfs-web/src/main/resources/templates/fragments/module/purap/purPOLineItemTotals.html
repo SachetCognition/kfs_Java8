@@ -1,0 +1,55 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/purPOLineItemTotals.tag -->
+<!-- Fragment parameters: documentAttributes, mainColumnCount -->
+<div th:fragment="content (documentAttributes, mainColumnCount)" xmlns:th="http://www.thymeleaf.org">
+<tr>
+	<td colspan="${mainColumnCount}" class="subhead">
+	    <span class="subhead-left">Purchase Order Line Item Totals</span>
+	</td>
+</tr>
+
+<tr>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.itemTotalPoEncumbranceAmount}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.itemTotalPoEncumbranceAmountRelieved}"></th>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.itemTotalPoPaidAmount}"></th>
+</tr>
+
+<tr>
+	<td class="infoline" colspan="4">
+	    <div align="right">
+	    <input type="text" name="document.itemTotalPoEncumbranceAmount" th:field="*{document.itemTotalPoEncumbranceAmount}" data-attribute-entry="${documentAttributes.itemTotalPoEncumbranceAmount}" readonly="readonly" />
+		</div>
+	</td>
+	<td class="infoline" colspan="4">
+		<div align="right">
+	    <input type="text" name="document.itemTotalPoEncumbranceAmountRelieved" th:field="*{document.itemTotalPoEncumbranceAmountRelieved}" data-attribute-entry="${documentAttributes.itemTotalPoEncumbranceAmountRelieved}" readonly="readonly" />
+		</div>
+	</td>
+	<td class="infoline" colspan="${mainColumnCount-8}">
+		<div align="right">
+	    <input type="text" name="document.itemTotalPoPaidAmount" th:field="*{document.itemTotalPoPaidAmount}" data-attribute-entry="${documentAttributes.itemTotalPoPaidAmount}" readonly="readonly" />	
+		</div>
+	</td>				    
+</tr>
+
+<tr>
+	<th height=30 colspan="${mainColumnCount}">&nbsp;</th>
+</tr>
+</div>

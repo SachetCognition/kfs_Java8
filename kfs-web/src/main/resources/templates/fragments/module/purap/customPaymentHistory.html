@@ -1,0 +1,198 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/customPaymentHistory.tag -->
+<!-- Fragment parameters: documentAttributes -->
+<div th:fragment="content (documentAttributes)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="documentType=${KualiForm.document.documentHeader.workflowDocument.documentTypeName}"> /*/-->
+<!--/*/ <th:block th:with="isATypeOfPODoc=${KualiForm.document.isATypeOfPODoc}"> /*/-->
+<!--/*/ <th:block th:with="isRequisition=${KualiForm.document.isReqsDoc}"> /*/-->
+
+<th:block th:switch="${true}">
+    <th:block th:case="${isATypeOfPODoc}">
+        <!--/*/ <th:block th:with="limitByPoId=${KualiForm.document.purapDocumentIdentifier}"> /*/-->
+    </th:block>
+    <th:block th:case="${isRequisition}">
+    </th:block>   
+    <th:block th:case="*">
+        <!--/*/ <th:block th:with="limitByPoId=${KualiForm.document.purchaseOrderIdentifier}"> /*/-->
+	</th:block>
+</th:block>
+
+<div th:replace="~{fragments/purap/loadOnOpenTab :: content}" data-tab-title="View Payment History" data-default-open="false" data-tab-error-key="${PurapConstants.PAYMENT_HISTORY_TAB_ERRORS}" data-class="tab-container"></div>
+
+		<th:block th:if="${kfunc:getTabState(KualiForm, tabKey) == 'OPEN'}">
+	   	<th:block th:unless="${#lists.isEmpty(KualiForm.document.relatedViews.paymentHistoryPaymentRequestViews)}">
+		    <table cellpadding="0" cellspacing="0" class="datatable" summary="Payment History">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PREQ #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Invoice #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PO #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PREQ Status</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Hold</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Request Cancel</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Vendor Name</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Customer #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Amount</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Pay Date</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PDP Extract Date</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Paid?</div><!-- /kul:htmlAttributeHeaderCell -->
+	        	</tr>
+				<tr th:each="preqHistory : ${KualiForm.document.relatedViews.paymentHistoryPaymentRequestViews}" indexId="ctr">
+					<th:block th:if="${(empty limitByPoId) or (limitByPoId eq preqHistory.purchaseOrderIdentifier)}">
+		        		<tr>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.purapDocumentIdentifier}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.invoiceNumber}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.purchaseOrderIdentifier}"></span>
+			        		</td>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.applicationDocumentStatus}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+			        			<th:block th:switch="${true}">
+			        				<th:block th:case="${preqHistory.paymentHoldIndicator == true}">Yes</th:block>
+		        					<th:block th:case="*">No</th:block>
+		        				</th:block>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+			        			<th:block th:switch="${true}">
+			        				<th:block th:case="${preqHistory.paymentRequestedCancelIndicator == true}">Yes</th:block>
+			        				<th:block th:case="*">No</th:block>
+			        			</th:block>
+			        		</td>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.vendorName}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.vendorCustomerNumber}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+			        			<span th:text="${preqHistory.totalAmount}"></span>
+			        		</td>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${preqHistory.paymentRequestPayDate}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+			        		<span th:text="${preqHistory.paymentExtractedTimestamp}"></span>
+		        			<th:block th:if="${not empty preqHistory.paymentExtractedTimestamp}">
+		        			  <div th:replace="~{fragments/purap/disbursementInfo :: content}" data-source-document-number="${preqHistory.documentNumber}" data-source-document-type="${preqHistory.documentType}"></div>
+		        			</th:block>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+			        			<th:block th:switch="${true}">
+			        				<th:block th:case="${not empty preqHistory.paymentPaidTimestamp}">Yes</th:block>
+		        					<th:block th:case="*">No</th:block>
+		        				</th:block>
+			        		</td>
+			        	</tr>
+			        </th:block>
+		       	</tr>
+	    	</table>
+		    <br />
+		    <br />
+		</th:block>
+        <th:block th:if="${#lists.isEmpty(KualiForm.document.relatedViews.paymentHistoryPaymentRequestViews)}">
+	        <h4>No Payment Requests</h4>
+        </th:block>
+
+            <h3>Payment History	- Credit Memos</h3>
+		<br />
+
+	   	<th:block th:unless="${#lists.isEmpty(KualiForm.document.relatedViews.paymentHistoryCreditMemoViews)}">
+		    <table cellpadding="0" cellspacing="0" class="datatable" summary="Payment History">
+				<tr>
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>CM #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Vendor CM #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PREQ #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PO #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Credit Memo Status</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Hold</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Vendor Name</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Customer #</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Amount</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>APAD Date</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>PDP Extract Date</div><!-- /kul:htmlAttributeHeaderCell -->
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>Paid?</div><!-- /kul:htmlAttributeHeaderCell -->
+	        	</tr>
+				<tr th:each="cmHistory : ${KualiForm.document.relatedViews.paymentHistoryCreditMemoViews}" indexId="ctr">
+					<th:block th:if="${(empty limitByPoId) or (limitByPoId eq cmHistory.purchaseOrderIdentifier)}">
+		        		<tr>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.purapDocumentIdentifier}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.creditMemoNumber}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.paymentRequestIdentifier}"></span>
+			        		</td>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.purchaseOrderIdentifier}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.applicationDocumentStatus}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+			        			<th:block th:switch="${true}">
+			        				<th:block th:case="${cmHistory.creditHoldIndicator == true}">Yes</th:block>
+			        				<th:block th:case="*">No</th:block>
+			        			</th:block>
+			        		</td>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.vendorName}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.vendorCustomerNumber}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.totalAmount}"></span>
+			        		</td>
+		        			<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.accountsPayableApprovalTimestamp}"></span>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+		        				<span th:text="${cmHistory.creditMemoExtractedTimestamp}"></span>
+	                			<th:block th:if="${not empty cmHistory.creditMemoExtractedTimestamp}">
+	                			  <div th:replace="~{fragments/purap/disbursementInfo :: content}" data-source-document-number="${cmHistory.documentNumber}" data-source-document-type="${cmHistory.documentType}"></div>
+		        			    </th:block>
+			        		</td>
+			        		<td align="left" valign="middle" class="datacell">
+								<th:block th:switch="${true}">
+									<th:block th:case="${not empty cmHistory.creditMemoPaidTimestamp}">Yes</th:block>
+									<th:block th:case="*">No</th:block>
+								</th:block>
+			        		</td>
+			        	</tr>
+			        </th:block>
+		       	</tr>
+	    	</table>
+		    <br />
+		    <br />
+		</th:block>
+        <th:block th:if="${#lists.isEmpty(KualiForm.document.relatedViews.paymentHistoryCreditMemoViews)}">
+	        <h4>No Credit Memos</h4>
+        </th:block>
+		</th:block>
+    </div>
+</div><!-- /purap:loadOnOpenTab -->
+</div>

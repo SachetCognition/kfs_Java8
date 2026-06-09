@@ -1,0 +1,109 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/ar/cashControlDetail.tag -->
+<!-- Fragment parameters: cashControlDetailAttributes, readOnly, addLine, rowHeading, propertyName, actionMethod, actionImage, actionAlt, cssClass, editPaymentAppDoc -->
+<div th:fragment="content (cashControlDetailAttributes, readOnly, addLine, rowHeading, propertyName, actionMethod, actionImage, actionAlt, cssClass, editPaymentAppDoc)" xmlns:th="http://www.thymeleaf.org">
+<!--  this parameter is ignored now, as of KULAR-755 -->
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+
+<%-- determine backdoor user to display app link; taken from kr:immutableBar.tag --%>
+<!--/*/ <th:block th:with="backdoorEnabled=[[${__EXPR__}]]"> /*/-->
+<th:block th:if="${backdoorEnabled}">
+	<th:block th:switch="${true}"> 
+		<th:block th:case="${empty UserSession.loggedInUserPrincipalName}"> 
+			<!--/*/ <th:block th:with="backdoorIdUrl="> /*/--> 			
+		</th:block> 
+		<th:block th:case="*"> 			
+			<th:block th:switch="${true}">
+				<th:block th:case="${UserSession.backdoorInUse}">
+					<!--/*/ <th:block th:with="backdoorIdUrl=backdoorId=${UserSession.principalName}"> /*/--> 					
+				</th:block>
+				<th:block th:case="*">
+					<!--/*/ <th:block th:with="backdoorIdUrl=backdoorId=${UserSession.loggedInUserPrincipalName}"> /*/-->
+				</th:block>
+			</th:block>				 			
+		</th:block> 
+	</th:block>
+</th:block>
+
+<tr>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry=""></th>
+	</div><!-- /kul:htmlAttributeHeaderCell -->
+
+	<td align=left class="${cssClass}">
+		<th:block th:switch="${true}">
+			<th:block th:case="${addLine}"> <!--  we always make the link live now, as of KULAR-755 -->
+				<input type="text" name="${propertyName}.referenceFinancialDocumentNumber" th:field="*{${propertyName}.referenceFinancialDocumentNumber}" data-attribute-entry="${cashControlDetailAttributes.referenceFinancialDocumentNumber}" readonly="readonly" />
+			</th:block>
+			<th:block th:case="*">
+				<a href="${ConfigProperties.workflow.url}/DocHandler.do?docId=${KualiForm.document.cashControlDetails[rowHeading-1].referenceFinancialDocumentNumber}&command=displayDocSearchView${empty backdoorIdUrl ? "" : "&"}${backdoorIdUrl}" target="cashControlDetailPayApp">
+					<input type="text" name="${propertyName}.referenceFinancialDocumentNumber" th:field="*{${propertyName}.referenceFinancialDocumentNumber}" data-attribute-entry="${cashControlDetailAttributes.referenceFinancialDocumentNumber}" readonly="readonly" />
+				</a>
+			</th:block>
+		</th:block>
+	</td>
+
+	<td align=left class="${cssClass}">
+		<input type="text" name="${propertyName}.referenceFinancialDocument.documentHeader.workflowDocument.document.status" th:field="*{${propertyName}.referenceFinancialDocument.documentHeader.workflowDocument.document.status}" data-attribute-entry="${cashControlDetailAttributes.status}" readonly="readonly" />
+	</td>
+	<td align=left class="${cssClass}">
+		<input type="text" name="${propertyName}.customerNumber" th:field="*{${propertyName}.customerNumber}" data-attribute-entry="${cashControlDetailAttributes.customerNumber}" />
+		<th:block th:if="${not readOnly}">
+			&nbsp;
+			<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.ar.businessobject.Customer" th:replace="~{fragments/kul/lookup :: content}"></span>
+		</th:block>
+	</td>
+	<td align=left class="${cssClass}">
+		<input type="text" name="${propertyName}.customerPaymentMediumIdentifier" th:field="*{${propertyName}.customerPaymentMediumIdentifier}" data-attribute-entry="${cashControlDetailAttributes.customerPaymentMediumIdentifier}" />
+	</td>
+	<td align=left class="${cssClass}">
+		<th:block th:switch="${true}">
+			<th:block th:case="${readOnly}">
+				<input type="text" name="${propertyName}.customerPaymentDate" th:field="*{${propertyName}.customerPaymentDate}" data-attribute-entry="${cashControlDetailAttributes.customerPaymentDate}" />
+			</th:block>
+			<th:block th:case="*">
+				<kul:dateInput
+					attributeEntry="${cashControlDetailAttributes.customerPaymentDate}"
+					tabindexOverride="${tabindexOverrideBase} + 20"
+					property="${propertyName}.customerPaymentDate" />
+			</th:block>
+		</th:block>
+	</td>
+	<td align=left class="${cssClass}">
+		<input type="text" name="${propertyName}.financialDocumentLineAmount" th:field="*{${propertyName}.financialDocumentLineAmount}" data-attribute-entry="${cashControlDetailAttributes.financialDocumentLineAmount }" />
+	</td>
+
+	<th:block th:if="${not readOnly}">
+		<td class="${cssClass}" rowspan="2">
+			<div align="center">
+				<input type="image" property="methodToCall.${actionMethod}"
+					src="${actionImage}" alt="${actionAlt}" title="${actionAlt}"
+					tabindex="${tabindexOverrideBase + 30}"
+					styleClass="tinybutton" />
+			</div>
+		</td>
+	</th:block>
+</tr>
+<tr>
+	<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${cashControlDetailAttributes.customerPaymentDescription}"></th>
+	<td colspan="5" class="${cssClass}">
+		<input type="text" name="${propertyName}.customerPaymentDescription" th:field="*{${propertyName}.customerPaymentDescription}" data-attribute-entry="${cashControlDetailAttributes.customerPaymentDescription}" />
+	</td>
+</tr>
+</div>

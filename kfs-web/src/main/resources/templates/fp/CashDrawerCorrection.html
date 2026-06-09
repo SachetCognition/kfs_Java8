@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: fp/CashDrawerCorrection.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">fp/CashDrawerCorrection</title>
+</head>
+<body>
+<div class="kfs-page" data-header-title="Cash Drawer Correction" data-doc-title="Cash Drawer Correction">
+  <form action="cashDrawerCorrection.do" method="post">
+    
+    <input type="hidden" th:field="*{campusCode}" />
+    
+    <section class="kfs-tab" data-tab-title="Cash Drawer Corrections" data-default-open="true">
+  <h3>Cash Drawer Corrections</h3>
+      <div class="tab-container" align="center">
+          <h3>Cash Drawer for ${KualiForm.cashDrawer.campusCode}</h3>
+        <div th:replace="~{fragments/fp/cashDrawerCurrencyCoin :: content}" data-cash-drawer-property="cashDrawer" data-read-only="false" data-show-cash-drawer-summary="false"></div>
+      </div>
+    </section>
+    
+    <div class="kfs-panel-footer"></div>
+    
+    <div id="globalbuttons" class="globalbuttons">
+      <input type="image" property="methodToCall.saveCashDrawer" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_save.gif" alt="save cash drawer corrections" title="save corrections" styleClass="tinybutton" />
+      <input type="image" property="methodToCall.cancelCorrections" src="${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif" alt="cancel" title="cancel" styleClass="tinybutton" />
+    </div>
+  </form>
+</div>
+</body>
+</html>

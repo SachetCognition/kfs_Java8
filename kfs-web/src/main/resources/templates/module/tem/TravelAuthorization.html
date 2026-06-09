@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: module/tem/TravelAuthorization.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">module/tem/TravelAuthorization</title>
+</head>
+<body>
+<!--/*/ <th:block th:with="returnFromEmployeeLookup=${KualiForm.refreshCaller == 'travelerLookupable'}"> /*/-->
+<!--/*/ <th:block th:with="canEdit=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.editingMode['fullEntry']}"> /*/-->
+<!--/*/ <th:block th:with="advancePaymentMode=${KualiForm.editingMode['advancePaymentEntry']}"> /*/-->
+<!--/*/ <th:block th:with="advancePolicyMode=${KualiForm.editingMode['advancePolicyEntry']}"> /*/-->
+<!--/*/ <th:block th:with="expenseTaxableMode=${KualiForm.editingMode['expenseTaxableEntry']}"> /*/-->
+<!--/*/ <th:block th:with="clearAdvanceMode=${KualiForm.editingMode['clearAdvanceMode']}"> /*/-->
+<!--/*/ <th:block th:with="blanketTravelEntryMode=${KualiForm.editingMode['blanketTravelEntry']}"> /*/-->
+<!--/*/ <th:block th:with="blanketTravelViewMode=${KualiForm.editingMode['blanketTravelView']}"> /*/-->
+<!--/*/ <th:block th:with="conversionRateEntryMode=${KualiForm.editingMode['conversionRateEntry']}"> /*/-->
+<!--/*/ <th:block th:with="frnEntryMode=${canEdit && KualiForm.editingMode['frnEntry']}"> /*/-->
+<!--/*/ <th:block th:with="wireEntryMode=${canEdit && KualiForm.editingMode['wireEntry']}"> /*/-->
+
+<div class="kfs-document-page" data-document-type="${KualiForm.docTypeName}">
+  <form action="temTravelAuthorization.do" method="post" enctype="multipart/form-data">
+    
+<script language="javascript" src="dwr/interface/TravelDocumentService.js"></script> 
+<script language="javascript" src="dwr/interface/TravelAuthorizationService.js"></script>     
+<script language="javascript" src="dwr/interface/TravelExpenseService.js"></script> 
+<script language="javascript" src="scripts/module/tem/common.js"></script>
+<script language="javascript" src="scripts/module/tem/objectInfo.js"></script>
+
+    <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}" data-include-bank-code="true" data-bank-property="document.financialDocumentBankCode" data-bank-object-property="document.bank" data-disbursement-only="true"></div>
+	  
+	<script type="text/javascript">
+		function clearSpecialHandlingTab() {
+		var prefix = "document.travelPayment.";
+		var ctrl;
+		
+		ctrl = kualiElements[prefix + "specialHandlingCityName"]
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "specialHandlingLine1Addr"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "specialHandlingStateCode"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "specialHandlingLine2Addr"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "specialHandlingZipCode"];
+		ctrl.value = "";
+		
+		ctrl = kualiElements[prefix + "specialHandlingCountryCode"];
+		ctrl.value = "";
+	   }
+	</script>
+	<div th:replace="~{fragments/sys/paymentMessages :: content}"></div>
+ 
+    <div th:replace="~{fragments/tem/ta/tripOverview :: content}"></div>
+	<th:block th:if="${KualiForm.docTypeName!=TemConstants.TravelDocTypes.TRAVEL_AUTHORIZATION_CLOSE_DOCUMENT}"> 
+		<section class="kfs-tab" data-tab-title="Travel Advance" data-default-open="${KualiForm.defaultTravelAdvanceTab}">
+  <h3>Travel Advance</h3>
+			<div class="tab-container" align="left">
+				<h3>Travel Advance</h3>
+				<div th:replace="~{fragments/tem/ta/travelAdvance :: content}" data-travel-advance-property="document.travelAdvance"></div>
+				<section class="kfs-tab" data-tab-title="Travel Advance Accounting Lines" data-default-open="true">
+  <h3>Travel Advance Accounting Lines</h3>
+					<div class="kfs-sys-java-accountingLines" th:include="~{fragments/sys/java/accountingLines :: content}">
+						<div th:replace="~{fragments/sys/java/accountingLineGroup :: content}" data-new-line-property-name="newAdvanceAccountingLine" data-collection-property-name="document.advanceAccountingLines" data-collection-item-property-name="document.advanceAccountingLine" data-attribute-group-name="advance"></div>
+					</div><!-- /kfs-sys-java-accountingLines -->
+				</section>
+				<div th:replace="~{fragments/tem/travelPayment :: content}" data-is-for-advance="true"></div>
+			</div>
+		</section>
+	</th:block>
+	<th:block th:if="${KualiForm.showTravelAdvancesForTrip}">
+		<div th:replace="~{fragments/tem/travelAdvances :: content}" data-tab-title="All Advances"></div>
+	</th:block>
+    <th:block th:if="${KualiForm.editingMode['displayEmergencyContactTab']}">
+	    <div th:replace="~{fragments/tem/ta/emergencyContact :: content}"></div>
+    </th:block>
+    <div th:replace="~{fragments/tem/specialCircumstances :: content}"></div>
+    <div th:replace="~{fragments/tem/groupTravel :: content}"></div>
+    <th:block th:if="${not empty KualiForm.document.primaryDestinationName}"> 
+    	<div th:replace="~{fragments/tem/perDiemExpenses :: content}"></div>
+    </th:block>
+    <div th:replace="~{fragments/tem/ta/expenses :: content}"></div>
+    <div th:replace="~{fragments/tem/ta/estimateTotal :: content}"></div> 
+    <th:block th:if="${KualiForm.displayAccountingLines}">
+    	<div th:replace="~{fragments/tem/accountingLines :: content}"></div>
+    </th:block>
+	<th:block th:if="${KualiForm.advancePdpStatusTabShown}">
+		<div th:replace="~{fragments/tem/travelPaymentPDPStatus :: content}" data-travel-payment-property="advanceTravelPayment" data-pdp-payment-document-type="${KualiForm.document.travelAdvancePaymentDocumentType}"></div>
+	</th:block>
+    <div th:replace="~{fragments/gl/generalLedgerPendingEntries :: content}"></div>
+	<div th:replace="~{fragments/tem/relatedDocuments :: content}"></div>
+	<div th:replace="~{fragments/tem/agencyLinks :: content}"></div>
+	
+    <kul:notes attachmentTypesValuesFinderClass="${DataDictionary.TravelEntertainmentDocument.attachmentTypesValuesFinderClass}" />
+    <div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+
+    <div th:replace="~{fragments/kul/routeLog :: content}"></div>
+	<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+    <div class="kfs-panel-footer"></div>
+    
+    <div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="${documentEntry.transactionalDocument}" data-extra-buttons="${KualiForm.extraButtons}"></div>
+
+<script>
+	$(document).ready(function() {
+		getAllStates();
+	});
+</script>
+      
+  </form>
+</div>
+</body>
+</html>

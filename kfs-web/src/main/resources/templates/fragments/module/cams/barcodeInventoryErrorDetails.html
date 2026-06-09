@@ -1,0 +1,225 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/cams/barcodeInventoryErrorDetails.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="bcieDocumentAttributes=${DataDictionary.BarcodeInventoryErrorDocument.attributes}"> /*/-->
+<!--/*/ <th:block th:with="bcieDetailAttributes=${DataDictionary.BarcodeInventoryErrorDetail.attributes}"> /*/-->
+<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+
+<section class="kfs-tab" data-tab-title="Barcode Inventory Error(s)" data-default-open="true">
+  <h3>Barcode Inventory Error(s)</h3>
+	<div id="barcodeInventoryDetails" class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Barcode Inventory Error(s)">
+			<tr>
+				<td colspan="11" class="subhead">Barcode Inventory Error(s)</td>				
+			</tr>
+			<tr>
+			    <!-- Columns Header -->
+				<!-- kul:htmlAttributeHeaderCell literalLabel="Line#" /-->
+            	<th:block th:if="${!readOnly}">				
+					<td align="right" class="${cssClass}" width="1%"><html:checkbox property="selectAllCheckbox" onclick="selectAllCheckboxes(document.forms[0])" /></td>
+				</th:block>
+
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.uploadRowNumber}"></th>
+				
+				<th:block th:if="${readOnly}">
+					<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.errorCorrectionStatusCode}"></th>				
+				</th:block>
+																		
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.assetTagNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.uploadScanIndicator}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.uploadScanTimestamp}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.campusCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.buildingCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.buildingRoomNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.buildingSubRoomNumber}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.assetConditionCode}"></th>
+				<th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${bcieDetailAttributes.errorDescription}"></th>
+			</tr>
+			
+			<!--/*/ <th:block th:with="isDocumentCorrected=${KualiForm.document.documentCorrected}"> /*/-->
+			
+			<!--/*/ <th:block th:with="lineNumber=${0}"> /*/-->
+			<tr th:each="detail : ${KualiForm.document.barcodeInventoryErrorDetail}" indexId="ctr">
+				<!--/*/ <th:block th:with="status=${detail.errorCorrectionStatusCode}"> /*/-->
+				
+				<th:block th:if="${isDocumentCorrected}">
+					<!--/*/ <th:block th:with="lineNumber=${lineNumber + 1}"> /*/-->
+				</th:block>
+				<th:block th:if="${not isDocumentCorrected and status == CamsConstants.BarCodeInventoryError.STATUS_CODE_ERROR}">
+					<!--/*/ <th:block th:with="lineNumber=${lineNumber + 1}"> /*/-->
+				</th:block>
+				
+				<div th:replace="~{fragments/cams/barcodeInventoryErrorDetail :: content}" data-barcode-inventory-detail-attributes="${bcieDetailAttributes}" data-property-name="document.barcodeInventoryErrorDetail[${ctr}]" data-read-only="${readOnly}" data-css-class="datacell" data-line-number="${lineNumber}" data-row-number="${detail.uploadRowNumber}" data-status="${status}"></div>
+            	
+<!--  We don't need to display the error message text on a page because they are being already displayed in a textbox.-->
+				<!--/*/ <th:block th:with="keyMatch=document.barcodeInventoryErrorDetail[${ctr}]*"> /*/-->            	            	
+				<c:forEach items="${ErrorPropertyList}" var="key">
+				  <th:block th:if="${not KualiForm.displayedErrors[key]}">            	            	
+		              <c:forEach items="${fn:split(keyMatch,',')}" var="prefix">
+			                <th:block th:if="${(fn:endsWith(prefix,'*') && fn:startsWith(key,fn:replace(prefix,'*',''))) || (key == prefix)}">
+			                 	<!--/*/ <th:block th:with="${key}=true"> /*/-->                 
+			                </th:block>
+		              </tr>
+				  </th:block>
+				</tr>
+				
+<!--  ********************************************************************************************************************************** -->
+            	
+			</tr>
+		</table>
+
+	<th:block th:if="${!readOnly}">						
+			<table table cellpadding="0" cellspacing="0" border=0> 		
+				<tr>
+				<th width="50%" class="grid" align="right">
+					<input type="image" property="methodToCall.validateLines" src="${ConfigProperties.externalizable.images.url}tinybutton-validate.gif"
+					    		alt="Validates selected lines"
+					        	styleClass="tinybutton" align="center"/>&nbsp &nbsp &nbsp
+				</td>
+				<th width="50%" class="grid" align="left">&nbsp &nbsp &nbsp				
+					<input type="image" property="methodToCall.deleteLines" src="${ConfigProperties.kr.externalizable.images.url}tinybutton-delete1.gif"
+					    		alt="Delete selected lines"
+					        	styleClass="tinybutton" align="center"/>
+				</td>	
+				</tr>			
+			</table>
+	</th:block>
+			
+	</div>
+</section>
+
+<th:block th:if="${!readOnly}">				
+	<section class="kfs-tab" data-tab-title="Global Replace" data-default-open="true">
+  <h3>Global Replace</h3>
+		<div id="globalReplace" class="tab-container" align=center>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td colspan="11" class="subhead">Global replace</td>
+				</tr>
+			</table>
+			<table cellpadding="0" cellspacing="0">
+				<tr>
+					<td  colspan="2"><div align="center"><label><strong>Search for lines containing...</strong></label></div></td>
+					<td  colspan="2"><div align="center"><label><strong>...and replace them with:</strong></label></div></td>
+				</tr>
+				<tr>	
+			        <th align=right valign=middle class="grid"><div align="right">
+			        	<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentTagNumber}"></label>
+			        </th>			        
+					<td align=left class="${cssClass}">&nbsp								
+						<input type="text" name="document.currentTagNumber" th:field="*{document.currentTagNumber}" data-attribute-entry="${bcieDocumentAttributes.currentTagNumber}" />
+					</td>	
+			        <th align=right valign=middle class="grid"><div align="right">&nbsp</div></th>				
+					<td align=left class="${cssClass}">&nbsp</td>
+	
+				</tr>				
+	
+				<tr>
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentScanCode}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp				
+						<input type="text" name="document.currentScanCode" th:field="*{document.currentScanCode}" data-attribute-entry="${bcieDocumentAttributes.currentScanCode}" />
+						[Y - N]
+					</td>
+			        <th align=right valign=middle class="grid"><div align="right">&nbsp</div></th>				
+					<td align=left class="${cssClass}">&nbsp</td>	
+				</tr>				
+	
+				<tr>
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentCampusCode}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp				
+						<input type="text" name="document.currentCampusCode" th:field="*{document.currentCampusCode}" data-attribute-entry="${bcieDocumentAttributes.currentCampusCode}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.campus.CampusEbo" th:replace="~{fragments/kul/lookup :: content}"></span>
+					</td>
+	
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.newCampusCode}"></label></div></th>				
+					<td align=left class="${cssClass}">&nbsp
+						<input type="text" name="document.newCampusCode" th:field="*{document.newCampusCode}" data-attribute-entry="${bcieDetailAttributes.campusCode}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.rice.location.framework.campus.CampusEbo" th:replace="~{fragments/kul/lookup :: content}"></span>						
+					</td>
+				</tr>				
+	
+				<tr>
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentBuildingNumber}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp				
+						<input type="text" name="document.currentBuildingNumber" th:field="*{document.currentBuildingNumber}" data-attribute-entry="${bcieDocumentAttributes.currentBuildingNumber}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>										
+					</td>
+	
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.newBuildingNumber}"></label></div></th>				
+					<td align=left class="${cssClass}">&nbsp
+						<input type="text" name="document.newBuildingNumber" th:field="*{document.newBuildingNumber}" data-attribute-entry="${bcieDocumentAttributes.newBuildingNumber}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>																
+					</td>
+				</tr>				
+	
+				<tr>
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentRoom}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp				
+						<input type="text" name="document.currentRoom" th:field="*{document.currentRoom}" data-attribute-entry="${bcieDocumentAttributes.currentRoom}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Room" th:replace="~{fragments/kul/lookup :: content}"></span>										
+					</td>
+	
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.newRoom}"></label></div></th>				
+					<td align=left class="${cssClass}">&nbsp
+						<input type="text" name="document.newRoom" th:field="*{document.newRoom}" data-attribute-entry="${bcieDocumentAttributes.newRoom}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Room" th:replace="~{fragments/kul/lookup :: content}"></span>																
+					</td>
+				</tr>				
+	
+				<tr>
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentSubroom}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp				
+						<input type="text" name="document.currentSubroom" th:field="*{document.currentSubroom}" data-attribute-entry="${bcieDocumentAttributes.currentSubroom}" />
+					</td>
+	
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.newSubroom}"></label></div></th>				
+					<td align=left class="${cssClass}">&nbsp
+						<input type="text" name="document.newSubroom" th:field="*{document.newSubroom}" data-attribute-entry="${bcieDocumentAttributes.newSubroom}" />
+					</td>
+				</tr>				
+	
+				<tr>
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.currentConditionCode}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp				
+						<input type="text" name="document.currentConditionCode" th:field="*{document.currentConditionCode}" data-attribute-entry="${bcieDocumentAttributes.currentConditionCode}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetCondition" th:replace="~{fragments/kul/lookup :: content}"></span>									
+					</td>
+	
+			        <th align=right valign=middle class="grid"><div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${bcieDocumentAttributes.newConditionCode}"></label></div></th>
+					<td align=left class="${cssClass}">&nbsp
+						<input type="text" name="document.newConditionCode" th:field="*{document.newConditionCode}" data-attribute-entry="${bcieDocumentAttributes.newConditionCode}" />
+						<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.cam.businessobject.AssetCondition" th:replace="~{fragments/kul/lookup :: content}"></span>															
+					</td>
+				</tr>
+						
+				<tr>
+					<th colspan=4 width="100%"><div align="center">
+						<input type="image" property="methodToCall.searchAndReplace"
+				    		src="${ConfigProperties.externalizable.images.url}tinybutton-replace.gif"
+				    		alt="Start replacing values"
+				        	styleClass="tinybutton" align="center"/></div>
+					</th>
+				</tr>					
+			</table>
+		</div>
+	</section>
+</th:block>
+</div>

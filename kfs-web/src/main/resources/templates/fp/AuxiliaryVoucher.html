@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf template converted from JSP: fp/AuxiliaryVoucher.jsp -->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:kfs="http://www.thymeleaf.org/kfs">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${documentTitle}">fp/AuxiliaryVoucher</title>
+</head>
+<body>
+<div class="kfs-document-page" data-document-type="AuxiliaryVoucherDocument">
+  <form action="financialAuxiliaryVoucher.do" method="post" enctype="multipart/form-data">
+		<%-- derive displayReadOnly value --%>
+		<!--/*/ <th:block th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}"> /*/-->
+
+  	   	<script type="text/javascript">
+		    function submitForChangedType() {
+        		document.forms[0].submit();
+		    }
+		</script>
+
+		
+        <div th:replace="~{fragments/sys/documentOverview :: content}" data-editing-mode="${KualiForm.editingMode}"></div>
+		<!-- AUXILIARY VOUCHER SPECIFIC FIELDS -->
+		<section class="kfs-tab" data-tab-title="Auxiliary Voucher Details" data-default-open="true">
+  <h3>Auxiliary Voucher Details</h3>
+	    	
+	    	<div class="tab-container" align="center">
+		<h3>Auxiliary Voucher Details</h3>
+	    	<table cellpadding="0" class="datatable" summary="view/edit ad hoc recipients">
+            <tbody>
+              <tr>
+                <th width="35%" class="bord-l-b">
+                  <div align="right">
+                    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.AuxiliaryVoucherDocument.attributes.accountingPeriod}"></label>
+                  </div>
+                </th>
+                <td class="datacell-nowrap">
+               		<th:block th:if="${KualiForm.accountingPeriodReadOnly}">
+                        ${KualiForm.accountingPeriod.universityFiscalPeriodName}
+					</th:block>
+                	<th:block th:if="${!KualiForm.accountingPeriodReadOnly}">
+						<select th:field="*{selectedAccountingPeriod}"
+						 onchange ="submitForChangedType()">
+					 		<html:options property="accountingPeriodCompositeValueList" labelProperty="accountingPeriodLabelList"  />
+                	 	</select>
+               		</th:block>
+                </td>
+              </tr>
+              <tr>
+                  <th width="35%" class="bord-l-b">
+                      <div align="right">
+                          <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.AuxiliaryVoucherDocument.attributes.typeCode}"></label>
+                      </div>
+                  </th>
+                  <td class="datacell-nowrap">
+         	          <input type="text" name="document.typeCode" th:field="*{document.typeCode}" data-attribute-entry="${DataDictionary.AuxiliaryVoucherDocument.attributes.typeCode}" onchange="submitForChangedType()" />          
+						<NOSCRIPT>
+    						<html:submit value="select" alt="press this button to refresh the page after changing the voucher type." />
+						</NOSCRIPT>                
+                  </td>
+              </tr>
+              <th:block th:switch="${true}">
+                  <th:block th:case="${empty KualiForm.document.typeCode || KualiForm.document.typeCode == KFSConstants.AuxiliaryVoucher.ADJUSTMENT_DOC_TYPE}">
+                  </th:block>                  
+                  <th:block th:case="*">
+                      <!--/*/ <th:block th:with="reversalReadOnly=${readOnly}"> /*/-->
+                      <th:block th:if="${!reversalReadOnly}">  <!--  if we're already readOnly b/c of authz permissions, then we want to stay that way -->
+	                      <th:block th:if="${KualiForm.document.typeCode == KFSConstants.AuxiliaryVoucher.RECODE_DOC_TYPE}">
+						      <!--/*/ <th:block th:with="reversalReadOnly=true"> /*/-->
+	                      </th:block>
+	                  </th:block>
+                      <tr>
+                          <th class="kfs-header-cell" data-attribute-entry-name="" data-attribute-entry="${DataDictionary.AuxiliaryVoucherDocument.attributes.reversalDate}"></th>
+                          <td class="datacell-nowrap">
+                              <input type="text" name="document.reversalDate" th:field="*{document.reversalDate}" data-attribute-entry="${DataDictionary.AuxiliaryVoucherDocument.attributes.reversalDate}" />
+                          </td>
+                      </tr>
+                  </th:block>
+              </th:block>
+            </tbody>
+          </table>
+	    	</div>
+		</section>
+        <section class="kfs-tab" data-tab-title="Accounting Lines" data-default-open="true">
+  <h3>Accounting Lines</h3>
+			<div class="kfs-sys-java-accountingLines" th:include="~{fragments/sys/java/accountingLines :: content}">
+				<div th:replace="~{fragments/sys/java/accountingLineGroup :: content}" data-new-line-property-name="newSourceLine" data-collection-property-name="document.sourceAccountingLines" data-collection-item-property-name="document.sourceAccountingLine" data-attribute-group-name="source"></div>
+			</div><!-- /kfs-sys-java-accountingLines -->
+		</section>
+		<div th:replace="~{fragments/gl/generalLedgerPendingEntries :: content}"></div>
+
+		<div th:replace="~{fragments/kul/notes :: content}"></div>
+						
+		<div th:replace="~{fragments/kul/adHocRecipients :: content}"></div>
+			
+		<div th:replace="~{fragments/kul/routeLog :: content}"></div>
+
+		<div th:replace="~{fragments/kul/superUserActions :: content}"></div>
+
+		<div class="kfs-panel-footer"></div>
+
+		<div th:replace="~{fragments/sys/documentControls :: content}" data-transactional-document="${documentEntry.transactionalDocument}" data-extra-buttons="${KualiForm.extraButtons}"></div>
+
+  </form>
+</div>
+</body>
+</html>

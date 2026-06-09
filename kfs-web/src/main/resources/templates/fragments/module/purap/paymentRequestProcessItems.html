@@ -1,0 +1,168 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/paymentRequestProcessItems.tag -->
+<!-- Fragment parameters: documentAttributes, itemAttributes, accountingLineAttributes, isCreditMemo -->
+<div th:fragment="content (documentAttributes, itemAttributes, accountingLineAttributes, isCreditMemo)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullDocumentEntryCompleted=${not empty KualiForm.editingMode['fullDocumentEntryCompleted']}"> /*/-->
+<!--/*/ <th:block th:with="purapTaxEnabled=${(not empty KualiForm.editingMode['purapTaxEnabled'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=50"> /*/-->
+
+<!--/*/ <th:block th:with="mainColumnCount=13"> /*/-->
+<!--/*/ <th:block th:with="colSpanItemType=6"> /*/-->
+<!--/*/ <th:block th:with="colSpanExtendedPrice=1"> /*/-->
+<th:block th:if="${purapTaxEnabled}">
+	<!--/*/ <th:block th:with="colSpanDescription=3"> /*/-->
+</th:block>	
+<th:block th:if="${!purapTaxEnabled}">
+	<!--/*/ <th:block th:with="colSpanDescription=5"> /*/-->
+</th:block>	
+
+<section class="kfs-tab" data-tab-title="Process Items" data-default-open="true">
+  <h3>Process Items</h3>
+	<div class="tab-container" align=center>
+	<th:block th:if="${!KualiForm.document.inquiryRendered}">
+	    <div align="left">
+	        Object Code and Sub-Object Code inquiries and descriptions have been removed because this is a prior year document.
+        </div>
+        <br>
+    </th:block>		
+	<table cellpadding="0" cellspacing="0" class="datatable" summary="Items Section">
+	
+	    <th:block th:if="${empty isCreditMemo or !isCreditMemo}">
+			<!--/*/ <th:block th:with="colSpanItemType=4"> /*/-->			
+    		<div th:replace="~{fragments/purap/purPOLineItemTotals :: content}" data-document-attributes="${documentAttributes}" data-main-column-count="${mainColumnCount}"></div>
+	    	<div th:replace="~{fragments/purap/paymentRequestItems :: content}" data-item-attributes="${itemAttributes}" data-accounting-line-attributes="${accountingLineAttributes}" data-show-amount="${fullDocumentEntryCompleted}" data-main-column-count="${mainColumnCount}"></div>
+		</th:block>
+
+        <!--  replace literal with PurapConstants once exported -->
+	    <th:block th:if="${isCreditMemo && !(KualiForm.document.creditMemoType eq 'Vendor')}">
+	    		<div th:replace="~{fragments/purap/creditMemoItems :: content}" data-item-attributes="${itemAttributes}" data-accounting-line-attributes="${accountingLineAttributes}" data-main-column-count="${mainColumnCount}"></div>
+		</th:block>
+
+		<!-- BEGIN SUBTOTAL SECTION -->
+		<!--/*/ <th:block th:with="colSpanTotalLabel=${mainColumnCount-colSpanDescription-colSpanExtendedPrice}"> /*/-->
+		<!--/*/ <th:block th:with="colSpanTotalAmount=${colSpanExtendedPrice}"> /*/-->
+		<!--/*/ <th:block th:with="colSpanTotalBlank=${colSpanDescription}"> /*/-->					
+		<th:block th:if="${purapTaxEnabled}">		
+			<!--/*/ <th:block th:with="colSpanTotalAmount=1"> /*/-->
+			<!--/*/ <th:block th:with="colSpanTotalLabel=${mainColumnCount-colSpanTotalBlank-colSpanTotalAmount}"> /*/-->		
+		</th:block>
+		
+		<tr>
+			<td align=right width='75%' scope="row" class="datacell" colspan="${colSpanTotalLabel}">
+			    <div align="right">
+			        <b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.lineItemTotal}"></label></b>&nbsp;
+			    </div>
+			</td>
+			<td valign=middle class="datacell" colspan="${colSpanTotalAmount}">
+			    <div align="right"><b>
+                    <input type="text" name="document.lineItemPreTaxTotal" th:field="*{document.lineItemPreTaxTotal}" data-attribute-entry="${documentAttributes.lineItemTotal}" readonly="readonly" />&nbsp; </b>
+                </div>
+			</td>
+			<td class="datacell" colspan="${colSpanTotalBlank}">&nbsp;</td>
+		</tr>
+		<!-- END SUBTOTAL SECTION -->
+		
+		<!--/*/ <th:block th:with="showInvoiced=${empty isCreditMemo or !isCreditMemo}"> /*/-->
+		<div th:replace="~{fragments/purap/miscitems :: content}" data-document-attributes="${documentAttributes}" data-item-attributes="${itemAttributes}" data-accounting-line-attributes="${accountingLineAttributes}" data-override-title="Additional Charges" data-show-amount="${fullDocumentEntryCompleted}" data-show-invoiced="${showInvoiced}" data-special-item-total-type="DISC" data-main-column-count="${mainColumnCount}" data-col-span-item-type="${colSpanItemType}" data-col-span-description="${colSpanDescription}" data-col-span-extended-price="${colSpanExtendedPrice}" data-col-span-amount-paid="0" data-name="specialItemTotalOverride" data-scope="row" data-class="datacell" data-colspan="${colSpanTotalLabel}" data-align="right" data-class="kfs-label" data-name="" data-entry="${documentAttributes.grandTotalExcludingDiscount}" data-class="datacell" data-colspan="${colSpanTotalAmount}" data-align="right" data-switch="${true}" data-case="${isCreditMemo && !(KualiForm.document.creditMemoType eq 'Vendor')}" data-type="text" data-name="document.grandTotal" data-field="*{document.grandTotal}" data-entry="${DataDictionary.PaymentRequestDocument.attributes.grandTotalExcludingDiscount}" data-readonly="readonly"></div>&nbsp; </b>
+								</th:block>
+                            	<th:block th:case="*">
+		                            <input type="text" name="document.grandPreTaxTotalExcludingDiscount" th:field="*{document.grandPreTaxTotalExcludingDiscount}" data-attribute-entry="${DataDictionary.PaymentRequestDocument.attributes.grandTotalExcludingDiscount}" readonly="readonly" />&nbsp; </b>
+								</th:block>
+							</th:block>
+                        </div>
+					</td>	
+					<td class="datacell" colspan="${colSpanTotalBlank}">
+						&nbsp;
+					</td>
+				</tr>
+			</jsp:attribute>
+		</div><!-- /purap:miscitems -->
+		
+		<!--/*/ <th:block th:with="taxInfoViewable=${KualiForm.editingMode['taxInfoViewable']}"> /*/-->
+    	<!--/*/ <th:block th:with="taxAreaEditable=${KualiForm.editingMode['taxAreaEditable']}"> /*/-->
+		<th:block th:if="${taxInfoViewable || taxAreaEditable}">
+			<div th:replace="~{fragments/purap/taxitems :: content}" data-document-attributes="${documentAttributes}" data-item-attributes="${itemAttributes}" data-accounting-line-attributes="${accountingLineAttributes}" data-override-title="Tax Withholding Charges" data-main-column-count="${mainColumnCount}" data-col-span-item-type="${colSpanItemType}" data-col-span-extended-price="${colSpanExtendedPrice}" data-if="${purapTaxEnabled}" data-scope="row" data-class="datacell" data-colspan="${colSpanTotalLabel}" data-align="right" data-if="${(empty isCreditMemo or !isCreditMemo) and purapTaxEnabled and KualiForm.document.useTaxIndicator}" data-class="kfs-label" data-name="" data-entry="${documentAttributes.grandPreTaxTotal}" data-class="datacell" data-colspan="${colSpanTotalAmount}" data-align="right" data-type="text" data-name="document.grandPreTaxTotal" data-field="*{document.grandPreTaxTotal}" data-entry="${documentAttributes.grandPreTaxTotal}" data-readonly="readonly"></div>&nbsp; </b>
+                </div>
+			</td>
+			<td valign="middle" class="datacell" colspan="${colSpanTotalBlank}">
+				&nbsp;
+			</td>
+		</tr>
+		
+		<tr>
+			<td align=right width='75%' scope="row" class="datacell" colspan="${colSpanTotalLabel}">
+			    <div align="right">
+			        <b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.grandTaxAmount}"></label></b>&nbsp;
+			    </div>
+			</td>
+			<td valign=middle class="datacell" colspan="${colSpanTotalAmount}">
+			    <div align="right"><b>
+                    <input type="text" name="document.grandTaxAmount" th:field="*{document.grandTaxAmount}" data-attribute-entry="${documentAttributes.grandTaxAmount}" readonly="readonly" />&nbsp; </b>
+                </div>
+			</td>
+			<td valign="middle" class="datacell" colspan="${colSpanTotalBlank}">
+				&nbsp;
+			</td>
+		</tr>
+		</th:block>
+
+		<tr>
+			<td align=right width='75%' scope="row" class="datacell" colspan="${colSpanTotalLabel}">
+			    <div align="right">
+					<th:block th:if="${(empty isCreditMemo or !isCreditMemo) and purapTaxEnabled and !KualiForm.document.useTaxIndicator}">
+					<b>[Vendor Remit Amount]</b>
+					</th:block>
+
+			        <b><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.grandTotal}"></label></b>&nbsp;
+			    </div>
+			</td>
+			<td valign=middle class="datacell" colspan="${colSpanTotalAmount}">
+			    <div align="right"><b>
+                    <input type="text" name="document.grandTotal" th:field="*{document.grandTotal}" data-attribute-entry="${documentAttributes.grandTotal}" readonly="readonly" />&nbsp; </b>
+                </div>
+			</td>
+			<td class="datacell" colspan="${colSpanTotalBlank}">
+              <th:block th:if="${empty isCreditMemo or !isCreditMemo}">
+	              <th:block th:if="${empty KualiForm.document.recurringPaymentTypeCode and !empty KualiForm.editingMode['allowClosePurchaseOrder']}">
+	              	<input type="text" name="document.closePurchaseOrderIndicator" th:field="*{document.closePurchaseOrderIndicator}" data-attribute-entry="${documentAttributes.closePurchaseOrderIndicator}" />
+					    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.closePurchaseOrderIndicator}"></label>
+	              </th:block>
+	              <th:block th:if="${not empty KualiForm.document.recurringPaymentTypeCode and not fullDocumentEntryCompleted}">
+	                Recurring PO
+	              </th:block>
+              </th:block>
+              <th:block th:if="${isCreditMemo}">
+	              <th:block th:if="${empty KualiForm.document.paymentRequestDocument.recurringPaymentTypeCode and !empty KualiForm.editingMode['allowReopenPurchaseOrder']}">
+	                <input type="text" name="document.reopenPurchaseOrderIndicator" th:field="*{document.reopenPurchaseOrderIndicator}" data-attribute-entry="${documentAttributes.reopenPurchaseOrderIndicator}" />
+					    <label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.reopenPurchaseOrderIndicator}"></label>
+	              </th:block>
+	              <th:block th:if="${not empty KualiForm.document.paymentRequestDocument.recurringPaymentTypeCode and not fullDocumentEntryCompleted}">
+	              	Recurring PO
+	              </th:block>			
+              </th:block>		
+			</td>
+		</tr>		
+		<!-- END TOTAL SECTION -->
+		
+	</table>
+
+	</div>
+</section>
+</div>

@@ -1,0 +1,251 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: module/purap/delivery.tag -->
+<!-- Fragment parameters: documentAttributes, deliveryReadOnly, showDefaultBuildingOption -->
+<div th:fragment="content (documentAttributes, deliveryReadOnly, showDefaultBuildingOption)" xmlns:th="http://www.thymeleaf.org">
+<!--/*/ <th:block th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="notOtherDeliveryBuilding=${not KualiForm.document.deliveryBuildingOtherIndicator}"> /*/-->
+<!--/*/ <th:block th:with="contentReadOnly=${(not empty KualiForm.editingMode['lockContentEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="amendmentEntry=${(not empty KualiForm.editingMode['amendmentEntry'])}"> /*/-->
+<!--/*/ <th:block th:with="lockB2BEntry=${(not empty KualiForm.editingMode['lockB2BEntry'])}"> /*/-->
+<th:block th:if="${empty deliveryReadOnly}">
+	<!--/*/ <th:block th:with="deliveryReadOnly=false"> /*/-->
+</th:block>
+<!--/*/ <th:block th:with="displayReceivingAddress=${(not empty KualiForm.editingMode['displayReceivingAddress'])}"> /*/-->
+<!--/*/ <th:block th:with="lockAddressToVendor=${(not empty KualiForm.editingMode['lockAddressToVendor'])}"> /*/-->
+<!--/*/ <th:block th:with="tabindexOverrideBase=20"> /*/-->
+
+<section class="kfs-tab" data-tab-title="Delivery" data-default-open="true">
+  <h3>Delivery</h3>
+    <div class="tab-container" align=center>
+    
+    	<!---- Final Delivery ---->
+            <h3>Final Delivery</h3>
+
+        <table cellpadding="0" cellspacing="0" class="datatable" summary="Final Delivery Section">
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCampusCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryCampusCode" th:field="*{document.deliveryCampusCode}" data-attribute-entry="${documentAttributes.deliveryCampusCode}" readonly="readonly" />&nbsp;                
+                    <th:block th:if="${(fullEntryMode or amendmentEntry) && !deliveryReadOnly}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.vnd.businessobject.CampusParameter" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                </td>               
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryToName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryToName" th:field="*{document.deliveryToName}" data-attribute-entry="${documentAttributes.deliveryToName}" />
+                    <th:block th:if="${fullEntryMode && !deliveryReadOnly}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.rice.kim.api.identity.Person" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>
+                </td>
+            </tr>
+            <tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryBuildingName" th:field="*{document.deliveryBuildingName}" data-attribute-entry="${documentAttributes.deliveryBuildingName}" readonly="readonly" />&nbsp;
+                        <th:block th:if="${hasErrors}">
+              				<kul:fieldShowErrorIcon />
+            			</th:block>
+                    <th:block th:if="${(fullEntryMode or amendmentEntry) && !deliveryReadOnly}">
+                        <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Building" th:replace="~{fragments/kul/lookup :: content}"></span>&nbsp;&nbsp;
+                        <input type="image" property="methodToCall.useOtherDeliveryBuilding" src="${ConfigProperties.externalizable.images.url}tinybutton-buildingnotfound.gif" alt="building not found" styleClass="tinybutton" />&nbsp;
+                        <th:block th:if="${showDefaultBuildingOption && notOtherDeliveryBuilding && !contentReadOnly}">
+                            <input type="image" property="methodToCall.setAsDefaultBuilding" src="${ConfigProperties.externalizable.images.url}tinybutton-setbuilding.gif" alt="set as default building" styleClass="tinybutton" />
+                        </th:block>
+                    </th:block>
+                </td>           
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryToPhoneNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryToPhoneNumber" th:field="*{document.deliveryToPhoneNumber}" data-attribute-entry="${documentAttributes.deliveryToPhoneNumber}" />
+                </td>
+            </tr>
+			<tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingLine1Address}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryBuildingLine1Address" th:field="*{document.deliveryBuildingLine1Address}" data-attribute-entry="${documentAttributes.deliveryBuildingLine1Address}" />
+                </td>           
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryToEmailAddress}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryToEmailAddress" th:field="*{document.deliveryToEmailAddress}" data-attribute-entry="${documentAttributes.deliveryToEmailAddress}" />
+                </td>
+			</tr>
+			<tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingLine2Address}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryBuildingLine2Address" th:field="*{document.deliveryBuildingLine2Address}" data-attribute-entry="${documentAttributes.deliveryBuildingLine2Address}" />
+                </td>
+                <th:block th:if="${!lockB2BEntry}">
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryRequiredDate}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryRequiredDate" th:field="*{document.deliveryRequiredDate}" data-attribute-entry="${documentAttributes.deliveryRequiredDate}" />
+	                </td>
+	            </th:block>
+                <th:block th:if="${lockB2BEntry}">
+                    <th align=right valign=middle class="bord-l-b" rowspan="7">&nbsp;</th>
+                    <td align=left valign=middle class="datacell" rowspan="7">&nbsp;</td>
+                </th:block>
+			</tr>
+			<tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryBuildingRoomNumber}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryBuildingRoomNumber" th:field="*{document.deliveryBuildingRoomNumber}" data-attribute-entry="${documentAttributes.deliveryBuildingRoomNumber}" />
+			        <th:block th:if="${(fullEntryMode or amendmentEntry) && !deliveryReadOnly && notOtherDeliveryBuilding && (not empty KualiForm.document.deliveryBuildingCode)}">
+			            <span class="kfs-lookup" data-bo-class="org.kuali.kfs.sys.businessobject.Room" th:replace="~{fragments/kul/lookup :: content}"></span>
+			        </th:block>
+                </td>           
+                <th:block th:if="${!lockB2BEntry}">
+	                <th align=right valign=middle class="bord-l-b">
+	                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryRequiredDateReasonCode}"></label></div>
+	                </th>
+	                <td align=left valign=middle class="datacell">
+	                    <input type="text" name="document.deliveryRequiredDateReasonCode" th:field="*{document.deliveryRequiredDateReasonCode}" data-attribute-entry="${documentAttributes.deliveryRequiredDateReasonCode}" />
+	                </td>
+                </th:block>
+			</tr>
+			<tr>
+                <th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCityName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryCityName" th:field="*{document.deliveryCityName}" data-attribute-entry="${documentAttributes.deliveryCityName}" />
+                </td>
+                <th:block th:if="${!lockB2BEntry}">
+                    <th align=right valign=middle class="bord-l-b" rowspan="4">
+                        <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryInstructionText}"></label></div>
+                    </th>
+                    <td align=left valign=middle class="datacell"  rowspan="4">
+                        <input type="text" name="document.deliveryInstructionText" th:field="*{document.deliveryInstructionText}" data-attribute-entry="${documentAttributes.deliveryInstructionText}" />
+                    </td>
+                </th:block>
+			</tr>
+            <tr>			
+				<th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryStateCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryStateCode" th:field="*{document.deliveryStateCode}" data-attribute-entry="${documentAttributes.deliveryStateCode}" />
+                </td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryPostalCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryPostalCode" th:field="*{document.deliveryPostalCode}" data-attribute-entry="${documentAttributes.deliveryPostalCode}" />
+                </td>
+			</tr>
+			<tr>
+				<th align=right valign=middle class="bord-l-b">
+                    <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.deliveryCountryCode}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell">
+                    <input type="text" name="document.deliveryCountryCode" th:field="*{document.deliveryCountryCode}" data-attribute-entry="${documentAttributes.deliveryCountryCode}" />
+                </td>
+			</tr>
+        </table>
+
+	   	<th:block th:if="${displayReceivingAddress}">    
+	   	
+    	<!---- Receiving Address ---->
+            <h3>Receiving Address</h3>
+
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Receiving Address Section">	 
+			<tr>
+                <th align=right valign=middle  class="bord-l-b">
+                   <div align="right"><label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.receivingName}"></label></div>
+                </th>
+                <td align=left valign=middle class="datacell"> 
+                	<input type="text" name="document.receivingName" th:field="*{document.receivingName}" data-attribute-entry="${documentAttributes.receivingName}" readonly="readonly" /><br>
+                   	<input type="text" name="document.receivingLine1Address" th:field="*{document.receivingLine1Address}" data-attribute-entry="${documentAttributes.receivingLine1Address}" readonly="readonly" /><br>
+                   	<th:block th:if="${! empty KualiForm.document.receivingLine2Address}">                   	
+                   		<input type="text" name="document.receivingLine2Address" th:field="*{document.receivingLine2Address}" data-attribute-entry="${documentAttributes.receivingLine2Address}" readonly="readonly" /><br>
+                   	</th:block>
+  	           		<input type="text" name="document.receivingCityName" th:field="*{document.receivingCityName}" data-attribute-entry="${documentAttributes.receivingCityName}" readonly="readonly" />,&nbsp;
+                    <input type="text" name="document.receivingStateCode" th:field="*{document.receivingStateCode}" data-attribute-entry="${documentAttributes.receivingStateCode}" readonly="readonly" />&nbsp;
+                    <input type="text" name="document.receivingPostalCode" th:field="*{document.receivingPostalCode}" data-attribute-entry="${documentAttributes.receivingPostalCode}" readonly="readonly" />
+                   	<th:block th:if="${! empty KualiForm.document.receivingCountryCode}">                   	
+	            		<br><input type="text" name="document.receivingCountryCode" th:field="*{document.receivingCountryCode}" data-attribute-entry="${documentAttributes.receivingCountryCode}" readonly="readonly" />
+                   	</th:block>
+            	</td>
+                <td align=left valign=middle class="datacell">
+                    <th:block th:if="${fullEntryMode || amendmentEntry}"> 
+                    	<span class="kfs-lookup" data-bo-class="org.kuali.kfs.module.purap.businessobject.ReceivingAddress" th:replace="~{fragments/kul/lookup :: content}"></span>
+                    </th:block>            		
+            	</td>
+            </tr>
+        </table>
+        
+    	<!---- Address To Vendor ---->
+            <h3>Address To Vendor</h3>
+        
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="Address To Vendor Section">
+			<tr>
+				<th align=right valign=middle class="bord-l-b">
+					<div align="right">
+						<th:block th:switch="${true}">
+							<th:block th:case="${(fullEntryMode || amendmentEntry) && !lockAddressToVendor}">
+								<label class="kfs-label" data-attribute-entry-name="" data-attribute-entry="${documentAttributes.addressToVendorIndicator}"></label>
+							</th:block>
+							<th:block th:case="*">
+								Use Receiving Address as Shipping Address Presented to Vendor?
+							</th:block>
+						</th:block>
+					</div>
+				</th>
+				<td align=left valign=middle class="datacell">
+                    <input type="text" name="document.addressToVendorIndicator" th:field="*{document.addressToVendorIndicator}" data-attribute-entry="${documentAttributes.addressToVendorIndicator}" /><br>				
+					<!--
+					<th:block th:switch="${true}">
+						<th:block th:case="${KualiForm.document.addressToVendorIndicator == 'true'}">
+							&nbsp;<input type=radio title="${documentAttributes.addressToVendorIndicator.label} - Receiving Address" name="document.addressToVendorIndicator" value="true" checked />&nbsp;Receiving Address&nbsp;
+							&nbsp;<input type=radio title="${documentAttributes.addressToVendorIndicator.label} - Final Delivery Address" name="document.addressToVendorIndicator" value="false" />&nbsp;Final Delivery Address&nbsp;
+						</th:block>
+						<th:block th:case="*">
+							&nbsp;<input type=radio title="${documentAttributes.addressToVendorIndicator.label} - Receiving Address" name="document.addressToVendorIndicator" value="false" />&nbsp;Receiving Address&nbsp;
+							&nbsp;<input type=radio title="${documentAttributes.addressToVendorIndicator.label} - Final Delivery Address" name="document.addressToVendorIndicator" value="true" checked />&nbsp;Final Delivery Address&nbsp;
+						</th:block>
+					</th:block>
+					-->
+            	</td>
+            </tr>
+        </table>
+					
+		</th:block>            		
+
+	</div>
+</section>
+</div>

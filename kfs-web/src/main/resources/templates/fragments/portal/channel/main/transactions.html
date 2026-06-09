@@ -1,0 +1,104 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!-- Thymeleaf fragment converted from tag: portal/channel/main/transactions.tag -->
+<div th:fragment="content ()" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/channel/portalChannelTop :: content}" data-channel-title="Transactions"></div>
+<div class="body">
+	<th:block th:if="${ConfigProperties.module.accounts.receivable.enabled == 'true'}">
+		<strong>Accounts Receivable</strong>
+		<br />
+		<ul class="chan">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Cash Control" data-url="${ConfigProperties.application.url}/arCashControlDocument.do?methodToCall=docHandler&command=initiate&docTypeName=CTRL"></div></li>
+			<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Contracts & Grants Collection Activity" data-url="${ConfigProperties.application.url}/arContractsGrantsCollectionActivityDocument.do?methodToCall=docHandler&command=initiate&docTypeName=CCA"></div></li>
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Contracts & Grants Invoice" data-url="${ConfigProperties.application.url}/arContractsGrantsInvoiceLookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.ar.businessobject.ContractsGrantsInvoiceLookupResult&docFormKey=88888888&returnLocation=portal.do&hideReturnLink=true"></div></li>
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Contracts & Grants LOC Review" data-url="${ConfigProperties.application.url}/arContractsGrantsLetterOfCreditReviewDocument.do?methodToCall=docHandler&command=initiate&docTypeName=LCR"></div></li>			
+			</th:block>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Customer Credit Memo" data-url="${ConfigProperties.application.url}/arCustomerCreditMemoDocument.do?methodToCall=docHandler&command=initiate&docTypeName=CRM"></div></li>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Customer Invoice" data-url="${ConfigProperties.application.url}/arCustomerInvoiceDocument.do?methodToCall=docHandler&command=initiate&docTypeName=INV"></div></li>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Customer Invoice Writeoff" data-url="${ConfigProperties.application.url}/arCustomerInvoiceWriteoffDocument.do?methodToCall=docHandler&command=initiate&docTypeName=INVW"></div></li>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Customer Invoice Writeoff Lookup" data-url="${ConfigProperties.application.url}/arCustomerInvoiceWriteoffLookup.do?methodToCall=start&businessObjectClassName=org.kuali.kfs.module.ar.businessobject.CustomerInvoiceWriteoffLookupResult&docFormKey=88888888&returnLocation=portal.do&hideReturnLink=true"></div></li>
+			<th:block th:if="${ConfigProperties.contracts.grants.billing.enabled == 'true'}">
+				<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Final Billed Indicator" data-url="${ConfigProperties.application.url}/arFinalBilledIndicatorDocument.do?methodToCall=docHandler&command=initiate&docTypeName=FBI"></div></li>
+			</th:block>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Payment Application" data-url="${ConfigProperties.application.url}/arPaymentApplicationDocument.do?methodToCall=docHandler&command=initiate&docTypeName=APP"></div></li>
+		</ul>
+	</th:block>
+
+	<th:block th:if="${ConfigProperties.module.labor.distribution.enabled == 'true'}">
+		<strong>Budget Construction</strong>
+		<br />
+		<ul class="chan">
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Budget Construction Selection" data-url="${ConfigProperties.application.url}/budgetBudgetConstructionSelection.do?methodToCall=loadExpansionScreen"></div></li>
+		</ul>
+	</th:block>
+
+	<strong>Financial Processing</strong><br />
+    <ul class="chan">
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Advance Deposit" data-url="${ConfigProperties.application.url}/financialAdvanceDeposit.do?methodToCall=docHandler&command=initiate&docTypeName=AD"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Auxiliary Voucher" data-url="${ConfigProperties.application.url}/financialAuxiliaryVoucher.do?methodToCall=docHandler&command=initiate&docTypeName=AV"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Budget Adjustment" data-url="${ConfigProperties.application.url}/financialBudgetAdjustment.do?methodToCall=docHandler&command=initiate&docTypeName=BA"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Cash Receipt" data-url="${ConfigProperties.application.url}/financialCashReceipt.do?methodToCall=docHandler&command=initiate&docTypeName=CR"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Credit Card Receipt" data-url="${ConfigProperties.application.url}/financialCreditCardReceipt.do?methodToCall=docHandler&command=initiate&docTypeName=CCR"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Disbursement Voucher" data-url="${ConfigProperties.application.url}/financialDisbursementVoucher.do?methodToCall=docHandler&command=initiate&docTypeName=DV"></div></li>
+        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Distribution of Income and Expense" data-url="${ConfigProperties.application.url}/financialDistributionOfIncomeAndExpense.do?methodToCall=docHandler&command=initiate&docTypeName=DI"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="General Error Correction" data-url="${ConfigProperties.application.url}/financialGeneralErrorCorrection.do?methodToCall=docHandler&command=initiate&docTypeName=GEC"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Indirect Cost Adjustment" data-url="${ConfigProperties.application.url}/financialIndirectCostAdjustment.do?methodToCall=docHandler&command=initiate&docTypeName=ICA"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Internal Billing" data-url="${ConfigProperties.application.url}/financialInternalBilling.do?methodToCall=docHandler&command=initiate&docTypeName=IB"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Intra-Account Adjustment" data-url="${ConfigProperties.application.url}/financialIntraAccountAdjustment.do?methodToCall=docHandler&command=initiate&docTypeName=IAA"></div></li>	
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Pre-Encumbrance" data-url="${ConfigProperties.application.url}/financialPreEncumbrance.do?methodToCall=docHandler&command=initiate&docTypeName=PE"></div></li>
+		<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Transfer of Funds" data-url="${ConfigProperties.application.url}/financialTransferOfFunds.do?methodToCall=docHandler&command=initiate&docTypeName=TF"></div></li>
+		
+    </ul>
+    
+    <th:block th:if="${ConfigProperties.module.labor.distribution.enabled == 'true'}">
+	    <strong>Labor Distribution</strong><br />
+	    <ul class="chan">
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Benefit Expense Transfer" data-url="${ConfigProperties.application.url}/laborBenefitExpenseTransfer.do?methodToCall=docHandler&command=initiate&docTypeName=BT"></div></li>	            
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Salary Expense Transfer" data-url="${ConfigProperties.application.url}/laborSalaryExpenseTransfer.do?methodToCall=docHandler&command=initiate&docTypeName=ST"></div></li>	
+	    </ul>
+	</th:block>
+
+	<th:block th:if="${ConfigProperties.module.purchasing.enabled == 'true'}">
+		<strong>Purchasing/Accounts Payable</strong><br />
+	    <ul class="chan">
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Bulk Receiving" data-url="${ConfigProperties.application.url}/purapBulkReceiving.do?methodToCall=docHandler&command=initiate&docTypeName=RCVB"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Contract Manager Assignment" data-url="${ConfigProperties.application.url}/purapContractManagerAssignment.do?methodToCall=docHandler&command=initiate&docTypeName=ACM"></div></li>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Payment Request" data-url="${ConfigProperties.application.url}/purapPaymentRequest.do?methodToCall=docHandler&command=initiate&docTypeName=PREQ"></div></li>
+			<li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Receiving" data-url="${ConfigProperties.application.url}/purapLineItemReceiving.do?methodToCall=docHandler&command=initiate&docTypeName=RCVL"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Requisition" data-url="${ConfigProperties.application.url}/purapRequisition.do?methodToCall=docHandler&command=initiate&docTypeName=REQS"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Shop Catalogs" data-url="${ConfigProperties.application.url}/b2b.do?methodToCall=shopCatalogs"></div></li>
+	        <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Vendor Credit Memo" data-url="${ConfigProperties.application.url}/purapVendorCreditMemo.do?methodToCall=docHandler&command=initiate&docTypeName=CM"></div></li>
+	    </ul>
+    </th:block>
+     <th:block th:if="${ConfigProperties.module.travel.enabled == 'true'}">
+         <strong>Travel</strong><br />
+         <ul class="chan">
+             <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Entertainment Reimbursement" data-url="${ConfigProperties.application.url}/temTravelEntertainment.do?methodToCall=docHandler&command=initiate&docTypeName=ENT"></div></li>
+             <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Moving and Relocation Reimbursement" data-url="${ConfigProperties.application.url}/temTravelRelocation.do?methodToCall=docHandler&command=initiate&docTypeName=RELO"></div></li>
+             <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Travel Arranger" data-url="${ConfigProperties.application.url}/temTravelArranger.do?methodToCall=docHandler&command=initiate&docTypeName=TTA"></div></li>
+             <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Travel Authorization" data-url="${ConfigProperties.application.url}/temTravelAuthorization.do?methodToCall=docHandler&command=initiate&docTypeName=TA"></div></li>
+             <th:block th:if="${ConfigProperties.travel.reimbursement.initiatelink.enabled == 'true'}">
+                 <li><div th:replace="~{fragments/portal/portalLink :: content}" data-display-title="true" data-title="Travel Reimbursement" data-url="${ConfigProperties.application.url}/temTravelReimbursement.do?methodToCall=docHandler&command=initiate&docTypeName=TR"></div></li>
+             </th:block>
+         </ul>
+   	 </th:block>
+</div>
+<div th:replace="~{fragments/channel/portalChannelBottom :: content}"></div>
+</div>
