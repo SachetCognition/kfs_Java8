@@ -8,8 +8,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/kfs?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: kfs
-    password: kfs
+    username: ${KFS_DB_USERNAME:kfs}
+    password: ${KFS_DB_PASSWORD:kfs}
     hikari:
       maximum-pool-size: 50
       minimum-idle: 5
@@ -24,8 +24,8 @@ spring:
 
   security:
     user:
-      name: admin
-      password: admin
+      name: ${SECURITY_USER_NAME:admin}
+      password: ${SECURITY_USER_PASSWORD:changeme}
 
   quartz:
     job-store-type: memory
@@ -53,7 +53,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,env
+        include: health,info,metrics
   endpoint:
     health:
       show-details: when-authorized

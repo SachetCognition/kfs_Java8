@@ -550,10 +550,11 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     protected boolean isDependencySatisfiedNegatively(JobDetail dependentJobDetail, JobDetail dependencyJobDetail) {
-       LOG.info("isDependencySatisfiedNegatively::::  dependentJobDetail::: " + dependencyJobDetail.getKey().toString() + " dependencyJobDetail    " + dependencyJobDetail.getKey().toString() );
         if ( dependentJobDetail == null || dependencyJobDetail == null ) {
+            LOG.info("isDependencySatisfiedNegatively:::: dependentJobDetail or dependencyJobDetail is null");
             return true;
         }
+       LOG.info("isDependencySatisfiedNegatively::::  dependentJobDetail::: " + dependentJobDetail.getKey().toString() + " dependencyJobDetail    " + dependencyJobDetail.getKey().toString() );
         return (isFailed(dependencyJobDetail) || isCancelled(dependencyJobDetail)) && !isSoftDependency(dependentJobDetail.getKey().getName(), dependencyJobDetail.getKey().getName());
     }
 
