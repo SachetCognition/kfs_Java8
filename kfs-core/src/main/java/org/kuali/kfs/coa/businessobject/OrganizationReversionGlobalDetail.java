@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.SortedSet;
@@ -38,14 +46,25 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
  * OrganizationReversionDetail lists Organization as a primary key and Global Organization Reversions deal with several
  * Organizations, that class could not be re-used for Globals.
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CHG_DTL_T")
+@IdClass(OrganizationReversionGlobalDetailId.class)
+
 public class OrganizationReversionGlobalDetail extends GlobalBusinessObjectDetailBase {
     protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalDetail.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_OBJ_CD")
     private String organizationReversionObjectCode;
+    @Column(name = "ORG_RVRSN_CD")
     private String organizationReversionCode;
 
+    @Transient
     private OrganizationReversionCategory organizationReversionCategory;
     private OrganizationReversionGlobal parentGlobalOrganizationReversion;
     private ObjectCode organizationReversionObject;

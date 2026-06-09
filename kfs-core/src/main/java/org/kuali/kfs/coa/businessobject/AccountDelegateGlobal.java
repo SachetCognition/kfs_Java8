@@ -18,6 +18,13 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,8 +48,13 @@ import org.kuali.rice.krad.service.PersistenceStructureService;
  * This class simply acts as a container to hold the List of Delegate Changes and the list of Account entries, for the Global
  * Delegate Change Document.
  */
+@Entity
+@Table(name = "CA_ACCT_DELEGATE_GBL_T")
+
 public class AccountDelegateGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
 
     protected String modelName;
@@ -51,6 +63,7 @@ public class AccountDelegateGlobal extends PersistableBusinessObjectBase impleme
 
     protected AccountDelegateModel model;
 
+    @Transient
     protected List<AccountGlobalDetail> accountGlobalDetails;
     protected List<AccountDelegateGlobalDetail> delegateGlobals;
 

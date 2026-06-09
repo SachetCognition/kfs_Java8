@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -26,6 +34,9 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_RC_T")
+
 public class ResponsibilityCenter extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,9 +46,15 @@ public class ResponsibilityCenter extends PersistableBusinessObjectBase implemen
 
     }
 
+    @Id
+    @Column(name = "RC_CD")
     private String responsibilityCenterCode;
+    @Column(name = "RC_NM")
     private String responsibilityCenterName;
+    @Column(name = "RC_SHRT_NM")
     private String responsibilityCenterShortName;
+    @Column(name = "RC_ACTIVE_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

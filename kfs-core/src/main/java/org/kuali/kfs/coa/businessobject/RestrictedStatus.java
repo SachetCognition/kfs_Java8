@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -26,6 +34,9 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_RESTRICT_STAT_T")
+
 public class RestrictedStatus extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,8 +46,13 @@ public class RestrictedStatus extends PersistableBusinessObjectBase implements M
 
     }
 
+    @Id
+    @Column(name = "ACCT_RSTRC_STAT_CD")
     private String accountRestrictedStatusCode;
+    @Column(name = "ACCT_RSTRC_STAT_NM")
     private String accountRestrictedStatusName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

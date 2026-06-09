@@ -19,12 +19,23 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
 /**
  * Mandatory Transfer Elimination Code Business Object
  */
+@Entity
+@Table(name = "CA_MNXFR_ELIM_T")
+
 public class MandatoryTransferEliminationCode extends KualiCodeBase implements MutableInactivatable {
 
     private static final long serialVersionUID = -4739034767927632704L;

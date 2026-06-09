@@ -19,6 +19,15 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -27,6 +36,9 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_FUND_GRP_T")
+
 public class SubFundGroup extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -38,16 +50,29 @@ public class SubFundGroup extends PersistableBusinessObjectBase implements Mutab
 
     private static final long serialVersionUID = 3304324942061886270L;
 
+    @Id
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Column(name = "SUB_FUND_GRP_DESC")
     private String subFundGroupDescription;
+    @Column(name = "SUBFUNDGRP_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "SUB_FUNDGRP_TYP_CD")
     private String subFundGroupTypeCode;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
+    @Column(name = "SUB_FUND_GRP_WAGE_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean subFundGroupWagesIndicator;
+    @Column(name = "FUND_GRP_CD")
     private String fundGroupCode;
+    @Column(name = "FND_GRP_BA_RSTR_LVL_CD")
     private String fundGroupBudgetAdjustmentRestrictionLevelCode;
+    @Column(name = "ACCT_RSTRC_STAT_CD")
     private String accountRestrictedStatusCode;
 
+    @Transient
     private FundGroup fundGroup;
     private SubFundGroupType subFundGroupType;
     private RestrictedStatus accountRestrictedStatus;

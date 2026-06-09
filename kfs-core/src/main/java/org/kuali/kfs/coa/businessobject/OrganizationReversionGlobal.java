@@ -18,6 +18,15 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,8 +35,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationReversionService;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
@@ -44,23 +51,38 @@ import org.kuali.rice.krad.service.PersistenceStructureService;
  * University Fiscal Year and Chart of Accounts code for the Organizations going through reversion, with some account information.
  * 2. A list of the appropriate Object Reversion Details 3. A list of Organizations to apply the Organization Reversion to
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CHG_DOC_T")
+
 public class OrganizationReversionGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
-    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobal.class);
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobal.class);
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
 
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "BDGT_RVRSN_COA_CD")
     protected String budgetReversionChartOfAccountsCode;
+    @Column(name = "BDGT_RVRSNACCT_NBR")
     protected String budgetReversionAccountNumber;
+    @Column(name = "CF_BY_OBJ_CD_IND")
+    @Convert(converter = YesNoConverter.class)
     protected Boolean carryForwardByObjectCodeIndicator;
+    @Column(name = "CSH_RVRSNFINCOA_CD")
     protected String cashReversionFinancialChartOfAccountsCode;
+    @Column(name = "CSH_RVRSN_ACCT_NBR")
     protected String cashReversionAccountNumber;
 
+    @Transient
     protected Account cashReversionAccount;
     protected Account budgetReversionAccount;
     protected Chart budgetReversionChartOfAccounts;
+    @Transient
     protected Chart cashReversionFinancialChartOfAccounts;
     protected SystemOptions universityFiscal;
 
+    @Transient
     protected List<OrganizationReversionGlobalDetail> organizationReversionGlobalDetails;
     protected List<OrganizationReversionGlobalOrganization> organizationReversionGlobalOrganizations;
 

@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.kfs.sys.context.SpringContext;
@@ -28,20 +38,37 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Reporting Codes Business Object
  */
+@Entity
+@Table(name = "FP_RPT_CD_T")
+@IdClass(ReportingCodeId.class)
+
 public class ReportingCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     private static final long serialVersionUID = -1585612121519839488L;
+    @Id
+    @Column(name = "FIN_RPT_CHRT_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_RPT_ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "FIN_RPT_CD")
     private String financialReportingCode;
+    @Column(name = "FIN_RPT_CD_DESC")
     private String financialReportingCodeDescription;
+    @Column(name = "FIN_REP_CD_MGR_ID")
     private String financialReportingCodeMgrId;
+    @Column(name = "FIN_RPTS_TO_RPT_CD")
     private String financialReportsToReportingCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private Chart chart;
     private Organization org;
     private Person person;
+    @Transient
     private ReportingCode reportingCodes;
 
     /**

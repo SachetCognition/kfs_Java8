@@ -18,6 +18,15 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -27,18 +36,26 @@ import org.kuali.rice.krad.bo.KualiCodeBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_PROJECT_T")
+
 public class ProjectCode extends KualiCodeBase implements MutableInactivatable {
 
     private static final long serialVersionUID = 4529316062843227897L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "ProjectCode";
     
+    @Column(name = "PROJECT_DESC")
     private String projectDescription;
+    @Column(name = "PROJ_MGR_UNVL_ID")
     private String projectManagerUniversalId;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ORG_CD")
     private String organizationCode;
 
     private Person projectManagerUniversal;
+    @Transient
     private Chart chartOfAccounts;
     private Organization organization;
 

@@ -14,7 +14,72 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Migrated entity classes (add here as OJB mappings are converted) -->
+        <!-- COA module -->
+        <class>org.kuali.kfs.coa.businessobject.A21IndirectCostRecoveryAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.A21SubAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.Account</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountDelegate</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountDelegateGlobal</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountDelegateGlobalDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountDelegateModel</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountDelegateModelDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountDescription</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountGlobal</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountGlobalDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountGuideline</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountType</class>
+        <class>org.kuali.kfs.coa.businessobject.AccountingPeriod</class>
+        <class>org.kuali.kfs.coa.businessobject.AICPAFunction</class>
+        <class>org.kuali.kfs.coa.businessobject.BalanceType</class>
+        <class>org.kuali.kfs.coa.businessobject.BasicAccountingCategory</class>
+        <class>org.kuali.kfs.coa.businessobject.BudgetAggregationCode</class>
+        <class>org.kuali.kfs.coa.businessobject.BudgetRecordingLevel</class>
         <class>org.kuali.kfs.coa.businessobject.Chart</class>
+        <class>org.kuali.kfs.coa.businessobject.FederalFunction</class>
+        <class>org.kuali.kfs.coa.businessobject.FederalFundedCode</class>
+        <class>org.kuali.kfs.coa.businessobject.FundGroup</class>
+        <class>org.kuali.kfs.coa.businessobject.HigherEducationFunction</class>
+        <class>org.kuali.kfs.coa.businessobject.IndirectCostRecoveryAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.IndirectCostRecoveryExclusionAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.IndirectCostRecoveryExclusionType</class>
+        <class>org.kuali.kfs.coa.businessobject.IndirectCostRecoveryRate</class>
+        <class>org.kuali.kfs.coa.businessobject.IndirectCostRecoveryRateDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.IndirectCostRecoveryType</class>
+        <class>org.kuali.kfs.coa.businessobject.MandatoryTransferEliminationCode</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectCode</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectCodeCurrent</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectCodeGlobal</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectCodeGlobalDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectConsolidation</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectLevel</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectSubType</class>
+        <class>org.kuali.kfs.coa.businessobject.ObjectType</class>
+        <class>org.kuali.kfs.coa.businessobject.OffsetDefinition</class>
+        <class>org.kuali.kfs.coa.businessobject.Organization</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationExtension</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationReversion</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationReversionCategory</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationReversionDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationReversionGlobal</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationReversionGlobalDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationReversionGlobalOrganization</class>
+        <class>org.kuali.kfs.coa.businessobject.OrganizationType</class>
+        <class>org.kuali.kfs.coa.businessobject.PriorYearAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.PriorYearIndirectCostRecoveryAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.PriorYearOrganization</class>
+        <class>org.kuali.kfs.coa.businessobject.ProjectCode</class>
+        <class>org.kuali.kfs.coa.businessobject.ReportingCode</class>
+        <class>org.kuali.kfs.coa.businessobject.ResponsibilityCenter</class>
+        <class>org.kuali.kfs.coa.businessobject.RestrictedStatus</class>
+        <class>org.kuali.kfs.coa.businessobject.SubAccount</class>
+        <class>org.kuali.kfs.coa.businessobject.SubFundGroup</class>
+        <class>org.kuali.kfs.coa.businessobject.SubFundGroupType</class>
+        <class>org.kuali.kfs.coa.businessobject.SubObjectCode</class>
+        <class>org.kuali.kfs.coa.businessobject.SubObjectCodeCurrent</class>
+        <class>org.kuali.kfs.coa.businessobject.SubObjectCodeGlobal</class>
+        <class>org.kuali.kfs.coa.businessobject.SubObjectCodeGlobalDetail</class>
+        <class>org.kuali.kfs.coa.businessobject.SufficientFundsCode</class>
+        <class>org.kuali.kfs.coa.businessobject.UniversityBudgetOfficeFunction</class>
 
         <properties>
             <!-- DataSource connection -->

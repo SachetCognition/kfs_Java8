@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -26,6 +34,9 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ACCOUNT_TYPE_T")
+
 public class AccountType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,8 +46,13 @@ public class AccountType extends PersistableBusinessObjectBase implements Mutabl
 
     }
 
+    @Id
+    @Column(name = "ACCT_TYP_CD")
     private String accountTypeCode;
+    @Column(name = "ACCT_TYP_NM")
     private String accountTypeName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

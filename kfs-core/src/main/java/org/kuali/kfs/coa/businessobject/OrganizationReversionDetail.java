@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
@@ -29,20 +39,39 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_DTL_T")
+@IdClass(OrganizationReversionDetailId.class)
+
 public class OrganizationReversionDetail extends PersistableBusinessObjectBase implements MutableInactivatable, OrganizationReversionCategoryInfo, FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_CD")
     private String organizationReversionCode;
+    @Column(name = "ORG_RVRSN_OBJ_CD")
     private String organizationReversionObjectCode;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private ObjectCode organizationReversionObject;
     private Organization organization;
     private Chart chartOfAccounts;
+    @Transient
     private OrganizationReversionCategory organizationReversionCategory;
+    @Transient
     private SystemOptions universityFiscal;
     private OrganizationReversion organizationReversion;
 

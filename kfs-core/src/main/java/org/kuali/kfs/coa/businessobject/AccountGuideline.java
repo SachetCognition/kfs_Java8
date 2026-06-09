@@ -18,6 +18,13 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -26,12 +33,23 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Account Guideline Business Object
  */
+@Entity
+@Table(name = "CA_ACCT_GDLNPRPS_T")
+@IdClass(AccountGuidelineId.class)
+
 public class AccountGuideline extends PersistableBusinessObjectBase {
     private static final long serialVersionUID = 807136405105252199L;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "ACCT_EXP_GDLN_TXT")
     private String accountExpenseGuidelineText;
+    @Column(name = "ACCT_INC_GDLN_TXT")
     private String accountIncomeGuidelineText;
+    @Column(name = "ACCT_PURPOSE_TXT")
     private String accountPurposeText;
 
 
