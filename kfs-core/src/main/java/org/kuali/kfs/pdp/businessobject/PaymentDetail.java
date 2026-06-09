@@ -34,6 +34,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -55,6 +57,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 @Entity
 @Table(name = "PDP_PMT_DTL_T")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class PaymentDetail extends TimestampedBusinessObjectBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentDetail.class);
     private static KualiDecimal zero = KualiDecimal.ZERO;

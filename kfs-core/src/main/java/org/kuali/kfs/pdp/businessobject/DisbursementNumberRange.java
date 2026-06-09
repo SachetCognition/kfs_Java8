@@ -30,6 +30,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -48,6 +49,7 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 
 @Entity
 @Table(name = "PDP_DISB_NBR_RNG_T")
+@IdClass(DisbursementNumberRangeId.class)
 public class DisbursementNumberRange extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     @Id

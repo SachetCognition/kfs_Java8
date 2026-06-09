@@ -43,6 +43,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 @Entity
 @Table(name = "PDP_CUST_BNK_T")
+@IdClass(CustomerBankId.class)
 public class CustomerBank extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     @Id
