@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED: Migrating to Java @Configuration. See org.kuali.kfs.module.tem.context.*Config -->
 <!--
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
