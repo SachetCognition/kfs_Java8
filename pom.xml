@@ -66,6 +66,11 @@
   </prerequisites>
   <properties>
 
+    <!-- Default empty argLine so ${argLine} resolves when JaCoCo is skipped -->
+    <argLine></argLine>
+    <!-- Shared JVM flags for surefire: add-opens for OJB CGLIB on Java 21 -->
+    <surefire.jvm.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</surefire.jvm.args>
+
     <!-- maven properties -->
     <maven.require.version>3.0</maven.require.version>
     <enforcer.phase>validate</enforcer.phase>
