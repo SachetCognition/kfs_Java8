@@ -24,18 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -87,18 +80,13 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Column(name = "KC_UNIT_NAME")
     protected String kcUnitName;
 
-    @ManyToOne
-    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+    @Transient
     protected Chart chartOfAccounts;
 
     @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
 
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
-    })
+    @Transient
     protected Organization organization;
 
     @Column(name = "ORG_CD")
@@ -119,8 +107,7 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Transient
     private String accountCountryCode = KFSConstants.COUNTRY_CODE_UNITED_STATES;
 
-    @ManyToOne
-    @JoinColumn(name = "ACCT_TYP_CD", insertable = false, updatable = false)
+    @Transient
     protected AccountType accountType;
 
     @Column(name = "ACCT_TYP_CD")
@@ -129,8 +116,7 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Column(name = "ACCT_PHYS_CMP_CD")
     protected String accountPhysicalCampusCode;
 
-    @ManyToOne
-    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
+    @Transient
     protected SubFundGroup subFundGroup;
 
     @Column(name = "SUB_FUND_GRP_CD")
@@ -140,8 +126,7 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Type(type = "yes_no")
     protected boolean accountsFringesBnftIndicator;
 
-    @ManyToOne
-    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
+    @Transient
     protected Chart fringeBenefitsChartOfAccount;
 
     @Column(name = "RPTS_TO_FIN_COA_CD")
@@ -159,39 +144,25 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Column(name = "ACCT_MGR_UNVL_ID")
     protected String accountManagerSystemIdentifier;
 
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "RPTS_TO_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "RPTS_TO_ACCT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
-    })
+    @Transient
     protected Account reportsToAccount;
 
-    @ManyToOne
-    @JoinColumn(name = "CONT_FIN_COA_CD", insertable = false, updatable = false)
+    @Transient
     protected Chart continuationChartOfAccount;
 
     @Column(name = "CONT_FIN_COA_CD")
     protected String continuationFinChrtOfAcctCd;
 
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "CONT_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "CONT_ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
-    })
+    @Transient
     protected Account continuationAccount;
 
     @Column(name = "CONT_ACCOUNT_NBR")
     protected String continuationAccountNumber;
 
-    @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "INCOME_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "INCOME_ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
-    })
+    @Transient
     protected Account incomeStreamAccount;
 
-    @ManyToOne
-    @JoinColumn(name = "INCOME_FIN_COA_CD", insertable = false, updatable = false)
+    @Transient
     protected Chart incomeStreamChartOfAccounts;
 
     @Column(name = "INCOME_FIN_COA_CD")
@@ -203,12 +174,10 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Column(name = "BDGT_REC_LVL_CD")
     protected String budgetRecordingLevelCode;
 
-    @ManyToOne
-    @JoinColumn(name = "BDGT_REC_LVL_CD", insertable = false, updatable = false)
+    @Transient
     protected BudgetRecordingLevel budgetRecordingLevel;
 
-    @ManyToOne
-    @JoinColumn(name = "ACCT_SF_CD", insertable = false, updatable = false)
+    @Transient
     protected SufficientFundsCode sufficientFundsCode;
 
     @Column(name = "ACCT_SF_CD")
@@ -263,9 +232,7 @@ public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase imp
     @Transient
     protected ContractsAndGrantsUnit unitDTO;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "ACCT_DFLT_ID")
-    @OrderBy("indirectCostRecoveryAccountGeneratedIdentifier ASC")
+    @Transient
     protected List<IndirectCostRecoveryAutoDefAccount> indirectCostRecoveryAutoDefAccounts;
 
     /**
