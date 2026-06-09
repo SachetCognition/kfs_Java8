@@ -28,6 +28,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.coa.util.AccountActiveIndicatorConverter;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class PriorYearAccount extends PersistableBusinessObjectBase implements A
     @Convert(converter = YesNoConverter.class)
     protected boolean accountOffCampusIndicator;
     @Column(name = "ACCT_CLOSED_IND")
-    @Convert(converter = YesNoConverter.class)
+    @Convert(converter = AccountActiveIndicatorConverter.class)
     protected boolean active;
 
     @Column(name = "ACCT_FSC_OFC_UID")

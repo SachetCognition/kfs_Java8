@@ -55,6 +55,9 @@ public class AccountDelegateGlobalDetail extends GlobalBusinessObjectDetailBase 
     private static final long serialVersionUID = -8089154029664644867L;
 
     @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
     @Column(name = "ACCT_DLGT_UNVL_ID")
     private String accountDelegateUniversalId;
     @Id

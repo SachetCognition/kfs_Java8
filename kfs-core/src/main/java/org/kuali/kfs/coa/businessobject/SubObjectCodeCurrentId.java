@@ -25,6 +25,7 @@ public class SubObjectCodeCurrentId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
     private String financialObjectCode;
@@ -38,7 +39,8 @@ public class SubObjectCodeCurrentId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubObjectCodeCurrentId that = (SubObjectCodeCurrentId) o;
-        return Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) &&
+        return Objects.equals(universityFiscalYear, that.universityFiscalYear) &&
+               Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) &&
                Objects.equals(accountNumber, that.accountNumber) &&
                Objects.equals(financialObjectCode, that.financialObjectCode) &&
                Objects.equals(financialSubObjectCode, that.financialSubObjectCode);
@@ -46,6 +48,6 @@ public class SubObjectCodeCurrentId implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(chartOfAccountsCode, accountNumber, financialObjectCode, financialSubObjectCode);
+        return Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, financialObjectCode, financialSubObjectCode);
     }
 }

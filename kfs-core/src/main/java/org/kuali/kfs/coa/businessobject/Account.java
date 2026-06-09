@@ -28,6 +28,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.coa.util.AccountActiveIndicatorConverter;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -94,6 +95,7 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     protected String accountStreetAddress;
     @Column(name = "ACCT_ZIP_CD")
     protected String accountZipCode;
+    @Transient
     protected String accountCountryCode = KFSConstants.COUNTRY_CODE_UNITED_STATES;
     @Column(name = "ACCT_CREATE_DT")
     protected Date accountCreateDate;
@@ -135,7 +137,7 @@ public class Account extends PersistableBusinessObjectBase implements AccountInt
     @Convert(converter = YesNoConverter.class)
     protected boolean accountOffCampusIndicator;
     @Column(name = "ACCT_CLOSED_IND")
-    @Convert(converter = YesNoConverter.class)
+    @Convert(converter = AccountActiveIndicatorConverter.class)
     protected boolean active;
 
     @Column(name = "ACCT_FSC_OFC_UID")

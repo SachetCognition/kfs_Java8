@@ -42,6 +42,9 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 public class ObjectCodeGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
     @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
     @Id

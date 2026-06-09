@@ -52,6 +52,9 @@ public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
     private static final Logger LOG = Logger.getLogger(AccountGlobalDetail.class);
 
     @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
     @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
     @Id
