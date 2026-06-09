@@ -511,7 +511,7 @@
 	
 	<bean id="homeOriginationService" parent="homeOriginationService-parentBean"/>
 	<bean id="homeOriginationService-parentBean" class="org.kuali.kfs.sys.service.impl.HomeOriginationServiceImpl" abstract="true">
-		<property name="businessObjectService" ref="businessObjectService" />
+		<property name="businessObjectService" ref="kfsBusinessObjectService" />
 	</bean>
 	
 	<bean id="originationCodeService" parent="originationCodeService-parentBean"/>
@@ -738,7 +738,7 @@
     
     <bean id="reportGenerationService-parentBean" class="org.kuali.kfs.sys.service.impl.ReportGenerationServiceImpl" abstract="true">
         <property name="dateTimeService">
-            <ref bean="dateTimeService"/>
+            <ref bean="kfsDateTimeService"/>
         </property>
     </bean>
 	<bean id="reportAggregatorService" parent="reportAggregatorService-parentBean"/>

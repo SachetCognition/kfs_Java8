@@ -18,15 +18,15 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
+import org.kuali.kfs.sys.rice.KfsRiceConstants;
 import org.kuali.rice.coreservice.framework.parameter.ParameterConstants.COMPONENT;
 import org.kuali.rice.coreservice.framework.parameter.ParameterConstants.NAMESPACE;
-import org.kuali.rice.krad.util.KRADConstants;
 
 
 
 public class KfsParameterConstants  {
 
-    public static final String NERVOUS_SYSTEM_NAMESPACE = KRADConstants.KNS_NAMESPACE;
+    public static final String NERVOUS_SYSTEM_NAMESPACE = KfsRiceConstants.KNS_NAMESPACE;
     public static final String ALL_COMPONENT = "All";
     public static final String DOCUMENT_COMPONENT = "Document";
     public static final String LOOKUP_COMPONENT = "Lookup";
