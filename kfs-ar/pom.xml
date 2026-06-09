@@ -38,7 +38,14 @@
           <argLine>${argLine} -Xms1024m -Xmx1024m ${surefire.jvm.args} -Dadditional.kfs.test.config.locations=src/test/config/${project.artifactId}.properties</argLine>
           <includes>
             <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+            <include>**/*IT.java</include>
           </includes>
+          <excludes>
+            <exclude>**/AllTests.java</exclude>
+            <exclude>**/BatchAllTests.java</exclude>
+            <exclude>**/AllAccountsReceivableTests.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>

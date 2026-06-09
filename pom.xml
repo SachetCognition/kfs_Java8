@@ -215,6 +215,11 @@
             <include>**/*Tests.java</include>
             <include>**/*IT.java</include>
           </includes>
+          <excludes>
+            <exclude>**/AllTests.java</exclude>
+            <exclude>**/BatchAllTests.java</exclude>
+            <exclude>**/AllAccountsReceivableTests.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
       <plugin>
@@ -283,6 +288,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.4.1</version>
         <executions>
           <execution>
             <id>enforce-rules</id>
@@ -1036,12 +1042,12 @@
       <version>${log4j2.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!-- Keep log4j 1.x JAR for compile-time compatibility with Rice (will be removed in Phase 3) -->
+    <!-- Keep log4j 1.x JAR for compile-time only; log4j-1.2-api bridges at runtime -->
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>${log4j.version}</version>
-      <scope>${log4j.scope}</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
