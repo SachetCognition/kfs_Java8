@@ -37,9 +37,13 @@ public class BillBase extends PersistableBusinessObjectBase {
     @Id
     @Column(name = "BILL_ID")
     private Long billIdentifier;
+    @Column(name = "BILL_NBR")
     private Long billNumber;
+    @Column(name = "BILL_DESC")
     private String billDescription;
+    @Column(name = "BILL_DT")
     private Date billDate;
+    @Column(name = "EST_AMT")
     private KualiDecimal estimatedAmount;
 
     /**

@@ -35,12 +35,16 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @MappedSuperclass
 public abstract class MilestoneBase extends PersistableBusinessObjectBase  {
 
+    @Column(name = "MLSTN_NBR")
     protected Long milestoneNumber;
     @Id
     @Column(name = "MLSTN_ID")
     protected Long milestoneIdentifier;
+    @Column(name = "MLSTN_DESC")
     protected String milestoneDescription;
+    @Column(name = "MLSTN_AMT")
     protected KualiDecimal milestoneAmount;
+    @Column(name = "MLSTN_COMPLTN_DT")
     protected Date milestoneActualCompletionDate;
 
     /**

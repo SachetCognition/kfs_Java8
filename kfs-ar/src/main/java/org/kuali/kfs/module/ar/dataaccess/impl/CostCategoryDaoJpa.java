@@ -249,41 +249,97 @@ public class CostCategoryDaoJpa implements CostCategoryDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Balance> getBalancesForCostCategory(Integer fiscalYear, String chartOfAccountsCode, String accountNumber, String balanceType, Collection<String> objectType, CostCategory costCategory) {
         List<Balance> results = new ArrayList<Balance>();
 
-        if (costCategory == null) {
+        if (costCategory == null || !costCategory.isActive()) {
             return results;
         }
 
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Balance> cq = cb.createQuery(Balance.class);
-        Root<Balance> root = cq.from(Balance.class);
-
-        List<Predicate> predicates = new ArrayList<Predicate>();
-        predicates.add(cb.equal(root.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), fiscalYear));
-        predicates.add(cb.equal(root.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE), chartOfAccountsCode));
-        predicates.add(cb.equal(root.get(KFSPropertyConstants.ACCOUNT_NUMBER), accountNumber));
-        predicates.add(cb.equal(root.get(KFSPropertyConstants.BALANCE_TYPE_CODE), balanceType));
-        if (objectType != null && !objectType.isEmpty()) {
-            predicates.add(root.get(KFSPropertyConstants.OBJECT_TYPE_CODE).in(objectType));
-        }
-
-        // Get object codes from cost category
+        // Collect object codes directly from cost category
         List<String> objectCodes = new ArrayList<String>();
         if (costCategory.getObjectCodes() != null) {
             for (CostCategoryObjectCode code : costCategory.getObjectCodes()) {
-                if (code.isActive()) {
+                if (code.isActive() && chartOfAccountsCode.equals(code.getChartOfAccountsCode())) {
                     objectCodes.add(code.getFinancialObjectCode());
                 }
             }
         }
-        if (!objectCodes.isEmpty()) {
-            predicates.add(root.get(KFSPropertyConstants.OBJECT_CODE).in(objectCodes));
+
+        // Collect object level codes from cost category
+        List<String> objectLevelCodes = new ArrayList<String>();
+        if (costCategory.getObjectLevels() != null) {
+            for (CostCategoryObjectLevel level : costCategory.getObjectLevels()) {
+                if (level.isActive() && chartOfAccountsCode.equals(level.getChartOfAccountsCode())) {
+                    objectLevelCodes.add(level.getFinancialObjectLevelCode());
+                }
+            }
         }
 
-        cq.where(predicates.toArray(new Predicate[0]));
-        TypedQuery<Balance> query = entityManager.createQuery(cq);
+        // Collect consolidation codes from cost category
+        List<String> consolidationCodes = new ArrayList<String>();
+        if (costCategory.getObjectConsolidations() != null) {
+            for (CostCategoryObjectConsolidation consol : costCategory.getObjectConsolidations()) {
+                if (consol.isActive() && chartOfAccountsCode.equals(consol.getChartOfAccountsCode())) {
+                    consolidationCodes.add(consol.getFinConsolidationObjectCode());
+                }
+            }
+        }
+
+        if (objectCodes.isEmpty() && objectLevelCodes.isEmpty() && consolidationCodes.isEmpty()) {
+            return results;
+        }
+
+        // Use native SQL to build OR across object codes, levels, and consolidations
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT b.* FROM GL_BALANCE_T b ");
+        sql.append("WHERE b.UNIV_FISCAL_YR = ?1 ");
+        sql.append("AND b.FIN_COA_CD = ?2 ");
+        sql.append("AND b.ACCOUNT_NBR = ?3 ");
+        sql.append("AND b.FIN_BALANCE_TYP_CD = ?4 ");
+        if (objectType != null && !objectType.isEmpty()) {
+            sql.append("AND b.FIN_OBJ_TYP_CD IN (?5) ");
+        }
+        sql.append("AND ( ");
+
+        boolean hasOrClause = false;
+        if (!objectCodes.isEmpty()) {
+            sql.append("b.FIN_OBJECT_CD IN (?6) ");
+            hasOrClause = true;
+        }
+        if (!objectLevelCodes.isEmpty()) {
+            if (hasOrClause) sql.append("OR ");
+            sql.append("b.FIN_OBJECT_CD IN (SELECT oc.FIN_OBJECT_CD FROM CA_OBJECT_CODE_T oc ");
+            sql.append("WHERE oc.FIN_COA_CD = ?2 AND oc.UNIV_FISCAL_YR = ?1 AND oc.FIN_OBJ_LEVEL_CD IN (?7)) ");
+            hasOrClause = true;
+        }
+        if (!consolidationCodes.isEmpty()) {
+            if (hasOrClause) sql.append("OR ");
+            sql.append("b.FIN_OBJECT_CD IN (SELECT oc2.FIN_OBJECT_CD FROM CA_OBJECT_CODE_T oc2 ");
+            sql.append("JOIN CA_OBJ_LEVEL_T lvl ON oc2.FIN_COA_CD = lvl.FIN_COA_CD AND oc2.FIN_OBJ_LEVEL_CD = lvl.FIN_OBJ_LEVEL_CD ");
+            sql.append("WHERE oc2.FIN_COA_CD = ?2 AND oc2.UNIV_FISCAL_YR = ?1 AND lvl.FIN_CONS_OBJ_CD IN (?8)) ");
+        }
+        sql.append(") ");
+
+        javax.persistence.Query query = entityManager.createNativeQuery(sql.toString(), Balance.class);
+        query.setParameter(1, fiscalYear);
+        query.setParameter(2, chartOfAccountsCode);
+        query.setParameter(3, accountNumber);
+        query.setParameter(4, balanceType);
+        if (objectType != null && !objectType.isEmpty()) {
+            query.setParameter(5, objectType);
+        }
+        if (!objectCodes.isEmpty()) {
+            query.setParameter(6, objectCodes);
+        }
+        if (!objectLevelCodes.isEmpty()) {
+            query.setParameter(7, objectLevelCodes);
+        }
+        if (!consolidationCodes.isEmpty()) {
+            query.setParameter(8, consolidationCodes);
+        }
+
         return query.getResultList();
     }
 
