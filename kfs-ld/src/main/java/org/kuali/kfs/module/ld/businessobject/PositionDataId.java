@@ -7,7 +7,7 @@ public class PositionDataId implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String positionNumber;
-    private String effectiveDate;
+    private java.sql.Date effectiveDate;
 
     public PositionDataId() {
     }

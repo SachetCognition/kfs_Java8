@@ -6,7 +6,7 @@ import java.util.Objects;
 public class July1PositionFundingId implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String universityFiscalYear;
+    private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
     private String subAccountNumber;

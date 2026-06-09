@@ -87,7 +87,7 @@ public class BenefitsCalculation extends PersistableBusinessObjectBase implement
 
         @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
 
-        @JoinColumn(name = "POS_FRNGBEN_OBJ_CD", referencedColumnName = "POS_FRNGBEN_OBJ_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "POS_FRNGBEN_OBJ_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
 
     })
 
@@ -116,7 +116,7 @@ public class BenefitsCalculation extends PersistableBusinessObjectBase implement
 
         @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
 
-        @JoinColumn(name = "POS_FRNGBEN_OBJ_CD", referencedColumnName = "POS_FRNGBEN_OBJ_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "POS_FRNGBEN_OBJ_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
 
     })
 

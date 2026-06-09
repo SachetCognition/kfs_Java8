@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LaborCalculatedSalaryFoundationTrackerId implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String universityFiscalYear;
+    private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
     private String subAccountNumber;
@@ -14,7 +14,7 @@ public class LaborCalculatedSalaryFoundationTrackerId implements Serializable {
     private String financialSubObjectCode;
     private String positionNumber;
     private String emplid;
-    private String csfCreateTimestamp;
+    private java.sql.Timestamp csfCreateTimestamp;
 
     public LaborCalculatedSalaryFoundationTrackerId() {
     }

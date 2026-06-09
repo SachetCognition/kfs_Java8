@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LedgerEntryId implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String universityFiscalYear;
+    private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
     private String subAccountNumber;
@@ -18,7 +18,7 @@ public class LedgerEntryId implements Serializable {
     private String financialDocumentTypeCode;
     private String financialSystemOriginationCode;
     private String documentNumber;
-    private String transactionLedgerEntrySequenceNumber;
+    private Integer transactionLedgerEntrySequenceNumber;
 
     public LedgerEntryId() {
     }

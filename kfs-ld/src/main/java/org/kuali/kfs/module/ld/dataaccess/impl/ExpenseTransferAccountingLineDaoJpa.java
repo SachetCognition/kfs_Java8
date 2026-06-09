@@ -58,7 +58,10 @@ public class ExpenseTransferAccountingLineDaoJpa implements AccountingLineDao {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery query = cb.createQuery(clazz);
         Root root = query.from(clazz);
-        query.where(cb.equal(root.get("documentNumber"), id));
+        query.where(cb.and(
+            cb.equal(root.get("documentNumber"), id),
+            cb.equal(root.get("financialDocumentLineTypeCode"), lineType)
+        ));
         return entityManager.createQuery(query).getResultList();
     }
 }

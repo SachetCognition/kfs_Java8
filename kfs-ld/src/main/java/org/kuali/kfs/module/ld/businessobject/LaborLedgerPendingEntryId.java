@@ -8,7 +8,7 @@ public class LaborLedgerPendingEntryId implements Serializable {
 
     private String financialSystemOriginationCode;
     private String documentNumber;
-    private String transactionLedgerEntrySequenceNumber;
+    private Integer transactionLedgerEntrySequenceNumber;
 
     public LaborLedgerPendingEntryId() {
     }

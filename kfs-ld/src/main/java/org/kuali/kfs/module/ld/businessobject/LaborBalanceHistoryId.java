@@ -6,7 +6,7 @@ import java.util.Objects;
 public class LaborBalanceHistoryId implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String universityFiscalYear;
+    private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
     private String subAccountNumber;

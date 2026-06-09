@@ -34,7 +34,7 @@ import javax.persistence.Table;
 import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
 
 @Entity
-@Table(name = "GL_BALANCE_T")
+@Table(name = "LD_LDGR_BAL_T")
 @IdClass(AccountStatusBaseFundsId.class)
 /**
  * Labor business object for Account Status (Base Funds).
