@@ -32,6 +32,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import java.sql.Date;
@@ -66,6 +67,7 @@ public class CollectionEvent extends PersistableBusinessObjectBase {
     private Timestamp postedDate;
     @Column(name = "USR_PRNCPL_ID")
     private String userPrincipalId;
+    @Transient
     private boolean completed;
 
     private transient Person user;

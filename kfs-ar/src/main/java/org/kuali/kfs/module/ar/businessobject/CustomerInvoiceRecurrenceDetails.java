@@ -57,6 +57,7 @@ public class CustomerInvoiceRecurrenceDetails extends PersistableBusinessObjectB
     private String documentRecurrenceIntervalCode;
     @Column(name = "DOC_INITR_USR_ID")
     private String documentInitiatorUserIdentifier;
+    @Column(name = "DOC_LST_CRTE_DT")
     private Date documentLastCreateDate;
     @Column(name = "ROW_ACTV_IND")
     private boolean active;

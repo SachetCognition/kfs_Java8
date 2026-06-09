@@ -26,6 +26,7 @@ import javax.persistence.Entity;
 import javax.persistence.IdClass;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.apache.commons.lang.StringUtils;
@@ -60,6 +61,7 @@ public class CashControlDetail extends PersistableBusinessObjectBase {
 	private String customerPaymentDescription;
 	@Column(name = "CUST_NBR")
 	private String customerNumber;
+    @Transient
     private String status;
 	@Column(name = "CUST_PMT_DT")
 	private Date customerPaymentDate;
