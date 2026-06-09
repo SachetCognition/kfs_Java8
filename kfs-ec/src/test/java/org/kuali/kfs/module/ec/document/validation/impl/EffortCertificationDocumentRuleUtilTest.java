@@ -4,18 +4,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
+import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDetail;
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
+import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.KfsUnitTestBase;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.mockito.MockedStatic;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 class EffortCertificationDocumentRuleUtilTest extends KfsUnitTestBase {
@@ -456,6 +463,234 @@ class EffortCertificationDocumentRuleUtilTest extends KfsUnitTestBase {
             assertThat(detail.getEffortCertificationOriginalPayrollAmount()).isEqualTo(new KualiDecimal(4000));
             assertThat(detail.getEffortCertificationCalculatedOverallPercent()).isEqualTo(75);
             assertThat(detail.getEffortCertificationUpdatedOverallPercent()).isEqualTo(80);
+        }
+    }
+
+    @Nested
+    @DisplayName("hasA21SubAccount")
+    class HasA21SubAccount {
+
+        @Test
+        void shouldReturnFalseWhenSubAccountNumberIsDash() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("-----");
+                assertThat(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detail)).isFalse();
+            }
+        }
+
+        @Test
+        void shouldReturnTrueWhenA21SubAccountExists() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
+
+                A21SubAccount a21 = new A21SubAccount();
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(a21);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detail)).isTrue();
+            }
+        }
+
+        @Test
+        void shouldReturnFalseWhenA21SubAccountNull() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
+
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(null);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detail)).isFalse();
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("hasContractGrantAccount")
+    class HasContractGrantAccount {
+
+        @Test
+        void shouldReturnTrueWhenAccountIsForContractsAndGrants() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = mock(Account.class);
+            when(account.isForContractsAndGrants()).thenReturn(true);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.hasContractGrantAccount(detail)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenAccountIsNotForContractsAndGrants() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = mock(Account.class);
+            when(account.isForContractsAndGrants()).thenReturn(false);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.hasContractGrantAccount(detail)).isFalse();
+        }
+    }
+
+    @Nested
+    @DisplayName("hasCostShareSubAccount")
+    class HasCostShareSubAccount {
+
+        @Test
+        void shouldReturnFalseWhenNoA21SubAccount() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("-----");
+                assertThat(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detail,
+                        Arrays.asList("CS"))).isFalse();
+            }
+        }
+
+        @Test
+        void shouldReturnTrueWhenSubAccountTypeInList() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
+
+                A21SubAccount a21 = new A21SubAccount();
+                a21.setSubAccountTypeCode("CS");
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(a21);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detail,
+                        Arrays.asList("CS", "EX"))).isTrue();
+            }
+        }
+
+        @Test
+        void shouldReturnFalseWhenSubAccountTypeNotInList() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
+
+                A21SubAccount a21 = new A21SubAccount();
+                a21.setSubAccountTypeCode("XX");
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(a21);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detail,
+                        Arrays.asList("CS", "EX"))).isFalse();
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("updateSourceAccountInformation")
+    class UpdateSourceAccountInfo {
+
+        @Test
+        void shouldCopyA21SubAccountFields() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+
+            A21SubAccount a21 = new A21SubAccount();
+            a21.setCostShareChartOfAccountCode("UA");
+            a21.setCostShareSourceAccountNumber("7654321");
+            a21.setCostShareSourceSubAccountNumber("CSSUB");
+
+            SubAccount subAccount = new SubAccount();
+            subAccount.setA21SubAccount(a21);
+            detail.setSubAccount(subAccount);
+
+            EffortCertificationDocumentRuleUtil.updateSourceAccountInformation(detail);
+
+            assertThat(detail.getSourceChartOfAccountsCode()).isEqualTo("UA");
+            assertThat(detail.getSourceAccountNumber()).isEqualTo("7654321");
+            assertThat(detail.getCostShareSourceSubAccountNumber()).isEqualTo("CSSUB");
+        }
+
+        @Test
+        void shouldNotUpdateWhenA21SubAccountNull() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setSourceChartOfAccountsCode("BL");
+            detail.setSourceAccountNumber("1234567");
+
+            SubAccount subAccount = new SubAccount();
+            subAccount.setA21SubAccount(null);
+            detail.setSubAccount(subAccount);
+
+            EffortCertificationDocumentRuleUtil.updateSourceAccountInformation(detail);
+
+            assertThat(detail.getSourceChartOfAccountsCode()).isEqualTo("BL");
+            assertThat(detail.getSourceAccountNumber()).isEqualTo("1234567");
+        }
+    }
+
+    @Nested
+    @DisplayName("hasSameExistingLine")
+    class HasSameExistingLine {
+
+        @Test
+        void shouldReturnTrueWhenMatchingLineExists() {
+            EffortCertificationDocument document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setChartOfAccountsCode("BL");
+            line1.setFinancialObjectCode("2400");
+
+            EffortCertificationDetail line2 = new EffortCertificationDetail();
+            line2.setChartOfAccountsCode("BL");
+            line2.setFinancialObjectCode("2400");
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            lines.add(line2);
+            document.setEffortCertificationDetailLines(lines);
+
+            List<String> comparableFields = Arrays.asList("chartOfAccountsCode", "financialObjectCode");
+            assertThat(EffortCertificationDocumentRuleUtil.hasSameExistingLine(
+                    document, line2, comparableFields)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenNoMatchingLineExists() {
+            EffortCertificationDocument document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setChartOfAccountsCode("BL");
+            line1.setFinancialObjectCode("2400");
+
+            EffortCertificationDetail line2 = new EffortCertificationDetail();
+            line2.setChartOfAccountsCode("UA");
+            line2.setFinancialObjectCode("5000");
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            lines.add(line2);
+            document.setEffortCertificationDetailLines(lines);
+
+            List<String> comparableFields = Arrays.asList("chartOfAccountsCode", "financialObjectCode");
+            assertThat(EffortCertificationDocumentRuleUtil.hasSameExistingLine(
+                    document, line2, comparableFields)).isFalse();
+        }
+
+        @Test
+        void shouldNotMatchLineAgainstItself() {
+            EffortCertificationDocument document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setChartOfAccountsCode("BL");
+            line1.setFinancialObjectCode("2400");
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            document.setEffortCertificationDetailLines(lines);
+
+            List<String> comparableFields = Arrays.asList("chartOfAccountsCode", "financialObjectCode");
+            assertThat(EffortCertificationDocumentRuleUtil.hasSameExistingLine(
+                    document, line1, comparableFields)).isFalse();
         }
     }
 
