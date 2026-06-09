@@ -61,13 +61,7 @@
 				<value>classpath:org/kuali/kfs/module/ar/businessobject/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/module/ar/document/datadictionary/*.xml</value>
 			</list>
-		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/ar/ojb-ar.xml</value>
-			</list>
-		</property>
-		<property name="jobNames">
+		</property>		<property name="jobNames">
 			<list>
 				<value>lockboxJob</value>
 				<value>customerLoadJob</value>

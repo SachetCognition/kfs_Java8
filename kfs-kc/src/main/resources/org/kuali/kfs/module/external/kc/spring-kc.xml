@@ -111,13 +111,7 @@
                 <value>classpath:org/kuali/kfs/module/external/kc/businessobject/datadictionary/*.xml</value>
                 <value>classpath:org/kuali/kfs/module/external/kc/document/datadictionary/*.xml</value>
 			</list>
-		</property> 	
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/external/kc/ojb-kc.xml</value>
-			</list>
-		</property>
- 	</bean>
+		</property> 	</bean>
     <bean id="cgModuleService" parent="cgModuleService-parentBean"/>
  
     <bean id="cgModuleService-parentBean" class="org.kuali.kfs.module.external.kc.service.impl.KcKfsModuleServiceImpl" abstract="true">

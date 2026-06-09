@@ -42,13 +42,7 @@
 				<value>classpath:org/kuali/kfs/gl/businessobject/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/gl/document/datadictionary/*.xml</value>
 			</list>
-		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/gl/ojb-gl.xml</value>
-			</list>
-		</property>
-		<property name="jobNames">
+		</property>		<property name="jobNames">
 			<list>
 				<value>enterpriseFeedJob</value>
 				<value>collectorJob</value>

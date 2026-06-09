@@ -41,13 +41,7 @@
 				<value>classpath:org/kuali/kfs/sec/document/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/sec/datadictionary/*.xml</value>
 			</list>
-		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/sec/ojb-sec.xml</value>
-			</list>
-		</property>
-	</bean>
+		</property>	</bean>
 
 	<bean id="securityBalanceLookupableHelperService" parent="securityBalanceLookupableHelperService-parentBean" scope="prototype" />
         

@@ -39,13 +39,7 @@
 				<value>classpath:org/kuali/kfs/sys/businessobject/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/sys/document/datadictionary/*.xml</value>
             </list>
-        </property>
-        <property name="databaseRepositoryFilePaths">
-            <list>
-                <value>org/kuali/kfs/sys/ojb-sys.xml</value>
-            </list>
-        </property>
-        <property name="scriptConfigurationFilePaths">
+        </property>        <property name="scriptConfigurationFilePaths">
             <list>
                 <value>org/kuali/kfs/sys/dwr-sys.xml</value>
             </list>

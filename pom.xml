@@ -68,8 +68,6 @@
 
     <!-- Default empty argLine so ${argLine} resolves when JaCoCo is skipped -->
     <argLine></argLine>
-    <!-- Shared JVM flags for surefire: add-opens for OJB CGLIB on Java 21 -->
-    <surefire.jvm.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</surefire.jvm.args>
 
     <!-- maven properties -->
     <maven.require.version>3.0</maven.require.version>
@@ -145,7 +143,7 @@
     <wstx-asl.version>3.2.9</wstx-asl.version>
     <xapool.version>1.5.0-patch4</xapool.version>
 
-    <!-- JPA / Hibernate – OJB→JPA migration infrastructure (S-2-SETUP) -->
+    <!-- JPA / Hibernate – migration infrastructure (S-2-SETUP) -->
     <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
     <hibernate.version>6.4.4.Final</hibernate.version>
     <!-- Spring Data JPA 3.2.x deferred to S-4A when Spring 6.x replaces Rice's Spring 3.1.x -->
@@ -209,12 +207,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <argLine>-Xms1024m -Xmx1024m ${argLine}
-            --add-opens java.base/java.lang=ALL-UNNAMED
-            --add-opens java.base/java.lang.reflect=ALL-UNNAMED
-            --add-opens java.base/java.util=ALL-UNNAMED
-            --add-opens java.base/java.math=ALL-UNNAMED
-            --add-opens java.base/java.io=ALL-UNNAMED</argLine>
+          <argLine>-Xms1024m -Xmx1024m ${argLine}</argLine>
           <includes>
             <include>**/*Test.java</include>
             <include>**/*Tests.java</include>
@@ -1133,7 +1126,7 @@
       <version>${liquibase.version}</version>
     </dependency>
 
-    <!-- JPA 3.1 / Hibernate 6.4 – OJB→JPA migration infrastructure (S-2-SETUP) -->
+    <!-- JPA 3.1 / Hibernate 6.4 – migration infrastructure (S-2-SETUP) -->
     <dependency>
       <groupId>jakarta.persistence</groupId>
       <artifactId>jakarta.persistence-api</artifactId>
