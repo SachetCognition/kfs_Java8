@@ -24,6 +24,8 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -58,6 +60,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Entity
 @Table(name = "GL_ENTRY_T")
 @IdClass(Entry.PK.class)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Entry extends PersistableBusinessObjectBase implements Transaction {
     static final long serialVersionUID = -24983129882357448L;
 

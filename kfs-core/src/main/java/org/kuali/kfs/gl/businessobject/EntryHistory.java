@@ -459,10 +459,17 @@ public class EntryHistory extends Entry implements LedgerEntryHistory {
         private static final long serialVersionUID = 1L;
         private Integer universityFiscalYear;
         private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
         private String financialObjectCode;
+        private String financialSubObjectCode;
         private String financialBalanceTypeCode;
+        private String financialObjectTypeCode;
         private String universityFiscalPeriodCode;
-        private String transactionDebitCreditCode;
+        private String financialDocumentTypeCode;
+        private String financialSystemOriginationCode;
+        private String documentNumber;
+        private Integer transactionLedgerEntrySequenceNumber;
 
         public PK() {}
 
@@ -471,12 +478,27 @@ public class EntryHistory extends Entry implements LedgerEntryHistory {
             if (this == o) return true;
             if (!(o instanceof PK)) return false;
             PK that = (PK) o;
-            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(financialObjectCode, that.financialObjectCode) && java.util.Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode) && java.util.Objects.equals(universityFiscalPeriodCode, that.universityFiscalPeriodCode) && java.util.Objects.equals(transactionDebitCreditCode, that.transactionDebitCreditCode);
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear)
+                && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode)
+                && java.util.Objects.equals(accountNumber, that.accountNumber)
+                && java.util.Objects.equals(subAccountNumber, that.subAccountNumber)
+                && java.util.Objects.equals(financialObjectCode, that.financialObjectCode)
+                && java.util.Objects.equals(financialSubObjectCode, that.financialSubObjectCode)
+                && java.util.Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode)
+                && java.util.Objects.equals(financialObjectTypeCode, that.financialObjectTypeCode)
+                && java.util.Objects.equals(universityFiscalPeriodCode, that.universityFiscalPeriodCode)
+                && java.util.Objects.equals(financialDocumentTypeCode, that.financialDocumentTypeCode)
+                && java.util.Objects.equals(financialSystemOriginationCode, that.financialSystemOriginationCode)
+                && java.util.Objects.equals(documentNumber, that.documentNumber)
+                && java.util.Objects.equals(transactionLedgerEntrySequenceNumber, that.transactionLedgerEntrySequenceNumber);
         }
 
         @Override
         public int hashCode() {
-            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, financialObjectCode, financialBalanceTypeCode, universityFiscalPeriodCode, transactionDebitCreditCode);
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber,
+                financialObjectCode, financialSubObjectCode, financialBalanceTypeCode, financialObjectTypeCode,
+                universityFiscalPeriodCode, financialDocumentTypeCode, financialSystemOriginationCode,
+                documentNumber, transactionLedgerEntrySequenceNumber);
         }
     }
 }
