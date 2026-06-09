@@ -20,10 +20,10 @@ package org.kuali.kfs.module.tem.businessobject;
 
 import java.util.LinkedHashMap;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 

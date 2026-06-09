@@ -22,14 +22,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemConstants.TravelParameters;
@@ -56,7 +55,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 @Table(name="TEM_RELO_DOC_T")
 public class TravelRelocationDocument extends TEMReimbursementDocument implements AmountTotaling {
 
-    protected static Logger LOG = LoggerFactory.getLogger(TravelRelocationDocument.class);
+    protected static Logger LOG = Logger.getLogger(TravelRelocationDocument.class);
 
     private String fromAddress1;
     private String fromAddress2;

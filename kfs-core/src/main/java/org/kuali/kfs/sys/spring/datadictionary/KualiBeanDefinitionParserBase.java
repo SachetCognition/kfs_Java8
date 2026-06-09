@@ -18,6 +18,7 @@
  */
 package org.kuali.kfs.sys.spring.datadictionary;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
@@ -26,12 +27,10 @@ import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class KualiBeanDefinitionParserBase extends AbstractBeanDefinitionParser {
 
-    private static Logger LOG = LoggerFactory.getLogger(KualiBeanDefinitionParserBase.class);
+    private static Logger LOG = Logger.getLogger(KualiBeanDefinitionParserBase.class);
     
     protected void parseEmbeddedPropertyElements(Element element, BeanDefinitionBuilder bean) {
         NodeList children = element.getChildNodes();
@@ -80,7 +79,7 @@ public abstract class KualiBeanDefinitionParserBase extends AbstractBeanDefiniti
             try {
                 builder = BeanDefinitionBuilder.rootBeanDefinition(Class.forName(beanClass));
             } catch (Exception ex) {
-                LOG.error( "Unable to resolve class given in class element of a " + element.getLocalName() + " element with id " + element.getAttribute("id"), ex );
+                LOG.fatal( "Unable to resolve class given in class element of a " + element.getLocalName() + " element with id " + element.getAttribute("id"), ex );
                 throw new RuntimeException(ex);
             }
         } else  if ( StringUtils.hasText(parent)) {
@@ -93,7 +92,9 @@ public abstract class KualiBeanDefinitionParserBase extends AbstractBeanDefiniti
         builder.getRawBeanDefinition().setSource(parserContext.extractSource(element));
         if (parserContext.isNested()) {
             // Inner bean definition must receive same singleton status as containing bean.
-            builder.setScope(parserContext.getContainingBeanDefinition().isSingleton() ? "singleton" : "prototype");
+            builder.setScope(parserContext.getContainingBeanDefinition().isSingleton()
+                    ? org.springframework.beans.factory.config.BeanDefinition.SCOPE_SINGLETON
+                    : org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE);
         }
         if (parserContext.isDefaultLazyInit()) {
             // Default-lazy-init applies to custom bean definitions as well.

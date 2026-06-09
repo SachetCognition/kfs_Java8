@@ -1,24 +1,21 @@
+/*
+ * Compatibility shim – SimpleJdbcDaoSupport was removed in Spring 4.0.
+ * This stub extends JdbcDaoSupport (which still exists in Spring 6.x)
+ * and provides getSimpleJdbcTemplate() so that legacy Rice/KFS DAO classes
+ * continue to compile and run against Spring 6.x.
+ */
 package org.springframework.jdbc.core.simple;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-/**
- * Compatibility shim for Spring 6.x migration (S-4A).
- * SimpleJdbcDaoSupport was removed in Spring 4.x; this stub restores the class
- * signature so that Rice 2.1.10 stubs (compiled against Spring 3.x) continue
- * to resolve at compile time.
- *
- * @deprecated Provided only for backward compatibility with Rice 2.1.10.
- *             New code should use JdbcDaoSupport directly.
- */
-@Deprecated
 public abstract class SimpleJdbcDaoSupport extends JdbcDaoSupport {
 
-    /**
-     * Returns the JdbcTemplate (replaces the removed SimpleJdbcTemplate).
-     */
-    public JdbcTemplate getSimpleJdbcTemplate() {
-        return getJdbcTemplate();
+    private SimpleJdbcTemplate simpleJdbcTemplate;
+
+    public SimpleJdbcTemplate getSimpleJdbcTemplate() {
+        if (this.simpleJdbcTemplate == null && getJdbcTemplate() != null) {
+            this.simpleJdbcTemplate = new SimpleJdbcTemplate(getJdbcTemplate());
+        }
+        return this.simpleJdbcTemplate;
     }
 }
