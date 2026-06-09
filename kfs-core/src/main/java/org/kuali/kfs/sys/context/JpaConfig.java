@@ -24,6 +24,8 @@ import java.util.Map;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import org.kuali.rice.core.api.config.property.Config;
+import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,6 +36,11 @@ import org.springframework.context.annotation.Configuration;
  * Hibernate 6.4. This configuration coexists with the legacy OJB
  * {@code PersistenceBroker} &mdash; both persistence layers remain active during
  * the incremental per-module migration.</p>
+ *
+ * <p>JDBC connection properties are read from the Rice {@link ConfigContext} at
+ * runtime (the same source used by the existing OJB/Spring datasource beans in
+ * {@code kfs-RiceDataSourceSpringBeans.xml}), so they resolve correctly
+ * regardless of Maven resource filtering.</p>
  *
  * <h3>Spring integration roadmap</h3>
  * <p>The current KFS classpath contains Spring Framework 3.1.x (via Rice 2.1.x),
@@ -51,13 +58,20 @@ public class JpaConfig {
      * Creates the JPA {@link EntityManagerFactory} for the {@code "kfs"}
      * persistence unit defined in {@code META-INF/persistence.xml}.
      *
-     * <p>Connection properties (datasource URL, credentials) are specified in
-     * {@code persistence.xml} and can be overridden programmatically via the
-     * {@code overrides} map below.</p>
+     * <p>Connection properties are resolved from the Rice
+     * {@link ConfigContext} so that JPA uses the same datasource
+     * configuration as the rest of KFS.</p>
      */
     @Bean(destroyMethod = "close")
     public EntityManagerFactory entityManagerFactory() {
+        Config cfg = ConfigContext.getCurrentContextConfig();
+
         Map<String, String> overrides = new HashMap<>();
+        overrides.put("jakarta.persistence.jdbc.url", cfg.getProperty("kfs.datasource.url"));
+        overrides.put("jakarta.persistence.jdbc.user", cfg.getProperty("kfs.datasource.username"));
+        overrides.put("jakarta.persistence.jdbc.password", cfg.getProperty("kfs.datasource.password"));
+        overrides.put("jakarta.persistence.jdbc.driver", cfg.getProperty("kfs.datasource.driver.name"));
+
         return Persistence.createEntityManagerFactory("kfs", overrides);
     }
 }

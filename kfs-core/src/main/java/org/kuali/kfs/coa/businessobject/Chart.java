@@ -21,10 +21,13 @@ package org.kuali.kfs.coa.businessobject;
 import java.util.LinkedHashMap;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.service.ChartService;
@@ -53,9 +56,10 @@ public class Chart extends PersistableBusinessObjectBase implements KualiCode {
     protected String finChartOfAccountDescription;
 
     @Column(name = "FIN_COA_ACTIVE_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
-    @Column(name = "FIN_COA_MGR_PRNCPL_ID")
+    @Transient
     protected String finCoaManagerPrincipalId;
 
     @Column(name = "RPTS_TO_FIN_COA_CD")
