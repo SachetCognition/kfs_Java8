@@ -22,24 +22,44 @@ package org.kuali.kfs.fp.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent automated clearing house for disbursement voucher.
  */
+@Entity
+@Table(name = "FP_DV_ACH_T")
 public class DisbursementVoucherAutomatedClearingHouse extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "DV_ACH_PRFL_NBR")
     private String disbursementVoucherAutomatedClearingHouseProfileNumber;
+    @Column(name = "DV_PMT_MTHD_CD")
     private String disbVchrPaymentMethodCode;
+    @Column(name = "DV_BNK_NM")
     private String disbursementVoucherBankName;
+    @Column(name = "DV_BNK_RTNG_NBR")
     private String disbVchrBankRoutingNumber;
+    @Column(name = "DV_BNK_CTY_NM")
     private String disbVchrBankCityName;
+    @Column(name = "DV_BNK_ST_CD")
     private String disbVchrBankStateCode;
+    @Column(name = "DV_BNK_CNTRY_NM")
     private String disbVchrBankCountryName;
+    @Column(name = "DV_ATTN_LN_TXT")
     private String disbVchrAttentionLineText;
+    @Column(name = "DV_ADDL_WIRE_TXT")
     private String disbVchrAdditionalWireText;
+    @Column(name = "DV_PAYEE_ACCT_NBR")
     private String disbVchrPayeeAccountNumber;
+    @Column(name = "DV_PAYEE_ACCT_NM")
     private String disbursementVoucherPayeeAccountName;
+    @Column(name = "DV_PAYEE_ACCT_TYP_CD")
     private String disbursementVoucherPayeeAccountTypeCode;
+    @Column(name = "DV_WIRE_TRNFR_FEE_WVR_IND")
     private boolean disbursementVoucherWireTransferFeeWaiverIndicator;
 
     /**

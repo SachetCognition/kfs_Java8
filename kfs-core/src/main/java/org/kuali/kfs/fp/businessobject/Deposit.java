@@ -30,27 +30,53 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.Bank;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 
 /**
  * This class represents a deposit used in the cash management document
  */
+@Entity
+@Table(name = "FP_DEPOSIT_DOC_T")
+@IdClass(DepositId.class)
 public class Deposit extends PersistableBusinessObjectBase {
     // primary key
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentDepositLineNumber;
     // attributes
+    @Column(name = "FDOC_DPST_TYP_CD")
     private String depositTypeCode;
+    @Column(name = "FDOC_DPST_DT")
     private Date depositDate;
+    @Column(name = "FDOC_DPST_AMT")
     private KualiDecimal depositAmount;
+    @Column(name = "FDOC_DPST_TKT_NBR")
     private String depositTicketNumber;
     // related objects and foreign keys
+    @Column(name = "FDOC_DPST_BNK_CD")
     private String depositBankCode;
 
     private CurrencyDetail depositedCurrency;
     private CoinDetail depositedCoin;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_DPST_BNK_CD", insertable = false, updatable = false)
     private Bank bank;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private CashManagementDocument cashManagementDocument;
     private List depositCashReceiptControl;
 

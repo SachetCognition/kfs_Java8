@@ -27,22 +27,49 @@ import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a sales tax business object.
  */
+@Entity
+@Table(name = "FP_SALES_TAX_T")
+@IdClass(SalesTaxId.class)
 public class SalesTax extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LN_TYP_CD")
     private String financialDocumentLineTypeCode;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "FDOC_GRS_SALES_AMT")
     private KualiDecimal financialDocumentGrossSalesAmount;
+    @Column(name = "FDOC_TXBL_SALES_AMT")
     private KualiDecimal financialDocumentTaxableSalesAmount;
+    @Column(name = "FDOC_SALE_DT")
     private Date financialDocumentSaleDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
     /**

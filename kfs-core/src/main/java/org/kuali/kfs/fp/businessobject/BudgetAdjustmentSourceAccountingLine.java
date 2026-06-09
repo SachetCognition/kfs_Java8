@@ -24,29 +24,56 @@ import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 
 /**
  * Special case <code>{@link SourceAccountingLine}</code> type for
  * <code>{@link org.kuali.kfs.fp.document.BudgetAdjustmentDocument}</code>
  */
+@Entity
+@Table(name = "FP_BDGT_ADJ_DTL_T")
+@IdClass(BudgetAdjustmentSourceAccountingLineId.class)
 public class BudgetAdjustmentSourceAccountingLine extends SourceAccountingLine implements BudgetAdjustmentAccountingLine {
 
+    @Column(name = "BDGT_ADJ_PRD_CD")
     private String budgetAdjustmentPeriodCode;
+    @Column(name = "CURR_BDGT_ADJ_AMT")
     private KualiDecimal currentBudgetAdjustmentAmount;
+    @Column(name = "BASE_BDGT_ADJ_AMT")
     private KualiInteger baseBudgetAdjustmentAmount;
+    @Column(name = "FDOC_LN_MO1_AMT")
     private KualiDecimal financialDocumentMonth1LineAmount;
+    @Column(name = "FDOC_LN_MO2_AMT")
     private KualiDecimal financialDocumentMonth2LineAmount;
+    @Column(name = "FDOC_LN_MO3_AMT")
     private KualiDecimal financialDocumentMonth3LineAmount;
+    @Column(name = "FDOC_LN_MO4_AMT")
     private KualiDecimal financialDocumentMonth4LineAmount;
+    @Column(name = "FDOC_LN_MO5_AMT")
     private KualiDecimal financialDocumentMonth5LineAmount;
+    @Column(name = "FDOC_LN_MO6_AMT")
     private KualiDecimal financialDocumentMonth6LineAmount;
+    @Column(name = "FDOC_LN_MO7_AMT")
     private KualiDecimal financialDocumentMonth7LineAmount;
+    @Column(name = "FDOC_LN_MO8_AMT")
     private KualiDecimal financialDocumentMonth8LineAmount;
+    @Column(name = "FDOC_LN_MO9_AMT")
     private KualiDecimal financialDocumentMonth9LineAmount;
+    @Column(name = "FDOC_LN_MO10_AMT")
     private KualiDecimal financialDocumentMonth10LineAmount;
+    @Column(name = "FDOC_LN_MO11_AMT")
     private KualiDecimal financialDocumentMonth11LineAmount;
+    @Column(name = "FDOC_LN_MO12_AMT")
     private KualiDecimal financialDocumentMonth12LineAmount;
+    @Column(name = "FRNG_BENE_IND")
     private boolean fringeBenefitIndicator;
 
     public BudgetAdjustmentSourceAccountingLine() {

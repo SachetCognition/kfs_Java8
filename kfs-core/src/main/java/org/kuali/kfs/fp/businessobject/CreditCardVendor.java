@@ -28,37 +28,97 @@ import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.coa.businessobject.SubObjectCodeCurrent;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * 
  */
+@Entity
+@Table(name = "FP_CR_CARD_VNDR_T")
 public class CreditCardVendor extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FDOC_CCRD_VNDR_NBR")
     private String financialDocumentCreditCardVendorNumber;
+    @Column(name = "FDOC_CCRD_VNDR_NM")
     private String financialDocumentCreditCardVendorName;
+    @Column(name = "FDOC_CCRD_TYP_CD")
     private String financialDocumentCreditCardTypeCode;
+    @Column(name = "INC_FIN_COA_CD")
     private String incomeFinancialChartOfAccountsCode;
+    @Column(name = "INC_ACCT_NBR")
     private String incomeAccountNumber;
+    @Column(name = "INC_FIN_OBJ_CD")
     private String incomeFinancialObjectCode;
+    @Column(name = "INC_FIN_SUB_OBJ_CD")
     private String incomeFinancialSubObjectCode;
+    @Column(name = "INC_SUB_ACCT_NBR")
     private String incomeSubAccountNumber;
+    @Column(name = "EXP_FIN_COA_CD")
     private String expenseFinancialChartOfAccountsCode;
+    @Column(name = "EXP_ACCT_NBR")
     private String expenseAccountNumber;
+    @Column(name = "EXP_FIN_OBJ_CD")
     private String expenseFinancialObjectCode;
+    @Column(name = "EXP_FIN_SUB_OBJ_CD")
     private String expenseFinancialSubObjectCode;
+    @Column(name = "EXP_SUB_ACCT_NBR")
     private String expenseSubAccountNumber;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
     private Chart incomeFinancialChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_FIN_OBJ_CD", insertable = false, updatable = false)
     private ObjectCodeCurrent incomeFinancialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_ACCT_NBR", insertable = false, updatable = false)
     private Account incomeAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
     private Chart expenseFinancialChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_FIN_OBJ_CD", insertable = false, updatable = false)
     private ObjectCodeCurrent expenseFinancialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_ACCT_NBR", insertable = false, updatable = false)
     private Account expenseAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_CCRD_TYP_CD", insertable = false, updatable = false)
     private CreditCardType financialDocumentCreditCardType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_ACCT_NBR", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_SUB_ACCT_NBR", insertable = false, updatable = false)
     private SubAccount incomeSubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_ACCT_NBR", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_SUB_ACCT_NBR", insertable = false, updatable = false)
     private SubAccount expenseSubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_ACCT_NBR", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_FIN_OBJ_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "INC_FIN_SUB_OBJ_CD", insertable = false, updatable = false)
     private SubObjectCodeCurrent incomeFinancialSubObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_ACCT_NBR", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_FIN_OBJ_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "EXP_FIN_SUB_OBJ_CD", insertable = false, updatable = false)
     private SubObjectCodeCurrent expenseFinancialSubObject;
 
 

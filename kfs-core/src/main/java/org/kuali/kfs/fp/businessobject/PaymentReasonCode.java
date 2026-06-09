@@ -21,12 +21,19 @@ package org.kuali.kfs.fp.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a payment reason code.
  */
+@Entity
+@Table(name = "FP_DV_PMT_REAS_T")
 public class PaymentReasonCode extends KualiCodeBase implements MutableInactivatable {
 
+    @Column(name = "DV_PMT_REAS_DESC")
     private String description;
 
     /**

@@ -21,13 +21,27 @@ package org.kuali.kfs.fp.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a travel company code business object.
  */
+@Entity
+@Table(name = "FP_DV_TRVL_CO_NM_T")
+@IdClass(TravelCompanyCodeId.class)
 public class TravelCompanyCode extends KualiCodeBase implements MutableInactivatable {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false)
     private TravelExpenseTypeCode travelExpenseTypeCode;
     
+    @Column(name = "FRGN_CMPNY")
     private boolean foreignCompany = false;
 
     /**

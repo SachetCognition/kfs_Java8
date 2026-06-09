@@ -31,23 +31,56 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "FP_CPTL_AST_INFO_DTL_T")
+@IdClass(CapitalAssetInformationDetailId.class)
 public class CapitalAssetInformationDetail extends PersistableBusinessObjectBase {
 
     //primary key fields..
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_LINE_NBR")
     protected Integer capitalAssetLineNumber;
+    @Id
+    @Column(name = "ITM_LN_NBR")
     protected Integer itemLineNumber;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     protected String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     protected String buildingSubRoomNumber;
+    @Column(name = "CPTLAST_TAG_NBR")
     protected String capitalAssetTagNumber;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     protected String capitalAssetSerialNumber;
  
     protected CampusEbo campus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
     protected Building building;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "BLDG_ROOM_NBR", insertable = false, updatable = false)
     protected Room room;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+    @JoinColumn(name = "CPTLAST_LINE_NBR", insertable = false, updatable = false)
     protected CapitalAssetInformation capitalAssetInformation;
 
     

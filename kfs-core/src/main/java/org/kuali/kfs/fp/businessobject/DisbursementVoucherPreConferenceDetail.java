@@ -28,17 +28,33 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a disbursement voucher pre-conference detail.
  */
+@Entity
+@Table(name = "FP_DV_PRE_CONF_T")
 public class DisbursementVoucherPreConferenceDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "DV_CONF_DEST_NM")
     private String dvConferenceDestinationName;
+    @Column(name = "DV_CONF_STRT_DT")
     private Date disbVchrConferenceStartDate;
+    @Column(name = "DV_CONF_END_DT")
     private Date disbVchrConferenceEndDate;
+    @Column(name = "DV_CONF_TOT_AMT")
     private KualiDecimal disbVchrConferenceTotalAmt;
+    @Column(name = "DV_EXP_CD")
     private String disbVchrExpenseCode;
 
 

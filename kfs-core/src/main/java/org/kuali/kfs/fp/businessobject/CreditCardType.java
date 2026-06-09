@@ -23,14 +23,24 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * This class represents the different types of credit card types
  */
+@Entity
+@Table(name = "FP_CR_CARD_TYP_T")
 public class CreditCardType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FDOC_CCRD_TYP_CD")
     private String financialDocumentCreditCardTypeCode;
+    @Column(name = "FDOC_CCRD_CMPNY_NM")
     private String financialDocumentCreditCardCompanyName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

@@ -23,21 +23,41 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 
 /**
  * This class represents in a cashiering item in process. This cashiering item in process
  *  has an item amount, reduced amount, and remaining amount.  It also has a closed and open date.  
  */
+@Entity
+@Table(name = "FP_CASHIER_ITM_IN_PROC_T")
+@IdClass(CashieringItemInProcessId.class)
 public class CashieringItemInProcess extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Id
+    @Column(name = "ITM_ID")
     private Integer itemIdentifier;
+    @Column(name = "ITM_AMT")
     private KualiDecimal itemAmount;
+    @Column(name = "ITM_RDCD_AMT")
     private KualiDecimal itemReducedAmount;
+    @Column(name = "ITM_TOT_AMT")
     private KualiDecimal itemRemainingAmount;
     private KualiDecimal currentPayment;
+    @Column(name = "ITM_OPEN_DT")
     private Date itemOpenDate;
+    @Column(name = "ITM_CLOSED_DT")
     private Date itemClosedDate;
+    @Column(name = "ITM_DESC")
     private String itemDescription;
 
     /**
