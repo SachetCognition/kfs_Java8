@@ -23,6 +23,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDetail;
@@ -48,6 +60,8 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Effort Certification Document Class.
  */
+@Entity
+@Table(name = "LD_A21_DETAIL_T")
 @COMPONENT(component="EffortCertification")
 public class EffortCertificationDocument extends FinancialSystemTransactionalDocumentBase  {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocument.class);
@@ -55,26 +69,58 @@ public class EffortCertificationDocument extends FinancialSystemTransactionalDoc
     protected static final String DO_AWARD_SPLIT = "DoAwardSplit";
     protected static final String DO_RECREATE_SPLIT = "DoRecreateSplit";
 
+    @Column(name = "A21_LBR_RPT_NBR")
     protected String effortCertificationReportNumber;
+
+    @Column(name = "A21_LBR_DOC_CD")
     protected boolean effortCertificationDocumentCode;
+
+    @Column(name = "A21_LBR_FSCL_YR")
     protected Integer universityFiscalYear;
+
+    @Column(name = "EMPLID")
     protected String emplid;
+
+    @Transient
     protected String organizationCode;
+
+    @Transient
     protected KualiDecimal financialDocumentTotalAmount;
 
+    @Transient
     protected Integer totalEffortPercent;
+    @Transient
     protected Integer totalOriginalEffortPercent;
+    @Transient
     protected KualiDecimal totalPayrollAmount;
+    @Transient
     protected KualiDecimal totalOriginalPayrollAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "A21_LBR_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "A21_LBR_RPT_NBR", referencedColumnName = "A21_LBR_RPT_NBR", insertable = false, updatable = false)
+    })
     protected EffortCertificationReportDefinition effortCertificationReportDefinition;
+
+    @Transient
     protected Person employee;
+
+    @Transient
     protected Organization organization;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "A21_LBR_FSCL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     protected SystemOptions options;
 
+    @OneToMany(mappedBy = "effortCertificationDocument", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OrderBy("effortCertificationPayrollAmount DESC")
     protected List<EffortCertificationDetail> effortCertificationDetailLines;
+
+    @Transient
     protected List<EffortCertificationDetail> summarizedDetailLines;
 
+    @Transient
     protected Person ledgerPerson;
 
     /**

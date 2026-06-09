@@ -23,6 +23,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.kuali.kfs.module.ec.EffortPropertyConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.ObjectUtil;
@@ -30,9 +38,15 @@ import org.kuali.kfs.sys.ObjectUtil;
 /**
  * Business Object for the Effort Certification Detail Build Table.
  */
+@Entity
+@Table(name = "LD_A21_DTL_LN_BLD_T")
 public class EffortCertificationDetailBuild extends EffortCertificationDetail {
+    @Id
+    @Column(name = "A21_LBR_BLD_NBR")
     private Long effortCertificationBuildNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "A21_LBR_BLD_NBR", referencedColumnName = "A21_LBR_BLD_NBR", insertable = false, updatable = false)
     private EffortCertificationDocumentBuild effortCertificationDocumentBuild;
 
     /**

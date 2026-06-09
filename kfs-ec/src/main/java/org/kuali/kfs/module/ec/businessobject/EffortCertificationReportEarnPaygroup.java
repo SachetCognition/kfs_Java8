@@ -20,6 +20,14 @@ package org.kuali.kfs.module.ec.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -28,14 +36,34 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Business Object for the Effort Certification Report Earn Paygroup Table.
  */
+@Entity
+@Table(name = "LD_A21_RPT_EARN_PAY_T")
 public class EffortCertificationReportEarnPaygroup extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+
+    @Id
+    @Column(name = "A21_LBR_RPT_TYP_CD")
     private String effortCertificationReportTypeCode;
+
+    @Id
+    @Column(name = "ERNCD")
     private String earnCode;
+
+    @Id
+    @Column(name = "PAYGROUP")
     private String payGroup;
+
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "A21_LBR_RPT_TYP_CD", referencedColumnName = "A21_LBR_RPT_TYP_CD", insertable = false, updatable = false)
     private EffortCertificationReportType effortCertificationReportType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions options;
     
     /**

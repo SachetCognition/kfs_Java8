@@ -21,15 +21,28 @@ package org.kuali.kfs.module.ec.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * Business Object for the Effort Certification Report Type Table.
  */
+@Entity
+@Table(name = "LD_A21_RPT_TYP_T")
 public class EffortCertificationReportType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "A21_LBR_RPT_TYP_CD")
     private String effortCertificationReportTypeCode;
+
+    @Column(name = "A21_LBR_RPT_DESC")
     private String effortCertificationReportDescription;
+
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**
