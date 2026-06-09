@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.kuali.kfs.module.external.kc.service;
-import jakarta.jws.WebService;
-import jakarta.jws.soap.SOAPBinding;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
 import org.kuali.kfs.module.external.kc.KcConstants;
 

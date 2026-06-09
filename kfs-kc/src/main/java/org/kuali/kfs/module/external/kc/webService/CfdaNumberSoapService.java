@@ -25,9 +25,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.xml.namespace.QName;
-import jakarta.xml.ws.WebEndpoint;
-import jakarta.xml.ws.WebServiceClient;
-import jakarta.xml.ws.WebServiceFeature;
+import javax.xml.ws.WebEndpoint;
+import javax.xml.ws.WebServiceClient;
+import javax.xml.ws.WebServiceFeature;
 
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kra.external.Cfda.service.CfdaNumberService;

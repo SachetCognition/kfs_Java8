@@ -18,12 +18,12 @@
  */
 package org.kuali.kra.external.award;
 
-import jakarta.jws.WebMethod;
-import jakarta.jws.WebParam;
-import jakarta.jws.WebResult;
-import jakarta.jws.WebService;
-import jakarta.xml.ws.RequestWrapper;
-import jakarta.xml.ws.ResponseWrapper;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+import javax.xml.ws.RequestWrapper;
+import javax.xml.ws.ResponseWrapper;
 
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kfs.module.external.kc.dto.AwardAccountDTO;

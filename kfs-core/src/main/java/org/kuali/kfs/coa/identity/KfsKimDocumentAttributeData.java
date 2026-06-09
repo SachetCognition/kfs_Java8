@@ -20,7 +20,7 @@ package org.kuali.kfs.coa.identity;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Transient;
+import javax.persistence.Transient;
 
 import org.kuali.rice.kim.api.common.attribute.KimAttribute;
 

@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.xml.ws.WebServiceException;
+import javax.xml.ws.WebServiceException;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.integration.cg.dto.HashMapElement;

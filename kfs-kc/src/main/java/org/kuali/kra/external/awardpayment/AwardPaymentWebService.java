@@ -20,9 +20,9 @@ package org.kuali.kra.external.awardpayment;
 
 import java.util.List;
 
-import jakarta.jws.WebParam;
-import jakarta.jws.WebService;
-import jakarta.jws.soap.SOAPBinding;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kfs.module.external.kc.dto.AwardBasisOfPaymentDTO;

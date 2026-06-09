@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.xml.ws.WebServiceException;
+import javax.xml.ws.WebServiceException;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.module.external.kc.KcConstants;

@@ -20,9 +20,9 @@ package org.kuali.kfs.module.external.kc.service;
 
 import java.util.List;
 
-import jakarta.jws.WebParam;
-import jakarta.jws.WebService;
-import jakarta.jws.soap.SOAPBinding;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
 import org.kuali.kfs.integration.cg.dto.HashMapElement;
 import org.kuali.kfs.integration.cg.dto.KcObjectCode;
