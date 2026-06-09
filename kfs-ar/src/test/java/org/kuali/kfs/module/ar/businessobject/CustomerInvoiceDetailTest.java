@@ -76,6 +76,6 @@ class CustomerInvoiceDetailTest extends KfsUnitTestBase {
     void testAmountWithZeroQuantity() {
         detail.setInvoiceItemQuantity(BigDecimal.ZERO);
         detail.setInvoiceItemUnitPrice(BigDecimal.valueOf(100));
-        assertThat(detail.getAmount()).isEqualTo(KualiDecimal.ZERO);
+        assertThat(detail.getInvoiceItemPreTaxAmount()).isEqualTo(KualiDecimal.ZERO);
     }
 }
