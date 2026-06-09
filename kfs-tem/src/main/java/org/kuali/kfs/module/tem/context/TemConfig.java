@@ -58,7 +58,8 @@ public class TemConfig {
         config.setPackagePrefixes(List.of("org.kuali.kfs.module.tem"));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/tem/businessobject/datadictionary/*.xml",
-            "classpath:org/kuali/kfs/module/tem/document/datadictionary/*.xml"
+            "classpath:org/kuali/kfs/module/tem/document/datadictionary/*.xml",
+            "classpath:org/kuali/kfs/module/tem/batch/businessobject/datadictionary/*.xml"
         ));
         config.setDatabaseRepositoryFilePaths(List.of(
             "org/kuali/kfs/module/tem/ojb-tem.xml"

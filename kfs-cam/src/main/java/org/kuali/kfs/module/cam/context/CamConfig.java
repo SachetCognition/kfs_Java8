@@ -58,7 +58,7 @@ public class CamConfig {
         config.setInitializeDataDictionary(true);
         config.setPackagePrefixes(Arrays.asList(
             "org.kuali.kfs.module.cam",
-            "org.kuali.kfs.module.cab"
+            "org.kuali.kfs.integration.cam"
         ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/cam/businessobject/datadictionary/*.xml",

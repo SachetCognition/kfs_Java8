@@ -55,7 +55,10 @@ public class ArConfig {
         FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
         config.setNamespaceCode("KFS-AR");
         config.setInitializeDataDictionary(true);
-        config.setPackagePrefixes(List.of("org.kuali.kfs.module.ar"));
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.ar",
+            "org.kuali.kfs.integration.ar"
+        ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/ar/businessobject/datadictionary/*.xml",
             "classpath:org/kuali/kfs/module/ar/document/datadictionary/*.xml"

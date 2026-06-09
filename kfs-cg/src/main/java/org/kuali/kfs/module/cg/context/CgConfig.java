@@ -54,10 +54,14 @@ public class CgConfig {
         FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
         config.setNamespaceCode("KFS-CG");
         config.setInitializeDataDictionary(true);
-        config.setPackagePrefixes(List.of("org.kuali.kfs.module.cg"));
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.cg",
+            "org.kuali.kfs.integration.cg"
+        ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/cg/businessobject/datadictionary/*.xml",
-            "classpath:org/kuali/kfs/module/cg/document/datadictionary/*.xml"
+            "classpath:org/kuali/kfs/module/cg/document/datadictionary/*.xml",
+            "classpath:org/kuali/kfs/integration/cg/businessobject/datadictionary/UnitDTO.xml"
         ));
         config.setDatabaseRepositoryFilePaths(List.of(
             "org/kuali/kfs/module/cg/ojb-cg.xml"

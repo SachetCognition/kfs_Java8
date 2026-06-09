@@ -51,7 +51,10 @@ public class EcConfig {
         FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
         config.setNamespaceCode("KFS-EC");
         config.setInitializeDataDictionary(true);
-        config.setPackagePrefixes(List.of("org.kuali.kfs.module.ec"));
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.ec",
+            "org.kuali.kfs.integration.ec"
+        ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/ec/businessobject/datadictionary/*.xml",
             "classpath:org/kuali/kfs/module/ec/document/datadictionary/*.xml"

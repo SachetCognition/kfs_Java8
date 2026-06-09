@@ -54,7 +54,10 @@ public class BcConfig {
         FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
         config.setNamespaceCode("KFS-BC");
         config.setInitializeDataDictionary(true);
-        config.setPackagePrefixes(List.of("org.kuali.kfs.module.bc"));
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.bc",
+            "org.kuali.kfs.integration.bc"
+        ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/bc/businessobject/datadictionary/*.xml",
             "classpath:org/kuali/kfs/module/bc/document/datadictionary/*.xml"

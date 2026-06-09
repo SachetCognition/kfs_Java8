@@ -51,7 +51,10 @@ public class LdConfig {
         FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
         config.setNamespaceCode("KFS-LD");
         config.setInitializeDataDictionary(true);
-        config.setPackagePrefixes(List.of("org.kuali.kfs.module.ld"));
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.ld",
+            "org.kuali.kfs.integration.ld"
+        ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/ld/businessobject/datadictionary/*.xml",
             "classpath:org/kuali/kfs/module/ld/document/datadictionary/*.xml"

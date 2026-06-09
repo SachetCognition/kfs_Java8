@@ -55,7 +55,10 @@ public class PurapConfig {
         FinancialSystemModuleConfiguration config = new FinancialSystemModuleConfiguration();
         config.setNamespaceCode("KFS-PURAP");
         config.setInitializeDataDictionary(true);
-        config.setPackagePrefixes(List.of("org.kuali.kfs.module.purap"));
+        config.setPackagePrefixes(Arrays.asList(
+            "org.kuali.kfs.module.purap",
+            "org.kuali.kfs.integration.purap"
+        ));
         config.setDataDictionaryPackages(Arrays.asList(
             "classpath:org/kuali/kfs/module/purap/businessobject/datadictionary/*.xml",
             "classpath:org/kuali/kfs/module/purap/document/datadictionary/*.xml"
