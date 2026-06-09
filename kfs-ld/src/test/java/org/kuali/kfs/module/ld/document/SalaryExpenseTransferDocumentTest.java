@@ -30,6 +30,21 @@ class SalaryExpenseTransferDocumentTest extends KfsUnitTestBase {
     }
 
     @Test
+    void testApprovalObjectCodeBalancesOverwrite() {
+        Map<String, KualiDecimal> first = new HashMap<>();
+        first.put("5000", new KualiDecimal(100));
+        document.setApprovalObjectCodeBalances(first);
+
+        Map<String, KualiDecimal> second = new HashMap<>();
+        second.put("6000", new KualiDecimal(200));
+        document.setApprovalObjectCodeBalances(second);
+
+        assertThat(document.getApprovalObjectCodeBalances())
+                .containsEntry("6000", new KualiDecimal(200))
+                .doesNotContainKey("5000");
+    }
+
+    @Test
     void testSetAndGetErrorCertification() {
         ErrorCertification cert = new ErrorCertification();
         cert.setDocumentNumber("DOC123");
@@ -39,12 +54,15 @@ class SalaryExpenseTransferDocumentTest extends KfsUnitTestBase {
     }
 
     @Test
-    void testErrorCertificationNullByDefault() {
-        assertThat(document.getErrorCertification()).isNull();
-    }
+    void testErrorCertificationReplacement() {
+        ErrorCertification cert1 = new ErrorCertification();
+        cert1.setDocumentNumber("DOC1");
+        document.setErrorCertification(cert1);
 
-    @Test
-    void testApprovalObjectCodeBalancesNullByDefault() {
-        assertThat(document.getApprovalObjectCodeBalances()).isNull();
+        ErrorCertification cert2 = new ErrorCertification();
+        cert2.setDocumentNumber("DOC2");
+        document.setErrorCertification(cert2);
+
+        assertThat(document.getErrorCertification().getDocumentNumber()).isEqualTo("DOC2");
     }
 }
