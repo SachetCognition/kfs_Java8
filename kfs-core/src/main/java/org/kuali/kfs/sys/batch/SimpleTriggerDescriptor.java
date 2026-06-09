@@ -21,8 +21,8 @@ package org.kuali.kfs.sys.batch;
 import java.util.Date;
 
 import org.kuali.rice.core.api.datetime.DateTimeService;
-import org.quartz.SimpleTrigger;
-import org.quartz.Trigger;
+import org.quartz.SimpleScheduleBuilder;
+import org.quartz.TriggerBuilder;
 
 public class SimpleTriggerDescriptor extends TriggerDescriptor {
     private Date startTime;
@@ -39,46 +39,28 @@ public class SimpleTriggerDescriptor extends TriggerDescriptor {
         setDateTimeService(dateTimeService);
     }
 
-    /**
-     * @see org.kuali.kfs.sys.batch.TriggerDescriptor#completeTriggerDescription(org.quartz.Trigger)
-     */
-    protected void completeTriggerDescription(Trigger trigger) {
-        if (startTime == null) {
-            startTime = trigger.getStartTime();
-        }
-        // prevent setting of the trigger information in test mode
+    @Override
+    protected void completeTriggerDescription(TriggerBuilder triggerBuilder) {
         if (!isTestMode()) {
-            trigger.setStartTime(new Date(startTime.getTime() + startDelay));
-            ((SimpleTrigger) trigger).setRepeatCount(repeatCount);
-        }
-        else {
-            trigger.setStartTime(new Date(new Date().getTime() + 525600000L));
+            Date effectiveStart = startTime != null ? startTime : getDateTimeService().getCurrentDate();
+            triggerBuilder.startAt(new Date(effectiveStart.getTime() + startDelay));
+            if (repeatCount > 0) {
+                triggerBuilder.withSchedule(
+                        SimpleScheduleBuilder.simpleSchedule().withRepeatCount(repeatCount));
+            }
+        } else {
+            triggerBuilder.startAt(new Date(new Date().getTime() + 525600000L));
         }
     }
 
-    /**
-     * Sets the repeatCount attribute value.
-     * 
-     * @param repeatCount The repeatCount to set.
-     */
     public void setRepeatCount(int repeatCount) {
         this.repeatCount = repeatCount;
     }
 
-    /**
-     * Sets the startTime attribute value.
-     * 
-     * @param startTime The startTime to set.
-     */
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    /**
-     * Sets the startDelay attribute value.
-     * 
-     * @param startDelay The startDelay to set.
-     */
     public void setStartDelay(long startDelay) {
         this.startDelay = startDelay;
     }

@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
-import javax.mail.MessagingException;
+
 
 import org.kuali.kfs.sys.mail.AttachmentMailMessage;
 import org.kuali.rice.core.api.mail.MailMessage;
@@ -32,7 +32,7 @@ public class AttachmentDevelopmentMailServiceImpl extends AttachmentMailServiceI
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AttachmentDevelopmentMailServiceImpl.class);
 
     @Override
-    public void sendMessage(MailMessage message) throws InvalidAddressException, MessagingException {
+    public void sendMessage(MailMessage message) throws InvalidAddressException {
         LOG.info( "*********************** EMAIL SEND *****************************");
         LOG.info( "FROM : " + message.getToAddresses() );
         LOG.info( "TO   : " + message.getFromAddress() );
@@ -45,7 +45,7 @@ public class AttachmentDevelopmentMailServiceImpl extends AttachmentMailServiceI
     }
 
     @Override
-    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException, MessagingException {
+    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException {
         LOG.info( "*********************** EMAIL SEND *****************************");
         LOG.info( "FROM : " + message.getToAddresses() );
         LOG.info( "TO   : " + message.getFromAddress() );

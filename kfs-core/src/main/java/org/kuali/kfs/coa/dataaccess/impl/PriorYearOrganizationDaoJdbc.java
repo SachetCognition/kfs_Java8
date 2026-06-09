@@ -42,7 +42,7 @@ public class PriorYearOrganizationDaoJdbc extends PlatformAwareDaoBaseJdbc imple
         String priorYrOrgTableName = MetadataManager.getInstance().getGlobalRepository().getDescriptorFor(PriorYearOrganization.class).getFullTableName();
 
         // 1. Count how many rows are currently in the prior year org table
-        int count = getSimpleJdbcTemplate().queryForInt("SELECT COUNT(" + OBJ_ID + ") from " + priorYrOrgTableName);
+        int count = getSimpleJdbcTemplate().queryForObject("SELECT COUNT(" + OBJ_ID + ") from " + priorYrOrgTableName, Integer.class);
 
         // 2. Purge all the rows from the prior year org table
         getSimpleJdbcTemplate().update("DELETE from " + priorYrOrgTableName);
@@ -64,7 +64,7 @@ public class PriorYearOrganizationDaoJdbc extends PlatformAwareDaoBaseJdbc imple
         getSimpleJdbcTemplate().update("INSERT into " + priorYrOrgTableName + " SELECT * from " + orgTableName);
 
         // 2. Count how many rows are currently in the prior year org table
-        return getSimpleJdbcTemplate().queryForInt("SELECT COUNT(" + OBJ_ID + ") from " + priorYrOrgTableName);
+        return getSimpleJdbcTemplate().queryForObject("SELECT COUNT(" + OBJ_ID + ") from " + priorYrOrgTableName, Integer.class);
     }
 
 }

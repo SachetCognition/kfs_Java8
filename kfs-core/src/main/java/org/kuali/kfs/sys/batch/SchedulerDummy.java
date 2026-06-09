@@ -18,10 +18,25 @@
  */
 package org.kuali.kfs.sys.batch;
 
-import org.quartz.impl.StdScheduler;
+import org.quartz.Scheduler;
+import org.quartz.impl.StdSchedulerFactory;
 
-public class SchedulerDummy extends StdScheduler {
+/**
+ * Dummy scheduler that does nothing - used for testing/development.
+ * Updated for Quartz 2.x API (S-4A migration).
+ */
+public class SchedulerDummy {
+    private Scheduler scheduler;
+
     public SchedulerDummy() {
-        super(null, null);
+        try {
+            scheduler = StdSchedulerFactory.getDefaultScheduler();
+        } catch (Exception e) {
+            // Ignore - this is a dummy scheduler
+        }
+    }
+
+    public Scheduler getScheduler() {
+        return scheduler;
     }
 }

@@ -42,15 +42,18 @@ import org.kuali.rice.kew.api.exception.WorkflowException;
 import org.kuali.rice.krad.UserSession;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.InterruptableJob;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.StatefulJob;
+import org.quartz.PersistJobDataAfterExecution;
 import org.quartz.UnableToInterruptJobException;
 import org.springframework.util.StopWatch;
 
-public class Job implements StatefulJob, InterruptableJob {
+@DisallowConcurrentExecution
+@PersistJobDataAfterExecution
+public class Job implements InterruptableJob {
 
     public static final String JOB_RUN_START_STEP = "JOB_RUN_START_STEP";
     public static final String JOB_RUN_END_STEP = "JOB_RUN_END_STEP";
@@ -77,7 +80,7 @@ public class Job implements StatefulJob, InterruptableJob {
         workerThread = Thread.currentThread();
         if (isNotRunnable()) {
             if (LOG.isInfoEnabled()) {
-                LOG.info("Skipping job because doNotRun is true: " + jobExecutionContext.getJobDetail().getName());
+                LOG.info("Skipping job because doNotRun is true: " + jobExecutionContext.getJobDetail().getKey().getName());
             }
             return;
         }
@@ -121,7 +124,7 @@ public class Job implements StatefulJob, InterruptableJob {
                 }
                 step.setInterrupted(false);
                 try {
-                    if (!runStep(parameterService, jobExecutionContext.getJobDetail().getFullName(), currentStepNumber, step, jobRunDate)) {
+                    if (!runStep(parameterService, jobExecutionContext.getJobDetail().getKey().toString(), currentStepNumber, step, jobRunDate)) {
                         break;
                     }
                 }
@@ -140,9 +143,9 @@ public class Job implements StatefulJob, InterruptableJob {
         }
         catch (Exception e) {
             schedulerService.updateStatus(jobExecutionContext.getJobDetail(), SchedulerService.FAILED_JOB_STATUS_CODE);
-            throw new JobExecutionException("Caught exception in " + jobExecutionContext.getJobDetail().getName(), e, false);
+            throw new JobExecutionException("Caught exception in " + jobExecutionContext.getJobDetail().getKey().getName(), e);
         }
-        LOG.info("Finished executing job: " + jobExecutionContext.getJobDetail().getName());
+        LOG.info("Finished executing job: " + jobExecutionContext.getJobDetail().getKey().getName());
         schedulerService.updateStatus(jobExecutionContext.getJobDetail(), SchedulerService.SUCCEEDED_JOB_STATUS_CODE);
     }
 
