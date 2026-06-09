@@ -1,327 +1,370 @@
-/*
- * The Kuali Financial System, a comprehensive financial management system for higher education.
- * 
- * Copyright 2005-2014 The Kuali Foundation
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * 
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package org.kuali.kfs.module.ec.document.validation.impl;
 
-import java.util.List;
-import java.util.Properties;
-
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.kuali.kfs.coa.businessobject.Account;
+import org.kuali.kfs.coa.businessobject.Organization;
+import org.kuali.kfs.coa.businessobject.SubFundGroup;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
-import org.kuali.kfs.integration.ld.LaborModuleService;
-import org.kuali.kfs.module.ec.businessobject.EffortCertificationReportDefinition;
-import org.kuali.kfs.module.ec.testdata.EffortTestDataPropertyConstants;
-import org.kuali.kfs.module.ld.businessobject.LedgerBalanceForEffortCertification;
-import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.Message;
-import org.kuali.kfs.sys.ObjectUtil;
-import org.kuali.kfs.sys.TestDataPreparator;
-import org.kuali.kfs.sys.context.KualiTestBase;
+import org.kuali.kfs.sys.context.KfsUnitTestBase;
 import org.kuali.kfs.sys.context.SpringContext;
-import org.kuali.rice.krad.service.BusinessObjectService;
-import org.kuali.rice.krad.service.KualiModuleService;
-import org.kuali.rice.krad.service.PersistenceService;
+import org.kuali.rice.core.api.config.property.ConfigurationService;
+import org.kuali.rice.core.api.util.type.KualiDecimal;
+import org.mockito.MockedStatic;
 
-@ConfigureContext
-public class LedgerBalanceFieldValidatorTest extends KualiTestBase {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-    private Properties properties, message;
-    private String balanceFieldNames;
-    private String deliminator;
-    Integer postingYear;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
-    private BusinessObjectService businessObjectService;
-    private PersistenceService persistenceService;
-    private LaborModuleService laborModuleService;
-
-    private Class<? extends LaborLedgerBalance> ledgerBalanceClass;
-
-    /**
-     * Constructs a LedgerBalanceFieldValidatorTest.java.
-     */
-    public LedgerBalanceFieldValidatorTest() {
-        super();
-        String messageFileName = EffortTestDataPropertyConstants.TEST_DATA_PACKAGE_NAME + "/message.properties";
-        String propertiesFileName = EffortTestDataPropertyConstants.TEST_DATA_PACKAGE_NAME + "/ledgerBalanceFieldValidator.properties";
-
-        properties = TestDataPreparator.loadPropertiesFromClassPath(propertiesFileName);
-        message = TestDataPreparator.loadPropertiesFromClassPath(messageFileName);
-
-        deliminator = properties.getProperty(EffortTestDataPropertyConstants.DELIMINATOR);
-        balanceFieldNames = properties.getProperty(EffortTestDataPropertyConstants.BALANCE_FIELD_NAMES);
-    }
-
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-
-        businessObjectService = SpringContext.getBean(BusinessObjectService.class);
-        persistenceService = SpringContext.getBean(PersistenceService.class);
-        laborModuleService = SpringContext.getBean(LaborModuleService.class);
-
-        KualiModuleService kualiModuleService = SpringContext.getBean(KualiModuleService.class);
-        ledgerBalanceClass = LedgerBalanceForEffortCertification.class;
-
-        TestDataPreparator.doCleanUpWithoutReference(ledgerBalanceClass, properties, EffortTestDataPropertyConstants.DATA_CLEANUP, balanceFieldNames, deliminator);
-    }
-
-    public void testHasValidAccount_valid() throws Exception {
-        String testTarget = "hasValidAccount.valid.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasValidAccount(ledgerBalance);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasValidAccount.valid");
-        assertTrue(errorMessage, validationMessage == null);
-    }
-
-    public void testHasValidAccount_invalid() throws Exception {
-        String testTarget = "hasValidAccount.invalid.";
-
-        // the test is disable because the account in the test data volates an integrity constraint foreign and the test data cannot
-        // be stored into database
-        // LedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        // Message validationMessage = LedgerBalanceFieldValidator.hasValidAccount(ledgerBalance);
-        // String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasValidAccount.invalid");
-        // assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testIsInFundGroups_Contain() throws Exception {
-        String testTarget = "isInFundGroups.contain.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isInFundGroups(ledgerBalance, fundGroupCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isInFundGroups.contain");
-        assertTrue(errorMessage, validationMessage == null);
-    }
-
-    public void testIsInFundGroups_NotContain() throws Exception {
-        String testTarget = "isInFundGroups.notContain.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isInFundGroups(ledgerBalance, fundGroupCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isInFundGroups.notContain");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testIsInSubFundGroups_Contain() throws Exception {
-        String testTarget = "isInSubFundGroups.contain.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.SUB_FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isInSubFundGroups(ledgerBalance, fundGroupCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isInSubFundGroups.contain");
-        assertTrue(errorMessage, validationMessage == null);
-    }
-
-    public void testIsInSubFundGroups_NotContain() throws Exception {
-        String testTarget = "isInSubFundGroups.notContain.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.SUB_FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isInSubFundGroups(ledgerBalance, fundGroupCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isInSubFundGroups.notContain");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testIsNonZeroAmountBalanceWithinReportPeriod_IsNonZeroAmount() throws Exception {
-        String testTarget = "isNonZeroAmountBalanceWithinReportPeriod.isNonZeroAmount.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        EffortCertificationReportDefinition reportDefinition = this.buildReportDefinition(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isNonZeroAmountBalanceWithinReportPeriod(ledgerBalance, reportDefinition.getReportPeriods());
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isNonZeroAmountBalanceWithinReportPeriod.isNonZeroAmount");
-        assertTrue(errorMessage, validationMessage == null);
-    }
-
-    public void testIsNonZeroAmountBalanceWithinReportPeriod_IsZeroAmount() throws Exception {
-        String testTarget = "isNonZeroAmountBalanceWithinReportPeriod.isZeroAmount.";
-        LaborLedgerBalance ledgerBalance = this.buildLedgerBalance(testTarget);
-        EffortCertificationReportDefinition reportDefinition = this.buildReportDefinition(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isNonZeroAmountBalanceWithinReportPeriod(ledgerBalance, reportDefinition.getReportPeriods());
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isNonZeroAmountBalanceWithinReportPeriod.isZeroAmount");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testIsTotalAmountPositive_IsPositive() throws Exception {
-        String testTarget = "isTotalAmountPositive.isPositive.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        EffortCertificationReportDefinition reportDefinition = this.buildReportDefinition(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isTotalAmountPositive(ledgerBalances, reportDefinition.getReportPeriods());
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isTotalAmountPositive.isPositive");
-        assertTrue(errorMessage.toString(), validationMessage == null);
-    }
-
-    public void testIsTotalAmountPositive_IsZero() throws Exception {
-        String testTarget = "isTotalAmountPositive.isZero.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        EffortCertificationReportDefinition reportDefinition = this.buildReportDefinition(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isTotalAmountPositive(ledgerBalances, reportDefinition.getReportPeriods());
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isTotalAmountPositive.isZero");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testIsTotalAmountPositive_IsNegative() throws Exception {
-        String testTarget = "isTotalAmountPositive.isNegative.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        EffortCertificationReportDefinition reportDefinition = this.buildReportDefinition(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isTotalAmountPositive(ledgerBalances, reportDefinition.getReportPeriods());
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isTotalAmountPositive.isNegative");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testHasGrantAccount_ByFundGroup_Contain() throws Exception {
-        String testTarget = "hasGrantAccount.byFundGroup.contain.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasGrantAccount(ledgerBalances);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasGrantAccount.byFundGroup.contain");
-        assertTrue(errorMessage.toString(), validationMessage == null);
-    }
-
-    public void testHasGrantAccount_ByFundGroup_NotContain() throws Exception {
-        String testTarget = "hasGrantAccount.byFundGroup.notContain.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasGrantAccount(ledgerBalances);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasGrantAccount.byFundGroup.notContain");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testHasGrantAccount_BySubFundGroup_Contain() throws Exception {
-        String testTarget = "hasGrantAccount.bySubFundGroup.contain.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.SUB_FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasGrantAccount(ledgerBalances);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasGrantAccount.bySubFundGroup.contain");
-        assertTrue(errorMessage.toString(), validationMessage == null);
-    }
-
-    public void testHasGrantAccount_BySubFundGroup_NotContain() throws Exception {
-        String testTarget = "hasGrantAccount.bySubFundGroup.notContain.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> fundGroupCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.SUB_FUND_GROUPS), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasGrantAccount(ledgerBalances);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasGrantAccount.bySubFundGroup.notContain");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
-
-    public void testIsFromSingleOrganization_Single() throws Exception {
-        String testTarget = "isFromSingleOrganization.single.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isFromSingleOrganization(ledgerBalances);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isFromSingleOrganization.single");
-        assertTrue(errorMessage.toString(), validationMessage == null);
-    }
-
-    public void testIsFromSingleOrganization_Multiple() throws Exception {
-        String testTarget = "isFromSingleOrganization.multiple.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-
-        Message validationMessage = LedgerBalanceFieldValidator.isFromSingleOrganization(ledgerBalances);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.isFromSingleOrganization.multiple");
-        assertTrue(errorMessage, validationMessage != null);
-    }
-
-    public void testHasFederalFunds_FederalFunds() throws Exception {
-        String testTarget = "hasFederalFunds.federalFunds.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> federalAgencyTypeCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FEDERAL_AGENCY_TYPE_CODES), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasFederalFunds(ledgerBalances, federalAgencyTypeCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasFederalFunds.federalFunds");
-        assertTrue(errorMessage.toString(), validationMessage == null);
-    }
-
-    public void testHasFederalFunds_PassThrough() throws Exception {
-        String testTarget = "hasFederalFunds.passThrough.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> federalAgencyTypeCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FEDERAL_AGENCY_TYPE_CODES), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasFederalFunds(ledgerBalances, federalAgencyTypeCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasFederalFunds.passThrough");
-        assertTrue(errorMessage.toString(), validationMessage == null);
-    }
-
-    public void testHasFederalFunds_NoFederalFunds() throws Exception {
-        String testTarget = "hasFederalFunds.noFederalFunds.";
-        List<LaborLedgerBalance> ledgerBalances = this.buildLedgerBalances(testTarget);
-        List<String> federalAgencyTypeCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.FEDERAL_AGENCY_TYPE_CODES), deliminator);
-
-        Message validationMessage = LedgerBalanceFieldValidator.hasFederalFunds(ledgerBalances, federalAgencyTypeCodes);
-        String errorMessage = message.getProperty("error.ledgerBalanceFieldValidator.hasFederalFunds.noFederalFunds");
-        assertTrue(errorMessage.toString(), validationMessage != null);
-    }
+class LedgerBalanceFieldValidatorTest extends KfsUnitTestBase {
 
     /**
-     * construct a ledger balance and persist it
-     *
-     * @param testTarget the given test target that specifies the test data being used
-     * @return a ledger balance
+     * Sets up a MockedStatic for SpringContext so that MessageBuilder's static
+     * initializer (which calls SpringContext.getBean) can complete without a
+     * real Spring context. The caller must close the returned scope.
      */
-    private LaborLedgerBalance buildLedgerBalance(String testTarget) {
-        LaborLedgerBalance ledgerBalance = TestDataPreparator.buildTestDataObject(ledgerBalanceClass, properties, testTarget + EffortTestDataPropertyConstants.INPUT_BALANCE, balanceFieldNames, deliminator);
-        businessObjectService.save(ledgerBalance);
-        persistenceService.retrieveNonKeyFields(ledgerBalance);
-        ledgerBalance.refreshNonUpdateableReferences();
+    private static MockedStatic<SpringContext> setupSpringContextMock() {
+        ConfigurationService configService = mock(ConfigurationService.class);
+        lenient().when(configService.getPropertyValueAsString(anyString())).thenReturn("Test error");
 
-        return ledgerBalance;
+        MockedStatic<SpringContext> springMock = mockStatic(SpringContext.class);
+        springMock.when(() -> SpringContext.getBean(any(Class.class))).thenAnswer(inv -> {
+            Class<?> type = inv.getArgument(0);
+            if (type == ConfigurationService.class) {
+                return configService;
+            }
+            return mock(type);
+        });
+        return springMock;
     }
 
-    /**
-     * construct a list of ledger balances and persist them
-     *
-     * @param testTarget the given test target that specifies the test data being used
-     * @return a list of ledger balances
-     */
-    private List<LaborLedgerBalance> buildLedgerBalances(String testTarget) {
-        int numberOfTestData = Integer.valueOf(properties.getProperty(testTarget + EffortTestDataPropertyConstants.NUM_OF_DATA));
+    @Nested
+    @DisplayName("hasValidAccount")
+    class HasValidAccount {
 
-        List<LaborLedgerBalance> ledgerBalances = TestDataPreparator.buildTestDataList(ledgerBalanceClass, properties, testTarget + EffortTestDataPropertyConstants.INPUT_BALANCE, balanceFieldNames, deliminator, numberOfTestData);
-        businessObjectService.save(ledgerBalances);
-        for (LaborLedgerBalance balance : ledgerBalances) {
-            persistenceService.retrieveNonKeyFields(balance);
-            balance.refreshNonUpdateableReferences();
+        @Test
+        void shouldReturnNullWhenAccountExists() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            Account account = new Account();
+            when(balance.getAccount()).thenReturn(account);
+
+            Message result = LedgerBalanceFieldValidator.hasValidAccount(balance);
+            assertThat(result).isNull();
         }
 
-        return ledgerBalances;
+        @Test
+        void shouldReturnMessageWhenAccountNull() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+                when(balance.getAccount()).thenReturn(null);
+                when(balance.getChartOfAccountsCode()).thenReturn("BL");
+                when(balance.getAccountNumber()).thenReturn("1234567");
+
+                Message result = LedgerBalanceFieldValidator.hasValidAccount(balance);
+                assertThat(result).isNotNull();
+                assertThat(result.getType()).isEqualTo(Message.TYPE_FATAL);
+            }
+        }
     }
 
-    /**
-     * build a report defintion object from the given test target
-     *
-     * @param testTarget the given test target that specifies the test data being used
-     * @return a report defintion object
-     */
-    private EffortCertificationReportDefinition buildReportDefinition(String testTarget) {
-        EffortCertificationReportDefinition reportDefinition = new EffortCertificationReportDefinition();
-        String reprtDefinitionFieldNames = properties.getProperty(EffortTestDataPropertyConstants.REPORT_DEFINITION_FIELD_NAMES);
-        ObjectUtil.populateBusinessObject(reportDefinition, properties, testTarget + EffortTestDataPropertyConstants.REPORT_DEFINITION_FIELD_VALUES, reprtDefinitionFieldNames, deliminator);
+    @Nested
+    @DisplayName("getSubFundGroup")
+    class GetSubFundGroup {
 
-        return reportDefinition;
+        @Test
+        void shouldReturnSubFundGroupWhenPresent() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            Account account = mock(Account.class);
+            SubFundGroup sfg = new SubFundGroup();
+            sfg.setSubFundGroupCode("SFG1");
+            when(balance.getAccount()).thenReturn(account);
+            when(account.getSubFundGroup()).thenReturn(sfg);
+
+            SubFundGroup result = LedgerBalanceFieldValidator.getSubFundGroup(balance);
+            assertThat(result).isNotNull();
+            assertThat(result.getSubFundGroupCode()).isEqualTo("SFG1");
+        }
+
+        @Test
+        void shouldReturnNullWhenAccountNull() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            when(balance.getAccount()).thenReturn(null);
+
+            SubFundGroup result = LedgerBalanceFieldValidator.getSubFundGroup(balance);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnNullWhenSubFundGroupNull() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            Account account = mock(Account.class);
+            when(balance.getAccount()).thenReturn(account);
+            when(account.getSubFundGroup()).thenReturn(null);
+
+            SubFundGroup result = LedgerBalanceFieldValidator.getSubFundGroup(balance);
+            assertThat(result).isNull();
+        }
+    }
+
+    @Nested
+    @DisplayName("isInFundGroups")
+    class IsInFundGroups {
+
+        @Test
+        void shouldReturnNullWhenFundGroupCodeInList() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            Account account = mock(Account.class);
+            SubFundGroup sfg = new SubFundGroup();
+            sfg.setFundGroupCode("CG");
+            when(balance.getAccount()).thenReturn(account);
+            when(account.getSubFundGroup()).thenReturn(sfg);
+
+            List<String> fundGroupCodes = Arrays.asList("CG", "GF");
+            Message result = LedgerBalanceFieldValidator.isInFundGroups(balance, fundGroupCodes);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnMessageWhenFundGroupCodeNotInList() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+                Account account = mock(Account.class);
+                SubFundGroup sfg = new SubFundGroup();
+                sfg.setFundGroupCode("XX");
+                when(balance.getAccount()).thenReturn(account);
+                when(account.getSubFundGroup()).thenReturn(sfg);
+
+                List<String> fundGroupCodes = Arrays.asList("CG", "GF");
+                Message result = LedgerBalanceFieldValidator.isInFundGroups(balance, fundGroupCodes);
+                assertThat(result).isNotNull();
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("isInSubFundGroups")
+    class IsInSubFundGroups {
+
+        @Test
+        void shouldReturnNullWhenSubFundGroupCodeInList() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            Account account = mock(Account.class);
+            SubFundGroup sfg = new SubFundGroup();
+            sfg.setSubFundGroupCode("HIEDUA");
+            when(balance.getAccount()).thenReturn(account);
+            when(account.getSubFundGroup()).thenReturn(sfg);
+
+            List<String> subFundGroupCodes = Arrays.asList("HIEDUA", "HIEDUB");
+            Message result = LedgerBalanceFieldValidator.isInSubFundGroups(balance, subFundGroupCodes);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnMessageWhenSubFundGroupCodeNotInList() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+                Account account = mock(Account.class);
+                SubFundGroup sfg = new SubFundGroup();
+                sfg.setSubFundGroupCode("XX");
+                when(balance.getAccount()).thenReturn(account);
+                when(account.getSubFundGroup()).thenReturn(sfg);
+
+                List<String> subFundGroupCodes = Arrays.asList("HIEDUA", "HIEDUB");
+                Message result = LedgerBalanceFieldValidator.isInSubFundGroups(balance, subFundGroupCodes);
+                assertThat(result).isNotNull();
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("hasGrantAccount")
+    class HasGrantAccount {
+
+        @Test
+        void shouldReturnNullWhenAccountIsForContractsAndGrants() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            Account account = mock(Account.class);
+            when(balance.getAccount()).thenReturn(account);
+            when(account.isForContractsAndGrants()).thenReturn(true);
+
+            Collection<LaborLedgerBalance> balances = new ArrayList<>();
+            balances.add(balance);
+
+            Message result = LedgerBalanceFieldValidator.hasGrantAccount(balances);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnMessageWhenNoGrantAccount() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+                Account account = mock(Account.class);
+                when(balance.getAccount()).thenReturn(account);
+                when(account.isForContractsAndGrants()).thenReturn(false);
+
+                Collection<LaborLedgerBalance> balances = new ArrayList<>();
+                balances.add(balance);
+
+                Message result = LedgerBalanceFieldValidator.hasGrantAccount(balances);
+                assertThat(result).isNotNull();
+                assertThat(result.getType()).isEqualTo(Message.TYPE_FATAL);
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("isFromSingleOrganization")
+    class IsFromSingleOrganization {
+
+        @Test
+        void shouldReturnNullWhenAllFromSameOrganization() {
+            Organization org = new Organization();
+            org.setChartOfAccountsCode("BL");
+            org.setOrganizationCode("ACCT");
+
+            LaborLedgerBalance balance1 = mock(LaborLedgerBalance.class);
+            Account account1 = mock(Account.class);
+            when(balance1.getAccount()).thenReturn(account1);
+            when(account1.getOrganization()).thenReturn(org);
+
+            LaborLedgerBalance balance2 = mock(LaborLedgerBalance.class);
+            Account account2 = mock(Account.class);
+            when(balance2.getAccount()).thenReturn(account2);
+            when(account2.getOrganization()).thenReturn(org);
+
+            Collection<LaborLedgerBalance> balances = new ArrayList<>();
+            balances.add(balance1);
+            balances.add(balance2);
+
+            Message result = LedgerBalanceFieldValidator.isFromSingleOrganization(balances);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnMessageWhenMultipleOrganizations() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                Organization org1 = new Organization();
+                org1.setChartOfAccountsCode("BL");
+                org1.setOrganizationCode("ACCT");
+
+                Organization org2 = new Organization();
+                org2.setChartOfAccountsCode("UA");
+                org2.setOrganizationCode("PHYS");
+
+                LaborLedgerBalance balance1 = mock(LaborLedgerBalance.class);
+                Account account1 = mock(Account.class);
+                when(balance1.getAccount()).thenReturn(account1);
+                when(account1.getOrganization()).thenReturn(org1);
+
+                LaborLedgerBalance balance2 = mock(LaborLedgerBalance.class);
+                Account account2 = mock(Account.class);
+                when(balance2.getAccount()).thenReturn(account2);
+                when(account2.getOrganization()).thenReturn(org2);
+
+                Collection<LaborLedgerBalance> balances = new ArrayList<>();
+                balances.add(balance1);
+                balances.add(balance2);
+
+                Message result = LedgerBalanceFieldValidator.isFromSingleOrganization(balances);
+                assertThat(result).isNotNull();
+                assertThat(result.getType()).isEqualTo(Message.TYPE_FATAL);
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("isNonZeroAmountBalanceWithinReportPeriod")
+    class IsNonZeroAmount {
+
+        @Test
+        void shouldReturnNullWhenAmountNonZero() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            when(balance.getUniversityFiscalYear()).thenReturn(2024);
+            when(balance.getAmountByPeriod("01")).thenReturn(new KualiDecimal(100));
+
+            Map<Integer, Set<String>> reportPeriods = new HashMap<>();
+            Set<String> periods = new HashSet<>();
+            periods.add("01");
+            reportPeriods.put(2024, periods);
+
+            Message result = LedgerBalanceFieldValidator.isNonZeroAmountBalanceWithinReportPeriod(balance, reportPeriods);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnMessageWhenAmountIsZero() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+                when(balance.getUniversityFiscalYear()).thenReturn(2024);
+                when(balance.getAmountByPeriod("01")).thenReturn(KualiDecimal.ZERO);
+
+                Map<Integer, Set<String>> reportPeriods = new HashMap<>();
+                Set<String> periods = new HashSet<>();
+                periods.add("01");
+                reportPeriods.put(2024, periods);
+
+                Message result = LedgerBalanceFieldValidator.isNonZeroAmountBalanceWithinReportPeriod(balance, reportPeriods);
+                assertThat(result).isNotNull();
+                assertThat(result.getType()).isEqualTo(Message.TYPE_FATAL);
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("isTotalAmountPositive")
+    class IsTotalAmountPositive {
+
+        @Test
+        void shouldReturnNullWhenTotalIsPositive() {
+            LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+            when(balance.getUniversityFiscalYear()).thenReturn(2024);
+            when(balance.getAmountByPeriod("01")).thenReturn(new KualiDecimal(500));
+
+            Collection<LaborLedgerBalance> balances = new ArrayList<>();
+            balances.add(balance);
+
+            Map<Integer, Set<String>> reportPeriods = new HashMap<>();
+            Set<String> periods = new HashSet<>();
+            periods.add("01");
+            reportPeriods.put(2024, periods);
+
+            Message result = LedgerBalanceFieldValidator.isTotalAmountPositive(balances, reportPeriods);
+            assertThat(result).isNull();
+        }
+
+        @Test
+        void shouldReturnMessageWhenTotalNotPositive() {
+            try (MockedStatic<SpringContext> ignored = setupSpringContextMock()) {
+                LaborLedgerBalance balance = mock(LaborLedgerBalance.class);
+                when(balance.getUniversityFiscalYear()).thenReturn(2024);
+                when(balance.getAmountByPeriod("01")).thenReturn(KualiDecimal.ZERO);
+
+                Collection<LaborLedgerBalance> balances = new ArrayList<>();
+                balances.add(balance);
+
+                Map<Integer, Set<String>> reportPeriods = new HashMap<>();
+                Set<String> periods = new HashSet<>();
+                periods.add("01");
+                reportPeriods.put(2024, periods);
+
+                Message result = LedgerBalanceFieldValidator.isTotalAmountPositive(balances, reportPeriods);
+                assertThat(result).isNotNull();
+            }
+        }
     }
 }

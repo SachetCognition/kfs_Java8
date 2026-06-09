@@ -1,593 +1,717 @@
-/*
- * The Kuali Financial System, a comprehensive financial management system for higher education.
- * 
- * Copyright 2005-2014 The Kuali Foundation
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * 
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package org.kuali.kfs.module.ec.document.validation.impl;
 
-import static org.kuali.kfs.sys.businessobject.AccountingLineOverride.CODE.EXPIRED_ACCOUNT;
-import static org.kuali.kfs.sys.businessobject.AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED;
-import static org.kuali.kfs.sys.businessobject.AccountingLineOverride.CODE.NONE;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-
-import org.apache.commons.lang.StringUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.kuali.kfs.coa.businessobject.A21SubAccount;
+import org.kuali.kfs.coa.businessobject.Account;
+import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.module.ec.businessobject.EffortCertificationDetail;
-import org.kuali.kfs.module.ec.businessobject.EffortCertificationReportDefinition;
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
-import org.kuali.kfs.module.ec.testdata.EffortTestDataPropertyConstants;
-import org.kuali.kfs.sys.ConfigureContext;
-import org.kuali.kfs.sys.KFSPropertyConstants;
-import org.kuali.kfs.sys.ObjectUtil;
-import org.kuali.kfs.sys.TestDataPreparator;
-import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
-import org.kuali.kfs.sys.context.KualiTestBase;
+import org.kuali.kfs.sys.KFSConstants;
+import org.kuali.kfs.sys.context.KfsUnitTestBase;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
-/**
- * unit tests for the methods in EffortCertificationDocumentRuleUtil
- * 
- * @see org.kuali.kfs.module.ec.document.validation.impl.EffortCertificationDocumentRuleUtil
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-@ConfigureContext
-public class EffortCertificationDocumentRuleUtilTest extends KualiTestBase {
+import org.mockito.MockedStatic;
 
-    private final Properties properties, message;
-    private final String detailFieldNames, documentFieldNames, documentHeaderFieldNames, reportDefinitionFieldNames;
-    private final String deliminator;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
-    /**
-     * Constructs a EffortCertificationDocumentRuleUtilTest.java.
-     */
-    public EffortCertificationDocumentRuleUtilTest() {
-        super();
-        String messageFileName = EffortTestDataPropertyConstants.TEST_DATA_PACKAGE_NAME + "/message.properties";
-        String propertiesFileName = EffortTestDataPropertyConstants.TEST_DATA_PACKAGE_NAME + "/effortCertificationDocumentRuleUtil.properties";
+class EffortCertificationDocumentRuleUtilTest extends KfsUnitTestBase {
 
-        properties = TestDataPreparator.loadPropertiesFromClassPath(propertiesFileName);
-        message = TestDataPreparator.loadPropertiesFromClassPath(messageFileName);
+    @Nested
+    @DisplayName("isValidPercent")
+    class IsValidPercent {
 
-        deliminator = properties.getProperty(EffortTestDataPropertyConstants.DELIMINATOR);
-
-        detailFieldNames = properties.getProperty(EffortTestDataPropertyConstants.DETAIL_FIELD_NAMES);
-        documentFieldNames = properties.getProperty(EffortTestDataPropertyConstants.DOCUMENT_FIELD_NAMES);
-        reportDefinitionFieldNames = properties.getProperty(EffortTestDataPropertyConstants.REPORT_DEFINITION_FIELD_NAMES);
-        documentHeaderFieldNames = properties.getProperty(EffortTestDataPropertyConstants.DOCUMENT_HEADER_FIELD_NAMES);
-    }
-
-    /**
-     * the default values will be applied into the specific fields when they are blank
-     */
-    public void testApplyDefaultvalues() throws Exception {
-        String testTarget = "applyDefaultValues.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            EffortCertificationDocumentRuleUtil.applyDefaultValues(detailLine);
+        @Test
+        void shouldReturnTrueForZero() {
+            assertThat(EffortCertificationDocumentRuleUtil.isValidPercent(0)).isTrue();
         }
 
-        int numberOfExpectedDetails = Integer.valueOf(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.NUM_OF_EXPECTED_DETAILS)));
-        List<EffortCertificationDetail> expectedDetails = TestDataPreparator.buildTestDataList(EffortCertificationDetail.class, properties, testTarget + EffortTestDataPropertyConstants.EXPECTED_DETAIL, detailFieldNames, deliminator, numberOfExpectedDetails);
-
-        assertEquals(numberOfExpectedDetails, details.size());
-
-        List<String> detailKeyFields = ObjectUtil.split(detailFieldNames, deliminator);
-        detailKeyFields.remove(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR);
-        assertTrue(TestDataPreparator.hasSameElements(expectedDetails, details, detailKeyFields));
-    }
-
-    /**
-     * test if an expired account can be used through surveying the override code on the detail line
-     */
-    public void testCanExpiredAccountBeUsed() throws Exception {
-        String testTarget = "canExpiredAccountBeUsed.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            detailLine.setOverrideCode(EXPIRED_ACCOUNT);
-            assertTrue(EffortCertificationDocumentRuleUtil.canExpiredAccountBeUsed(detailLine));
+        @Test
+        void shouldReturnTrueForHundred() {
+            assertThat(EffortCertificationDocumentRuleUtil.isValidPercent(100)).isTrue();
         }
 
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            detailLine.setOverrideCode(EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED);
-            assertTrue(EffortCertificationDocumentRuleUtil.canExpiredAccountBeUsed(detailLine));
+        @Test
+        void shouldReturnTrueForFifty() {
+            assertThat(EffortCertificationDocumentRuleUtil.isValidPercent(50)).isTrue();
         }
 
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            detailLine.setOverrideCode(NONE);
-            assertFalse(EffortCertificationDocumentRuleUtil.canExpiredAccountBeUsed(detailLine));
+        @Test
+        void shouldReturnFalseForNegative() {
+            assertThat(EffortCertificationDocumentRuleUtil.isValidPercent(-1)).isFalse();
+        }
+
+        @Test
+        void shouldReturnFalseForOver100() {
+            assertThat(EffortCertificationDocumentRuleUtil.isValidPercent(101)).isFalse();
         }
     }
 
-    /**
-     * an A21 sub account is associated with the detail line
-     */
-    public void testHasA21SubAccount_Yes() throws Exception {
-        String testTarget = "hasA21SubAccount.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isPayrollAmountNonnegative")
+    class IsPayrollAmountNonnegative {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.SUB_ACCOUNT);
-            assertTrue(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detailLine));
+        @Test
+        void shouldReturnTrueForZero() {
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountNonnegative(KualiDecimal.ZERO)).isTrue();
+        }
+
+        @Test
+        void shouldReturnTrueForPositive() {
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountNonnegative(new KualiDecimal(100))).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseForNegative() {
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountNonnegative(new KualiDecimal(-1))).isFalse();
         }
     }
 
-    /**
-     * no A21 sub account is associated with the detail line
-     */
-    public void testHasA21SubAccount_No() throws Exception {
-        String testTarget = "hasA21SubAccount.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isOriginalEffortPercentSameAsCurrentEffortPercent")
+    class IsOriginalSameAsCurrent {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.SUB_ACCOUNT);
-            assertFalse(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detailLine));
+        @Test
+        void shouldReturnTrueWhenSame() {
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isOriginalEffortPercentSameAsCurrentEffortPercent(50, 50)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenDifferent() {
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isOriginalEffortPercentSameAsCurrentEffortPercent(50, 60)).isFalse();
         }
     }
 
-    /**
-     * the account associated with the detail line is closed
-     */
-    public void testHasClosedAccount_Yes() throws Exception {
-        String testTarget = "hasClosedAccount.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("hasNonnegativePayrollAmount")
+    class HasNonnegativePayrollAmount {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            assertTrue(EffortCertificationDocumentRuleUtil.hasClosedAccount(detailLine));
+        @Test
+        void shouldReturnTrueForPositiveAmount() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(500));
+            assertThat(EffortCertificationDocumentRuleUtil.hasNonnegativePayrollAmount(detail)).isTrue();
+        }
+
+        @Test
+        void shouldReturnTrueForZeroAmount() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(KualiDecimal.ZERO);
+            assertThat(EffortCertificationDocumentRuleUtil.hasNonnegativePayrollAmount(detail)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseForNegativeAmount() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(-100));
+            assertThat(EffortCertificationDocumentRuleUtil.hasNonnegativePayrollAmount(detail)).isFalse();
+        }
+
+        @Test
+        void shouldReturnFalseForNullAmount() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(null);
+            assertThat(EffortCertificationDocumentRuleUtil.hasNonnegativePayrollAmount(detail)).isFalse();
         }
     }
 
-    /**
-     * the account associated with the detail line is not closed (Still active)
-     */
-    public void testHasClosedAccount_No() throws Exception {
-        String testTarget = "hasClosedAccount.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("hasValidEffortPercent")
+    class HasValidEffortPercent {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            assertFalse(EffortCertificationDocumentRuleUtil.hasClosedAccount(detailLine));
+        @Test
+        void shouldReturnTrueForValidPercent() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationUpdatedOverallPercent(50);
+            assertThat(EffortCertificationDocumentRuleUtil.hasValidEffortPercent(detail)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseForInvalidPercent() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationUpdatedOverallPercent(150);
+            assertThat(EffortCertificationDocumentRuleUtil.hasValidEffortPercent(detail)).isFalse();
+        }
+
+        @Test
+        void shouldReturnFalseForNullPercent() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationUpdatedOverallPercent(null);
+            assertThat(EffortCertificationDocumentRuleUtil.hasValidEffortPercent(detail)).isFalse();
         }
     }
 
-    /**
-     * the account associated with the detail line is a contract & grant account
-     */
-    public void testHasContractGrantAccount_Yes() throws Exception {
-        String testTarget = "hasContractGrantAccount.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isPayrollAmountChangedFromOriginal (detail)")
+    class PayrollAmountChangedFromOriginalDetail {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            assertTrue(EffortCertificationDocumentRuleUtil.hasContractGrantAccount(detailLine));
+        @Test
+        void shouldReturnTrueWhenAmountsAreDifferent() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(4000));
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(detail)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenAmountsAreEqual() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(detail)).isFalse();
         }
     }
 
-    /**
-     * the account associated with the detail line is not a contract & grant account
-     */
-    public void testHasContractGrantAccount_No() throws Exception {
-        String testTarget = "hasContractGrantAccount.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isPayrollAmountChangedFromOriginal (document)")
+    class PayrollAmountChangedFromOriginalDocument {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.ACCOUNT);
-            assertFalse(EffortCertificationDocumentRuleUtil.hasContractGrantAccount(detailLine));
+        private EffortCertificationDocument document;
+
+        @BeforeEach
+        void setUp() {
+            document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+        }
+
+        @Test
+        void shouldReturnTrueWhenAnyLineChanged() {
+            EffortCertificationDetail line = new EffortCertificationDetail();
+            line.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            line.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(4000));
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line);
+            document.setEffortCertificationDetailLines(lines);
+
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(document)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenNoLinesChanged() {
+            EffortCertificationDetail line = new EffortCertificationDetail();
+            line.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            line.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line);
+            document.setEffortCertificationDetailLines(lines);
+
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(document)).isFalse();
         }
     }
 
-    /**
-     * the sub account associated with the detail line is cost shared
-     */
-    public void testHasCostShareSubAccount_Yes() throws Exception {
-        String testTarget = "hasCostShareSubAccount.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isPayrollAmountChangedFromPersisted (detail)")
+    class PayrollAmountChangedFromPersistedDetail {
 
-        List<String> designatedCostShareSubAccountTypeCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.COST_SHARE_SUB_ACCOUNT_TYPE_CODES), deliminator);
+        @Test
+        void shouldReturnTrueWhenPersistedDiffers() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setPersistedPayrollAmount(new KualiDecimal(4000));
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromPersisted(detail)).isTrue();
+        }
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.SUB_ACCOUNT);
-            assertTrue(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detailLine, designatedCostShareSubAccountTypeCodes));
+        @Test
+        void shouldReturnFalseWhenPersistedSame() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setPersistedPayrollAmount(new KualiDecimal(5000));
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromPersisted(detail)).isFalse();
+        }
+
+        @Test
+        void shouldReturnFalseWhenPersistedNull() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setPersistedPayrollAmount(null);
+            assertThat(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromPersisted(detail)).isFalse();
         }
     }
 
-    /**
-     * the sub account associated with the detail line is not cost shared
-     */
-    public void testHasCostShareSubAccount_No() throws Exception {
-        String testTarget = "hasCostShareSubAccount.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isTotalEffortPercentageAs100")
+    class TotalEffortPercentageAs100 {
 
-        List<String> designatedCostShareSubAccountTypeCodes = ObjectUtil.split(properties.getProperty(testTarget + EffortTestDataPropertyConstants.COST_SHARE_SUB_ACCOUNT_TYPE_CODES), deliminator);
+        private EffortCertificationDocument document;
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.SUB_ACCOUNT);
-            assertFalse(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detailLine, designatedCostShareSubAccountTypeCodes));
+        @BeforeEach
+        void setUp() {
+            document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+        }
+
+        @Test
+        void shouldReturnTrueWhenTotalIs100() {
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setEffortCertificationUpdatedOverallPercent(60);
+            EffortCertificationDetail line2 = new EffortCertificationDetail();
+            line2.setEffortCertificationUpdatedOverallPercent(40);
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            lines.add(line2);
+            document.setEffortCertificationDetailLines(lines);
+
+            assertThat(EffortCertificationDocumentRuleUtil.isTotalEffortPercentageAs100(document)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenTotalIsNot100() {
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setEffortCertificationUpdatedOverallPercent(50);
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            document.setEffortCertificationDetailLines(lines);
+
+            assertThat(EffortCertificationDocumentRuleUtil.isTotalEffortPercentageAs100(document)).isFalse();
         }
     }
 
-    /**
-     * the payroll amount of the detail line is zero or positive number
-     */
-    public void testHasNonnegativePayrollAmount_Yes() throws Exception {
-        String testTarget = "hasNonnegativePayrollAmount.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isTotalPayrollAmountOverChanged")
+    class TotalPayrollAmountOverChanged {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            assertTrue(EffortCertificationDocumentRuleUtil.hasNonnegativePayrollAmount(detailLine));
+        private EffortCertificationDocument document;
+
+        @BeforeEach
+        void setUp() {
+            document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+        }
+
+        @Test
+        void shouldReturnTrueWhenChangeExceedsLimit() {
+            EffortCertificationDetail line = new EffortCertificationDetail();
+            line.setEffortCertificationPayrollAmount(new KualiDecimal(10000));
+            line.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+            line.setEffortCertificationUpdatedOverallPercent(100);
+            line.setEffortCertificationCalculatedOverallPercent(100);
+            line.setOriginalFringeBenefitAmount(new KualiDecimal(100));
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line);
+            document.setEffortCertificationDetailLines(lines);
+
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isTotalPayrollAmountOverChanged(document, 100.0)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenChangeWithinLimit() {
+            EffortCertificationDetail line = new EffortCertificationDetail();
+            line.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            line.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+            line.setEffortCertificationUpdatedOverallPercent(100);
+            line.setEffortCertificationCalculatedOverallPercent(100);
+            line.setOriginalFringeBenefitAmount(new KualiDecimal(100));
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line);
+            document.setEffortCertificationDetailLines(lines);
+
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isTotalPayrollAmountOverChanged(document, 100.0)).isFalse();
         }
     }
 
-    /**
-     * the payroll amount of the detail line is a negatitive number
-     */
-    public void testHasNonnegativePayrollAmount_No() throws Exception {
-        String testTarget = "hasNonnegativePayrollAmount.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("hasDetailLine")
+    class HasDetailLine {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            assertFalse(EffortCertificationDocumentRuleUtil.hasNonnegativePayrollAmount(detailLine));
+        private EffortCertificationDocument document;
+
+        @BeforeEach
+        void setUp() {
+            document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+        }
+
+        @Test
+        void shouldReturnTrueWhenDocumentHasLines() {
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(new EffortCertificationDetail());
+            document.setEffortCertificationDetailLines(lines);
+            assertThat(EffortCertificationDocumentRuleUtil.hasDetailLine(document)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenDocumentHasNoLines() {
+            document.setEffortCertificationDetailLines(new ArrayList<>());
+            assertThat(EffortCertificationDocumentRuleUtil.hasDetailLine(document)).isFalse();
+        }
+
+        @Test
+        void shouldReturnFalseWhenLinesNull() {
+            document.setEffortCertificationDetailLines(null);
+            assertThat(EffortCertificationDocumentRuleUtil.hasDetailLine(document)).isFalse();
         }
     }
 
-    /**
-     * there is an existing detail line in the document with the same chart, account and sub account as the new detail line
-     */
-    public void testHasSameExistingLine_Yes() throws Exception {
-        String testTarget = "hasSameExistingLine.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("canExpiredAccountBeUsed")
+    class CanExpiredAccountBeUsed {
 
-        EffortCertificationDetail newDetail = this.buildDetailLine(testTarget, EffortTestDataPropertyConstants.NEW_DETAIL);
-        List<String> comparableFields = Arrays.asList(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, KFSPropertyConstants.ACCOUNT_NUMBER, KFSPropertyConstants.SUB_ACCOUNT_NUMBER);
+        @Test
+        void shouldReturnTrueWhenAccountNotExpired() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = new Account();
+            account.setAccountExpirationDate(null);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.canExpiredAccountBeUsed(detail)).isTrue();
+        }
 
-        assertTrue(EffortCertificationDocumentRuleUtil.hasSameExistingLine(document, newDetail, comparableFields));
-    }
-
-    /**
-     * there is no existing detail line in the document with the same chart, account and sub account as the new detail line
-     */
-    public void testHasSameExistingLine_No() throws Exception {
-        String testTarget = "hasSameExistingLine.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        EffortCertificationDetail newDetail = this.buildDetailLine(testTarget, EffortTestDataPropertyConstants.NEW_DETAIL);
-        List<String> comparableFields = Arrays.asList(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, KFSPropertyConstants.ACCOUNT_NUMBER, KFSPropertyConstants.SUB_ACCOUNT_NUMBER);
-
-        assertFalse(EffortCertificationDocumentRuleUtil.hasSameExistingLine(document, newDetail, comparableFields));
-    }
-
-    /**
-     * the detail line has valid effort percent
-     */
-    public void testHasValidEffortPercent_Yes() throws Exception {
-        String testTarget = "hasValidEffortPercent.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            assertTrue(EffortCertificationDocumentRuleUtil.hasValidEffortPercent(detailLine));
+        @Test
+        void shouldReturnTrueWhenAccountNull() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setAccount(null);
+            assertThat(EffortCertificationDocumentRuleUtil.canExpiredAccountBeUsed(detail)).isTrue();
         }
     }
 
-    /**
-     * the detail line has no valid effort percent
-     */
-    public void testHasValidEffortPercent_No() throws Exception {
-        String testTarget = "hasValidEffortPercent.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("hasClosedAccount")
+    class HasClosedAccount {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            assertFalse(EffortCertificationDocumentRuleUtil.hasValidEffortPercent(detailLine));
+        @Test
+        void shouldReturnTrueWhenAccountClosed() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = new Account();
+            account.setActive(false);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.hasClosedAccount(detail)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenAccountActive() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = new Account();
+            account.setActive(true);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.hasClosedAccount(detail)).isFalse();
         }
     }
 
-    /**
-     * the payroll amounts of the detail lines have been changed
-     */
-    public void testIsPayrollAmountChanged_Line_Yes() throws Exception {
-        String testTarget = "isPayrollAmountChanged.line.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("isPayrollAmountOverChanged (detail)")
+    class PayrollAmountOverChanged {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            assertTrue(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(detailLine));
+        @Test
+        void shouldReturnFalseWhenPercentsAreDifferent() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(10000));
+            detail.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationCalculatedOverallPercent(50);
+            detail.setEffortCertificationUpdatedOverallPercent(60);
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isPayrollAmountOverChanged(detail, new KualiDecimal(10000), 0.1)).isFalse();
+        }
+
+        @Test
+        void shouldReturnTrueWhenPercentsEqualAndChangeExceedsLimit() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(3000));
+            detail.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationCalculatedOverallPercent(50);
+            detail.setEffortCertificationUpdatedOverallPercent(50);
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isPayrollAmountOverChanged(detail, new KualiDecimal(10000), 0.01)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenPercentsEqualAndChangeWithinLimit() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationCalculatedOverallPercent(50);
+            detail.setEffortCertificationUpdatedOverallPercent(50);
+            assertThat(EffortCertificationDocumentRuleUtil
+                    .isPayrollAmountOverChanged(detail, new KualiDecimal(10000), 0.1)).isFalse();
         }
     }
 
-    /**
-     * the payroll amounts of the detail lines have not been changed
-     */
-    public void testIsPayrollAmountChanged_Line_No() throws Exception {
-        String testTarget = "isPayrollAmountChanged.line.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("applyDefaultValues")
+    class ApplyDefaultValues {
 
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            assertFalse(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(detailLine));
+        @Test
+        void shouldNotOverwriteExistingValues() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationPayrollAmount(new KualiDecimal(5000));
+            detail.setEffortCertificationOriginalPayrollAmount(new KualiDecimal(4000));
+            detail.setEffortCertificationCalculatedOverallPercent(75);
+            detail.setEffortCertificationUpdatedOverallPercent(80);
+            detail.setSubAccountNumber("SUB1");
+            detail.setCostShareSourceSubAccountNumber("CSUB");
+            detail.setSourceChartOfAccountsCode("BL");
+            detail.setSourceAccountNumber("1234567");
+            detail.setUniversityFiscalYear(2024);
+
+            EffortCertificationDocumentRuleUtil.applyDefaultValues(detail);
+
+            assertThat(detail.getEffortCertificationPayrollAmount()).isEqualTo(new KualiDecimal(5000));
+            assertThat(detail.getEffortCertificationOriginalPayrollAmount()).isEqualTo(new KualiDecimal(4000));
+            assertThat(detail.getEffortCertificationCalculatedOverallPercent()).isEqualTo(75);
+            assertThat(detail.getEffortCertificationUpdatedOverallPercent()).isEqualTo(80);
         }
     }
 
-    /**
-     * the payroll amount of the document has been changed
-     */
-    public void testIsPayrollAmountChanged_Document_Yes() throws Exception {
-        String testTarget = "isPayrollAmountChanged.document.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("hasA21SubAccount")
+    class HasA21SubAccount {
 
-        assertTrue(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(document));
-    }
-
-    /**
-     * the payroll amount of the document has not been changed
-     */
-    public void testIsPayrollAmountChanged_Document_No() throws Exception {
-        String testTarget = "isPayrollAmountChanged.document.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        assertFalse(EffortCertificationDocumentRuleUtil.isPayrollAmountChangedFromOriginal(document));
-    }
-
-    /**
-     * the payroll amount of the detail line is zero or positive number
-     */
-    public void testIsPayrollAmountNonnegative_Yes() throws Exception {
-        this.testHasNonnegativePayrollAmount_Yes();
-    }
-
-    /**
-     * the payroll amount of the detail line is a negatitive number
-     */
-    public void testIsPayrollAmountNonnegative_No() throws Exception {
-        this.testHasNonnegativePayrollAmount_No();
-    }
-
-    /**
-     * the payroll amount of the detail line is overchanged
-     */
-    public void testIsPayrollAmountOverChanged_Line_Yes() throws Exception {
-        String testTarget = "isPayrollAmountOverChanged.line.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        KualiDecimal originalTotalAmount = document.getTotalOriginalPayrollAmount();
-        double limitOfLinePayrollAmountChange = Double.parseDouble(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.LIMIT_OF_LINE_PAYROLL_AMOUNT_CHANGE)));
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        
-        int countOfOverChangedLine = 0;
-        for (EffortCertificationDetail detailLine : details) {
-            if(EffortCertificationDocumentRuleUtil.isPayrollAmountOverChanged(detailLine, originalTotalAmount, limitOfLinePayrollAmountChange)) {
-                countOfOverChangedLine++;
+        @Test
+        void shouldReturnFalseWhenSubAccountNumberIsDash() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("-----");
+                assertThat(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detail)).isFalse();
             }
         }
-        
-        assertEquals("All line amounts are overchanged.", details.size(), countOfOverChangedLine);
-    }
 
-    /**
-     * the payroll amount of the detail line is not overchanged
-     */
-    public void testIsPayrollAmountOverChanged_Line_No() throws Exception {
-        String testTarget = "isPayrollAmountOverChanged.line.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+        @Test
+        void shouldReturnTrueWhenA21SubAccountExists() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
 
-        KualiDecimal originalTotalAmount = document.getTotalOriginalPayrollAmount();
-        double limitOfLinePayrollAmountChange = Double.parseDouble(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.LIMIT_OF_LINE_PAYROLL_AMOUNT_CHANGE)));
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        
-        int countOfOverChangedLine = 0;
-        for (EffortCertificationDetail detailLine : details) {
-            if(EffortCertificationDocumentRuleUtil.isPayrollAmountOverChanged(detailLine, originalTotalAmount, limitOfLinePayrollAmountChange)) {
-                countOfOverChangedLine++;
+                A21SubAccount a21 = new A21SubAccount();
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(a21);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detail)).isTrue();
             }
         }
-        
-        assertEquals("There is no line whose amount is overchanged.", 0, countOfOverChangedLine);
+
+        @Test
+        void shouldReturnFalseWhenA21SubAccountNull() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
+
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(null);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasA21SubAccount(detail)).isFalse();
+            }
+        }
     }
 
-    /**
-     * the payroll amount of at least one the detail line in the document is not overchanged
-     */
-    public void testIsPayrollAmountOverChanged_Document_Yes() throws Exception {
-        String testTarget = "isPayrollAmountOverChanged.document.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
+    @Nested
+    @DisplayName("hasContractGrantAccount")
+    class HasContractGrantAccount {
 
-        double limitOfLinePayrollAmountChange = Double.parseDouble(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.LIMIT_OF_LINE_PAYROLL_AMOUNT_CHANGE)));
-        assertTrue(EffortCertificationDocumentRuleUtil.isPayrollAmountOverChanged(document, limitOfLinePayrollAmountChange));
-    }
-
-    /**
-     * the payroll amounts of the detail lines in the document are not overchanged
-     */
-    public void testIsPayrollAmountOverChanged_Document_No() throws Exception {
-        String testTarget = "isPayrollAmountOverChanged.document.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        double limitOfLinePayrollAmountChange = Double.parseDouble(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.LIMIT_OF_LINE_PAYROLL_AMOUNT_CHANGE)));
-        assertFalse(EffortCertificationDocumentRuleUtil.isPayrollAmountOverChanged(document, limitOfLinePayrollAmountChange));
-    }
-
-    /**
-     * the total effort of the document is 100
-     */
-    public void testIsTotalEffortPercentageAs100_Yes() throws Exception {
-        String testTarget = "isTotalEffortPercentageAs100.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        assertTrue(EffortCertificationDocumentRuleUtil.isTotalEffortPercentageAs100(document));
-    }
-
-    /**
-     * the total effort of the document is not 100
-     */
-    public void testIsTotalEffortPercentageAs100_No() throws Exception {
-        String testTarget = "isTotalEffortPercentageAs100.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        assertFalse(EffortCertificationDocumentRuleUtil.isTotalEffortPercentageAs100(document));
-    }
-
-    /**
-     * the total payroll amount of the document is overchanged
-     */
-    public void testIsTotalPayrollAmountOverChanged_Yes() throws Exception {
-        String testTarget = "isTotalPayrollAmountOverChanged.yes.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        double limitOfTotalPayrollAmountChange = Double.parseDouble(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.LIMIT_OF_TOTAL_PAYROLL_AMOUNT_CHANGE)));
-        assertTrue(EffortCertificationDocumentRuleUtil.isTotalPayrollAmountOverChanged(document, limitOfTotalPayrollAmountChange));
-    }
-
-    /**
-     * the total payroll amount of the document is not overchanged
-     */
-    public void testIsTotalPayrollAmountOverChanged_No() throws Exception {
-        String testTarget = "isTotalPayrollAmountOverChanged.no.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        double limitOfTotalPayrollAmountChange = Double.parseDouble(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.LIMIT_OF_TOTAL_PAYROLL_AMOUNT_CHANGE)));
-        assertFalse(EffortCertificationDocumentRuleUtil.isTotalPayrollAmountOverChanged(document, limitOfTotalPayrollAmountChange));
-    }
-
-    /**
-     * the detail line has valid effort percent
-     */
-    public void testIsValidPercent_Yes() throws Exception {
-        this.testHasValidEffortPercent_Yes();
-    }
-
-    /**
-     * the detail line has invalid effort percent
-     */
-    public void testIsValidPercent_No() throws Exception {
-        this.testHasValidEffortPercent_No();
-    }
-
-    /**
-     * test if the source account information is updated approperitely
-     */
-    public void testUpdateSourceAccountInformation() throws Exception {
-        String testTarget = "updateSourceAccountInformation.";
-        EffortCertificationDocument document = this.loadEffortCertificationDocument(testTarget);
-
-        List<EffortCertificationDetail> details = document.getEffortCertificationDetailLines();
-        for (EffortCertificationDetail detailLine : details) {
-            detailLine.refreshReferenceObject(KFSPropertyConstants.SUB_ACCOUNT);
-            EffortCertificationDocumentRuleUtil.updateSourceAccountInformation(detailLine);
+        @Test
+        void shouldReturnTrueWhenAccountIsForContractsAndGrants() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = mock(Account.class);
+            when(account.isForContractsAndGrants()).thenReturn(true);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.hasContractGrantAccount(detail)).isTrue();
         }
 
-        List<EffortCertificationDetail> expectedDetails = this.buildExpectedDetailLines(testTarget);
-
-        List<String> detailKeyFields = ObjectUtil.split(detailFieldNames, deliminator);
-        assertTrue(TestDataPreparator.hasSameElements(expectedDetails, details, detailKeyFields));
+        @Test
+        void shouldReturnFalseWhenAccountIsNotForContractsAndGrants() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            Account account = mock(Account.class);
+            when(account.isForContractsAndGrants()).thenReturn(false);
+            detail.setAccount(account);
+            assertThat(EffortCertificationDocumentRuleUtil.hasContractGrantAccount(detail)).isFalse();
+        }
     }
 
-    /**
-     * load test data into database before a test case starts
-     * 
-     * @param testTarget the target test case
-     */
-    private EffortCertificationDocument loadEffortCertificationDocument(String testTarget) throws Exception {
-        TestDataPreparator.doCleanUpWithReference(EffortCertificationDocument.class, properties, EffortTestDataPropertyConstants.DOCUMENT_CLEANUP, documentFieldNames, deliminator);
+    @Nested
+    @DisplayName("hasCostShareSubAccount")
+    class HasCostShareSubAccount {
 
-        EffortCertificationReportDefinition reportDefinition = this.buildReportDefinition("");
-        reportDefinition = TestDataPreparator.persistDataObject(reportDefinition);
+        @Test
+        void shouldReturnFalseWhenNoA21SubAccount() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("-----");
+                assertThat(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detail,
+                        Arrays.asList("CS"))).isFalse();
+            }
+        }
 
-        FinancialSystemDocumentHeader documentHeader = TestDataPreparator.buildTestDataObject(FinancialSystemDocumentHeader.class, properties, testTarget + EffortTestDataPropertyConstants.DOCUMENT_HEADER, documentHeaderFieldNames, deliminator);
-        documentHeader = TestDataPreparator.persistDataObject(documentHeader);
+        @Test
+        void shouldReturnTrueWhenSubAccountTypeInList() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
 
-        EffortCertificationDocument document = this.buildDocument(testTarget);
-        document.setDocumentHeader(documentHeader);
+                A21SubAccount a21 = new A21SubAccount();
+                a21.setSubAccountTypeCode("CS");
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(a21);
+                detail.setSubAccount(subAccount);
 
-        List<EffortCertificationDetail> detailLines = this.buildDetailLines(testTarget);
-        document.setEffortCertificationDetailLines(detailLines);
+                assertThat(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detail,
+                        Arrays.asList("CS", "EX"))).isTrue();
+            }
+        }
 
-        document = TestDataPreparator.persistDataObject(document);
+        @Test
+        void shouldReturnFalseWhenSubAccountTypeNotInList() {
+            try (MockedStatic<KFSConstants> kfs = mockStatic(KFSConstants.class)) {
+                kfs.when(KFSConstants::getDashSubAccountNumber).thenReturn("-----");
+                EffortCertificationDetail detail = new EffortCertificationDetail();
+                detail.setSubAccountNumber("SUB1");
 
-        return document;
+                A21SubAccount a21 = new A21SubAccount();
+                a21.setSubAccountTypeCode("XX");
+                SubAccount subAccount = new SubAccount();
+                subAccount.setA21SubAccount(a21);
+                detail.setSubAccount(subAccount);
+
+                assertThat(EffortCertificationDocumentRuleUtil.hasCostShareSubAccount(detail,
+                        Arrays.asList("CS", "EX"))).isFalse();
+            }
+        }
     }
 
-    /**
-     * build a report defintion object from the given test target
-     * 
-     * @param testTarget the given test target that specifies the test data being used
-     * @return a report defintion object
-     */
-    private EffortCertificationReportDefinition buildReportDefinition(String testTarget) {
-        return TestDataPreparator.buildTestDataObject(EffortCertificationReportDefinition.class, properties, testTarget + EffortTestDataPropertyConstants.REPORT_DEFINITION_FIELD_VALUES, reportDefinitionFieldNames, deliminator);
+    @Nested
+    @DisplayName("updateSourceAccountInformation")
+    class UpdateSourceAccountInfo {
+
+        @Test
+        void shouldCopyA21SubAccountFields() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+
+            A21SubAccount a21 = new A21SubAccount();
+            a21.setCostShareChartOfAccountCode("UA");
+            a21.setCostShareSourceAccountNumber("7654321");
+            a21.setCostShareSourceSubAccountNumber("CSSUB");
+
+            SubAccount subAccount = new SubAccount();
+            subAccount.setA21SubAccount(a21);
+            detail.setSubAccount(subAccount);
+
+            EffortCertificationDocumentRuleUtil.updateSourceAccountInformation(detail);
+
+            assertThat(detail.getSourceChartOfAccountsCode()).isEqualTo("UA");
+            assertThat(detail.getSourceAccountNumber()).isEqualTo("7654321");
+            assertThat(detail.getCostShareSourceSubAccountNumber()).isEqualTo("CSSUB");
+        }
+
+        @Test
+        void shouldNotUpdateWhenA21SubAccountNull() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setSourceChartOfAccountsCode("BL");
+            detail.setSourceAccountNumber("1234567");
+
+            SubAccount subAccount = new SubAccount();
+            subAccount.setA21SubAccount(null);
+            detail.setSubAccount(subAccount);
+
+            EffortCertificationDocumentRuleUtil.updateSourceAccountInformation(detail);
+
+            assertThat(detail.getSourceChartOfAccountsCode()).isEqualTo("BL");
+            assertThat(detail.getSourceAccountNumber()).isEqualTo("1234567");
+        }
     }
 
-    /**
-     * build an Effort Certification Document object from the given test target
-     * 
-     * @param testTarget the given test target that specifies the test data being used
-     * @return an Effort Certification Document object
-     */
-    private EffortCertificationDocument buildDocument(String testTarget) {
-        return TestDataPreparator.buildTestDataObject(EffortCertificationDocument.class, properties, testTarget + EffortTestDataPropertyConstants.DOCUMENT, documentFieldNames, deliminator);
+    @Nested
+    @DisplayName("hasSameExistingLine")
+    class HasSameExistingLine {
+
+        @Test
+        void shouldReturnTrueWhenMatchingLineExists() {
+            EffortCertificationDocument document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setChartOfAccountsCode("BL");
+            line1.setFinancialObjectCode("2400");
+
+            EffortCertificationDetail line2 = new EffortCertificationDetail();
+            line2.setChartOfAccountsCode("BL");
+            line2.setFinancialObjectCode("2400");
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            lines.add(line2);
+            document.setEffortCertificationDetailLines(lines);
+
+            List<String> comparableFields = Arrays.asList("chartOfAccountsCode", "financialObjectCode");
+            assertThat(EffortCertificationDocumentRuleUtil.hasSameExistingLine(
+                    document, line2, comparableFields)).isTrue();
+        }
+
+        @Test
+        void shouldReturnFalseWhenNoMatchingLineExists() {
+            EffortCertificationDocument document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setChartOfAccountsCode("BL");
+            line1.setFinancialObjectCode("2400");
+
+            EffortCertificationDetail line2 = new EffortCertificationDetail();
+            line2.setChartOfAccountsCode("UA");
+            line2.setFinancialObjectCode("5000");
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            lines.add(line2);
+            document.setEffortCertificationDetailLines(lines);
+
+            List<String> comparableFields = Arrays.asList("chartOfAccountsCode", "financialObjectCode");
+            assertThat(EffortCertificationDocumentRuleUtil.hasSameExistingLine(
+                    document, line2, comparableFields)).isFalse();
+        }
+
+        @Test
+        void shouldNotMatchLineAgainstItself() {
+            EffortCertificationDocument document = mock(EffortCertificationDocument.class, CALLS_REAL_METHODS);
+
+            EffortCertificationDetail line1 = new EffortCertificationDetail();
+            line1.setChartOfAccountsCode("BL");
+            line1.setFinancialObjectCode("2400");
+
+            List<EffortCertificationDetail> lines = new ArrayList<>();
+            lines.add(line1);
+            document.setEffortCertificationDetailLines(lines);
+
+            List<String> comparableFields = Arrays.asList("chartOfAccountsCode", "financialObjectCode");
+            assertThat(EffortCertificationDocumentRuleUtil.hasSameExistingLine(
+                    document, line1, comparableFields)).isFalse();
+        }
     }
 
-    /**
-     * build a list of detail lines for the specified test target
-     * 
-     * @param testTarget the given test target that specifies the test data being used
-     * @return a list of detail lines for the specified test target
-     */
-    private List<EffortCertificationDetail> buildDetailLines(String testTarget) {
-        int numberOfDetails = Integer.valueOf(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.NUM_OF_DETAILS)));
-        return TestDataPreparator.buildTestDataList(EffortCertificationDetail.class, properties, testTarget + EffortTestDataPropertyConstants.DETAIL, detailFieldNames, deliminator, numberOfDetails);
-    }
+    @Nested
+    @DisplayName("isEffortPercentChangedFromPersisted (detail)")
+    class EffortPercentChangedFromPersisted {
 
-    /**
-     * build a list of expected detail lines for the specified test target
-     * 
-     * @param testTarget the given test target that specifies the test data being used
-     * @return a list of expected detail lines for the specified test target
-     */
-    private List<EffortCertificationDetail> buildExpectedDetailLines(String testTarget) {
-        int numberOfDetails = Integer.valueOf(StringUtils.trim(properties.getProperty(testTarget + EffortTestDataPropertyConstants.NUM_OF_EXPECTED_DETAILS)));
-        return TestDataPreparator.buildTestDataList(EffortCertificationDetail.class, properties, testTarget + EffortTestDataPropertyConstants.EXPECTED_DETAIL, detailFieldNames, deliminator, numberOfDetails);
-    }
+        @Test
+        void shouldReturnTrueWhenPercentsDiffer() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationUpdatedOverallPercent(60);
+            detail.setPersistedEffortPercent(50);
+            assertThat(EffortCertificationDocumentRuleUtil.isEffortPercentChangedFromPersisted(detail)).isTrue();
+        }
 
-    /**
-     * build a detail lines for the specified test target
-     * 
-     * @param testTarget the given test target that specifies the test data being used
-     * @param propertyName the name the specified property that contains the data being used to build a detail line
-     * @return a detail lines for the specified test target with the given property
-     */
-    private EffortCertificationDetail buildDetailLine(String testTarget, String propertyName) {
-        return TestDataPreparator.buildTestDataObject(EffortCertificationDetail.class, properties, testTarget + propertyName, detailFieldNames, deliminator);
+        @Test
+        void shouldReturnFalseWhenPercentsSame() {
+            EffortCertificationDetail detail = new EffortCertificationDetail();
+            detail.setEffortCertificationUpdatedOverallPercent(50);
+            detail.setPersistedEffortPercent(50);
+            assertThat(EffortCertificationDocumentRuleUtil.isEffortPercentChangedFromPersisted(detail)).isFalse();
+        }
     }
 }
