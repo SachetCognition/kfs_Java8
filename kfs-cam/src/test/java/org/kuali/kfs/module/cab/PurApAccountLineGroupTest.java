@@ -132,6 +132,4 @@ public class PurApAccountLineGroupTest extends KualiTestBase {
         entry.setAmount(amount);
         return entry;
     }
-
-
 }

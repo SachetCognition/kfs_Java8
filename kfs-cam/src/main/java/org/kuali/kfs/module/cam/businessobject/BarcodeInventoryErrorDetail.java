@@ -83,16 +83,19 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     private String assetConditionCode;
 
     // References
+    @Transient
     private CampusEbo campus;
     @Transient
     private Room buildingRoom;
     @Transient
     private Building building;
+    @Transient
     private AssetCondition condition;
 
-    // error description. This field is not being saved in any table.
+    @Transient
     private String errorDescription;
 
+    @Transient
     private boolean rowSelected;
 
     /**

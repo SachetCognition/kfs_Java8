@@ -94,8 +94,8 @@ public class AssetComponent extends PersistableBusinessObjectBase implements Mut
     private boolean active;
 
     @Transient
-
     private Asset asset;
+    @Transient
     private AssetCondition componentCondition;
 
     /**

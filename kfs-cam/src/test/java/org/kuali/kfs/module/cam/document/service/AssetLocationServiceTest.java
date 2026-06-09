@@ -50,8 +50,6 @@ public class AssetLocationServiceTest extends KualiTestBase {
         fieldMap.put(LocationField.ZIP_CODE, CamsPropertyConstants.AssetGlobalDetail.OFF_CAMPUS_ZIP_CODE);
         fieldMap.put(LocationField.COUNTRY_CODE, CamsPropertyConstants.AssetGlobalDetail.OFF_CAMPUS_COUNTRY_CODE);
     }
-
-
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -93,8 +91,6 @@ public class AssetLocationServiceTest extends KualiTestBase {
         this.assetLocationService.validateLocation(fieldMap, onCampusObject, true, assetType);
         assertTrue(GlobalVariables.getMessageMap().hasErrors());
         GlobalVariables.getMessageMap().clearErrorMessages();
-
-
         // when sub room number is optional
         onCampusObject.setBuildingRoomNumber("B034F");
         onCampusObject.setBuildingSubRoomNumber(null);
@@ -123,8 +119,6 @@ public class AssetLocationServiceTest extends KualiTestBase {
         this.assetLocationService.validateLocation(fieldMap, onCampusObject, true, assetType);
         assertTrue(GlobalVariables.getMessageMap().hasErrors());
         GlobalVariables.getMessageMap().clearErrorMessages();
-
-
         // when sub room number is not null
         onCampusObject.setBuildingRoomNumber(null);
         onCampusObject.setBuildingSubRoomNumber("HGBJHNGBJH");

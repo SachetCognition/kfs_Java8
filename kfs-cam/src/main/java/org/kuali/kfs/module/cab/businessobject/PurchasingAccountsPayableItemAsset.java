@@ -88,31 +88,47 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
     private List<PurchasingAccountsPayableLineAssetAccount> purchasingAccountsPayableLineAssetAccounts;
 
     // non persistent fields
+    @Transient
     private boolean active;
+    @Transient
     private Integer itemLineNumber;
+    @Transient
     private boolean additionalChargeNonTradeInIndicator;
+    @Transient
     private boolean tradeInAllowance;
+    @Transient
     private boolean itemAssignedToTradeInIndicator;
+    @Transient
     private KualiDecimal unitCost;
+    @Transient
     private KualiDecimal totalCost;
+    @Transient
     private String firstFincialObjectCode;
+    @Transient
     private KualiDecimal splitQty;
+    @Transient
     private boolean selectedValue;
+    @Transient
     private String itemTypeCode;
+    @Transient
     private String lockingInformation;
-    // used for Capital Asset Transaction
+    @Transient
     private String capitalAssetTransactionTypeCode;
+    @Transient
     private List<ItemCapitalAsset> purApItemAssets;
+    @Transient
     private Integer capitalAssetSystemIdentifier;
-
+    @Transient
     private Integer purchaseOrderItemIdentifier;
-    // used to control "create asset" and "apply payment" button display
+    @Transient
     private boolean createAssetIndicator;
+    @Transient
     private boolean applyPaymentIndicator;
-
+    @Transient
     private String preTagInquiryUrl;
+    @Transient
     private List<Long> approvedAssetNumbers;
-
+    @Transient
     private Integer paymentRequestIdentifier;
 
     public PurchasingAccountsPayableItemAsset() {

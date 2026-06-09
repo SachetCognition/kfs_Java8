@@ -32,6 +32,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import org.hibernate.annotations.Type;
 
@@ -57,6 +58,7 @@ public class AssetPaymentDocumentType extends PersistableBusinessObjectBase impl
     @Type(type = "yes_no")
     private boolean active;
 
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
     public Long getDocumentTypeId() {

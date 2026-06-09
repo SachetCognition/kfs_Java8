@@ -132,13 +132,18 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     protected Integer financialDocumentPostingYear;
 
 // CSU 6702 END
+    @Transient
     protected String universityFiscalPeriodName;
 // CSU 6702 END    
 
     // Not Persisted   
+    @Transient
     private AccountingPeriod accountingPeriod;
+    @Transient
     private Date lastInventoryDate;
+    @Transient
     private ContractsAndGrantsAgency agency;
+    @Transient
     private Person assetRepresentative;
     @Transient
     private AssetType capitalAssetType;
@@ -148,6 +153,7 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     private AssetStatus inventoryStatus;
     @Transient
     private List<AssetGlobalDetail> assetGlobalDetails;
+    @Transient
     private List<AssetGlobalDetail> assetSharedDetails;
     @Transient
     private List<AssetPaymentDetail> assetPaymentDetails;
@@ -164,23 +170,26 @@ public class AssetGlobal extends PersistableBusinessObjectBase implements Global
     @Column(name = "SEP_SRC_CPTLAST_NBR")
     private Long separateSourceCapitalAssetNumber;
 
-    // Calculate Equal Source Amounts button
+    @Transient
     private String calculateEqualSourceAmountsButton;
 
-    // calculate remaining source amount
+    @Transient
     private KualiDecimal separateSourceRemainingAmount;
+    @Transient
     private KualiDecimal separateSourceTotalAmount;
+    @Transient
     private String calculateSeparateSourceRemainingAmountButton;
 
     @Transient
-
     private List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
     @Transient
     private FinancialSystemDocumentHeader documentHeader;
+    @Transient
     private KualiDecimal totalAssetPaymentAmount;
 
-    //
+    @Transient
     private KualiDecimal minAssetTotalAmount;
+    @Transient
     private KualiDecimal maxAssetTotalAmount;
 
     // CSU 6702 BEGIN

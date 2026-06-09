@@ -116,24 +116,29 @@ public class GeneralLedgerEntry extends PersistableBusinessObjectBase {
     // References
     @Transient
     private Account account;
+    @Transient
     private Chart chart;
     @Transient
     private ObjectCode financialObject;
     @Transient
     private SubAccount subAccount;
+    @Transient
     private SubObjectCode financialSubObject;
     @Transient
     private ObjectType objectType;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
     @Transient
-
     private List<GeneralLedgerEntryAsset> generalLedgerEntryAssets;
     @Transient
     private List<PurchasingAccountsPayableLineAssetAccount> purApLineAssetAccounts;
     // non-db fields
+    @Transient
     private boolean selected;
+    @Transient
     private KualiDecimal amount;
+    @Transient
     private boolean active;
 
     public GeneralLedgerEntry() {

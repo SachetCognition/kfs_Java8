@@ -66,6 +66,7 @@ public class PurchasingAccountsPayableDocument extends PersistableBusinessObject
     private String activityStatusCode;
 
     // References
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
     @Transient
     private FinancialSystemDocumentHeader documentHeader;
@@ -73,10 +74,15 @@ public class PurchasingAccountsPayableDocument extends PersistableBusinessObject
     private List<PurchasingAccountsPayableItemAsset> purchasingAccountsPayableItemAssets;
 
     // non-persistent
+    @Transient
     private boolean active;
+    @Transient
     private String purApContactEmailAddress;
+    @Transient
     private String purApContactPhoneNumber;
+    @Transient
     private String statusDescription;
+    @Transient
     private String capitalAssetSystemTypeCodeFromPurAp;
 
     public PurchasingAccountsPayableDocument() {

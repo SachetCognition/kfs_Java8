@@ -58,9 +58,10 @@ public class AssetPaymentAssetDetail extends PersistableBusinessObjectBase {
     private BigDecimal allocatedUserValuePct = BigDecimal.ZERO;
 
     @Transient
-
     private Asset asset;
+    @Transient
     private List<AssetPaymentDetail> assetPaymentDetails;
+    @Transient
     private FinancialSystemDocumentHeader documentHeader;
 
     public AssetPaymentAssetDetail() {

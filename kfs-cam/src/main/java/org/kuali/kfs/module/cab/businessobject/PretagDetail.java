@@ -83,9 +83,11 @@ public class PretagDetail extends PersistableBusinessObjectBase {
     @Type(type = "yes_no")
     private boolean active;
 
+    @Transient
     protected CampusEbo campus;
     @Transient
     private Building building;
+    @Transient
     private Room buildingRoom;
 
     /**

@@ -85,18 +85,20 @@ public class Pretag extends PersistableBusinessObjectBase implements MutableInac
     private boolean active;
 
     @Transient
-
     private Chart chartOfAccounts;
+    @Transient
     private Organization organization;
     @Transient
     private AssetType capitalAssetType;
+    @Transient
     private Person personUniversal;
 
+    @Transient
     private List<String> campusTagNumbers;
+    @Transient
     private List<String> serialNumbers;
 
     @Transient
-
     private List<PretagDetail> pretagDetails;
     /**
      * Default constructor.

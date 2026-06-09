@@ -62,11 +62,13 @@ public class PurchasingAccountsPayableLineAssetAccount extends PersistableBusine
     private String activityStatusCode;
 
     // non-persistent field
+    @Transient
     private boolean active;
 
     // References
     @Transient
     private GeneralLedgerEntry generalLedgerEntry;
+    @Transient
     private PurchasingAccountsPayableItemAsset purchasingAccountsPayableItemAsset;
 
     public PurchasingAccountsPayableLineAssetAccount() {

@@ -135,7 +135,9 @@ public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
     private KualiDecimal separateSourceAmount; 
 
     // Non persistent
+    @Transient
     private List<AssetGlobalDetail> assetGlobalUniqueDetails;
+    @Transient
     private Person assetRepresentative;
     
     public Person getAssetRepresentative() {

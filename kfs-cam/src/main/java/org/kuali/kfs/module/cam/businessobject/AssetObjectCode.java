@@ -80,6 +80,7 @@ public class AssetObjectCode extends PersistableBusinessObjectBase implements Mu
     protected List<ObjectCode> objectCode;
     @Transient
     protected Chart chartOfAccounts;
+    @Transient
     protected ObjectSubType financialObjectSubType;
 
     /**
