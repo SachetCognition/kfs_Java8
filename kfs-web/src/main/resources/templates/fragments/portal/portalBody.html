@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="portalBody" id="portal-body">
+    <div class="portal-channel-container">
+        <div th:if="${channelUrl != null}">
+            <iframe th:src="${channelUrl}" width="100%" height="800" frameborder="0"
+                    th:title="${channelTitle != null ? channelTitle : 'Channel Content'}">
+            </iframe>
+        </div>
+        <div th:unless="${channelUrl != null}" class="portal-channels">
+            <p>Select a menu item to view content.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

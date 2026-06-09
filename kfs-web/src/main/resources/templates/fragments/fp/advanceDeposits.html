@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="advanceDeposits" class="tab-container">
+    <h3>Advance Deposits</h3>
+    <table class="datatable" summary="advance deposits">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Bank Account</th>
+                <th>Advance Deposit Date</th>
+                <th>Reference Number</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th th:if="${editingMode != null and editingMode.containsKey('fullEntry')}">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="deposit,iterStat : ${KualiForm.document.advanceDeposits}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${deposit.financialDocumentBankCode}"></td>
+                <td th:text="${deposit.financialDocumentAdvanceDepositDate}"></td>
+                <td th:text="${deposit.financialDocumentAdvanceDepositReferenceNumber}"></td>
+                <td th:text="${deposit.financialDocumentAdvanceDepositDescription}"></td>
+                <td th:text="${deposit.financialDocumentAdvanceDepositAmount}"></td>
+                <td th:if="${editingMode != null and editingMode.containsKey('fullEntry')}">
+                    <input type="image" th:src="@{${ConfigProperties['externalizable.images.url']}+'tinybutton-delete1.gif'}"
+                           th:name="'methodToCall.deleteAdvanceDeposit.line' + ${iterStat.index}"
+                           title="Delete Advance Deposit" alt="Delete"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

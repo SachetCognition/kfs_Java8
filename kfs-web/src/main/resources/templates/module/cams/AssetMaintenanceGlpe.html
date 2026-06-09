@@ -1,0 +1,56 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Asset Maintenance Glpe</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="generalLedgerPendingEntriesList=${KualiForm.document.newMaintainableObject.businessObject.generalLedgerPendingEntries}" -->
+<th:block th:if="${!empty generalLedgerPendingEntriesList}">
+	<gl:generalLedgerPendingEntries
+		generalLedgerPendingEntries="${generalLedgerPendingEntriesList}"
+		generalLedgerPendingEntryProperty="document.newMaintainableObject.businessObject.generalLedgerPendingEntries"
+		generalLedgerPendingEntriesProperty="document.newMaintainableObject.businessObject.generalLedgerPendingEntries" />
+</th:block>
+<th:block th:if="${empty generalLedgerPendingEntriesList}">
+	<div class="tab-container" th:data-tab-title="General Ledger Pending Entries">
+    <h3 th:text="General Ledger Pending Entries">General Ledger Pending Entries</h3>
+		<div class="tab-container" align=center>
+		<h3>General Ledger Pending Entries <kul:lookup
+			boClassName="org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry"
+			lookupParameters="document.documentNumber:documentNumber"
+			hideReturnLink="true" suppressActions="true" /></h3>
+		<table cellpadding="0" cellspacing="0" class="datatable"
+			summary="view/edit pending entries">
+			<tr>
+				<td class="datacell" height="50" colspan="12">
+				<div align="center">There are currently no General Ledger Pending Entries associated with this Transaction Processing document.</div>
+				</td>
+			</tr>
+		</table>
+		</div>
+	</div>
+</th:block>
+</div>
+</body>
+</html>

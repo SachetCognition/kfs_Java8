@@ -1,0 +1,69 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Cash Control Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+<!-- th:with="editDetails=${!empty KualiForm.editingMode['editDetails']}" -->
+<!-- th:with="showGenerateButton=${!empty KualiForm.editingMode['showGenerateButton']}" -->
+<!-- th:with="editPaymentMedium=${!empty KualiForm.editingMode['editPaymentMedium']}" -->
+<!-- th:with="editRefDocNbr=${!empty KualiForm.editingMode['editRefDocNbr']}" -->
+<!-- th:with="editPaymentAppDoc=${!empty KualiForm.editingMode['editPaymentAppDoc']}" -->
+<!-- th:with="editBankCode=${!empty KualiForm.editingMode['editBankCode']}" -->
+<!-- th:with="showBankCode=${!empty KualiForm.editingMode['showBankCode']}" -->
+
+<div class="document-page" data-document-type="CashControlDocument" data-form-action="arCashControlDocument" data-show-document-info="true">
+<form th:action="@{arCashControlDocument}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+	<th:block th:if="${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}">
+		<c:set var="fullEntryMode" value="true" scope="request" />
+	</th:block>
+
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+
+	<sys:hiddenDocumentFields isFinancialDocument="false" />
+
+	<div th:replace="~{fragments/ar/cashControl :: cashControl}" th:with="documentAttributes=${DataDictionary.CashControlDocument.attributes},readOnly=${readOnly},showGenerateButton=${showGenerateButton},editPaymentMedium=${editPaymentMedium},editBankCode=${editBankCode},showBankCode=${showBankCode},editRefDocNbr=${editRefDocNbr}"></div>
+
+	<div th:replace="~{fragments/ar/cashControlDetails :: cashControlDetails}" th:with="documentAttributes=${DataDictionary.CashControlDocument.attributes},cashControlDetailAttributes=${DataDictionary.CashControlDetail.attributes},readOnly=${readOnly},editDetails=${editDetails},editPaymentAppDoc=${editPaymentAppDoc}"></div>
+
+	<div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+
+	<div th:replace="~{fragments/notes :: notes}"></div>
+
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="capitalAssetModifyTab" class="tab-container">
+    <h3>Modify Capital Assets</h3>
+    <table class="datatable" summary="modify capital assets"
+           th:if="${KualiForm.document.capitalAssetInformation != null and !KualiForm.document.capitalAssetInformation.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Asset #</th>
+                <th>Action</th>
+                <th>Quantity</th>
+                <th>Asset Type</th>
+                <th>Manufacturer</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="asset,iterStat : ${KualiForm.document.capitalAssetInformation}">
+                <td th:text="${asset.capitalAssetNumber}"></td>
+                <td th:text="${asset.capitalAssetActionIndicator}"></td>
+                <td th:text="${asset.capitalAssetQuantity}"></td>
+                <td th:text="${asset.capitalAssetTypeCode}"></td>
+                <td th:text="${asset.capitalAssetManufacturerName}"></td>
+                <td th:text="${asset.capitalAssetDescription}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <p th:if="${KualiForm.document.capitalAssetInformation == null or KualiForm.document.capitalAssetInformation.isEmpty()}">
+        No capital asset information available.
+    </p>
+</div>
+</body>
+</html>

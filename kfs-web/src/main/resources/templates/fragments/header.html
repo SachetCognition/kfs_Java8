@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="header" id="header">
+    <div id="header-wrap">
+        <h1><a th:href="@{/portal.html}" title="Kuali Financial System">Kuali Financial System</a></h1>
+        <div id="build" th:text="${ConfigProperties != null ? ConfigProperties['build.version'] : ''}"></div>
+    </div>
+</div>
+</body>
+</html>

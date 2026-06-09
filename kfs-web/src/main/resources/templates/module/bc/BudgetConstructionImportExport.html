@@ -1,0 +1,98 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Budget Construction Import Export</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="budgetAttributes=${DataDictionary.BudgetConstructionRequestImport.attributes}" -->
+
+<div class="kfs-page" data-header-title="" data-doc-title="">
+<h1></h1>
+<form th:action="@{${KualiForm.htmlFormAction}}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+ <script type="text/javascript">
+
+        var excludeSubmitRestriction = true;
+
+    </script>     
+    <strong><h2>
+    <span th:text="${KualiForm.title}"></span>
+	 <a href="${ConfigProperties.externalizable.help.url}default.htm?turl=WordDocuments%2Frequestimporttool.htm" tabindex="${KualiForm.nextArbitrarilyHighIndex}" target="helpWindow"  title="[Help]Upload">
+	                                        <img src="${ConfigProperties.kr.externalizable.images.url}my_cp_inf.gif" title="[Help] Upload" alt="[Help] Upload" hspace=5 border=0  align="middle"></a>
+  </h2></strong>
+	</br>
+      
+    <!-- kul:tab tabTitle="Select File to Import" defaultOpen="false" tabErrorKey="${EffortConstants.EFFORT_CERTIFICATION_TAB_ERRORS}"-->
+    	<!-- div class="tab-container" align=center-->
+		    <table align="center" cellpadding="0" cellspacing="0" class="datatable-100">
+		    
+		    <html:hidden name="KualiForm" property="universityFiscalYear" />
+		    <html:hidden name="KualiForm" property="reportMode" />
+		    <input type="hidden" th:field="*{returnAnchor}" />
+            <input type="hidden" th:field="*{returnFormKey}" />
+            <input type="hidden" th:field="*{backLocation}" />
+            
+            <th:block th:if="${KualiForm.reportMode != 'requestImport'}">  
+	            <input type="hidden" th:field="*{chartOfAccountsCode}" />
+	            <input type="hidden" th:field="*{accountNumber}" />
+	            <input type="hidden" th:field="*{subAccountNumber}" />
+	            <input type="hidden" th:field="*{backLocation}" />
+	            <input type="hidden" th:field="*{orgReport}" />
+	        </th:block>
+		    	<th:block th:if="${KualiForm.reportMode == 'requestImport'}">  
+					<tr>
+			        	<th class="grid" align="right" colspan="1"><label th:text="${budgetAttributes.fileName.label}"></label></th>
+			            <td class="grid"><html:file property="file" /></td>
+			       	</tr>
+		        	<tr>
+			        	<th class="grid" align="right" colspan="1"><label th:text="${budgetAttributes.fileType.label}"></label></th>
+			            <td class="grid"><kul:htmlControlAttribute attributeEntry="${budgetAttributes.fileType}" property="fileType" readOnly="false" /></td>
+					</tr>
+				</th:block>
+				<tr>
+		        	<th class="grid" align="right" colspan="1"><label th:text="${budgetAttributes.fieldDelimiter.label}"></label></th>
+		            <td class="grid"><kul:htmlControlAttribute attributeEntry="${budgetAttributes.fieldDelimiter}" property="fieldDelimiter" readOnly="false" /> &nbsp; <kul:htmlControlAttribute attributeEntry="${budgetAttributes.otherFieldDelimiter}" property="otherFieldDelimiter" readOnly="false" /></td>
+				</tr>
+				
+				<tr>
+		        	<th class="grid" align="right" colspan="1"><label th:text="${budgetAttributes.textFieldDelimiter.label}"></label></th>
+		            <td class="grid"><kul:htmlControlAttribute attributeEntry="${budgetAttributes.textFieldDelimiter}" property="textFieldDelimiter" readOnly="false" /> &nbsp; <kul:htmlControlAttribute attributeEntry="${budgetAttributes.otherTextFieldDelimiter}" property="otherTextFieldDelimiter" readOnly="false" /></td>
+				</tr>
+				
+				<tr>
+					<td class="grid" class="infoline" colspan="2">
+						<div align="center">
+							<html:image property="methodToCall.submit" src="kr/static/images/buttonsmall_submit.gif" title="Import File" alt="Import File" styleClass="tinybutton" /> &nbsp;&nbsp;&nbsp;
+							<html:image property="methodToCall.close" src="kr/static/images/buttonsmall_close.gif" title="Close Window" alt="Close Window" styleClass="tinybutton" />
+						</div>
+					</td>
+				</tr>
+			</table>
+		<!-- /div-->
+	<!-- /kul:tab-->
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Vendor Credit Memo</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="document-page" data-document-type="VendorCreditMemoDocument" data-form-action="purapVendorCreditMemo" data-show-document-info="true">
+<form th:action="@{purapVendorCreditMemo}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+    <!-- th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+ 
+    <c:set var="displayInitTab" value="${KualiForm.editingMode['displayInitTab']}" scope="request" />
+                     
+    <th:block th:if="${displayInitTab}"> 
+    	<div th:replace="~{fragments/purap/creditMemoInit :: creditMemoInit}" th:with="documentAttributes=${DataDictionary.VendorCreditMemoDocument.attributes}"></div> 
+    	
+    	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+    
+	    <div align="right"><br><span th:text="#{message.creditMemo.initMessage}"></span></div><br>
+	</th:block>
+	
+	<th:block th:if="${not displayInitTab}">
+		<!--  Display hold message if payment is on hold -->
+	    <th:block th:if="${KualiForm.document.holdIndicator}">	
+		  <h4>This Credit Memo has been Held by <span th:text="${KualiForm.document.lastActionPerformedByPersonName}"></span></h4>		
+	    </th:block>
+	    
+		<sys:documentOverview editingMode="${KualiForm.editingMode}" includePostingYear="true" fiscalYearReadOnly="true" postingYearAttributes="${DataDictionary.VendorCreditMemoDocument.attributes}" />
+	        
+		<div th:replace="~{fragments/purap/vendor :: vendor}" th:with="documentAttributes=${DataDictionary.VendorCreditMemoDocument.attributes},displayPurchaseOrderFields='false',displayCreditMemoFields='true'"></div>
+	
+		<div th:replace="~{fragments/purap/creditMemoInfo :: creditMemoInfo}" th:with="documentAttributes=${DataDictionary.VendorCreditMemoDocument.attributes}"></div>        
+
+	  	<div th:replace="~{fragments/purap/paymentRequestProcessItems :: paymentRequestProcessItems}" th:with="documentAttributes=${DataDictionary.VendorCreditMemoDocument.attributes},itemAttributes=${DataDictionary.CreditMemoItem.attributes},accountingLineAttributes=${DataDictionary.CreditMemoAccount.attributes},isCreditMemo='true'"></div>
+	  
+	    <div th:replace="~{fragments/purap/summaryaccounts :: summaryaccounts}" th:with="itemAttributes=${DataDictionary.CreditMemoItem.attributes},documentAttributes=${DataDictionary.SourceAccountingLine.attributes}"></div>  
+    	    	
+		<div th:replace="~{fragments/purap/customRelatedDocuments :: customRelatedDocuments}" th:with="documentAttributes=${DataDictionary.RelatedDocuments.attributes}"></div>
+           	
+	    <div th:replace="~{fragments/purap/customPaymentHistory :: customPaymentHistory}" th:with="documentAttributes=${DataDictionary.RelatedDocuments.attributes}"></div>
+	
+	    <div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+	    
+		<kul:notes attachmentTypesValuesFinderClass="${documentEntry.attachmentTypesValuesFinderClass}" />
+	    
+	    <div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+	    
+	    <div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	
+		<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	
+        <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	</th:block>
+	
+	<c:set var="extraButtons" value="${KualiForm.extraButtons}" scope="request"/>
+	
+  	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+   
+</div>
+</div>
+</div>
+</body>
+</html>

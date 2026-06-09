@@ -1,0 +1,250 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Cash Receipt</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="displayHidden=false" -->
+<!-- th:with="checkDetailMode=${KualiForm.checkEntryDetailMode}" -->
+<!-- th:with="confirmMode=${KualiForm.editingMode['cmConfirm']}" -->
+<!-- th:with="changeRequestMode=${KualiForm.editingMode['changeRequestOn']}" -->
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+<!-- th:with="confirmed=${KualiForm.document.confirmed}" -->
+<!-- th:with="cashReceiptAttributes=${DataDictionary['CashReceiptDocument'].attributes}" -->
+
+	
+<!-- th:with="showConfirm=${confirmMode || confirmed}" -->
+
+<div class="document-page" data-document-type="CashReceiptDocument" data-form-action="financialCashReceipt" data-show-document-info="true">
+<form th:action="@{financialCashReceipt}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+	<div th:replace="~{fragments/fp/crPrintCoverSheet :: crPrintCoverSheet}"></div>
+	<!-- th:with="docStatusMessage=${KualiForm.financialDocumentStatusMessage}" -->
+	<th:block th:if="${!empty docStatusMessage}">
+		<div align="left"><b>${KualiForm.financialDocumentStatusMessage}</b></div>
+		<br>
+	</th:block>
+	<!-- th:with="cashDrawerStatusMessage=${KualiForm.cashDrawerStatusMessage}" -->
+	<th:block th:if="${!empty cashDrawerStatusMessage}">
+		<div align="left"><span style="color: #ff0000;"><b>${KualiForm.cashDrawerStatusMessage}</b></span>
+		</div>
+		<br>
+	</th:block>
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+	<SCRIPT type="text/javascript">
+    <!--
+        function submitForm() {
+            document.forms[0].submit();
+        }
+    //-->
+    </SCRIPT>
+        
+	<div class="tab-container" th:data-tab-title="Cash Reconciliation">
+    <h3 th:text="Cash Reconciliation">Cash Reconciliation</h3>
+		<div class="tab-container" align=center>
+		<h3>Cash Reconciliation</h3>
+		<table>
+			<tbody>
+				<th:block th:if="${showConfirm}">
+					<tr>
+						<th>&nbsp;</th>
+						<th>Original</th>
+						<th>Cash Manager</th>
+					</tr>
+				</th:block>
+				<tr>
+					<th width="35%">
+					<div align="right"><label th:text="${cashReceiptAttributes.totalCheckAmount.label}"></label></div>
+					</th>
+					<th:block th:if="${readOnly}">
+						<td>${KualiForm.document.currencyFormattedTotalCheckAmount}</td>
+					</th:block>
+					<th:block th:if="${!readOnly}">
+						<td><th:block th:if="${!checkDetailMode}">
+							<input type="text" th:name="document.totalCheckAmount" th:value="${KualiForm.document.totalCheckAmount}" th:title="${cashReceiptAttributes.totalCheckAmount.label}" />
+						</th:block> 
+					</th:block>
+					<th:block th:if="${!readOnly}">
+						<input type="text" th:name="document.checkEntryMode" th:value="${KualiForm.document.checkEntryMode}" th:title="${cashReceiptAttributes.checkEntryMode.label}" onchange="submitForm()" />						
+						<noscript><input type="image" th:src="@{${ConfigProperties.externalizable.images.url}tinybutton-select.gif}"
+							styleClass="tinybutton" alt="change check entry mode" title="change check entry mode" /></noscript>
+						</td>
+					</th:block>
+					<th:block th:if="${showConfirm}">
+						<th:block th:if="${!checkDetailMode}">
+						<td>
+							<input type="text" th:name="document.totalConfirmedCheckAmount" th:value="${KualiForm.document.totalConfirmedCheckAmount}" th:title="${cashReceiptAttributes.totalCheckAmount.label}" readOnly="${!confirmMode}"/></td>
+						</th:block>
+						<th:block th:if="${checkDetailMode}">
+							<td>${KualiForm.document.currencyFormattedTotalConfirmedCheckAmount}</td>
+						</th:block>
+					</th:block>			
+				</tr>
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalCurrencyAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalCurrencyAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedCurrencyAmount" /></td>
+					</th:block>
+				</tr>
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalCoinAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalCoinAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedCoinAmount" /></td>
+					</th:block>
+				</tr>												
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalCashInAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalCashInAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedCashInAmount" /></td>
+					</th:block>
+				</tr>												
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalMoneyInAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalMoneyInAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedMoneyInAmount" /></td>
+					</th:block>
+				</tr>												
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalChangeCurrencyAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalChangeCurrencyAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedChangeCurrencyAmount" /></td>
+					</th:block>
+				</tr>												
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalChangeCoinAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalChangeCoinAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedChangeCoinAmount" /></td>
+					</th:block>
+				</tr>												
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalChangeAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalChangeAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedChangeAmount" /></td>
+					</th:block>
+				</tr>												
+				<tr>
+					<th>
+					<div align="right"><strong><label th:text="${cashReceiptAttributes.totalNetAmount.label}"></label></strong></div>
+					</th>
+					<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalNetAmount" /></td>
+					<th:block th:if="${showConfirm}">
+						<td width="35%" align="left" valign="middle"><bean:write name="KualiForm" property="document.totalConfirmedNetAmount" /></td>
+					</th:block>
+				</tr>												
+			</tbody>
+		</table>
+
+		<th:block th:if="${!readOnly || confirmMode}">
+			<div>
+				<input type="image" th:src="@{${ConfigProperties.externalizable.images.url}tinybutton-recalculate.gif}" styleClass="tinybutton" 
+					title="Recalculate all subtotals and totals" alt="Recalculate Totals" />
+				</div>
+			</th:block>
+
+		</div>
+	</div>
+	
+  <div class="tab-container" th:data-tab-title="Currency and Coin Detail">
+    <h3 th:text="Currency and Coin Detail">Currency and Coin Detail</h3>
+  	<th:block th:if="${confirmMode}"> 
+  	    <div class="tab-container">
+			<html:image align="center" property="methodToCall.copyAllCurrencyAndCoin" 
+			 	src="${ConfigProperties.externalizable.images.url}tinybutton-copyall.gif" styleClass="tinybutton"
+			 	title="Copy all currency and coin from Original to CashManager section" alt="Copy all currency and coin" />
+	    </div>
+	</th:block>
+    <div class="tab-container" align="center">
+        <h3>Currency and Coin Detail</h3>
+      <div th:replace="~{fragments/fp/currencyCoinLine :: currencyCoinLine}" th:with="currencyProperty='document.currencyDetail',coinProperty='document.coinDetail',confirmedCurrencyProperty='document.confirmedCurrencyDetail',confirmedCoinProperty='document.confirmedCoinDetail',readOnly=${readOnly},editingMode=${KualiForm.editingMode},confirmMode=${confirmMode},confirmed=${confirmed}"></div>
+    </div>
+  </div>
+	
+	<div th:replace="~{fragments/fp/crCheckLines :: crCheckLines}" th:with="checkDetailMode=${checkDetailMode},editingMode=${KualiForm.editingMode},totalAmount=${KualiForm.cashReceiptDocument.currencyFormattedTotalCheckAmount},totalConfirmedAmount=${KualiForm.cashReceiptDocument.currencyFormattedTotalConfirmedCheckAmount},displayHidden=${displayHidden},confirmMode=${confirmMode}"></div>
+		
+	<th:block th:if="${changeRequestMode}">	
+		<div class="tab-container" th:data-tab-title="Change Request">
+    <h3 th:text="Change Request">Change Request</h3>
+			<th:block th:if="${confirmMode}"> 
+				<div class="tab-container">
+					<html:image align="center" property="methodToCall.copyAllChangeCurrencyAndCoin"
+						src="${ConfigProperties.externalizable.images.url}tinybutton-copyall.gif" styleClass="tinybutton" 
+						title="Copy all change currency and coin from Original to CashManager section" alt="Copy all change currency and coin" />
+				</div>
+			</th:block>
+			<div class="tab-container" align="center">
+				<h3>Requesting</h3>
+	      		<div th:replace="~{fragments/fp/currencyCoinLine :: currencyCoinLine}" th:with="currencyProperty='document.changeCurrencyDetail',coinProperty='document.changeCoinDetail',confirmedCurrencyProperty='document.confirmedChangeCurrencyDetail',confirmedCoinProperty='document.confirmedChangeCoinDetail',readOnly=${readOnly},editingMode=${KualiForm.editingMode},confirmMode=${confirmMode},confirmed=${confirmed}"></div>
+	      	</div>
+		</div>	
+	</th:block>
+		
+	<div class="tab-container" th:data-tab-title="Accounting Lines">
+    <h3 th:text="Accounting Lines">Accounting Lines</h3>
+		<sys-java:accountingLines>
+			<sys-java:accountingLineGroup newLinePropertyName="newSourceLine" collectionPropertyName="document.sourceAccountingLines" collectionItemPropertyName="document.sourceAccountingLine" attributeGroupName="source" />
+		</sys-java:accountingLines>
+	</div>			
+		 
+  	<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+  	<div th:replace="~{fragments/fp/capitalAccountingLines :: capitalAccountingLines}" th:with="readOnly=${readOnly}"></div>
+  	
+	<th:block th:if="${KualiForm.capitalAccountingLine.canCreateAsset}">
+		<div th:replace="~{fragments/fp/capitalAssetCreateTab :: capitalAssetCreateTab}" th:with="readOnly=${readOnly}"></div>
+	</th:block>
+  	
+	<div th:replace="~{fragments/fp/capitalAssetModifyTab :: capitalAssetModifyTab}" th:with="readOnly=${readOnly}"></div>  
+			
+	<div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+	<div th:replace="~{fragments/notes :: notes}"></div>
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

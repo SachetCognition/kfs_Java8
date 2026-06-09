@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="capitalAssetCreateTab" class="tab-container">
+    <h3>Create Capital Assets</h3>
+    <table class="datatable" summary="capital asset creation">
+        <tr>
+            <th>Capital Asset Number:</th>
+            <td>
+                <input th:unless="${readOnly}" type="text"
+                       name="capitalAssetNumber" th:value="${KualiForm.capitalAssetNumber}"/>
+                <span th:if="${readOnly}" th:text="${KualiForm.capitalAssetNumber}"></span>
+            </td>
+        </tr>
+        <tr>
+            <th>Quantity:</th>
+            <td>
+                <input th:unless="${readOnly}" type="text"
+                       name="capitalAssetQuantity" th:value="${KualiForm.capitalAssetQuantity}"/>
+                <span th:if="${readOnly}" th:text="${KualiForm.capitalAssetQuantity}"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

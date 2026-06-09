@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="portalTabs" id="portal-tabs">
+    <ul class="portal-tab-list">
+        <li th:classappend="${session.selectedTab == 'main' ? 'active' : ''}">
+            <a th:href="@{/portal.html(selectedTab=main)}">Main Menu</a>
+        </li>
+        <li th:classappend="${session.selectedTab == 'maintenance' ? 'active' : ''}">
+            <a th:href="@{/portal.html(selectedTab=maintenance)}">Maintenance</a>
+        </li>
+        <li th:classappend="${session.selectedTab == 'administration' ? 'active' : ''}">
+            <a th:href="@{/portal.html(selectedTab=administration)}">Administration</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

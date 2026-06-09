@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="documentInfo(form)" class="document-info">
+    <table class="datatable" summary="document info">
+        <tr>
+            <th>Doc Nbr:</th>
+            <td th:text="${form.document.documentNumber}"></td>
+            <th>Initiator:</th>
+            <td th:text="${form.document.documentHeader.workflowDocument.initiatorPrincipalId}"></td>
+            <th>Status:</th>
+            <td th:text="${form.document.documentHeader.workflowDocument.status.label}"></td>
+        </tr>
+        <tr>
+            <th>Created:</th>
+            <td th:text="${form.document.documentHeader.workflowDocument.dateCreated}"></td>
+            <th>Last Updated:</th>
+            <td th:text="${form.document.documentHeader.workflowDocument.dateLastModified}"></td>
+            <th>Last Approved:</th>
+            <td th:text="${form.document.documentHeader.workflowDocument.dateApproved}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

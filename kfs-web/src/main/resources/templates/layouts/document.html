@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title th:text="${documentTypeName != null ? documentTypeName : 'Document'}">Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Document Page Wrapper -->
+    <div class="document-page" th:if="${showDocumentInfo}">
+        <div th:replace="~{fragments/documentInfo :: documentInfo(${KualiForm})}"></div>
+    </div>
+
+    <form th:action="@{${htmlFormAction}}" method="post"
+          th:attr="enctype=${renderMultipart ? 'multipart/form-data' : 'application/x-www-form-urlencoded'}"
+          id="kualiForm" name="KualiForm">
+
+        <!-- Hidden Document Fields -->
+        <div th:replace="~{fragments/hiddenDocumentFields :: hiddenDocumentFields}"></div>
+
+        <!-- Document Overview -->
+        <div th:replace="~{fragments/documentOverview :: documentOverview(${KualiForm.editingMode})}"></div>
+
+        <!-- Document Body (specific to each document type) -->
+        <div th:replace="${bodyFragment}"></div>
+
+        <!-- Standard Document Sections -->
+        <div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+        <div th:replace="~{fragments/notes :: notes}"></div>
+        <div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+        <div th:replace="~{fragments/routeLog :: routeLog}"></div>
+        <div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+
+        <!-- Panel Footer -->
+        <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+        <!-- Document Controls -->
+        <div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+
+        <!-- Tab Buttons -->
+        <div th:if="${showTabButtons}" class="tab-buttons">
+            <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_openall.gif'}"
+                   name="methodToCall.showAllTabs" title="open all panels" alt="open all panels"/>
+            <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_closeall.gif'}"
+                   name="methodToCall.hideAllTabs" title="close all panels" alt="close all panels"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
