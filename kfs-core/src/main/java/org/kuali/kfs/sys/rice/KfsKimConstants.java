@@ -60,7 +60,6 @@ public final class KfsKimConstants {
         public static final String INITIATE_DOCUMENT = KimConstants.PermissionTemplateNames.INITIATE_DOCUMENT;
         public static final String EDIT_DOCUMENT = KimConstants.PermissionTemplateNames.EDIT_DOCUMENT;
         public static final String BLANKET_APPROVE_DOCUMENT = KimConstants.PermissionTemplateNames.BLANKET_APPROVE_DOCUMENT;
-        public static final String DEFAULT_OPEN_DOCUMENT = "Default Open Document";
         public static final String OPEN_DOCUMENT = KimConstants.PermissionTemplateNames.OPEN_DOCUMENT;
     }
 }
