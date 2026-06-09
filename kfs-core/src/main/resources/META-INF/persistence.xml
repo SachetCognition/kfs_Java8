@@ -106,6 +106,58 @@
         <class>org.kuali.kfs.gl.businessobject.SufficientFundBalances</class>
         <class>org.kuali.kfs.gl.businessobject.SufficientFundRebuild</class>
 
+        <!-- FP (Financial Processing) business objects -->
+        <class>org.kuali.kfs.fp.businessobject.AdvanceDepositDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.BudgetAdjustmentSourceAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.BudgetAdjustmentTargetAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.CapitalAssetAccountsGroupDetails</class>
+        <class>org.kuali.kfs.fp.businessobject.CapitalAssetInformation</class>
+        <class>org.kuali.kfs.fp.businessobject.CapitalAssetInformationDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.CashDrawer</class>
+        <class>org.kuali.kfs.fp.businessobject.CashieringDocument</class>
+        <class>org.kuali.kfs.fp.businessobject.CashieringItemInProcess</class>
+        <class>org.kuali.kfs.fp.businessobject.CheckBase</class>
+        <class>org.kuali.kfs.fp.businessobject.CoinDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.CreditCardDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.CreditCardType</class>
+        <class>org.kuali.kfs.fp.businessobject.CreditCardVendor</class>
+        <class>org.kuali.kfs.fp.businessobject.CurrencyDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.CustomerCreditCardInformation</class>
+        <class>org.kuali.kfs.fp.businessobject.Deposit</class>
+        <class>org.kuali.kfs.fp.businessobject.DepositCashReceiptControl</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherAutomatedClearingHouse</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeExpense</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeTravel</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherNonResidentAlienTax</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherPayeeDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherPreConferenceDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.DisbursementVoucherPreConferenceRegistrant</class>
+        <class>org.kuali.kfs.fp.businessobject.FiscalYearFunctionControl</class>
+        <class>org.kuali.kfs.fp.businessobject.FunctionControlCode</class>
+        <class>org.kuali.kfs.fp.businessobject.GECSourceAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.GECTargetAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.InternalBillingItem</class>
+        <class>org.kuali.kfs.fp.businessobject.IntraAccountAdjustmentSourceAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.IntraAccountAdjustmentTargetAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.MessageOfTheDay</class>
+        <class>org.kuali.kfs.fp.businessobject.NonResidentAlienTaxPercent</class>
+        <class>org.kuali.kfs.fp.businessobject.OffsetAccount</class>
+        <class>org.kuali.kfs.fp.businessobject.PaymentReasonCode</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardDefault</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardHolder</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardSourceAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardTargetAccountingLine</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardTransaction</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardTransactionDetail</class>
+        <class>org.kuali.kfs.fp.businessobject.ProcurementCardVendor</class>
+        <class>org.kuali.kfs.fp.businessobject.SalesTax</class>
+        <class>org.kuali.kfs.fp.businessobject.TaxIncomeClassCode</class>
+        <class>org.kuali.kfs.fp.businessobject.TravelCompanyCode</class>
+        <class>org.kuali.kfs.fp.businessobject.TravelExpenseTypeCode</class>
+        <class>org.kuali.kfs.fp.businessobject.TravelMileageRate</class>
+        <class>org.kuali.kfs.fp.businessobject.TravelPerDiem</class>
+        <class>org.kuali.kfs.fp.businessobject.VoucherSourceAccountingLine</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>

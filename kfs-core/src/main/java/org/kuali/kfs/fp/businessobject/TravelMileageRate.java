@@ -23,13 +23,26 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 
 /**
  * This class is used to represent a travel mileage rate business object.
  */
+@Entity
+@Table(name = "FP_DV_MLG_T")
+@IdClass(TravelMileageRateId.class)
 public class TravelMileageRate extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "DV_MLG_EFF_DT")
     protected Date disbursementVoucherMileageEffectiveDate;
+    @Id
+    @Column(name = "DV_MLG_LMT_AMT")
     protected Integer mileageLimitAmount;
+    @Column(name = "DV_MLG_RT")
     protected BigDecimal mileageRate;
 
     /**

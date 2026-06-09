@@ -29,18 +29,40 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.service.BankService;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * This business object represents the advance deposit detail business object that is used by the Advance Deposit Document.
  */
+@Entity
+@Table(name = "FP_ADV_DPST_DTL_T")
+@IdClass(AdvanceDepositDetailId.class)
 public class AdvanceDepositDetail extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "FDOC_ADV_DPST_DT")
     private Date financialDocumentAdvanceDepositDate;
+    @Column(name = "FDOC_ADPST_REF_NBR")
     private String financialDocumentAdvanceDepositReferenceNumber;
+    @Column(name = "FDOC_ADV_DPST_DESC")
     private String financialDocumentAdvanceDepositDescription;
+    @Column(name = "FDOC_ADV_DPST_AMT")
     private KualiDecimal financialDocumentAdvanceDepositAmount;
+    @Column(name = "FDOC_BANK_CD")
     private String financialDocumentBankCode;
     
     /* NOTE
@@ -52,6 +74,8 @@ public class AdvanceDepositDetail extends PersistableBusinessObjectBase {
      */
     //private AdvanceDepositDocument advanceDepositDocument;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_BANK_CD", insertable = false, updatable = false)
     private Bank bank;
 
     /**

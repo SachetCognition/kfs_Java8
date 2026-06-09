@@ -24,22 +24,55 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a disbursement voucher non-employee expense, often associated with a trip or a service rendered.
  */
+@Entity
+@Table(name = "FP_DV_NONEMP_EXP_T")
+@IdClass(DisbursementVoucherNonEmployeeExpenseId.class)
 public class DisbursementVoucherNonEmployeeExpense extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "DV_EXP_CD")
     private String disbVchrExpenseCode;
+    @Column(name = "DV_EXP_CO_NM")
     private String disbVchrExpenseCompanyName;
+    @Column(name = "DV_EXP_AMT")
     private KualiDecimal disbVchrExpenseAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false)
     private TravelExpenseTypeCode disbVchrExpense;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+
+        @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "DV_EXP_CO_NM", insertable = false, updatable = false)
+
+    })
     private TravelCompanyCode disbVchrExpenseCompany;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private DisbursementVoucherNonEmployeeTravel disbursementVoucherNonEmployeeTravel;
 
+    @Transient
     private boolean isPrepaid;
 
     /**

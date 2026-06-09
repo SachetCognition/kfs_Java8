@@ -34,32 +34,80 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.ObjectUtils;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
+@Entity
+@Table(name = "FP_CPTL_AST_INFO_T")
+@IdClass(CapitalAssetInformationId.class)
 public class CapitalAssetInformation extends PersistableBusinessObjectBase {
 
     //primary key fields..
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_LINE_NBR")
     private Integer capitalAssetLineNumber;
     
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Transient
     private String vendorName;
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Column(name = "CPTLAST_LINE_QTY")
     private Integer capitalAssetQuantity;
+    @Column(name = "CPTLAST_TYP_CD")
     private String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_MFR_NM")
     private String capitalAssetManufacturerName;
+    @Column(name = "CPTLAST_DESC")
     private String capitalAssetDescription;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     private String capitalAssetManufacturerModelNumber;
+    @Column(name = "CPTLAST_LINE_AMT")
     private KualiDecimal capitalAssetLineAmount;
+    @Column(name = "CPTLAST_ACTION_IND")
     private String capitalAssetActionIndicator;
+    @Column(name = "CPTLAST_PROCESSED_IND")
     private boolean capitalAssetProcessedIndicator;
+    @Column(name = "CPTLAST_DST_AMT_CD")
     private String distributionAmountCode;
     
+    @Transient
     private CapitalAssetManagementAsset capitalAssetManagementAsset;
+    @Transient
     private CapitalAssetManagementAssetType capitalAssetManagementAssetType;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "capitalAssetInformation")
     private List<CapitalAssetInformationDetail> capitalAssetInformationDetails;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "capitalAssetInformation")
     private List<CapitalAssetAccountsGroupDetails> capitalAssetAccountsGroupDetails;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    
+    @JoinColumns({
+
+    
+        @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+
+    
+        @JoinColumn(name = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+
+    
+    })
     private VendorDetail vendorDetail;
 
     /**

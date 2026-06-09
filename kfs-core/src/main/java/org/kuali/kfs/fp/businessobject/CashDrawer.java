@@ -32,37 +32,66 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class represents a cash drawer used in cash management document. It contains amounts for 
  * different types of denominations for currency and coin. 
  */
+@Entity
+@Table(name = "FP_CSH_DRWR_T")
 public class CashDrawer extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "FDOC_OPEN_DPST_CD")
     private String statusCode;
 
+    @Column(name = "CSH_DRWR_TOT_AMT")
     private KualiDecimal cashDrawerTotalAmount;
 
+    @Column(name = "FDOC_100_DLR_AMT")
     private KualiDecimal financialDocumentHundredDollarAmount;
+    @Column(name = "FDOC_50_DLR_AMT")
     private KualiDecimal financialDocumentFiftyDollarAmount;
+    @Column(name = "FDOC_20_DLR_AMT")
     private KualiDecimal financialDocumentTwentyDollarAmount;
+    @Column(name = "FDOC_10_DLR_AMT")
     private KualiDecimal financialDocumentTenDollarAmount;
+    @Column(name = "FDOC_5_DLR_AMT")
     private KualiDecimal financialDocumentFiveDollarAmount;
+    @Column(name = "FDOC_2_DLR_AMT")
     private KualiDecimal financialDocumentTwoDollarAmount;
+    @Column(name = "FDOC_1_DLR_AMT")
     private KualiDecimal financialDocumentOneDollarAmount;
+    @Column(name = "FDOC_OTHR_DLR_AMT")
     private KualiDecimal financialDocumentOtherDollarAmount;
 
+    @Column(name = "FDOC_100_CENT_AMT")
     private KualiDecimal financialDocumentHundredCentAmount;
+    @Column(name = "FDOC_50_CENT_AMT")
     private KualiDecimal financialDocumentFiftyCentAmount;
+    @Column(name = "FDOC_25_CENT_AMT")
     private KualiDecimal financialDocumentTwentyFiveCentAmount;
+    @Column(name = "FDOC_10_CENT_AMT")
     private KualiDecimal financialDocumentTenCentAmount;
+    @Column(name = "FDOC_5_CENT_AMT")
     private KualiDecimal financialDocumentFiveCentAmount;
+    @Column(name = "FDOC_1_CENT_AMT")
     private KualiDecimal financialDocumentOneCentAmount;
+    @Column(name = "FDOC_OTHR_CENT_AMT")
     private KualiDecimal financialDocumentOtherCentAmount;
 
+    @Column(name = "FDOC_MISC_ADV_AMT")
     private KualiDecimal financialDocumentMiscellaneousAdvanceAmount;
 
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Transient
     private CampusEbo campus;
 
     /**
