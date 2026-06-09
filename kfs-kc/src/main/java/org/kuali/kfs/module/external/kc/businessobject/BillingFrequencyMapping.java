@@ -18,14 +18,34 @@
  */
 package org.kuali.kfs.module.external.kc.businessobject;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+@Entity
+@Table(name = "KC_BILL_FREQ_MAP_T")
+@IdClass(BillingFrequencyMappingId.class)
 public class BillingFrequencyMapping extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "KFS_FREQ_CD")
     private String frequency;
+
+    @Column(name = "GRACE_PERIOD")
     private Integer gracePeriodDays;
+
+    @Id
+    @Column(name = "KC_FREQ_CD")
     private String kcFrequencyCode;
+
+    @Column(name = "ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
 
     public String getFrequency() {
