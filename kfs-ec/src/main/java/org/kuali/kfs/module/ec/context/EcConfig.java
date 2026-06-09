@@ -62,6 +62,9 @@ public class EcConfig {
         config.setDatabaseRepositoryFilePaths(List.of(
             "org/kuali/kfs/module/ec/ojb-ec.xml"
         ));
+        config.setScriptConfigurationFilePaths(List.of(
+            "org/kuali/kfs/module/ec/dwr-ec.xml"
+        ));
         return config;
     }
 

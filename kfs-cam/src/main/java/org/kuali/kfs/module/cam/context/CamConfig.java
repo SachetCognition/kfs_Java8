@@ -70,6 +70,9 @@ public class CamConfig {
             "org/kuali/kfs/module/cam/ojb-cam.xml",
             "org/kuali/kfs/module/cab/ojb-cab.xml"
         ));
+        config.setScriptConfigurationFilePaths(List.of(
+            "org/kuali/kfs/module/cam/dwr-cam.xml"
+        ));
         return config;
     }
 

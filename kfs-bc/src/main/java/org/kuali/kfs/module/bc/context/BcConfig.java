@@ -65,6 +65,9 @@ public class BcConfig {
         config.setDatabaseRepositoryFilePaths(List.of(
             "org/kuali/kfs/module/bc/ojb-bc.xml"
         ));
+        config.setScriptConfigurationFilePaths(List.of(
+            "org/kuali/kfs/module/bc/dwr-bc.xml"
+        ));
         return config;
     }
 

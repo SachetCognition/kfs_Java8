@@ -66,6 +66,9 @@ public class CgConfig {
         config.setDatabaseRepositoryFilePaths(List.of(
             "org/kuali/kfs/module/cg/ojb-cg.xml"
         ));
+        config.setScriptConfigurationFilePaths(List.of(
+            "org/kuali/kfs/module/cg/dwr-cg.xml"
+        ));
         return config;
     }
 

@@ -62,6 +62,9 @@ public class LdConfig {
         config.setDatabaseRepositoryFilePaths(List.of(
             "org/kuali/kfs/module/ld/ojb-ld.xml"
         ));
+        config.setScriptConfigurationFilePaths(List.of(
+            "org/kuali/kfs/module/ld/dwr-ld.xml"
+        ));
         return config;
     }
 
