@@ -23,7 +23,6 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 /**
