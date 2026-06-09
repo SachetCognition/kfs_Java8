@@ -25,18 +25,35 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Arbitrary categories per Vendor Contract for the purpose of tracking various kinds of costs that may be incurred by Purchase
  * Orders which use the Vendors which have these Contracts.
  * 
  * @see org.kuali.kfs.vnd.businessobject.VendorContract
  */
+@Entity
+@Table(name = "PUR_PO_CST_SRC_T")
 public class PurchaseOrderCostSource extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "PO_CST_SRC_CD")
     private String purchaseOrderCostSourceCode;
+    @Column(name = "PO_CST_SRC_DESC")
     private String purchaseOrderCostSourceDescription;
+    @Column(name = "ITM_UNIT_PRC_UPR_VAR_PCT")
     private BigDecimal itemUnitPriceUpperVariancePercent;
+    @Column(name = "ITM_UNIT_PRC_LWR_VAR_PCT")
     private BigDecimal itemUnitPriceLowerVariancePercent;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

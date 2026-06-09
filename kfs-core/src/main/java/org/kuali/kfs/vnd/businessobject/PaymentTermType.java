@@ -25,20 +25,40 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Types of Payment Terms for Vendor Contracts. Per contract as distinct from <code>ShippingPaymentTerms</code>.
  * 
  * @see org.kuali.kfs.vnd.businessobject.ShippingPaymentTerms
  */
+@Entity
+@Table(name = "PUR_PMT_TERM_TYP_T")
 public class PaymentTermType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_PMT_TERM_CD")
     private String vendorPaymentTermsCode;
+    @Column(name = "VNDR_DSCT_DUE_TYP_DESC")
     private String vendorDiscountDueTypeDescription;
+    @Column(name = "VNDR_DSCT_DUE_NBR")
     private Integer vendorDiscountDueNumber;
+    @Column(name = "VNDR_PMT_TERM_PCT")
     private BigDecimal vendorPaymentTermsPercent;
+    @Column(name = "VNDR_NET_DUE_TYP_DESC")
     private String vendorNetDueTypeDescription;
+    @Column(name = "VNDR_NET_DUE_NBR")
     private Integer vendorNetDueNumber;
+    @Column(name = "VNDR_PMT_TERM_DESC")
     private String vendorPaymentTermsDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

@@ -29,20 +29,45 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.KualiModuleService;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * CommodityCode Business Object
  */
+@Entity
+@Table(name = "PUR_COMM_T")
 public class CommodityCode extends PersistableBusinessObjectBase implements MutableInactivatable  {
     
+    @Id
+    @Column(name = "PUR_COMM_CD")
     private String purchasingCommodityCode;
+    @Column(name = "PUR_COMM_DESC")
     private String commodityDescription;
+    @Column(name = "PUR_SALES_TAX_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean salesTaxIndicator;
+    @Column(name = "ITM_RSTRC_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean restrictedItemsIndicator;
+    @Column(name = "SNSTV_DTA_CD")
     private String sensitiveDataCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
     
+    @Transient
     private PurchasingAccountsPayableSensitiveData sensitiveData;
     
+    @OneToMany(mappedBy = "commodityCode", fetch = FetchType.LAZY)
     private List<CommodityContractManager> commodityContractManagers;
     
     public CommodityCode() {

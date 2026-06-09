@@ -24,16 +24,31 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Broad categories in which a vendor may be included, exclusively, as opposed to a kind of basic business organization that the
  * vendor may have, which would be an instance of <code>OwnershipType</code>.
  * 
  * @see org.kuali.kfs.vnd.businessobject.OwnershipType
  */
+@Entity
+@Table(name = "PUR_OWNR_CTGRY_T")
 public class OwnershipCategory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_OWNR_CTGRY_CD")
     private String vendorOwnershipCategoryCode;
+    @Column(name = "VNDR_OWNR_CTGRY_DESC")
     private String vendorOwnershipCategoryDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

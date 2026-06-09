@@ -26,12 +26,30 @@ import java.util.List;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "PUR_VNDR_W8_TYP_T")
 public class W8Type extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_W8_TYP_CD")
     private String vendorW8TypeCode;
+    @Column(name = "VNDR_W8_TYP_DESC")
     private String vendorW8TypeDescription;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @OneToMany(mappedBy = "w8Type", fetch = FetchType.LAZY)
     protected List<W8TypeOwnershipType> w8TypeOwnershipTypes;
 
     /**

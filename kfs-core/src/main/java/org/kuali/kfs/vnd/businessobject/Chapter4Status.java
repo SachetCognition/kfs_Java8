@@ -22,10 +22,25 @@ package org.kuali.kfs.vnd.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "PUR_VNDR_CHAP_4_STAT_T")
 public class Chapter4Status extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_CHAP_4_STAT_CD")
     private String vendorChapter4StatusCode;
+    @Column(name = "VNDR_CHAP_4_STAT_DESC")
     private String vendorChapter4StatusDescription;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
     /**
      * Gets the vendorChapter4StatusCode attribute.

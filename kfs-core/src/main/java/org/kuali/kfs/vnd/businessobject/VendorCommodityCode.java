@@ -21,15 +21,48 @@ package org.kuali.kfs.vnd.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "PUR_VNDR_COMM_T")
+@IdClass(VendorCommodityCodeId.class)
 public class VendorCommodityCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+	@Column(name = "VNDR_HDR_GNRTD_ID")
 	private Integer vendorHeaderGeneratedIdentifier;
+	@Id
+	@Column(name = "VNDR_DTL_ASND_ID")
 	private Integer vendorDetailAssignedIdentifier;
+	@Id
+	@Column(name = "PUR_COMM_CD")
 	private String purchasingCommodityCode;
+	@Column(name = "PUR_COMM_DFLT_IND")
+	@Convert(converter = YesNoConverter.class)
 	private boolean commodityDefaultIndicator;
+	@Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+	@Convert(converter = YesNoConverter.class)
 	private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "VNDR_HDR_GNRTD_ID", referencedColumnName = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "VNDR_DTL_ASND_ID", referencedColumnName = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+    })
     private VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PUR_COMM_CD", insertable = false, updatable = false)
     private CommodityCode commodityCode;
     
 	/**

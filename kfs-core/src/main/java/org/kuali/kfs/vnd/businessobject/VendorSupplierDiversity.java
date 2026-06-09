@@ -27,19 +27,44 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Relationship between a Vendor and a <code>SupplierDiversity</code>.
  * 
  * @see org.kuali.kfs.vnd.businessobject.SupplierDiversity
  */
+@Entity
+@Table(name = "PUR_VNDR_SUPP_DVRST_T")
+@IdClass(VendorSupplierDiversityId.class)
 public class VendorSupplierDiversity extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
     private static Logger LOG = Logger.getLogger(VendorSupplierDiversity.class);
 
+    @Id
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Id
+    @Column(name = "VNDR_SUPP_DVRST_CD")
     private String vendorSupplierDiversityCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false)
     private VendorHeader vendorHeader;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SUPP_DVRST_CD", insertable = false, updatable = false)
     private SupplierDiversity vendorSupplierDiversity;
 
 

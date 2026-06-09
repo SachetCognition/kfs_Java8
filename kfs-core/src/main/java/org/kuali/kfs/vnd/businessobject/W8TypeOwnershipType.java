@@ -21,14 +21,37 @@ package org.kuali.kfs.vnd.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "PUR_VNDR_W8_OWNRSHP_T")
 public class W8TypeOwnershipType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ID")
     private Integer id;
+    @Column(name = "VNDR_OWNRSHIP_CD")
     private String vendorOwnershipCode;
+    @Column(name = "VNDR_W8_TYP_CD")
     private String w8TypeCode;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_W8_TYP_CD", insertable = false, updatable = false)
     private W8Type w8Type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_OWNRSHIP_CD", insertable = false, updatable = false)
     private OwnershipType ownershipType;
 
     public W8TypeOwnershipType() {

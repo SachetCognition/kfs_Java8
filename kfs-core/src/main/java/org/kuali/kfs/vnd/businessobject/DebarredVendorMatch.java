@@ -22,36 +22,82 @@ import java.util.Date;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
+@Entity
+@Table(name = "PUR_VNDR_EXCL_MTCH_T")
 public class DebarredVendorMatch extends PersistableBusinessObjectBase {
     public static final String VENDOR_TYPE = "vendorHeader.vendorTypeCode";
     public static final String CONFIRM_STATUS = "confirmStatusCode";
     public static final String EXCLUSION_STATUS = "vendorExclusionStatus";
     public static final String DEBARRED_VENDOR_ID = "debarredVendorId";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_EXCL_ID")
     private int debarredVendorId;
+    @Column(name = "VNDR_EXCL_LOAD_DT")
     private Date loadDate;
+    @Column(name = "VNDR_EXCL_NM")
     private String name;
+    @Column(name = "VNDR_EXCL_LN1_ADDR")
     private String address1;
+    @Column(name = "VNDR_EXCL_LN2_ADDR")
     private String address2;
+    @Column(name = "VNDR_EXCL_CTY_NM")
     private String city;
+    @Column(name = "VNDR_EXCL_ST_CD")
     private String state;
+    @Column(name = "VNDR_EXCL_PRVN_NM")
     private String province;
+    @Column(name = "VNDR_EXCL_ZIP_CD")
     private String zip;
+    @Column(name = "VNDR_EXCL_OTHR_NM")
     private String aliases;
+    @Column(name = "VNDR_EXCL_DESC_TXT")
     private String description;
+    @Column(name = "VNDR_EXCL_CFRM_STAT_CD")
     private String confirmStatusCode;
+    @Column(name = "LST_UPDT_TS")
     private Date lastUpdatedTimeStamp;
+    @Column(name = "LST_UPDT_PRNCPL_NM")
     private String lastUpdatedPrincipalName;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Column(name = "VNDR_ADDR_GNRTD_ID")
     private long addressGeneratedId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "VNDR_HDR_GNRTD_ID", referencedColumnName = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "VNDR_DTL_ASND_ID", referencedColumnName = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+    })
     private VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_ADDR_GNRTD_ID", insertable = false, updatable = false)
     private VendorAddress vendorAddress;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false)
     private VendorHeader vendorHeader;
 
+    @Transient
     private String vendorExclusionStatus; // not persisted in the db
+    @Transient
     private String concatenatedId; // not persisted in the db
+    @Transient
     private String concatenatedAliases; // not persisted in the db
 
     /**
