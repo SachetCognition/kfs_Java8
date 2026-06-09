@@ -22,7 +22,20 @@ package org.kuali.kfs.module.external.kc.businessobject;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.apache.log4j.Logger;
+import org.hibernate.annotations.Type;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -32,23 +45,49 @@ import org.springframework.beans.BeanUtils;
 /**
  * IndrectCostRecoveryAccount
  */
+@Entity
+@Table(name = "CA_ACCT_AUTODEF_ICR_T")
 public class IndirectCostRecoveryAutoDefAccount extends PersistableBusinessObjectBase implements MutableInactivatable{
     private static Logger LOG = Logger.getLogger(IndirectCostRecoveryAutoDefAccount.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CA_ACCT_AUTODEF_ICR_SEQ")
+    @SequenceGenerator(name = "CA_ACCT_AUTODEF_ICR_SEQ", sequenceName = "CA_ACCT_AUTODEF_ICR_SEQ")
+    @Column(name = "CA_ICR_ACCT_GNRTD_ID")
     private Integer indirectCostRecoveryAccountGeneratedIdentifier;
     
     //foreign keys to Account
+    @Transient
     private String chartOfAccountsCode;
+    @Transient
     private String accountNumber;
     
+    @Column(name = "ACCT_DFLT_ID")
     private Integer accountDefaultId;
+
+    @Column(name = "ICR_FIN_COA_CD")
     private String indirectCostRecoveryFinCoaCode;
+
+    @Column(name = "ICR_FIN_ACCT_NBR")
     private String indirectCostRecoveryAccountNumber;
+
+    @Column(name = "ACLN_PCT", precision = 19, scale = 2)
     private BigDecimal accountLinePercent;
+
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Type(type = "yes_no")
     private boolean active;
     
     //BO Reference
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "ICR_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ICR_FIN_ACCT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account indirectCostRecoveryAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "ICR_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart indirectCostRecoveryChartOfAccounts;
     /**
      * Default constructor.

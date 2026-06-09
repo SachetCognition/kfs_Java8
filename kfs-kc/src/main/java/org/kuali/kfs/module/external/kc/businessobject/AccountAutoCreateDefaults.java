@@ -24,7 +24,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.Type;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountType;
 import org.kuali.kfs.coa.businessobject.BudgetRecordingLevel;
@@ -52,65 +69,203 @@ import org.kuali.rice.location.framework.state.StateEbo;
 /**
  *
  */
+@Entity
+@Table(name = "CA_ACCT_AUTO_CREATE_DFLT_T")
 public class AccountAutoCreateDefaults extends PersistableBusinessObjectBase implements MutableInactivatable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountAutoCreateDefaults.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CA_ACCT_AUTO_CREATE_DFLT_SEQ")
+    @SequenceGenerator(name = "CA_ACCT_AUTO_CREATE_DFLT_SEQ", sequenceName = "CA_ACCT_AUTO_CREATE_DFLT_SEQ")
+    @Column(name = "ACCT_DFLT_ID")
     protected Integer accountDefaultId;
+
+    @Column(name = "KC_UNIT")
     protected String kcUnit;
     //protected KCUnit kcUnit;
+
+    @Column(name = "KC_UNIT_NAME")
     protected String kcUnitName;
+
+    @ManyToOne
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     protected Organization organization;
+
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+
+    @Column(name = "ACCT_ZIP_CD")
     protected String accountZipCode;
+
+    @Column(name = "ACCT_CITY_NM")
     protected String accountCityName;
+
+    @Column(name = "ACCT_STATE_CD")
     protected String accountStateCode;
+
+    @Column(name = "ACCT_STREET_ADDR")
     protected String accountStreetAddress;
+
+    @Transient
     private String accountCountryCode = KFSConstants.COUNTRY_CODE_UNITED_STATES;
+
+    @ManyToOne
+    @JoinColumn(name = "ACCT_TYP_CD", insertable = false, updatable = false)
     protected AccountType accountType;
+
+    @Column(name = "ACCT_TYP_CD")
     protected String accountTypeCode;
+
+    @Column(name = "ACCT_PHYS_CMP_CD")
     protected String accountPhysicalCampusCode;
+
+    @ManyToOne
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     protected SubFundGroup subFundGroup;
+
+    @Column(name = "SUB_FUND_GRP_CD")
     protected String subFundGroupCode;
+
+    @Column(name = "ACCT_FRNG_BNFT_CD")
+    @Type(type = "yes_no")
     protected boolean accountsFringesBnftIndicator;
+
+    @ManyToOne
+    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart fringeBenefitsChartOfAccount;
+
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+
+    @Column(name = "RPTS_TO_ACCT_NBR")
     protected String reportsToAccountNumber;
+
+    @Column(name = "ACCT_FSC_OFC_UID")
     protected String accountFiscalOfficerSystemIdentifier;
+
+    @Column(name = "ACCT_SPVSR_UNVL_ID")
     protected String accountsSupervisorySystemsIdentifier;
+
+    @Column(name = "ACCT_MGR_UNVL_ID")
     protected String accountManagerSystemIdentifier;
+
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "RPTS_TO_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "RPTS_TO_ACCT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     protected Account reportsToAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "CONT_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart continuationChartOfAccount;
+
+    @Column(name = "CONT_FIN_COA_CD")
     protected String continuationFinChrtOfAcctCd;
+
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "CONT_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "CONT_ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     protected Account continuationAccount;
+
+    @Column(name = "CONT_ACCOUNT_NBR")
     protected String continuationAccountNumber;
+
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "INCOME_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "INCOME_ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     protected Account incomeStreamAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "INCOME_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart incomeStreamChartOfAccounts;
+
+    @Column(name = "INCOME_FIN_COA_CD")
     protected String incomeStreamFinancialCoaCode;
+
+    @Column(name = "INCOME_ACCOUNT_NBR")
     protected String incomeStreamAccountNumber;
+
+    @Column(name = "BDGT_REC_LVL_CD")
     protected String budgetRecordingLevelCode;
+
+    @ManyToOne
+    @JoinColumn(name = "BDGT_REC_LVL_CD", insertable = false, updatable = false)
     protected BudgetRecordingLevel budgetRecordingLevel;
+
+    @ManyToOne
+    @JoinColumn(name = "ACCT_SF_CD", insertable = false, updatable = false)
     protected SufficientFundsCode sufficientFundsCode;
+
+    @Column(name = "ACCT_SF_CD")
     protected String accountSufficientFundsCode;
+
+    @Column(name = "ACCT_PND_SF_CD")
+    @Type(type = "yes_no")
     protected boolean pendingAcctSufficientFundsIndicator;
+
+    @Column(name = "FIN_EXT_ENC_SF_CD")
+    @Type(type = "yes_no")
     protected boolean extrnlFinEncumSufficntFndIndicator;
+
+    @Column(name = "FIN_INT_ENC_SF_CD")
+    @Type(type = "yes_no")
     protected boolean intrnlFinEncumSufficntFndIndicator;
+
+    @Column(name = "FIN_PRE_ENC_SF_CD")
+    @Type(type = "yes_no")
     protected boolean finPreencumSufficientFundIndicator;
+
+    @Column(name = "FIN_OBJ_PRSCTRL_CD")
+    @Type(type = "yes_no")
     protected boolean financialObjectivePrsctrlIndicator;
+
+    @Column(name = "CG_ACCT_RESP_ID")
     protected Integer contractsAndGrantsAccountResponsibilityId;
+
+    @Column(name = "ACCT_DESC_CMPS_CD")
     protected String accountDescriptionCampusCode;
+
+    @Column(name = "ACCT_DESC_BLDG_CD")
     protected String accountDescriptionBuildingCode;
+
+    @Column(name = "ACCT_CLOSED_IND")
+    @Type(type = "org.kuali.kfs.module.external.kc.util.AccountClosedIndicatorConverter")
     protected boolean active;
 
+    @Transient
     private CampusEbo accountPhysicalCampus;
+    @Transient
     protected StateEbo accountState;
+    @Transient
     private PostalCodeEbo postalZipCode;
 
+    @Transient
     protected Person accountFiscalOfficerUser;
+    @Transient
     protected Person accountSupervisoryUser;
+    @Transient
     protected Person accountManagerUser;
+    @Transient
     protected ContractsAndGrantsUnit unitDTO;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "ACCT_DFLT_ID")
+    @OrderBy("indirectCostRecoveryAccountGeneratedIdentifier ASC")
     protected List<IndirectCostRecoveryAutoDefAccount> indirectCostRecoveryAutoDefAccounts;
 
     /**

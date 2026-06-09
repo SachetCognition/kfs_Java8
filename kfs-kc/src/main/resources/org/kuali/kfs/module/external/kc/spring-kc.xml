@@ -27,7 +27,41 @@
                            http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
-                           
+
+    <!-- JPA EntityManagerFactory for kfs-kc module -->
+    <bean id="kcEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitName" value="kfs-kc"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+                <property name="showSql" value="false"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- JPA Transaction Manager for kfs-kc -->
+    <bean id="kcTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="kcEntityManagerFactory"/>
+    </bean>
+
+    <!-- JPA DAO beans -->
+    <bean id="accountAutoCreateDefaultsDao" class="org.kuali.kfs.module.external.kc.dataaccess.impl.AccountAutoCreateDefaultsDaoJpa">
+        <property name="entityManager">
+            <bean class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+                <property name="entityManagerFactory" ref="kcEntityManagerFactory"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="billingFrequencyMappingDao" class="org.kuali.kfs.module.external.kc.dataaccess.impl.BillingFrequencyMappingDaoJpa">
+        <property name="entityManager">
+            <bean class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+                <property name="entityManagerFactory" ref="kcEntityManagerFactory"/>
+            </bean>
+        </property>
+    </bean>
+
  	<bean id="cgModuleConfiguration" parent="cgModuleConfiguration-parentBean" />
     <bean id="cgModuleConfiguration-parentBean" class="org.kuali.kfs.module.external.kc.service.impl.KcFinancialSystemModuleConfiguration" abstract="true">
         <property name="namespaceCode" value="KFS-CG" />
@@ -112,11 +146,7 @@
                 <value>classpath:org/kuali/kfs/module/external/kc/document/datadictionary/*.xml</value>
 			</list>
 		</property> 	
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/external/kc/ojb-kc.xml</value>
-			</list>
-		</property>
+		<!-- OJB repository removed: JPA annotations and DAO implementations replace OJB persistence -->
  	</bean>
     <bean id="cgModuleService" parent="cgModuleService-parentBean"/>
  
@@ -164,7 +194,7 @@
     
     <bean id="accountDefaultsService" parent="accountDefaultsService-parentBean"/>
     <bean id="accountDefaultsService-parentBean" class="org.kuali.kfs.module.external.kc.service.impl.AccountDefaultServiceImpl" abstract="true">
-      	<property name="businessObjectService" ref="businessObjectService" />
+      	<property name="accountAutoCreateDefaultsDao" ref="accountAutoCreateDefaultsDao" />
       	<property name="contractsAndGrantsModuleService" ref="contractsAndGrantsModuleService" />
     </bean>
     
@@ -237,7 +267,7 @@
     
     <bean id="billingFrequencyService" parent="billingFrequencyService-parentBean"/>
     <bean id="billingFrequencyService-parentBean" class="org.kuali.kfs.module.external.kc.service.impl.BillingFrequencyServiceImpl" abstract="true" >
-    	<property name="businessObjectService" ref="businessObjectService" />
+    	<property name="billingFrequencyMappingDao" ref="billingFrequencyMappingDao" />
     	<property name="configurationService" ref="configurationService"/>
     </bean>
     
