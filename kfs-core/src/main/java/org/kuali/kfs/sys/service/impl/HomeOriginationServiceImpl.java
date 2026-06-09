@@ -19,12 +19,12 @@
 package org.kuali.kfs.sys.service.impl;
 
 import org.kuali.kfs.sys.businessobject.HomeOrigination;
+import org.kuali.kfs.sys.rice.KfsBusinessObjectService;
 import org.kuali.kfs.sys.service.HomeOriginationService;
-import org.kuali.rice.krad.service.BusinessObjectService;
 import org.springframework.cache.annotation.Cacheable;
 
 public class HomeOriginationServiceImpl implements HomeOriginationService {
-    protected BusinessObjectService businessObjectService;
+    protected KfsBusinessObjectService businessObjectService;
 
     /**
      * Retrieves a HomeOrigination object. Currently, there is only a single, unique HomeOriginationCode record in the database.
@@ -37,7 +37,7 @@ public class HomeOriginationServiceImpl implements HomeOriginationService {
     }
 
 
-    public void setBusinessObjectService(BusinessObjectService businessObjectService) {
+    public void setBusinessObjectService(KfsBusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
     }
 
