@@ -30,6 +30,7 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 /**
@@ -45,11 +46,13 @@ public class AssetPaymentDocumentType extends PersistableBusinessObjectBase impl
     private Long documentTypeId;
     @Column(name = "DOC_TYP_NM")
     private String expenditureFinancialDocumentTypeCode;
+    @Transient
     private String label;
     @Column(name = "ACTV_IND")
     @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
 
