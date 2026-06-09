@@ -78,11 +78,14 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         sql.append("AND inv.AR_OPEN_INV_IND = 'Y' ");
         sql.append("AND d.FIN_COA_CD = ?2 ");
         sql.append("AND d.ACCOUNT_NBR = ?3 ");
+        int nextParam = 4;
         if (begin != null) {
-            sql.append("AND inv.AR_BILLING_DT >= ?4 ");
+            sql.append("AND inv.AR_BILLING_DT >= ?" + nextParam + " ");
+            nextParam++;
         }
         if (end != null) {
-            sql.append("AND inv.AR_BILLING_DT <= ?5 ");
+            sql.append("AND inv.AR_BILLING_DT <= ?" + nextParam + " ");
+            nextParam++;
         }
         sql.append("GROUP BY h.CUST_NBR, c.CUST_NM");
 
@@ -90,11 +93,12 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         query.setParameter(1, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setParameter(2, chart);
         query.setParameter(3, account);
+        int setParam = 4;
         if (begin != null) {
-            query.setParameter(4, begin);
+            query.setParameter(setParam++, begin);
         }
         if (end != null) {
-            query.setParameter(5, end);
+            query.setParameter(setParam++, end);
         }
 
         return extractResults(query);
@@ -116,11 +120,14 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         sql.append("AND inv.AR_OPEN_INV_IND = 'Y' ");
         sql.append("AND det.FIN_COA_CD = ?2 ");
         sql.append("AND det.ACCOUNT_NBR = ?3 ");
+        int nextParam = 4;
         if (begin != null) {
-            sql.append("AND inv.AR_BILLING_DT >= ?4 ");
+            sql.append("AND inv.AR_BILLING_DT >= ?" + nextParam + " ");
+            nextParam++;
         }
         if (end != null) {
-            sql.append("AND inv.AR_BILLING_DT <= ?5 ");
+            sql.append("AND inv.AR_BILLING_DT <= ?" + nextParam + " ");
+            nextParam++;
         }
         sql.append("GROUP BY h.CUST_NBR, c.CUST_NM");
 
@@ -128,11 +135,12 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         query.setParameter(1, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setParameter(2, chart);
         query.setParameter(3, account);
+        int setParam = 4;
         if (begin != null) {
-            query.setParameter(4, begin);
+            query.setParameter(setParam++, begin);
         }
         if (end != null) {
-            query.setParameter(5, end);
+            query.setParameter(setParam++, end);
         }
 
         return extractResults(query);
@@ -154,11 +162,14 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         sql.append("  AND sub.FIN_COA_CD = ?2 ");
         sql.append("  AND sub.ACCOUNT_NBR = ?3 ");
         sql.append("  AND sub.FDOC_NBR = disc.FDOC_NBR ");
+        int nextParam = 4;
         if (begin != null) {
-            sql.append("  AND inv.AR_BILLING_DT >= ?4 ");
+            sql.append("  AND inv.AR_BILLING_DT >= ?" + nextParam + " ");
+            nextParam++;
         }
         if (end != null) {
-            sql.append("  AND inv.AR_BILLING_DT <= ?5 ");
+            sql.append("  AND inv.AR_BILLING_DT <= ?" + nextParam + " ");
+            nextParam++;
         }
         sql.append("  AND sub.AR_INV_ITM_DSCT_LN_NBR IS NOT NULL ");
         sql.append(") ");
@@ -168,11 +179,12 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         query.setParameter(1, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setParameter(2, chart);
         query.setParameter(3, account);
+        int setParam = 4;
         if (begin != null) {
-            query.setParameter(4, begin);
+            query.setParameter(setParam++, begin);
         }
         if (end != null) {
-            query.setParameter(5, end);
+            query.setParameter(setParam++, end);
         }
 
         return extractResults(query);
@@ -214,11 +226,14 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
             sql.append("AND inv.AR_BILL_BY_COA_CD = ?2 ");
             sql.append("AND inv.AR_BILL_BY_ORG_CD = ?3 ");
         }
+        int nextParam = 4;
         if (begin != null) {
-            sql.append("AND inv.AR_BILLING_DT >= ?4 ");
+            sql.append("AND inv.AR_BILLING_DT >= ?" + nextParam + " ");
+            nextParam++;
         }
         if (end != null) {
-            sql.append("AND inv.AR_BILLING_DT <= ?5 ");
+            sql.append("AND inv.AR_BILLING_DT <= ?" + nextParam + " ");
+            nextParam++;
         }
         sql.append("GROUP BY h.CUST_NBR, c.CUST_NM");
 
@@ -226,11 +241,12 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         query.setParameter(1, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setParameter(2, chart);
         query.setParameter(3, org);
+        int setParam = 4;
         if (begin != null) {
-            query.setParameter(4, begin);
+            query.setParameter(setParam++, begin);
         }
         if (end != null) {
-            query.setParameter(5, end);
+            query.setParameter(setParam++, end);
         }
 
         return extractResults(query);
@@ -255,11 +271,14 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
             sql.append("AND inv.AR_BILL_BY_COA_CD = ?2 ");
             sql.append("AND inv.AR_BILL_BY_ORG_CD = ?3 ");
         }
+        int nextParam = 4;
         if (begin != null) {
-            sql.append("AND inv.AR_BILLING_DT >= ?4 ");
+            sql.append("AND inv.AR_BILLING_DT >= ?" + nextParam + " ");
+            nextParam++;
         }
         if (end != null) {
-            sql.append("AND inv.AR_BILLING_DT <= ?5 ");
+            sql.append("AND inv.AR_BILLING_DT <= ?" + nextParam + " ");
+            nextParam++;
         }
         sql.append("GROUP BY h.CUST_NBR, c.CUST_NM");
 
@@ -267,11 +286,12 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         query.setParameter(1, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setParameter(2, chart);
         query.setParameter(3, org);
+        int setParam = 4;
         if (begin != null) {
-            query.setParameter(4, begin);
+            query.setParameter(setParam++, begin);
         }
         if (end != null) {
-            query.setParameter(5, end);
+            query.setParameter(setParam++, end);
         }
 
         return extractResults(query);
@@ -299,11 +319,14 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
             sql.append("  AND inv.AR_BILL_BY_COA_CD = ?2 ");
             sql.append("  AND inv.AR_BILL_BY_ORG_CD = ?3 ");
         }
+        int nextParam = 4;
         if (begin != null) {
-            sql.append("  AND inv.AR_BILLING_DT >= ?4 ");
+            sql.append("  AND inv.AR_BILLING_DT >= ?" + nextParam + " ");
+            nextParam++;
         }
         if (end != null) {
-            sql.append("  AND inv.AR_BILLING_DT <= ?5 ");
+            sql.append("  AND inv.AR_BILLING_DT <= ?" + nextParam + " ");
+            nextParam++;
         }
         sql.append("  AND sub.FDOC_NBR = disc.FDOC_NBR ");
         sql.append("  AND sub.AR_INV_ITM_DSCT_LN_NBR IS NOT NULL ");
@@ -314,11 +337,12 @@ public class CustomerAgingReportDaoJpa implements CustomerAgingReportDao {
         query.setParameter(1, KFSConstants.DocumentStatusCodes.APPROVED);
         query.setParameter(2, chart);
         query.setParameter(3, org);
+        int setParam = 4;
         if (begin != null) {
-            query.setParameter(4, begin);
+            query.setParameter(setParam++, begin);
         }
         if (end != null) {
-            query.setParameter(5, end);
+            query.setParameter(setParam++, end);
         }
 
         return extractResults(query);
