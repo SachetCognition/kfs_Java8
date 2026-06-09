@@ -66,6 +66,9 @@
   </prerequisites>
   <properties>
 
+    <!-- Spring Boot version -->
+    <spring-boot.version>3.3.5</spring-boot.version>
+
     <!-- Default empty argLine so ${argLine} resolves when JaCoCo is skipped -->
     <argLine></argLine>
     <!-- Shared JVM flags for surefire: add-opens for OJB CGLIB on Java 21 -->
