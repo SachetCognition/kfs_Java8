@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -58,6 +59,7 @@ public abstract class ImportedExpenseBase extends PersistableBusinessObjectBase 
      * Gets the id attribute.
      * @return Returns the id.
      */
+    @Id
     @Column(name = "ID", nullable = false)
     public Long getId() {
         return id;

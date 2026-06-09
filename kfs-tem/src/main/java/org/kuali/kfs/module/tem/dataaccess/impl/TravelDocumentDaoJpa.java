@@ -120,7 +120,7 @@ public class TravelDocumentDaoJpa implements TravelDocumentDao {
 
         cq.where(
             root.get("arInvoiceDocNumber").in(arInvoiceDocNumbers),
-            cb.isNull(root.get("taxableRamificationNotificationDate"))
+            cb.isNull(root.get("taxRamificationNotificationDate"))
         );
 
         TypedQuery<TravelAdvance> query = entityManager.createQuery(cq);
@@ -133,8 +133,8 @@ public class TravelDocumentDaoJpa implements TravelDocumentDao {
         CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
         Root<TravelAdvance> root = cq.from(TravelAdvance.class);
 
-        cq.multiselect(cb.greatest(root.<java.sql.Date>get("taxableRamificationNotificationDate")));
-        cq.where(cb.isNotNull(root.get("taxableRamificationNotificationDate")));
+        cq.multiselect(cb.greatest(root.<java.sql.Date>get("taxRamificationNotificationDate")));
+        cq.where(cb.isNotNull(root.get("taxRamificationNotificationDate")));
 
         TypedQuery<Object[]> query = entityManager.createQuery(cq);
         List<Object[]> results = query.getResultList();
@@ -217,7 +217,8 @@ public class TravelDocumentDaoJpa implements TravelDocumentDao {
         subquery.select(expRoot.<String>get("documentNumber"));
         subquery.where(
             cb.equal(expRoot.get("cardType"), TemConstants.TRAVEL_TYPE_CORP),
-            cb.equal(expRoot.get("expenseLineTypeCode"), TemConstants.EXPENSE_IMPORTED)
+            cb.equal(expRoot.get("expenseLineTypeCode"), TemConstants.EXPENSE_IMPORTED),
+            cb.equal(expRoot.get("historicalTravelExpense").get("creditCardAgency").get("paymentIndicator"), Boolean.TRUE)
         );
 
         cq.where(statusPred, nullExtract, root.get("documentNumber").in(subquery));

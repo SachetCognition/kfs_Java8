@@ -21,6 +21,9 @@ package org.kuali.kfs.module.tem.businessobject;
 import java.util.LinkedHashMap;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.kuali.kfs.module.tem.TemConstants;
@@ -39,6 +42,8 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
     private Boolean enableNonReimbursable = Boolean.TRUE;
     private String expenseLineTypeCode = TemConstants.EXPENSE_IMPORTED;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HIST_EXP_ID", insertable = false, updatable = false)
     private HistoricalTravelExpense historicalTravelExpense;
 
     public ImportedExpense(){
