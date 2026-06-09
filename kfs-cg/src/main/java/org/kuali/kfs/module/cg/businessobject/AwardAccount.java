@@ -33,25 +33,60 @@ import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * This class represents an association between an award and an account. It's like a reference to the account from the award. This
  * way an award can maintain a collection of these references instead of owning accounts directly.
  */
+@Entity
+@Table(name = "CG_AWD_ACCT_T")
+@IdClass(AwardAccount.AwardAccountId.class)
 public class AwardAccount extends PersistableBusinessObjectBase implements CGProjectDirector, MutableInactivatable, ContractsAndGrantsBillingAwardAccount {
 	private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AwardAccount.class);
 
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
+    @Column(name = "FNL_BILLED_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean finalBilledIndicator;
+    @Column(name = "CURR_LST_BILLED_DT")
     private Date currentLastBilledDate;
+    @Column(name = "PREV_LST_BILLED_DT")
     private Date previousLastBilledDate;
 
+    @Transient
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @Transient
     private Person projectDirector;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Award award;
 
     /**
@@ -326,4 +361,27 @@ public class AwardAccount extends PersistableBusinessObjectBase implements CGPro
         }
         return null;
     }
+
+    public static class AwardAccountId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private Long proposalNumber;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+
+        public AwardAccountId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            AwardAccountId that = (AwardAccountId) o;
+            return java.util.Objects.equals(proposalNumber, that.proposalNumber) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(proposalNumber, chartOfAccountsCode, accountNumber);
+        }
+    }
+
 }
