@@ -62,7 +62,7 @@ public class IndirectCostRecoveryAutoDefAccount extends PersistableBusinessObjec
     @Transient
     private String accountNumber;
     
-    @Column(name = "ACCT_DFLT_ID")
+    @Column(name = "ACCT_DFLT_ID", insertable = false, updatable = false)
     private Integer accountDefaultId;
 
     @Column(name = "ICR_FIN_COA_CD")

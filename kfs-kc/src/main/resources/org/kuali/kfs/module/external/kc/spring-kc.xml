@@ -146,7 +146,13 @@
                 <value>classpath:org/kuali/kfs/module/external/kc/document/datadictionary/*.xml</value>
 			</list>
 		</property> 	
-		<!-- OJB repository removed: JPA annotations and DAO implementations replace OJB persistence -->
+		<!-- OJB repository retained for Rice framework backward compatibility (maintenance documents, BusinessObjectService callers).
+		     Service-layer DAOs have been migrated to JPA; full OJB removal will follow once all framework callers are migrated. -->
+		<property name="databaseRepositoryFilePaths">
+			<list>
+				<value>org/kuali/kfs/module/external/kc/ojb-kc.xml</value>
+			</list>
+		</property>
  	</bean>
     <bean id="cgModuleService" parent="cgModuleService-parentBean"/>
  
