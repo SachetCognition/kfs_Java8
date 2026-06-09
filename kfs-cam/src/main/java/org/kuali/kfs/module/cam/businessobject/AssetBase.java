@@ -58,94 +58,180 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.util.UrlFactory;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 
+@MappedSuperclass
 public class AssetBase extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CPTLAST_NBR")
     protected Long capitalAssetNumber;
+    @Column(name = "CPTLAST_DESC")
     protected String capitalAssetDescription;
+    @Column(name = "CPTLAST_TYP_CD")
     protected String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_COND_CD")
     protected String conditionCode;
+    @Column(name = "CPTLAST_CRT_DT")
     protected Date createDate;
+    @Column(name = "CPTLAST_RECEIVE_DT")
     protected Date receiveDate;
+    @Column(name = "CPTLAST_LN_RTRN_DT")
     protected Date loanReturnDate;
+    @Column(name = "CPTLAST_LOAN_DT")
     protected Date loanDate;
+    @Column(name = "AST_EXPCTRETURN_DT")
     protected Date expectedReturnDate;
+    @Column(name = "FDOC_POST_PRD_CD")
     protected String financialDocumentPostingPeriodCode;
+    @Column(name = "FDOC_POST_YR")
     protected Integer financialDocumentPostingYear;
+    @Column(name = "ORG_OWNER_ACCT_NBR")
     protected String organizationOwnerAccountNumber;
+    @Column(name = "ORG_OWNER_COA_CD")
     protected String organizationOwnerChartOfAccountsCode;
+    @Column(name = "CPTLAST_VENDOR_NM")
     protected String vendorName;
+    @Column(name = "CPTLAST_ACQ_TYP_CD")
     protected String acquisitionTypeCode;
+    @Column(name = "CPTLAST_TOTCST_AMT")
     protected KualiDecimal totalCostAmount;
+    @Column(name = "CPTLAST_RPLC_AMT")
     protected KualiDecimal replacementAmount;
+    @Column(name = "CPTLAST_SALE_PRC")
     protected KualiDecimal salePrice;
+    @Column(name = "AST_EST_SELL_PRC")
     protected KualiDecimal estimatedSellingPrice;
+    @Column(name = "CPTLAST_SALVAG_AMT")
     protected KualiDecimal salvageAmount;
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     protected String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     protected String buildingSubRoomNumber;
+    @Column(name = "AST_RETIR_COA_CD")
     protected String retirementChartOfAccountsCode;
+    @Column(name = "AST_RETIR_ACCT_NBR")
     protected String retirementAccountNumber;
+    @Column(name = "AST_RETIRE_REAS_CD")
     protected String retirementReasonCode;
+    @Column(name = "AST_RETIR_PRD_CD")
     protected String retirementPeriodCode;
+    @Column(name = "AST_RETIR_FSCL_YR")
     protected Integer retirementFiscalYear;
+    @Column(name = "CASH_RCPT_FDOC_NBR")
     protected String cashReceiptFinancialDocumentNumber;
+    @Column(name = "AST_DEPR_MTHD1_CD")
     protected String primaryDepreciationMethodCode;
+    @Column(name = "AST_ESTFABRCMPL_DT")
     protected Date estimatedFabricationCompletionDate;
+    @Column(name = "AST_FABRESTTOT_AMT")
     protected KualiDecimal fabricationEstimatedTotalAmount;
+    @Column(name = "TRNFR_FND_FDOC_NBR")
     protected String transferOfFundsFinancialDocumentNumber;
+    @Column(name = "AST_INVN_STAT_CD")
     protected String inventoryStatusCode;
+    @Column(name = "CPTLAST_TAG_NBR")
     protected String campusTagNumber;
+    @Column(name = "CPTLAST_LSTINVN_DT")
     protected Timestamp lastInventoryDate;
+    @Column(name = "ORG_INVN_NM")
     protected String organizationInventoryName;
+    @Column(name = "CPTLAST_OLDTAG_NBR")
     protected String oldTagNumber;
+    @Column(name = "CPTLAST_MFR_NM")
     protected String manufacturerName;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     protected String manufacturerModelNumber;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     protected String serialNumber;
+    @Column(name = "AST_REP_UNVL_ID")
     protected String representativeUniversalIdentifier;
+    @Column(name = "CG_AGENCY_NBR")
     protected String agencyNumber;
+    @Column(name = "AST_PD_CASE_NBR")
     protected String campusPoliceDepartmentCaseNumber;
+    @Column(name = "AST_INVN_SCAN_CD")
     protected String inventoryScannedCode;
     protected boolean active;
+    @Column(name = "CPTL_AST_IN_SRVC_DT")
     protected Date capitalAssetInServiceDate;
+    @Column(name = "CPTL_AST_GOV_TAG_NBR")
     protected String governmentTagNumber;
+    @Column(name = "CPTL_AST_NTL_STOCK_NBR")
     protected String nationalStockNumber;
+    @Column(name = "CPTL_AST_LAND_CNTY_NM")
     protected String landCountyName;
+    @Column(name = "CPTL_AST_LAND_ACRG_SZ")
     protected Integer landAcreageSize;
+    @Column(name = "CPTL_AST_LAND_PRCL_NBR")
     protected String landParcelNumber;
+    @Column(name = "CPTL_AST_DEPR_DT")
     protected Date depreciationDate;
+    @Column(name = "FIN_OBJ_SUB_TYP_CD")
     protected String financialObjectSubTypeCode;
+    @Column(name = "AST_FABR_EST_RETN_YRS")
     protected Integer fabricationEstimatedRetentionYears;
 
+    @Transient
     protected AssetType capitalAssetType;
+    @Transient
     protected Account organizationOwnerAccount;
+    @Transient
     protected Chart organizationOwnerChartOfAccounts;
     protected CampusEbo campus;
+    @Transient
     protected Room buildingRoom;
+    @Transient
     protected Account retirementAccount;
+    @Transient
     protected Chart retirementChartOfAccounts;
+    @Transient
     protected AccountingPeriod financialDocumentPostingPeriod;
+    @Transient
     protected Building building;
+    @Transient
     protected AccountingPeriod retirementPeriod;
+    @Transient
     protected AssetRetirementReason retirementReason;
+    @Transient
     protected DocumentHeader cashReceiptFinancialDocument;
+    @Transient
     protected DocumentHeader transferOfFundsFinancialDocument;
+    @Transient
     protected AssetCondition condition;
+    @Transient
     protected AssetStatus inventoryStatus;
+    @Transient
     protected List<AssetPayment> assetPayments;
     protected Person assetRepresentative;
     protected Person borrowerPerson;
+    @Transient
     protected AssetOrganization assetOrganization;
     protected String organizationTagNumber;
+    @Transient
     protected List<AssetRepairHistory> assetRepairHistory;
+    @Transient
     protected AssetWarranty assetWarranty;
+    @Transient
     protected List<AssetComponent> assetComponents;
+    @Transient
     protected List<AssetLocation> assetLocations;
+    @Transient
     protected List<AssetRetirementGlobalDetail> assetRetirementHistory;
+    @Transient
     protected AssetDepreciationMethod assetPrimaryDepreciationMethod;
+    @Transient
     protected List<AssetRetirementGlobal> retirementGlobals;
+    @Transient
     protected ObjectSubType financialObjectSubType;
+    @Transient
     protected AssetAcquisitionType acquisitionType;
     protected ContractsAndGrantsAgency agency;
 

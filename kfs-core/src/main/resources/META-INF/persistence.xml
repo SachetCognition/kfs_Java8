@@ -17,6 +17,40 @@
         <!-- Migrated entity classes (add here as OJB mappings are converted) -->
         <class>org.kuali.kfs.coa.businessobject.Chart</class>
 
+        <!-- CAM module entities -->
+        <class>org.kuali.kfs.module.cam.businessobject.Asset</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetAcquisitionType</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetComponent</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetCondition</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetDepreciationConvention</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetDepreciationMethod</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetForSearching</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetGlobal</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetGlobalDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetGlpeSourceDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetLocation</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetLocationGlobal</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetLocationGlobalDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetLocationType</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetLock</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetObjectCode</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetOrganization</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetPayment</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentAllocationType</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentAssetDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetPaymentDocumentType</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetRepairHistory</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetRetirementGlobal</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetRetirementGlobalDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetRetirementReason</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetStatus</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetType</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetWarranty</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetYearEndDepreciation</class>
+        <class>org.kuali.kfs.module.cam.businessobject.AssetYearEndDepreciationDetail</class>
+        <class>org.kuali.kfs.module.cam.businessobject.BarcodeInventoryErrorDetail</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>

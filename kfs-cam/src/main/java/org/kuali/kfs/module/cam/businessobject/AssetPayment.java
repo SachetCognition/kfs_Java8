@@ -42,59 +42,114 @@ import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_PAYMENT_T")
 public class AssetPayment extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Id
+    @Column(name = "AST_PMT_SEQ_NBR")
     private Integer paymentSequenceNumber;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "FDOC_POST_YR")
     private Integer financialDocumentPostingYear;
+    @Column(name = "FDOC_POST_PRD_CD")
     private String financialDocumentPostingPeriodCode;
+    @Column(name = "FDOC_POST_DT")
     private Date financialDocumentPostingDate;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Column(name = "ORG_REFERENCE_ID")
     private String organizationReferenceId;
+    @Column(name = "ACCT_CHARGE_AMT")
     private KualiDecimal accountChargeAmount;
+    @Column(name = "PO_NUMBER")
     private String purchaseOrderNumber;
+    @Column(name = "REQUISITION_NBR")
     private String requisitionNumber;
+    @Column(name = "AST_DEPR1_BASE_AMT")
     private KualiDecimal primaryDepreciationBaseAmount;
+    @Column(name = "AST_ACUM_DEPR1_AMT")
     private KualiDecimal accumulatedPrimaryDepreciationAmount;
+    @Column(name = "AST_PRVYRDEPR1_AMT")
     private KualiDecimal previousYearPrimaryDepreciationAmount;
+    @Column(name = "AST_PRD1_DEPR1_AMT")
     private KualiDecimal period1Depreciation1Amount;
+    @Column(name = "AST_PRD2_DEPR1_AMT")
     private KualiDecimal period2Depreciation1Amount;
+    @Column(name = "AST_PRD3_DEPR1_AMT")
     private KualiDecimal period3Depreciation1Amount;
+    @Column(name = "AST_PRD4_DEPR1_AMT")
     private KualiDecimal period4Depreciation1Amount;
+    @Column(name = "AST_PRD5_DEPR1_AMT")
     private KualiDecimal period5Depreciation1Amount;
+    @Column(name = "AST_PRD6_DEPR1_AMT")
     private KualiDecimal period6Depreciation1Amount;
+    @Column(name = "AST_PRD7_DEPR1_AMT")
     private KualiDecimal period7Depreciation1Amount;
+    @Column(name = "AST_PRD8_DEPR1_AMT")
     private KualiDecimal period8Depreciation1Amount;
+    @Column(name = "AST_PRD9_DEPR1_AMT")
     private KualiDecimal period9Depreciation1Amount;
+    @Column(name = "AST_PRD10DEPR1_AMT")
     private KualiDecimal period10Depreciation1Amount;
+    @Column(name = "AST_PRD11DEPR1_AMT")
     private KualiDecimal period11Depreciation1Amount;
+    @Column(name = "AST_PRD12DEPR1_AMT")
     private KualiDecimal period12Depreciation1Amount;
+    @Column(name = "AST_TRNFR_PMT_CD")
     private String transferPaymentCode;
 
+    @Transient
     private Asset asset;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private ObjectCodeCurrent objectCodeCurrent;
+    @Transient
     private Account account;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private ProjectCode project;
+    @Transient
     private AccountingPeriod financialDocumentPostingPeriod;
     private DocumentTypeEBO financialSystemDocumentTypeCode;
+    @Transient
     private DocumentHeader documentHeader;
+    @Transient
     private OriginationCode financialSystemOrigination;
+    @Transient
     private SystemOptions option;
 
     // Non-persisted attributes:

@@ -25,16 +25,29 @@ import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
 
 /**
  *
  * This class is to store document type use by the asset global document - Asset Payment tab.
  */
 
+@Entity
+@Table(name = "CM_AST_PMT_DOC_TYP_T")
 public class AssetPaymentDocumentType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "DOC_TYP_ID")
     private Long documentTypeId;
+    @Column(name = "DOC_TYP_NM")
     private String expenditureFinancialDocumentTypeCode;
     private String label;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     private DocumentTypeEBO financialSystemDocumentTypeCode;

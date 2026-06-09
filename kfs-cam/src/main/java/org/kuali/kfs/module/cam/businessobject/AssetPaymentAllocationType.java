@@ -22,16 +22,32 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * Asset payment Allocation type is used to select the method of Allocation of payments. In other words, the type determines how
  * source line payments are distributed/allocated amonth the target assets.
  */
+@Entity
+@Table(name = "CM_AST_PMT_DST_CD_T")
 public class AssetPaymentAllocationType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Id
+    @Column(name = "AST_PMT_DST_CD")
     private String allocationCode;
+    @Column(name = "AST_PMT_DST_NM")
     private String allocationName;
+    @Column(name = "AST_PMT_DST_COL_NM")
     private String allocationColumnName;
+    @Column(name = "AST_PMT_DST_EDT")
+    @Convert(converter = YesNoConverter.class)
     private boolean allocationEditable;
 
 

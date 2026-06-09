@@ -25,22 +25,39 @@ import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySourceDetail;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
+@Entity
+@Table(name = "CM_AST_PMT_DTL_T")
 public class AssetGlpeSourceDetail extends PersistableBusinessObjectBase implements GeneralLedgerPendingEntrySourceDetail {
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "ACCT_CHARGE_AMT")
     private KualiDecimal amount;
     private String balanceTypeCode;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
     private String financialDocumentLineDescription;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
     private String organizationReferenceId;
+    @Column(name = "FDOC_POST_YR")
     private Integer postingYear;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
     private String referenceNumber;
     private String referenceOriginCode;
     private String referenceTypeCode;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
     private boolean source;
     private boolean expense;
@@ -49,9 +66,14 @@ public class AssetGlpeSourceDetail extends PersistableBusinessObjectBase impleme
     private boolean capitalizationOffset;
     private boolean payment;
     private boolean paymentOffset;
+    @Transient
     private Account account;
+    @Transient
     private ObjectCode objectCode;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private int sequenceNumber;
+    @Column(name = "FDOC_POST_PRD_CD")
     private String postingPeriodCode;
 
 

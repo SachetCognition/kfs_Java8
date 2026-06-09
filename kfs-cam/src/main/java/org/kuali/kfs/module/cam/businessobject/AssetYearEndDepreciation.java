@@ -29,14 +29,30 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetail;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 
+@Entity
+@Table(name = "CM_FSCL_YR_END_DEPR_HDR_T")
 public class AssetYearEndDepreciation extends PersistableBusinessObjectBase implements MutableInactivatable {
     private String documentNumber;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "YEAR_END_DEPR_RUN_DATE")
     private Date runDate;
+    @Column(name = "YEAR_END_DEPR_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Transient
     private List<AssetYearEndDepreciationDetail> assetYearEndDepreciationDetails;
+    @Transient
     private List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
 
 

@@ -35,28 +35,50 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * Accounting line for the asset payment document.
  */
+@Entity
+@Table(name = "CM_AST_PMT_DTL_T")
 public class AssetPaymentDetail extends SourceAccountingLine {
     private static Logger LOG = Logger.getLogger(AssetPaymentDetail.class);
 
+    @Column(name = "EXPND_FS_ORIGIN_CD")
     private String expenditureFinancialSystemOriginationCode;
+    @Column(name = "EXPND_FDOC_POST_DT")
     private Date expenditureFinancialDocumentPostedDate;
+    @Column(name = "AST_TRNFR_PMT_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean transferPaymentIndicator;
 
+    @Column(name = "EXPND_FDOC_NBR")
     private String expenditureFinancialDocumentNumber;
+    @Column(name = "EXPND_FDOC_TYP_CD")
     private String expenditureFinancialDocumentTypeCode;
+    @Column(name = "FDOC_POST_PRD_CD")
     private String postingPeriodCode;
+    @Column(name = "PO_NUMBER")
     private String purchaseOrderNumber;
+    @Column(name = "REQUISITION_NBR")
     private String requisitionNumber;
+    @Column(name = "ACCT_CHARGE_AMT")
     private KualiDecimal amount;
 
     // bo references
+    @Transient
     private AccountingPeriod financialDocumentPostingPeriod;
     private DocumentTypeEBO expenditureFinancialSystemDocumentTypeCode;
+    @Transient
     private OriginationCode expenditureFinancialSystemOrigination;
+    @Transient
     private Account account;
 
 

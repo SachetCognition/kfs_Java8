@@ -19,10 +19,14 @@
 package org.kuali.kfs.module.cam.businessobject;
 
 import org.kuali.kfs.integration.cam.CapitalAssetManagementAsset;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_T")
 public class Asset extends AssetBase implements CapitalAssetManagementAsset {
     
     public Asset(){

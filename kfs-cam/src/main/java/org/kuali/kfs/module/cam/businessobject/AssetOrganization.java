@@ -19,17 +19,30 @@
 package org.kuali.kfs.module.cam.businessobject;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_ORG_T")
 public class AssetOrganization extends PersistableBusinessObjectBase {
 
+	@Id
+	@Column(name = "CPTLAST_NBR")
 	protected Long capitalAssetNumber;
+	@Column(name = "ORG_CPTLAST_TYP_ID")
 	protected String organizationAssetTypeIdentifier;
+	@Column(name = "CPTLAST_ORGTAG_NBR")
 	protected String organizationTagNumber;
+	@Column(name = "ORG_TXT")
 	protected String organizationText;
 
+    @Transient
     protected Asset asset;
 
 	/**
