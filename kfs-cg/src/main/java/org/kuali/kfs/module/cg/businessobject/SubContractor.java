@@ -33,18 +33,37 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Subcontractors are vendors involved with an awarded {@link Proposal}.
  */
+@Entity
+@Table(name = "CG_SUBCNR_T")
 public class SubContractor extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CG_SUBCNR_NBR")
     protected String subcontractorNumber;
+    @Column(name = "CG_SUBCNR_NM")
     protected String subcontractorName;
+    @Column(name = "CG_SUBCNR_LN1_ADDR")
     protected String subcontractorAddressLine1;
+    @Column(name = "CG_SUBCNR_LN2_ADDR")
     protected String subcontractorAddressLine2;
+    @Column(name = "CG_SUBCNR_CITY_NM")
     protected String subcontractorCity;
+    @Column(name = "CG_SUBCNR_ST_CD")
     protected String subcontractorStateCode;
+    @Column(name = "CG_SUBCNR_ZIP_CD")
     protected String subcontractorZipCode;
+    @Column(name = "CGSUBCNR_CNTRY_CD")
     protected String subcontractorCountryCode;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     protected boolean active;
 
     protected StateEbo subcontractorState;

@@ -48,13 +48,31 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.NoteService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Defines a financial award object.
  */
+@Entity
+@Table(name = "CG_AWD_T")
 public class Award extends PersistableBusinessObjectBase implements MutableInactivatable, ContractsAndGrantsBillingAward {
     private static final String AWARD_INQUIRY_TITLE_PROPERTY = "message.inquiry.award.title";
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGAWD_BEG_DT")
     private Date awardBeginningDate;
+    @Column(name = "CGAWD_END_DT")
     private Date awardEndingDate;
     private Date lastBilledDate;
 
@@ -65,76 +83,153 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
      * @see #getAwardTotalAmount
      * @see #setAwardTotalAmount
      */
+    @Column(name = "CGAWD_TOT_AMT")
     protected KualiDecimal awardTotalAmount;
 
+    @Column(name = "CGAWD_ADDENDUM_NBR")
     private String awardAddendumNumber;
+    @Column(name = "CGAWD_ALOC_UCS_AMT")
     private KualiDecimal awardAllocatedUniversityComputingServicesAmount;
+    @Column(name = "CG_FEDPT_FND_AMT")
     private KualiDecimal federalPassThroughFundedAmount;
+    @Column(name = "CGAWD_ENTRY_DT")
     private Date awardEntryDate;
+    @Column(name = "CG_AGENCY_FUT1_AMT")
     private KualiDecimal agencyFuture1Amount;
+    @Column(name = "CG_AGENCY_FUT2_AMT")
     private KualiDecimal agencyFuture2Amount;
+    @Column(name = "CG_AGENCY_FUT3_AMT")
     private KualiDecimal agencyFuture3Amount;
+    @Column(name = "CGAWD_DOC_NBR")
     private String awardDocumentNumber;
+    @Column(name = "CGAWD_LST_UPDT_DT")
     private Timestamp awardLastUpdateDate;
+    @Column(name = "CG_FEDPT_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean federalPassThroughIndicator;
+    @Column(name = "CG_OLD_PRPSL_NBR")
     private String oldProposalNumber;
+    @Column(name = "CGAWD_DRCT_CST_AMT")
     private KualiDecimal awardDirectCostAmount;
+    @Column(name = "CGAWD_INDR_CST_AMT")
     private KualiDecimal awardIndirectCostAmount;
+    @Column(name = "CG_FED_FNDED_AMT")
     private KualiDecimal federalFundedAmount;
+    @Column(name = "CGAWD_CREATE_TS")
     private Timestamp awardCreateTimestamp;
+    @Column(name = "CGAWD_CLOSING_DT")
     private Date awardClosingDate;
+    @Column(name = "CGPRPSL_AWD_TYP_CD")
     private String proposalAwardTypeCode;
+    @Column(name = "CGAWD_STAT_CD")
     private String awardStatusCode;
+    @Column(name = "CG_LTRCR_FND_CD")
     private String letterOfCreditFundCode;
+    @Column(name = "CG_GRANT_DESC_CD")
     private String grantDescriptionCode;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "CG_FEDPT_AGNCY_NBR")
     private String federalPassThroughAgencyNumber;
+    @Column(name = "CG_AGNCY_ANALST_NM")
     private String agencyAnalystName;
+    @Column(name = "CG_ANALYST_PHN_NBR")
     private String analystTelephoneNumber;
+    @Column(name = "BILL_FREQ_CD")
     private String billingFrequencyCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BILL_FREQ_CD", insertable = false, updatable = false)
     private BillingFrequency billingFrequency;
+    @Column(name = "CGAWD_PROJ_TTL")
     private String awardProjectTitle;
+    @Column(name = "CGAWD_PURPOSE_CD")
     private String awardPurposeCode;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
     private String kimGroupNames;
+    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OrderBy("principalId ASC")
     private List<AwardProjectDirector> awardProjectDirectors;
     private AwardProjectDirector awardPrimaryProjectDirector;
+    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OrderBy("principalId ASC")
     private List<AwardFundManager> awardFundManagers;
     private AwardFundManager awardPrimaryFundManager;
+    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OrderBy("chartOfAccountsCode ASC, accountNumber ASC")
     private List<AwardAccount> awardAccounts;
+    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OrderBy("awardSubcontractorAmendmentNumber ASC, awardSubcontractorNumber ASC, subcontractorNumber ASC")
     private List<AwardSubcontractor> awardSubcontractors;
+    @OneToMany(mappedBy = "proposalNumber", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OrderBy("chartOfAccountsCode ASC, organizationCode ASC")
     private List<AwardOrganization> awardOrganizations;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Proposal proposal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_AWD_TYP_CD", insertable = false, updatable = false)
     private ProposalAwardType proposalAwardType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGAWD_STAT_CD", insertable = false, updatable = false)
     private AwardStatus awardStatus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_LTRCR_FND_CD", insertable = false, updatable = false)
     protected ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_GRANT_DESC_CD", insertable = false, updatable = false)
     private GrantDescription grantDescription;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_NBR", insertable = false, updatable = false)
     private Agency agency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_FEDPT_AGNCY_NBR", insertable = false, updatable = false)
     private Agency federalPassThroughAgency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGAWD_PURPOSE_CD", insertable = false, updatable = false)
     private ProposalPurpose awardPurpose;
     private AwardOrganization primaryAwardOrganization;
     private String routingOrg;
     private String routingChart;
 
+    @Column(name = "STATE_TRNSFR_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean stateTransferIndicator;
+    @Column(name = "EXCL_FRM_INV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean excludedFromInvoicing;
+    @Column(name = "ADDL_FRMS_REQ_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean additionalFormsRequiredIndicator;
+    @Column(name = "ADDL_FRMS_DESC")
     private String additionalFormsDescription;
+    @Column(name = "EXCL_FRM_INV_REASON_TXT")
     private String excludedFromInvoicingReason;
+    @Column(name = "INSTRMNT_TYP_CD")
     private String instrumentTypeCode;
+    @Column(name = "INV_OPT_CD")
     private String invoicingOptionCode;
 
+    @Column(name = "MIN_INV_AMT")
     private KualiDecimal minInvoiceAmount = KualiDecimal.ZERO;
 
+    @Column(name = "AUTO_APPROVE_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean autoApproveIndicator;
 
     private AccountsReceivableMilestoneSchedule milestoneSchedule;
     private AccountsReceivablePredeterminedBillingSchedule predeterminedBillingSchedule;
 
+    @Column(name = "FUNDING_EXP_DT")
     private Date fundingExpirationDate;
+    @Column(name = "CMPGN_ID")
     private String dunningCampaign;
+    @Column(name = "STOP_WRK_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean stopWorkIndicator;
+    @Column(name = "STOP_WRK_REASON_TXT")
     private String stopWorkReason;
 
     private List<Note> boNotes;

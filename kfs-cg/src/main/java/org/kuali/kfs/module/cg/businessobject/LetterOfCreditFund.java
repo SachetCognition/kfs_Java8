@@ -26,18 +26,40 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Letter Of Credit Fund under Contracts & Grants section.
  */
+@Entity
+@Table(name = "CG_LTRCR_FND_T")
 public class LetterOfCreditFund extends PersistableBusinessObjectBase implements ContractsAndGrantsLetterOfCreditFund, MutableInactivatable {
 
+    @Id
+    @Column(name = "CG_LTRCR_FND_CD")
     private String letterOfCreditFundCode;
+    @Column(name = "CG_LTRCR_FND_DESC")
     private String letterOfCreditFundDescription;
+    @Column(name = "CG_LTRCR_FNDGRP_CD")
     private String letterOfCreditFundGroupCode;
+    @Column(name = "CG_LTRCR_AMT")
     private KualiDecimal letterOfCreditFundAmount;
+    @Column(name = "CG_LTRCR_START_DT")
     private Date letterOfCreditFundStartDate;
+    @Column(name = "CG_LTRCR_EXPIRATION_DT")
     private Date letterOfCreditFundExpirationDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_LTRCR_FNDGRP_CD", insertable = false, updatable = false)
     private LetterOfCreditFundGroup letterOfCreditFundGroup;
+    @Column(name = "ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
 
     /**

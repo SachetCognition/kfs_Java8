@@ -27,17 +27,42 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  *
  */
+@IdClass(ProposalSubcontractorId.class)
+@Entity
+@Table(name = "CG_PRPSL_SUBCN_T")
 public class ProposalSubcontractor extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CGPRPSL_SUBCN_NBR")
     private String proposalSubcontractorNumber;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "CG_SUBCNR_NBR")
     private String subcontractorNumber;
+    @Column(name = "CGPRPSL_SUBCN_AMT")
     private KualiDecimal proposalSubcontractorAmount;
+    @Column(name = "CGPRPSL_SUBCN_DESC")
     private String proposalSubcontractorDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_SUBCNR_NBR", insertable = false, updatable = false)
     private SubContractor subcontractor;
 
     /**

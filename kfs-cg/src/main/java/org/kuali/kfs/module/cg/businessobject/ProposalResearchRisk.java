@@ -24,15 +24,38 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Represents a relationship between a {@link Proposal} and a {@link ResearchRisk}.
  */
+@IdClass(ProposalResearchRiskId.class)
+@Entity
+@Table(name = "CG_PRPSL_RSRCH_RSK_T")
 public class ProposalResearchRisk extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "RSRCH_RSK_TYP_CD")
     private String researchRiskTypeCode;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "RSRCH_RSK_TYP_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Proposal proposal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RSRCH_RSK_TYP_CD", insertable = false, updatable = false)
     private ResearchRiskType researchRiskType;
 
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {

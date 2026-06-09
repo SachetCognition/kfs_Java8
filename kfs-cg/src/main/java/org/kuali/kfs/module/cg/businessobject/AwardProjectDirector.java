@@ -29,16 +29,35 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * This class represents an association between an award and a project director. It's like a reference to the project director from
  * the award. This way an award can maintain a collection of these references instead of owning project directors directly.
  */
+@IdClass(AwardProjectDirectorId.class)
+@Entity
+@Table(name = "CG_AWD_PRJDR_T")
 public class AwardProjectDirector extends PersistableBusinessObjectBase implements Primaryable, CGProjectDirector, MutableInactivatable, ContractsAndGrantsProjectDirector {
 
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGAWD_PRMPRJDR_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean awardPrimaryProjectDirectorIndicator;
+    @Column(name = "CGAWD_PRJDRPRJ_TTL")
     private String awardProjectDirectorProjectTitle;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
     private Person projectDirector;

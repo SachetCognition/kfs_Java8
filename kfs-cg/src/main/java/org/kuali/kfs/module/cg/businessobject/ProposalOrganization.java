@@ -27,14 +27,34 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * Represents a relationship between a {@link Proposal} and an {@Org}.
  */
+@IdClass(ProposalOrganizationId.class)
+@Entity
+@Table(name = "CG_PRPSL_ORG_T")
 public class ProposalOrganization extends PersistableBusinessObjectBase implements Primaryable, MutableInactivatable {
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGPRPSL_PRMORG_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean proposalPrimaryOrganizationIndicator;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
     private Organization organization;

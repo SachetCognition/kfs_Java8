@@ -48,9 +48,7 @@
 			</list>
 		</property>
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/cg/ojb-cg.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>
@@ -142,7 +140,9 @@
 
 	<!-- DAOs -->
 
-	<bean id="closeDao" parent="platformAwareDao" class="org.kuali.kfs.module.cg.dataaccess.impl.CloseDaoOjb" />
+	<bean id="closeDao" class="org.kuali.kfs.module.cg.dataaccess.impl.CloseDaoJpa">
+		<property name="entityManager" ref="entityManagerFactory" />
+	</bean>
 
 	<!-- Services -->
 	<bean id="closeService"  parent="closeService-parentBean"/>

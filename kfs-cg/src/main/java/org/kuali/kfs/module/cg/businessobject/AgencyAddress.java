@@ -33,29 +33,65 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.framework.country.CountryEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@IdClass(AgencyAddressId.class)
+@Entity
+@Table(name = "CG_AGENCY_ADDR_T")
 public class AgencyAddress extends PersistableBusinessObjectBase implements Primaryable, ContractsAndGrantsAgencyAddress {
 
+    @Id
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Id
+    @Column(name = "CG_AGENCY_ADDR_ID")
     private Long agencyAddressIdentifier;
+    @Column(name = "CG_AGENCY_ADDR_NM")
     private String agencyAddressName;
+    @Column(name = "CNTCT_NM")
     private String agencyContactName;
+    @Column(name = "CG_AGENCY_LINE_1_ADDR")
     private String agencyLine1StreetAddress;
+    @Column(name = "CG_AGENCY_LINE_2_ADDR")
     private String agencyLine2StreetAddress;
+    @Column(name = "CG_AGENCY_LINE_3_ADDR")
     private String agencyLine3StreetAddress;
+    @Column(name = "CG_AGENCY_LINE_4_ADDR")
     private String agencyLine4StreetAddress;
+    @Column(name = "CG_AGENCY_CITY_NM")
     private String agencyCityName;
+    @Column(name = "CG_AGENCY_STATE_CD")
     private String agencyStateCode;
+    @Column(name = "CG_AGENCY_ZIP_CD")
     private String agencyZipCode;
+    @Column(name = "CG_AGENCY_CNTRY_CD")
     private String agencyCountryCode;
+    @Column(name = "PHN_NBR")
     private String agencyPhoneNumber;
+    @Column(name = "FAX_NBR")
     private String agencyFaxNumber;
+    @Column(name = "CG_AGENCY_ADDR_INTL_PROV_NM")
     private String agencyAddressInternationalProvinceName;
+    @Column(name = "CG_AGENCY_INTL_MAIL_CD")
     private String agencyInternationalMailCode;
+    @Column(name = "AGENCY_CNTCT_EMAIL_ADDR")
     private String agencyContactEmailAddress;
+    @Column(name = "CG_AGENCY_ADDR_TYPE_CD")
     private String customerAddressTypeCode;
+    @Column(name = "CG_AGENCY_ADDR_END_DT")
     private Date agencyAddressEndDate;
 
     private AccountsReceivableCustomerAddressType customerAddressType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_NBR", insertable = false, updatable = false)
     private Agency agency;
     private CountryEbo agencyCountry;
 

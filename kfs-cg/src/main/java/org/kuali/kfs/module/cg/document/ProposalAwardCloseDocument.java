@@ -27,15 +27,27 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase;
 import org.kuali.rice.kim.api.identity.Person;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Instances of this class are used to signal to the CloseBatchStep that a close should occur on a particular day.
  */
+@Entity
+@Table(name = "CG_PRPSL_CLOSE_T")
 public class ProposalAwardCloseDocument extends FinancialSystemTransactionalDocumentBase {
 
+    @Column(name = "CG_LAST_CLOSED_DT")
     protected Date closeOnOrBeforeDate;
+    @Column(name = "CG_USR_INITIATE_DT")
     protected Date userInitiatedCloseDate;
+    @Column(name = "CGAWD_CLOSED_CNT")
     protected Long awardClosedCount;
+    @Column(name = "CGPRPSL_CLOSED_CNT")
     protected Long proposalClosedCount;
+    @Column(name = "PERSON_USER_ID")
     protected String principalName;
 
     protected Person personUser;

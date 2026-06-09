@@ -26,23 +26,53 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * This class represents an association between an award and a subcontractor. It's like a reference to the subcontractor from the
  * award. This way an award can maintain a collection of these references instead of owning subcontractors directly.
  */
+@IdClass(AwardSubcontractorId.class)
+@Entity
+@Table(name = "CG_AWD_SUBCN_T")
 public class AwardSubcontractor extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "AWD_SUBCN_AMND_NBR")
     private String awardSubcontractorAmendmentNumber;
+    @Id
+    @Column(name = "CGAWD_SUBCN_NBR")
     private String awardSubcontractorNumber;
+    @Id
+    @Column(name = "CG_SUBCNR_NBR")
     private String subcontractorNumber;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CG_SUBCN_AMT")
     private KualiDecimal subcontractorAmount;
+    @Column(name = "SUBCNR_CNTCT_F_NM")
     private String subcontractorContactFirstName;
+    @Column(name = "SUBCNR_CNTCT_L_NM")
     private String subcontractorContactLastName;
+    @Column(name = "SUBCN_AUDTHIST_TXT")
     private String subcontractorAuditHistoryText;
+    @Column(name = "CGAWD_SUBCN_DESC")
     private String awardSubcontractorDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_SUBCNR_NBR", insertable = false, updatable = false)
     private SubContractor subcontractor;
 
     /**

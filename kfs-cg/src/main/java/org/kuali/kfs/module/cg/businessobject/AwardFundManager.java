@@ -29,16 +29,35 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 /**
  * This class represents an association between an award and a fund manager. It's like a reference to the fund manager from the
  * award. This way an award can maintain a collection of these references instead of owning fund managers directly.
  */
+@IdClass(AwardFundManagerId.class)
+@Entity
+@Table(name = "CG_AWD_FNDMGR_T")
 public class AwardFundManager extends PersistableBusinessObjectBase implements Primaryable, MutableInactivatable, ContractsAndGrantsFundManager {
 
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "PRI_FNDMGR_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean primaryFundManagerIndicator;
+    @Column(name = "PROJECT_TTL")
     private String projectTitle;
+    @Column(name = "ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
     private Person fundManager;
