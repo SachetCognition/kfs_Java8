@@ -107,16 +107,16 @@
     <commons-transaction.version>1.2</commons-transaction.version>
     <itext.version>1.4.8</itext.version>
     <jasperreports.version>2.0.4</jasperreports.version>
-    <javamelody.core.version>1.49.0</javamelody.core.version>
+    <spring-boot.version>3.3.0</spring-boot.version>
     <javax.resource.connector.api.version>1.5</javax.resource.connector.api.version>
     <jaxb.version>2.2.6</jaxb.version>
-    <jrobin.version>1.5.9</jrobin.version>
+
     <jsp-api.version>2.1</jsp-api.version>
     <jstl-api.version>1.2</jstl-api.version>
     <jta.version>1.1</jta.version>
     <junit.version>4.9</junit.version>
     <kfs.help.version>5.4.0</kfs.help.version>
-    <liquibase.version>3.3.2</liquibase.version>
+    <liquibase.version>4.27.0</liquibase.version>
     <mysql.groupId>mysql</mysql.groupId>
     <mysql.artifactId>mysql-connector-java</mysql.artifactId>
     <mysql.version>5.1.25</mysql.version>
@@ -152,6 +152,18 @@
     <jul-to-slf4j.version>${slf4j.version}</jul-to-slf4j.version>
 
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <build>
     <finalName>${project.artifactId}</finalName>
     <pluginManagement>
@@ -758,14 +770,13 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>net.bull.javamelody</groupId>
-      <artifactId>javamelody-core</artifactId>
-      <version>${javamelody.core.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.jrobin</groupId>
-      <artifactId>jrobin</artifactId>
-      <version>${jrobin.version}</version>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-vault-config</artifactId>
+      <version>4.1.1</version>
     </dependency>
     <dependency>
       <groupId>net.sf.opencsv</groupId>
@@ -924,6 +935,11 @@
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <optional>true</optional>
     </dependency>
 
   </dependencies>

@@ -1,0 +1,69 @@
+# KFS Spring Boot Configuration
+# Secrets are externalized via environment variables or Spring Cloud Vault.
+# No secrets are stored in the repository.
+
+spring:
+  application:
+    name: kfs
+  datasource:
+    url: ${KFS_DATASOURCE_URL:jdbc:mysql://localhost:3306/kfs}
+    username: ${KFS_DATASOURCE_USERNAME:kfs}
+    password: ${KFS_DATASOURCE_PASSWORD:}
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+  cloud:
+    vault:
+      enabled: ${VAULT_ENABLED:false}
+      uri: ${VAULT_URI:http://localhost:8200}
+      token: ${VAULT_TOKEN:}
+      kv:
+        backend: secret
+        default-context: kfs
+
+# Actuator endpoints (replaces JavaMelody)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info,env,liquibase
+  endpoint:
+    health:
+      show-details: when-authorized
+    metrics:
+      enabled: true
+    info:
+      enabled: true
+  info:
+    build:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+
+# KFS-specific properties (previously in kfs-security-skel-config.properties)
+kfs:
+  datasource:
+    url: ${KFS_DATASOURCE_URL:}
+    username: ${KFS_DATASOURCE_USERNAME:}
+    password: ${KFS_DATASOURCE_PASSWORD:}
+  rice:
+    datasource:
+      url: ${RICE_DATASOURCE_URL:}
+      username: ${RICE_DATASOURCE_USERNAME:}
+      password: ${RICE_DATASOURCE_PASSWORD:}
+  keystore:
+    alias: ${KFS_KEYSTORE_ALIAS:}
+    password: ${KFS_KEYSTORE_PASSWORD:}
+  encryption:
+    key: ${KFS_ENCRYPTION_KEY:}
+  b2b:
+    user-agent: ${B2B_USER_AGENT:}
+    purchase-order:
+      identity: ${B2B_PURCHASE_ORDER_IDENTITY:}
+      password: ${B2B_PURCHASE_ORDER_PASSWORD:}
+    shopping:
+      identity: ${B2B_SHOPPING_IDENTITY:}
+      password: ${B2B_SHOPPING_PASSWORD:}
