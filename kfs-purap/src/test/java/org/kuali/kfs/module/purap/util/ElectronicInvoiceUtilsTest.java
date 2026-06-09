@@ -1,103 +1,191 @@
-/*
- * The Kuali Financial System, a comprehensive financial management system for higher education.
- * 
- * Copyright 2005-2014 The Kuali Foundation
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * 
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package org.kuali.kfs.module.purap.util;
 
-import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
+import org.junit.jupiter.api.Test;
+import org.kuali.kfs.module.purap.PurapConstants;
+import org.kuali.kfs.sys.context.KfsUnitTestBase;
+import org.kuali.kfs.sys.context.SpringContext;
+import org.kuali.rice.core.api.datetime.DateTimeService;
+import org.mockito.MockedStatic;
 
-import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
-import org.kuali.kfs.sys.ConfigureContext;
-import org.kuali.kfs.sys.context.KualiTestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
-@ConfigureContext(session = khuntley, shouldCommitTransactions=false)
-public class ElectronicInvoiceUtilsTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceUtilsTest.class);
-    
-    protected void setUp() throws Exception {
-        super.setUp();
+class ElectronicInvoiceUtilsTest extends KfsUnitTestBase {
+
+    @Test
+    void stripSplCharsRemovesSpecialCharacters() {
+        assertThat(ElectronicInvoiceUtils.stripSplChars("ABC-123!@#")).isEqualTo("ABC123");
     }
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @Test
+    void stripSplCharsPreservesAlphanumeric() {
+        assertThat(ElectronicInvoiceUtils.stripSplChars("Hello123World")).isEqualTo("Hello123World");
     }
-    
-    public void testGetDate() throws Exception{
-        //TestCase 1 - cdw.xml 
-        String invoiceDate = "2008-08-11T00:00:00-06:00";
-        Date formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate);
-        assertEquals("2008-08-11", formattedDate.toString());
-        
-        //TestCase 2 - vwr.xml
-        invoiceDate = "2008-07-29";
-        formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate);
-        assertEquals("2008-07-29", formattedDate.toString());
-        
-        //TestCase 3 - guybrown.xml
-        invoiceDate = "2008-07-29T12:00:00";
-        formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate);
-        assertEquals("2008-07-29", formattedDate.toString());
-        
-        //TestCase 4 - barnesandnoble.xml
-        invoiceDate = "2008-07-23T12:00:00-12:00";
-        formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate);
-        assertEquals("2008-07-23", formattedDate.toString());
-        
-        //TestCase 5 - For reject doc date (in kuali format)
-        invoiceDate = "07/23/2008";
-        formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate + "  (KualiFormat check) ");
-        assertEquals("2008-07-23", formattedDate.toString());
-        
-        //TestCase 6 - For invalid format 1
-        invoiceDate = "2008|07|23";
-        formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate + "  (InvalidFormat check) ");
-        assertNull(formattedDate);
-        
-        //TestCase 7 - For invalid format 2
-        invoiceDate = null;
-        formattedDate = ElectronicInvoiceUtils.getDate(invoiceDate);
-        System.out.println("Actual Date= " + invoiceDate + ", Converted Date = " + formattedDate + "  (InvalidFormat check) ");
-        assertNull(formattedDate);
-        
-        //Invoice Id Check
-        String rawInvoiceId = "A1!B2#C3$D4%";
-        System.out.println("Processed InvId " + ElectronicInvoiceUtils.stripSplChars(rawInvoiceId));
-        
-        
-        BigDecimal d1 = new BigDecimal("0");
-        BigDecimal d2 = new BigDecimal("-50");
-        
-        System.out.println(d2.compareTo(d1) < 0);
-        if (d2.compareTo(d1) < 0) {
-            System.out.println("D2 greater");
+
+    @Test
+    void stripSplCharsReturnsNullForNull() {
+        assertThat(ElectronicInvoiceUtils.stripSplChars(null)).isNull();
+    }
+
+    @Test
+    void stripSplCharsEmptyString() {
+        assertThat(ElectronicInvoiceUtils.stripSplChars("")).isEmpty();
+    }
+
+    @Test
+    void stripSplCharsAllSpecialCharacters() {
+        assertThat(ElectronicInvoiceUtils.stripSplChars("!@#$%^&*()")).isEmpty();
+    }
+
+    @Test
+    void getDateDisplayTextFormatsCorrectly() {
+        Calendar cal = new GregorianCalendar(2024, Calendar.MARCH, 15);
+        java.util.Date date = cal.getTime();
+        String result = ElectronicInvoiceUtils.getDateDisplayText(date);
+        assertThat(result).isEqualTo("03/15/2024");
+    }
+
+    @Test
+    void getDateDisplayTextSingleDigitMonthAndDay() {
+        Calendar cal = new GregorianCalendar(2024, Calendar.JANUARY, 5);
+        java.util.Date date = cal.getTime();
+        String result = ElectronicInvoiceUtils.getDateDisplayText(date);
+        assertThat(result).isEqualTo("01/05/2024");
+    }
+
+    @Test
+    void getDateDisplayTextDecember31() {
+        Calendar cal = new GregorianCalendar(2024, Calendar.DECEMBER, 31);
+        java.util.Date date = cal.getTime();
+        String result = ElectronicInvoiceUtils.getDateDisplayText(date);
+        assertThat(result).isEqualTo("12/31/2024");
+    }
+
+    @Test
+    void getDateReturnsNullForNullInput() {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class)) {
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            Date result = ElectronicInvoiceUtils.getDate(null);
+            assertThat(result).isNull();
         }
-        else {
-            System.out.println("D1 greater");
-        }
-
     }
-    
+
+    @Test
+    void getDateReturnsNullForEmptyString() {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class)) {
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            Date result = ElectronicInvoiceUtils.getDate("");
+            assertThat(result).isNull();
+        }
+    }
+
+    @Test
+    void getDateParsesCxmlFormat() {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class)) {
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getSimpleDateFormat(PurapConstants.NamedDateFormats.CXML_SIMPLE_DATE_FORMAT))
+               .thenReturn(new SimpleDateFormat("yyyy-MM-dd", Locale.US));
+
+            Date result = ElectronicInvoiceUtils.getDate("2024-03-15");
+            assertThat(result).isNotNull();
+            assertThat(result.toString()).isEqualTo("2024-03-15");
+        }
+    }
+
+    @Test
+    void getDateParsesCxmlFormatWithTimezoneAppended() {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class)) {
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+            fmt.when(() -> PurApDateFormatUtils.getSimpleDateFormat(PurapConstants.NamedDateFormats.CXML_SIMPLE_DATE_FORMAT))
+               .thenReturn(new SimpleDateFormat("yyyy-MM-dd", Locale.US));
+
+            // cXML dates can have timezone suffix like "2024-03-15T12:00:00-05:00"
+            Date result = ElectronicInvoiceUtils.getDate("2024-03-15T12:00:00-05:00");
+            assertThat(result).isNotNull();
+            assertThat(result.toString()).isEqualTo("2024-03-15");
+        }
+    }
+
+    @Test
+    void getDateReturnsNullForInvalidFormat() {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class)) {
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+
+            Date result = ElectronicInvoiceUtils.getDate("not-a-date");
+            assertThat(result).isNull();
+        }
+    }
+
+    @Test
+    void getDateReturnsNullForInvalidSeparators() {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class)) {
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+
+            // Same length as CXML format but wrong separators
+            Date result = ElectronicInvoiceUtils.getDate("2024/03/15");
+            assertThat(result).isNull();
+        }
+    }
+
+    @Test
+    void getDateParsesKualiFormat() throws ParseException {
+        java.util.Date expectedDate = new GregorianCalendar(2008, Calendar.JULY, 23).getTime();
+
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class);
+             MockedStatic<SpringContext> ctx = mockStatic(SpringContext.class)) {
+
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+
+            DateTimeService dateTimeService = mock(DateTimeService.class);
+            when(dateTimeService.convertToDate("07/23/2008")).thenReturn(expectedDate);
+            ctx.when(() -> SpringContext.getBean(DateTimeService.class)).thenReturn(dateTimeService);
+
+            Date result = ElectronicInvoiceUtils.getDate("07/23/2008");
+            assertThat(result).isNotNull();
+            assertThat(result.toString()).isEqualTo("2008-07-23");
+        }
+    }
+
+    @Test
+    void getDateReturnsNullForKualiFormatParseException() throws ParseException {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class);
+             MockedStatic<SpringContext> ctx = mockStatic(SpringContext.class)) {
+
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+
+            DateTimeService dateTimeService = mock(DateTimeService.class);
+            when(dateTimeService.convertToDate("99/99/9999")).thenThrow(new ParseException("bad date", 0));
+            ctx.when(() -> SpringContext.getBean(DateTimeService.class)).thenReturn(dateTimeService);
+
+            Date result = ElectronicInvoiceUtils.getDate("99/99/9999");
+            assertThat(result).isNull();
+        }
+    }
 }
-
