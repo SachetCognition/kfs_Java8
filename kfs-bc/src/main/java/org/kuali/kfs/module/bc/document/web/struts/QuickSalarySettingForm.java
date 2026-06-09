@@ -45,7 +45,7 @@ public class QuickSalarySettingForm extends SalarySettingBaseForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

@@ -94,7 +94,7 @@ public class AccountsPayableFormBase extends PurchasingAccountsPayableFormBase {
     }
 
     /**
-     * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

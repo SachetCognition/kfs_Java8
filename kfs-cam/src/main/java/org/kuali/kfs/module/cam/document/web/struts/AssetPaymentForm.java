@@ -141,7 +141,7 @@ public class AssetPaymentForm extends KualiAccountingDocumentFormBase {
 	}
 
 	/**
-	 * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
+	 * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
 	 */
 	@Override
 	public void populate(HttpServletRequest request) {

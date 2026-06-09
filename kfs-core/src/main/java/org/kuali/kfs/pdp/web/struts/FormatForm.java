@@ -224,7 +224,7 @@ public class FormatForm extends KualiForm {
     }
 
     /**
-     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, jakarta.servlet.http.HttpServletRequest)
+     * @see org.apache.struts.action.ActionForm#reset(org.apache.struts.action.ActionMapping, javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void reset(ActionMapping arg0, HttpServletRequest arg1) {

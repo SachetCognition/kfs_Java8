@@ -75,7 +75,7 @@ public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {
@@ -322,7 +322,7 @@ public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
 
     /**
      * @see org.kuali.rice.kns.web.struts.form.KualiForm#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String,
-     *      jakarta.servlet.http.HttpServletRequest)
+     *      javax.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldMethodToCallParameterBeUsed(String methodToCallParameterName, String methodToCallParameterValue, HttpServletRequest request) {
@@ -335,7 +335,7 @@ public class OrganizationSelectionTreeForm extends BudgetExpansionForm {
 
     /**
      * @see org.kuali.rice.kns.web.struts.form.KualiForm#reset(org.apache.struts.action.ActionMapping,
-     *      jakarta.servlet.http.HttpServletRequest) resets check box fields if not returning from a child expansion screen
+     *      javax.servlet.http.HttpServletRequest) resets check box fields if not returning from a child expansion screen
      */
     @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {

@@ -99,7 +99,7 @@ public class AccountingLineTableRow implements RenderableElement {
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     public void renderElement(PageContext pageContext, Tag parentTag, AccountingLineRenderingContext renderingContext) throws JspException {
         TableRowRenderer renderer = new TableRowRenderer();

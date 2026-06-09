@@ -56,7 +56,7 @@ public class BalanceInquiryLookupForm extends MultipleValueLookupForm {
     /**
      * Picks out business object name from the request to get retrieve a lookupable and set properties.
      * 
-     * @param request <code>{@link jakarta.servlet.http.HttpServletRequest}</code> instance for Struts
+     * @param request <code>{@link javax.servlet.http.HttpServletRequest}</code> instance for Struts
      */
     @Override
     public void populate(HttpServletRequest request) {

@@ -84,7 +84,7 @@ public class KualiAccountingDocumentFormBase extends FinancialSystemTransactiona
      * Overrides the parent to call super.populate and then to call the accounting lines populate method that is specific to loading
      * the two select lists on the page.
      *
-     * @see org.kuali.rice.kns.web.struts.pojo.PojoForm#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.pojo.PojoForm#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {
@@ -446,7 +446,7 @@ public class KualiAccountingDocumentFormBase extends FinancialSystemTransactiona
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String, jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#shouldMethodToCallParameterBeUsed(java.lang.String, java.lang.String, javax.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldMethodToCallParameterBeUsed(String methodToCallParameterName, String methodToCallParameterValue, HttpServletRequest request) {

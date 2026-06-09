@@ -39,7 +39,7 @@ import org.kuali.rice.core.api.util.jaxb.MapStringStringAdapter;
 public class PermissionDetailListAdapter extends XmlAdapter<PermissionDetailList,Map<String, String>> {
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public Map<String, String> unmarshal(PermissionDetailList v) throws Exception {
@@ -60,7 +60,7 @@ public class PermissionDetailListAdapter extends XmlAdapter<PermissionDetailList
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public PermissionDetailList marshal(Map<String, String> v) throws Exception {

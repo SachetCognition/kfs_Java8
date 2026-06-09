@@ -44,7 +44,7 @@ public class TableCellRenderer implements Renderer {
 
     /**
      * Renders the table cell as a header cell as well as rendering all children renderable elements of the cell
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
         JspWriter out = pageContext.getOut();

@@ -95,7 +95,7 @@ public class AccountingLineViewMultipleReadOnlyFields extends FieldTableJoiningW
 
     /**
      * 
-     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
+     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
      * 
      * KRAD Conversion: Customization of the fields - No use of data dictionary
      */

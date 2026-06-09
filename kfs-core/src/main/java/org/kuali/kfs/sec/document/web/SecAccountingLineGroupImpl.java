@@ -111,8 +111,8 @@ public class SecAccountingLineGroupImpl extends DefaultAccountingLineGroupImpl {
     /**
      * Adds info message if we have restricted view of any accounting lines and adds an additional key to match on
      *
-     * @see org.kuali.kfs.sys.document.web.DefaultAccountingLineGroupImpl#renderErrors(jakarta.servlet.jsp.PageContext,
-     *      jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.DefaultAccountingLineGroupImpl#renderErrors(javax.servlet.jsp.PageContext,
+     *      javax.servlet.jsp.tagext.Tag)
      */
     @Override
     protected void renderErrors(PageContext pageContext, Tag parentTag) throws JspException {

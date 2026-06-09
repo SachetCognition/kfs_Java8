@@ -33,7 +33,7 @@ import org.apache.commons.lang.StringUtils;
 public class StringTrimmingAdapter extends XmlAdapter<String,String> {
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public String unmarshal(String v) throws Exception {
@@ -41,7 +41,7 @@ public class StringTrimmingAdapter extends XmlAdapter<String,String> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(String v) throws Exception {

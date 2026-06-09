@@ -40,7 +40,7 @@ public class ReadOnlyRenderer extends FieldRendererBase {
     private boolean shouldRenderInquiry = true;
 
     /**
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     @Override
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
@@ -212,7 +212,7 @@ public class ReadOnlyRenderer extends FieldRendererBase {
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.renderers.FieldRendererBase#closeNoWrapSpan(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.FieldRendererBase#closeNoWrapSpan(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     @Override
     public void closeNoWrapSpan(PageContext pageContext, Tag parentTag) throws JspException {
@@ -220,7 +220,7 @@ public class ReadOnlyRenderer extends FieldRendererBase {
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.renderers.FieldRendererBase#openNoWrapSpan(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.FieldRendererBase#openNoWrapSpan(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     @Override
     public void openNoWrapSpan(PageContext pageContext, Tag parentTag) throws JspException {

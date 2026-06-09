@@ -165,7 +165,7 @@ public abstract class RoleMembersXmlDTO<T extends RoleMemberXmlDTO> implements R
         }
 
         /**
-         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#beforeUnmarshal(jakarta.xml.bind.Unmarshaller, java.lang.Object)
+         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#beforeUnmarshal(javax.xml.bind.Unmarshaller, java.lang.Object)
          */
         @Override
         void beforeUnmarshal(Unmarshaller unmarshaller, Object parent) throws UnmarshalException {
@@ -184,7 +184,7 @@ public abstract class RoleMembersXmlDTO<T extends RoleMemberXmlDTO> implements R
         /**
          * This overridden method ...
          * 
-         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#afterUnmarshal(jakarta.xml.bind.Unmarshaller, java.lang.Object)
+         * @see org.kuali.rice.kim.impl.jaxb.RoleMembersXmlDTO#afterUnmarshal(javax.xml.bind.Unmarshaller, java.lang.Object)
          */
         @Override
         void afterUnmarshal(Unmarshaller unmarshaller, Object parent) throws UnmarshalException {

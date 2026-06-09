@@ -148,7 +148,7 @@ public class AccountingLineGroupTag extends TagSupport {
     }
     
     /**
-     * @see jakarta.servlet.jsp.tagext.TagSupport#doStartTag()
+     * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
      */
     @Override
     public int doStartTag() throws JspException {
@@ -165,7 +165,7 @@ public class AccountingLineGroupTag extends TagSupport {
     
     /**
      * If our parent isn't AccountingLinesTag, then we should render all the group
-     * @see jakarta.servlet.jsp.tagext.TagSupport#doEndTag()
+     * @see javax.servlet.jsp.tagext.TagSupport#doEndTag()
      */
     @Override
     public int doEndTag() throws JspException {
@@ -321,7 +321,7 @@ public class AccountingLineGroupTag extends TagSupport {
 
     /**
      * Clean up state held by this tag
-     * @see jakarta.servlet.jsp.tagext.TagSupport#release()
+     * @see javax.servlet.jsp.tagext.TagSupport#release()
      */
     @Override
     public void release() {

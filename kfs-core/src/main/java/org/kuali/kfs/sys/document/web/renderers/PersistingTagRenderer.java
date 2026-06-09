@@ -76,7 +76,7 @@ public class PersistingTagRenderer extends StringRenderer {
     }
     
     /**
-     * @see org.kuali.kfs.sys.document.web.renderers.StringRenderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.StringRenderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     @Override
     public void render(PageContext pageContext, Tag parentTag) throws JspException {

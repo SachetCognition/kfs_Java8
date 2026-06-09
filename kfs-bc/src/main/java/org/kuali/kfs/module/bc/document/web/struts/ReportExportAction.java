@@ -44,7 +44,7 @@ public class ReportExportAction extends BudgetConstructionImportExportAction {
      * Sets up params for export screen based on the dump mode.
      * 
      * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm,
-     *      jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
+     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     public ActionForward start(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ReportExportForm reportDumpForm = (ReportExportForm) form;
@@ -75,7 +75,7 @@ public class ReportExportAction extends BudgetConstructionImportExportAction {
      * Validates export settings, calls service to build the dump data and dump file.
      * 
      * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm,
-     *      jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
+     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     public ActionForward submit(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ReportExportForm reportExportForm = (ReportExportForm) form;

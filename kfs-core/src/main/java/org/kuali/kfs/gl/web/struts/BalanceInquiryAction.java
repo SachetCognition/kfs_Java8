@@ -223,7 +223,7 @@ public class BalanceInquiryAction extends KualiAction {
      * Refresh - is called when one quickFinder returns to the previous one. Sets all the values and performs the new search.
      *
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#refresh(org.apache.struts.action.ActionMapping,
-     *      org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      *
      * KRAD Conversion: Lookupable performs customization of the fields and check for additional fields.
      *

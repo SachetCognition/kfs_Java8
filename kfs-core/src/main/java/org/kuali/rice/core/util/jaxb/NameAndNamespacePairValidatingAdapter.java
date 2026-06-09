@@ -36,7 +36,7 @@ import org.kuali.rice.coreservice.api.CoreServiceApiServiceLocator;
 public class NameAndNamespacePairValidatingAdapter extends XmlAdapter<NameAndNamespacePair,NameAndNamespacePair> {
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public NameAndNamespacePair unmarshal(NameAndNamespacePair v) throws Exception {
@@ -58,7 +58,7 @@ public class NameAndNamespacePairValidatingAdapter extends XmlAdapter<NameAndNam
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public NameAndNamespacePair marshal(NameAndNamespacePair v) throws Exception {

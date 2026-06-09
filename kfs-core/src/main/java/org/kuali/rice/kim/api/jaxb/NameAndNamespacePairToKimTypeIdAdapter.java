@@ -36,7 +36,7 @@ import org.kuali.rice.kim.api.type.KimTypeContract;
 public class NameAndNamespacePairToKimTypeIdAdapter extends XmlAdapter<NameAndNamespacePair,String> {
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public String unmarshal(NameAndNamespacePair v) throws Exception {
@@ -52,7 +52,7 @@ public class NameAndNamespacePairToKimTypeIdAdapter extends XmlAdapter<NameAndNa
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public NameAndNamespacePair marshal(String v) throws Exception {

@@ -51,7 +51,7 @@ public class TextAreaRenderer extends FieldRendererBase {
 
     /**
      * Uses the struts html:textarea tag to render a text area
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {     
         tag.setPageContext(pageContext);

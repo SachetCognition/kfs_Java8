@@ -81,7 +81,7 @@ public class AdvanceDepositForm extends CapitalAccountingLinesFormBase implement
      * Overrides the parent to call super.populate and then tells each line to check the associated data dictionary and modify the
      * values entered to follow all the attributes set for the values of the accounting line.
      * 
-     * @see org.kuali.rice.kns.web.struts.form.KualiTransactionalDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiTransactionalDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

@@ -43,7 +43,7 @@ public class AdvanceDepositAction extends CapitalAccountingLinesActionBase {
      * Adds handling for advance deposit detail amount updates.
      * 
      * @see org.apache.struts.action.Action#execute(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm,
-     *      jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
+     *      javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         AdvanceDepositForm adForm = (AdvanceDepositForm) form;

@@ -368,7 +368,7 @@ public class AccountingLineRenderingServiceImpl implements AccountingLineRenderi
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.service.AccountingLineRenderingService#findForm(jakarta.servlet.jsp.PageContext)
+     * @see org.kuali.kfs.sys.document.service.AccountingLineRenderingService#findForm(javax.servlet.jsp.PageContext)
      */
     public KualiAccountingDocumentFormBase findForm(PageContext pageContext) {
         if (pageContext.getRequest().getAttribute(KUALI_FORM_NAME) != null) return (KualiAccountingDocumentFormBase)pageContext.getRequest().getAttribute(KUALI_FORM_NAME);

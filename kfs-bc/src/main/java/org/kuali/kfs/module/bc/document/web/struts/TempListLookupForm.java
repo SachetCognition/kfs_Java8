@@ -101,7 +101,7 @@ public class TempListLookupForm extends LookupForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.LookupForm#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.LookupForm#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

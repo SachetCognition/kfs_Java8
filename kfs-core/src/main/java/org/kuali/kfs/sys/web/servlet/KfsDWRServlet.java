@@ -57,7 +57,7 @@ public class KfsDWRServlet extends DwrServlet {
      * This method calls the super version then loads the dwr config file
      * specified in the loaded module definitions.
      * 
-     * @see uk.ltd.getahead.dwr.DWRServlet#configure(jakarta.servlet.ServletConfig,
+     * @see uk.ltd.getahead.dwr.DWRServlet#configure(javax.servlet.ServletConfig,
      *      uk.ltd.getahead.dwr.Configuration)
      */
     protected List<NamedOrderedListBean> getDwrNamedOrderedListBeans(String listName) {
@@ -145,7 +145,7 @@ public class KfsDWRServlet extends DwrServlet {
     }
 
     /**
-     * @see jakarta.servlet.GenericServlet#init()
+     * @see javax.servlet.GenericServlet#init()
      */
 
     @Override

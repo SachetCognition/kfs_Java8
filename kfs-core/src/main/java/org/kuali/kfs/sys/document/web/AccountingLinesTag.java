@@ -76,7 +76,7 @@ public class AccountingLinesTag extends BodyTagSupport {
     }
     
     /**
-     * @see jakarta.servlet.jsp.tagext.BodyTagSupport#doStartTag()
+     * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
     @Override
     public int doStartTag() throws JspException {
@@ -84,7 +84,7 @@ public class AccountingLinesTag extends BodyTagSupport {
     }
 
     /**
-     * @see jakarta.servlet.jsp.tagext.BodyTagSupport#doEndTag()
+     * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
      */
     @Override
     public int doEndTag() throws JspException {
@@ -173,7 +173,7 @@ public class AccountingLinesTag extends BodyTagSupport {
 
     /**
      * Removes the document from the tag
-     * @see jakarta.servlet.jsp.tagext.BodyTagSupport#release()
+     * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
      */
     @Override
     public void release() {

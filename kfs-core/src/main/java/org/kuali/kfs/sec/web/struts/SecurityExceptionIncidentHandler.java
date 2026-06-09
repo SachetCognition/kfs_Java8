@@ -42,7 +42,7 @@ public class SecurityExceptionIncidentHandler extends StrutsExceptionIncidentHan
 
     /**
      * @see org.kuali.rice.kns.web.struts.pojo.StrutsExceptionIncidentHandler#execute(java.lang.Exception, org.apache.struts.config.ExceptionConfig,
-     *      org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)
+     *      org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
     @Override
     public ActionForward execute(Exception exception, ExceptionConfig exceptionConfig, ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {

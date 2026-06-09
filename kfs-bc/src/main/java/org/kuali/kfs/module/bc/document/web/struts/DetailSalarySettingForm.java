@@ -84,7 +84,7 @@ public abstract class DetailSalarySettingForm extends SalarySettingBaseForm {
     }
 
     /**
-     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiForm#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {
@@ -578,7 +578,7 @@ public abstract class DetailSalarySettingForm extends SalarySettingBaseForm {
 
     /**
      * @see org.kuali.rice.kns.web.struts.form.KualiForm#shouldPropertyBePopulatedInForm(java.lang.String,
-     *      jakarta.servlet.http.HttpServletRequest)
+     *      javax.servlet.http.HttpServletRequest)
      */
     @Override
     public boolean shouldPropertyBePopulatedInForm(String requestParameterName, HttpServletRequest request) {

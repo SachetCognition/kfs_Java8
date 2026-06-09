@@ -101,8 +101,8 @@ public class AssetPaymentAction extends KualiAccountingDocumentActionBase {
 	/**
 	 * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#refresh(org.apache.struts.action.ActionMapping,
 	 *      org.apache.struts.action.ActionForm,
-	 *      jakarta.servlet.http.HttpServletRequest,
-	 *      jakarta.servlet.http.HttpServletResponse)
+	 *      javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public ActionForward refresh(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -186,8 +186,8 @@ public class AssetPaymentAction extends KualiAccountingDocumentActionBase {
 	/**
 	 * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#insertSourceLine(org.apache.struts.action.ActionMapping,
 	 *      org.apache.struts.action.ActionForm,
-	 *      jakarta.servlet.http.HttpServletRequest,
-	 *      jakarta.servlet.http.HttpServletResponse)
+	 *      javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public ActionForward insertSourceLine(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -335,8 +335,8 @@ public class AssetPaymentAction extends KualiAccountingDocumentActionBase {
 	/**
 	 * @see org.kuali.kfs.sys.web.struts.KualiAccountingDocumentActionBase#route(org.apache.struts.action.ActionMapping,
 	 *      org.apache.struts.action.ActionForm,
-	 *      jakarta.servlet.http.HttpServletRequest,
-	 *      jakarta.servlet.http.HttpServletResponse)
+	 *      javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse)
 	 */
 	@Override
 	public ActionForward route(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {

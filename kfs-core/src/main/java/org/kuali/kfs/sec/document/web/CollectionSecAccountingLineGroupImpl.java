@@ -43,8 +43,8 @@ public class CollectionSecAccountingLineGroupImpl extends SecAccountingLineGroup
     /**
      * Adds info message if we have restricted view of any accounting lines and matches only messages for collection
      * 
-     * @see org.kuali.kfs.sys.document.web.DefaultAccountingLineGroupImpl#renderErrors(jakarta.servlet.jsp.PageContext,
-     *      jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.DefaultAccountingLineGroupImpl#renderErrors(javax.servlet.jsp.PageContext,
+     *      javax.servlet.jsp.tagext.Tag)
      */
     @Override
     protected void renderErrors(PageContext pageContext, Tag parentTag) throws JspException {

@@ -124,7 +124,7 @@ public class BudgetConstructionForm extends FinancialSystemTransactionalDocument
     /**
      * calls super.populate, then populates revenue and expenditure lines
      * 
-     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

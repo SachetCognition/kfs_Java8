@@ -80,7 +80,7 @@ public class AccountingLineViewSequenceNumberField extends FieldTableJoiningWith
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
+     * @see org.kuali.kfs.sys.document.web.RenderableElement#renderElement(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag, org.kuali.kfs.sys.document.web.AccountingLineRenderingContext)
      */
     public void renderElement(PageContext pageContext, Tag parentTag, AccountingLineRenderingContext renderingContext) throws JspException {
         if (renderingContext.isNewLine()) {

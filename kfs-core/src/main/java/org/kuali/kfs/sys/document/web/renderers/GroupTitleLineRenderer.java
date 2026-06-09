@@ -108,7 +108,7 @@ public class GroupTitleLineRenderer implements Renderer, CellCountCurious {
     }
 
     /**
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag,
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag,
      *      org.kuali.core.bo.BusinessObject)
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {

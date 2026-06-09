@@ -62,7 +62,7 @@ public class ProcurementCardForm extends CapitalAccountingLinesFormBase implemen
     /**
      * Override to accomodate multiple target lines.
      * 
-     * @see org.kuali.rice.kns.web.struts.pojo.PojoForm#populate(jakarta.servlet.http.HttpServletRequest)
+     * @see org.kuali.rice.kns.web.struts.pojo.PojoForm#populate(javax.servlet.http.HttpServletRequest)
      */
     @Override
     public void populate(HttpServletRequest request) {

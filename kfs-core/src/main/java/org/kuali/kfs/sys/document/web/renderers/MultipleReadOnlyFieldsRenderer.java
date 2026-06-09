@@ -45,7 +45,7 @@ public class MultipleReadOnlyFieldsRenderer implements Renderer {
 
     /**
      * 
-     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag)
+     * @see org.kuali.kfs.sys.document.web.renderers.Renderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag)
      * KRAD Conversion: Customization of render with fieldsand inquiry urls.
      */
     public void render(PageContext pageContext, Tag parentTag) throws JspException {

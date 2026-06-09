@@ -39,7 +39,7 @@ import org.kuali.rice.core.api.util.jaxb.MapStringStringAdapter;
 public class QualificationListAdapter extends XmlAdapter<QualificationList,Map<String, String>> {
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public Map<String, String> unmarshal(QualificationList v) throws Exception {
@@ -60,7 +60,7 @@ public class QualificationListAdapter extends XmlAdapter<QualificationList,Map<S
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public QualificationList marshal(Map<String, String> v) throws Exception {

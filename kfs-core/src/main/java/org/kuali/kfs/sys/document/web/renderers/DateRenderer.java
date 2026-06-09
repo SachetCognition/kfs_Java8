@@ -44,7 +44,7 @@ public class DateRenderer extends TextRenderer {
 
     /**
      * 
-     * @see org.kuali.kfs.sys.document.web.renderers.TextRenderer#render(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag, org.kuali.rice.krad.bo.BusinessObject)
+     * @see org.kuali.kfs.sys.document.web.renderers.TextRenderer#render(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag, org.kuali.rice.krad.bo.BusinessObject)
      */
     @Override
     public void render(PageContext pageContext, Tag parentTag) throws JspException {
@@ -110,7 +110,7 @@ public class DateRenderer extends TextRenderer {
 
     /**
      * Overridden to do nothing - date fields never need quick finders
-     * @see org.kuali.kfs.sys.document.web.renderers.FieldRendererBase#renderQuickFinderIfNecessary(jakarta.servlet.jsp.PageContext, jakarta.servlet.jsp.tagext.Tag, org.kuali.rice.krad.bo.BusinessObject)
+     * @see org.kuali.kfs.sys.document.web.renderers.FieldRendererBase#renderQuickFinderIfNecessary(javax.servlet.jsp.PageContext, javax.servlet.jsp.tagext.Tag, org.kuali.rice.krad.bo.BusinessObject)
      */
     @Override
     protected void renderQuickFinderIfNecessary(PageContext pageContext, Tag parentTag) throws JspException {
