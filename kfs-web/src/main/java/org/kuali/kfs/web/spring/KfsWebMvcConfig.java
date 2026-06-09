@@ -57,19 +57,9 @@ public class KfsWebMvcConfig implements WebMvcConfigurer {
     public ViewResolver jspViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/jsp/");
-        resolver.setSuffix(".jsp");
-        resolver.setOrder(1);
-        return resolver;
-    }
-
-    @Bean
-    public ViewResolver rootJspViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/");
         resolver.setSuffix("");
-        resolver.setOrder(2);
+        resolver.setOrder(1);
         return resolver;
     }
 
