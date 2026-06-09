@@ -26,6 +26,16 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.businessobject.Bank;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -37,19 +47,45 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+@Entity
+@Table(name = "PDP_DISB_NBR_RNG_T")
+@IdClass(DisbursementNumberRangeId.class)
 public class DisbursementNumberRange extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "PHYS_CMP_PROC_CD")
     protected String physCampusProcCode;
+
+    @Column(name = "BEG_DISB_NBR")
     protected KualiInteger beginDisbursementNbr;
+
+    @Column(name = "LST_ASND_DISB_NBR")
     protected KualiInteger lastAssignedDisbNbr;
+
+    @Column(name = "END_DISB_NBR")
     protected KualiInteger endDisbursementNbr;
+
+    @Id
+    @Column(name = "DISB_NBR_RNG_START_DT")
     protected Date disbNbrRangeStartDt;
+
+    @Id
+    @Column(name = "BNK_CD")
     protected String bankCode;
+
+    @Id
+    @Column(name = "DISB_TYP_CD")
     protected String disbursementTypeCode;
+
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected CampusEbo campus;
+    @Transient
     protected Bank bank;
+    @Transient
     protected DisbursementType disbursementType;
 
     public DisbursementNumberRange() {

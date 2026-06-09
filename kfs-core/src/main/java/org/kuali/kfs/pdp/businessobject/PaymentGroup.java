@@ -26,6 +26,15 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
@@ -45,64 +54,163 @@ import org.kuali.rice.krad.service.KeyValuesService;
 /**
  * This class represents the PaymentGroup
  */
+@Entity
+@Table(name = "PDP_PMT_GRP_T")
 public class PaymentGroup extends TimestampedBusinessObjectBase {
     private static KualiDecimal zero = KualiDecimal.ZERO;
 
-    private KualiInteger id; // PMT_GRP_ID
-    private String payeeName; // PMT_PAYEE_NM
-    private String payeeId; // PAYEE_ID
-    private String payeeIdTypeCd; // PAYEE_ID_TYP_CD
-    private String alternatePayeeId; // ALTRNT_PAYEE_ID
-    private String alternatePayeeIdTypeCd; // ALTRNT_PAYEE_ID_TYP_CD
-    private String payeeOwnerCd; // PAYEE_OWNR_CD
-    private String line1Address; // PMT_LN1_ADDR
-    private String line2Address; // PMT_LN2_ADDR
-    private String line3Address; // PMT_LN3_ADDR
-    private String line4Address; // PMT_LN4_ADDR
-    private String city; // PMT_CTY_NM
-    private String state; // PMT_ST_NM
-    private String country; // PMT_CNTRY_NM
-    private String zipCd; // PMT_ZIP_CD
-    private Boolean campusAddress; // CMP_ADDR_IND
-    private Date paymentDate; // PMT_DT DATE
-    private Boolean pymtAttachment; // PMT_ATTCHMNT_IND
-    private Boolean pymtSpecialHandling; // PMT_SPCL_HANDLG_IND
-    private Boolean taxablePayment; // PMT_TXBL_IND
-    private Boolean nraPayment; // NRA_PMT_IND
-    private Boolean processImmediate; // PROC_IMD_IND
-    private Boolean combineGroups; // PMT_GRP_CMB_IND
-    private String achBankRoutingNbr; // ACH_BNK_RTNG_NBR
-    private String adviceEmailAddress; // ADV_EMAIL_ADDR
-    private Boolean employeeIndicator; // EMP_IND
-    private String creditMemoNbr; // PMT_CRDT_MEMO_NBR
-    private KualiDecimal creditMemoAmount; // PMT_CRDT_MEMO_AMT
-    private KualiInteger disbursementNbr; // DISB_NBR
-    private Date disbursementDate; // DISB_TS
-    private String physCampusProcessCd; // PHYS_CMP_PROC_CD
-    private String sortValue; // PMT_SORT_ORD_VAL
-    private String achAccountType; // CUST_ACCT_TYP_CD
-    private Timestamp epicPaymentCancelledExtractedDate; // PDP_EPIC_PMT_CNCL_EXTRT_TS
-    private Timestamp epicPaymentPaidExtractedDate; // PDP_EPIC_PMT_PD_EXTRT_TS
-    private Timestamp adviceEmailSentDate; // ADV_EMAIL_SNT_TS
+    @Id
+    @Column(name = "PMT_GRP_ID")
+    private KualiInteger id;
 
+    @Column(name = "PMT_PAYEE_NM")
+    private String payeeName;
+
+    @Column(name = "PAYEE_ID")
+    private String payeeId;
+
+    @Column(name = "PAYEE_ID_TYP_CD")
+    private String payeeIdTypeCd;
+
+    @Column(name = "ALTRNT_PAYEE_ID")
+    private String alternatePayeeId;
+
+    @Column(name = "ALTRNT_PAYEE_ID_TYP_CD")
+    private String alternatePayeeIdTypeCd;
+
+    @Column(name = "PAYEE_OWNR_CD")
+    private String payeeOwnerCd;
+
+    @Column(name = "PMT_LN1_ADDR")
+    private String line1Address;
+
+    @Column(name = "PMT_LN2_ADDR")
+    private String line2Address;
+
+    @Column(name = "PMT_LN3_ADDR")
+    private String line3Address;
+
+    @Column(name = "PMT_LN4_ADDR")
+    private String line4Address;
+
+    @Column(name = "PMT_CTY_NM")
+    private String city;
+
+    @Column(name = "PMT_ST_NM")
+    private String state;
+
+    @Column(name = "PMT_CNTRY_NM")
+    private String country;
+
+    @Column(name = "PMT_ZIP_CD")
+    private String zipCd;
+
+    @Column(name = "CMP_ADDR_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean campusAddress;
+
+    @Column(name = "PMT_DT")
+    private Date paymentDate;
+
+    @Column(name = "PMT_ATTCHMNT_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean pymtAttachment;
+
+    @Column(name = "PMT_SPCL_HANDLG_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean pymtSpecialHandling;
+
+    @Column(name = "PMT_TXBL_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean taxablePayment;
+
+    @Column(name = "NRA_PMT_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean nraPayment;
+
+    @Column(name = "PROC_IMD_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean processImmediate;
+
+    @Column(name = "PMT_GRP_CMB_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean combineGroups;
+
+    @Column(name = "ACH_BNK_RTNG_NBR")
+    private String achBankRoutingNbr;
+
+    @Column(name = "ADV_EMAIL_ADDR")
+    private String adviceEmailAddress;
+
+    @Column(name = "EMP_IND")
+    @Convert(converter = YesNoConverter.class)
+    private Boolean employeeIndicator;
+
+    @Transient
+    private String creditMemoNbr;
+    @Transient
+    private KualiDecimal creditMemoAmount;
+
+    @Column(name = "DISB_NBR")
+    private KualiInteger disbursementNbr;
+
+    @Column(name = "DISB_TS")
+    private Date disbursementDate;
+
+    @Column(name = "PHYS_CMP_PROC_CD")
+    private String physCampusProcessCd;
+
+    @Column(name = "PMT_SORT_ORD_VAL")
+    private String sortValue;
+
+    @Column(name = "CUST_ACCT_TYP_CD")
+    private String achAccountType;
+
+    @Column(name = "PDP_EPIC_PMT_CNCL_EXTRT_TS")
+    private Timestamp epicPaymentCancelledExtractedDate;
+
+    @Column(name = "PDP_EPIC_PMT_PD_EXTRT_TS")
+    private Timestamp epicPaymentPaidExtractedDate;
+
+    @Column(name = "ADV_EMAIL_SNT_TS")
+    private Timestamp adviceEmailSentDate;
+
+    @Column(name = "PMT_FIL_ID")
     private KualiInteger batchId;
-    private Batch batch; // PMT_BATCH_ID
 
+    @Transient
+    private Batch batch;
+
+    @Column(name = "PROC_ID")
     private KualiInteger processId;
-    private PaymentProcess process; // PROC_ID
 
+    @Transient
+    private PaymentProcess process;
+
+    @Column(name = "PMT_STAT_CD")
     private String paymentStatusCode;
-    private PaymentStatus paymentStatus; // PMT_STAT_CD
 
+    @Transient
+    private PaymentStatus paymentStatus;
+
+    @Column(name = "DISB_TYP_CD")
     private String disbursementTypeCode;
-    private DisbursementType disbursementType; // DISB_TYP_CD
 
+    @Transient
+    private DisbursementType disbursementType;
+
+    @Column(name = "BNK_CD")
     private String bankCode;
-    private Bank bank; // BNK_ID
 
+    @Transient
+    private Bank bank;
+
+    @Transient
     private AchAccountNumber achAccountNumber;
 
+    @Transient
     private List<PaymentGroupHistory> paymentGroupHistory = new ArrayList<PaymentGroupHistory>();
+    @Transient
     private List<PaymentDetail> paymentDetails = new ArrayList<PaymentDetail>();
 
     /**

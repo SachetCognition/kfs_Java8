@@ -26,6 +26,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
@@ -36,27 +42,56 @@ import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+@Entity
+@Table(name = "PDP_PMT_ACCT_DTL_T")
 public class PaymentAccountDetail extends TimestampedBusinessObjectBase {
 
-    private KualiInteger id; // PMT_ACCT_DTL_ID
-    private String finChartCode; // FIN_COA_CD
-    private String accountNbr; // ACCOUNT_NBR
-    private String subAccountNbr; // SUB_ACCT_NBR
-    private String finObjectCode; // FIN_OBJECT_CD
-    private String finSubObjectCode; // FIN_SUB_OBJ_CD
-    private String orgReferenceId; // ORG_REFERENCE_ID
-    private String projectCode; // PROJECT_CD
-    private KualiDecimal accountNetAmount; // ACCT_NET_AMT
+    @Id
+    @Column(name = "PMT_ACCT_DTL_ID")
+    private KualiInteger id;
 
+    @Column(name = "FIN_COA_CD")
+    private String finChartCode;
+
+    @Column(name = "ACCOUNT_NBR")
+    private String accountNbr;
+
+    @Column(name = "SUB_ACCT_NBR")
+    private String subAccountNbr;
+
+    @Column(name = "FIN_OBJECT_CD")
+    private String finObjectCode;
+
+    @Column(name = "FIN_SUB_OBJ_CD")
+    private String finSubObjectCode;
+
+    @Column(name = "ORG_REFERENCE_ID")
+    private String orgReferenceId;
+
+    @Column(name = "PROJECT_CD")
+    private String projectCode;
+
+    @Column(name = "ACCT_NET_AMT")
+    private KualiDecimal accountNetAmount;
+
+    @Column(name = "PMT_DTL_ID")
     private KualiInteger paymentDetailId;
-    private PaymentDetail paymentDetail; // PMT_DTL_ID
 
+    @Transient
+    private PaymentDetail paymentDetail;
+
+    @Transient
     private List<PaymentAccountHistory> accountHistory = new ArrayList<PaymentAccountHistory>();
 
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Account account;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private ProjectCode project;
+    @Transient
     private ObjectCodeCurrent objectCode;
 
     /**
