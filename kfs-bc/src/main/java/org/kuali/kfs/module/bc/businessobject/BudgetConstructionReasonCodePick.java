@@ -22,14 +22,35 @@ package org.kuali.kfs.module.bc.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * Business object that represents a selected/unselected funding reason code for a user.
  */
+@Entity
+@Table(name = "LD_BCN_RSN_CD_PK_T")
+@IdClass(BudgetConstructionReasonCodePickId.class)
 public class BudgetConstructionReasonCodePick extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "APPT_FND_REASON_CD")
+
     private String appointmentFundingReasonCode;
+    @Column(name = "SELECT_FLAG")
     private Integer selectFlag;
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
 
     BudgetConstructionAppointmentFundingReasonCode appointmentFundingReason;

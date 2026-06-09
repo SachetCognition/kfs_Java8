@@ -26,22 +26,58 @@ import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_SLRY_TOT_T")
+@IdClass(BudgetConstructionSalaryTotalId.class)
 public class BudgetConstructionSalaryTotal extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "ORG_FIN_COA_CD")
+
     private String organizationChartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "POS_CSF_AMT")
     private KualiInteger csfAmount;
+    @Column(name = "APPT_RQST_AMT")
     private KualiInteger appointmentRequestedAmount;
+    @Column(name = "APPT_RQST_FTE_QTY")
     private BigDecimal appointmentRequestedFteQuantity;
+    @Column(name = "INIT_RQST_AMT")
     private KualiInteger initialRequestedAmount;
+    @Column(name = "INIT_RQST_FTE_QTY")
     private BigDecimal initialRequestedFteQuantity;
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "ORG_FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart organizationChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "ORG_FIN_COA_CD", referencedColumnName = "ORG_FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
 
     /**

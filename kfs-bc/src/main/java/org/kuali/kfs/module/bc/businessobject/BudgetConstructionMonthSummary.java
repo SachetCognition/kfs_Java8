@@ -28,43 +28,117 @@ import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_MNTH_SUMM_T")
+@IdClass(BudgetConstructionMonthSummaryId.class)
 public class BudgetConstructionMonthSummary extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "ORG_FIN_COA_CD")
     private String organizationChartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "INC_EXP_CD")
     private String incomeExpenseCode;
+    @Id
+    @Column(name = "FIN_CONS_SORT_CD")
     private String financialConsolidationSortCode;
+    @Id
+    @Column(name = "FIN_LEV_SORT_CD")
     private String financialLevelSortCode;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "ACLN_ANNL_BAL_AMT")
     private KualiInteger accountLineAnnualBalanceAmount;
+    @Column(name = "FDOC_LN_MO1_AMT")
     private KualiInteger financialDocumentMonth1LineAmount;
+    @Column(name = "FDOC_LN_MO2_AMT")
     private KualiInteger financialDocumentMonth2LineAmount;
+    @Column(name = "FDOC_LN_MO3_AMT")
     private KualiInteger financialDocumentMonth3LineAmount;
+    @Column(name = "FDOC_LN_MO4_AMT")
     private KualiInteger financialDocumentMonth4LineAmount;
+    @Column(name = "FDOC_LN_MO5_AMT")
     private KualiInteger financialDocumentMonth5LineAmount;
+    @Column(name = "FDOC_LN_MO6_AMT")
     private KualiInteger financialDocumentMonth6LineAmount;
+    @Column(name = "FDOC_LN_MO7_AMT")
     private KualiInteger financialDocumentMonth7LineAmount;
+    @Column(name = "FDOC_LN_MO8_AMT")
     private KualiInteger financialDocumentMonth8LineAmount;
+    @Column(name = "FDOC_LN_MO9_AMT")
     private KualiInteger financialDocumentMonth9LineAmount;
+    @Column(name = "FDOC_LN_MO10_AMT")
     private KualiInteger financialDocumentMonth10LineAmount;
+    @Column(name = "FDOC_LN_MO11_AMT")
     private KualiInteger financialDocumentMonth11LineAmount;
+    @Column(name = "FDOC_LN_MO12_AMT")
     private KualiInteger financialDocumentMonth12LineAmount;
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String financialConsolidationObjectCode;
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     private String financialObjectLevelCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "ORG_FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart organizationChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "ORG_FIN_COA_CD", referencedColumnName = "ORG_FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     private SubFundGroup subFundGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "FIN_OBJ_LEVEL_CD", referencedColumnName = "FIN_OBJ_LEVEL_CD", insertable = false, updatable = false)
+    })
     private ObjectLevel financialObjectLevel;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "FIN_CONS_OBJ_CD", referencedColumnName = "FIN_CONS_OBJ_CD", insertable = false, updatable = false)
+    })
     private ObjectConsolidation financialConsolidationObject;
 
     /**

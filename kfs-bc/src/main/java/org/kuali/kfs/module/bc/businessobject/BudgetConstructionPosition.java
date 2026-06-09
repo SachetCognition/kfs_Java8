@@ -37,41 +37,94 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 
+
+@Entity
+@Table(name = "LD_BCN_POS_T")
+@IdClass(BudgetConstructionPositionId.class)
 public class BudgetConstructionPosition extends PersistableBusinessObjectBase implements PendingBudgetConstructionAppointmentFundingAware, Position, MutableInactivatable {
 
+    @Id
+
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "POS_EFFDT")
     private Date positionEffectiveDate;
     private String positionEffectiveStatus;
+    @Column(name = "POSN_STATUS")
     private String positionStatus;
+    @Column(name = "BUDGETED_POSN")
     private boolean budgetedPosition;
+    @Column(name = "CONFIDENTIAL_POSN")
     private boolean confidentialPosition;
+    @Column(name = "POS_STD_HRS_DFLT")
     private BigDecimal positionStandardHoursDefault;
+    @Column(name = "POS_REG_TEMP")
     private String positionRegularTemporary;
+    @Column(name = "POS_FTE")
     private BigDecimal positionFullTimeEquivalency;
+    @Column(name = "IU_NORM_WORK_MONTHS")
     private Integer iuNormalWorkMonths;
+    @Column(name = "IU_PAY_MONTHS")
     private Integer iuPayMonths;
+    @Column(name = "POS_DESCR")
     private String positionDescription;
+    @Column(name = "SETID_DEPT")
     private String setidDepartment;
+    @Column(name = "POS_DEPTID")
     private String positionDepartmentIdentifier;
+    @Column(name = "RC_CD")
     private String responsibilityCenterCode;
+    @Column(name = "POS_UNION_CD")
     private String positionUnionCode;
+    @Column(name = "POS_SAL_PLAN_DFLT")
     private String positionSalaryPlanDefault;
+    @Column(name = "POS_GRADE_DFLT")
     private String positionGradeDefault;
+    @Column(name = "SETID_JOBCODE")
     private String setidJobCode;
+    @Column(name = "JOBCODE")
     private String jobCode;
+    @Column(name = "JBCD_DESCR")
     private String jobCodeDescription;
+    @Column(name = "SETID_SALARY")
     private String setidSalary;
+    @Column(name = "IU_DFLT_OBJ_CD")
     private String iuDefaultObjectCode;
+    @Column(name = "IU_POSITION_TYPE")
     private String iuPositionType;
+    @Column(name = "POS_LOCK_USR_ID")
     private String positionLockUserIdentifier;
+    @Column(name = "POS_EFF_STATUS")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
+
     private SystemOptions universityFiscal;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PendingBudgetConstructionAppointmentFunding> pendingBudgetConstructionAppointmentFunding;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<BudgetConstructionPositionSelect> budgetConstructionPositionSelect;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RC_CD", insertable = false, updatable = false)
     private ResponsibilityCenter responsibilityCenter;
     private Person positionLockUser;
 

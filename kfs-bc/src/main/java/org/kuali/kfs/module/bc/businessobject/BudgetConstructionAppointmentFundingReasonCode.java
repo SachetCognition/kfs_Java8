@@ -23,14 +23,28 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_AF_RSN_CD_T")
 public class BudgetConstructionAppointmentFundingReasonCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+
+    @Column(name = "APPT_FND_REASON_CD")
+
     private String appointmentFundingReasonCode;
+    @Column(name = "APPT_FND_RESN_DESC")
     private String appointmentFundingReasonDescription;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

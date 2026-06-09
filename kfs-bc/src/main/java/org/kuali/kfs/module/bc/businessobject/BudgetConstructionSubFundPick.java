@@ -23,15 +23,40 @@ import java.util.LinkedHashMap;
 
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * Business Object that represents selected/unselected sub fund group code for a user.
  */
+@Entity
+@Table(name = "LD_BCN_SUBFUND_PICK_T")
+@IdClass(BudgetConstructionSubFundPickId.class)
 public class BudgetConstructionSubFundPick extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Column(name = "REPORT_FLAG")
     private Integer reportFlag;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
 
     private SubFundGroup subFundGroup;
 

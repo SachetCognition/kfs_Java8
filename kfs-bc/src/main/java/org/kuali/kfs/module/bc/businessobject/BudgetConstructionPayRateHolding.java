@@ -23,20 +23,44 @@ import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_PAYRT_HLDG_T")
+@IdClass(BudgetConstructionPayRateHoldingId.class)
 public class BudgetConstructionPayRateHolding extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Id
+    @Column(name = "POSITION_NBR")
     private String positionNumber;
+    @Column(name = "PERSON_NM")
     private String name;
+    @Column(name = "SETID_SALARY")
     private String setidSalary;
+    @Column(name = "SAL_ADMIN_PLAN")
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
     private String grade;
+    @Column(name = "UNION_CD")
     private String unionCode;
+    @Column(name = "APPT_RQST_PAY_RT")
     private BigDecimal appointmentRequestedPayRate;
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
     
     /**
