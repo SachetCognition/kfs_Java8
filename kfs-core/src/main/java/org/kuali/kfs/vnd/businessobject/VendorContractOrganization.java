@@ -29,6 +29,18 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * A relation between a particular <code>Org</code> and a <code>VendorContract</code> indicating that the Org uses this Vendor
  * Contract.
@@ -36,17 +48,35 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.vnd.businessobject.VendorContract
  * @see org.kuali.kfs.coa.businessobject.Org
  */
+@Entity
+@Table(name = "PUR_VNDR_CONTR_ORG_T")
+@IdClass(VendorContractOrganizationId.class)
 public class VendorContractOrganization extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_CONTR_GNRTD_ID")
     private Integer vendorContractGeneratedIdentifier;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "VNDR_CTRPO_LMT_AMT")
     private KualiDecimal vendorContractPurchaseOrderLimitAmount;
+    @Column(name = "VNDR_CONTR_EXCL_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorContractExcludeIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CONTR_GNRTD_ID", insertable = false, updatable = false)
     private VendorContract vendorContract;
+    @Transient
     private Organization organization;
+    @Transient
     private Chart chartOfAccounts;
 
     /**

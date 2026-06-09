@@ -24,13 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Title to identify the method of dividing ownership during the process of shipment of packages from a particular Vendor.
  */
+@Entity
+@Table(name = "PUR_SHP_TTL_T")
 public class ShippingTitle extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "VNDR_SHP_TTL_CD")
     private String vendorShippingTitleCode;
+    @Column(name = "VNDR_SHP_TTL_DESC")
     private String vendorShippingTitleDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

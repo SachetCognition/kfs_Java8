@@ -22,17 +22,39 @@ import java.util.Date;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "PUR_VNDR_EXCL_MT")
 public class DebarredVendorDetail extends PersistableBusinessObjectBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_EXCL_ID")
     private int debarredVendorId;
+    @Column(name = "VNDR_EXCL_LOAD_DT")
     private Date loadDate;
+    @Column(name = "VNDR_EXCL_NM")
     private String name;
+    @Column(name = "VNDR_EXCL_LN1_ADDR")
     private String address1;
+    @Column(name = "VNDR_EXCL_LN2_ADDR")
     private String address2;
+    @Column(name = "VNDR_EXCL_CTY_NM")
     private String city;
+    @Column(name = "VNDR_EXCL_ST_CD")
     private String state;
+    @Column(name = "VNDR_EXCL_PRVN_NM")
     private String province;
+    @Column(name = "VNDR_EXCL_ZIP_CD")
     private String zip;
+    @Column(name = "VNDR_EXCL_OTHR_NM")
     private String aliases;
+    @Column(name = "VNDR_EXCL_DESC_TXT")
     private String description;
 
     /**

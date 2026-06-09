@@ -39,73 +39,164 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.LookupService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Contains all data for a specific parent or division Vendor, including a link to the <code>VendorHeader</code>, which only
  * contains information about the parent company, but can be shared between division Vendors.
  *
  * @see org.kuali.kfs.vnd.businessobject.VendorHeader
  */
+@Entity
+@Table(name = "PUR_VNDR_DTL_T")
+@IdClass(VendorDetailId.class)
 public class VendorDetail extends PersistableBusinessObjectBase implements VendorRoutingComparable {
     private static Logger LOG = Logger.getLogger(VendorDetail.class);
 
+    @Id
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Id
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Transient
     private String vendorNumber; // not persisted in the db
+    @Column(name = "VNDR_PARENT_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorParentIndicator;
+    @Column(name = "VNDR_NM")
     private String vendorName;
+    @Transient
     private String vendorFirstName; // not persisted in the db
+    @Transient
     private String vendorLastName; // not persisted in the db
+    @Transient
     private String vendorStateForLookup; // not persisted in the db
 
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean activeIndicator;
+    @Column(name = "VNDR_INACTV_REAS_CD")
     private String vendorInactiveReasonCode;
+    @Column(name = "VNDR_DUNS_NBR")
     private String vendorDunsNumber;
+    @Column(name = "VNDR_PMT_TERM_CD")
     private String vendorPaymentTermsCode;
+    @Column(name = "VNDR_SHP_TTL_CD")
     private String vendorShippingTitleCode;
+    @Column(name = "VNDR_SHP_PMT_TERM_CD")
     private String vendorShippingPaymentTermsCode;
+    @Column(name = "VNDR_CNFM_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean vendorConfirmationIndicator;
+    @Column(name = "VNDR_PRPYMT_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean vendorPrepaymentIndicator;
+    @Column(name = "VNDR_CCRD_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean vendorCreditCardIndicator;
+    @Column(name = "VNDR_MIN_ORD_AMT")
     private KualiDecimal vendorMinimumOrderAmount;
+    @Column(name = "VNDR_URL_ADDR")
     private String vendorUrlAddress;
+    @Column(name = "VNDR_RMT_NM")
     private String vendorRemitName;
+    @Column(name = "VNDR_RSTRC_IND")
+    @Convert(converter = YesNoConverter.class)
     private Boolean vendorRestrictedIndicator;
+    @Column(name = "VNDR_RSTRC_REAS_TXT")
     private String vendorRestrictedReasonText;
+    @Column(name = "VNDR_RSTRC_DT")
     private Date vendorRestrictedDate;
+    @Column(name = "VNDR_RSTRC_PRSN_ID")
     private String vendorRestrictedPersonIdentifier;
+    @Transient
     private String vendorSoldToNumber; // not persisted in the db
+    @Column(name = "VNDR_SOLD_TO_GNRTD_ID")
     private Integer vendorSoldToGeneratedIdentifier;
+    @Column(name = "VNDR_SOLD_TO_ASND_ID")
     private Integer vendorSoldToAssignedIdentifier;
+    @Column(name = "VNDR_SOLD_TO_NM")
     private String vendorSoldToName;
+    @Column(name = "VNDR_1ST_LST_NM_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorFirstLastNameIndicator;
+    @Column(name = "COLLECT_TAX_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean taxableIndicator;
 
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorAddress> vendorAddresses;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorAlias> vendorAliases;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorContact> vendorContacts;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorContract> vendorContracts;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorCustomerNumber> vendorCustomerNumbers;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorPhoneNumber> vendorPhoneNumbers;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorShippingSpecialCondition> vendorShippingSpecialConditions;
+    @OneToMany(mappedBy = "vendorDetail", fetch = FetchType.LAZY)
     private List<VendorCommodityCode> vendorCommodities;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false)
     private VendorHeader vendorHeader;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_INACTV_REAS_CD", insertable = false, updatable = false)
     private VendorInactiveReason vendorInactiveReason;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_PMT_TERM_CD", insertable = false, updatable = false)
     private PaymentTermType vendorPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_TTL_CD", insertable = false, updatable = false)
     private ShippingTitle vendorShippingTitle;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_PMT_TERM_CD", insertable = false, updatable = false)
     private ShippingPaymentTerms vendorShippingPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "VNDR_SOLD_TO_GNRTD_ID", referencedColumnName = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "VNDR_SOLD_TO_ASND_ID", referencedColumnName = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+    })
     private VendorDetail soldToVendorDetail;
+    @Transient
     private Person vendorRestrictedPerson;
 
+    @Transient
     private String vendorParentName; // not persisted in the db
+    @Transient
     private String defaultAddressLine1; // not persisted in the db
+    @Transient
     private String defaultAddressLine2; // not persisted in the db
+    @Transient
     private String defaultAddressCity; // not persisted in the db
+    @Transient
     private String defaultAddressStateCode; // not persisted in the db
+    @Transient
     private String defaultAddressInternationalProvince; // not persisted in the db
+    @Transient
     private String defaultAddressPostalCode; // not persisted in the db
+    @Transient
     private String defaultAddressCountryCode; // not persisted in the db
+    @Transient
     private String defaultFaxNumber; // not persisted in the db
+    @Transient
     private List    boNotes;
     /**
      * Default constructor.
