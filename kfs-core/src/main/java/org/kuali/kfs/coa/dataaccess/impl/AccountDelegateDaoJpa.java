@@ -18,49 +18,23 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.sql.Date;
 import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.dataaccess.AccountDelegateDao;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.maintenance.MaintenanceLock;
 import org.kuali.rice.krad.util.KRADPropertyConstants;
 
 /**
- * This class is the JPA/Hibernate implementation of the AccountDelegateDao.
+ * This class is the OJB implementation of the AccountDelegateDao.
  */
-public class AccountDelegateDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements AccountDelegateDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class AccountDelegateDaoJpa extends PlatformAwareDaoBaseOjb implements AccountDelegateDao {
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.AccountDelegateDao#getLockingDocumentNumber(java.lang.String, java.lang.String)
@@ -99,7 +73,7 @@ public class AccountDelegateDaoJpa extends org.kuali.rice.core.framework.persist
         criteria.addEqualTo("active", "Y");
         criteria.addEqualTo("accountsDelegatePrmrtIndicator", primary);
 
-        return (Iterator<AccountDelegate>) entityManager.createQuery(QueryFactory.newQuery(AccountDelegate.class, criteria).getResultList().iterator());
+        return (Iterator<AccountDelegate>) getPersistenceBrokerTemplate().getIteratorByQuery(QueryFactory.newQuery(AccountDelegate.class, criteria));
     }
 
     /**
@@ -137,7 +111,7 @@ public class AccountDelegateDaoJpa extends org.kuali.rice.core.framework.persist
 
         int resultCount = 0;
         // TODO: getReportQueryIteratorByQuery can be changed to getCount...
-        Iterator iter = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         while (iter.hasNext()) {
             final Object[] results = (Object[]) iter.next();
             resultCount = (results[0] instanceof Number) ? ((Number) results[0]).intValue() : new Integer(results[0].toString()).intValue();

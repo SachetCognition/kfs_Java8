@@ -18,19 +18,13 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.util.Iterator;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.gl.dataaccess.EntryDao;
@@ -38,33 +32,14 @@ import org.kuali.kfs.gl.dataaccess.LedgerEntryBalancingDao;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 /**
- * A JPA/Hibernate implementation of EntryDao
+ * An OJB implementation of EntryDao
  */
-public class EntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements EntryDao, LedgerEntryBalancingDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(EntryDaoJpa.class);
+public class EntryDaoJpa extends PlatformAwareDaoBaseOjb implements EntryDao, LedgerEntryBalancingDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EntryDaoJpa.class);
 
     private final static String UNIVERISITY_FISCAL_YEAR = "universityFiscalYear";
     private final static String CHART_OF_ACCOUNTS_CODE = "chartOfAccountsCode";
@@ -78,6 +53,7 @@ public class EntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
     private final static String FINANCIAL_DOCUMENT_TYPE_CODE = "financialDocumentTypeCode";
     private final static String FINANCIAL_SYSTEM_ORIGINATION_CODE = "financialSystemOriginationCode";
     private final static String MAX_CONSTANT = "max(documentNumber)";
+
 
     /**
      * Constructs a EntryDaoJpa instance
@@ -113,8 +89,8 @@ public class EntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
         ReportQueryByCriteria q = QueryFactory.newReportQuery(Entry.class, crit);
         q.setAttributes(new String[] { "max(transactionLedgerEntrySequenceNumber)" });
 
-        Iterator iter = entityManager.createQuery(q).getResultList().iterator();
-        // would this work better? max = (BigDecimal) entityManager.createQuery(q).getSingleResult();
+        Iterator iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
+        // would this work better? max = (BigDecimal) getPersistenceBrokerTemplate().getObjectByQuery(q);
         BigDecimal max = null;
         while (iter.hasNext()) {
             Object[] data = (Object[]) iter.next();
@@ -141,12 +117,12 @@ public class EntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
         criteria.addEqualTo(CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
         criteria.addLessThan(UNIVERISITY_FISCAL_YEAR, new Integer(year));
 
-        entityManager.createQuery(new QueryByCriteria(Entry.class, criteria).executeUpdate());
+        getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(Entry.class, criteria));
 
         // This is required because if any deleted rows are in the cache, deleteByQuery doesn't
         // remove them from the cache so a future select will retrieve these deleted account balances from
         // the cache and return them. Clearing the cache forces OJB to go to the database again.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
     
     /**
@@ -165,7 +141,7 @@ public class EntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
         reportQuery.setAttributes(new String[] { "count(*)", "sum(" + KFSConstants.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")"});
         reportQuery.addGroupBy(new String[] { KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, KFSConstants.CHART_OF_ACCOUNTS_CODE_PROPERTY_NAME, KFSConstants.FINANCIAL_OBJECT_CODE_PROPERTY_NAME, KFSConstants.FINANCIAL_BALANCE_TYPE_CODE_PROPERTY_NAME, KFSConstants.UNIVERSITY_FISCAL_PERIOD_CODE_PROPERTY_NAME, KFSConstants.TRANSACTION_DEBIT_CREDIT_CODE});
         
-        Iterator<Object[]> iterator = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator<Object[]> iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         Object[] returnResult = TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iterator);
         
         if (ObjectUtils.isNull(returnResult)) {
@@ -188,6 +164,6 @@ public class EntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
         
         ReportQueryByCriteria query = QueryFactory.newReportQuery(Entry.class, criteria);
         
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 }

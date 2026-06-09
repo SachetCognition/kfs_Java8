@@ -18,49 +18,22 @@
  */
 package org.kuali.kfs.fp.document.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
 import org.kuali.kfs.fp.businessobject.TravelMileageRate;
 import org.kuali.kfs.fp.document.dataaccess.TravelMileageRateDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * This class is the JPA/Hibernate implementation of the TravelMileageRate interface.
+ * This class is the OJB implementation of the TravelMileageRate interface.
  */
-public class TravelMileageRateDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements TravelMileageRateDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
+public class TravelMileageRateDaoJpa extends PlatformAwareDaoBaseOjb implements TravelMileageRateDao {
     private static Logger LOG = Logger.getLogger(TravelMileageRateDaoJpa.class);
 
     /**
@@ -76,7 +49,7 @@ public class TravelMileageRateDaoJpa extends org.kuali.rice.core.framework.persi
         queryByCriteria.addOrderByDescending("mileageLimitAmount");
 
         Collection mostEffectiveRates = new ArrayList();
-        Collection rates = entityManager.createQuery(queryByCriteria).getResultList();
+        Collection rates = getPersistenceBrokerTemplate().getCollectionByQuery(queryByCriteria);
         Date mostEffectiveDate = ((TravelMileageRate) rates.iterator().next()).getDisbursementVoucherMileageEffectiveDate();
         for (Iterator iter = rates.iterator(); iter.hasNext();) {
             TravelMileageRate rate = (TravelMileageRate) iter.next();
@@ -87,5 +60,6 @@ public class TravelMileageRateDaoJpa extends org.kuali.rice.core.framework.persi
 
         return mostEffectiveRates;
     }
+
 
 }

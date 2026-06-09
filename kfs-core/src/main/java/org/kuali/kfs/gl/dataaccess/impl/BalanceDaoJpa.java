@@ -18,16 +18,6 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,7 +27,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.Query;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.OJBUtility;
@@ -53,31 +47,13 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.parameter.ParameterEvaluator;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of BalanceDao
+ * An OJB implementation of BalanceDao
  */
-public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements BalanceDao, LedgerBalanceBalancingDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(BalanceDaoJpa.class);
+public class BalanceDaoJpa extends PlatformAwareDaoBaseOjb implements BalanceDao, LedgerBalanceBalancingDao {
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceDaoJpa.class);
 
     /**
      * Does a ReportQuery to summarize GL balance data
@@ -105,7 +81,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addGroupBy(groupby);
         query.addOrderByAscending("account.subFundGroup.fundGroupCode");
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -131,7 +107,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -156,7 +132,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         crit.addEqualTo(KFSPropertyConstants.OBJECT_TYPE_CODE, t.getFinancialObjectTypeCode());
 
         QueryByCriteria qbc = QueryFactory.newQuery(Balance.class, crit);
-        return (Balance) entityManager.createQuery(qbc).getSingleResult();
+        return (Balance) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -181,6 +157,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
     protected void negatedCriteriaBuilder(Criteria criteria, String name, Collection collection) {
         criteriaBuilderHelper(criteria, name, collection, true);
     }
+
 
     /**
      * This method provides the implementation for the conveniences methods criteriaBuilder & negatedCriteriaBuilder
@@ -246,7 +223,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         ReportQueryByCriteria query = new ReportQueryByCriteria(Balance.class, criteria);
 
         // returns an iterator of all matching balances
-        Iterator balances = entityManager.createQuery(query).getResultList().iterator();
+        Iterator balances = getPersistenceBrokerTemplate().getIteratorByQuery(query);
         return balances;
     }
 
@@ -265,7 +242,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
 
         Query query = this.getCashBalanceQuery(fieldValues, isConsolidated, encumbranceBalanceTypes);
         OJBUtility.limitResultSize(query);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -281,7 +258,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         LOG.debug("getDetailedCashBalanceRecordCount() started");
 
         Query query = this.getCashBalanceQuery(fieldValues, false, encumbranceBalanceTypes);
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     /**
@@ -296,7 +273,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         LOG.debug("getCashBalanceRecordCount() started");
 
         ReportQueryByCriteria query = this.getCashBalanceCountQuery(fieldValues, encumbranceBalanceTypes);
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     /**
@@ -315,9 +292,9 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         OJBUtility.limitResultSize(query);
 
         if (isConsolidated) {
-            return entityManager.createQuery(query).getResultList().iterator();
+            return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
         }
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -333,7 +310,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         LOG.debug("getBalanceRecordCount() started");
 
         ReportQueryByCriteria query = this.getBalanceCountQuery(fieldValues, encumbranceBalanceTypes);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -564,7 +541,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         crit.addEqualTo(KFSPropertyConstants.BALANCE_TYPE_CODE, KFSConstants.BALANCE_TYPE_CURRENT_BUDGET);
 
         QueryByCriteria qbc = QueryFactory.newQuery(Balance.class, crit);
-        return (Balance) entityManager.createQuery(qbc).getSingleResult();
+        return (Balance) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -609,7 +586,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         else if (KFSConstants.SF_TYPE_CONSOLIDATION.equals(sfCode)) {
             qbc.addOrderByAscending(GeneralLedgerConstants.BalanceInquiryDrillDowns.CONSOLIDATION_OBJECT_CODE);
         }
-        return entityManager.createQuery(qbc).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(qbc);
     }
 
     /**
@@ -626,12 +603,12 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
         criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
 
-        entityManager.createQuery(new QueryByCriteria(Balance.class, criteria).executeUpdate());
+        getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(Balance.class, criteria));
 
         // This is required because if any deleted account balances are in the cache, deleteByQuery doesn't
         // remove them from the cache so a future select will retrieve these deleted account balances from
         // the cache and return them. Clearing the cache forces OJB to go to the database again.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -649,7 +626,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         c.addEqualTo(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, year);
         QueryByCriteria query = QueryFactory.newQuery(Balance.class, c);
 
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     /**
@@ -664,7 +641,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         c.addIn(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, charts);
         QueryByCriteria query = QueryFactory.newQuery(Balance.class, c);
 
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     /**
@@ -693,7 +670,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
      /**
@@ -719,7 +696,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -743,7 +720,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        Iterator<Balance> balances = entityManager.createQuery(query).getResultList().iterator();
+        Iterator<Balance> balances = getPersistenceBrokerTemplate().getIteratorByQuery(query);
 
         return balances;
     }
@@ -769,7 +746,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        Iterator<Balance> balances = entityManager.createQuery(query).getResultList().iterator();
+        Iterator<Balance> balances = getPersistenceBrokerTemplate().getIteratorByQuery(query);
 
         FilteringBalanceIterator filteredBalances = SpringContext.getBean(FilteringBalanceIterator.class, GeneralLedgerConstants.GL_BALANCE_TOTAL_NOT_ZERO_ITERATOR);
         filteredBalances.setBalancesSource(balances);
@@ -814,7 +791,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        Iterator<Balance> balances = entityManager.createQuery(query).getResultList().iterator();
+        Iterator<Balance> balances = getPersistenceBrokerTemplate().getIteratorByQuery(query);
 
         return balances;
     }
@@ -856,7 +833,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        Iterator<Balance> balances = entityManager.createQuery(query).getResultList().iterator();
+        Iterator<Balance> balances = getPersistenceBrokerTemplate().getIteratorByQuery(query);
 
         FilteringBalanceIterator filteredBalances = SpringContext.getBean(FilteringBalanceIterator.class, GeneralLedgerConstants.GL_BALANCE_ANNUAL_AND_CG_TOTAL_NOT_ZERO_ITERATOR);
         filteredBalances.setBalancesSource(balances);
@@ -914,7 +891,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
         query.addOrderByAscending(KFSPropertyConstants.OBJECT_TYPE_CODE);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -927,7 +904,7 @@ public class BalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
 
         ReportQueryByCriteria query = QueryFactory.newReportQuery(Balance.class, criteria);
 
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
 }

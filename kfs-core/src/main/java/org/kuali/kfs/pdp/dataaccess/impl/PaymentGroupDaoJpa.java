@@ -18,47 +18,23 @@
  */
 package org.kuali.kfs.pdp.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.PaymentGroup;
 import org.kuali.kfs.pdp.dataaccess.PaymentGroupDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
-public class PaymentGroupDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements PaymentGroupDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(PaymentGroupDaoJpa.class);
+public class PaymentGroupDaoJpa extends PlatformAwareDaoBaseOjb implements PaymentGroupDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentGroupDaoJpa.class);
 
     
     public PaymentGroupDaoJpa() {
@@ -82,7 +58,7 @@ public class PaymentGroupDaoJpa extends org.kuali.rice.core.framework.persistenc
         ReportQueryByCriteria rq = QueryFactory.newReportQuery(PaymentGroup.class, fields, criteria, true);
         rq.addOrderBy(PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_DISBURSEMENT_NBR, true);
 
-        Iterator i = entityManager.createQuery(rq).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(rq);
         while ( i.hasNext() ) {
             Object[] data = (Object[])i.next();
             BigDecimal d = (BigDecimal)data[0];
@@ -111,7 +87,7 @@ public class PaymentGroupDaoJpa extends org.kuali.rice.core.framework.persistenc
         ReportQueryByCriteria rq = QueryFactory.newReportQuery(PaymentGroup.class, fields, criteria, true);
         rq.addOrderBy(PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_DISBURSEMENT_NBR, true);
 
-        Iterator i = entityManager.createQuery(rq).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(rq);
         while ( i.hasNext() ) {
             Object[] data = (Object[])i.next();
             BigDecimal d = (BigDecimal)data[0];
@@ -138,7 +114,7 @@ public class PaymentGroupDaoJpa extends org.kuali.rice.core.framework.persistenc
         ReportQueryByCriteria rq = QueryFactory.newReportQuery(PaymentGroup.class, fields, criteria, true);
         rq.addOrderBy(PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_BANK_CODE, true);
         
-        Iterator iter = entityManager.createQuery(rq).getResultList().iterator();
+        Iterator iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(rq);
         while (iter.hasNext()) {
             final Object[] row = (Object[])iter.next();
             final String bankCode = (String)row[0];
@@ -160,7 +136,7 @@ public class PaymentGroupDaoJpa extends org.kuali.rice.core.framework.persistenc
         criteria.addEqualTo(PdpPropertyConstants.DISBURSEMENT_TYPE_CODE, PdpConstants.DisbursementTypeCodes.ACH);
         criteria.addIsNull(PdpPropertyConstants.ADVICE_EMAIL_SENT_DATE);
 
-        return (List<PaymentGroup>) entityManager.createQuery(new QueryByCriteria(PaymentGroup.class, criteria).getResultList());
+        return (List<PaymentGroup>) getPersistenceBrokerTemplate().getCollectionByQuery(new QueryByCriteria(PaymentGroup.class, criteria));
     }
  
 }

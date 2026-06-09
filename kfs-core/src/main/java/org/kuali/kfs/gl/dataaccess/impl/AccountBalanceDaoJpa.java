@@ -18,20 +18,14 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.gl.businessobject.AccountBalance;
 import org.kuali.kfs.gl.businessobject.Transaction;
@@ -42,31 +36,13 @@ import org.kuali.kfs.gl.dataaccess.AccountBalanceObjectDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
  * An OJB implmentation of the AccountBalanceDao
  */
-public class AccountBalanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements AccountBalanceDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(AccountBalanceDaoJpa.class);
+public class AccountBalanceDaoJpa extends PlatformAwareDaoBaseOjb implements AccountBalanceDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceDaoJpa.class);
 
     private AccountBalanceConsolidationDao accountBalanceConsolidationDao;
     private AccountBalanceLevelDao accountBalanceLevelDao;
@@ -93,7 +69,7 @@ public class AccountBalanceDaoJpa extends org.kuali.rice.core.framework.persiste
         crit.addEqualTo(KFSPropertyConstants.SUB_OBJECT_CODE, t.getFinancialSubObjectCode());
 
         QueryByCriteria qbc = QueryFactory.newQuery(AccountBalance.class, crit);
-        return (AccountBalance) entityManager.createQuery(qbc).getSingleResult();
+        return (AccountBalance) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -117,7 +93,7 @@ public class AccountBalanceDaoJpa extends org.kuali.rice.core.framework.persiste
         query.addGroupBy(groupBy);
         OJBUtility.limitResultSize(query);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -134,7 +110,7 @@ public class AccountBalanceDaoJpa extends org.kuali.rice.core.framework.persiste
         QueryByCriteria query = QueryFactory.newReportQuery(AccountBalance.class, criteria);
         OJBUtility.limitResultSize(query);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -213,12 +189,12 @@ public class AccountBalanceDaoJpa extends org.kuali.rice.core.framework.persiste
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
         criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
 
-        entityManager.createQuery(new QueryByCriteria(AccountBalance.class, criteria).executeUpdate());
+        getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(AccountBalance.class, criteria));
 
         // This is required because if any deleted account balances are in the cache, deleteByQuery doesn't
         // remove them from the cache so a future select will retrieve these deleted account balances from
         // the cache and return them. Clearing the cache forces OJB to go to the database again.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -230,7 +206,7 @@ public class AccountBalanceDaoJpa extends org.kuali.rice.core.framework.persiste
 
         ReportQueryByCriteria query = QueryFactory.newReportQuery(AccountBalance.class, criteria);
 
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     public AccountBalanceConsolidationDao getAccountBalanceConsolidationDao() {

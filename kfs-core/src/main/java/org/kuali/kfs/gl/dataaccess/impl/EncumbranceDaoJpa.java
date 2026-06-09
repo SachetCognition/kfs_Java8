@@ -18,16 +18,6 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,6 +25,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.Query;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.dataaccess.BalanceTypeDao;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
@@ -46,31 +41,13 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.service.OptionsService;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of the EncumbranceDao
+ * An OJB implementation of the EncumbranceDao
  */
-public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements EncumbranceDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(EncumbranceDaoJpa.class);
+public class EncumbranceDaoJpa extends PlatformAwareDaoBaseOjb implements EncumbranceDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EncumbranceDaoJpa.class);
 
     protected BalanceTypeDao balanceTypeDao;
 
@@ -98,7 +75,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         crit.addEqualTo(KFSPropertyConstants.DOCUMENT_NUMBER, t.getDocumentNumber());
 
         QueryByCriteria qbc = QueryFactory.newQuery(Encumbrance.class, crit);
-        return (Encumbrance) entityManager.createQuery(qbc).getSingleResult();
+        return (Encumbrance) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -122,7 +99,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         query.addOrderByAscending(KFSPropertyConstants.SUB_OBJECT_CODE);
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -148,7 +125,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         query.addOrderByAscending(KFSPropertyConstants.SUB_OBJECT_CODE);
         query.addOrderByAscending(KFSPropertyConstants.BALANCE_TYPE_CODE);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -166,14 +143,14 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         criteria.addEqualTo(KFSPropertyConstants.CHART, chartOfAccountsCode);
         criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
 
-        entityManager.createQuery(new QueryByCriteria(Encumbrance.class, criteria).executeUpdate());
+        getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(Encumbrance.class, criteria));
 
         // This is required because if any deleted account balances are in the cache, deleteByQuery
         // doesn't
         // remove them from the cache so a future select will retrieve these deleted account
         // balances from
         // the cache and return them. Clearing the cache forces OJB to go to the database again.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -186,7 +163,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
     public Iterator getAllEncumbrances() {
         Criteria criteria = new Criteria();
         QueryByCriteria query = QueryFactory.newQuery(Encumbrance.class, criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -221,7 +198,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         String[] groupBy = (String[]) groupByList.toArray(new String[groupByList.size()]);
         query.addGroupBy(groupBy);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -237,7 +214,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
 
         Query query = this.getOpenEncumbranceQuery(fieldValues, includeZeroEncumbrances);
         OJBUtility.limitResultSize(query);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -265,6 +242,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
             criteria.addAndCriteria(nonZeroEncumbranceCriteria);
         }
 
+
         ReportQueryByCriteria query = QueryFactory.newReportQuery(Encumbrance.class, criteria);
 
         // set the selection attributes
@@ -278,7 +256,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         Criteria having = new Criteria ();
         having.addNotEqualTo("sum(" + GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_AMOUNT + ") - sum(" + GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_CLOSED_AMOUNT + ")", new Integer (0));
         query.setHavingCriteria(having);
-        Iterator searchResultsIterator = entityManager.createQuery(query).getResultList().iterator();
+        Iterator searchResultsIterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
 
         // For EX & IE - For any record on this account: acln_encum_amt - acln_encum_cls_amt <> 0
         Criteria criteria2 = OJBUtility.buildCriteriaFromMap(fieldValues, new Encumbrance());
@@ -296,7 +274,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         query2.setAttributes(new String[] {KFSPropertyConstants.BALANCE_TYPE_CODE,
                 GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_AMOUNT + " - " + GeneralLedgerConstants.ColumnNames.ACCOUNT_LINE_ENCUMBRANCE_CLOSED_AMOUNT} );
 
-        Iterator searchResultsIterator2 = entityManager.createQuery(query2).getResultList().iterator();
+        Iterator searchResultsIterator2 = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query2);
 
         return searchResultsIterator.hasNext() || searchResultsIterator2.hasNext();
     }
@@ -313,7 +291,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
         LOG.debug("getOpenEncumbranceRecordCount() started");
 
         Query query = this.getOpenEncumbranceQuery(fieldValues, includeZeroEncumbrances);
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     /**
@@ -389,7 +367,7 @@ public class EncumbranceDaoJpa extends org.kuali.rice.core.framework.persistence
 
         ReportQueryByCriteria query = QueryFactory.newReportQuery(Encumbrance.class, criteria);
 
-        return entityManager.createQuery(query).getResultList().size();
+        return getPersistenceBrokerTemplate().getCount(query);
     }
 
     /**

@@ -18,45 +18,20 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.Query;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.dataaccess.BalanceTypeDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
  * This class implements the {@link BalanceTypeDao} data access methods using Ojb
  */
-public class BalanceTypeDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements BalanceTypeDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(BalanceTypeDaoJpa.class);
+public class BalanceTypeDaoJpa extends PlatformAwareDaoBaseOjb implements BalanceTypeDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceTypeDaoJpa.class);
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.BalanceTypeDao#getEncumbranceBalanceTypes()
@@ -69,6 +44,6 @@ public class BalanceTypeDaoJpa extends org.kuali.rice.core.framework.persistence
         criteria.addEqualTo("finBalanceTypeEncumIndicator", true);
 
         Query q = QueryFactory.newQuery(BalanceType.class, criteria);
-        return entityManager.createQuery(q).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(q);
     }
 }

@@ -18,47 +18,23 @@
  */
 package org.kuali.kfs.sys.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.sql.Date;
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
 import org.kuali.kfs.sys.dataaccess.UniversityDateDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * The JPA/Hibernate implementation of the UniversityDateDao
+ * The OJB implementation of the UniversityDateDao
  */
-public class UniversityDateDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements UniversityDateDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(UniversityDateDaoJpa.class);
+public class UniversityDateDaoJpa extends PlatformAwareDaoBaseOjb implements UniversityDateDao {
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UniversityDateDaoJpa.class);
 
     /**
      * Converts a java.util.Date to a java.sql.Date
@@ -91,7 +67,7 @@ public class UniversityDateDaoJpa extends org.kuali.rice.core.framework.persiste
 
         QueryByCriteria qbc = QueryFactory.newQuery(UniversityDate.class, crit);
 
-        return (UniversityDate) entityManager.createQuery(qbc).getSingleResult();
+        return (UniversityDate) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -115,7 +91,7 @@ public class UniversityDateDaoJpa extends org.kuali.rice.core.framework.persiste
 
         QueryByCriteria qbc = QueryFactory.newQuery(UniversityDate.class, crit);
 
-        return (UniversityDate) entityManager.createQuery(qbc).getSingleResult();
+        return (UniversityDate) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
 }

@@ -18,16 +18,6 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +25,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.gl.businessobject.OriginEntryGroup;
 import org.kuali.kfs.gl.businessobject.OriginEntryInformation;
@@ -43,31 +37,13 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of the OriginEntryDao
+ * An OJB implementation of the OriginEntryDao
  */
-public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements OriginEntryDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(OriginEntryDaoJpa.class);
+public class OriginEntryDaoJpa extends PlatformAwareDaoBaseOjb implements OriginEntryDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryDaoJpa.class);
 
     private static final String ENTRY_GROUP_ID = "entryGroupId";
     private static final String ENTRY_ID = "entryId";
@@ -139,7 +115,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         ReportQueryByCriteria q = QueryFactory.newReportQuery(entryClass, crit);
         q.setAttributes(new String[] { "SUM(" + OriginEntryDaoJpa.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")" });
 
-        Iterator i = entityManager.createQuery(q).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
         if (i.hasNext()) {
             Object[] data = (Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(i);
             return (KualiDecimal) data[0];
@@ -164,7 +140,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         ReportQueryByCriteria q = QueryFactory.newReportQuery(entryClass, crit);
         q.setAttributes(new String[] { "count(*)" });
 
-        Iterator i = entityManager.createQuery(q).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
         if (i.hasNext()) {
             Object[] data = (Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(i);
 
@@ -195,7 +171,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         q.setAttributes(new String[] { ENTRY_GROUP_ID, "count(*)" });
         q.addGroupBy(ENTRY_GROUP_ID);
 
-        return entityManager.createQuery(q).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
     }
 
     /**
@@ -206,7 +182,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
     public void deleteEntry(OriginEntryInformation oe) {
         LOG.debug("deleteEntry() started");
 
-        entityManager.remove(entityManager.contains(oe) ? oe : entityManager.merge(oe));
+        getPersistenceBrokerTemplate().delete(oe);
     }
 
     /**
@@ -227,7 +203,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
 
         q.setDistinct(true);
 
-        return entityManager.createQuery(q).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
     }
 
     /**
@@ -248,7 +224,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
 
         QueryByCriteria qbc = QueryFactory.newQuery(entryClass, criteria);
         qbc.addOrderByAscending(ENTRY_GROUP_ID);
-        return entityManager.createQuery(qbc).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(qbc);
     }
 
     /**
@@ -296,7 +272,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         qbc.addOrderByAscending(FINANCIAL_SYSTEM_ORIGINATION_CODE);
         qbc.addOrderByAscending(KFSPropertyConstants.DOCUMENT_NUMBER);
 
-        return entityManager.createQuery(qbc).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(qbc);
     }
 
     /**
@@ -314,7 +290,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         // clear cache because the GLCP document class saves to the origin entry table and
         // reads from it (via this method) in the same transaction. If the clearCache line is
         // deleted, then the references to OriginEntries returned by this method will be null.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
 
         Criteria criteria = new Criteria();
         criteria.addEqualTo(ENTRY_GROUP_ID, oeg.getId());
@@ -382,7 +358,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
             qbc.addOrderByAscending(TRANSACTION_LEDGER_ENTRY_DESCRIPTION);
         }
 
-        return entityManager.createQuery(qbc).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(qbc);
     }
 
     /**
@@ -398,7 +374,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         QueryByCriteria qbc = QueryFactory.newQuery(entryClass, criteria);
         qbc.addOrderByAscending(ENTRY_GROUP_ID);
         qbc.addOrderByAscending(ENTRY_ID);
-        return entityManager.createQuery(qbc).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(qbc);
     }
 
     /**
@@ -416,12 +392,12 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         }
 
         QueryByCriteria qbc = QueryFactory.newQuery(entryClass, criteria);
-        entityManager.createQuery(qbc).executeUpdate();
+        getPersistenceBrokerTemplate().deleteByQuery(qbc);
 
         // This is required because deleteByQuery leaves the cache alone so future queries
         // could return origin entries that don't exist. Clearing the cache makes OJB
         // go back to the database for everything to make sure valid data is returned.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -448,12 +424,12 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
         criteria.addIn(ENTRY_GROUP_ID, ids);
 
         QueryByCriteria qbc = QueryFactory.newQuery(entryClass, criteria);
-        entityManager.createQuery(qbc).executeUpdate();
+        getPersistenceBrokerTemplate().deleteByQuery(qbc);
 
         // This is required because deleteByQuery leaves the cache alone so future queries
         // could return origin entries that don't exist. Clearing the cache makes OJB
         // go back to the database for everything to make sure valid data is returned.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -474,7 +450,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
 
         QueryByCriteria qbc = QueryFactory.newQuery(entryClass, criteria);
         qbc.addOrderByAscending(ENTRY_GROUP_ID);
-        return entityManager.createQuery(qbc).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(qbc);
     }
 
     /**
@@ -514,7 +490,7 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
             query.addOrderByAscending(groupList[i]);
         }
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -576,6 +552,6 @@ public class OriginEntryDaoJpa extends org.kuali.rice.core.framework.persistence
             query.addOrderByAscending(groupList[i]);
         }
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 }

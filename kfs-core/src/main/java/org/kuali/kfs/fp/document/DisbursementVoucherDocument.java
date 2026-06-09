@@ -98,7 +98,6 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -110,7 +109,7 @@ import javax.persistence.OneToMany;
 /**
  * This is the business object that represents the DisbursementVoucher document in Kuali.
  */
-@Entity
+@javax.persistence.Entity
 @Table(name = "FP_DV_DOC_T")
 public class DisbursementVoucherDocument extends AccountingDocumentBase implements Copyable, AmountTotaling, PaymentSource {
     protected static Logger LOG = Logger.getLogger(DisbursementVoucherDocument.class);

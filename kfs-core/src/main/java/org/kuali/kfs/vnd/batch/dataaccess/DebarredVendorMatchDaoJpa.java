@@ -18,40 +18,16 @@
  */
 package org.kuali.kfs.vnd.batch.dataaccess;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.vnd.businessobject.DebarredVendorMatch;
 import org.kuali.kfs.vnd.businessobject.VendorDetail;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
-public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.persistence.dao.PlatformAwareDao, DebarredVendorMatchDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class DebarredVendorMatchDaoJpa extends  PlatformAwareDaoBaseOjb implements DebarredVendorMatchDao {
 
     /**
      * @see org.kuali.kfs.vnd.batch.dataaccess.DebarredVendorMatchDao.getPreviousVendorExcludeConfirmation(org.kuali.kfs.vnd.businessobject.DebarredVendorMatch)
@@ -94,7 +70,7 @@ public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.
             criteria.addIsNull("zip");
         }
         QueryByCriteria query = QueryFactory.newQuery(DebarredVendorMatch.class, criteria);
-        List<DebarredVendorMatch> matches = (List<DebarredVendorMatch>)entityManager.createQuery(query).getResultList();
+        List<DebarredVendorMatch> matches = (List<DebarredVendorMatch>)getPersistenceBrokerTemplate().getCollectionByQuery(query);
 
         DebarredVendorMatch oldMatch = null;
         if (matches.size() > 0) {
@@ -124,7 +100,7 @@ public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.
         criteria.addEqualTo("vendorHeader.vendorDebarredIndicator", "Y");
         criteria.addNotExists(subqr);
         QueryByCriteria query = QueryFactory.newQuery(VendorDetail.class, criteria);
-        List<VendorDetail> vendors = (List<VendorDetail>) entityManager.createQuery(query).getResultList();
+        List<VendorDetail> vendors = (List<VendorDetail>) getPersistenceBrokerTemplate().getCollectionByQuery(query);
 
         return vendors;
       }
@@ -134,7 +110,7 @@ public class DebarredVendorMatchDaoJpa implements org.kuali.rice.core.framework.
         Criteria criteria = new Criteria();
         criteria.addEqualTo("debarredVendorId", debarredVendorId);
         QueryByCriteria query = QueryFactory.newQuery(DebarredVendorMatch.class, criteria);
-        return (DebarredVendorMatch)entityManager.createQuery(query).getSingleResult();
+        return (DebarredVendorMatch)getPersistenceBrokerTemplate().getObjectByQuery(query);
     }
 
 }

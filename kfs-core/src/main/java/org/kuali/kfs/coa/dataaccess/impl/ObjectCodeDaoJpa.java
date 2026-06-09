@@ -18,48 +18,24 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.dataaccess.ObjectCodeDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
+
 
 /**
- * This class is the JPA/Hibernate implementation of the ObjectCodeDao interface.
+ * This class is the OJB implementation of the ObjectCodeDao interface.
  */
-public class ObjectCodeDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements ObjectCodeDao {
-    @PersistenceContext
-    private EntityManager entityManager;
+public class ObjectCodeDaoJpa extends PlatformAwareDaoBaseOjb implements ObjectCodeDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectCodeDaoJpa.class);
 
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ObjectCodeDaoJpa.class);
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.ObjectCodeDao#getYearList(java.lang.String, java.lang.String)
@@ -71,7 +47,7 @@ public class ObjectCodeDaoJpa extends org.kuali.rice.core.framework.persistence.
         Criteria criteria = new Criteria();
         criteria.addEqualTo("chartOfAccountsCode", chartOfAccountsCode);
         criteria.addEqualTo("financialObjectCode", financialObjectCode);
-        Collection years = entityManager.createQuery(QueryFactory.newQuery(ObjectCode.class, criteria).getResultList());
+        Collection years = getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(ObjectCode.class, criteria));
         for (Iterator iter = years.iterator(); iter.hasNext();) {
             ObjectCode o = (ObjectCode) iter.next();
             if (o != null) {

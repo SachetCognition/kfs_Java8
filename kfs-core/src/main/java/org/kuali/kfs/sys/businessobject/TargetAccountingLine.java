@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.businessobject;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * This class represents the "target" grouping of accounting lines in a given document. Its counterpart is the SourceAccountingLine

@@ -18,22 +18,15 @@
  */
 package org.kuali.kfs.fp.document.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.fp.businessobject.CashieringItemInProcess;
 import org.kuali.kfs.fp.businessobject.CashieringTransaction;
 import org.kuali.kfs.fp.businessobject.Check;
@@ -43,30 +36,11 @@ import org.kuali.kfs.fp.businessobject.CurrencyDetail;
 import org.kuali.kfs.fp.document.dataaccess.CashManagementDao;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.springframework.dao.DataAccessException;
 
-public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CashManagementDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CashManagementDaoJpa.class);
+public class CashManagementDaoJpa extends PlatformAwareDaoBaseOjb implements CashManagementDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashManagementDaoJpa.class);
 
     public CashManagementDaoJpa() {
         super();
@@ -82,7 +56,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
         criteria.addColumnIsNull("ITM_CLOSED_DT");
 
         QueryByCriteria openItemsQuery = QueryFactory.newQuery(CashieringItemInProcess.class, criteria);
-        return new ArrayList<CashieringItemInProcess>( entityManager.createQuery(openItemsQuery).getResultList() );
+        return new ArrayList<CashieringItemInProcess>( getPersistenceBrokerTemplate().getCollectionByQuery(openItemsQuery) );
     }
 
     /**
@@ -99,7 +73,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
         criteria.addGreaterThan("itemClosedDate", new java.sql.Date(thirtyDaysAgo.getTimeInMillis()));
 
         QueryByCriteria closedItemsQuery = QueryFactory.newQuery(CashieringItemInProcess.class, criteria);
-        Iterator iter = entityManager.createQuery(closedItemsQuery).getResultList().iterator();
+        Iterator iter = getPersistenceBrokerTemplate().getIteratorByQuery(closedItemsQuery);
         while (iter.hasNext()) {
             closedItems.add((CashieringItemInProcess) iter.next());
         }
@@ -149,7 +123,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
      */
     protected Object retrieveCashDetail(String documentNumber, String documentTypeCode, String cashieringStatus, Class detailType) {
         QueryByCriteria cashDetailQuery = QueryFactory.newQuery(detailType, getCashDetailCriteria(documentNumber, documentTypeCode, cashieringStatus));
-        Iterator iter = entityManager.createQuery(cashDetailQuery).getResultList().iterator();
+        Iterator iter = getPersistenceBrokerTemplate().getIteratorByQuery(cashDetailQuery);
         return (iter.hasNext() ? iter.next() : null);
     }
 
@@ -158,7 +132,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
      */
     public List<Check> selectCashieringChecksForDeposit(String documentNumber, Integer depositLineNumber) {
         QueryByCriteria depositedChecksQuery = QueryFactory.newQuery(CheckBase.class, createDepositedCashieringCheckCriteria(documentNumber, depositLineNumber));
-        return putResultsIntoCheckList(entityManager.createQuery(depositedChecksQuery).getResultList().iterator());
+        return putResultsIntoCheckList(getPersistenceBrokerTemplate().getIteratorByQuery(depositedChecksQuery));
     }
 
     /**
@@ -193,7 +167,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
      */
     public List<Check> selectUndepositedCashieringChecks(String documentNumber) {
         QueryByCriteria undepositedChecksQuery = QueryFactory.newQuery(CheckBase.class, createUndepositedCashieringCheckCriteria(documentNumber));
-        return putResultsIntoCheckList(entityManager.createQuery(undepositedChecksQuery).getResultList().iterator());
+        return putResultsIntoCheckList(getPersistenceBrokerTemplate().getIteratorByQuery(undepositedChecksQuery));
     }
 
     /**
@@ -213,7 +187,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
      */
     public List<Check> selectDepositedCashieringChecks(String documentNumber) {
         QueryByCriteria depositedChecksQuery = QueryFactory.newQuery(CheckBase.class, createDepositedCashieringCheckCriteria(documentNumber));
-        return putResultsIntoCheckList(entityManager.createQuery(depositedChecksQuery).getResultList().iterator());
+        return putResultsIntoCheckList(getPersistenceBrokerTemplate().getIteratorByQuery(depositedChecksQuery));
     }
 
     /**
@@ -237,7 +211,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
     public List<CurrencyDetail> getAllCurrencyDetails(String documentNumber) {
         QueryByCriteria allCurrencyDetailsQuery = QueryFactory.newQuery(CurrencyDetail.class, getAllCashDetailCriteria(documentNumber));
         List<CurrencyDetail> result = new ArrayList<CurrencyDetail>();
-        for (Iterator iter = entityManager.createQuery(allCurrencyDetailsQuery).getResultList().iterator(); iter.hasNext();) {
+        for (Iterator iter = getPersistenceBrokerTemplate().getIteratorByQuery(allCurrencyDetailsQuery); iter.hasNext();) {
             result.add((CurrencyDetail) iter.next());
         }
         return result;
@@ -252,7 +226,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
     public List<CoinDetail> getAllCoinDetails(String documentNumber) {
         QueryByCriteria allCoinDetailsQuery = QueryFactory.newQuery(CoinDetail.class, getAllCashDetailCriteria(documentNumber));
         List<CoinDetail> result = new ArrayList<CoinDetail>();
-        for (Iterator iter = entityManager.createQuery(allCoinDetailsQuery).getResultList().iterator(); iter.hasNext();) {
+        for (Iterator iter = getPersistenceBrokerTemplate().getIteratorByQuery(allCoinDetailsQuery); iter.hasNext();) {
             result.add((CoinDetail) iter.next());
         }
         return result;
@@ -284,7 +258,7 @@ public class CashManagementDaoJpa extends org.kuali.rice.core.framework.persiste
 
             QueryByCriteria cmChecksQuery = QueryFactory.newQuery(CheckBase.class, criteria);
             cmChecksQuery.addOrderByDescending("sequenceId");
-            Iterator allChecksIter = entityManager.createQuery(cmChecksQuery).getResultList().iterator();
+            Iterator allChecksIter = getPersistenceBrokerTemplate().getIteratorByQuery(cmChecksQuery);
             if (allChecksIter.hasNext()) {
                 return new Integer((((Check) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(allChecksIter)).getSequenceId()).intValue() + 1);
             }

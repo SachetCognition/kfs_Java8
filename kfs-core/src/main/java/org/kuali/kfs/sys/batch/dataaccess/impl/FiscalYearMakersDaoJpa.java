@@ -18,16 +18,6 @@
  */
 package org.kuali.kfs.sys.batch.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -39,38 +29,21 @@ import java.util.Set;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.apache.ojb.broker.util.ObjectModification;
 import org.kuali.kfs.sys.batch.dataaccess.FiscalYearMaker;
 import org.kuali.kfs.sys.batch.dataaccess.FiscalYearMakersDao;
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 /**
  * @see org.kuali.kfs.coa.batch.dataaccess.FiscalYearMakersDao
  */
-public class FiscalYearMakersDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements FiscalYearMakersDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final Logger LOG = org.slf4j.LoggerFactory.getLogger(FiscalYearMakersDaoJpa.class);
+public class FiscalYearMakersDaoJpa extends PlatformAwareDaoBaseOjb implements FiscalYearMakersDao {
+    private static final Logger LOG = org.apache.log4j.Logger.getLogger(FiscalYearMakersDaoJpa.class);
     
     protected static final String KEY_STRING_DELIMITER = "|";
 
@@ -84,9 +57,9 @@ public class FiscalYearMakersDaoJpa extends org.kuali.rice.core.framework.persis
         }
 
         QueryByCriteria queryID = new QueryByCriteria(objectFiscalYearMaker.getBusinessObjectClass(), objectFiscalYearMaker.createDeleteCriteria(baseYear));
-        entityManager.createQuery(queryID).executeUpdate();
+        getPersistenceBrokerTemplate().deleteByQuery(queryID);
 
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -114,7 +87,7 @@ public class FiscalYearMakersDaoJpa extends org.kuali.rice.core.framework.persis
         Set<String> nextYearPrimaryKeys = new HashSet<String>(2000);
         LOG.info( "Loading Next Year's PKs for comparison");        
         ReportQueryByCriteria nextYearKeyQuery = new ReportQueryByCriteria(fiscalYearMaker.getBusinessObjectClass(), primaryKeyFields.toArray(new String[0]), fiscalYearMaker.createNextYearSelectionCriteria(baseYear) );
-        Iterator<Object[]> nextYearRecords = entityManager.createQuery(nextYearKeyQuery).getResultList().iterator();
+        Iterator<Object[]> nextYearRecords = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(nextYearKeyQuery);
         StringBuilder keyString = new StringBuilder(40);
         int numNextYearRecords = 0;
         while ( nextYearRecords.hasNext() ) {
@@ -138,7 +111,7 @@ public class FiscalYearMakersDaoJpa extends org.kuali.rice.core.framework.persis
         // retrieve base year records to copy
         QueryByCriteria queryId = new QueryByCriteria(fiscalYearMaker.getBusinessObjectClass(), fiscalYearMaker.createSelectionCriteria(baseYear));
         // BIG QUERY - GET ALL RECORDS for the current FY 
-        Iterator<FiscalYearBasedBusinessObject> recordsToCopy = entityManager.createQuery(queryId).getResultList().iterator();
+        Iterator<FiscalYearBasedBusinessObject> recordsToCopy = getPersistenceBrokerTemplate().getIteratorByQuery(queryId);
         
         
         while ( recordsToCopy.hasNext() ) {
@@ -186,7 +159,7 @@ public class FiscalYearMakersDaoJpa extends org.kuali.rice.core.framework.persis
             LOG.info(String.format("\n%s:\n%d read = %d\n%d written = %d\nfailed RI = %d", fiscalYearMaker.getBusinessObjectClass(), baseYear, rowsRead, baseYear + 1, rowsWritten, rowsFailingRI));
         }
 
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
 
         return copyErrors;
     }

@@ -18,16 +18,6 @@
  */
 package org.kuali.kfs.pdp.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -40,7 +30,9 @@ import java.util.Map;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.DailyReport;
@@ -53,32 +45,15 @@ import org.kuali.kfs.pdp.dataaccess.PaymentDetailDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
-public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements PaymentDetailDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(PaymentDetailDaoJpa.class);
+public class PaymentDetailDaoJpa extends PlatformAwareDaoBaseOjb implements PaymentDetailDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentDetailDaoJpa.class);
 
     public PaymentDetailDaoJpa() {
         super();
     }
+
 
     /**
      * @see org.kuali.kfs.pdp.dataaccess.PaymentDetailDao#getAchPaymentsWithUnsentEmail()
@@ -92,7 +67,7 @@ public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persisten
         crit.addEqualTo(PdpPropertyConstants.PaymentDetail.PAYMENT_DISBURSEMENT_TYPE_CODE, PdpConstants.DisbursementTypeCodes.ACH);
         crit.addIsNull(PdpPropertyConstants.PaymentDetail.PAYMENT_GROUP + "." + PdpPropertyConstants.ADVICE_EMAIL_SENT_DATE);
 
-        return entityManager.createQuery(new QueryByCriteria(PaymentDetail.class, crit).getResultList().iterator());
+        return getPersistenceBrokerTemplate().getIteratorByQuery(new QueryByCriteria(PaymentDetail.class, crit));
     }
 
     /**
@@ -131,7 +106,7 @@ public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persisten
 
         Map<Key, Numbers> summary = new HashMap<Key, Numbers>();
         KualiInteger lastGroupId = null;
-        Iterator i = entityManager.createQuery(q).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getIteratorByQuery(q);
         while (i.hasNext()) {
             PaymentDetail d = (PaymentDetail) i.next();
             Key rsk = new Key(d);
@@ -226,7 +201,7 @@ public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persisten
         criteria.addEqualTo(PdpPropertyConstants.PaymentDetail.PAYMENT_UNIT_CODE, orgCode);
         criteria.addEqualTo(PdpPropertyConstants.PaymentDetail.PAYMENT_SUBUNIT_CODE, subUnitCode);
 
-        List paymentDetails = (List) entityManager.createQuery(new QueryByCriteria(PaymentDetail.class, criteria).getResultList());
+        List paymentDetails = (List) getPersistenceBrokerTemplate().getCollectionByQuery(new QueryByCriteria(PaymentDetail.class, criteria));
         PaymentDetail cp = null;
         for (Iterator iter = paymentDetails.iterator(); iter.hasNext();) {
             PaymentDetail pd = (PaymentDetail) iter.next();
@@ -261,7 +236,7 @@ public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persisten
         QueryByCriteria qbc = new QueryByCriteria(DisbursementNumberRange.class, criteria);
         qbc.addOrderBy(KFSPropertyConstants.BANK_CODE, true);
 
-        return (List<DisbursementNumberRange>) entityManager.createQuery(qbc).getResultList();
+        return (List<DisbursementNumberRange>) getPersistenceBrokerTemplate().getCollectionByQuery(qbc);
     }
 
     /**
@@ -282,7 +257,7 @@ public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persisten
         criteria.addIsNull(PdpPropertyConstants.PaymentDetail.PAYMENT_EPIC_PAYMENT_CANCELLED_DATE);
         criteria.addAndCriteria(subUnitsCriteria);
 
-        return entityManager.createQuery(new QueryByCriteria(PaymentDetail.class, criteria).getResultList().iterator());
+        return getPersistenceBrokerTemplate().getIteratorByQuery(new QueryByCriteria(PaymentDetail.class, criteria));
     }
 
     /**
@@ -299,7 +274,7 @@ public class PaymentDetailDaoJpa extends org.kuali.rice.core.framework.persisten
         criteria.addIsNull(PdpPropertyConstants.PaymentDetail.PAYMENT_EPIC_PAYMENT_PAID_EXTRACTED_DATE);
         criteria.addAndCriteria(subUnitsCriteria);
 
-        return entityManager.createQuery(new QueryByCriteria(PaymentDetail.class, criteria).getResultList().iterator());
+        return getPersistenceBrokerTemplate().getIteratorByQuery(new QueryByCriteria(PaymentDetail.class, criteria));
     }
 
     /**

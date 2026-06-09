@@ -18,19 +18,13 @@
  */
 package org.kuali.kfs.gl.batch.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.batch.dataaccess.SufficientFundsDao;
 import org.kuali.kfs.gl.businessobject.SufficientFundBalances;
 import org.kuali.kfs.sys.KFSConstants;
@@ -38,31 +32,13 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of SufficientFundsDao
+ * An OJB implementation of SufficientFundsDao
  */
-public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements SufficientFundsDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(SufficientFundsDaoJpa.class);
+public class SufficientFundsDaoJpa extends PlatformAwareDaoBaseOjb implements SufficientFundsDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SufficientFundsDaoJpa.class);
 
     private static final String YEAR_END_DOC_PREFIX = "YE%";
 
@@ -91,6 +67,7 @@ public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persist
 
         ReportQueryByCriteria reportQuery = QueryFactory.newReportQuery(SufficientFundBalances.class, criteria);
         reportQuery.setAttributes(new String[] { KFSConstants.CURRENT_BUDGET_BALANCE_AMOUNT_PROPERTY_NAME });
+
 
         return executeReportQuery(reportQuery);
     }
@@ -246,6 +223,7 @@ public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persist
         sub1.addOrCriteria(sub1_1);
         criteria.addOrCriteria(sub1);
 
+
         criteria.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, universityFiscalYear);
         criteria.addEqualTo(KFSConstants.CHART_OF_ACCOUNTS_CODE_PROPERTY_NAME, chartOfAccountsCode);
         criteria.addEqualTo(KFSConstants.ACCOUNT_NUMBER_PROPERTY_NAME, accountNumber);
@@ -272,6 +250,7 @@ public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persist
         reportQuery.setAttributes(new String[] { "sum(" + KFSConstants.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")" });
 
         return executeReportQuery(reportQuery);
+
 
     }
 
@@ -416,12 +395,12 @@ public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persist
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
         criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
 
-        entityManager.createQuery(new QueryByCriteria(SufficientFundBalances.class, criteria).executeUpdate());
+        getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(SufficientFundBalances.class, criteria));
 
         // This is required because if any deleted account balances are in the cache, deleteByQuery doesn't
         // remove them from the cache so a future select will retrieve these deleted account balances from
         // the cache and return them. Clearing the cache forces OJB to go to the database again.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -432,7 +411,7 @@ public class SufficientFundsDaoJpa extends org.kuali.rice.core.framework.persist
      * @return the first value generated from the given query
      */
     protected KualiDecimal executeReportQuery(ReportQueryByCriteria reportQuery) {
-        Iterator iterator = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         if (iterator.hasNext()) {
             KualiDecimal returnResult = (KualiDecimal) ((Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iterator))[0];
             return returnResult;

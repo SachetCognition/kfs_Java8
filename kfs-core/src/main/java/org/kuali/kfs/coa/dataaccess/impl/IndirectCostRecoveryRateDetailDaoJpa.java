@@ -18,46 +18,21 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryRateDetail;
 import org.kuali.kfs.coa.dataaccess.IndirectCostRecoveryRateDetailDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
  * This class implements the {@link IndirectCostRecoverRateDetailDao} data access methods using Ojb
  */
-public class IndirectCostRecoveryRateDetailDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements IndirectCostRecoveryRateDetailDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(IndirectCostRecoveryRateDetailDaoJpa.class);
+public class IndirectCostRecoveryRateDetailDaoJpa extends PlatformAwareDaoBaseOjb implements IndirectCostRecoveryRateDetailDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IndirectCostRecoveryRateDetailDaoJpa.class);
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.IndirectCostRecoveryRateDetailDao#getEntriesBySeries(java.lang.Integer, java.lang.String,
@@ -74,6 +49,6 @@ public class IndirectCostRecoveryRateDetailDaoJpa extends org.kuali.rice.core.fr
         QueryByCriteria qbc = QueryFactory.newQuery(IndirectCostRecoveryRateDetail.class, crit);
         qbc.addOrderByAscending(KFSPropertyConstants.AWARD_INDR_COST_RCVY_ENTRY_NBR);
 
-        return entityManager.createQuery(qbc).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(qbc);
     }
 }

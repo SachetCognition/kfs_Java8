@@ -18,22 +18,15 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.dataaccess.AccountDao;
@@ -41,34 +34,15 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.AccountResponsibility;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 /**
- * This class is the JPA/Hibernate implementation of the AccountDao interface.
+ * This class is the OJB implementation of the AccountDao interface.
  */
-public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements AccountDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(AccountDaoJpa.class);
+public class AccountDaoJpa extends PlatformAwareDaoBaseOjb implements AccountDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDaoJpa.class);
 
     /**
      * Retrieves account business object by primary key
@@ -123,7 +97,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
      *      java.lang.String)
      */
     public List getPrimaryDelegationByExample(AccountDelegate delegateExample, Date currentSqlDate, String totalDollarAmount) {
-        return new ArrayList(entityManager.createQuery(QueryFactory.newQuery(AccountDelegate.class, getDelegateByExampleCriteria(delegateExample, currentSqlDate, totalDollarAmount, "Y").getResultList())));
+        return new ArrayList(getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(AccountDelegate.class, getDelegateByExampleCriteria(delegateExample, currentSqlDate, totalDollarAmount, "Y"))));
     }
 
     /**
@@ -131,7 +105,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
      *      java.lang.String)
      */
     public List getSecondaryDelegationsByExample(AccountDelegate delegateExample, Date currentSqlDate, String totalDollarAmount) {
-        return new ArrayList(entityManager.createQuery(QueryFactory.newQuery(AccountDelegate.class, getDelegateByExampleCriteria(delegateExample, currentSqlDate, totalDollarAmount, "N").getResultList())));
+        return new ArrayList(getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(AccountDelegate.class, getDelegateByExampleCriteria(delegateExample, currentSqlDate, totalDollarAmount, "N"))));
     }
 
     /**
@@ -215,7 +189,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         List fiscalOfficerResponsibilities = new ArrayList();
         Criteria criteria = new Criteria();
         criteria.addEqualTo("accountFiscalOfficerSystemIdentifier", person.getPrincipalId());
-        Collection accounts = entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList());
+        Collection accounts = getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(Account.class, criteria));
         for (Iterator iter = accounts.iterator(); iter.hasNext();) {
             Account account = (Account) iter.next();
             AccountResponsibility accountResponsibility = new AccountResponsibility(AccountResponsibility.FISCAL_OFFICER_RESPONSIBILITY, KualiDecimal.ZERO, KualiDecimal.ZERO, "", account);
@@ -237,7 +211,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo("accountFiscalOfficerSystemIdentifier", person.getPrincipalId());
         criteria.addEqualTo("chartOfAccountsCode", account.getChartOfAccountsCode());
         criteria.addEqualTo("accountNumber", account.getAccountNumber());
-        Collection accounts = entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList());
+        Collection accounts = getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(Account.class, criteria));
         if (accounts != null && accounts.size() > 0) {
             Account retrievedAccount = (Account) accounts.iterator().next();
             if (ObjectUtils.isNotNull(retrievedAccount)) {
@@ -257,7 +231,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         List delegatedResponsibilities = new ArrayList();
         Criteria criteria = new Criteria();
         criteria.addEqualTo("accountDelegateSystemId", person.getPrincipalId());
-        Collection accountDelegates = entityManager.createQuery(QueryFactory.newQuery(AccountDelegate.class, criteria).getResultList());
+        Collection accountDelegates = getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(AccountDelegate.class, criteria));
         for (Iterator iter = accountDelegates.iterator(); iter.hasNext();) {
             AccountDelegate accountDelegate = (AccountDelegate) iter.next();
             if (accountDelegate.isActive()) {
@@ -289,7 +263,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo("accountDelegateSystemId", person.getPrincipalId());
         criteria.addEqualTo("chartOfAccountsCode", account.getChartOfAccountsCode());
         criteria.addEqualTo("accountNumber", account.getAccountNumber());
-        Collection accountDelegates = entityManager.createQuery(QueryFactory.newQuery(AccountDelegate.class, criteria).getResultList());
+        Collection accountDelegates = getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(AccountDelegate.class, criteria));
         for (Iterator iter = accountDelegates.iterator(); iter.hasNext() && !hasResponsibility;) {
             AccountDelegate accountDelegate = (AccountDelegate) iter.next();
             if (accountDelegate.isActive()) {
@@ -314,7 +288,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         LOG.debug("getAllAccounts() started");
 
         Criteria criteria = new Criteria();
-        return entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList().iterator());
+        return getPersistenceBrokerTemplate().getIteratorByQuery(QueryFactory.newQuery(Account.class, criteria));
     }
 
     /**
@@ -325,7 +299,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo("accountsSupervisorySystemsIdentifier", principalId);
         criteria.addEqualTo("active", true);
         criteria.addAndCriteria(getAccountNotExpiredCriteria(currentSqlDate));
-        return (Iterator<Account>) entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList().iterator());
+        return (Iterator<Account>) getPersistenceBrokerTemplate().getIteratorByQuery(QueryFactory.newQuery(Account.class, criteria));
     }
 
     /**
@@ -336,7 +310,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo("accountFiscalOfficerSystemIdentifier", principalId);
         criteria.addEqualTo("active", true);
         criteria.addAndCriteria(getAccountNotExpiredCriteria(currentSqlDate));
-        return (Iterator<Account>) entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList().iterator());
+        return (Iterator<Account>) getPersistenceBrokerTemplate().getIteratorByQuery(QueryFactory.newQuery(Account.class, criteria));
     }
 
     /**
@@ -347,7 +321,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo("accountsSupervisorySystemsIdentifier", principalId);
         criteria.addEqualTo("active", true);
         criteria.addAndCriteria(getAccountExpiredCriteria(currentSqlDate));
-        return (Iterator<Account>) entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList().iterator());
+        return (Iterator<Account>) getPersistenceBrokerTemplate().getIteratorByQuery(QueryFactory.newQuery(Account.class, criteria));
     }
 
     /**
@@ -358,7 +332,7 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         criteria.addEqualTo("accountFiscalOfficerSystemIdentifier", principalId);
         criteria.addEqualTo("active", true);
         criteria.addAndCriteria(getAccountExpiredCriteria(currentSqlDate));
-        return (Iterator<Account>) entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList().iterator());
+        return (Iterator<Account>) getPersistenceBrokerTemplate().getIteratorByQuery(QueryFactory.newQuery(Account.class, criteria));
     }
 
     /**
@@ -412,13 +386,14 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         reportQuery.setAttributes(new String[] { "count(*)" });
 
         int resultCount = 0;
-        Iterator iter = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         while (iter.hasNext()) {
             final Object[] results = (Object[]) iter.next();
             resultCount = (results[0] instanceof Number) ? ((Number) results[0]).intValue() : new Integer(results[0].toString()).intValue();
         }
         return resultCount > 0;
     }
+
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.AccountDao#isPrincipalInAnyWayShapeOrFormAccountSupervisor(java.lang.String)
@@ -441,6 +416,6 @@ public class AccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KFSPropertyConstants.ACCOUNT_NUMBER, accountNumber);
 
-        return entityManager.createQuery(QueryFactory.newQuery(Account.class, criteria).getResultList());
+        return getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(Account.class, criteria));
     }
 }

@@ -18,45 +18,18 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.coa.dataaccess.AccountDelegateGlobalDao;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.maintenance.MaintenanceLock;
 import org.kuali.rice.krad.util.KRADPropertyConstants;
 
 /**
- * This class is the JPA/Hibernate implementation of AccountDelegateGlobalDao
+ * This class is the OJB implementation of AccountDelegateGlobalDao
  */
-public class AccountDelegateGlobalDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements AccountDelegateGlobalDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class AccountDelegateGlobalDaoJpa extends PlatformAwareDaoBaseOjb implements AccountDelegateGlobalDao {
 
    /**
     * 

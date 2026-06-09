@@ -18,46 +18,23 @@
  */
 package org.kuali.kfs.gl.batch.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ojb.broker.metadata.ClassDescriptor;
+import org.apache.ojb.broker.metadata.ClassNotPersistenceCapableException;
+import org.apache.ojb.broker.metadata.DescriptorRepository;
+import org.apache.ojb.broker.metadata.FieldDescriptor;
+import org.apache.ojb.broker.metadata.MetadataManager;
 import org.kuali.kfs.gl.batch.dataaccess.ReconciliationDao;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.exception.ClassNotPersistableException;
 
 /**
  * Uses OJB to determine the column name -> java attribute name mapping
  */
-public class ReconciliationDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements ReconciliationDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class ReconciliationDaoJpa extends PlatformAwareDaoBaseOjb implements ReconciliationDao {
 
     private DescriptorRepository descriptorRepository;
 

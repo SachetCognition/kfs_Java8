@@ -18,41 +18,15 @@
  */
 package org.kuali.kfs.sys.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import org.apache.log4j.Logger;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.sys.businessobject.OriginationCode;
 import org.kuali.kfs.sys.dataaccess.OriginationCodeDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
-public class OriginationCodeDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements OriginationCodeDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
+public class OriginationCodeDaoJpa extends PlatformAwareDaoBaseOjb implements OriginationCodeDao {
     private static Logger LOG = Logger.getLogger(OriginationCodeDaoJpa.class);
 
     public OriginationCodeDaoJpa() {
@@ -65,7 +39,7 @@ public class OriginationCodeDaoJpa extends org.kuali.rice.core.framework.persist
      * @see org.kuali.rice.krad.dao.OriginationCodeDao#delete(org.kuali.rice.krad.bo.OriginationCode)
      */
     public void delete(OriginationCode code) {
-        entityManager.remove(entityManager.contains(code) ? code : entityManager.merge(code));
+        getPersistenceBrokerTemplate().delete(code);
     }
 
     /*
@@ -79,7 +53,7 @@ public class OriginationCodeDaoJpa extends org.kuali.rice.core.framework.persist
         criteria.addEqualTo("FS_ORIGIN_CD", originationCode);
 
         QueryByCriteria query = QueryFactory.newQuery(OriginationCode.class, criteria);
-        return (OriginationCode) entityManager.createQuery(query).getSingleResult();
+        return (OriginationCode) getPersistenceBrokerTemplate().getObjectByQuery(query);
     }
 
 }

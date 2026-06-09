@@ -18,46 +18,21 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.gl.businessobject.CorrectionChangeGroup;
 import org.kuali.kfs.gl.dataaccess.CorrectionChangeGroupDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * The JPA/Hibernate implementation of CorrectionChangeGroupDao
+ * The OJB implementation of CorrectionChangeGroupDao
  */
-public class CorrectionChangeGroupDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CorrectionChangeGroupDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CorrectionChangeGroupDaoJpa.class);
+public class CorrectionChangeGroupDaoJpa extends PlatformAwareDaoBaseOjb implements CorrectionChangeGroupDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionChangeGroupDaoJpa.class);
 
     /**
      * Deletes an unlucky correction change group
@@ -68,7 +43,7 @@ public class CorrectionChangeGroupDaoJpa extends org.kuali.rice.core.framework.p
     public void delete(CorrectionChangeGroup group) {
         LOG.debug("delete() started");
 
-        entityManager.remove(entityManager.contains(group) ? group : entityManager.merge(group));
+        getPersistenceBrokerTemplate().delete(group);
     }
 
     /**
@@ -84,7 +59,7 @@ public class CorrectionChangeGroupDaoJpa extends org.kuali.rice.core.framework.p
 
         QueryByCriteria query = QueryFactory.newQuery(CorrectionChangeGroup.class, criteria);
 
-        return entityManager.createQuery(query).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(query);
     }
 
     /**
@@ -105,6 +80,6 @@ public class CorrectionChangeGroupDaoJpa extends org.kuali.rice.core.framework.p
 
         QueryByCriteria query = QueryFactory.newQuery(CorrectionChangeGroup.class, criteria);
 
-        return (CorrectionChangeGroup) entityManager.createQuery(query).getSingleResult();
+        return (CorrectionChangeGroup) getPersistenceBrokerTemplate().getObjectByQuery(query);
     }
 }

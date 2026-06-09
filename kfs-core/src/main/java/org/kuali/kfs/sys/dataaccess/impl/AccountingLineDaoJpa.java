@@ -18,54 +18,29 @@
  */
 package org.kuali.kfs.sys.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
+import org.apache.ojb.broker.metadata.MetadataManager;
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.Query;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
 import org.kuali.kfs.sys.businessobject.TargetAccountingLine;
 import org.kuali.kfs.sys.dataaccess.AccountingLineDao;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.springframework.dao.DataAccessException;
 
 /**
- * This class is the JPA/Hibernate implementation of the AccountingLineDao interface.
+ * This class is the OJB implementation of the AccountingLineDao interface.
  */
 
-public class AccountingLineDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements AccountingLineDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
+public class AccountingLineDaoJpa extends PlatformAwareDaoBaseOjb implements AccountingLineDao {
     private static final Logger LOG = Logger.getLogger(AccountingLineDaoJpa.class);
 
     /**
@@ -73,7 +48,7 @@ public class AccountingLineDaoJpa extends org.kuali.rice.core.framework.persiste
      */
     @Override
     public void deleteAccountingLine(AccountingLine line) throws DataAccessException {
-        entityManager.remove(entityManager.contains(line) ? line : entityManager.merge(line));
+        getPersistenceBrokerTemplate().delete(line);
     }
 
     /**
@@ -102,6 +77,7 @@ public class AccountingLineDaoJpa extends org.kuali.rice.core.framework.persiste
         return new ArrayList(lines);
     }
 
+
     /**
      * Retrieves accounting lines associated with the given document header ID and line type code
      * @see org.kuali.kfs.sys.dataaccess.AccountingLineDao#findByDocumentHeaderIdAndLineType(java.lang.String, java.lang.String)
@@ -124,6 +100,6 @@ public class AccountingLineDaoJpa extends org.kuali.rice.core.framework.persiste
      * @return
      */
     protected Collection findCollection(Query query) throws DataAccessException {
-        return entityManager.createQuery(query).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(query);
     }
 }

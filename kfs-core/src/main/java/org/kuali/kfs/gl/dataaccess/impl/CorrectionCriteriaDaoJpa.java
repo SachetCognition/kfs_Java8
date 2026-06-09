@@ -18,46 +18,21 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.gl.businessobject.CorrectionCriteria;
 import org.kuali.kfs.gl.dataaccess.CorrectionCriteriaDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of CorrectionCriteriaDao
+ * An OJB implementation of CorrectionCriteriaDao
  */
-public class CorrectionCriteriaDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CorrectionCriteriaDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CorrectionCriteriaDaoJpa.class);
+public class CorrectionCriteriaDaoJpa extends PlatformAwareDaoBaseOjb implements CorrectionCriteriaDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionCriteriaDaoJpa.class);
 
     /**
      * Deletes a correction criterion
@@ -68,7 +43,7 @@ public class CorrectionCriteriaDaoJpa extends org.kuali.rice.core.framework.pers
     public void delete(CorrectionCriteria criterion) {
         LOG.debug("delete() started");
 
-        entityManager.remove(entityManager.contains(criterion) ? criterion : entityManager.merge(criterion));
+        getPersistenceBrokerTemplate().delete(criterion);
     }
 
     /**
@@ -90,7 +65,7 @@ public class CorrectionCriteriaDaoJpa extends org.kuali.rice.core.framework.pers
         Class clazz = CorrectionCriteria.class;
         QueryByCriteria query = QueryFactory.newQuery(clazz, criteria);
 
-        List returnList = (List) entityManager.createQuery(query).getResultList();
+        List returnList = (List) getPersistenceBrokerTemplate().getCollectionByQuery(query);
         return returnList;
     }
 

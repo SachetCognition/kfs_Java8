@@ -18,50 +18,23 @@
  */
 package org.kuali.kfs.fp.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.fp.businessobject.Check;
 import org.kuali.kfs.fp.businessobject.CheckBase;
 import org.kuali.kfs.fp.dataaccess.CheckDao;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.springframework.dao.DataAccessException;
 
 /**
- * This class is the JPA/Hibernate implementation of the AccountingLineDao interface.
+ * This class is the OJB implementation of the AccountingLineDao interface.
  */
 
-public class CheckDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CheckDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
+public class CheckDaoJpa extends PlatformAwareDaoBaseOjb implements CheckDao {
     private static final Logger LOG = Logger.getLogger(CheckDaoJpa.class);
 
     /**
@@ -69,7 +42,7 @@ public class CheckDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
      * @throws DataAccessException
      */
     public void deleteCheck(Check check) throws DataAccessException {
-        entityManager.remove(entityManager.contains(check) ? check : entityManager.merge(check));
+        getPersistenceBrokerTemplate().delete(check);
     }
 
     /**
@@ -85,7 +58,7 @@ public class CheckDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.c
 
         QueryByCriteria query = QueryFactory.newQuery(CheckBase.class, criteria);
 
-        Collection<CheckBase> lines = entityManager.createQuery(query).getResultList();
+        Collection<CheckBase> lines = getPersistenceBrokerTemplate().getCollectionByQuery(query);
 
         return lines;
     }

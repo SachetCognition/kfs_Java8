@@ -22,53 +22,28 @@
  */
 package org.kuali.kfs.pdp.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.pdp.PdpConstants.PaymentStatusCodes;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.PaymentGroup;
 import org.kuali.kfs.pdp.businessobject.PaymentStatus;
 import org.kuali.kfs.pdp.dataaccess.BatchMaintenanceDao;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.util.ObjectUtils;
+
 
 /**
  * 
  */
-public class BatchMaintenanceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements BatchMaintenanceDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(BatchMaintenanceDaoJpa.class);
+public class BatchMaintenanceDaoJpa extends PlatformAwareDaoBaseOjb implements BatchMaintenanceDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchMaintenanceDaoJpa.class);
 
     public BatchMaintenanceDaoJpa() {
         super();
@@ -108,7 +83,7 @@ public class BatchMaintenanceDaoJpa extends org.kuali.rice.core.framework.persis
         q.setAttributes(new String[] { PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_PAYMENT_STATUS_CODE });
         q.addGroupBy(PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_PAYMENT_STATUS_CODE);
 
-        Iterator i = entityManager.createQuery(q).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
         if (i.hasNext()) {
             LOG.debug("doBatchPaymentsHaveOpenStatus() Not all payment groups have status 'OPEN'.");
             TransactionalServiceUtils.exhaustIterator(i);
@@ -155,7 +130,7 @@ public class BatchMaintenanceDaoJpa extends org.kuali.rice.core.framework.persis
         q.setAttributes(new String[] { PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_PAYMENT_STATUS_CODE });
         q.addGroupBy(PdpPropertyConstants.PaymentGroup.PAYMENT_GROUP_PAYMENT_STATUS_CODE);
 
-        Iterator i = entityManager.createQuery(q).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
         if (i.hasNext()) {
             LOG.debug("doBatchPaymentsHaveHeldStatus() Not all payment groups have status 'HELD'.");
             TransactionalServiceUtils.exhaustIterator(i);

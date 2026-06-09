@@ -18,16 +18,6 @@
  */
 package org.kuali.kfs.sys.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.dataaccess.BalanceTypeDao;
@@ -51,34 +44,15 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.kns.lookup.LookupUtils;
 
 /**
  *
  *
  */
-public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements GeneralLedgerPendingEntryDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(GeneralLedgerPendingEntryDaoJpa.class);
+public class GeneralLedgerPendingEntryDaoJpa extends PlatformAwareDaoBaseOjb implements GeneralLedgerPendingEntryDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralLedgerPendingEntryDaoJpa.class);
 
     protected final static String TRANSACTION_LEDGER_ENTRY_SEQUENCE_NUMBER = "transactionLedgerEntrySequenceNumber";
     protected final static String FINANCIAL_DOCUMENT_APPROVED_CODE = "financialDocumentApprovedCode";
@@ -123,7 +97,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         reportQuery.setAttributes(new String[] { "sum(" + KFSConstants.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")" });
 
         KualiDecimal rv = null;
-        Iterator iterator = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         if (iterator.hasNext()) {
             rv = (KualiDecimal) ((Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iterator))[0];
         }
@@ -170,7 +144,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         reportQuery.setAttributes(new String[] { "sum(" + KFSConstants.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")" });
 
         KualiDecimal rv = null;
-        Iterator iterator = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         if (iterator.hasNext()) {
             rv = (KualiDecimal) ((Object[]) iterator.next())[0];
         }
@@ -209,7 +183,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         reportQuery.setAttributes(new String[] { "sum(" + KFSConstants.TRANSACTION_LEDGER_ENTRY_AMOUNT + ")" });
 
         KualiDecimal rv = null;
-        Iterator iterator = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         if (iterator.hasNext()) {
             rv = (KualiDecimal) ((Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iterator))[0];
         }
@@ -228,8 +202,8 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
             Criteria criteria = new Criteria();
             criteria.addEqualTo(KFSPropertyConstants.DOCUMENT_NUMBER, documentHeaderId);
 
-            entityManager.createQuery(QueryFactory.newQuery(this.getEntryClass().executeUpdate(), criteria));
-            entityManager.clear();
+            getPersistenceBrokerTemplate().deleteByQuery(QueryFactory.newQuery(this.getEntryClass(), criteria));
+            getPersistenceBrokerTemplate().clearCache();
         }
     }
 
@@ -241,8 +215,8 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         criteria.addEqualTo(FINANCIAL_DOCUMENT_APPROVED_CODE, financialDocumentApprovedCode);
 
         QueryByCriteria qbc = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        entityManager.createQuery(qbc).executeUpdate();
-        entityManager.clear();
+        getPersistenceBrokerTemplate().deleteByQuery(qbc);
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -257,7 +231,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         criteria.addEqualTo("financialDocumentApprovedCode", KFSConstants.PENDING_ENTRY_APPROVED_STATUS_CODE.APPROVED);
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -273,7 +247,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
 
         ReportQueryByCriteria query = QueryFactory.newReportQuery(this.getEntryClass(), criteria);
         query.setAttributes(new String[] { "count(*)" });
-        Iterator i = entityManager.createQuery(query).getResultList().iterator();
+        Iterator i = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
         if (i.hasNext()) {
             Object[] values = (Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(i);
             if (values[0] instanceof BigDecimal) {
@@ -322,7 +296,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         criteria.addAndCriteria(criteria1);
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -349,7 +323,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         this.addStatusCode(criteria, isApproved);
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -368,7 +342,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         LookupUtils.applySearchResultsLimit(this.getEntryClass(), criteria, getDbPlatform());
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -385,7 +359,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         this.addStatusCode(criteria, isApproved);
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -404,8 +378,9 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         this.addStatusCode(criteria, isApproved);
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
+
 
     /**
      * @see org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao#findPendingLedgerEntriesForEncumbrance(java.util.Map, boolean,
@@ -453,7 +428,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         }
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
 
     /**
@@ -482,6 +457,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         return criteria;
     }
 
+
     /**
      * @see org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao#findPendingLedgerEntriesForAccountBalance(Map, boolean,
      *      String, int, List)
@@ -496,8 +472,9 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         this.addStatusCode(criteria, isApproved);
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(query);
     }
+
 
     /**
      * @see org.kuali.kfs.sys.dataaccess.GeneralLedgerPendingEntryDao#findPendingLedgerEntrySummaryForAccountBalance(java.util.Map,
@@ -525,7 +502,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         String[] groupBy = (String[]) groupByList.toArray(new String[groupByList.size()]);
         query.addGroupBy(groupBy);
 
-        return entityManager.createQuery(query).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(query);
     }
 
     /**
@@ -689,7 +666,7 @@ public class GeneralLedgerPendingEntryDaoJpa extends org.kuali.rice.core.framewo
         LookupUtils.applySearchResultsLimit(this.getEntryClass(), criteria, getDbPlatform());
 
         QueryByCriteria query = QueryFactory.newQuery(this.getEntryClass(), criteria);
-        return entityManager.createQuery(query).getResultList();
+        return getPersistenceBrokerTemplate().getCollectionByQuery(query);
     }
 
     /**

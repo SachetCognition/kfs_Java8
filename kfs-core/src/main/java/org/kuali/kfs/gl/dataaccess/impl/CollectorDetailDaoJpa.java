@@ -18,50 +18,29 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Iterator;
 
+import org.apache.ojb.broker.metadata.ClassDescriptor;
+import org.apache.ojb.broker.metadata.ClassNotPersistenceCapableException;
+import org.apache.ojb.broker.metadata.DescriptorRepository;
+import org.apache.ojb.broker.metadata.MetadataManager;
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.businessobject.CollectorDetail;
 import org.kuali.kfs.gl.dataaccess.CollectorDetailDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.exception.ClassNotPersistableException;
 
 /**
- * A JPA/Hibernate implementation of the CollectorDetailDao
+ * An OJB implementation of the CollectorDetailDao
  */
-public class CollectorDetailDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CollectorDetailDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CollectorDetailDaoJpa.class);
+public class CollectorDetailDaoJpa extends PlatformAwareDaoBaseOjb implements CollectorDetailDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorDetailDaoJpa.class);
 
     private DescriptorRepository descriptorRepository;
 
@@ -83,12 +62,12 @@ public class CollectorDetailDaoJpa extends org.kuali.rice.core.framework.persist
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
         criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(universityFiscalYear));
         
-        entityManager.createQuery(new QueryByCriteria(CollectorDetail.class, criteria).executeUpdate());
+        getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(CollectorDetail.class, criteria));
 
         // This is required because if any deleted items are in the cache, deleteByQuery doesn't
         // remove them from the cache so a future select will retrieve these deleted account balances from
         // the cache and return them. Clearing the cache forces OJB to go to the database again.
-        entityManager.clear();
+        getPersistenceBrokerTemplate().clearCache();
     }
 
     /**
@@ -110,6 +89,7 @@ public class CollectorDetailDaoJpa extends org.kuali.rice.core.framework.persist
         return classDescriptor.getFullTableName();
     }
 
+
     public Integer getMaxCreateSequence(Date date) {
         Criteria crit = new Criteria();
         crit.addEqualTo("CREATE_DT", date);
@@ -117,7 +97,7 @@ public class CollectorDetailDaoJpa extends org.kuali.rice.core.framework.persist
         ReportQueryByCriteria q = QueryFactory.newReportQuery(CollectorDetail.class, crit);
         q.setAttributes(new String[] { "max(transactionLedgerEntrySequenceNumber)" });
 
-        Iterator<Object[]> iter = entityManager.createQuery(q).getResultList().iterator();
+        Iterator<Object[]> iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
         if (iter.hasNext()) {
             Object[] result = iter.next();
             if (result[0] != null) {

@@ -18,45 +18,23 @@
  */
 package org.kuali.kfs.sys.batch.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.Query;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.batch.dataaccess.FinancialSystemDocumentHeaderPopulationDao;
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeaderMissingFromWorkflow;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
  * Base implementation of the FinancialSystemDocumentHeaderPopulationDao DAO
  */
-public class FinancialSystemDocumentHeaderPopulationDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements FinancialSystemDocumentHeaderPopulationDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class FinancialSystemDocumentHeaderPopulationDaoJpa extends PlatformAwareDaoBaseOjb implements FinancialSystemDocumentHeaderPopulationDao {
 
     /**
      *
@@ -66,7 +44,7 @@ public class FinancialSystemDocumentHeaderPopulationDaoJpa extends org.kuali.ric
     public int countTotalFinancialSystemDocumentHeadersToProcess() {
         Criteria c = buildFinancialSystemDocumentHeaderCriteria();
         QueryByCriteria query = QueryFactory.newQuery(FinancialSystemDocumentHeader.class, c);
-        final int numOfFSDocHeaders = entityManager.createQuery(query).getResultList().size();
+        final int numOfFSDocHeaders = getPersistenceBrokerTemplate().getCount(query);
         return numOfFSDocHeaders;
     }
 
@@ -82,7 +60,7 @@ public class FinancialSystemDocumentHeaderPopulationDaoJpa extends org.kuali.ric
         query.setEndAtIndex(batchEndIndex);
         query.addOrderByDescending(KFSPropertyConstants.DOCUMENT_NUMBER); // roughly try to process newer documents first
 
-        Collection<FinancialSystemDocumentHeader> documentHeaders = entityManager.createQuery(query).getResultList();
+        Collection<FinancialSystemDocumentHeader> documentHeaders = getPersistenceBrokerTemplate().getCollectionByQuery(query);
         return documentHeaders;
     }
 

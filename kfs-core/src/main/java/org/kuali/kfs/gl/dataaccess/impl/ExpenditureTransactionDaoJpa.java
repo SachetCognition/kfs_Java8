@@ -18,50 +18,24 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.ExpenditureTransaction;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.gl.dataaccess.ExpenditureTransactionDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
  * The OJB implmentation of ExpenditureTransactionDao
  */
-public class ExpenditureTransactionDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements ExpenditureTransactionDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ExpenditureTransactionDaoJpa.class);
+public class ExpenditureTransactionDaoJpa extends PlatformAwareDaoBaseOjb implements ExpenditureTransactionDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExpenditureTransactionDaoJpa.class);
 
     /**
      * Constructs a ExpenditureTransactionDaoJpa instance
@@ -101,7 +75,7 @@ public class ExpenditureTransactionDaoJpa extends org.kuali.rice.core.framework.
         }
 
         QueryByCriteria qbc = QueryFactory.newQuery(ExpenditureTransaction.class, crit);
-        return (ExpenditureTransaction) entityManager.createQuery(qbc).getSingleResult();
+        return (ExpenditureTransaction) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -117,7 +91,7 @@ public class ExpenditureTransactionDaoJpa extends org.kuali.rice.core.framework.
             // We want them all so no criteria is added
 
             QueryByCriteria qbc = QueryFactory.newQuery(ExpenditureTransaction.class, crit);
-            return entityManager.createQuery(qbc).getResultList().iterator();
+            return getPersistenceBrokerTemplate().getIteratorByQuery(qbc);
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -133,7 +107,7 @@ public class ExpenditureTransactionDaoJpa extends org.kuali.rice.core.framework.
     public void delete(ExpenditureTransaction et) {
         LOG.debug("delete() started");
 
-        entityManager.remove(entityManager.contains(et) ? et : entityManager.merge(et));
+        getPersistenceBrokerTemplate().delete(et);
     }
 
     /**

@@ -18,46 +18,21 @@
  */
 package org.kuali.kfs.gl.document.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.sql.Date;
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.gl.document.GeneralLedgerCorrectionProcessDocument;
 import org.kuali.kfs.gl.document.dataaccess.CorrectionDocumentDao;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * The JPA/Hibernate implementation of CorrectionDocumentDao
+ * The OJB implementation of CorrectionDocumentDao
  */
-public class CorrectionDocumentDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CorrectionDocumentDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class CorrectionDocumentDaoJpa extends PlatformAwareDaoBaseOjb implements CorrectionDocumentDao {
 
     /**
      * Queries the database to get a Collection of GLCP documents finalized on the given date
@@ -68,6 +43,6 @@ public class CorrectionDocumentDaoJpa extends org.kuali.rice.core.framework.pers
     public Collection<GeneralLedgerCorrectionProcessDocument> getCorrectionDocumentsFinalizedOn(Date documentFinalDate) {
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KFSConstants.DOCUMENT_HEADER_PROPERTY_NAME + "." + KFSPropertyConstants.DOCUMENT_FINAL_DATE, documentFinalDate);
-        return entityManager.createQuery(QueryFactory.newQuery(GeneralLedgerCorrectionProcessDocument.class, criteria).getResultList());
+        return getPersistenceBrokerTemplate().getCollectionByQuery(QueryFactory.newQuery(GeneralLedgerCorrectionProcessDocument.class, criteria));
     }
 }

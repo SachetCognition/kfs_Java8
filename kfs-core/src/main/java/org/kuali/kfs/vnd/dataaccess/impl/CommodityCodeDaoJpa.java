@@ -18,47 +18,20 @@
  */
 package org.kuali.kfs.vnd.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.vnd.VendorPropertyConstants;
 import org.kuali.kfs.vnd.businessobject.CommodityCode;
 import org.kuali.kfs.vnd.dataaccess.CommodityCodeDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * JPA/Hibernate implementation of CommodityCodeDao.
+ * OJB implementation of CommodityCodeDao.
  */
-public class CommodityCodeDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements CommodityCodeDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CommodityCodeDaoJpa.class);
+public class CommodityCodeDaoJpa extends PlatformAwareDaoBaseOjb implements CommodityCodeDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CommodityCodeDaoJpa.class);
 
     /**
      * @see org.kuali.kfs.vnd.dataaccess.CommodityCodeDao#wildCardCommodityCodeExists(java.lang.String)
@@ -67,7 +40,7 @@ public class CommodityCodeDaoJpa extends org.kuali.rice.core.framework.persisten
         String commodityCodeString = StringUtils.replace(wildCardCommodityCode, KFSConstants.WILDCARD_CHARACTER, KFSConstants.PERCENTAGE_SIGN);
         Criteria criteria = new Criteria();
         criteria.addLike(VendorPropertyConstants.PURCHASING_COMMODITY_CODE, commodityCodeString);        
-        int count =  entityManager.createQuery(QueryFactory.newQuery(CommodityCode.class, criteria).getResultList().size());
+        int count =  getPersistenceBrokerTemplate().getCount(QueryFactory.newQuery(CommodityCode.class, criteria));
         boolean exists = ((count > 0) ? true : false);
         return exists;
     }

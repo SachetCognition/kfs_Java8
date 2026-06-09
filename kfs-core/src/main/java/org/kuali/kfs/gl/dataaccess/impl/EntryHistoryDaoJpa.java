@@ -18,50 +18,24 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.util.Iterator;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.businessobject.EntryHistory;
 import org.kuali.kfs.gl.dataaccess.LedgerEntryHistoryBalancingDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
-
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 /**
- * A JPA/Hibernate implementation of LedgerEntryHistoryBalancingDao
+ * An OJB implementation of LedgerEntryHistoryBalancingDao
  */
-public class EntryHistoryDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements LedgerEntryHistoryBalancingDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(EntryHistoryDaoJpa.class);
+public class EntryHistoryDaoJpa extends PlatformAwareDaoBaseOjb implements LedgerEntryHistoryBalancingDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EntryHistoryDaoJpa.class);
     
     /**
      * @see org.kuali.kfs.gl.dataaccess.LedgerEntryHistoryBalancingDao#findSumRowCountGreaterOrEqualThan(java.lang.Integer)
@@ -73,7 +47,7 @@ public class EntryHistoryDaoJpa extends org.kuali.rice.core.framework.persistenc
         ReportQueryByCriteria reportQuery = QueryFactory.newReportQuery(EntryHistory.class, criteria);
         reportQuery.setAttributes(new String[] { "sum(" + KFSPropertyConstants.ROW_COUNT  + ")"});
         
-        Iterator<Object[]> iterator = entityManager.createQuery(reportQuery).getResultList().iterator();
+        Iterator<Object[]> iterator = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(reportQuery);
         Object[] returnResult = TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iterator);
         
         return ObjectUtils.isNull(returnResult[0]) ? 0 : ((BigDecimal) returnResult[0]).intValue();

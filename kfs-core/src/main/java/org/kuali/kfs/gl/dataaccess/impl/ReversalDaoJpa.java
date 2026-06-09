@@ -22,51 +22,27 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
+import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.businessobject.Reversal;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.gl.dataaccess.ReversalDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of the Reversal DAO
+ * An OJB implementation of the Reversal DAO
  */
-public class ReversalDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements ReversalDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ReversalDaoJpa.class);
+public class ReversalDaoJpa extends PlatformAwareDaoBaseOjb implements ReversalDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReversalDaoJpa.class);
 
     private final static String UNIVERISITY_FISCAL_YEAR = "universityFiscalYear";
     private final static String CHART_OF_ACCOUNTS_CODE = "chartOfAccountsCode";
@@ -115,7 +91,7 @@ public class ReversalDaoJpa extends org.kuali.rice.core.framework.persistence.jp
         ReportQueryByCriteria q = QueryFactory.newReportQuery(Entry.class, crit);
         q.setAttributes(new String[] { "max(transactionLedgerEntrySequenceNumber)" });
 
-        Iterator iter = entityManager.createQuery(q).getResultList().iterator();
+        Iterator iter = getPersistenceBrokerTemplate().getReportQueryIteratorByQuery(q);
         if (iter.hasNext()) {
             Object[] data = (Object[]) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(iter);
             BigDecimal max = (BigDecimal) data[0]; // Don't know why OJB returns a BigDecimal, but it does
@@ -159,7 +135,7 @@ public class ReversalDaoJpa extends org.kuali.rice.core.framework.persistence.jp
         crit.addEqualTo(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER, t.getTransactionLedgerEntrySequenceNumber());
 
         QueryByCriteria qbc = QueryFactory.newQuery(Reversal.class, crit);
-        return (Reversal) entityManager.createQuery(qbc).getSingleResult();
+        return (Reversal) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 
     /**
@@ -177,7 +153,7 @@ public class ReversalDaoJpa extends org.kuali.rice.core.framework.persistence.jp
         crit.addLessOrEqualThan(KFSPropertyConstants.FINANCIAL_DOCUMENT_REVERSAL_DATE, new java.sql.Date(before.getTime()));
 
         QueryByCriteria qbc = QueryFactory.newQuery(Reversal.class, crit);
-        return entityManager.createQuery(qbc).getResultList().iterator();
+        return getPersistenceBrokerTemplate().getIteratorByQuery(qbc);
     }
 
     /**
@@ -189,6 +165,6 @@ public class ReversalDaoJpa extends org.kuali.rice.core.framework.persistence.jp
     public void delete(Reversal re) {
         LOG.debug("delete() started");
 
-        entityManager.remove(entityManager.contains(re) ? re : entityManager.merge(re));
+        getPersistenceBrokerTemplate().delete(re);
     }
 }

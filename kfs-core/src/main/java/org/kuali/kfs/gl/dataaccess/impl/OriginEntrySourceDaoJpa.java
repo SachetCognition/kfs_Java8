@@ -18,43 +18,19 @@
  */
 package org.kuali.kfs.gl.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
 import java.util.Collection;
 
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.gl.businessobject.OriginEntrySource;
 import org.kuali.kfs.gl.dataaccess.OriginEntrySourceDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
- * A JPA/Hibernate implementation of OriginEntrySourceDao
+ * An OJB implementation of OriginEntrySourceDao
  */
-public class OriginEntrySourceDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements OriginEntrySourceDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
+public class OriginEntrySourceDaoJpa extends PlatformAwareDaoBaseOjb implements OriginEntrySourceDao {
 
     private static final String FINANCIAL_DOCUMENT_REVERSAL_DATE = "financialDocumentReversalDate";
     private static final String UNIVERSITY_FISCAL_YEAR = "universityFiscalYear";
@@ -86,7 +62,7 @@ public class OriginEntrySourceDaoJpa extends org.kuali.rice.core.framework.persi
     public Collection findAll() {
         QueryByCriteria query = QueryFactory.newQuery(OriginEntrySource.class, (Criteria) null);// "SELECT * FROM
         // GL_ORIGIN_ENTRY_SRC_T");
-        Collection thawed = entityManager.createQuery(query).getResultList();
+        Collection thawed = getPersistenceBrokerTemplate().getCollectionByQuery(query);
         // Collection frozen = Collections.unmodifiableCollection(thawed);
         return thawed;
     }
@@ -102,7 +78,7 @@ public class OriginEntrySourceDaoJpa extends org.kuali.rice.core.framework.persi
         Criteria criteria = new Criteria();
         criteria.addEqualTo("code", code);
         QueryByCriteria query = QueryFactory.newQuery(OriginEntrySource.class, criteria);
-        return (OriginEntrySource) entityManager.createQuery(query).getSingleResult();
+        return (OriginEntrySource) getPersistenceBrokerTemplate().getObjectByQuery(query);
     }
 
 }

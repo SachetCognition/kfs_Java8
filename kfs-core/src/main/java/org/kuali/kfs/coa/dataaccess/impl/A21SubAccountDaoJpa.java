@@ -18,43 +18,18 @@
  */
 package org.kuali.kfs.coa.dataaccess.impl;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-
+import org.apache.ojb.broker.query.Criteria;
+import org.apache.ojb.broker.query.QueryByCriteria;
+import org.apache.ojb.broker.query.QueryFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.dataaccess.A21SubAccountDao;
+import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 /**
  * This class provides data access to {@link A21SubAccount} through OJB
  */
-public class A21SubAccountDaoJpa extends org.kuali.rice.core.framework.persistence.jpa.criteria.Criteria implements A21SubAccountDao {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    private org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform;
-
-    @Override
-    public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() {
-        return dbPlatform;
-    }
-
-    public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform dbPlatform) {
-        this.dbPlatform = dbPlatform;
-    }
-
-    public void setJcdAlias(String jcdAlias) {
-        // no-op: JPA does not use OJB jcdAlias
-    }
-
-
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(A21SubAccountDaoJpa.class);
+public class A21SubAccountDaoJpa extends PlatformAwareDaoBaseOjb implements A21SubAccountDao {
+    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(A21SubAccountDaoJpa.class);
 
     public A21SubAccountDaoJpa() {
         super();
@@ -72,6 +47,6 @@ public class A21SubAccountDaoJpa extends org.kuali.rice.core.framework.persisten
         crit.addEqualTo("subAccountNumber", subAccountNumber);
 
         QueryByCriteria qbc = QueryFactory.newQuery(A21SubAccount.class, crit);
-        return (A21SubAccount) entityManager.createQuery(qbc).getSingleResult();
+        return (A21SubAccount) getPersistenceBrokerTemplate().getObjectByQuery(qbc);
     }
 }
