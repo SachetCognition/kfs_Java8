@@ -18,7 +18,13 @@
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <property name="persistenceUnitName" value="kfs-pu"/>
-    <property name="packagesToScan" value="org.kuali.kfs"/>
+    <!--
+      packagesToScan is intentionally omitted: the codebase has ~47 legacy @Entity
+      classes (mostly in kfs-tem) with incomplete JPA mappings that would break
+      Hibernate initialization. Instead, entity classes are registered explicitly
+      in persistence.xml as they are migrated from OJB — giving full control over
+      the incremental migration.
+    -->
     <property name="jpaVendorAdapter">
       <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="showSql" value="false"/>
