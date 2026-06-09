@@ -22,6 +22,8 @@ package org.kuali.kfs.module.purap.document;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PurchaseOrderStatuses;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Purchase Order Retransmit Document
  */
 public class PurchaseOrderRetransmitDocument extends PurchaseOrderDocument {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderRetransmitDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchaseOrderRetransmitDocument.class);
 
     protected boolean shouldDisplayRetransmitTab;
 

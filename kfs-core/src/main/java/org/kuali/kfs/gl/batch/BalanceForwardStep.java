@@ -23,6 +23,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.YearEndService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
@@ -34,7 +36,7 @@ import org.springframework.util.StopWatch;
  * This step runs the balance forward year end process.
  */
 public class BalanceForwardStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceForwardStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalanceForwardStep.class);
 
     private YearEndService yearEndService;
 

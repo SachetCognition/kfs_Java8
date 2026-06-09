@@ -20,6 +20,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants.Report;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionAccountSummaryReportDao;
@@ -30,7 +32,7 @@ import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionAccountSumm
  */
 
 public class BudgetConstructionAccountSummaryReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionAccountSummaryReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionAccountSummaryReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionAccountSummaryReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsAccountSummaryTable = new ArrayList<SQLForStep>(1);
 
@@ -414,7 +416,6 @@ public class BudgetConstructionAccountSummaryReportDaoJdbc extends BudgetConstru
         // run the SQL after inserting the constant strings
         getSimpleJdbcTemplate().update(updateReportsAccountSummaryTable.get(0).getSQL(stringsToInsert), principalName, principalName, principalName, principalName, principalName, principalName, principalName, principalName);
     }
-
 
     /**
      * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionAccountSummaryReportDao#updateReportsAccountSummaryTableWithConsolidation(java.lang.String, java.lang.String, java.lang.String)

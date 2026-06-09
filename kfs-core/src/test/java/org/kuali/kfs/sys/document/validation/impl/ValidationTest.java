@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -34,7 +36,7 @@ import org.kuali.kfs.sys.document.validation.Validation;
  */
 @ConfigureContext
 public class ValidationTest extends KualiTestBase {
-    private final static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ValidationTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ValidationTest.class);
     
     /**
      * Tests that all validations are at least configured correctly

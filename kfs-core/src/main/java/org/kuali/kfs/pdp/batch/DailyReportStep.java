@@ -18,12 +18,14 @@
  */
 package org.kuali.kfs.pdp.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.batch.service.DailyReportService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
 
 public class DailyReportStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DailyReportStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(DailyReportStep.class);
 
     private DailyReportService dailyReportService;
 

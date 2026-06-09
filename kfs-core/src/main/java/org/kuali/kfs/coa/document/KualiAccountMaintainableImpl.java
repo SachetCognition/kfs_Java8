@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryAccount;
 import org.kuali.kfs.coa.service.AccountPersistenceStructureService;
@@ -48,7 +49,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * specific fields that shouldn't be copied to default values {@link KualiPostProcessor}
  */
 public class KualiAccountMaintainableImpl extends FinancialSystemMaintainable {
-    private static final Logger LOG = Logger.getLogger(KualiAccountMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KualiAccountMaintainableImpl.class);
     private static final String ACCOUNT_GUIDE_LINE_PROPERTY = "accountGuideline";
 
     /**
@@ -91,7 +92,6 @@ public class KualiAccountMaintainableImpl extends FinancialSystemMaintainable {
 
         account.setIndirectCostRecoveryAccounts(copyIndirectCostRecoveryAccounts);
     }
-
 
     @Override
     public List<MaintenanceLock> generateMaintenanceLocks() {

@@ -28,6 +28,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountGlobal;
 import org.kuali.kfs.coa.businessobject.AccountGlobalDetail;
@@ -55,7 +57,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class represents the business rules for the maintenance of {@link AccountGlobal} business objects
  */
 public class AccountGlobalRule extends GlobalDocumentRuleBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountGlobalRule.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AccountGlobalRule.class);
 
     // These constants should not be here - need to be in system parameters
     @Deprecated
@@ -465,7 +467,6 @@ public class AccountGlobalRule extends GlobalDocumentRuleBase {
             }
         }
 
-
         // a continuation account is required if the expiration date is completed.
         success &= checkContinuationAccount(maintenanceDocument, newExpDate);
 
@@ -501,7 +502,6 @@ public class AccountGlobalRule extends GlobalDocumentRuleBase {
                 LOG.warn( "Error retrieving maintenance doc for doc #" + maintenanceDocument.getDocumentNumber()+ ". This shouldn't happen.", ex );
             }
         }
-
 
         // load the object by keys
         Account account = SpringContext.getBean(BusinessObjectService.class).findByPrimaryKey(Account.class, detail.getPrimaryKeys());
@@ -624,7 +624,6 @@ public class AccountGlobalRule extends GlobalDocumentRuleBase {
             return true;
         }
     }
-
 
     /**
      * This method tests whether the continuation account entered (if any) has expired or not.

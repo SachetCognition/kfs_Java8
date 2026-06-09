@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
 import org.kuali.kfs.module.purap.dataaccess.B2BDao;
@@ -52,7 +54,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class B2BPurchaseOrderServiceImpl implements B2BPurchaseOrderService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(B2BPurchaseOrderServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(B2BPurchaseOrderServiceImpl.class);
 
     private B2BDao b2bDao;
     private RequisitionService requisitionService;
@@ -192,7 +194,6 @@ public class B2BPurchaseOrderServiceImpl implements B2BPurchaseOrderService {
         cxml.append("          <Money currency=\"USD\">").append(purchaseOrder.getTotalDollarAmount()).append("</Money>\n");
         cxml.append("        </Total>\n");
 
-
         cxml.append("        <ShipTo>\n");
         cxml.append("          <Address addressID=\"").append(purchaseOrder.getDeliveryCampusCode()).append(purchaseOrder.getOrganizationCode()).append("\">\n");
         cxml.append("            <Name xml:lang=\"en\">Kuali</Name>\n");
@@ -244,7 +245,6 @@ public class B2BPurchaseOrderServiceImpl implements B2BPurchaseOrderService {
         cxml.append("            </PostalAddress>\n");
         cxml.append("          </Address>\n");
         cxml.append("        </ShipTo>\n");
-
 
         cxml.append("        <BillTo>\n");
         cxml.append("          <Address addressID=\"").append(purchaseOrder.getDeliveryCampusCode()).append("\">\n");

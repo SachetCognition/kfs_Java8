@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.module.ar.document.validation.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.coa.service.ObjectTypeService;
@@ -32,7 +33,7 @@ import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class SystemInformationRule extends MaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(SystemInformationRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(SystemInformationRule.class);
     
     protected ObjectTypeService objectTypeService;
     protected AccountService accountService;

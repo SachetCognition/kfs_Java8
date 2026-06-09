@@ -29,7 +29,8 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.fp.document.DistributionOfIncomeAndExpenseDocument;
 import org.kuali.kfs.module.tem.TemConstants;
@@ -58,7 +59,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ImportedCTSExpenseServiceImpl extends ExpenseServiceBase implements TemExpenseService {
 
-    private static Logger LOG = Logger.getLogger(ImportedCTSExpenseServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ImportedCTSExpenseServiceImpl.class);
 
     protected ImportedExpensePendingEntryService importedExpensePendingEntryService;
     protected TravelExpenseService travelExpenseService;

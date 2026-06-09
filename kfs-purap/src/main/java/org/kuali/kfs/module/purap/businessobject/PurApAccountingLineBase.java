@@ -24,6 +24,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Purap Accounting Line Base Business Object.
  */
 public abstract class PurApAccountingLineBase extends SourceAccountingLine implements PurApAccountingLine, Comparable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurApAccountingLineBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurApAccountingLineBase.class);
     protected Integer accountIdentifier;
     private Integer itemIdentifier;
     private BigDecimal accountLinePercent;

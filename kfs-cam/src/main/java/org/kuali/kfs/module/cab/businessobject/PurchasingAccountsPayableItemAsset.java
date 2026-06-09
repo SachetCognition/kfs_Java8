@@ -27,7 +27,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.ItemCapitalAsset;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
@@ -49,7 +50,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjectBase implements Comparable<PurchasingAccountsPayableItemAsset> {
-    private static final Logger LOG = Logger.getLogger(PurchasingAccountsPayableItemAsset.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableItemAsset.class);
 
     private String documentNumber;
     private Integer accountsPayableLineItemIdentifier;
@@ -121,7 +122,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
         this.lockingInformation = initialItemAsset.getLockingInformation();
     }
 
-
     /**
      * Gets the lockingInformation attribute.
      * @return Returns the lockingInformation.
@@ -174,7 +174,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
         this.purchaseOrderItemIdentifier = purchaseOrderItemIdentifier;
     }
 
-
     /**
      * Gets the capitalAssetNumbers attribute.
      *
@@ -204,7 +203,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
         }
         return getPurApItemAssets().get(index);
     }
-
 
     /**
      * Gets the createAssetIndicator attribute.
@@ -350,7 +348,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
         this.splitQty = splitQty;
     }
 
-
     /**
      * Gets the purchasingAccountsPayableLineAssetAccounts attribute.
      *
@@ -458,7 +455,6 @@ public class PurchasingAccountsPayableItemAsset extends PersistableBusinessObjec
     public void setCapitalAssetBuilderLineNumber(Integer capitalAssetBuilderLineNumber) {
         this.capitalAssetBuilderLineNumber = capitalAssetBuilderLineNumber;
     }
-
 
     /**
      * Gets the capitalAssetManagementDocumentNumber attribute.

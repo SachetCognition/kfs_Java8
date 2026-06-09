@@ -28,7 +28,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.FinancialSystemModuleConfiguration;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.FiscalYearMakerStep;
@@ -47,7 +48,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class FiscalYearMakerServiceImpl implements FiscalYearMakerService {
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(FiscalYearMakerServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FiscalYearMakerServiceImpl.class);
 
     protected FiscalYearMakersDao fiscalYearMakersDao;
     protected ParameterService parameterService;
@@ -276,7 +277,6 @@ public class FiscalYearMakerServiceImpl implements FiscalYearMakerService {
 
         return false;
     }
-
 
     /**
      * Gets all classes that are child of another class in the given Map

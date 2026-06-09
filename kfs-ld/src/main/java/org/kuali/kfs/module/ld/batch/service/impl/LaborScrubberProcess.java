@@ -37,6 +37,8 @@ import java.util.StringTokenizer;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
@@ -94,7 +96,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * it's own instance variables instead of being shared.
  */
 public class LaborScrubberProcess {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborScrubberProcess.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LaborScrubberProcess.class);
 
     // 40 spaces - used for filling in descriptions with spaces
     protected static String SPACES = "                                        ";
@@ -510,7 +512,6 @@ public class LaborScrubberProcess {
                             this.laborMainReportWriterService.writeError(unscrubbedEntry, transactionErrors);
                         }
 
-
                         if (saveValidTransaction) {
                             scrubbedEntry.setTransactionScrubberOffsetGenerationIndicator(false);
                             createOutputEntry(scrubbedEntry, OUTPUT_GLE_FILE_ps);
@@ -554,7 +555,6 @@ public class LaborScrubberProcess {
             throw new RuntimeException("processGroup() stopped due to: " + ioe.getMessage(), ioe);
         }
     }
-
 
     protected boolean isFatal(List<Message> errors) {
         for (Iterator<Message> iter = errors.iterator(); iter.hasNext();) {
@@ -712,7 +712,6 @@ public class LaborScrubberProcess {
             }
         }
     }
-
 
     public void unsetCutoffTimeForPreviousDay() {
         this.cutoffHour = null;
@@ -1000,7 +999,6 @@ public class LaborScrubberProcess {
 
         this.generateScrubberErrorListingReport(demergerErrorOutputFilename);
     }
-
 
     protected void createOutputEntry(LaborOriginEntry entry, PrintStream ps) throws IOException {
         try {

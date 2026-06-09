@@ -31,6 +31,8 @@ import java.util.Map;
 import javax.mail.MessagingException;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpParameterConstants;
@@ -83,7 +85,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class FormatServiceImpl implements FormatService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FormatServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(FormatServiceImpl.class);
 
     protected PaymentDetailDao paymentDetailDao;
     protected PaymentGroupDao paymentGroupDao;
@@ -183,7 +185,6 @@ public class FormatServiceImpl implements FormatService {
 
         this.businessObjectService.save(formatProcess);
 
-
         Timestamp now = new Timestamp((new Date()).getTime());
         java.sql.Date sqlDate = new java.sql.Date(paydate.getTime());
         Calendar c = Calendar.getInstance();
@@ -219,7 +220,6 @@ public class FormatServiceImpl implements FormatService {
             businessObjectService.save(paymentGroup);
         }
 
-
         // summarize them
         FormatProcessSummary preFormatProcessSummary = new FormatProcessSummary();
         Iterator<PaymentGroup> iterator = this.paymentGroupService.getByProcess(paymentProcess);
@@ -237,7 +237,6 @@ public class FormatServiceImpl implements FormatService {
 
         return preFormatProcessSummary;
     }
-
 
     /**
      * This method gets the maximum number of lines in a note.

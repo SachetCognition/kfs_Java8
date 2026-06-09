@@ -47,6 +47,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.impl.StringHelper;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -127,7 +129,7 @@ import org.w3c.dom.Node;
  */
 
 public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase implements ElectronicInvoiceHelperService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceHelperServiceImpl.class);
 
     protected final String UNKNOWN_DUNS_IDENTIFIER = "Unknown";
     protected final String INVOICE_FILE_MIME_TYPE = "text/xml";
@@ -228,7 +230,7 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
                     isRejected = processElectronicInvoice(eInvoiceLoad, xmlFile, modifiedXML);
                 } catch (Exception e) {
                     String msg = xmlFile.getName() + "\n";
-                    LOG.error(msg);
+                    LOG.error("{}", msg);
 
                     //since getMessage() is empty we'll compose the stack trace and nicely format it.
                     StackTraceElement[] elements = e.getStackTrace();
@@ -247,7 +249,7 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
                         trace.append("\n");
                     }
 
-                    LOG.error(trace);
+                    LOG.error("{}", trace);
                     emailMsg.append(msg);
                     msg += "\n--------------------------------------------------------------------------------------\n" + trace;
                     logProcessElectronicInvoiceError(msg);
@@ -285,7 +287,7 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
                 if (moveFiles) {
                     if (!moveFile(xmlFile, acceptDirName)) {
                         String msg = xmlFile.getName() + " unable to move";
-                        LOG.error(msg);
+                        LOG.error("{}", msg);
                         throw new PurError(msg);
                     }
                 }
@@ -403,7 +405,6 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
 
     protected byte[] addNamespaceDefinition(ElectronicInvoiceLoad eInvoiceLoad,
                                           File invoiceFile) {
-
 
         boolean result = true;
 
@@ -924,7 +925,6 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
             LOG.error("Error creating reject reason note - " + e.getMessage());
         }
     }
-
 
     protected String generateRejectDocumentDescription(ElectronicInvoice eInvoice,
                                                      ElectronicInvoiceOrder electronicInvoiceOrder){
@@ -1592,7 +1592,6 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
                         preqItems.add(preqItem);
                     }
 
-
                 }
             }
 
@@ -1780,7 +1779,6 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
         preqItem.addToExtendedPrice(new KualiDecimal(orderHolder.getInvoiceDiscountAmount()));
     }
 
-
     protected void processDepositItem(PaymentRequestItem preqItem,
                                     ElectronicInvoiceOrderHolder orderHolder){
 
@@ -1837,7 +1835,6 @@ public class ElectronicInvoiceHelperServiceImpl extends InitiateDirectoryBase im
         String itemTypeCodeFromMappings = orderHolder.getKualiItemTypeCodeFromMappings(invoiceItemTypeCode);
         return isItemTypeAvailableInItemMapping && StringUtils.equals(itemTypeCodeFromMappings, itemTypeCode);
     }
-
 
     protected String generatePREQDocumentDescription(PurchaseOrderDocument poDocument) {
         String description = "PO: " + poDocument.getPurapDocumentIdentifier() + " Vendor: " + poDocument.getVendorName() + " Electronic Invoice";

@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ec.document.validation.impl;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.integration.ld.LaborModuleService;
 import org.kuali.kfs.module.ec.EffortConstants;
@@ -56,7 +58,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * To define the rules that may be applied to the effort certification document, a transactional document
  */
 public class EffortCertificationDocumentRules extends TransactionalDocumentRuleBase implements AddDetailLineRule<EffortCertificationDocument, EffortCertificationDetail>, UpdateDetailLineRule<EffortCertificationDocument, EffortCertificationDetail>, CheckDetailLineAmountRule<EffortCertificationDocument, EffortCertificationDetail>, LoadDetailLineRule<EffortCertificationDocument> {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocumentRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(EffortCertificationDocumentRules.class);
 
     protected EffortCertificationDocumentService effortCertificationDocumentService = SpringContext.getBean(EffortCertificationDocumentService.class);
     protected EffortCertificationReportDefinitionService effortCertificationReportDefinitionService = SpringContext.getBean(EffortCertificationReportDefinitionService.class);

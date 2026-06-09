@@ -23,8 +23,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -38,12 +40,12 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 @ConfigureContext
 public class AccountingPeriodServiceTest extends KualiTestBase {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingPeriodServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingPeriodServiceTest.class);
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Logger.getLogger("p6spy").setLevel(Level.INFO);
+        Configurator.setLevel("p6spy", Level.INFO);
     }
 
     public void testPersistenceAndCaching() {

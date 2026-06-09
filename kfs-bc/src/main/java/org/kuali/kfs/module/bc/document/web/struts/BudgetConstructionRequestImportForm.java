@@ -19,15 +19,16 @@
 package org.kuali.kfs.module.bc.document.web.struts;
 
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionRequestImport;
-
 
 /**
  * Form for Budget Construction Import
  */
 public class BudgetConstructionRequestImportForm extends BudgetConstructionImportExportForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionRequestImportForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionRequestImportForm.class);
 
     private FormFile file;
     private String fileType;

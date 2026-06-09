@@ -21,6 +21,8 @@ package org.kuali.kfs.module.purap.document.validation.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.PurApAccountingLine;
 import org.kuali.kfs.module.purap.businessobject.PurApItem;
 import org.kuali.kfs.module.purap.document.PurchasingAccountsPayableDocument;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * Utility class to set error path for Payment Request validations
  */
 public class PurchasingAccountsPayableErrorPathUtil {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingAccountsPayableErrorPathUtil.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableErrorPathUtil.class);
 
     /**
      * Fix the GlobalVariables.getMessageMap errorPath for how payment request documents needs them in order to properly display

@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
@@ -57,7 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class SufficientFundsAccountUpdateServiceImpl implements SufficientFundsAccountUpdateService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SufficientFundsAccountUpdateServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SufficientFundsAccountUpdateServiceImpl.class);
 
     private DateTimeService dateTimeService;
     private ConfigurationService kualiConfigurationService;
@@ -85,7 +87,6 @@ public class SufficientFundsAccountUpdateServiceImpl implements SufficientFundsA
     private int sfblInsertedCount = 0;
     private int sfblUpdatedCount = 0;
     private int warningCount = 0;
-
 
     private SufficientFundBalances currentSfbl = null;
 
@@ -250,7 +251,7 @@ public class SufficientFundsAccountUpdateServiceImpl implements SufficientFundsA
         Account sfrbAccount = accountService.getByPrimaryId(sfrb.getChartOfAccountsCode(), sfrb.getAccountNumberFinancialObjectCode());
         if (sfrbAccount == null) {
             String msg = "Account found in SufficientFundsRebuild table that is not in Accounts table [" + sfrb.getChartOfAccountsCode() + "-" + sfrb.getAccountNumberFinancialObjectCode() + "].";
-            LOG.error(msg);
+            LOG.error("{}", msg);
             throw new RuntimeException(msg);
         }
         if ((sfrbAccount.getAccountSufficientFundsCode() != null) 

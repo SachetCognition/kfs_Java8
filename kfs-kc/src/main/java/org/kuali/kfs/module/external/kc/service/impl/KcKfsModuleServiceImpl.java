@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.external.kc.service.ExternalizableBusinessObjectService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -35,7 +36,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class KcKfsModuleServiceImpl  extends KfsModuleServiceImpl  {
 
-    protected static final Logger LOG = Logger.getLogger(KcKfsModuleServiceImpl.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(KcKfsModuleServiceImpl.class);
 
     protected DataDictionaryService dataDictionaryService;
     protected ConfigurationService configurationService;

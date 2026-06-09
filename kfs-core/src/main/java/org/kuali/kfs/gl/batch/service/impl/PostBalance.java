@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.AccountingCycleCachingService;
 import org.kuali.kfs.gl.batch.service.BalanceCalculator;
 import org.kuali.kfs.gl.batch.service.PostTransaction;
@@ -39,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PostBalance implements PostTransaction, BalanceCalculator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PostBalance.class);
+    private static Logger LOG = LoggerFactory.getLogger(PostBalance.class);
     
     private AccountingCycleCachingService accountingCycleCachingService;
     private static final KualiDecimal NEGATIVE_ONE = new KualiDecimal(-1);

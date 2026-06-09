@@ -29,6 +29,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.NumberUtils;
 import org.apache.commons.lang.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.batch.service.ProcurementCardLoadTransactionsService;
 import org.kuali.kfs.fp.businessobject.ProcurementCardTransaction;
 import org.kuali.kfs.sys.batch.BatchInputFileType;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * @see org.kuali.kfs.fp.batch.service.ProcurementCardCreateDocumentService
  */
 public class ProcurementCardLoadTransactionsServiceImpl extends InitiateDirectoryBase implements ProcurementCardLoadTransactionsService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardLoadTransactionsServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcurementCardLoadTransactionsServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected BatchInputFileService batchInputFileService;

@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.module.bc.BCConstants;
@@ -41,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional(readOnly=true)
 public class BudgetConstructionProcessorServiceImpl implements BudgetConstructionProcessorService {
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionProcessorServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionProcessorServiceImpl.class);
 
     protected OrganizationService organizationService;
 

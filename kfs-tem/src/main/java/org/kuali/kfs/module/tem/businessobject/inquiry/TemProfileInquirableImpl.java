@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.TemProfile;
 import org.kuali.kfs.module.tem.service.TemProfileService;
 import org.kuali.kfs.sys.businessobject.inquiry.KfsInquirableImpl;
@@ -40,7 +41,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 @SuppressWarnings({ "rawtypes", "deprecation" })
 public class TemProfileInquirableImpl extends KfsInquirableImpl {
 
-    private static final Logger LOG = Logger.getLogger(TemProfileInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TemProfileInquirableImpl.class);
 
 	/**
 	 * @see org.kuali.rice.kns.inquiry.KualiInquirableImpl#getBusinessObject(java.util.Map)

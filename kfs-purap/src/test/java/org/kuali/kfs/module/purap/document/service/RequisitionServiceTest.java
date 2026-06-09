@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.sterner;
 
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.service.DocumentService;
  */
 @ConfigureContext(session = parke)
 public class RequisitionServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequisitionServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(RequisitionServiceTest.class);
 
     private static final String ACCOUNT_REVIEW = "Account";
 

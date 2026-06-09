@@ -25,6 +25,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeExpense;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPayeeDetail;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPreConferenceRegistrant;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * This class is the action form for the Disbursement Voucher.
  */
 public class DisbursementVoucherForm extends KualiAccountingDocumentFormBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherForm.class);
 
     protected static final long serialVersionUID = 1L;
 
@@ -218,7 +220,6 @@ public class DisbursementVoucherForm extends KualiAccountingDocumentFormBase {
         this.tempPayeeIdNumber = payeeIdNumber;
     }
 
-
     /**
      * Gets the hasMultipleAddresses attribute.
      *
@@ -314,9 +315,6 @@ public class DisbursementVoucherForm extends KualiAccountingDocumentFormBase {
         SpringContext.getBean(BusinessObjectDictionaryService.class).performForceUppercase(payeeDetail);
         }
 
-
-
-
     /**
      * Gets the tempVendorHeaderGeneratedIdentifier attribute.
      * @return Returns the tempVendorHeaderGeneratedIdentifier.
@@ -364,8 +362,6 @@ public class DisbursementVoucherForm extends KualiAccountingDocumentFormBase {
     public void setTempVendorAddressGeneratedIdentifier(String tempVendorAddressGeneratedIdentifier) {
         this.tempVendorAddressGeneratedIdentifier = tempVendorAddressGeneratedIdentifier;
     }
-
-
 
     /**
      * Gets the oldPayeeType attribute.
@@ -486,6 +482,5 @@ public class DisbursementVoucherForm extends KualiAccountingDocumentFormBase {
         button.setExtraButtonAltText("Extract Immediate Payments Now");
         return button;
     }
-
 
 }

@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.dataaccess.ReconciliationDao;
 import org.kuali.kfs.gl.batch.service.ReconciliationService;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
@@ -37,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ReconciliationServiceImpl implements ReconciliationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReconciliationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReconciliationServiceImpl.class);
 
     private ReconciliationDao reconciliationDao;
     private Class<? extends OriginEntryFull> originEntryClass;

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cam.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.cam.CamsPropertyConstants.Asset.CAPITAL_ASSET_NUMBER;
 
 import java.util.HashMap;
@@ -40,9 +42,8 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.kns.web.struts.action.KualiTransactionalDocumentActionBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
-
 public class EquipmentLoanOrReturnAction extends KualiTransactionalDocumentActionBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EquipmentLoanOrReturnAction.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(EquipmentLoanOrReturnAction.class);
 
     /**
      * This method had to override because equipmentLoanOrReturn information has to be refreshed before display

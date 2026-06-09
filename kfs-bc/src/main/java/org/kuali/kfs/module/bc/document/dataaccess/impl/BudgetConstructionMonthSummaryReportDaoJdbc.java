@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionMonthSummaryReportDao;
 import org.kuali.kfs.sys.KFSConstants;
@@ -30,7 +32,7 @@ import org.kuali.kfs.sys.KFSConstants;
  */
 
 public class BudgetConstructionMonthSummaryReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionMonthSummaryReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionMonthSummaryReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionMonthSummaryReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsMonthSummaryTable = new ArrayList<SQLForStep>(9);
 
@@ -343,7 +345,6 @@ public class BudgetConstructionMonthSummaryReportDaoJdbc extends BudgetConstruct
         // sum expenditure from the monthly budgets to the sub-object code level
         getSimpleJdbcTemplate().update(updateReportsMonthSummaryTable.get(7).getSQL(expenditureInsertions), idForSession, principalName);
     }
-
 
     /**
      * @see org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionMonthSummaryReportDao#updateReportsMonthSummaryTable(java.lang.String,

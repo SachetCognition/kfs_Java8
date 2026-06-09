@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.CERTIFICATION_STATEMENT_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.EMPLOYEE_TEST_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.SHOW_ACCOUNT_DISTRIBUTION_ATTRIBUTE;
@@ -36,7 +38,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -93,7 +94,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class TravelAuthorizationAction extends TravelActionBase {
 
-    public static Logger LOG = Logger.getLogger(TravelAuthorizationAction.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelAuthorizationAction.class);
 
     public static final String DOCUMENT_ERROR_PREFIX = "document.";
     public static final String NEW_SOURCE_LINE_OBJECT_CODE = String.format("%s.%s", NEW_SOURCE_LINE, FINANCIAL_OBJECT_CODE);
@@ -696,7 +697,6 @@ public class TravelAuthorizationAction extends TravelActionBase {
             }
 
             SpringContext.getBean(DocumentService.class).saveDocument(taDoc);
-
 
             if (ObjectUtils.isNotNull(returnActionForward)) {
                 return returnActionForward;

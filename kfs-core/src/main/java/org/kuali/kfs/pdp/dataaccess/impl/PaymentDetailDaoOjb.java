@@ -33,6 +33,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.DailyReport;
@@ -48,12 +50,11 @@ import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 public class PaymentDetailDaoOjb extends PlatformAwareDaoBaseOjb implements PaymentDetailDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentDetailDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentDetailDaoOjb.class);
 
     public PaymentDetailDaoOjb() {
         super();
     }
-
 
     /**
      * @see org.kuali.kfs.pdp.dataaccess.PaymentDetailDao#getAchPaymentsWithUnsentEmail()

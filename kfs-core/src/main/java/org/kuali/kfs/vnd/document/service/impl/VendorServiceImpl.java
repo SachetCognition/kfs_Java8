@@ -27,7 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.vnd.VendorConstants;
@@ -59,7 +60,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class VendorServiceImpl implements VendorService {
-    private static final Logger LOG = Logger.getLogger(VendorServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(VendorServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected DocumentService documentService;
@@ -240,8 +241,6 @@ public class VendorServiceImpl implements VendorService {
         return getVendorDefaultAddress(addresses, addressType, campus,true);
     }
 
-
-
     /**
      * @see org.kuali.kfs.vnd.document.service.VendorService#getVendorDefaultAddress(java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.String, boolean)
      */
@@ -260,7 +259,6 @@ public class VendorServiceImpl implements VendorService {
         return getVendorDefaultAddress(addresses, addressType, campus,activeCheck);
     }
 
-
    /**
      * @see org.kuali.kfs.vnd.document.service.VendorService#getVendorDefaultAddress(java.util.Collection, java.lang.String, java.lang.String)
      */
@@ -268,7 +266,6 @@ public class VendorServiceImpl implements VendorService {
     public VendorAddress getVendorDefaultAddress(Collection<VendorAddress> addresses, String addressType, String campus) {
        return getVendorDefaultAddress(addresses, addressType, campus,true);
     }
-
 
    /**
      * @see org.kuali.kfs.vnd.document.service.VendorService#getVendorDefaultAddress(List, String, String)
@@ -410,7 +407,7 @@ public class VendorServiceImpl implements VendorService {
         VendorDetail vendorToUse = getParentVendor(vendorHeaderGeneratedIdentifier);
         if (ObjectUtils.isNull(vendorToUse)) {
             String errorMsg = "Vendor with header generated id '" + vendorHeaderGeneratedIdentifier + "' cannot be found in the system";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
        // vendorToUse.refreshReferenceObject("vendorHeader");
@@ -466,7 +463,7 @@ public class VendorServiceImpl implements VendorService {
         VendorDetail vendorToUse = getParentVendor(vendorHeaderGeneratedIdentifier);
         if (ObjectUtils.isNull(vendorToUse)) {
             String errorMsg = "Vendor with header generated id '" + vendorHeaderGeneratedIdentifier + "' cannot be found in the system";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
         return vendorToUse.getVendorHeader().getVendorForeignIndicator();
@@ -480,7 +477,7 @@ public class VendorServiceImpl implements VendorService {
         VendorDetail vendorToUse = getParentVendor(vendorHeaderGeneratedIdentifier);
         if (ObjectUtils.isNull(vendorToUse)) {
             String errorMsg = "Vendor with header generated id '" + vendorHeaderGeneratedIdentifier + "' cannot be found in the system";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
         return VendorConstants.VendorTypes.SUBJECT_PAYMENT.equals(vendorToUse.getVendorHeader().getVendorTypeCode());
@@ -494,7 +491,7 @@ public class VendorServiceImpl implements VendorService {
         VendorDetail vendorToUse = getParentVendor(vendorHeaderGeneratedIdentifier);
         if (ObjectUtils.isNull(vendorToUse)) {
             String errorMsg = "Vendor with header generated id '" + vendorHeaderGeneratedIdentifier + "' cannot be found in the system";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
         return VendorConstants.VendorTypes.REVOLVING_FUND.equals(vendorToUse.getVendorHeader().getVendorTypeCode());

@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.coa.service.SubAccountTrickleDownInactivationService;
@@ -48,7 +49,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class SubAccountTrickleDownInactivationServiceImpl implements SubAccountTrickleDownInactivationService {
-    private static final Logger LOG = Logger.getLogger(SubAccountTrickleDownInactivationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SubAccountTrickleDownInactivationServiceImpl.class);
 
     protected MaintenanceDocumentDictionaryService maintenanceDocumentDictionaryService;
     protected MaintenanceDocumentDao maintenanceDocumentDao;
@@ -223,13 +224,9 @@ public class SubAccountTrickleDownInactivationServiceImpl implements SubAccountT
         this.maintenanceDocumentDictionaryService = maintenanceDocumentDictionaryService;
     }
 
-
-
     public void setMaintenanceDocumentDao(MaintenanceDocumentDao maintenanceDocumentDao) {
         this.maintenanceDocumentDao = maintenanceDocumentDao;
     }
-
-
 
     public void setNoteService(NoteService noteService) {
         this.noteService = noteService;

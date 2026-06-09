@@ -24,7 +24,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
@@ -37,7 +38,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     private static final long serialVersionUID = -6329389744704772474L;
-    private static final Logger LOG = Logger.getLogger(AccountGlobalDetail.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountGlobalDetail.class);
 
     private String chartOfAccountsCode;
     private String accountNumber;
@@ -97,7 +98,6 @@ public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     /**
      * Gets the accountNumber attribute.

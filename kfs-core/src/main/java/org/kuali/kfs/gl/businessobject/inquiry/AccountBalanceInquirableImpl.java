@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.businessobject.Balance;
 import org.kuali.kfs.sys.KFSConstants;
@@ -39,7 +41,7 @@ import org.kuali.rice.krad.service.LookupService;
  * AbstractGeneralLedgerInquirableImpl class, so it covers both the default implementation and customized implemetnation.
  */
 public class AccountBalanceInquirableImpl extends AbstractGeneralLedgerInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountBalanceInquirableImpl.class);
 
     private BusinessObjectDictionaryService dataDictionary;
     private LookupService lookupService;

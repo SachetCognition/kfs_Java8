@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.coa.service.A21SubAccountService;
@@ -68,7 +70,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 @ConfigureContext
 public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(YearEndFlexibleOffsetTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(YearEndFlexibleOffsetTest.class);
 
     public static final String DEFAULT_FLEXIBLE_BALANCE_CHART = "BL";
     public static final String DEFAULT_FLEXIBLE_BALANCE_ACCOUNT_NBR = "1031400";
@@ -111,7 +113,7 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
         private KualiDecimal amount;
         private Date timestamp;
         private static final String DATE_FORMAT = "yyyy-MM-dd";
-        private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NOMINAL_ACTIVITY_BALANCE_FIXTURE.class);
+        private static Logger LOG = LoggerFactory.getLogger(NOMINAL_ACTIVITY_BALANCE_FIXTURE.class);
         private SystemOptions fsOptions = SpringContext.getBean(OptionsService.class).getCurrentYearOptions();
 
         private NOMINAL_ACTIVITY_BALANCE_FIXTURE(String chartCode, String accountNumber) {
@@ -218,7 +220,7 @@ public class YearEndFlexibleOffsetTest extends OriginEntryTestBase {
         private KualiDecimal amount;
         private Date timestamp;
         private static final String DATE_FORMAT = "yyyy-MM-dd";
-        private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NOMINAL_ACTIVITY_BALANCE_FIXTURE.class);
+        private static Logger LOG = LoggerFactory.getLogger(NOMINAL_ACTIVITY_BALANCE_FIXTURE.class);
         private SystemOptions fsOptions = SpringContext.getBean(OptionsService.class).getCurrentYearOptions();
 
         private ORG_REVERSION_BALANCE_FIXTURE(String chartCode, String accountNumber) {

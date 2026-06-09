@@ -22,6 +22,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionAppointmentFundingReason;
 import org.kuali.kfs.module.bc.businessobject.PendingBudgetConstructionAppointmentFunding;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * the base Struts form for salary setting
  */
 public abstract class SalarySettingBaseForm extends BudgetExpansionForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalarySettingBaseForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SalarySettingBaseForm.class);
 
     private String documentNumber;
     private String chartOfAccountsCode;

@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.module.ld.LaborConstants.SalaryExpenseTransfer;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * balance inquiry of Ledger Balance For Salary Expense Transfer processing.
  */
 public class LedgerBalanceForSalaryExpenseTransferLookupableHelperServiceImpl extends LedgerBalanceForExpenseTransferLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerBalanceForSalaryExpenseTransferLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LedgerBalanceForSalaryExpenseTransferLookupableHelperServiceImpl.class);
 
     private OptionsService optionsService;
 

@@ -27,7 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.SubObjectCode;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerInvoiceDetail;
@@ -51,7 +52,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class CustomerInvoiceDetail extends SourceAccountingLine implements AppliedPayment, AccountsReceivableCustomerInvoiceDetail {
 
-    private static Logger LOG = Logger.getLogger(CustomerInvoiceDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDetail.class);
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "CustomerInvoiceDetail";
 
     // private Integer invoiceItemNumber; using SourceAccountingLine.sequenceNumber

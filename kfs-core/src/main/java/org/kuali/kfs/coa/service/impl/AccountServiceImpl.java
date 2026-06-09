@@ -30,7 +30,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.IteratorUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.dataaccess.AccountDao;
@@ -58,7 +59,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 @NonTransactional
 public class AccountServiceImpl implements AccountService {
-    private static final Logger LOG = Logger.getLogger(AccountServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     protected ParameterService parameterService;
     protected AccountDao accountDao;
@@ -305,7 +306,6 @@ public class AccountServiceImpl implements AccountService {
         return accountDao.getAccountsForAccountNumber(accountNumber);
     }
 
-
     @Override
     public String getDefaultLaborBenefitRateCategoryCodeForAccountType(String accountTypeCode) {
         String benefitRateCategory = parameterService.getSubParameterValueAsString(Account.class, "DEFAULT_BENEFIT_RATE_CATEGORY_CODE_BY_ACCOUNT_TYPE", accountTypeCode);
@@ -331,7 +331,6 @@ public class AccountServiceImpl implements AccountService {
 
         return (Boolean)org.apache.commons.lang.ObjectUtils.defaultIfNull(isFringeBeneCalcEnable, false);
     }
-
 
     /**
      * @see org.kuali.kfs.coa.service.AccountService#getUniqueAccountForAccountNumber(java.lang.String)

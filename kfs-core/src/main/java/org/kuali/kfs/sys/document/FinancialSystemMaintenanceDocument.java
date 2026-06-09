@@ -21,7 +21,8 @@ package org.kuali.kfs.sys.document;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -39,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class is used by the system to use financial specific objects and data for maintenance documents
  */
 public class FinancialSystemMaintenanceDocument extends MaintenanceDocumentBase implements FinancialSystemDocument {
-    private static final Logger LOG = Logger.getLogger(FinancialSystemMaintenanceDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FinancialSystemMaintenanceDocument.class);
 
     private transient Map<String,Boolean> canEditCache;
 

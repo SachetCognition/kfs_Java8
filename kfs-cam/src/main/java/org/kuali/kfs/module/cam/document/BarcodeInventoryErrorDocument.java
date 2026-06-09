@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.businessobject.BarcodeInventoryErrorDetail;
 import org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase;
 public class BarcodeInventoryErrorDocument extends FinancialSystemTransactionalDocumentBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorDocument.class);
     
 	protected String documentNumber;
 	protected String uploaderUniversalIdentifier;
@@ -79,7 +81,6 @@ public class BarcodeInventoryErrorDocument extends FinancialSystemTransactionalD
 	public void setDocumentNumber(String documentNumber) {
 		this.documentNumber = documentNumber;
 	}
-
 
 	/**
 	 * Gets the uploaderUniversalIdentifier attribute.

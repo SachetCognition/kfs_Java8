@@ -20,6 +20,8 @@ package org.kuali.kfs.module.cam.util;
 
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 /**
@@ -28,7 +30,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 public class KualiDecimalUtils {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiDecimalUtils.class);
+    private static Logger LOG = LoggerFactory.getLogger(KualiDecimalUtils.class);
 
     /**
      * Allocates evenly a sum of money amongst a number of targets.

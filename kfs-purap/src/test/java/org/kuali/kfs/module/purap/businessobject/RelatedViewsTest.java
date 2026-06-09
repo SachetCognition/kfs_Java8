@@ -21,6 +21,8 @@ package org.kuali.kfs.module.purap.businessobject;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.document.BulkReceivingDocument;
 import org.kuali.kfs.module.purap.document.ElectronicInvoiceRejectDocument;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.service.DocumentService;
 
 @ConfigureContext(session = UserNameFixture.appleton)
 public class RelatedViewsTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentRequestServiceTest.class);
 
     private DocumentService documentService;
     private PaymentRequestDocumentTest preqDocTest;

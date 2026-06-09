@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionAdministrativePost;
@@ -59,7 +61,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class BudgetConstructionReasonSummaryReportServiceImpl implements BudgetConstructionReasonSummaryReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionReasonSummaryReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionReasonSummaryReportServiceImpl.class);
 
     protected BudgetConstructionSalarySummaryReportDao budgetConstructionSalarySummaryReportDao;
     protected BudgetConstructionOrganizationReportsService budgetConstructionOrganizationReportsService;
@@ -549,7 +551,6 @@ public class BudgetConstructionReasonSummaryReportServiceImpl implements BudgetC
         return reportTotal;
     }
 
-
     // create a report total for the given person with the values in the given total holder
     protected BudgetConstructionOrgReasonSummaryReportTotal createReportTotal(BudgetConstructionSalarySocialSecurityNumber totalPersonEntry, PersonTotalHolder totalsHolder) {
         BudgetConstructionOrgReasonSummaryReportTotal reportTotal = new BudgetConstructionOrgReasonSummaryReportTotal();
@@ -571,7 +572,6 @@ public class BudgetConstructionReasonSummaryReportServiceImpl implements BudgetC
 
         return reportTotal;
     }
-
 
     // a total holder that contains the totals for a single person
     protected class PersonTotalHolder {

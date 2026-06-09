@@ -29,6 +29,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -60,7 +62,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Defines a lookupable helper class for Suspended Invoice Detail Report.
  */
 public class ContractsGrantsSuspendedInvoiceDetailReportLookupableHelperServiceImpl extends ContractsGrantsSuspendedInvoiceReportLookupableHelperServiceImplBase {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsSuspendedInvoiceDetailReportLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsGrantsSuspendedInvoiceDetailReportLookupableHelperServiceImpl.class);
     protected PersonService personService;
     protected ContractsAndGrantsModuleBillingService contractsAndGrantsModuleBillingService;
 

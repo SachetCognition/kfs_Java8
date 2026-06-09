@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.integration.cg.dto.HashMapElement;
@@ -33,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class KcObjectCodeServiceImpl implements KcObjectCodeService {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KcObjectCodeServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(KcObjectCodeServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected ObjectCodeService objectCodeService;

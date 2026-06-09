@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.batch.service.CustomerLoadService;
@@ -36,7 +38,7 @@ import org.kuali.kfs.sys.exception.ParseException;
  * 
  */
 public class CustomerLoadCSVInputFileType extends CsvBatchInputFileTypeBase<CustomerAddressCSV> {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerLoadCSVInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerLoadCSVInputFileType.class);
 
     private static final String FILE_NAME_PREFIX = "customer_load";
     private static final String FILE_NAME_DELIM = "_";

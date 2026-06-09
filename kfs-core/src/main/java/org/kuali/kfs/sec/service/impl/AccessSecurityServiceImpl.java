@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleService;
 import org.kuali.kfs.sec.SecConstants;
 import org.kuali.kfs.sec.SecConstants.SecurityTemplateNames;
@@ -61,12 +63,11 @@ import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * @see org.kuali.kfs.sec.service.AccessSecurityService
  */
 public class AccessSecurityServiceImpl implements AccessSecurityService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccessSecurityServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccessSecurityServiceImpl.class);
 
     protected DataDictionaryService dataDictionaryService;
     protected ParameterService parameterService;
@@ -662,7 +663,6 @@ public class AccessSecurityServiceImpl implements AccessSecurityService {
         }
     }
 
-
     /**
      * @see org.kuali.kfs.sec.service.AccessSecurityService#getEditDocumentWithFieldValueTemplateId()
      */
@@ -675,7 +675,6 @@ public class AccessSecurityServiceImpl implements AccessSecurityService {
             throw new RuntimeException(SecurityTemplateNames.EDIT_DOCUMENT_FIELD_VALUE + " parameter does not exist");
         }
     }
-
 
     /**
      * @see org.kuali.kfs.sec.service.AccessSecurityService#getInquiryWithFieldValueTemplateId()
@@ -690,7 +689,6 @@ public class AccessSecurityServiceImpl implements AccessSecurityService {
         }
     }
 
-
     /**
      * @see org.kuali.kfs.sec.service.AccessSecurityService#getLookupWithFieldValueTemplateId()
      */
@@ -703,7 +701,6 @@ public class AccessSecurityServiceImpl implements AccessSecurityService {
             throw new RuntimeException(SecurityTemplateNames.LOOKUP_FIELD_VALUE + " parameter does not exist");
         }
     }
-
 
     /**
      * @see org.kuali.kfs.sec.service.AccessSecurityService#getViewAccountingLineWithFieldValueTemplateId()
@@ -718,7 +715,6 @@ public class AccessSecurityServiceImpl implements AccessSecurityService {
         }
     }
 
-
     /**
      * @see org.kuali.kfs.sec.service.AccessSecurityService#getViewDocumentWithFieldValueTemplateId()
      */
@@ -731,7 +727,6 @@ public class AccessSecurityServiceImpl implements AccessSecurityService {
             throw new RuntimeException(SecurityTemplateNames.VIEW_DOCUMENT_FIELD_VALUE + " parameter does not exist");
         }
     }
-
 
     /**
      * @see org.kuali.kfs.sec.service.AccessSecurityService#getViewNotesAttachmentsWithFieldValueTemplateId()

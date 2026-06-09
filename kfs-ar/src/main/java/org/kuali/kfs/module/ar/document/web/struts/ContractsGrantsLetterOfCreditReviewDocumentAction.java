@@ -31,6 +31,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -60,7 +62,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * Action class for Contracts & Grants LetterOfCredit Review Document.
  */
 public class ContractsGrantsLetterOfCreditReviewDocumentAction extends KualiTransactionalDocumentActionBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsLetterOfCreditReviewDocumentAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsLetterOfCreditReviewDocumentAction.class);
 
     /**
      * Clears out init tab.

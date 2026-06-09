@@ -32,6 +32,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryFileIterator;
 import org.kuali.kfs.gl.businessobject.LedgerEntryForReporting;
@@ -51,7 +53,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class OriginEntryServiceImpl implements OriginEntryService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginEntryServiceImpl.class);
 
     private static final String ENTRY_GROUP_ID = "entryGroupId";
     private static final String FINANCIAL_DOCUMENT_TYPE_CODE = "financialDocumentTypeCode";

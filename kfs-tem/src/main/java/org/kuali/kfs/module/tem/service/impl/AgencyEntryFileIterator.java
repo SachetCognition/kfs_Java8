@@ -24,11 +24,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.AgencyEntryFull;
 
 public class AgencyEntryFileIterator implements Iterator<AgencyEntryFull> {
-    private static Logger LOG = Logger.getLogger(AgencyEntryFileIterator.class);
+    private static Logger LOG = LoggerFactory.getLogger(AgencyEntryFileIterator.class);
     
     protected AgencyEntryFull nextEntry;
     protected BufferedReader reader;

@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.AdvanceDepositDocument;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ElectronicPaymentClaimingServiceImpl implements ElectronicPaymentClaimingService {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicPaymentClaimingServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ElectronicPaymentClaimingServiceImpl.class);
     private DocumentService documentService;
     private BusinessObjectService businessObjectService;
     private ParameterService parameterService;

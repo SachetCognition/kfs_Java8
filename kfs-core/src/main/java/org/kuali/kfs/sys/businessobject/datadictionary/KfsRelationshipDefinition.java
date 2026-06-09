@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.businessobject.datadictionary;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.kim.api.group.Group;
 import org.kuali.rice.kim.api.role.Role;
 import org.kuali.rice.kim.framework.group.GroupEbo;
@@ -38,7 +40,7 @@ import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
 public class KfsRelationshipDefinition extends RelationshipDefinition {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KfsRelationshipDefinition.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KfsRelationshipDefinition.class);
 
     @Override
     public Class<?> getTargetClass() {
@@ -76,7 +78,6 @@ public class KfsRelationshipDefinition extends RelationshipDefinition {
                     throw new AttributeValidationException("property '" + objectAttributeName + "' is not a BusinessObject (" + propertyClass.getName() + ") on sourceClass (" + sourceClass +")");
                 }
             }
-
 
             targetClass = propertyClass;
         }

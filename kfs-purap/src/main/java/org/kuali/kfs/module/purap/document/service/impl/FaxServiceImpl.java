@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorQuote;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
@@ -46,18 +47,16 @@ import org.kuali.rice.location.api.country.Country;
 import org.kuali.rice.location.api.country.CountryService;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 public class FaxServiceImpl implements FaxService {
 
-    private static final Logger LOG = Logger.getLogger(FaxServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FaxServiceImpl.class);
 
     protected ConfigurationService kualiConfigurationService;
     protected ParameterService parameterService;
     protected VendorService vendorService;
     protected BusinessObjectService businessObjectService;
     protected CountryService countryService;
-
 
     /**
      * Create the Purchase Order Pdf document and send it via fax to the recipient in the PO
@@ -83,8 +82,6 @@ public class FaxServiceImpl implements FaxService {
         this.faxPurchaseOrderPdf(po, pdfFileLocation, imageTempLocation, isRetransmit);
     }
 
-
-
     /**
      * Create the Purchase Order Pdf document and send it via fax to the recipient in the PO
      *
@@ -107,7 +104,6 @@ public class FaxServiceImpl implements FaxService {
         } else {
             po.setVendorCountryCode("NA");
         }
-
 
         PurchaseOrderParameters purchaseOrderParameters = getPurchaseOrderParameters();
         purchaseOrderParameters.setPurchaseOrderPdfAndFaxParameters(po);
@@ -172,14 +168,12 @@ public class FaxServiceImpl implements FaxService {
     public void faxPurchaseOrderQuotePdf(PurchaseOrderDocument po, PurchaseOrderVendorQuote povq) {
         LOG.debug("faxPurchaseOrderQuotePdf() started");
 
-
         PurchaseOrderParameters purchaseOrderParameters = getPurchaseOrderParameters();
         purchaseOrderParameters.setPurchaseOrderPdfAndFaxParameters(po,povq);
         String environmentCode = kualiConfigurationService.getPropertyValueAsString(KFSConstants.ENVIRONMENT_KEY);
 
         PurchaseOrderQuotePdf poQuotePdf = new PurchaseOrderQuotePdf();
         Collection errors = new ArrayList();
-
 
         try {
 
@@ -246,12 +240,9 @@ public class FaxServiceImpl implements FaxService {
           }
         }
 
-
         LOG.debug("faxPurchaseOrderQuotePdf() ended");
 
-
     }
-
 
     /**
      * Here is where the PDF is actually faxed, needs to be implemented at each institution
@@ -260,8 +251,6 @@ public class FaxServiceImpl implements FaxService {
         LOG.info("faxPDF() NEEDS TO BE IMPLEMENTED!");
         throw new RuntimeException("faxPDF() NEEDS TO BE IMPLEMENTED!");
     }
-
-
 
     public ConfigurationService getConfigurationService() {
         return kualiConfigurationService;
@@ -310,6 +299,5 @@ public class FaxServiceImpl implements FaxService {
     public String getPdfFileLocation() {
         return parameterService.getParameterValueAsString(KfsParameterConstants.PURCHASING_DOCUMENT.class, PurapConstants.PDF_DIRECTORY);
     }
-
 
 }

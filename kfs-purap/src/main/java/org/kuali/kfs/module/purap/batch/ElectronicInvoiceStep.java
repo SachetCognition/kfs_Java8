@@ -21,14 +21,15 @@ package org.kuali.kfs.module.purap.batch;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceLoad;
 import org.kuali.kfs.module.purap.service.ElectronicInvoiceHelperService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
 public class ElectronicInvoiceStep extends AbstractStep {
 
-    private static Logger LOG = Logger.getLogger(ElectronicInvoiceStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceStep.class);
 
     private ElectronicInvoiceHelperService electronicInvoiceHelperService;
 

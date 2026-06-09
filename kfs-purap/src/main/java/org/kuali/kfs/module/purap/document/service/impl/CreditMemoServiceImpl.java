@@ -32,6 +32,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.CreditMemoStatuses;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -93,7 +95,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CreditMemoServiceImpl implements CreditMemoService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CreditMemoServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CreditMemoServiceImpl.class);
 
     private AccountsPayableService accountsPayableService;
     private CreditMemoDao creditMemoDao;
@@ -109,7 +111,6 @@ public class CreditMemoServiceImpl implements CreditMemoService {
     private VendorService vendorService;
     private WorkflowDocumentService workflowDocumentService;
     private FinancialSystemDocumentService financialSystemDocumentService;
-
 
     public void setAccountsPayableService(AccountsPayableService accountsPayableService) {
         this.accountsPayableService = accountsPayableService;
@@ -243,7 +244,6 @@ public class CreditMemoServiceImpl implements CreditMemoService {
         return filteredCreditMemoDocuments;
     }
 
-
     /**
      * Wrapper class to the filterPaymentRequestByAppDocStatus (Collection<PaymentRequestDocument>)
      *
@@ -318,7 +318,6 @@ public class CreditMemoServiceImpl implements CreditMemoService {
 
         return invoicedItems;
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.document.service.CreditMemoService#calculateCreditMemo(org.kuali.kfs.module.purap.document.CreditMemoDocument)
@@ -722,7 +721,7 @@ public class CreditMemoServiceImpl implements CreditMemoService {
             throw new RuntimeException(errorMessage, e);
         }
         else {
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage);
         }
     }
@@ -937,7 +936,6 @@ public class CreditMemoServiceImpl implements CreditMemoService {
         cmDocument.setVendorDetailAssignedIdentifier(vendorDetail.getVendorDetailAssignedIdentifier());
         cmDocument.setVendorCustomerNumber(vendorDetail.getVendorNumber());
         cmDocument.setVendorName(vendorDetail.getVendorName());
-
 
         // credit memo type vendor uses the default remit type address for the vendor if found
         String userCampus = GlobalVariables.getUserSession().getPerson().getCampusCode();

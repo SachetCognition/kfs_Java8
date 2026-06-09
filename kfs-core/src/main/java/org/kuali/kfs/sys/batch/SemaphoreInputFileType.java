@@ -26,7 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.context.BatchStepFileDescriptor;
@@ -41,7 +42,7 @@ import org.kuali.rice.krad.util.MessageMap;
  */
 public class SemaphoreInputFileType extends BatchInputFileTypeBase {
 
-	private static Logger LOG = Logger.getLogger(SemaphoreInputFileType.class);
+	private static Logger LOG = LoggerFactory.getLogger(SemaphoreInputFileType.class);
 
 	private String fileTypeIdentifier;
 

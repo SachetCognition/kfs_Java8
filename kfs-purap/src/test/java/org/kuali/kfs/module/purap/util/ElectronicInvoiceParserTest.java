@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
 
 import java.io.BufferedInputStream;
@@ -42,7 +44,7 @@ import org.kuali.kfs.sys.context.SpringContext;
 @ConfigureContext(session = parke, shouldCommitTransactions=false)
 public class ElectronicInvoiceParserTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceParserTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceParserTest.class);
     
     private ElectronicInvoice eInvoice;
     private final String eInvoiceXMLFile = ".." + File.separator + "fixture" + File.separator + "electronicInvoiceFixture.xml";

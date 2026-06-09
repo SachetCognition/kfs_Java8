@@ -26,9 +26,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.log4j.Logger;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.service.BatchInputFileService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.w3c.dom.Document;
@@ -37,7 +38,7 @@ import org.w3c.dom.Node;
 
 public class B2BParserHelper {
     
-    private static Logger log = Logger.getLogger(B2BParserHelper.class);
+    private static Logger log = LoggerFactory.getLogger(B2BParserHelper.class);
     
     private DocumentBuilder builder;
     private static B2BParserHelper _this;

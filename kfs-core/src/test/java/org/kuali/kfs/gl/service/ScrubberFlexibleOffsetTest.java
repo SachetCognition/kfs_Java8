@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.service;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.ScrubberStep;
@@ -40,7 +42,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  */
 @ConfigureContext
 public class ScrubberFlexibleOffsetTest extends OriginEntryTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ScrubberFlexibleOffsetTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ScrubberFlexibleOffsetTest.class);
 
     private ScrubberService scrubberService;
 

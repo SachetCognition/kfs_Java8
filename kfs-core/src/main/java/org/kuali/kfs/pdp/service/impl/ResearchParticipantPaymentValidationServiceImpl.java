@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ProjectCode;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
@@ -39,12 +41,11 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ResearchParticipantPaymentValidationServiceImpl implements ResearchParticipantPaymentValidationService {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ResearchParticipantPaymentValidationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ResearchParticipantPaymentValidationServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 
     private ParameterService parameterService;
-
 
     @Override
     public boolean validatePaymentAccount(PaymentFileLoad paymentFile, MessageMap errorMap) {
@@ -152,6 +153,5 @@ public class ResearchParticipantPaymentValidationServiceImpl implements Research
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
 
 }

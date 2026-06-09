@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.BalancingService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
@@ -31,7 +33,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  * 5) Evaluate GL batch directory for results
  */
 public class PosterBalancingStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PosterBalancingStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PosterBalancingStep.class);
     
     private BalancingService balancingService;
     

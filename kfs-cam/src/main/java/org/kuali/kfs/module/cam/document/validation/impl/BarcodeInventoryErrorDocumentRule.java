@@ -27,6 +27,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -60,7 +62,7 @@ import org.kuali.rice.location.api.campus.CampusService;
  * Business rule(s) applicable to Asset Barcode Inventory upload and Barcode inventory error document.
  */
 public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorDocumentRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorDocumentRule.class);
 
     /**
      * @see org.kuali.rice.krad.rules.DocumentRuleBase#processCustomSaveDocumentBusinessRules(org.kuali.rice.krad.document.Document)
@@ -69,7 +71,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
     protected boolean processCustomSaveDocumentBusinessRules(Document document) {
         return true;
     }
-
 
     /**
      * Invokes several methods that validates each barcode error record
@@ -234,7 +235,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         }
         return result;
     }
-
 
     /**
      * Validates that the existance of the building code is consistent with the asset type requirements.
@@ -511,7 +511,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         return result;
     }
 
-
     /**
      * Iterates over the list of errors each records might have and returns a single string with all the errors for each asset
      *
@@ -533,7 +532,6 @@ public class BarcodeInventoryErrorDocumentRule extends TransactionalDocumentRule
         }
         return (StringUtils.isEmpty(message) ? message : message.substring(2));
     }
-
 
     /**
      * Deletes the asset locking error messages from the GlobalVariables.

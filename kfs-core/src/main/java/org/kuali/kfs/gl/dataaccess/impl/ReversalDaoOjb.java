@@ -30,6 +30,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.businessobject.Reversal;
 import org.kuali.kfs.gl.businessobject.Transaction;
@@ -42,7 +44,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * An OJB implementation of the Reversal DAO
  */
 public class ReversalDaoOjb extends PlatformAwareDaoBaseOjb implements ReversalDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReversalDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReversalDaoOjb.class);
 
     private final static String UNIVERISITY_FISCAL_YEAR = "universityFiscalYear";
     private final static String CHART_OF_ACCOUNTS_CODE = "chartOfAccountsCode";

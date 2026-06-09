@@ -21,17 +21,18 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionPositionFundingDetailReportDao;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
-
 
 /**
  * populates the report table for positon funding detail for a given user
  */
 
 public class BudgetConstructionPositionFundingDetailReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionPositionFundingDetailReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionPositionFundingDetailReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionPositionFundingDetailReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsPositionFundingDetailTable = new ArrayList<SQLForStep>(5);
 

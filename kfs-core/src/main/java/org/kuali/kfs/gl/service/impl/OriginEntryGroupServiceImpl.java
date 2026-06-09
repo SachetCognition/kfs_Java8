@@ -29,6 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.service.OriginEntryGroupService;
 import org.kuali.rice.core.api.datetime.DateTimeService;
@@ -40,7 +42,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class OriginEntryGroupServiceImpl implements OriginEntryGroupService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryGroupServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OriginEntryGroupServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected String batchFileDirectoryName;
@@ -80,7 +82,6 @@ public class OriginEntryGroupServiceImpl implements OriginEntryGroupService {
         return newestFile.getName();
     }
 
-
     /**
      * Retrieves all groups to be created today, and creates backup group versions of them
      * 
@@ -109,7 +110,6 @@ public class OriginEntryGroupServiceImpl implements OriginEntryGroupService {
         buildBackupFileOutput(doneFileList, backupPs);
         backupPs.close();
     }
-
 
     /*
      * buildBackupFileOuput with doneFileList and PrintStream
@@ -152,7 +152,6 @@ public class OriginEntryGroupServiceImpl implements OriginEntryGroupService {
         // do nothing.  A hook for institution extension.
     }
 
-
     /**
      * @see org.kuali.kfs.gl.service.OriginEntryGroupService#createGroup(java.lang.String)
      */
@@ -184,7 +183,6 @@ public class OriginEntryGroupServiceImpl implements OriginEntryGroupService {
         }
         return returnFiles;
     }
-
 
     /**
      * @see org.kuali.kfs.gl.service.OriginEntryGroupService#deleteFile(java.lang.String)
@@ -247,7 +245,6 @@ public class OriginEntryGroupServiceImpl implements OriginEntryGroupService {
     public void setBatchFileDirectoryName(String batchFileDirectoryName) {
         this.batchFileDirectoryName = batchFileDirectoryName;
     }
-
 
     public void setKualiModuleService(KualiModuleService kualiModuleService) {
         this.kualiModuleService = kualiModuleService;

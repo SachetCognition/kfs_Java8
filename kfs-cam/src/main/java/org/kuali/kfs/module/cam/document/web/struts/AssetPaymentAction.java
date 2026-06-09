@@ -34,6 +34,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
 import org.kuali.kfs.module.cam.businessobject.Asset;
@@ -66,7 +68,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Control user responses
  */
 public class AssetPaymentAction extends KualiAccountingDocumentActionBase {
-	protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetPaymentAction.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(AssetPaymentAction.class);
 
 	@Override
 	protected void createDocument(KualiDocumentFormBase kualiDocumentFormBase) throws WorkflowException {

@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsConstants.DocumentTypeName;
@@ -51,7 +53,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AssetLocationGlobalRule extends MaintenanceDocumentRuleBase {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetLocationGlobalRule.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AssetLocationGlobalRule.class);
     protected AssetService assetService = SpringContext.getBean(AssetService.class);
 
     /**

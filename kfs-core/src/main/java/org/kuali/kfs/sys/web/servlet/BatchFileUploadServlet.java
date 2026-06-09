@@ -44,6 +44,8 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.FinancialSystemModuleConfiguration;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
@@ -57,7 +59,7 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 
 public class BatchFileUploadServlet extends HttpServlet {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchFileUploadServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchFileUploadServlet.class);
 
     protected void checkAuthorization( HttpServletRequest request ) {
         boolean authorized = false;

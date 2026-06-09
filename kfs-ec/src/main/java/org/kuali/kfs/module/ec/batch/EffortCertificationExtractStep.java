@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ec.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.EffortConstants.SystemParameters;
 import org.kuali.kfs.module.ec.EffortKeyConstants;
 import org.kuali.kfs.module.ec.batch.service.EffortCertificationExtractService;
@@ -31,7 +33,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * Batch Step that executes the Effort Certification Extract Process.
  */
 public class EffortCertificationExtractStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationExtractStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationExtractStep.class);
     
     private EffortCertificationExtractService effortCertificationExtractService;
 
@@ -45,7 +47,7 @@ public class EffortCertificationExtractStep extends AbstractStep {
         else {
             String key = EffortKeyConstants.ERROR_BATCH_JOB_NOT_SCHEDULED;
             String message = MessageBuilder.buildMessageWithPlaceHolder(key, 0, new Object[] { jobName, SystemParameters.RUN_IND } ).toString();            
-            LOG.warn(message);
+            LOG.warn("{}", message);
         }
         return true;
     }

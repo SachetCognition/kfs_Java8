@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
 import org.kuali.kfs.module.ec.document.validation.event.LoadDetailLineEvent;
 import org.kuali.kfs.sys.KFSConstants;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * To define Actions for Effort Recreate document.
  */
 public class CertificationRecreateAction extends EffortCertificationAction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CertificationRecreateAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(CertificationRecreateAction.class);
 
     
     /**

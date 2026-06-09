@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -29,7 +31,7 @@ import org.kuali.rice.kim.api.identity.Person;
  */
 @ConfigureContext
 public class AccountServiceTest extends KualiTestBase {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountServiceTest.class);
+    Logger LOG = LoggerFactory.getLogger(AccountServiceTest.class);
 
     public void testValidateAccount() {
         Account account = null;

@@ -20,6 +20,8 @@ package org.kuali.kfs.coa.businessobject;
 
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.SufficientFundRebuild;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -30,7 +32,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * 
  */
 public class ObjectLevel extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectLevel.class);
+    private static Logger LOG = LoggerFactory.getLogger(ObjectLevel.class);
 
     private String chartOfAccountsCode;
     private String financialObjectLevelCode;
@@ -42,7 +44,6 @@ public class ObjectLevel extends PersistableBusinessObjectBase implements Mutabl
 
     private ObjectConsolidation financialConsolidationObject;
     private Chart chartOfAccounts;
-
 
     /**
      * Constructs a ObjLevel.java.
@@ -142,7 +143,6 @@ public class ObjectLevel extends PersistableBusinessObjectBase implements Mutabl
         this.financialReportingSortCode = financialReportingSortCode;
     }
 
-
     public String getConsolidatedObjectCode() {
         return financialConsolidationObject.getFinancialReportingSortCode();
     }
@@ -187,7 +187,6 @@ public class ObjectLevel extends PersistableBusinessObjectBase implements Mutabl
     public void setChartOfAccounts(Chart chartOfAccounts) {
         this.chartOfAccounts = chartOfAccounts;
     }
-
 
     /**
      * @return Returns the financialConsolidationObjectCode.

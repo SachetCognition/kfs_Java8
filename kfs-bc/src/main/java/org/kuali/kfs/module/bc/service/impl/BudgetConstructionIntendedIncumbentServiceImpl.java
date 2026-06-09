@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionIntendedIncumbent;
 import org.kuali.kfs.module.bc.businessobject.Incumbent;
 import org.kuali.kfs.module.bc.exception.BudgetIncumbentAlreadyExistsException;
@@ -32,12 +34,11 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
 /**
  * implements the service methods defined in BudgetConstructionIntendedIncumbentService
  */
 public class BudgetConstructionIntendedIncumbentServiceImpl implements BudgetConstructionIntendedIncumbentService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionIntendedIncumbentServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionIntendedIncumbentServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private HumanResourcesPayrollService humanResourcesPayrollService;

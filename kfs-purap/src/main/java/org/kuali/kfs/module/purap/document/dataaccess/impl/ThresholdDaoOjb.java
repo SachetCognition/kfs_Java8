@@ -23,10 +23,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ReceivingThreshold;
 import org.kuali.kfs.module.purap.document.dataaccess.ThresholdDao;
 import org.kuali.kfs.module.purap.util.ThresholdField;
@@ -37,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ThresholdDaoOjb extends PlatformAwareDaoBaseOjb implements ThresholdDao {
 
-    private static Logger LOG = Logger.getLogger(ThresholdDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ThresholdDaoOjb.class);
     
     public Collection<ReceivingThreshold> findByChart(String chartCode) {
         Map criteriaFields = new HashMap(1);

@@ -26,6 +26,8 @@ import java.util.List;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.PaymentRequestDocument;
 import org.kuali.kfs.module.purap.document.VendorCreditMemoDocument;
@@ -42,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CreditMemoDaoOjb extends PlatformAwareDaoBaseOjb implements CreditMemoDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CreditMemoDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(CreditMemoDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.CreditMemoDao#getCreditMemosToExtract(java.lang.String)
@@ -75,8 +77,6 @@ public class CreditMemoDaoOjb extends PlatformAwareDaoBaseOjb implements CreditM
 
         return getPersistenceBrokerTemplate().getCollectionByQuery(new QueryByCriteria(VendorCreditMemoDocument.class, criteria));
     }
-
-
 
     /**
      * @see edu.iu.uis.pur.cm.dao.CreditMemoDao#duplicateExists(java.lang.String, java.lang.String)
@@ -152,7 +152,7 @@ public class CreditMemoDaoOjb extends PlatformAwareDaoBaseOjb implements CreditM
         
         if (returnList.size() > 1) {
             String errorMsg = "Expected single document number for given criteria but multiple (at least 2) were returned";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException();
         } else {
             return returnList.get(0);

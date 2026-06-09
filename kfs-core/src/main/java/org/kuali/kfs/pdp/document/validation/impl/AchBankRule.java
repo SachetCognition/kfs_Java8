@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.pdp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.businessobject.ACHBank;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -27,7 +29,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class AchBankRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ACHBank.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ACHBank.class);
 
     protected ACHBank oldAchBank;
     protected ACHBank newAchBank;

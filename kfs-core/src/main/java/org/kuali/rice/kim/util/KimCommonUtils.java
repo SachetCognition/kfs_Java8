@@ -23,6 +23,8 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.kew.api.KewApiServiceLocator;
@@ -37,7 +39,7 @@ import org.kuali.rice.kim.api.KimConstants;
  *
  */
 public class KimCommonUtils {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KimCommonUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KimCommonUtils.class);
 
     public static String getClosestParentDocumentTypeName( DocumentType documentType, Set<String> potentialParentDocumentTypeNames) {
         if ( potentialParentDocumentTypeNames == null || documentType == null ) {

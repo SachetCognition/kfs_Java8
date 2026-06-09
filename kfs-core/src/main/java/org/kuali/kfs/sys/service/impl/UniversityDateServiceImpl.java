@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.sys.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.dataaccess.UniversityDateDao;
@@ -37,7 +38,7 @@ import org.springframework.cache.annotation.Cacheable;
 @NonTransactional
 public class UniversityDateServiceImpl implements UniversityDateService {
 
-    private static final Logger LOG = Logger.getLogger(UniversityDateServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UniversityDateServiceImpl.class);
 
     protected UniversityDateDao universityDateDao;
     protected DateTimeService dateTimeService;

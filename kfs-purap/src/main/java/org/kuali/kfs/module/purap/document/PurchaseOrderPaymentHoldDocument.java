@@ -19,6 +19,8 @@
 
 package org.kuali.kfs.module.purap.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PurchaseOrderStatuses;
 import org.kuali.kfs.module.purap.document.service.PurchaseOrderService;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Purchase Order Payment Hold Document
  */
 public class PurchaseOrderPaymentHoldDocument extends PurchaseOrderDocument {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderPaymentHoldDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchaseOrderPaymentHoldDocument.class);
 
     /**
      * General Ledger pending entries are not created for this document. Overriding this method so that entries are not created.

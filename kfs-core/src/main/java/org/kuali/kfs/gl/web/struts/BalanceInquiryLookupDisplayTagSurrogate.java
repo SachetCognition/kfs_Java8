@@ -27,6 +27,8 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kns.lookup.LookupResultsService;
 import org.kuali.rice.kns.lookup.LookupUtils;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * This class serves as the struts action for implementing multiple value lookups
  */
 public class BalanceInquiryLookupDisplayTagSurrogate implements LookupDisplayTagSurrogate {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceInquiryLookupDisplayTagSurrogate.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceInquiryLookupDisplayTagSurrogate.class);
 
     /**
      * If there is no app param defined for the # rows/page, then this value will be used for the default
@@ -246,7 +248,6 @@ public class BalanceInquiryLookupDisplayTagSurrogate implements LookupDisplayTag
         }
         return resultTable;
     }
-
 
     /**
      * @see LookupDisplayTagSurrogate#getMaxRowsPerPage(LookupResultsSelectable)

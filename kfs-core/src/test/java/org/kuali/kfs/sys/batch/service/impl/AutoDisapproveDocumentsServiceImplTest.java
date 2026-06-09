@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.kfs;
 
 import java.text.ParseException;
@@ -41,7 +43,7 @@ import org.springframework.aop.support.AopUtils;
 
 @ConfigureContext(session = kfs)
 public class AutoDisapproveDocumentsServiceImplTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AutoDisapproveDocumentsServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(AutoDisapproveDocumentsServiceImplTest.class);
 
     private AutoDisapproveDocumentsServiceImpl autoDisapproveDocumentsService;
     private DateTimeService dateTimeService;

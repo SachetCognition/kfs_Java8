@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.businessobject.AccountDelegateGlobal;
 import org.kuali.kfs.coa.businessobject.AccountDelegateGlobalDetail;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see OrganizationRoutingModelName
  */
 public class AccountDelegateGlobalMaintainableImpl extends FinancialSystemGlobalMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDelegateGlobalMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountDelegateGlobalMaintainableImpl.class);
 
     @Override
     /**

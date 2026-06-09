@@ -20,12 +20,14 @@ package org.kuali.kfs.sys.service.impl;
 
 import javax.mail.MessagingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.mail.MailMessage;
 import org.kuali.rice.krad.exception.InvalidAddressException;
 import org.kuali.rice.krad.service.impl.MailServiceImpl;
 
 public class DevelopmentMailServiceImpl extends MailServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DevelopmentMailServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DevelopmentMailServiceImpl.class);
 
     @Override
     public void sendMessage(MailMessage message) throws InvalidAddressException, MessagingException {

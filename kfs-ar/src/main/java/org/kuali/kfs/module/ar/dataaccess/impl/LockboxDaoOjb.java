@@ -26,6 +26,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.Lockbox;
 import org.kuali.kfs.module.ar.dataaccess.LockboxDao;
 import org.kuali.kfs.sys.util.TransactionalServiceUtils;
@@ -33,7 +35,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
 
 public class LockboxDaoOjb extends PlatformAwareDaoBaseOjb implements LockboxDao {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LockboxDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LockboxDaoOjb.class);
 
     @Override
     public Collection<Lockbox> getAllLockboxes() {

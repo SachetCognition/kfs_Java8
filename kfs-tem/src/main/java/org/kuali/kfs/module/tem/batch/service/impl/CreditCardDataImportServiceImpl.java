@@ -32,6 +32,8 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -60,7 +62,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class CreditCardDataImportServiceImpl implements CreditCardDataImportService{
 
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CreditCardDataImportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(CreditCardDataImportServiceImpl.class);
 
     public final static String REPORT_FILE_NAME_PATTERN = "{0}/{1}_{2}{3}";
 
@@ -145,7 +147,6 @@ public class CreditCardDataImportServiceImpl implements CreditCardDataImportServ
             }
         }
     }
-
 
     /**
      * Clears out associated .done files for the processed data files.
@@ -387,8 +388,6 @@ public class CreditCardDataImportServiceImpl implements CreditCardDataImportServ
     public void setCreditCardDataFileErrorDirectory(String creditCardDataFileErrorDirectory) {
         this.creditCardDataFileErrorDirectory = creditCardDataFileErrorDirectory;
     }
-
-
 
     /**
      * Sets the temProfileService attribute value.

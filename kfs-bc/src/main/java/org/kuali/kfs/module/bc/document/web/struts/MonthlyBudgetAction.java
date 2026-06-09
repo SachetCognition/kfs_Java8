@@ -28,6 +28,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
@@ -48,9 +50,8 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.service.KualiRuleService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
-
 public class MonthlyBudgetAction extends BudgetExpansionAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MonthlyBudgetAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MonthlyBudgetAction.class);
 
     /**
      * added for testing - remove if not needed
@@ -129,7 +130,6 @@ public class MonthlyBudgetAction extends BudgetExpansionAction {
             monthlyBudgetForm.setMonthlyPersisted(true);
         }
         monthlyBudgetForm.setBudgetConstructionMonthly(budgetConstructionMonthly);
-
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }

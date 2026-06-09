@@ -19,6 +19,8 @@
 
 package org.kuali.kfs.module.purap.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
 import static org.kuali.kfs.sys.KFSConstants.GL_DEBIT_CODE;
 import static org.kuali.rice.core.api.util.type.KualiDecimal.ZERO;
@@ -129,7 +131,7 @@ import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
  * Purchase Order Document
  */
 public class PurchaseOrderDocument extends PurchasingDocumentBase implements MultiselectableDocSearchConversion {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseOrderDocument.class);
 
     protected Timestamp purchaseOrderCreateTimestamp;
     protected Integer requisitionIdentifier;
@@ -411,7 +413,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
         return super.getOverrideWorkflowButtons();
     }
 
-
     /**
      * @see org.kuali.kfs.module.purap.document.PurchasingAccountsPayableDocumentBase#customPrepareForSave()
      */
@@ -636,7 +637,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
         return docIdStrings;
     }
 
-
     /**
      * @see org.kuali.kfs.sys.document.GeneralLedgerPostingDocumentBase#doRouteStatusChange()
      */
@@ -676,8 +676,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
             }
         }
 
-
-
         if (shouldAdhocFyi()) {
 
             try {
@@ -706,8 +704,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
         }
         return false;
     }
-
-
 
     /**
      * Returns the name of the current route node.
@@ -745,7 +741,7 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
             if(!isActiveUser || !canReceiveAdHocRequest){
                 String principalName = SpringContext.getBean(PersonService.class).getPerson(routePrincipalId).getName();
                 String errorText = "cannot send FYI to the user: " + principalName + "; Annotation: " + annotation;
-                LOG.info(errorText);
+                LOG.info("{}", errorText);
                 Note note = SpringContext.getBean(DocumentService.class).createNoteFromDocument(this, errorText);
                 this.addNote(SpringContext.getBean(NoteService.class).save(note));
             }
@@ -1229,7 +1225,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
         this.setAlternateVendorName(vendorDetail.getVendorName());
     }
 
-
 //    public void refreshDocumentBusinessObject() {
 //        // RICE20 documentBusinessObject removed from super class - functionality no longer supported
 //        SpringContext.getBean(PurchaseOrderService.class).getOldestPurchaseOrder(this, (PurchaseOrderDocument) this.documentBusinessObject);
@@ -1396,7 +1391,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
         }
         return total;
     }
-
 
     @Override
     public KualiDecimal getTotalTaxAmount() {
@@ -1694,7 +1688,6 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
 
         return false;
     }
-
 
     protected boolean isVendorEmployeeOrNonResidentAlien() {
         if (ObjectUtils.isNull(this.getVendorHeaderGeneratedIdentifier())) {

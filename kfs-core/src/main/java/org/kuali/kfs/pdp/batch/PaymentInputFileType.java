@@ -22,6 +22,8 @@ import java.io.File;
 import java.sql.Timestamp;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.pdp.PdpConstants;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * Batch input type for the PDP payment file.
  */
 public class PaymentInputFileType extends XmlBatchInputFileTypeBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentInputFileType.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PaymentInputFileType.class);
 
     private DateTimeService dateTimeService;
     private PaymentFileService paymentFileService;

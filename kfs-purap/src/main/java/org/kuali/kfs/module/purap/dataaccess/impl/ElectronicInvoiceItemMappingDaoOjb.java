@@ -22,6 +22,8 @@ import java.util.List;
 
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceItemMapping;
 import org.kuali.kfs.module.purap.businessobject.ItemType;
 import org.kuali.kfs.module.purap.dataaccess.ElectronicInvoiceItemMappingDao;
@@ -29,7 +31,7 @@ import org.springmodules.orm.ojb.support.PersistenceBrokerDaoSupport;
 
 public class ElectronicInvoiceItemMappingDaoOjb extends PersistenceBrokerDaoSupport implements
 ElectronicInvoiceItemMappingDao {
-  private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceItemMappingDaoOjb.class);
+  private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceItemMappingDaoOjb.class);
 
   /**
    * Get list of all ElectronicInvoiceItemMappings

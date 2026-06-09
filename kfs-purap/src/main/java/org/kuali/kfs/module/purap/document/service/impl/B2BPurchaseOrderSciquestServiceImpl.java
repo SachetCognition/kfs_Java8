@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
 import org.kuali.kfs.module.purap.dataaccess.B2BDao;
@@ -50,7 +52,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class B2BPurchaseOrderSciquestServiceImpl implements B2BPurchaseOrderService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(B2BPurchaseOrderSciquestServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(B2BPurchaseOrderSciquestServiceImpl.class);
 
     protected B2BDao b2bDao;
     protected RequisitionService requisitionService;

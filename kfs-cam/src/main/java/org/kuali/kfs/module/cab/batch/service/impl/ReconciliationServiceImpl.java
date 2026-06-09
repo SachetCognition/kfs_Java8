@@ -25,7 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
@@ -44,7 +45,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ReconciliationServiceImpl implements ReconciliationService {
-    private static final Logger LOG = Logger.getLogger(ReconciliationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReconciliationServiceImpl.class);
     protected BusinessObjectService businessObjectService;
     protected ReconciliationDao reconciliationDao;
     protected List<Entry> ignoredEntries = new ArrayList<Entry>();
@@ -281,6 +282,5 @@ public class ReconciliationServiceImpl implements ReconciliationService {
     public Collection<GlAccountLineGroup> getMisMatchedGroups() {
         return this.misMatchedGroups;
     }
-
 
 }

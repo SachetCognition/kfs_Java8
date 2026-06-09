@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.inquiry.AbstractGeneralLedgerInquirableImpl;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
 import org.kuali.kfs.integration.ld.LaborLedgerBalanceForEffortCertification;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.bo.BusinessObject;
 import org.kuali.rice.krad.service.KualiModuleService;
 
 public class EffortLedgerBalanceInquirableImpl extends AbstractGeneralLedgerInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortLedgerBalanceInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EffortLedgerBalanceInquirableImpl.class);
 
     private KualiModuleService kualiModuleService = SpringContext.getBean(KualiModuleService.class);
 

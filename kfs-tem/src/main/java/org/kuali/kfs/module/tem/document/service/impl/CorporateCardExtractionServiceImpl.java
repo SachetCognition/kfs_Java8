@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemParameterConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -65,7 +67,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CorporateCardExtractionServiceImpl implements PaymentSourceToExtractService<TEMReimbursementDocument> {
-    static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorporateCardExtractionServiceImpl.class);
+    static Logger LOG = LoggerFactory.getLogger(CorporateCardExtractionServiceImpl.class);
     protected ParameterService parameterService;
     protected DocumentService documentService;
     protected TravelDocumentDao travelDocumentDao;

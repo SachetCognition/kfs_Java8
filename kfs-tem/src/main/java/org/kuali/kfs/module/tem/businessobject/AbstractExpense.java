@@ -34,7 +34,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.TravelCompanyCode;
 import org.kuali.kfs.module.tem.service.TravelExpenseService;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -45,7 +46,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Table(name="tem_trvl_exp_t")
 public abstract class AbstractExpense extends PersistableBusinessObjectBase implements TemExpense {
 
-    public static Logger LOG = Logger.getLogger(AbstractExpense.class);
+    public static Logger LOG = LoggerFactory.getLogger(AbstractExpense.class);
 
     @GeneratedValue(generator="tem_trvl_exp_id_seq")
     @SequenceGenerator(name="tem_trvl_exp_id_seq",sequenceName="tem_trvl_exp_id_seq", allocationSize=5)
@@ -188,7 +189,6 @@ public abstract class AbstractExpense extends PersistableBusinessObjectBase impl
         this.missingReceipt = argMissingReceipt;
     }
 
-
     @Override
     @Column(name="EXP_AMT",precision=19,scale=2,nullable=false)
     public KualiDecimal getExpenseAmount() {
@@ -238,7 +238,6 @@ public abstract class AbstractExpense extends PersistableBusinessObjectBase impl
     public void setTravelExpenseTypeCode(final ExpenseTypeObjectCode argTravelExpenseTypeCode) {
         this.expenseTypeObjectCode = argTravelExpenseTypeCode;
     }
-
 
     /**
      * Gets the value of description

@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.ar.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectTypeService;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -34,7 +35,7 @@ import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class OrganizationAccountingDefaultRule extends MaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationAccountingDefaultRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationAccountingDefaultRule.class);
 
     protected ObjectTypeService objectTypeService;
     protected OrganizationAccountingDefault newOrganizationAccountingDefault;
@@ -70,8 +71,6 @@ public class OrganizationAccountingDefaultRule extends MaintenanceDocumentRuleBa
 
         return success;
     }
-
-
 
     /**
      * This method returns true if payment account number is provided and is valid.
@@ -119,7 +118,6 @@ public class OrganizationAccountingDefaultRule extends MaintenanceDocumentRuleBa
 
         return true;
     }
-
 
     @Override
     protected boolean processCustomSaveDocumentBusinessRules(MaintenanceDocument document) {
@@ -217,7 +215,6 @@ public class OrganizationAccountingDefaultRule extends MaintenanceDocumentRuleBa
 
         } else {
             Integer universityFiscalYear = organizationAccountingDefault.getUniversityFiscalYear();
-
 
             ObjectCode defaultInvoiceFinancialObject = organizationAccountingDefault.getDefaultInvoiceFinancialObject();
 

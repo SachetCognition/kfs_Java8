@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +60,7 @@ public class ReimbursementAccountingTotalsValidationTest extends KualiTestBase {
     private static final String FINANCIAL_OBJECT_CODE = "5070";
     private BusinessObjectService businessObjectService;
     private ObjectCodeService objectCodeService;
-    private static final Logger LOG = Logger.getLogger(ReimbursementAccountingTotalsValidationTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReimbursementAccountingTotalsValidationTest.class);
     private AttributedDocumentEventBase event = null;
     private TravelReimbursementDocument tr = null;
     private List<ActualExpense> oteList = null;

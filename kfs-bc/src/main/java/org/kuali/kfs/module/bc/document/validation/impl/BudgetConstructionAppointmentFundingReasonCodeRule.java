@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCKeyConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionAppointmentFundingReasonCode;
 import org.kuali.kfs.module.bc.document.service.SalarySettingService;
@@ -29,7 +31,7 @@ import org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase;
  * Business rules for BudgetConstructionAppointmentFundingReasonCode maintenance document. 
  */
 public class BudgetConstructionAppointmentFundingReasonCodeRule extends MaintenanceDocumentRuleBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionAppointmentFundingReasonCodeRule.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionAppointmentFundingReasonCodeRule.class);
 
     protected BudgetConstructionAppointmentFundingReasonCode oldBudgetConstructionAppointmentFundingReasonCode;
     protected BudgetConstructionAppointmentFundingReasonCode newBudgetConstructionAppointmentFundingReasonCode;

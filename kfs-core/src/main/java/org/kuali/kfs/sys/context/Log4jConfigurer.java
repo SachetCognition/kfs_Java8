@@ -18,36 +18,36 @@
  */
 package org.kuali.kfs.sys.context;
 
-import java.net.URL;
+import java.net.URI;
 import java.net.URLClassLoader;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.kuali.kfs.sys.KFSConstants;
 import java.util.Arrays;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.kuali.kfs.sys.KFSConstants;
+
 public class Log4jConfigurer {
-    private static final long MILLISECONDS_CONVERSION_MULTIPLIER = 60 * 1000;
+    private static final Logger LOG = LoggerFactory.getLogger(Log4jConfigurer.class);
 
     public static final void configureLogging(boolean doStartupStatsLogging) {
         String settingsFile = PropertyLoadingFactoryBean.getBaseProperty(KFSConstants.LOG4J_SETTINGS_FILE_KEY);
-        String reloadMinutes = PropertyLoadingFactoryBean.getBaseProperty(KFSConstants.LOG4J_RELOAD_MINUTES_KEY);
-        long reloadMilliseconds = 5 * MILLISECONDS_CONVERSION_MULTIPLIER;
-        try {
-            reloadMilliseconds = Long.parseLong(reloadMinutes) * MILLISECONDS_CONVERSION_MULTIPLIER;
+        if (settingsFile != null && !settingsFile.isEmpty()) {
+            try {
+                Configurator.reconfigure(URI.create(settingsFile));
+            } catch (Exception e) {
+                LOG.warn("Could not reconfigure Log4j from {}, using default configuration", settingsFile, e);
+            }
         }
-        catch (NumberFormatException ignored) {
-            // default to 5 minutes
-        }
-        PropertyConfigurator.configureAndWatch(settingsFile, reloadMilliseconds);
         printClasspath();
     }
 
     private static void printClasspath() {
-        StringBuffer classpath = new StringBuffer("Classpath is:\n");
+        StringBuilder classpath = new StringBuilder("Classpath is:\n");
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         if (classloader instanceof URLClassLoader) {
-            URL[] urls = ((URLClassLoader) classloader).getURLs();
+            java.net.URL[] urls = ((URLClassLoader) classloader).getURLs();
             for (int i = 0; i < urls.length; i++) {
                 classpath.append(urls[i].getFile()).append("; ");
             }
@@ -60,6 +60,6 @@ public class Log4jConfigurer {
                 classpath.append("(unavailable)");
             }
         }
-        Logger.getLogger(Log4jConfigurer.class).info(classpath.toString());
+        LOG.info(classpath.toString());
     }
 }

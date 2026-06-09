@@ -28,6 +28,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.BalanceType;
@@ -73,7 +75,7 @@ import org.springframework.util.StringUtils;
 
 @NonTransactional
 public class ScrubberValidatorImpl implements ScrubberValidator {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ScrubberValidatorImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScrubberValidatorImpl.class);
 
     protected ConfigurationService kualiConfigurationService;
     protected ParameterService parameterService;
@@ -180,7 +182,6 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
             scrubbedEntry.setReferenceFinancialDocumentNumber(d.replaceAll("~", " "));
             errors.add(new Message("** INVALID CHARACTER EDITED", Message.TYPE_WARNING));
         }
-
 
         // It's important that this check come before the checks for object, sub-object and accountingPeriod
         // because this validation method will set the fiscal year and reload those three objects if the fiscal
@@ -412,7 +413,6 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
                         return MessageBuilder.buildMessage(KFSKeyConstants.MSG_ACCOUNT_EXPIRED_TO, chartCode+accountNumber, Message.TYPE_WARNING);
                     }
 
-
                 }
                 else {
                     // the account does have an expiration date.
@@ -569,7 +569,6 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
             workingEntry.setSubAccountNumber(KFSConstants.getDashSubAccountNumber());
         }
 
-
         return null;
 
     }
@@ -712,7 +711,6 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
         return null;
     }
 
-
     protected Message validateReferenceOrigination(OriginEntryInformation originEntry, OriginEntryInformation workingEntry, AccountingCycleCachingService accountingCycleCachingService) {
         LOG.debug("validateOrigination() started");
         String referenceFinancialSystemOriginationCode = originEntry.getReferenceFinancialSystemOriginationCode();
@@ -728,7 +726,6 @@ public class ScrubberValidatorImpl implements ScrubberValidator {
 
         return null;
     }
-
 
     /**
      * Validates the document number of the origin entry

@@ -23,8 +23,10 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.kuali.kfs.coa.identity.OrgReviewRole;
 import org.kuali.kfs.coa.service.impl.OrgReviewRoleServiceImpl;
 import org.kuali.kfs.coa.service.impl.OrgReviewRoleTestBase;
@@ -56,8 +58,8 @@ public class OrgReviewRoleMaintainableImplTest extends OrgReviewRoleTestBase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        Logger.getLogger(OrgReviewRoleServiceImpl.class).setLevel(Level.DEBUG);
-        Logger.getLogger(OrgReviewRoleMaintainableImpl.class).setLevel(Level.DEBUG);
+        Configurator.setLevel(OrgReviewRoleServiceImpl.class.getName(), Level.DEBUG);
+        Configurator.setLevel(OrgReviewRoleMaintainableImpl.class.getName(), Level.DEBUG);
 
         newMaint = new OrgReviewRoleMaintainableImpl();
         oldMaint = new OrgReviewRoleMaintainableImpl();

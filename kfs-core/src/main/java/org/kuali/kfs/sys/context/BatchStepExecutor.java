@@ -24,10 +24,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.NDC;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.Job;
 import org.kuali.kfs.sys.batch.Step;
@@ -46,7 +50,7 @@ import org.kuali.rice.krad.service.ModuleService;
  *
  */
 public class BatchStepExecutor implements Runnable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchStepExecutor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchStepExecutor.class);
 
 	private ParameterService parameterService;
 	private DateTimeService dateTimeService;
@@ -111,7 +115,6 @@ public class BatchStepExecutor implements Runnable {
 			}
 
 		} catch (Exception throwable) {
-			//LOG.info("Step threw an error: ", throwable);
 		    LOG.warn(batchStepFile + " threw " + throwable.getClass().getName() + ". Look at the step log to see the details. throwable.getMessage(): " + throwable.getMessage());
 			batchContainerDirectory.writeBatchStepErrorResultFile(batchStepFile, throwable);
 
@@ -141,10 +144,19 @@ public class BatchStepExecutor implements Runnable {
         ndcAppender = null;
         ndcSet = false;
         try {
-            ndcAppender = new FileAppender(KFSConstants.BATCH_LOGGER_DEFAULT_PATTERN_LAYOUT, logFileName);
-            ndcAppender.addFilter(new NDCFilter(nestedDiagnosticContext));
-            Logger.getRootLogger().addAppender(ndcAppender);
-            NDC.push(nestedDiagnosticContext);
+            FileAppender fileAppender = FileAppender.newBuilder()
+                .setName("ndcAppender-" + nestedDiagnosticContext)
+                .withFileName(logFileName)
+                .setLayout(KFSConstants.BATCH_LOGGER_DEFAULT_PATTERN_LAYOUT)
+                .setFilter(new NDCFilter(nestedDiagnosticContext))
+                .build();
+            fileAppender.start();
+
+            ndcAppender = fileAppender;
+            LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+            ctx.getConfiguration().getRootLogger().addAppender(fileAppender, null, null);
+            ctx.updateLoggers();
+            ThreadContext.push(nestedDiagnosticContext);
             ndcSet = true;
         } catch (Exception ex) {
             LOG.warn("Could not initialize custom logging for step: " + step.getName(), ex);
@@ -156,9 +168,11 @@ public class BatchStepExecutor implements Runnable {
 	 */
 	private void resetNDCLogging() {
         if ( ndcSet ) {
-            ndcAppender.close();
-            Logger.getRootLogger().removeAppender(ndcAppender);
-            NDC.pop();
+            ndcAppender.stop();
+            LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+            ctx.getConfiguration().getRootLogger().removeAppender(ndcAppender.getName());
+            ctx.updateLoggers();
+            ThreadContext.pop();
         }
 	}
 

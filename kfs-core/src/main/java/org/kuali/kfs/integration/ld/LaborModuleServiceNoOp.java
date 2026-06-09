@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.integration.UnimplementedKfsModuleServiceImpl;
@@ -37,7 +38,7 @@ import org.kuali.rice.kns.lookup.HtmlData;
 
 public class LaborModuleServiceNoOp extends UnimplementedKfsModuleServiceImpl implements LaborModuleService  {
 
-    private Logger LOG = Logger.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
     public KualiDecimal calculateFringeBenefit(Integer fiscalYear, String chartCode, String objectCode, KualiDecimal salaryAmount) {
         LOG.warn( "Using No-Op " + getClass().getSimpleName() + " service." );
@@ -143,7 +144,6 @@ public class LaborModuleServiceNoOp extends UnimplementedKfsModuleServiceImpl im
         LOG.warn( "Using No-Op " + getClass().getSimpleName() + " service." );
         return null;
     }
-
 
     @Override
     public String getBenefitRateCategoryCode(String chartOfAccountsCode, String accountNumber, String subAccountNumber) {

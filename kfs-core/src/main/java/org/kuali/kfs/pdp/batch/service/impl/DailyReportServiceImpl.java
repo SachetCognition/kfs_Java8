@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.batch.service.DailyReportService;
 import org.kuali.kfs.pdp.businessobject.DailyReport;
@@ -36,7 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class DailyReportServiceImpl implements DailyReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DailyReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(DailyReportServiceImpl.class);
 
     protected PaymentDetailDao paymentDetailDao;
     protected DateTimeService dateTimeService;

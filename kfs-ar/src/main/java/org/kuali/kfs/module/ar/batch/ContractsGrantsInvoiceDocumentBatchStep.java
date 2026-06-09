@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ar.batch;
 import java.io.File;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.batch.service.ContractsGrantsInvoiceBatchCreateDocumentService;
@@ -31,7 +33,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
  * A step to run the cgInvoice document creation process.
  */
 public class ContractsGrantsInvoiceDocumentBatchStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceDocumentBatchStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceDocumentBatchStep.class);
 
     protected String batchFileDirectoryName;
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
@@ -74,7 +76,6 @@ public class ContractsGrantsInvoiceDocumentBatchStep extends AbstractStep {
         this.dateTimeService = dateTimeService;
     }
 
-
     /**
      * Sets the cgInvoiceDocumentCreateService attribute value.
      *
@@ -83,7 +84,6 @@ public class ContractsGrantsInvoiceDocumentBatchStep extends AbstractStep {
     public void setCgInvoiceBatchDocumentCreateService(ContractsGrantsInvoiceBatchCreateDocumentService cgInvoiceBatchDocumentCreateService) {
         this.cgInvoiceBatchDocumentCreateService = cgInvoiceBatchDocumentCreateService;
     }
-
 
     /**
      * This method sets the batch file directory name.

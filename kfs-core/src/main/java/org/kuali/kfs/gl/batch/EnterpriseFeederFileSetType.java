@@ -33,6 +33,8 @@ import org.apache.commons.io.filefilter.OrFileFilter;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.EnterpriseFeederService;
 import org.kuali.kfs.sys.FileUtil;
 import org.kuali.kfs.sys.KFSConstants;
@@ -46,7 +48,7 @@ import org.kuali.rice.kim.api.identity.Person;
  * This class provides metadata for the batch upload screen to work for files associated with the enterprise feeder.
  */
 public class EnterpriseFeederFileSetType implements BatchInputFileSetType {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EnterpriseFeederFileSetType.class);
+    private static Logger LOG = LoggerFactory.getLogger(EnterpriseFeederFileSetType.class);
 
     private static final String FILE_NAME_PREFIX = "entpBatchFile";
     private static final String FILE_NAME_PART_DELIMITER = "_";

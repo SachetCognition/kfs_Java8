@@ -29,9 +29,10 @@ import java.util.regex.PatternSyntaxException;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.metadata.ClassDescriptor;
 import org.apache.ojb.broker.metadata.ClassNotPersistenceCapableException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.BusinessObjectComponent;
 import org.kuali.kfs.sys.businessobject.BusinessObjectProperty;
@@ -53,7 +54,7 @@ import org.kuali.rice.krad.service.LookupService;
 
 @NonTransactional
 public class KfsBusinessObjectMetaDataServiceImpl implements KfsBusinessObjectMetaDataService {
-    private Logger LOG = Logger.getLogger(KfsBusinessObjectMetaDataServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(KfsBusinessObjectMetaDataServiceImpl.class);
     private DataDictionaryService dataDictionaryService;
     private ParameterService parameterService;
     private BusinessObjectService businessObjectService;

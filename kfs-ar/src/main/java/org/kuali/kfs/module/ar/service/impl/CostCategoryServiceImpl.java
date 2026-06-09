@@ -25,6 +25,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
 import org.kuali.kfs.gl.businessobject.Balance;
 import org.kuali.kfs.module.ar.businessobject.CostCategory;
@@ -48,7 +50,7 @@ public class CostCategoryServiceImpl implements CostCategoryService {
     protected CostCategoryDao costCategoryDao;
     protected BusinessObjectService businessObjectService;
 
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CostCategoryServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(CostCategoryServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.ar.service.CostCategoryService#isCostCategoryObjectConsolidationUnique(org.kuali.kfs.module.ar.businessobject.CostCategoryObjectConsolidation)

@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CashDrawer;
 import org.kuali.kfs.fp.businessobject.CashieringItemInProcess;
 import org.kuali.kfs.fp.businessobject.CashieringTransaction;
@@ -73,7 +75,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CashManagementServiceImpl implements CashManagementService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashManagementServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CashManagementServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private CashDrawerService cashDrawerService;
@@ -120,7 +122,6 @@ public class CashManagementServiceImpl implements CashManagementService {
 
         return cmdoc;
     }
-
 
     /**
      * This method creates a new cash management document and sets the provided values as attributes to the document.
@@ -189,7 +190,6 @@ public class CashManagementServiceImpl implements CashManagementService {
                 }
             }
         }
-
 
         CashManagementDocument cmDoc = null;
         if (cd.isClosed()) {
@@ -485,7 +485,6 @@ public class CashManagementServiceImpl implements CashManagementService {
         }
     }
 
-
     /**
      * This method cancels a given deposit.  This equates to the following:
      * <ul>
@@ -588,7 +587,6 @@ public class CashManagementServiceImpl implements CashManagementService {
         String campusCode = cmDoc.getCampusCode();
         cashDrawerService.closeCashDrawer(campusCode);
         CashDrawer cd = cashDrawerService.getByCampusCode(campusCode);
-
 
         // finalize the CashReceipts
         List<Deposit> deposits = cmDoc.getDeposits();
@@ -1009,7 +1007,6 @@ public class CashManagementServiceImpl implements CashManagementService {
         return masterDetail;
     }
 
-
     /**
      * This method generates a master currency detail for the cash management document given.  A master currency detail is a currencyDetail
      * that represents the result of all the money in and out of the cash drawer via the given cash management document.  The
@@ -1119,7 +1116,6 @@ public class CashManagementServiceImpl implements CashManagementService {
         return cashManagementDao.selectDepositedCashieringChecks(documentNumber);
     }
 
-
     /**
      * Total up the amounts of all checks so far deposited as part of the given cash management document.
      *
@@ -1155,7 +1151,6 @@ public class CashManagementServiceImpl implements CashManagementService {
         }
         return total;
     }
-
 
     /**
      * This method determines if a document can be cancelled, by reviewing a set of criteria:
@@ -1375,7 +1370,6 @@ public class CashManagementServiceImpl implements CashManagementService {
     public void setCashManagementDao(CashManagementDao cashManagementDao) {
         this.cashManagementDao = cashManagementDao;
     }
-
 
     /**
      * @return an implementation of the DataDictionaryService

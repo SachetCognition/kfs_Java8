@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemKeyConstants.TA_MESSAGE_CLOSE_DOCUMENT_TEXT;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.TRAVEL_DOCUMENT_IDENTIFIER;
 
@@ -38,7 +40,6 @@ import java.util.concurrent.Callable;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerInvoice;
@@ -106,7 +107,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TravelAuthorizationServiceImpl implements TravelAuthorizationService {
 
-    protected static Logger LOG = Logger.getLogger(TravelAuthorizationServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelAuthorizationServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected AccountsReceivableModuleService accountsReceivableModuleService;
@@ -411,7 +412,6 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
         return customerInvoiceDetail;
     }
 
-
     /**
      * This method takes a detail object, runs business rules and adds it to the source accounting lines of the invoice
      *
@@ -478,7 +478,7 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
     protected TravelAuthorizationDocument createTravelAuthorizationDocumentFromSourceDocument(TravelDocument sourceDocument, String docType) throws WorkflowException {
         if (ObjectUtils.isNull(sourceDocument)) {
             String errorMsg = "Attempting to create new Travel Authorization of type '" + docType + "' from source TA doc that is null";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
 
@@ -500,7 +500,6 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
 
         return newTravelAuthChangeDocument;
     }
-
 
     /**
      * @see org.kuali.kfs.module.tem.document.service.TravelAuthorizationService#getTravelAuthorizationBy(java.lang.String)
@@ -658,7 +657,6 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
             }
         }
 
-
      return duplicateTrips;
 
     }
@@ -706,7 +704,6 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
            return true;
        }
 
-
         return false;
     }
 
@@ -749,8 +746,6 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
          return tripEnd;
 
     }
-
-
 
     public void setBusinessObjectService(BusinessObjectService businessObjectService) {
         this.businessObjectService = businessObjectService;
@@ -838,7 +833,5 @@ public class TravelAuthorizationServiceImpl implements TravelAuthorizationServic
     public void setTravelAuthorizationDao(TravelAuthorizationDao travelAuthorizationDao) {
         this.travelAuthorizationDao = travelAuthorizationDao;
     }
-
-
 
 }

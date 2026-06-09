@@ -30,6 +30,8 @@ import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
@@ -75,7 +77,7 @@ import org.kuali.rice.location.framework.country.CountryEbo;
  */
 public abstract class PurchasingAccountsPayableDocumentBase extends AccountingDocumentBase implements PurchasingAccountsPayableDocument, AmountTotaling {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingAccountsPayableDocumentBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableDocumentBase.class);
 
     // SHARED FIELDS BETWEEN REQUISITION, PURCHASE ORDER, PAYMENT REQUEST, AND CREDIT MEMO
     protected Integer purapDocumentIdentifier;
@@ -301,7 +303,7 @@ public abstract class PurchasingAccountsPayableDocumentBase extends AccountingDo
             throw new RuntimeException(errorMessage, e);
         }
         else {
-            LOG.error(errorMessage);
+            LOG.error("{}", errorMessage);
             throw new RuntimeException(errorMessage);
         }
     }

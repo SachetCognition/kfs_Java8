@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.report.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.FAX_NUMBER;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.LODGING_TYPE_CODES;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.TRANSPORTATION_TYPE_CODES;
@@ -30,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
@@ -61,7 +62,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TravelEntertainmentHostCertificationServiceImpl implements TravelEntertainmentHostCertificationService {
 
-    public static Logger LOG = Logger.getLogger(TravelEntertainmentHostCertificationServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelEntertainmentHostCertificationServiceImpl.class);
 
     protected ConfigurationService configurationService;
     protected ParameterService parameterService;
@@ -194,7 +195,6 @@ public class TravelEntertainmentHostCertificationServiceImpl implements TravelEn
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
 
     /**
      * Gets the travelAuthorizationService attribute.

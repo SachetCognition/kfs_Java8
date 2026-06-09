@@ -23,6 +23,8 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSParameterKeyConstants;
 import org.kuali.kfs.sys.businessobject.Bank;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -40,7 +42,7 @@ import org.springframework.cache.annotation.Cacheable;
  * @see org.kuali.kfs.fp.service.BankService
  */
 public class BankServiceImpl implements BankService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BankServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BankServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected DataDictionaryService dataDictionaryService;

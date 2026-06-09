@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversion;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.OrganizationReversionProcess;
@@ -41,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class OrganizationReversionProcessServiceImpl implements OrganizationReversionProcessService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionProcessServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationReversionProcessServiceImpl.class);
     
     private static final String ORGANIZATION_REVERSION_PRIOR_YEAR_ACCOUNT_PROCESS_BEAN_NAME = "glOrganizationReversionPriorYearAccountProcess";
     private static final String ORGANIZATION_REVERSION_CURRENT_YEAR_ACCOUNT_PROCESS_BEAN_NAME = "glOrganizationReversionCurrentYearAccountProcess";

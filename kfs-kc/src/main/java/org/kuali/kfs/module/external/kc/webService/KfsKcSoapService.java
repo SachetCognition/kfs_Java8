@@ -25,7 +25,8 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
@@ -33,7 +34,7 @@ import org.kuali.rice.ksb.api.registry.ServiceInfo;
 import org.kuali.rice.ksb.api.registry.ServiceRegistry;
 
 public abstract class KfsKcSoapService extends Service {
-    protected static final Logger LOG = Logger.getLogger(KfsKcSoapService.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(KfsKcSoapService.class);
 
     protected KfsKcSoapService(URL wsdlDocumentLocation, QName serviceName) {
         super(wsdlDocumentLocation, serviceName);

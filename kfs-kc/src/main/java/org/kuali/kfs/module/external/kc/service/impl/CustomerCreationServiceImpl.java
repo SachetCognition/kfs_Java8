@@ -26,6 +26,8 @@ import java.util.Map;
 
 import javax.jws.WebParam;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerType;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 public class CustomerCreationServiceImpl implements CustomerCreationService {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerCreationServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CustomerCreationServiceImpl.class);
 
     private static final String CREATED_BY_AGENCY_DOC = "message.ar.createdByAgencyDocument";
 

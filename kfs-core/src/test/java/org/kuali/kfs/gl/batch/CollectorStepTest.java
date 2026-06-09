@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.batch;
 import java.io.*;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.batch.BatchDirectoryHelper;
 import org.kuali.kfs.sys.batch.BatchSpringContext;
@@ -37,7 +39,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
  */
 @ConfigureContext
 public class CollectorStepTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorStepTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorStepTest.class);
 
     private BatchDirectoryHelper originEntryBatchDirectoryHelper;
     private BatchDirectoryHelper collectorXmlBatchDirectoryHelper;

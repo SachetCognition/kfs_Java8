@@ -30,7 +30,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.document.TravelDocument;
@@ -50,7 +51,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 @Table(name="TEM_TRVL_EXP_T")
 public class ActualExpense extends AbstractExpense implements OtherExpense, ExpenseTypeAware {
 
-    public static Logger LOG = Logger.getLogger(AbstractExpense.class);
+    public static Logger LOG = LoggerFactory.getLogger(AbstractExpense.class);
 
     @GeneratedValue(generator="tem_trvl_exp_id_seq")
     @SequenceGenerator(name="tem_trvl_exp_id_seq",sequenceName="tem_trvl_exp_id_seq", allocationSize=5)
@@ -373,7 +374,6 @@ public class ActualExpense extends AbstractExpense implements OtherExpense, Expe
     protected ParameterService getParameterService() {
         return SpringContext.getBean(ParameterService.class);
     }
-
 
     /**
      * @see org.kuali.kfs.module.tem.businessobject.AbstractExpense#getConvertedAmount()

@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableMilestoneSchedule;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -32,14 +34,12 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
-
 /**
  * Created a Milestone Schedule maintenance Document parameter
  */
 public class MilestoneSchedule extends PersistableBusinessObjectBase implements AccountsReceivableMilestoneSchedule {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MilestoneSchedule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(MilestoneSchedule.class);
 
     private static final String MILESTONE_SCHEDULE_INQUIRY_TITLE_PROPERTY = "message.inquiry.milestone.schedule.title";
     private Long proposalNumber;
@@ -54,7 +54,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
         milestones = new ArrayList<Milestone>();
     }
 
-
     /**
      * Constructs an Milestone Schedule with paramter Award
      *
@@ -63,7 +62,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
     public MilestoneSchedule(ContractsAndGrantsBillingAward award) {
         this();
     }
-
 
     /**
      * Gets the proposalNumber attribute.
@@ -74,7 +72,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
     public Long getProposalNumber() {
         return proposalNumber;
     }
-
 
     /**
      * Sets the proposalNumber attribute value.
@@ -135,7 +132,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
         this.milestoneScheduleInquiryTitle = milestoneScheduleInquiryTitle;
     }
 
-
     /**
      * Gets the milestones attribute.
      *
@@ -145,7 +141,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
         return milestones;
     }
 
-
     /**
      * Sets the milestones attribute value.
      *
@@ -154,7 +149,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
     public void setMilestones(List<Milestone> milestones) {
         this.milestones = milestones;
     }
-
 
     /**
      * Gets the award attribute.
@@ -167,7 +161,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
         return award;
     }
 
-
     /**
      * Sets the award attribute value.
      *
@@ -176,7 +169,6 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
     public void setAward(ContractsAndGrantsBillingAward award) {
         this.award = award;
     }
-
 
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
@@ -188,6 +180,5 @@ public class MilestoneSchedule extends PersistableBusinessObjectBase implements 
         m.put("totalAmountRemaining", getTotalAmountRemaining().toString());
         return m;
     }
-
 
 }

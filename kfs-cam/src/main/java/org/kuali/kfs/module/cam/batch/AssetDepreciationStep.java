@@ -20,11 +20,13 @@ package org.kuali.kfs.module.cam.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.batch.service.AssetDepreciationService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
 public class AssetDepreciationStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetDepreciationStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetDepreciationStep.class);
     private AssetDepreciationService assetDepreciationService;
 
     /**

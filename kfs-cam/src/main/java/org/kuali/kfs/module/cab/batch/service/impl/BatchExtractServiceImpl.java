@@ -32,7 +32,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.module.cab.CabConstants;
@@ -86,7 +87,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class BatchExtractServiceImpl implements BatchExtractService {
 
-    protected static final Logger LOG = Logger.getLogger(BatchExtractServiceImpl.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BatchExtractServiceImpl.class);
     protected BusinessObjectService businessObjectService;
     protected ExtractDao extractDao;
     protected DateTimeService dateTimeService;
@@ -270,7 +271,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         return extractDao.findPreTaggablePOAccounts(parameters, getDocumentsNumbersAwaitingPurchaseOrderOpenStatus());
     }
 
-
     /**
      * Retrieves a payment request document for a specific document number
      *
@@ -287,7 +287,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         }
         return paymentRequestDocument;
     }
-
 
     /**
      * Computes the last run time stamp, if null then it gives yesterday
@@ -680,7 +679,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         return purApInfoService.retrieveValidAssetNumberForLocking(purApdocument.getPurapDocumentIdentifier(), purApdocument.getCapitalAssetSystemTypeCode(), purapItem);
     }
 
-
     protected CapitalAssetManagementModuleService getCapitalAssetManagementModuleService() {
         return SpringContext.getBean(CapitalAssetManagementModuleService.class);
     }
@@ -710,7 +708,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         copyEntry.setTransactionLedgerEntryAmount(KualiDecimal.ZERO);
         return copyEntry;
     }
-
 
     /**
      * Retrieves Payment Request Account History and Credit Memo account history, combines them into a single list
@@ -910,7 +907,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         }
     }
 
-
     /**
      * @see org.kuali.kfs.module.cab.batch.service.BatchExtractService#updateLastExtractTime(java.sql.Timestamp)
      */
@@ -984,7 +980,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
         return poDocumentNumbers;
     }
 
-
     /**
      * @see org.kuali.kfs.module.cab.batch.service.BatchExtractService#updateLastExtractDate(java.sql.Date)
      */
@@ -995,7 +990,6 @@ public class BatchExtractServiceImpl implements BatchExtractService {
 
         if (parameter != null) {
             SimpleDateFormat format = new SimpleDateFormat(CabConstants.DateFormats.MONTH_DAY_YEAR);
-
 
             Parameter.Builder updatedParameter = Parameter.Builder.create(parameter);
             updatedParameter.setValue(format.format(dt));

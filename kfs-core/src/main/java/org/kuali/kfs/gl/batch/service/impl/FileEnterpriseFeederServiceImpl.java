@@ -29,6 +29,8 @@ import java.util.List;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.EnterpriseFeederNotificationService;
 import org.kuali.kfs.gl.batch.service.EnterpriseFeederService;
@@ -47,7 +49,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
  * transaction.
  */
 public class FileEnterpriseFeederServiceImpl extends InitiateDirectoryBase implements EnterpriseFeederService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileEnterpriseFeederServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(FileEnterpriseFeederServiceImpl.class);
 
     private String directoryName;
     private String glOriginEntryDirectoryName;

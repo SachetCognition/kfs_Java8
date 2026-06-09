@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.ProcurementCardHolder;
 import org.kuali.kfs.fp.businessobject.ProcurementCardSourceAccountingLine;
 import org.kuali.kfs.fp.businessobject.ProcurementCardTargetAccountingLine;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
  * are associated with the document to help better distribute the expense.
  */
 public class ProcurementCardDocument extends CapitalAccountingLinesDocumentBase implements AmountTotaling, CapitalAssetEditable {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ProcurementCardDocument.class);
 
     protected ProcurementCardHolder procurementCardHolder;
 

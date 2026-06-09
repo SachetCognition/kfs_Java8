@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
 import static org.kuali.kfs.sys.KFSConstants.GL_DEBIT_CODE;
 
@@ -59,7 +61,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.util.UrlFactory;
 
 public class PaymentSourceHelperServiceImpl implements PaymentSourceHelperService {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentSourceHelperServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(PaymentSourceHelperServiceImpl.class);
 
     protected UniversityDateService universityDateService;
     protected BusinessObjectService businessObjectService;

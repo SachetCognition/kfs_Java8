@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.document.TravelDocument;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Mostly disallows totals on document from changing, but if user can change wire transfer or foreign draft, allows totals to change
  */
 public class TravelDocumentAccountingLineTotalsValidation extends AccountingLineGroupTotalsUnchangedValidation {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TravelDocumentAccountingLineTotalsValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelDocumentAccountingLineTotalsValidation.class);
 
     protected DocumentHelperService documentHelperService;
 

@@ -24,10 +24,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.PaymentRequestDocument;
@@ -43,7 +44,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PaymentRequestDaoOjb extends PlatformAwareDaoBaseOjb implements PaymentRequestDao {
-    private static Logger LOG = Logger.getLogger(PaymentRequestDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentRequestDaoOjb.class);
 
     /**
      * The special payments query should be this: select * from pur.ap_pmt_rqst_t where pmt_rqst_stat_cd in ('AUTO', 'DPTA') and
@@ -207,7 +208,6 @@ public class PaymentRequestDaoOjb extends PlatformAwareDaoBaseOjb implements Pay
         return returnList;
     }
 
-
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.PaymentRequestDao#getDocumentNumberByPaymentRequestId(java.lang.Integer)
      */
@@ -249,7 +249,7 @@ public class PaymentRequestDaoOjb extends PlatformAwareDaoBaseOjb implements Pay
         if (returnList.size() > 1) {
             // the list should have held only a single doc id of data but it holds 2 or more
             String errorMsg = "Expected single document number for given criteria but multiple (at least 2) were returned";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException();
 
         } else {
@@ -334,7 +334,6 @@ public class PaymentRequestDaoOjb extends PlatformAwareDaoBaseOjb implements Pay
 
         return this.getPaymentRequestsByQueryByCriteria(qbc);
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.document.dataaccess.PaymentRequestDao#getActivePaymentRequestsByPOIdInvoiceAmountInvoiceDate(java.lang.Integer,

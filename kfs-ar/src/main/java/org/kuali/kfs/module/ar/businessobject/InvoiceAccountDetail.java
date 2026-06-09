@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  */
 public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceAccountDetail.class);
+    protected static Logger LOG = LoggerFactory.getLogger(InvoiceAccountDetail.class);
     private String documentNumber;
     private Long proposalNumber;
     private String chartOfAccountsCode;
@@ -62,7 +64,6 @@ public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
         this.documentNumber = documentNumber;
     }
 
-
     /***
      * Gets the proposalNumber attribute.
      *
@@ -80,7 +81,6 @@ public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
     public void setProposalNumber(Long proposalNumber) {
         this.proposalNumber = proposalNumber;
     }
-
 
     /***
      * Gets the chartOfAccountsCode attribute.
@@ -100,7 +100,6 @@ public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
 
-
     /***
      * Gets the accountNumber attribute.
      *
@@ -119,7 +118,6 @@ public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
         this.accountNumber = accountNumber;
     }
 
-
     /**
      * Gets the contractControlAccountNumber attribute.
      *
@@ -128,7 +126,6 @@ public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
     public String getContractControlAccountNumber() {
         return contractControlAccountNumber;
     }
-
 
     /**
      * Sets the contractControlAccountNumber attribute value.

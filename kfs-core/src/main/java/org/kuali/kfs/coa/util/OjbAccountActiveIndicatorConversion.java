@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanConversion;
 
 /**
@@ -26,7 +28,7 @@ import org.kuali.rice.core.framework.persistence.ojb.conversion.OjbCharBooleanCo
  * 2) convert the indicator as an approperite type  
  */
 public class OjbAccountActiveIndicatorConversion extends OjbCharBooleanConversion {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OjbAccountActiveIndicatorConversion.class);
+    private static Logger LOG = LoggerFactory.getLogger(OjbAccountActiveIndicatorConversion.class);
     
     public final static String INDICATOR_NO  = "N";
     public final static String INDICATOR_YES = "Y";

@@ -21,6 +21,8 @@ package org.kuali.kfs.pdp.document;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpConstants.PayeeIdTypeCodes;
 import org.kuali.kfs.pdp.businessobject.PayeeACHAccount;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class PayeeACHAccountMaintainableImpl extends FinancialSystemMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PayeeACHAccountMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PayeeACHAccountMaintainableImpl.class);
 
     @Override
     public List<Section> getSections(MaintenanceDocument document, Maintainable oldMaintainable) {

@@ -21,7 +21,8 @@ package org.kuali.kfs.module.cab.businessobject;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
 import org.kuali.kfs.module.purap.businessobject.AccountsPayableItem;
 import org.kuali.kfs.module.purap.businessobject.CreditMemoAccountRevision;
@@ -34,7 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class PurApAccountLineGroup extends AccountLineGroup {
 
-    private Logger LOG = Logger.getLogger(PurApAccountLineGroup.class);
+    private Logger LOG = LoggerFactory.getLogger(PurApAccountLineGroup.class);
     private List<PurApAccountingLineBase> sourceEntries = new ArrayList<PurApAccountingLineBase>();
 
     /**
@@ -103,7 +104,6 @@ public class PurApAccountLineGroup extends AccountLineGroup {
             this.amount = this.amount.add(newEntry.getAmount());
         }
     }
-
 
     /**
      * Gets the sourceEntries attribute.

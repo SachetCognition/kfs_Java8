@@ -20,6 +20,8 @@ package org.kuali.kfs.pdp.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.batch.service.AchAdviceNotificationService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,10 +29,9 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * Batch step for sending ACH Advice notifications to payees receiving an ACH payment
  */
 public class SendAchAdviceNotificationsStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SendAchAdviceNotificationsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(SendAchAdviceNotificationsStep.class);
 
     private AchAdviceNotificationService achAdviceNotificationService;
-
 
     /**
      * @see org.kuali.kfs.sys.batch.Step#execute(java.lang.String, java.util.Date)
@@ -42,7 +43,6 @@ public class SendAchAdviceNotificationsStep extends AbstractStep {
 
         return true;
     }
-
 
     /**
      * Sets the achAdviceNotificationService attribute value.

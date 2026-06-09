@@ -20,6 +20,8 @@ package org.kuali.kfs.fp.batch.service;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.batch.ProcurementCardInputFileType;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -31,7 +33,7 @@ import org.kuali.kfs.sys.context.SpringContext;
  */
 @ConfigureContext
 public class PcdoLoadStepTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PcdoLoadStepTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(PcdoLoadStepTest.class);
 
     public PcdoLoadStepTest() {
         super();

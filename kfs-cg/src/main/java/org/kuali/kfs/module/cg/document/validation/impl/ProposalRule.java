@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.cg.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.businessobject.Proposal;
 import org.kuali.kfs.module.cg.businessobject.ProposalOrganization;
 import org.kuali.kfs.module.cg.businessobject.ProposalProjectDirector;
@@ -34,7 +35,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Rules for the Proposal maintenance document.
  */
 public class ProposalRule extends CGMaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(ProposalRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ProposalRule.class);
 
     protected Proposal newProposalCopy;
 

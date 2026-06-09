@@ -30,6 +30,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.businessobject.B2BInformation;
@@ -73,7 +75,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class B2BShoppingServiceImpl implements B2BShoppingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(B2BShoppingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(B2BShoppingServiceImpl.class);
 
     private B2BDao b2bDao;
     private BusinessObjectService businessObjectService;
@@ -409,7 +411,6 @@ public class B2BShoppingServiceImpl implements B2BShoppingService {
 
         return vendorItems;
     }
-
 
     // These are helper classes for extracting information from the cxml message
     protected RequisitionItem createRequisitionItem(B2BShoppingCartItem item, Integer itemLine, String defaultCommodityCode) {

@@ -38,6 +38,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21IndirectCostRecoveryAccount;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
@@ -99,7 +101,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PosterServiceImpl implements PosterService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PosterServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PosterServiceImpl.class);
 
     public static final KualiDecimal WARNING_MAX_DIFFERENCE = new KualiDecimal("0.03");
     public static final String DATE_FORMAT_STRING = "yyyyMMdd";
@@ -952,7 +954,6 @@ public class PosterServiceImpl implements PosterService {
         return null;
     }
 
-
     protected IndirectCostRecoveryGenerationMetadata retrieveAccountIndirectCostRecoveryMetadata(ExpenditureTransaction et) {
         Account account = et.getAccount();
 
@@ -1141,7 +1142,6 @@ public class PosterServiceImpl implements PosterService {
 
         return true;
     }
-
 
     public void setVerifyTransaction(VerifyTransaction vt) {
         verifyTransaction = vt;

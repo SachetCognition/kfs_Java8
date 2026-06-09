@@ -28,13 +28,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.BatchSortService;
 
 /**
  * This class...
  */
 public class BatchSortServiceImpl implements BatchSortService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchSortServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BatchSortServiceImpl.class);
 
     @Override
     public void sortTextFileWithFields(String inputFileName, String outputFileName, Comparator comparator){
@@ -72,6 +74,5 @@ public class BatchSortServiceImpl implements BatchSortService {
         outputFileStream.close();
 
     }
-
 
 }

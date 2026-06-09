@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.ACHBank;
 import org.kuali.kfs.pdp.service.AchBankService;
@@ -34,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class AchBankServiceImpl implements AchBankService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AchBankServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AchBankServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 

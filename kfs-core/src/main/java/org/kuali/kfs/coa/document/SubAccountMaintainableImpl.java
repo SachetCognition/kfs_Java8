@@ -21,7 +21,8 @@ package org.kuali.kfs.coa.document;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.SubAccount;
@@ -42,7 +43,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class...
  */
 public class SubAccountMaintainableImpl extends FinancialSystemMaintainable {
-    private static final Logger LOG = Logger.getLogger(SubAccountMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SubAccountMaintainableImpl.class);
 
     // account fields that are PKs of nested reference accounts but don't exist in the Sub-Account BO as FKs.
     public static final String[] COA_CODE_NAMES = {        

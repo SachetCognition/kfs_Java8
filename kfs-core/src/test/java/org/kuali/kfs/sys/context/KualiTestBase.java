@@ -29,8 +29,9 @@ import javax.sql.DataSource;
 import junit.framework.TestCase;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.OptimisticLockException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.KualiTestConstants;
 import org.kuali.kfs.sys.batch.service.CacheService;
@@ -59,7 +60,7 @@ import org.springmodules.orm.ojb.OjbOperationException;
  */
 
 public abstract class KualiTestBase extends TestCase implements KualiTestConstants {
-    private static final Logger LOG = Logger.getLogger(KualiTestBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KualiTestBase.class);
     protected static boolean log4jConfigured = false;
     protected static RuntimeException configurationFailure;
     protected static boolean springContextInitialized = false;
@@ -80,7 +81,6 @@ public abstract class KualiTestBase extends TestCase implements KualiTestConstan
     public final void runBare() throws Throwable {
 
         final String testName = getClass().getName() + "." + getName();
-
 
         GlobalVariables.clear();
         ConfigureContext contextConfiguration = getMethod(getName()).getAnnotation(ConfigureContext.class) != null ? getMethod(getName()).getAnnotation(ConfigureContext.class) : getMethod("setUp").getAnnotation(ConfigureContext.class) != null ? getMethod("setUp").getAnnotation(ConfigureContext.class) : getClass().getAnnotation(ConfigureContext.class);
@@ -136,11 +136,11 @@ public abstract class KualiTestBase extends TestCase implements KualiTestConstan
             fail( "Test threw an unexpected ValidationException: " + dumpMessageMapErrors() );
         } catch (Throwable ex) {
             if ( ex instanceof CannotGetJdbcConnectionException || StringUtils.contains(ex.getMessage(), "GenericPool:checkOut" ) || StringUtils.contains( ex.getMessage(), "no connection available" ) ) {
-                LOG.fatal( "UNABLE TO OBTAIN DATABASE CONNECTION!  THIS AND MANY OTHER TESTS WILL LIKELY FAIL!", ex );
+                LOG.error( "UNABLE TO OBTAIN DATABASE CONNECTION!  THIS AND MANY OTHER TESTS WILL LIKELY FAIL!", ex );
                 DataSource ds = (DataSource) SpringContext.getBean("datasource");
                 if ( ds != null && ds instanceof XAPoolDataSource ) {
-                    LOG.fatal( "Datasource Information:" );
-                    LOG.fatal( ((XAPoolDataSource)ds).getDataSource().toString() );
+                    LOG.error( "Datasource Information:" );
+                    LOG.error( ((XAPoolDataSource)ds).getDataSource().toString() );
                 }
                 fail( "CONFIGURATION ERROR: UNABLE TO OBTAIN DATABASE CONNECTION!" );
             }

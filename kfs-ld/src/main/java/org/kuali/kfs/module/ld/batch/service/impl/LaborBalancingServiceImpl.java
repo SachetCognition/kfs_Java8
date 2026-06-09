@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.BalancingService;
 import org.kuali.kfs.gl.batch.service.PosterService;
@@ -55,7 +57,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborBalancingServiceImpl extends BalancingServiceBaseImpl<LaborEntryHistory, LaborBalanceHistory> implements BalancingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborBalancingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborBalancingServiceImpl.class);
 
     protected File laborPosterInputFile = null;
     protected File laborPosterErrorOutputFile = null;
@@ -113,7 +115,6 @@ public class LaborBalancingServiceImpl extends BalancingServiceBaseImpl<LaborEnt
 
         return laborPosterErrorOutputFile;
     }
-
 
     /**
      * @see org.kuali.kfs.gl.batch.service.BalancingService#getPastFiscalYearsToConsider()

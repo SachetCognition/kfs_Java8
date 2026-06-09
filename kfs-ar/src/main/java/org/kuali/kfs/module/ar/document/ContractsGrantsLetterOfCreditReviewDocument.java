@@ -28,7 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAwardAccount;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsLetterOfCreditFund;
@@ -57,7 +58,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Contracts & Grants LOC Review Document.
  */
 public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystemTransactionalDocumentBase {
-    private static final Logger LOG = Logger.getLogger(ContractsGrantsLetterOfCreditReviewDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ContractsGrantsLetterOfCreditReviewDocument.class);
 
     private String letterOfCreditFundCode;
     private ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
@@ -83,7 +84,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
         return letterOfCreditFundGroupCode;
     }
 
-
     /**
      * Sets the letterOfCreditFundGroupCode attribute value.
      *
@@ -92,7 +92,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
     public void setLetterOfCreditFundGroupCode(String letterOfCreditFundGroupCode) {
         this.letterOfCreditFundGroupCode = letterOfCreditFundGroupCode;
     }
-
 
     /**
      * Gets the letterOfCreditFundCode attribute.
@@ -111,7 +110,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
     public void setLetterOfCreditFundCode(String letterOfCreditFundCode) {
         this.letterOfCreditFundCode = letterOfCreditFundCode;
     }
-
 
     /**
      * Gets the letterOfCreditFund attribute.
@@ -293,7 +291,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
                         locReviewDtl.setLetterOfCreditAmount(award.getLetterOfCreditFund().getLetterOfCreditFundAmount());
                     }
 
-
                     headerReviewDetails.add(locReviewDtl);
                     final SystemOptions systemOption = getOptionsService().getCurrentYearOptions();
 
@@ -341,7 +338,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
         return valid;
     }
 
-
     /**
      * @see org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase#prepareForSave() To check if the amount to Draw
      *      field has been changed and to set the award locReviewIndicator to true.
@@ -357,7 +353,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
             map.put(KFSPropertyConstants.PROPOSAL_NUMBER, detail.getProposalNumber());
             ContractsAndGrantsBillingAward award = SpringContext.getBean(KualiModuleService.class).getResponsibleModuleService(ContractsAndGrantsBillingAward.class).getExternalizableBusinessObject(ContractsAndGrantsBillingAward.class, map);
             // to set funds Not Drawn as a difference between amountToDraw and hiddenAmountToDraw.
-
 
             // To set amount to Draw to 0 if there are blank values, to avoid exceptions.
             if (ObjectUtils.isNull(detail.getAmountToDraw()) ) {
@@ -399,7 +394,6 @@ public class ContractsGrantsLetterOfCreditReviewDocument extends FinancialSystem
         }
 
     }
-
 
     /**
      * @see org.kuali.kfs.sys.document.FinancialSystemTransactionalDocumentBase#doRouteStatusChange(org.kuali.rice.kew.dto.DocumentRouteStatusChangeDTO)

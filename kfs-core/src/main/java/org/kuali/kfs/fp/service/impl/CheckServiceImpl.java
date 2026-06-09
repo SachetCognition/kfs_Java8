@@ -20,7 +20,8 @@ package org.kuali.kfs.fp.service.impl;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CheckBase;
 import org.kuali.kfs.fp.dataaccess.CheckDao;
 import org.kuali.kfs.fp.service.CheckService;
@@ -34,7 +35,7 @@ import org.kuali.kfs.sys.service.NonTransactional;
 @NonTransactional
 public class CheckServiceImpl implements CheckService {
     // set up logging
-    private static final Logger LOG = Logger.getLogger(CheckServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CheckServiceImpl.class);
 
     protected CheckDao checkDao;
 

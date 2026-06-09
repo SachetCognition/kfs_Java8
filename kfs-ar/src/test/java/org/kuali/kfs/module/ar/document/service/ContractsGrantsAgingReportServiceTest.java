@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.wklykins;
 
 import java.text.ParseException;
@@ -27,7 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAwardAccount;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -60,7 +61,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 @ConfigureContext(session = wklykins)
 public class ContractsGrantsAgingReportServiceTest extends KualiTestBase {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingReportServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingReportServiceTest.class);
 
     private final static String CUSTOMER_NUMBER = "ABB2";
     private final static String CUSTOMER_NAME = "WOODS CORPORATION";

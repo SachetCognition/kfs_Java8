@@ -26,7 +26,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.coa.service.ObjectCodeService;
@@ -100,7 +101,7 @@ public class AssetGlobalServiceImpl implements AssetGlobalService {
     protected ObjectCodeService objectCodeService;
     protected OffsetDefinitionService offsetDefinitionService;
 
-    private static final Logger LOG = Logger.getLogger(AssetGlobalServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetGlobalServiceImpl.class);
 
     /**
      * Creates an instance of AssetGlpeSourceDetail depending on the source flag
@@ -483,7 +484,6 @@ public class AssetGlobalServiceImpl implements AssetGlobalService {
         return parameterService.getParameterValueAsString(AssetGlobal.class,
                 CamsConstants.AssetGlobal.NON_NEW_ACQUISITION_GROUP_PARAM);
     }
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetGlobalService#getFiscalYearEndDayAndMonth()

@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.TrialBalanceReport;
 import org.kuali.kfs.gl.dataaccess.TrialBalanceDao;
 import org.kuali.kfs.sys.KFSConstants;
@@ -36,9 +38,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
  * A class to do the database queries needed to calculate Balance By Consolidation Balance Inquiry Screen
  */
 public class TrialBalanceDaoJdbc extends PlatformAwareDaoBaseJdbc implements TrialBalanceDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TrialBalanceDaoJdbc.class);
-
-
+    private static Logger LOG = LoggerFactory.getLogger(TrialBalanceDaoJdbc.class);
 
     /*
      * Helper method used to build the YTD sum depending on the selected fiscal period
@@ -70,7 +70,6 @@ public class TrialBalanceDaoJdbc extends PlatformAwareDaoBaseJdbc implements Tri
 
         return ytdQuery.append( ")" ).toString();
     }
-
 
     @Override
     public List<TrialBalanceReport> findBalanceByFields(String selectedFiscalYear, String chartCode, String periodCode) {

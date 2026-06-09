@@ -23,14 +23,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.businessobject.PendingBudgetConstructionAppointmentFunding;
 import org.kuali.kfs.module.bc.businessobject.SalarySettingExpansion;
 import org.kuali.kfs.sys.ObjectUtil;
 
-
 public class QuickSalarySettingForm extends SalarySettingBaseForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(QuickSalarySettingForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(QuickSalarySettingForm.class);
 
     private SalarySettingExpansion salarySettingExpansion;
     private boolean refreshPositionBeforeSalarySetting;

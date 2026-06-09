@@ -28,8 +28,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.core.Appender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.service.SchedulerService;
 import org.kuali.kfs.sys.context.ProxyUtils;
@@ -59,7 +60,7 @@ public class Job implements StatefulJob, InterruptableJob {
     public static final String STEP_RUN_ON_DATE_PARM_NM = "RUN_DATE";
     public static final String STEP_USER_PARM_NM = "USER";
     public static final String RUN_DATE_CUTOFF_PARM_NM = "RUN_DATE_CUTOFF_TIME";
-    private static final Logger LOG = Logger.getLogger(Job.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Job.class);
     private SchedulerService schedulerService;
     private ParameterService parameterService;
     private DateTimeService dateTimeService;
@@ -149,10 +150,10 @@ public class Job implements StatefulJob, InterruptableJob {
     public static boolean runStep(ParameterService parameterService, String jobName, int currentStepNumber, Step step, Date jobRunDate) throws InterruptedException, WorkflowException {
         boolean continueJob = true;
         if (GlobalVariables.getUserSession() == null) {
-            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user <unknown>"));
+            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user <unknown>").toString());
         }
         else {
-            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user ").append(GlobalVariables.getUserSession().getPrincipalName()));
+            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user ").append(GlobalVariables.getUserSession().getPrincipalName()).toString());
         }
 
         if (!skipStep(parameterService, step, jobRunDate)) {
@@ -166,11 +167,11 @@ public class Job implements StatefulJob, InterruptableJob {
                 stepUserName = parameterService.getParameterValueAsString(stepClass, STEP_USER_PARM_NM);
             }
             if (LOG.isInfoEnabled()) {
-                LOG.info(new StringBuffer("Creating user session for step: ").append(step.getName()).append("=").append(stepUserName));
+                LOG.info(new StringBuffer("Creating user session for step: ").append(step.getName()).append("=").append(stepUserName).toString());
             }
             GlobalVariables.setUserSession(new UserSession(stepUserName));
             if (LOG.isInfoEnabled()) {
-                LOG.info(new StringBuffer("Executing step: ").append(step.getName()).append("=").append(stepClass));
+                LOG.info(new StringBuffer("Executing step: ").append(step.getName()).append("=").append(stepClass).toString());
             }
             StopWatch stopWatch = new StopWatch();
             stopWatch.start(jobName);
@@ -191,7 +192,7 @@ public class Job implements StatefulJob, InterruptableJob {
                 LOG.info("Stopping job after successful step execution");
             }
         }
-        LOG.info(new StringBuffer("Finished processing step ").append(currentStepNumber).append(": ").append(step.getName()));
+        LOG.info(new StringBuffer("Finished processing step ").append(currentStepNumber).append(": ").append(step.getName()).toString());
         return continueJob;
     }
 

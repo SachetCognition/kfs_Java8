@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.EnterpriseFeederFileSetType;
 import org.kuali.kfs.module.ld.batch.service.EnterpriseFeederService;
 import org.kuali.kfs.sys.FileUtil;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.context.SpringContext;
  * This class provides metadata for the batch upload screen to work for files associated with the enterprise feeder.
  */
 public class LaborEnterpriseFeederFileSetType extends EnterpriseFeederFileSetType {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborEnterpriseFeederFileSetType.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborEnterpriseFeederFileSetType.class);
 
     private static final String FILE_NAME_PREFIX = "laborEntpBatchFile";
     

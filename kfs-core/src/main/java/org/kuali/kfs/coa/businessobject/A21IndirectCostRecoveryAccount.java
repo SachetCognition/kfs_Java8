@@ -21,14 +21,15 @@ package org.kuali.kfs.coa.businessobject;
 
 import java.util.LinkedHashMap;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * IndirectCostRecoveryAccount for A21SubAccount
  */
 public class A21IndirectCostRecoveryAccount extends IndirectCostRecoveryAccount {
-    private static Logger LOG = Logger.getLogger(A21IndirectCostRecoveryAccount.class);
+    private static Logger LOG = LoggerFactory.getLogger(A21IndirectCostRecoveryAccount.class);
 
     private Integer a21IndirectCostRecoveryAccountGeneratedIdentifier;
     

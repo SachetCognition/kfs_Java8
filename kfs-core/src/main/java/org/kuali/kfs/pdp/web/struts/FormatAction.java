@@ -29,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpParameterConstants;
@@ -58,7 +60,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class provides actions for the format process
  */
 public class FormatAction extends KualiAction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FormatAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(FormatAction.class);
     private FormatService formatService;
 
     /**

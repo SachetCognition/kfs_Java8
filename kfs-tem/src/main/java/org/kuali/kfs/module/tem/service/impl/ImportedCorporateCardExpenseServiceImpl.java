@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -48,7 +49,7 @@ import org.kuali.kfs.sys.context.SpringContext;
 
 public class ImportedCorporateCardExpenseServiceImpl extends ExpenseServiceBase implements TemExpenseService {
 
-    protected static Logger LOG = Logger.getLogger(ImportedCorporateCardExpenseServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ImportedCorporateCardExpenseServiceImpl.class);
 
     protected ImportedExpensePendingEntryService importedExpensePendingEntryService;
     protected CreditCardAgencyService creditCardAgencyService;

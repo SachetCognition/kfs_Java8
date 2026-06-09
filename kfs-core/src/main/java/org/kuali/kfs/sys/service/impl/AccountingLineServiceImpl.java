@@ -20,6 +20,8 @@ package org.kuali.kfs.sys.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.dataaccess.AccountingLineDao;
 import org.kuali.kfs.sys.service.AccountingLineService;
 import org.kuali.kfs.sys.service.NonTransactional;
@@ -33,7 +35,7 @@ import org.kuali.kfs.sys.service.NonTransactional;
 @NonTransactional
 public class AccountingLineServiceImpl implements AccountingLineService {
     // set up logging
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingLineServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountingLineServiceImpl.class);
 
     private AccountingLineDao accountingLineDao;
 

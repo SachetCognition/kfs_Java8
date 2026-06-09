@@ -19,6 +19,8 @@
 
 package org.kuali.kfs.module.purap.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.GL_DEBIT_CODE;
 import static org.kuali.rice.core.api.util.type.KualiDecimal.ZERO;
 import static org.kuali.rice.core.api.util.type.KualiDecimal.ZERO;
@@ -61,7 +63,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * Purchase Order Amendment Document
  */
 public class PurchaseOrderAmendmentDocument extends PurchaseOrderDocument {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderAmendmentDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchaseOrderAmendmentDocument.class);
 
     boolean newUnorderedItem; //Used for routing
     String receivingDeliveryCampusCode; //Used for routing
@@ -152,7 +154,6 @@ public class PurchaseOrderAmendmentDocument extends PurchaseOrderDocument {
        return accountingLines;
    }
 
-
    @Override
    public void populateDocumentForRouting() {
        newUnorderedItem = SpringContext.getBean(PurchaseOrderService.class).hasNewUnorderedItem(this);
@@ -186,7 +187,6 @@ public class PurchaseOrderAmendmentDocument extends PurchaseOrderDocument {
     public Class<? extends AccountingDocument> getDocumentClassForAccountingLineValueAllowedValidation() {
         return PurchaseOrderDocument.class;
     }
-
 
     @Override
     public void customPrepareForSave(KualiDocumentEvent event) {
@@ -262,8 +262,5 @@ public class PurchaseOrderAmendmentDocument extends PurchaseOrderDocument {
         }
         return false;
     }
-
-
-
 
 }

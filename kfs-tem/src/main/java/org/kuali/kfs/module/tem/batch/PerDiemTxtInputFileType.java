@@ -26,7 +26,8 @@ import java.io.Reader;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.batch.businessobject.PerDiemForLoad;
@@ -39,7 +40,7 @@ import org.kuali.kfs.sys.exception.ParseException;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
 public class PerDiemTxtInputFileType extends BatchInputFileTypeBase {
-    private static Logger LOG = Logger.getLogger(PerDiemTxtInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(PerDiemTxtInputFileType.class);
 
     private PerDiemFileParsingService perDiemFileParsingService;
     private DateTimeService dateTimeService;

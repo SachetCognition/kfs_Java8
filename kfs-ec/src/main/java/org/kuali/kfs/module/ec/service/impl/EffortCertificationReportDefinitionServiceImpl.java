@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ec.EffortCertificationReport;
 import org.kuali.kfs.module.ec.EffortConstants;
 import org.kuali.kfs.module.ec.EffortKeyConstants;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.module.ec.businessobject.EffortCertificationReportDefinition
  */
 public class EffortCertificationReportDefinitionServiceImpl implements EffortCertificationReportDefinitionService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationReportDefinitionServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationReportDefinitionServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
 

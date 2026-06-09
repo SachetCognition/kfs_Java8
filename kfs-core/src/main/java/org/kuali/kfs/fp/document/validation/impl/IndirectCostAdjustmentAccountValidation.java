@@ -19,6 +19,8 @@
 package org.kuali.kfs.fp.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryAccount;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class IndirectCostAdjustmentAccountValidation extends GenericValidation {
     protected AccountingLine accountingLineForValidation;
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IndirectCostAdjustmentAccountValidation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IndirectCostAdjustmentAccountValidation.class);
     
     /**
      * @see org.kuali.kfs.sys.document.validation.Validation#validate(org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent)

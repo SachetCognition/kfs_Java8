@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.businessobject.Asset;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 
 @ConfigureContext(session = UserNameFixture.kfs, shouldCommitTransactions = false)
 public class AssetDepreciationServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetDepreciationServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetDepreciationServiceTest.class);
 
     private String ERROR_INVALID_DATE = "Invalid depreciation date";
     private String ERROR_INVALID_DATE_FORMAT = "Invalid depreciation date format";
@@ -145,7 +147,6 @@ public class AssetDepreciationServiceTest extends KualiTestBase {
         }
     }
 
-
     /**
      * stores the depreciation date into parameters table
      * 
@@ -215,7 +216,6 @@ public class AssetDepreciationServiceTest extends KualiTestBase {
         depreciationDate.add(Calendar.MONTH, incrementBy);
         return dateFormat.format(depreciationDate.getTime());
     }
-
 
     /**
      * Determines whether or not a calculated depreciation amount has the same value as the on the fixture file

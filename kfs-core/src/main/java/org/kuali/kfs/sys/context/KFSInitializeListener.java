@@ -22,10 +22,12 @@ import java.util.Arrays;
 
 import javax.servlet.ServletContextEvent;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.web.listener.KualiInitializeListener;
 
 public class KFSInitializeListener extends KualiInitializeListener {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KFSInitializeListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KFSInitializeListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

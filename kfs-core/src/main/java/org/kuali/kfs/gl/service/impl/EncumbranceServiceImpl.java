@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.service.impl;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Encumbrance;
 import org.kuali.kfs.gl.dataaccess.EncumbranceDao;
 import org.kuali.kfs.gl.service.EncumbranceService;
@@ -33,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EncumbranceServiceImpl implements EncumbranceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EncumbranceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EncumbranceServiceImpl.class);
 
     private EncumbranceDao encumbranceDao;
 

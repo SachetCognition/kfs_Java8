@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.businessobject.AccountBalance;
 import org.kuali.kfs.gl.businessobject.lookup.BusinessObjectFieldConverter;
@@ -53,7 +55,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class is the template class for the customized inqurable implementations used to generate balance inquiry screens.
  */
 public abstract class AbstractGeneralLedgerInquirableImpl extends KfsInquirableImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractGeneralLedgerInquirableImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AbstractGeneralLedgerInquirableImpl.class);
     
     private BusinessObject businessObject; 
     

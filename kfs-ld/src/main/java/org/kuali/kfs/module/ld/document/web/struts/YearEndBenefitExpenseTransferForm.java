@@ -18,12 +18,14 @@
  */
 package org.kuali.kfs.module.ld.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Struts Action Form for the Year End Benefit Expense Transfer Document.
  */
 public class YearEndBenefitExpenseTransferForm extends BenefitExpenseTransferForm {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(YearEndBenefitExpenseTransferForm.class);
+    private static Logger LOG = LoggerFactory.getLogger(YearEndBenefitExpenseTransferForm.class);
 
     /**
      * Constructs a BenefitExpenseTransferForm instance and sets up the appropriately casted document.

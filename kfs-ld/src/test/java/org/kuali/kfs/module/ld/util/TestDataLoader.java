@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.gl.businessobject.OriginEntrySource.LABOR_BACKUP;
 import static org.kuali.kfs.gl.businessobject.OriginEntrySource.LABOR_SCRUBBER_VALID;
 
@@ -44,7 +46,7 @@ import org.kuali.kfs.sys.context.SpringContextForBatchRunner;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class TestDataLoader {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TestDataLoader.class);
+    private static Logger LOG = LoggerFactory.getLogger(TestDataLoader.class);
 
     private Properties properties;
     private String fieldNames;

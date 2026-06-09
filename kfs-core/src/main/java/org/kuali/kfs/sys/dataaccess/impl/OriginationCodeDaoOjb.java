@@ -18,16 +18,17 @@
  */
 package org.kuali.kfs.sys.dataaccess.impl;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.OriginationCode;
 import org.kuali.kfs.sys.dataaccess.OriginationCodeDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 public class OriginationCodeDaoOjb extends PlatformAwareDaoBaseOjb implements OriginationCodeDao {
-    private static Logger LOG = Logger.getLogger(OriginationCodeDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginationCodeDaoOjb.class);
 
     public OriginationCodeDaoOjb() {
         super();

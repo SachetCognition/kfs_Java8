@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -29,7 +31,7 @@ import org.kuali.rice.core.framework.persistence.platform.OracleDatabasePlatform
 
 @ConfigureContext
 public class MismatchedForeignKeyTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MismatchedForeignKeyTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(MismatchedForeignKeyTest.class);
 
     protected UnitTestSqlDao unitTestSqlDao = null;
 

@@ -20,10 +20,11 @@ package org.kuali.kfs.fp.dataaccess.impl;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.Check;
 import org.kuali.kfs.fp.businessobject.CheckBase;
 import org.kuali.kfs.fp.dataaccess.CheckDao;
@@ -35,7 +36,7 @@ import org.springframework.dao.DataAccessException;
  */
 
 public class CheckDaoOjb extends PlatformAwareDaoBaseOjb implements CheckDao {
-    private static final Logger LOG = Logger.getLogger(CheckDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CheckDaoOjb.class);
 
     /**
      * @param line

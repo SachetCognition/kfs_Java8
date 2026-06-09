@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.AccountBalance;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.lookup.CollectionIncomplete;
  * An extension of KualiLookupableImpl to support the account balance by level inquiry screen
  */
 public class AccountBalanceByLevelLookupableImpl extends KualiLookupableImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceByLevelLookupableImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountBalanceByLevelLookupableImpl.class);
 
     private AccountBalanceService accountBalanceService;
 

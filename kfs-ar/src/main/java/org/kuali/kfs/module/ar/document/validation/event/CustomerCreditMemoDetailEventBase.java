@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.ar.document.validation.event;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.CustomerCreditMemoDetail;
 import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEventBase;
@@ -27,7 +28,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public abstract class CustomerCreditMemoDetailEventBase extends KualiDocumentEventBase implements CustomerCreditMemoDetailEvent{
 
-    private static final Logger LOG = Logger.getLogger(CustomerCreditMemoDetailEventBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerCreditMemoDetailEventBase.class);
     private final CustomerCreditMemoDetail customerCreditMemoDetail;
     
     public CustomerCreditMemoDetailEventBase(String description, String errorPathPrefix, Document document, CustomerCreditMemoDetail customerCreditMemoDetail) {
@@ -70,7 +71,7 @@ public abstract class CustomerCreditMemoDetailEventBase extends KualiDocumentEve
             logMessage.append( customerCreditMemoDetail.getReferenceInvoiceItemNumber() );
         }
 
-        LOG.debug(logMessage);
+        LOG.debug("{}", logMessage);
     }
 
 }

@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.businessobject.LedgerEntry;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -32,7 +34,7 @@ import org.kuali.rice.krad.bo.BusinessObject;
  * The class is the front-end for the balance inquiry of Ledger entry For Expense Transfer processing.
  */
 public class LedgerEntryForExpenseTransferLookupableHelperServiceImpl extends LedgerEntryLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerEntryForExpenseTransferLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LedgerEntryForExpenseTransferLookupableHelperServiceImpl.class);
 
     /**
      * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#getSearchResults(java.util.Map)

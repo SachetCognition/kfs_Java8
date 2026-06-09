@@ -20,13 +20,14 @@ package org.kuali.kfs.integration.cam;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.document.AccountingDocument;
 import org.kuali.rice.krad.document.Document;
 
 public class CapitalAssetManagementModuleServiceNoOp implements CapitalAssetManagementModuleService {
 
-    private Logger LOG = Logger.getLogger(getClass()); 
+    private Logger LOG = LoggerFactory.getLogger(getClass()); 
     
     public void deleteAssetLocks(String documentNumber, String lockingInformation) {
         LOG.warn( "Using No-Op " + getClass().getSimpleName() + " service." );

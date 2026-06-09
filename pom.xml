@@ -1038,14 +1038,6 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
       <version>${log4j2.version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <!-- Bridge: routes Log4j 1.x API calls to Log4j 2.x -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-1.2-api</artifactId>
-      <version>${log4j2.version}</version>
-      <scope>runtime</scope>
     </dependency>
     <!-- SLF4J → Log4j 2.x binding -->
     <dependency>
@@ -1054,13 +1046,7 @@
       <version>${log4j2.version}</version>
       <scope>runtime</scope>
     </dependency>
-    <!-- Keep log4j 1.x JAR for compile-time only; log4j-1.2-api bridges at runtime -->
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
-      <scope>provided</scope>
-    </dependency>
+
     <dependency>
       <groupId>org.codehaus.woodstox</groupId>
       <artifactId>wstx-asl</artifactId>

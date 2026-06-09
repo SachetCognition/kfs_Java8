@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import org.kuali.kfs.module.ar.ArConstants;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 @ConfigureContext(session = khuntley)
 public class CustomerInvoiceWriteoffDocumentRuleTest extends KualiTestBase {
     
- public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceWriteoffDocumentRuleTest.class);
+ public static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceWriteoffDocumentRuleTest.class);
     
     private CustomerInvoiceWriteoffDocumentRule rule;
     private CustomerInvoiceWriteoffDocument document;

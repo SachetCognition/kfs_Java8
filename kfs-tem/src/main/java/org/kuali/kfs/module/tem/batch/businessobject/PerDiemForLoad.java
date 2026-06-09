@@ -20,13 +20,15 @@ package org.kuali.kfs.module.tem.batch.businessobject;
 
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.PerDiem;
 import org.kuali.kfs.module.tem.businessobject.PrimaryDestination;
 import org.kuali.kfs.module.tem.businessobject.TemRegion;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 public class PerDiemForLoad extends PerDiem {
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PerDiemForLoad.class);
+    public static Logger LOG = LoggerFactory.getLogger(PerDiemForLoad.class);
 
     private String effectiveDateAsString;
     private String seasonBeginDateAsString;
@@ -165,8 +167,6 @@ public class PerDiemForLoad extends PerDiem {
 
         return map;
     }
-
-
 
     /**
      * Gets the regionNameForReport attribute.

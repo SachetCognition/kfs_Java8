@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.CustomerProfile;
 import org.kuali.kfs.sys.document.FinancialSystemMaintainable;
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * default Start Date on edits and copies, ala JIRA #KULRNE-62.
  */
 public class CustomerProfileMaintenanceDocumentMaintainableImpl extends FinancialSystemMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerProfileMaintenanceDocumentMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerProfileMaintenanceDocumentMaintainableImpl.class);
 
     /**
      * This method will reset AccountDelegate's Start Date to the current timestamp on edits and copies
@@ -97,7 +99,6 @@ public class CustomerProfileMaintenanceDocumentMaintainableImpl extends Financia
         }
         return sections;
     }
-
 
     protected boolean shouldReviewTypesFieldBeReadOnly(MaintenanceDocument document){
         CustomerProfile  customerProfile = (CustomerProfile)document.getNewMaintainableObject().getBusinessObject();

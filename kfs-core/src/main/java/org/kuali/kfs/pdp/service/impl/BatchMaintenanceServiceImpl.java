@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
@@ -48,7 +50,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class BatchMaintenanceServiceImpl implements BatchMaintenanceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchMaintenanceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BatchMaintenanceServiceImpl.class);
 
     private BatchMaintenanceDao batchMaintenanceDao;
     private BusinessObjectService businessObjectService;

@@ -38,6 +38,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapAuthorizationConstants;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PODocumentsStrings;
@@ -104,7 +106,7 @@ import org.kuali.kfs.vnd.VendorPropertyConstants;
  * Struts Action for Purchase Order document.
  */
 public class PurchaseOrderAction extends PurchasingActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PurchaseOrderAction.class);
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#refresh(org.apache.struts.action.ActionMapping,
@@ -556,7 +558,6 @@ public class PurchaseOrderAction extends PurchasingActionBase {
 
             SpringContext.getBean(PurchasingService.class).setupCapitalAssetItems(poToSplit);
             SpringContext.getBean(PurchasingService.class).setupCapitalAssetSystem(poToSplit);
-
 
             // Add the note that would normally have gone in after the confirmation page.
             String noteText = purchaseOrderForm.getSplitNoteText();
@@ -1189,7 +1190,6 @@ public class PurchaseOrderAction extends PurchasingActionBase {
         return returnToPreviousPage(mapping, kualiDocumentFormBase);
     }
 
-
     /**
      * Is invoked when the user clicks on the Retransmit button on both the PO tabbed page and on the Purchase Order Retransmit
      * Document page, which is essentially a PO tabbed page with the other irrelevant tabs being hidden. If it was invoked from the
@@ -1261,7 +1261,6 @@ public class PurchaseOrderAction extends PurchasingActionBase {
             itemIndexesBuffer.deleteCharAt(itemIndexesBuffer.lastIndexOf(","));
             request.setAttribute("selectedItemIndexes", itemIndexesBuffer.toString());
         }
-
 
         if (itemIndexesBuffer.length() == 0) {
             GlobalVariables.getMessageMap().putError(PurapConstants.PO_RETRANSMIT_SELECT_TAB_ERRORS, PurapKeyConstants.ERROR_PURCHASE_ORDER_RETRANSMIT_SELECT);
@@ -1846,8 +1845,6 @@ public class PurchaseOrderAction extends PurchasingActionBase {
 
                     return this.performQuestionWithInputAgainBecauseOfErrors(mapping, form, request, response, KRADConstants.DOCUMENT_CANCEL_QUESTION, questionText, KRADConstants.CONFIRMATION_QUESTION, KRADConstants.MAPPING_CANCEL, "", reason, RiceKeyConstants.ERROR_DOCUMENT_DISAPPROVE_REASON_REQUIRED, KRADConstants.QUESTION_REASON_ATTRIBUTE_NAME, new Integer(reasonLimit).toString());
                 }
-
-
 
             }
             // else go to cancel logic below

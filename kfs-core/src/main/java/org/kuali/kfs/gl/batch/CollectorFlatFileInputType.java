@@ -29,7 +29,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.CollectorHelperService;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryTotals;
 import org.kuali.kfs.gl.businessobject.CollectorDetail;
@@ -50,7 +51,7 @@ import org.kuali.rice.krad.util.MessageMap;
 import org.springframework.util.AutoPopulatingList;
 
 public class CollectorFlatFileInputType extends BatchInputFileTypeBase {
-    protected static Logger LOG = Logger.getLogger(CollectorFlatFileInputType.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CollectorFlatFileInputType.class);
     protected DateTimeService dateTimeService;
     protected CollectorHelperService collectorHelperService;
     protected static final String FILE_NAME_PREFIX = "gl_collectorflatfile_";

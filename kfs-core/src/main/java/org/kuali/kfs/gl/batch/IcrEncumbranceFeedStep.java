@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.IcrEncumbranceService;
 import org.kuali.kfs.sys.batch.AbstractStep;
@@ -29,7 +31,7 @@ import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
  * This step builds a file of ICR Encumbrance Entries
  */
 public class IcrEncumbranceFeedStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IcrEncumbranceFeedStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(IcrEncumbranceFeedStep.class);
     protected IcrEncumbranceService icrEncumbranceService;
 
     /**

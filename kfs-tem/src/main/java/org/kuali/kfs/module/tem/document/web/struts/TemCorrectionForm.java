@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.AgencyEntryFull;
 import org.kuali.kfs.module.tem.document.TemCorrectionProcessDocument;
 import org.kuali.kfs.module.tem.document.service.TemCorrectionDocumentService;
@@ -37,7 +39,7 @@ import org.kuali.rice.kns.web.ui.Column;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class TemCorrectionForm extends KualiDocumentFormBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TemCorrectionForm.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TemCorrectionForm.class);
 
     protected String docTitle;
     protected String htmlFormAction;
@@ -99,7 +101,6 @@ public class TemCorrectionForm extends KualiDocumentFormBase {
     protected String entryTransactionLedgerEntrySequenceNumber;
     protected String entryTransactionLedgerEntryAmount;
     protected AgencyEntryFull entryForManualEdit;
-
 
     protected transient KualiTableRenderFormMetadata agencyEntrySearchResultTableMetadata;
 
@@ -187,7 +188,6 @@ public class TemCorrectionForm extends KualiDocumentFormBase {
     public int getGroupsSize() {
         return 0;
     }
-
 
     /**
      * Clears correction document form
@@ -728,8 +728,6 @@ public class TemCorrectionForm extends KualiDocumentFormBase {
         return (allEntries == null) ? null : allEntries.size();
     }
 
-
-
     /**
      * Gets the agencyEntrySearchResultTableMetadata attribute.
      *
@@ -738,7 +736,6 @@ public class TemCorrectionForm extends KualiDocumentFormBase {
     public KualiTableRenderFormMetadata getAgencyEntrySearchResultTableMetadata() {
         return agencyEntrySearchResultTableMetadata;
     }
-
 
     /**
      * Returns list of Column objects for table render column meta data

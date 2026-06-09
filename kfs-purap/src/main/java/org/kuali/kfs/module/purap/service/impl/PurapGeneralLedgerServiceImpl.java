@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.purap.PurapConstants.HUNDRED;
 import static org.kuali.kfs.module.purap.PurapConstants.PURAP_ORIGIN_CODE;
 import static org.kuali.kfs.sys.KFSConstants.BALANCE_TYPE_EXTERNAL_ENCUMBRANCE;
@@ -80,7 +82,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class PurapGeneralLedgerServiceImpl implements PurapGeneralLedgerService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapGeneralLedgerServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurapGeneralLedgerServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private DateTimeService dateTimeService;
@@ -427,7 +429,6 @@ public class PurapGeneralLedgerServiceImpl implements PurapGeneralLedgerService 
                 SpringContext.getBean(PurapAccountRevisionService.class).cancelPaymentRequestAccountRevisions(preq.getItems(), preq.getPostingYearFromPendingGLEntries(), preq.getPostingPeriodCodeFromPendingGLEntries());
             }
         }
-
 
         // Manually save GL entries for Payment Request and encumbrances
         saveGLEntries(preq.getGeneralLedgerPendingEntries());
@@ -989,7 +990,6 @@ public class PurapGeneralLedgerServiceImpl implements PurapGeneralLedgerService 
                         }
                     }
 
-
                 }
                 else {
                     if (LOG.isDebugEnabled()) {
@@ -1354,7 +1354,6 @@ public class PurapGeneralLedgerServiceImpl implements PurapGeneralLedgerService 
         return encumbranceAccounts;
     }
 
-
     /**
      * Re-encumber the Encumbrance on a PO based on values in a PREQ. This is used when a PREQ is cancelled. Note: This modifies the
      * encumbrance values on the PO and saves the PO
@@ -1470,7 +1469,6 @@ public class PurapGeneralLedgerServiceImpl implements PurapGeneralLedgerService 
                 if (poItem.getItemInvoicedTotalAmount().compareTo(ZERO) < 0) {
                     poItem.setItemInvoicedTotalAmount(ZERO);
                 }
-
 
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("getCreditMemoEncumbrance() " + logItmNbr + " Amount to disencumber: " + itemDisEncumber);

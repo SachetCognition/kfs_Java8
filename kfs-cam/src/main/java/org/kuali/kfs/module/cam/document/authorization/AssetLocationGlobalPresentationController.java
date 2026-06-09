@@ -20,13 +20,15 @@ package org.kuali.kfs.module.cam.document.authorization;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.document.authorization.FinancialSystemMaintenanceDocumentPresentationControllerBase;
 import org.kuali.rice.krad.bo.BusinessObject;
 
 public class AssetLocationGlobalPresentationController extends FinancialSystemMaintenanceDocumentPresentationControllerBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetLocationGlobalPresentationController.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AssetLocationGlobalPresentationController.class);
 
     @Override
     public Set<String> getConditionallyHiddenPropertyNames(BusinessObject businessObject) {

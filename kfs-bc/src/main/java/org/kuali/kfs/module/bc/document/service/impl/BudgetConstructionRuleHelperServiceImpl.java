@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -46,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * implementing the validation methods defined in BudgetConstructionRuleHelperService
  */
 public class BudgetConstructionRuleHelperServiceImpl implements BudgetConstructionRuleHelperService {
-    private static final Logger LOG = Logger.getLogger(BudgetConstructionRuleHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionRuleHelperServiceImpl.class);
 
     protected DictionaryValidationService dictionaryValidationService;
     protected LaborModuleService laborModuleService;

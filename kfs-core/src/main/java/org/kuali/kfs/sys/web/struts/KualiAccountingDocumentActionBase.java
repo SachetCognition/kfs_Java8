@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_DOCUMENT_ACCOUNTING_LINE_SALES_TAX_INVALID_ACCOUNT;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_DOCUMENT_ACCOUNTING_LINE_SALES_TAX_REQUIRED;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_REQUIRED;
@@ -79,7 +81,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class handles UI actions for all shared methods of financial documents.
  */
 public class KualiAccountingDocumentActionBase extends FinancialSystemTransactionalDocumentActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiAccountingDocumentActionBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(KualiAccountingDocumentActionBase.class);
 
     /**
      * Adds check for accountingLine updates, generates and dispatches any events caused by such updates
@@ -115,7 +117,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
     @Override
     protected void loadDocument(KualiDocumentFormBase kualiDocumentFormBase) throws WorkflowException {
         super.loadDocument(kualiDocumentFormBase);
-
 
         KualiAccountingDocumentFormBase tform = (KualiAccountingDocumentFormBase) kualiDocumentFormBase;
 
@@ -153,7 +154,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     // Set of actions for which updateEvents should be generated
     protected static final Set UPDATE_EVENT_ACTIONS;
@@ -299,7 +299,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * Deletes the source or target accountingLine with the given index from the given form. Assumes that the rule- and form-
      * validation have already occurred.
@@ -326,7 +325,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
 
     }
 
-
     /**
      * This action executes a call to upload CSV accounting line values as TargetAccountingLines for a given transactional document.
      * The "uploadAccountingLines()" method handles the multi-part request.
@@ -345,7 +343,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * This action executes a call to upload CSV accounting line values as SourceAccountingLines for a given transactional document.
@@ -459,7 +456,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * This action executes an insert of a SourceAccountingLine into a document only after validating the accounting line and
@@ -920,7 +916,6 @@ public class KualiAccountingDocumentActionBase extends FinancialSystemTransactio
             accountingLine.setSalesTax(null);
         }
     }
-
 
     /**
      * This method checks to see if the given accounting needs sales tax and if it does it sets the salesTaxRequired variable on the

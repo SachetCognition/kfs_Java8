@@ -30,6 +30,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -63,7 +65,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class ContractsGrantsInvoiceLookupableHelperServiceImpl extends AccountsReceivableLookupableHelperServiceImplBase {
 
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceLookupableHelperServiceImpl.class);
     protected ContractsAndGrantsModuleBillingService contractsAndGrantsModuleBillingService;
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;
     protected ContractsGrantsInvoiceReportService contractsGrantsInvoiceReportService;
@@ -201,7 +203,6 @@ public class ContractsGrantsInvoiceLookupableHelperServiceImpl extends AccountsR
 
         col.setPropertyName(attributeName);
 
-
         String columnTitle = getDataDictionaryService().getAttributeLabel(element.getClass(), attributeName);
         if (StringUtils.isBlank(columnTitle)) {
             columnTitle = getDataDictionaryService().getCollectionLabel(element.getClass(), attributeName);
@@ -252,7 +253,6 @@ public class ContractsGrantsInvoiceLookupableHelperServiceImpl extends AccountsR
         }
         return col;
     }
-
 
     /**
      * Constructs the list of columns for the search results. All properties for the column objects come from the DataDictionary.

@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.web.format.FormatException;
 import org.kuali.rice.krad.bo.BusinessObject;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.ExternalizableBusinessObjectUtils;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ObjectPopulationUtils {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectPopulationUtils.class);
+    private static Logger LOG = LoggerFactory.getLogger(ObjectPopulationUtils.class);
 
     /**
      *
@@ -55,7 +57,6 @@ public class ObjectPopulationUtils {
     public static void populateFromBaseClass(Class base, BusinessObject src, BusinessObject target, Map supplementalUncopyable, Map<String, Class<?>> uncopyableFields) {
         List<String> fieldNames = new ArrayList<String>();
         Field[] fields = base.getDeclaredFields();
-
 
         for (Field field : fields) {
             if (!Modifier.isTransient(field.getModifiers())) {

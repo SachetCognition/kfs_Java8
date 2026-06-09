@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.FundGroup;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AccountAutoCreateDefaultsRule extends org.kuali.kfs.coa.document.validation.impl.AccountRule {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountAutoCreateDefaultsRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountAutoCreateDefaultsRule.class);
     protected static ParameterService parameterService;
 
     protected static final String ACCT_PREFIX_RESTRICTION = "PREFIXES";
@@ -93,7 +95,6 @@ public class AccountAutoCreateDefaultsRule extends org.kuali.kfs.coa.document.va
 
         setBoFieldPath(KFSPropertyConstants.INDIRECT_COST_RECOVERY_ACCOUNTS);
     }
-
 
     /**
      * This method calls the route rules but does not fail if any of them fail (this only happens on routing)
@@ -152,7 +153,6 @@ public class AccountAutoCreateDefaultsRule extends org.kuali.kfs.coa.document.va
         }
         return success;
     }
-
 
     @Override
     protected boolean checkEmptyValues(MaintenanceDocument maintenanceDocument) {
@@ -355,8 +355,6 @@ public class AccountAutoCreateDefaultsRule extends org.kuali.kfs.coa.document.va
         return result;
     }
 
-
-
     protected boolean checkIncomeStreamValid() {
         // if the subFundGroup object is null, we can't test, so exit
         if (ObjectUtils.isNull(newAccountAutoCreateDefaults.getSubFundGroup())) {
@@ -445,7 +443,6 @@ public class AccountAutoCreateDefaultsRule extends org.kuali.kfs.coa.document.va
         }
     }
 
-
     /**
      * Sets the contractsAndGrantsModuleService attribute value.
      *
@@ -455,7 +452,6 @@ public class AccountAutoCreateDefaultsRule extends org.kuali.kfs.coa.document.va
     public void setContractsAndGrantsModuleService(ContractsAndGrantsModuleService contractsAndGrantsModuleService) {
         this.contractsAndGrantsModuleService = contractsAndGrantsModuleService;
     }
-
 
     @Override
     public ParameterService getParameterService() {

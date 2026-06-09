@@ -25,7 +25,8 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CashDrawer;
 import org.kuali.kfs.fp.businessobject.CashieringItemInProcess;
 import org.kuali.kfs.fp.businessobject.CashieringTransaction;
@@ -57,7 +58,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Business rule(s) applicable to Cash Management Document.
  */
 public class CashManagementDocumentRule extends GeneralLedgerPostingDocumentRuleBase implements CashManagingRule {
-    private static final Logger LOG = Logger.getLogger(CashManagementDocumentRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CashManagementDocumentRule.class);
 
     /**
      * Overrides to validate that the person saving the document is the initiator, validates that the cash drawer is open for
@@ -144,7 +145,6 @@ public class CashManagementDocumentRule extends GeneralLedgerPostingDocumentRule
         }
     }
 
-
     /**
      * Validates all Deposits associated with the given CashManagementDocument
      *
@@ -190,7 +190,6 @@ public class CashManagementDocumentRule extends GeneralLedgerPostingDocumentRule
 
         return isValid;
     }
-
 
     private static final List INITIATED_STATES = Arrays.asList(new String[] { CashReceipt.VERIFIED });
     private static final List UNINITIATED_STATES = Arrays.asList(new String[] { CashReceipt.INTERIM, CashReceipt.FINAL});

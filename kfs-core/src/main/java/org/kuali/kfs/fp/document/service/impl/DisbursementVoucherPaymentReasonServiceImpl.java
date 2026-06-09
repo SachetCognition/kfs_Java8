@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementPayee;
 import org.kuali.kfs.fp.businessobject.PaymentReasonCode;
 import org.kuali.kfs.fp.document.DisbursementVoucherConstants;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * @see DisbursementVoucherPaymentReasonService
  */
 public class DisbursementVoucherPaymentReasonServiceImpl implements DisbursementVoucherPaymentReasonService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherPaymentReasonServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DisbursementVoucherPaymentReasonServiceImpl.class);
 
     protected ParameterService parameterService;
     protected BusinessObjectService businessObjectService;

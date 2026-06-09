@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.dataaccess.AccountBalanceLevelDao;
 import org.kuali.kfs.gl.service.AccountBalanceService;
@@ -36,7 +38,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * Calculate Balance By Level Balance Inquiry Screen
  */
 public class AccountBalanceLevelDaoJdbc extends AccountBalanceDaoJdbcBase implements AccountBalanceLevelDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceLevelDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountBalanceLevelDaoJdbc.class);
 
     /**
      * Summarizes all of the qualifying account balance information for the balance by level inquiry
@@ -140,7 +142,6 @@ public class AccountBalanceLevelDaoJdbc extends AccountBalanceDaoJdbcBase implem
             String insertBalanceStatementSql = "INSERT INTO FP_INTERIM1_LEVEL_MT (UNIV_FISCAL_YR, FIN_COA_CD, ACCOUNT_NBR, SUB_ACCT_NBR, FIN_OBJECT_CD, " + "FIN_SUB_OBJ_CD, CURR_BDLN_BAL_AMT, ACLN_ACTLS_BAL_AMT, ACLN_ENCUM_BAL_AMT, TIMESTAMP, FIN_REPORT_SORT_CD, " + "FIN_OBJ_LEVEL_CD, SESID) " + "VALUES (?,?,?,?,?,?,?,?,?," + getDbPlatform().getCurTimeFunction() + ",?,?,?)";
 
             SqlRowSet pendingEntryRowSet = getJdbcTemplate().queryForRowSet("SELECT o.FIN_OBJ_LEVEL_CD,b.FIN_OFFST_GNRTN_CD,t.FIN_OBJTYP_DBCR_CD,l.fin_report_sort_cd,e.*" + " FROM GL_PENDING_ENTRY_MT e,CA_OBJ_TYPE_T t,CA_BALANCE_TYPE_T b,CA_OBJECT_CODE_T o,CA_OBJ_LEVEL_T l" + " WHERE e.SESID = ?" + " AND e.FIN_OBJ_TYP_CD = t.FIN_OBJ_TYP_CD" + " AND e.fin_balance_typ_cd = b.fin_balance_typ_cd" + " AND e.univ_fiscal_yr = o.univ_fiscal_yr" + " AND e.fin_coa_cd = o.fin_coa_cd" + " AND e.fin_object_cd = o.fin_object_cd" + " AND o.fin_coa_cd = l.fin_coa_cd" + " AND o.fin_obj_level_cd = l.fin_obj_level_cd " + "ORDER BY e.univ_fiscal_yr,e.account_nbr,e.sub_acct_nbr,e.fin_object_cd,e.fin_sub_obj_cd,e.fin_obj_typ_cd", new Object[] { sessionId });
-
 
             int updateCount = 0;
             int insertCount = 0;
@@ -260,7 +261,6 @@ public class AccountBalanceLevelDaoJdbc extends AccountBalanceDaoJdbcBase implem
         // If they have specified a previous year, we will get all the pending entries where the year is equal to their selection
         // without the nulls (because we will post eDocs
         // with blank years tonight most probably.
-
 
         clearTempTable("GL_PENDING_ENTRY_MT", "SESID", sessionId);
 

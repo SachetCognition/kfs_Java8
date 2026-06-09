@@ -31,6 +31,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAgency;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Action class for Federal Financial Report service.
  */
 public class FederalFinancialReportAction extends KualiAction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FederalFinancialReportAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(FederalFinancialReportAction.class);
 
     private static volatile FederalFinancialReportService federalFinancialReportService;
 

@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -33,7 +34,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * 
  */
 public class AccountDelegateModel extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static final Logger LOG = Logger.getLogger(AccountDelegateModel.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountDelegateModel.class);
 
     private String chartOfAccountsCode;
     private String organizationCode;
@@ -69,7 +70,6 @@ public class AccountDelegateModel extends PersistableBusinessObjectBase implemen
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
 
-
     /**
      * Gets the organizationCode attribute.
      * 
@@ -88,7 +88,6 @@ public class AccountDelegateModel extends PersistableBusinessObjectBase implemen
         this.organizationCode = organizationCode;
     }
 
-
     /**
      * Gets the accountDelegateModelName attribute.
      * 
@@ -106,7 +105,6 @@ public class AccountDelegateModel extends PersistableBusinessObjectBase implemen
     public void setAccountDelegateModelName(String organizationRoutingModelName) {
         this.accountDelegateModelName = organizationRoutingModelName;
     }
-
 
     /**
      * Gets the organization attribute.

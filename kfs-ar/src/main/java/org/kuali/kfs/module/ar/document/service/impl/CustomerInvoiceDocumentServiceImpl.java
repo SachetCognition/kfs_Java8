@@ -31,6 +31,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -83,7 +85,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CustomerInvoiceDocumentServiceImpl implements CustomerInvoiceDocumentService {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceDocumentServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocumentServiceImpl.class);
 
     protected AccountsReceivableDocumentHeaderService accountsReceivableDocumentHeaderService;
     protected BusinessObjectService businessObjectService;
@@ -326,7 +328,6 @@ public class CustomerInvoiceDocumentServiceImpl implements CustomerInvoiceDocume
     public Collection<CustomerInvoiceDetail> getCustomerInvoiceDetailsForCustomerInvoiceDocument(String customerInvoiceDocumentNumber) {
         return customerInvoiceDetailService.getCustomerInvoiceDetailsForInvoice(customerInvoiceDocumentNumber);
     }
-
 
     /**
      * @see org.kuali.kfs.module.ar.document.service.CustomerInvoiceDocumentService#getOpenAmountForCustomerInvoiceDocument(java.lang.String)
@@ -991,7 +992,6 @@ public class CustomerInvoiceDocumentServiceImpl implements CustomerInvoiceDocume
         final String noteTextPattern = getConfigurationService().getPropertyValueAsString(ArKeyConstants.INVOICE_CLOSE_NOTE_TEXT);
         Object[] arguments = { principalName, closingDocument.getDocumentTypeName(), closingDocument.getDocumentId() };
         String noteText = MessageFormat.format(noteTextPattern, arguments);
-
 
         Note note = getDocumentService().createNoteFromDocument(documentToClose, noteText);
         note.setAuthorUniversalIdentifier(getIdentityService().getPrincipalByPrincipalName(KFSConstants.SYSTEM_USER).getPrincipalId());

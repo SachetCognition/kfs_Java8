@@ -20,7 +20,8 @@ package org.kuali.kfs.fp.batch.service.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DistributionOfIncomeAndExpenseDocument;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.ElectronicPaymentClaim;
@@ -37,7 +38,7 @@ import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.service.DocumentService;
 
 public class DistributionOfIncomeAndExpenseElectronicPaymentClaimingHelperStrategyImpl implements ElectronicPaymentClaimingDocumentGenerationStrategy {
-    private static final Logger LOG = Logger.getLogger(DistributionOfIncomeAndExpenseElectronicPaymentClaimingHelperStrategyImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DistributionOfIncomeAndExpenseElectronicPaymentClaimingHelperStrategyImpl.class);
     
     protected DocumentService documentService;
     protected ElectronicPaymentClaimingService electronicPaymentClaimingService;

@@ -29,7 +29,8 @@ import java.util.Set;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.PurchaseOrderStatuses;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -59,7 +60,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ElectronicInvoiceMatchingServiceImpl implements ElectronicInvoiceMatchingService {
 
-    private Logger LOG = Logger.getLogger(ElectronicInvoiceMatchingServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceMatchingServiceImpl.class);
 
     private Map<String,ElectronicInvoiceRejectReasonType> rejectReasonTypes;
     private VendorService vendorService;
@@ -655,8 +656,6 @@ public class ElectronicInvoiceMatchingServiceImpl implements ElectronicInvoiceMa
         }
 
     }
-
-
 
     //Copied from PurApItemBase.calculateExtendedPrice
     protected BigDecimal getExtendedPrice(ElectronicInvoiceItemHolder itemHolder){

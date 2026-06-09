@@ -29,6 +29,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
@@ -62,7 +64,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Struts Action for Requisition document.
  */
 public class RequisitionAction extends PurchasingActionBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequisitionAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(RequisitionAction.class);
     private RequisitionService requisitionService;
     
     /**
@@ -293,7 +295,6 @@ public class RequisitionAction extends PurchasingActionBase {
         RequisitionService reqs = getRequisitionService();
         return (doc.isMissingAccountingLines() && reqs.hasContentReviewer(doc.getOrganizationCode(), doc.getChartOfAccountsCode()));
     }
-
 
     protected synchronized RequisitionService getRequisitionService(){
         if (this.requisitionService == null){

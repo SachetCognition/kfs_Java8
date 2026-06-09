@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.PriorYearAccountService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  * This job typically runs at year end, and should be run only after populatePriorYearDataJob and after users have updated the parameter.
  */
 public class AddPriorYearAccountsStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AddPriorYearAccountsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(AddPriorYearAccountsStep.class);
 
     private PriorYearAccountService priorYearAccountService;
 

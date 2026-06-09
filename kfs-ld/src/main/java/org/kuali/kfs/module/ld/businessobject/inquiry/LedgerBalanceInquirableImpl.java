@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.module.ld.businessobject.LedgerEntry;
 import org.kuali.kfs.sys.KFSConstants;
@@ -35,7 +37,7 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
  * implemetnation.
  */
 public class LedgerBalanceInquirableImpl extends AbstractLaborInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerBalanceInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LedgerBalanceInquirableImpl.class);
 
     /**
      * @see org.kuali.kfs.gl.businessobject.inquiry.AbstractGeneralLedgerInquirableImpl#buildUserDefinedAttributeKeyList()

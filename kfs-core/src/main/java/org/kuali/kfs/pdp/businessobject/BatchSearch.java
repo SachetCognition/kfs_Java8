@@ -26,6 +26,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
  * 
  */
 public class BatchSearch extends TransientBusinessObjectBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchSearch.class);
+    private static Logger LOG = LoggerFactory.getLogger(BatchSearch.class);
 
     private KualiInteger batchId;
     private KualiInteger paymentCount;

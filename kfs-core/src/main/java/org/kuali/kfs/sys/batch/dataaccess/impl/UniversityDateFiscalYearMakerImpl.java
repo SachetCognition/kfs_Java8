@@ -23,7 +23,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.businessobject.UniversityDate;
@@ -33,7 +34,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * Performs custom fiscal year process for University Date records
  */
 public class UniversityDateFiscalYearMakerImpl extends FiscalYearMakerImpl {
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(UniversityDateFiscalYearMakerImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UniversityDateFiscalYearMakerImpl.class);
 
     /**
      * @see org.kuali.kfs.coa.batch.dataaccess.impl.FiscalYearMakerHelperImpl#performCustomProcessing(java.lang.Integer)

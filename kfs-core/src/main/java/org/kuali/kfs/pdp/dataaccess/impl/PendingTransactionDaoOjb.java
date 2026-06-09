@@ -27,17 +27,18 @@ import java.util.Iterator;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.GlPendingTransaction;
 import org.kuali.kfs.pdp.dataaccess.PendingTransactionDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
-
 /**
  * @see org.kuali.kfs.pdp.dataaccess.PendingTransactionDao
  */
 public class PendingTransactionDaoOjb extends PlatformAwareDaoBaseOjb implements PendingTransactionDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PendingTransactionDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(PendingTransactionDaoOjb.class);
 
     public PendingTransactionDaoOjb() {
         super();

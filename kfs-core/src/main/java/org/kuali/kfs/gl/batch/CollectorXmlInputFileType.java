@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.gl.batch.service.CollectorHelperService;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Batch input type for the collector job.
  */
 public class CollectorXmlInputFileType extends XmlBatchInputFileTypeBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorXmlInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorXmlInputFileType.class);
 
     protected DateTimeService dateTimeService;
     private CollectorHelperService collectorHelperService;

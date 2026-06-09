@@ -32,7 +32,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.module.tem.TemConstants;
@@ -66,7 +67,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 @Table(name = "TEM_ENT_DOC_T")
 public class TravelEntertainmentDocument extends TEMReimbursementDocument implements AmountTotaling {
 
-    protected static Logger LOG = Logger.getLogger(TravelEntertainmentDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelEntertainmentDocument.class);
 
     private Integer hostProfileId;
     private String hostName;
@@ -109,9 +110,6 @@ public class TravelEntertainmentDocument extends TEMReimbursementDocument implem
     public void setEventTitle(String eventTitle) {
         this.eventTitle = eventTitle;
     }
-
-
-
 
     @Column(name = "SPOUSE_INCLUDED", nullable = true, length = 1)
     public Boolean getSpouseIncluded() {
@@ -518,7 +516,5 @@ public class TravelEntertainmentDocument extends TEMReimbursementDocument implem
     public void setHostAsPayee(Boolean hostAsPayee) {
         this.hostAsPayee = hostAsPayee;
     }
-
-
 
 }

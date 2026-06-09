@@ -20,16 +20,16 @@ package org.kuali.kfs.sys.businessobject.format;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.web.format.BigDecimalFormatter;
-
 
 /**
  * This class is used to format explicit decimal value to BigDecimal objects.
  */
 public class ExplicitKualiDecimalFormatter extends BigDecimalFormatter {
-	private static Logger LOG = Logger.getLogger(ExplicitKualiDecimalFormatter.class);
+	private static Logger LOG = LoggerFactory.getLogger(ExplicitKualiDecimalFormatter.class);
 
 	/**
 	 * Converts the given String into a KualiDecimal with the final two characters being behind the decimal place

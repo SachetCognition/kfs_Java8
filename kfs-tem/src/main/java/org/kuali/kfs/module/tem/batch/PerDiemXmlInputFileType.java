@@ -43,7 +43,8 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.batch.businessobject.PerDiemForLoad;
@@ -59,7 +60,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class PerDiemXmlInputFileType extends XmlBatchInputFileTypeBase {
-    private static Logger LOG = Logger.getLogger(PerDiemXmlInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(PerDiemXmlInputFileType.class);
 
     private DateTimeService dateTimeService;
     private String fileNamePrefix;
@@ -186,7 +187,6 @@ public class PerDiemXmlInputFileType extends XmlBatchInputFileTypeBase {
 
             // Transform the document to the result stream
             transformer.transform(domSource, streamResult);
-
 
             InputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 

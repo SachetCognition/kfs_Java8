@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ld.LaborLedgerBalance;
 import org.kuali.kfs.integration.ld.LaborLedgerEntry;
 import org.kuali.kfs.integration.ld.LaborModuleService;
@@ -43,12 +45,11 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.MessageMap;
 
-
 /**
  * This batch runner is just for testing purpose and used by effort team members.
  */
 public class EffortBatchRunner {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortBatchRunner.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortBatchRunner.class);
 
     private final Properties properties, message;
     private final String balanceFieldNames, entryFieldNames;
@@ -118,7 +119,6 @@ public class EffortBatchRunner {
         }
         businessObjectService.save(ledgerBalances);
     }
-
 
     public static void main(String[] args) {
         EffortBatchRunner batchRunner = new EffortBatchRunner();

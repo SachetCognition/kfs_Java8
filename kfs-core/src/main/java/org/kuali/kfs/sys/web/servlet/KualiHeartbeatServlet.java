@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -36,7 +38,7 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class KualiHeartbeatServlet extends HttpServlet {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiHeartbeatServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KualiHeartbeatServlet.class);
 	/**
 	 *
 	 */
@@ -80,7 +82,7 @@ public class KualiHeartbeatServlet extends HttpServlet {
 		    PrintWriter pw = new PrintWriter( sw );
 		    ex.printStackTrace( pw );
 		    sb.append( sw.toString() );
-		    LOG.fatal( "Failed to detect heartbeat.  Apply paddles stat!   beeeeeeeeeeeeeeeeeeeeeeeeeeep  It's dead Jim.", ex);
+		    LOG.error( "Failed to detect heartbeat.  Apply paddles stat!   beeeeeeeeeeeeeeeeeeeeeeeeeeep  It's dead Jim.", ex);
 		} finally {
 		    sb.append( "</body></html>");
     		try {

@@ -23,6 +23,8 @@ import java.util.List;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.CorrectionChange;
 import org.kuali.kfs.gl.dataaccess.CorrectionChangeDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -32,7 +34,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * The OJB implementation of the CorrectionChangeDao
  */
 public class CorrectionChangeDaoOjb extends PlatformAwareDaoBaseOjb implements CorrectionChangeDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionChangeDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(CorrectionChangeDaoOjb.class);
 
     /**
      * Delete a CorrectionChange from the database

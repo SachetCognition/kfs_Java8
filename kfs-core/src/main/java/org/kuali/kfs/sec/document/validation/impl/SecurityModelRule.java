@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sec.SecConstants;
 import org.kuali.kfs.sec.SecKeyConstants;
 import org.kuali.kfs.sec.SecPropertyConstants;
@@ -47,12 +49,11 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * Implements business rules checks on the SecurityModel maintenance document
  */
 public class SecurityModelRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SecurityModelRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(SecurityModelRule.class);
 
     private SecurityModel oldSecurityModel;
     private SecurityModel newSecurityModel;
@@ -175,7 +176,6 @@ public class SecurityModelRule extends MaintenanceDocumentRuleBase {
 
             index++;
         }
-
 
         return isValid;
     }

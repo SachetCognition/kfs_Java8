@@ -30,6 +30,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.CollectorBatch;
 import org.kuali.kfs.gl.batch.CollectorStep;
 import org.kuali.kfs.gl.batch.service.CollectorReportService;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * The base implementation of the CollectorReportService
  */
 public class CollectorReportServiceImpl implements CollectorReportService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorReportServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CollectorReportServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected ParameterService parameterService;

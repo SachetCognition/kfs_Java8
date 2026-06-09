@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
 import org.kuali.kfs.module.cam.businessobject.Asset;
@@ -43,10 +45,9 @@ import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 public class AssetDateServiceImpl implements AssetDateService {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetDateService.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetDateService.class);
 
     private AssetService assetService;
     private UniversityDateService universityDateService;
@@ -121,7 +122,6 @@ public class AssetDateServiceImpl implements AssetDateService {
             newAsset.setDepreciationDate(computeDepreciationDate(newAsset.getCapitalAssetType(), depreciationConvention, newAsset.getCapitalAssetInServiceDate()));
         }
     }
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.service.AssetDateService#computeDepreciationDate(org.kuali.kfs.module.cam.businessobject.AssetType,

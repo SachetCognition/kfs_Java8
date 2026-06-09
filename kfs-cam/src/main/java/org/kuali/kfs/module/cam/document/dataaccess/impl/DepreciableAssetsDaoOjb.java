@@ -31,6 +31,8 @@ import java.util.Locale;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -48,7 +50,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
 import org.kuali.rice.krad.bo.DocumentHeader;
 
 public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements DepreciableAssetsDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DepreciableAssetsDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(DepreciableAssetsDaoOjb.class);
     private UniversityDateDao universityDateDao;
     private DepreciationBatchDao depreciationBatchDao;
 
@@ -58,7 +60,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
     protected final static String PAYMENT_TO_OBJECT_REFERENCE_DESCRIPTOR = "financialObject.";
     protected final static String ASSET_TO_ASSET_TYPE_REFERENCE_DESCRIPTOR = "asset.capitalAssetType.";
     protected final static String[] REPORT_GROUP = { "*** BEFORE RUNNING DEPRECIATION PROCESS ****", "*** AFTER RUNNING DEPRECIATION PROCESS ****" };
-
 
     /**
      * @see org.kuali.kfs.module.cam.document.dataaccess.DepreciableAssetsDao#generateStatistics(boolean, java.lang.String,
@@ -75,7 +76,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
         KualiDecimal amount = new KualiDecimal(0);
         String[] columns = new String[2];
 
-
         columns[1] = "******************";
         if (beforeDepreciationReport)
             columns[0] = REPORT_GROUP[0];
@@ -88,7 +88,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
             columns[0] = "Depreciation Run Date";
             columns[1] = depreciationRunDate; 
             reportLine.add(columns.clone());
-
 
             columns[0] = "Fiscal Year";
             columns[1] = (fiscalYear.toString());
@@ -252,7 +251,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
             reportLine.add(columns.clone());
         }
 
-
         if (!beforeDepreciationReport) {
             // Generating a list of depreciation expense object codes.
             List<String> depreExpObjCodes = this.getExpenseObjectCodes(assetObjectCodes);
@@ -365,7 +363,6 @@ public class DepreciableAssetsDaoOjb extends PlatformAwareDaoBaseOjb implements 
         LOG.info(CamsConstants.Depreciation.DEPRECIATION_BATCH + "Finished generating statistics for report - " + (beforeDepreciationReport ? "Before part." : "After part"));
         return reportLine;
     }
-
 
     /**
      * This method returns the number of records found resulting from a join of the organization table and the account table

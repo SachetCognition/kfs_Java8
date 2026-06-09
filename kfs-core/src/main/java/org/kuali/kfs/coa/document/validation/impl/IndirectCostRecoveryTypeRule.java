@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.document.validation.impl;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryExclusionType;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryType;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class IndirectCostRecoveryTypeRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(Account.class);
+    protected static Logger LOG = LoggerFactory.getLogger(Account.class);
 
     protected IndirectCostRecoveryType indirectCostRecoveryType;
     protected List indirectCostRecoveryExclusionTypeDetails;

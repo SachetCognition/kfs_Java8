@@ -20,6 +20,8 @@ package org.kuali.kfs.pdp.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.service.PendingTransactionService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * A step to clear pdp pending ledger entries.
  */
 public class ClearPendingTransactionsStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ClearPendingTransactionsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ClearPendingTransactionsStep.class);
     
     private PendingTransactionService pendingTransactionService;
 

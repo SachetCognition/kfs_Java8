@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.ACCOUNTING_LINE_ERRORS;
 import static org.kuali.kfs.sys.KFSKeyConstants.ERROR_DOCUMENT_PC_TRANSACTION_TOTAL_ACCTING_LINE_TOTAL_NOT_EQUAL;
 
@@ -38,7 +40,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  */
 public class ProcurementCardFixErrorPathValidation extends GenericValidation {
     private AccountingLine accountingLineForValidation;
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardFixErrorPathValidation.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ProcurementCardFixErrorPathValidation.class);
 
     /**
      * Validates that an accounting line does not have a capital object object code

@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
@@ -85,7 +87,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class PaymentApplicationDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource, AmountTotaling {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PaymentApplicationDocument.class);
 
     protected static final String LAUNCHED_FROM_BATCH = "LaunchedBySystemUser";
 

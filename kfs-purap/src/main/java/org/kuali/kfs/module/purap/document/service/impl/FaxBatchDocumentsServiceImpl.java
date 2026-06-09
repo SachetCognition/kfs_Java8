@@ -22,6 +22,8 @@ package org.kuali.kfs.module.purap.document.service.impl;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
 import org.kuali.kfs.module.purap.document.service.FaxBatchDocumentsService;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class FaxBatchDocumentsServiceImpl implements FaxBatchDocumentsService {
-   private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FaxBatchDocumentsServiceImpl.class);
+   private static Logger LOG = LoggerFactory.getLogger(FaxBatchDocumentsServiceImpl.class);
 
    private PurchaseOrderService purchaseOrderService;
    private FaxService faxService;

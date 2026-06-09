@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.OrganizationReversion;
 import org.kuali.kfs.coa.service.BalanceTypeService;
@@ -57,7 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class BalanceServiceImpl implements BalanceService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BalanceServiceImpl.class);
 
     protected static final String PARAMETER_PREFIX = "SELECTION_";
 
@@ -156,7 +158,6 @@ public class BalanceServiceImpl implements BalanceService {
             runningTotal = runningTotal.add(annual);
 
             groups.put(objectCode, runningTotal);
-
 
         }
 

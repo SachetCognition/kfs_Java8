@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.LODGING_TOTAL_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.MEALS_AND_INC_TOTAL_ATTRIBUTE;
 import static org.kuali.kfs.module.tem.TemConstants.MILEAGE_TOTAL_ATTRIBUTE;
@@ -33,7 +35,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.kuali.kfs.module.tem.TemConstants;
@@ -71,7 +72,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 @ConfigureContext
 public class TravelDocumentServiceTest extends KualiTestBase {
 
-    private static final Logger LOG = Logger.getLogger(TravelDocumentServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TravelDocumentServiceTest.class);
 
     protected final static String AIRFARE_EXPENSE_TYPE = "A";
     protected final static String MILEAGE_EXPENSE_TYPE = "MP";
@@ -160,8 +161,6 @@ public class TravelDocumentServiceTest extends KualiTestBase {
 
     }
 
-
-
     /**
      *
      * This method tests calculateDailyTotals using multiple (3) per diem expenses.
@@ -186,7 +185,6 @@ public class TravelDocumentServiceTest extends KualiTestBase {
         perDiemExpense.setBreakfast(false);
         perDiemExpense.setLunch(false);
         perDiemExpense.setDinner(false);
-
 
         Calendar cal = Calendar.getInstance();
         perDiemExpense.setMileageDate(new Timestamp(cal.getTimeInMillis()));
@@ -255,18 +253,15 @@ public class TravelDocumentServiceTest extends KualiTestBase {
         perDiemExpenses2.add(perDiemExpense2);
         perDiemExpenses2.add(perDiemExpense3);
 
-
         List<Map<String, KualiDecimal>> dailyTotals2 = travelDocumentService.calculateDailyTotals(perDiemExpenses2);
 
         assertEquals(new KualiDecimal(20 * 0.45), dailyTotals2.get(0).get(MILEAGE_TOTAL_ATTRIBUTE));
         assertEquals(new KualiDecimal(75), dailyTotals2.get(0).get(LODGING_TOTAL_ATTRIBUTE));
         assertEquals(new KualiDecimal(60 ), dailyTotals2.get(0).get(MEALS_AND_INC_TOTAL_ATTRIBUTE));
 
-
         assertEquals(new KualiDecimal(30 * 0.45), dailyTotals2.get(1).get(MILEAGE_TOTAL_ATTRIBUTE));
         assertEquals(new KualiDecimal(75), dailyTotals2.get(1).get(LODGING_TOTAL_ATTRIBUTE));
         assertEquals(new KualiDecimal(60), dailyTotals2.get(1).get(MEALS_AND_INC_TOTAL_ATTRIBUTE));
-
 
         assertEquals(new KualiDecimal(40 * 0.45), dailyTotals2.get(2).get(MILEAGE_TOTAL_ATTRIBUTE));
         assertEquals(new KualiDecimal(55), dailyTotals2.get(2).get(LODGING_TOTAL_ATTRIBUTE));
@@ -287,7 +282,6 @@ public class TravelDocumentServiceTest extends KualiTestBase {
                 return rate;
             }
         };
-
 
         Calendar cal = Calendar.getInstance();
         perDiemExpense.setMiles(20);
@@ -397,7 +391,6 @@ public class TravelDocumentServiceTest extends KualiTestBase {
                 return rate;
             }
         };
-
 
         Date today = dateTimeService.getCurrentSqlDateMidnight();
         Calendar cal = Calendar.getInstance();
@@ -647,7 +640,6 @@ public class TravelDocumentServiceTest extends KualiTestBase {
             }
         };
 
-
         Date today = dateTimeService.getCurrentSqlDateMidnight();
         Calendar cal = Calendar.getInstance();
         cal.setTime(today);
@@ -876,11 +868,9 @@ public class TravelDocumentServiceTest extends KualiTestBase {
         perDiemExpense.setLunch(true);
         perDiemExpense.setDinner(true);
 
-
         Integer perDiemPercentage = travelDocumentService.calculatePerDiemPercentageFromTimestamp(perDiemExpense, perDiemExpense.getMileageDate());
         assertFalse(perDiemPercentage.equals(100));
     }
-
 
     /**
      * This method tests {@link TravelDocumentService#checkNonEmployeeTravelerTypeCode(String)}

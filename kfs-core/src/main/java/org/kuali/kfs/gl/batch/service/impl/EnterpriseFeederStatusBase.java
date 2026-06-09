@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
@@ -26,7 +28,7 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
  * Base implementation for the enterprise feeder status
  */
 public abstract class EnterpriseFeederStatusBase implements EnterpriseFeederStatus {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EnterpriseFeederStatusBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(EnterpriseFeederStatusBase.class);
 
     /**
      * Retrieves the description in ApplicationResources.properties

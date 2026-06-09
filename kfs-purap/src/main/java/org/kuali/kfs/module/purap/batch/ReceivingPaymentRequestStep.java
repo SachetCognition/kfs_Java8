@@ -20,14 +20,14 @@ package org.kuali.kfs.module.purap.batch;
 
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.document.service.PaymentRequestService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
-
 public class ReceivingPaymentRequestStep extends AbstractStep {
 
-    private static final Logger log = Logger.getLogger(ReceivingPaymentRequestStep.class);
+    private static final Logger log = LoggerFactory.getLogger(ReceivingPaymentRequestStep.class);
     private PaymentRequestService paymentRequestService;
     
     public ReceivingPaymentRequestStep() {
@@ -47,6 +47,5 @@ public class ReceivingPaymentRequestStep extends AbstractStep {
     }
 
     
-
 
 }

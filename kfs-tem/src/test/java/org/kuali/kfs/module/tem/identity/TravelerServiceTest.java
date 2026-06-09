@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.module.tem.identity;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.service.TravelerService;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
@@ -27,7 +28,7 @@ import org.kuali.kfs.sys.context.SpringContext;
 @ConfigureContext
 public class TravelerServiceTest extends KualiTestBase {
 
-    public static Logger LOG = Logger.getLogger(TravelerServiceTest.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelerServiceTest.class);
 
     private TravelerService travelerService;
 

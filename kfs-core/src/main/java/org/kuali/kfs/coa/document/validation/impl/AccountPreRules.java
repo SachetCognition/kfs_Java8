@@ -22,6 +22,8 @@ import java.sql.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryAccount;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
@@ -39,7 +41,7 @@ import org.kuali.rice.location.api.postalcode.PostalCodeService;
  */
 public class AccountPreRules extends MaintenancePreRulesBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountPreRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountPreRules.class);
 
     protected static final String DEFAULT_STATE_CODE = "Account.Defaults.StateCode";
     protected static final String DEFAULT_ACCOUNT_TYPE_CODE = "Account.Defaults.AccountType";
@@ -58,7 +60,6 @@ public class AccountPreRules extends MaintenancePreRulesBase {
     protected static final String RESTRICTED_CD_UNRESTRICTED = "U";
     protected static final String RESTRICTED_CD_TEMPORARILY_RESTRICTED = "T";
     protected static final String RESTRICTED_CD_NOT_APPLICABLE = "N";
-
 
     public AccountPreRules() {
         accountService = SpringContext.getBean(AccountService.class);
@@ -162,7 +163,6 @@ public class AccountPreRules extends MaintenancePreRulesBase {
             }
         }
 
-
     }
 
     /**
@@ -185,7 +185,6 @@ public class AccountPreRules extends MaintenancePreRulesBase {
      * @param maintenanceDocument
      */
     protected void newAccountDefaults(MaintenanceDocument maintenanceDocument) {
-
 
         /*
          * GlobalVariables.getMessageMap().put("document.newMaintainableObject.accountEffectiveDate" ,
@@ -227,6 +226,5 @@ public class AccountPreRules extends MaintenancePreRulesBase {
             }
         }
     }
-
 
 }

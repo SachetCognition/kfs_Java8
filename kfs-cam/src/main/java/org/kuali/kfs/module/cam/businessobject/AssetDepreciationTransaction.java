@@ -18,11 +18,13 @@
  */
 package org.kuali.kfs.module.cam.businessobject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
 
 public class AssetDepreciationTransaction extends TransientBusinessObjectBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TransientBusinessObjectBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TransientBusinessObjectBase.class);
 
     protected Long capitalAssetNumber;
     protected String documentNumber;
@@ -52,11 +54,9 @@ public class AssetDepreciationTransaction extends TransientBusinessObjectBase {
         
     
 
-
     public Long getCapitalAssetNumber() {
         return capitalAssetNumber;
     }
-
 
     public void setCapitalAssetNumber(Long capitalAssetNumber) {
         this.capitalAssetNumber = capitalAssetNumber;
@@ -66,96 +66,77 @@ public class AssetDepreciationTransaction extends TransientBusinessObjectBase {
         return documentNumber;
     }
 
-
     public void setDocumentNumber(String documentNumber) {
         this.documentNumber = documentNumber;
     }
-
 
     public String getChartOfAccountsCode() {
         return chartOfAccountsCode;
     }
 
-
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
-
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
-
 
     public String getSubAccountNumber() {
         return subAccountNumber;
     }
 
-
     public void setSubAccountNumber(String subAccountNumber) {
         this.subAccountNumber = subAccountNumber;
     }
-
 
     public String getFinancialObjectCode() {
         return financialObjectCode;
     }
 
-
     public void setFinancialObjectCode(String financialObjectCode) {
         this.financialObjectCode = financialObjectCode;
     }
-
 
     public String getFinancialSubObjectCode() {
         return financialSubObjectCode;
     }
 
-
     public void setFinancialSubObjectCode(String financialSubObjectCode) {
         this.financialSubObjectCode = financialSubObjectCode;
     }
-
 
     public String getFinancialObjectTypeCode() {
         return financialObjectTypeCode;
     }
 
-
     public void setFinancialObjectTypeCode(String financialObjectTypeCode) {
         this.financialObjectTypeCode = financialObjectTypeCode;
     }
-
 
     public String getTransactionType() {
         return transactionType;
     }
 
-
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
-
 
     public String getProjectCode() {
         return projectCode;
     }
 
-
     public void setProjectCode(String projectCode) {
         this.projectCode = projectCode;
     }
 
-
     public KualiDecimal getTransactionAmount() {
         return transactionAmount;
     }
-
 
     public void setTransactionAmount(KualiDecimal transactionAmount) {
         this.transactionAmount = transactionAmount;

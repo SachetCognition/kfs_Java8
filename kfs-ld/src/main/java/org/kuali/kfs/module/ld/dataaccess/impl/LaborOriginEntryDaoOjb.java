@@ -29,6 +29,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.OriginEntryGroup;
 import org.kuali.kfs.gl.businessobject.OriginEntrySource;
 import org.kuali.kfs.gl.dataaccess.OriginEntryDao;
@@ -42,7 +44,7 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
  * OJB Implementation of LaborOriginEntryDao.
  */
 public class LaborOriginEntryDaoOjb extends OriginEntryDaoOjb implements LaborOriginEntryDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborOriginEntryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborOriginEntryDaoOjb.class);
     
     private static final String DATE = "date";
     private static final String SOURCE_CODE = "sourceCode";

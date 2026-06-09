@@ -21,7 +21,8 @@ package org.kuali.kfs.module.cam.utils;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.businessobject.BarcodeInventoryErrorDetail;
 import org.kuali.kfs.module.cam.document.BarcodeInventoryErrorDocument;
 import org.kuali.kfs.module.cam.fixture.BarcodeInventoryErrorDetailPredicateFixture;
@@ -32,7 +33,7 @@ import org.kuali.kfs.sys.fixture.UserNameFixture;
 
 @ConfigureContext(session = UserNameFixture.kfs)
 public class BarcodeInventoryErrorDetailPredicateTest extends KualiTestBase {
-    private static Logger LOG = Logger.getLogger(BarcodeInventoryErrorDetailPredicateTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorDetailPredicateTest.class);
 
     /**
      *     

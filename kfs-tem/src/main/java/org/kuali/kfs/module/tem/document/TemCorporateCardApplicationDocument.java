@@ -18,14 +18,14 @@
  */
 package org.kuali.kfs.module.tem.document;
 
-
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -36,9 +36,8 @@ import org.kuali.rice.core.web.format.DateFormatter;
 import org.kuali.rice.kew.api.document.DocumentStatus;
 import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
 
-
 public class TemCorporateCardApplicationDocument extends CardApplicationDocumentBase implements CardApplicationDocument {
-    protected static Logger LOG = Logger.getLogger(TemCorporateCardApplicationDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TemCorporateCardApplicationDocument.class);
 
     private String pseudoNumber;
     private boolean departmentHeadAgreement;
@@ -62,7 +61,6 @@ public class TemCorporateCardApplicationDocument extends CardApplicationDocument
     public String getDepartmentHeadAgreementText() {
         return getConfigurationService().getPropertyValueAsString(TemKeyConstants.CORP_CARD_DOCUMENT_DEPT_HEAD_AGREEMENT);
     }
-
 
     @Override
     public void applyToBank() {

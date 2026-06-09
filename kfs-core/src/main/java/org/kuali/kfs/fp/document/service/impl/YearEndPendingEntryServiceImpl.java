@@ -19,6 +19,8 @@
 package org.kuali.kfs.fp.document.service.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
 import org.kuali.kfs.coa.service.OffsetDefinitionService;
@@ -39,7 +41,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * The default implementation of the YearEndPendingEntryService
  */
 public class YearEndPendingEntryServiceImpl implements YearEndPendingEntryService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(YearEndPendingEntryServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(YearEndPendingEntryServiceImpl.class);
 
     protected static final String FINAL_ACCOUNTING_PERIOD = KFSConstants.MONTH13;
 

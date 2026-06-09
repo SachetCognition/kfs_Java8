@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderSensitiveData;
 import org.kuali.kfs.module.purap.businessobject.SensitiveData;
 import org.kuali.kfs.module.purap.businessobject.SensitiveDataAssignment;
@@ -32,7 +34,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
 
 public class SensitiveDataDaoOjb extends PlatformAwareDaoBaseOjb implements SensitiveDataDao {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SensitiveDataDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(SensitiveDataDaoOjb.class);
 
     public SensitiveDataDaoOjb() {
         super();

@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.B2BShoppingCartItem;
 
 public class B2BShoppingCart extends B2BShoppingCartBase {
     
-    private final static Logger log = Logger.getLogger(B2BShoppingCart.class);
+    private final static Logger log = LoggerFactory.getLogger(B2BShoppingCart.class);
     
     private String messageStatusCode;
     private String messageStatusText;

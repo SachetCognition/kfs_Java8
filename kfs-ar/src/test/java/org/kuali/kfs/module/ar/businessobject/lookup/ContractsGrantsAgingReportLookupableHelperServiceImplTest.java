@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.wklykins;
 
 import java.text.DateFormat;
@@ -59,7 +61,7 @@ import org.kuali.rice.krad.util.ErrorMessage;
 @ConfigureContext(session = wklykins)
 public class ContractsGrantsAgingReportLookupableHelperServiceImplTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingReportLookupableHelperServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingReportLookupableHelperServiceImplTest.class);
 
     private ContractsGrantsAgingReportLookupableHelperServiceImpl contractsGrantsAgingReportLookupableHelperServiceImpl;
     private ContractsGrantsAgingReportForm contractsGrantsAgingReportForm;
@@ -148,7 +150,6 @@ public class ContractsGrantsAgingReportLookupableHelperServiceImplTest extends K
         KualiDecimal testSYSPRplus1orMoretotal = new KualiDecimal("0.00");
         assertNotNull("search results not null", displayList = contractsGrantsAgingReportLookupableHelperServiceImpl.getSearchResults(fieldValues));
 
-
         // add all 0to30 totals
         for (Object aDisplayList : displayList) {
             ContractsAndGrantsAgingReport detail = (ContractsAndGrantsAgingReport) aDisplayList;
@@ -163,7 +164,6 @@ public class ContractsGrantsAgingReportLookupableHelperServiceImplTest extends K
         assertEquals(contractsGrantsAgingReportLookupableHelperServiceImpl.getTotal61to90().toString(), test61to90total.toString());
         LOG.info("\n\n\n\n***************************************************************************************\n" + "\n\t\t testtotal0to30 = " + contractsGrantsAgingReportLookupableHelperServiceImpl.getTotal0to30().toString() + "\t\t\t\t\tactualtotal0to30 = " + test0to30total.toString() + "\n\t\t testtotal31to60 = " + contractsGrantsAgingReportLookupableHelperServiceImpl.getTotal31to60().toString() + "\t\t\t\t\t\tactualtotal31to60 = " + test31to60total.toString() + "\n\t\t testtotal61to90 = " + contractsGrantsAgingReportLookupableHelperServiceImpl.getTotal61to90().toString() + "\t\t\t\t\t\tactualtotal61to90 = " + test61to90total.toString() + "\n\t\t testtotal91toSYSPR = " + contractsGrantsAgingReportLookupableHelperServiceImpl.getTotal91toSYSPR().toString() + "\t\t\t\t\tactualtotal91toSYSPR = " + test91toSYSPRtotal.toString() + "\n\t\t testtotalSYSPRplus1orMore = " + contractsGrantsAgingReportLookupableHelperServiceImpl.getTotalSYSPRplus1orMore().toString()
                 + "\t\t\tactualtotalSYSPRplus1orMore = " + testSYSPRplus1orMoretotal.toString() + "\n\n***************************************************************************************\n\n");
-
 
     }
 

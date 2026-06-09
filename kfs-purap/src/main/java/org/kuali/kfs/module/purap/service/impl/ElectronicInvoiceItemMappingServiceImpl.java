@@ -20,6 +20,8 @@ package org.kuali.kfs.module.purap.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceItemMapping;
 import org.kuali.kfs.module.purap.businessobject.ItemType;
 import org.kuali.kfs.module.purap.dataaccess.ElectronicInvoiceItemMappingDao;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class ElectronicInvoiceItemMappingServiceImpl implements ElectronicInvoiceItemMappingService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceItemMappingServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceItemMappingServiceImpl.class);
 
     private ElectronicInvoiceItemMappingDao electronicInvoiceItemMappingDao;
 

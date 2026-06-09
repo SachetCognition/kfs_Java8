@@ -22,6 +22,8 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.fp.businessobject.ProcurementCardTransaction;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Batch input type for the procurement card job.
  */
 public class ProcurementCardInputFileType extends XmlBatchInputFileTypeBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcurementCardInputFileType.class);
 
     private DateTimeService dateTimeService;
 

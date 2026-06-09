@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.cg.businessobject.Award;
 import org.kuali.kfs.module.cg.businessobject.ContractsGrantsAwardBalancesReport;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Helper service class for Contracts & Grants Award Balances Report
  */
 public class ContractsGrantsAwardBalancesReportLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAwardBalancesReportLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsAwardBalancesReportLookupableHelperServiceImpl.class);
 
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
     protected DateTimeService dateTimeService;
@@ -285,7 +287,6 @@ public class ContractsGrantsAwardBalancesReportLookupableHelperServiceImpl exten
     public AccountsReceivableModuleBillingService getAccountsReceivableModuleBillingService() {
         return accountsReceivableModuleBillingService;
     }
-
 
     public void setAccountsReceivableModuleBillingService(AccountsReceivableModuleBillingService accountsReceivableModuleBillingService) {
         this.accountsReceivableModuleBillingService = accountsReceivableModuleBillingService;

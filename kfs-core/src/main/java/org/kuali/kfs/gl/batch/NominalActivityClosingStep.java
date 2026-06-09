@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.YearEndService;
 import org.kuali.kfs.sys.batch.AbstractWrappedBatchStep;
@@ -36,7 +38,7 @@ import org.springframework.util.StopWatch;
  * The step that runs the year end nominal activity closing process.
  */
 public class NominalActivityClosingStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NominalActivityClosingStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(NominalActivityClosingStep.class);
     private YearEndService yearEndService;
 
     public static final String TRANSACTION_DATE_FORMAT_STRING = "yyyy-MM-dd";

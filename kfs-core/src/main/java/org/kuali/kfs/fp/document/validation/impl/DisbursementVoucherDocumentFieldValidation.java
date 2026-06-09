@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document.validation.impl;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DisbursementVoucherConstants;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.sys.KFSConstants;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.MessageMap;
 
 public class DisbursementVoucherDocumentFieldValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherDocumentFieldValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherDocumentFieldValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
 

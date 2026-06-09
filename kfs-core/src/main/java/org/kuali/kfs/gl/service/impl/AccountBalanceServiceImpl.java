@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.IteratorUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ObjectTypeService;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.OJBUtility;
@@ -45,7 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class AccountBalanceServiceImpl implements AccountBalanceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountBalanceServiceImpl.class);
 
     protected AccountBalanceDao accountBalanceDao;
     protected ConfigurationService kualiConfigurationService;

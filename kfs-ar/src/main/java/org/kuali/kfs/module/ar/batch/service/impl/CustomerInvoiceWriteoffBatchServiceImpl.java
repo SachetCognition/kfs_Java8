@@ -35,6 +35,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.xerces.dom.DocumentImpl;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.batch.service.CustomerInvoiceWriteoffBatchService;
@@ -67,7 +69,7 @@ import com.lowagie.text.pdf.PdfWriter;
 
 @Transactional
 public class CustomerInvoiceWriteoffBatchServiceImpl implements CustomerInvoiceWriteoffBatchService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceWriteoffBatchServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceWriteoffBatchServiceImpl.class);
 
     private static final String XML_ROOT_ELEMENT_NAME = "invoiceWriteoffBatch";
     private static final String XML_BATCH_NAMESPACE = "http://www.kuali.org/kfs/ar/customerInvoiceWriteoffBatch";
@@ -559,7 +561,6 @@ public class CustomerInvoiceWriteoffBatchServiceImpl implements CustomerInvoiceW
     public void setReportsDirectory(String reportsDirectory) {
         this.reportsDirectory = reportsDirectory;
     }
-
 
     public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;

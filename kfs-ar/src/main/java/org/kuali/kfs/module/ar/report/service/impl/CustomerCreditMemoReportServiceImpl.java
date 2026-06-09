@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
 
 import net.sf.jasperreports.engine.JRParameter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.report.service.CustomerCreditMemoReportService;
 import org.kuali.kfs.module.ar.report.util.CustomerCreditMemoReportDataHolder;
@@ -39,7 +41,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CustomerCreditMemoReportServiceImpl implements CustomerCreditMemoReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerCreditMemoReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerCreditMemoReportServiceImpl.class);
 
     private ReportGenerationService reportGenerationService;
     private ParameterService parameterService;

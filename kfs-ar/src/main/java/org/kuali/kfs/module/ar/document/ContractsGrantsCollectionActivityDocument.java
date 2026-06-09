@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsCollectionActivityInvoiceDetail;
 import org.kuali.kfs.module.ar.document.service.ContractsGrantsCollectionActivityDocumentService;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -35,7 +37,7 @@ import org.kuali.rice.kns.service.DataDictionaryService;
  */
 public class ContractsGrantsCollectionActivityDocument extends FinancialSystemTransactionalDocumentBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsCollectionActivityDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsCollectionActivityDocument.class);
 
     private Long proposalNumber;
     private String agencyNumber;

@@ -35,6 +35,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
 import org.kuali.kfs.module.bc.BCPropertyConstants;
@@ -95,7 +97,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * need to figure out if this should extend KualiAction, KualiDocumentActionBase or KualiTransactionDocumentActionBase
  */
 public class BudgetConstructionAction extends KualiTransactionalDocumentActionBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionAction.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionAction.class);
 
     /**
      * Entry point to all actions Checks for cases where methodToCall is loadDocument, performAccountPullup or
@@ -1240,7 +1242,6 @@ public class BudgetConstructionAction extends KualiTransactionalDocumentActionBa
 
         }
         if (refreshCaller != null && refreshCaller.endsWith(BCConstants.QUICK_SALARY_SETTING_REFRESH_CALLER)) {
-
 
             BudgetDocumentService budgetDocumentService = SpringContext.getBean(BudgetDocumentService.class);
 

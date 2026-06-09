@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.BalanceTypeService;
 import org.kuali.kfs.coa.service.ObjectTypeService;
 import org.kuali.kfs.coa.service.PriorYearAccountService;
@@ -61,7 +63,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class YearEndServiceImpl implements YearEndService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(YearEndServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(YearEndServiceImpl.class);
 
     protected EncumbranceDao encumbranceDao;
     protected OriginEntryService originEntryService;
@@ -553,7 +555,6 @@ public class YearEndServiceImpl implements YearEndService {
     public void setObjectTypeService(ObjectTypeService objectTypeService) {
         this.objectTypeService = objectTypeService;
     }
-
 
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;

@@ -26,6 +26,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * This class represents a GLCP correction change group
  */
 public class CorrectionChangeGroup extends PersistableBusinessObjectBase implements Comparable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionChangeGroup.class);
+    private static Logger LOG = LoggerFactory.getLogger(CorrectionChangeGroup.class);
 
     private String documentNumber;
     private Integer correctionChangeGroupLineNumber;

@@ -18,13 +18,14 @@
  */
 package org.kuali.kfs.module.tem.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class TravelReimbursementServiceTest extends KualiTestBase {
     private TravelReimbursementService trService;
     private DocumentService documentService;
 
-    private static final Logger LOG = Logger.getLogger(TravelReimbursementServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TravelReimbursementServiceTest.class);
 
     @Override
     @Before

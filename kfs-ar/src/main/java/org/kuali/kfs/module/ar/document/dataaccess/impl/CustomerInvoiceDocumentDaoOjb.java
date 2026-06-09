@@ -32,6 +32,8 @@ import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.CustomerInvoiceDetail;
@@ -44,8 +46,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerInvoiceDocumentDaoOjb extends PlatformAwareDaoBaseOjb implements CustomerInvoiceDocumentDao {
 
-    private static org.apache.log4j.Logger LOG =
-        org.apache.log4j.Logger.getLogger(CustomerInvoiceDocumentDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocumentDaoOjb.class);
 
     @Override
     public List<String> getPrintableCustomerInvoiceDocumentNumbersFromUserQueue() {
@@ -283,7 +284,6 @@ public class CustomerInvoiceDocumentDaoOjb extends PlatformAwareDaoBaseOjb imple
         criteria.addEqualTo("openInvoiceIndicator", "true");
         criteria.addEqualTo("documentHeader.financialDocumentStatusCode", KFSConstants.DocumentStatusCodes.APPROVED);
 
-
         QueryByCriteria qbc = QueryFactory.newQuery(CustomerInvoiceDocument.class, criteria);
 
         Collection customerinvoicedocuments = getPersistenceBrokerTemplate().getCollectionByQuery(qbc);
@@ -306,7 +306,6 @@ public class CustomerInvoiceDocumentDaoOjb extends PlatformAwareDaoBaseOjb imple
         criteria.addEqualTo("openInvoiceIndicator", "true");
         criteria.addEqualTo("documentHeader.financialDocumentStatusCode", KFSConstants.DocumentStatusCodes.APPROVED);
 
-
         QueryByCriteria qbc = QueryFactory.newQuery(CustomerInvoiceDocument.class, criteria);
 
         Collection customerinvoicedocuments = getPersistenceBrokerTemplate().getCollectionByQuery(qbc);
@@ -327,7 +326,6 @@ public class CustomerInvoiceDocumentDaoOjb extends PlatformAwareDaoBaseOjb imple
         criteria.addLike("accountsReceivableDocumentHeader.customer.customerName", customerName);
         criteria.addEqualTo("openInvoiceIndicator", "true");
         criteria.addEqualTo("documentHeader.financialDocumentStatusCode", KFSConstants.DocumentStatusCodes.APPROVED);
-
 
         QueryByCriteria qbc = QueryFactory.newQuery(CustomerInvoiceDocument.class, criteria);
 
@@ -352,7 +350,6 @@ public class CustomerInvoiceDocumentDaoOjb extends PlatformAwareDaoBaseOjb imple
         criteria.addEqualTo("accountsReceivableDocumentHeader.customer.customerTypeCode", customerTypeCode);
         criteria.addEqualTo("openInvoiceIndicator", "true");
         criteria.addEqualTo("documentHeader.financialDocumentStatusCode", KFSConstants.DocumentStatusCodes.APPROVED);
-
 
         QueryByCriteria qbc = QueryFactory.newQuery(CustomerInvoiceDocument.class, criteria);
 
@@ -426,7 +423,6 @@ public class CustomerInvoiceDocumentDaoOjb extends PlatformAwareDaoBaseOjb imple
 
         return getPersistenceBrokerTemplate().getCollectionByQuery(query);
     }
-
 
     /**
      * @see org.kuali.kfs.module.ar.document.dataaccess.CustomerInvoiceDocumentDao#getAllAgingInvoiceDocumentsByAccounts(java.util.List, java.util.List, java.sql.Date, java.sql.Date)

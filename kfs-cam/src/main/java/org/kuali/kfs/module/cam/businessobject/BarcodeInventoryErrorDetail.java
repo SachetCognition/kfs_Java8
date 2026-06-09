@@ -24,6 +24,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.Building;
 import org.kuali.kfs.sys.businessobject.Room;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -37,7 +39,7 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
  * Class for the barcode inventory error detail
  */
 public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorDetail.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorDetail.class);
 
     private String documentNumber;
     private Long uploadRowNumber;
@@ -89,7 +91,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the uploadRowNumber attribute.
      * 
@@ -107,7 +108,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     public void setUploadRowNumber(Long uploadRowNumber) {
         this.uploadRowNumber = uploadRowNumber;
     }
-
 
     /**
      * Gets the errorCorrectionStatusCode attribute.
@@ -127,7 +127,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
         this.errorCorrectionStatusCode = errorCorrectionStatusCode;
     }
 
-
     /**
      * Gets the correctorUniversalIdentifier attribute.
      * 
@@ -145,7 +144,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     public void setCorrectorUniversalIdentifier(String correctorUniversalIdentifier) {
         this.correctorUniversalIdentifier = correctorUniversalIdentifier;
     }
-
 
     /**
      * Gets the inventoryCorrectionTimestamp attribute.
@@ -165,7 +163,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
         this.inventoryCorrectionTimestamp = inventoryCorrectionTimestamp;
     }
 
-
     /**
      * Gets the assetTagNumber attribute.
      * 
@@ -183,7 +180,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     public void setAssetTagNumber(String assetTagNumber) {
         this.assetTagNumber = assetTagNumber;
     }
-
 
     /**
      * Gets the uploadScanIndicator attribute.
@@ -203,7 +199,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
         this.uploadScanIndicator = uploadScanIndicator;
     }
 
-
     /**
      * Gets the uploadScanTimestamp attribute.
      * 
@@ -221,7 +216,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     public void setUploadScanTimestamp(Timestamp uploadScanTimestamp) {
         this.uploadScanTimestamp = uploadScanTimestamp;
     }
-
 
     /**
      * Gets the campusCode attribute.
@@ -241,7 +235,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
         this.campusCode = campusCode;
     }
 
-
     /**
      * Gets the buildingCode attribute.
      * 
@@ -259,7 +252,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     public void setBuildingCode(String buildingCode) {
         this.buildingCode = buildingCode;
     }
-
 
     /**
      * Gets the buildingRoomNumber attribute.
@@ -279,7 +271,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
         this.buildingRoomNumber = buildingRoomNumber;
     }
 
-
     /**
      * Gets the buildingSubRoomNumber attribute.
      * 
@@ -297,7 +288,6 @@ public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     public void setBuildingSubRoomNumber(String buildingSubRoomNumber) {
         this.buildingSubRoomNumber = buildingSubRoomNumber;
     }
-
 
     /**
      * Gets the assetConditionCode attribute.

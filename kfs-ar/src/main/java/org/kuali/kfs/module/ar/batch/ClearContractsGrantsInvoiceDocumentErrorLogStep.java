@@ -21,18 +21,19 @@ package org.kuali.kfs.module.ar.batch;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsInvoiceDocumentErrorLog;
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsInvoiceDocumentErrorMessage;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
-
 /**
  * Batch step to clear Contracts & Grants Invoice Document Error Log table.
  */
 public class ClearContractsGrantsInvoiceDocumentErrorLogStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ClearContractsGrantsInvoiceDocumentErrorLogStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ClearContractsGrantsInvoiceDocumentErrorLogStep.class);
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
     protected BusinessObjectService businessObjectService;
 

@@ -19,6 +19,8 @@
 package org.kuali.kfs.sys.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.validation.impl.DisbursementVoucherEmployeeInformationValidation;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.MessageMap;
 
 public class PaymentSourceForeignDraftValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherEmployeeInformationValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherEmployeeInformationValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
 

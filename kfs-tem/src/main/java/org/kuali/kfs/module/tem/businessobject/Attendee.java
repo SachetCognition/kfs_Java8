@@ -28,14 +28,15 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 @Entity
 @Table(name="TEM_ATTENDEE_T")
 public class Attendee  extends PersistableBusinessObjectBase{
 
-    public static Logger LOG = Logger.getLogger(Attendee.class);
+    public static Logger LOG = LoggerFactory.getLogger(Attendee.class);
 
     @GeneratedValue(generator="TEM_ATTENDEE_ID_SEQ")
     @SequenceGenerator(name="TEM_ATTENDEE_ID_SEQ",sequenceName="TEM_ATTENDEE_ID_SEQ", allocationSize=5)
@@ -45,7 +46,6 @@ public class Attendee  extends PersistableBusinessObjectBase{
     private String attendeeType;
     private String name;
     private String documentNumber;
-
 
     @Id
     @Column(name="id",nullable=false)
@@ -65,7 +65,6 @@ public class Attendee  extends PersistableBusinessObjectBase{
     public String getDocumentNumber() {
         return documentNumber;
     }
-
 
     /**
      * Sets the documentNumber attribute.
@@ -159,6 +158,5 @@ public class Attendee  extends PersistableBusinessObjectBase{
 
         return map;
     }
-
 
 }

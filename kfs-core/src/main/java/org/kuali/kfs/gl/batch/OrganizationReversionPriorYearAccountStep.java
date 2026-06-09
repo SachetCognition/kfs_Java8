@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.batch;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.OrganizationReversionProcessService;
 import org.kuali.kfs.gl.batch.service.YearEndService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -33,7 +35,7 @@ import org.springframework.util.StopWatch;
  * end of a fiscal year for reporting purposes; therefore, it uses current year accounts instead of prior year accounts.
  */
 public class OrganizationReversionPriorYearAccountStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionPriorYearAccountStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationReversionPriorYearAccountStep.class);
     private OrganizationReversionProcessService organizationReversionProcessService;
     private YearEndService yearEndService;
 

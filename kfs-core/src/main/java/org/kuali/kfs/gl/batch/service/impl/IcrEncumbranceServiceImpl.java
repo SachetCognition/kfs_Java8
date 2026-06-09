@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ObjectTypeService;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.IcrEncumbranceService;
@@ -35,10 +37,9 @@ import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 public class IcrEncumbranceServiceImpl implements IcrEncumbranceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IcrEncumbranceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(IcrEncumbranceServiceImpl.class);
 
     protected IcrEncumbranceDao icrEncumbranceDao;
     protected ObjectTypeService objectTypeService;

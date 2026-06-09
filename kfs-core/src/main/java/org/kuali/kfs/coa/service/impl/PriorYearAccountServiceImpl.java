@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.coa.service.impl;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.batch.AddPriorYearAccountsStep;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryAccount;
@@ -51,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PriorYearAccountServiceImpl implements PriorYearAccountService {
-    private static final Logger LOG = Logger.getLogger(PriorYearAccountServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PriorYearAccountServiceImpl.class);
 
     protected PriorYearAccountDao priorYearAccountDao;
     protected AccountService accountService;
@@ -187,8 +187,8 @@ public class PriorYearAccountServiceImpl implements PriorYearAccountService {
         reportWriterService.writeTable(priorAccounts, true, false);
         reportWriterService.writeStatisticLine("%s", totalSuccessMsg);
         reportWriterService.writeStatisticLine("%s", totalFailureMsg);
-        LOG.info(totalSuccessMsg);
-        LOG.info(totalFailureMsg);
+        LOG.info("{}", totalSuccessMsg);
+        LOG.info("{}", totalFailureMsg);
     }
     
     public void setPriorYearAccountDao(PriorYearAccountDao priorYearAccountDao) {

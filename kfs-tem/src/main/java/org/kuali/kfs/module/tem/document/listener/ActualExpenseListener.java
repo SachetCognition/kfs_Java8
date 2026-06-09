@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.listener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.PER_DIEM_EXPENSE_DISABLED;
 
 import java.beans.PropertyChangeEvent;
@@ -25,13 +27,11 @@ import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
 import org.kuali.kfs.module.tem.businessobject.PerDiemExpense;
 import org.kuali.kfs.module.tem.document.TravelDocumentBase;
 import org.kuali.kfs.module.tem.document.service.TravelDocumentService;
 import org.kuali.kfs.sys.context.SpringContext;
-
 
 /**
  * Executed when a ActualExpense are added or removed
@@ -39,7 +39,7 @@ import org.kuali.kfs.sys.context.SpringContext;
  */
 public class ActualExpenseListener implements PropertyChangeListener, java.io.Serializable {
 
-    public static Logger LOG = Logger.getLogger(ActualExpenseListener.class);
+    public static Logger LOG = LoggerFactory.getLogger(ActualExpenseListener.class);
     protected volatile TravelDocumentService travelDocumentService;
 
     @Override

@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DisbursementVoucherConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpParameterConstants;
@@ -68,7 +70,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * @see org.kuali.kfs.pdp.service.PdpEmailService
  */
 public class PdpEmailServiceImpl implements PdpEmailService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PdpEmailServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PdpEmailServiceImpl.class);
 
     protected CustomerProfileService customerProfileService;
     protected ConfigurationService kualiConfigurationService;
@@ -436,7 +438,6 @@ public class PdpEmailServiceImpl implements PdpEmailService {
 
         List<String> ccAddresses = new ArrayList<String>( parameterService.getParameterValuesAsString(LoadPaymentsStep.class, PdpParameterConstants.SOFT_EDIT_CC) );
         message.getCcAddresses().addAll(ccAddresses);
-
 
         message.getBccAddresses().addAll(ccAddresses);
 
