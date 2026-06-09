@@ -7,14 +7,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
          http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/data/jpa
-         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-         http://www.springframework.org/schema/tx
-         http://www.springframework.org/schema/tx/spring-tx.xsd">
+         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
   <!-- EntityManagerFactory backed by Hibernate, reusing the existing KFS dataSource -->
   <bean id="entityManagerFactory"
@@ -41,8 +38,12 @@
     <property name="entityManagerFactory" ref="entityManagerFactory"/>
   </bean>
 
-  <!-- Enable annotation-driven transaction management for JPA beans -->
-  <tx:annotation-driven transaction-manager="jpaTransactionManager"/>
+  <!--
+    NOTE: tx:annotation-driven is intentionally omitted to avoid hijacking the
+    361 existing @Transactional beans that route through the JTA transactionManager.
+    New JPA service classes should use @Transactional("jpaTransactionManager")
+    to explicitly opt in to the JPA transaction manager.
+  -->
 
   <!-- Scan for Spring Data JPA repositories under org.kuali.kfs -->
   <jpa:repositories base-package="org.kuali.kfs"
