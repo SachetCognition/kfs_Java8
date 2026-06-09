@@ -21,8 +21,9 @@ package org.kuali.kfs.sys.batch;
 import java.util.Date;
 
 import org.kuali.rice.core.api.datetime.DateTimeService;
-import org.quartz.SimpleTrigger;
+import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 
 public class SimpleTriggerDescriptor extends TriggerDescriptor {
     private Date startTime;
@@ -39,46 +40,34 @@ public class SimpleTriggerDescriptor extends TriggerDescriptor {
         setDateTimeService(dateTimeService);
     }
 
-    /**
-     * @see org.kuali.kfs.sys.batch.TriggerDescriptor#completeTriggerDescription(org.quartz.Trigger)
-     */
-    protected void completeTriggerDescription(Trigger trigger) {
-        if (startTime == null) {
-            startTime = trigger.getStartTime();
-        }
-        // prevent setting of the trigger information in test mode
+    @Override
+    @SuppressWarnings("unchecked")
+    protected Trigger completeTriggerDescription(TriggerBuilder triggerBuilder) {
+        Date effectiveStartTime;
         if (!isTestMode()) {
-            trigger.setStartTime(new Date(startTime.getTime() + startDelay));
-            ((SimpleTrigger) trigger).setRepeatCount(repeatCount);
+            if (startTime == null) {
+                startTime = getDateTimeService().getCurrentDate();
+            }
+            effectiveStartTime = new Date(startTime.getTime() + startDelay);
+        } else {
+            effectiveStartTime = new Date(new Date().getTime() + 525600000L);
         }
-        else {
-            trigger.setStartTime(new Date(new Date().getTime() + 525600000L));
+        triggerBuilder.startAt(effectiveStartTime);
+        if (!isTestMode() && repeatCount > 0) {
+            triggerBuilder.withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                    .withRepeatCount(repeatCount));
         }
+        return triggerBuilder.build();
     }
 
-    /**
-     * Sets the repeatCount attribute value.
-     * 
-     * @param repeatCount The repeatCount to set.
-     */
     public void setRepeatCount(int repeatCount) {
         this.repeatCount = repeatCount;
     }
 
-    /**
-     * Sets the startTime attribute value.
-     * 
-     * @param startTime The startTime to set.
-     */
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    /**
-     * Sets the startDelay attribute value.
-     * 
-     * @param startDelay The startDelay to set.
-     */
     public void setStartDelay(long startDelay) {
         this.startDelay = startDelay;
     }

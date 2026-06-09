@@ -18,13 +18,14 @@
  */
 package org.kuali.kfs.sys.mail;
 
-import javax.activation.DataHandler;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
+
+import jakarta.activation.DataHandler;
+import jakarta.mail.Multipart;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.util.ByteArrayDataSource;
 
 import org.kuali.rice.core.mail.MailerImpl;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -47,35 +48,37 @@ public class AttachmentMailerImpl extends MailerImpl implements AttachmentMailer
      */
     @Override
     public void sendEmail(AttachmentMailMessage message) throws MessagingException {
-        // Construct a mime message from the Attachment Mail Message
-
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-
-        MimeBodyPart body = new MimeBodyPart();
-        body.setText(message.getMessage());
-
-        MimeBodyPart attachment = new MimeBodyPart();
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(body);
-        ByteArrayDataSource ds = new ByteArrayDataSource(message.getContent(), message.getType());
-        attachment.setDataHandler(new DataHandler(ds));
-        attachment.setFileName(message.getFileName());
-        multipart.addBodyPart(attachment);
-        mimeMessage.setContent(multipart);
-
-        MimeMailMessage mmm = new MimeMailMessage(mimeMessage);
-
-        mmm.setTo( (String[])message.getToAddresses().toArray(new String[message.getToAddresses().size()]) );
-        mmm.setBcc( (String[])message.getBccAddresses().toArray(new String[message.getBccAddresses().size()]) );
-        mmm.setCc( (String[])message.getCcAddresses().toArray(new String[message.getCcAddresses().size()]) );
-        mmm.setSubject(message.getSubject());
-        mmm.setFrom(message.getFromAddress());
-
         try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+            MimeBodyPart body = new MimeBodyPart();
+            body.setText(message.getMessage());
+
+            MimeBodyPart attachment = new MimeBodyPart();
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(body);
+            ByteArrayDataSource ds = new ByteArrayDataSource(message.getContent(), message.getType());
+            attachment.setDataHandler(new DataHandler(ds));
+            attachment.setFileName(message.getFileName());
+            multipart.addBodyPart(attachment);
+            mimeMessage.setContent(multipart);
+
+            MimeMailMessage mmm = new MimeMailMessage(mimeMessage);
+
+            mmm.setTo( (String[])message.getToAddresses().toArray(new String[message.getToAddresses().size()]) );
+            mmm.setBcc( (String[])message.getBccAddresses().toArray(new String[message.getBccAddresses().size()]) );
+            mmm.setCc( (String[])message.getCcAddresses().toArray(new String[message.getCcAddresses().size()]) );
+            mmm.setSubject(message.getSubject());
+            mmm.setFrom(message.getFromAddress());
+
             if ( LOG.isDebugEnabled() ) {
                 LOG.debug( "sendEmail() - Sending message: " + mmm.toString() );
             }
             mailSender.send(mmm.getMimeMessage());
+        }
+        catch (jakarta.mail.MessagingException e) {
+            LOG.error("sendEmail() - Error sending email.", e);
+            throw new MessagingException(e.getMessage(), e);
         }
         catch (Exception e) {
             LOG.error("sendEmail() - Error sending email.", e);

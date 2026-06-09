@@ -291,7 +291,7 @@ public class TravelReimbursementAction extends TravelActionBase {
 
 
     protected Integer getPerDiemActionLineNumber(final HttpServletRequest request) {
-        for (final String parameterKey : ((Map<String,String>) request.getParameterMap()).keySet()) {
+        for (final String parameterKey : ((Map<String,String[]>) request.getParameterMap()).keySet()) {
             if (StringUtils.containsIgnoreCase(parameterKey, TemPropertyConstants.PER_DIEM_EXPENSES)) {
                 return getLineNumberFromParameter(parameterKey);
             }
