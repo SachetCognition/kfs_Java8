@@ -20,6 +20,16 @@ package org.kuali.kfs.module.ec.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.kuali.kfs.integration.ld.LaborLedgerPositionObjectGroup;
 import org.kuali.kfs.module.ld.LaborPropertyConstants;
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
@@ -32,14 +42,36 @@ import org.kuali.rice.krad.service.KualiModuleService;
 /**
  * Business Object for the Effort Certification Report Position Table.
  */
+@Entity
+@Table(name = "LD_A21_RPT_POS_T")
 public class EffortCertificationReportPosition extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+
+    @Id
+    @Column(name = "A21_LBR_RPT_NBR")
     private String effortCertificationReportNumber;
+
+    @Id
+    @Column(name = "LBR_RPT_POSOBJ_CD")
     private String effortCertificationReportPositionObjectGroupCode;
+
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @Transient
     private LaborLedgerPositionObjectGroup positionObjectGroup;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+        @JoinColumn(name = "A21_LBR_RPT_NBR", referencedColumnName = "A21_LBR_RPT_NBR", insertable = false, updatable = false)
+    })
     private EffortCertificationReportDefinition effortCertificationReportDefinition;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions options;
 
     /**
