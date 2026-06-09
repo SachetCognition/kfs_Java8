@@ -24,14 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * This class is used to represent the documentation location for a disbursement voucher.
  */
+@Entity
+@Table(name = "FS_PMT_DOC_LOC_T")
 public class PaymentDocumentationLocation extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "PMT_DOC_LOC_CD")
     private String paymentDocumentationLocationCode;
+    @Column(name = "PMT_DOC_LOC_NM")
     private String paymentDocumentationLocationName;
+    @Column(name = "PMT_DOC_LOC_ADDR")
     private String paymentDocumentationLocationAddress;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

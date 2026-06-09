@@ -24,25 +24,49 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "FS_ORIGIN_CODE_T")
 public class OriginationCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Column(name = "FS_SERVER_NM")
     private String financialSystemServerName;
+    @Column(name = "FS_DATABASE_NM")
     private String financialSystemDatabaseName;
+    @Column(name = "FS_DATABASE_DESC")
     private String financialSystemDatabaseDesc;
+    @Column(name = "NEXT_CPTLAST_NBR")
     private Long nextCapitalAssetNumber;
+    @Column(name = "NEXT_NONCA_NBR")
     private Long nextNonCapitalAssetNumber;
     private Long nextCgProposalNumber;
+    @Column(name = "NEXT_CG_AGENCY_NBR")
     private String nextContractsAndGrantsAgencyNumber;
+    @Column(name = "NEXT_CG_SUBCNR_NBR")
     private String nextContractsAndGrantsSubcontractorNumber;
+    @Column(name = "NXT_DV_PAYEEID_NBR")
     private Long nextDisbVchrPayeeIdNbr;
+    @Column(name = "NXT_FDOC_ATT_ID")
     private Long nextFdocAttachmentIdentifier;
+    @Column(name = "AR_NEXT_CUST_NBR")
     private Long acctRcvbNextCustomerNumber;
+    @Column(name = "FDOC_NEXT_ITEM_ID")
     private Long financialDocumentNextItemIdentifier;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

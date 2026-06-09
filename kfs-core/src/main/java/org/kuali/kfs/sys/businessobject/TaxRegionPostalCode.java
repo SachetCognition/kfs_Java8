@@ -32,11 +32,30 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "FS_TAX_POSTAL_CD_T")
+@IdClass(TaxRegionPostalCodeId.class)
 public class TaxRegionPostalCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "POSTAL_CNTRY_CD")
     protected String postalCountryCode;
+	@Id
+	@Column(name = "POSTAL_CD")
 	protected String postalCode;
+	@Id
+	@Column(name = "TAX_REGION_CD")
 	protected String taxRegionCode;
+	@Column(name = "ACTV_IND")
+	@Convert(converter = YesNoConverter.class)
 	protected boolean active;
 
 	protected CountryEbo country;

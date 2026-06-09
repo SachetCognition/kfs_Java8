@@ -33,9 +33,18 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+
 /**
  * This class is used to represent an electronic payment claim.
  */
+@Entity
+@Table(name = "FP_ELCTRNC_PMT_CLM_T")
+@IdClass(ElectronicPaymentClaimId.class)
 public class ElectronicPaymentClaim extends PersistableBusinessObjectBase {
     
     public final static class ClaimStatusCodes {
@@ -43,11 +52,19 @@ public class ElectronicPaymentClaim extends PersistableBusinessObjectBase {
         public final static String UNCLAIMED = "U";
     }
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     private Integer financialDocumentLineNumber;
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Column(name = "FDOC_POST_YR")
     private Integer financialDocumentPostingYear;
+    @Column(name = "FDOC_POST_PRD_CD")
     private String financialDocumentPostingPeriodCode;
+    @Column(name = "PMT_CLM_STAT_CD")
     private String paymentClaimStatusCode;
     
     private AdvanceDepositDocument generatingDocument;

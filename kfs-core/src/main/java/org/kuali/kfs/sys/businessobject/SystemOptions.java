@@ -26,9 +26,18 @@ import org.kuali.kfs.coa.businessobject.ObjectType;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * 
  */
+@Entity
+@Table(name = "FS_OPTION_T")
 public class SystemOptions extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "SystemOptions";
@@ -40,33 +49,64 @@ public class SystemOptions extends PersistableBusinessObjectBase implements Fisc
 
     }
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "ACT_FIN_BAL_TYP_CD")
     private String actualFinancialBalanceTypeCd;
+    @Column(name = "BDGT_CHK_BALTYP_CD")
     private String budgetCheckingBalanceTypeCd;
+    @Column(name = "BDGT_CHK_OPTN_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean budgetCheckingOptionsCode;
+    @Column(name = "UNIV_FSCYR_STRT_YR")
     private Integer universityFiscalYearStartYr;
+    @Column(name = "UNIV_FSCYR_STRT_MO")
     private String universityFiscalYearStartMo;
+    @Column(name = "FOBJTP_INC_CSH_CD")
     private String finObjectTypeIncomecashCode;
+    @Column(name = "FOBJTP_XPND_EXP_CD")
     private String finObjTypeExpenditureexpCd;
+    @Column(name = "FOBJTP_XPNDNEXP_CD")
     private String finObjTypeExpendNotExpCode;
+    @Column(name = "FOBJTP_EXPNXPND_CD")
     private String finObjTypeExpNotExpendCode;
+    @Column(name = "FOBJ_TYP_ASSET_CD")
     private String financialObjectTypeAssetsCd;
+    @Column(name = "FOBJ_TYP_LBLTY_CD")
     private String finObjectTypeLiabilitiesCode;
+    @Column(name = "FOBJ_TYP_FNDBAL_CD")
     private String finObjectTypeFundBalanceCd;
+    @Column(name = "EXT_ENC_FBALTYP_CD")
     private String extrnlEncumFinBalanceTypCd;
+    @Column(name = "INT_ENC_FBALTYP_CD")
     private String intrnlEncumFinBalanceTypCd;
+    @Column(name = "PRE_ENC_FBALTYP_CD")
     private String preencumbranceFinBalTypeCd;
+    @Column(name = "ELIM_FINBAL_TYP_CD")
     private String eliminationsFinBalanceTypeCd;
+    @Column(name = "FOBJTP_INC_NCSH_CD")
     private String finObjTypeIncomeNotCashCd;
+    @Column(name = "FOBJTP_CSH_NINC_CD")
     private String finObjTypeCshNotIncomeCd;
+    @Column(name = "UNIV_FISCAL_YR_NM")
     private String universityFiscalYearName;
+    @Column(name = "FIN_BEGBALLOAD_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean financialBeginBalanceLoadInd;
+    @Column(name = "UNIV_FIN_COA_CD")
     private String universityFinChartOfAcctCd;
+    @Column(name = "CSTSHR_ENCUM_FIN_BAL_TYP_CD")
     private String costShareEncumbranceBalanceTypeCd;
+    @Column(name = "BASE_BDGT_FIN_BAL_TYP_CD")
     private String baseBudgetFinancialBalanceTypeCd;
+    @Column(name = "MO_BDGT_FIN_BAL_TYP_CD")
     private String monthlyBudgetFinancialBalanceTypeCd;
+    @Column(name = "FIN_OBJECT_TYP_TRNFR_INC_CD")
     private String financialObjectTypeTransferIncomeCd;
+    @Column(name = "FIN_OBJECT_TYP_TRNFR_EXP_CD")
     private String financialObjectTypeTransferExpenseCd;
+    @Column(name = "NMNL_FIN_BAL_TYP_CD")
     private String nominalFinancialBalanceTypeCd;
 
     private Chart universityFinChartOfAcct;

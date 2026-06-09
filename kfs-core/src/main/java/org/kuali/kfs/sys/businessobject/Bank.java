@@ -27,28 +27,60 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Bank Business Object
  */
+@Entity
+@Table(name = "FP_BANK_T")
 public class Bank extends PersistableBusinessObjectBase implements MutableInactivatable {
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Bank";
 
+    @Id
+    @Column(name = "BNK_CD")
     protected String bankCode;
+    @Column(name = "BNK_NM")
     protected String bankName;
+    @Column(name = "BNK_SHRT_NM")
     protected String bankShortName;
+    @Column(name = "BNK_RTNG_NBR")
     protected String bankRoutingNumber;
+    @Column(name = "BNK_ACCT_NBR")
     protected String bankAccountNumber;
+    @Column(name = "BNK_ACCT_DESC")
     protected String bankAccountDescription;
+    @Column(name = "CSH_OFST_FIN_COA_CD")
     protected String cashOffsetFinancialChartOfAccountCode;
+    @Column(name = "CSH_OFST_ACCT_NBR")
     protected String cashOffsetAccountNumber;
+    @Column(name = "CSH_OFST_SUB_ACCT_NBR")
     protected String cashOffsetSubAccountNumber;
+    @Column(name = "CSH_OFST_OBJ_CD")
     protected String cashOffsetObjectCode;
+    @Column(name = "CSH_OFST_SUB_OBJ_CD")
     protected String cashOffsetSubObjectCode;
+    @Column(name = "CONT_BNK_CD")
     protected String continuationBankCode;
+    @Column(name = "BNK_DPST_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean bankDepositIndicator;
+    @Column(name = "BNK_DISB_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean bankDisbursementIndicator;
+    @Column(name = "BNK_ACH_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean bankAchIndicator;
+    @Column(name = "BNK_CHK_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean bankCheckIndicator;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
     protected Chart cashOffsetFinancialChartOfAccount;
