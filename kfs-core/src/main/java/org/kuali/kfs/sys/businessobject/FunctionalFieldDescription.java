@@ -24,13 +24,30 @@ import org.kuali.kfs.sys.service.KfsBusinessObjectMetaDataService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "SH_FNCTNL_FIELD_DESCR_T")
 public class FunctionalFieldDescription extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "NMSPC_CD")
     private String namespaceCode;
+    @Id
+    @Column(name = "CMPNT_CLSS")
     private String componentClass;
+    @Id
+    @Column(name = "PRPRTY_NM")
     private String propertyName;
+    @Column(name = "FNCTNL_FIELD_DESCR")
     private String description;
+    @Column(name = "ACTIVE_IND")
     private boolean active;
 
+    @Transient
     private BusinessObjectProperty businessObjectProperty;
     
     public FunctionalFieldDescription() {        

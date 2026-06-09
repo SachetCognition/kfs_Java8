@@ -43,22 +43,37 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the AdvanceDeposit document in Kuali. This is a transactional document that will
  * eventually post transactions to the G/L. It integrates with workflow. Since an Advance Deposit document is a one sided
  * transactional document, only accepting funds into the university, the accounting line data will be held in the source accounting
  * line data structure only.
  */
+@Entity
+@Table(name = "FP_CASH_RCPT_DOC_T")
 public class AdvanceDepositDocument extends CashReceiptFamilyBase implements Copyable, AmountTotaling, Correctable {
     public static final String ADVANCE_DEPOSIT_DOCUMENT_TYPE_CODE = "AD";
 
     // holds details about each advance deposit
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<AdvanceDepositDetail> advanceDeposits = new ArrayList<AdvanceDepositDetail>();
 
     // incrementers for detail lines
+    @Column(name = "FDOC_NXT_AD_LN_NBR")
     protected Integer nextAdvanceDepositLineNumber = 1;
 
     // monetary attributes
+    @Column(name = "FDOC_ADV_DPST_AMT")
     protected KualiDecimal totalAdvanceDepositAmount = KualiDecimal.ZERO;
 
     /**

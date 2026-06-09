@@ -64,15 +64,29 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.exception.InfrastructureException;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the BudgetAdjustment document in Kuali.
  */
+@Entity
+@Table(name = "FP_BDGT_ADJ_DOC_T")
 public class BudgetAdjustmentDocument extends AccountingDocumentBase implements Copyable, Correctable, AmountTotaling {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetAdjustmentDocument.class);
 
     protected static final String REQUIRES_FULL_APPROVAL_SPLIT_NODE_NAME = "RequiresFullApproval";
 
+    @Column(name = "FDOC_NXT_PSFRM_NBR")
     protected Integer nextPositionSourceLineNumber;
+    @Column(name = "FDOC_NXT_PSTO_NBR")
     protected Integer nextPositionTargetLineNumber;
 
     /**

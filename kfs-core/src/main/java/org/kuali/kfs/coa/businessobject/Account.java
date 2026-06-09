@@ -51,111 +51,227 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_ACCOUNT_T")
 public class Account extends PersistableBusinessObjectBase implements AccountIntf, MutableInactivatable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(Account.class);
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Account";
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "ACCOUNT_NM")
     protected String accountName;
+    @Column(name = "ACCT_FRNG_BNFT_CD")
     protected boolean accountsFringesBnftIndicator;
+    @Column(name = "ACCT_RSTRC_STAT_DT")
     protected Date accountRestrictedStatusDate;
+    @Column(name = "ACCT_CITY_NM")
     protected String accountCityName;
+    @Column(name = "ACCT_STATE_CD")
     protected String accountStateCode;
+    @Column(name = "ACCT_STREET_ADDR")
     protected String accountStreetAddress;
+    @Column(name = "ACCT_ZIP_CD")
     protected String accountZipCode;
+    @Transient
     protected String accountCountryCode = KFSConstants.COUNTRY_CODE_UNITED_STATES;
+    @Column(name = "ACCT_CREATE_DT")
     protected Date accountCreateDate;
+    @Column(name = "ACCT_EFFECT_DT")
     protected Date accountEffectiveDate;
+    @Column(name = "ACCT_EXPIRATION_DT")
     protected Date accountExpirationDate;
+    @Column(name = "ACCT_ICR_TYP_CD")
     protected String acctIndirectCostRcvyTypeCd;
+    @Column(name = "AC_CSTM_ICREXCL_CD")
     protected String acctCustomIndCstRcvyExclCd;
+    @Column(name = "FIN_SERIES_ID")
     protected String financialIcrSeriesIdentifier;
+    @Column(name = "ACCT_IN_FP_CD")
     protected boolean accountInFinancialProcessingIndicator;
+    @Column(name = "BDGT_REC_LVL_CD")
     protected String budgetRecordingLevelCode;
+    @Column(name = "ACCT_SF_CD")
     protected String accountSufficientFundsCode;
+    @Column(name = "ACCT_PND_SF_CD")
     protected boolean pendingAcctSufficientFundsIndicator;
+    @Column(name = "FIN_EXT_ENC_SF_CD")
     protected boolean extrnlFinEncumSufficntFndIndicator;
+    @Column(name = "FIN_INT_ENC_SF_CD")
     protected boolean intrnlFinEncumSufficntFndIndicator;
+    @Column(name = "FIN_PRE_ENC_SF_CD")
     protected boolean finPreencumSufficientFundIndicator;
+    @Column(name = "FIN_OBJ_PRSCTRL_CD")
     protected boolean financialObjectivePrsctrlIndicator;
+    @Column(name = "CG_CFDA_NBR")
     protected String accountCfdaNumber;
+    @Column(name = "ACCT_OFF_CMP_IND")
     protected boolean accountOffCampusIndicator;
+    @Column(name = "ACCT_CLOSED_IND")
     protected boolean active;
 
+    @Column(name = "ACCT_FSC_OFC_UID")
     protected String accountFiscalOfficerSystemIdentifier;
+    @Column(name = "ACCT_SPVSR_UNVL_ID")
     protected String accountsSupervisorySystemsIdentifier;
+    @Column(name = "ACCT_MGR_UNVL_ID")
     protected String accountManagerSystemIdentifier;
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "ACCT_TYP_CD")
     protected String accountTypeCode;
+    @Column(name = "ACCT_PHYS_CMP_CD")
     protected String accountPhysicalCampusCode;
+    @Column(name = "SUB_FUND_GRP_CD")
     protected String subFundGroupCode;
+    @Column(name = "FIN_HGH_ED_FUNC_CD")
     protected String financialHigherEdFunctionCd;
+    @Column(name = "ACCT_RSTRC_STAT_CD")
     protected String accountRestrictedStatusCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ACCT_NBR")
     protected String reportsToAccountNumber;
+    @Column(name = "CONT_FIN_COA_CD")
     protected String continuationFinChrtOfAcctCd;
+    @Column(name = "CONT_ACCOUNT_NBR")
     protected String continuationAccountNumber;
+    @Column(name = "ENDOW_FIN_COA_CD")
     protected String endowmentIncomeAcctFinCoaCd;
+    @Column(name = "ENDOW_ACCOUNT_NBR")
     protected String endowmentIncomeAccountNumber;
+    @Column(name = "CONTR_CTRL_FCOA_CD")
     protected String contractControlFinCoaCode;
+    @Column(name = "CONTR_CTRLACCT_NBR")
     protected String contractControlAccountNumber;
+    @Column(name = "INCOME_FIN_COA_CD")
     protected String incomeStreamFinancialCoaCode;
+    @Column(name = "INCOME_ACCOUNT_NBR")
     protected String incomeStreamAccountNumber;
+    @Column(name = "CG_ACCT_RESP_ID")
     protected Integer contractsAndGrantsAccountResponsibilityId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ENDOW_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart endowmentIncomeChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_TYP_CD", insertable = false, updatable = false)
     protected AccountType accountType;
+    @Transient
     protected CampusEbo accountPhysicalCampus;
+    @Transient
     protected StateEbo accountState;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     protected SubFundGroup subFundGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_HGH_ED_FUNC_CD", insertable = false, updatable = false)
     protected HigherEducationFunction financialHigherEdFunction;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_RSTRC_STAT_CD", insertable = false, updatable = false)
     protected RestrictedStatus accountRestrictedStatus;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account reportsToAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account continuationAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account endowmentIncomeAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account contractControlAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account incomeStreamAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_ICR_TYP_CD", insertable = false, updatable = false)
     protected IndirectCostRecoveryType acctIndirectCostRcvyType;
+    @Transient
     protected Person accountFiscalOfficerUser;
+    @Transient
     protected Person accountSupervisoryUser;
+    @Transient
     protected Person accountManagerUser;
+    @Transient
     protected PostalCodeEbo postalZipCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BDGT_REC_LVL_CD", insertable = false, updatable = false)
     protected BudgetRecordingLevel budgetRecordingLevel;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCT_SF_CD", insertable = false, updatable = false)
     protected SufficientFundsCode sufficientFundsCode;
+    @Transient
     protected ContractsAndGrantsCfda cfda;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart fringeBenefitsChartOfAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONT_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart continuationChartOfAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INCOME_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart incomeStreamChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTR_CTRL_FCOA_CD", insertable = false, updatable = false)
     protected Chart contractControlChartOfAccounts;
 
     // Several kinds of Dummy Attributes for dividing sections on Inquiry page
+    @Transient
     protected String accountResponsibilitySectionBlank;
+    @Transient
     protected String accountResponsibilitySection;
+    @Transient
     protected String contractsAndGrantsSectionBlank;
+    @Transient
     protected String contractsAndGrantsSection;
+    @Transient
     protected String guidelinesAndPurposeSectionBlank;
+    @Transient
     protected String guidelinesAndPurposeSection;
+    @Transient
     protected String accountDescriptionSectionBlank;
+    @Transient
     protected String accountDescriptionSection;
 
+    @Transient
     protected Boolean forContractsAndGrants;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     protected AccountGuideline accountGuideline;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected AccountDescription accountDescription;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List subAccounts;
+    @Transient
     protected List<ContractsAndGrantsAccountAwardInformation> awards;
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<IndirectCostRecoveryAccount> indirectCostRecoveryAccounts;
     //added for the employee labor benefit calculation
+    @Column(name = "LBR_BEN_RT_CAT_CD")
     protected String laborBenefitRateCategoryCode;
+    @Transient
     protected LaborBenefitRateCategory laborBenefitRateCategory;
     /**
      * Default no-arg constructor.

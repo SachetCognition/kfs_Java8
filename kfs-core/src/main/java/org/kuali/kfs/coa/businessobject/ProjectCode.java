@@ -24,22 +24,41 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_PROJECT_T")
 public class ProjectCode extends KualiCodeBase implements MutableInactivatable {
 
     private static final long serialVersionUID = 4529316062843227897L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "ProjectCode";
     
+    @Column(name = "PROJECT_DESC")
     private String projectDescription;
+    @Column(name = "PROJ_MGR_UNVL_ID")
     private String projectManagerUniversalId;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ORG_CD")
     private String organizationCode;
 
+    @Transient
     private Person projectManagerUniversal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
 
     /**

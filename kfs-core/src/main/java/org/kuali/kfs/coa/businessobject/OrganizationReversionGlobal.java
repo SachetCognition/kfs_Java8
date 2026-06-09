@@ -37,29 +37,59 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.service.PersistenceStructureService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * The representation of a Global Organization Reversion. A Global Organization Reversion is made up of three sections: 1. The
  * University Fiscal Year and Chart of Accounts code for the Organizations going through reversion, with some account information.
  * 2. A list of the appropriate Object Reversion Details 3. A list of Organizations to apply the Organization Reversion to
  */
+@Entity
+@Table(name = "CA_ORG_RVRSN_CHG_DOC_T")
 public class OrganizationReversionGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobal.class);
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
 
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "BDGT_RVRSN_COA_CD")
     protected String budgetReversionChartOfAccountsCode;
+    @Column(name = "BDGT_RVRSNACCT_NBR")
     protected String budgetReversionAccountNumber;
+    @Column(name = "CF_BY_OBJ_CD_IND")
     protected Boolean carryForwardByObjectCodeIndicator;
+    @Column(name = "CSH_RVRSNFINCOA_CD")
     protected String cashReversionFinancialChartOfAccountsCode;
+    @Column(name = "CSH_RVRSN_ACCT_NBR")
     protected String cashReversionAccountNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account cashReversionAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account budgetReversionAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BDGT_RVRSN_COA_CD", insertable = false, updatable = false)
     protected Chart budgetReversionChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CSH_RVRSNFINCOA_CD", insertable = false, updatable = false)
     protected Chart cashReversionFinancialChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     protected SystemOptions universityFiscal;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<OrganizationReversionGlobalDetail> organizationReversionGlobalDetails;
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<OrganizationReversionGlobalOrganization> organizationReversionGlobalOrganizations;
 
     public OrganizationReversionGlobal() {

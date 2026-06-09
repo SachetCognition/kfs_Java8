@@ -28,6 +28,16 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.AccountingDocument;
 import org.kuali.kfs.sys.document.AmountTotaling;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the <code>{@link YearEndDocument}</code> version of
  * <code>{@link GeneralErrorCorrectionDocument}</code> in Kuali. This is a transactional document that will eventually post
@@ -36,6 +46,8 @@ import org.kuali.kfs.sys.document.AmountTotaling;
  * version except that it has slightly different routing and that it only allows posting to the year end accounting period for a
  * year.
  */
+@Entity
+@Table(name = "FP_ERROR_COR_DOC_T")
 public class YearEndGeneralErrorCorrectionDocument extends GeneralErrorCorrectionDocument implements YearEndDocument, AmountTotaling, CapitalAssetEditable {
 
     /**

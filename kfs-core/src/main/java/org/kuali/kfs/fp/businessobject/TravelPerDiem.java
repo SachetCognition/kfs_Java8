@@ -26,13 +26,30 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class is used to represent a Travel Per Diem business object.
  */
+@Entity
+@Table(name = "FP_DV_DIEM_T")
 public class TravelPerDiem extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Id
+    @Column(name = "DV_DIEM_CNTRY_NM")
     protected String perDiemCountryName;
+    @Column(name = "DV_DIEM_RT")
     protected KualiDecimal perDiemRate;
+    @Column(name = "DV_DIEM_CNTRY_TXT")
     protected String perDiemCountryText;
 
     protected transient SystemOptions fiscalYear;

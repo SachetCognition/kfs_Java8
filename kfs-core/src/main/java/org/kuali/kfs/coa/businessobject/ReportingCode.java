@@ -25,23 +25,49 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Reporting Codes Business Object
  */
+@Entity
+@Table(name = "FP_RPT_CD_T")
 public class ReportingCode extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     private static final long serialVersionUID = -1585612121519839488L;
+    @Id
+    @Column(name = "FIN_RPT_CHRT_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_RPT_ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "FIN_RPT_CD")
     private String financialReportingCode;
+    @Column(name = "FIN_RPT_CD_DESC")
     private String financialReportingCodeDescription;
+    @Column(name = "FIN_REP_CD_MGR_ID")
     private String financialReportingCodeMgrId;
+    @Column(name = "FIN_RPTS_TO_RPT_CD")
     private String financialReportsToReportingCode;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_RPT_CHRT_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization org;
+    @Transient
     private Person person;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ReportingCode reportingCodes;
 
     /**

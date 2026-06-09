@@ -28,28 +28,60 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "FP_CPTL_AST_ACCT_GRP_DTL_T")
 public class CapitalAssetAccountsGroupDetails extends PersistableBusinessObjectBase {
 
     //primary key fields..
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_LINE_NBR")
     protected Integer capitalAssetLineNumber;
+    @Id
+    @Column(name = "CPTLAST_ACCTLINE_NBR")
     protected Integer capitalAssetAccountLineNumber;
+    @Id
+    @Column(name = "FDOC_LINE_NBR")
     protected Integer sequenceNumber;
 
     // accounting line info
+    @Column(name = "FDOC_LN_TYP_CD")
     protected String financialDocumentLineTypeCode;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "SUB_ACCT_NBR")
     protected String subAccountNumber;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "PROJECT_CD")
     protected String projectCode;
+    @Column(name = "ORG_REFERENCE_ID")
     protected String organizationReferenceId;
+    @Column(name = "FDOC_LINE_AMT")
     protected KualiDecimal amount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account account;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     protected CapitalAssetInformation capitalAssetInformation;
 
     public CapitalAssetAccountsGroupDetails() {

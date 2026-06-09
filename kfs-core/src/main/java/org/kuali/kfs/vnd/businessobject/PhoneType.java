@@ -24,14 +24,26 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Phone Types for Vendors. These types may be based on technical distinctions, the Vendor's organization, or the phone's intended
  * purpose.
  */
+@Entity
+@Table(name = "PUR_PHN_TYP_T")
 public class PhoneType extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_PHN_TYP_CD")
     private String vendorPhoneTypeCode;
+    @Column(name = "VNDR_PHN_TYP_DESC")
     private String vendorPhoneTypeDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

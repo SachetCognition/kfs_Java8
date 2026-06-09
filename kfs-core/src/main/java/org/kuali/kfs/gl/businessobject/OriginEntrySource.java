@@ -20,10 +20,18 @@ package org.kuali.kfs.gl.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * A class that defines all the source codes for all types of Origin Entry groups
  */
 
+@Entity
+@Table(name = "GL_ORIGIN_ENTRY_SRC_T")
 public class OriginEntrySource extends KualiCodeBase {
     /**
      * A general ledger backup group

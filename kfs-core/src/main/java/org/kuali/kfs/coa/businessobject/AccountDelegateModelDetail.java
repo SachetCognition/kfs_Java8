@@ -32,24 +32,54 @@ import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_ORG_RTNG_MDL_T")
 public class AccountDelegateModelDetail extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "ORG_RTNG_MDL_NM")
     private String accountDelegateModelName;
+    @Id
+    @Column(name = "ACCT_DLGT_UNVL_ID")
     private String accountDelegateUniversalId;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "FDOC_APRV_FROM_AMT")
     private KualiDecimal approvalFromThisAmount;
+    @Column(name = "FDOC_APRV_TO_AMT")
     private KualiDecimal approvalToThisAmount;
+    @Column(name = "ACCT_DLGT_PRMRT_CD")
     private boolean accountDelegatePrimaryRoutingIndicator;
+    @Column(name = "ACCT_DLGT_START_DT")
     private Date accountDelegateStartDate;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
+    @Transient
     private Person accountDelegate;
 
     /**

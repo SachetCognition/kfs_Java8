@@ -29,19 +29,42 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_RTNG_MDL_NM_T")
 public class AccountDelegateModel extends PersistableBusinessObjectBase implements MutableInactivatable {
     private static final Logger LOG = Logger.getLogger(AccountDelegateModel.class);
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "ORG_RTNG_MDL_NM")
     private String accountDelegateModelName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<AccountDelegateModelDetail> accountDelegateModelDetails;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
     /**

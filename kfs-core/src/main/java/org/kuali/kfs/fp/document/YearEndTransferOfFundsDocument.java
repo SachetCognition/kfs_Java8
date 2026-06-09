@@ -28,11 +28,23 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.AccountingDocument;
 import org.kuali.kfs.sys.document.AmountTotaling;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 /**
  * Year End version of the <code>TransferOfFundsDocument</code> functionally the only difference is the accounting period code
  * used on the glpe entries
  */
+@Entity
+@Table(name = "FP_FND_TRNFR_DOC_T")
 public class YearEndTransferOfFundsDocument extends TransferOfFundsDocument implements YearEndDocument, AmountTotaling {
 
     /**

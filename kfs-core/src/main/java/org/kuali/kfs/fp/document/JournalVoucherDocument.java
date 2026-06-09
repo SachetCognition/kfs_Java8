@@ -50,18 +50,34 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kew.api.exception.WorkflowException;
 import org.kuali.rice.krad.document.Copyable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This is the business object that represents the JournalVoucherDocument in Kuali. This is a transactional document that will
  * eventually post transactions to the G/L. It integrates with workflow and contains a single group of accounting lines. The Journal
  * Voucher is unique in that we only make use of one accounting line list: the source accounting lines seeing as a JV only records
  * accounting lines as debits or credits.
  */
+@Entity
+@Table(name = "FP_JRNL_VCHR_DOC_T")
 public class JournalVoucherDocument extends AccountingDocumentBase implements VoucherDocument, Copyable, Correctable, AmountTotaling {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(JournalVoucherDocument.class);
 
     // document specific attributes
+    @Column(name = "FIN_BALANCE_TYP_CD")
     protected String balanceTypeCode; // balanceType key
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_BALANCE_TYP_CD", insertable = false, updatable = false)
     protected BalanceType balanceType;
+    @Column(name = "FDOC_REVERSAL_DT")
     protected java.sql.Date reversalDate;
 
     /**

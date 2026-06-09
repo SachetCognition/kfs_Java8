@@ -37,44 +37,96 @@ import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_OBJ_CD_CHG_DOC_T")
 public class ObjectCodeGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectCodeGlobal.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "FIN_OBJ_CD_NM")
     protected String financialObjectCodeName;
+    @Column(name = "FIN_OBJ_CD_SHRT_NM")
     protected String financialObjectCodeShortName;
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     protected String financialObjectLevelCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_FIN_OBJ_CD")
     protected String reportsToFinancialObjectCode;
+    @Column(name = "FIN_OBJ_TYP_CD")
     protected String financialObjectTypeCode;
+    @Column(name = "FIN_OBJ_SUB_TYP_CD")
     protected String financialObjectSubTypeCode;
+    @Column(name = "HIST_FIN_OBJECT_CD")
     protected String historicalFinancialObjectCode;
+    @Column(name = "FIN_OBJ_ACTIVE_CD")
     protected boolean financialObjectActiveIndicator;
+    @Column(name = "FOBJ_BDGT_AGGR_CD")
     protected String financialBudgetAggregationCd;
+    @Column(name = "FOBJ_MNXFR_ELIM_CD")
     protected String finObjMandatoryTrnfrOrElimCd;
+    @Column(name = "FIN_FED_FUNDED_CD")
     protected String financialFederalFundedCode;
+    @Column(name = "NXT_YR_FIN_OBJ_CD")
     protected String nextYearFinancialObjectCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DocumentHeader financialDocument;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected ObjectCode reportsToFinancialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     protected SystemOptions universityFiscal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart reportsToChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
     protected ObjectType financialObjectType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OBJ_SUB_TYP_CD", insertable = false, updatable = false)
     protected ObjectSubType financialObjectSubType;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected ObjectLevel financialObjectLevel;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FOBJ_BDGT_AGGR_CD", insertable = false, updatable = false)
     protected BudgetAggregationCode financialBudgetAggregation;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FOBJ_MNXFR_ELIM_CD", insertable = false, updatable = false)
     protected MandatoryTransferEliminationCode finObjMandatoryTrnfrelim;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_FED_FUNDED_CD", insertable = false, updatable = false)
     protected FederalFundedCode financialFederalFunded;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<ObjectCodeGlobalDetail> objectCodeGlobalDetails;
 
     /**

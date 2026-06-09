@@ -32,22 +32,44 @@ import org.kuali.rice.kim.api.role.Role;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * Associates a member (principal, role, or group) to a model. These become the members of the model role created in KIM
  */
+@Entity
+@Table(name = "SEC_SCRTY_MDL_MBR_T")
 public class SecurityModelMember extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "MDL_ID")
     protected KualiInteger modelId;
+    @Id
+    @Column(name = "MBR_ID")
     protected String memberId;
+    @Column(name = "MBR_TYP_CD")
     protected String memberTypeCode;
+    @Column(name = "ACTV_FRM_DT")
     protected Timestamp activeFromDate;
+    @Column(name = "ACTV_TO_DT")
     protected Timestamp activeToDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MDL_ID", insertable = false, updatable = false)
     protected SecurityModel securityModel;
 
     // non db
+    @Transient
     protected String memberName = "";
 
+    @Transient
     protected ModelMember modelMember;
 
     /**

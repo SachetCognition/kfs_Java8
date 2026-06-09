@@ -59,37 +59,70 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.campus.Campus;
 import org.kuali.rice.location.api.campus.CampusService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * This class represents the CashManagementDocument.
  */
+@Entity
+@Table(name = "FP_DEPOSIT_HDR_T")
 public class CashManagementDocument extends GeneralLedgerPostingDocumentBase implements GeneralLedgerPendingEntrySource {
     protected static final long serialVersionUID = 7475843770851900297L;
     protected static Logger LOG = Logger.getLogger(CashManagementDocument.class);
 
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<Deposit> deposits;
 
+    @Transient
     protected List<Check> checks;
 
+    @Transient
     protected CashieringTransaction currentTransaction;
+    @Transient
     protected CashDrawer cashDrawer;
+    @Transient
     protected Campus campus;
 
+    @Column(name = "FDOC_MSTR_100_DLR_AMT")
     private KualiDecimal financialDocumentHundredDollarAmount;
+    @Column(name = "FDOC_MSTR_50_DLR_AMT")
     private KualiDecimal financialDocumentFiftyDollarAmount;
+    @Column(name = "FDOC_MSTR_20_DLR_AMT")
     private KualiDecimal financialDocumentTwentyDollarAmount;
+    @Column(name = "FDOC_MSTR_10_DLR_AMT")
     private KualiDecimal financialDocumentTenDollarAmount;
+    @Column(name = "FDOC_MSTR_5_DLR_AMT")
     private KualiDecimal financialDocumentFiveDollarAmount;
+    @Column(name = "FDOC_MSTR_2_DLR_AMT")
     private KualiDecimal financialDocumentTwoDollarAmount;
+    @Column(name = "FDOC_MSTR_1_DLR_AMT")
     private KualiDecimal financialDocumentOneDollarAmount;
+    @Column(name = "FDOC_MSTR_OTHR_DLR_AMT")
     private KualiDecimal financialDocumentOtherDollarAmount;
+    @Column(name = "FDOC_MSTR_100_CENT_AMT")
     private KualiDecimal financialDocumentHundredCentAmount;
+    @Column(name = "FDOC_MSTR_50_CENT_AMT")
     private KualiDecimal financialDocumentFiftyCentAmount;
+    @Column(name = "FDOC_MSTR_25_CENT_AMT")
     private KualiDecimal financialDocumentTwentyFiveCentAmount;
+    @Column(name = "FDOC_MSTR_10_CENT_AMT")
     private KualiDecimal financialDocumentTenCentAmount;
+    @Column(name = "FDOC_MSTR_5_CENT_AMT")
     private KualiDecimal financialDocumentFiveCentAmount;
+    @Column(name = "FDOC_MSTR_1_CENT_AMT")
     private KualiDecimal financialDocumentOneCentAmount;
+    @Column(name = "FDOC_MSTR_OTHR_CENT_AMT")
     private KualiDecimal financialDocumentOtherCentAmount;
 
 

@@ -29,17 +29,32 @@ import org.kuali.kfs.coa.businessobject.OrganizationReversionCategory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class represents a unit of work for the organization reversion
  */
+@Entity
+@Table(name = "GL_ORG_RVRSN_UNIT_WRK_T")
 public class OrgReversionUnitOfWork extends PersistableBusinessObjectBase {
     public String chartOfAccountsCode = "";
     public String accountNumber = "";
     public String subAccountNumber = "";
     public Map<String, OrgReversionUnitOfWorkCategoryAmount> amounts;
+    @Column(name = "ORG_TOT_RVRSN_AMT")
     private KualiDecimal totalReversion;
+    @Column(name = "ORG_TOT_CF_AMT")
     private KualiDecimal totalCarryForward;
+    @Column(name = "ORG_TOT_AVAIL_AMT")
     private KualiDecimal totalAvailable;
+    @Column(name = "ORG_TOT_CSH_AMT")
     private KualiDecimal totalCash;
 
     public OrgReversionUnitOfWork() {

@@ -34,20 +34,37 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_DLGT_CHG_DOC_T")
 public class AccountDelegateGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     private static final long serialVersionUID = -8089154029664644867L;
 
+    @Id
+    @Column(name = "ACCT_DLGT_UNVL_ID")
     private String accountDelegateUniversalId;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "FDOC_APRV_FROM_AMT")
     private KualiDecimal approvalFromThisAmount;
+    @Column(name = "FDOC_APRV_TO_AMT")
     private KualiDecimal approvalToThisAmount;
+    @Column(name = "ACCT_DLGT_PRMRT_CD")
     private boolean accountDelegatePrimaryRoutingIndicator;
+    @Column(name = "ACCT_DLGT_START_DT")
     private Date accountDelegateStartDate;
 
+    @Transient
     private Person accountDelegate;
     private transient DocumentTypeEBO financialSystemDocumentTypeCode;
 

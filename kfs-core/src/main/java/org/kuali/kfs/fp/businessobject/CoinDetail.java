@@ -26,21 +26,42 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class contains the coin breakdown for coin inserted into a cash drawer
  */
+@Entity
+@Table(name = "FP_COIN_DTL_T")
 public class CoinDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "CSHR_STAT_CD")
     private String cashieringStatus;
 
+    @Column(name = "FDOC_50_CENT_AMT")
     private KualiDecimal financialDocumentFiftyCentAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_25_CENT_AMT")
     private KualiDecimal financialDocumentTwentyFiveCentAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_10_CENT_AMT")
     private KualiDecimal financialDocumentTenCentAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_5_CENT_AMT")
     private KualiDecimal financialDocumentFiveCentAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_1_CENT_AMT")
     private KualiDecimal financialDocumentOneCentAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_OTHR_CENT_AMT")
     private KualiDecimal financialDocumentOtherCentAmount = KualiDecimal.ZERO;
+    @Column(name = "FDOC_100_CENT_AMT")
     private KualiDecimal financialDocumentHundredCentAmount = KualiDecimal.ZERO;
 
     /**

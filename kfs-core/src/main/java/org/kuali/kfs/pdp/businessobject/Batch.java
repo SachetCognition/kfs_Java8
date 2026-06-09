@@ -32,17 +32,43 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.kim.api.identity.Person;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PDP_FIL_T")
 public class Batch extends TimestampedBusinessObjectBase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PMT_FIL_ID")
     private KualiInteger id; 
+    @Column(name = "CUST_ID")
     private KualiInteger customerId;
+    @Column(name = "PMT_FL_NM")
     private String paymentFileName; 
+    @Column(name = "CUST_FL_CRTN_TS")
     private Timestamp customerFileCreateTimestamp; 
+    @Column(name = "PMT_CNT")
     private KualiInteger paymentCount; 
+    @Column(name = "PMT_TOT_AMT")
     private KualiDecimal paymentTotalAmount; 
+    @Column(name = "SBMTR_USR_ID")
     private String submiterUserId; 
+    @Column(name = "FL_PROC_TS")
     private Timestamp fileProcessTimestamp; 
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUST_ID", insertable = false, updatable = false)
     private CustomerProfile customerProfile; 
+    @Transient
     private Person submiterUser;
     
     public Batch() {

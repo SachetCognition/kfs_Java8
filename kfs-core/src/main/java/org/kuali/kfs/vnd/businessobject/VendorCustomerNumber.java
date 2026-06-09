@@ -26,24 +26,50 @@ import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Customer numbers that may have been assigned by the Vendor to various <code>Chart</code> and/or <code>Org</code>.
  * 
  * @see org.kuali.kfs.coa.businessobject.Chart
  * @see org.kuali.kfs.coa.businessobject.Org
  */
+@Entity
+@Table(name = "PUR_VNDR_CUST_NBR_T")
 public class VendorCustomerNumber extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_CUST_NBR_GNRTD_ID")
     private Integer vendorCustomerNumberGeneratedIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Column(name = "VNDR_CUST_NBR")
     private String vendorCustomerNumber;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "VNDR_ORG_CD")
     private String vendorOrganizationCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization vendorOrganization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
     /**

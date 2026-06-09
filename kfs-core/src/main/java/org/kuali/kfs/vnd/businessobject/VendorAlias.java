@@ -22,14 +22,32 @@ package org.kuali.kfs.vnd.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Alternate name for a Vendor.
  */
+@Entity
+@Table(name = "PUR_VNDR_ALIAS_T")
 public class VendorAlias extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_ALIAS_NM")
     private String vendorAliasName;
+    @Id
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Id
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     VendorDetail vendorDetail;

@@ -43,23 +43,54 @@ import org.kuali.rice.krad.datadictionary.AttributeSecurity;
 import org.kuali.rice.krad.service.DataDictionaryService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Table(name = "PDP_PAYEE_ACH_ACCT_T")
 public class PayeeACHAccount extends TimestampedBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ACH_ACCT_GNRTD_ID")
     private KualiInteger achAccountGeneratedIdentifier;
+    @Column(name = "BNK_RTNG_NBR")
     private String bankRoutingNumber;
+    @Column(name = "BNK_ACCT_NBR")
     private String bankAccountNumber;
+    @Column(name = "PAYEE_ID_NBR")
     private String payeeIdNumber;
+    @Column(name = "PAYEE_NM")
     private String payeeName;
+    @Column(name = "PAYEE_EMAIL_ADDR")
     private String payeeEmailAddress;
+    @Column(name = "PAYEE_ID_TYP_CD")
     private String payeeIdentifierTypeCode;
+    @Column(name = "ACH_TRANS_TYP")
     private String achTransactionType;
+    @Column(name = "BNK_ACCT_TYP_CD")
     private String bankAccountTypeCode;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
+    @Column(name = "AUTO_INACTV_IND")
     private boolean autoInactivationIndicator;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BNK_RTNG_NBR", insertable = false, updatable = false)
     private ACHBank bankRouting;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACH_TRANS_TYP", insertable = false, updatable = false)
     private ACHTransactionType transactionType;
+    @Transient
     private ACHPayee achPayee;
 
     /**

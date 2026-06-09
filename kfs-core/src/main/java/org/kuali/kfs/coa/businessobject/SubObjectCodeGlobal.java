@@ -37,26 +37,54 @@ import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_OBJ_CD_CHG_DOC_T")
 public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject, MutableInactivatable {
 
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SubObjectCodeGlobal.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD_NM")
     protected String financialSubObjectCodeName;
+    @Column(name = "FIN_SUBOBJ_SHRT_NM")
     protected String financialSubObjectCodeShortName;
+    @Column(name = "FIN_SUBOBJ_ACTV_CD")
     protected boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected DocumentHeader financialDocument;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     protected SystemOptions universityFiscal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<SubObjectCodeGlobalDetail> subObjCdGlobalDetails;
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<AccountGlobalDetail> accountGlobalDetails;
 
     /**

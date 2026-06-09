@@ -35,13 +35,26 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * The Distribution of Income and Expense (DI) document is used to distribute income or expense, or assets and liabilities. Amounts
  * being distributed are usually the result of an accumulation of transactions that need to be divided up between various accounts.
  */
+@Entity
+@Table(name = "FP_DISTRIB_DOC_T")
 public class DistributionOfIncomeAndExpenseDocument extends CapitalAccountingLinesDocumentBase implements Copyable, Correctable, AmountTotaling, ElectronicPaymentClaiming {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DistributionOfIncomeAndExpenseDocument.class);
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<ElectronicPaymentClaim> electronicPaymentClaims;
     protected transient CapitalAssetManagementModuleService capitalAssetManagementModuleService;
 

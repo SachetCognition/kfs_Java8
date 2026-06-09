@@ -24,15 +24,30 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "FS_HOME_ORIGIN_T")
 public class HomeOrigination extends PersistableBusinessObjectBase {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "HomeOrigination";
     
+    @Id
+    @Column(name = "FS_HOME_ORIGIN_CD")
     private String finSystemHomeOriginationCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_HOME_ORIGIN_CD", insertable = false, updatable = false)
     private OriginationCode originationCode;
 
 

@@ -29,25 +29,56 @@ import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+@Table(name = "FS_TAX_REGION_T")
 public class TaxRegion extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "TAX_REGION_CD")
     protected String taxRegionCode; // (e.g., state code or district code)
+    @Column(name = "TAX_REGION_NM")
     protected String taxRegionName; // (e.g., state name or tax district name)
+    @Column(name = "TAX_REGION_TYP_CD")
     protected String taxRegionTypeCode;
+    @Column(name = "LIAB_ACCT_FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "LIAB_ACCT_ACCT_NBR")
     protected String accountNumber;
+    @Column(name = "LIAB_ACCT_FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "ACTV_IND")
     protected boolean active;
+    @Column(name = "TAX_REGION_USE_TAX_IND")
     protected boolean taxRegionUseTaxIndicator;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LIAB_ACCT_FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected ObjectCodeCurrent objectCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TAX_REGION_TYP_CD", insertable = false, updatable = false)
     protected TaxRegionType taxRegionType;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<TaxRegionRate> taxRegionRates = new ArrayList<TaxRegionRate>();
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<TaxRegionState> taxRegionStates = new ArrayList<TaxRegionState>();
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<TaxRegionCounty> taxRegionCounties = new ArrayList<TaxRegionCounty>();
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<TaxRegionPostalCode> taxRegionPostalCodes = new ArrayList<TaxRegionPostalCode>();
 
     public List<TaxRegionRate> getTaxRegionRates() {

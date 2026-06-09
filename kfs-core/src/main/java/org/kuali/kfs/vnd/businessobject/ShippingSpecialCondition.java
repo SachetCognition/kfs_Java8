@@ -24,15 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Special Conditions for Shipping. These are typically conditions of products which affect the way they are shipped.
  * 
  * @see org.kuali.kfs.vnd.businessobject.VendorShippingSpecialCondition
  */
+@Entity
+@Table(name = "PUR_SHP_SPCL_COND_T")
 public class ShippingSpecialCondition extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "VNDR_SHP_SPCL_COND_CD")
     private String vendorShippingSpecialConditionCode;
+    @Column(name = "VNDR_SHP_SPCL_COND_DESC")
     private String vendorShippingSpecialConditionDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

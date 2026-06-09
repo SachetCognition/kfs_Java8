@@ -24,26 +24,51 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class is used to represent a disbursement voucher wire transfer.
  */
+@Entity
+@Table(name = "FS_PMT_SRC_WIRE_TRNFR_T")
 public class PaymentSourceWireTransfer extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "BNK_NM")
     private String bankName;
+    @Column(name = "BNK_RTNG_NBR")
     private String bankRoutingNumber;
+    @Column(name = "BNK_CTY_NM")
     private String bankCityName;
+    @Column(name = "BNK_ST_CD")
     private String bankStateCode;
+    @Column(name = "BNK_CNTRY_CD")
     private String bankCountryCode;
+    @Column(name = "ATTN_LN_TXT")
     private String attentionLineText;
+    @Column(name = "ADDL_WIRE_TXT")
     private String additionalWireText;
+    @Column(name = "PAYEE_ACCT_NBR")
     private String payeeAccountNumber;
+    @Column(name = "CRNCY_TYP_NM")
     private String currencyTypeName;
+    @Column(name = "CRNCY_TYP_CD")
     private String currencyTypeCode;
+    @Column(name = "WIRE_TRNFR_FEE_WVR_IND")
     private boolean wireTransferFeeWaiverIndicator;
+    @Column(name = "PAYEE_ACCT_NM")
     private String payeeAccountName;
+    @Column(name = "ACH_PRFL_NBR")
     private String automatedClearingHouseProfileNumber;
+    @Column(name = "FCRNCY_TYP_NM")
     private String foreignCurrencyTypeName;
+    @Column(name = "FCRNCY_TYP_CD")
     private String foreignCurrencyTypeCode;
 
 

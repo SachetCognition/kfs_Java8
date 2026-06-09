@@ -26,25 +26,50 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.springframework.beans.BeanUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * IndrectCostRecoveryAccount
  */
+@Entity
+@Table(name = "CA_ICR_ACCT_T")
 public class IndirectCostRecoveryAccount extends PersistableBusinessObjectBase implements MutableInactivatable{
     private static Logger LOG = Logger.getLogger(IndirectCostRecoveryAccount.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CA_ICR_ACCT_GNRTD_ID")
     private Integer indirectCostRecoveryAccountGeneratedIdentifier;
 
     //foreign keys to Account
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
 
+    @Column(name = "ICR_FIN_COA_CD")
     private String indirectCostRecoveryFinCoaCode;
+    @Column(name = "ICR_FIN_ACCT_NBR")
     private String indirectCostRecoveryAccountNumber;
+    @Column(name = "ACLN_PCT")
     private BigDecimal accountLinePercent;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     //BO Reference
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account indirectCostRecoveryAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ICR_FIN_COA_CD", insertable = false, updatable = false)
     private Chart indirectCostRecoveryChartOfAccounts;
 
     /**

@@ -37,12 +37,24 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 /**
  * This is the business object that represents the GeneralErrorCorrectionDocument in Kuali. This is a transactional document that
  * will eventually post transactions to the G/L. It integrates with workflow and also contains two groupings of accounting lines:
  * from and to. From lines are the source lines, to lines are the target lines.
  */
+@Entity
+@Table(name = "FP_ERROR_COR_DOC_T")
 public class GeneralErrorCorrectionDocument extends CapitalAccountingLinesDocumentBase implements Copyable, Correctable, AmountTotaling, CapitalAssetEditable {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralErrorCorrectionDocument.class);
 

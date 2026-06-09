@@ -23,9 +23,17 @@ import java.sql.Date;
 
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * General Ledger business object for BalanceHistory.
  */
+@Entity
+@Table(name = "GL_BALANCE_HIST_T")
 public class BalanceHistory extends Balance implements LedgerBalanceHistory {
     /**
      * Default constructor.

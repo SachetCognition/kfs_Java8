@@ -23,12 +23,24 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Org Type Business Object
  */
+@Entity
+@Table(name = "CA_ORG_TYPE_T")
 public class OrganizationType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "ORG_TYP_CD")
     private String organizationTypeCode;
+    @Column(name = "ORG_TYP_NM")
     private String organizationTypeName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
 

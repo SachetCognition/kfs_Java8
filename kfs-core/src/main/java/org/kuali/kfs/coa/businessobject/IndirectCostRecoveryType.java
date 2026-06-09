@@ -24,14 +24,30 @@ import java.util.List;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+
 /**
  * This class...
  */
+@Entity
+@Table(name = "CA_ICR_TYPE_T")
 public class IndirectCostRecoveryType extends KualiCodeBase implements MutableInactivatable {
     
+    @Id
+    @Column(name = "ACCT_ICR_TYP_CD")
     private String code;
+    @Column(name = "ACCT_ICR_TYP_DESC")
     private String name;
+    @Column(name = "ACCT_ICR_TYP_ACTV_IND")
     private boolean active;
+    @OneToMany(fetch = FetchType.LAZY)
     private List indirectCostRecoveryExclusionTypeDetails;
 
     public IndirectCostRecoveryType () {

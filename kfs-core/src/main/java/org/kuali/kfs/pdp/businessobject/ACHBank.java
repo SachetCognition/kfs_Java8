@@ -32,26 +32,53 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "PDP_ACH_BNK_T")
 public class ACHBank extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "BNK_RTNG_NBR")
     protected String bankRoutingNumber;
+    @Column(name = "BNK_OFFC_CD")
     protected String bankOfficeCode;
+    @Column(name = "BNK_SRVC_NBR")
     protected String bankServiceNumber;
+    @Column(name = "BNK_TYP_CD")
     protected String bankTypeCode;
+    @Column(name = "BNK_NEW_RTNG_NBR")
     protected String bankNewRoutingNumber;
+    @Column(name = "BNK_NM")
     protected String bankName;
+    @Column(name = "BNK_STR_ADDR")
     protected String bankStreetAddress;
+    @Column(name = "BNK_CTY_NM")
     protected String bankCityName;
+    @Column(name = "BNK_ST_CD")
     protected String bankStateCode;
+    @Column(name = "BNK_ZIP_CD")
     protected String bankZipCode;
+    @Column(name = "BNK_PHN_AREA_CD")
     protected String bankPhoneAreaCode;
+    @Column(name = "BNK_PHN_PRFX_NBR")
     protected String bankPhonePrefixNumber;
+    @Column(name = "BNK_PHN_SFX_NBR")
     protected String bankPhoneSuffixNumber;
+    @Column(name = "BNK_INST_STAT_CD")
     protected String bankInstitutionStatusCode;
+    @Column(name = "BNK_DTA_V_CD")
     protected String bankDataViewCode;
+    @Column(name = "ACTV_IND")
     protected boolean active;
 
+    @Transient
     protected StateEbo bankState;
+    @Transient
     protected PostalCodeEbo postalCode;
 
     /**

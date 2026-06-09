@@ -25,24 +25,47 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Represents a cashiering document
  */
+@Entity
+@Table(name = "FP_CASHIER_DOC_T")
 public class CashieringDocument extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "DPST_FS_ORIG_CD")
     private String depositFinancialSystemOriginationCode;
+    @Column(name = "DPST_FDOC_NBR")
     private String financialDocumentDepositNumber;
+    @Column(name = "FDOC_CHCK_AMT")
     private KualiDecimal financialDocumentCheckAmount;
+    @Column(name = "FDOC_ADV_DPST_AMT")
     private KualiDecimal financialDocumentAdvanceDepositAmount;
+    @Column(name = "FDOC_REVOLVFND_AMT")
     private KualiDecimal financialDocumentRevolvingFundAmount;
+    @Column(name = "FDOC_NXT_CC_LN_NBR")
     private Integer financialDocumentNextCreditCardLineNumber;
+    @Column(name = "FDOC_CASH_AMT")
     private KualiDecimal financialDocumentCashAmount;
+    @Column(name = "FDOC_CRDT_CARD_AMT")
     private KualiDecimal financialDocumentCreditCardAmount;
+    @Column(name = "FDOC_TOTL_COIN_AMT")
     private KualiDecimal financialDocumentTotalCoinAmount;
+    @Column(name = "FDOC_CHANGEOUT_AMT")
     private KualiDecimal financialDocumentChangeOutAmount;
+    @Column(name = "FDOC_NXT_CK_LN_NBR")
     private Integer nextCheckLineNumber;
+    @Column(name = "FDOC_NXT_AD_LN_NBR")
     private Integer nextAdvanceDepositLineNumber;
+    @Column(name = "FDOC_NXT_RF_LN_NBR")
     private Integer nextRevolvingFundLineNumber;
 
     /**

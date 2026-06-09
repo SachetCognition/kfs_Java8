@@ -20,10 +20,20 @@ package org.kuali.kfs.sys.businessobject;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Basically a document number which has a FinancialSystemDocumentHeader record but not a KEW document header record
  */
+@Entity
+@Table(name = "FS_DOC_HDRS_MSNG_IN_KEW_T")
 public class FinancialSystemDocumentHeaderMissingFromWorkflow extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
 
     public String getDocumentNumber() {

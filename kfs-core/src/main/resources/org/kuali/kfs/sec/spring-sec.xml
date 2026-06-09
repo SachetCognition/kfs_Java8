@@ -44,8 +44,7 @@
 		</property>
 		<property name="databaseRepositoryFilePaths">
 			<list>
-				<value>org/kuali/kfs/sec/ojb-sec.xml</value>
-			</list>
+					</list>
 		</property>
 	</bean>
 

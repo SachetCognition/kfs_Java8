@@ -27,23 +27,51 @@ import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "GL_OFFSET_DEFN_T")
 public class OffsetDefinition extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
     private static final long serialVersionUID = -6150010338773403021L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_BALANCE_TYP_CD", insertable = false, updatable = false)
     private BalanceType financialBalanceType;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
     /**

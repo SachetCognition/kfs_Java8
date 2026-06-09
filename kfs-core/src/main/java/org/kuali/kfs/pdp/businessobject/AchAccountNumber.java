@@ -28,9 +28,20 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "PDP_ACH_ACCT_NBR_T")
 public class AchAccountNumber extends TimestampedBusinessObjectBase {
 
+    @Id
+    @Column(name = "PMT_GRP_ID")
     private KualiInteger id;
+    @Column(name = "ACH_BNK_ACCT_NBR")
     private String achBankAccountNbr;
 
     public AchAccountNumber() {

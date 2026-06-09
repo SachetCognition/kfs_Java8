@@ -39,6 +39,15 @@ import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Represents the encumbrance amount for a specific university fiscal year,
  * chart of accounts code, account number, sub account number, object code,
@@ -47,38 +56,81 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * outstanding amount
  *
 */
+@Entity
+@Table(name = "GL_ENCUMBRANCE_T")
 public class Encumbrance extends PersistableBusinessObjectBase {
     static final long serialVersionUID = -7494473472438516396L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String balanceTypeCode;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String documentTypeCode;
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String originCode;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "TRN_ENCUM_DESC")
     private String transactionEncumbranceDescription;
+    @Column(name = "TRN_ENCUM_DT")
     private Date transactionEncumbranceDate;
+    @Column(name = "ACLN_ENCUM_AMT")
     private KualiDecimal accountLineEncumbranceAmount;
+    @Column(name = "ACLN_ENCUM_CLS_AMT")
     private KualiDecimal accountLineEncumbranceClosedAmount;
+    @Transient
     private KualiDecimal accountLineEncumbranceOutstandingAmount;
+    @Column(name = "ACLN_ENCUM_PRG_CD")
     private String accountLineEncumbrancePurgeCode;
+    @Column(name = "TIMESTAMP")
     private Timestamp timestamp;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubObjectCode financialSubObject;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_BALANCE_TYP_CD", insertable = false, updatable = false)
     private BalanceType balanceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_ORIGIN_CD", insertable = false, updatable = false)
     private OriginationCode originationCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions option;
 
+    @Transient
     private TransientBalanceInquiryAttributes dummyBusinessObject;
 
     public Encumbrance() {

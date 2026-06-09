@@ -27,9 +27,20 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ICR_AUTO_ENTR_T")
 public class IndirectCostRecoveryRateDetail extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
     /**
@@ -38,19 +49,36 @@ public class IndirectCostRecoveryRateDetail extends PersistableBusinessObjectBas
     public IndirectCostRecoveryRateDetail() {
     }
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_SERIES_ID")
     private String financialIcrSeriesIdentifier;
+    @Id
+    @Column(name = "AWRD_ICR_ENTRY_NBR")
     private Integer awardIndrCostRcvyEntryNbr;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitIndicator;
+    @Column(name = "AWRD_ICR_RATE_PCT")
     private BigDecimal awardIndrCostRcvyRatePct;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "ACCT_ICR_RATE_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
+    @ManyToOne(fetch = FetchType.LAZY)
     private IndirectCostRecoveryRate indirectCostRecoveryRate;
     
     /*

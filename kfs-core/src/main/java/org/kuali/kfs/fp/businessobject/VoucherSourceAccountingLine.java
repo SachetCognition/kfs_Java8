@@ -24,12 +24,26 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 /**
  * Special case <code>{@link SourceAccountingLine}</code> type for <code>{@link org.kuali.kfs.fp.document.VoucherDocument}</code>
  */
+@Entity
+@Table(name = "FP_JV_ACCT_LINES_T")
 public class VoucherSourceAccountingLine extends SourceAccountingLine {
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String objectTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
     private ObjectType objectType;
 
     /**

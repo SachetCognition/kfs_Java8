@@ -48,57 +48,124 @@ import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * The general ledger pending entry structure holds financial transaction info that will post to the general ledger as an entry.
  */
+@Entity
+@Table(name = "GL_PENDING_ENTRY_T")
 public class GeneralLedgerPendingEntry extends PersistableBusinessObjectBase implements Transaction, Serializable, Cloneable {
     private static final long serialVersionUID = 4041748389323105932L;
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     private Integer transactionLedgerEntrySequenceNumber;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String financialObjectTypeCode;
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Column(name = "TRN_LDGR_ENTR_DESC")
     private String transactionLedgerEntryDescription;
+    @Column(name = "TRN_LDGR_ENTR_AMT")
     private KualiDecimal transactionLedgerEntryAmount;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitCreditCode;
+    @Column(name = "TRANSACTION_DT")
     private Date transactionDate;
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "ORG_DOC_NBR")
     private String organizationDocumentNumber;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Column(name = "ORG_REFERENCE_ID")
     private String organizationReferenceId;
+    @Column(name = "FDOC_REF_TYP_CD")
     private String referenceFinancialDocumentTypeCode;
+    @Column(name = "FS_REF_ORIGIN_CD")
     private String referenceFinancialSystemOriginationCode;
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Column(name = "FDOC_REVERSAL_DT")
     private Date financialDocumentReversalDate;
+    @Column(name = "TRN_ENCUM_UPDT_CD")
     private String transactionEncumbranceUpdateCode;
+    @Column(name = "FDOC_APPROVED_CD")
     private String financialDocumentApprovedCode;
+    @Column(name = "ACCT_SF_FINOBJ_CD")
     private String acctSufficientFundsFinObjCd;
+    @Column(name = "TRN_ENTR_OFST_CD")
     private boolean transactionEntryOffsetIndicator;
+    @Column(name = "TRNENTR_PROCESS_TM")
     private Timestamp transactionEntryProcessedTs;
 
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private FinancialSystemDocumentHeader documentHeader;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions option;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubObjectCode financialSubObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_BALANCE_TYP_CD", insertable = false, updatable = false)
     private BalanceType balanceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
     private ObjectType objectType;
+    @ManyToOne(fetch = FetchType.LAZY)
     private A21SubAccount a21SubAccount;
+    @Transient
     private TransientBalanceInquiryAttributes dummyBusinessObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_ORIGIN_CD", insertable = false, updatable = false)
     private OriginationCode originationCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROJECT_CD", insertable = false, updatable = false)
     private ProjectCode project;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_REF_ORIGIN_CD", insertable = false, updatable = false)
     private OriginationCode referenceOriginationCode;
+    @Transient
     private DocumentTypeEBO referenceFinancialSystemDocumentTypeCode;
 
     @Deprecated

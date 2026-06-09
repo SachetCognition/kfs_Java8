@@ -35,51 +35,109 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class contains the monthly balance amounts for a specific fiscal year, chart of accounts code, account number, 
  * sub account number, object code, sub object code, balance type code, object type code
  * 
  */
+@Entity
+@Table(name = "GL_BALANCE_T")
 public class Balance extends PersistableBusinessObjectBase {
     static final long serialVersionUID = 6581797610149985575L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String balanceTypeCode;
+    @Id
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String objectTypeCode;
+    @Column(name = "ACLN_ANNL_BAL_AMT")
     private KualiDecimal accountLineAnnualBalanceAmount;
    
+    @Column(name = "FIN_BEG_BAL_LN_AMT")
     private KualiDecimal beginningBalanceLineAmount;
+    @Column(name = "CONTR_GR_BB_AC_AMT")
     private KualiDecimal contractsGrantsBeginningBalanceAmount;
+    @Column(name = "MO1_ACCT_LN_AMT")
     private KualiDecimal month1Amount;
+    @Column(name = "MO2_ACCT_LN_AMT")
     private KualiDecimal month2Amount;
+    @Column(name = "MO3_ACCT_LN_AMT")
     private KualiDecimal month3Amount;
+    @Column(name = "MO4_ACCT_LN_AMT")
     private KualiDecimal month4Amount;
+    @Column(name = "MO5_ACCT_LN_AMT")
     private KualiDecimal month5Amount;
+    @Column(name = "MO6_ACCT_LN_AMT")
     private KualiDecimal month6Amount;
+    @Column(name = "MO7_ACCT_LN_AMT")
     private KualiDecimal month7Amount;
+    @Column(name = "MO8_ACCT_LN_AMT")
     private KualiDecimal month8Amount;
+    @Column(name = "MO9_ACCT_LN_AMT")
     private KualiDecimal month9Amount;
+    @Column(name = "MO10_ACCT_LN_AMT")
     private KualiDecimal month10Amount;
+    @Column(name = "MO11_ACCT_LN_AMT")
     private KualiDecimal month11Amount;
+    @Column(name = "MO12_ACCT_LN_AMT")
     private KualiDecimal month12Amount;
+    @Column(name = "MO13_ACCT_LN_AMT")
     private KualiDecimal month13Amount;
+    @Column(name = "TIMESTAMP")
     private Date timestamp;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private PriorYearAccount priorYearAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubObjectCode financialSubObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_BALANCE_TYP_CD", insertable = false, updatable = false)
     private BalanceType balanceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
     private ObjectType objectType;
 
+    @Transient
     private TransientBalanceInquiryAttributes dummyBusinessObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions option;
 
     /**
@@ -802,8 +860,11 @@ public class Balance extends PersistableBusinessObjectBase {
         this.priorYearAccount = priorYearAccount;
     }
     
+    @Transient
     private String fundGroup; // a transient attribute
+    @Transient
     private KualiDecimal yearBalance = KualiDecimal.ZERO; // a transient attribute
+    @Transient
     private KualiDecimal yearToDayBalance = KualiDecimal.ZERO; // a transient attribute
 
     /**

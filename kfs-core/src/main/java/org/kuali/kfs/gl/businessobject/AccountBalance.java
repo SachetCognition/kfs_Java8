@@ -39,32 +39,70 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * Just as Balance is a summarization of Entry, so AccountBalance is a summarization of Balance.
  * Specifically, it stores the current budget, actual, and encumbrance totals in one record.
  */
+@Entity
+@Table(name = "GL_ACCT_BALANCES_T")
 public class AccountBalance extends PersistableBusinessObjectBase implements ReportBusinessObject{
     static final long serialVersionUID = 6873573726961704771L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Column(name = "CURR_BDLN_BAL_AMT")
     private KualiDecimal currentBudgetLineBalanceAmount;
+    @Column(name = "ACLN_ACTLS_BAL_AMT")
     private KualiDecimal accountLineActualsBalanceAmount;
+    @Column(name = "ACLN_ENCUM_BAL_AMT")
     private KualiDecimal accountLineEncumbranceBalanceAmount;
+    @Column(name = "TIMESTAMP")
     private Date timestamp;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubObjectCode financialSubObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private A21SubAccount a21SubAccount;
+    @Transient
     private TransientBalanceInquiryAttributes dummyBusinessObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions option;
+    @Transient
     private String title;
 
     public static final String TYPE_CONSOLIDATION = "Consolidation";

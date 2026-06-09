@@ -22,19 +22,37 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_OBJ_TYPE_T")
 public class ObjectType extends KualiCodeBase implements MutableInactivatable {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "ObjectType";
 
+    @Column(name = "FIN_OBJTYP_DBCR_CD")
     protected String finObjectTypeDebitcreditCd;
+    @Column(name = "FIN_OBJ_TYP_ICR_CD")
     protected boolean finObjectTypeIcrSelectionIndicator;
+    @Column(name = "FUND_BALANCE_CD")
     protected boolean fundBalanceIndicator;
+    @Column(name = "FIN_REPORT_SORT_CD")
     protected String financialReportingSortCode;
+    @Column(name = "ACCTG_CTGRY_CD")
     protected String basicAccountingCategoryCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCTG_CTGRY_CD", insertable = false, updatable = false)
     protected BasicAccountingCategory basicAccountingCategory;
 
     /**

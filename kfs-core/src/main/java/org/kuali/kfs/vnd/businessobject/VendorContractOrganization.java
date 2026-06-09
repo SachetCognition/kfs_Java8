@@ -29,6 +29,15 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * A relation between a particular <code>Org</code> and a <code>VendorContract</code> indicating that the Org uses this Vendor
  * Contract.
@@ -36,17 +45,33 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.vnd.businessobject.VendorContract
  * @see org.kuali.kfs.coa.businessobject.Org
  */
+@Entity
+@Table(name = "PUR_VNDR_CONTR_ORG_T")
 public class VendorContractOrganization extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
 
+    @Id
+    @Column(name = "VNDR_CONTR_GNRTD_ID")
     private Integer vendorContractGeneratedIdentifier;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "VNDR_CTRPO_LMT_AMT")
     private KualiDecimal vendorContractPurchaseOrderLimitAmount;
+    @Column(name = "VNDR_CONTR_EXCL_IND")
     private boolean vendorContractExcludeIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CONTR_GNRTD_ID", insertable = false, updatable = false)
     private VendorContract vendorContract;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
     /**

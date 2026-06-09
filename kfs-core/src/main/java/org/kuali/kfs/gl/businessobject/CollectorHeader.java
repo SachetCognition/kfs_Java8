@@ -33,24 +33,55 @@ import org.kuali.rice.krad.util.KRADPropertyConstants;
 import org.kuali.rice.location.api.campus.Campus;
 import org.kuali.rice.location.api.campus.CampusService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class represents a unique header for use with a CollectorBatch class
  */
+@Entity
+@Table(name = "FS_CLCTR_HDR_T")
 public class CollectorHeader extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "PROC_TRNS_DT")
     private Date processTransmissionDate;
+    @Id
+    @Column(name = "PROC_BATCH_SEQ_NBR")
     private Integer processBatchSequenceNumber;
+    @Id
+    @Column(name = "PROC_TOT_REC_CNT")
     private Integer processTotalRecordCount;
+    @Id
+    @Column(name = "PROC_TOT_AMT")
     private KualiDecimal processTotalAmount;
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "CNTCT_PRSN_PHN_NBR")
     private String contactPersonPhoneNumber;
+    @Column(name = "CNTCT_MAIL_ADDR")
     private String contactMailingAddress;
+    @Column(name = "CNTCT_DEPT_NM")
     private String contactDepartmentName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @Transient
     private Campus campus;
 
     /**

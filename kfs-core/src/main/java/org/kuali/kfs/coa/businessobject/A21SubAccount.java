@@ -26,31 +26,66 @@ import java.util.List;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_A21_SUB_ACCT_T")
 public class A21SubAccount extends PersistableBusinessObjectBase {
 
     private static final long serialVersionUID = 2983753447370117974L;
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     protected String subAccountNumber;
+    @Column(name = "SUB_ACCT_TYP_CD")
     protected String subAccountTypeCode;
+    @Column(name = "ICR_TYP_CD")
     protected String indirectCostRecoveryTypeCode;
+    @Column(name = "FIN_SERIES_ID")
     protected String financialIcrSeriesIdentifier;
+    @Column(name = "OFF_CMP_CD")
     protected boolean offCampusCode;
+    @Column(name = "CST_SHR_COA_CD")
     protected String costShareChartOfAccountCode;
+    @Column(name = "CST_SHRSRCACCT_NBR")
     protected String costShareSourceAccountNumber;
+    @Column(name = "CST_SRCSUBACCT_NBR")
     protected String costShareSourceSubAccountNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CST_SHR_COA_CD", insertable = false, updatable = false)
     protected Chart costShareChartOfAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account costShareAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected SubAccount costShareSourceSubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ICR_TYP_CD", insertable = false, updatable = false)
     protected IndirectCostRecoveryType indirectCostRecoveryType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     protected Account account;
     
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<A21IndirectCostRecoveryAccount> a21IndirectCostRecoveryAccounts;
 
     /**

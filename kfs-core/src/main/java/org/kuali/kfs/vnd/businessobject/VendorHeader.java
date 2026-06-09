@@ -41,46 +41,98 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * Contains information specific to a parent Vendor, which may be shared by its division Vendors if it has any. Contained by a
  * <code>VendorDetail</code>.
  *
  * @see org.kuali.kfs.vnd.businessobject.VendorDetail
  */
+@Entity
+@Table(name = "PUR_VNDR_HDR_T")
 public class VendorHeader extends PersistableBusinessObjectBase {
     private static Logger LOG = Logger.getLogger(VendorHeader.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_TYP_CD")
     private String vendorTypeCode;
+    @Column(name = "VNDR_US_TAX_NBR")
     private String vendorTaxNumber;
+    @Column(name = "VNDR_TAX_TYP_CD")
     private String vendorTaxTypeCode;
+    @Column(name = "VNDR_OWNR_CD")
     private String vendorOwnershipCode;
+    @Column(name = "VNDR_OWNR_CTGRY_CD")
     private String vendorOwnershipCategoryCode;
+    @Column(name = "VNDR_FWT_BEG_DT")
     private Date vendorFederalWithholdingTaxBeginningDate;
+    @Column(name = "VNDR_FWT_END_DT")
     private Date vendorFederalWithholdingTaxEndDate;
+    @Column(name = "VNDR_W9_RCVD_IND")
     private Boolean vendorW9ReceivedIndicator;
+    @Column(name = "VNDR_W8_RCVD_IND")
     private Boolean vendorW8BenReceivedIndicator;
+    @Column(name = "VNDR_DEBRD_IND")
     private Boolean vendorDebarredIndicator;
+    @Column(name = "VNDR_FRGN_IND")
     private Boolean vendorForeignIndicator;
 
+    @Column(name = "VNDR_W8_TYP_CD")
     private String vendorW8TypeCode;
+    @Column(name = "VNDR_W8_SIGNED_DT")
     private Date vendorW8SignedDate;
+    @Column(name = "VNDR_W9_SIGNED_DT")
     private Date vendorW9SignedDate;
+    @Column(name = "VNDR_CORP_CTZN_CNTRY_CD")
     private String vendorCorpCitizenCode;
+    @Column(name = "VNDR_FOREIGN_TAX_ID")
     private String vendorForeignTaxId;
+    @Column(name = "VNDR_GIIN")
     private String vendorGIIN;
+    @Column(name = "VNDR_DOB_DT")
     private Date vendorDOB;
+    @Column(name = "VNDR_CHAP_3_STAT_CD")
     private String vendorChapter3StatusCode;
+    @Column(name = "VNDR_CHAP_4_STAT_CD")
     private String vendorChapter4StatusCode;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_TYP_CD", insertable = false, updatable = false)
     private VendorType vendorType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_OWNR_CD", insertable = false, updatable = false)
     private OwnershipType vendorOwnership;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_OWNR_CTGRY_CD", insertable = false, updatable = false)
     private OwnershipCategory vendorOwnershipCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_W8_TYP_CD", insertable = false, updatable = false)
     private W8Type w8Type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CHAP_3_STAT_CD", insertable = false, updatable = false)
     private Chapter3Status chapter3Status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CHAP_4_STAT_CD", insertable = false, updatable = false)
     private Chapter4Status chapter4Status;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<VendorSupplierDiversity> vendorSupplierDiversities;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<VendorTaxChange> vendorTaxChanges;
+    @Transient
     protected CountryEbo vendorCountry;
 
     /**

@@ -34,9 +34,20 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_ACCT_DELEGATE_T")
 public class AccountDelegate extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     private static final long serialVersionUID = 6883162275377881235L;
@@ -47,19 +58,36 @@ public class AccountDelegate extends PersistableBusinessObjectBase implements Mu
     public AccountDelegate() {
     }
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "ACCT_DLGT_UNVL_ID")
     private String accountDelegateSystemId;
+    @Column(name = "FDOC_APRV_FROM_AMT")
     private KualiDecimal finDocApprovalFromThisAmt;
+    @Column(name = "ACCT_DLGT_PRMRT_CD")
     private boolean accountsDelegatePrmrtIndicator;
+    @Column(name = "ACCT_DLGT_ACTV_CD")
     private boolean active;
+    @Column(name = "ACCT_DLGT_START_DT")
     private Date accountDelegateStartDate;
+    @Column(name = "FDOC_APRV_TO_AMT")
     private KualiDecimal finDocApprovalToThisAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
     private transient DocumentTypeEBO financialSystemDocumentTypeCode;
+    @Transient
     private Person accountDelegate;
 
     /**

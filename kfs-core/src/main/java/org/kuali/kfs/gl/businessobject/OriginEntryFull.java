@@ -57,9 +57,22 @@ import org.kuali.rice.kew.doctype.bo.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  * This class represents a full origin entry
  */
+@Entity
+@Table(name = "GL_ORIGIN_ENTRY_T")
 public class OriginEntryFull extends PersistableBusinessObjectBase implements Transaction, OriginEntryInformation, FlexibleAccountUpdateable {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryFull.class);
     private static OriginEntryFieldUtil originEntryFieldUtil;
@@ -71,52 +84,108 @@ public class OriginEntryFull extends PersistableBusinessObjectBase implements Tr
     // KFSMI-3308 - changed to 20
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ORIGIN_ENTRY_ID")
     private Integer entryId;
+    @Column(name = "ORIGIN_ENTRY_GRP_ID")
     private Integer entryGroupId;
+    @Column(name = "ACCOUNT_NBR")
     protected String accountNumber;
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "FDOC_REF_NBR")
     protected String referenceFinancialDocumentNumber;
+    @Column(name = "FDOC_REF_TYP_CD")
     protected String referenceFinancialDocumentTypeCode;
+    @Column(name = "FDOC_REVERSAL_DT")
     protected Date financialDocumentReversalDate;
+    @Column(name = "FDOC_TYP_CD")
     protected String financialDocumentTypeCode;
+    @Column(name = "FIN_BALANCE_TYP_CD")
     protected String financialBalanceTypeCode;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "FIN_OBJ_TYP_CD")
     protected String financialObjectTypeCode;
+    @Column(name = "FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "FS_ORIGIN_CD")
     protected String financialSystemOriginationCode;
+    @Column(name = "FS_REF_ORIGIN_CD")
     protected String referenceFinancialSystemOriginationCode;
+    @Column(name = "ORG_DOC_NBR")
     protected String organizationDocumentNumber;
+    @Column(name = "ORG_REFERENCE_ID")
     protected String organizationReferenceId;
+    @Column(name = "PROJECT_CD")
     protected String projectCode;
+    @Column(name = "SUB_ACCT_NBR")
     protected String subAccountNumber;
+    @Column(name = "TRANSACTION_DT")
     protected Date transactionDate;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     protected String transactionDebitCreditCode;
+    @Column(name = "TRN_ENCUM_UPDT_CD")
     protected String transactionEncumbranceUpdateCode;
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     protected Integer transactionLedgerEntrySequenceNumber;
+    @Column(name = "TRN_LDGR_ENTR_AMT")
     protected KualiDecimal transactionLedgerEntryAmount;
+    @Column(name = "TRN_LDGR_ENTR_DESC")
     protected String transactionLedgerEntryDescription;
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     protected String universityFiscalPeriodCode;
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "TRN_SCRBBR_OFST_GEN_IND")
     private boolean transactionScrubberOffsetGenerationIndicator;
 
     // bo references
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORIGIN_ENTRY_GRP_ID", insertable = false, updatable = false)
     private OriginEntryGroup group;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
     private A21SubAccount a21SubAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_BALANCE_TYP_CD", insertable = false, updatable = false)
     private BalanceType balanceType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubObjectCode financialSubObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
     private ObjectType objectType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROJECT_CD", insertable = false, updatable = false)
     private ProjectCode project;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TRANSACTION_DT", insertable = false, updatable = false)
     private UniversityDate universityDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions option;
+    @ManyToOne(fetch = FetchType.LAZY)
     private AccountingPeriod accountingPeriod;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_REVERSAL_DT", insertable = false, updatable = false)
     private UniversityDate reversalDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FS_ORIGIN_CD", insertable = false, updatable = false)
     private OriginationCode origination;
+    @Transient
     private DocumentTypeEBO referenceFinancialSystemDocumentTypeCode;
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";

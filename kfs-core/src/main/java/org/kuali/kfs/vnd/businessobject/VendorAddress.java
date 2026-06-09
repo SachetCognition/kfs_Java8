@@ -38,35 +38,74 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 /**
  * Address to be associated with a particular Vendor.
  */
+@Entity
+@Table(name = "PUR_VNDR_ADDR_T")
 public class VendorAddress extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
     private static final Logger LOG = Logger.getLogger(VendorAddress.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_ADDR_GNRTD_ID")
     protected Integer vendorAddressGeneratedIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     protected Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     protected Integer vendorDetailAssignedIdentifier;
+    @Column(name = "VNDR_ADDR_TYP_CD")
     protected String vendorAddressTypeCode;
+    @Column(name = "VNDR_LN1_ADDR")
     protected String vendorLine1Address;
+    @Column(name = "VNDR_LN2_ADDR")
     protected String vendorLine2Address;
+    @Column(name = "VNDR_CTY_NM")
     protected String vendorCityName;
+    @Column(name = "VNDR_ST_CD")
     protected String vendorStateCode;
+    @Column(name = "VNDR_ZIP_CD")
     protected String vendorZipCode;
+    @Column(name = "VNDR_CNTRY_CD")
     protected String vendorCountryCode;
+    @Column(name = "VNDR_ATTN_NM")
     protected String vendorAttentionName;
+    @Column(name = "VNDR_ADDR_INTL_PROV_NM")
     protected String vendorAddressInternationalProvinceName;
+    @Column(name = "VNDR_ADDR_EMAIL_ADDR")
     protected String vendorAddressEmailAddress;
+    @Column(name = "VNDR_B2B_URL_ADDR")
     protected String vendorBusinessToBusinessUrlAddress;
+    @Column(name = "VNDR_FAX_NBR")
     protected String vendorFaxNumber;
+    @Column(name = "VNDR_DFLT_ADDR_IND")
     protected boolean vendorDefaultAddressIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     protected boolean active;
 
+    @OneToMany(fetch = FetchType.LAZY)
     protected List<VendorDefaultAddress> vendorDefaultAddresses;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     protected VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_ADDR_TYP_CD", insertable = false, updatable = false)
     protected AddressType vendorAddressType;
+    @Transient
     protected StateEbo vendorState;
+    @Transient
     protected CountryEbo vendorCountry;
 
     /**

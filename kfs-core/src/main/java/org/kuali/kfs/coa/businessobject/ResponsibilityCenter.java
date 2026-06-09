@@ -23,9 +23,17 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * 
  */
+@Entity
+@Table(name = "CA_RC_T")
 public class ResponsibilityCenter extends PersistableBusinessObjectBase implements MutableInactivatable {
 
     /**
@@ -35,9 +43,14 @@ public class ResponsibilityCenter extends PersistableBusinessObjectBase implemen
 
     }
 
+    @Id
+    @Column(name = "RC_CD")
     private String responsibilityCenterCode;
+    @Column(name = "RC_NM")
     private String responsibilityCenterName;
+    @Column(name = "RC_SHRT_NM")
     private String responsibilityCenterShortName;
+    @Column(name = "RC_ACTIVE_CD")
     private boolean active;
 
     /**

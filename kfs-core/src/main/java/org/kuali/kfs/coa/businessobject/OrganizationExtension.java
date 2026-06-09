@@ -32,58 +32,119 @@ import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  */
+@Entity
+@Table(name = "CA_ORG_EXTNS_T")
 public class OrganizationExtension extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "DESCRSHORT")
     private String hrmsShortDescription;
+    @Column(name = "COMPANY")
     private String hrmsCompany;
+    @Column(name = "SETID_LOCATION")
     private String hrmsSetIdLocation;
+    @Column(name = "LOCATION")
     private String hrmsLocation;
+    @Column(name = "TAX_LOCATION_CD")
     private String hrmsTaxLocationCode;
+    @Column(name = "MANAGER_UNVL_ID")
     private String hrmsPersonnelApproverUniversalId;
+    @Column(name = "MANAGER_POSN")
     private String hrmsManagerPositionNumber;
+    @Column(name = "BUDGET_YR_END_DT")
     private Integer hrmsBudgetYearEndDate;
+    @Column(name = "BUDGET_LVL")
     private String hrmsBudgetLevel;
+    @Column(name = "GL_EXPENSE")
     private String hrmsGeneralLedgerExpense;
+    @Column(name = "EEO4_FUNCTION")
     private String hrmsEqualEmploymentOpportunity4Function;
+    @Column(name = "ACCIDENT_INS")
     private String hrmsAccidentInsurance;
+    @Column(name = "SI_ACCIDENT_NUM")
     private String hrmsSocialInsuranceAccidentNumber;
+    @Column(name = "HAZARD")
     private String hrmsHazard;
+    @Column(name = "ESTABID")
     private String hrmsEstablishmentId;
+    @Column(name = "RISKCD")
     private String hrmsRiskCode;
+    @Column(name = "FTE_EDIT_INDC")
     private String hrmsFullTimeEmploymentEditIndicator;
+    @Column(name = "DEPT_TENURE_FLG")
     private String hrmsDepartmentTenureFlag;
+    @Column(name = "TL_DISTRIB_INFO")
     private String hrmsTimeAndLaborDistributionInformation;
+    @Column(name = "USE_BUDGETS")
     private String hrmsUseBudgetsIndicator;
+    @Column(name = "USE_ENCUMBRANCES")
     private String hrmsUseEncumbrancesIndicator;
+    @Column(name = "USE_DISTRIBUTION")
     private String hrmsUseDistributionIndicator;
+    @Column(name = "BUDGET_DEPTID")
     private String hrmsBudgetDepartmentId;
+    @Column(name = "DIST_PRORATE_OPTN")
     private String hrmsDistributionProrateOption;
+    @Column(name = "HP_STATS_DEPT_CD")
     private String hrmsHealthProgramStatisticsDepartmentCode;
+    @Column(name = "HP_STATS_FACULTY")
     private String hrmsHealthProgramStatisticsFaculty;
+    @Column(name = "ACCOUNTING_OWNER")
     private String hrmsAccountingOwner;
+    @Column(name = "COUNTRY_GRP")
     private String hrmsCountryGroup;
+    @Column(name = "IU_ORG_MAIL_DRP_CD")
     private String hrmsIuOrganizationMailDropCode;
+    @Column(name = "IU_ORG_ADDRESS_2")
     private String hrmsIuOrganizationAddress2;
+    @Column(name = "IU_ORG_ADDRESS_3")
     private String hrmsIuOrganizationAddress3;
+    @Column(name = "IU_CAMPUS_CD")
     private String hrmsIuCampusCode;
+    @Column(name = "IU_CAMPUS_BLDG")
     private String hrmsIuCampusBuilding;
+    @Column(name = "IU_CAMPUS_ROOM")
     private String hrmsIuCampusRoom;
+    @Column(name = "IU_POSN_ALLOW_FL")
     private boolean hrmsIuPositionAllowedFlag;
+    @Column(name = "IU_TENURE_ALLOW_FL")
     private boolean hrmsIuTenureAllowedFlag;
+    @Column(name = "IU_TITLE_ALLOW_FL")
     private boolean hrmsIuTitleAllowedFlag;
+    @Column(name = "IU_OCC_UN_ALLOW_FL")
     private boolean hrmsIuOccupationalUnitAllowedFlag;
+    @Column(name = "ORG_FSCL_APRVR_UID")
     private String fiscalApproverUniversalId;
+    @Column(name = "LAST_UPDATE_DATE")
     private Timestamp hrmsLastUpdateDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Organization organization;
+    @Transient
     private Person hrmsPersonnelApproverUniversal;
+    @Transient
     private CampusEbo hrmsIuCampus;
+    @Transient
     private Person fiscalApproverUniversal;
 
     /**

@@ -29,17 +29,36 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+
 /**
  * This class represents a GLCP correction change group
  */
+@Entity
+@Table(name = "GL_COR_CHG_GRP_T")
 public class CorrectionChangeGroup extends PersistableBusinessObjectBase implements Comparable {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionChangeGroup.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_GRP_LN_NBR")
     private Integer correctionChangeGroupLineNumber;
+    @Column(name = "GL_COR_CRTA_NXT_LN_NBR")
     private Integer correctionCriteriaNextLineNumber;
+    @Column(name = "GL_COR_CHG_NXT_LN_NBR")
     private Integer correctionChangeNextLineNumber;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<CorrectionCriteria> correctionCriteria;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<CorrectionChange> correctionChange;
 
     public CorrectionChangeGroup(String documentNumber, Integer correctionChangeGroupLineNumber) {

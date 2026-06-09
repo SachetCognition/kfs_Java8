@@ -24,13 +24,25 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * Business object for American Institute of Certified Public Accountants (AICPA) function
  */
+@Entity
+@Table(name = "CA_AICPA_FUNC_T")
 public class AICPAFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_AICPA_FUNC_CD")
     private String financialAicpaFunctionCode;
+    @Column(name = "FIN_AICPA_FUNC_NM")
     private String financialAicpaFunctionName;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
     /**

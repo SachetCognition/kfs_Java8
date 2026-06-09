@@ -45,7 +45,7 @@
 		<property name="documentService" ref="documentService" />
 	</bean>
 
-    <bean id="documentHeaderDao" parent="platformAwareDao" class="org.kuali.kfs.sys.document.dataaccess.impl.FinancialSystemDocumentHeaderDaoOjb">
+    <bean id="documentHeaderDao" parent="platformAwareDao" class="org.kuali.kfs.sys.document.dataaccess.impl.FinancialSystemDocumentHeaderDaoJpa">
     	<property name="documentHeaderBaseClass" value="org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader" />
     </bean>
     
