@@ -35,25 +35,45 @@ import org.kuali.rice.krad.service.PersistenceStructureService;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "CM_AST_LOC_DTL_T")
 public class AssetLocationGlobalDetail extends GlobalBusinessObjectDetailBase {
     private static final Logger LOG = LoggerFactory.getLogger(AssetLocationGlobalDetail.class);
 
+	@Id
+	@Column(name = "FDOC_NBR")
 	protected String documentNumber;
+	@Id
+	@Column(name = "CPTLAST_NBR")
 	protected Long capitalAssetNumber;
+	@Column(name = "CAMPUS_CD")
 	protected String campusCode;
+	@Column(name = "BLDG_CD")
 	protected String buildingCode;
+	@Column(name = "BLDG_ROOM_NBR")
 	protected String buildingRoomNumber;
+	@Column(name = "BLDG_SUB_ROOM_NBR")
 	protected String buildingSubRoomNumber;
+	@Column(name = "CPTLAST_TAG_NBR")
 	protected String campusTagNumber;
 
+    @Transient
     protected Asset asset;
+    @Transient
     protected CampusEbo campus;
+    @Transient
     protected Building building;
+    @Transient
     protected Room buildingRoom;
 
 	/**

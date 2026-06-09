@@ -23,17 +23,35 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementAssetType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_ASSET_TYPE_T")
 public class AssetType extends PersistableBusinessObjectBase implements CapitalAssetManagementAssetType, MutableInactivatable {
 
+	@Id
+	@Column(name = "CPTLAST_TYP_CD")
 	private String capitalAssetTypeCode;
+	@Column(name = "CPTLAST_TYP_DESC")
 	private String capitalAssetTypeDescription;
+	@Column(name = "CPTLAST_DEPRLF_LMT")
 	private Integer depreciableLifeLimit;
+	@Column(name = "CPTLAST_MOVING_CD")
+	@Convert(converter = YesNoConverter.class)
 	private boolean movingIndicator;
+	@Column(name = "CPTLAST_RQDBLDG_CD")
+	@Convert(converter = YesNoConverter.class)
 	private boolean requiredBuildingIndicator;
+	@Column(name = "ROW_ACTV_IND")
+	@Convert(converter = YesNoConverter.class)
 	private boolean active;
 
 	/**

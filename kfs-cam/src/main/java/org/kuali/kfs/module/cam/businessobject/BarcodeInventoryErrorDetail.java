@@ -34,36 +34,67 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.campus.CampusEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * Class for the barcode inventory error detail
  */
+@Entity
+@Table(name = "CM_INVN_ERR_DTL_T")
 public class BarcodeInventoryErrorDetail extends PersistableBusinessObjectBase {
     private static final Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorDetail.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "AST_UPLD_ROW_NBR")
     private Long uploadRowNumber;
+    @Column(name = "AST_ERRCOR_STAT_CD")
     private String errorCorrectionStatusCode;
+    @Column(name = "AST_COR_UNVL_ID")
     private String correctorUniversalIdentifier;
+    @Column(name = "AST_INVN_COR_TS")
     private Timestamp inventoryCorrectionTimestamp;
+    @Column(name = "CPTLAST_TAG_NBR")
     private String assetTagNumber;
+    @Column(name = "AST_UPLD_SCAN_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean uploadScanIndicator;
+    @Column(name = "AST_UPLD_SCAN_TS")
     private Timestamp uploadScanTimestamp;
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "BLDG_CD")
     private String buildingCode;
+    @Column(name = "BLDG_ROOM_NBR")
     private String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     private String buildingSubRoomNumber;
+    @Column(name = "CPTLAST_COND_CD")
     private String assetConditionCode;
 
     // References
+    @Transient
     private CampusEbo campus;
+    @Transient
     private Room buildingRoom;
+    @Transient
     private Building building;
+    @Transient
     private AssetCondition condition;
 
     // error description. This field is not being saved in any table.
+    @Transient
     private String errorDescription;
 
+    @Transient
     private boolean rowSelected;
 
     /**

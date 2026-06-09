@@ -58,55 +58,100 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "CM_AST_RETIRE_DOC_T")
 public class AssetRetirementGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "MERGED_TGT_CPTLAST_NBR")
     protected Long mergedTargetCapitalAssetNumber;
+    @Column(name = "MERGED_TGT_CPTLAST_DESC")
     protected String mergedTargetCapitalAssetDescription;
+    @Column(name = "AST_RETIRE_REAS_CD")
     protected String retirementReasonCode;
+    @Column(name = "AST_RETIR_COA_CD")
     protected String retirementChartOfAccountsCode;
+    @Column(name = "AST_RETIR_ACCT_NBR")
     protected String retirementAccountNumber;
+    @Column(name = "AST_RETIR_CNTCT_NM")
     protected String retirementContactName;
+    @Column(name = "AST_RETIR_INST_NM")
     protected String retirementInstitutionName;
+    @Column(name = "AST_RETIRSTRT_ADDR")
     protected String retirementStreetAddress;
+    @Column(name = "AST_RETIR_CITY_NM")
     protected String retirementCityName;
+    @Column(name = "AST_RETIR_STATE_CD")
     protected String retirementStateCode;
+    @Column(name = "AST_RETIR_ZIP_CD")
     protected String retirementZipCode;
+    @Column(name = "AST_RETIR_CNTRY_CD")
     protected String retirementCountryCode;
+    @Column(name = "AST_RETIR_PHN_NBR")
     protected String retirementPhoneNumber;
+    @Column(name = "AST_EST_SELL_PRC")
     protected KualiDecimal estimatedSellingPrice;
+    @Column(name = "CPTLAST_SALE_PRC")
     protected KualiDecimal salePrice;
+    @Column(name = "CASH_RCPT_FDOC_NBR")
     protected String cashReceiptFinancialDocumentNumber;
+    @Column(name = "AST_HANDLG_FEE_AMT")
     protected KualiDecimal handlingFeeAmount;
+    @Column(name = "AST_PRVNTMAINT_AMT")
     protected KualiDecimal preventiveMaintenanceAmount;
+    @Column(name = "CPTLAST_BUYER_DESC")
     protected String buyerDescription;
+    @Column(name = "AST_PD_CASE_NBR")
     protected String paidCaseNumber;
     // persistent relationship
+    @Column(name = "CPTLAST_RETIRE_DT")
     protected Date retirementDate;
+    @Transient
     protected Asset mergedTargetCapitalAsset;
+    @Transient
     protected AssetRetirementReason retirementReason;
+    @Transient
     protected FinancialSystemDocumentHeader documentHeader;
+    @Transient
     protected List<AssetRetirementGlobalDetail> assetRetirementGlobalDetails;
+    @Transient
     protected Account retirementAccount;
+    @Transient
     protected Chart retirementChartOfAccounts;
+    @Transient
     protected DocumentHeader cashReceiptFinancialDocument;
+    @Transient
     protected StateEbo retirementState;
+    @Transient
     protected CountryEbo retirementCountry;
+    @Transient
     protected PostalCodeEbo postalZipCode;
 
+    @Transient
     protected List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
 
+    @Transient
     protected Integer postingYear;
+    @Transient
     protected String postingPeriodCode;
+    @Transient
     protected AccountingPeriod accountingPeriod;
     static protected transient AccountingPeriodService accountingPeriodService;
 
     // Non-persistent
+    @Transient
     protected KualiDecimal calculatedTotal;
 
     /**

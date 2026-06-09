@@ -25,8 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -36,29 +35,53 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.kew.doctype.bo.DocumentTypeEBO;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * Accounting line for the asset payment document.
+ *
+ * NOTE: Not annotated as @Entity because its parent class SourceAccountingLine
+ * is not yet @MappedSuperclass. JPA column annotations are retained as mapping
+ * documentation for when the parent hierarchy is migrated.
  */
 public class AssetPaymentDetail extends SourceAccountingLine {
-    private static Logger LOG = LoggerFactory.getLogger(AssetPaymentDetail.class);
+    private static Logger LOG = Logger.getLogger(AssetPaymentDetail.class);
 
+    @Column(name = "EXPND_FS_ORIGIN_CD")
     private String expenditureFinancialSystemOriginationCode;
+    @Column(name = "EXPND_FDOC_POST_DT")
     private Date expenditureFinancialDocumentPostedDate;
+    @Column(name = "AST_TRNFR_PMT_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean transferPaymentIndicator;
 
+    @Column(name = "EXPND_FDOC_NBR")
     private String expenditureFinancialDocumentNumber;
+    @Column(name = "EXPND_FDOC_TYP_CD")
     private String expenditureFinancialDocumentTypeCode;
+    @Column(name = "FDOC_POST_PRD_CD")
     private String postingPeriodCode;
+    @Column(name = "PO_NUMBER")
     private String purchaseOrderNumber;
+    @Column(name = "REQUISITION_NBR")
     private String requisitionNumber;
+    @Column(name = "ACCT_CHARGE_AMT")
     private KualiDecimal amount;
 
     // bo references
+    @Transient
     private AccountingPeriod financialDocumentPostingPeriod;
+    @Transient
     private DocumentTypeEBO expenditureFinancialSystemDocumentTypeCode;
+    @Transient
     private OriginationCode expenditureFinancialSystemOrigination;
+    @Transient
     private Account account;
+
+
 
     /**
      * Default constructor.
@@ -87,6 +110,7 @@ public class AssetPaymentDetail extends SourceAccountingLine {
         this.setPostingPeriodCode(assetPayment.getFinancialDocumentPostingPeriodCode());
         this.setAmount(assetPayment.getAccountChargeAmount());
     }
+
 
     /**
      * @see org.kuali.rice.kns.bo.BusinessObjectBase#toStringMapper()
@@ -133,69 +157,86 @@ public class AssetPaymentDetail extends SourceAccountingLine {
         return expenditureFinancialSystemOriginationCode;
     }
 
+
     public void setExpenditureFinancialSystemOriginationCode(String expenditureFinancialSystemOriginationCode) {
         this.expenditureFinancialSystemOriginationCode = expenditureFinancialSystemOriginationCode;
     }
+
 
     public Date getExpenditureFinancialDocumentPostedDate() {
         return expenditureFinancialDocumentPostedDate;
     }
 
+
     public void setExpenditureFinancialDocumentPostedDate(Date expenditureFinancialDocumentPostedDate) {
         this.expenditureFinancialDocumentPostedDate = expenditureFinancialDocumentPostedDate;
     }
+
 
     public boolean isTransferPaymentIndicator() {
         return transferPaymentIndicator;
     }
 
+
     public void setTransferPaymentIndicator(boolean transferPaymentIndicator) {
         this.transferPaymentIndicator = transferPaymentIndicator;
     }
+
 
     public String getExpenditureFinancialDocumentNumber() {
         return expenditureFinancialDocumentNumber;
     }
 
+
     public void setExpenditureFinancialDocumentNumber(String expenditureFinancialDocumentNumber) {
         this.expenditureFinancialDocumentNumber = expenditureFinancialDocumentNumber;
     }
+
 
     public String getExpenditureFinancialDocumentTypeCode() {
         return expenditureFinancialDocumentTypeCode;
     }
 
+
     public void setExpenditureFinancialDocumentTypeCode(String expenditureFinancialDocumentTypeCode) {
         this.expenditureFinancialDocumentTypeCode = expenditureFinancialDocumentTypeCode;
     }
+
 
     public String getPostingPeriodCode() {
         return postingPeriodCode;
     }
 
+
     public void setPostingPeriodCode(String postingPeriodCode) {
         this.postingPeriodCode = postingPeriodCode;
     }
+
 
     public String getPurchaseOrderNumber() {
         return purchaseOrderNumber;
     }
 
+
     public void setPurchaseOrderNumber(String purchaseOrderNumber) {
         this.purchaseOrderNumber = purchaseOrderNumber;
     }
+
 
     public String getRequisitionNumber() {
         return requisitionNumber;
     }
 
+
     public void setRequisitionNumber(String requisitionNumber) {
         this.requisitionNumber = requisitionNumber;
     }
 
+
     public AccountingPeriod getFinancialDocumentPostingPeriod() {
         return financialDocumentPostingPeriod;
     }
+
 
     public void setFinancialDocumentPostingPeriod(AccountingPeriod financialDocumentPostingPeriod) {
         this.financialDocumentPostingPeriod = financialDocumentPostingPeriod;
@@ -217,6 +258,7 @@ public class AssetPaymentDetail extends SourceAccountingLine {
     public OriginationCode getExpenditureFinancialSystemOrigination() {
         return expenditureFinancialSystemOrigination;
     }
+
 
     public void setExpenditureFinancialSystemOrigination(OriginationCode expenditureFinancialSystemOrigination) {
         this.expenditureFinancialSystemOrigination = expenditureFinancialSystemOrigination;
@@ -249,6 +291,7 @@ public class AssetPaymentDetail extends SourceAccountingLine {
     public KualiDecimal getAmount() {
         return amount;
     }
+
 
     @Override
     public void setAmount(KualiDecimal amount) {
