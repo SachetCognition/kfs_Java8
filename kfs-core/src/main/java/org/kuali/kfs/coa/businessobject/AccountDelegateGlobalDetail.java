@@ -76,6 +76,16 @@ public class AccountDelegateGlobalDetail extends GlobalBusinessObjectDetailBase 
     private Person accountDelegate;
     private transient DocumentTypeEBO financialSystemDocumentTypeCode;
 
+    @Override
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    @Override
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
     /**
      * Default constructor.
      */

@@ -65,6 +65,16 @@ public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
     transient private Chart chartOfAccounts;
     transient private Account account;
 
+    @Override
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    @Override
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
     /**
      * Default constructor.
      */
