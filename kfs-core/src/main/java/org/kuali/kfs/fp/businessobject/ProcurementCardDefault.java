@@ -37,6 +37,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
 
 /**
  * This class is used to represent a procurement card holder, or the individual whose name is on the card.
@@ -95,8 +96,17 @@ public class ProcurementCardDefault extends PersistableBusinessObjectBase implem
     private boolean active;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+    @JoinColumns({
+
+
+        @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+
+
+        @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+
+    })
     private Account account;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)

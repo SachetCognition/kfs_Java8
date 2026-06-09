@@ -27,6 +27,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 /**
@@ -39,6 +40,7 @@ public class ProcurementCardTargetAccountingLine extends TargetAccountingLine {
     @Id
     @Column(name = "FDOC_TRN_LN_NBR")
     private Integer financialDocumentTransactionLineNumber;
+    @Transient
     protected int transactionContainerIndex;
     
     /**

@@ -47,6 +47,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a disbursement voucher payee detail.
@@ -94,11 +95,13 @@ public class DisbursementVoucherPayeeDetail extends PersistableBusinessObjectBas
     @Column(name = "DV_RMT_CNTRY_CD")
     private String disbVchrSpecialHandlingCountryCode;
 
+    @Transient
     private Boolean dvPayeeSubjectPaymentCode;
     @Column(name = "DV_ALIEN_PMT_IND")
     private Boolean disbVchrAlienPaymentCode;
     @Column(name = "DV_PAYEE_EMP_IND")
     private Boolean disbVchrPayeeEmployeeCode;
+    @Transient
     private Boolean disbVchrEmployeePaidOutsidePayrollCode;
     @Column(name = "DV_PAYEE_TYP_CD")
     private String disbursementVoucherPayeeTypeCode;
@@ -108,13 +111,20 @@ public class DisbursementVoucherPayeeDetail extends PersistableBusinessObjectBas
     private PaymentReasonCode disbVchrPaymentReason;
 
     // The following vendor-associated attributes are for convenience only and are not mapped to OJB or the DB.
+    @Transient
     private String disbVchrVendorHeaderIdNumber;
+    @Transient
     private String disbVchrVendorDetailAssignedIdNumber;
+    @Transient
     private String disbVchrVendorAddressIdNumber;
+    @Transient
     private boolean hasMultipleVendorAddresses = false;
 
+    @Transient
     private StateEbo disbVchrPayeeState;
+    @Transient
     private CountryEbo disbVchrPayeeCountry;
+    @Transient
     private PostalCodeEbo disbVchrPayeePostalZipCode;
 
     /**

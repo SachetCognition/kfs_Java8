@@ -41,6 +41,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a procurement card transaction detail business object.
@@ -94,13 +96,25 @@ public class ProcurementCardTransactionDetail extends PersistableBusinessObjectB
     private KualiDecimal transactionTotalAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
-    @JoinColumn(name = "FDOC_TRN_LN_NBR", insertable = false, updatable = false)
+
+    @JoinColumns({
+
+
+        @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false),
+
+
+        @JoinColumn(name = "FDOC_TRN_LN_NBR", insertable = false, updatable = false)
+
+
+    })
     private ProcurementCardVendor procurementCardVendor;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List sourceAccountingLines;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List targetAccountingLines;
 
+    @Transient
     protected FormFile targetFile;
     /**
      * Default constructor.

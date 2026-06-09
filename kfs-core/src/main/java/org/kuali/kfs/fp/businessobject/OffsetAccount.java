@@ -34,6 +34,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
 
 /**
  * This class represents an offset account business object.
@@ -63,8 +64,13 @@ public class OffsetAccount extends PersistableBusinessObjectBase implements Muta
     @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+    @JoinColumns({
+
+        @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+    })
     private Account account;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FIN_OFST_COA_CD", insertable = false, updatable = false)

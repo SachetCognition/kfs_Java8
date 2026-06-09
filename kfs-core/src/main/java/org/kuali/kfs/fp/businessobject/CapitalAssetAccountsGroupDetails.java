@@ -35,6 +35,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
 
 @Entity
 @Table(name = "FP_CPTL_AST_ACCT_GRP_DTL_T")
@@ -79,8 +80,13 @@ public class CapitalAssetAccountsGroupDetails extends PersistableBusinessObjectB
     @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     protected Chart chart;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+    @JoinColumns({
+
+        @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+    })
     protected Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)

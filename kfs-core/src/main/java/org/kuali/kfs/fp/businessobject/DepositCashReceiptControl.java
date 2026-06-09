@@ -32,6 +32,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
 
 /**
  * This class represents a deposit cash receipt control which contains cash receipt header used for validating receipts
@@ -56,8 +57,17 @@ public class DepositCashReceiptControl extends PersistableBusinessObjectBase {
     private String financialSystemsProcessingOperatorIdentifier;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FDOC_DPST_NBR", insertable = false, updatable = false)
-    @JoinColumn(name = "FDOC_LINE_NBR", insertable = false, updatable = false)
+
+    @JoinColumns({
+
+
+        @JoinColumn(name = "FDOC_DPST_NBR", insertable = false, updatable = false),
+
+
+        @JoinColumn(name = "FDOC_LINE_NBR", insertable = false, updatable = false)
+
+
+    })
     private Deposit deposit;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FDOC_CSH_RCPT_NBR", insertable = false, updatable = false)

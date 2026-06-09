@@ -40,6 +40,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 /**
@@ -69,7 +70,9 @@ public class Deposit extends PersistableBusinessObjectBase {
     @Column(name = "FDOC_DPST_BNK_CD")
     private String depositBankCode;
 
+    @Transient
     private CurrencyDetail depositedCurrency;
+    @Transient
     private CoinDetail depositedCoin;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -78,6 +81,7 @@ public class Deposit extends PersistableBusinessObjectBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private CashManagementDocument cashManagementDocument;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List depositCashReceiptControl;
 
 

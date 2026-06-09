@@ -39,6 +39,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a non-employee trip for a disbursement voucher .
@@ -107,9 +108,12 @@ public class DisbursementVoucherNonEmployeeTravel extends PersistableBusinessObj
     @Column(name = "DV_MLG_CALC_AMT")
     private KualiDecimal disbVchrMileageCalculatedAmt;
 
+    @Transient
     private KualiDecimal totalTravelAmount;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List dvNonEmployeeExpenses;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List dvPrePaidEmployeeExpenses;
 
     /**

@@ -44,6 +44,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "FP_CPTL_AST_INFO_T")
@@ -62,6 +64,7 @@ public class CapitalAssetInformation extends PersistableBusinessObjectBase {
     private Integer vendorHeaderGeneratedIdentifier;
     @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Transient
     private String vendorName;
     @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
@@ -84,14 +87,27 @@ public class CapitalAssetInformation extends PersistableBusinessObjectBase {
     @Column(name = "CPTLAST_DST_AMT_CD")
     private String distributionAmountCode;
     
+    @Transient
     private CapitalAssetManagementAsset capitalAssetManagementAsset;
+    @Transient
     private CapitalAssetManagementAssetType capitalAssetManagementAssetType;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CapitalAssetInformationDetail> capitalAssetInformationDetails;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CapitalAssetAccountsGroupDetails> capitalAssetAccountsGroupDetails;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false)
-    @JoinColumn(name = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+    
+    @JoinColumns({
+
+    
+        @JoinColumn(name = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+
+    
+        @JoinColumn(name = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+
+    
+    })
     private VendorDetail vendorDetail;
 
     /**

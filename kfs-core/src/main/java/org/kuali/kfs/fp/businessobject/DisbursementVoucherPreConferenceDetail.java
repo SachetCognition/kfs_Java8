@@ -58,6 +58,9 @@ public class DisbursementVoucherPreConferenceDetail extends PersistableBusinessO
     private String disbVchrExpenseCode;
 
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+
     private List dvPreConferenceRegistrants;
 
     /**

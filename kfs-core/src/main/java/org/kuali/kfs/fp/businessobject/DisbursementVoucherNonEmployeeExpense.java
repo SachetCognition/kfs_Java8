@@ -32,6 +32,8 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a disbursement voucher non-employee expense, often associated with a trip or a service rendered.
@@ -58,13 +60,19 @@ public class DisbursementVoucherNonEmployeeExpense extends PersistableBusinessOb
     @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false)
     private TravelExpenseTypeCode disbVchrExpense;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "DV_EXP_CO_NM", insertable = false, updatable = false)
+    @JoinColumns({
+
+        @JoinColumn(name = "DV_EXP_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "DV_EXP_CO_NM", insertable = false, updatable = false)
+
+    })
     private TravelCompanyCode disbVchrExpenseCompany;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private DisbursementVoucherNonEmployeeTravel disbursementVoucherNonEmployeeTravel;
 
+    @Transient
     private boolean isPrepaid;
 
     /**

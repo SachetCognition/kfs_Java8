@@ -39,6 +39,8 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "FP_CPTL_AST_INFO_DTL_T")
@@ -68,14 +70,26 @@ public class CapitalAssetInformationDetail extends PersistableBusinessObjectBase
     @Column(name = "CPTLAST_SERIAL_NBR")
     protected String capitalAssetSerialNumber;
  
+    @Transient
+ 
     protected CampusEbo campus;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+    @JoinColumns({
+
+        @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+
+    })
     protected Building building;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+    @JoinColumns({
+
+        @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+
+    })
     @JoinColumn(name = "BLDG_ROOM_NBR", insertable = false, updatable = false)
     protected Room room;
     @ManyToOne(fetch = FetchType.LAZY)

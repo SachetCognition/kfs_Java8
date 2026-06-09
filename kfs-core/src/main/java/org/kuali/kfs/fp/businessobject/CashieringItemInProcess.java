@@ -30,6 +30,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class represents in a cashiering item in process. This cashiering item in process
@@ -52,6 +53,7 @@ public class CashieringItemInProcess extends PersistableBusinessObjectBase {
     private KualiDecimal itemReducedAmount;
     @Column(name = "ITM_TOT_AMT")
     private KualiDecimal itemRemainingAmount;
+    @Transient
     private KualiDecimal currentPayment;
     @Column(name = "ITM_OPEN_DT")
     private Date itemOpenDate;

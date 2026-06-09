@@ -35,6 +35,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
 
 /**
  * 
@@ -77,8 +78,13 @@ public class CreditCardVendor extends PersistableBusinessObjectBase implements M
     @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
     private Chart incomeFinancialChartOfAccounts;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "INC_FIN_OBJ_CD", insertable = false, updatable = false)
+    @JoinColumns({
+
+        @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "INC_FIN_OBJ_CD", insertable = false, updatable = false)
+
+    })
     private ObjectCodeCurrent incomeFinancialObject;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)

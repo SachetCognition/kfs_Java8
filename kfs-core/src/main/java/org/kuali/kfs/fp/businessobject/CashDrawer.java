@@ -36,6 +36,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class represents a cash drawer used in cash management document. It contains amounts for 
@@ -90,6 +91,7 @@ public class CashDrawer extends PersistableBusinessObjectBase {
 
     @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Transient
     private CampusEbo campus;
 
     /**
