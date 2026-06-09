@@ -167,7 +167,7 @@ public class GeneralLedgerBudgetLoadDaoJpa extends BudgetConstructionBatchHelper
                 .setParameter(15, amount)
                 .setParameter(16, transactionDate)
                 .setParameter(17, KFSConstants.PENDING_ENTRY_APPROVED_STATUS_CODE.APPROVED)
-                .setParameter(18, false)
+                .setParameter(18, "N")
                 .executeUpdate();
 
             Integer seqNum2 = getNextSequenceNumber(entrySequenceNumbers, documentNumber);
@@ -195,7 +195,7 @@ public class GeneralLedgerBudgetLoadDaoJpa extends BudgetConstructionBatchHelper
                 .setParameter(15, amount)
                 .setParameter(16, transactionDate)
                 .setParameter(17, KFSConstants.PENDING_ENTRY_APPROVED_STATUS_CODE.APPROVED)
-                .setParameter(18, false)
+                .setParameter(18, "N")
                 .executeUpdate();
         }
     }
@@ -260,7 +260,7 @@ public class GeneralLedgerBudgetLoadDaoJpa extends BudgetConstructionBatchHelper
                         .setParameter(15, monthlyAmount)
                         .setParameter(16, transactionDate)
                         .setParameter(17, KFSConstants.PENDING_ENTRY_APPROVED_STATUS_CODE.APPROVED)
-                        .setParameter(18, false)
+                        .setParameter(18, "N")
                         .executeUpdate();
                 }
             }

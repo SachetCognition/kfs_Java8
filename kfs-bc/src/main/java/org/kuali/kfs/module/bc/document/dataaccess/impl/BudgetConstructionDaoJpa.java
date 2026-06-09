@@ -126,9 +126,11 @@ public class BudgetConstructionDaoJpa implements BudgetConstructionDao {
     @Override
     public List<BudgetConstructionPullup> getBudgetConstructionPullupChildOrgs(String principalId, String chartOfAccountsCode, String organizationCode) {
         TypedQuery<BudgetConstructionPullup> query = entityManager.createQuery(
-            "SELECT p FROM BudgetConstructionPullup p WHERE p.reportsToChartOfAccountsCode = :chart " +
+            "SELECT p FROM BudgetConstructionPullup p LEFT JOIN p.organization o " +
+            "WHERE p.reportsToChartOfAccountsCode = :chart " +
             "AND p.reportsToOrganizationCode = :org AND p.principalId = :principalId " +
-            "AND NOT (p.chartOfAccountsCode = p.reportsToChartOfAccountsCode AND p.organizationCode = p.reportsToOrganizationCode)",
+            "AND NOT (p.chartOfAccountsCode = p.reportsToChartOfAccountsCode AND p.organizationCode = p.reportsToOrganizationCode) " +
+            "ORDER BY o.organizationName ASC",
             BudgetConstructionPullup.class);
         query.setParameter("chart", chartOfAccountsCode);
         query.setParameter("org", organizationCode);

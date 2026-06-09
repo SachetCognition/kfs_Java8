@@ -23,6 +23,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionPosition;
 import org.kuali.kfs.module.bc.document.dataaccess.PayrateExportDao;
 
@@ -42,25 +43,28 @@ public class PayrateExportDaoJpa implements PayrateExportDao {
 
     @Override
     public Integer buildPayRateHoldingRows(Integer budgetYear, String positionUnionCode, String principalId) {
-        Query deleteQuery = entityManager.createQuery(
-            "DELETE FROM BudgetConstructionPayRateHolding h WHERE h.principalId = :principalId");
-        deleteQuery.setParameter("principalId", principalId);
-        deleteQuery.executeUpdate();
+        entityManager.createNativeQuery(
+            "DELETE FROM LD_BCN_PAYRT_HLDG_T WHERE PERSON_UNVL_ID = ?1")
+            .setParameter(1, principalId)
+            .executeUpdate();
 
         Query insertQuery = entityManager.createNativeQuery(
-            "INSERT INTO LD_BCN_PAYRT_HLDG_T (PRNCPL_ID, EMPLID, POSITION_NBR, " +
-            "SETID_SALARY, SAL_ADMIN_PLAN, GRADE, APPT_RQST_PAY_RT, APPT_RQCSF_FTE_QTY, " +
-            "APPT_RQST_FTE_QTY, SETID_DEPT_ID) " +
-            "SELECT DISTINCT :principalId, f.EMPLID, f.POSITION_NBR, " +
-            "p.SETID_SALARY, p.SAL_ADMIN_PLAN, p.GRADE, f.APPT_RQST_PAY_RT, " +
-            "f.APPT_RQCSF_FTE_QTY, f.APPT_RQST_FTE_QTY, p.SETID_DEPT_ID " +
-            "FROM LD_PNDBC_APPTFND_T f, LD_BCN_POS_T p " +
-            "WHERE f.UNIV_FISCAL_YR = :budgetYear AND f.POSITION_NBR = p.POSITION_NBR " +
-            "AND f.UNIV_FISCAL_YR = p.UNIV_FISCAL_YR AND p.POS_UNION_CD = :unionCode " +
-            "AND f.APPT_FND_DLT_CD = 'N'");
-        insertQuery.setParameter("principalId", principalId);
-        insertQuery.setParameter("budgetYear", budgetYear);
-        insertQuery.setParameter("unionCode", positionUnionCode);
+            "INSERT INTO LD_BCN_PAYRT_HLDG_T (PERSON_UNVL_ID, EMPLID, POSITION_NBR, " +
+            "PERSON_NM, SETID_SALARY, SAL_ADMIN_PLAN, GRADE, UNION_CD, APPT_RQST_PAY_RT, VER_NBR) " +
+            "SELECT DISTINCT ?1, f.EMPLID, f.POSITION_NBR, " +
+            "i.PERSON_NM, p.SETID_SALARY, p.SAL_ADMIN_PLAN, p.GRADE, p.POS_UNION_CD, 0, 1 " +
+            "FROM LD_PNDBC_APPTFND_T f " +
+            "JOIN LD_BCN_POS_T p ON f.POSITION_NBR = p.POSITION_NBR AND f.UNIV_FISCAL_YR = p.UNIV_FISCAL_YR " +
+            "JOIN LD_BCN_INTINCBNT_T i ON f.EMPLID = i.EMPLID " +
+            "WHERE f.UNIV_FISCAL_YR = ?2 " +
+            "AND f.EMPLID <> ?3 " +
+            "AND f.APPT_FND_DLT_CD = 'N' " +
+            "AND p.POS_UNION_CD = ?4 " +
+            "AND p.POS_CONFIDENTIAL = 'N'");
+        insertQuery.setParameter(1, principalId);
+        insertQuery.setParameter(2, budgetYear);
+        insertQuery.setParameter(3, BCConstants.VACANT_EMPLID);
+        insertQuery.setParameter(4, positionUnionCode);
         return insertQuery.executeUpdate();
     }
 
