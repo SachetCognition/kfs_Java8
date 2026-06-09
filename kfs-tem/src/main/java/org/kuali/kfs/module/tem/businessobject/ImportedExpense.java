@@ -20,8 +20,8 @@ package org.kuali.kfs.module.tem.businessobject;
 
 import java.util.LinkedHashMap;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemParameterConstants;

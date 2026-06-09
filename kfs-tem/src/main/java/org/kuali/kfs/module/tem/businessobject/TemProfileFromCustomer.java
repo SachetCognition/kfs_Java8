@@ -20,11 +20,11 @@ package org.kuali.kfs.module.tem.businessobject;
 
 import java.util.LinkedHashMap;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerType;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
