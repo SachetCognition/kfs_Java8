@@ -78,10 +78,12 @@ public class AwardAccount extends PersistableBusinessObjectBase implements CGPro
     @Column(name = "PREV_LST_BILLED_DT")
     private Date previousLastBilledDate;
 
+    @Transient
     private Account account;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @Transient
     private Person projectDirector;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)

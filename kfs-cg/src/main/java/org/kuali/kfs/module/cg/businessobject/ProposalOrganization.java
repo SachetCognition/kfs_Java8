@@ -63,6 +63,7 @@ public class ProposalOrganization extends PersistableBusinessObjectBase implemen
     @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private Organization organization;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)

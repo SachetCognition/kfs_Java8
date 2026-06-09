@@ -90,10 +90,12 @@ public class AgencyAddress extends PersistableBusinessObjectBase implements Prim
     @Column(name = "CG_AGENCY_ADDR_END_DT")
     private Date agencyAddressEndDate;
 
+    @Transient
     private AccountsReceivableCustomerAddressType customerAddressType;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CG_AGENCY_NBR", insertable = false, updatable = false)
     private Agency agency;
+    @Transient
     private CountryEbo agencyCountry;
 
      /**

@@ -68,7 +68,9 @@ public class SubContractor extends PersistableBusinessObjectBase implements Muta
     @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected StateEbo subcontractorState;
+    @Transient
     protected CountryEbo subcontractorCountry;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "SubContractor";

@@ -75,6 +75,7 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     private Date awardBeginningDate;
     @Column(name = "CGAWD_END_DT")
     private Date awardEndingDate;
+    @Transient
     private Date lastBilledDate;
 
     /**
@@ -157,14 +158,17 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @Column(name = "ROW_ACTV_IND")
     @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Transient
     private String kimGroupNames;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardProjectDirector> awardProjectDirectors;
+    @Transient
     private AwardProjectDirector awardPrimaryProjectDirector;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardFundManager> awardFundManagers;
+    @Transient
     private AwardFundManager awardPrimaryFundManager;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR")
@@ -185,7 +189,7 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGAWD_STAT_CD", insertable = false, updatable = false)
     private AwardStatus awardStatus;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = LetterOfCreditFund.class)
     @JoinColumn(name = "CG_LTRCR_FND_CD", insertable = false, updatable = false)
     protected ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -200,8 +204,11 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGAWD_PURPOSE_CD", insertable = false, updatable = false)
     private ProposalPurpose awardPurpose;
+    @Transient
     private AwardOrganization primaryAwardOrganization;
+    @Transient
     private String routingOrg;
+    @Transient
     private String routingChart;
 
     @Column(name = "STATE_TRNSFR_IND")
@@ -230,7 +237,9 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @Convert(converter = YesNoConverter.class)
     private boolean autoApproveIndicator;
 
+    @Transient
     private AccountsReceivableMilestoneSchedule milestoneSchedule;
+    @Transient
     private AccountsReceivablePredeterminedBillingSchedule predeterminedBillingSchedule;
 
     @Column(name = "FUNDING_EXP_DT")
@@ -243,13 +252,16 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @Column(name = "STOP_WRK_REASON_TXT")
     private String stopWorkReason;
 
+    @Transient
     private List<Note> boNotes;
 
     /** Dummy value used to facilitate lookups */
     private transient String lookupPersonUniversalIdentifier;
     private transient Person lookupPerson;
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     private transient String lookupFundMgrPersonUniversalIdentifier;

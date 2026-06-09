@@ -22,6 +22,7 @@ package org.kuali.kfs.module.cg.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -35,6 +36,9 @@ import org.hibernate.type.YesNoConverter;
  */
 @Entity
 @Table(name = "CG_AGENCY_TYP_T")
+@AttributeOverride(name = "code", column = @Column(name = "CG_AGENCY_TYP_CD"))
+@AttributeOverride(name = "name", column = @Column(name = "CG_AGENCY_TYP_DESC"))
+@AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
 public class AgencyType extends KualiCodeBase implements MutableInactivatable {
 
 }

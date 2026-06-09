@@ -69,6 +69,7 @@ public class AwardOrganization extends PersistableBusinessObjectBase implements 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @Transient
     private Organization organization;
 
     /**

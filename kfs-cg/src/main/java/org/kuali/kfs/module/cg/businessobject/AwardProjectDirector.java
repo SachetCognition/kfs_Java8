@@ -63,9 +63,12 @@ public class AwardProjectDirector extends PersistableBusinessObjectBase implemen
     @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private Person projectDirector;
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     /**

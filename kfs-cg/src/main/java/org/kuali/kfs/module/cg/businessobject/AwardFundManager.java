@@ -63,6 +63,7 @@ public class AwardFundManager extends PersistableBusinessObjectBase implements P
     @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private Person fundManager;
 
     /**

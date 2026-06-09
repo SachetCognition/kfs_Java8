@@ -152,9 +152,13 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CG_CFDA_NBR", insertable = false, updatable = false)
     private CFDA cfda;
+    @Transient
     private ProposalOrganization primaryProposalOrganization;
+    @Transient
     private String routingOrg;
+    @Transient
     private String routingChart;
+    @Transient
     private LookupService lookupService;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
@@ -165,7 +169,9 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     private transient Person lookupPerson;
 
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     /**
