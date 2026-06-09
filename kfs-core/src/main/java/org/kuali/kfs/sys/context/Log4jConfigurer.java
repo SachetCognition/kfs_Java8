@@ -24,6 +24,7 @@ import java.net.URLClassLoader;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.kuali.kfs.sys.KFSConstants;
+import java.util.Arrays;
 
 public class Log4jConfigurer {
     private static final long MILLISECONDS_CONVERSION_MULTIPLIER = 60 * 1000;
@@ -45,9 +46,19 @@ public class Log4jConfigurer {
     private static void printClasspath() {
         StringBuffer classpath = new StringBuffer("Classpath is:\n");
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        URL[] urls = ((URLClassLoader) classloader).getURLs();
-        for (int i = 0; i < urls.length; i++) {
-            classpath.append(urls[i].getFile()).append("; ");
+        if (classloader instanceof URLClassLoader) {
+            URL[] urls = ((URLClassLoader) classloader).getURLs();
+            for (int i = 0; i < urls.length; i++) {
+                classpath.append(urls[i].getFile()).append("; ");
+            }
+        } else {
+            String cp = System.getProperty("java.class.path");
+            if (cp != null) {
+                Arrays.stream(cp.split(System.getProperty("path.separator")))
+                    .forEach(entry -> classpath.append(entry).append("; "));
+            } else {
+                classpath.append("(unavailable)");
+            }
         }
         Logger.getLogger(Log4jConfigurer.class).info(classpath.toString());
     }
