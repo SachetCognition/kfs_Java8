@@ -17,6 +17,79 @@
         <!-- Migrated entity classes (add here as OJB mappings are converted) -->
         <class>org.kuali.kfs.coa.businessobject.Chart</class>
 
+        <!-- PURAP module business objects (S-2-PURAP migration) -->
+        <class>org.kuali.kfs.module.purap.businessobject.AccountsPayableSummaryAccount</class>
+        <class>org.kuali.kfs.module.purap.businessobject.AutoApproveExclude</class>
+        <class>org.kuali.kfs.module.purap.businessobject.AutoClosePurchaseOrderView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.BillingAddress</class>
+        <class>org.kuali.kfs.module.purap.businessobject.BulkReceivingView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CapitalAssetSystemState</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CapitalAssetSystemType</class>
+        <class>org.kuali.kfs.module.purap.businessobject.Carrier</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ContractManagerAssignmentDetail</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CorrectionReceivingItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CorrectionReceivingView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CreditMemoAccount</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CreditMemoAccountRevision</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CreditMemoItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CreditMemoItemUseTax</class>
+        <class>org.kuali.kfs.module.purap.businessobject.CreditMemoView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.DefaultPrincipalAddress</class>
+        <class>org.kuali.kfs.module.purap.businessobject.DeliveryRequiredDateReason</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceItemMapping</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceLoadSummary</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceRejectItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceRejectReason</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceRejectReasonType</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceRejectView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.FundingSource</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ItemReasonAdded</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ItemType</class>
+        <class>org.kuali.kfs.module.purap.businessobject.LineItemReceivingItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.LineItemReceivingView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.NegativePaymentRequestApprovalLimit</class>
+        <class>org.kuali.kfs.module.purap.businessobject.OrganizationParameter</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PaymentRequestAccount</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PaymentRequestAccountRevision</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PaymentRequestItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PaymentRequestItemUseTax</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PaymentRequestView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderAccount</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderCapitalAssetItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderCapitalAssetLocation</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderCapitalAssetSystem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderContractLanguage</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderItemCapitalAsset</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderItemUseTax</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderQuoteLanguage</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderQuoteList</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderQuoteListVendor</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderQuoteStatus</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderSensitiveData</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderTransmissionMethod</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorChoice</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorQuote</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderVendorStipulation</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseOrderView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.PurchaseRequisitionItemUseTax</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ReceivingAddress</class>
+        <class>org.kuali.kfs.module.purap.businessobject.ReceivingThreshold</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RecurringPaymentFrequency</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RecurringPaymentType</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionAccount</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionCapitalAssetItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionCapitalAssetLocation</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionCapitalAssetSystem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionItem</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionItemCapitalAsset</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionSource</class>
+        <class>org.kuali.kfs.module.purap.businessobject.RequisitionView</class>
+        <class>org.kuali.kfs.module.purap.businessobject.SensitiveData</class>
+        <class>org.kuali.kfs.module.purap.businessobject.SensitiveDataAssignment</class>
+        <class>org.kuali.kfs.module.purap.businessobject.SensitiveDataAssignmentDetail</class>
+        <class>org.kuali.kfs.module.purap.businessobject.VendorStipulation</class>
+
         <properties>
             <!-- DataSource connection -->
             <property name="jakarta.persistence.jdbc.url"      value="${kfs.datasource.url}"/>

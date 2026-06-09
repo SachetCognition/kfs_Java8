@@ -27,14 +27,39 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.module.purap.document.ElectronicInvoiceRejectDocument;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
+@Entity
+@Table(name = "AP_ELCTRNC_INV_RJT_REAS_T")
 public class ElectronicInvoiceRejectReason extends PersistableBusinessObjectBase {
   
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "INV_RJT_REAS_ID")
   private Integer invoiceRejectReasonIdentifier;
+  @Column(name = "INV_RJT_ID")
   private Integer purapDocumentIdentifier;
+  @Column(name = "INV_FL_NM")
   private String invoiceFileName;
+  @Column(name = "INV_RJT_REAS_TYP_CD")
   private String invoiceRejectReasonTypeCode;
+  @Column(name = "INV_RJT_REAS_DESC")
   private String invoiceRejectReasonDescription;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "INV_RJT_ID", insertable = false, updatable = false)
   private ElectronicInvoiceRejectDocument electronicInvoiceRejectDocument;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "INV_RJT_REAS_TYP_CD", insertable = false, updatable = false)
   private ElectronicInvoiceRejectReasonType invoiceRejectReasonType;
   
   

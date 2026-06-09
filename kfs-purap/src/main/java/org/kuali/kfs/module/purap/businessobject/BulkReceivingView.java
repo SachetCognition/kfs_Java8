@@ -23,11 +23,30 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.Note;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Bulk Receiving View Business Object.
  */
+@Entity
+@Table(name = "PUR_BLK_RCVNG_T")
+@IdClass(BulkReceivingViewId.class)
 public class BulkReceivingView extends AbstractRelatedView {
+    @Id
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+    @Column(name = "DLVY_BLDG_OTHR_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean deliveryBuildingOtherIndicator;
 
     public boolean isDeliveryBuildingOtherIndicator() {

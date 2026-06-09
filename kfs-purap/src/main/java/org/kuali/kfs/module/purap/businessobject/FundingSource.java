@@ -24,13 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Funding Source Business Object.
  */
+@Entity
+@Table(name = "PUR_FND_SRC_T")
 public class FundingSource extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "FND_SRC_CD")
     private String fundingSourceCode;
+    @Column(name = "FND_SRC_DESC")
     private String fundingSourceDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

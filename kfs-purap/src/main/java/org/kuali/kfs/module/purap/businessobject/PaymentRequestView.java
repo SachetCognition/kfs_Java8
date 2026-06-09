@@ -30,19 +30,55 @@ import org.kuali.rice.core.web.format.CurrencyFormatter;
 import org.kuali.rice.core.web.format.DateFormatter;
 import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.service.NoteService;
+
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Payment Request View Business Object.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_T")
+@IdClass(PaymentRequestViewId.class)
 public class PaymentRequestView extends AbstractRelatedView {
 
+    @Id
+    @Column(name = "PMT_RQST_ID")
+    @Access(AccessType.PROPERTY)
+    @Override
+    public Integer getPurapDocumentIdentifier() {
+        return super.getPurapDocumentIdentifier();
+    }
+
+    @Column(name = "INV_NBR")
     private String invoiceNumber;
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+    @Column(name = "PMT_HLD_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean paymentHoldIndicator;
+    @Column(name = "PMT_RQST_CNCL_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean paymentRequestedCancelIndicator;
+    @Column(name = "VNDR_NM")
     private String vendorName;
+    @Column(name = "VNDR_CUST_NBR")
     private String vendorCustomerNumber;
+    @Column(name = "PMT_RQST_PAY_DT")
     private Date paymentRequestPayDate;
+    @Column(name = "PMT_EXTRT_DT")
     private Timestamp paymentExtractedTimestamp;
+    @Column(name = "PMT_PD_DT")
     private Timestamp paymentPaidTimestamp;
 
     // GETTERS & SETTERS
@@ -127,15 +163,6 @@ public class PaymentRequestView extends AbstractRelatedView {
      */
     public String getDocumentType() {
         return KFSConstants.FinancialDocumentTypeCodes.PAYMENT_REQUEST;
-    }
-
-    /**
-     * The next three methods are overridden but shouldnt be! If they arent overridden, they dont show up in the tag, not sure why
-     * at this point! (AAP)
-     */
-    @Override
-    public Integer getPurapDocumentIdentifier() {
-        return super.getPurapDocumentIdentifier();
     }
 
     @Override

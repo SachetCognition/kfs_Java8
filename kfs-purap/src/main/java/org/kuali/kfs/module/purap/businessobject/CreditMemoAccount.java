@@ -19,10 +19,28 @@
 
 package org.kuali.kfs.module.purap.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
 
 /**
  * Accounting line Business Object for a credit memo item line.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_ACCT_T")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class CreditMemoAccount extends PurApAccountingLineBase {
 
     /**

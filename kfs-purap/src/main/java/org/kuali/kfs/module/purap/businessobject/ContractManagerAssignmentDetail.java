@@ -35,19 +35,44 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 import org.kuali.rice.kew.api.exception.WorkflowException;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
 /**
  * Assign Contract Manager Detail Business Object. Defines attributes in Assign Contract Manager tab.
  */
+@Entity
+@Table(name = "PUR_ASGN_CONTR_MGR_DTL_T")
+@IdClass(ContractManagerAssignmentDetailId.class)
 public class ContractManagerAssignmentDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "REQS_ID")
     private Integer requisitionIdentifier;
+    @Column(name = "CONTR_MGR_CD")
     private Integer contractManagerCode;
     private String deliveryCampusCode;
     private String vendorName;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REQS_ID", insertable = false, updatable = false)
     private RequisitionDocument requisition;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     private ContractManager contractManager;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private ContractManagerAssignmentDocument contractManagerAssignmentDocument;
     
     private String createDate;

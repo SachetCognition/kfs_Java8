@@ -24,13 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Delivery Required Date Reason Business Object. Defines the reason why a delivery date is required.
  */
+@Entity
+@Table(name = "PUR_DLVY_REQ_DT_REAS_T")
 public class DeliveryRequiredDateReason extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "DLVY_REQ_DT_REAS_CD")
     private String deliveryRequiredDateReasonCode;
+    @Column(name = "DLVY_REQ_DT_REAS_DESC")
     private String deliveryRequiredDateReasonDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

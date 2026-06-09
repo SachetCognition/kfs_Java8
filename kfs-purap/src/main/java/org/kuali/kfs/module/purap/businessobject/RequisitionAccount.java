@@ -26,10 +26,25 @@ import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
 
 /**
  * Requisition Account Business Object.
  */
+@Entity
+@Table(name = "PUR_REQS_ACCT_T")
 public class RequisitionAccount extends PurApAccountingLineBase {
 
     private static final long serialVersionUID = -8655437895493693864L;
