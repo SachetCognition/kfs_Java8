@@ -3,16 +3,21 @@ package org.kuali.kfs.module.purap.util;
 import org.junit.jupiter.api.Test;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.sys.context.KfsUnitTestBase;
+import org.kuali.kfs.sys.context.SpringContext;
+import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.mockito.MockedStatic;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
 class ElectronicInvoiceUtilsTest extends KfsUnitTestBase {
 
@@ -139,6 +144,47 @@ class ElectronicInvoiceUtilsTest extends KfsUnitTestBase {
 
             // Same length as CXML format but wrong separators
             Date result = ElectronicInvoiceUtils.getDate("2024/03/15");
+            assertThat(result).isNull();
+        }
+    }
+
+    @Test
+    void getDateParsesKualiFormat() throws ParseException {
+        java.util.Date expectedDate = new GregorianCalendar(2008, Calendar.JULY, 23).getTime();
+
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class);
+             MockedStatic<SpringContext> ctx = mockStatic(SpringContext.class)) {
+
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+
+            DateTimeService dateTimeService = mock(DateTimeService.class);
+            when(dateTimeService.convertToDate("07/23/2008")).thenReturn(expectedDate);
+            ctx.when(() -> SpringContext.getBean(DateTimeService.class)).thenReturn(dateTimeService);
+
+            Date result = ElectronicInvoiceUtils.getDate("07/23/2008");
+            assertThat(result).isNotNull();
+            assertThat(result.toString()).isEqualTo("2008-07-23");
+        }
+    }
+
+    @Test
+    void getDateReturnsNullForKualiFormatParseException() throws ParseException {
+        try (MockedStatic<PurApDateFormatUtils> fmt = mockStatic(PurApDateFormatUtils.class);
+             MockedStatic<SpringContext> ctx = mockStatic(SpringContext.class)) {
+
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.CXML_DATE_FORMAT))
+               .thenReturn("0000-00-00");
+            fmt.when(() -> PurApDateFormatUtils.getFormattingString(PurapConstants.NamedDateFormats.KUALI_DATE_FORMAT))
+               .thenReturn("00/00/0000");
+
+            DateTimeService dateTimeService = mock(DateTimeService.class);
+            when(dateTimeService.convertToDate("99/99/9999")).thenThrow(new ParseException("bad date", 0));
+            ctx.when(() -> SpringContext.getBean(DateTimeService.class)).thenReturn(dateTimeService);
+
+            Date result = ElectronicInvoiceUtils.getDate("99/99/9999");
             assertThat(result).isNull();
         }
     }
