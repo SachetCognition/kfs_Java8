@@ -39,9 +39,6 @@ import javax.persistence.Version;
 
 
 
-@Entity
-@Table(name = "LD_PND_BCNSTR_GL_T")
-@IdClass(SalarySettingExpansionId.class)
 public class SalarySettingExpansion extends PendingBudgetConstructionGeneralLedger implements PendingBudgetConstructionAppointmentFundingAware {
 
     @javax.persistence.Transient

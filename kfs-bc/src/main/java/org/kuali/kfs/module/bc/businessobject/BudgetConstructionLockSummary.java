@@ -27,75 +27,28 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 /**
  * Holds information about a budget lock.
+ * This is a transient/display BO for the lock monitor screen — not backed by a database table.
  */
-@Entity
-@Table(name = "FOO")
-@IdClass(BudgetConstructionLockSummaryId.class)
 public class BudgetConstructionLockSummary extends PersistableBusinessObjectBase {
-    @Id
-    @Column(name = "FOO")
     private String lockType;
-    @Id
-    @Column(name = "FOO")
     private String lockUserId;
-    @Column(name = "FOO")
     private String documentNumber;
-    @Id
-    @Column(name = "FOO")
     private Integer universityFiscalYear;
-    @Id
-    @Column(name = "FOO")
     private String chartOfAccountsCode;
-    @Id
-    @Column(name = "FOO")
     private String accountNumber;
-    @Id
-    @Column(name = "FOO")
     private String subAccountNumber;
-    @Id
-    @Column(name = "FOO")
     private String positionNumber;
-    @Column(name = "FOO")
     private String positionDescription;
 
     private Person lockUser;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FOO", insertable = false, updatable = false)
     private Chart chart;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false),
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false)
-    })
     private Account account;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false),
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false),
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false)
-    })
     private SubAccount subAccount;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false),
-        @JoinColumn(name = "FOO", referencedColumnName = "FOO", insertable = false, updatable = false)
-    })
     private BudgetConstructionPosition budgetConstructionPosition;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FOO", insertable = false, updatable = false)
     private SystemOptions options;
 
     /**

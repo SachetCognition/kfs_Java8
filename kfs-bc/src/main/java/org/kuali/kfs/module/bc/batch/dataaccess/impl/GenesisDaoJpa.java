@@ -118,11 +118,26 @@ public class GenesisDaoJpa extends BudgetConstructionBatchHelperDaoJpa implement
 
     @Override
     public void createChartForNextBudgetCycle() {
-        // Native SQL implementation for chart creation in next budget cycle
         entityManager.createNativeQuery(
-            "INSERT INTO CA_CHART_T (FIN_COA_CD, FIN_COA_DESC, FIN_COA_ACTIVE_CD, OBJ_ID, VER_NBR) " +
-            "SELECT FIN_COA_CD, FIN_COA_DESC, FIN_COA_ACTIVE_CD, OBJ_ID, VER_NBR FROM CA_CHART_T " +
-            "WHERE 1=0").executeUpdate();
+            "DELETE FROM LD_BCN_ACCT_RPTS_T WHERE FIN_COA_CD IS NOT NULL")
+            .executeUpdate();
+        entityManager.createNativeQuery(
+            "DELETE FROM LD_BCN_ORG_RPTS_T WHERE FIN_COA_CD IS NOT NULL")
+            .executeUpdate();
+
+        entityManager.createNativeQuery(
+            "INSERT INTO LD_BCN_ORG_RPTS_T (FIN_COA_CD, ORG_CD, RPTS_TO_FIN_COA_CD, RPTS_TO_ORG_CD, " +
+            "RC_CD, VER_NBR, OBJ_ID) " +
+            "SELECT DISTINCT FIN_COA_CD, ORG_CD, RPTS_TO_FIN_COA_CD, RPTS_TO_ORG_CD, " +
+            "RC_CD, 1, OBJ_ID FROM CA_ORG_T")
+            .executeUpdate();
+
+        entityManager.createNativeQuery(
+            "INSERT INTO LD_BCN_ACCT_RPTS_T (FIN_COA_CD, ACCOUNT_NBR, RPTS_TO_FIN_COA_CD, RPTS_TO_ORG_CD, " +
+            "VER_NBR, OBJ_ID) " +
+            "SELECT DISTINCT FIN_COA_CD, ACCOUNT_NBR, FIN_COA_CD, ORG_CD, " +
+            "1, OBJ_ID FROM CA_ACCOUNT_T")
+            .executeUpdate();
     }
 
     @Override
