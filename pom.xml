@@ -145,6 +145,11 @@
     <wstx-asl.version>3.2.9</wstx-asl.version>
     <xapool.version>1.5.0-patch4</xapool.version>
 
+    <!-- JPA / Hibernate – OJB→JPA migration infrastructure (S-2-SETUP) -->
+    <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
+    <hibernate.version>6.4.4.Final</hibernate.version>
+    <!-- Spring Data JPA 3.2.x deferred to S-4A when Spring 6.x replaces Rice's Spring 3.1.x -->
+
     <db.groupId>${mysql.groupId}</db.groupId>
     <db.artifactId>${mysql.artifactId}</db.artifactId>
     <db.version>${mysql.version}</db.version>
@@ -257,6 +262,13 @@
         <version>3.12.1</version>
         <configuration>
           <release>21</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.hibernate.orm</groupId>
+              <artifactId>hibernate-jpamodelgen</artifactId>
+              <version>${hibernate.version}</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>
@@ -1119,6 +1131,24 @@
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
+    </dependency>
+
+    <!-- JPA 3.1 / Hibernate 6.4 – OJB→JPA migration infrastructure (S-2-SETUP) -->
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <version>${jakarta.persistence.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-jpamodelgen</artifactId>
+      <version>${hibernate.version}</version>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>
