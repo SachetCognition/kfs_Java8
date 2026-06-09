@@ -61,6 +61,7 @@ public class CloseDaoJpa implements CloseDao {
     @Override
     @SuppressWarnings("unchecked")
     public String getMostRecentClose(Date currentSqlMidnight) {
+        entityManager.clear();
         Query query = entityManager.createNativeQuery(
                 "SELECT c.CG_PRPSL_CLOSE_NBR FROM CG_PRPSL_CLOSE_T c " +
                 "INNER JOIN FS_DOC_HEADER_T h ON c.CG_PRPSL_CLOSE_NBR = h.FDOC_NBR " +

@@ -37,6 +37,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Subcontractors are vendors involved with an awarded {@link Proposal}.
@@ -65,7 +66,9 @@ public class SubContractor extends PersistableBusinessObjectBase implements Muta
     @org.hibernate.annotations.Type(type = "yes_no")
     protected boolean active;
 
+    @Transient
     protected StateEbo subcontractorState;
+    @Transient
     protected CountryEbo subcontractorCountry;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "SubContractor";

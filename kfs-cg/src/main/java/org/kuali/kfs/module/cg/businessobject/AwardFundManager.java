@@ -34,6 +34,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * This class represents an association between an award and a fund manager. It's like a reference to the fund manager from the
@@ -59,6 +60,7 @@ public class AwardFundManager extends PersistableBusinessObjectBase implements P
     @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @Transient
     private Person fundManager;
 
     /**

@@ -34,6 +34,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * This class represents an association between an award and a project director. It's like a reference to the project director from
@@ -59,9 +60,12 @@ public class AwardProjectDirector extends PersistableBusinessObjectBase implemen
     @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @Transient
     private Person projectDirector;
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     /**

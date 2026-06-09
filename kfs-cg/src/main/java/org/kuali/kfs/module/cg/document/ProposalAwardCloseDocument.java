@@ -31,6 +31,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Instances of this class are used to signal to the CloseBatchStep that a close should occur on a particular day.
@@ -51,6 +52,7 @@ public class ProposalAwardCloseDocument extends FinancialSystemTransactionalDocu
     @Column(name = "PERSON_USER_ID")
     protected String principalName;
 
+    @Transient
     protected Person personUser;
 
     /**

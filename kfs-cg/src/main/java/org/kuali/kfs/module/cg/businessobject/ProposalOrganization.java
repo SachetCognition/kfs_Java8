@@ -32,6 +32,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Represents a relationship between a {@link Proposal} and an {@Org}.
@@ -56,7 +57,9 @@ public class ProposalOrganization extends PersistableBusinessObjectBase implemen
     @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @Transient
     private Organization organization;
+    @Transient
     private Chart chartOfAccounts;
 
     /**

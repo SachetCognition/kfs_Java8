@@ -41,6 +41,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * This class represents an association between an award and an account. It's like a reference to the account from the award. This
@@ -74,8 +75,11 @@ public class AwardAccount extends PersistableBusinessObjectBase implements CGPro
     @Column(name = "PREV_LST_BILLED_DT")
     private Date previousLastBilledDate;
 
+    @Transient
     private Account account;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Person projectDirector;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)

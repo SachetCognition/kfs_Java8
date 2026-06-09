@@ -46,6 +46,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * This class defines an agency as it is used and referenced within the Contracts & Grants portion of a college or university
@@ -100,6 +101,7 @@ public class Agency extends PersistableBusinessObjectBase implements ContractsAn
     private boolean stateAgencyIndicator;
 
     // Creating Customer from Agency
+    @Transient
     private AccountsReceivableCustomer customer;
     @Column(name = "CUST_CRTN_OPTN_CD")
     private String customerCreationOptionCode;
@@ -111,6 +113,7 @@ public class Agency extends PersistableBusinessObjectBase implements ContractsAn
     private String dunningCampaign;
 
     //To add boNotes
+    @Transient
     private List boNotes;
     /**
      * Default no-arg constructor.

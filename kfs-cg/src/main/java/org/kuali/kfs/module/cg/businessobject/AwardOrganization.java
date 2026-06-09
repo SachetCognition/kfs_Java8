@@ -33,6 +33,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * This class represents an association between an award and an organization. It's like a reference to the organization from the
@@ -59,7 +60,9 @@ public class AwardOrganization extends PersistableBusinessObjectBase implements 
     @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Organization organization;
 
     /**

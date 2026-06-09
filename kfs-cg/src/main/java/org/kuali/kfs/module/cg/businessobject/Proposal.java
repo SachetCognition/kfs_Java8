@@ -48,6 +48,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * See functional documentation.
@@ -128,7 +129,7 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     @OrderBy("principalId ASC")
     private List<ProposalProjectDirector> proposalProjectDirectors;
     @OneToMany(mappedBy = "proposal", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @org.hibernate.annotations.OrderBy(clause = "(SELECT rt.RSRCH_RSK_TYP_SORT_NBR FROM ER_RSRCH_RSK_TYP_T rt WHERE rt.RSRCH_RSK_TYP_CD = RSRCH_RSK_TYP_CD) ASC")
+    @org.hibernate.annotations.OrderBy(clause = "(SELECT rt.RSRCH_RSK_TYP_SORT_NBR FROM ER_RSRCH_RSK_TYP_T rt WHERE rt.RSRCH_RSK_TYP_CD = CG_PRPSL_RSRCH_RSK_T.RSRCH_RSK_TYP_CD) ASC")
     private List<ProposalResearchRisk> proposalResearchRisks;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -149,9 +150,13 @@ public class Proposal extends PersistableBusinessObjectBase implements MutableIn
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CG_CFDA_NBR", insertable = false, updatable = false)
     private CFDA cfda;
+    @Transient
     private ProposalOrganization primaryProposalOrganization;
+    @Transient
     private String routingOrg;
+    @Transient
     private String routingChart;
+    @Transient
     private LookupService lookupService;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
