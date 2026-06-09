@@ -6,8 +6,11 @@ import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceRejectItem;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
 import org.kuali.kfs.sys.context.KfsUnitTestBase;
 
+import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceItemMapping;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -165,5 +168,57 @@ class ElectronicInvoiceItemHolderTest extends KfsUnitTestBase {
         ElectronicInvoiceItemHolder holder = new ElectronicInvoiceItemHolder(
                 invoiceItem, new HashMap<>(), null, null);
         assertThat(holder.getUnitPriceCurrency()).isEqualTo("EUR");
+    }
+
+    @Test
+    void getItemMappingReturnsNullDueToUnassignedField() {
+        // NOTE: This documents a pre-existing bug in the source code.
+        // Both constructors accept itemTypeMappings but never assign it to the field,
+        // so getItemMapping() always returns null regardless of what was passed in.
+        Map<String, ElectronicInvoiceItemMapping> mappings = new HashMap<>();
+        ElectronicInvoiceItemMapping mapping = new ElectronicInvoiceItemMapping();
+        mapping.setItemTypeCode("ITEM");
+        mappings.put("quantity", mapping);
+
+        ElectronicInvoiceRejectItem rejectItem = mock(ElectronicInvoiceRejectItem.class);
+        ElectronicInvoiceItemHolder holder = new ElectronicInvoiceItemHolder(
+                rejectItem, mappings, null, null);
+
+        // Would expect mappings.get("quantity") but field was never assigned
+        assertThat(holder.getItemMapping("quantity")).isNull();
+    }
+
+    @Test
+    void getItemTypeCodeReturnsNullWhenMappingsNotAssigned() {
+        // Follows from the same pre-existing bug: getItemTypeCode delegates to
+        // getItemMapping which always returns null, so getItemTypeCode always returns null.
+        Map<String, ElectronicInvoiceItemMapping> mappings = new HashMap<>();
+        ElectronicInvoiceItemMapping mapping = new ElectronicInvoiceItemMapping();
+        mapping.setItemTypeCode("ITEM");
+        mappings.put("quantity", mapping);
+
+        ElectronicInvoiceItem invoiceItem = mock(ElectronicInvoiceItem.class);
+        ElectronicInvoiceItemHolder holder = new ElectronicInvoiceItemHolder(
+                invoiceItem, mappings, null, null);
+
+        assertThat(holder.getItemTypeCode("quantity")).isNull();
+    }
+
+    @Test
+    void getItemMappingReturnsNullForNullMappingsMap() {
+        ElectronicInvoiceItem invoiceItem = mock(ElectronicInvoiceItem.class);
+        ElectronicInvoiceItemHolder holder = new ElectronicInvoiceItemHolder(
+                invoiceItem, null, null, null);
+
+        assertThat(holder.getItemMapping("anything")).isNull();
+    }
+
+    @Test
+    void getInvoiceOrderHolderReturnsOrderHolder() {
+        ElectronicInvoiceItem invoiceItem = mock(ElectronicInvoiceItem.class);
+        ElectronicInvoiceOrderHolder orderHolder = mock(ElectronicInvoiceOrderHolder.class);
+        ElectronicInvoiceItemHolder holder = new ElectronicInvoiceItemHolder(
+                invoiceItem, null, null, orderHolder);
+        assertThat(holder.getInvoiceOrderHolder()).isSameAs(orderHolder);
     }
 }
