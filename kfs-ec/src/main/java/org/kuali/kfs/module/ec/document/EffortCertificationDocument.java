@@ -27,6 +27,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -62,12 +65,17 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 @Entity
 @Table(name = "LD_A21_DETAIL_T")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @COMPONENT(component="EffortCertification")
 public class EffortCertificationDocument extends FinancialSystemTransactionalDocumentBase  {
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocument.class);
 
     protected static final String DO_AWARD_SPLIT = "DoAwardSplit";
     protected static final String DO_RECREATE_SPLIT = "DoRecreateSplit";
+
+    @Id
+    @Column(name = "FDOC_NBR")
+    protected String documentNumber;
 
     @Column(name = "A21_LBR_RPT_NBR")
     protected String effortCertificationReportNumber;

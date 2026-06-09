@@ -147,6 +147,7 @@ public class EffortCertificationReportDefinition extends PersistableBusinessObje
     @OrderBy("effortCertificationReportPositionObjectGroupCode ASC")
     private Collection<EffortCertificationReportPosition> effortCertificationReportPositions;
 
+    @Transient
     private Map<Integer, Set<String>> reportPeriods;
 
     /**

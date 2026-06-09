@@ -26,7 +26,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -41,7 +40,6 @@ import org.kuali.kfs.sys.ObjectUtil;
 @Entity
 @Table(name = "LD_A21_DTL_LN_BLD_T")
 public class EffortCertificationDetailBuild extends EffortCertificationDetail {
-    @Id
     @Column(name = "A21_LBR_BLD_NBR")
     private Long effortCertificationBuildNumber;
 

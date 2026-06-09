@@ -26,6 +26,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -57,6 +59,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 @Entity
 @Table(name = "LD_A21_DETAIL_LN_T")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class EffortCertificationDetail extends PersistableBusinessObjectBase {
     @Id
     @Column(name = "FDOC_NBR")

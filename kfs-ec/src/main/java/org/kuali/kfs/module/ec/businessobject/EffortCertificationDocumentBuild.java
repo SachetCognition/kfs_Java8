@@ -26,12 +26,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.kuali.kfs.module.ec.document.EffortCertificationDocument;
@@ -44,9 +40,6 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterConstants.COMPONE
 @Table(name = "LD_A21_DTL_BLD_T")
 @COMPONENT(component="EffortCertificationDocumentBuild")
 public class EffortCertificationDocumentBuild extends EffortCertificationDocument {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "A21_LBR_BLD_NBR_SEQ")
-    @SequenceGenerator(name = "A21_LBR_BLD_NBR_SEQ", sequenceName = "A21_LBR_BLD_NBR_SEQ")
     @Column(name = "A21_LBR_BLD_NBR")
     protected Long effortCertificationBuildNumber;
  
