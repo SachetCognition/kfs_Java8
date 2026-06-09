@@ -28,19 +28,41 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  * This class represents an association between an award and an organization. It's like a reference to the organization from the
  * award. This way an award can maintain a collection of these references instead of owning organizations directly.
  */
+@IdClass(AwardOrganizationId.class)
+@Entity
+@Table(name = "CG_AWD_ORG_T")
 public class AwardOrganization extends PersistableBusinessObjectBase implements Primaryable, MutableInactivatable, ContractsAndGrantsOrganization {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGAWD_PRM_ORG_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean awardPrimaryOrganizationIndicator;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active = true;
 
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Organization organization;
 
     /**

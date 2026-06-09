@@ -25,13 +25,25 @@ import org.kuali.kfs.module.cg.CGPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * Instrument Types under Contracts & Grants section.
  */
 
+@Entity
+@Table(name = "CG_INSTRMNT_TYP_T")
 public class InstrumentType extends PersistableBusinessObjectBase implements ContractsAndGrantsInstrumentType, MutableInactivatable {
+    @Id
+    @Column(name = "INSTRMNT_TYP_CD")
     private String instrumentTypeCode;
+    @Column(name = "INSTRMNT_TYP_DESC")
     private String instrumentTypeDescription;
+    @Column(name = "ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
 
     @Override

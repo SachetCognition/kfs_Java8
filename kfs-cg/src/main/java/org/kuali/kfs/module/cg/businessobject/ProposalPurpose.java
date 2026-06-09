@@ -24,12 +24,24 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * A generalized purpose for a proposal.
  */
+@Entity
+@Table(name = "CG_PRPSL_PURPOSE_T")
 public class ProposalPurpose extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CGPRPSL_PURPOSE_CD")
     private String proposalPurposeCode;
+    @Column(name = "PRPSL_PURPOSE_DESC")
     private String proposalPurposeDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @org.hibernate.annotations.Type(type = "yes_no")
     private boolean active;
 
     /**

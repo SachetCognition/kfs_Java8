@@ -48,9 +48,7 @@
 			</list>
 		</property>
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/cg/ojb-cg.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>
@@ -140,9 +138,12 @@
         <property name="lookupService" ref="lookupService" />
 	</bean>
 
+	<!-- JPA annotation processing -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
 	<!-- DAOs -->
 
-	<bean id="closeDao" parent="platformAwareDao" class="org.kuali.kfs.module.cg.dataaccess.impl.CloseDaoOjb" />
+	<bean id="closeDao" class="org.kuali.kfs.module.cg.dataaccess.impl.CloseDaoJpa" />
 
 	<!-- Services -->
 	<bean id="closeService"  parent="closeService-parentBean"/>
