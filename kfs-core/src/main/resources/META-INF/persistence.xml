@@ -50,7 +50,7 @@
             <property name="jakarta.persistence.jdbc.driver"   value="com.mysql.cj.jdbc.Driver"/>
 
             <!-- Hibernate settings (dialect auto-detected from JDBC URL) -->
-            <property name="hibernate.hbm2ddl.auto"  value="validate"/>
+            <property name="hibernate.hbm2ddl.auto"  value="none"/>
             <property name="hibernate.show_sql"      value="false"/>
             <property name="hibernate.format_sql"    value="true"/>
         </properties>
