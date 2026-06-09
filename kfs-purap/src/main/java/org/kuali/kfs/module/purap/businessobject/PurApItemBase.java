@@ -34,34 +34,65 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 /**
  * Purap Item Base Business Object.
  */
+@MappedSuperclass
 public abstract class PurApItemBase extends PersistableBusinessObjectBase implements PurApItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ITM_ID")
     private Integer itemIdentifier;
+    @Column(name = "ITM_LN_NBR")
     private Integer itemLineNumber;
+    @Column(name = "ITM_UOM_CD")
     private String itemUnitOfMeasureCode;
+    @Column(name = "ITM_CATLG_NBR")
     private String itemCatalogNumber;
+    @Column(name = "ITM_DESC")
     private String itemDescription;
+    @Column(name = "ITM_UNIT_PRC")
     private BigDecimal itemUnitPrice;
+    @Column(name = "ITM_TYP_CD")
     private String itemTypeCode;
+    @Column(name = "ITM_AUX_PART_ID")
     private String itemAuxiliaryPartIdentifier;
+    @Column(name = "EXT_ORG_B2B_PROD_REF_NBR")
     private String externalOrganizationB2bProductReferenceNumber;
+    @Column(name = "EXT_ORG_B2B_PROD_TYP_NM")
     private String externalOrganizationB2bProductTypeName;
+    @Column(name = "ITM_ASND_TO_TRADE_IN_IND")
     private boolean itemAssignedToTradeInIndicator;
+    @Transient
     private KualiDecimal extendedPrice; // not currently in DB
+    @Column(name = "ITM_TAX_AMT")
     private KualiDecimal itemSalesTaxAmount;
 
+    @Transient
     private List<PurApItemUseTax> useTaxItems;
+    @Transient
     private List<PurApAccountingLine> sourceAccountingLines;
+    @Transient
     private List<PurApAccountingLine> baselineSourceAccountingLines;
+    @Transient
     private PurApAccountingLine newSourceLine;
 
+    @Transient
     private ItemType itemType;
+    @Column(name = "DOC_ID")
     private Integer purapDocumentIdentifier;
+    @Column(name = "ITM_QTY")
     private KualiDecimal itemQuantity;
 
+    @Transient
     private PurchasingAccountsPayableDocument purapDocument;
 
     /**

@@ -24,14 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Quote Language Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_QT_LANG_T")
 public class PurchaseOrderQuoteLanguage extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "PO_QT_LANG_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer purchaseOrderQuoteLanguageIdentifier;
+    @Column(name = "PO_QT_LANG_DESC")
     private String purchaseOrderQuoteLanguageDescription;
+    @Column(name = "PO_QT_LANG_CRTE_DT")
     private Date purchaseOrderQuoteLanguageCreateDate;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

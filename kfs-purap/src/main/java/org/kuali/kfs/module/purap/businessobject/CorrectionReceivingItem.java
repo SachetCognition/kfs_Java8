@@ -20,11 +20,33 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.kfs.module.purap.document.CorrectionReceivingDocument;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "PUR_RCVNG_COR_ITM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "receivingItemIdentifier", column = @Column(name = "RCVNG_COR_ITM_ID")),
+    @AttributeOverride(name = "itemReceivedTotalQuantity", column = @Column(name = "ITM_COR_RCVD_TOT_QTY")),
+    @AttributeOverride(name = "itemReturnedTotalQuantity", column = @Column(name = "ITM_COR_RTRN_TOT_QTY")),
+    @AttributeOverride(name = "itemDamagedTotalQuantity", column = @Column(name = "ITM_COR_DMGED_TOT_QTY"))
+})
 public class CorrectionReceivingItem extends ReceivingItemBase {
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
 	private CorrectionReceivingDocument correctionReceivingDocument;
     
 	/**

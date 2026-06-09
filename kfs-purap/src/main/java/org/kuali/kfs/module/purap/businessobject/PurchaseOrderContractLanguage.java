@@ -27,15 +27,31 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Contract Language Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_CONTR_LANG_T")
 public class PurchaseOrderContractLanguage extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "PO_CONTR_LANG_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer purchaseOrderContractLanguageIdentifier;
+    @Column(name = "CMP_CD")
     private String campusCode;
+    @Column(name = "PO_CONTR_LANG_DESC")
     private String purchaseOrderContractLanguageDescription;
+    @Column(name = "CONTR_LANG_CRTE_DT")
     private Date contractLanguageCreateDate;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

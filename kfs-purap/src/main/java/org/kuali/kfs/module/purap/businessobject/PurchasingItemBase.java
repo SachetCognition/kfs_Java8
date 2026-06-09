@@ -27,15 +27,23 @@ import org.kuali.kfs.sys.businessobject.UnitOfMeasure;
 import org.kuali.kfs.vnd.businessobject.CommodityCode;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 /**
  * Purchasing Item Base Business Object.
  */
+@MappedSuperclass
 public abstract class PurchasingItemBase extends PurApItemBase implements PurchasingItem {
     
+    @Column(name = "PUR_COMM_CD")
     private String purchasingCommodityCode;
     
+    @Transient
     private CommodityCode commodityCode;
     
+    @Transient
     private UnitOfMeasure itemUnitOfMeasure;
     
     /**

@@ -30,19 +30,41 @@ import org.kuali.rice.core.web.format.CurrencyFormatter;
 import org.kuali.rice.core.web.format.DateFormatter;
 import org.kuali.rice.krad.bo.Note;
 import org.kuali.rice.krad.service.NoteService;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
+
 /**
  * Payment Request View Business Object.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "PMT_RQST_ID"))
 public class PaymentRequestView extends AbstractRelatedView {
 
+    @Column(name = "INV_NBR")
     private String invoiceNumber;
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+    @Column(name = "PMT_HLD_IND")
     private boolean paymentHoldIndicator;
+    @Column(name = "PMT_RQST_CNCL_IND")
     private boolean paymentRequestedCancelIndicator;
+    @Column(name = "VNDR_NM")
     private String vendorName;
+    @Column(name = "VNDR_CUST_NBR")
     private String vendorCustomerNumber;
+    @Column(name = "PMT_RQST_PAY_DT")
     private Date paymentRequestPayDate;
+    @Column(name = "PMT_EXTRT_DT")
     private Timestamp paymentExtractedTimestamp;
+    @Column(name = "PMT_PD_DT")
     private Timestamp paymentPaidTimestamp;
 
     // GETTERS & SETTERS

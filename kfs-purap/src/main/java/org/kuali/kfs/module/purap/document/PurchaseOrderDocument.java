@@ -125,45 +125,88 @@ import org.kuali.rice.krad.util.NoteType;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Document
  */
+@Entity
+@Table(name = "PUR_PO_T")
 public class PurchaseOrderDocument extends PurchasingDocumentBase implements MultiselectableDocSearchConversion {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderDocument.class);
 
+    @Column(name = "PO_CRTE_DT")
     protected Timestamp purchaseOrderCreateTimestamp;
+    @Column(name = "REQS_ID")
     protected Integer requisitionIdentifier;
+    @Column(name = "PO_VNDR_CHC_CD")
     protected String purchaseOrderVendorChoiceCode;
+    @Column(name = "RECUR_PMT_FREQ_CD")
     protected String recurringPaymentFrequencyCode;
+    @Column(name = "RECUR_PMT_AMT")
     protected KualiDecimal recurringPaymentAmount;
+    @Column(name = "RECUR_PMT_DT")
     protected Date recurringPaymentDate;
+    @Column(name = "INIT_PMT_AMT")
     protected KualiDecimal initialPaymentAmount;
+    @Column(name = "INIT_PMT_DT")
     protected Date initialPaymentDate;
+    @Column(name = "FNL_PMT_AMT")
     protected KualiDecimal finalPaymentAmount;
+    @Column(name = "FNL_PMT_DT")
     protected Date finalPaymentDate;
+    @Column(name = "PO_INIT_OPEN_DT")
     protected Timestamp purchaseOrderInitialOpenTimestamp;
+    @Column(name = "PO_LST_TRNS_DT")
     protected Timestamp purchaseOrderLastTransmitTimestamp;
+    @Column(name = "PO_QT_DUE_DT")
     protected Date purchaseOrderQuoteDueDate;
+    @Column(name = "PO_QT_TYP_CD")
     protected String purchaseOrderQuoteTypeCode;
+    @Column(name = "PO_QT_VNDR_NTE_TXT")
     protected String purchaseOrderQuoteVendorNoteText;
+    @Column(name = "PO_CNFRMD_IND")
     protected boolean purchaseOrderConfirmedIndicator;
+    @Column(name = "PO_COMM_DESC")
     protected String purchaseOrderCommodityDescription;
+    @Column(name = "PO_PREV_ID")
     protected Integer purchaseOrderPreviousIdentifier;
+    @Column(name = "ALTRNT_VNDR_HDR_GNRTD_ID")
     protected Integer alternateVendorHeaderGeneratedIdentifier;
+    @Column(name = "ALTRNT_VNDR_DTL_ASND_ID")
     protected Integer alternateVendorDetailAssignedIdentifier;
     protected Integer newQuoteVendorHeaderGeneratedIdentifier;
     protected Integer newQuoteVendorDetailAssignedIdentifier;
+    @Column(name = "ALTRNT_VNDR_NM")
     protected String alternateVendorName;
+    @Column(name = "PO_CUR_IND")
     protected boolean purchaseOrderCurrentIndicator = false;
+    @Column(name = "PEND_ACTN_IND")
     protected boolean pendingActionIndicator = false;
+    @Column(name = "PO_1ST_TRNS_DT")
     protected Timestamp purchaseOrderFirstTransmissionTimestamp;
+    @Column(name = "CONTR_MGR_CD")
     protected Integer contractManagerCode;
+    @Column(name = "PO_QT_INITLZTN_DT")
     protected Date purchaseOrderQuoteInitializationDate;
+    @Column(name = "PO_QT_AWDED_DT")
     protected Date purchaseOrderQuoteAwardedDate;
+    @Column(name = "PO_ASND_ID")
     protected String assignedUserPrincipalId;
 
     // COLLECTIONS
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrder")
     protected List<PurchaseOrderVendorStipulation> purchaseOrderVendorStipulations;
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrder")
     protected List<PurchaseOrderVendorQuote> purchaseOrderVendorQuotes;
 
     // NOT PERSISTED IN DB
@@ -183,11 +226,23 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
     protected List<SourceAccountingLine> glOnlySourceAccountingLines;
 
     // REFERENCE OBJECTS
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PO_VNDR_CHC_CD", insertable = false, updatable = false)
     protected PurchaseOrderVendorChoice purchaseOrderVendorChoice;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_PMT_TERM_CD", insertable = false, updatable = false)
     protected PaymentTermType vendorPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_TTL_CD", insertable = false, updatable = false)
     protected ShippingTitle vendorShippingTitle;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_PMT_TERM_CD", insertable = false, updatable = false)
     protected ShippingPaymentTerms vendorShippingPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RECUR_PMT_FREQ_CD", insertable = false, updatable = false)
     protected RecurringPaymentFrequency recurringPaymentFrequency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     protected ContractManager contractManager;
 
     /**

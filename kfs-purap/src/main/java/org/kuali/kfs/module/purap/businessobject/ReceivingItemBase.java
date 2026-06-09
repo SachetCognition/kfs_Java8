@@ -27,29 +27,57 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 /**
  * This class...
  */
+@MappedSuperclass
 public abstract class ReceivingItemBase extends PersistableBusinessObjectBase implements PurapEnterableItem, ReceivingItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "RCVNG_LN_ITM_ID")
     private Integer receivingItemIdentifier;
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+    @Column(name = "ITM_LN_NBR")
     private Integer itemLineNumber;
+    @Column(name = "ITM_TYP_CD")
     private String itemTypeCode;
+    @Column(name = "ITM_UOM_CD")
     private String itemUnitOfMeasureCode;
+    @Column(name = "ITM_CATLG_NBR")
     private String itemCatalogNumber;
+    @Column(name = "ITM_DESC")
     private String itemDescription;
+    @Column(name = "ITM_RCVD_TOT_QTY")
     private KualiDecimal itemReceivedTotalQuantity;
+    @Column(name = "ITM_RTRN_TOT_QTY")
     private KualiDecimal itemReturnedTotalQuantity;
+    @Column(name = "ITM_DMGED_TOT_QTY")
     private KualiDecimal itemDamagedTotalQuantity;
+    @Column(name = "ITM_REAS_ADD_CD")
     private String itemReasonAddedCode;
+    @Column(name = "ITM_ORIG_RCVD_TOT_QTY")
     protected KualiDecimal itemOriginalReceivedTotalQuantity;
+    @Column(name = "ITM_ORIG_RTRN_TOT_QTY")
     protected KualiDecimal itemOriginalReturnedTotalQuantity;
+    @Column(name = "ITM_ORIG_DMGED_TOT_QTY")
     protected KualiDecimal itemOriginalDamagedTotalQuantity;
     
+    @Transient
     private ItemReasonAdded itemReasonAdded;
+    @Transient
     private ItemType itemType;
+    @Transient
     private UnitOfMeasure itemUnitOfMeasure;
     
     

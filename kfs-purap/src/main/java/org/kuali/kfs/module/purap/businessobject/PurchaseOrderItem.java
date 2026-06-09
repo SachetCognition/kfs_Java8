@@ -36,25 +36,58 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.service.SequenceAccessorService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+
 /**
  * Purchase Order Item Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_ITM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "itemIdentifier", column = @Column(name = "PO_ITM_ID")),
+    @AttributeOverride(name = "itemQuantity", column = @Column(name = "ITM_ORD_QTY"))
+})
 public class PurchaseOrderItem extends PurchasingItemBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderItem.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "ITM_INV_TOT_QTY")
     private KualiDecimal itemInvoicedTotalQuantity;
+    @Column(name = "ITM_INV_TOT_AMT")
     private KualiDecimal itemInvoicedTotalAmount;
+    @Column(name = "ITM_RCVD_TOT_QTY")
     private KualiDecimal itemReceivedTotalQuantity;
+    @Column(name = "ITM_OSTND_ENC_QTY")
     private KualiDecimal itemOutstandingEncumberedQuantity;
+    @Column(name = "ITM_OSTND_ENC_AMT")
     private KualiDecimal itemOutstandingEncumberedAmount;
+    @Column(name = "ITM_ACTV_IND")
     private boolean itemActiveIndicator = true;
+    @Column(name = "ITM_DMGED_TOT_QTY")
     private KualiDecimal itemDamagedTotalQuantity;
         
+    @Transient
     private PurchaseOrderDocument purchaseOrder;
     
     // Not persisted to DB
+    @Transient
     private boolean itemSelectedForRetransmitIndicator;
+    @Transient
     private boolean movingToSplit;
 
     /**
@@ -133,7 +166,7 @@ public class PurchaseOrderItem extends PurchasingItemBase {
     }
     
 //    public String getItemActiveIndicator() {
-//        return (Boolean.valueOf(itemActiveIndicator)).toString();
+//        return (new Boolean(itemActiveIndicator)).toString();
 //    }
 
     public void setItemActiveIndicator(boolean itemActiveIndicator) {

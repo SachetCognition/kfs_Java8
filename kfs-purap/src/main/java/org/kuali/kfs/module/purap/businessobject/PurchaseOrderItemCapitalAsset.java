@@ -19,10 +19,15 @@
 
 package org.kuali.kfs.module.purap.businessobject;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 /**
  * Purchase Order Item Capital Asset Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_CPTL_AST_ITM_AST_T")
 public class PurchaseOrderItemCapitalAsset extends PurchasingItemCapitalAssetBase {
 
     /**

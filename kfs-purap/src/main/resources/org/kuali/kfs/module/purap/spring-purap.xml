@@ -54,9 +54,7 @@
             </list>
         </property>		
 		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/purap/ojb-purap.xml</value>
-			</list>
+			<list/>
 		</property>
 		<property name="jobNames">
 			<list>
@@ -250,7 +248,7 @@
         <property name="accountService" ref="accountService" />
     </bean>
 
-    <bean id="paymentRequestDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.PaymentRequestDaoOjb"/>
+    <bean id="paymentRequestDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.PaymentRequestDaoJpa"/>
 
     <bean id="paymentRequestService" parent="paymentRequestService-parentBean"/>
     
@@ -277,7 +275,7 @@
         <property name="kualiRuleService" ref="kualiRuleService" />
     </bean>
 	
-	<bean id="creditMemoDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.CreditMemoDaoOjb" />
+	<bean id="creditMemoDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.CreditMemoDaoJpa" />
     <bean id="creditMemoService" parent="creditMemoService-parentBean"/>
 	
 	<bean id="creditMemoService-parentBean" class="org.kuali.kfs.module.purap.document.service.impl.CreditMemoServiceImpl" abstract="true">
@@ -348,7 +346,7 @@
 		<property name="thresholdDao" ref="thresholdDao" />
 	</bean>
 	
-	<bean id="thresholdDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.ThresholdDaoOjb" />
+	<bean id="thresholdDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.ThresholdDaoJpa" />
     <bean id="thresholdLookupableHelperService" parent="thresholdLookupableHelperService-parentBean" scope="prototype" />
 	
 	<bean id="thresholdLookupableHelperService-parentBean" class="org.kuali.kfs.module.purap.businessobject.lookup.ThresholdLookupableHelperService" parent="lookupableHelperService" scope="prototype" abstract="true" />
@@ -447,25 +445,25 @@
 		<property name="configurationService" ref="kualiConfigurationService" />
     </bean>
 
-	<bean id="receivingDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.ReceivingDaoOjb" />
+	<bean id="receivingDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.ReceivingDaoJpa" />
 	
-	<bean id="bulkReceivingDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.BulkReceivingDaoOjb" />
+	<bean id="bulkReceivingDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.BulkReceivingDaoJpa" />
 	
-	<bean id="requisitionDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.RequisitionDaoOjb" />
+	<bean id="requisitionDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.RequisitionDaoJpa" />
 	
-	<bean id="purchaseOrderDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.PurchaseOrderDaoOjb" />
+	<bean id="purchaseOrderDao" class="org.kuali.kfs.module.purap.document.dataaccess.impl.PurchaseOrderDaoJpa" />
 
-	<bean id="purApAccountingDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.dataaccess.impl.PurApAccountingDaoOjb" />
+	<bean id="purApAccountingDao" class="org.kuali.kfs.module.purap.dataaccess.impl.PurApAccountingDaoJpa" />
 	
-	<bean id="negativePaymentRequestApprovalLimitDao" parent="platformAwareDao" 
-		class="org.kuali.kfs.module.purap.document.dataaccess.impl.NegativePaymentRequestApprovalLimitDaoOjb" />
+	<bean id="negativePaymentRequestApprovalLimitDao"
+		class="org.kuali.kfs.module.purap.document.dataaccess.impl.NegativePaymentRequestApprovalLimitDaoJpa" />
 	
-	<bean id="receivingAddressDao" parent="platformAwareDao" 
-		class="org.kuali.kfs.module.purap.document.dataaccess.impl.ReceivingAddressDaoOjb" />
+	<bean id="receivingAddressDao"
+		class="org.kuali.kfs.module.purap.document.dataaccess.impl.ReceivingAddressDaoJpa" />
 
 	<bean id="singleConfirmationQuestion" class="org.kuali.kfs.module.purap.SingleConfirmationQuestion" scope="prototype" />
 	
-	<bean id="sensitiveDataDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.dataaccess.impl.SensitiveDataDaoOjb"/>
+	<bean id="sensitiveDataDao" class="org.kuali.kfs.module.purap.dataaccess.impl.SensitiveDataDaoJpa"/>
 	<bean id="sensitiveDataService" parent="sensitiveDataService-parentBean"/>
     
     <bean id="sensitiveDataService-parentBean" abstract="true"  class="org.kuali.kfs.module.purap.service.impl.SensitiveDataServiceImpl">
@@ -648,7 +646,7 @@
         <property name="electronicInvoicingDao" ref="electronicInvoicingDao" />
 	</bean>
 	
-	<bean id="electronicInvoicingDao" parent="platformAwareDao" class="org.kuali.kfs.module.purap.dataaccess.impl.ElectronicInvoicingDaoOjb"/>
+	<bean id="electronicInvoicingDao" class="org.kuali.kfs.module.purap.dataaccess.impl.ElectronicInvoicingDaoJpa"/>
     
 	<bean id="electronicInvoiceExtractJob" parent="scheduledJobDescriptor">
 		<property name="steps">

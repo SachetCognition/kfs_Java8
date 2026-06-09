@@ -24,14 +24,26 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Requisition Source Business Object.
  */
+@Entity
+@Table(name = "PUR_REQS_SRC_T")
 public class RequisitionSource extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "REQS_SRC_CD")
     private String requisitionSourceCode;
+    @Column(name = "REQS_SRC_DESC")
     private String requisitionSourceDescription;
+    @Column(name = "ALLOW_COPY_DAYS")
     private Integer allowCopyDays;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

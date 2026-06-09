@@ -18,12 +18,17 @@
  */
 package org.kuali.kfs.module.purap.businessobject;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "PUR_REQS_CPTL_AST_LOC_T")
 public class RequisitionCapitalAssetLocation extends PurchasingCapitalAssetLocationBase {
 
     /**

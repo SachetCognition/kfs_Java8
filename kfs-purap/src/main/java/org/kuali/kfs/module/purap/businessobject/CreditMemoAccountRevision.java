@@ -28,15 +28,34 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.util.ObjectPopulationUtils;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 /**
  * Credit Memo Account Revision Business Object.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_ACCT_CHG_T")
 public class CreditMemoAccountRevision extends CreditMemoAccount {
 
+    @Id
+    @Column(name = "CRDT_MEMO_ACCT_CHG_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer accountRevisionIdentifier;
+    @Column(name = "CRDT_MEMO_ACCT_CHG_TS")
     private Timestamp accountRevisionTimestamp;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FDOC_POST_YR", insertable = false, updatable = false), @JoinColumn(name = "FDOC_POST_PRD_CD", insertable = false, updatable = false)})
     private AccountingPeriod accountingPeriod;
 
     public AccountingPeriod getAccountingPeriod() {

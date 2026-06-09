@@ -21,13 +21,21 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  * Purchase Order Quote Status Business Object.
  * 
  */
+@Entity
+@Table(name = "PUR_PO_QT_STAT_T")
 public class PurchaseOrderQuoteStatus extends Status implements MutableInactivatable{
 
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
     
     /**
