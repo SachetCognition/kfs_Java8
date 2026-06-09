@@ -57,7 +57,7 @@ public class PaymentRequestDaoJpa implements PaymentRequestDao {
             jpql.append(" AND p.processingCampusCode = :chartCode");
         }
         if (onlySpecialPayments) {
-            jpql.append(" AND ((p.specialHandlingInstructionLine1Text IS NOT NULL OR p.specialHandlingInstructionLine2Text IS NOT NULL OR p.specialHandlingInstructionLine3Text IS NOT NULL OR p.paymentAttachmentIndicator = true) AND p.paymentRequestPayDate <= :payDate)");
+            jpql.append(" AND (((p.specialHandlingInstructionLine1Text IS NOT NULL OR p.specialHandlingInstructionLine2Text IS NOT NULL OR p.specialHandlingInstructionLine3Text IS NOT NULL OR p.paymentAttachmentIndicator = true) AND p.paymentRequestPayDate <= :payDate) OR p.immediatePaymentIndicator = true)");
         } else {
             jpql.append(" AND (p.paymentRequestPayDate <= :payDate OR p.immediatePaymentIndicator = true)");
         }
