@@ -30,23 +30,99 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbCharBooleanConverter;
+
+@Entity
+@Table(name = "LD_LABOR_OBJ_T")
+@IdClass(LaborObjectId.class)
 /**
  * Labor business object for LaborObject.
  */
 public class LaborObject extends PersistableBusinessObjectBase implements LaborLedgerObject, MutableInactivatable, FiscalYearBasedBusinessObject {
+    @Id
+
+    @Column(name = "UNIV_FISCAL_YR")
+
     private Integer universityFiscalYear;
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+
+    @Column(name = "FIN_OBJECT_CD")
+
     private String financialObjectCode;
+    @Column(name = "DTL_POS_REQ_CD")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean detailPositionRequiredIndicator;
+    @Column(name = "FIN_OBJ_HRS_REQ_CD")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean financialObjectHoursRequiredIndicator;
+    @Column(name = "FIN_OBJ_PAY_TYP_CD")
+
     private String financialObjectPayTypeCode;
+    @Column(name = "FINOBJ_FRNGSLRY_CD")
+
     private String financialObjectFringeOrSalaryCode;
+    @Column(name = "POS_OBJ_GRP_CD")
+
     private String positionObjectGroupCode;
+    @Column(name = "ACTV_IND")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean active;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    
+    @JoinColumns({
+
+    
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+    
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+    
+        @JoinColumn(name = "FIN_OBJECT_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
+
+    
+    })
+
+    
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "POS_OBJ_GRP_CD", insertable = false, updatable = false)
+
     private PositionObjectGroup positionObjectGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
+
     private SystemOptions option;
 
     /**

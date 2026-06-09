@@ -46,13 +46,28 @@ import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
 import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 // @latex.ClassSignatureStart
+@Entity
+@Table(name = "LD_JRNL_VCHR_DOC_T")
 /**
  * Labor Document class for the Labor Ledger Journal Voucher.
  */
 public class LaborJournalVoucherDocument extends JournalVoucherDocument implements LaborLedgerPostingDocument, AmountTotaling {
     // @latex.ClassSignatureStop
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborJournalVoucherDocument.class);
+    @Column(name = "FDOC_OFST_TYP_CD")
+
     protected String offsetTypeCode = JournalVoucherOffsetType.NO_OFFSET.typeCode;
     protected List<LaborLedgerPendingEntry> laborLedgerPendingEntries;
     protected DocumentTypeEBO financialSystemDocumentTypeCode;

@@ -25,32 +25,104 @@ import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.fp.businessobject.VoucherSourceAccountingLine;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_JRNL_VCHR_DTL_T")
+@IdClass(LaborJournalVoucherDetailId.class)
 /**
  * Labor Journal Voucher Detail Business Object.
  */
 public class LaborJournalVoucherDetail extends VoucherSourceAccountingLine {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborJournalVoucherDetail.class);
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Column(name = "PAY_PERIOD_END_DT")
+
     private Date payPeriodEndDate;
+    @Column(name = "TRN_TOTAL_HR")
+
     private BigDecimal transactionTotalHours;
+    @Column(name = "PYRL_DT_FSCL_YR")
+
     private Integer payrollEndDateFiscalYear;
+    @Column(name = "PYRL_DT_FSCLPRD_CD")
+
     private String payrollEndDateFiscalPeriodCode;
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Column(name = "EMPL_RCD")
+
     private Integer employeeRecord;
+    @Column(name = "ERNCD")
+
     private String earnCode;
+    @Column(name = "PAYGROUP")
+
     private String payGroup;
+    @Column(name = "SAL_ADMIN_PLAN")
+
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
+
     private String grade;
+    @Column(name = "RUN_ID")
+
     private String runIdentifier;
+    @Column(name = "LL_ORIG_FIN_COA_CD")
+
     private String laborLedgerOriginalChartOfAccountsCode;
+    @Column(name = "LL_ORIG_ACCT_NBR")
+
     private String laborLedgerOriginalAccountNumber;
+    @Column(name = "LL_ORIG_SUB_ACCT_NBR")
+
     private String laborLedgerOriginalSubAccountNumber;
+    @Column(name = "LL_ORIG_FIN_OBJECT_CD")
+
     private String laborLedgerOriginalFinancialObjectCode;
+    @Column(name = "LL_ORIG_FIN_SUB_OBJ_CD")
+
     private String laborLedgerOriginalFinancialSubObjectCode;
+    @Column(name = "COMPANY")
+
     private String hrmsCompany;
+    @Column(name = "SETID")
+
     private String setid;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "PYRL_DT_FSCL_YR", insertable = false, updatable = false)
+
     private SystemOptions payrollEndDateOptions;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "PYRL_DT_FSCL_YR", referencedColumnName = "PYRL_DT_FSCL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "PYRL_DT_FSCLPRD_CD", referencedColumnName = "PYRL_DT_FSCLPRD_CD", insertable = false, updatable = false)
+
+    })
+
     private AccountingPeriod payrollEndDateFiscalPeriod;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FDOC_POST_YR", insertable = false, updatable = false)
+
     private SystemOptions options;
 
     /**

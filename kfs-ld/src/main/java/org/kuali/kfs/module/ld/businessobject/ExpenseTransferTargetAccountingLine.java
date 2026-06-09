@@ -29,16 +29,54 @@ import org.kuali.kfs.sys.businessobject.TargetAccountingLine;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_EXP_TRNFR_TO_T")
+@IdClass(ExpenseTransferTargetAccountingLineId.class)
 /**
  * Labor business object for special case <code>{@link TargetAccountingLine}</code> type for
  * <code>{@link org.kuali.module.labor.document.ExpenseTransferDocument}</code>
  */
 public class ExpenseTransferTargetAccountingLine extends TargetAccountingLine implements ExpenseTransferAccountingLine, LaborLedgerExpenseTransferTargetAccountingLine, Comparable<ExpenseTransferTargetAccountingLine> {
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Column(name = "PYRL_TOTAL_HR")
+
     private BigDecimal payrollTotalHours;
+    @Column(name = "PYRL_DT_FSCL_YR")
+
     private Integer payrollEndDateFiscalYear;
+    @Column(name = "PYRL_DT_FSCLPRD_CD")
+
     private String payrollEndDateFiscalPeriodCode;
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "FDOC_POST_YR", referencedColumnName = "FDOC_POST_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_OBJECT_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
+
+    })
+
     private LaborObject laborObject;
     private String fringeBenefitView;
 

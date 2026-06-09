@@ -20,14 +20,34 @@ package org.kuali.kfs.module.ld.businessobject;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table(name = "LD_ERROR_CERT_T")
 /**
  * Error Certification business object for Salary Expense Transfer and Year End Salary Expense Transfer
  */
 public class ErrorCertification extends PersistableBusinessObjectBase {
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Column(name = "EXPND_DESC")
+
     private String expenditureDescription;
+    @Column(name = "EXPND_PROJ_BENEFIT_DESC")
+
     private String expenditureProjectBenefit;
+    @Column(name = "ERROR_DESC")
+
     private String errorDescription;
+    @Column(name = "ERROR_CORR_REASON_DESC")
+
     private String errorCorrectionReason;
 
     /**

@@ -39,35 +39,169 @@ import org.kuali.kfs.sys.service.FinancialSystemUserService;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
 
+
+@Entity
+@Table(name = "LD_CSF_TRACKER_T")
+@IdClass(LaborCalculatedSalaryFoundationTrackerId.class)
 /**
  * Labor business object for LaborCalculatedSalaryFoundationTracker.
  */
 public class LaborCalculatedSalaryFoundationTracker extends PersistableBusinessObjectBase {
+    @Id
+
+    @Column(name = "UNIV_FISCAL_YR")
+
     private Integer universityFiscalYear;
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+
+    @Column(name = "ACCOUNT_NBR")
+
     private String accountNumber;
+    @Id
+
+    @Column(name = "SUB_ACCT_NBR")
+
     private String subAccountNumber;
+    @Id
+
+    @Column(name = "FIN_OBJECT_CD")
+
     private String financialObjectCode;
+    @Id
+
+    @Column(name = "FIN_SUB_OBJ_CD")
+
     private String financialSubObjectCode;
+    @Id
+
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Id
+
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Id
+
+    @Column(name = "POS_CSF_CREATE_TM")
+
     private Timestamp csfCreateTimestamp;
+    @Column(name = "POS_CSF_DELETE_CD")
+
     private String csfDeleteCode;
+    @Column(name = "POS_CSF_AMT")
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
     private KualiDecimal csfAmount;
+    @Column(name = "POS_CSF_FTE_QTY")
+
     private BigDecimal csfFullTimeEmploymentQuantity;
+    @Column(name = "POS_CSF_TM_PCT")
+
     private BigDecimal csfTimePercent;
+    @Column(name = "POS_CSF_FNDSTAT_CD")
+
     private String csfFundingStatusCode;
+    @Column(name = "EMPL_RCD")
+
     private Integer employeeRecord;
+    @Column(name = "ERNCD")
+
     private String earnCode;
+    @Column(name = "ADDL_SEQ")
+
     private Integer additionalSequence;
+    @Column(name = "EFFDT")
+
     private Date effectiveDate;
+    @Column(name = "EFFSEQ")
+
     private Integer effectiveSequence;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+
+    @JoinColumns({
+
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+
+        @JoinColumn(name = "FIN_OBJECT_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
+
+
+    })
+
+
     private ObjectCode financialObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+    })
+
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "SUB_ACCT_NBR", referencedColumnName = "SUB_ACCT_NBR", insertable = false, updatable = false)
+
+    })
+
     private SubAccount subAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_OBJECT_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_SUB_OBJ_CD", referencedColumnName = "FIN_SUB_OBJ_CD", insertable = false, updatable = false)
+
+    })
+
     private SubObjectCode financialSubObject;
     private transient SystemOptions universityFiscal;
     private final int PERCENTAGE_SCALE = 2;

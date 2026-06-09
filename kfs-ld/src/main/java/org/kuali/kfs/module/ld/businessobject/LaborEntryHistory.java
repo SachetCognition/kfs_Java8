@@ -26,10 +26,25 @@ import java.sql.Timestamp;
 import org.kuali.kfs.gl.businessobject.LedgerEntryHistory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_LDGR_ENTR_HIST_T")
+@IdClass(LaborEntryHistoryId.class)
 /**
  * Labor business object for LedgerEntryHistory
  */
 public class LaborEntryHistory extends LedgerEntry implements LedgerEntryHistory {
+
+    @Column(name = "ROW_CNT")
+
 
     private Integer rowCount;
 

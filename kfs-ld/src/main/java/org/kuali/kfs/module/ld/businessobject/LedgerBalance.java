@@ -37,22 +37,88 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
+@Entity
+@Table(name = "LD_LDGR_BAL_T")
+@IdClass(LedgerBalanceId.class)
 /**
  * Labor business object for LedgerBalance.
  */
 public class LedgerBalance extends Balance implements LaborLedgerBalance{
+    @Id
+
+    @Column(name = "FIN_OBJECT_CD")
+
     private String financialObjectCode;
+    @Id
+
+    @Column(name = "FIN_SUB_OBJ_CD")
+
     private String financialSubObjectCode;
+    @Id
+
+    @Column(name = "FIN_BALANCE_TYP_CD")
+
     private String financialBalanceTypeCode;
+    @Id
+
+    @Column(name = "FIN_OBJ_TYP_CD")
+
     private String financialObjectTypeCode;
+    @Id
+
+    @Column(name = "POSITION_NBR")
+
     private String positionNumber;
+    @Id
+
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Column(name = "FIN_BEG_BAL_LN_AMT")
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
     private KualiDecimal financialBeginningBalanceLineAmount;
+    @Column(name = "TIMESTAMP")
+
     private Timestamp transactionDateTimeStamp;
     private String financialObjectFringeOrSalaryCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
+
     private ObjectType financialObjectType;
     private Person ledgerPerson;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_OBJECT_CD", referencedColumnName = "FIN_OBJECT_CD", insertable = false, updatable = false)
+
+    })
+
     private LaborObject laborObject;
 
     /**

@@ -44,7 +44,20 @@ import org.kuali.rice.krad.datadictionary.AttributeDefinition;
 import org.kuali.rice.krad.datadictionary.BusinessObjectEntry;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
+
+@Entity
+@Table(name = "LD_EXP_TRNFR_DOC_T")
 /**
  * Labor Document Class for the Salary Expense Transfer Document.
  */
@@ -52,6 +65,10 @@ public class SalaryExpenseTransferDocument extends LaborExpenseTransferDocumentB
     protected static final org.apache.commons.logging.Log LOG = org.apache.commons.logging.LogFactory.getLog(SalaryExpenseTransferDocument.class);
 
     protected Map<String, KualiDecimal> approvalObjectCodeBalances;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+
     protected ErrorCertification errorCertification;
 
     /**

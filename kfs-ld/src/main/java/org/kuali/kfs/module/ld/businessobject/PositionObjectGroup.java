@@ -25,12 +25,32 @@ import org.kuali.kfs.integration.ld.LaborLedgerPositionObjectGroup;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbCharBooleanConverter;
+
+@Entity
+@Table(name = "LD_POS_OBJ_GRP_T")
 /**
  * Labor business object for PositionObjectGroup
  */
 public class PositionObjectGroup extends PersistableBusinessObjectBase implements LaborLedgerPositionObjectGroup, MutableInactivatable {
+    @Id
+
+    @Column(name = "POS_OBJ_GRP_CD")
+
     private String positionObjectGroupCode;
+    @Column(name = "POS_OBJ_GRP_NM")
+
     private String positionObjectGroupName;
+    @Column(name = "ROW_ACTV_IND")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean active;
 
     /**

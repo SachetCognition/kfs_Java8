@@ -31,6 +31,19 @@ import org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntrySequenceHelper;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Entity
+@Table(name = "LD_EXP_TRNFR_DOC_T")
 /**
  * Labor Document class for the Benefit Expense Transfer Document and a base class for the year end benefit expense transfer
  * document

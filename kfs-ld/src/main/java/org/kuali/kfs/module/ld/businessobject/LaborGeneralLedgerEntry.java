@@ -26,37 +26,129 @@ import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiDecimalFieldConverter;
+
 /**
  * Labor business object for Labor General ledger Entry
  */
 
 // Temporarily changed to be extended from OriginEntryInformation.   
+@Entity
+@Table(name = "LD_LBR_GL_ENTRY_T")
+@IdClass(LaborGeneralLedgerEntryId.class)
 public class LaborGeneralLedgerEntry extends OriginEntryFull {
 
+    @Id
+
+
+    @Column(name = "UNIV_FISCAL_YR")
+
+
     private Integer universityFiscalYear;
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+
+    @Column(name = "ACCOUNT_NBR")
+
     private String accountNumber;
+    @Id
+
+    @Column(name = "SUB_ACCT_NBR")
+
     private String subAccountNumber;
+    @Id
+
+    @Column(name = "FIN_OBJECT_CD")
+
     private String financialObjectCode;
+    @Id
+
+    @Column(name = "FIN_SUB_OBJ_CD")
+
     private String financialSubObjectCode;
+    @Id
+
+    @Column(name = "FIN_BALANCE_TYP_CD")
+
     private String financialBalanceTypeCode;
+    @Id
+
+    @Column(name = "FIN_OBJ_TYP_CD")
+
     private String financialObjectTypeCode;
+    @Id
+
+    @Column(name = "UNIV_FISCAL_PRD_CD")
+
     private String universityFiscalPeriodCode;
+    @Id
+
+    @Column(name = "FDOC_TYP_CD")
+
     private String financialDocumentTypeCode;
+    @Id
+
+    @Column(name = "FS_ORIGIN_CD")
+
     private String financialSystemOriginationCode;
+    @Id
+
+    @Column(name = "FDOC_NBR")
+
     private String documentNumber;
+    @Id
+
+    @Column(name = "TRN_ENTR_SEQ_NBR")
+
     private Integer transactionLedgerEntrySequenceNumber;
+    @Column(name = "TRN_LDGR_ENTR_DESC")
+
     private String transactionLedgerEntryDescription;
+    @Column(name = "TRN_LDGR_ENTR_AMT")
+
+    @Convert(converter = OjbKualiDecimalFieldConverter.class)
+
     private KualiDecimal transactionLedgerEntryAmount;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
+
     private String transactionDebitCreditCode;
+    @Column(name = "TRANSACTION_DT")
+
     private Date transactionDate;
+    @Column(name = "ORG_DOC_NBR")
+
     private String organizationDocumentNumber;
+    @Column(name = "PROJECT_CD")
+
     private String projectCode;
+    @Column(name = "ORG_REFERENCE_ID")
+
     private String organizationReferenceId;
+    @Column(name = "FDOC_REF_TYP_CD")
+
     private String referenceFinancialDocumentTypeCode;
+    @Column(name = "FS_REF_ORIGIN_CD")
+
     private String referenceFinancialSystemOriginationCode;
+    @Column(name = "FDOC_REF_NBR")
+
     private String referenceFinancialDocumentNumber;
+    @Column(name = "FDOC_REVERSAL_DT")
+
     private Date financialDocumentReversalDate;
+    @Column(name = "TRN_ENCUM_UPDT_CD")
+
     private String transactionEncumbranceUpdateCode;
 
     /**

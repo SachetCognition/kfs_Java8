@@ -32,26 +32,108 @@ import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiPercent;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import org.kuali.kfs.module.ld.persistence.converter.OjbCharBooleanConverter;
+import org.kuali.kfs.module.ld.persistence.converter.OjbKualiPercentFieldConverter;
+
+@Entity
+@Table(name = "LD_BENEFITS_CALC_T")
+@IdClass(BenefitsCalculationId.class)
 /**
  * Labor business object for Benefits Calculation.
  */
 public class BenefitsCalculation extends PersistableBusinessObjectBase implements LaborLedgerBenefitsCalculation, MutableInactivatable, FiscalYearBasedBusinessObject {
 
+    @Id
+
+
+    @Column(name = "UNIV_FISCAL_YR")
+
+
     private Integer universityFiscalYear;
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+
+    @Column(name = "POS_BENEFIT_TYP_CD")
+
     private String positionBenefitTypeCode;
+    @Column(name = "POS_FRNG_BENE_PCT")
+
+    @Convert(converter = OjbKualiPercentFieldConverter.class)
+
     private KualiPercent positionFringeBenefitPercent;
+    @Column(name = "POS_FRNGBEN_OBJ_CD")
+
     private String positionFringeBenefitObjectCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "POS_FRNGBEN_OBJ_CD", referencedColumnName = "POS_FRNGBEN_OBJ_CD", insertable = false, updatable = false)
+
+    })
+
     private ObjectCode positionFringeBenefitObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "POS_BENEFIT_TYP_CD", insertable = false, updatable = false)
+
     private BenefitsType positionBenefitType;
     private transient SystemOptions universityFiscal;
+    @Column(name = "ACTV_IND")
+
+    @Convert(converter = OjbCharBooleanConverter.class)
+
     private boolean active;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "POS_FRNGBEN_OBJ_CD", referencedColumnName = "POS_FRNGBEN_OBJ_CD", insertable = false, updatable = false)
+
+    })
+
     private LaborObject laborObject;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "LBR_BEN_RT_CAT_CD", insertable = false, updatable = false)
+
     private LaborBenefitRateCategory laborBenefitRateCategory;
+    @Column(name = "LBR_BEN_RT_CAT_CD")
+
     private String laborBenefitRateCategoryCode;
     private Account laborAccountOffset;
     private ObjectCode laborObjectCodeOffset;
+    
+    @Column(name = "OFFSET_ACCOUNT_NBR")
+
     
     private String accountCodeOffset;
     private String objectCodeOffset;
