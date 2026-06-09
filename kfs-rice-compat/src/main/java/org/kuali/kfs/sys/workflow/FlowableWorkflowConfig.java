@@ -32,7 +32,7 @@ public class FlowableWorkflowConfig {
         SpringProcessEngineConfiguration config = new SpringProcessEngineConfiguration();
         config.setDataSource(dataSource);
         config.setTransactionManager(transactionManager);
-        config.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+        config.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_FALSE);
         config.setAsyncExecutorActivate(false);
         config.setDeploymentName("kfs-workflow");
         return config;
