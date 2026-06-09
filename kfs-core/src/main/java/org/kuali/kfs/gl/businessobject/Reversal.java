@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
@@ -45,48 +53,104 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents a reversal of a transaction
  */
+@Entity
+@Table(name = "GL_REVERSAL_T")
+@IdClass(Reversal.PK.class)
 public class Reversal extends PersistableBusinessObjectBase implements Transaction {
 
+    @Id
+    @Column(name = "FDOC_REVERSAL_DT")
     private Date financialDocumentReversalDate;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String financialSubObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Id
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String financialObjectTypeCode;
+    @Id
+    @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalPeriodCode;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "FS_ORIGIN_CD")
     private String financialSystemOriginationCode;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "TRN_ENTR_SEQ_NBR")
     private Integer transactionLedgerEntrySequenceNumber;
+    @Column(name = "TRN_LDGR_ENTR_DESC")
     private String transactionLedgerEntryDescription;
+    @Column(name = "TRN_LDGR_ENTR_AMT")
     private KualiDecimal transactionLedgerEntryAmount;
+    @Column(name = "TRN_DEBIT_CRDT_CD")
     private String transactionDebitCreditCode;
+    @Column(name = "TRANSACTION_DT")
     private Date transactionDate;
+    @Column(name = "ORG_DOC_NBR")
     private String organizationDocumentNumber;
+    @Column(name = "PROJECT_CD")
     private String projectCode;
+    @Column(name = "ORG_REFERENCE_ID")
     private String organizationReferenceId;
+    @Column(name = "FDOC_REF_TYP_CD")
     private String referenceFinancialDocumentTypeCode;
+    @Column(name = "FS_REF_ORIGIN_CD")
     private String referenceFinancialSystemOriginationCode;
+    @Column(name = "FDOC_REF_NBR")
     private String referenceFinancialDocumentNumber;
+    @Column(name = "TRN_ENCUM_UPDT_CD")
     private String transactionEncumbranceUpdateCode;
+    @Column(name = "TRN_POST_DT")
     private Date transactionPostingDate;
 
     // bo references
+    @Transient
     private Account account;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private BalanceType balanceType;
+    @Transient
     private Chart chart;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private ObjectType objectType;
+    @Transient
     private ProjectCode project;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
+    @Transient
     private UniversityDate universityDate;
+    @Transient
     private SystemOptions option;
+    @Transient
     private AccountingPeriod accountingPeriod;
+    @Transient
     private UniversityDate reversalDate;
 
     /**
@@ -763,5 +827,38 @@ public class Reversal extends PersistableBusinessObjectBase implements Transacti
         map.put(KFSPropertyConstants.DOCUMENT_NUMBER, getDocumentNumber());
         map.put("transactionLedgerEntrySequenceNumber", getTransactionLedgerEntrySequenceNumber());
         return map;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private java.sql.Date financialDocumentReversalDate;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String financialObjectCode;
+        private String financialSubObjectCode;
+        private String financialBalanceTypeCode;
+        private String financialObjectTypeCode;
+        private String universityFiscalPeriodCode;
+        private String financialDocumentTypeCode;
+        private String financialSystemOriginationCode;
+        private String documentNumber;
+        private Integer transactionLedgerEntrySequenceNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(financialDocumentReversalDate, that.financialDocumentReversalDate) && java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(financialObjectCode, that.financialObjectCode) && java.util.Objects.equals(financialSubObjectCode, that.financialSubObjectCode) && java.util.Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode) && java.util.Objects.equals(financialObjectTypeCode, that.financialObjectTypeCode) && java.util.Objects.equals(universityFiscalPeriodCode, that.universityFiscalPeriodCode) && java.util.Objects.equals(financialDocumentTypeCode, that.financialDocumentTypeCode) && java.util.Objects.equals(financialSystemOriginationCode, that.financialSystemOriginationCode) && java.util.Objects.equals(documentNumber, that.documentNumber) && java.util.Objects.equals(transactionLedgerEntrySequenceNumber, that.transactionLedgerEntrySequenceNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(financialDocumentReversalDate, universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, financialObjectCode, financialSubObjectCode, financialBalanceTypeCode, financialObjectTypeCode, universityFiscalPeriodCode, financialDocumentTypeCode, financialSystemOriginationCode, documentNumber, transactionLedgerEntrySequenceNumber);
+        }
     }
 }

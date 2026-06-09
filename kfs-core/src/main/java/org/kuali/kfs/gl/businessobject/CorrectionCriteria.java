@@ -19,6 +19,18 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,17 +40,36 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Represents a GLCP criteria
  */
+@Entity
+@Table(name = "GL_COR_CRTA_T")
+@IdClass(CorrectionCriteria.PK.class)
 public class CorrectionCriteria extends PersistableBusinessObjectBase implements Comparable {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_GRP_LN_NBR")
     private Integer correctionChangeGroupLineNumber;
+    @Id
+    @Column(name = "GL_COR_CRTA_LN_NBR")
     private Integer correctionCriteriaLineNumber;
+    @Column(name = "GL_COR_STRT_POS")
     private Integer correctionStartPosition;
+    @Column(name = "GL_COR_END_POS")
     private Integer correctionEndPosition;
+    @Column(name = "GL_COR_OPR_CD")
     private String correctionOperatorCode;
+    @Column(name = "GL_COR_FIELD_VAL")
     private String correctionFieldValue;
+    @Column(name = "GL_COR_FIELD_NM")
     private String correctionFieldName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false),
+        @JoinColumn(name = "GL_COR_CHG_GRP_LN_NBR", insertable = false, updatable = false)
+    })
     private CorrectionChangeGroup correctionChangeGroup;
 
     public CorrectionCriteria() {
@@ -156,5 +187,27 @@ public class CorrectionCriteria extends PersistableBusinessObjectBase implements
             m.put("correctionCriteriaLineNumber", this.correctionCriteriaLineNumber.toString());
         }
         return m;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String documentNumber;
+        private Integer correctionChangeGroupLineNumber;
+        private Integer correctionCriteriaLineNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(documentNumber, that.documentNumber) && java.util.Objects.equals(correctionChangeGroupLineNumber, that.correctionChangeGroupLineNumber) && java.util.Objects.equals(correctionCriteriaLineNumber, that.correctionCriteriaLineNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(documentNumber, correctionChangeGroupLineNumber, correctionCriteriaLineNumber);
+        }
     }
 }

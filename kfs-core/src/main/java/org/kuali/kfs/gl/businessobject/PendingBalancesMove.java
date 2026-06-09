@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -28,14 +36,24 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * This class represents a pending balances move
  * 
  */
+@Entity
+@Table(name = "GL_PENDING_BALANCES_MT")
 public class PendingBalancesMove extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
+    @Column(name = "APPR_BUDGET")
     private KualiDecimal appropriationBudget;
+    @Column(name = "APPR_ACTUAL")
     private KualiDecimal appropriationActual;
+    @Column(name = "APPR_ENCUM")
     private KualiDecimal appropriationEncumbrance;
+    @Column(name = "PEND_BUDGET")
     private KualiDecimal pendingBudget;
+    @Column(name = "PEND_ACTUAL")
     private KualiDecimal pendingActual;
+    @Column(name = "PEND_ENCUM")
     private KualiDecimal pendingEncumbrance;
 
     /**

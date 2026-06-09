@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,14 +42,25 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents a GLCP correction change group
  */
+@Entity
+@Table(name = "GL_COR_CHG_GRP_T")
+@IdClass(CorrectionChangeGroup.PK.class)
 public class CorrectionChangeGroup extends PersistableBusinessObjectBase implements Comparable {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionChangeGroup.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "GL_COR_CHG_GRP_LN_NBR")
     private Integer correctionChangeGroupLineNumber;
+    @Column(name = "GL_COR_CRTA_NXT_LN_NBR")
     private Integer correctionCriteriaNextLineNumber;
+    @Column(name = "GL_COR_CHG_NXT_LN_NBR")
     private Integer correctionChangeNextLineNumber;
+    @Transient
     private List<CorrectionCriteria> correctionCriteria;
+    @Transient
     private List<CorrectionChange> correctionChange;
 
     public CorrectionChangeGroup(String documentNumber, Integer correctionChangeGroupLineNumber) {
@@ -282,5 +303,26 @@ public class CorrectionChangeGroup extends PersistableBusinessObjectBase impleme
             return ccg1.getCorrectionChangeGroupLineNumber().compareTo(ccg2.getCorrectionChangeGroupLineNumber());
         }
 
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String documentNumber;
+        private Integer correctionChangeGroupLineNumber;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(documentNumber, that.documentNumber) && java.util.Objects.equals(correctionChangeGroupLineNumber, that.correctionChangeGroupLineNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(documentNumber, correctionChangeGroupLineNumber);
+        }
     }
 }

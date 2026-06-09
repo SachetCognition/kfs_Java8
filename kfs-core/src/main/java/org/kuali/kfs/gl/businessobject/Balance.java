@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
@@ -40,46 +50,94 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * sub account number, object code, sub object code, balance type code, object type code
  * 
  */
+@Entity
+@Table(name = "GL_BALANCE_T")
+@IdClass(Balance.PK.class)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Balance extends PersistableBusinessObjectBase {
     static final long serialVersionUID = 6581797610149985575L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "FIN_OBJECT_CD")
     private String objectCode;
+    @Id
+    @Column(name = "FIN_SUB_OBJ_CD")
     private String subObjectCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String balanceTypeCode;
+    @Id
+    @Column(name = "FIN_OBJ_TYP_CD")
     private String objectTypeCode;
+    @Column(name = "ACLN_ANNL_BAL_AMT")
     private KualiDecimal accountLineAnnualBalanceAmount;
    
+    @Column(name = "FIN_BEG_BAL_LN_AMT")
     private KualiDecimal beginningBalanceLineAmount;
+    @Column(name = "CONTR_GR_BB_AC_AMT")
     private KualiDecimal contractsGrantsBeginningBalanceAmount;
+    @Column(name = "MO1_ACCT_LN_AMT")
     private KualiDecimal month1Amount;
+    @Column(name = "MO2_ACCT_LN_AMT")
     private KualiDecimal month2Amount;
+    @Column(name = "MO3_ACCT_LN_AMT")
     private KualiDecimal month3Amount;
+    @Column(name = "MO4_ACCT_LN_AMT")
     private KualiDecimal month4Amount;
+    @Column(name = "MO5_ACCT_LN_AMT")
     private KualiDecimal month5Amount;
+    @Column(name = "MO6_ACCT_LN_AMT")
     private KualiDecimal month6Amount;
+    @Column(name = "MO7_ACCT_LN_AMT")
     private KualiDecimal month7Amount;
+    @Column(name = "MO8_ACCT_LN_AMT")
     private KualiDecimal month8Amount;
+    @Column(name = "MO9_ACCT_LN_AMT")
     private KualiDecimal month9Amount;
+    @Column(name = "MO10_ACCT_LN_AMT")
     private KualiDecimal month10Amount;
+    @Column(name = "MO11_ACCT_LN_AMT")
     private KualiDecimal month11Amount;
+    @Column(name = "MO12_ACCT_LN_AMT")
     private KualiDecimal month12Amount;
+    @Column(name = "MO13_ACCT_LN_AMT")
     private KualiDecimal month13Amount;
+    @Column(name = "TIMESTAMP")
     private Date timestamp;
 
+    @Transient
     private Chart chart;
+    @Transient
     private Account account;
+    @Transient
     private PriorYearAccount priorYearAccount;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private BalanceType balanceType;
+    @Transient
     private ObjectType objectType;
 
+    @Transient
+
     private TransientBalanceInquiryAttributes dummyBusinessObject;
+    @Transient
     private SystemOptions option;
 
     /**
@@ -802,8 +860,12 @@ public class Balance extends PersistableBusinessObjectBase {
         this.priorYearAccount = priorYearAccount;
     }
     
+    @Transient
+    
     private String fundGroup; // a transient attribute
+    @Transient
     private KualiDecimal yearBalance = KualiDecimal.ZERO; // a transient attribute
+    @Transient
     private KualiDecimal yearToDayBalance = KualiDecimal.ZERO; // a transient attribute
 
     /**
@@ -861,5 +923,32 @@ public class Balance extends PersistableBusinessObjectBase {
         combinedBeginningBalanceAmount = combinedBeginningBalanceAmount.add(getBeginningBalanceLineAmount());
         combinedBeginningBalanceAmount = combinedBeginningBalanceAmount.add(getContractsGrantsBeginningBalanceAmount());
         return combinedBeginningBalanceAmount;
+    }
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private Integer universityFiscalYear;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String objectCode;
+        private String subObjectCode;
+        private String balanceTypeCode;
+        private String objectTypeCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(universityFiscalYear, that.universityFiscalYear) && java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(objectCode, that.objectCode) && java.util.Objects.equals(subObjectCode, that.subObjectCode) && java.util.Objects.equals(balanceTypeCode, that.balanceTypeCode) && java.util.Objects.equals(objectTypeCode, that.objectTypeCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, objectCode, subObjectCode, balanceTypeCode, objectTypeCode);
+        }
     }
 }
