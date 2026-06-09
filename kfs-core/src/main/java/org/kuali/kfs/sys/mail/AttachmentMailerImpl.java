@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.mail;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.rice.core.mail.MailerImpl;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -65,9 +65,9 @@ public class AttachmentMailerImpl extends MailerImpl implements AttachmentMailer
             }
             mailSender.send(mmm.getMimeMessage());
         }
-        catch (jakarta.mail.MessagingException e) {
+        catch (MessagingException e) {
             LOG.error("sendEmail() - Error sending email.", e);
-            throw new MessagingException(e.getMessage(), e);
+            throw e;
         }
         catch (Exception e) {
             LOG.error("sendEmail() - Error sending email.", e);

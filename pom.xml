@@ -66,9 +66,6 @@
   </prerequisites>
   <properties>
 
-    <!-- Spring Boot version -->
-    <spring-boot.version>3.3.5</spring-boot.version>
-
     <!-- Default empty argLine so ${argLine} resolves when JaCoCo is skipped -->
     <argLine></argLine>
     <!-- Shared JVM flags for surefire: add-opens for OJB CGLIB on Java 21 -->
@@ -148,6 +145,20 @@
     <wstx-asl.version>3.2.9</wstx-asl.version>
     <xapool.version>1.5.0-patch4</xapool.version>
 
+    <!-- JPA / Hibernate – OJB→JPA migration infrastructure (S-2-SETUP) -->
+    <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
+    <hibernate.version>6.4.4.Final</hibernate.version>
+
+    <!-- Spring Boot 3.3.x (S-4C) -->
+    <spring-boot.version>3.3.5</spring-boot.version>
+    <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+    <jakarta.mail-api.version>2.1.3</jakarta.mail-api.version>
+    <jakarta.inject-api.version>2.0.1</jakarta.inject-api.version>
+    <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
+    <jakarta.activation-api.version>2.1.3</jakarta.activation-api.version>
+    <jakarta.xml.bind-api.version>4.0.2</jakarta.xml.bind-api.version>
+    <jaxb-runtime.version>4.0.5</jaxb-runtime.version>
+
     <db.groupId>${mysql.groupId}</db.groupId>
     <db.artifactId>${mysql.artifactId}</db.artifactId>
     <db.version>${mysql.version}</db.version>
@@ -170,9 +181,23 @@
     <jul-to-slf4j.version>${slf4j.version}</jul-to-slf4j.version>
 
   </properties>
-  <!-- NOTE: Spring Boot BOM (3.3.5) will be added to <dependencyManagement> in Phase 4 (S-4A)
-       when Rice is fully removed and Spring Boot is adopted. Adding it now would override
-       Spring 3.x transitives from Rice with Spring 6.x, breaking compilation. -->
+  <dependencyManagement>
+    <dependencies>
+      <!-- Quartz 2.3.x for Spring Boot 3.x / Spring 6.x scheduler integration -->
+      <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>2.3.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -260,6 +285,13 @@
         <version>3.12.1</version>
         <configuration>
           <release>21</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.hibernate.orm</groupId>
+              <artifactId>hibernate-jpamodelgen</artifactId>
+              <version>${hibernate.version}</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>
@@ -966,12 +998,7 @@
       <version>${db.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <version>${jsp-api.version}</version>
-      <scope>provided</scope>
-    </dependency>
+
       <dependency>
         <groupId>commons-transaction</groupId>
         <artifactId>commons-transaction</artifactId>
@@ -988,17 +1015,7 @@
           </exclusion>
         </exclusions>
       </dependency>
-      <dependency>
-        <groupId>javax.servlet.jsp.jstl</groupId>
-        <artifactId>jstl-api</artifactId>
-        <version>${jstl-api.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
+
     <!-- logging setup -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -1029,7 +1046,6 @@
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
       <version>${log4j2.version}</version>
-      <scope>runtime</scope>
     </dependency>
     <!-- Bridge: routes Log4j 1.x API calls to Log4j 2.x -->
     <dependency>
@@ -1064,6 +1080,8 @@
       <version>${xapool.version}</version>
       <scope>runtime</scope>
     </dependency>
+    <!-- Legacy javax APIs kept for Rice 2.x backward compatibility (S-4C) -->
+    <!-- These will be removed once Rice is fully replaced -->
     <dependency>
       <groupId>javax.xml.bind</groupId>
       <artifactId>jaxb-api</artifactId>
@@ -1101,11 +1119,34 @@
       <artifactId>javax.jws-api</artifactId>
       <version>1.1</version>
     </dependency>
+    <!-- Jakarta APIs needed by KFS shim classes (S-4C) -->
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+      <version>2.0.1</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>${servlet-api.version}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>${jsp-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>jstl-api</artifactId>
+      <version>${jstl-api.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.ws.security</groupId>
@@ -1122,6 +1163,58 @@
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
       <version>${liquibase.version}</version>
+    </dependency>
+
+    <!-- JPA 3.1 / Hibernate 6.4 – OJB→JPA migration infrastructure (S-2-SETUP) -->
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <version>${jakarta.persistence.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-jpamodelgen</artifactId>
+      <version>${hibernate.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Spring Boot starters (S-4C) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate.orm</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+
+    <!-- Quartz scheduler (was transitive via Rice; now direct) -->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
     </dependency>
 
   </dependencies>
