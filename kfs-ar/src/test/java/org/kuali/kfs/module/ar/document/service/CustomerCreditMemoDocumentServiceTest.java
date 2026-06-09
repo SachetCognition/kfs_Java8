@@ -65,11 +65,11 @@ public class CustomerCreditMemoDocumentServiceTest extends KualiTestBase {
         CustomerCreditMemoDetail detail1 = new CustomerCreditMemoDetail();
         detail1.setFinancialDocumentReferenceInvoiceNumber(documentNumber);
         detail1.setCreditMemoItemQuantity(new BigDecimal(0.5));
-        detail1.setReferenceInvoiceItemNumber(new Integer(1));
+        detail1.setReferenceInvoiceItemNumber(Integer.valueOf(1));
         
         CustomerCreditMemoDetail detail2 = new CustomerCreditMemoDetail();
         detail2.setFinancialDocumentReferenceInvoiceNumber(documentNumber);
-        detail2.setReferenceInvoiceItemNumber(new Integer(2));
+        detail2.setReferenceInvoiceItemNumber(Integer.valueOf(2));
         
         details.add(detail1);
         details.add(detail2);
@@ -104,7 +104,7 @@ public class CustomerCreditMemoDocumentServiceTest extends KualiTestBase {
         
         details = document.getCreditMemoDetails();
         for (CustomerCreditMemoDetail crmDetail:details) {
-            if (crmDetail.getReferenceInvoiceItemNumber().equals(new Integer(1))) {
+            if (crmDetail.getReferenceInvoiceItemNumber().equals(Integer.valueOf(1))) {
                 assertTrue(crmDetail.getCreditMemoItemTotalAmount().equals(testAmount));
                 assertTrue(crmDetail.getCreditMemoItemTaxAmount().equals(KualiDecimal.ZERO));
                 assertTrue(crmDetail.getCreditMemoLineTotalAmount().equals(testAmount));

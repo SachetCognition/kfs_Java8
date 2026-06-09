@@ -125,7 +125,7 @@ public class SalaryExpenseTransferTransactionAgeServiceImpl implements SalaryExp
         String newComparePeriods = parameterService.getSubParameterValueAsString(KfsParameterConstants.LABOR_DOCUMENT.class, ERROR_CERTIFICATION_DEFAULT_OVERRIDE_BY_SUB_FUND, subFundGroupCode);
 
         if (ObjectUtils.isNotNull(newComparePeriods)) {
-            periodsFromParameter = new Integer(newComparePeriods);
+            periodsFromParameter = Integer.valueOf(newComparePeriods);
         }
 
         return periodsFromParameter;

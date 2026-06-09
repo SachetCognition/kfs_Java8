@@ -111,13 +111,13 @@ public class CollectorServiceTest extends KualiTestBase {
         MockCollectorBatch collectorBatch = new MockCollectorBatch();
         populateMockCollectorBatch(collectorBatch);
         OriginEntryFull entry = new OriginEntryFull();
-        entry.setUniversityFiscalYear(new Integer(2007));
+        entry.setUniversityFiscalYear(Integer.valueOf(2007));
         entry.setChartOfAccountsCode("BA");
         entry.setAccountNumber("1912610");
         collectorBatch.addOriginEntry(entry);
 
         CollectorDetail collectorDetail = new CollectorDetail();
-        collectorDetail.setUniversityFiscalYear(new Integer(2007));
+        collectorDetail.setUniversityFiscalYear(Integer.valueOf(2007));
         collectorDetail.setChartOfAccountsCode("UA");
         collectorDetail.setAccountNumber("1912660");
         collectorBatch.addCollectorDetail(collectorDetail);

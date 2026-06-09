@@ -116,7 +116,7 @@ public enum PurchaseOrderVendorQuoteFixture {
         vendorQuote.setVendorAddressInternationalProvinceName (vendorAddressInternationalProvinceName);
 
         SequenceAccessorService sequenceAccessorService = SpringContext.getBean(SequenceAccessorService.class);
-        Integer purchaseOrderVendorQuoteIdentifier = new Integer(sequenceAccessorService.getNextAvailableSequenceNumber("PO_VNDR_QT_ID").toString());
+        Integer purchaseOrderVendorQuoteIdentifier = Integer.valueOf(sequenceAccessorService.getNextAvailableSequenceNumber("PO_VNDR_QT_ID").toString());
         vendorQuote.setPurchaseOrderVendorQuoteIdentifier(purchaseOrderVendorQuoteIdentifier);
         vendorQuote.refreshNonUpdateableReferences();
         

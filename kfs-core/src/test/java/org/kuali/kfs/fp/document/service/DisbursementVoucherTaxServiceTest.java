@@ -53,10 +53,10 @@ public class DisbursementVoucherTaxServiceTest extends KualiTestBase {
         line.setAccountNumber("1912610");
         line.setFinancialObjectCode("5000");
         line.setAmount(new KualiDecimal(100));
-        line.setSequenceNumber(new Integer(1));
+        line.setSequenceNumber(Integer.valueOf(1));
 
         dvDocument.getSourceAccountingLines().add(line);
-        dvDocument.setNextSourceLineNumber(new Integer(2));
+        dvDocument.setNextSourceLineNumber(Integer.valueOf(2));
     }
 
     /**
@@ -139,9 +139,9 @@ public class DisbursementVoucherTaxServiceTest extends KualiTestBase {
         SpringContext.getBean(DisbursementVoucherTaxService.class).processNonResidentAlienTax(dvDocument);
         List newTaxNumbers = SpringContext.getBean(DisbursementVoucherTaxService.class).getNRATaxLineNumbers(dvDocument.getDvNonResidentAlienTax().getFinancialDocumentAccountingLineText());
         assertTrue(newTaxNumbers.size() == 2);
-        assertTrue(newTaxNumbers.get(0).equals(new Integer(2)));
-        assertTrue(newTaxNumbers.get(1).equals(new Integer(3)));
-        assertTrue(dvDocument.getNextSourceLineNumber().equals(new Integer(4)));
+        assertTrue(newTaxNumbers.get(0).equals(Integer.valueOf(2)));
+        assertTrue(newTaxNumbers.get(1).equals(Integer.valueOf(3)));
+        assertTrue(dvDocument.getNextSourceLineNumber().equals(Integer.valueOf(4)));
         assertTrue(dvDocument.getSourceAccountingLines().size() == 3);
 
         // test clearning
@@ -154,9 +154,9 @@ public class DisbursementVoucherTaxServiceTest extends KualiTestBase {
         SpringContext.getBean(DisbursementVoucherTaxService.class).processNonResidentAlienTax(dvDocument);
         newTaxNumbers = SpringContext.getBean(DisbursementVoucherTaxService.class).getNRATaxLineNumbers(dvDocument.getDvNonResidentAlienTax().getFinancialDocumentAccountingLineText());
         assertTrue(newTaxNumbers.size() == 2);
-        assertTrue(newTaxNumbers.get(0).equals(new Integer(4)));
-        assertTrue(newTaxNumbers.get(1).equals(new Integer(5)));
-        assertTrue(dvDocument.getNextSourceLineNumber().equals(new Integer(6)));
+        assertTrue(newTaxNumbers.get(0).equals(Integer.valueOf(4)));
+        assertTrue(newTaxNumbers.get(1).equals(Integer.valueOf(5)));
+        assertTrue(dvDocument.getNextSourceLineNumber().equals(Integer.valueOf(6)));
         assertEquals(3, dvDocument.getSourceAccountingLines().size());
 
         // validate debit of check total amount and accounting lines

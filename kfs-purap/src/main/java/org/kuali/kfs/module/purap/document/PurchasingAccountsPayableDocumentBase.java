@@ -458,7 +458,7 @@ public abstract class PurchasingAccountsPayableDocumentBase extends AccountingDo
 
             // only set the item line number for above the line items
             if (item.getItemType().isLineItemIndicator()) {
-                item.setItemLineNumber(new Integer(i + 1));
+                item.setItemLineNumber(Integer.valueOf(i + 1));
             }
         }
     }

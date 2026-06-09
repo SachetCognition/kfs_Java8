@@ -113,7 +113,7 @@ public class PurchasingServiceTestDontRunThisYet extends KualiTestBase {
 //    }
 //    
 //    public void testCABModuleServiceIndividualNewRequisitionValidation() {
-//        Integer requisitionId = new Integer(1012);
+//        Integer requisitionId = Integer.valueOf(1012);
 //        RequisitionDocument document = SpringContext.getBean(RequisitionService.class).getRequisitionById(requisitionId);
 //        List<PurchasingCapitalAssetItem> capitalAssetItems = document.getPurchasingCapitalAssetItems();
 //        //The capitalAssetSystems is supposed to be null in the INDIVIDUAL system type.
@@ -122,7 +122,7 @@ public class PurchasingServiceTestDontRunThisYet extends KualiTestBase {
 //    }
 //
 //    public void testCABModuleServiceIndividualModRequisitionValidation() {
-//        Integer requisitionId = new Integer(1013);
+//        Integer requisitionId = Integer.valueOf(1013);
 //        RequisitionDocument document = SpringContext.getBean(RequisitionService.class).getRequisitionById(requisitionId);
 //        List<PurchasingCapitalAssetItem> capitalAssetItems = document.getPurchasingCapitalAssetItems();
 //        //The capitalAssetSystems is supposed to be null in the INDIVIDUAL system type.
@@ -131,7 +131,7 @@ public class PurchasingServiceTestDontRunThisYet extends KualiTestBase {
 //    }
 //    
 //    public void testCABModuleServiceOneSystemNewRequisitionValidation() {
-//        Integer requisitionId = new Integer(1004);
+//        Integer requisitionId = Integer.valueOf(1004);
 //        RequisitionDocument document = SpringContext.getBean(RequisitionService.class).getRequisitionById(requisitionId);
 //        List<PurchasingCapitalAssetItem> capitalAssetItems = document.getPurchasingCapitalAssetItems();
 //        List<CapitalAssetSystem> capitalAssetSystems = document.getPurchasingCapitalAssetSystems();
@@ -140,7 +140,7 @@ public class PurchasingServiceTestDontRunThisYet extends KualiTestBase {
 //    }
 //
 //    public void testCABModuleServiceOneSystemModRequisitionValidation() {
-//        Integer requisitionId = new Integer(1014);
+//        Integer requisitionId = Integer.valueOf(1014);
 //        RequisitionDocument document = SpringContext.getBean(RequisitionService.class).getRequisitionById(requisitionId);
 //        List<PurchasingCapitalAssetItem> capitalAssetItems = document.getPurchasingCapitalAssetItems();
 //        List<CapitalAssetSystem> capitalAssetSystems = document.getPurchasingCapitalAssetSystems();
@@ -149,7 +149,7 @@ public class PurchasingServiceTestDontRunThisYet extends KualiTestBase {
 //    }
 //    
 //    public void testCABModuleServiceMultipleSystemNewRequisitionValidation() {
-//        Integer requisitionId = new Integer(1010);
+//        Integer requisitionId = Integer.valueOf(1010);
 //        RequisitionDocument document = SpringContext.getBean(RequisitionService.class).getRequisitionById(requisitionId);
 //        List<PurchasingCapitalAssetItem> capitalAssetItems = document.getPurchasingCapitalAssetItems();
 //        List<CapitalAssetSystem> capitalAssetSystems = document.getPurchasingCapitalAssetSystems();
@@ -158,7 +158,7 @@ public class PurchasingServiceTestDontRunThisYet extends KualiTestBase {
 //    }
 //    
 //    public void testCABModuleServiceMultipleSystemModRequisitionValidation() {
-//        Integer requisitionId = new Integer(1015);
+//        Integer requisitionId = Integer.valueOf(1015);
 //        RequisitionDocument document = SpringContext.getBean(RequisitionService.class).getRequisitionById(requisitionId);
 //        List<PurchasingCapitalAssetItem> capitalAssetItems = document.getPurchasingCapitalAssetItems();
 //        List<CapitalAssetSystem> capitalAssetSystems = document.getPurchasingCapitalAssetSystems();

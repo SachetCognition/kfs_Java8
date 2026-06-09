@@ -131,7 +131,7 @@ public class VerifyBillingFrequencyServiceTest extends KualiTestBase {
         assertEquals(Date.valueOf(beginningDate), billingPeriod.getStartDate());
         assertEquals(Date.valueOf(endDate), billingPeriod.getEndDate());
 
-        boolean withinGracePeriod = verifyBillingFrequencyService.calculateIfWithinGracePeriod(date, billingPeriod.getEndDate(), billingPeriod.getStartDate(), award.getLastBilledDate(), new Integer(0));
+        boolean withinGracePeriod = verifyBillingFrequencyService.calculateIfWithinGracePeriod(date, billingPeriod.getEndDate(), billingPeriod.getStartDate(), award.getLastBilledDate(), Integer.valueOf(0));
         assertEquals(expectedWithinGracePeriod, withinGracePeriod);
     }
 

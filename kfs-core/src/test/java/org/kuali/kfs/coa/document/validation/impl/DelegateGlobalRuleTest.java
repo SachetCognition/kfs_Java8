@@ -102,7 +102,7 @@ public class DelegateGlobalRuleTest extends ChartRuleTestBase {
         delegateGlobals.add(listItem);
 
         Integer result = rule.checkPrimaryRoutePerDocType(delegateGlobal, delegateGlobals, null);
-        assertEquals(new Integer(0), result);
+        assertEquals(Integer.valueOf(0), result);
     }
 
     public void testCheckOnlyOnePrimaryRoute_NewLine_OnePrimaryWithSameDocType() {
@@ -125,7 +125,7 @@ public class DelegateGlobalRuleTest extends ChartRuleTestBase {
         delegateGlobals.add(listItem);
 
         Integer result = rule.checkPrimaryRoutePerDocType(delegateGlobal, delegateGlobals, null);
-        assertEquals(new Integer(1), result);
+        assertEquals(Integer.valueOf(1), result);
     }
 
 }

@@ -189,7 +189,7 @@ public class DisbursementVoucherPayeeDetail extends PersistableBusinessObjectBas
     public Integer getDisbVchrVendorHeaderIdNumberAsInteger() {
         if (getDisbVchrVendorHeaderIdNumber() != null) {
             try {
-                return new Integer(getDisbVchrVendorHeaderIdNumber());
+                return Integer.valueOf(getDisbVchrVendorHeaderIdNumber());
             }
             catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
@@ -236,7 +236,7 @@ public class DisbursementVoucherPayeeDetail extends PersistableBusinessObjectBas
     public Integer getDisbVchrVendorDetailAssignedIdNumberAsInteger() {
         if (getDisbVchrVendorDetailAssignedIdNumber() != null) {
             try {
-                return new Integer(getDisbVchrVendorDetailAssignedIdNumber());
+                return Integer.valueOf(getDisbVchrVendorDetailAssignedIdNumber());
             }
             catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
@@ -722,7 +722,7 @@ public class DisbursementVoucherPayeeDetail extends PersistableBusinessObjectBas
     public Integer getDisbVchrVendorAddressIdNumberAsInteger() {
         if (getDisbVchrVendorAddressIdNumber() != null) {
             try {
-                return new Integer(getDisbVchrVendorAddressIdNumber());
+                return Integer.valueOf(getDisbVchrVendorAddressIdNumber());
             }
             catch (NumberFormatException nfe) {
                 nfe.printStackTrace();

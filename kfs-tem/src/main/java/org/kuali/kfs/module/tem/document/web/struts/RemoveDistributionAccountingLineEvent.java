@@ -52,7 +52,7 @@ public class RemoveDistributionAccountingLineEvent  implements Observer {
         wrapper.setAccountDistributionnextSourceLineNumber(lineNumber);
         int counter = 1;
         for (AccountingLine line : wrapper.getAccountDistributionsourceAccountingLines()){
-            line.setSequenceNumber(new Integer(counter));
+            line.setSequenceNumber(Integer.valueOf(counter));
             counter++;
         }
         

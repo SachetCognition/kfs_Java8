@@ -99,7 +99,7 @@ public class LedgerEntryForReporting implements BusinessObject{
         Object oAmount = entrySummary[5];
         Object oCount = entrySummary[6];
 
-        Integer fiscalYear = oFiscalYear != null ? new Integer(oFiscalYear.toString()) : null;
+        Integer fiscalYear = oFiscalYear != null ? Integer.valueOf(oFiscalYear.toString()) : null;
         String periodCode = oPeriodCode != null ? oPeriodCode.toString() : "  ";
         String balanceType = oBalanceType != null ? oBalanceType.toString() : "  ";
         String originCode = oOriginCode != null ? oOriginCode.toString() : "  ";

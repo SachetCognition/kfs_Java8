@@ -141,7 +141,7 @@ public class AccountBalanceLookupableHelperServiceImpl extends AbstractGeneralLe
                 Object[] array = (Object[]) avaiableAccountBalance;
                 AccountBalance accountBalance = new AccountBalance();
 
-                accountBalance.setUniversityFiscalYear(new Integer(array[i++].toString()));
+                accountBalance.setUniversityFiscalYear(Integer.valueOf(array[i++].toString()));
                 accountBalance.setChartOfAccountsCode(array[i++].toString());
 
                 accountBalance.setAccountNumber(array[i++].toString());

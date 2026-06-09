@@ -77,7 +77,7 @@ public abstract class PurchasingFormBase extends PurchasingAccountsPayableFormBa
         this.setNewPurchasingItemLine(setupNewPurchasingItemLine());
         newPurchasingItemLine.setItemTypeCode("ITEM");
 
-        this.accountDistributionnextSourceLineNumber = new Integer(1);
+        this.accountDistributionnextSourceLineNumber = Integer.valueOf(1);
         setAccountDistributionsourceAccountingLines(new ArrayList());
         this.setAccountDistributionnewSourceLine(setupNewAccountDistributionAccountingLine());
 
@@ -216,7 +216,7 @@ public abstract class PurchasingFormBase extends PurchasingAccountsPayableFormBa
     public void addAccountDistributionsourceAccountingLine(PurApAccountingLine line) {
         line.setSequenceNumber(this.getAccountDistributionnextSourceLineNumber());
         this.accountDistributionsourceAccountingLines.add(line);
-        this.accountDistributionnextSourceLineNumber = new Integer(this.getAccountDistributionnextSourceLineNumber().intValue() + 1);
+        this.accountDistributionnextSourceLineNumber = Integer.valueOf(this.getAccountDistributionnextSourceLineNumber().intValue() + 1);
         this.setAccountDistributionnewSourceLine(setupNewAccountDistributionAccountingLine());
     }
 

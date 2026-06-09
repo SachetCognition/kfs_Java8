@@ -58,7 +58,7 @@ public class CoinDetailTest extends KualiTestBase {
     }
 
     public enum CoinDetailCountFixture {
-        GOOD_COIN_AMOUNT(new Integer(5), new Integer(7), new Integer(3), new Integer(6), new Integer(9), new Integer(7)), ALL_FIVES_COIN_AMOUNT(new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5), new Integer(5)), ZERO_COIN_AMOUNT(new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0), new Integer(0)), NULL_COIN_AMOUNT(null, null, null, null, null, null), NEGATIVE_COIN_AMOUNT(new Integer(-5), new Integer(-7), new Integer(-3), new Integer(-6), new Integer(-9), new Integer(-7));
+        GOOD_COIN_AMOUNT(Integer.valueOf(5), Integer.valueOf(7), Integer.valueOf(3), Integer.valueOf(6), Integer.valueOf(9), Integer.valueOf(7)), ALL_FIVES_COIN_AMOUNT(Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5), Integer.valueOf(5)), ZERO_COIN_AMOUNT(Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0)), NULL_COIN_AMOUNT(null, null, null, null, null, null), NEGATIVE_COIN_AMOUNT(Integer.valueOf(-5), Integer.valueOf(-7), Integer.valueOf(-3), Integer.valueOf(-6), Integer.valueOf(-9), Integer.valueOf(-7));
 
         private Integer hundredCentCount;
         private Integer fiftyCentCount;
@@ -90,12 +90,12 @@ public class CoinDetailTest extends KualiTestBase {
 
     public void testAmountToCountConversion() {
         CoinDetail goodDetail = CoinDetailAmountFixture.GOOD_COIN_AMOUNT.convertToCoinDetail();
-        assertEquals(goodDetail.getHundredCentCount(), new Integer(5));
-        assertEquals(goodDetail.getFiftyCentCount(), new Integer(11));
-        assertEquals(goodDetail.getTwentyFiveCentCount(), new Integer(3));
-        assertEquals(goodDetail.getTenCentCount(), new Integer(6));
-        assertEquals(goodDetail.getFiveCentCount(), new Integer(9));
-        assertEquals(goodDetail.getOneCentCount(), new Integer(7));
+        assertEquals(goodDetail.getHundredCentCount(), Integer.valueOf(5));
+        assertEquals(goodDetail.getFiftyCentCount(), Integer.valueOf(11));
+        assertEquals(goodDetail.getTwentyFiveCentCount(), Integer.valueOf(3));
+        assertEquals(goodDetail.getTenCentCount(), Integer.valueOf(6));
+        assertEquals(goodDetail.getFiveCentCount(), Integer.valueOf(9));
+        assertEquals(goodDetail.getOneCentCount(), Integer.valueOf(7));
     }
 
     public void testCountToAmountConversion() {

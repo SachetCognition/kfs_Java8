@@ -35,13 +35,13 @@ public class CheckBaseTest extends KualiTestBase {
     private CheckBase crchk = null;
     private static final KualiDecimal AMOUNT = new KualiDecimal("100.27");
     private static final String GUID = "123456789012345678901234567890123456";
-    private static final Long VER_NBR = new Long(1);
+    private static final Long VER_NBR = Long.valueOf(1);
     private static Date date;
     private static final String CHECK_NUMBER = "123456";
     private static final String DESCRIPTION = "Description 123.";
     private static final String DOC_HDR_ID = "999999";
-    private static final Integer SEQ_ID = new Integer(1);
-    private static final Integer DEPOSIT_LINE_NUMBER = new Integer(1);
+    private static final Integer SEQ_ID = Integer.valueOf(1);
+    private static final Integer DEPOSIT_LINE_NUMBER = Integer.valueOf(1);
     private static final String GENERAL_LEDGER_INPUT_TYPE = "CR";
     private static final String CASHIERING_STATUS = "C";
 

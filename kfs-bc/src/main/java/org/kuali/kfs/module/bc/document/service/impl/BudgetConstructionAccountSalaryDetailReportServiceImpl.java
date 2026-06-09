@@ -174,7 +174,7 @@ public class BudgetConstructionAccountSalaryDetailReportServiceImpl implements B
      * @param BudgetConstructionLevelSummary bcas
      */
     protected void buildReportsBody(Integer universityFiscalYear, PendingBudgetConstructionAppointmentFunding pendingAppointmentFunding, BudgetConstructionAccountSalaryDetailReport accountMonthlyDetailReport) {
-        Integer amountChange = new Integer(0);
+        Integer amountChange = Integer.valueOf(0);
         BigDecimal percentChange = BigDecimal.ZERO;
 
         BudgetConstructionIntendedIncumbent intendedIncumbent = budgetConstructionReportsServiceHelper.getBudgetConstructionIntendedIncumbent(pendingAppointmentFunding);
@@ -292,7 +292,7 @@ public class BudgetConstructionAccountSalaryDetailReportServiceImpl implements B
         for (PendingBudgetConstructionAppointmentFunding totalEntry : listForTotal) {
             KualiInteger totalBaseAmount = KualiInteger.ZERO;
             BigDecimal totalBaseFte = BigDecimal.ZERO;
-            Integer totalRequestAmount = new Integer(0);
+            Integer totalRequestAmount = Integer.valueOf(0);
             BigDecimal totalRequestFte = BigDecimal.ZERO;
 
             BudgetConstructionAccountSalaryDetailReportTotal budgetConstructionAccountSalaryDetailReportTotal = new BudgetConstructionAccountSalaryDetailReportTotal();
@@ -305,7 +305,7 @@ public class BudgetConstructionAccountSalaryDetailReportServiceImpl implements B
                         totalBaseFte = totalBaseFte.add(csfTracker.getCsfFullTimeEmploymentQuantity());
                     }
 
-                    totalRequestAmount = totalRequestAmount + new Integer(appointmentFundingEntry.getAppointmentRequestedAmount().intValue());
+                    totalRequestAmount = totalRequestAmount + Integer.valueOf(appointmentFundingEntry.getAppointmentRequestedAmount().intValue());
                     totalRequestFte = totalRequestFte.add(appointmentFundingEntry.getAppointmentRequestedFteQuantity());
                 }
             }

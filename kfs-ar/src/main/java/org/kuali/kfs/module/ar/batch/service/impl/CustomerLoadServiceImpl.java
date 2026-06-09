@@ -417,7 +417,7 @@ public class CustomerLoadServiceImpl extends InitiateDirectoryBase implements Cu
         if (StringUtils.isBlank(maxRecordsString) || !StringUtils.isNumeric(maxRecordsString)) {
             criticalError("Expected 'Max Records Per Document' System Parameter is not available.");
         }
-        Integer maxRecords = new Integer(maxRecordsString);
+        Integer maxRecords = Integer.valueOf(maxRecordsString);
         if (customerUploads.size() > maxRecords.intValue()) {
             LOG.error("Too many records passed in for this file.  " + customerUploads.size() + " were passed in, and the limit is " + maxRecords + ".  As a result, no validation was done.");
             reporter.addFileErrorMessage("Too many records passed in for this file.  " + customerUploads.size() + " were passed in, and the limit is " + maxRecords + ".  As a result, no validation was done.");

@@ -962,7 +962,7 @@ public class AssetTransferDocument extends GeneralLedgerPostingDocumentBase impl
     public void prepareForSave(KualiDocumentEvent event) {
         super.prepareForSave(event);
         String accountingPeriodCompositeString = getAccountingPeriodCompositeString();                
-        setPostingYear(new Integer(StringUtils.right(accountingPeriodCompositeString, 4)));
+        setPostingYear(Integer.valueOf(StringUtils.right(accountingPeriodCompositeString, 4)));
         setPostingPeriodCode(StringUtils.left(accountingPeriodCompositeString, 2));
     }
 

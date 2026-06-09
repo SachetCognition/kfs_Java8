@@ -185,7 +185,7 @@ public class TaxServiceImpl implements TaxService {
         if (StringUtils.isBlank(digits)) { return null; }
         Integer digitsToUse;
         try {
-            digitsToUse = new Integer(digits);
+            digitsToUse = Integer.valueOf(digits);
         }
         catch (NumberFormatException ex) {
             throw new RuntimeException("The value returned for Parameter " + POSTAL_CODE_DIGITS_PASSED_TO_SALES_TAX_REGION_SERVICE + " was non-numeric and cannot be processed.", ex);

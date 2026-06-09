@@ -141,7 +141,7 @@ public class EncumbranceDaoOjb extends PlatformAwareDaoBaseOjb implements Encumb
 
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KFSPropertyConstants.CHART, chartOfAccountsCode);
-        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
+        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, Integer.valueOf(year));
 
         getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(Encumbrance.class, criteria));
 

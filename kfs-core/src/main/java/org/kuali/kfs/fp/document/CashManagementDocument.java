@@ -214,7 +214,7 @@ public class CashManagementDocument extends GeneralLedgerPostingDocumentBase imp
             }
         }
 
-        return new Integer(maxLineNumber + 1);
+        return Integer.valueOf(maxLineNumber + 1);
     }
 
     /**

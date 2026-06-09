@@ -27,8 +27,8 @@ import org.kuali.kfs.module.cg.businessobject.AwardAccount;
  */
 public enum AwardAccountFixture {
 
-    AWD_ACCT_1(new Long(111), "BL", "1031400", false, null, null),
-    AWD_ACCT_2(new Long(111), "BL", "0142900", false, null, null);
+    AWD_ACCT_1(Long.valueOf(111), "BL", "1031400", false, null, null),
+    AWD_ACCT_2(Long.valueOf(111), "BL", "0142900", false, null, null);
 
     private Long proposalNumber;
     private String chartOfAccountsCode;

@@ -91,7 +91,7 @@ public class ElectronicInvoiceRejectItem extends PersistableBusinessObjectBase {
 
         this.electronicInvoiceRejectDocument = electronicInvoiceRejectDocument;
         try {
-            this.invoiceItemLineNumber = new Integer(Integer.parseInt(eii.getInvoiceLineNumber()));
+            this.invoiceItemLineNumber = Integer.valueOf(Integer.parseInt(eii.getInvoiceLineNumber()));
         }
         catch (NumberFormatException n) {
             this.invoiceItemLineNumber = null;

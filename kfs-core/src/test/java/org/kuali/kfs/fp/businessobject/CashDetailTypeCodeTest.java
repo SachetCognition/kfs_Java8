@@ -29,7 +29,7 @@ public class CashDetailTypeCodeTest extends KualiTestBase {
     public static final String GUID = "123456789012345678901234567890123456";
     public static final String NAME = "NAME";
     public static final String CODE = "CODE";
-    public static final Long VER_NBR = new Long(1);
+    public static final Long VER_NBR = Long.valueOf(1);
     public static final String DESCRIPTION = "Description";
 
     @Override

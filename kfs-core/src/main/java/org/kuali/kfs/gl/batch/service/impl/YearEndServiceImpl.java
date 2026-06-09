@@ -113,12 +113,12 @@ public class YearEndServiceImpl implements YearEndService {
         Iterator<Balance> balanceIterator = null;
         if (closingHelper.isAnnualClosingChartParamterBlank()) {
             //process all charts, either ANNUAL_CLOSING_CHARTS parameter did not exist or there were no values specified
-            nominalActivityClosingCounts.put("globalReadCount", new Integer(balanceService.countBalancesForFiscalYear(varFiscalYear)));
+            nominalActivityClosingCounts.put("globalReadCount", Integer.valueOf(balanceService.countBalancesForFiscalYear(varFiscalYear)));
             balanceIterator = balanceService.findNominalActivityBalancesForFiscalYear(varFiscalYear);
         }
         else {
             //ANNUAL_CLOSING_CHARTS parameter was detected and contained values
-            nominalActivityClosingCounts.put("globalReadCount", new Integer(balanceService.countBalancesForFiscalYear(varFiscalYear, (List<String>) nominalClosingJobParameters.get(GeneralLedgerConstants.ColumnNames.CHART_OF_ACCOUNTS_CODE))));
+            nominalActivityClosingCounts.put("globalReadCount", Integer.valueOf(balanceService.countBalancesForFiscalYear(varFiscalYear, (List<String>) nominalClosingJobParameters.get(GeneralLedgerConstants.ColumnNames.CHART_OF_ACCOUNTS_CODE))));
             balanceIterator = balanceService.findNominalActivityBalancesForFiscalYear(varFiscalYear, (List<String>) nominalClosingJobParameters.get(GeneralLedgerConstants.ColumnNames.CHART_OF_ACCOUNTS_CODE));
         }
 
@@ -126,10 +126,10 @@ public class YearEndServiceImpl implements YearEndService {
 
         boolean selectSw = false;
 
-        nominalActivityClosingCounts.put("globalSelectCount", new Integer(0));
-        nominalActivityClosingCounts.put("sequenceNumber", new Integer(0));
-        nominalActivityClosingCounts.put("sequenceWriteCount", new Integer(0));
-        nominalActivityClosingCounts.put("sequenceCheckCount", new Integer(0));
+        nominalActivityClosingCounts.put("globalSelectCount", Integer.valueOf(0));
+        nominalActivityClosingCounts.put("sequenceNumber", Integer.valueOf(0));
+        nominalActivityClosingCounts.put("sequenceWriteCount", Integer.valueOf(0));
+        nominalActivityClosingCounts.put("sequenceCheckCount", Integer.valueOf(0));
 
         boolean nonFatalErrorFlag = false;
 
@@ -160,22 +160,22 @@ public class YearEndServiceImpl implements YearEndService {
                     incrementCount(nominalActivityClosingCounts, "sequenceNumber");
                 }
                 else {
-                    nominalActivityClosingCounts.put("sequenceNumber", new Integer(1));
+                    nominalActivityClosingCounts.put("sequenceNumber", Integer.valueOf(1));
                 }
                 incrementCount(nominalActivityClosingCounts, "globalSelectCount");
-                OriginEntryFull activityEntry = closingHelper.generateActivityEntry(balance, new Integer(1));
+                OriginEntryFull activityEntry = closingHelper.generateActivityEntry(balance, Integer.valueOf(1));
                 originEntryService.createEntry(activityEntry, nominalClosingPs);
                 ledgerReport.summarizeEntry(activityEntry);
                 incrementCount(nominalActivityClosingCounts, "sequenceWriteCount");
-                nominalActivityClosingCounts.put("sequenceCheckCount", new Integer(nominalActivityClosingCounts.get("sequenceWriteCount").intValue()));
+                nominalActivityClosingCounts.put("sequenceCheckCount", Integer.valueOf(nominalActivityClosingCounts.get("sequenceWriteCount").intValue()));
                 if (0 == nominalActivityClosingCounts.get("sequenceCheckCount").intValue() % 1000) {
                     LOG.info(new StringBuffer("  SEQUENTIAL RECORDS WRITTEN = ").append(nominalActivityClosingCounts.get("sequenceCheckCount")).toString());
                 }
-                OriginEntryFull offsetEntry = closingHelper.generateOffset(balance, new Integer(1));
+                OriginEntryFull offsetEntry = closingHelper.generateOffset(balance, Integer.valueOf(1));
                 originEntryService.createEntry(offsetEntry, nominalClosingPs);
                 ledgerReport.summarizeEntry(offsetEntry);
                 incrementCount(nominalActivityClosingCounts, "sequenceWriteCount");
-                nominalActivityClosingCounts.put("sequenceCheckCount", new Integer(nominalActivityClosingCounts.get("sequenceWriteCount").intValue()));
+                nominalActivityClosingCounts.put("sequenceCheckCount", Integer.valueOf(nominalActivityClosingCounts.get("sequenceWriteCount").intValue()));
                 if (0 == nominalActivityClosingCounts.get("sequenceCheckCount").intValue() % 1000) {
                     LOG.info(new StringBuffer(" ORIGIN ENTRIES INSERTED = ").append(nominalActivityClosingCounts.get("sequenceCheckCount")).toString());
                 }
@@ -220,7 +220,7 @@ public class YearEndServiceImpl implements YearEndService {
     protected int incrementCount(Map<String, Integer> counts, String countName) {
         Integer value = counts.get(countName);
         int incremented = value.intValue() + 1;
-        counts.put(countName, new Integer(incremented));
+        counts.put(countName, Integer.valueOf(incremented));
         return incremented;
     }
 
@@ -350,9 +350,9 @@ public class YearEndServiceImpl implements YearEndService {
         LOG.debug("forwardEncumbrances() started");
 
         // counters for the report
-        counts.put("encumbrancesRead", new Integer(0));
-        counts.put("encumbrancesSelected", new Integer(0));
-        counts.put("originEntriesWritten", new Integer(0));
+        counts.put("encumbrancesRead", Integer.valueOf(0));
+        counts.put("encumbrancesSelected", Integer.valueOf(0));
+        counts.put("originEntriesWritten", Integer.valueOf(0));
 
         LedgerSummaryReport forwardEncumbranceLedgerReport = new LedgerSummaryReport();
 

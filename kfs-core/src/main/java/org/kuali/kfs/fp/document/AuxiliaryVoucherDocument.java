@@ -571,7 +571,7 @@ public class AuxiliaryVoucherDocument extends AccountingDocumentBase implements 
         GeneralLedgerPendingEntry recodeGlpe = new GeneralLedgerPendingEntry(explicitEntry);
 
         // set the sequence number according to what was passed in - this is managed external to this method
-        recodeGlpe.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+        recodeGlpe.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
 
         // set the document type to that of a Distrib. Of Income and Expense
         recodeGlpe.setFinancialDocumentTypeCode(KFSConstants.FinancialDocumentTypeCodes.DISTRIBUTION_OF_INCOME_AND_EXPENSE);
@@ -621,9 +621,9 @@ public class AuxiliaryVoucherDocument extends AccountingDocumentBase implements 
     public boolean calculateIfWithinGracePeriod(Date today, AccountingPeriod periodToCheck) {
         boolean result = false;
         final int todayAsComparableDate = comparableDateForm(today);
-        final int periodClose = new Integer(comparableDateForm(periodToCheck.getUniversityFiscalPeriodEndDate()));
+        final int periodClose = Integer.valueOf(comparableDateForm(periodToCheck.getUniversityFiscalPeriodEndDate()));
         final int periodBegin = comparableDateForm(calculateFirstDayOfMonth(periodToCheck.getUniversityFiscalPeriodEndDate()));
-        final int gracePeriodClose = periodClose + new Integer(SpringContext.getBean(ParameterService.class).getParameterValueAsString(getClass(), AUXILIARY_VOUCHER_ACCOUNTING_PERIOD_GRACE_PERIOD)).intValue();
+        final int gracePeriodClose = periodClose + Integer.valueOf(SpringContext.getBean(ParameterService.class).getParameterValueAsString(getClass(), AUXILIARY_VOUCHER_ACCOUNTING_PERIOD_GRACE_PERIOD)).intValue();
         return (todayAsComparableDate >= periodBegin && todayAsComparableDate <= gracePeriodClose);
     }
 

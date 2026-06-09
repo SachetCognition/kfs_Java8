@@ -41,7 +41,7 @@ public class AwardRuleTest extends MaintenanceRuleTestBase {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-        proposalNumber = new Long(39603);
+        proposalNumber = Long.valueOf(39603);
         boService = SpringContext.getBean(BusinessObjectService.class);
         award = new Award();
         rule = (AwardRule) setupMaintDocRule(newMaintDoc(award), AwardRule.class);

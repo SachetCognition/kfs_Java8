@@ -71,9 +71,9 @@ public abstract class ContractsGrantsReportLookupAction extends KualiLookupActio
         String sortIndexParameter = request.getParameter("d-16544-s");
         if (sortIndexParameter != null) {
             // to store how many times user clicks sort links
-            Integer clickedSession = ObjectUtils.isNull(GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY)) ? new Integer(1) : (Integer) GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY);
+            Integer clickedSession = ObjectUtils.isNull(GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY)) ? Integer.valueOf(1) : (Integer) GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY);
             if (ObjectUtils.isNotNull(GlobalVariables.getUserSession().retrieveObject(ArConstants.SORT_INDEX_SESSION_KEY)) && GlobalVariables.getUserSession().retrieveObject(ArConstants.SORT_INDEX_SESSION_KEY).toString().equals(sortIndexParameter)) {
-                GlobalVariables.getUserSession().addObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY, new Integer(clickedSession + 1));
+                GlobalVariables.getUserSession().addObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY, Integer.valueOf(clickedSession + 1));
             }
             GlobalVariables.getUserSession().addObject(ArConstants.SORT_INDEX_SESSION_KEY, sortIndexParameter);
         }
@@ -162,7 +162,7 @@ public abstract class ContractsGrantsReportLookupAction extends KualiLookupActio
      * @param sortPropertyName
      */
     protected void sortReport(List displayList, String sortPropertyName) {
-        Integer numSortIndexClick = (ObjectUtils.isNull(GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY))) ? 1 : new Integer(GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY).toString());
+        Integer numSortIndexClick = (ObjectUtils.isNull(GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY))) ? 1 : Integer.valueOf(GlobalVariables.getUserSession().retrieveObject(ArConstants.NUM_SORT_INDEX_CLICK_SESSION_KEY).toString());
         if (((numSortIndexClick) % 2) == 0) {
             DynamicCollectionComparator.sort(displayList, SortOrder.DESC, sortPropertyName);
         }

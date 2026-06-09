@@ -128,7 +128,7 @@ public class BudgetConstructionDocument extends FinancialSystemTransactionalDocu
 
 
         Map fieldValues = new HashMap();
-        // fieldValues.put("UNIV_FISCAL_YR", new Integer(2008));
+        // fieldValues.put("UNIV_FISCAL_YR", Integer.valueOf(2008));
         // fieldValues.put("FIN_COA_CD", "BA");
         // fieldValues.put("ACCOUNT_NBR", "6044906");
         // fieldValues.put("SUB_ACCT_NBR", "-----");

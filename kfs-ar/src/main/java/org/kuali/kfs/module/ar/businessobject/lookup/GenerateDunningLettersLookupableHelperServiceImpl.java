@@ -152,7 +152,7 @@ public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsR
         Collection searchResultsCollection;
         // Get the list of invoices
         searchResultsCollection = getInvoiceDocumentsForDunningLetterLookup(fieldValues);
-        return this.buildSearchResultList(searchResultsCollection, new Long(searchResultsCollection.size()));
+        return this.buildSearchResultList(searchResultsCollection, Long.valueOf(searchResultsCollection.size()));
     }
 
     /**
@@ -219,7 +219,7 @@ public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsR
         // To get value for FINAL days past due.
         String stateAgencyFinalCutOffDate = parameterService.getParameterValueAsString(DunningCampaign.class, ArConstants.DunningLetters.DYS_PST_DUE_STATE_AGENCY_FINAL_PARM, "0");
         String finalCutOffDate = parameterService.getParameterValueAsString(DunningCampaign.class, ArConstants.DunningLetters.DYS_PST_DUE_FINAL_PARM, "0");
-        Integer cutoffdateFinal = new Integer(finalCutOffDate);
+        Integer cutoffdateFinal = Integer.valueOf(finalCutOffDate);
 
         String agencyNumber = fieldValues.get(KFSPropertyConstants.AGENCY_NUMBER);
         String campaignID = fieldValues.get(ArPropertyConstants.DunningCampaignFields.DUNNING_CAMPAIGN_ID);
@@ -281,8 +281,8 @@ public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsR
                 agingBucketEndValue = cutoffDateFinal;
             }
             else {
-                agingBucketStartValue = new Integer(agingBucket.split("-")[0]);
-                agingBucketEndValue = new Integer(agingBucket.split("-")[1]);
+                agingBucketStartValue = Integer.valueOf(agingBucket.split("-")[0]);
+                agingBucketEndValue = Integer.valueOf(agingBucket.split("-")[1]);
             }
             if (agingBucketStartValue != null && agingBucketEndValue != null) {
                 Integer[] returnContainer = new Integer[2];
@@ -380,12 +380,12 @@ public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsR
         int agingBucketEnd = agingBucketEndValue.intValue();
         if (invoice.getInvoiceGeneralDetail().getAward().getAgency().isStateAgencyIndicator()) {
             if (agingBucket.equalsIgnoreCase(ArConstants.DunningLetters.DYS_PST_DUE_STATE_AGENCY_FINAL)) {
-                agingBucketStart = new Integer(stateAgencyFinalCutOffDate) + 1;
+                agingBucketStart = Integer.valueOf(stateAgencyFinalCutOffDate) + 1;
                 agingBucketEnd = 0;
             }
             else if (agingBucket.equalsIgnoreCase(ArConstants.DunningLetters.DYS_PST_DUE_121)) {
                 agingBucketStart = 121;
-                agingBucketEnd = new Integer(stateAgencyFinalCutOffDate);
+                agingBucketEnd = Integer.valueOf(stateAgencyFinalCutOffDate);
             }
         }
 

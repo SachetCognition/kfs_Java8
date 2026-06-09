@@ -73,7 +73,7 @@ public class GeneralLedgerCorrectionProcessDocument extends FinancialSystemTrans
 
        public GeneralLedgerCorrectionProcessDocument() {
         super();
-        correctionChangeGroupNextLineNumber = new Integer(0);
+        correctionChangeGroupNextLineNumber = Integer.valueOf(0);
 
         correctionChangeGroup = new ArrayList<CorrectionChangeGroup>();
     }

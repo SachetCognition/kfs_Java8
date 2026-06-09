@@ -520,7 +520,7 @@ class ModifiableInteger {
      * @return The value of this class formatted as an Integer.
      */
     public Integer getInteger() {
-        return new Integer(_value);
+        return Integer.valueOf(_value);
     }
 
     /**

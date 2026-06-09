@@ -56,7 +56,7 @@ public enum BarcodeInventoryErrorDetailPredicateFixture {
     }
 
     public List<BarcodeInventoryErrorDetail> getBarcodeInventoryDetail() {
-        Integer numOfRecords = new Integer(properties.getProperty(BCIE+"."+NUM_OF_REC));                        
+        Integer numOfRecords = Integer.valueOf(properties.getProperty(BCIE+"."+NUM_OF_REC));                        
         List<BarcodeInventoryErrorDetail> details = new ArrayList<BarcodeInventoryErrorDetail>();
 
         String deliminator = properties.getProperty(DELIMINATOR);
@@ -71,7 +71,7 @@ public enum BarcodeInventoryErrorDetailPredicateFixture {
 
 
     public List<BarcodeInventoryErrorDetail> getExpectedResults() {
-        Integer numOfRecords = new Integer(properties.getProperty(BCIE+"."+NUM_OF_REC));                        
+        Integer numOfRecords = Integer.valueOf(properties.getProperty(BCIE+"."+NUM_OF_REC));                        
         List<BarcodeInventoryErrorDetail> details = new ArrayList<BarcodeInventoryErrorDetail>();
 
         String deliminator = properties.getProperty(DELIMINATOR);

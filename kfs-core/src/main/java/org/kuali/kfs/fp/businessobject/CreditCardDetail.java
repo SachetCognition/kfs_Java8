@@ -49,7 +49,7 @@ public class CreditCardDetail extends PersistableBusinessObjectBase {
     public CreditCardDetail() {
         super();
         
-        this.financialDocumentLineNumber = new Integer(1);
+        this.financialDocumentLineNumber = Integer.valueOf(1);
         this.creditCardAdvanceDepositAmount = KualiDecimal.ZERO;
     }
 

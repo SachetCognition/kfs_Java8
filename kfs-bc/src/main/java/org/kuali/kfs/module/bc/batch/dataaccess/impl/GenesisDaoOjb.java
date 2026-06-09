@@ -148,12 +148,12 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     /*
      *   version number for new rows
      */
-    public final static Long DEFAULT_VERSION_NUMBER = new Long(1);
+    public final static Long DEFAULT_VERSION_NUMBER = Long.valueOf(1);
     /*
      *   code a high value for the limit of the organization reporting chain.  we limit this to avoid
      *   infinite loops when for some reason there is a circular reporting chain in the DB
      */
-    public final static Integer MAXIMUM_ORGANIZATION_TREE_DEPTH = new Integer(1000);
+    public final static Integer MAXIMUM_ORGANIZATION_TREE_DEPTH = Integer.valueOf(1000);
 
     private DocumentService documentService;
     private WorkflowDocumentService workflowDocumentService;
@@ -207,7 +207,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     public Integer fiscalYearFromToday() {
         //  we look up the fiscal year for today's date, and return it
         //  we return 0 if nothing is found
-        Integer currentFiscalYear = new Integer(0);
+        Integer currentFiscalYear = Integer.valueOf(0);
         Date lookUpDate = dateTimeService.getCurrentSqlDateMidnight();
         Criteria criteriaID = new Criteria();
         criteriaID.addEqualTo(KFSPropertyConstants.UNIVERSITY_DATE, lookUpDate);
@@ -603,14 +603,14 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     }
 
     // counters
-    protected Long documentsToCreateinNTS = new Long(0);
-    protected Long documentsSkippedinNTS = new Long(0);
-    protected Long documentsCreatedinNTS = new Long(0);
-    protected Long documentsCSFCreatedinNTS = new Long(0);
-    protected Long documentsGLCreatedinNTS = new Long(0);
+    protected Long documentsToCreateinNTS = Long.valueOf(0);
+    protected Long documentsSkippedinNTS = Long.valueOf(0);
+    protected Long documentsCreatedinNTS = Long.valueOf(0);
+    protected Long documentsCSFCreatedinNTS = Long.valueOf(0);
+    protected Long documentsGLCreatedinNTS = Long.valueOf(0);
 
-    protected Long proxyCandidatesReadinTS = new Long(0);
-    protected Long proxyBCHeadersCreatedinTS = new Long(0);
+    protected Long proxyCandidatesReadinTS = Long.valueOf(0);
+    protected Long proxyBCHeadersCreatedinTS = Long.valueOf(0);
 
     //
     // this is the new document creation mechanism that works with embedded workflow
@@ -905,7 +905,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
         Integer sqlReportsToChartofAccountsCode = 0;
         Integer sqlOrganizationCode = 2;
 
-        Long accountsAdded = new Long(0);
+        Long accountsAdded = Long.valueOf(0);
 
         Criteria criteriaID = new Criteria();
         /*  current IU genesis does NOT check for closed accounts--it loads all accounts
@@ -942,7 +942,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
         Integer sqlReportsToOrganizationCode = 3;
         Integer sqlResponsibilityCenterCode = 4;
 
-        Long organizationsAdded = new Long(0);
+        Long organizationsAdded = Long.valueOf(0);
 
         Criteria criteriaID = new Criteria();
         /*
@@ -1356,15 +1356,15 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     protected Integer sqlAccountLineAnnualBalanceAmount = 7;
     protected Integer sqlBeginningBalanceLineAmount = 8;
 
-    protected Integer nGLHeadersAdded = new Integer(0);
-    protected Integer nGLRowsAdded = new Integer(0);
-    protected Integer nGLRowsUpdated = new Integer(0);
-    protected Integer nCurrentPBGLRows = new Integer(0);
-    protected Integer nGLBBRowsZeroNet = new Integer(0);
-    protected Integer nGLBBRowsRead = new Integer(0);
-    protected Integer nGLRowsMatchingPBGL = new Integer(0);
-    protected Integer nGLBBKeysRead = new Integer(0);
-    protected Integer nGLBBRowsSkipped = new Integer(0);
+    protected Integer nGLHeadersAdded = Integer.valueOf(0);
+    protected Integer nGLRowsAdded = Integer.valueOf(0);
+    protected Integer nGLRowsUpdated = Integer.valueOf(0);
+    protected Integer nCurrentPBGLRows = Integer.valueOf(0);
+    protected Integer nGLBBRowsZeroNet = Integer.valueOf(0);
+    protected Integer nGLBBRowsRead = Integer.valueOf(0);
+    protected Integer nGLRowsMatchingPBGL = Integer.valueOf(0);
+    protected Integer nGLBBKeysRead = Integer.valueOf(0);
+    protected Integer nGLBBRowsSkipped = Integer.valueOf(0);
 
     // public methods
 
@@ -1608,7 +1608,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
         //
         Integer RequestYear = BaseYear + 1;
         //
-        Long documentsRead = new Long(0);
+        Long documentsRead = Long.valueOf(0);
         Criteria criteriaId = new Criteria();
         criteriaId.addEqualTo(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, RequestYear);
         documentNumberFromBCHdr = new HashMap<String, String>(hashObjectSize(BudgetConstructionHeader.class, criteriaId));
@@ -1701,7 +1701,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     protected void recordSkippedKeys(String badGLKey) {
         nGLBBRowsSkipped = nGLBBRowsSkipped + 1;
         if (skippedPBGLKeys.get(badGLKey) == null) {
-            skippedPBGLKeys.put(badGLKey, new Integer(1));
+            skippedPBGLKeys.put(badGLKey, Integer.valueOf(1));
         }
         else {
             Integer rowCount = skippedPBGLKeys.get(badGLKey) + 1;
@@ -1792,7 +1792,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
 
     protected HashMap<String, String[]> baseYearInactiveObjects = new HashMap<String, String[]>(1);
     protected HashMap<String, String[]> gLBBObjects = new HashMap<String, String[]>(1);
-    protected Integer nInactiveBBObjectCodes = new Integer(0);
+    protected Integer nInactiveBBObjectCodes = Integer.valueOf(0);
 
     protected void objectClassRICleanUp() {
         baseYearInactiveObjects.clear();
@@ -1945,22 +1945,22 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     //
     // counters
     //
-    protected Integer CSFRowsRead = new Integer(0);
-    protected Integer CSFRowsVacant = new Integer(0);
-    protected Integer CSFVacantsConsolidated = new Integer(0);
-    protected Integer CSFOverrideDeletesRead = new Integer(0);
-    protected Integer CSFOverrideRead = new Integer(0);
-    protected Integer CSFOverrideVacant = new Integer(0);
-    protected Integer CSFForBCSF = new Integer(0);
-    protected Integer CSFCurrentGLRows = new Integer(0);
-    protected Integer CSFCurrentBCAFRows = new Integer(0);
-    protected Integer CSFBCSFRowsMatchingGL = new Integer(0);
-    protected Integer CSFBCSFRowsMatchingBCAF = new Integer(0);
-    protected Integer CSFNewGLRows = new Integer(0);
-    protected Integer CSFNewBCAFRows = new Integer(0);
-    protected Integer CSFBCAFRowsMarkedDeleted = new Integer(0);
-    protected Integer CSFBCAFRowsMissing = new Integer(0);
-    protected Integer CSFBadObjectsSkipped = new Integer(0);
+    protected Integer CSFRowsRead = Integer.valueOf(0);
+    protected Integer CSFRowsVacant = Integer.valueOf(0);
+    protected Integer CSFVacantsConsolidated = Integer.valueOf(0);
+    protected Integer CSFOverrideDeletesRead = Integer.valueOf(0);
+    protected Integer CSFOverrideRead = Integer.valueOf(0);
+    protected Integer CSFOverrideVacant = Integer.valueOf(0);
+    protected Integer CSFForBCSF = Integer.valueOf(0);
+    protected Integer CSFCurrentGLRows = Integer.valueOf(0);
+    protected Integer CSFCurrentBCAFRows = Integer.valueOf(0);
+    protected Integer CSFBCSFRowsMatchingGL = Integer.valueOf(0);
+    protected Integer CSFBCSFRowsMatchingBCAF = Integer.valueOf(0);
+    protected Integer CSFNewGLRows = Integer.valueOf(0);
+    protected Integer CSFNewBCAFRows = Integer.valueOf(0);
+    protected Integer CSFBCAFRowsMarkedDeleted = Integer.valueOf(0);
+    protected Integer CSFBCAFRowsMissing = Integer.valueOf(0);
+    protected Integer CSFBadObjectsSkipped = Integer.valueOf(0);
 
     public void buildAppointmentFundingAndBCSF(Integer BaseYear) {
         /*********************************************************************
@@ -2441,7 +2441,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     // set up the hash objects   
     protected void setUpBCSFMap(Integer BaseYear) {
         // we'll just overestimate, making the size equal to active override rows and active CSF rows, even though the former might replace some of the latter
-        Integer bCSFSize = new Integer(0);
+        Integer bCSFSize = Integer.valueOf(0);
         Criteria criteriaID = new Criteria();
         criteriaID.addEqualTo(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, BaseYear);
         criteriaID.addEqualTo(KFSPropertyConstants.CSF_DELETE_CODE, BCConstants.ACTIVE_CSF_DELETE_CODE);
@@ -2518,7 +2518,7 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
             currentPBGLKeys.add(testKey);
             counter = counter + 1;
         }
-        CSFCurrentGLRows = new Integer(counter);
+        CSFCurrentGLRows = Integer.valueOf(counter);
         //
         // now we have to set up the query to read the object types
         String[] objectTypeSelectList = { KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, KFSPropertyConstants.FINANCIAL_OBJECT_CODE, KFSPropertyConstants.FINANCIAL_OBJECT_TYPE_CODE };
@@ -2533,8 +2533,8 @@ public class GenesisDaoOjb extends BudgetConstructionBatchHelperDaoOjb implement
     }
 
     protected void setUpKeysNeedingRounding(Integer BaseYear) {
-        Integer emplidCSFOvrdCount = new Integer(0);
-        Integer emplidCSFCount = new Integer(0);
+        Integer emplidCSFOvrdCount = Integer.valueOf(0);
+        Integer emplidCSFCount = Integer.valueOf(0);
         Criteria criteriaID = new Criteria();
         criteriaID.addEqualTo(KFSPropertyConstants.CSF_DELETE_CODE, BCConstants.ACTIVE_CSF_DELETE_CODE);
         criteriaID.addEqualTo(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, BaseYear);

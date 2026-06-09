@@ -182,7 +182,7 @@ public class CollectorScrubberProcess {
             }
         }
 
-        collectorReportData.setNumDetailDeleted(batch, new Integer(numDetailDeleted));
+        collectorReportData.setNumDetailDeleted(batch, Integer.valueOf(numDetailDeleted));
     }
 
     /**

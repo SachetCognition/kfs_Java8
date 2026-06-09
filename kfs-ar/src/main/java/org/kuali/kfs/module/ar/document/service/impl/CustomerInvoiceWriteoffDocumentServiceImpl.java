@@ -252,7 +252,7 @@ public class CustomerInvoiceWriteoffDocumentServiceImpl implements CustomerInvoi
             eligibleInvoiceFlag = true;
 
             if (ObjectUtils.isNotNull(invoice.getAge())) {
-                eligibleInvoiceFlag &=((new Integer(age)).compareTo(invoice.getAge()) <= 0);
+                eligibleInvoiceFlag &=((Integer.valueOf(age)).compareTo(invoice.getAge()) <= 0);
             } else {
                 eligibleInvoiceFlag = false;
             }

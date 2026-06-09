@@ -218,7 +218,7 @@ public class ExpenseTransferTargetAccountingLine extends TargetAccountingLine im
         retval = getPayrollEndDateFiscalYear().compareTo(o.getPayrollEndDateFiscalYear());
 
         if (retval == 0) {
-            retval = new Integer(getPayrollEndDateFiscalPeriodCode()).compareTo(new Integer(o.getPayrollEndDateFiscalPeriodCode()));
+            retval = Integer.valueOf(getPayrollEndDateFiscalPeriodCode()).compareTo(Integer.valueOf(o.getPayrollEndDateFiscalPeriodCode()));
         }
 
         return retval;

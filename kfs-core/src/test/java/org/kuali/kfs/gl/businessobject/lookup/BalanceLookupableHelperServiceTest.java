@@ -130,7 +130,7 @@ public class BalanceLookupableHelperServiceTest extends AbstractGeneralLedgerLoo
         nonapprovedPendingEntry.setFinancialDocumentApprovedCode(" ");
 
         String sequenceNumber = testDataGenerator.getProperties().getProperty("genericSquenceNumber");
-        nonapprovedPendingEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceNumber));
+        nonapprovedPendingEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceNumber));
 
         insertNewPendingEntry(nonapprovedPendingEntry);
 

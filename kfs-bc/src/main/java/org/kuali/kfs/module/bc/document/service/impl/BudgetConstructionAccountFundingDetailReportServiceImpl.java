@@ -243,15 +243,15 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
         }
 
         BudgetConstructionCalculatedSalaryFoundationTracker csfTracker = appointmentFundingEntry.getEffectiveCSFTracker();
-        orgAccountFundingDetailReportEntry.setAmountChange(new Integer(0));
+        orgAccountFundingDetailReportEntry.setAmountChange(Integer.valueOf(0));
         orgAccountFundingDetailReportEntry.setPercentChange(BigDecimal.ZERO);
         if (csfTracker != null) {
             orgAccountFundingDetailReportEntry.setCsfTimePercent(BudgetConstructionReportHelper.setDecimalDigit(csfTracker.getCsfTimePercent(), 2, false));
-            orgAccountFundingDetailReportEntry.setCsfAmount(new Integer(csfTracker.getCsfAmount().intValue()));
+            orgAccountFundingDetailReportEntry.setCsfAmount(Integer.valueOf(csfTracker.getCsfAmount().intValue()));
             orgAccountFundingDetailReportEntry.setCsfFullTimeEmploymentQuantity(BudgetConstructionReportHelper.setDecimalDigit(csfTracker.getCsfFullTimeEmploymentQuantity(), 5, true));
 
             // calculate amountChange and percentChange
-            Integer amountChange = new Integer(0);
+            Integer amountChange = Integer.valueOf(0);
             BigDecimal percentChange = BigDecimal.ZERO;
             BigDecimal csfFte = BudgetConstructionReportHelper.setDecimalDigit(csfTracker.getCsfFullTimeEmploymentQuantity(), 5, false);
             BigDecimal reqFte = BudgetConstructionReportHelper.setDecimalDigit(appointmentFundingEntry.getAppointmentRequestedFteQuantity(), 5, false);
@@ -272,7 +272,7 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
             }
 
             orgAccountFundingDetailReportEntry.setAppointmentFundingMonth(appointmentFundingEntry.getAppointmentFundingMonth());
-            orgAccountFundingDetailReportEntry.setAppointmentRequestedAmount(new Integer(appointmentFundingEntry.getAppointmentRequestedAmount().intValue()));
+            orgAccountFundingDetailReportEntry.setAppointmentRequestedAmount(Integer.valueOf(appointmentFundingEntry.getAppointmentRequestedAmount().intValue()));
             orgAccountFundingDetailReportEntry.setAppointmentRequestedTimePercent(BudgetConstructionReportHelper.setDecimalDigit(appointmentFundingEntry.getAppointmentRequestedTimePercent(), 2, false));
             orgAccountFundingDetailReportEntry.setAppointmentRequestedFteQuantity(BudgetConstructionReportHelper.setDecimalDigit(appointmentFundingEntry.getAppointmentRequestedFteQuantity(), 5, false));
             orgAccountFundingDetailReportEntry.setAppointmentFundingDurationCode(appointmentFundingEntry.getAppointmentFundingDurationCode());
@@ -335,8 +335,8 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
      * @param List reportTotalList
      */
     protected Collection<BudgetConstructionOrgAccountFundingDetailReportTotal> calculateObjectTotal(Map appointmentFundingEntireMap, List<BudgetConstructionObjectDump> listForCalculateTotalObject) {
-        Integer totalObjectPositionCsfAmount = new Integer(0);
-        Integer totalObjectAppointmentRequestedAmount = new Integer(0);
+        Integer totalObjectPositionCsfAmount = Integer.valueOf(0);
+        Integer totalObjectAppointmentRequestedAmount = Integer.valueOf(0);
         BigDecimal totalObjectPositionCsfFteQuantity = BigDecimal.ZERO;
         BigDecimal totalObjectAppointmentRequestedFteQuantity = BigDecimal.ZERO;
 
@@ -348,10 +348,10 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
             for (PendingBudgetConstructionAppointmentFunding accountFundingEntry : accountFundingCollection) {
                 if (accountFundingEntry.getBcnCalculatedSalaryFoundationTracker().size() > 0) {
                     BudgetConstructionCalculatedSalaryFoundationTracker calculatedSalaryFoundationTracker = accountFundingEntry.getBcnCalculatedSalaryFoundationTracker().get(0);
-                    totalObjectPositionCsfAmount = totalObjectPositionCsfAmount + new Integer(calculatedSalaryFoundationTracker.getCsfAmount().intValue());
+                    totalObjectPositionCsfAmount = totalObjectPositionCsfAmount + Integer.valueOf(calculatedSalaryFoundationTracker.getCsfAmount().intValue());
                     totalObjectPositionCsfFteQuantity = totalObjectPositionCsfFteQuantity.add(calculatedSalaryFoundationTracker.getCsfFullTimeEmploymentQuantity());
                 }
-                totalObjectAppointmentRequestedAmount = totalObjectAppointmentRequestedAmount + new Integer(accountFundingEntry.getAppointmentRequestedAmount().intValue());
+                totalObjectAppointmentRequestedAmount = totalObjectAppointmentRequestedAmount + Integer.valueOf(accountFundingEntry.getAppointmentRequestedAmount().intValue());
                 totalObjectAppointmentRequestedFteQuantity = totalObjectAppointmentRequestedFteQuantity.add(accountFundingEntry.getAppointmentRequestedFteQuantity());
             }
 
@@ -365,8 +365,8 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
 
             returnCollection.add(budgetConstructionOrgAccountFundingDetailReportTotal);
 
-            totalObjectPositionCsfAmount = new Integer(0);
-            totalObjectAppointmentRequestedAmount = new Integer(0);
+            totalObjectPositionCsfAmount = Integer.valueOf(0);
+            totalObjectAppointmentRequestedAmount = Integer.valueOf(0);
             totalObjectPositionCsfFteQuantity = BigDecimal.ZERO;
             totalObjectAppointmentRequestedFteQuantity = BigDecimal.ZERO;
         }
@@ -381,8 +381,8 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
         // appointmentFundingEntireMap, Collection<BudgetConstructionObjectDump> accountFundingDetailList,
         // List<BudgetConstructionObjectDump> listForCalculateTotalAccount) {
 
-        Integer totalAccountPositionCsfAmount = new Integer(0);
-        Integer totalAccountAppointmentRequestedAmount = new Integer(0);
+        Integer totalAccountPositionCsfAmount = Integer.valueOf(0);
+        Integer totalAccountAppointmentRequestedAmount = Integer.valueOf(0);
         BigDecimal totalAccountPositionCsfFteQuantity = BigDecimal.ZERO;
         BigDecimal totalAccountAppointmentRequestedFteQuantity = BigDecimal.ZERO;
 
@@ -405,8 +405,8 @@ public class BudgetConstructionAccountFundingDetailReportServiceImpl implements 
 
             returnCollection.add(budgetConstructionOrgAccountFundingDetailReportTotal);
 
-            totalAccountPositionCsfAmount = new Integer(0);
-            totalAccountAppointmentRequestedAmount = new Integer(0);
+            totalAccountPositionCsfAmount = Integer.valueOf(0);
+            totalAccountAppointmentRequestedAmount = Integer.valueOf(0);
             totalAccountPositionCsfFteQuantity = BigDecimal.ZERO;
             totalAccountAppointmentRequestedFteQuantity = BigDecimal.ZERO;
         }

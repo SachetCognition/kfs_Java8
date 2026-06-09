@@ -327,7 +327,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * Happy path for PO-type Credit Memo.  The Item Quantity is the same as the Invoiced Quantity.
      */
     public void testValidateItemQuantity_POType_EquivalentQuantity() {
-        creditMemo.setPurchaseOrderIdentifier(new Integer(99999));
+        creditMemo.setPurchaseOrderIdentifier(Integer.valueOf(99999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPoInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(new KualiDecimal(1));
@@ -342,7 +342,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * Happy path for PREQ-type Credit Memo.  The Item Quantity is the same as the Invoiced Quantity.
      */
     public void testValidateItemQuantity_PREQType_EquivalentQuantity() {
-        creditMemo.setPaymentRequestIdentifier(new Integer(9999));
+        creditMemo.setPaymentRequestIdentifier(Integer.valueOf(9999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPreqInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(new KualiDecimal(1));
@@ -357,7 +357,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * The conditions are met to require a quantity, but there is no quantity: PO-Type.
      */
     public void testValidateItemQuantity_POType_NullQuantity() {
-        creditMemo.setPurchaseOrderIdentifier(new Integer(99999));
+        creditMemo.setPurchaseOrderIdentifier(Integer.valueOf(99999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPoInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(null);
@@ -372,7 +372,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * The conditions are met to require a quantity, but there is no quantity: PREQ-Type.
      */
     public void testValidateItemQuantity_PREQType_NullQuantity() {
-        creditMemo.setPaymentRequestIdentifier(new Integer(9999));
+        creditMemo.setPaymentRequestIdentifier(Integer.valueOf(9999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPreqInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(null);
@@ -388,7 +388,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * Quantities cannot be negative: PO-Type.
      */
     public void testValidateItemQuantity_POType_NegativeQuantity() {
-        creditMemo.setPurchaseOrderIdentifier(new Integer(99999));
+        creditMemo.setPurchaseOrderIdentifier(Integer.valueOf(99999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPoInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(new KualiDecimal(-1));
@@ -403,7 +403,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * Quantities cannot be negative: PREQ-Type
      */
     public void testValidateItemQuantity_PREQType_NegativeQuantity() {
-        creditMemo.setPaymentRequestIdentifier(new Integer(9999));
+        creditMemo.setPaymentRequestIdentifier(Integer.valueOf(9999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPreqInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(new KualiDecimal(-1));
@@ -418,7 +418,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * Quantity for the item should not be greater than the invoiced quantity: PO-Type
      */
     public void testValidateItemQuantity_POType_GreaterQuantity() {
-        creditMemo.setPurchaseOrderIdentifier(new Integer(99999));
+        creditMemo.setPurchaseOrderIdentifier(Integer.valueOf(99999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPoInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(new KualiDecimal(2));
@@ -433,7 +433,7 @@ public class CreditMemoDocumentRuleTest extends PurapRuleTestBase {
      * Quantity for the item should not be greater than the invoiced quantity: PREQ-Type
      */
     public void testValidateItemQuantity_PREQType_GreaterQuantity() {
-        creditMemo.setPaymentRequestIdentifier(new Integer(9999));
+        creditMemo.setPaymentRequestIdentifier(Integer.valueOf(9999));
         CreditMemoItem item = (CreditMemoItem)creditMemo.getItemByLineNumber(1);
         item.setPreqInvoicedTotalQuantity(new KualiDecimal(1));
         item.setItemQuantity(new KualiDecimal(2));

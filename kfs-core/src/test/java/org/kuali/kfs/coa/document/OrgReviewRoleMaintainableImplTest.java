@@ -380,7 +380,7 @@ public class OrgReviewRoleMaintainableImplTest extends OrgReviewRoleTestBase {
         // mark so that blank required fields will be populated with default values
         maintainable.setGenerateBlankRequiredValues(ORG_REVIEW_DOC_TYPE);
         document.getNewMaintainableObject().getBusinessObject().setObjectId(null);
-        document.getNewMaintainableObject().getBusinessObject().setVersionNumber(new Long(1));
+        document.getNewMaintainableObject().getBusinessObject().setVersionNumber(Long.valueOf(1));
 
         document.getNewMaintainableObject().setMaintenanceAction(KRADConstants.MAINTENANCE_COPY_ACTION);
 

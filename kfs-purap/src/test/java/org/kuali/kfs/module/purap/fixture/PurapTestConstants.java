@@ -35,7 +35,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 public class PurapTestConstants {
 
-    static final Integer FY_2007 = new Integer("2007");
+    static final Integer FY_2007 = Integer.valueOf("2007");
 
     @SuppressWarnings("deprecation")
     static class BeginEndDates {
@@ -81,14 +81,14 @@ public class PurapTestConstants {
 
     @SuppressWarnings("deprecation")
     static class PO {
-        static final Integer REQ_ID = new Integer("8888");
+        static final Integer REQ_ID = Integer.valueOf("8888");
         static final Timestamp CREATE_DATE = new Timestamp(107, 10, 10, 0, 0, 0, 0); // 2007-10-10
         static final KualiDecimal AMOUNT = new KualiDecimal(32);
     }
 
     @SuppressWarnings("deprecation")
     static class PREQInvoice {
-        static final Integer PO_ID = new Integer("9999");
+        static final Integer PO_ID = Integer.valueOf("9999");
         static final Date INVOICE_DATE = new Date(108, 1, 1); // 2008-01-01
         static final String INVOICE_NUMBER = "123456789";
         static final KualiDecimal AMOUNT = new KualiDecimal(32);
@@ -107,15 +107,15 @@ public class PurapTestConstants {
         static final KualiDecimal POSITIVE_AMOUNT = new KualiDecimal(16);
         static final KualiDecimal ZERO_AMOUNT = new KualiDecimal(0);
         static final KualiDecimal NEGATIVE_AMOUNT = new KualiDecimal(-16);
-        static final ObjectCode CAPITAL_OBJECT_CODE = new ObjectCode(new Integer("2008"),"BL","7017"); //Level should be set to "CAP"
-        static final ObjectCode POSSIBLE_OBJECT_CODE = new ObjectCode(new Integer("2008"),"BL","7050"); //Level should be set to "S&E"
-        static final ObjectCode EXPENSE_OBJECT_CODE = new ObjectCode(new Integer("2008"),"BL","5010"); //Level should be set to "DEBT"
+        static final ObjectCode CAPITAL_OBJECT_CODE = new ObjectCode(Integer.valueOf("2008"),"BL","7017"); //Level should be set to "CAP"
+        static final ObjectCode POSSIBLE_OBJECT_CODE = new ObjectCode(Integer.valueOf("2008"),"BL","7050"); //Level should be set to "S&E"
+        static final ObjectCode EXPENSE_OBJECT_CODE = new ObjectCode(Integer.valueOf("2008"),"BL","5010"); //Level should be set to "DEBT"
         static final CapitalAssetBuilderAssetTransactionType NONRECURRING_ASSET_NUMBER_REQUIRING_TRAN_TYPE = new MockAssetTransactionType("MDEX");
         static final CapitalAssetBuilderAssetTransactionType NONRECURRING_NON_ASSET_NUMBER_REQUIRING_TRAN_TYPE = new MockAssetTransactionType("NEW");
         static final CapitalAssetBuilderAssetTransactionType RECURRING_TRAN_TYPE = new MockAssetTransactionType("LEAS");
         static final RecurringPaymentType RECURRING_PAYMENT_TYPE = new RecurringPaymentType();
-        static final Long ASSET_NUMBER_1 = new Long("333221");
-        static final Long ASSET_NUMBER_2 = new Long("333222");
+        static final Long ASSET_NUMBER_1 = Long.valueOf("333221");
+        static final Long ASSET_NUMBER_2 = Long.valueOf("333222");
         
         static class MockAssetTransactionType implements CapitalAssetBuilderAssetTransactionType {
             private String capitalAssetTransactionTypeCode;

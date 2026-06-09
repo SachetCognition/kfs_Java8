@@ -25,7 +25,7 @@ import org.kuali.kfs.module.cg.businessobject.AwardFundManager;
  */
 public enum ARAwardFundManagerFixture {
 
-    AWD_FND_MGR1("1137304513", new Long(11), true, null);
+    AWD_FND_MGR1("1137304513", Long.valueOf(11), true, null);
 
     private String principalId;
     private Long proposalNumber;

@@ -114,7 +114,7 @@ public class ContractsGrantsSuspendedInvoiceSummaryReportLookupableHelperService
             cgSuspendedInvoiceSummaryReport.setSuspensionCategoryCode(suspensionCategoryCode);
 
             cgSuspendedInvoiceSummaryReport.setSuspensionCategoryDescription(suspensionCategoryDescriptions.get(suspensionCategoryCode));
-            cgSuspendedInvoiceSummaryReport.setTotalInvoicesSuspended(new Long(documentNumbersByCategory.get(suspensionCategoryCode).size()));
+            cgSuspendedInvoiceSummaryReport.setTotalInvoicesSuspended(Long.valueOf(documentNumbersByCategory.get(suspensionCategoryCode).size()));
 
             displayList.add(cgSuspendedInvoiceSummaryReport);
 

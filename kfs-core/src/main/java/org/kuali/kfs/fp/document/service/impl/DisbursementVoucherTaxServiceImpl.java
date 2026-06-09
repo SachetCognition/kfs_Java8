@@ -172,7 +172,7 @@ public class DisbursementVoucherTaxServiceImpl implements DisbursementVoucherTax
 
             // put line number in line number list, and update next line property in document
             taxLineNumbers.add(grossLine.getSequenceNumber());
-            document.setNextSourceLineNumber(new Integer(document.getNextSourceLineNumber().intValue() + 1));
+            document.setNextSourceLineNumber(Integer.valueOf(document.getNextSourceLineNumber().intValue() + 1));
 
             // add to source accounting lines
             grossLine.refresh();
@@ -198,7 +198,7 @@ public class DisbursementVoucherTaxServiceImpl implements DisbursementVoucherTax
 
             // put line number in line number list, and update next line property in document
             taxLineNumbers.add(federalTaxLine.getSequenceNumber());
-            document.setNextSourceLineNumber(new Integer(document.getNextSourceLineNumber().intValue() + 1));
+            document.setNextSourceLineNumber(Integer.valueOf(document.getNextSourceLineNumber().intValue() + 1));
 
             // add to source accounting lines
             federalTaxLine.refresh();
@@ -223,7 +223,7 @@ public class DisbursementVoucherTaxServiceImpl implements DisbursementVoucherTax
 
             // put line number in line number list, and update next line property in document
             taxLineNumbers.add(stateTaxLine.getSequenceNumber());
-            document.setNextSourceLineNumber(new Integer(document.getNextSourceLineNumber().intValue() + 1));
+            document.setNextSourceLineNumber(Integer.valueOf(document.getNextSourceLineNumber().intValue() + 1));
 
             // add to source accounting lines
             stateTaxLine.refresh();

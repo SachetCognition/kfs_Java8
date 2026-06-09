@@ -74,8 +74,8 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
      */
     public AccountingDocumentBase() {
         super();
-        this.nextSourceLineNumber = new Integer(1);
-        this.nextTargetLineNumber = new Integer(1);
+        this.nextSourceLineNumber = Integer.valueOf(1);
+        this.nextTargetLineNumber = Integer.valueOf(1);
         setSourceAccountingLines(new ArrayList());
         setTargetAccountingLines(new ArrayList());
     }
@@ -123,7 +123,7 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
     public void addSourceAccountingLine(SourceAccountingLine line) {
         line.setSequenceNumber(this.getNextSourceLineNumber());
         this.sourceAccountingLines.add(line);
-        this.nextSourceLineNumber = new Integer(this.getNextSourceLineNumber().intValue() + 1);
+        this.nextSourceLineNumber = Integer.valueOf(this.getNextSourceLineNumber().intValue() + 1);
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
     public void addTargetAccountingLine(TargetAccountingLine line) {
         line.setSequenceNumber(this.getNextTargetLineNumber());
         this.targetAccountingLines.add(line);
-        this.nextTargetLineNumber = new Integer(this.getNextTargetLineNumber().intValue() + 1);
+        this.nextTargetLineNumber = Integer.valueOf(this.getNextTargetLineNumber().intValue() + 1);
     }
 
     /**
@@ -443,7 +443,7 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
             for (Iterator iter = getSourceAccountingLines().iterator(); iter.hasNext();) {
                 AccountingLineBase sourceLine = (AccountingLineBase) iter.next();
                 sourceLine.setDocumentNumber(getDocumentNumber());
-                sourceLine.setVersionNumber(new Long(1));
+                sourceLine.setVersionNumber(Long.valueOf(1));
                 if (isErrorCorrection) {
                     sourceLine.setAmount(sourceLine.getAmount().negated());
                 }
@@ -454,7 +454,7 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
             for (Iterator iter = getTargetAccountingLines().iterator(); iter.hasNext();) {
                 AccountingLineBase targetLine = (AccountingLineBase) iter.next();
                 targetLine.setDocumentNumber(getDocumentNumber());
-                targetLine.setVersionNumber(new Long(1));
+                targetLine.setVersionNumber(Long.valueOf(1));
                 if (isErrorCorrection) {
                     targetLine.setAmount(targetLine.getAmount().negated());
                 }

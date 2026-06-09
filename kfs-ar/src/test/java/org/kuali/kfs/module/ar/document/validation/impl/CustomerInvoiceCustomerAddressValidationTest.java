@@ -33,8 +33,8 @@ public class CustomerInvoiceCustomerAddressValidationTest extends KualiTestBase 
     private CustomerInvoiceCustomerAddressValidation validation;
     
     private static final String VALID_CUSTOMER_NUMBER = "ABB2";
-    private static final Integer VALID_ADDRESS_IDENTIFIER = new Integer(1);
-    private static final Integer INVALID_ADDRESS_IDENTIFIER = new Integer(99);
+    private static final Integer VALID_ADDRESS_IDENTIFIER = Integer.valueOf(1);
+    private static final Integer INVALID_ADDRESS_IDENTIFIER = Integer.valueOf(99);
     
     
     @Override

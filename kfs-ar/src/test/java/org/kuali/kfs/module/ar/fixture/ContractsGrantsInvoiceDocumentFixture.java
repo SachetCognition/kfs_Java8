@@ -30,7 +30,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Fixture class for ContractsGrantsInvoiceDocument
  */
 public enum ContractsGrantsInvoiceDocumentFixture {
-    CG_INV_DOC1(new Long(11),  "2011-12-23"), CG_INV_DOC2(new Long(1234), "2011-12-23");
+    CG_INV_DOC1(Long.valueOf(11),  "2011-12-23"), CG_INV_DOC2(Long.valueOf(1234), "2011-12-23");
 
     private Long proposalNumber;
     private String billingDate;

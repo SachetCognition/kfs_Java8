@@ -58,7 +58,7 @@ public enum BarcodeInventoryServiceFixture{
 
     @SuppressWarnings("deprecation")
     public List<BarcodeInventoryErrorDetail> getBarcodeInventoryDetail() {
-        Integer numOfRecords = new Integer(properties.getProperty(BCIE+"."+NUM_OF_REC));                        
+        Integer numOfRecords = Integer.valueOf(properties.getProperty(BCIE+"."+NUM_OF_REC));                        
         List<BarcodeInventoryErrorDetail> details = new ArrayList<BarcodeInventoryErrorDetail>();
                 
         String deliminator = properties.getProperty(DELIMINATOR);

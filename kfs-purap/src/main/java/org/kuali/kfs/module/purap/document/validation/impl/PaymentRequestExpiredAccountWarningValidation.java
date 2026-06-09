@@ -50,7 +50,7 @@ public class PaymentRequestExpiredAccountWarningValidation extends GenericValida
 
                 if (expirationExtensionDays.trim().length() > 0) {
 
-                    expirationExtensionDaysInt = new Integer(expirationExtensionDays).intValue();
+                    expirationExtensionDaysInt = Integer.valueOf(expirationExtensionDays).intValue();
                 }
                 
                 if (!accountingLine.getAccount().isForContractsAndGrants() ||

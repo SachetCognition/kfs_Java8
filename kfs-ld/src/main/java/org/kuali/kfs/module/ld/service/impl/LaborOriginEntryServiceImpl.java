@@ -365,7 +365,7 @@ public class LaborOriginEntryServiceImpl extends OriginEntryGroupServiceImpl imp
                 tmperrors = laborOriginEntry.setFromTextFileForBatch(line, lineNumber);
                 laborOriginEntry.setEntryId(lineNumber);
                 if (tmperrors.size() > 0){
-                    returnMessageMap.put(new Integer(lineNumber), tmperrors);
+                    returnMessageMap.put(Integer.valueOf(lineNumber), tmperrors);
                 } else {
                     originEntryList.add(laborOriginEntry);
                 }

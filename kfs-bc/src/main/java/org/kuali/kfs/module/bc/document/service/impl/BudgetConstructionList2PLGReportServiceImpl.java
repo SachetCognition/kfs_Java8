@@ -143,7 +143,7 @@ public class BudgetConstructionList2PLGReportServiceImpl implements BudgetConstr
             }
         }
 
-        orgList2PLGReportEntry.setReqAmount(new Integer(twoPlugListMoveEntry.getAccountLineAnnualBalanceAmount().intValue()));
+        orgList2PLGReportEntry.setReqAmount(Integer.valueOf(twoPlugListMoveEntry.getAccountLineAnnualBalanceAmount().intValue()));
     }
 
     /**

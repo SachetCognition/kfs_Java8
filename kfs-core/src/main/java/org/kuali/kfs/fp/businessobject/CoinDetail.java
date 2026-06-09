@@ -191,7 +191,7 @@ public class CoinDetail extends PersistableBusinessObjectBase {
      * @return the count of half cent coins in the drawer
      */
     public Integer getFiftyCentCount() {
-        return (financialDocumentFiftyCentAmount == null) ? new Integer(0) : new Integer(financialDocumentFiftyCentAmount.divide(KFSConstants.CoinTypeAmounts.FIFTY_CENT_AMOUNT).intValue());
+        return (financialDocumentFiftyCentAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentFiftyCentAmount.divide(KFSConstants.CoinTypeAmounts.FIFTY_CENT_AMOUNT).intValue());
     }
 
     /**
@@ -230,7 +230,7 @@ public class CoinDetail extends PersistableBusinessObjectBase {
      * @return the count of quarters in the drawer
      */
     public Integer getTwentyFiveCentCount() {
-        return (financialDocumentTwentyFiveCentAmount == null) ? new Integer(0) : new Integer(financialDocumentTwentyFiveCentAmount.divide(KFSConstants.CoinTypeAmounts.TWENTY_FIVE_CENT_AMOUNT).intValue());
+        return (financialDocumentTwentyFiveCentAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentTwentyFiveCentAmount.divide(KFSConstants.CoinTypeAmounts.TWENTY_FIVE_CENT_AMOUNT).intValue());
     }
 
     /**
@@ -268,7 +268,7 @@ public class CoinDetail extends PersistableBusinessObjectBase {
      * @return the count of dimes in the drawer
      */
     public Integer getTenCentCount() {
-        return (financialDocumentTenCentAmount == null) ? new Integer(0) : new Integer(financialDocumentTenCentAmount.divide(KFSConstants.CoinTypeAmounts.TEN_CENT_AMOUNT).intValue());
+        return (financialDocumentTenCentAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentTenCentAmount.divide(KFSConstants.CoinTypeAmounts.TEN_CENT_AMOUNT).intValue());
     }
 
     /**
@@ -306,7 +306,7 @@ public class CoinDetail extends PersistableBusinessObjectBase {
      * @return the count of nickels in the drawer
      */
     public Integer getFiveCentCount() {
-        return (financialDocumentFiveCentAmount == null) ? new Integer(0) : new Integer(financialDocumentFiveCentAmount.divide(KFSConstants.CoinTypeAmounts.FIVE_CENT_AMOUNT).intValue());
+        return (financialDocumentFiveCentAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentFiveCentAmount.divide(KFSConstants.CoinTypeAmounts.FIVE_CENT_AMOUNT).intValue());
     }
 
     /**
@@ -344,7 +344,7 @@ public class CoinDetail extends PersistableBusinessObjectBase {
      * @return the count of pennies in the drawer
      */
     public Integer getOneCentCount() {
-        return (financialDocumentOneCentAmount == null) ? new Integer(0) : new Integer(financialDocumentOneCentAmount.divide(KFSConstants.CoinTypeAmounts.ONE_CENT_AMOUNT).intValue());
+        return (financialDocumentOneCentAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentOneCentAmount.divide(KFSConstants.CoinTypeAmounts.ONE_CENT_AMOUNT).intValue());
     }
 
     /**
@@ -401,7 +401,7 @@ public class CoinDetail extends PersistableBusinessObjectBase {
      * @return the count of dollar coins in the drawer
      */
     public Integer getHundredCentCount() {
-        return (financialDocumentHundredCentAmount == null) ? new Integer(0) : new Integer(financialDocumentHundredCentAmount.divide(KFSConstants.CoinTypeAmounts.HUNDRED_CENT_AMOUNT).intValue());
+        return (financialDocumentHundredCentAmount == null) ? Integer.valueOf(0) : Integer.valueOf(financialDocumentHundredCentAmount.divide(KFSConstants.CoinTypeAmounts.HUNDRED_CENT_AMOUNT).intValue());
     }
 
     /**

@@ -200,7 +200,7 @@ public class OriginEntryFull extends PersistableBusinessObjectBase implements Tr
 
         if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(line.substring(pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE)))) {
             try {
-                setUniversityFiscalYear(new Integer(getValue(line, pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE))));
+                setUniversityFiscalYear(Integer.valueOf(getValue(line, pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE))));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Fiscal year '" + line.substring(pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE)) + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -236,7 +236,7 @@ public class OriginEntryFull extends PersistableBusinessObjectBase implements Tr
         // don't trim sequenceNumber because SpaceTransactionEntrySequenceNumber is "     "
         if (!GeneralLedgerConstants.getSpaceTransactionEntrySequenceNumber().equals(line.substring(pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.TRANSACTION_LEDGER_ENTRY_DESC))) && !GeneralLedgerConstants.getZeroTransactionEntrySequenceNumber().equals(getValue(line, pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.TRANSACTION_LEDGER_ENTRY_DESC)))) {
             try {
-                setTransactionLedgerEntrySequenceNumber(new Integer(StringUtils.trim(getValue(line, pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.TRANSACTION_LEDGER_ENTRY_DESC)))));
+                setTransactionLedgerEntrySequenceNumber(Integer.valueOf(StringUtils.trim(getValue(line, pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.TRANSACTION_LEDGER_ENTRY_DESC)))));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Transaction Sequence Number '" + line.substring(pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.TRANSACTION_LEDGER_ENTRY_DESC)) + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -951,10 +951,10 @@ public class OriginEntryFull extends PersistableBusinessObjectBase implements Tr
         setDocumentNumber(KFSConstants.EMPTY_STRING);
         setFinancialDocumentReversalDate(null);
 
-        setUniversityFiscalYear(new Integer(0));
+        setUniversityFiscalYear(Integer.valueOf(0));
         setUniversityFiscalPeriodCode(KFSConstants.EMPTY_STRING);
 
-        setTransactionLedgerEntrySequenceNumber(new Integer(1));
+        setTransactionLedgerEntrySequenceNumber(Integer.valueOf(1));
         setTransactionLedgerEntryAmount(KualiDecimal.ZERO);
         setTransactionLedgerEntryDescription(KFSConstants.EMPTY_STRING);
         setTransactionDate(null);

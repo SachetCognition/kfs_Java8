@@ -708,7 +708,7 @@ public class ScrubberProcessImpl implements ScrubberProcess {
                     scrubbedEntry.setReferenceFinancialDocumentNumber(unscrubbedEntry.getReferenceFinancialDocumentNumber());
 
                     Integer transactionNumber = unscrubbedEntry.getTransactionLedgerEntrySequenceNumber();
-                    scrubbedEntry.setTransactionLedgerEntrySequenceNumber(null == transactionNumber ? new Integer(0) : transactionNumber);
+                    scrubbedEntry.setTransactionLedgerEntrySequenceNumber(null == transactionNumber ? Integer.valueOf(0) : transactionNumber);
                     scrubbedEntry.setTransactionLedgerEntryDescription(unscrubbedEntry.getTransactionLedgerEntryDescription());
                     scrubbedEntry.setTransactionLedgerEntryAmount(unscrubbedEntry.getTransactionLedgerEntryAmount());
                     scrubbedEntry.setTransactionDebitCreditCode(unscrubbedEntry.getTransactionDebitCreditCode());
@@ -941,7 +941,7 @@ public class ScrubberProcessImpl implements ScrubberProcess {
             costShareEntry.setFinancialObjectCode(parameterService.getParameterValueAsString(ScrubberStep.class, GeneralLedgerConstants.GlScrubberGroupParameters.COST_SHARE_OBJECT_CODE_PARM_NM));
             costShareEntry.setFinancialSubObjectCode(KFSConstants.getDashFinancialSubObjectCode());
             costShareEntry.setFinancialObjectTypeCode(scrubbedEntryOption.getFinancialObjectTypeTransferExpenseCd());
-            costShareEntry.setTransactionLedgerEntrySequenceNumber(new Integer(0));
+            costShareEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(0));
 
             StringBuffer description = new StringBuffer();
             description.append(costShareDescription);
@@ -1049,7 +1049,7 @@ public class ScrubberProcessImpl implements ScrubberProcess {
 
             costShareSourceAccountEntry.setFinancialSubObjectCode(KFSConstants.getDashFinancialSubObjectCode());
             costShareSourceAccountEntry.setFinancialObjectTypeCode(scrubbedEntryOption.getFinancialObjectTypeTransferExpenseCd());
-            costShareSourceAccountEntry.setTransactionLedgerEntrySequenceNumber(new Integer(0));
+            costShareSourceAccountEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(0));
 
             costShareSourceAccountEntry.setTransactionLedgerEntryAmount(scrubCostShareAmount);
             if (scrubCostShareAmount.isPositive()) {
@@ -1611,7 +1611,7 @@ public class ScrubberProcessImpl implements ScrubberProcess {
             costShareEncumbranceEntry.setFinancialBalanceTypeCode(scrubbedEntryOption.getCostShareEncumbranceBalanceTypeCd());
             setCostShareObjectCode(costShareEncumbranceEntry, scrubbedEntry);
             costShareEncumbranceEntry.setFinancialSubObjectCode(KFSConstants.getDashFinancialSubObjectCode());
-            costShareEncumbranceEntry.setTransactionLedgerEntrySequenceNumber(new Integer(0));
+            costShareEncumbranceEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(0));
 
             if (!StringUtils.hasText(scrubbedEntry.getTransactionDebitCreditCode())) {
                 if (scrubbedEntry.getTransactionLedgerEntryAmount().isPositive()) {

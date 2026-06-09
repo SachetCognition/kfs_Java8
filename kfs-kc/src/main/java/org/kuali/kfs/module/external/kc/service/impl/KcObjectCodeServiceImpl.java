@@ -67,7 +67,7 @@ public class KcObjectCodeServiceImpl implements KcObjectCodeService {
      */
     @Override
     public KcObjectCode getObjectCode(String universityFiscalYear, String chartOfAccountsCode, String financialObjectCode) {
-        Integer fiscalYear = new Integer(universityFiscalYear);
+        Integer fiscalYear = Integer.valueOf(universityFiscalYear);
         ObjectCode objectCode = objectCodeService.getByPrimaryId(fiscalYear, chartOfAccountsCode, financialObjectCode);
         return createKcObjectCode(objectCode);
     }

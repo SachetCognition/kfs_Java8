@@ -55,7 +55,7 @@ public class CustomerCreditMemoDetailServiceTest extends KualiTestBase {
         document.getInvoice();
 
         detail = new CustomerCreditMemoDetail();
-        detail.setReferenceInvoiceItemNumber(new Integer(1));
+        detail.setReferenceInvoiceItemNumber(Integer.valueOf(1));
         detail.setFinancialDocumentReferenceInvoiceNumber(documentNumber);
 
         testAmount = new KualiDecimal(0.5);

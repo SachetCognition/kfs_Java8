@@ -240,7 +240,7 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
         Date todayAtMidnight = dateTimeService.getCurrentSqlDateMidnight();
         List<String> docNumbers = paymentRequestDao.getEligibleForAutoApproval(todayAtMidnight);
         if ( LOG.isInfoEnabled() ) {
-            LOG.info(" -- Initial filtering complete, returned " + new Integer(docNumbers.size()).toString() + " docs.");
+            LOG.info(" -- Initial filtering complete, returned " + Integer.valueOf(docNumbers.size()).toString() + " docs.");
         }
 
         String samt = parameterService.getParameterValueAsString(PaymentRequestDocument.class, PurapParameterConstants.PURAP_DEFAULT_NEGATIVE_PAYMENT_REQUEST_APPROVAL_LIMIT);
@@ -1250,7 +1250,7 @@ public class PaymentRequestServiceImpl implements PaymentRequestService {
                         //there is a check in that method to throw NPE if accounts percents == 0..
                         //KFSMI-8487
                         if (summaryAccounts != null) {
-                        distributedAccounts = purapAccountingService.generateAccountDistributionForProration(summaryAccounts, totalAmount, new Integer("6"), PaymentRequestAccount.class);
+                        distributedAccounts = purapAccountingService.generateAccountDistributionForProration(summaryAccounts, totalAmount, Integer.valueOf("6"), PaymentRequestAccount.class);
                     }
                 }
                 }

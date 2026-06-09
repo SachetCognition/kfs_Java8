@@ -182,8 +182,8 @@ public class VendorDetail extends PersistableBusinessObjectBase implements Vendo
         // make sure there's at least one char before and after '-'
         if (dashInd > 0 && dashInd < vendorNumber.length() - 1) {
             try {
-                vendorHeaderGeneratedIdentifier = new Integer(vendorNumber.substring(0, dashInd));
-                vendorDetailAssignedIdentifier = new Integer(vendorNumber.substring(dashInd + 1));
+                vendorHeaderGeneratedIdentifier = Integer.valueOf(vendorNumber.substring(0, dashInd));
+                vendorDetailAssignedIdentifier = Integer.valueOf(vendorNumber.substring(dashInd + 1));
             }
             catch (NumberFormatException e) {
                 // in case of invalid number format
@@ -258,8 +258,8 @@ public class VendorDetail extends PersistableBusinessObjectBase implements Vendo
         // make sure there's at least one char before and after '-'
         if (dashInd > 0 && dashInd < vendorSoldToNumber.length() - 1) {
             try {
-                vendorSoldToGeneratedIdentifier = new Integer(vendorSoldToNumber.substring(0, dashInd));
-                vendorSoldToAssignedIdentifier = new Integer(vendorSoldToNumber.substring(dashInd + 1));
+                vendorSoldToGeneratedIdentifier = Integer.valueOf(vendorSoldToNumber.substring(0, dashInd));
+                vendorSoldToAssignedIdentifier = Integer.valueOf(vendorSoldToNumber.substring(dashInd + 1));
             }
             catch (NumberFormatException e) {
                 // in case of invalid number format

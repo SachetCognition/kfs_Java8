@@ -28,10 +28,10 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 public enum LineItemReceivingItemFixture {
 
     NORMAL_ITEM_1(
-            new Integer(0), //receivingLineItemIdentifier;
+            Integer.valueOf(0), //receivingLineItemIdentifier;
             "", //documentNumber;
-            new Integer(0), //purchaseOrderIdentifier;
-            new Integer(1), //itemLineNumber;
+            Integer.valueOf(0), //purchaseOrderIdentifier;
+            Integer.valueOf(1), //itemLineNumber;
             "ITEM", //itemTypeCode;
             "BX", //itemUnitOfMeasureCode;
             new KualiDecimal(30), //itemOrderedQuantity;

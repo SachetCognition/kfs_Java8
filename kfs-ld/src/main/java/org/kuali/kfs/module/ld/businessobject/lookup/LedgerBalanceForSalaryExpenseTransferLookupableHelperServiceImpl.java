@@ -63,7 +63,7 @@ public class LedgerBalanceForSalaryExpenseTransferLookupableHelperServiceImpl ex
         SystemOptions options = this.getOptions(fiscalYearString);
 
         if (ObjectUtils.isNull(options)) {
-            return new CollectionIncomplete(new ArrayList(), new Long(0));
+            return new CollectionIncomplete(new ArrayList(), Long.valueOf(0));
         }
 
         fieldValues.put(KFSPropertyConstants.FINANCIAL_OBJECT_TYPE_CODE, options.getFinObjTypeExpenditureexpCd());

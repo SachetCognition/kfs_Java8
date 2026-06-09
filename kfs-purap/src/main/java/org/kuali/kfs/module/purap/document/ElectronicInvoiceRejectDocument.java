@@ -185,12 +185,12 @@ public class ElectronicInvoiceRejectDocument extends FinancialSystemTransactiona
     public void setFileLevelData(ElectronicInvoice ei) {
         DateTimeService dateTimeService = SpringContext.getBean(DateTimeService.class);
         this.invoiceProcessTimestamp = dateTimeService.getCurrentTimestamp();
-        this.invoiceFileHeaderTypeIndicator = new Boolean(ei.getInvoiceDetailRequestHeader().isHeaderInvoiceIndicator());
-        this.invoiceFileInformationOnlyIndicator = new Boolean(ei.getInvoiceDetailRequestHeader().isInformationOnly());
-        this.invoiceFileTaxInLineIndicator = new Boolean(ei.getInvoiceDetailRequestHeader().isTaxInLine());
-        this.invoiceFileSpecialHandlingInLineIndicator = new Boolean(ei.getInvoiceDetailRequestHeader().isSpecialHandlingInLine());
-        this.invoiceFileShippingInLineIndicator = new Boolean(ei.getInvoiceDetailRequestHeader().isShippingInLine());
-        this.invoiceFileDiscountInLineIndicator = new Boolean(ei.getInvoiceDetailRequestHeader().isDiscountInLine());
+        this.invoiceFileHeaderTypeIndicator = Boolean.valueOf(ei.getInvoiceDetailRequestHeader().isHeaderInvoiceIndicator());
+        this.invoiceFileInformationOnlyIndicator = Boolean.valueOf(ei.getInvoiceDetailRequestHeader().isInformationOnly());
+        this.invoiceFileTaxInLineIndicator = Boolean.valueOf(ei.getInvoiceDetailRequestHeader().isTaxInLine());
+        this.invoiceFileSpecialHandlingInLineIndicator = Boolean.valueOf(ei.getInvoiceDetailRequestHeader().isSpecialHandlingInLine());
+        this.invoiceFileShippingInLineIndicator = Boolean.valueOf(ei.getInvoiceDetailRequestHeader().isShippingInLine());
+        this.invoiceFileDiscountInLineIndicator = Boolean.valueOf(ei.getInvoiceDetailRequestHeader().isDiscountInLine());
 
         this.invoiceFileName = ei.getFileName();
         this.vendorDunsNumber = ei.getDunsNumber();
@@ -528,9 +528,9 @@ public class ElectronicInvoiceRejectDocument extends FinancialSystemTransactiona
             !NumberUtils.isDigits(getInvoicePurchaseOrderNumber())){
             currentPurchaseOrderDocument = null;
         }else if (currentPurchaseOrderDocument == null) {
-            currentPurchaseOrderDocument = SpringContext.getBean(PurchaseOrderService.class).getCurrentPurchaseOrder(new Integer(getInvoicePurchaseOrderNumber()));
+            currentPurchaseOrderDocument = SpringContext.getBean(PurchaseOrderService.class).getCurrentPurchaseOrder(Integer.valueOf(getInvoicePurchaseOrderNumber()));
         }else if (!StringUtils.equals(getInvoicePurchaseOrderNumber(), currentPurchaseOrderDocument.getPurapDocumentIdentifier().toString())){
-            currentPurchaseOrderDocument = SpringContext.getBean(PurchaseOrderService.class).getCurrentPurchaseOrder(new Integer(getInvoicePurchaseOrderNumber()));
+            currentPurchaseOrderDocument = SpringContext.getBean(PurchaseOrderService.class).getCurrentPurchaseOrder(Integer.valueOf(getInvoicePurchaseOrderNumber()));
         }
 
         return currentPurchaseOrderDocument;

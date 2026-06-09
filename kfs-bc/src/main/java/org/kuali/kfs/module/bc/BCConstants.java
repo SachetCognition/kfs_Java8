@@ -34,7 +34,7 @@ public class BCConstants {
     public static final String BUDGET_CONSTRUCTION_NAMESPACE = "KFS-BC";
 
     // max depth to check runaway account organization hierarchy builds
-    public final static Integer MAXIMUM_ORGANIZATION_TREE_DEPTH = new Integer(1000);
+    public final static Integer MAXIMUM_ORGANIZATION_TREE_DEPTH = Integer.valueOf(1000);
 
     // formkey prefix to use for all screens we will store in session
     public static final String FORMKEY_PREFIX = "BcDoc";
@@ -490,7 +490,7 @@ public class BCConstants {
 
     /* constants for the budget construction header */
     public final static String DEFAULT_BUDGET_HEADER_LOCK_IDS = null;
-    public final static Integer INITIAL_ORGANIZATION_LEVEL_CODE = new Integer(0);
+    public final static Integer INITIAL_ORGANIZATION_LEVEL_CODE = Integer.valueOf(0);
     public final static String INITIAL_ORGANIZATION_LEVEL_CHART_OF_ACCOUNTS_CODE = null;
     public final static String INITIAL_ORGANIZATION_LEVEL_ORGANIZATION_CODE = null;
 

@@ -72,7 +72,7 @@ public class EncumbranceForwardStep extends AbstractWrappedBatchStep {
                 String FIELD_TRANSACTION_DATE = GeneralLedgerConstants.ColumnNames.TRANSACTION_DT;
 
                 // Get the current fiscal year.
-                varFiscalYear = new Integer(getParameterService().getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
+                varFiscalYear = Integer.valueOf(getParameterService().getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
 
                 // Get the current date (transaction date).
                 try {

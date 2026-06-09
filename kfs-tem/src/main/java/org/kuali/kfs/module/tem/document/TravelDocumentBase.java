@@ -1577,7 +1577,7 @@ public abstract class TravelDocumentBase extends AccountingDocumentBase implemen
         if (getTripEnd() != null) {
             Calendar tripEndCal = Calendar.getInstance();
             tripEndCal.setTimeInMillis(getTripEnd().getTime());
-            fiscalYear = new Integer(tripEndCal.get(Calendar.YEAR));
+            fiscalYear = Integer.valueOf(tripEndCal.get(Calendar.YEAR));
         }
         if (universityDateService.getCurrentFiscalYear().compareTo(fiscalYear) >= 0) {
             // delete and recreate the GL entries for this document so they do not get included in the SF check

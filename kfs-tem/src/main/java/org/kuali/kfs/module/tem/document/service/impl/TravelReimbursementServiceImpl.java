@@ -277,7 +277,7 @@ public class TravelReimbursementServiceImpl implements TravelReimbursementServic
     }
 
     protected Boolean areDatesNull(Date startDateIn, Date currentStart, Date endDateIn, Date currentEnd) {
-        Boolean nullDates = new Boolean(false);
+        Boolean nullDates = Boolean.valueOf(false);
         if (startDateIn == null) {
             nullDates = true;
         }
@@ -294,7 +294,7 @@ public class TravelReimbursementServiceImpl implements TravelReimbursementServic
     }
 
     protected Boolean haveDatesChanged(Date startDateIn, Date currentStart, Date endDateIn, Date currentEnd) {
-        Boolean diffDates = new Boolean(false);
+        Boolean diffDates = Boolean.valueOf(false);
         final SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         final String origStartDateStr = formatter.format(startDateIn);
         final String origEndDateStr = formatter.format(endDateIn);

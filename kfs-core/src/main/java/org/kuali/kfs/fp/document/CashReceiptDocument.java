@@ -85,8 +85,8 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
     protected List<DepositCashReceiptControl> depositCashReceiptControl = new ArrayList<DepositCashReceiptControl>();
 
     // incrementers for detail lines
-    protected Integer nextCheckSequenceId = new Integer(1);
-    protected Integer nextConfirmedCheckSequenceId = new Integer(1);
+    protected Integer nextCheckSequenceId = Integer.valueOf(1);
+    protected Integer nextConfirmedCheckSequenceId = Integer.valueOf(1);
 
     // monetary attributes
 
@@ -345,7 +345,7 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
 
         this.checks.add(check);
 
-        this.nextCheckSequenceId = new Integer(this.nextCheckSequenceId.intValue() + 1);
+        this.nextCheckSequenceId = Integer.valueOf(this.nextCheckSequenceId.intValue() + 1);
 
         setTotalCheckAmount(getTotalCheckAmount().add(check.getAmount()));
     }
@@ -360,7 +360,7 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
 
         this.confirmedChecks.add(check);
 
-        this.nextConfirmedCheckSequenceId = new Integer(this.nextConfirmedCheckSequenceId.intValue() + 1);
+        this.nextConfirmedCheckSequenceId = Integer.valueOf(this.nextConfirmedCheckSequenceId.intValue() + 1);
 
         setTotalConfirmedCheckAmount(getTotalConfirmedCheckAmount().add(check.getAmount()));
     }

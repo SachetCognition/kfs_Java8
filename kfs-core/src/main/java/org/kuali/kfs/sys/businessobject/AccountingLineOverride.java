@@ -64,10 +64,10 @@ public class AccountingLineOverride {
      * These are the somewhat independent components of an override.
      */
     public static final class COMPONENT { // todo: use JDK 1.5 enum
-        public static final Integer EXPIRED_ACCOUNT = new Integer(1);
-        public static final Integer NON_BUDGETED_OBJECT = new Integer(2);
-        public static final Integer TRANSACTION_EXCEEDS_REMAINING_BUDGET = new Integer(3);
-        public static final Integer NON_FRINGE_ACCOUNT_USED = new Integer(8);
+        public static final Integer EXPIRED_ACCOUNT = Integer.valueOf(1);
+        public static final Integer NON_BUDGETED_OBJECT = Integer.valueOf(2);
+        public static final Integer TRANSACTION_EXCEEDS_REMAINING_BUDGET = Integer.valueOf(3);
+        public static final Integer NON_FRINGE_ACCOUNT_USED = Integer.valueOf(8);
     }
 
     /**

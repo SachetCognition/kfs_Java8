@@ -52,7 +52,7 @@ public class UpcomingMilestoneNotificationServiceImpl implements UpcomingMilesto
     @Override
     @Transactional
     public void sendNotificationsForMilestones() {
-        int limitDays = new Integer(parameterService.getParameterValueAsString(UpcomingMilestoneNotificationStep.class, ArConstants.CHECK_LIMIT_DAYS));
+        int limitDays = Integer.valueOf(parameterService.getParameterValueAsString(UpcomingMilestoneNotificationStep.class, ArConstants.CHECK_LIMIT_DAYS));
         final Date expectedCompletionLimitDate = DateUtils.addDays(dateTimeService.getCurrentDate(), limitDays);
 
         List<Milestone> milestones = (List<Milestone>) milestoneDao.getMilestonesForNotification(expectedCompletionLimitDate);

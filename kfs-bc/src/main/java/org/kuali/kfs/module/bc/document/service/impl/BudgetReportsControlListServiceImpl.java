@@ -98,7 +98,7 @@ public class BudgetReportsControlListServiceImpl implements BudgetReportsControl
     public Collection<BudgetConstructionPullup> retrieveSelectedOrganziations(String principalName) {
         Map criteria = new HashMap();
         criteria.put(KFSPropertyConstants.KUALI_USER_PERSON_USER_IDENTIFIER, principalName);
-        criteria.put(BCPropertyConstants.PULL_FLAG, new Integer(1));
+        criteria.put(BCPropertyConstants.PULL_FLAG, Integer.valueOf(1));
 
         return businessObjectService.findMatching(BudgetConstructionPullup.class, criteria);
     }

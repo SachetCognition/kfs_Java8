@@ -111,7 +111,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         transaction.setMoneyOutCoin(CoinDetailTest.CoinDetailAmountFixture.ALL_FIVES_COIN_AMOUNT.convertToCoinDetail());
         CashieringItemInProcess currAdvance = transaction.getNewItemInProcess();
         currAdvance.setItemAmount(new KualiDecimal(3530.0));
-        currAdvance.setItemIdentifier(new Integer(27));
+        currAdvance.setItemIdentifier(Integer.valueOf(27));
         currAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         assertTrue(rule.checkMoneyInMoneyOutBalance(transaction));
 
@@ -120,7 +120,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         transaction.setMoneyOutCoin(CoinDetailTest.CoinDetailAmountFixture.ALL_FIVES_COIN_AMOUNT.convertToCoinDetail());
         currAdvance = transaction.getNewItemInProcess();
         currAdvance.setItemAmount(new KualiDecimal(30.0));
-        currAdvance.setItemIdentifier(new Integer(27));
+        currAdvance.setItemIdentifier(Integer.valueOf(27));
         assertFalse(rule.checkMoneyInMoneyOutBalance(transaction));
 
         resetTransaction(transaction);
@@ -128,7 +128,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         transaction.setMoneyOutCoin(CoinDetailTest.CoinDetailAmountFixture.ALL_FIVES_COIN_AMOUNT.convertToCoinDetail());
         currAdvance = transaction.getNewItemInProcess();
         currAdvance.setItemAmount(new KualiDecimal(1000000.0));
-        currAdvance.setItemIdentifier(new Integer(27));
+        currAdvance.setItemIdentifier(Integer.valueOf(27));
         assertFalse(rule.checkMoneyInMoneyOutBalance(transaction));
 
         // currency and misc advance
@@ -136,7 +136,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         CashieringItemInProcess oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(3530.0));
         oldAdvance.setItemRemainingAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(58));
+        oldAdvance.setItemIdentifier(Integer.valueOf(58));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         transaction.getOpenItemsInProcess().add(oldAdvance);
         transaction.setMoneyInCurrency(CurrencyDetailTest.CurrencyDetailAmountFixture.ALL_FIVES_AMOUNT.convertToCurrencyDetail());
@@ -147,7 +147,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(3530.0));
         oldAdvance.setItemRemainingAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(58));
+        oldAdvance.setItemIdentifier(Integer.valueOf(58));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         transaction.getOpenItemsInProcess().add(oldAdvance);
         transaction.setMoneyInCurrency(CurrencyDetailTest.CurrencyDetailAmountFixture.ZERO_AMOUNT.convertToCurrencyDetail());
@@ -158,7 +158,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(3530.0));
         oldAdvance.setItemRemainingAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(58));
+        oldAdvance.setItemIdentifier(Integer.valueOf(58));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         transaction.getOpenItemsInProcess().add(oldAdvance);
         transaction.setMoneyInCurrency(CurrencyDetailTest.CurrencyDetailAmountFixture.ALL_TENS_AMOUNT.convertToCurrencyDetail());
@@ -170,7 +170,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(50.0));
         oldAdvance.setItemRemainingAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(58));
+        oldAdvance.setItemIdentifier(Integer.valueOf(58));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         justEnoughCheck = new CheckBase();
         justEnoughCheck.setAmount(new KualiDecimal(50.0));
@@ -182,7 +182,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(3530.0));
         oldAdvance.setItemRemainingAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(58));
+        oldAdvance.setItemIdentifier(Integer.valueOf(58));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         transaction.getOpenItemsInProcess().add(oldAdvance);
         notEnoughCheck = new CheckBase();
@@ -194,7 +194,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(3530.0));
         oldAdvance.setItemRemainingAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(58));
+        oldAdvance.setItemIdentifier(Integer.valueOf(58));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         transaction.getOpenItemsInProcess().add(oldAdvance);
         tooMuchCheck = new CheckBase();
@@ -351,7 +351,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         CashieringItemInProcess oldAdvance = new CashieringItemInProcess();
         oldAdvance.setCurrentPayment(new KualiDecimal(3530.0));
         oldAdvance.setItemAmount(new KualiDecimal(10000.0));
-        oldAdvance.setItemIdentifier(new Integer(82));
+        oldAdvance.setItemIdentifier(Integer.valueOf(82));
         oldAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         assertTrue(rule.checkPaidBackItemInProcessDoesNotExceedTotal(oldAdvance, 0));
         oldAdvance.setCurrentPayment(null);
@@ -426,12 +426,12 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         assertTrue(rule.checkItemInProcessIsNotPayingOffItemInProcess(cmDoc.getCurrentTransaction()));
         CashieringItemInProcess openAdvance = new CashieringItemInProcess();
         openAdvance.setItemAmount(new KualiDecimal(10000.0));
-        openAdvance.setItemIdentifier(new Integer(82));
+        openAdvance.setItemIdentifier(Integer.valueOf(82));
         openAdvance.setCurrentPayment(new KualiDecimal(25.0));
         openAdvance.setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         cmDoc.getCurrentTransaction().getOpenItemsInProcess().add(openAdvance);
         assertTrue(rule.checkItemInProcessIsNotPayingOffItemInProcess(cmDoc.getCurrentTransaction()));
-        cmDoc.getCurrentTransaction().getNewItemInProcess().setItemIdentifier(new Integer(80));
+        cmDoc.getCurrentTransaction().getNewItemInProcess().setItemIdentifier(Integer.valueOf(80));
         cmDoc.getCurrentTransaction().getNewItemInProcess().setItemAmount(new KualiDecimal(52));
         cmDoc.getCurrentTransaction().getNewItemInProcess().setItemOpenDate(new Date(new GregorianCalendar().getTimeInMillis()));
         assertFalse(rule.checkItemInProcessIsNotPayingOffItemInProcess(cmDoc.getCurrentTransaction()));
@@ -443,7 +443,7 @@ public class CashieringTransactionRuleTest extends KualiTestBase {
         CashManagementDocument cmDoc = this.cashManagementDocumentFixture("testAdvancesDoNotPayOffOtherAdvances");
         CashManagementDocumentRule rule = new CashManagementDocumentRule();
 
-        cmDoc.getCurrentTransaction().getNewItemInProcess().setItemIdentifier(new Integer(80));
+        cmDoc.getCurrentTransaction().getNewItemInProcess().setItemIdentifier(Integer.valueOf(80));
         cmDoc.getCurrentTransaction().getNewItemInProcess().setItemAmount(new KualiDecimal(52));
         cmDoc.getCurrentTransaction().getNewItemInProcess().setItemOpenDate(oneWeekAgo());
         assertTrue(rule.checkNewItemInProcessInPast(cmDoc.getCurrentTransaction()));

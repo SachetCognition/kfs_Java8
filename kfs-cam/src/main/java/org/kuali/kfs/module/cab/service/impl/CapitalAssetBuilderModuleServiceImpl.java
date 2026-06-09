@@ -667,7 +667,7 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                     String[] mappedNames = {PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS, mappedName};
 
                     for (PurchasingCapitalAssetItem item : capitalAssetItems) {
-                        StringBuffer keyBuffer = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS + "[" + new Integer(item.getPurchasingItem().getItemLineNumber().intValue() - 1) + "].");
+                        StringBuffer keyBuffer = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS + "[" + Integer.valueOf(item.getPurchasingItem().getItemLineNumber().intValue() - 1) + "].");
                         valid &= validateFieldRequirementByChartHelper(item, ArrayUtils.subarray(mappedNames, 1, mappedNames.length), keyBuffer, item.getPurchasingItem().getItemLineNumber());
                     }
                 }
@@ -685,7 +685,7 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                     // types to work fine.
                     int count = 0;
                     for (CapitalAssetSystem system : capitalAssetSystems) {
-                        StringBuffer keyBuffer = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_SYSTEMS + "[" + new Integer(count) + "].");
+                        StringBuffer keyBuffer = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_SYSTEMS + "[" + Integer.valueOf(count) + "].");
                         valid &= validateFieldRequirementByChartHelper(system, ArrayUtils.subarray(mappedNamesList.toArray(), 1, mappedNamesList.size()), keyBuffer, null);
                         count++;
                     }
@@ -744,7 +744,7 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
                 // it through
                 // the purchasingCapitalAssetSystem of the item.
                 for (PurchasingCapitalAssetItem item : capitalAssetItems) {
-                    StringBuffer keyBuffer = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS + "[" + new Integer(item.getPurchasingItem().getItemLineNumber().intValue() - 1) + "].");
+                    StringBuffer keyBuffer = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS + "[" + Integer.valueOf(item.getPurchasingItem().getItemLineNumber().intValue() - 1) + "].");
                     valid &= validateFieldRequirementByChartHelper(item, ArrayUtils.subarray(mappedNamesList.toArray(), 1, mappedNamesList.size()), keyBuffer, item.getPurchasingItem().getItemLineNumber());
                 }
             }
@@ -1237,7 +1237,7 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         int systemCount = 0;
         for (CapitalAssetSystem system : capitalAssetSystems) {
             List<CapitalAssetLocation> capitalAssetLocations = system.getCapitalAssetLocations();
-            StringBuffer errorKey = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_SYSTEMS + "[" + new Integer(systemCount++) + "].");
+            StringBuffer errorKey = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_SYSTEMS + "[" + Integer.valueOf(systemCount++) + "].");
             errorKey.append("capitalAssetLocations");
             int locationCount = 0;
             for (CapitalAssetLocation location : capitalAssetLocations) {
@@ -1263,7 +1263,7 @@ public class CapitalAssetBuilderModuleServiceImpl implements CapitalAssetBuilder
         for (PurchasingCapitalAssetItem item : capitalAssetItems) {
             CapitalAssetSystem system = item.getPurchasingCapitalAssetSystem();
             List<CapitalAssetLocation> capitalAssetLocations = system.getCapitalAssetLocations();
-            StringBuffer errorKey = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS + "[" + new Integer(item.getPurchasingItem().getItemLineNumber().intValue() - 1) + "].");
+            StringBuffer errorKey = new StringBuffer("document." + PurapPropertyConstants.PURCHASING_CAPITAL_ASSET_ITEMS + "[" + Integer.valueOf(item.getPurchasingItem().getItemLineNumber().intValue() - 1) + "].");
             errorKey.append("purchasingCapitalAssetSystem.capitalAssetLocations");
             int i = 0;
             for (CapitalAssetLocation location : capitalAssetLocations) {

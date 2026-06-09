@@ -352,7 +352,7 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
         }
         else if (!getAssetService().isDocumentEnrouting(document)) {
             success &= checkRetirementDetailOneLine(assetRetirementGlobalDetail, assetRetirementGlobal, document);
-            success &= checkRetireMultipleAssets(assetRetirementGlobal.getRetirementReasonCode(), assetRetirementGlobal.getAssetRetirementGlobalDetails(), new Integer(0), document);
+            success &= checkRetireMultipleAssets(assetRetirementGlobal.getRetirementReasonCode(), assetRetirementGlobal.getAssetRetirementGlobalDetails(), Integer.valueOf(0), document);
         }
 
         // Calculate summary fields in order to show the values even though add new line fails.
@@ -505,7 +505,7 @@ public class AssetRetirementGlobalRule extends MaintenanceDocumentRuleBase {
 
         if (!getAssetService().isDocumentEnrouting(maintenanceDocument)) {
             valid &= validateRetirementDetails(assetRetirementGlobal, maintenanceDocument);
-            valid &= checkRetireMultipleAssets(assetRetirementGlobal.getRetirementReasonCode(), assetRetirementGlobal.getAssetRetirementGlobalDetails(), new Integer(1), maintenanceDocument);
+            valid &= checkRetireMultipleAssets(assetRetirementGlobal.getRetirementReasonCode(), assetRetirementGlobal.getAssetRetirementGlobalDetails(), Integer.valueOf(1), maintenanceDocument);
         }
         return valid;
     }

@@ -77,10 +77,10 @@ public class BudgetConstructionReportHelper {
     public static Integer convertKualiInteger(KualiInteger num) {
         Integer returnNum = null;
         if (num != null) {
-            returnNum = new Integer(num.intValue());
+            returnNum = Integer.valueOf(num.intValue());
         }
         else {
-            returnNum = new Integer(0);
+            returnNum = Integer.valueOf(0);
         }
         return returnNum;
     }

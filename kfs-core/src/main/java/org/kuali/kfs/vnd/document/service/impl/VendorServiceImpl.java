@@ -99,8 +99,8 @@ public class VendorServiceImpl implements VendorService {
         // make sure there's at least one char before and after '-'
         if (dashInd > 0 && dashInd < vendorNumber.length() - 1) {
             try {
-                Integer headerId = new Integer(vendorNumber.substring(0, dashInd));
-                Integer detailId = new Integer(vendorNumber.substring(dashInd + 1));
+                Integer headerId = Integer.valueOf(vendorNumber.substring(0, dashInd));
+                Integer detailId = Integer.valueOf(vendorNumber.substring(dashInd + 1));
                 return getVendorDetail(headerId, detailId);
             }
             catch (NumberFormatException e) {

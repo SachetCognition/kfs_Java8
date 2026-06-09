@@ -864,7 +864,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String fiscalYearString = line.substring(pMap.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR), pMap.get(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE));
         if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(fiscalYearString)) {
             try {
-                setUniversityFiscalYear(new Integer(fiscalYearString));
+                setUniversityFiscalYear(Integer.valueOf(fiscalYearString));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Fiscal year '" + fiscalYearString + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -901,7 +901,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String sequenceNumberString = line.substring(pMap.get(KFSPropertyConstants.TRANSACTION_ENTRY_SEQUENCE_NUMBER), pMap.get(KFSPropertyConstants.POSITION_NUMBER));
         if (!GeneralLedgerConstants.getSpaceTransactionEntrySequenceNumber().equals(sequenceNumberString) && !GeneralLedgerConstants.getZeroTransactionEntrySequenceNumber().equals(sequenceNumberString)) {
             try {
-                setTransactionLedgerEntrySequenceNumber(new Integer(sequenceNumberString.trim()));
+                setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceNumberString.trim()));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Transaction Sequence Number '" + sequenceNumberString + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -1007,7 +1007,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String payEndFisYrStr = line.substring(pMap.get(KFSPropertyConstants.PAYROLL_END_DATE_FISCAL_YEAR), pMap.get(LaborPropertyConstants.PAYROLL_END_DATE_FISCAL_PERIOD_CODE));
         if (!GeneralLedgerConstants.getSpaceUniversityFiscalYear().equals(payEndFisYrStr)) {
             try {
-                setPayrollEndDateFiscalYear(new Integer(org.springframework.util.StringUtils.trimTrailingWhitespace(payEndFisYrStr)));
+                setPayrollEndDateFiscalYear(Integer.valueOf(org.springframework.util.StringUtils.trimTrailingWhitespace(payEndFisYrStr)));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Payroll End Date Fiscal Year '" + payEndFisYrStr + "' contains an invalid value." , Message.TYPE_FATAL));
@@ -1024,7 +1024,7 @@ public class LaborOriginEntry extends OriginEntryFull implements OriginEntryInfo
         String empRecordStr = line.substring(pMap.get(KFSPropertyConstants.EMPLOYEE_RECORD), pMap.get(KFSPropertyConstants.EARN_CODE));
         if (!empRecordStr.trim().equals(GeneralLedgerConstants.EMPTY_CODE)){
             try {
-                setEmployeeRecord(new Integer(empRecordStr.trim()));
+                setEmployeeRecord(Integer.valueOf(empRecordStr.trim()));
             }
             catch (NumberFormatException e) {
                 returnList.add(new Message("Employee Record '" + empRecordStr.trim() + "' contains an invalid value." , Message.TYPE_FATAL));

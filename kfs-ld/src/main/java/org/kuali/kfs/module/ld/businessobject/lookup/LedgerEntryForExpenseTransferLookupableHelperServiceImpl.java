@@ -56,7 +56,7 @@ public class LedgerEntryForExpenseTransferLookupableHelperServiceImpl extends Le
         consolidatedEntries.addAll(effortEntries);
 
         // get the actual size of all qualified search results
-        Long actualSize = new Long(consolidatedEntries.size());
+        Long actualSize = Long.valueOf(consolidatedEntries.size());
 
         return this.buildSearchResultList(consolidatedEntries, actualSize);
     }

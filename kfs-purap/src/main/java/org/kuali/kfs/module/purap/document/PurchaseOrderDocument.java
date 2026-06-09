@@ -1206,8 +1206,8 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
                 String vndrHdrGenId = vendorNumber.substring(0, dashInd);
                 String vndrDetailAssgnedId = vendorNumber.substring(dashInd + 1);
                 if (!StringUtils.isEmpty(vndrHdrGenId) && !StringUtils.isEmpty(vndrDetailAssgnedId)) {
-                    this.alternateVendorHeaderGeneratedIdentifier = new Integer(vndrHdrGenId);
-                    this.alternateVendorDetailAssignedIdentifier = new Integer(vndrDetailAssgnedId);
+                    this.alternateVendorHeaderGeneratedIdentifier = Integer.valueOf(vndrHdrGenId);
+                    this.alternateVendorDetailAssignedIdentifier = Integer.valueOf(vndrDetailAssgnedId);
                 }
             }
         }

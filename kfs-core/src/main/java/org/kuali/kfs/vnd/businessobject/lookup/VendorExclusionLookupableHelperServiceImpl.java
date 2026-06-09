@@ -65,8 +65,8 @@ public class VendorExclusionLookupableHelperServiceImpl extends KualiLookupableH
         Properties properties = new Properties();
         properties.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, KRADConstants.START_METHOD);
         properties.put(KRADConstants.BUSINESS_OBJECT_CLASS_ATTRIBUTE, VendorDetail.class.getName());
-        properties.put("vendorDetailAssignedIdentifier", new Integer(match.getVendorDetailAssignedIdentifier()).toString());
-        properties.put("vendorHeaderGeneratedIdentifier", new Integer(match.getVendorHeaderGeneratedIdentifier()).toString());
+        properties.put("vendorDetailAssignedIdentifier", Integer.valueOf(match.getVendorDetailAssignedIdentifier()).toString());
+        properties.put("vendorHeaderGeneratedIdentifier", Integer.valueOf(match.getVendorHeaderGeneratedIdentifier()).toString());
 
         return UrlFactory.parameterizeUrl(KRADConstants.INQUIRY_ACTION, properties);
     }
@@ -74,7 +74,7 @@ public class VendorExclusionLookupableHelperServiceImpl extends KualiLookupableH
     protected HtmlData getInquiryUrl(BusinessObject bo){
         Properties properties = new Properties();
         properties.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, KRADConstants.START_METHOD);
-        properties.put("debarredVendorId", new Integer(((DebarredVendorMatch)bo).getDebarredVendorId()).toString());
+        properties.put("debarredVendorId", Integer.valueOf(((DebarredVendorMatch)bo).getDebarredVendorId()).toString());
         properties.put(KRADConstants.BUSINESS_OBJECT_CLASS_ATTRIBUTE, DebarredVendorMatch.class.getName());
 
         String href = UrlFactory.parameterizeUrl(KRADConstants.INQUIRY_ACTION, properties);

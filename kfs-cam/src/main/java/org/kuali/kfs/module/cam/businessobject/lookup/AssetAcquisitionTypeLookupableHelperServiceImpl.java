@@ -122,7 +122,7 @@ public class AssetAcquisitionTypeLookupableHelperServiceImpl extends KualiLookup
         }
         matchingResultsCount = Long.valueOf(newList.size());
         if (matchingResultsCount.intValue() <= searchResultsLimit.intValue()) {
-            matchingResultsCount = new Long(0);
+            matchingResultsCount = Long.valueOf(0);
         }
         return new CollectionIncomplete(newList, matchingResultsCount);
     }

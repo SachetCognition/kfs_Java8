@@ -176,7 +176,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                 }
 
                 fiscalYear = universityDate.getUniversityFiscalYear();
-                fiscalMonth = new Integer(universityDate.getUniversityFiscalAccountingPeriod());
+                fiscalMonth = Integer.valueOf(universityDate.getUniversityFiscalAccountingPeriod());
                   assetObjectCodes = getAssetObjectCodes(fiscalYear);
                 // If the depreciation date is not = to the system date then, the depreciation process cannot run.
                 if ( LOG.isInfoEnabled() ) {
@@ -296,7 +296,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
             }
 
             fiscalYear = universityDate.getUniversityFiscalYear();
-            fiscalMonth = new Integer(universityDate.getUniversityFiscalAccountingPeriod());
+            fiscalMonth = Integer.valueOf(universityDate.getUniversityFiscalAccountingPeriod());
 
             depreciationDate.setTime(java.sql.Date.valueOf(fiscalYearToDepreciate.toString()+getLastDayOfFiscalyear()));
             fiscalYear = fiscalYearToDepreciate;
@@ -446,8 +446,8 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
     private Date getBlankOutEndDate(List<String> errorMessages) throws ParseException {
         String endDate = parameterService.getParameterValueAsString(AssetDepreciationStep.class, CamsConstants.Parameters.BLANK_OUT_END_MMDD);
         if(!StringHelper.isNullOrEmpty(endDate)) {
-            int endDay = new Integer(StringUtils.substringAfterLast(endDate, "/")).intValue();
-            int endMonth = new Integer(StringUtils.substringBeforeLast(endDate, "/")).intValue()-1  ;
+            int endDay = Integer.valueOf(StringUtils.substringAfterLast(endDate, "/")).intValue();
+            int endMonth = Integer.valueOf(StringUtils.substringBeforeLast(endDate, "/")).intValue()-1  ;
             Calendar blankOutEndcalendar = Calendar.getInstance();
             blankOutEndcalendar.set(blankOutEndcalendar.get(Calendar.YEAR), endMonth , endDay);
             return  convertToDate(dateTimeService.toString(blankOutEndcalendar.getTime(), CamsConstants.DateFormats.MONTH_DAY_YEAR));
@@ -474,8 +474,8 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         String beginDate =  parameterService.getParameterValueAsString(AssetDepreciationStep.class, CamsConstants.Parameters.BLANK_OUT_BEGIN_MMDD);
 
         if(!StringHelper.isNullOrEmpty(beginDate)) {
-            int beginDay = new Integer(StringUtils.substringAfterLast(beginDate, "/")).intValue();
-            int beginMonth = new Integer(StringUtils.substringBeforeLast(beginDate, "/")).intValue()-1;
+            int beginDay = Integer.valueOf(StringUtils.substringAfterLast(beginDate, "/")).intValue();
+            int beginMonth = Integer.valueOf(StringUtils.substringBeforeLast(beginDate, "/")).intValue()-1;
             Calendar blankOutBegincalendar = Calendar.getInstance();
             blankOutBegincalendar.set(blankOutBegincalendar.get(Calendar.YEAR),beginMonth , beginDay);
             return convertToDate(dateTimeService.toString(blankOutBegincalendar.getTime(), CamsConstants.DateFormats.MONTH_DAY_YEAR));
@@ -725,7 +725,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                     GeneralLedgerPendingEntry explicitEntry = new GeneralLedgerPendingEntry();
                     explicitEntry.setFinancialSystemOriginationCode(KFSConstants.ORIGIN_CODE_KUALI);
                     explicitEntry.setDocumentNumber(documentNumber);
-                    explicitEntry.setTransactionLedgerEntrySequenceNumber(new Integer(sequenceHelper.getSequenceCounter()));
+                    explicitEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(sequenceHelper.getSequenceCounter()));
                     sequenceHelper.increment();
                     explicitEntry.setChartOfAccountsCode(t.getChartOfAccountsCode());
                     explicitEntry.setAccountNumber(t.getAccountNumber());
@@ -742,7 +742,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                     explicitEntry.setTransactionDate(new java.sql.Date(transactionTimestamp.getTime()));
                     explicitEntry.setFinancialDocumentTypeCode(financialSystemDocumentTypeCodeCode);
                     explicitEntry.setFinancialDocumentApprovedCode(KFSConstants.DocumentStatusCodes.APPROVED);
-                    explicitEntry.setVersionNumber(new Long(1));
+                    explicitEntry.setVersionNumber(Long.valueOf(1));
                     explicitEntry.setTransactionEntryProcessedTs(new java.sql.Timestamp(transactionTimestamp.getTime()));
                     // this.generalLedgerPendingEntryService.save(explicitEntry);
                     saveList.add(explicitEntry);
@@ -1123,7 +1123,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
     }
 
     protected void processYearEndGeneralLedgerPendingEntry(Integer fiscalYear, List<String> documentNos, SortedMap<String, AssetDepreciationTransaction> trans) {
-        Integer fiscalMonth = new Integer(13);
+        Integer fiscalMonth = Integer.valueOf(13);
         processGeneralLedgerPendingEntry(fiscalYear, fiscalMonth, documentNos, trans);
     }
 

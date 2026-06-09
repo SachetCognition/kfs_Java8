@@ -43,7 +43,7 @@ public class FringeBenefitInquiryAction extends KualiAction {
     public ActionForward calculateFringeBenefit(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         FringeBenefitInquiryForm accountingLineForm = (FringeBenefitInquiryForm) form;
 
-        Integer payrollFiscalyear = new Integer(accountingLineForm.getPayrollEndDateFiscalYear());
+        Integer payrollFiscalyear = Integer.valueOf(accountingLineForm.getPayrollEndDateFiscalYear());
         String chartOfAccountsCode = accountingLineForm.getChartOfAccountsCode();
         String objectCode = accountingLineForm.getFinancialObjectCode();
         KualiDecimal amount = new KualiDecimal(accountingLineForm.getAmount());

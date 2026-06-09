@@ -78,11 +78,11 @@ public class OriginEntryKey {
         entry.setAccountNumber(getAccountNumber());
         entry.setBalanceType(balanceTypService.getBalanceTypeByCode(getBalanceTypeCode()));
         entry.setChartOfAccountsCode(getChartCode());
-        entry.setTransactionLedgerEntrySequenceNumber(new Integer(getEntrySequenceNumber()));
+        entry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(getEntrySequenceNumber()));
         entry.setDocumentNumber(getDocumentNumber());
         entry.setFinancialObjectCode(getFinancialObjectCode());
         entry.setUniversityFiscalPeriodCode(getFiscalPeriodCode());
-        entry.setUniversityFiscalYear(new Integer(getFiscalYear()));
+        entry.setUniversityFiscalYear(Integer.valueOf(getFiscalYear()));
         entry.setFinancialObjectTypeCode(getObjectTypeCode());
         entry.setSubAccountNumber(getSubAccountNumber());
         entry.setFinancialSubObjectCode(getSubObjectCode());

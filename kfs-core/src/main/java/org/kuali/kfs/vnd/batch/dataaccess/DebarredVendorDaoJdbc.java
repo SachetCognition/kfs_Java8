@@ -97,8 +97,8 @@ public class DebarredVendorDaoJdbc extends  PlatformAwareDaoBaseJdbc implements 
 
             while(rs.next()) {
                 match = new DebarredVendorMatch();
-                match.setVendorHeaderGeneratedIdentifier(new Integer(rs.getInt(1)));
-                match.setVendorDetailAssignedIdentifier(new Integer(rs.getInt(2)));
+                match.setVendorHeaderGeneratedIdentifier(Integer.valueOf(rs.getInt(1)));
+                match.setVendorDetailAssignedIdentifier(Integer.valueOf(rs.getInt(2)));
                 match.setLoadDate(rs.getDate(4));
                 match.setName(rs.getString(5));
                 match.setAddress1(rs.getString(6));

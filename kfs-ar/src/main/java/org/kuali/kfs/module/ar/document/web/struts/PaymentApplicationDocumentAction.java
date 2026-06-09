@@ -159,7 +159,7 @@ public class PaymentApplicationDocumentAction extends FinancialSystemTransaction
 
         // If we know which line to remove, remove it.
         if (null != indexToRemoveString) {
-            indexToRemove = new Integer(indexToRemoveString);
+            indexToRemove = Integer.valueOf(indexToRemoveString);
             NonInvoiced toRemove = null;
             for (NonInvoiced nonInvoiced : paymentApplicationDocument.getNonInvoiceds()) {
                 if (indexToRemove.equals(nonInvoiced.getFinancialDocumentLineNumber())) {

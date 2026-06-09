@@ -393,7 +393,7 @@ public class CashManagementServiceImpl implements CashManagementService {
 
         // derive the line number
         int lineNumber = cashManagementDoc.getNextDepositLineNumber();
-        deposit.setFinancialDocumentDepositLineNumber(new Integer(lineNumber));
+        deposit.setFinancialDocumentDepositLineNumber(Integer.valueOf(lineNumber));
 
         // trim depositTicketNumber to empty, because the field is optional
         deposit.setDepositTicketNumber(StringUtils.trimToEmpty(depositTicketNumber));

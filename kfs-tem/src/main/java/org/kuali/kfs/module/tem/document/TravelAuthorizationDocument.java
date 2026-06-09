@@ -115,7 +115,7 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
     private PaymentSourceWireTransfer wireTransfer;
     private List<TemSourceAccountingLine> advanceAccountingLines;
     private List<TravelAdvance> travelAdvancesForTrip;
-    private Integer nextAdvanceLineNumber  = new Integer(1);
+    private Integer nextAdvanceLineNumber  = Integer.valueOf(1);
     private String holdRequestorprincipalId ;
 
     protected volatile static PersonService personService;
@@ -233,12 +233,12 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
         List<TemSourceAccountingLine> newList = new ArrayList<TemSourceAccountingLine>();
         int sequence = 1;
         for (TemSourceAccountingLine line : copyToDocument.getEncumbranceSourceAccountingLines()){
-            line.setSequenceNumber(new Integer(sequence));
+            line.setSequenceNumber(Integer.valueOf(sequence));
             sequence++;
             newList.add(line);
         }
         copyToDocument.setSourceAccountingLines(newList);
-        copyToDocument.setNextSourceLineNumber(new Integer(sequence));
+        copyToDocument.setNextSourceLineNumber(Integer.valueOf(sequence));
 
         copyToDocument.initiateAdvancePaymentAndLines();// should we be reinitiating all travel advance info here?  Funcs will tell us if that's wrong....
     }
@@ -460,7 +460,7 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
             TemSourceAccountingLine accountingLine = getAdvanceAccountingLineClass().newInstance();
             accountingLine.setDocumentNumber(getDocumentNumber());
             accountingLine.setFinancialDocumentLineTypeCode(TemConstants.TRAVEL_ADVANCE_ACCOUNTING_LINE_TYPE_CODE);
-            accountingLine.setSequenceNumber(new Integer(1));
+            accountingLine.setSequenceNumber(Integer.valueOf(1));
             accountingLine.setCardType(TemConstants.ADVANCE);
             if (this.allParametersForAdvanceAccountingLinesSet()) {
                 accountingLine.setChartOfAccountsCode(getParameterService().getParameterValueAsString(TravelAuthorizationDocument.class, TemConstants.TravelAuthorizationParameters.TRAVEL_ADVANCE_CHART));
@@ -918,7 +918,7 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
     public void addAdvanceAccountingLine(TemSourceAccountingLine line) {
         line.setSequenceNumber(this.getNextAdvanceLineNumber());
         this.advanceAccountingLines.add(line);
-        this.nextAdvanceLineNumber = new Integer(getNextAdvanceLineNumber().intValue() + 1);
+        this.nextAdvanceLineNumber = Integer.valueOf(getNextAdvanceLineNumber().intValue() + 1);
     }
 
     /**
@@ -974,7 +974,7 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
      * (like that which creates TAA's)
      */
     protected void resetNextAdvanceLineNumber() {
-        this.nextAdvanceLineNumber = new Integer(1);
+        this.nextAdvanceLineNumber = Integer.valueOf(1);
     }
 
     /**

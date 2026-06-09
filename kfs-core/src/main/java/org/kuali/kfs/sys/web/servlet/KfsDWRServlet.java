@@ -150,7 +150,7 @@ public class KfsDWRServlet extends DwrServlet {
 
     @Override
     public void init() throws ServletException {
-        setSpringBasedConfigPath(new Boolean(this.getInitParameter("springpath")));
+        setSpringBasedConfigPath(Boolean.valueOf(this.getInitParameter("springpath")));
         super.init();
     }
 

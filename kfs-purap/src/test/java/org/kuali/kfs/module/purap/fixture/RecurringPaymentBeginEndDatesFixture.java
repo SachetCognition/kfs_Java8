@@ -56,7 +56,7 @@ public enum RecurringPaymentBeginEndDatesFixture {
         this.document.setPurchaseOrderEndDate(endDate);
         this.document.setRecurringPaymentTypeCode(recurringPaymentType);
         if (ObjectUtils.isNotNull(this.currentFiscalYear)) {
-            this.document.setPostingYear(new Integer(this.currentFiscalYear + 1));
+            this.document.setPostingYear(Integer.valueOf(this.currentFiscalYear + 1));
         }
         return document;
     }

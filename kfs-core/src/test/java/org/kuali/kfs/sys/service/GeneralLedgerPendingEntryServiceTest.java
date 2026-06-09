@@ -131,14 +131,14 @@ public class GeneralLedgerPendingEntryServiceTest extends KualiTestBase {
         generalLedgerPendingEntry.setFinancialObjectCode("1130");
         generalLedgerPendingEntry.setFinancialBalanceTypeCode("AX");
         generalLedgerPendingEntry.setFinancialObjectTypeCode("AS");
-        generalLedgerPendingEntry.setUniversityFiscalYear(new Integer(2005));
+        generalLedgerPendingEntry.setUniversityFiscalYear(Integer.valueOf(2005));
         generalLedgerPendingEntry.setUniversityFiscalPeriodCode("7");
         generalLedgerPendingEntry.setTransactionLedgerEntryAmount(new KualiDecimal("8.8"));
         generalLedgerPendingEntry.setTransactionLedgerEntryDescription("9");
         generalLedgerPendingEntry.setTransactionDebitCreditCode("D");
         generalLedgerPendingEntry.setTransactionDate(new java.sql.Date(SpringContext.getBean(DateTimeService.class).getCurrentDate().getTime()));
         generalLedgerPendingEntry.setFinancialDocumentTypeCode("12");
-        generalLedgerPendingEntry.setTransactionLedgerEntrySequenceNumber(new Integer(1));
+        generalLedgerPendingEntry.setTransactionLedgerEntrySequenceNumber(Integer.valueOf(1));
         generalLedgerPendingEntry.setFinancialDocumentApprovedCode(KFSConstants.PENDING_ENTRY_APPROVED_STATUS_CODE.APPROVED);
         return generalLedgerPendingEntry;
     }

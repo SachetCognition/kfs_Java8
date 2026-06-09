@@ -72,7 +72,7 @@ public enum ItemAccountsFixture {
             this.poItem.setSourceAccountingLines(lines);
         }
         this.poItem.setItemTypeCode(ItemTypeCodes.ITEM_TYPE_ITEM_CODE);
-        this.poItem.setItemLineNumber(new Integer(1));
+        this.poItem.setItemLineNumber(Integer.valueOf(1));
         this.poItem.refreshNonUpdateableReferences();
         return this.poItem;
     }

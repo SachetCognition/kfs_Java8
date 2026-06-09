@@ -83,7 +83,7 @@ public class July1PositionFundingLookupableHelperServiceImpl extends AbstractLoo
             Collections.sort(searchResults, new BeanPropertyComparator(defaultSortColumns, true));
         }
 
-        return new CollectionIncomplete(searchResults, new Long(0));
+        return new CollectionIncomplete(searchResults, Long.valueOf(0));
     }
 
     /**

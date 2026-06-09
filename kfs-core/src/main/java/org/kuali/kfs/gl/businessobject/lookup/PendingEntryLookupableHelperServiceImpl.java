@@ -159,8 +159,8 @@ public class PendingEntryLookupableHelperServiceImpl extends AbstractGeneralLedg
             limit = Integer.valueOf(limitConfig);
         }
 
-        Long collectionCount = new Long(searchResults.size());
-        Long actualCountIfTruncated = new Long(0);
+        Long collectionCount = Long.valueOf(searchResults.size());
+        Long actualCountIfTruncated = Long.valueOf(0);
 
         // If more than limit number of records were returned, removed
         if (limit != null) {
@@ -217,7 +217,7 @@ public class PendingEntryLookupableHelperServiceImpl extends AbstractGeneralLedg
             collection.add(pendingEntry);
         }
 
-        return new CollectionIncomplete(collection, new Long(collection.size()));
+        return new CollectionIncomplete(collection, Long.valueOf(collection.size()));
     }
     
     

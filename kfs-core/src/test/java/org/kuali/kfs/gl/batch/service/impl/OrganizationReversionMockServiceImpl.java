@@ -87,7 +87,7 @@ public class OrganizationReversionMockServiceImpl extends OrganizationReversionS
      */
     private OrganizationReversionDetail createDetail(Integer fiscalYear, String chartCode, String orgCode, String categoryCode, String categoryAlgorithm) {
         OrganizationReversionDetail detail = new OrganizationReversionDetail();
-        detail.setUniversityFiscalYear(new Integer(fiscalYear.intValue() - 1));
+        detail.setUniversityFiscalYear(Integer.valueOf(fiscalYear.intValue() - 1));
         detail.setChartOfAccountsCode(chartCode);
         detail.setOrganizationCode(orgCode);
         detail.setOrganizationReversionCategoryCode(categoryCode);

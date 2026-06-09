@@ -128,7 +128,7 @@ public class CashBalanceLookupableHelperServiceImpl extends AbstractGeneralLedge
                 Object[] array = (Object[]) cashBalance;
                 Balance balance = new CashBalance();
 
-                balance.setUniversityFiscalYear(new Integer(array[i++].toString()));
+                balance.setUniversityFiscalYear(Integer.valueOf(array[i++].toString()));
                 balance.setChartOfAccountsCode(array[i++].toString());
                 balance.setAccountNumber(array[i++].toString());
 

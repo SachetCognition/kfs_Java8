@@ -25,10 +25,10 @@ import org.kuali.kfs.module.cg.businessobject.AwardOrganization;
  */
 public enum ARAwardOrganizationFixture {
 
-    AWD_ORG1("BL", "PSY", new Long(11), true),
-    AWD_ORG2("BL", "AAAM", new Long(11), true),
-    AWD_ORG3("UA", "VPIT", new Long(11), true),
-    AWD_ORG4("BL", "MOTR", new Long(11), true);
+    AWD_ORG1("BL", "PSY", Long.valueOf(11), true),
+    AWD_ORG2("BL", "AAAM", Long.valueOf(11), true),
+    AWD_ORG3("UA", "VPIT", Long.valueOf(11), true),
+    AWD_ORG4("BL", "MOTR", Long.valueOf(11), true);
 
     private String chartOfAccountsCode;
     private String organizationCode;

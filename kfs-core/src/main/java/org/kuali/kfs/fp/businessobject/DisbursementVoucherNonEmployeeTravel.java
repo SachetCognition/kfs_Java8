@@ -79,7 +79,7 @@ public class DisbursementVoucherNonEmployeeTravel extends PersistableBusinessObj
     public DisbursementVoucherNonEmployeeTravel() {
         dvNonEmployeeExpenses = new ArrayList<DisbursementVoucherNonEmployeeExpense>();
         dvPrePaidEmployeeExpenses = new ArrayList<DisbursementVoucherNonEmployeeExpense>();
-        financialDocumentNextLineNbr = new Integer(1);
+        financialDocumentNextLineNbr = Integer.valueOf(1);
     }
 
     /**
@@ -673,7 +673,7 @@ public class DisbursementVoucherNonEmployeeTravel extends PersistableBusinessObj
     public void addDvNonEmployeeExpenseLine(DisbursementVoucherNonEmployeeExpense line) {
         line.setFinancialDocumentLineNumber(getFinancialDocumentNextLineNbr());
         this.dvNonEmployeeExpenses.add(line);
-        this.financialDocumentNextLineNbr = new Integer(getFinancialDocumentNextLineNbr().intValue() + 1);
+        this.financialDocumentNextLineNbr = Integer.valueOf(getFinancialDocumentNextLineNbr().intValue() + 1);
     }
 
     /**
@@ -684,7 +684,7 @@ public class DisbursementVoucherNonEmployeeTravel extends PersistableBusinessObj
     public void addDvPrePaidEmployeeExpenseLine(DisbursementVoucherNonEmployeeExpense line) {
         line.setFinancialDocumentLineNumber(getFinancialDocumentNextLineNbr());
         this.dvPrePaidEmployeeExpenses.add(line);
-        this.financialDocumentNextLineNbr = new Integer(getFinancialDocumentNextLineNbr().intValue() + 1);
+        this.financialDocumentNextLineNbr = Integer.valueOf(getFinancialDocumentNextLineNbr().intValue() + 1);
     }
 
     /**

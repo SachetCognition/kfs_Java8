@@ -97,7 +97,7 @@ public class LedgerBalanceLookupableHelperServiceImpl extends BalanceLookupableH
             // StringUtils.indexOfAny(fieldValues.get(KFSPropertyConstants.EMPLID).toString().trim(), KFSConstants.QUERY_CHARACTERS)
             // != 0) {
             List emptySearchResults = new ArrayList();
-            Long actualCountIfTruncated = new Long(0);
+            Long actualCountIfTruncated = Long.valueOf(0);
             GlobalVariables.getMessageMap().putError(KFSPropertyConstants.EMPLID, KFSConstants.WILDCARD_NOT_ALLOWED_ON_FIELD, "Employee ID field ");
             return new CollectionIncomplete(emptySearchResults, actualCountIfTruncated);
         }
@@ -224,7 +224,7 @@ public class LedgerBalanceLookupableHelperServiceImpl extends BalanceLookupableH
                     LOG.warn("Using " + LedgerBalance.class + " for results because I couldn't instantiate the " + getBusinessObjectClass());
                 }
 
-                balance.setUniversityFiscalYear(new Integer(array[i++].toString()));
+                balance.setUniversityFiscalYear(Integer.valueOf(array[i++].toString()));
                 balance.setChartOfAccountsCode(array[i++].toString());
                 balance.setAccountNumber(array[i++].toString());
 
@@ -362,7 +362,7 @@ public class LedgerBalanceLookupableHelperServiceImpl extends BalanceLookupableH
         if (fieldValues.containsKey(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR)) {
             // parse the university fiscal year since it's a required field from the lookups
             String universityFiscalYearStr = fieldValues.get(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR);
-            Integer universityFiscalYear = new Integer(universityFiscalYearStr);
+            Integer universityFiscalYear = Integer.valueOf(universityFiscalYearStr);
             encumbranceBalanceTypes = balanceTypService.getEncumbranceBalanceTypes(universityFiscalYear);
         }
 

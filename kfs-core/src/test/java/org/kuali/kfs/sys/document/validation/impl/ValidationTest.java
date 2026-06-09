@@ -54,6 +54,6 @@ public class ValidationTest extends KualiTestBase {
 
         LOG.info(StringUtils.join(badValidationNames, "\n"));
         
-        assertEquals("Bad validations: "+StringUtils.join(badValidationNames, ","), new Integer(0), new Integer(badValidationNames.size()));
+        assertEquals("Bad validations: "+StringUtils.join(badValidationNames, ","), Integer.valueOf(0), Integer.valueOf(badValidationNames.size()));
     }
 }

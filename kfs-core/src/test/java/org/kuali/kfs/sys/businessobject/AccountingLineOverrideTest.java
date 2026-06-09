@@ -158,7 +158,7 @@ public class AccountingLineOverrideTest extends KualiTestBase {
     }
 
     public void testIsValidComponentSet_invalid() {
-        assertEquals(false, AccountingLineOverride.isValidComponentSet(new Integer[] { new Integer(4) }));
+        assertEquals(false, AccountingLineOverride.isValidComponentSet(new Integer[] { Integer.valueOf(4) }));
     }
 
     public void testIsValidComponentSet_empty() {

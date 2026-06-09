@@ -80,7 +80,7 @@ public class CustomerOpenItemReportLookupableHelperServiceImpl extends KualiLook
             results = getCustomerOpenItemReportService().getPopulatedReportDetails(getParameters());
         }
         LOG.info("\t\t sending results back... \n\n\n");
-        return new CollectionIncomplete(results, new Long(results.size()));
+        return new CollectionIncomplete(results, Long.valueOf(results.size()));
     }
 
     /**

@@ -260,10 +260,10 @@ public class CashManagementDaoOjb extends PlatformAwareDaoBaseOjb implements Cas
             cmChecksQuery.addOrderByDescending("sequenceId");
             Iterator allChecksIter = getPersistenceBrokerTemplate().getIteratorByQuery(cmChecksQuery);
             if (allChecksIter.hasNext()) {
-                return new Integer((((Check) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(allChecksIter)).getSequenceId()).intValue() + 1);
+                return Integer.valueOf((((Check) TransactionalServiceUtils.retrieveFirstAndExhaustIterator(allChecksIter)).getSequenceId()).intValue() + 1);
             }
             else {
-                return new Integer(1);
+                return Integer.valueOf(1);
             }
         }
         else {

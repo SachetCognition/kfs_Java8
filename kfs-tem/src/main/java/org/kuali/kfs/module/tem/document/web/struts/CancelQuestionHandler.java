@@ -93,7 +93,7 @@ public class CancelQuestionHandler implements QuestionHandler<TravelDocument> {
                 return (T) asker.confirm(CANCEL_TA_QUESTION, question, true, ERROR_TA_REASON_REQUIRED,QUESTION_REASON_ATTRIBUTE_NAME,CANCEL_TA_TEXT);
             }
             else {
-                return (T) asker.confirm(CANCEL_TA_QUESTION, question, true, ERROR_TA_REASON_PASTLIMIT, QUESTION_REASON_ATTRIBUTE_NAME, new Integer(reasonLimit).toString());
+                return (T) asker.confirm(CANCEL_TA_QUESTION, question, true, ERROR_TA_REASON_PASTLIMIT, QUESTION_REASON_ATTRIBUTE_NAME, Integer.valueOf(reasonLimit).toString());
             }
         }
 

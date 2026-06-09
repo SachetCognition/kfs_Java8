@@ -282,7 +282,7 @@ public class LockServiceTest extends KualiTestBase {
     
     private Integer setTestFiscalYear()
     {
-        Integer fiscalYear = new Integer(0);
+        Integer fiscalYear = Integer.valueOf(0);
         // find a fiscal year for which there is active budget construction data.
         HashMap<String,Object> fieldValues = new HashMap<String,Object>(2);
         fieldValues.put(KFSPropertyConstants.FINANCIAL_SYSTEM_FUNCTION_CONTROL_CODE,BudgetConstructionConstants.BUDGET_CONSTRUCTION_ACTIVE);
@@ -308,8 +308,8 @@ public class LockServiceTest extends KualiTestBase {
         // all we need is a single funding line (not deleted, not vacant) for a real person
         // but we'll apparently have to get them all and just take the first one
         HashMap<String,Object> fieldValues = new HashMap<String,Object>(2);
-//        fieldValues.put(BCPropertyConstants.APPOINTMENT_FUNDING_DELETE_INDICATOR,new Boolean(false));
-        fieldValues.put(KFSPropertyConstants.ACTIVE,new Boolean(true));
+//        fieldValues.put(BCPropertyConstants.APPOINTMENT_FUNDING_DELETE_INDICATOR,Boolean.valueOf(false));
+        fieldValues.put(KFSPropertyConstants.ACTIVE,Boolean.valueOf(true));
         fieldValues.put(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR,universityFiscalYear);
         // get the complete set of rows and look for the first one that does not have a vacant EMPLID
         Collection<PendingBudgetConstructionAppointmentFunding> resultSet = SpringContext.getBean(BusinessObjectService.class).findMatching(PendingBudgetConstructionAppointmentFunding.class,fieldValues);

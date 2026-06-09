@@ -66,7 +66,7 @@ public class NominalActivityClosingStep extends AbstractWrappedBatchStep {
                     LOG.error("forwardBalances() Unable to parse transaction date", e);
                     throw new IllegalArgumentException("Unable to parse transaction date");
                 }
-                Integer varFiscalYear = new Integer(getParameterService().getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
+                Integer varFiscalYear = Integer.valueOf(getParameterService().getParameterValueAsString(KfsParameterConstants.GENERAL_LEDGER_BATCH.class, GeneralLedgerConstants.ANNUAL_CLOSING_FISCAL_YEAR_PARM));
                 String nominalClosingFileName = GeneralLedgerConstants.BatchFileSystem.CLOSE_NOMINAL_ACTIVITY_FILE + GeneralLedgerConstants.BatchFileSystem.EXTENSION;
                 
                 Map nominalClosingJobParameters = new HashMap();

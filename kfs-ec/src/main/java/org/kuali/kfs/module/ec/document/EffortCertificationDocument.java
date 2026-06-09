@@ -635,7 +635,7 @@ public class EffortCertificationDocument extends FinancialSystemTransactionalDoc
             detailLine.setPersistedPayrollAmount(new KualiDecimal(detailLine.getEffortCertificationPayrollAmount().bigDecimalValue()));
 
             int effortPercent = detailLine.getEffortCertificationUpdatedOverallPercent();
-            detailLine.setPersistedEffortPercent(new Integer(effortPercent));
+            detailLine.setPersistedEffortPercent(Integer.valueOf(effortPercent));
         }
 
         // calculate original fringe benefits for each line

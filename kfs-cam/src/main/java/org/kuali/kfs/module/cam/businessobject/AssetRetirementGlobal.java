@@ -984,7 +984,7 @@ public class AssetRetirementGlobal extends PersistableBusinessObjectBase impleme
         String THIRTEEN = "13";
         if (StringUtils.isNotBlank(accountingPeriodString) && StringUtils.left(accountingPeriodString, 2).equals(THIRTEEN)) {
             String period = StringUtils.left(accountingPeriodString, 2);
-            Integer year = new Integer(StringUtils.right(accountingPeriodString, 4));
+            Integer year = Integer.valueOf(StringUtils.right(accountingPeriodString, 4));
             AccountingPeriod accountingPeriod = getAccountingPeriodService().getByPeriod(period, year);
             setAccountingPeriod(accountingPeriod);
         }

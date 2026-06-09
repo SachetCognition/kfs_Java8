@@ -60,7 +60,7 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
      */
     public KualiDecimal calculateM113PfyrBudget(Integer universityFiscalYear, String chartOfAccountsCode, String accountNumber) {
         Criteria criteria = new Criteria();
-        criteria.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, new Integer(universityFiscalYear.intValue() - 1));
+        criteria.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, Integer.valueOf(universityFiscalYear.intValue() - 1));
         criteria.addEqualTo(KFSConstants.CHART_OF_ACCOUNTS_CODE_PROPERTY_NAME, chartOfAccountsCode);
         criteria.addEqualTo(KFSConstants.ACCOUNT_NUMBER_PROPERTY_NAME, accountNumber);
         criteria.addEqualTo(KFSConstants.ACCOUNT_SUFFICIENT_FUNDS_CODE_PROPERTY_NAME, KFSConstants.SF_TYPE_CASH_AT_ACCOUNT);
@@ -83,7 +83,7 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
      */
     public KualiDecimal calculateM113PfyrEncum(Integer universityFiscalYear, String chartOfAccountsCode, String accountNumber) {
         Criteria criteria = new Criteria();
-        criteria.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, new Integer(universityFiscalYear.intValue() - 1));
+        criteria.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, Integer.valueOf(universityFiscalYear.intValue() - 1));
         criteria.addEqualTo(KFSConstants.CHART_OF_ACCOUNTS_CODE_PROPERTY_NAME, chartOfAccountsCode);
         criteria.addEqualTo(KFSConstants.ACCOUNT_NUMBER_PROPERTY_NAME, accountNumber);
         criteria.addEqualTo(KFSConstants.ACCOUNT_SUFFICIENT_FUNDS_CODE_PROPERTY_NAME, KFSConstants.SF_TYPE_CASH_AT_ACCOUNT);
@@ -313,7 +313,7 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
             Criteria sub1 = new Criteria();
             sub1.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, universityFiscalYear);
             Criteria sub1_1 = new Criteria();
-            sub1_1.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, new Integer(universityFiscalYear.intValue() - 1));
+            sub1_1.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, Integer.valueOf(universityFiscalYear.intValue() - 1));
             sub1.addOrCriteria(sub1_1);
             criteria.addAndCriteria(sub1);
         }
@@ -358,7 +358,7 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
             Criteria sub1 = new Criteria();
             sub1.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, universityFiscalYear);
             Criteria sub1_1 = new Criteria();
-            sub1_1.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, new Integer(universityFiscalYear.intValue() - 1));
+            sub1_1.addEqualTo(KFSConstants.UNIVERSITY_FISCAL_YEAR_PROPERTY_NAME, Integer.valueOf(universityFiscalYear.intValue() - 1));
             sub1.addOrCriteria(sub1_1);
             criteria.addAndCriteria(sub1);
         }
@@ -393,7 +393,7 @@ public class SufficientFundsDaoOjb extends PlatformAwareDaoBaseOjb implements Su
 
         Criteria criteria = new Criteria();
         criteria.addEqualTo(KFSPropertyConstants.CHART_OF_ACCOUNTS_CODE, chartOfAccountsCode);
-        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, new Integer(year));
+        criteria.addLessThan(KFSPropertyConstants.UNIVERSITY_FISCAL_YEAR, Integer.valueOf(year));
 
         getPersistenceBrokerTemplate().deleteByQuery(new QueryByCriteria(SufficientFundBalances.class, criteria));
 
