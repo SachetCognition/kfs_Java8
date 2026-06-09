@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.config;
 
-import javax.sql.DataSource;
+import com.zaxxer.hikari.HikariDataSource;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -43,9 +43,11 @@ public class KfsDataSourceConfiguration {
 
     @Bean
     @Primary
-    public DataSource kfsDataSource() {
+    @ConfigurationProperties("spring.datasource.hikari")
+    public HikariDataSource kfsDataSource() {
         return kfsDataSourceProperties()
                 .initializeDataSourceBuilder()
+                .type(HikariDataSource.class)
                 .build();
     }
 }
