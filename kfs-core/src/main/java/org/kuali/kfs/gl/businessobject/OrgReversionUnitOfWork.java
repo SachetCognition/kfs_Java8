@@ -45,9 +45,16 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Table(name = "GL_ORG_RVRSN_UNIT_WRK_T")
 @IdClass(OrgReversionUnitOfWork.PK.class)
 public class OrgReversionUnitOfWork extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FIN_COA_CD")
     public String chartOfAccountsCode = "";
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     public String accountNumber = "";
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     public String subAccountNumber = "";
+    @Transient
     public Map<String, OrgReversionUnitOfWorkCategoryAmount> amounts;
     @Column(name = "ORG_TOT_RVRSN_AMT")
     private KualiDecimal totalReversion;

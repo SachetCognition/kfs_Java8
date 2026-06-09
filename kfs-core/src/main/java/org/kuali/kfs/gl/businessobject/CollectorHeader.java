@@ -81,6 +81,7 @@ public class CollectorHeader extends PersistableBusinessObjectBase {
     private Organization organization;
     @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Campus campus;
 
     /**

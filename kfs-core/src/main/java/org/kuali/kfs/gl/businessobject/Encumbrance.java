@@ -114,6 +114,7 @@ public class Encumbrance extends PersistableBusinessObjectBase {
     private Account account;
     @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 
     @Transient

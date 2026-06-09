@@ -106,6 +106,7 @@ public class CollectorDetail extends PersistableBusinessObjectBase {
     private KualiDecimal collectorDetailItemAmount;
     @Column(name = "FDOC_IDBIL_NTE_TXT")
     private String collectorDetailNoteText;
+    @Transient
     private String glCreditCode;
     
     @Transient
