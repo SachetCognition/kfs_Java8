@@ -30,6 +30,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 @Entity
@@ -51,6 +52,7 @@ public class FunctionalFieldDescription extends PersistableBusinessObjectBase im
     @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private BusinessObjectProperty businessObjectProperty;
     
     public FunctionalFieldDescription() {        

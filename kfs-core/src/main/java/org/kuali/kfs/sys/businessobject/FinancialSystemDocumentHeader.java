@@ -38,6 +38,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class is a custom {@link DocumentHeader} class used by KFS to facilitate custom data fields and a few UI fields
@@ -56,6 +57,7 @@ public class FinancialSystemDocumentHeader extends DocumentHeader {
 
     @Column(name = "FDOC_TOTAL_AMT")
     protected KualiDecimal financialDocumentTotalAmount;
+    @Transient
     protected String correctedByDocumentId;
     @Column(name = "FDOC_IN_ERR_NBR")
     protected String financialDocumentInErrorNumber;

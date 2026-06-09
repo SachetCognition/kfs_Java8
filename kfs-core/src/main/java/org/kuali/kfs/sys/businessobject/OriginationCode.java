@@ -29,6 +29,7 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 
@@ -52,6 +53,7 @@ public class OriginationCode extends PersistableBusinessObjectBase implements Mu
     private Long nextCapitalAssetNumber;
     @Column(name = "NEXT_NONCA_NBR")
     private Long nextNonCapitalAssetNumber;
+    @Transient
     private Long nextCgProposalNumber;
     @Column(name = "NEXT_CG_AGENCY_NBR")
     private String nextContractsAndGrantsAgencyNumber;

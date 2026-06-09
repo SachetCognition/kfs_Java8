@@ -38,6 +38,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent an electronic payment claim.
@@ -67,9 +68,13 @@ public class ElectronicPaymentClaim extends PersistableBusinessObjectBase {
     @Column(name = "PMT_CLM_STAT_CD")
     private String paymentClaimStatusCode;
     
+    @Transient
     private AdvanceDepositDocument generatingDocument;
+    @Transient
     private SourceAccountingLine generatingAccountingLine;
+    @Transient
     private AccountingPeriod financialDocumentPostingPeriod;
+    @Transient
     private DocumentHeader generatingDocumentHeader;
 
     /**
@@ -274,6 +279,7 @@ public class ElectronicPaymentClaim extends PersistableBusinessObjectBase {
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap m = new LinkedHashMap();
         m.put(KFSPropertyConstants.DOCUMENT_NUMBER, this.documentNumber);

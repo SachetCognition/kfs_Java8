@@ -32,6 +32,7 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 /**
@@ -83,11 +84,17 @@ public class Bank extends PersistableBusinessObjectBase implements MutableInacti
     @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected Chart cashOffsetFinancialChartOfAccount;
+    @Transient
     protected Account cashOffsetAccount;
+    @Transient
     protected ObjectCode cashOffsetObject;
+    @Transient
     protected SubAccount cashOffsetSubAccount;
+    @Transient
     protected SubObjectCode cashOffsetSubObject;
+    @Transient
     protected Bank continuationBank;
 
     /**

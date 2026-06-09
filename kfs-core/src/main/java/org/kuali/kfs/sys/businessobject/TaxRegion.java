@@ -34,6 +34,7 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 @Entity
@@ -60,14 +61,22 @@ public class TaxRegion extends PersistableBusinessObjectBase implements MutableI
     @Convert(converter = YesNoConverter.class)
     protected boolean taxRegionUseTaxIndicator;
 
+    @Transient
     protected Chart chartOfAccounts;
+    @Transient
     protected Account account;
+    @Transient
     protected ObjectCodeCurrent objectCode;
+    @Transient
     protected TaxRegionType taxRegionType;
 
+    @Transient
     protected List<TaxRegionRate> taxRegionRates = new ArrayList<TaxRegionRate>();
+    @Transient
     protected List<TaxRegionState> taxRegionStates = new ArrayList<TaxRegionState>();
+    @Transient
     protected List<TaxRegionCounty> taxRegionCounties = new ArrayList<TaxRegionCounty>();
+    @Transient
     protected List<TaxRegionPostalCode> taxRegionPostalCodes = new ArrayList<TaxRegionPostalCode>();
 
     public List<TaxRegionRate> getTaxRegionRates() {
@@ -161,6 +170,7 @@ public class TaxRegion extends PersistableBusinessObjectBase implements MutableI
     }
 
 
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         // TODO Auto-generated method stub
         return null;

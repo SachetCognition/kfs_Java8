@@ -31,6 +31,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a Wire Charge business object, which is a method of payment to an institution.
@@ -55,10 +56,15 @@ public class WireCharge extends PersistableBusinessObjectBase implements FiscalY
     @Column(name = "FRGN_CHRG_AMT")
     private KualiDecimal foreignChargeAmt;
 
+    @Transient
     private SystemOptions fiscalYear;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private ObjectCode incomeFinancialObject;
+    @Transient
     private ObjectCode expenseFinancialObject;
+    @Transient
     private Account account;
 
     /**
@@ -309,6 +315,7 @@ public class WireCharge extends PersistableBusinessObjectBase implements FiscalY
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap m = new LinkedHashMap();
         m.put("universityFiscalYear", getUniversityFiscalYear());

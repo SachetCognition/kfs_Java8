@@ -29,6 +29,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * Represents a specific university date
@@ -49,7 +50,9 @@ public class UniversityDate extends PersistableBusinessObjectBase implements Fis
     @Column(name = "UNIV_FISCAL_PRD_CD")
     private String universityFiscalAccountingPeriod;
 
+    @Transient
     private AccountingPeriod accountingPeriod;
+    @Transient
     private SystemOptions options;
 
     /*
@@ -57,6 +60,7 @@ public class UniversityDate extends PersistableBusinessObjectBase implements Fis
      * 
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap map = new LinkedHashMap();
         map.put("universityDate", getUniversityDate());

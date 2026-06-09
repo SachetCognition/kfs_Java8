@@ -51,6 +51,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 
 /**
  * This is the generic class which contains all the elements on a typical line of accounting elements. These are all the accounting
@@ -78,11 +79,17 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
     protected String referenceTypeCode;
     @Column(name = "FDOC_OVERRIDE_CD")
     protected String overrideCode = AccountingLineOverride.CODE.NONE;
+    @Transient
     protected boolean accountExpiredOverride; // for the UI, persisted in overrideCode
+    @Transient
     protected boolean accountExpiredOverrideNeeded; // for the UI, not persisted
+    @Transient
     protected boolean nonFringeAccountOverride; // for the UI, persisted in overrideCode
+    @Transient
     protected boolean nonFringeAccountOverrideNeeded; // for the UI, not persisted
+    @Transient
     protected boolean objectBudgetOverride;
+    @Transient
     protected boolean objectBudgetOverrideNeeded;
     @Column(name = "ORG_REFERENCE_ID")
     protected String organizationReferenceId;
@@ -95,6 +102,7 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
     protected String financialDocumentLineTypeCode;
     @Column(name = "FDOC_LINE_DESC")
     protected String financialDocumentLineDescription;
+    @Transient
     protected boolean salesTaxRequired;
 
     @Column(name = "FIN_COA_CD")
@@ -113,15 +121,25 @@ public abstract class AccountingLineBase extends PersistableBusinessObjectBase i
     protected String balanceTypeCode;
 
     // bo references
+    @Transient
     protected Chart chart;
+    @Transient
     protected Account account;
+    @Transient
     protected ObjectCode objectCode;
+    @Transient
     protected SubAccount subAccount;
+    @Transient
     protected SubObjectCode subObjectCode;
+    @Transient
     protected ProjectCode project;
+    @Transient
     protected BalanceType balanceTyp;
+    @Transient
     protected OriginationCode referenceOrigin;
+    @Transient
     protected DocumentTypeEBO referenceFinancialSystemDocumentTypeCode;
+    @Transient
     protected SalesTax salesTax;
 
     /**

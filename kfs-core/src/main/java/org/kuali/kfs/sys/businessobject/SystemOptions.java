@@ -31,6 +31,7 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 /**
@@ -109,27 +110,49 @@ public class SystemOptions extends PersistableBusinessObjectBase implements Fisc
     @Column(name = "NMNL_FIN_BAL_TYP_CD")
     private String nominalFinancialBalanceTypeCd;
 
+    @Transient
     private Chart universityFinChartOfAcct;
+    @Transient
     private ObjectType objectType;
+    @Transient
     private ObjectType finObjTypeExpenditureexp;
+    @Transient
     private ObjectType finObjTypeExpendNotExp;
+    @Transient
     private ObjectType finObjTypeExpNotExpend;
+    @Transient
     private ObjectType financialObjectTypeAssets;
+    @Transient
     private ObjectType finObjectTypeLiabilities;
+    @Transient
     private ObjectType finObjectTypeFundBalance;
+    @Transient
     private ObjectType finObjTypeIncomeNotCash;
+    @Transient
     private ObjectType finObjTypeCshNotIncome;
+    @Transient
     private ObjectType financialObjectTypeTransferIncome;
+    @Transient
     private ObjectType financialObjectTypeTransferExpense;
+    @Transient
     private BalanceType actualFinancialBalanceType;
+    @Transient
     private BalanceType budgetCheckingBalanceType;
+    @Transient
     private BalanceType extrnlEncumFinBalanceTyp;
+    @Transient
     private BalanceType intrnlEncumFinBalanceTyp;
+    @Transient
     private BalanceType preencumbranceFinBalType;
+    @Transient
     private BalanceType eliminationsFinBalanceType;
+    @Transient
     private BalanceType costShareEncumbranceBalanceType;
+    @Transient
     private BalanceType baseBudgetFinancialBalanceType;
+    @Transient
     private BalanceType monthlyBudgetFinancialBalanceType;
+    @Transient
     private BalanceType nominalFinancialBalanceType;
 
     /**
@@ -979,6 +1002,7 @@ public class SystemOptions extends PersistableBusinessObjectBase implements Fisc
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
     @SuppressWarnings("rawtypes")
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap map = new LinkedHashMap();
         map.put("universityFiscalYear", getUniversityFiscalYear());

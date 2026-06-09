@@ -40,6 +40,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 /**
@@ -74,9 +75,13 @@ public class Building extends PersistableBusinessObjectBase implements MutableIn
     @Column(name = "BLDG_ADDR_CNTRY_CD")
     protected String buildingAddressCountryCode;
 
+    @Transient
     protected CampusEbo campus;
+    @Transient
     protected StateEbo buildingAddressState;
+    @Transient
     protected PostalCodeEbo buildingAddressZip;
+    @Transient
     protected CountryEbo buildingAddressCountry;
 
     /**

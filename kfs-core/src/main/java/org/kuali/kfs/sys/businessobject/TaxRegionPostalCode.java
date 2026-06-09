@@ -38,6 +38,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 @Entity
@@ -58,8 +59,11 @@ public class TaxRegionPostalCode extends PersistableBusinessObjectBase implement
 	@Convert(converter = YesNoConverter.class)
 	protected boolean active;
 
+	@Transient
 	protected CountryEbo country;
+	@Transient
 	protected PostalCodeEbo postalZip;
+	@Transient
 	protected TaxRegion taxRegion;
 
 	public PostalCodeEbo getPostalZip() {

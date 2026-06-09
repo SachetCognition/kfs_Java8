@@ -54,6 +54,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.hibernate.type.YesNoConverter;
 
 /**
@@ -127,25 +128,42 @@ public class GeneralLedgerPendingEntry extends PersistableBusinessObjectBase imp
     @Column(name = "TRNENTR_PROCESS_TM")
     private Timestamp transactionEntryProcessedTs;
 
+    @Transient
     private DocumentTypeEBO financialSystemDocumentTypeCode;
+    @Transient
     private FinancialSystemDocumentHeader documentHeader;
 
+    @Transient
     private SystemOptions option;
+    @Transient
     private Chart chart;
+    @Transient
     private Account account;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private ObjectCode financialObject;
+    @Transient
     private SubObjectCode financialSubObject;
+    @Transient
     private BalanceType balanceType;
+    @Transient
     private ObjectType objectType;
+    @Transient
     private A21SubAccount a21SubAccount;
+    @Transient
     private TransientBalanceInquiryAttributes dummyBusinessObject;
+    @Transient
     private OriginationCode originationCode;
+    @Transient
     private ProjectCode project;
+    @Transient
     private OriginationCode referenceOriginationCode;
+    @Transient
     private DocumentTypeEBO referenceFinancialSystemDocumentTypeCode;
 
     @Deprecated
+    @Transient
     private transient AccountingPeriod accountingPeriod;
 
     /**
@@ -812,6 +830,7 @@ public class GeneralLedgerPendingEntry extends PersistableBusinessObjectBase imp
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap m = new LinkedHashMap();
         m.put("financialSystemOriginationCode", this.financialSystemOriginationCode);
