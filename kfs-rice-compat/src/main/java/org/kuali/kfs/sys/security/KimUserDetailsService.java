@@ -27,6 +27,7 @@ public class KimUserDetailsService implements UserDetailsService {
         "SELECT r.ROLE_NM FROM KRIM_ROLE_MBR_T rm " +
         "JOIN KRIM_ROLE_T r ON rm.ROLE_ID = r.ROLE_ID " +
         "WHERE rm.MBR_ID = ? AND rm.MBR_TYP_CD = 'P' " +
+        "AND (rm.ACTV_FRM_DT IS NULL OR rm.ACTV_FRM_DT <= CURRENT_TIMESTAMP) " +
         "AND (rm.ACTV_TO_DT IS NULL OR rm.ACTV_TO_DT > CURRENT_TIMESTAMP)";
 
     public void setDataSource(DataSource dataSource) {

@@ -71,18 +71,31 @@ public class KfsDocumentRoutingService {
     }
 
     public void disapproveDocument(String processInstanceId, String principalId, String annotation) {
-        runtimeService.setVariable(processInstanceId, "documentStatus", "DISAPPROVED");
-        runtimeService.deleteProcessInstance(processInstanceId, "Disapproved by " + principalId + ": " + annotation);
+        runtimeService.deleteProcessInstance(processInstanceId, "DISAPPROVED:" + principalId + ": " + annotation);
     }
 
     public void cancelDocument(String processInstanceId, String principalId, String annotation) {
-        runtimeService.setVariable(processInstanceId, "documentStatus", "CANCELLED");
-        runtimeService.deleteProcessInstance(processInstanceId, "Cancelled by " + principalId + ": " + annotation);
+        runtimeService.deleteProcessInstance(processInstanceId, "CANCELLED:" + principalId + ": " + annotation);
     }
 
     public String getDocumentStatus(String processInstanceId) {
-        Object status = runtimeService.getVariable(processInstanceId, "documentStatus");
-        return status != null ? status.toString() : "INITIATED";
+        try {
+            Object status = runtimeService.getVariable(processInstanceId, "documentStatus");
+            return status != null ? status.toString() : "INITIATED";
+        } catch (Exception e) {
+            // Process was deleted (disapproved/cancelled) — fall back to history
+            org.flowable.engine.history.HistoricProcessInstance hist =
+                historyService.createHistoricProcessInstanceQuery()
+                    .processInstanceId(processInstanceId)
+                    .singleResult();
+            if (hist != null && hist.getDeleteReason() != null) {
+                String reason = hist.getDeleteReason();
+                if (reason.startsWith("DISAPPROVED:")) return "DISAPPROVED";
+                if (reason.startsWith("CANCELLED:")) return "CANCELLED";
+                return "CANCELLED";
+            }
+            return "INITIATED";
+        }
     }
 
     private String mapDocumentTypeToProcessKey(String documentTypeName) {

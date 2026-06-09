@@ -6,7 +6,7 @@ public class KualiDecimal extends AbstractKualiDecimal<KualiDecimal> implements 
     public static final KualiDecimal ZERO = new KualiDecimal(0);
 
     public KualiDecimal() { super(BigDecimal.ZERO); }
-    public KualiDecimal(double value) { super(new BigDecimal(value)); }
+    public KualiDecimal(double value) { super(BigDecimal.valueOf(value)); }
     public KualiDecimal(String value) { super(new BigDecimal(value)); }
     public KualiDecimal(int value) { super(new BigDecimal(value)); }
     public KualiDecimal(long value) { super(new BigDecimal(value)); }
@@ -25,7 +25,7 @@ public class KualiDecimal extends AbstractKualiDecimal<KualiDecimal> implements 
         return new KualiDecimal(this.value.multiply(multiplier));
     }
     public KualiDecimal divide(KualiDecimal divisor) {
-        if (divisor == null || divisor.isZero()) return ZERO;
+        if (divisor == null || divisor.isZero()) throw new ArithmeticException("Cannot divide by zero or null KualiDecimal");
         return new KualiDecimal(this.value.divide(divisor.value, 2, BigDecimal.ROUND_HALF_UP));
     }
     public KualiDecimal mod(KualiDecimal modulus) {
