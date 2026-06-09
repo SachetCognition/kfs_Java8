@@ -20,6 +20,7 @@ package org.kuali.kfs.module.tem.businessobject;
 
 import java.util.LinkedHashMap;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -38,6 +39,7 @@ public class ImportedExpense extends AbstractExpense implements TemExpense, Expe
     private String cardType = "";
     private Boolean receiptRequired = Boolean.FALSE;
     private String temExpenseTypeCode = TemConstants.EXPENSE_IMPORTED;
+    @Column(name = "HIST_EXP_ID")
     private Long historicalTravelExpenseId;
     private Boolean enableNonReimbursable = Boolean.TRUE;
     private String expenseLineTypeCode = TemConstants.EXPENSE_IMPORTED;
