@@ -204,9 +204,9 @@ public class PurchaseOrderDocument extends PurchasingDocumentBase implements Mul
     protected String assignedUserPrincipalId;
 
     // COLLECTIONS
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrder")
     protected List<PurchaseOrderVendorStipulation> purchaseOrderVendorStipulations;
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrder")
     protected List<PurchaseOrderVendorQuote> purchaseOrderVendorQuotes;
 
     // NOT PERSISTED IN DB

@@ -59,7 +59,7 @@ import javax.persistence.Table;
 public class LineItemReceivingDocument extends ReceivingDocumentBase {
 
     //Collections
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "lineItemReceivingDocument")
     protected List<LineItemReceivingItem> items;
 
     /**

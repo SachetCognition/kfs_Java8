@@ -56,7 +56,7 @@ public class CorrectionReceivingDocument extends ReceivingDocumentBase {
     @Column(name = "RCVNG_LN_FDOC_NBR")
     protected String lineItemReceivingDocumentNumber;
     //Collections
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "correctionReceivingDocument")
     protected List<CorrectionReceivingItem> items;
 
     @ManyToOne(fetch = FetchType.LAZY)

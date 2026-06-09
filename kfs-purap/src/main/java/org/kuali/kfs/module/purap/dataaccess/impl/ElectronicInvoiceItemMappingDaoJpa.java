@@ -83,7 +83,7 @@ public class ElectronicInvoiceItemMappingDaoJpa implements ElectronicInvoiceItem
     @Override
     public ElectronicInvoiceItemMapping getById(String id) {
         LOG.debug("getById() started");
-        return entityManager.find(ElectronicInvoiceItemMapping.class, id);
+        return entityManager.find(ElectronicInvoiceItemMapping.class, Integer.valueOf(id));
     }
 
     @Override
