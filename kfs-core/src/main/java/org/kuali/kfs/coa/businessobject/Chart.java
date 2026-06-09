@@ -41,8 +41,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Chart of Accounts business object.
  *
- * <p>JPA annotations coexist with the legacy OJB mapping in
- * {@code ojb-coa.xml}; both are active during the incremental migration.</p>
+ * <p>Mapped via JPA annotations to the {@code CA_CHART_T} table.</p>
  */
 @Entity
 @Table(name = "CA_CHART_T")

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-   JPA 3.1 persistence unit for the KFS OJB→JPA migration.
+   JPA 3.1 persistence unit for KFS.
 
-   This configuration coexists with the legacy OJB PersistenceBroker.
    Entity classes are registered here as individual modules are migrated.
 -->
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
