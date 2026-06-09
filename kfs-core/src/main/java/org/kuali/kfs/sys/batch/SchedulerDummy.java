@@ -19,9 +19,10 @@
 package org.kuali.kfs.sys.batch;
 
 import org.quartz.impl.StdScheduler;
+import org.quartz.core.QuartzSchedulerResources;
 
 public class SchedulerDummy extends StdScheduler {
     public SchedulerDummy() {
-        super(null, null);
+        super(null);
     }
 }

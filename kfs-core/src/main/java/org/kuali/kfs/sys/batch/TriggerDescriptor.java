@@ -19,9 +19,8 @@
 package org.kuali.kfs.sys.batch;
 
 import org.kuali.rice.core.api.datetime.DateTimeService;
-import org.quartz.CronTrigger;
-import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
 import org.springframework.beans.factory.BeanNameAware;
 
 public abstract class TriggerDescriptor implements BeanNameAware {
@@ -31,21 +30,16 @@ public abstract class TriggerDescriptor implements BeanNameAware {
     private DateTimeService dateTimeService;
     private boolean testMode = false;
 
-    protected abstract void completeTriggerDescription(Trigger trigger);
+    @SuppressWarnings("unchecked")
+    protected abstract Trigger completeTriggerDescription(TriggerBuilder triggerBuilder);
 
     public Trigger getTrigger() {
-        Trigger trigger = null;
-        if (getClass().equals(SimpleTriggerDescriptor.class)) {
-            trigger = new SimpleTrigger(name, group);
-        }
-        else {
-            trigger = new CronTrigger(name, group);
-        }
-        trigger.setJobName(jobName);
-        trigger.setJobGroup(group);
-        trigger.setStartTime(dateTimeService.getCurrentDate());
-        completeTriggerDescription(trigger);
-        return trigger;
+        @SuppressWarnings("unchecked")
+        TriggerBuilder triggerBuilder = TriggerBuilder.newTrigger()
+                .withIdentity(name, group)
+                .forJob(jobName, group)
+                .startAt(dateTimeService.getCurrentDate());
+        return completeTriggerDescription(triggerBuilder);
     }
 
     /**
@@ -55,20 +49,10 @@ public abstract class TriggerDescriptor implements BeanNameAware {
         this.name = name;
     }
 
-    /**
-     * Sets the group attribute value.
-     * 
-     * @param group The group to set.
-     */
     public void setGroup(String group) {
         this.group = group;
     }
 
-    /**
-     * Sets the jobName attribute value.
-     * 
-     * @param jobName The jobName to set.
-     */
     public void setJobName(String jobName) {
         this.jobName = jobName;
     }
@@ -77,11 +61,14 @@ public abstract class TriggerDescriptor implements BeanNameAware {
         return jobName;
     }
 
-    /**
-     * Sets the dateTimeService attribute value.
-     * 
-     * @param dateTimeService The dateTimeService to set.
-     */
+    protected String getName() {
+        return name;
+    }
+
+    protected String getGroup() {
+        return group;
+    }
+
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }

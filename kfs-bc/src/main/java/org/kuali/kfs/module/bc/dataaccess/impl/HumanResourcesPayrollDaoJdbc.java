@@ -34,7 +34,7 @@ import org.kuali.kfs.module.bc.businessobject.Position;
 import org.kuali.kfs.module.bc.dataaccess.HumanResourcesPayrollDao;
 import org.kuali.kfs.module.bc.document.dataaccess.impl.BudgetConstructionDaoJdbcBase;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Implementation of <code>HumanResourcesPayrollDao</code> using JDBC to query PS_POSITION_DATA and then set other 
@@ -121,7 +121,7 @@ public class HumanResourcesPayrollDaoJdbc extends BudgetConstructionDaoJdbcBase 
 
         String sqlString = sqlBuilder.toString();
 
-        ParameterizedRowMapper<PositionData> mapper = new ParameterizedRowMapper<PositionData>() {
+        RowMapper<PositionData> mapper = new RowMapper<PositionData>() {
 
             public PositionData mapRow(ResultSet rs, int rowNum) throws SQLException {
                 PositionData positionData = new PositionData();

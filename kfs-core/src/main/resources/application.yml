@@ -1,0 +1,100 @@
+# KFS Spring Boot Application Configuration
+# Converted from kfs-default-config.properties
+
+spring:
+  application:
+    name: kfs
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kfs?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${KFS_DB_USERNAME:kfs}
+    password: ${KFS_DB_PASSWORD:kfs}
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 5
+      connection-timeout: 100000
+      idle-timeout: 30000
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  security:
+    user:
+      name: ${SECURITY_USER_NAME:admin}
+      password: ${SECURITY_USER_PASSWORD:changeme}
+
+  quartz:
+    job-store-type: memory
+    properties:
+      org.quartz.threadPool.threadCount: 8
+      org.quartz.scheduler.instanceName: KfsQuartzScheduler
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+
+  liquibase:
+    enabled: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /kfs-dev
+    session:
+      timeout: 90m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# KFS-specific configuration
+kfs:
+  version: 6.0.1-SNAPSHOT
+  application-id: KFS
+  service-namespace-uri: http://kfs.kuali.org/kfs/v5_0
+  app-code: kfs
+  environment: dev
+  production-environment-code: prd
+  locale: en_US
+  base-url: http://localhost:8080
+  base-directory: ${user.home}/kuali/kfs
+  module:
+    access-security-enabled: false
+    labor-distribution-enabled: true
+    contracts-and-grants-enabled: true
+    external-kuali-coeus-enabled: false
+    accounts-receivable-enabled: true
+    purchasing-enabled: true
+    capital-asset-enabled: true
+    travel-enabled: true
+  contracts-grants-billing-enabled: false
+  directories:
+    logs: ${kfs.base-directory}/logs/${kfs.environment}/${kfs.app-code}
+    work: ${kfs.base-directory}/work/${kfs.environment}/${kfs.app-code}
+    reports: ${kfs.directories.work}/reports
+    staging: ${kfs.directories.work}/staging
+    temp: ${kfs.directories.work}/temp
+    templates: ${kfs.directories.work}/templates
+  batch:
+    schedule-cron: "00 00 23 ? * *"
+    quartz-thread-pool-size: 8
+    quartz-trigger-check-interval: 30000
+  rice:
+    application: kr
+    version: 2.1.10
+
+logging:
+  level:
+    org.kuali: INFO
+    org.springframework: INFO

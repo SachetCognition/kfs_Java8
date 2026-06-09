@@ -139,7 +139,7 @@ public class PaymentApplicationDocumentAction extends FinancialSystemTransaction
         // doApplicationOfFunds((PaymentApplicationDocumentForm)form);
 
         PaymentApplicationDocument paymentApplicationDocument = paymentApplicationDocumentForm.getPaymentApplicationDocument();
-        Map<String, Object> parameters = request.getParameterMap();
+        Map<String, String[]> parameters = request.getParameterMap();
         String indexToRemoveString = null;
         Integer indexToRemove = null;
 
