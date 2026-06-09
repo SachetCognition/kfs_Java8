@@ -19,14 +19,10 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import jakarta.persistence.Version;
-import org.hibernate.type.YesNoConverter;
 
 import java.util.LinkedHashMap;
 
@@ -38,14 +34,11 @@ import org.springframework.beans.BeanUtils;
  */
 @Entity
 @Table(name = "CA_PRIOR_YR_ICR_ACCT_T")
+@AttributeOverride(name = "indirectCostRecoveryAccountGeneratedIdentifier", column = @Column(name = "CA_PRIOR_YR_ICR_ACCT_GNRTD_ID"))
 
 public class PriorYearIndirectCostRecoveryAccount extends IndirectCostRecoveryAccount {
     private static Logger LOG = Logger.getLogger(PriorYearIndirectCostRecoveryAccount.class);
 
-    @Id
-    @Column(name = "CA_PRIOR_YR_ICR_ACCT_GNRTD_ID")
-    private Integer priorYearIndirectCostRecoveryAccountGeneratedIdentifier;
-    
     /**
      * Default constructor.
      */
@@ -57,11 +50,11 @@ public class PriorYearIndirectCostRecoveryAccount extends IndirectCostRecoveryAc
     }
 
     public Integer getPriorYearIndirectCostRecoveryAccountGeneratedIdentifier() {
-        return priorYearIndirectCostRecoveryAccountGeneratedIdentifier;
+        return getIndirectCostRecoveryAccountGeneratedIdentifier();
     }
 
     public void setPriorYearIndirectCostRecoveryAccountGeneratedIdentifier(Integer priorYearIndirectCostRecoveryAccountGeneratedIdentifier) {
-        this.priorYearIndirectCostRecoveryAccountGeneratedIdentifier = priorYearIndirectCostRecoveryAccountGeneratedIdentifier;
+        setIndirectCostRecoveryAccountGeneratedIdentifier(priorYearIndirectCostRecoveryAccountGeneratedIdentifier);
     }
 
     /**
@@ -69,8 +62,8 @@ public class PriorYearIndirectCostRecoveryAccount extends IndirectCostRecoveryAc
      */
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap<String, String> m = new LinkedHashMap<String, String>();
-        if (this.priorYearIndirectCostRecoveryAccountGeneratedIdentifier != null) {
-            m.put("priorYearIndirectCostRecoveryAccountGeneratedIdentifier", this.priorYearIndirectCostRecoveryAccountGeneratedIdentifier.toString());
+        if (this.getPriorYearIndirectCostRecoveryAccountGeneratedIdentifier() != null) {
+            m.put("priorYearIndirectCostRecoveryAccountGeneratedIdentifier", this.getPriorYearIndirectCostRecoveryAccountGeneratedIdentifier().toString());
         }
         return m;
     }

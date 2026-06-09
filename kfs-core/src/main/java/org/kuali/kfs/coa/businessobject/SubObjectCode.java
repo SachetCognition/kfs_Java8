@@ -23,6 +23,8 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
@@ -42,6 +44,7 @@ import org.kuali.rice.krad.service.impl.PersistenceStructureServiceImpl;
 @Entity
 @Table(name = "CA_SUB_OBJECT_CD_T")
 @IdClass(SubObjectCodeId.class)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
 public class SubObjectCode extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
