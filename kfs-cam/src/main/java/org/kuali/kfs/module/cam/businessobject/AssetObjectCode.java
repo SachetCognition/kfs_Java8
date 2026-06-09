@@ -29,28 +29,54 @@ import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_OBJ_T")
 public class AssetObjectCode extends PersistableBusinessObjectBase implements MutableInactivatable, FiscalYearBasedBusinessObject {
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "AssetObjectCode";
     
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_SUB_TYPE_CD")
     protected String financialObjectSubTypeCode;
+    @Column(name = "CPTLZTN_FOBJ_CD")
     protected String capitalizationFinancialObjectCode;
+    @Column(name = "ACCUM_DEPR_FOBJ_CD")
     protected String accumulatedDepreciationFinancialObjectCode;
+    @Column(name = "DEPR_EXP_FOBJ_CD")
     protected String depreciationExpenseFinancialObjectCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
     protected transient SystemOptions universityFiscal;
+    @Transient
     protected ObjectCode accumulatedDepreciationFinancialObject;
+    @Transient
     protected ObjectCode capitalizationFinancialObject;
+    @Transient
     protected ObjectCode depreciationExpenseFinancialObject;
+    @Transient
     protected List<ObjectCode> objectCode;
+    @Transient
     protected Chart chartOfAccounts;
+    @Transient
     protected ObjectSubType financialObjectSubType;
 
     /**

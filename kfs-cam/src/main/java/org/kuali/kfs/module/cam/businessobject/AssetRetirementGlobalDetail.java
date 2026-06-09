@@ -22,17 +22,31 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "CM_AST_RETIRE_DTL_T")
 public class AssetRetirementGlobalDetail extends GlobalBusinessObjectDetailBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Transient
     private DocumentHeader documentHeader;
+    @Transient
     private Asset asset;
+    @Transient
     private AssetRetirementGlobal assetRetirementGlobal;
 
     /**

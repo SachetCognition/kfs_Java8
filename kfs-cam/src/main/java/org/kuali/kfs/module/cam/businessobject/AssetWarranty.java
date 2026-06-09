@@ -23,22 +23,43 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_WRNTY_T")
 public class AssetWarranty extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+	@Column(name = "CPTLAST_NBR")
 	private Long capitalAssetNumber;
+	@Column(name = "AST_WRNTY_CNTCT_NM")
 	private String warrantyContactName;
+	@Column(name = "AST_WRNTYPHN_NBR")
 	private String warrantyPhoneNumber;
+	@Column(name = "AST_WRNTY_BEG_DT")
 	private Date warrantyBeginningDate;
+	@Column(name = "AST_WRNTY_END_DT")
 	private Date warrantyEndingDate;
+	@Column(name = "AST_WRNTY_NBR")
 	private String warrantyNumber;
+	@Column(name = "AST_WRNTY_PO_NBR")
 	private String warrantyPurchaseOrderNumber;
+	@Column(name = "AST_WRNTY_TXT")
 	private String warrantyText;
+	@Column(name = "ACTV_IND")
+	@Convert(converter = YesNoConverter.class)
 	private boolean active;
 
+    @Transient
     private Asset asset;
 
 	/**

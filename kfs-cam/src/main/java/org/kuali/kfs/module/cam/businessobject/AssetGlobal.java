@@ -53,80 +53,143 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_DOC_T")
 public class AssetGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetGlobal.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "CPTLAST_ACQ_TYP_CD")
     private String acquisitionTypeCode;
+    @Column(name = "CPTLAST_DESC")
     private String capitalAssetDescription;
+    @Column(name = "AST_INVN_STAT_CD")
     private String inventoryStatusCode;
+    @Column(name = "CPTLAST_COND_CD")
     private String conditionCode;
+    @Column(name = "CPTLAST_TYP_CD")
     private String capitalAssetTypeCode;
+    @Column(name = "CPTLAST_MFR_NM")
     private String manufacturerName;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     private String manufacturerModelNumber;
+    @Column(name = "CPTLAST_TOTCST_AMT")
     private KualiDecimal totalCostAmount;
+    @Column(name = "CPTL_AST_LAND_CNTY_NM")
     private String landCountyName;
+    @Column(name = "CPTL_AST_LAND_ACRG_SZ")
     private Integer landAcreageSize;
+    @Column(name = "CPTL_AST_LAND_PRCL_NBR")
     private String landParcelNumber;
+    @Column(name = "CPTLAST_VENDOR_NM")
     private String vendorName;
+    @Column(name = "ORG_TXT")
     private String organizationText;
+    @Column(name = "CPTLAST_CRT_DT")
     private Date createDate;
+    @Column(name = "CPTL_AST_IN_SRVC_DT")
     private Date capitalAssetInServiceDate;
+    @Column(name = "CPTL_AST_DEPR_DT")
     private Date capitalAssetDepreciationDate;
+    @Column(name = "AST_REP_UNVL_ID")
     private String representativeUniversalIdentifier;
+    @Column(name = "ORG_OWNER_COA_CD")
     private String organizationOwnerChartOfAccountsCode;
+    @Column(name = "ORG_OWNER_ACCT_NBR")
     private String organizationOwnerAccountNumber;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "FDOC_NXT_LINE_NBR")
     private Integer financialDocumentNextLineNumber;
+    @Transient
     private Asset separateSourceCapitalAsset;
+    @Column(name = "SEP_SRC_AST_PMT_SEQ_NBR")
     private Integer separateSourcePaymentSequenceNumber;
+    @Column(name = "CB_ORIGIN_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean capitalAssetBuilderOriginIndicator;
     
+    @Column(name = "FDOC_POST_PRD_CD")
     protected String financialDocumentPostingPeriodCode;
+    @Column(name = "FDOC_POST_YR")
     protected Integer financialDocumentPostingYear;
 
 // CSU 6702 END
+    @Transient
     protected String universityFiscalPeriodName;
 // CSU 6702 END    
 
     // Not Persisted   
+    @Transient
     private AccountingPeriod accountingPeriod;
+    @Transient
     private Date lastInventoryDate;
+    @Transient
     private ContractsAndGrantsAgency agency;
+    @Transient
     private Person assetRepresentative;
+    @Transient
     private AssetType capitalAssetType;
+    @Transient
     private AssetCondition assetCondition;
+    @Transient
     private AssetStatus inventoryStatus;
+    @Transient
     private List<AssetGlobalDetail> assetGlobalDetails;
+    @Transient
     private List<AssetGlobalDetail> assetSharedDetails;
+    @Transient
     private List<AssetPaymentDetail> assetPaymentDetails;
+    @Transient
     private AssetAcquisitionType acquisitionType;
+    @Transient
     private Chart organizationOwnerChartOfAccounts;
+    @Transient
     private Account organizationOwnerAccount;
 
     // field is here so that AssetLookupableHelperServiceImpl can pass action information
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Column(name = "SEP_SRC_CPTLAST_NBR")
     private Long separateSourceCapitalAssetNumber;
 
     // Calculate Equal Source Amounts button
+    @Transient
     private String calculateEqualSourceAmountsButton;
 
     // calculate remaining source amount
+    @Transient
     private KualiDecimal separateSourceRemainingAmount;
+    @Transient
     private KualiDecimal separateSourceTotalAmount;
+    @Transient
     private String calculateSeparateSourceRemainingAmountButton;
 
+    @Transient
     private List<GeneralLedgerPendingEntry> generalLedgerPendingEntries;
+    @Transient
     private FinancialSystemDocumentHeader documentHeader;
+    @Transient
     private KualiDecimal totalAssetPaymentAmount;
 
     //
+    @Transient
     private KualiDecimal minAssetTotalAmount;
+    @Transient
     private KualiDecimal maxAssetTotalAmount;
 
     // CSU 6702 BEGIN

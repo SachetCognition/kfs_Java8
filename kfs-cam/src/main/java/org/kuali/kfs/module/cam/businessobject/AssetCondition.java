@@ -22,14 +22,27 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_CONDITION_T")
 public class AssetCondition extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CPTLAST_COND_CD")
     private String assetConditionCode;
+    @Column(name = "CPTLAST_COND_NM")
     private String assetConditionName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

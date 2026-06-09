@@ -31,29 +31,54 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_LOC_T")
 public class AssetLocation extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CPTLAST_NBR")
     protected Long capitalAssetNumber;
+    @Id
+    @Column(name = "AST_LOC_TYP_CD")
     protected String assetLocationTypeCode;
+    @Column(name = "AST_LOC_CNTCT_NM")
     protected String assetLocationContactName;
+    @Column(name = "AST_LOC_CNTCT_ID")
     protected String assetLocationContactIdentifier;
+    @Column(name = "AST_LOC_INST_NM")
     protected String assetLocationInstitutionName;
+    @Column(name = "AST_LOC_PHN_NBR")
     protected String assetLocationPhoneNumber;
+    @Column(name = "AST_LOC_STRT_ADDR")
     protected String assetLocationStreetAddress;
+    @Column(name = "AST_LOC_CITY_NM")
     protected String assetLocationCityName;
+    @Column(name = "AST_LOC_STATE_CD")
     protected String assetLocationStateCode;
+    @Column(name = "AST_LOC_CNTRY_CD")
     protected String assetLocationCountryCode;
+    @Column(name = "AST_LOC_ZIP_CD")
     protected String assetLocationZipCode;
 
+    @Transient
     protected Asset asset;
+    @Transient
     protected AssetLocationType assetLocationType;
 
+    @Transient
     protected StateEbo assetLocationState;
+    @Transient
     protected CountryEbo assetLocationCountry;
+    @Transient
     protected PostalCodeEbo postalZipCode;
 
     /**

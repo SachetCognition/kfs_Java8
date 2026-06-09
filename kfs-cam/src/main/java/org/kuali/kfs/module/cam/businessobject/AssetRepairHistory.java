@@ -24,23 +24,46 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_RPR_HIST_T")
 public class AssetRepairHistory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+	@Id
+	@Column(name = "CPTLAST_NBR")
 	private Long capitalAssetNumber;
+	@Id
+	@Column(name = "CPTLAST_INCIDNT_DT")
 	private Date incidentDate;
+	@Column(name = "CPTLAST_PRBLM_DESC")
 	private String problemDescription;
+	@Column(name = "CPTLAST_RPRCNTC_NM")
 	private String repairContactName;
+	@Column(name = "CPTLAST_RPR_NT_TXT")
 	private String repairNoteText;
+	@Column(name = "CPTLAST_EST_RPR_DT")
 	private Date estimatedRepairDate;
+	@Column(name = "CPTLAST_RPR_DT")
 	private Date repairDate;
+	@Column(name = "CPTLAST_RPR_AMT")
 	private KualiDecimal repairAmount;
+	@Column(name = "AST_RPR_SOLN_DESC")
 	private String repairSolutionDescription;
+	@Column(name = "ACTV_IND")
+	@Convert(converter = YesNoConverter.class)
 	private boolean active;
 
+    @Transient
     private Asset asset;
 
 	/**

@@ -39,53 +39,98 @@ import org.kuali.rice.location.framework.campus.CampusEbo;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_CPTLAST_DTL_T")
 public class AssetGlobalDetail extends GlobalBusinessObjectDetailBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Column(name = "CAMPUS_CD")
     private String campusCode;
+    @Column(name = "BLDG_CD")
     private String buildingCode;
+    @Column(name = "CPTLAST_SERIAL_NBR")
     private String serialNumber;
+    @Column(name = "BLDG_ROOM_NBR")
     private String buildingRoomNumber;
+    @Column(name = "BLDG_SUB_ROOM_NBR")
     private String buildingSubRoomNumber;
+    @Column(name = "CPTLAST_TAG_NBR")
     private String campusTagNumber;
+    @Column(name = "ORG_INVN_NM")
     private String organizationInventoryName;
+    @Column(name = "ORG_CPTLAST_TYP_ID")
     private String organizationAssetTypeIdentifier;
+    @Column(name = "AST_OFFCMP_NM")
     private String offCampusName;
+    @Column(name = "AST_OFFCMP_ADDR")
     private String offCampusAddress;
+    @Column(name = "AST_OFFCMP_CITY_NM")
     private String offCampusCityName;
+    @Column(name = "AST_OFFCMP_ST_CD")
     private String offCampusStateCode;
+    @Column(name = "AST_OFFCMP_ZIP_CD")
     private String offCampusZipCode;
+    @Column(name = "AST_OFFCMP_CNTRY_CD")
     private String offCampusCountryCode;
+    @Column(name = "CPTL_AST_GOV_TAG_NBR")
     private String governmentTagNumber;
+    @Column(name = "CPTL_AST_NTL_STOCK_NBR")
     private String nationalStockNumber;
 
+    @Transient
     private Asset asset;
+    @Transient
     private CampusEbo campus;
+    @Transient
     private Building building;
+    @Transient
     private Room buildingRoom;
+    @Transient
     private StateEbo offCampusState;
+    @Transient
     private CountryEbo offCampusCountry;
+    @Transient
     private PostalCodeEbo postalZipCode;
 
+    @Transient
     private Integer locationQuantity;
+    @Column(name = "AST_REP_UNVL_ID")
     private String representativeUniversalIdentifier;
 
+    @Column(name = "CPTLAST_TYP_CD")
     private String capitalAssetTypeCode;
+    @Transient
     private AssetType capitalAssetType;
 
+    @Column(name = "CPTLAST_DESC")
     private String capitalAssetDescription;
+    @Column(name = "CPTLAST_MFR_NM")
     private String manufacturerName;
+    @Column(name = "ORG_TXT")
     private String organizationText;
+    @Column(name = "CPTLAST_MFRMDL_NBR")
     private String manufacturerModelNumber;
+    @Column(name = "SEP_SRC_AMT")
     private KualiDecimal separateSourceAmount; 
 
     // Non persistent
+    @Transient
     private List<AssetGlobalDetail> assetGlobalUniqueDetails;
+    @Transient
     private Person assetRepresentative;
     
     public Person getAssetRepresentative() {

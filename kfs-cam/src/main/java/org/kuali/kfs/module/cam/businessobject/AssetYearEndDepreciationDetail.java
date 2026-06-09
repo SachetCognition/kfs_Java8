@@ -22,17 +22,36 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "CM_FSCL_YR_END_DEPR_DTL_T")
 public class AssetYearEndDepreciationDetail extends GlobalBusinessObjectDetailBase implements MutableInactivatable {
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Column(name = "YEAR_END_DEPR_DTL_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "YEAR_END_DEPR_DTL_PROC_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean processed;
+    @Transient
     private Asset asset;
+    @Transient
     private AssetYearEndDepreciation assetYearEndDepreciation;
 
     /**
