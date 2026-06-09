@@ -18,12 +18,19 @@
  */
 package org.kuali.kfs.sys.businessobject;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+
 
 /**
  * This class represents the "target" grouping of accounting lines in a given document. Its counterpart is the SourceAccountingLine
  * class. Both objects' data is stored in the DB in a single table named "FP_ACCT_LINES_T." Most documents follow the "source" and
  * "target" patterns. Target Accounting Line Business Object
  */
+@Entity
+@Table(name = "FP_ACCT_LINES_T")
+@IdClass(AccountingLineId.class)
 public class TargetAccountingLine extends AccountingLineBase {
 
     private static final long serialVersionUID = -7290902582961553147L;
