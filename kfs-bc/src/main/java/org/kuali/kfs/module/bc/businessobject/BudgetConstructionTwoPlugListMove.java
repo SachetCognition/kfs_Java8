@@ -77,7 +77,7 @@ public class BudgetConstructionTwoPlugListMove extends PersistableBusinessObject
     private Chart organizationChartOfAccounts;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "ORG_FIN_COA_CD", referencedColumnName = "ORG_FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
         @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
     })
     private Organization organization;

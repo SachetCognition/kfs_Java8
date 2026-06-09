@@ -105,8 +105,8 @@ public class BudgetConstructionHeader extends PersistableBusinessObjectBase {
     private Person budgetTransactionLockUser;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "ORG_COA_OF_LVL_CD", referencedColumnName = "ORG_COA_OF_LVL_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "ORG_OF_LVL_CD", referencedColumnName = "ORG_OF_LVL_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "ORG_COA_OF_LVL_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_OF_LVL_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
     })
     private Organization organizationLevelOrganization;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -119,7 +119,7 @@ public class BudgetConstructionHeader extends PersistableBusinessObjectBase {
     })
     private BudgetConstructionAccountReports budgetConstructionAccountReports;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "budgetConstructionHeader", fetch = FetchType.LAZY)
 
     private List budgetConstructionAccountSelect;
 

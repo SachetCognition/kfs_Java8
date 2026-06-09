@@ -180,12 +180,11 @@ public class PendingBudgetConstructionAppointmentFunding extends PersistableBusi
     @JoinColumn(name = "APPT_FND_DUR_CD", insertable = false, updatable = false)
     private BudgetConstructionDuration budgetConstructionDuration;
 
-    @OneToMany(fetch = FetchType.LAZY)
-
+    @javax.persistence.Transient
     private List<BudgetConstructionCalculatedSalaryFoundationTracker> bcnCalculatedSalaryFoundationTracker;
-    @OneToMany(fetch = FetchType.LAZY)
+    @javax.persistence.Transient
     private List<BudgetConstructionSalaryFunding> budgetConstructionSalaryFunding;
-    @OneToMany(fetch = FetchType.LAZY)
+    @javax.persistence.Transient
     private List<BudgetConstructionAppointmentFundingReason> budgetConstructionAppointmentFundingReason;
 
     private KualiDecimal percentChange;

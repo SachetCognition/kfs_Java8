@@ -94,8 +94,8 @@ public class BudgetConstructionPositionFunding extends PersistableBusinessObject
     private Chart selectedOrganizationChartOfAccounts;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "SEL_ORG_FIN_COA", referencedColumnName = "SEL_ORG_FIN_COA", insertable = false, updatable = false),
-        @JoinColumn(name = "SEL_ORG_CD", referencedColumnName = "SEL_ORG_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "SEL_ORG_FIN_COA", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "SEL_ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
     })
     private Organization selectedOrganization;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -73,8 +73,8 @@ public class BudgetConstructionAppointmentFundingLoad02Move extends PersistableB
     private Chart continuationChartOfAccount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "CONT_FIN_COA_CD", referencedColumnName = "CONT_FIN_COA_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "CONT_ACCOUNT_NBR", referencedColumnName = "CONT_ACCOUNT_NBR", insertable = false, updatable = false)
+        @JoinColumn(name = "CONT_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "CONT_ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
     })
     private Account continuationAccount;
 

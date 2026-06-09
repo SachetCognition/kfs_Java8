@@ -7,6 +7,7 @@ public class SalarySettingExpansionId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String documentNumber;
     private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
@@ -17,6 +18,9 @@ public class SalarySettingExpansionId implements Serializable {
     private String financialObjectTypeCode;
 
     public SalarySettingExpansionId() {}
+
+    public String getDocumentNumber() { return documentNumber; }
+    public void setDocumentNumber(String documentNumber) { this.documentNumber = documentNumber; }
 
     public Integer getUniversityFiscalYear() { return universityFiscalYear; }
     public void setUniversityFiscalYear(Integer universityFiscalYear) { this.universityFiscalYear = universityFiscalYear; }
@@ -47,11 +51,11 @@ public class SalarySettingExpansionId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SalarySettingExpansionId that = (SalarySettingExpansionId) o;
-        return Objects.equals(universityFiscalYear, that.universityFiscalYear) && Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(subAccountNumber, that.subAccountNumber) && Objects.equals(financialObjectCode, that.financialObjectCode) && Objects.equals(financialSubObjectCode, that.financialSubObjectCode) && Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode) && Objects.equals(financialObjectTypeCode, that.financialObjectTypeCode);
+        return Objects.equals(documentNumber, that.documentNumber) && Objects.equals(universityFiscalYear, that.universityFiscalYear) && Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && Objects.equals(accountNumber, that.accountNumber) && Objects.equals(subAccountNumber, that.subAccountNumber) && Objects.equals(financialObjectCode, that.financialObjectCode) && Objects.equals(financialSubObjectCode, that.financialSubObjectCode) && Objects.equals(financialBalanceTypeCode, that.financialBalanceTypeCode) && Objects.equals(financialObjectTypeCode, that.financialObjectTypeCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, financialObjectCode, financialSubObjectCode, financialBalanceTypeCode, financialObjectTypeCode);
+        return Objects.hash(documentNumber, universityFiscalYear, chartOfAccountsCode, accountNumber, subAccountNumber, financialObjectCode, financialSubObjectCode, financialBalanceTypeCode, financialObjectTypeCode);
     }
 }

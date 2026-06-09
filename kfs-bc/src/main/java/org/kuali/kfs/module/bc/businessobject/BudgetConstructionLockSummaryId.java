@@ -8,7 +8,7 @@ public class BudgetConstructionLockSummaryId implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String lockType;
-    private java.sql.Date lockUserId;
+    private String lockUserId;
     private Integer universityFiscalYear;
     private String chartOfAccountsCode;
     private String accountNumber;
@@ -20,8 +20,8 @@ public class BudgetConstructionLockSummaryId implements Serializable {
     public String getLockType() { return lockType; }
     public void setLockType(String lockType) { this.lockType = lockType; }
 
-    public java.sql.Date getLockUserId() { return lockUserId; }
-    public void setLockUserId(java.sql.Date lockUserId) { this.lockUserId = lockUserId; }
+    public String getLockUserId() { return lockUserId; }
+    public void setLockUserId(String lockUserId) { this.lockUserId = lockUserId; }
 
     public Integer getUniversityFiscalYear() { return universityFiscalYear; }
     public void setUniversityFiscalYear(Integer universityFiscalYear) { this.universityFiscalYear = universityFiscalYear; }

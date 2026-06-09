@@ -59,10 +59,9 @@ public class BudgetConstructionIntendedIncumbent extends PersistableBusinessObje
     @Column(name = "ACTV_IND")
     private boolean active;
 
-    @OneToMany(fetch = FetchType.LAZY)
-
+    @javax.persistence.Transient
     private List<BudgetConstructionSalarySocialSecurityNumber> budgetConstructionSalarySocialSecurity;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "budgetConstructionIntendedIncumbent", fetch = FetchType.LAZY)
     private List<PendingBudgetConstructionAppointmentFunding> pendingBudgetConstructionAppointmentFunding;
 
     /**

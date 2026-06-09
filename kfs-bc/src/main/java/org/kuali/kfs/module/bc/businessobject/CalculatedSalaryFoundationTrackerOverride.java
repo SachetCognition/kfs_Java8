@@ -138,7 +138,7 @@ public class CalculatedSalaryFoundationTrackerOverride extends PersistableBusine
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
     private SystemOptions universityFiscal;
-    @OneToMany(fetch = FetchType.LAZY)
+    @javax.persistence.Transient
     private List calculatedSalaryFoundationTracker;
 
     private Person csfTrackerOverridePerson;

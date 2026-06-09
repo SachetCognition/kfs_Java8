@@ -78,13 +78,12 @@ public class BudgetConstructionAccountReports extends PersistableBusinessObjectB
     private Chart reportsToChartOfAccounts;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "RPTS_TO_FIN_COA_CD", referencedColumnName = "RPTS_TO_FIN_COA_CD", insertable = false, updatable = false),
-        @JoinColumn(name = "RPTS_TO_ORG_CD", referencedColumnName = "RPTS_TO_ORG_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "RPTS_TO_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "RPTS_TO_ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
     })
     private BudgetConstructionOrganizationReports budgetConstructionOrganizationReports;
 
-    @OneToMany(fetch = FetchType.LAZY)
-
+    @javax.persistence.Transient
     private List budgetConstructionAccountOrganizationHierarchy;
 
     /**

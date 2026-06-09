@@ -44,8 +44,7 @@ import javax.persistence.Version;
 @IdClass(SalarySettingExpansionId.class)
 public class SalarySettingExpansion extends PendingBudgetConstructionGeneralLedger implements PendingBudgetConstructionAppointmentFundingAware {
 
-    @OneToMany(fetch = FetchType.LAZY)
-
+    @javax.persistence.Transient
     private List<PendingBudgetConstructionAppointmentFunding> pendingBudgetConstructionAppointmentFunding;
 
     /**

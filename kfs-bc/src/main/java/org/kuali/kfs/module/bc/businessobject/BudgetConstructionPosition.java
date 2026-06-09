@@ -119,9 +119,9 @@ public class BudgetConstructionPosition extends PersistableBusinessObjectBase im
     @JoinColumn(name = "UNIV_FISCAL_YR", insertable = false, updatable = false)
 
     private SystemOptions universityFiscal;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "budgetConstructionPosition", fetch = FetchType.LAZY)
     private List<PendingBudgetConstructionAppointmentFunding> pendingBudgetConstructionAppointmentFunding;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "budgetConstructionPosition", fetch = FetchType.LAZY)
     private List<BudgetConstructionPositionSelect> budgetConstructionPositionSelect;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RC_CD", insertable = false, updatable = false)

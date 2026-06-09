@@ -151,8 +151,7 @@ public class PendingBudgetConstructionGeneralLedger extends PersistableBusinessO
     @JoinColumn(name = "FIN_OBJ_TYP_CD", insertable = false, updatable = false)
     private ObjectType objectType;
 
-    @OneToMany(fetch = FetchType.LAZY)
-
+    @javax.persistence.Transient
     private List<BudgetConstructionMonthly> budgetConstructionMonthly;
 
     // These are not defined under ojb since not all expenditure line objects have these
