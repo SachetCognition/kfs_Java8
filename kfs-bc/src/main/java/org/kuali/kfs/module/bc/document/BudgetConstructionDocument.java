@@ -47,6 +47,7 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+
 public class BudgetConstructionDocument extends FinancialSystemTransactionalDocumentBase {
 
     protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionDocument.class);

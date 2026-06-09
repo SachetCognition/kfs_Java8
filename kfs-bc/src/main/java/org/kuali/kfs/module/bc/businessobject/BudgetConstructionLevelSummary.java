@@ -29,34 +29,97 @@ import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.businessobject.SubFundGroup;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_LEVL_SUMM_T")
+@IdClass(BudgetConstructionLevelSummaryId.class)
 public class BudgetConstructionLevelSummary extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "ORG_FIN_COA_CD")
     private String organizationChartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "SUB_FUND_GRP_CD")
     private String subFundGroupCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "INC_EXP_CD")
     private String incomeExpenseCode;
+    @Id
+    @Column(name = "FIN_CONS_SORT_CD")
     private String financialConsolidationSortCode;
+    @Id
+    @Column(name = "FIN_LEV_SORT_CD")
     private String financialLevelSortCode;
+    @Column(name = "ACLN_ANNL_BAL_AMT")
     private KualiInteger accountLineAnnualBalanceAmount;
+    @Column(name = "FIN_BEG_BAL_LN_AMT")
     private KualiInteger financialBeginningBalanceLineAmount;
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String financialConsolidationObjectCode;
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     private String financialObjectLevelCode;
+    @Column(name = "APPT_RQCSF_FTE_QTY")
     private BigDecimal appointmentRequestedCsfFteQuantity;
+    @Column(name = "APPT_RQST_FTE_QTY")
     private BigDecimal appointmentRequestedFteQuantity;
+    @Column(name = "POS_CSF_FTE_QTY")
     private BigDecimal csfFullTimeEmploymentQuantity;
+    @Column(name = "POS_CSF_LV_FTE_QTY")
     private BigDecimal positionCsfLeaveFteQuantity;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "ORG_FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart organizationChartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "ORG_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ORG_CD", referencedColumnName = "ORG_CD", insertable = false, updatable = false)
+    })
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_FUND_GRP_CD", insertable = false, updatable = false)
     private SubFundGroup subFundGroup;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "FIN_OBJ_LEVEL_CD", referencedColumnName = "FIN_OBJ_LEVEL_CD", insertable = false, updatable = false)
+    })
     private ObjectLevel financialObjectLevel;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "FIN_CONS_OBJ_CD", referencedColumnName = "FIN_CONS_OBJ_CD", insertable = false, updatable = false)
+    })
     private ObjectConsolidation financialConsolidationObject;
 
     /**

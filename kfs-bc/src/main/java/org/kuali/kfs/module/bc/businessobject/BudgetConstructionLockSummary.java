@@ -28,8 +28,10 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+
 /**
  * Holds information about a budget lock.
+ * This is a transient/display BO for the lock monitor screen — not backed by a database table.
  */
 public class BudgetConstructionLockSummary extends PersistableBusinessObjectBase {
     private String lockType;

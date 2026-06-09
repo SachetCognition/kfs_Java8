@@ -31,14 +31,31 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.BusinessObjectService;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * Business object that represents a selected/unselected object code for a user.
  */
+@Entity
+@Table(name = "LD_BCN_OBJ_PICK_T")
+@IdClass(BudgetConstructionObjectPickId.class)
 public class BudgetConstructionObjectPick extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "FIN_OBJECT_CD")
+
     private String financialObjectCode;
+    @Column(name = "SELECT_FLAG")
     private Integer selectFlag;
+    @Id
+    @Column(name = "PERSON_UNVL_ID")
     private String principalId;
 
     /**

@@ -24,20 +24,58 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_AF_LOAD02_MT")
+@IdClass(BudgetConstructionAppointmentFundingLoad02MoveId.class)
 public class BudgetConstructionAppointmentFundingLoad02Move extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "FIN_COA_CD")
+
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "CONT_FIN_COA_CD")
     private String continuationFinChrtOfAcctCd;
+    @Column(name = "CONT_ACCOUNT_NBR")
     private String continuationAccountNumber;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
+
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONT_FIN_COA_CD", insertable = false, updatable = false)
     private Chart continuationChartOfAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "CONT_FIN_COA_CD", referencedColumnName = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "CONT_ACCOUNT_NBR", referencedColumnName = "ACCOUNT_NBR", insertable = false, updatable = false)
+    })
     private Account continuationAccount;
 
     /**

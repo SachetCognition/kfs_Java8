@@ -22,20 +22,61 @@ package org.kuali.kfs.module.bc.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
+
+@Entity
+@Table(name = "LD_BCN_POS_SEL_T")
+@IdClass(BudgetConstructionPositionSelectId.class)
 public class BudgetConstructionPositionSelect extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "POSITION_NBR")
     private String positionNumber;
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "EMPLID")
     private String emplid;
+    @Column(name = "IU_POSITION_TYPE")
     private String iuPositionType;
+    @Column(name = "POS_DEPTID")
     private String positionDepartmentIdentifier;
+    @Column(name = "SETID_SALARY")
     private String setidSalary;
+    @Column(name = "SAL_ADMIN_PLAN")
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
     private String grade;
+    @Column(name = "POS_DESCR")
     private String positionDescription;
+    @Column(name = "PERSON_NM")
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+        @JoinColumn(name = "POSITION_NBR", referencedColumnName = "POSITION_NBR", insertable = false, updatable = false),
+
+        @JoinColumn(name = "UNIV_FISCAL_YR", referencedColumnName = "UNIV_FISCAL_YR", insertable = false, updatable = false)
+
+    })
 
     private BudgetConstructionPosition budgetConstructionPosition;
 

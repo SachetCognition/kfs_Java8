@@ -22,14 +22,31 @@ package org.kuali.kfs.module.bc.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_ADM_POST_T")
+@IdClass(BudgetConstructionAdministrativePostId.class)
 public class BudgetConstructionAdministrativePost extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "EMPLID")
+
     private String emplid;
+    @Id
+    @Column(name = "POSITION_NBR")
     private String positionNumber;
+    @Column(name = "ADMIN_POST")
     private String administrativePost;
 
     /**

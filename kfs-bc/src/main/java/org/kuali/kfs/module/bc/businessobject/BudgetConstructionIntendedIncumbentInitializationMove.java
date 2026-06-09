@@ -22,18 +22,39 @@ package org.kuali.kfs.module.bc.businessobject;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_II_INIT_MT")
+@IdClass(BudgetConstructionIntendedIncumbentInitializationMoveId.class)
 public class BudgetConstructionIntendedIncumbentInitializationMove extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "EMPLID")
     private String emplid;
+    @Column(name = "PERSON_NM")
     private String name;
+    @Column(name = "SETID_SALARY")
     private String setidSalary;
+    @Column(name = "SAL_ADMIN_PLAN")
     private String salaryAdministrationPlan;
+    @Column(name = "GRADE")
     private String grade;
+    @Column(name = "IU_CLASSIF_LEVEL")
     private String iuClassificationLevel;
 
     /**

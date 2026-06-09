@@ -23,19 +23,44 @@ import java.sql.Date;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
 
 /**
  * 
  */
+@Entity
+@Table(name = "LD_BCN_ACTV_JOB_MT")
+@IdClass(BudgetConstructionActiveJobMoveId.class)
 public class BudgetConstructionActiveJobMove extends PersistableBusinessObjectBase {
 
+    @Id
+
+    @Column(name = "PERSON_UNVL_ID")
+
     private String principalId;
+    @Id
+    @Column(name = "EMPLID")
     private String emplid;
+    @Id
+    @Column(name = "EMPL_RCD")
     private Integer employeeRecord;
+    @Id
+    @Column(name = "EFFDT")
     private Date effectiveDate;
+    @Id
+    @Column(name = "EFFSEQ")
     private Integer effectiveSequence;
+    @Column(name = "POSITION_NBR")
     private String positionNumber;
+    @Column(name = "EMPL_STATUS")
     private String employeeStatus;
+    @Column(name = "DEPTID")
     private String departmentIdentifier;
 
     /**
