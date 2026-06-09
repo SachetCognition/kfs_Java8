@@ -247,19 +247,19 @@
 	</bean>
 
 	<bean id="accountDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.AccountDaoOjb"/>
+		class="org.kuali.kfs.coa.dataaccess.impl.AccountDaoJpa"/>
 	
 	<bean id="accountDelegateDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.AccountDelegateDaoOjb"/>
+		class="org.kuali.kfs.coa.dataaccess.impl.AccountDelegateDaoJpa"/>
 		
 	<bean id="accountDelegateGlobalDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.AccountDelegateGlobalDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.AccountDelegateGlobalDaoJpa" />
 
 	<bean id="objectCodeDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.ObjectCodeDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.ObjectCodeDaoJpa" />
 
 	<bean id="balanceTypeDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.BalanceTypeDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.BalanceTypeDaoJpa" />
 
 	<bean id="priorYearAccountDao" parent="platformAwareDaoJdbc"
 		class="org.kuali.kfs.coa.dataaccess.impl.PriorYearAccountDaoJdbcImpl"/>
@@ -268,19 +268,19 @@
 		class="org.kuali.kfs.coa.dataaccess.impl.PriorYearOrganizationDaoJdbc" />
 
 	<bean id="subFundGroupDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.SubFundGroupDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.SubFundGroupDaoJpa" />
 
 	<bean id="indirectCostRecoveryRateDetailDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.IndirectCostRecoveryRateDetailDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.IndirectCostRecoveryRateDetailDaoJpa" />
 
 	<bean id="indirectCostRecoveryExclusionAccountDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.IndirectCostRecoveryExclusionAccountDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.IndirectCostRecoveryExclusionAccountDaoJpa" />
 
 	<bean id="indirectCostRecoveryExclusionTypeDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.IndirectCostRecoveryExclusionTypeDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.IndirectCostRecoveryExclusionTypeDaoJpa" />
 
 	<bean id="a21SubAccountDao" parent="platformAwareDao"
-		class="org.kuali.kfs.coa.dataaccess.impl.A21SubAccountDaoOjb" />
+		class="org.kuali.kfs.coa.dataaccess.impl.A21SubAccountDaoJpa" />
 		
 	<bean id="accountLookupableHelperService" parent="accountLookupableHelperService-parentBean" scope="prototype" />		
 	<bean id="accountLookupableHelperService-parentBean" abstract="true" 

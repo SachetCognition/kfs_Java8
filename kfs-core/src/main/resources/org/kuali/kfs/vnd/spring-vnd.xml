@@ -74,7 +74,7 @@
 		<property name="moduleConfiguration" ref="vndModuleConfiguration" />
 	</bean>
 
-    <bean id="vendorDao" parent="platformAwareDao" class="org.kuali.kfs.vnd.dataaccess.impl.VendorDaoOjb" />
+    <bean id="vendorDao" parent="platformAwareDao" class="org.kuali.kfs.vnd.dataaccess.impl.VendorDaoJpa" />
    
     <bean id="vendorService" parent="vendorService-parentBean"/>
    
@@ -271,7 +271,7 @@
         </property>
     </bean>
    
-   <bean id="commodityCodeDao" parent="platformAwareDao" class="org.kuali.kfs.vnd.dataaccess.impl.CommodityCodeDaoOjb" />
+   <bean id="commodityCodeDao" parent="platformAwareDao" class="org.kuali.kfs.vnd.dataaccess.impl.CommodityCodeDaoJpa" />
 
     <bean id="commodityCodeService" parent="commodityCodeService-parentBean"/>
 
@@ -285,7 +285,7 @@
     </bean>
 
 	<bean id="debarredVendorMatchDao" parent="platformAwareDao"
-		class="org.kuali.kfs.vnd.batch.dataaccess.DebarredVendorMatchDaoOjb" />
+		class="org.kuali.kfs.vnd.batch.dataaccess.DebarredVendorMatchDaoJpa" />
 		
 	<bean id="debarredVendorDao" parent="platformAwareDaoJdbc"
 		class="org.kuali.kfs.vnd.batch.dataaccess.DebarredVendorDaoJdbc">

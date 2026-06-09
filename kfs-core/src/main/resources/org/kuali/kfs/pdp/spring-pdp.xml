@@ -97,21 +97,21 @@
 		<property name="moduleConfiguration" ref="pdpModuleConfiguration" />
 	</bean>
 	
-	<bean id="pdpBatchMaintenanceDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.BatchMaintenanceDaoOjb"/>
+	<bean id="pdpBatchMaintenanceDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.BatchMaintenanceDaoJpa"/>
 
-	<bean id="pdpFormatPaymentDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.FormatPaymentDaoOjb"/>
+	<bean id="pdpFormatPaymentDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.FormatPaymentDaoJpa"/>
 
-	<bean id="pdpGlPendingTransactionDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PendingTransactionDaoOjb"/>
+	<bean id="pdpGlPendingTransactionDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PendingTransactionDaoJpa"/>
 
-	<bean id="pdpPaymentDetailDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentDetailDaoOjb"/>
+	<bean id="pdpPaymentDetailDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentDetailDaoJpa"/>
 
-	<bean id="pdpPaymentFileLoadDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentFileLoadDaoOjb"/>
+	<bean id="pdpPaymentFileLoadDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentFileLoadDaoJpa"/>
 
-	<bean id="pdpPaymentGroupDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentGroupDaoOjb" />
+	<bean id="pdpPaymentGroupDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentGroupDaoJpa" />
 	
-	<bean id="pdpPaymentGroupHistoryDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentGroupHistoryDaoOjb"/>
+	<bean id="pdpPaymentGroupHistoryDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.PaymentGroupHistoryDaoJpa"/>
 
-	<bean id="pdpProcessDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.ProcessDaoOjb" />
+	<bean id="pdpProcessDao" parent="platformAwareDao" class="org.kuali.kfs.pdp.dataaccess.impl.ProcessDaoJpa" />
 	
 	
 	<bean id="pdpLoadPaymentsJob" parent="scheduledJobDescriptor">

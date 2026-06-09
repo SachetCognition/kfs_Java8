@@ -85,14 +85,14 @@
     </bean>
 
   <bean id="capitalAssetInformationDao" parent="capitalAssetInformationDao-parentBean"/>
-  <bean id="capitalAssetInformationDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.fp.document.dataaccess.impl.CapitalAssetInformationDaoOjb"/>
+  <bean id="capitalAssetInformationDao-parentBean" abstract="true" parent="platformAwareDao" class="org.kuali.kfs.fp.document.dataaccess.impl.CapitalAssetInformationDaoJpa"/>
 
-	<bean id="travelMileageRateDao" parent="platformAwareDao" class="org.kuali.kfs.fp.document.dataaccess.impl.TravelMileageRateDaoOjb" />
+	<bean id="travelMileageRateDao" parent="platformAwareDao" class="org.kuali.kfs.fp.document.dataaccess.impl.TravelMileageRateDaoJpa" />
 	
 	<bean id="checkService"  parent="checkService-parentBean"/>
 	<bean id="checkService-parentBean" class="org.kuali.kfs.fp.service.impl.CheckServiceImpl" abstract="true">
 		<property name="checkDao">
-			<bean class="org.kuali.kfs.fp.dataaccess.impl.CheckDaoOjb" parent="platformAwareDao" />
+			<bean class="org.kuali.kfs.fp.dataaccess.impl.CheckDaoJpa" parent="platformAwareDao" />
 		</property>
 	</bean>
 
@@ -400,9 +400,9 @@
 		</property>
 	</bean>
 
-	<bean id="cashManagementDao" class="org.kuali.kfs.fp.document.dataaccess.impl.CashManagementDaoOjb" parent="platformAwareDao" />
+	<bean id="cashManagementDao" class="org.kuali.kfs.fp.document.dataaccess.impl.CashManagementDaoJpa" parent="platformAwareDao" />
 
-	<bean id="disbursementVoucherDao" class="org.kuali.kfs.fp.dataaccess.impl.DisbursementVoucherDaoOjb" parent="platformAwareDao" />
+	<bean id="disbursementVoucherDao" class="org.kuali.kfs.fp.dataaccess.impl.DisbursementVoucherDaoJpa" parent="platformAwareDao" />
 	
 	<bean id="distributionOfIncomeAndExpenseElectronicPaymentClaimingDocumentHelper"  parent="distributionOfIncomeAndExpenseElectronicPaymentClaimingDocumentHelper-parentBean"/>
 	<bean id="distributionOfIncomeAndExpenseElectronicPaymentClaimingDocumentHelper-parentBean" class="org.kuali.kfs.fp.batch.service.impl.DistributionOfIncomeAndExpenseElectronicPaymentClaimingHelperStrategyImpl" abstract="true">
