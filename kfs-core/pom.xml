@@ -12,6 +12,14 @@
   <artifactId>kfs-core</artifactId>
   <name>Kuali Financial Core</name>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.kuali.kfs</groupId>
+      <artifactId>kfs-rice-compat</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -55,5 +63,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

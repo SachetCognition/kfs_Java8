@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="org.kuali.kfs.workflow">
+
+  <!--
+    Generic KFS document routing process, replacing Rice KEW route definitions.
+    Maps the standard KFS document lifecycle: INITIATED → ENROUTE → PROCESSED → FINAL.
+    Specific document types can extend this with additional route nodes.
+  -->
+  <process id="kfs-generic-document" name="KFS Generic Document Routing" isExecutable="true">
+
+    <startEvent id="start" name="Document Initiated"/>
+
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="fiscalOfficerApproval"/>
+
+    <userTask id="fiscalOfficerApproval"
+              name="Fiscal Officer Approval"
+              flowable:candidateGroups="KFS-SYS Fiscal Officer">
+      <documentation>Fiscal Officer reviews and approves the document.</documentation>
+    </userTask>
+
+    <sequenceFlow id="flow2" sourceRef="fiscalOfficerApproval" targetRef="approvalGateway"/>
+
+    <exclusiveGateway id="approvalGateway" name="Approval Decision"/>
+
+    <sequenceFlow id="flow3" sourceRef="approvalGateway" targetRef="accountSupervisorApproval">
+      <conditionExpression>${action == 'APPROVE'}</conditionExpression>
+    </sequenceFlow>
+
+    <sequenceFlow id="flow3b" sourceRef="approvalGateway" targetRef="documentDisapproved">
+      <conditionExpression>${action != 'APPROVE'}</conditionExpression>
+    </sequenceFlow>
+
+    <userTask id="accountSupervisorApproval"
+              name="Account Supervisor Approval"
+              flowable:candidateGroups="KFS-SYS Account Supervisor">
+      <documentation>Account Supervisor reviews and approves the document.</documentation>
+    </userTask>
+
+    <sequenceFlow id="flow4" sourceRef="accountSupervisorApproval" targetRef="supervisorGateway"/>
+
+    <exclusiveGateway id="supervisorGateway" name="Supervisor Decision"/>
+
+    <sequenceFlow id="flow5" sourceRef="supervisorGateway" targetRef="documentProcessed">
+      <conditionExpression>${action == 'APPROVE'}</conditionExpression>
+    </sequenceFlow>
+
+    <sequenceFlow id="flow5b" sourceRef="supervisorGateway" targetRef="documentDisapproved">
+      <conditionExpression>${action != 'APPROVE'}</conditionExpression>
+    </sequenceFlow>
+
+    <serviceTask id="documentProcessed" name="Mark Document Processed"
+                 flowable:expression="${execution.setVariable('documentStatus', 'PROCESSED')}"/>
+
+    <sequenceFlow id="flow6" sourceRef="documentProcessed" targetRef="documentFinal"/>
+
+    <serviceTask id="documentFinal" name="Mark Document Final"
+                 flowable:expression="${execution.setVariable('documentStatus', 'FINAL')}"/>
+
+    <sequenceFlow id="flow7" sourceRef="documentFinal" targetRef="end"/>
+
+    <serviceTask id="documentDisapproved" name="Mark Document Disapproved"
+                 flowable:expression="${execution.setVariable('documentStatus', 'DISAPPROVED')}"/>
+
+    <sequenceFlow id="flow8" sourceRef="documentDisapproved" targetRef="endDisapproved"/>
+
+    <endEvent id="end" name="Document Final"/>
+    <endEvent id="endDisapproved" name="Document Disapproved"/>
+
+  </process>
+</definitions>

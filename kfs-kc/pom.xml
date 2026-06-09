@@ -33,6 +33,10 @@
   <dependencies>
     <dependency>
       <groupId>org.kuali.kfs</groupId>
+      <artifactId>kfs-rice-compat</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.kuali.kfs</groupId>
       <artifactId>kfs-core</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -49,5 +53,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 </project>

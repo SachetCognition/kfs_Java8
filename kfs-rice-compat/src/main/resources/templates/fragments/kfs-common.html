@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--
+  Thymeleaf fragments replacing Rice KNS/KRAD UI framework patterns.
+  These provide common UI components previously rendered by KNS tag libraries.
+-->
+
+<!-- Document header fragment (replaces KNS document header tags) -->
+<div th:fragment="documentHeader(document)">
+  <div class="kfs-document-header">
+    <h2 th:text="${document.documentHeader.documentDescription}">Document</h2>
+    <table class="kfs-header-table">
+      <tr>
+        <th>Document Number:</th>
+        <td th:text="${document.documentNumber}">--</td>
+        <th>Status:</th>
+        <td th:text="${document.documentHeader.workflowDocument.status}">--</td>
+      </tr>
+      <tr>
+        <th>Initiator:</th>
+        <td th:text="${document.documentHeader.workflowDocument.initiatorPrincipalId}">--</td>
+        <th>Created:</th>
+        <td th:text="${document.documentHeader.workflowDocument.dateCreated}">--</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- Field rendering fragment (replaces KNS dd:field tag) -->
+<div th:fragment="field(label, value, required)">
+  <div class="kfs-field">
+    <label th:text="${label}" th:classappend="${required} ? 'required' : ''">Label</label>
+    <span th:text="${value}">Value</span>
+  </div>
+</div>
+
+<!-- Input field fragment (replaces KNS dd:inputField tag) -->
+<div th:fragment="inputField(label, fieldName, value, maxLength, required)">
+  <div class="kfs-input-field">
+    <label th:for="${fieldName}" th:text="${label}"
+           th:classappend="${required} ? 'required' : ''">Label</label>
+    <input type="text" th:name="${fieldName}" th:id="${fieldName}"
+           th:value="${value}" th:maxlength="${maxLength}"/>
+  </div>
+</div>
+
+<!-- Lookup result table fragment (replaces KNS lookup display) -->
+<div th:fragment="lookupResults(columns, rows)">
+  <table class="kfs-lookup-results">
+    <thead>
+      <tr>
+        <th th:each="col : ${columns}" th:text="${col.label}">Column</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="row : ${rows}">
+        <td th:each="col : ${columns}" th:text="${row[col.propertyName]}">Value</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Action buttons fragment (replaces KNS extra buttons) -->
+<div th:fragment="actionButtons(buttons)">
+  <div class="kfs-action-buttons">
+    <button th:each="btn : ${buttons}"
+            th:text="${btn.label}"
+            th:onclick="${btn.action}"
+            class="kfs-btn">Action</button>
+  </div>
+</div>
+
+<!-- Error messages fragment (replaces KNS error display) -->
+<div th:fragment="errors(messageMap)">
+  <div th:if="${not #lists.isEmpty(messageMap.errorMessages)}" class="kfs-errors">
+    <ul>
+      <li th:each="entry : ${messageMap.errorMessages}"
+          th:text="${entry.value}">Error message</li>
+    </ul>
+  </div>
+</div>
+
+</html>
