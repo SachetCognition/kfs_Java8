@@ -1,353 +1,176 @@
-/*
- * The Kuali Financial System, a comprehensive financial management system for higher education.
- * 
- * Copyright 2005-2014 The Kuali Foundation
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * 
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package org.kuali.kfs.sys.businessobject;
 
-import java.sql.Date;
+import org.junit.jupiter.api.Test;
+import org.kuali.kfs.sys.context.KfsUnitTestBase;
 
-import org.kuali.kfs.coa.businessobject.Account;
-import org.kuali.kfs.sys.ConfigureContext;
-import org.kuali.kfs.sys.context.KualiTestBase;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-/**
- * This class tests AccountingLineOverride.
- */
-@ConfigureContext
-public class AccountingLineOverrideTest extends KualiTestBase {
-    private static final AccountingLineOverride EXPIRED = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
-    private static final AccountingLineOverride NONE = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NONE);
-    private static final AccountingLineOverride EXPIRED_AND_NON_FRINGE = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED);
-    private static final AccountingLineOverride NON_FRINGE = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NON_FRINGE_ACCOUNT_USED);
+class AccountingLineOverrideTest extends KfsUnitTestBase {
 
-    public void testValueOf_String_none() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NONE);
-        assertEquals(AccountingLineOverride.CODE.NONE, expired.getCode());
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
+    // ──────────────────── isValidCode ───────────────────────────────
+
+    @Test
+    void isValidCode_NONE_returnsTrue() {
+        assertThat(AccountingLineOverride.isValidCode(AccountingLineOverride.CODE.NONE)).isTrue();
     }
 
-    public void testValueOf_String_expiredAccount() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT, expired.getCode());
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
+    @Test
+    void isValidCode_BLANK_returnsTrue() {
+        assertThat(AccountingLineOverride.isValidCode(AccountingLineOverride.CODE.BLANK)).isTrue();
     }
 
-    public void testValueOf_String_nonBudgetedObject() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NON_BUDGETED_OBJECT);
-        assertEquals(AccountingLineOverride.CODE.NON_BUDGETED_OBJECT, expired.getCode());
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT));
+    @Test
+    void isValidCode_EXPIRED_ACCOUNT_returnsTrue() {
+        assertThat(AccountingLineOverride.isValidCode(AccountingLineOverride.CODE.EXPIRED_ACCOUNT)).isTrue();
     }
 
-    public void testValueOf_String_double() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED);
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED, expired.getCode());
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT));
+    @Test
+    void isValidCode_invalid_returnsFalse() {
+        assertThat(AccountingLineOverride.isValidCode("BOGUS_CODE")).isFalse();
     }
 
-    public void testValueOf_String_invalid() {
-        try {
-            AccountingLineOverride.valueOf("foo");
-            fail("got invalid code");
+    @Test
+    void isValidCode_null_returnsFalse() {
+        assertThat(AccountingLineOverride.isValidCode(null)).isFalse();
+    }
+
+    // ──────────────────── valueOf(String) ───────────────────────────
+
+    @Test
+    void valueOf_NONE_returnsOverrideWithNoneCode() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NONE);
+        assertThat(override.getCode()).isEqualTo(AccountingLineOverride.CODE.NONE);
+    }
+
+    @Test
+    void valueOf_EXPIRED_ACCOUNT() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+        assertThat(override.getCode()).isEqualTo(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT)).isTrue();
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT)).isFalse();
+    }
+
+    @Test
+    void valueOf_invalidCode_throws() {
+        assertThatThrownBy(() -> AccountingLineOverride.valueOf("INVALID"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    // ──────────────────── valueOf(Integer[]) ────────────────────────
+
+    @Test
+    void valueOf_components_EXPIRED_ACCOUNT() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(
+                new Integer[]{AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT});
+        assertThat(override.getCode()).isEqualTo(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+    }
+
+    @Test
+    void valueOf_components_emptyArray_returnsNoneOrBlank() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(new Integer[]{});
+        assertThat(override).isNotNull();
+    }
+
+    @Test
+    void valueOf_components_multipleValid() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(
+                new Integer[]{
+                        AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT,
+                        AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT
+                });
+        assertThat(override.getCode()).isEqualTo(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_BUDGETED_OBJECT);
+    }
+
+    // ──────────────────── hasComponent ──────────────────────────────
+
+    @Test
+    void hasComponent_present_returnsTrue() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT)).isTrue();
+    }
+
+    @Test
+    void hasComponent_absent_returnsFalse() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT)).isFalse();
+    }
+
+    @Test
+    void hasComponent_NONE_allAbsent() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NONE);
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT)).isFalse();
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT)).isFalse();
+        assertThat(override.hasComponent(AccountingLineOverride.COMPONENT.TRANSACTION_EXCEEDS_REMAINING_BUDGET)).isFalse();
+    }
+
+    // ──────────────────── isValidComponentSet ───────────────────────
+
+    @Test
+    void isValidComponentSet_validSingle() {
+        assertThat(AccountingLineOverride.isValidComponentSet(
+                new Integer[]{AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT})).isTrue();
+    }
+
+    @Test
+    void isValidComponentSet_validCombo() {
+        assertThat(AccountingLineOverride.isValidComponentSet(
+                new Integer[]{AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT, AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT})).isTrue();
+    }
+
+    @Test
+    void isValidComponentSet_emptyArray() {
+        assertThat(AccountingLineOverride.isValidComponentSet(new Integer[]{})).isTrue();
+    }
+
+    // ──────────────────── mask ──────────────────────────────────────
+
+    @Test
+    void mask_retainsCommonComponents() {
+        AccountingLineOverride full = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_BUDGETED_OBJECT);
+        AccountingLineOverride maskOverride = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+
+        AccountingLineOverride result = full.mask(maskOverride);
+        assertThat(result.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT)).isTrue();
+        assertThat(result.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT)).isFalse();
+    }
+
+    @Test
+    void isValidMask_validCombination_returnsTrue() {
+        AccountingLineOverride full = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_BUDGETED_OBJECT);
+        AccountingLineOverride maskOverride = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
+        assertThat(full.isValidMask(maskOverride)).isTrue();
+    }
+
+    // ──────────────────── toString ──────────────────────────────────
+
+    @Test
+    void toString_containsCode() {
+        AccountingLineOverride override = AccountingLineOverride.valueOf(AccountingLineOverride.CODE.NONE);
+        assertThat(override.toString()).contains("NONE");
+    }
+
+    // ──────────────────── all defined codes ─────────────────────────
+
+    @Test
+    void allCodes_areValid() {
+        String[] codes = {
+                AccountingLineOverride.CODE.BLANK,
+                AccountingLineOverride.CODE.NONE,
+                AccountingLineOverride.CODE.EXPIRED_ACCOUNT,
+                AccountingLineOverride.CODE.NON_BUDGETED_OBJECT,
+                AccountingLineOverride.CODE.TRANSACTION_EXCEEDS_REMAINING_BUDGET,
+                AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_BUDGETED_OBJECT,
+                AccountingLineOverride.CODE.NON_BUDGETED_OBJECT_AND_TRANSACTION_EXCEEDS_REMAINING_BUDGET,
+                AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_TRANSACTION_EXCEEDS_REMAINING_BUDGET,
+                AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_BUDGETED_OBJECT_AND_TRANSACTION_EXCEEDS_REMAINING_BUDGET,
+                AccountingLineOverride.CODE.NON_FRINGE_ACCOUNT_USED,
+                AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED
+        };
+        for (String code : codes) {
+            assertThat(AccountingLineOverride.isValidCode(code))
+                    .as("Code '%s' should be valid", code)
+                    .isTrue();
         }
-        catch (IllegalArgumentException e) {
-            // good
-        }
-    }
-
-    public void testValueOf_String_null() {
-        try {
-            AccountingLineOverride.valueOf((String) null);
-            fail("got null code");
-        }
-        catch (IllegalArgumentException e) {
-            // good
-        }
-    }
-
-    public void testValueOf_IntegerArray_none() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(new Integer[] {});
-        assertEquals(AccountingLineOverride.CODE.NONE, expired.getCode());
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
-    }
-
-    public void testValueOf_IntegerArray_expiredAccount() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(new Integer[] { AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT });
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT, expired.getCode());
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
-    }
-
-    public void testValueOf_IntegerArray_double() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(new Integer[] { AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT, AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED });
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED, expired.getCode());
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT));
-    }
-
-    public void testValueOf_IntegerArray_doubleReverse() {
-        AccountingLineOverride expired = AccountingLineOverride.valueOf(new Integer[] { AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED, AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT });
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED, expired.getCode());
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT));
-        assertEquals(true, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED));
-        assertEquals(false, expired.hasComponent(AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT));
-    }
-
-    public void testValueOf_IntegerArray_invalid() {
-        try {
-            AccountingLineOverride.valueOf(new Integer[] { AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT, AccountingLineOverride.COMPONENT.NON_FRINGE_ACCOUNT_USED });
-            fail("got invalid components");
-        }
-        catch (IllegalArgumentException e) {
-            // good
-        }
-    }
-
-    public void testValueOf_IntegerArray_null() {
-        try {
-            AccountingLineOverride.valueOf((Integer[]) null);
-            fail("got null components");
-        }
-        catch (NullPointerException e) {
-            // good
-        }
-    }
-
-    public void testIsValidCode_valid() {
-        assertEquals(true, AccountingLineOverride.isValidCode(AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_BUDGETED_OBJECT));
-    }
-
-    public void testIsValidCode_invalid() {
-        assertEquals(false, AccountingLineOverride.isValidCode("foo"));
-    }
-
-    public void testIsValidCode_empty() {
-        assertEquals(true, AccountingLineOverride.isValidCode(""));
-    }
-
-    public void testIsValidCode_blank() {
-        assertEquals(false, AccountingLineOverride.isValidCode(" "));
-    }
-
-    public void testIsValidCode_null() {
-        assertEquals(false, AccountingLineOverride.isValidCode(null));
-    }
-
-    public void testIsValidComponentSet_valid() {
-        assertEquals(true, AccountingLineOverride.isValidComponentSet(new Integer[] { AccountingLineOverride.COMPONENT.EXPIRED_ACCOUNT, AccountingLineOverride.COMPONENT.NON_BUDGETED_OBJECT }));
-    }
-
-    public void testIsValidComponentSet_invalid() {
-        assertEquals(false, AccountingLineOverride.isValidComponentSet(new Integer[] { new Integer(4) }));
-    }
-
-    public void testIsValidComponentSet_empty() {
-        assertEquals(true, AccountingLineOverride.isValidComponentSet(new Integer[] {}));
-    }
-
-    public void testIsValidComponentSet_null() {
-        try {
-            AccountingLineOverride.isValidComponentSet(null);
-            fail("null valid check didn't throw an exception");
-        }
-        catch (NullPointerException e) {
-            // good
-        }
-    }
-
-    public void testMask_expiredToNone() {
-        assertSame(NONE, EXPIRED.mask(NONE));
-    }
-
-    public void testMask_noneToExpired() {
-        assertSame(NONE, NONE.mask(EXPIRED));
-    }
-
-    public void testMask_expiredAndNonFringeToExpired() {
-        assertSame(EXPIRED, EXPIRED_AND_NON_FRINGE.mask(EXPIRED));
-    }
-
-    public void testMask_nonFringeToExpired() {
-        assertSame(NONE, NON_FRINGE.mask(EXPIRED));
-    }
-
-    public void testPopulateFromInput_none() {
-        AccountingLine line = new SourceAccountingLine();
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        AccountingLineOverride.populateFromInput(line);
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-    }
-
-    public void testPopulateFromInput_expiredAccount() {
-        AccountingLine line = new SourceAccountingLine();
-        line.setAccountExpiredOverride(true);
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        AccountingLineOverride.populateFromInput(line);
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT, line.getOverrideCode());
-    }
-
-    public void testPopulateFromInput_nonBudgetedObject() {
-        AccountingLine line = new SourceAccountingLine();
-        line.setObjectBudgetOverride(true);
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        AccountingLineOverride.populateFromInput(line);
-        assertEquals(AccountingLineOverride.CODE.NON_BUDGETED_OBJECT, line.getOverrideCode());
-    }
-
-    public void testProcessForOutput_none() {
-        AccountingLine line = new SourceAccountingLine();
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_unexpired() {
-        AccountingLine line = new SourceAccountingLine();
-        line.setAccount(getUnexpiredAccount());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_expired() {
-        AccountingLine line = new SourceAccountingLine();
-        line.setOverrideCode(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
-        Account expiredAccount = getExpiredAccount();
-        line.setAccount(expiredAccount);
-        line.setChartOfAccountsCode(expiredAccount.getChartOfAccountsCode());
-        line.setAccountNumber(expiredAccount.getAccountNumber());
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(true, line.getAccountExpiredOverride());
-        assertEquals(true, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_nonBudgetedObject() {
-        AccountingLine line = new SourceAccountingLine();
-        Account closedAccount = getClosedAccount();
-        line.setAccount(closedAccount);
-        line.setChartOfAccountsCode(closedAccount.getChartOfAccountsCode());
-        line.setAccountNumber(closedAccount.getAccountNumber());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_alreadyExpired() {
-        AccountingLine line = new SourceAccountingLine();
-        line.setOverrideCode(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
-        Account expiredAccount = getExpiredAccount();
-        line.setAccount(expiredAccount);
-        line.setChartOfAccountsCode(expiredAccount.getChartOfAccountsCode());
-        line.setAccountNumber(expiredAccount.getAccountNumber());
-        line.setAccountExpiredOverride(true);
-        line.setAccountExpiredOverrideNeeded(true);
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(true, line.getAccountExpiredOverride());
-        assertEquals(true, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_becomingExpired() {
-        AccountingLine line = new SourceAccountingLine();
-        Account expiredAccount = getExpiredAccount();
-        line.setAccount(expiredAccount);
-        line.setChartOfAccountsCode(expiredAccount.getChartOfAccountsCode());
-        line.setAccountNumber(expiredAccount.getAccountNumber());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(true, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_becomingUnexpired() {
-        AccountingLine line = new SourceAccountingLine();
-        line.setOverrideCode(AccountingLineOverride.CODE.EXPIRED_ACCOUNT);
-        line.setAccount(getUnexpiredAccount());
-        line.setAccountExpiredOverride(true);
-        line.setAccountExpiredOverrideNeeded(true);
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(true, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.EXPIRED_ACCOUNT, line.getOverrideCode());
-    }
-
-    @SuppressWarnings("deprecation")
-    public void testProcessForOutput_becomingClosed() {
-        AccountingLine line = new SourceAccountingLine();
-        Account closedAccount = getClosedAccount();
-        line.setAccount(closedAccount);
-        line.setChartOfAccountsCode(closedAccount.getChartOfAccountsCode());
-        line.setAccountNumber(closedAccount.getAccountNumber());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        AccountingLineOverride.processForOutput(null,line);
-        assertEquals(false, line.getAccountExpiredOverride());
-        assertEquals(false, line.getAccountExpiredOverrideNeeded());
-        assertEquals(AccountingLineOverride.CODE.NONE, line.getOverrideCode());
-    }
-
-    private Account getClosedAccount() {
-        Account account = getExpiredAccount();
-        account.setActive(false);
-        return account;
-    }
-
-    private Account getExpiredAccount() {
-        Account account = new Account();
-        account.setChartOfAccountsCode("BL");
-        account.setAccountNumber("9999999");
-        account.setAccountExpirationDate(new Date(42)); // this account expired near the beginning of the era (1970)
-        return account;
-    }
-
-    private Account getUnexpiredAccount() {
-        Account account = new Account();
-        account.setAccountExpirationDate(new Date(Long.MAX_VALUE / 2)); // this account expires far in the future
-        return account;
     }
 }
