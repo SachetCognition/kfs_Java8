@@ -88,6 +88,8 @@ public class ExpenseTypeObjectCode extends PersistableBusinessObjectBase impleme
 
     private transient DocumentTypeEBO documentType;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EXP_TYP_CD", insertable = false, updatable = false)
     private ExpenseType expenseType;
 
     public Long getExpenseTypeObjectCodeId() {

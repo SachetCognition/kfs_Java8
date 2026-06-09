@@ -33,9 +33,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TEM_CC_IMP_EXP_CLR_DTL_T")
+@IdClass(CreditCardImportedExpenseClearingDetailId.class)
 public class CreditCardImportedExpenseClearingDetail extends GlobalBusinessObjectDetailBase {
     @Id
-    @Column(name = "CC_STAGING_DATA_ID")
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
+    @Column(name = "CC_STG_DAT_ID")
     private Integer creditCardStagingDataId;
 
     private String merchantName;
