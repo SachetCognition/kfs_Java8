@@ -213,6 +213,11 @@
             <include>**/*Tests.java</include>
             <include>**/*IT.java</include>
           </includes>
+          <excludes>
+            <exclude>**/AllTests.java</exclude>
+            <exclude>**/BatchAllTests.java</exclude>
+            <exclude>**/AllAccountsReceivableTests.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
       <plugin>
