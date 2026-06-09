@@ -30,12 +30,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
 
 /**
  * Requisition View Business Object.
  */
 @Entity
 @Table(name = "PUR_REQS_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "REQS_ID"))
 public class RequisitionView extends AbstractRelatedView {
     private Integer requisitionIdentifier;
 

@@ -38,21 +38,35 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.service.NoteService;
 import org.kuali.rice.krad.util.KRADConstants;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 /**
  * Base class for Related View Business Objects.
  */
+@MappedSuperclass
 public abstract class AbstractRelatedView extends PersistableBusinessObjectBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractRelatedView.class);
 
+    @Id
+    @Column(name = "AP_PUR_DOC_LNK_ID")
     private Integer accountsPayablePurchasingDocumentLinkIdentifier;
+    @Column(name = "PURAP_DOC_ID")
     private Integer purapDocumentIdentifier;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Transient
     private String poNumberMasked;
 
     //create date from the workflow document header...
+    @Transient
     private DateTime createDate;
 
     // REFERENCE OBJECTS
+    @Transient
     protected FinancialSystemDocumentHeader documentHeader;
 
     public Integer getAccountsPayablePurchasingDocumentLinkIdentifier() {

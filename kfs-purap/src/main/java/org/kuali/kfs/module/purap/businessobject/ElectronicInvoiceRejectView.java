@@ -30,12 +30,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
 
 /**
  * Electronic invoice View Business Object.
  */
 @Entity
 @Table(name = "AP_ELCTRNC_INV_RJT_DOC_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "INV_RJT_ID"))
 public class ElectronicInvoiceRejectView extends AbstractRelatedView {
 
     @Id

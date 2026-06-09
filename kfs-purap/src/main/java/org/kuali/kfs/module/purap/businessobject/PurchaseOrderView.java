@@ -35,12 +35,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
 
 /**
  * Purchase Order View Business Object.
  */
 @Entity
 @Table(name = "PUR_PO_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "PO_ID"))
 public class PurchaseOrderView extends AbstractRelatedView {
 
     @Column(name = "PO_CUR_IND")

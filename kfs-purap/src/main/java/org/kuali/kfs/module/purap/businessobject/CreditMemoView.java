@@ -33,6 +33,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
 
 
 /**
@@ -40,6 +41,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "AP_CRDT_MEMO_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "CRDT_MEMO_ID"))
 public class CreditMemoView extends AbstractRelatedView {
     @Column(name = "CRDT_MEMO_NBR")
     private String creditMemoNumber;

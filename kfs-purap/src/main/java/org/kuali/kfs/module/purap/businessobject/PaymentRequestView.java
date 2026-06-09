@@ -38,11 +38,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.AttributeOverride;
+
 /**
  * Payment Request View Business Object.
  */
 @Entity
 @Table(name = "AP_PMT_RQST_T")
+@AttributeOverride(name = "purapDocumentIdentifier", column = @Column(name = "PMT_RQST_ID"))
 public class PaymentRequestView extends AbstractRelatedView {
 
     @Column(name = "INV_NBR")
