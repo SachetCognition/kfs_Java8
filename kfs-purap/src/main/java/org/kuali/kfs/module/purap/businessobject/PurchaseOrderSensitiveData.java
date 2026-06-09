@@ -22,12 +22,30 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PUR_PO_SNSTV_DTA_T")
 public class PurchaseOrderSensitiveData extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "PO_ID")
     private  Integer purapDocumentIdentifier;
+    @Column(name = "REQS_ID")
     private  Integer requisitionIdentifier;
+    @Id
+    @Column(name = "SNSTV_DTA_CD")
     private  String sensitiveDataCode;
         
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "SNSTV_DTA_CD", insertable = false, updatable = false)
     private SensitiveData sensitiveData;
 
     public PurchaseOrderSensitiveData() {

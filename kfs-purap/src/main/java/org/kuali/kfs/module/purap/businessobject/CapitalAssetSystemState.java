@@ -23,14 +23,25 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * 
  * This class is the Capital Asset System State
  */
+@Entity
+@Table(name = "PUR_CPTL_AST_SYS_ST_T")
 public class CapitalAssetSystemState extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+	@Id
+	@Column(name = "CPTL_AST_SYS_ST_CD")
 	private String capitalAssetSystemStateCode;
+	@Column(name = "CPTL_AST_SYS_ST_DESC")
 	private String capitalAssetSystemStateDescription;
+	@Column(name = "DOBJ_MAINT_CD_ACTV_IND")
 	private boolean active;
 
 	/**

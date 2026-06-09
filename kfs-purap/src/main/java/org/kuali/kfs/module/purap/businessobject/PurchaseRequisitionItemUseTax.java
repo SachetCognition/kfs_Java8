@@ -18,7 +18,12 @@
  */
 package org.kuali.kfs.module.purap.businessobject;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "PUR_REQS_ITM_USE_TAX_T")
 public class PurchaseRequisitionItemUseTax  extends PurApItemUseTaxBase {
 
 }

@@ -40,12 +40,26 @@ import org.kuali.rice.krad.bo.DocumentHeader;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.util.KRADPropertyConstants;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "PUR_RCVNG_LN_T")
 public class LineItemReceivingDocument extends ReceivingDocumentBase {
 
     //Collections
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
     protected List<LineItemReceivingItem> items;
 
     /**

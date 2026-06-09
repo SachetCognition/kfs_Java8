@@ -25,17 +25,40 @@ import java.util.LinkedHashMap;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Vendor Stipulation.
  */
+@Entity
+@Table(name = "PUR_PO_VNDR_STPLTN_T")
 public class PurchaseOrderVendorStipulation extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "PO_VNDR_STPLTN_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer purchaseOrderVendorStipulationIdentifier;
+    @Column(name = "VNDR_STPLTN_DESC")
     private String vendorStipulationDescription;
+    @Column(name = "VNDR_STPLTN_AUTH_EMP_ID")
     private String vendorStipulationAuthorEmployeeIdentifier;
+    @Column(name = "VNDR_STPLTN_CRTE_DT")
     private Date vendorStipulationCreateDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     private PurchaseOrderDocument purchaseOrder;
 
     public PurchaseOrderVendorStipulation() {

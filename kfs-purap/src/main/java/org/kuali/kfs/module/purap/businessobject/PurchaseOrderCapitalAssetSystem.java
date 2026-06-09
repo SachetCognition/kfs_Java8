@@ -24,14 +24,27 @@ import org.kuali.kfs.integration.purap.CapitalAssetLocation;
 import org.kuali.kfs.integration.purap.CapitalAssetSystem;
 import org.kuali.kfs.integration.purap.ItemCapitalAsset;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "PUR_PO_CPTL_AST_SYS_T")
 public class PurchaseOrderCapitalAssetSystem extends PurchasingCapitalAssetSystemBase {
 
+	@Column(name = "FDOC_NBR")
 	private String documentNumber;
 	
 	/**

@@ -36,19 +36,43 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.service.SequenceAccessorService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Item Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_ITM_T")
 public class PurchaseOrderItem extends PurchasingItemBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderItem.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Column(name = "ITM_INV_TOT_QTY")
     private KualiDecimal itemInvoicedTotalQuantity;
+    @Column(name = "ITM_INV_TOT_AMT")
     private KualiDecimal itemInvoicedTotalAmount;
+    @Column(name = "ITM_RCVD_TOT_QTY")
     private KualiDecimal itemReceivedTotalQuantity;
+    @Column(name = "ITM_OSTND_ENC_QTY")
     private KualiDecimal itemOutstandingEncumberedQuantity;
+    @Column(name = "ITM_OSTND_ENC_AMT")
     private KualiDecimal itemOutstandingEncumberedAmount;
+    @Column(name = "ITM_ACTV_IND")
     private boolean itemActiveIndicator = true;
+    @Column(name = "ITM_DMGED_TOT_QTY")
     private KualiDecimal itemDamagedTotalQuantity;
         
     private PurchaseOrderDocument purchaseOrder;

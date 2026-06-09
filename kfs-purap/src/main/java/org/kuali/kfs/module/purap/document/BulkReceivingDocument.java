@@ -44,36 +44,65 @@ import org.kuali.rice.krad.util.KRADPropertyConstants;
 import org.kuali.rice.location.api.country.Country;
 import org.kuali.rice.location.api.country.CountryService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PUR_BLK_RCVNG_T")
 public class BulkReceivingDocument extends ReceivingDocumentBase{
 
     protected static final Logger LOG = Logger.getLogger(BulkReceivingDocument.class);
 
+    @Column(name = "SHPMNT_WGHT")
     protected String shipmentWeight;
+    @Column(name = "CRTNS_CNT")
     protected Integer noOfCartons;
+    @Column(name = "TRAKNG_NBR")
     protected String trackingNumber;
+    @Column(name = "VNDR_ADDR_INTL_PROV_NM")
     protected String vendorAddressInternationalProvinceName;
+    @Column(name = "VNDR_NTE_TXT")
     protected String vendorNoteText;
 
     /**
      * Goods delivered vendor
      */
+    @Column(name = "GDS_DLVD_VNDR_HDR_GNRTD_ID")
     protected Integer goodsDeliveredVendorHeaderGeneratedIdentifier;
+    @Column(name = "GDS_DLVD_VNDR_DTL_ASND_ID")
     protected Integer goodsDeliveredVendorDetailAssignedIdentifier;
     protected String goodsDeliveredVendorNumber;
+    @Column(name = "DLVY_ADDL_INSTRC_TXT")
     protected String deliveryAdditionalInstructionText;
 
+    @Column(name = "RQSTR_PRSN_NM")
     protected String requestorPersonName;
+    @Column(name = "RQSTR_PRSN_PHN_NBR")
     protected String requestorPersonPhoneNumber;
+    @Column(name = "RQSTR_PRSN_EMAIL_ADDR")
     protected String requestorPersonEmailAddress;
 
+    @Column(name = "PREPR_PRSN_NM")
     protected String preparerPersonName;
+    @Column(name = "PREPR_PRSN_PHN_NBR")
     protected String preparerPersonPhoneNumber;
 
     protected String deliveryCampusName;
+    @Column(name = "INST_CNTCT_NM")
     protected String institutionContactName;
+    @Column(name = "INST_CNTCT_PHN_NBR")
     protected String institutionContactPhoneNumber;
+    @Column(name = "INST_CNTCT_EMAIL_ADDR")
     protected String institutionContactEmailAddress;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "ALTRNT_VNDR_HDR_GNRTD_ID", insertable = false, updatable = false), @JoinColumn(name = "ALTRNT_VNDR_DTL_ASND_ID", insertable = false, updatable = false)})
     protected VendorDetail alternateVendorDetail;
 
     /**

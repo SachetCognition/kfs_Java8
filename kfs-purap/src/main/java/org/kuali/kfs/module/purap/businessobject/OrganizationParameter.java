@@ -26,17 +26,39 @@ import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Organization Parameter Business Object. Maintenance document for organization parameters.
  */
+@Entity
+@Table(name = "PUR_AP_ORG_PARM_T")
 public class OrganizationParameter extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "ORG_AUTO_PO_LMT")
     private KualiDecimal organizationAutomaticPurchaseOrderLimit;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({@JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false), @JoinColumn(name = "ORG_CD", insertable = false, updatable = false)})
     private Organization organization;
+    @Column(name = "ACTV_IND")
     private boolean activeIndicator;
 
     public boolean isActiveIndicator() {

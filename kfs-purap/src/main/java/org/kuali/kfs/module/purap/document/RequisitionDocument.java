@@ -83,20 +83,44 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Document class for the Requisition.
  */
+@Entity
+@Table(name = "PUR_REQS_T")
 public class RequisitionDocument extends PurchasingDocumentBase implements Copyable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RequisitionDocument.class);
 
+    @Column(name = "REQS_ORG_REF_1_TXT")
     protected String requisitionOrganizationReference1Text;
+    @Column(name = "REQS_ORG_REF_2_TXT")
     protected String requisitionOrganizationReference2Text;
+    @Column(name = "REQS_ORG_REF_3_TXT")
     protected String requisitionOrganizationReference3Text;
+    @Column(name = "ALTRNT_1_VNDR_NM")
     protected String alternate1VendorName;
+    @Column(name = "ALTRNT_2_VNDR_NM")
     protected String alternate2VendorName;
+    @Column(name = "ALTRNT_3_VNDR_NM")
     protected String alternate3VendorName;
+    @Column(name = "ALTRNT_4_VNDR_NM")
     protected String alternate4VendorName;
+    @Column(name = "ALTRNT_5_VNDR_NM")
     protected String alternate5VendorName;
+    @Column(name = "ORG_AUTO_PO_LMT")
     protected KualiDecimal organizationAutomaticPurchaseOrderLimit;
     protected List reqStatusList;
 

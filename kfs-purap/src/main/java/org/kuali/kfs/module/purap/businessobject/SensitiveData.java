@@ -25,13 +25,24 @@ import org.kuali.kfs.integration.purap.PurchasingAccountsPayableSensitiveData;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Sensitive Data Business Object.
  */
+@Entity
+@Table(name = "PUR_SNSTV_DTA_T")
 public class SensitiveData extends PersistableBusinessObjectBase implements PurchasingAccountsPayableSensitiveData, MutableInactivatable{
 
+    @Id
+    @Column(name = "SNSTV_DTA_CD")
     private String sensitiveDataCode;
+    @Column(name = "SNSTV_DTA_DESC")
     private String sensitiveDataDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

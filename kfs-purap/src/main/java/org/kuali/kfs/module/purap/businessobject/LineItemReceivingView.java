@@ -23,11 +23,25 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.Note;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Requisition View Business Object.
  */
+@Entity
+@Table(name = "PUR_RCVNG_LN_T")
 public class LineItemReceivingView extends AbstractRelatedView {
+    @Id
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
+    @Column(name = "DLVY_BLDG_OTHR_IND")
     private boolean deliveryBuildingOtherIndicator;
     public boolean isDeliveryBuildingOtherIndicator() {
         return deliveryBuildingOtherIndicator;

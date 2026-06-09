@@ -23,9 +23,23 @@ import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Account Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_ACCT_T")
 public class PurchaseOrderAccount extends PurApAccountingLineBase {
 
     /**
@@ -33,6 +47,7 @@ public class PurchaseOrderAccount extends PurApAccountingLineBase {
      * it is already defined in AccountingLineBase so we don't need to add it here
      */
     // private String documentNumber;
+    @Column(name = "ITM_ACCT_OSTND_ENCUM_AMT")
     private KualiDecimal itemAccountOutstandingEncumbranceAmount;
 
     /**

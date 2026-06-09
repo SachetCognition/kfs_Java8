@@ -38,15 +38,35 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Item line Business Object for Credit Memo Document.
  */
+@Entity
+@Table(name = "AP_CRDT_MEMO_ITM_T")
 public class CreditMemoItem extends AccountsPayableItemBase {
+    @Column(name = "PO_INV_TOT_QTY")
     private KualiDecimal poInvoicedTotalQuantity;
+    @Column(name = "PO_UNT_PRC")
     private BigDecimal poUnitPrice;
+    @Column(name = "PO_EXTND_PRC")
     private KualiDecimal poTotalAmount;
+    @Column(name = "PMT_RQST_INV_TOT_QTY")
     private KualiDecimal preqInvoicedTotalQuantity;
+    @Column(name = "PMT_RQST_UNT_PRC")
     private BigDecimal preqUnitPrice;
+    @Column(name = "PMT_RQST_EXTND_PRC")
     private KualiDecimal preqTotalAmount;
 
     /**

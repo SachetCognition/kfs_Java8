@@ -23,12 +23,27 @@ import java.util.List;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.krad.bo.Note;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Electronic invoice View Business Object.
  */
+@Entity
+@Table(name = "AP_ELCTRNC_INV_RJT_DOC_T")
 public class ElectronicInvoiceRejectView extends AbstractRelatedView {
 
+    @Id
+    @Column(name = "PREQ_ID")
     private Integer paymentRequestIdentifier;
+    @Id
+    @Column(name = "PO_ID")
     private Integer purchaseOrderIdentifier;
 
     @Override

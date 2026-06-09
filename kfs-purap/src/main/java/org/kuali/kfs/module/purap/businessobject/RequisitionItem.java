@@ -21,11 +21,26 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.kfs.module.purap.document.RequisitionDocument;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Requisition Item Business Object.
  */
+@Entity
+@Table(name = "PUR_REQS_ITM_T")
 public class RequisitionItem extends PurchasingItemBase {
 
+    @Column(name = "ITM_RSTRC_IND")
     private boolean itemRestrictedIndicator;
     private String holdSupplierId; //not persisted
         

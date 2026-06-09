@@ -24,18 +24,31 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Electronic Invoice Reject Reason Type Code Business Object.
  */
+@Entity
+@Table(name = "AP_ELCTRNC_INV_RJT_REAS_TYP_T")
 public class ElectronicInvoiceRejectReasonType extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "INV_RJT_REAS_TYP_CD")
     private String invoiceRejectReasonTypeCode;
+    @Column(name = "INV_RJT_REAS_TYP_DESC")
     private String invoiceRejectReasonTypeDescription;
     /*
      * Indicates whether this reject reason will cause a INVOICE (if true) or a FILE (if false) reject document.
      */
+    @Column(name = "INV_FAIL_IND")
     private boolean invoiceFailureIndicator;
+    @Column(name = "INV_RJT_REAS_PERF_MTCH_IND")
     private boolean performMatchingIndicator;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
     /**

@@ -38,14 +38,31 @@ import org.kuali.kfs.sys.util.ObjectPopulationUtils;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Payment Request Item Business Object.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_ITM_T")
 public class PaymentRequestItem extends AccountsPayableItemBase {
     private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentRequestItem.class);
 
+    @Column(name = "PO_ITM_UNIT_PRC")
     private BigDecimal purchaseOrderItemUnitPrice;
+    @Column(name = "ITM_OSTND_INV_QTY")
     private KualiDecimal itemOutstandingInvoiceQuantity;
+    @Column(name = "ITM_OSTND_INV_AMT")
     private KualiDecimal itemOutstandingInvoiceAmount;
 
     /**

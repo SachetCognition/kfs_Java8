@@ -36,15 +36,31 @@ import org.kuali.rice.kew.framework.postprocessor.DocumentRouteStatusChange;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.location.framework.country.CountryEbo;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "PUR_RCVNG_COR_T")
 public class CorrectionReceivingDocument extends ReceivingDocumentBase {
 
+    @Column(name = "RCVNG_LN_FDOC_NBR")
     protected String lineItemReceivingDocumentNumber;
     //Collections
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "documentNumber")
     protected List<CorrectionReceivingItem> items;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RCVNG_LN_FDOC_NBR", insertable = false, updatable = false)
     protected LineItemReceivingDocument lineItemReceivingDocument;
 
     /**

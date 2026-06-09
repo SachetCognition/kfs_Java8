@@ -27,14 +27,34 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PUR_SNSTV_DTA_ASGN_T")
 public class SensitiveDataAssignment extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "SNSTV_DTA_ASGN_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private  Integer sensitiveDataAssignmentIdentifier;
+    @Column(name = "PO_ID")
     private  Integer purapDocumentIdentifier;
+    @Column(name = "SNSTV_DTA_ASGN_REAS_TXT")
     private  String sensitiveDataAssignmentReasonText;
+    @Column(name = "SNSTV_DTA_ASGN_CHG_PRSN_ID")
     private  String sensitiveDataAssignmentPersonIdentifier;
+    @Column(name = "SNSTV_DTA_ASGN_CHG_DT")
     private  Date sensitiveDataAssignmentChangeDate;
     
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "sensitiveDataAssignmentIdentifier")
     private List<SensitiveDataAssignmentDetail> sensitiveDataAssignmentDetails;
     
     public SensitiveDataAssignment() {

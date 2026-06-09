@@ -25,11 +25,25 @@ import org.kuali.kfs.sys.businessobject.AccountingLineBase;
 import org.kuali.kfs.sys.util.ObjectPopulationUtils;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Payment Request Account Business Object.
  */
+@Entity
+@Table(name = "AP_PMT_RQST_ACCT_T")
 public class PaymentRequestAccount extends PurApAccountingLineBase {
 
+    @Column(name = "DISENC_AMT")
     private KualiDecimal disencumberedAmount = KualiDecimal.ZERO;
 
     /**

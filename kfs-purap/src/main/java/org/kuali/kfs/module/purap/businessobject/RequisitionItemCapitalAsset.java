@@ -23,10 +23,22 @@ import org.kuali.kfs.integration.cam.CapitalAssetManagementAsset;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.service.KualiModuleService;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 /**
  * Requisition Item Capital Asset Business Object.
  */
+@Entity
+@Table(name = "PUR_REQS_CPTL_AST_ITM_AST_T")
 public class RequisitionItemCapitalAsset extends PurchasingItemCapitalAssetBase {
 
     private CapitalAssetManagementAsset asset;

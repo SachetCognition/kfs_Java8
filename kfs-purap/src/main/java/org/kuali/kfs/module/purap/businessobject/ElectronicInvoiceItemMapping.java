@@ -27,15 +27,37 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "AP_ELCTRNC_INV_MAP_T")
 public class ElectronicInvoiceItemMapping extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "AP_ELCTRNC_INV_MAP_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer invoiceMapIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     private Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     private Integer vendorDetailAssignedIdentifier;
+    @Column(name = "ITM_TYP_CD")
     private String itemTypeCode;
+    @Column(name = "INV_ITM_TYP_CD")
     private String invoiceItemTypeCode;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ITM_TYP_CD", insertable = false, updatable = false)
     private ItemType itemType;
     private ItemType invoiceItemType;
 

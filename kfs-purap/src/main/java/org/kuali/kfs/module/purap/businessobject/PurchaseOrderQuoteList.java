@@ -27,19 +27,42 @@ import org.kuali.kfs.vnd.businessobject.ContractManager;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * Purchase Order Quote List Business Object.
  */
+@Entity
+@Table(name = "PUR_PO_QT_LST_T")
 public class PurchaseOrderQuoteList extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "PO_QT_LST_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer purchaseOrderQuoteListIdentifier;
+    @Column(name = "PO_QT_LST_NM")
     private String purchaseOrderQuoteListName;
+    @Column(name = "CONTR_MGR_CD")
     private Integer contractManagerCode;
     private String contractManagerName;
+    @Column(name = "ACTV_IND")
     private boolean active;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     private ContractManager contractManager;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "purchaseOrderQuoteListIdentifier")
     private List<PurchaseOrderQuoteListVendor> quoteListVendors;
 
     /**

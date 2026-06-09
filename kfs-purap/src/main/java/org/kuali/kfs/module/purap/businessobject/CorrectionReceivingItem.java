@@ -20,11 +20,25 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.kfs.module.purap.document.CorrectionReceivingDocument;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "PUR_RCVNG_COR_ITM_T")
 public class CorrectionReceivingItem extends ReceivingItemBase {
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
 	private CorrectionReceivingDocument correctionReceivingDocument;
     
 	/**
