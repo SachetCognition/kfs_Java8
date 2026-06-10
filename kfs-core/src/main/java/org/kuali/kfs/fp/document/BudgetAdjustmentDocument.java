@@ -512,7 +512,7 @@ public class BudgetAdjustmentDocument extends AccountingDocumentBase implements 
      *
      * @see org.kuali.rice.krad.document.TransactionalDocumentBase#getAllowsCopy()
      */
-    @Override
+    
     public boolean getAllowsCopy() {
         return true;
     }

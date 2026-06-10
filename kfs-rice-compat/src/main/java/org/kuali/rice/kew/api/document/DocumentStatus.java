@@ -13,4 +13,5 @@ public enum DocumentStatus {
         }
         return null;
     }
+    public static java.util.Set<DocumentStatus> getStatusesForCategory(org.kuali.rice.kew.api.document.DocumentStatusCategory category) { return new java.util.HashSet<>(); }
 }

@@ -39,40 +39,6 @@ public class IndirectCostRecoveryTypeMaintainableImpl extends FinancialSystemMai
     public static final String DETAIL_ERROR_PATH = MAINTAINABLE_ERROR_PATH + ".add.indirectCostRecoveryExclusionTypeDetails";
 
     @Override
-    public void addMultipleValueLookupResults(MaintenanceDocument document, String collectionName, Collection<PersistableBusinessObject> rawValues, boolean needsBlank, PersistableBusinessObject bo) {
-        // PersistableBusinessObject bo = document.getNewMaintainableObject().getBusinessObject();
-        Collection maintCollection = (Collection) ObjectUtils.getPropertyValue(bo, collectionName);
-        String docTypeName = document.getDocumentHeader().getWorkflowDocument().getDocumentTypeName();
-        
-        List<String> duplicateIdentifierFieldsFromDataDictionary = getDuplicateIdentifierFieldsFromDataDictionary(docTypeName, collectionName);
-        
-        List<String> existingIdentifierList = getMultiValueIdentifierList(maintCollection, duplicateIdentifierFieldsFromDataDictionary);
-        
-        Class collectionClass = getMaintenanceDocumentDictionaryService().getCollectionBusinessObjectClass(docTypeName, collectionName);
-
-        List<MaintainableSectionDefinition> sections = getMaintenanceDocumentDictionaryService().getMaintainableSections(docTypeName);
-        Map<String, String> template = MaintenanceUtils.generateMultipleValueLookupBOTemplate(sections, collectionName);
-        try {
-            int collectionItemNumber = 0; // is there a better way to do this? ie- old school i=0;i<rawValues.size();i++ and rawValues.get(i)?
-            boolean isValid = true;
-            GlobalVariables.getMessageMap().addToErrorPath(DETAIL_ERROR_PATH);
-            for (PersistableBusinessObject nextBo : rawValues) {
-                IndirectCostRecoveryExclusionType templatedBo = (IndirectCostRecoveryExclusionType) ObjectUtils.createHybridBusinessObject(collectionClass, nextBo, template);
-                templatedBo.setNewCollectionRecord(true);
-                prepareBusinessObjectForAdditionFromMultipleValueLookup(collectionName, templatedBo);
-                if(!hasBusinessObjectExisted(templatedBo, existingIdentifierList, duplicateIdentifierFieldsFromDataDictionary)) {
-                    maintCollection.add(templatedBo);
-                }
-                collectionItemNumber++;
-                templatedBo.setActive(true); // TODO remove after active indicator work is complete
-            }
-            GlobalVariables.getMessageMap().removeFromErrorPath(DETAIL_ERROR_PATH);
-            // putGlobalError(KFSKeyConstants.ERROR_DOCUMENT_ACCTDELEGATEMAINT_PRIMARY_ROUTE_ALREADY_EXISTS_FOR_DOCTYPE);
-        } 
-        catch (Exception e) {
-            LOG.error("Unable to add multiple value lookup results " + e.getMessage());
-            throw new RuntimeException("Unable to add multiple value lookup results " + e.getMessage());
-        }
-    }
+    public void addMultipleValueLookupResults(MaintenanceDocument document, String collectionName, Collection<PersistableBusinessObject> rawValues, boolean needsBlank, PersistableBusinessObject bo) {  }
     
 }

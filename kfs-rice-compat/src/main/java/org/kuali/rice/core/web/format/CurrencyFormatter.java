@@ -9,4 +9,5 @@ public class CurrencyFormatter extends Formatter {
     }
     
     public Object convertFromPresentationFormat(Object value) { return value; }
+    public String formatForPresentation(org.kuali.rice.core.api.util.type.KualiDecimal amount) { return amount != null ? amount.toString() : ""; }
 }

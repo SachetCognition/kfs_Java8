@@ -1,5 +1,6 @@
 package org.kuali.rice.kns.web.ui;
 public class HeaderField {
+    public static final HeaderField EMPTY_FIELD = new HeaderField();
     private String id;
     private String ddAttributeEntryName;
     private String displayValue;

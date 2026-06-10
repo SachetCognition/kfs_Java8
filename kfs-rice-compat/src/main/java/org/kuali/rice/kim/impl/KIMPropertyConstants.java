@@ -15,6 +15,9 @@ public class KIMPropertyConstants {
         public static final String EMPLOYEE_ID = "employeeId";
         public static final String CAMPUS_CODE = "campusCode";
         public static final String ACTIVE = "active";
+        public static final String BASE_SALARY_AMOUNT = "baseSalaryAmount";
+        public static final String PHONE_NUMBER = "phoneNumber";
+        public static final String PRIMARY_DEPARTMENT_CODE = "primaryDepartmentCode";
         private Person() {}
     }
     

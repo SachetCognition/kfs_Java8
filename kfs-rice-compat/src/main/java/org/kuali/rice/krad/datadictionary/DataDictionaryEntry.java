@@ -10,4 +10,5 @@ public interface DataDictionaryEntry {
     List<AttributeDefinition> getAttributes();
     AttributeDefinition getAttributeDefinition(String attributeName);
     Class<?> getEntryClass();
+    void completeValidation();
 }

@@ -5,4 +5,5 @@ public interface CountryService {
     Country getCountryByAlternateCode(String alternateCode);
     List<Country> findAllCountries();
     List<Country> findAllCountriesNotRestricted();
+    Country getDefaultCountry();
 }

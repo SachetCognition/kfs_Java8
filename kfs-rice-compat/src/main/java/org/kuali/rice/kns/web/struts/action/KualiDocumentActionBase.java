@@ -42,4 +42,7 @@ public class KualiDocumentActionBase extends org.kuali.rice.kns.web.struts.actio
     public org.apache.struts.action.ActionForward superUserDisapprove(org.apache.struts.action.ActionMapping p0, org.apache.struts.action.ActionForm p1, javax.servlet.http.HttpServletRequest p2, javax.servlet.http.HttpServletResponse p3) { return null; }
     public org.apache.struts.action.ActionForward superUserApprove(org.apache.struts.action.ActionMapping p0, org.apache.struts.action.ActionForm p1, javax.servlet.http.HttpServletRequest p2, javax.servlet.http.HttpServletResponse p3) { return null; }
     public org.apache.struts.action.ActionForward complete(org.apache.struts.action.ActionMapping p0, org.apache.struts.action.ActionForm p1, javax.servlet.http.HttpServletRequest p2, javax.servlet.http.HttpServletResponse p3) throws java.lang.Exception { return null; }
+    protected void loadDocument(org.kuali.rice.kns.web.struts.form.KualiDocumentFormBase form) throws org.kuali.rice.kew.api.exception.WorkflowException {}
+    protected org.apache.struts.action.ActionForward performQuestionWithoutInput(org.apache.struts.action.ActionMapping mapping, org.apache.struts.action.ActionForm form, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response, String questionId, String questionText, String questionType, String caller, String context) throws Exception { return null; }
+    protected Object addObjectWithGeneratedKey(org.apache.struts.action.ActionForm form) { return null; }
 }

@@ -12,4 +12,5 @@ public class MailServiceImpl implements org.kuali.rice.krad.service.MailService 
     public void setNonProductionNotificationMailingList(java.lang.String p0) {  }
     public boolean isRealNotificationsEnabled() { return false; }
     public void setRealNotificationsEnabled(boolean p0) {  }
+    protected org.kuali.rice.core.api.mail.MailMessage composeMessage(org.kuali.rice.core.api.mail.MailMessage message) { return message; }
 }

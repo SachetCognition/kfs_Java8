@@ -16,4 +16,8 @@ public interface PersistenceBroker {
     Object getObjectByIdentity(Object id);
     void retrieveAllReferences(Object obj);
     void retrieveReference(Object obj, String refName);
+    void store(Object obj, boolean update);
+
+    void store(Object obj, org.apache.ojb.broker.util.ObjectModification mod);
+
 }

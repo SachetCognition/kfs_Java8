@@ -60,6 +60,7 @@ import javax.persistence.OneToMany;
 @Entity
 @Table(name = "FP_NCHK_DSBRSDOC_T")
 public class NonCheckDisbursementDocument extends AccountingDocumentBase implements Copyable, Correctable, AmountTotaling {
+    protected static final String DOCUMENT_PROPERTY_NAME = "document";
     @Column(name = "FDOC_BNK_CD")
     protected String financialDocumentBankCode;
 

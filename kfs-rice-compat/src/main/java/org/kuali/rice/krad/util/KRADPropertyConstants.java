@@ -2,7 +2,12 @@ package org.kuali.rice.krad.util;
 
 public class KRADPropertyConstants {
     public static final String DOCUMENT_NUMBER = "documentNumber";
+    public static final String DOCUMENT = "document";
     public static final String DOCUMENT_DESCRIPTION = "documentDescription";
+    public static final String DOCUMENT_EXPLANATION = "explanation";
+    public static final String DOCUMENT_HEADER = "documentHeader";
+    public static final String DOCUMENT_TEMPLATE_NUMBER = "documentTemplateNumber";
+    public static final String EMAIL_ADDRESS = "emailAddress";
     public static final String EXPLANATION = "explanation";
     public static final String ORGANIZATION_DOCUMENT_NUMBER = "organizationDocumentNumber";
     public static final String FINANCIAL_DOCUMENT_DESCRIPTION = "financialDocumentDescription";
@@ -13,6 +18,52 @@ public class KRADPropertyConstants {
     public static final String ID = "id";
     public static final String DOCUMENT_TYPE_CODE = "documentTypeCode";
     public static final String CAMPUS_CODE = "campusCode";
-    
+    public static final String ACTION_REQUESTED = "actionRequested";
+    public static final String AD_HOC_ROUTE_PERSONS = "adHocRoutePersons";
+    public static final String AD_HOC_ROUTE_WORKGROUPS = "adHocRouteWorkgroups";
+    public static final String ATTACHMENT = "attachment";
+    public static final String ATTRIBUTE_CONTROL_TYPE = "attributeControlType";
+    public static final String ATTRIBUTE_DESCRIPTION = "attributeDescription";
+    public static final String ATTRIBUTE_FORMATTER_CLASS_NAME = "attributeFormatterClassName";
+    public static final String ATTRIBUTE_LABEL = "attributeLabel";
+    public static final String ATTRIBUTE_MAX_LENGTH = "attributeMaxLength";
+    public static final String ATTRIBUTE_NAME = "attributeName";
+    public static final String ATTRIBUTE_SHORT_LABEL = "attributeShortLabel";
+    public static final String ATTRIBUTE_SUMMARY = "attributeSummary";
+    public static final String ATTRIBUTE_VALIDATING_EXPRESSION = "attributeValidatingExpression";
+    public static final String CAMPUS = "campus";
+    public static final String CAMPUS_NAME = "campusName";
+    public static final String CAMPUS_SHORT_NAME = "campusShortName";
+    public static final String CAMPUS_TYPE_CODE = "campusTypeCode";
+    public static final String CREATE_DATE = "createDate";
+    public static final String DESCRIPTION = "description";
+    public static final String DICTIONARY_BUSINESS_OBJECT_NAME = "dictionaryBusinessObjectName";
+    public static final String EMPLOYEE_STATUS_CODE = "employeeStatusCode";
+    public static final String EMPLOYEE_TYPE_CODE = "employeeTypeCode";
+    public static final String GENERIC_AMOUNT = "genericAmount";
+    public static final String GENERIC_BIG_TEXT = "genericBigText";
+    public static final String GENERIC_BOOLEAN = "genericBoolean";
+    public static final String GENERIC_DATE = "genericDate";
+    public static final String GENERIC_SYSTEM_ID = "genericSystemId";
+    public static final String GENERIC_TIMESTAMP = "genericTimestamp";
+    public static final String GROUPS = "groups";
+    public static final String INITIATOR_NETWORK_ID = "initiatorNetworkId";
+    public static final String LOOKUP_DATE = "lookupDate";
+    public static final String NAME = "name";
+    public static final String NEW_COLLECTION_RECORD = "newCollectionRecord";
+    public static final String NEW_MAINTAINABLE_OBJECT = "newMaintainableObject";
+    public static final String NOTE = "note";
+    public static final String OBJECT_ID = "objectId";
+    public static final String OLD_MAINTAINABLE_OBJECT = "oldMaintainableObject";
+    public static final String ONE_DIGIT_TEXT_CODE = "oneDigitTextCode";
+    public static final String TWO_DIGIT_TEXT_CODE = "twoDigitTextCode";
+    public static final String TYPE = "type";
+    public static final String UNIVERSAL_USER = "universalUser";
+    public static final String UU_ID = "uuId";
+    public static final String VALUE = "value";
+    public static final String VERSION_NUMBER = "versionNumber";
+    public static final String WORKFLOW_DOCUMENT = "workflowDocument";
+    public static final String XML_DOCUMENT_CONTENTS = "xmlDocumentContents";
+
     private KRADPropertyConstants() {}
 }

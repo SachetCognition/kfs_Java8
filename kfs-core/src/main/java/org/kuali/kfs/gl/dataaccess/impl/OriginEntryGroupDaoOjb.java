@@ -220,4 +220,5 @@ public class OriginEntryGroupDaoOjb extends PlatformAwareDaoBaseOjb implements O
     }
 
 
+    protected Object getObjectById(Class clazz, Object id) { return null; }
 }

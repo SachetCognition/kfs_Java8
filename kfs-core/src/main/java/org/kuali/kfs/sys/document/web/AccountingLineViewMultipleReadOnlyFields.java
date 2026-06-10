@@ -51,47 +51,38 @@ public class AccountingLineViewMultipleReadOnlyFields extends FieldTableJoiningW
      * 
      * KRAD Conversion: Customization of the fields - No use of data dictionary
      */
-    public AccountingLineViewMultipleReadOnlyFields(AccountingLineViewMultipleReadOnlyFieldsDefinition definition, List<Field> fields) {
-        this.definition = definition;
-        this.fields = fields;
-    }
+    public AccountingLineViewMultipleReadOnlyFields(AccountingLineViewMultipleReadOnlyFieldsDefinition definition, List<Field> fields) { return null; }
 
     /**
      * 
      * @see org.kuali.kfs.sys.document.web.TableJoiningWithHeader#createHeaderLabel()
      */
-    public HeaderLabel createHeaderLabel() {
-        return new LiteralHeaderLabel(KFSConstants.BLANK_SPACE);
-    }
+    public HeaderLabel createHeaderLabel() { return null; }
 
     /**
      * Returns the top field name given in the definition
      * @see org.kuali.kfs.sys.document.web.ElementNamable#getName()
      */
-    public String getName() {
-        return definition.getFieldNames().get(0);
-    }
+    public String getName() { return null; }
 
     /**
      * None of the read only fields will be associated with quickfinders, so this method does nothing
      * @see org.kuali.kfs.sys.document.web.RenderableElement#appendFields(java.util.List)
      */
-    public void appendFields(List<Field> fields) {}
+    public void appendFields(List<Field> fields) {  }
 
     /**
      * There are no input fields here, so no need to set tab indices
      * @see org.kuali.kfs.sys.document.web.RenderableElement#populateWithTabIndexIfRequested(int)
      */
-    public void populateWithTabIndexIfRequested(int reallyHighIndex) {}
+    public void populateWithTabIndexIfRequested(int reallyHighIndex) {  }
 
     /**
      * @return the fields associated with this Multiple read only fields
      * 
      * KRAD Conversion: Gets the fields - No use of data dictionary
      */
-    public List<Field> getFields() {
-        return fields;
-    }
+    public List<Field> getFields() { return new java.util.ArrayList<>(); }
 
     /**
      * 
@@ -99,21 +90,7 @@ public class AccountingLineViewMultipleReadOnlyFields extends FieldTableJoiningW
      * 
      * KRAD Conversion: Customization of the fields - No use of data dictionary
      */
-    public void renderElement(PageContext pageContext, Tag parentTag, AccountingLineRenderingContext renderingContext) throws JspException {
-        final org.kuali.rice.krad.datadictionary.BusinessObjectEntry boEntry = getDataDictionaryService().getDataDictionary().getBusinessObjectEntry(renderingContext.getAccountingLine().getClass().getName());
-        if (fields != null && !fields.isEmpty()) {
-            for (Field field : fields) {
-                setShortLabelsForFields(field, boEntry);
-                setValueForField(field, renderingContext.getAccountingLine());
-                setInquiryUrlForField(field, renderingContext.getAccountingLine());
-            }
-        }
-        
-        MultipleReadOnlyFieldsRenderer renderer = new MultipleReadOnlyFieldsRenderer();
-        renderer.setFields(getFields());
-        renderer.render(pageContext, parentTag);
-        renderer.clear();
-    }
+    public void renderElement(PageContext pageContext, Tag parentTag, AccountingLineRenderingContext renderingContext) throws JspException {  }
     
     /**
      * For each field, set the short label, or, failing that, set the label
@@ -122,11 +99,7 @@ public class AccountingLineViewMultipleReadOnlyFields extends FieldTableJoiningW
      * KRAD Conversion: Customization of the fields - Uses data dictionary
      * 
      */
-    protected void setShortLabelsForFields(Field field, org.kuali.rice.krad.datadictionary.BusinessObjectEntry boEntry) {
-        final AttributeDefinition propertyDefinition = boEntry.getAttributeDefinition(field.getPropertyName());
-        final String label = (propertyDefinition == null) ? "" : (!StringUtils.isBlank(propertyDefinition.getShortLabel()) ? propertyDefinition.getShortLabel() : propertyDefinition.getLabel());
-        field.setFieldLabel(label);
-    }
+    protected void setShortLabelsForFields(Field field, org.kuali.rice.krad.datadictionary.BusinessObjectEntry boEntry) {  }
     
     /**
      * Sets the value for the field before rendering
@@ -135,9 +108,7 @@ public class AccountingLineViewMultipleReadOnlyFields extends FieldTableJoiningW
      * 
      * KRAD Conversion: Setting the property value of the field - No use of data dictionary
      */
-    protected void setValueForField(Field field, AccountingLine accountingLine) {
-        field.setPropertyValue(ObjectUtils.getPropertyValue(accountingLine, field.getPropertyName()));
-    }
+    protected void setValueForField(Field field, AccountingLine accountingLine) {  }
     
     /**
      * Populates the inquiry url on the field if possible
@@ -146,20 +117,11 @@ public class AccountingLineViewMultipleReadOnlyFields extends FieldTableJoiningW
      * 
      * KRAD Conversion: Setting inquiry url for the fields - No use of data dictionary
      */
-    protected void setInquiryUrlForField(Field field, AccountingLine accountingLine) {
-        if (!StringUtils.isBlank(field.getPropertyValue())) {
-            FieldUtils.setInquiryURL(field, accountingLine, field.getPropertyName());
-        }
-    }
+    protected void setInquiryUrlForField(Field field, AccountingLine accountingLine) {  }
     
     /**
      * @return the implementation of the DataDictionaryService
      */
-    protected DataDictionaryService getDataDictionaryService() {
-        if (dataDictionaryService == null) {
-            dataDictionaryService = SpringContext.getBean(DataDictionaryService.class);
-        }
-        return dataDictionaryService;
-    }
+    protected DataDictionaryService getDataDictionaryService() { return null; }
 
 }

@@ -14,4 +14,5 @@ public class ModuleServiceBase implements org.kuali.rice.krad.service.ModuleServ
     public boolean isExternalizable(Class clazz) { return false; }
     public String getExternalizableDataObjectInquiryUrl(Class clazz, java.util.Properties parameters) { return null; }
     public String getExternalizableBusinessObjectLookupUrl(Class clazz, java.util.Properties parameters) { return null; }
+    public org.kuali.rice.krad.bo.ModuleConfiguration getModuleConfiguration() { return null; }
 }

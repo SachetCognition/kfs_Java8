@@ -5,4 +5,5 @@ public interface MaintenanceDocumentRestrictions extends org.kuali.rice.kns.docu
     void addReadOnlySectionId(java.lang.String p0);
     java.util.Set<java.lang.String> getReadOnlySectionIds();
     boolean isReadOnlySectionId(java.lang.String p0);
+    public boolean isHiddenSectionId(java.lang.String arg0);
 }

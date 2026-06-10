@@ -42,4 +42,20 @@ public class ObjectUtils {
     public static void materializeClassForProxiedObject(org.kuali.rice.krad.bo.PersistableBusinessObject bo) {}
     
     public static Object getPropertyValue(Object bo, String propertyName, boolean forceIntrospection) { return null; }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends java.io.Serializable> T deepCopy(T obj) {
+        if (obj == null) return null;
+        try {
+            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(baos);
+            oos.writeObject(obj);
+            oos.close();
+            java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+            java.io.ObjectInputStream ois = new java.io.ObjectInputStream(bais);
+            return (T) ois.readObject();
+        } catch (Exception e) { return obj; }
+    }
+
+    public static Class easyGetPropertyType(Object bo, String propertyName) { return String.class; }
 }

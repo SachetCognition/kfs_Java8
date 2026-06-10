@@ -6,4 +6,6 @@ public abstract class PlatformAwareDaoBaseOjb extends org.springmodules.orm.ojb.
 
     public org.kuali.rice.core.framework.persistence.platform.DatabasePlatform getDbPlatform() { return null; }
     public void setDbPlatform(org.kuali.rice.core.framework.persistence.platform.DatabasePlatform p0) {  }
+
+    public org.springmodules.orm.ojb.PersistenceBrokerTemplate getPersistenceBrokerTemplate() { return new org.springmodules.orm.ojb.PersistenceBrokerTemplate(); }
 }

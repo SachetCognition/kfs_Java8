@@ -15,4 +15,9 @@ public class KualiMultipleValueLookupAction extends org.kuali.rice.kns.web.strut
     public org.apache.struts.action.ActionForward prepareToReturnNone(org.apache.struts.action.ActionMapping p0, org.apache.struts.action.ActionForm p1, javax.servlet.http.HttpServletRequest p2, javax.servlet.http.HttpServletResponse p3) throws java.lang.Exception { return null; }
     public org.apache.struts.action.ActionForward export(org.apache.struts.action.ActionMapping p0, org.apache.struts.action.ActionForm p1, javax.servlet.http.HttpServletRequest p2, javax.servlet.http.HttpServletResponse p3) throws java.lang.Exception { return null; }
     public org.apache.struts.action.ActionForward clearValues(org.apache.struts.action.ActionMapping p0, org.apache.struts.action.ActionForm p1, javax.servlet.http.HttpServletRequest p2, javax.servlet.http.HttpServletResponse p3) throws java.io.IOException, javax.servlet.ServletException { return null; }
+    protected int getMaxRowsPerPage(org.kuali.rice.kns.web.struts.form.LookupForm form) { return 100; }
+    protected java.util.Collection performMultipleValueLookup(org.kuali.rice.kns.web.struts.form.MultipleValueLookupForm form, java.util.List<org.kuali.rice.kns.web.ui.ResultRow> resultTable, int maxRowsPerPage, boolean bounded) { return new java.util.ArrayList(); }
+    protected void prepareToReturnSelectedResultBOs(org.kuali.rice.kns.web.struts.form.MultipleValueLookupForm form) {}
+    protected void prepareToReturnNone(org.kuali.rice.kns.web.struts.form.MultipleValueLookupForm form) {}
+    protected java.util.List<org.kuali.rice.kns.web.ui.ResultRow> selectAll(org.kuali.rice.kns.web.struts.form.MultipleValueLookupForm form, int maxRowsPerPage) { return new java.util.ArrayList<>(); }
 }

@@ -16,4 +16,5 @@ public class AttributeSecurity {
     public void setMask(boolean mask) { this.mask = mask; }
     public boolean isPartialMask() { return partialMask; }
     public void setPartialMask(boolean partialMask) { this.partialMask = partialMask; }
+    public Object getMaskFormatter() { return null; }
 }

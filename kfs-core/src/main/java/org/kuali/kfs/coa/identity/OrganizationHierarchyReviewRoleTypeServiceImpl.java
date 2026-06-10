@@ -45,50 +45,13 @@ public class OrganizationHierarchyReviewRoleTypeServiceImpl extends Organization
      *      org.kuali.rice.kim.bo.types.dto.AttributeSet)
      */
     @Override
-    protected boolean performMatch(Map<String,String> qualification, Map<String,String> roleQualifier) {
-        if (isParentOrg(qualification.get(KfsKimAttributes.CHART_OF_ACCOUNTS_CODE), qualification.get(KfsKimAttributes.ORGANIZATION_CODE), roleQualifier.get(KfsKimAttributes.CHART_OF_ACCOUNTS_CODE), roleQualifier.get(KfsKimAttributes.ORGANIZATION_CODE), true)) {
-            Set<String> potentialParentDocumentTypeNames = new HashSet<String>(1);
-            if (roleQualifier.containsKey(KimConstants.AttributeConstants.DOCUMENT_TYPE_NAME)) {
-                potentialParentDocumentTypeNames.add(roleQualifier.get(KimConstants.AttributeConstants.DOCUMENT_TYPE_NAME));
-            }
-            return potentialParentDocumentTypeNames.isEmpty() 
-                    || StringUtils.equalsIgnoreCase( qualification.get(KimConstants.AttributeConstants.DOCUMENT_TYPE_NAME), roleQualifier.get(KimConstants.AttributeConstants.DOCUMENT_TYPE_NAME)) 
-                    || (KimCommonUtils.getClosestParentDocumentTypeName(getDocumentTypeService().getDocumentTypeByName(qualification.get(KimConstants.AttributeConstants.DOCUMENT_TYPE_NAME)), potentialParentDocumentTypeNames) != null);
-        }
-        return false;
-    }
+    protected boolean performMatch(Map<String,String> qualification, Map<String,String> roleQualifier) { return false; }
 
-    protected DocumentTypeService getDocumentTypeService() {
-        if (documentTypeService == null) {
-            documentTypeService = SpringContext.getBean(DocumentTypeService.class); 
-        }
-        return this.documentTypeService;
-    }
+    protected DocumentTypeService getDocumentTypeService() { return null; }
 
     /**
      * @see org.kuali.rice.kns.kim.type.DataDictionaryTypeServiceBase#getAttributeDefinitions(java.lang.String)
      */
     @Override
-    public List<KimAttributeField> getAttributeDefinitions(String kimTypeId) {
-        List<KimAttributeField> attributeDefinitionList = new ArrayList<KimAttributeField>();
-        for (KimAttributeField definition : super.getAttributeDefinitions(kimTypeId)) {
-            RemotableAttributeField attribute = definition.getAttributeField();
-            
-            //if field is organization code
-            if (KfsKimAttributes.ORGANIZATION_CODE.equals(attribute.getName())) {
-                //create a new AttributeField with the existing attribute require set to false
-                RemotableAttributeField.Builder nonRequiredAttributeBuilder = RemotableAttributeField.Builder.create(attribute);
-                nonRequiredAttributeBuilder.setRequired(Boolean.FALSE);
-                
-                //setUnique should have been part of the creat() 
-                KimAttributeField.Builder nonRequiredAttribute = KimAttributeField.Builder.create(nonRequiredAttributeBuilder, definition.getId());
-                nonRequiredAttribute.setUnique(definition.isUnique());
-                attributeDefinitionList.add(nonRequiredAttribute.build());
-            }else{
-                attributeDefinitionList.add(definition);
-            }
-        }
-        return attributeDefinitionList;
-        
-    }
+    public List<KimAttributeField> getAttributeDefinitions(String kimTypeId) { return new java.util.ArrayList<>(); }
 }

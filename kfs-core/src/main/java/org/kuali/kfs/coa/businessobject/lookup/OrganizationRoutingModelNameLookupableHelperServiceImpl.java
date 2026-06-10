@@ -64,7 +64,7 @@ public class OrganizationRoutingModelNameLookupableHelperServiceImpl extends Kua
      */
     @Override
     public HtmlData getReturnUrl(BusinessObject businessObject, LookupForm lookupForm, List returnKeys, BusinessObjectRestrictions businessObjectRestrictions) {
-        String originalBackLocation = this.backLocation;
+        String originalBackLocation = getBackLocation();
         Properties parameters = getParameters(businessObject, lookupForm.getFieldConversions(), lookupForm.getLookupableImplServiceName(), returnKeys);
         parameters.put(KFSConstants.DISPATCH_REQUEST_PARAMETER, KFSConstants.MAINTENANCE_NEWWITHEXISTING_ACTION);
         parameters.put(KFSConstants.BUSINESS_OBJECT_CLASS_ATTRIBUTE, AccountDelegateGlobal.class.getName());
@@ -80,9 +80,9 @@ public class OrganizationRoutingModelNameLookupableHelperServiceImpl extends Kua
      *
      * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#setFieldConversions(java.util.Map)
      */
-    @Override
+    
     public void setFieldConversions(Map fieldConversions) {
-        super.setFieldConversions(fieldConversions);
+        // super.setFieldConversions(fieldConversions);
         if (fieldConversions == null || fieldConversions.size() == 0) {
             // if we don't have any field conversions, then we must be
             // actually dealing with the model, instead of looking up the model

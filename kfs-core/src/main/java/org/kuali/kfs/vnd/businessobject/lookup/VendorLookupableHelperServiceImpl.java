@@ -99,7 +99,7 @@ public class VendorLookupableHelperServiceImpl extends AbstractLookupableHelperS
      *
      * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#getActionUrlHref(org.kuali.rice.krad.bo.BusinessObject, java.lang.String, java.util.List)
      */
-    @Override
+    
     protected String getActionUrlHref(BusinessObject businessObject, String methodToCall, List pkNames){
         if (!methodToCall.equals(KFSConstants.COPY_METHOD)) {
             Properties parameters = new Properties();
@@ -361,7 +361,7 @@ public class VendorLookupableHelperServiceImpl extends AbstractLookupableHelperS
         this.vendorService = vendorService;
     }
 
-    @Override
+    
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }

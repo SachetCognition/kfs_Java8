@@ -487,4 +487,9 @@ public class VoucherForm extends KualiAccountingDocumentFormBase {
         }
         return valid;
     }
+
+    protected String formatReversalDate(java.sql.Date date) {
+        if (date == null) return "";
+        return new java.text.SimpleDateFormat("MM/dd/yyyy").format(date);
+    }
 }

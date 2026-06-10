@@ -6,4 +6,5 @@ public class TextControlDefinition extends org.kuali.rice.kns.datadictionary.con
 
     public boolean isText() { return false; }
     public java.lang.String toString() { return null; }
+    public Integer getSize() { return null; }
 }

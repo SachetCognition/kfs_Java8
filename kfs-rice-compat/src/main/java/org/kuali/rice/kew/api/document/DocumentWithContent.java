@@ -5,4 +5,5 @@ public class DocumentWithContent extends org.kuali.rice.core.api.mo.AbstractData
     public String getDocumentTypeName() { return null; }
     public String getTitle() { return null; }
     public String getDocumentContent() { return null; }
+    public Document getDocument() { return null; }
 }

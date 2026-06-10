@@ -34,4 +34,11 @@ public class DocumentBase extends org.kuali.rice.krad.bo.PersistableBusinessObje
     public String getApplicationDocumentStatus() { return null; }
     public void setApplicationDocumentStatus(String status) {}
     public void performForceUppercase(Object bo) {}
+    public void addCopyErrorDocumentNote(String errorText) {}
+    public void postProcessSave(org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent event) {}
+    public List generateSaveEvents() { return new ArrayList(); }
+    public String discoverDocumentTypeName() { return null; }
+    public void refreshNonUpdateableReferences() {}
+    public java.util.List getAdHocRoutePersons() { return new java.util.ArrayList(); }
+    public java.util.List getAdHocRouteWorkgroups() { return new java.util.ArrayList(); }
 }

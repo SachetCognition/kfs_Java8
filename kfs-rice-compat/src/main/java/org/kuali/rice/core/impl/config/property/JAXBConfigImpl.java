@@ -2,6 +2,8 @@ package org.kuali.rice.core.impl.config.property;
 
 public class JAXBConfigImpl extends org.kuali.rice.core.framework.config.property.AbstractBaseConfig {
     public JAXBConfigImpl() {}
+    public JAXBConfigImpl(java.util.Properties props) { super(props); }
+    public JAXBConfigImpl(String fileLoc) { super(); }
 
 
     public java.lang.Object getObject(java.lang.String p0) { return null; }
@@ -19,4 +21,5 @@ public class JAXBConfigImpl extends org.kuali.rice.core.framework.config.propert
     public void removeProperty(java.lang.String p0) {  }
     public void putConfig(org.kuali.rice.core.api.config.property.Config p0) {  }
     public java.lang.String toString() { return null; }
+    public JAXBConfigImpl(java.util.List<String> fileLocs) {}
 }

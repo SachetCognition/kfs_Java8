@@ -16,4 +16,11 @@ public interface PersistenceStructureService {
     Map<String, String> getInverseForeignKeysForCollection(Class clazz, String collectionName);
     Map<String, String> getForeignKeysForReference(Class clazz, String referenceName);
     String getTableName(Class clazz);
+    List<String> getPrimaryKeys(Class clazz);
+    boolean hasPrimaryKeyFieldValues(Object obj);
+    Map<String, String> getRelationshipMetadata(Class clazz, String attributeName);
+    Map getReferenceConversionMap(Class clazz);
+
+    Class getBusinessObjectAttributeClass(Class clazz, String attributeName);
+    String getForeignKeyFieldName(Class clazz, String attributeName, String pkFieldName);
 }

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 public class KualiDecimal extends AbstractKualiDecimal<KualiDecimal> implements Comparable<KualiDecimal>, java.io.Serializable {
     public static final KualiDecimal ZERO = new KualiDecimal(0);
+    public static final int SCALE = 2;
+    public static final int ROUND_BEHAVIOR = BigDecimal.ROUND_HALF_UP;
 
     public KualiDecimal() { super(BigDecimal.ZERO); }
     public KualiDecimal(double value) { super(BigDecimal.valueOf(value)); }
@@ -24,7 +26,14 @@ public class KualiDecimal extends AbstractKualiDecimal<KualiDecimal> implements 
     public KualiDecimal multiply(BigDecimal multiplier) {
         return new KualiDecimal(this.value.multiply(multiplier));
     }
+    public KualiDecimal multiply(KualiDecimal multiplier, boolean useHalfUp) {
+        return new KualiDecimal(this.value.multiply(multiplier.value));
+    }
     public KualiDecimal divide(KualiDecimal divisor) {
+        if (divisor == null || divisor.isZero()) throw new ArithmeticException("Cannot divide by zero or null KualiDecimal");
+        return new KualiDecimal(this.value.divide(divisor.value, 2, BigDecimal.ROUND_HALF_UP));
+    }
+    public KualiDecimal divide(KualiDecimal divisor, boolean useHalfUp) {
         if (divisor == null || divisor.isZero()) throw new ArithmeticException("Cannot divide by zero or null KualiDecimal");
         return new KualiDecimal(this.value.divide(divisor.value, 2, BigDecimal.ROUND_HALF_UP));
     }
@@ -60,4 +69,7 @@ public class KualiDecimal extends AbstractKualiDecimal<KualiDecimal> implements 
     }
     public int hashCode() { return value.stripTrailingZeros().hashCode(); }
     public String toString() { return value.toString(); }
+
+    public KualiDecimal kualiDecimalValue() { return this; }
+    public org.kuali.rice.core.api.util.type.KualiInteger kualiIntegerValue() { return new org.kuali.rice.core.api.util.type.KualiInteger((long)this.doubleValue()); }
 }

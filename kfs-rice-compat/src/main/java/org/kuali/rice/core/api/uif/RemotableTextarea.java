@@ -1,9 +1,8 @@
 package org.kuali.rice.core.api.uif;
-public class RemotableTextarea extends org.kuali.rice.core.api.mo.AbstractDataTransferObject {
-    public RemotableTextarea() {}
-    
-    public static class Builder {
+public class RemotableTextarea extends RemotableAbstractControl {
+    public static class Builder extends RemotableAbstractControl.Builder {
         public static Builder create() { return new Builder(); }
-        public RemotableTextarea build() { return new RemotableTextarea(); }
+        public void setRows(Integer rows) {}
+        public void setCols(Integer cols) {}
     }
 }

@@ -25,4 +25,5 @@ public class DocumentType extends org.kuali.rice.core.api.mo.AbstractDataTransfe
     
     public static DocumentType from(org.kuali.rice.kew.doctype.bo.DocumentType dtBo) { return new DocumentType(); }
     public static DocumentType from(org.kuali.rice.kew.doctype.bo.DocumentTypeEBO dtBo) { return new DocumentType(); }
+    public static DocumentType from(DocumentType dt) { return dt != null ? dt : new DocumentType(); }
 }

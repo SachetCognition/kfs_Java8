@@ -8,6 +8,7 @@ public interface WorkflowDocument {
     org.joda.time.DateTime getDateCreated();
     org.joda.time.DateTime getDateLastModified();
     org.joda.time.DateTime getDateFinalized();
+    org.joda.time.DateTime getDateApproved();
     boolean isInitiated();
     boolean isSaved();
     boolean isEnroute();
@@ -33,9 +34,17 @@ public interface WorkflowDocument {
     void superUserBlanketApprove(String annotation);
     void superUserApprove(String annotation);
     java.util.Set<String> getNodeNames();
+    java.util.Set<String> getCurrentNodeNames();
     org.kuali.rice.kew.api.document.DocumentStatus getDocumentStatus();
     String getApplicationDocumentStatus();
     void setApplicationDocumentStatus(String status);
     String getApplicationDocumentId();
     void setApplicationDocumentId(String id);
+    boolean hasDocumentId();
+    java.util.List<org.kuali.rice.kew.api.document.node.RouteNodeInstance> getCurrentRouteNodeInstances();
+    java.util.List<org.kuali.rice.kew.api.action.ActionTaken> getActionsTaken();
+    default boolean isException() { return false; }
+    default void route(String annotation, Object unused) {}
+    default void superUserApproveDocument(org.kuali.rice.krad.document.Document doc, String annotation) {}
+    default void prepareWorkflowDocument(org.kuali.rice.krad.document.Document doc) {}
 }

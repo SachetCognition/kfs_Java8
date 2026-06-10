@@ -33,6 +33,8 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * General PreRules checks for all Maintenance docs that needs to occur while still in the Struts processing.
  */
 public class MaintenancePreRulesBase extends PromptBeforeValidationBase {
+    protected static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(MaintenancePreRulesBase.class);
+
 
     protected ConfigurationService configService;
     protected AccountService accountService;

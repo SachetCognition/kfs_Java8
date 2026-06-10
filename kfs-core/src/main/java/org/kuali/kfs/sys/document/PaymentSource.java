@@ -49,4 +49,5 @@ public interface PaymentSource extends GeneralLedgerPostingDocument, GeneralLedg
      * @return the bank associated with this document
      */
     public abstract Bank getBank();
+    default void refreshReferenceObject(String referenceObjectName) {}
 }

@@ -1,5 +1,6 @@
 package org.apache.ojb.broker.query;
 public class Criteria implements java.io.Serializable {
+    public static final String PARENT_QUERY_PREFIX = "parentQuery.";
     public Criteria() {}
     public void addEqualTo(String attribute, Object value) {}
     public void addNotEqualTo(String attribute, Object value) {}
@@ -17,4 +18,14 @@ public class Criteria implements java.io.Serializable {
     public void addOrderByAscending(String attribute) {}
     public void addOrderByDescending(String attribute) {}
     public void addColumnEqualTo(String col1, String col2) {}
+    public void addNotExists(QueryByCriteria subQuery) {}
+    public void addExists(QueryByCriteria subQuery) {}
+    public void addNotIn(String attribute, java.util.Collection values) {}
+    public void addColumnEqualToField(String column, String field) {}
+    public void addEqualToField(String attribute, String fieldPath) {}
+    public void setEmbraced(boolean embrace) {}
+
+    public void addColumnIsNull(String column) {}
+    public void addColumnNotNull(String column) {}
+    public void addNotLike(String attribute, String value) {}
 }

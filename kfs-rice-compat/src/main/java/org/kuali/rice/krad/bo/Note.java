@@ -19,4 +19,6 @@ public class Note extends PersistableBusinessObjectBase {
     public void setRemoteObjectIdentifier(String id) { this.remoteObjectIdentifier = id; }
     public Attachment getAttachment() { return attachment; }
     public void setAttachment(Attachment attachment) { this.attachment = attachment; }
+    public void setNotePostedTimestampToCurrent() {}
+    public void setNotePostedTimestamp(java.sql.Timestamp ts) {}
 }

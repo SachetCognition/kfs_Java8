@@ -1,6 +1,6 @@
 package org.kuali.rice.kim.api.role;
 import java.util.Map;
-public class RoleMember extends org.kuali.rice.core.api.mo.AbstractDataTransferObject {
+public class RoleMember extends org.kuali.rice.core.api.mo.AbstractDataTransferObject implements RoleMemberContract {
     private String id;
     private String roleId;
     private String memberId;
@@ -61,4 +61,6 @@ public class RoleMember extends org.kuali.rice.core.api.mo.AbstractDataTransferO
         public Builder setAttributes(Map<String, String> attrs) { this.attributes = attrs; return this; }
         public RoleMember build() { return new RoleMember(); }
     }
+
+    public boolean isActive(org.joda.time.DateTime asOfDate) { return true; }
 }

@@ -17,4 +17,9 @@ public class RoleTypeServiceBase extends org.kuali.rice.kns.kim.type.DataDiction
     public boolean doesDelegationQualifierMatchQualification(Map<String, String> qualification, Map<String, String> delegationQualifier) { return false; }
     public boolean dynamicRoleMembership(String namespaceCode, String roleName) { return false; }
     public List<String> getQualifiersForExactMatch() { return new ArrayList<String>(); }
+    public java.util.List<String> getUniqueAttributes(String kimTypeId) { return new java.util.ArrayList<>(); }
+    public java.util.List<String> getWorkflowRoutingAttributes(String routeLevel) { return new java.util.ArrayList<>(); }
+    public String getWorkflowDocumentTypeName() { return null; }
+    protected org.kuali.rice.kns.service.DataDictionaryService getDataDictionaryService() { return null; }
+    protected java.util.List<String> extractErrorsFromGlobalVariablesErrorMap(String attributeName) { return new java.util.ArrayList<>(); }
 }

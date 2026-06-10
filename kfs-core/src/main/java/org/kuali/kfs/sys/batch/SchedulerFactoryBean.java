@@ -40,68 +40,38 @@ public class SchedulerFactoryBean extends org.springframework.scheduling.quartz.
     private Properties quartzPropertiesReference;
 
     @Override
-    public void destroy() throws SchedulerException {
-        if (useQuartzScheduling) {
-            super.destroy();
-        }
-    }
+    public void destroy() throws SchedulerException {  }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        if (useQuartzScheduling) {
-            if (useJdbcJobstore) {
-                quartzPropertiesReference.put("org.quartz.jobStore.useProperties", "false");
-                quartzPropertiesReference.put("org.quartz.jobStore.isClustered", "true");
-                setDataSource((DataSource) ConfigContext.getCurrentContextConfig().getObject(RiceConstants.DATASOURCE_OBJ));
-                setNonTransactionalDataSource((DataSource) ConfigContext.getCurrentContextConfig().getObject(RiceConstants.NON_TRANSACTIONAL_DATASOURCE_OBJ));
-            }
-            setQuartzProperties(quartzPropertiesReference);
-            super.afterPropertiesSet();
-        }
-    }
+    public void afterPropertiesSet() throws Exception {  }
 
     @Override
-    public Scheduler getObject() {
-        if (useQuartzScheduling) {
-            return super.getObject();
-        }
-        return SCHEDULER_DUMMY;
-    }
+    public Scheduler getObject() { return null; }
 
     /**
      * @see org.springframework.scheduling.quartz.SchedulerFactoryBean#createScheduler(org.quartz.SchedulerFactory, java.lang.String)
      */
     @Override
-    protected Scheduler createScheduler(SchedulerFactory schedulerFactory, String schedulerName) throws SchedulerException {
-        Scheduler scheduler = super.createScheduler(schedulerFactory, schedulerName);
-        scheduler.getListenerManager().addJobListener(new MessageServiceExecutorJobListener());
-        return scheduler;
-    }
+    protected Scheduler createScheduler(SchedulerFactory schedulerFactory, String schedulerName) throws SchedulerException { return null; }
 
     /**
      * Sets the useJdbcJobstore attribute value.
      *
      * @param useJdbcJobstore The useJdbcJobstore to set.
      */
-    public void setUseJdbcJobstore(boolean useJdbcJobstore) {
-        this.useJdbcJobstore = useJdbcJobstore;
-    }
+    public void setUseJdbcJobstore(boolean useJdbcJobstore) {  }
 
     /**
      * Sets the useQuartzScheduling attribute value.
      *
      * @param useQuartzScheduling The useQuartzScheduling to set.
      */
-    public void setUseQuartzScheduling(boolean useQuartzScheduling) {
-        this.useQuartzScheduling = useQuartzScheduling;
-    }
+    public void setUseQuartzScheduling(boolean useQuartzScheduling) {  }
 
     /**
      * Sets the quartzPropertiesReference attribute value.
      *
      * @param quartzPropertiesReference The quartzPropertiesReference to set.
      */
-    public void setQuartzPropertiesReference(Properties quartzPropertiesReference) {
-        this.quartzPropertiesReference = quartzPropertiesReference;
-    }
+    public void setQuartzPropertiesReference(Properties quartzPropertiesReference) {  }
 }

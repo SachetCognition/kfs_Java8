@@ -50,7 +50,7 @@ public class AccountDelegateMaintainableImpl extends FinancialSystemMaintainable
      * 
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterRetrieve()
      */
-    @Override
+    
     public void processAfterCopy( MaintenanceDocument document, Map<String,String[]> parameters ) {
         this.setStartDateDefault();
         super.processAfterCopy( document, parameters );
@@ -61,7 +61,7 @@ public class AccountDelegateMaintainableImpl extends FinancialSystemMaintainable
      * 
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterEdit()
      */
-    @Override
+    
     public void processAfterEdit( MaintenanceDocument document, Map<String,String[]> parameters ) {
         this.setStartDateDefault();
         super.processAfterEdit( document, parameters );

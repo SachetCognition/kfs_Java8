@@ -51,6 +51,8 @@ import org.kuali.rice.krad.util.KRADConstants;
  * Calls the access security service to simulate validation for the specified user, attribute, and action
  */
 public class AccessSecuritySimulationLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(AccessSecuritySimulationLookupableHelperServiceImpl.class);
+
     protected AccessSecurityService accessSecurityService;
     protected UniversityDateService universityDateService;
 
@@ -143,7 +145,7 @@ public class AccessSecuritySimulationLookupableHelperServiceImpl extends KualiLo
     /**
      * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#setRows()
      */
-    @Override
+    
     protected void setRows() {
         List<String> lookupFieldAttributeList = new ArrayList<String>();
         if (getParameters().containsKey(SecPropertyConstants.TEMPLATE_ID)) {
@@ -201,7 +203,7 @@ public class AccessSecuritySimulationLookupableHelperServiceImpl extends KualiLo
      * KRAD Conversion: Lookupable performs the customization of columns
      * by  using data dictionary service for attribute properties.
      */
-    @Override
+    
     public List<Column> getColumns() {
         String searchAttributeName = ((String[]) getParameters().get(SecPropertyConstants.ATTRIBUTE_NAME))[0];
 

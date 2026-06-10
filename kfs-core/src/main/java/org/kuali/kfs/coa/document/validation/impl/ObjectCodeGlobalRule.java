@@ -58,6 +58,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class represents the business rules for the maintenance of {@link ObjectCodeGlobal} business objects
  */
 public class ObjectCodeGlobalRule extends MaintenanceDocumentRuleBase {
+    protected transient org.kuali.rice.krad.service.DataDictionaryService ddService;
     protected ObjectCodeGlobal objectCodeGlobal;
     protected ObjectCodeService objectCodeService;
     protected ObjectLevelService objectLevelService;
@@ -124,7 +125,7 @@ public class ObjectCodeGlobalRule extends MaintenanceDocumentRuleBase {
     }
 
 
-    @Override
+    
     protected boolean processInactivationBlockChecking(MaintenanceDocument maintenanceDocument) {
         boolean success = true;
         if (!objectCodeGlobal.isFinancialObjectActiveIndicator()) {
@@ -327,7 +328,7 @@ public class ObjectCodeGlobalRule extends MaintenanceDocumentRuleBase {
                 GlobalVariables.getMessageMap().putError("chartOfAccountsCode", KFSKeyConstants.ERROR_REQUIRED, "Chart of Accounts Code");
                 success &= false;
             }
-            if (!checkEmptyValue(detail.getUniversityFiscalYear())) {
+            if (!checkEmptyValue(String.valueOf(detail.getUniversityFiscalYear()))) {
                 // put an error about fiscal year
                 GlobalVariables.getMessageMap().putError("universityFiscalYear", KFSKeyConstants.ERROR_REQUIRED, "University Fiscal Year");
                 success &= false;
@@ -720,4 +721,5 @@ public class ObjectCodeGlobalRule extends MaintenanceDocumentRuleBase {
         this.objectLevelService = objectLevelService;
 
     }
+    protected org.kuali.rice.krad.service.DictionaryValidationService getDictionaryValidationService() { return null; }
 }

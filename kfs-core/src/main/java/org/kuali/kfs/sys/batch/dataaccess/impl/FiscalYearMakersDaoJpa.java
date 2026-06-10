@@ -314,4 +314,5 @@ public class FiscalYearMakersDaoJpa extends PlatformAwareDaoBaseOjb implements F
         }
         return keyString.toString();
     }
+    protected org.apache.ojb.broker.PersistenceBroker getPersistenceBroker(boolean b) { return null; }
 }

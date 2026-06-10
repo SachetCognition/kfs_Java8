@@ -265,5 +265,5 @@ public class AccountDelegateGlobalDetail extends GlobalBusinessObjectDetailBase 
         return ObjectUtil.generateHashCode(this, Arrays.asList(KFSPropertyConstants.DOCUMENT_NUMBER,"financialDocumentTypeCode", "accountDelegatePrimaryRoutingIndicator", "accountDelegateUniversalId" ));
     }
 
+    public void setNewCollectionRecord(boolean arg0) {  }
 }
-

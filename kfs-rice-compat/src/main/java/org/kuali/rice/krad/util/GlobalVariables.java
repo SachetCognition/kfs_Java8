@@ -10,4 +10,5 @@ public class GlobalVariables {
     public static org.kuali.rice.krad.UserSession getUserSession() { return userSession.get(); }
     public static void setUserSession(org.kuali.rice.krad.UserSession session) { userSession.set(session); }
     public static void clear() { messageMap.remove(); userSession.remove(); }
+    public static Object mergeErrorMap(org.kuali.rice.krad.util.MessageMap arg0) { return null; }
 }

@@ -9,4 +9,5 @@ public class ClassDescriptor implements java.io.Serializable {
     public FieldDescriptor getAutoIncrementField() { return null; }
     public FieldDescriptor[] getPkFields() { return new FieldDescriptor[0]; }
     public String getFullTableName() { return null; }
+    public ObjectReferenceDescriptor getObjectReferenceDescriptorByName(String name) { return null; }
 }

@@ -157,4 +157,5 @@ public class DataMappingFieldDefinition extends TransientBusinessObjectBase {
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         return new LinkedHashMap();
     }
+    public Object getRegexPattern() { return null; }
 }

@@ -112,7 +112,7 @@ public class BusinessObjectReportHelper {
      * @return
      */
     protected Class<? extends Formatter> retrievePropertyFormatterClass(Class<? extends BusinessObject> businessObjectClass, String propertyName) {
-        return dataDictionaryService.getAttributeFormatter(businessObjectClass, propertyName);
+        return (Class<? extends Formatter>) dataDictionaryService.getAttributeFormatter(businessObjectClass, propertyName);
     }
 
     /**
@@ -592,4 +592,6 @@ public class BusinessObjectReportHelper {
     public void setColumnSpanDefinition(Map<String, Integer> columnSpanDefinition) {
         this.columnSpanDefinition = columnSpanDefinition;
     }
+    protected Object getDataObjectMetaDataService() { return null; }
+    protected String getTitleAttribute(Class clazz) { return null; }
 }

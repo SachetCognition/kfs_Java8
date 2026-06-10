@@ -65,45 +65,7 @@ public class DataDictionaryRemoteFieldBuilder {
      * @see org.kuali.rice.krad.service.DataDictionaryRemoteFieldService#buildRemotableFieldFromAttributeDefinition(java.lang.String,
      *      java.lang.String)
      */
-    public RemotableAttributeField buildRemotableFieldFromAttributeDefinition(String componentClassName, String attributeName) {
-        AttributeDefinition baseDefinition;
-        Class<?> componentClass;
-        // try to resolve the component name - if not possible - try to pull the definition from the app mediation service
-        try {
-            componentClass = (Class<? extends BusinessObject>) Class.forName(componentClassName);
-            baseDefinition = getDataDictionaryService().getDataDictionary().getDictionaryObjectEntry(componentClassName).getAttributeDefinition(attributeName);
-        }
-        catch (ClassNotFoundException ex) {
-            throw new RiceRuntimeException("Unable to find attribute definition for attribute : " + attributeName);
-        }
-
-        RemotableAttributeField.Builder definition = RemotableAttributeField.Builder.create(baseDefinition.getName());
-
-        definition.setLongLabel(baseDefinition.getLabel());
-        definition.setShortLabel(baseDefinition.getShortLabel());
-        definition.setMaxLength(baseDefinition.getMaxLength());
-        definition.setRequired(baseDefinition.isRequired());
-        definition.setForceUpperCase(baseDefinition.getForceUppercase());
-        // set the datatype - needed for successful custom doc searches
-        WorkflowAttributePropertyResolutionService propertyResolutionService = KRADServiceLocatorInternal.getWorkflowAttributePropertyResolutionService();
-        String dataType = propertyResolutionService.determineFieldDataType((Class<? extends BusinessObject>) componentClass, attributeName);
-        definition.setDataType(DataType.valueOf(dataType.toUpperCase()));
-        RemotableAbstractControl.Builder control = createControl(baseDefinition);
-        if (control != null) {
-            definition.setControl(control);
-        }
-
-        try {
-            RemotableQuickFinder.Builder qf = createQuickFinder(componentClass, attributeName);
-            if (qf != null) {
-                definition.setWidgets(Collections.<RemotableAbstractWidget.Builder> singletonList(qf));
-            }
-        } catch ( Exception ex ) {
-            LOG.warn(ex);
-        }
-
-        return definition.build();
-    }
+    public RemotableAttributeField buildRemotableFieldFromAttributeDefinition(String componentClassName, String attributeName) { return null; }
 
     /**
      * Creates a {@link RemotableAbstractControl} instance based on the control definition within the given attribute definition
@@ -111,54 +73,7 @@ public class DataDictionaryRemoteFieldBuilder {
      * @param attr - attribute definition instance to pull control from
      * @return RemotableAbstractControl instance or null if one could not be built
      */
-    protected RemotableAbstractControl.Builder createControl(AttributeDefinition attr) {
-        ControlDefinition control = attr.getControl();
-
-        if (control != null) {
-            if (control instanceof CheckboxControlDefinition) {
-                return RemotableCheckbox.Builder.create();
-            }
-            // else if (control instanceof CheckboxGroupControl) {
-            // return RemotableCheckboxGroup.Builder.create(getValues(attr));
-            // }
-            else if (control instanceof HiddenControlDefinition) {
-                return RemotableHiddenInput.Builder.create();
-            }
-            else if (control instanceof SelectControlDefinition) {
-                RemotableSelect.Builder b = RemotableSelect.Builder.create(getValues(attr));
-                b.setMultiple(((SelectControlDefinition) control).isMultiselect());
-                b.setSize(((SelectControlDefinition) control).getSize());
-            }
-            else if (control instanceof RadioControlDefinition) {
-                return RemotableRadioButtonGroup.Builder.create(getValues(attr));
-            }
-            else if (control instanceof TextControlDefinition) {
-                final RemotableTextInput.Builder b = RemotableTextInput.Builder.create();
-                b.setSize(((TextControlDefinition) control).getSize());
-                return b;
-            }
-
-            // else if (control instanceof UserControl) {
-            // final RemotableTextInput.Builder b = RemotableTextInput.Builder.create();
-            // b.setSize(((UserControl) control).getSize());
-            // return b;
-            // }
-            // else if (control instanceof GroupControl) {
-            // final RemotableTextInput.Builder b = RemotableTextInput.Builder.create();
-            // b.setSize(((GroupControl) control).getSize());
-            // return b;
-            // }
-
-            else if (control instanceof TextareaControlDefinition) {
-                final RemotableTextarea.Builder b = RemotableTextarea.Builder.create();
-                b.setCols(((TextareaControlDefinition) control).getCols());
-                b.setRows(((TextareaControlDefinition) control).getRows());
-                return b;
-            }
-        }
-
-        return null;
-    }
+    protected RemotableAbstractControl.Builder createControl(AttributeDefinition attr) { return null; }
 
     /**
      * Will first try to retrieve options configured on the control. If that doesn't return any values then will try to use the
@@ -167,27 +82,7 @@ public class DataDictionaryRemoteFieldBuilder {
      * @param attr - AttributeDefinition
      * @return Map of key value pairs
      */
-    protected Map<String, String> getValues(AttributeDefinition attr) {
-        ControlDefinition control = attr.getControl();
-
-        if (MultivalueControlDefinitionBase.class.isAssignableFrom(control.getClass())) {
-            String valuesFinderClass = ((MultivalueControlDefinitionBase) control).getValuesFinderClass();
-            KeyValuesFinder finder;
-            try {
-                finder = (KeyValuesFinder) Class.forName(valuesFinderClass).newInstance();
-            }
-            catch (Exception ex) {
-                throw new RuntimeException("", ex);
-            }
-            Map<String, String> options = finder.getKeyLabelMap();
-            return options;
-        }
-        else if (attr.getOptionsFinder() != null) {
-            return attr.getOptionsFinder().getKeyLabelMap();
-        }
-
-        return Collections.emptyMap();
-    }
+    protected Map<String, String> getValues(AttributeDefinition attr) { return new java.util.HashMap<>(); }
 
     /**
      * Builds a {@link RemotableQuickFinder} instance for the given attribute based on determined relationships
@@ -202,81 +97,19 @@ public class DataDictionaryRemoteFieldBuilder {
      * @param attributeName - name of the attribute to determine quickfinder for
      * @return RemotableQuickFinder.Builder instance for the configured lookup, or null if one could not be found
      */
-    protected RemotableQuickFinder.Builder createQuickFinder(Class<?> componentClass, String attributeName) {
-        Object sampleComponent;
-        try {
-            sampleComponent = componentClass.newInstance();
-        }
-        catch (InstantiationException e) {
-            throw new RiceRuntimeException(e);
-        }
-        catch (IllegalAccessException e) {
-            throw new RiceRuntimeException(e);
-        }
+    protected RemotableQuickFinder.Builder createQuickFinder(Class<?> componentClass, String attributeName) { return null; }
 
-        String lookupClassName = null;
-        Map<String, String> fieldConversions = new HashMap<String, String>();
-        Map<String, String> lookupParameters = new HashMap<String, String>();
+    protected DataDictionaryService getDataDictionaryService() { return null; }
 
-        DataObjectRelationship relationship = getDataObjectMetaDataService().getDataObjectRelationship(sampleComponent, componentClass, attributeName, "", true, true, false);
-        if (relationship != null) {
-            lookupClassName = relationship.getRelatedClass().getName();
+    protected DataObjectMetaDataService getDataObjectMetaDataService() { return null; }
 
-            for (Map.Entry<String, String> entry : relationship.getParentToChildReferences().entrySet()) {
-                String fromField = entry.getValue();
-                String toField = entry.getKey();
-                fieldConversions.put(fromField, toField);
-            }
-
-            for (Map.Entry<String, String> entry : relationship.getParentToChildReferences().entrySet()) {
-                String fromField = entry.getKey();
-                String toField = entry.getValue();
-
-                if (relationship.getUserVisibleIdentifierKey() == null || relationship.getUserVisibleIdentifierKey().equals(fromField)) {
-                    lookupParameters.put(fromField, toField);
-                }
-            }
-        }
-        else {
-            Map foreignKeysForReference = KRADServiceLocator.getPersistenceStructureService().getForeignKeysForReference(componentClass, attributeName);
-            // check for title attribute and if match build lookup to component class using pk fields
-            String titleAttribute = getDataObjectMetaDataService().getTitleAttribute(componentClass);
-            if (StringUtils.equals(titleAttribute, attributeName)) {
-                lookupClassName = componentClass.getName();
-
-                List<String> pkAttributes = getDataObjectMetaDataService().listPrimaryKeyFieldNames(componentClass);
-                for (String pkAttribute : pkAttributes) {
-                    fieldConversions.put(pkAttribute, pkAttribute);
-                    if (!StringUtils.equals(pkAttribute, attributeName)) {
-                        lookupParameters.put(pkAttribute, pkAttribute);
-                    }
-                }
-            }
-        }
-
-        if (StringUtils.isNotBlank(lookupClassName)) {
-            String baseUrl = getKualiConfigurationService().getPropertyValueAsString(KRADConstants.KRAD_LOOKUP_URL_KEY);
-            RemotableQuickFinder.Builder builder = RemotableQuickFinder.Builder.create(baseUrl, lookupClassName);
-            builder.setLookupParameters(lookupParameters);
-            builder.setFieldConversions(fieldConversions);
-
-            return builder;
-        }
-
-        return null;
-    }
-
-    protected DataDictionaryService getDataDictionaryService() {
-        return KRADServiceLocatorWeb.getDataDictionaryService();
-    }
-
-    protected DataObjectMetaDataService getDataObjectMetaDataService() {
-        return KRADServiceLocatorWeb.getDataObjectMetaDataService();
-    }
-
-    protected ConfigurationService getKualiConfigurationService() {
-        return KRADServiceLocator.getKualiConfigurationService();
-    }
+    protected ConfigurationService getKualiConfigurationService() { return null; }
 
 
+    public void setForceUpperCase(java.lang.Boolean arg0) {  }
+    public java.util.Map getKeyLabelMap() { return new java.util.HashMap<>(); }
+    public void setMultiple(boolean arg0) {  }
+    public void setSize(java.lang.Integer arg0) {  }
+    public void setCols(java.lang.Integer arg0) {  }
+    public void setRows(java.lang.Integer arg0) {  }
 }

@@ -5,5 +5,6 @@ import org.kuali.rice.core.api.util.KeyValue;
 
 public interface KeyValuesFinder {
     List<KeyValue> getKeyValues();
-    String getKeyLabel(String key);
+    default String getKeyLabel(String key) { return null; }
+    default java.util.Map getKeyLabelMap() { return new java.util.HashMap(); }
 }

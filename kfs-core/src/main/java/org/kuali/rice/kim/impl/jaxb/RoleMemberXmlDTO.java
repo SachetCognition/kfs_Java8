@@ -111,7 +111,7 @@ public abstract class RoleMemberXmlDTO implements Serializable {
         if (roleMember == null) {
             throw new IllegalArgumentException("roleMember cannot be null");
         }
-        this.memberType = roleMember.getType();
+        this.memberType = roleMember.getType() != null ? org.kuali.rice.core.api.membership.MemberType.fromCode(roleMember.getType()) : null;
         this.activeFromDate = roleMember.getActiveFromDate();
         this.activeToDate = roleMember.getActiveToDate();
         this.qualifications = (roleMember.getAttributes() != null) ? roleMember.getAttributes() : new HashMap<String, String>();

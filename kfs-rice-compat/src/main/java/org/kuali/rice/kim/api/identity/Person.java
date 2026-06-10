@@ -1,4 +1,6 @@
 package org.kuali.rice.kim.api.identity;
+import java.util.Map;
+import java.util.List;
 public interface Person {
     String getPrincipalId();
     String getPrincipalName();
@@ -13,4 +15,16 @@ public interface Person {
     boolean isActive();
     String getCampusCode();
     String getExternalIdentifier(String externalIdentifierTypeCode);
+    Map<String, String> getExternalIdentifiers();
+    String getAddressLine1();
+    String getAddressLine1Unmasked();
+    String getAddressLine2Unmasked();
+    String getAddressCity();
+    String getAddressCityUnmasked();
+    String getAddressStateProvinceCode();
+    String getAddressStateProvinceCodeUnmasked();
+    String getAddressPostalCodeUnmasked();
+    String getAddressCountryCode();
+    String getAddressCountryCodeUnmasked();
+    String getPrimaryDepartmentCode();
 }

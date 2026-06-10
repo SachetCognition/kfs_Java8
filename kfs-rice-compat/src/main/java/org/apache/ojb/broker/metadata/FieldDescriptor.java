@@ -8,4 +8,5 @@ public class FieldDescriptor implements java.io.Serializable {
     public int getColumnJdbcType() { return 0; }
     public String getColumnType() { return null; }
     public boolean isAutoIncrement() { return false; }
+    public Object getFieldConversion() { return null; }
 }

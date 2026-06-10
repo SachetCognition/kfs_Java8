@@ -8,4 +8,6 @@ public class RiceKeyConstants {
     public static final String ERROR_INACTIVE = "error.inactive";
     
     private RiceKeyConstants() {}
+    public static final String ERROR_DELEGATION_FROM_AMOUNT_LESSER = "error.delegation.from.amount.lesser";
+    public static final String ERROR_DELEGATION_TO_AMOUNT_GREATER = "error.delegation.to.amount.greater";
 }

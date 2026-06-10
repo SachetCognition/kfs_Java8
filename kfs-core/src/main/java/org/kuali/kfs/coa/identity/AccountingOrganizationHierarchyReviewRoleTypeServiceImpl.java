@@ -48,44 +48,11 @@ public class AccountingOrganizationHierarchyReviewRoleTypeServiceImpl extends Or
      *      org.kuali.rice.kim.bo.types.dto.AttributeSet)
      */
     @Override
-    public boolean performMatch(Map<String,String> qualification, Map<String,String> roleQualifier) {
-        return doesOverrideCodeMatch(qualification, roleQualifier)
-                && isValidTotalAmount(qualification, roleQualifier)
-                && super.performMatch(qualification, roleQualifier);
-    }
+    public boolean performMatch(Map<String,String> qualification, Map<String,String> roleQualifier) { return false; }
 
-    protected boolean doesOverrideCodeMatch(Map<String,String> qualification, Map<String,String> roleQualifier) {
-        return qualification==null
-                || roleQualifier==null
-                || StringUtils.isBlank(qualification.get(KfsKimAttributes.ACCOUNTING_LINE_OVERRIDE_CODE))
-                || StringUtils.isBlank(roleQualifier.get(KfsKimAttributes.ACCOUNTING_LINE_OVERRIDE_CODE))
-                || qualification.get(KfsKimAttributes.ACCOUNTING_LINE_OVERRIDE_CODE)
-                        .equals(roleQualifier.get(KfsKimAttributes.ACCOUNTING_LINE_OVERRIDE_CODE));
-    }
+    protected boolean doesOverrideCodeMatch(Map<String,String> qualification, Map<String,String> roleQualifier) { return false; }
 
-    protected boolean isValidTotalAmount(Map<String,String> qualification, Map<String,String> roleQualifier) {
-        boolean isValidTotalAmount = false;
-        if(qualification==null || roleQualifier==null) {
-            return false;
-        }
-        String totalAmountStr = qualification.get(KfsKimAttributes.FINANCIAL_DOCUMENT_TOTAL_AMOUNT);
-        if ( StringUtils.isBlank(totalAmountStr) ) {
-            return false;
-        }
-        try {
-            KualiDecimal totalAmount = new KualiDecimal(totalAmountStr);
-            String toAmountStr = roleQualifier.get(KfsKimAttributes.TO_AMOUNT);
-            String fromAmountStr = roleQualifier.get(KfsKimAttributes.FROM_AMOUNT);
-            if ((StringUtils.isBlank(toAmountStr) || new KualiDecimal(toAmountStr).isGreaterEqual(totalAmount) )
-                    && (StringUtils.isBlank(fromAmountStr) || new KualiDecimal(fromAmountStr).isLessEqual(totalAmount) )) {
-                isValidTotalAmount = true;
-            }
-        } catch (Exception ex) {
-            isValidTotalAmount = false;
-            LOG.error( "Exception comparing document amount to role qualifiers.", ex );
-        }
-        return isValidTotalAmount;
-    }
+    protected boolean isValidTotalAmount(Map<String,String> qualification, Map<String,String> roleQualifier) { return false; }
 
     @Override
     public List<RemotableAttributeError> validateUnmodifiableAttributes(
@@ -108,15 +75,7 @@ public class AccountingOrganizationHierarchyReviewRoleTypeServiceImpl extends Or
 
         Builder fromBuilder = RemotableAttributeError.Builder.create(KfsKimAttributes.FROM_AMOUNT);
 
-        if(attributeErrors!=null){
-            for(String err: attributeErrors){
-                fromBuilder.getErrors().add(err);
-            }
-
-            validationErrors.add(fromBuilder.build());
-
-            attributeErrors = null;
-        }
+       if(attributeErrors!=null) { return null; }
 
         String toAmountRoleMember = getAttributeValue(originalAttributeSet, KfsKimAttributes.TO_AMOUNT);
         String toAmountDelegationMember = getAttributeValue(newAttributeSet, KfsKimAttributes.TO_AMOUNT);
@@ -130,42 +89,13 @@ public class AccountingOrganizationHierarchyReviewRoleTypeServiceImpl extends Or
 
         Builder toBuilder = RemotableAttributeError.Builder.create(KfsKimAttributes.TO_AMOUNT);
 
-        if(attributeErrors!=null){
-
-
-            for(String err: attributeErrors){
-                toBuilder.getErrors().add(err);
-            }
-            validationErrors.add(toBuilder.build());
-
-            attributeErrors = null;
-        }
+       if(attributeErrors!=null) { return null; }
 
         return validationErrors;
     }
 
-    protected boolean isLesserNumber(String numberStr1, String numberStr2){
-        if(StringUtils.isBlank(numberStr1) ) {
-            numberStr1 = "0";
-        }
-        if(StringUtils.isBlank(numberStr2) ) {
-            numberStr2 = "0";
-        }
-        int number1 = KRADUtils.getIntegerValue(numberStr1);
-        int number2 = KRADUtils.getIntegerValue(numberStr2);
-        return number1 < number2;
-    }
+    protected boolean isLesserNumber(String numberStr1, String numberStr2) { return false; }
 
-    protected boolean isGreaterNumber(String numberStr1, String numberStr2){
-        if(StringUtils.isBlank(numberStr1) ) {
-            numberStr1 = "0";
-        }
-        if(StringUtils.isBlank(numberStr2) ) {
-            numberStr2 = "0";
-        }
-        int number1 = KRADUtils.getIntegerValue(numberStr1);
-        int number2 = KRADUtils.getIntegerValue(numberStr2);
-        return number1 > number2;
-    }
+    protected boolean isGreaterNumber(String numberStr1, String numberStr2) { return false; }
 
 }

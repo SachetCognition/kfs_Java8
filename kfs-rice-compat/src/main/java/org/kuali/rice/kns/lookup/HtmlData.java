@@ -36,6 +36,7 @@ public class HtmlData implements java.io.Serializable {
         public void setTarget(String target) { this.target = target; }
         public String getOnclick() { return onclick; }
         public void setOnclick(String onclick) { this.onclick = onclick; }
+        public void setPrependDisplayText(String text) {}
     }
     
     public static class InputHtmlData extends HtmlData {

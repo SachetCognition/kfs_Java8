@@ -18,4 +18,9 @@ public interface DateTimeService {
     Date convertToDateTime(String dateString) throws java.text.ParseException;
     int dateDiff(Date startDate, Date endDate, boolean resetTime);
     String toDateStringForFilename(Date date);
+
+    String toDateTimeStringForFilename(java.util.Date date);
+
+    java.sql.Date convertToSqlDate(java.sql.Timestamp timestamp) throws java.text.ParseException;
+    java.sql.Date getCurrentSqlDateMidnight();
 }

@@ -13,4 +13,5 @@ public interface MaintenanceDocumentDictionaryService {
     boolean getAllowsNewOrCopy(String docTypeName);
     boolean getAllowsRecordDeletion(Class businessObjectClass);
     boolean getAllowsRecordDeletion(Class maintenanceDocumentClass, String collectionName);
+    String getCollectionFieldDefaultValue(String docType, String collectionName, String fieldName);
 }

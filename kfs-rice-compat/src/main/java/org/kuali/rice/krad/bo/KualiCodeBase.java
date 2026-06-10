@@ -11,4 +11,5 @@ public class KualiCodeBase extends PersistableBusinessObjectBase implements Kual
     public void setName(String name) { this.name = name; }
     public boolean isActive() { return active; }
     public void setActive(boolean active) { this.active = active; }
+    public String getCodeAndDescription() { return code + " - " + name; }
 }

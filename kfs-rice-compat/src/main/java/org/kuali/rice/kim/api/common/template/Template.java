@@ -1,15 +1,20 @@
 package org.kuali.rice.kim.api.common.template;
+public class Template {
+    private String namespaceCode;
+    private String name;
+    private String id;
+    public String getNamespaceCode() { return namespaceCode; }
+    public String getName() { return name; }
+    public String getId() { return id; }
+    public void setNamespaceCode(String ns) { this.namespaceCode = ns; }
+    public void setName(String name) { this.name = name; }
+    public void setId(String id) { this.id = id; }
 
-public class Template extends org.kuali.rice.core.api.mo.AbstractDataTransferObject implements org.kuali.rice.kim.api.common.template.TemplateContract {
-    public Template() {}
-
-
-    public java.lang.String getId() { return null; }
-    public java.lang.String getNamespaceCode() { return null; }
-    public java.lang.String getName() { return null; }
-    public java.lang.String getDescription() { return null; }
-    public java.lang.String getKimTypeId() { return null; }
-    public boolean isActive() { return false; }
-    public java.lang.Long getVersionNumber() { return null; }
-    public java.lang.String getObjectId() { return null; }
+    public static class Builder {
+        public static Builder create() { return new Builder(); }
+        public void setId(String id) {}
+        public void setNamespaceCode(String ns) {}
+        public void setName(String name) {}
+        public Template build() { return new Template(); }
+    }
 }

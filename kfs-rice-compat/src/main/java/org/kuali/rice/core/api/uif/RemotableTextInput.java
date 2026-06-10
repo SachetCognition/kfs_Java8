@@ -1,9 +1,10 @@
 package org.kuali.rice.core.api.uif;
-public class RemotableTextInput extends org.kuali.rice.core.api.mo.AbstractDataTransferObject {
-    public RemotableTextInput() {}
-    
-    public static class Builder {
+public class RemotableTextInput extends RemotableAbstractControl {
+    public static class Builder extends RemotableAbstractControl.Builder {
+        private int size;
+        private Builder() {}
         public static Builder create() { return new Builder(); }
-        public RemotableTextInput build() { return new RemotableTextInput(); }
+        public void setSize(int size) { this.size = size; }
+        public int getSize() { return size; }
     }
 }

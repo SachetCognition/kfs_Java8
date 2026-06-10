@@ -280,7 +280,7 @@ public class SecurityModelMaintainableImpl extends AbstractSecurityModuleMaintai
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterCopy(org.kuali.rice.kns.document.MaintenanceDocument,
      *      java.util.Map)
      */
-    @Override
+    
     public void processAfterCopy(MaintenanceDocument document, Map<String, String[]> parameters) {
         SecurityModel securityModel = (SecurityModel) document.getNewMaintainableObject().getBusinessObject();
         securityModel.setRoleId("");

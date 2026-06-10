@@ -5,6 +5,11 @@ public class QueryByCriteria {
     public static class Builder {
         public Builder() {}
         public static Builder create() { return new Builder(); }
+        public static Builder fromPredicates(Predicate... predicates) {
+            Builder b = new Builder();
+            b.setPredicates(predicates);
+            return b;
+        }
         public Builder setPredicates(Predicate... predicates) { return this; }
         public QueryByCriteria build() { return new QueryByCriteria(); }
     }

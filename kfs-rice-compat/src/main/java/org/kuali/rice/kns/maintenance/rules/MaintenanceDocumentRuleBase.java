@@ -4,6 +4,9 @@ import org.kuali.rice.kns.document.MaintenanceDocument;
 import org.kuali.rice.krad.bo.PersistableBusinessObject;
 
 public class MaintenanceDocumentRuleBase {
+    protected static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(MaintenanceDocumentRuleBase.class);
+    protected static final String MAINTAINABLE_ERROR_PREFIX = "document.newMaintainableObject.";
+    protected static final String MAINTAINABLE_ERROR_PATH = "document.newMaintainableObject";
     protected org.kuali.rice.krad.bo.PersistableBusinessObject oldBo;
     protected org.kuali.rice.krad.bo.PersistableBusinessObject newBo;
     
@@ -50,4 +53,7 @@ public class MaintenanceDocumentRuleBase {
     
     protected org.kuali.rice.kns.service.BusinessObjectDictionaryService getBoService() { return null; }
     protected org.kuali.rice.krad.service.BusinessObjectService getBusinessObjectService() { return null; }
+    protected org.kuali.rice.kns.service.DocumentHelperService getDocumentHelperService() { return null; }
+    protected boolean isCorrectMaintenanceClass(org.kuali.rice.kns.document.MaintenanceDocument doc, Class clazz) { return true; }
+    protected Object getDictionaryValidationService() { return null; }
 }

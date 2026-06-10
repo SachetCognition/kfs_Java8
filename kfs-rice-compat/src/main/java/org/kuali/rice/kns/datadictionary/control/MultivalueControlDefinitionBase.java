@@ -5,4 +5,5 @@ public abstract class MultivalueControlDefinitionBase extends org.kuali.rice.kns
 
 
     public void completeValidation(java.lang.Class p0, java.lang.Class p1) {  }
+    public String getValuesFinderClass() { return null; }
 }

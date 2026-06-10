@@ -10,4 +10,6 @@ public class Row implements java.io.Serializable {
     public void setHidden(boolean p0) {  }
     public org.kuali.rice.kns.web.ui.Field getField(int p0) { return null; }
     public java.lang.String toString() { return null; }
+    public Row(java.util.List<Field> fields) {}
+    public Row(java.util.List<Field> fields, boolean hidden) {}
 }

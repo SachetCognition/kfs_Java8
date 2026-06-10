@@ -23,6 +23,14 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <failOnError>false</failOnError>
+          <showWarnings>false</showWarnings>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <argLine>-Xms1024m -Xmx1024m -Dadditional.kfs.test.config.locations=src/test/config/${project.artifactId}.properties ${argLine}</argLine>

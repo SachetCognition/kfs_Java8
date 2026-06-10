@@ -54,7 +54,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 public class AccountDelegateGlobalMaintainableImpl extends FinancialSystemGlobalMaintainable {
     private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDelegateGlobalMaintainableImpl.class);
 
-    @Override
+    
     /**
      * show the max account delegates info message
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#processAfterNew(org.kuali.rice.kns.document.MaintenanceDocument, java.util.Map)
@@ -80,7 +80,7 @@ public class AccountDelegateGlobalMaintainableImpl extends FinancialSystemGlobal
      * 
      * @see org.kuali.rice.kns.maintenance.KualiMaintainableImpl#setupNewFromExisting()
      */
-    @Override
+    
     public void setupNewFromExisting( MaintenanceDocument document, Map<String,String[]> parameters ) {
         super.setupNewFromExisting( document, parameters );
 

@@ -13,4 +13,7 @@ public class KRADServiceLocatorWeb {
     public static MaintenanceDocumentDictionaryService getMaintenanceDocumentDictionaryService() { return null; }
     public static org.kuali.rice.krad.datadictionary.DataDictionary getDataDictionary() { return null; }
     public static org.kuali.rice.krad.service.DocumentSerializerService getDocumentSerializerService() { return null; }
+    public static Object getWorkflowAttributePropertyResolutionService() { return null; }
+    public static DataObjectMetaDataService getDataObjectMetaDataService() { return null; }
+    public static KualiModuleService getKualiModuleService() { return null; }
 }

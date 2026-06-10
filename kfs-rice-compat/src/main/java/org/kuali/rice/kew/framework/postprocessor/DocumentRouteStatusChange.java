@@ -12,4 +12,5 @@ public class DocumentRouteStatusChange {
     public String getDocumentId() { return documentId; }
     public String getOldRouteStatus() { return oldRouteStatus; }
     public String getNewRouteStatus() { return newRouteStatus; }
+    public String getDocumentEventCode() { return newRouteStatus; }
 }

@@ -10,4 +10,6 @@ public class FormatException extends java.lang.RuntimeException {
     public void setFormatValue(java.lang.Object p0) {  }
     public java.lang.String getErrorKey() { return null; }
     public java.lang.String[] getErrorArgs() { return null; }
+    public FormatException(String message) { super(message); }
+    public FormatException(String message, Throwable cause) { super(message); }
 }

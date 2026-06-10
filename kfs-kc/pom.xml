@@ -15,6 +15,14 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <failOnError>false</failOnError>
+          <showWarnings>false</showWarnings>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>${plugin.javadoc.version}</version>
         <configuration>

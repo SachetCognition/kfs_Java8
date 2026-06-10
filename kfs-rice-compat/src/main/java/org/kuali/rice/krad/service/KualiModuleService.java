@@ -8,4 +8,5 @@ public interface KualiModuleService {
     ModuleService getResponsibleModuleServiceForJob(String jobName);
     void setInstalledModuleServices(List<ModuleService> moduleServices);
     boolean isModuleServiceInstalled(String namespaceCode);
+    String getNamespaceCode(Class<?> boClass);
 }

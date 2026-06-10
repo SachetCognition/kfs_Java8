@@ -33,26 +33,19 @@ public class AttributedAddNoteEvent extends AttributedDocumentEventBase {
      * @param document
      * @param errorPathPrefix
      */
-    public AttributedAddNoteEvent(String errorPathPrefix, Document document, Note note) {
-        super("creating add note event for document " + getDocumentId(document), errorPathPrefix, document);
-        this.note = note;
-    }
+    public AttributedAddNoteEvent(String errorPathPrefix, Document document, Note note) { return null; }
 
     /**
      * Constructs an AddNoteEvent with the given document
      * 
      * @param document
      */
-    public AttributedAddNoteEvent(Document document, Note note) {
-        this("", document, note);
-    }
+    public AttributedAddNoteEvent(Document document, Note note) { return null; }
 
     /**
      * This method retrieves the note associated with this event.
      * 
      * @return
      */
-    public Note getNote() {
-        return note;
-    }
+    public Note getNote() { return null; }
 }

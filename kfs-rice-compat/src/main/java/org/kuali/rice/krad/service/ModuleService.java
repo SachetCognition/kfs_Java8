@@ -12,4 +12,5 @@ public interface ModuleService {
     boolean isExternalizable(Class clazz);
     String getExternalizableDataObjectInquiryUrl(Class clazz, java.util.Properties parameters);
     String getExternalizableBusinessObjectLookupUrl(Class clazz, java.util.Properties parameters);
+    org.kuali.rice.krad.bo.ModuleConfiguration getModuleConfiguration();
 }

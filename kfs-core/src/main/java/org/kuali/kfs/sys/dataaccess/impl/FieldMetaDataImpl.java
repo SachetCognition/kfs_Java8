@@ -146,4 +146,5 @@ public class FieldMetaDataImpl implements DatabaseMetaDataCallback, FieldMetaDat
     public boolean isEncrypted() {
         return encrypted;
     }
+    public Class getItemClass() { return null; }
 }

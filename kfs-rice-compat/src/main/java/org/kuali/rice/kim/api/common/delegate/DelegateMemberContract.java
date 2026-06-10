@@ -4,5 +4,11 @@ public interface DelegateMemberContract {
     String getDelegationId();
     String getMemberId();
     String getRoleMemberId();
-    String getType();
+    org.kuali.rice.core.api.membership.MemberType getType();
+    org.joda.time.DateTime getActiveFromDate();
+    org.joda.time.DateTime getActiveToDate();
+    java.util.Map<String, String> getAttributes();
+    Long getVersionNumber();
+    boolean isActive(org.joda.time.DateTime activeAsOfDate);
+    boolean isActive();
 }

@@ -4,4 +4,6 @@ public interface MaintenanceDocument extends org.kuali.rice.krad.document.Docume
     void setNewMaintainableObject(org.kuali.rice.kns.maintenance.Maintainable m);
     org.kuali.rice.kns.maintenance.Maintainable getOldMaintainableObject();
     void setOldMaintainableObject(org.kuali.rice.kns.maintenance.Maintainable m);
+    default boolean isNew() { return false; }
+    default boolean isEdit() { return false; }
 }

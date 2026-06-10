@@ -17,4 +17,12 @@ public interface BusinessObjectService {
     int countMatching(Class clazz, Map<String, ?> positiveFieldValues, Map<String, ?> negativeFieldValues);
     <T extends org.kuali.rice.krad.bo.BusinessObject> T getReferenceIfExists(org.kuali.rice.krad.bo.BusinessObject bo, String referenceName);
     void linkAndSave(org.kuali.rice.krad.bo.PersistableBusinessObject bo);
+    void deleteMatching(Class clazz, Map<String, ?> fieldValues);
+    <T extends org.kuali.rice.krad.bo.PersistableBusinessObject> java.util.List<T> save(java.util.List<T> boList);
+
+    <T extends org.kuali.rice.krad.bo.BusinessObject> java.util.Collection<T> findAllOrderBy(Class<T> clazz, String sortField, boolean sortAscending);
+
+    <T extends org.kuali.rice.krad.bo.BusinessObject> java.util.Collection<T> findCollectionBySearchHelper(Class<T> clazz, java.util.Map<String, String> formProps, boolean unbounded);
+    void linkUserFields(java.util.List list);
+    void linkEditableUserFields();
 }

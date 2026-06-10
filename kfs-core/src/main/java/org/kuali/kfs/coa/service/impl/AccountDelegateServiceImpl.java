@@ -242,4 +242,5 @@ public class AccountDelegateServiceImpl implements AccountDelegateService {
         this.dateTimeService = dateTimeService;
     }
 
+    public Object updateActionRequestsForResponsibilityChange(java.util.Set<java.lang.String> arg0) { return null; }
 }

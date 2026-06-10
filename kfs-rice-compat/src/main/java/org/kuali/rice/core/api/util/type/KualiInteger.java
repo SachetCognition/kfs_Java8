@@ -39,4 +39,8 @@ public class KualiInteger extends Number implements Comparable<KualiInteger> {
     public String toString() { return String.valueOf(value); }
     public boolean equals(Object o) { return o instanceof KualiInteger && ((KualiInteger) o).value == value; }
     public int hashCode() { return Long.hashCode(value); }
+
+    public org.kuali.rice.core.api.util.type.KualiDecimal kualiDecimalValue() { return new org.kuali.rice.core.api.util.type.KualiDecimal(this.longValue()); }
+    public KualiInteger multiply(java.math.BigDecimal other) { return new KualiInteger((long)(this.longValue() * (other != null ? other.doubleValue() : 0))); }
+    public KualiInteger multiply(org.kuali.rice.core.api.util.type.KualiDecimal other) { return new KualiInteger((long)(this.longValue() * (other != null ? other.doubleValue() : 0))); }
 }

@@ -115,4 +115,5 @@ public class SubAccountMaintainableImpl extends FinancialSystemMaintainable {
         }
     }
     
+    public java.util.List getMaintenanceDocumentRestrictions(org.kuali.rice.kns.document.MaintenanceDocument arg0, org.kuali.rice.kim.api.identity.Person arg1) { return new java.util.ArrayList(); }
 }

@@ -16,4 +16,6 @@ public class DocumentEntry {
     public WorkflowAttributes getWorkflowAttributes() { return workflowAttributes; }
     public void setWorkflowAttributes(WorkflowAttributes wa) { this.workflowAttributes = wa; }
     public List<String> getRoutingTypeDefinitions() { return new ArrayList<String>(); }
+    public void completeValidation() {}
+    public Class getDocumentAuthorizerClass() { return null; }
 }

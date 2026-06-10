@@ -17,4 +17,10 @@ public class UrlFactory {
         }
         return sb.toString();
     }
+
+    public static String encode(String value) {
+        if (value == null) return "";
+        try { return java.net.URLEncoder.encode(value, "UTF-8"); }
+        catch (Exception e) { return value; }
+    }
 }

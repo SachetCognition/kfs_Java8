@@ -80,4 +80,7 @@ public class OffsetDefinitionInactivationBlockingDetectionServiceImpl extends In
         // if queryMap were null, means that we couldn't perform a query, and hence, need to return false
         return hasBlockingRecord;
     }
+    protected org.kuali.rice.krad.service.BusinessObjectService businessObjectService;
+    public void setBusinessObjectService(org.kuali.rice.krad.service.BusinessObjectService svc) { this.businessObjectService = svc; }
+    protected java.util.Map<String, String> buildInactivationBlockerQueryMap(org.kuali.rice.krad.bo.BusinessObject bo, org.kuali.rice.krad.datadictionary.InactivationBlockingMetadata metadata) { return new java.util.HashMap<>(); }
 }

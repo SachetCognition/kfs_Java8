@@ -15,4 +15,6 @@ public class KualiInquirableImpl extends org.kuali.rice.krad.inquiry.InquirableI
     public org.kuali.rice.kns.lookup.HtmlData getInquiryUrl(org.kuali.rice.krad.bo.BusinessObject bo, String propertyName) { return null; }
     public void setBusinessObjectClass(Class clazz) {}
     public Class getBusinessObjectClass() { return null; }
+    public org.kuali.rice.kns.lookup.HtmlData getInquiryUrl(org.kuali.rice.krad.bo.BusinessObject businessObject, String attributeName, boolean forceInquiry) { return null; }
+    public org.kuali.rice.kns.lookup.HtmlData getHyperLink(Class clazz, java.util.Map<String, String> fieldValues, String linkText) { return null; }
 }

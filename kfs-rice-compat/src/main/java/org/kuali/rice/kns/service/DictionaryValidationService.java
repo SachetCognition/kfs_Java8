@@ -7,4 +7,7 @@ public interface DictionaryValidationService extends org.kuali.rice.krad.service
     void validateAttributeFormat(java.lang.String p0, java.lang.String p1, java.lang.String p2, java.lang.String p3);
     void validateAttributeFormat(java.lang.String p0, java.lang.String p1, java.lang.String p2, java.lang.String p3, java.lang.String p4);
     void validateAttributeRequired(java.lang.String p0, java.lang.String p1, java.lang.Object p2, java.lang.Boolean p3, java.lang.String p4);
+    boolean isBusinessObjectValid(Object bo, String prefix);
+    boolean isBusinessObjectValid(Object bo);
+    public Object validateDocumentAttribute(Object arg0, java.lang.String arg1, java.lang.String arg2);
 }

@@ -1,6 +1,9 @@
 package org.kuali.rice.core.api.config.property;
 
 public interface Config {
+    String KEW_URL = "kew.url";
+    String PROD_ENVIRONMENT_CODE = "production.environment.code";
+
     String getDailyEmailFirstDeliveryDate();
     String getWeeklyEmailFirstDeliveryDate();
     String getBaseWebServiceURL();

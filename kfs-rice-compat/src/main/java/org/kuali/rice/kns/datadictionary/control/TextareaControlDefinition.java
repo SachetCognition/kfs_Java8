@@ -6,4 +6,6 @@ public class TextareaControlDefinition extends org.kuali.rice.kns.datadictionary
 
     public boolean isTextarea() { return false; }
     public java.lang.String toString() { return null; }
+    public Integer getCols() { return null; }
+    public Integer getRows() { return null; }
 }

@@ -163,7 +163,7 @@ public class ElectronicPaymentClaimLookupableHelperServiceImpl extends AbstractL
     /**
      * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#isResultReturnable(org.kuali.rice.krad.bo.BusinessObject)
      */
-    @Override
+    
     public boolean isResultReturnable(BusinessObject claimAsBO) {
         boolean result = super.isResultReturnable(claimAsBO);
         ElectronicPaymentClaim claim = (ElectronicPaymentClaim)claimAsBO;

@@ -47,6 +47,8 @@ import org.kuali.rice.krad.kim.NamespaceWildcardAllowedAndOrStringExactMatchPerm
  */
 public class NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeServiceImpl
 		extends NamespaceWildcardAllowedAndOrStringExactMatchPermissionTypeServiceImpl {
+    protected String exactMatchStringAttributeName;
+
     org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeServiceImpl.class);
 	protected static final String NAMESPACE_CODE = KimConstants.AttributeConstants.NAMESPACE_CODE;
 
@@ -60,7 +62,7 @@ public class NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeSer
      *
      * @see org.kuali.rice.kim.service.support.impl.KimPermissionTypeServiceBase#performPermissionMatches(org.kuali.rice.kim.bo.types.dto.AttributeSet, java.util.List)
      */
-	@Override
+	
 	protected List<Permission> performPermissionMatches(Map<String, String> requestedDetails, List<Permission> permissionsList) {
 	    if (LOG.isDebugEnabled()) {
 	        LOG.debug("requested details = "+prettyPrintAttributeSet(requestedDetails));
@@ -252,7 +254,7 @@ public class NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeSer
      * Exact match helper method that isn't applicable in wildcard match
      * @see org.kuali.rice.krad.kim.NamespaceWildcardAllowedAndOrStringExactMatchPermissionTypeServiceImpl#setExactMatchStringAttributeName(java.lang.String)
      */
-    @Override
+    
     public void setExactMatchStringAttributeName(String exactMatchStringAttributeName) {
         throw new UnsupportedOperationException();
     }

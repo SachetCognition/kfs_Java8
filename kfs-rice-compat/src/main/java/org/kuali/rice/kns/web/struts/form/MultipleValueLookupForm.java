@@ -39,4 +39,7 @@ public class MultipleValueLookupForm extends org.kuali.rice.kns.web.struts.form.
     public void jumpToFirstPage(int p0, int p1) {  }
     public void jumpToLastPage(int p0, int p1) {  }
     public void jumpToPage(int p0, int p1, int p2) {  }
+
+    public String getFormKey() { return null; }
+    public void setFormKey(String formKey) {}
 }

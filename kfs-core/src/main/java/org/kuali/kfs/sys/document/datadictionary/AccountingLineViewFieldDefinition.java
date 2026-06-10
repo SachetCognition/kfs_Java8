@@ -263,4 +263,13 @@ public class AccountingLineViewFieldDefinition extends MaintainableFieldDefiniti
     public void setOverrideLookupParameters(String overrideLookupParameters) {
         this.overrideLookupParameters = overrideLookupParameters;
     }
+    protected String name;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    protected Class defaultValueFinderClass;
+    protected String defaultValue;
+    public Class getDefaultValueFinderClass() { return defaultValueFinderClass; }
+    public void setDefaultValueFinderClass(Class c) { this.defaultValueFinderClass = c; }
+    public String getDefaultValue() { return defaultValue; }
+    public void setDefaultValue(String v) { this.defaultValue = v; }
 }

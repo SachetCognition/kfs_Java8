@@ -302,4 +302,9 @@ public class CheckBase extends PersistableBusinessObjectBase implements Check {
 
         return like;
     }
+    public void afterLookup(org.apache.ojb.broker.PersistenceBroker broker) {}
+    public void afterDelete(org.apache.ojb.broker.PersistenceBroker arg0) {}
+    public void beforeDelete(org.apache.ojb.broker.PersistenceBroker arg0) {}
+    public void afterUpdate(org.apache.ojb.broker.PersistenceBroker arg0) {}
+    public void beforeUpdate(org.apache.ojb.broker.PersistenceBroker arg0) {}
 }

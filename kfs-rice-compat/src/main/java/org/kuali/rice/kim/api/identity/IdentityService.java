@@ -11,4 +11,7 @@ public interface IdentityService {
     org.kuali.rice.kim.api.identity.type.EntityTypeContactInfo getEntityTypeContactInfo(String entityId, String entityTypeCode);
     List<org.kuali.rice.kim.api.identity.address.EntityAddress> getEntityAddresses(String entityId);
     List<org.kuali.rice.kim.api.identity.principal.Principal> getPrincipalsByEmployeeId(String employeeId);
+    org.kuali.rice.kim.api.identity.entity.EntityDefault getEntityDefault(String entityId);
+    org.kuali.rice.kim.api.identity.entity.EntityDefault getEntityDefaultByPrincipalId(String principalId);
+    org.kuali.rice.kim.api.identity.entity.EntityDefault getEntityDefaultByPrincipalName(String principalName);
 }

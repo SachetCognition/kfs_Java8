@@ -14,4 +14,5 @@ public class KimType extends org.kuali.rice.core.api.mo.AbstractDataTransferObje
     public String getNamespaceCode() { return namespaceCode; }
     public String getName() { return name; }
     public boolean isActive() { return active; }
+    public org.kuali.rice.kim.api.type.KimAttributeField getAttributeDefinitionById(String id) { return null; }
 }

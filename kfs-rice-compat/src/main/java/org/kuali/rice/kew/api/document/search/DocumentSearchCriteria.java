@@ -13,4 +13,5 @@ public class DocumentSearchCriteria extends org.kuali.rice.core.api.mo.AbstractD
         public Builder setDocumentId(String id) { return this; }
         public DocumentSearchCriteria build() { return new DocumentSearchCriteria(); }
     }
+    public Integer getMaxResults() { return null; }
 }

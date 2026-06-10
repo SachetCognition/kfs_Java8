@@ -9,4 +9,8 @@ public class MaintenanceDocumentBase extends org.kuali.rice.krad.document.Docume
     public void setNewMaintainableObject(org.kuali.rice.kns.maintenance.Maintainable m) { this.newMaintainableObject = m; }
     public org.kuali.rice.kns.maintenance.Maintainable getOldMaintainableObject() { return oldMaintainableObject; }
     public void setOldMaintainableObject(org.kuali.rice.kns.maintenance.Maintainable m) { this.oldMaintainableObject = m; }
+    public void refreshNonUpdateableReferences() {}
+    public boolean isEdit() { return false; }
+    public java.util.List getAdHocRoutePersons() { return new java.util.ArrayList(); }
+    public java.util.List getAdHocRouteWorkgroups() { return new java.util.ArrayList(); }
 }
