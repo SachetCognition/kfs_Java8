@@ -157,6 +157,7 @@ Modules integrate via **externalizable business objects**: `kfs-core` defines in
 |------|---------|
 | `pom.xml` (root) | All dependency versions, module list, profiles, plugin management |
 | `DEVELOPER_GUIDE.md` | Comprehensive onboarding guide (architecture, metrics, glossary) |
+| `REVIEW.md` | Review agent checkpoint criteria for every migration milestone |
 | `COVERAGE_BASELINE.md` | Pre-migration test coverage baseline |
 | `kfs-core/src/main/resources/kfs-default-config.properties` | Default app config |
 | `kfs-core/src/main/resources/META-INF/persistence.xml` | JPA persistence unit (post-migration) |
