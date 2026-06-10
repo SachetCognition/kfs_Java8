@@ -20,6 +20,8 @@ package org.kuali.kfs.module.purap.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.document.service.PurchaseOrderService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -29,7 +31,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
  * Step used to auto approve purchase orders that meet a certain criteria
  */
 public class AutoCloseRecurringOrdersStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AutoCloseRecurringOrdersStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(AutoCloseRecurringOrdersStep.class);
     
     private PurchaseOrderService purchaseOrderService;
 
@@ -69,7 +71,5 @@ public class AutoCloseRecurringOrdersStep extends AbstractStep {
     public void setPurchaseOrderService(PurchaseOrderService purchaseOrderService) {
         this.purchaseOrderService = purchaseOrderService;
     }
-
-
 
 }

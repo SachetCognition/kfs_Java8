@@ -23,6 +23,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KfsAuthorizationConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -37,7 +39,7 @@ import org.kuali.rice.kns.service.DocumentHelperService;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class DisbursementVoucherAccountingLineAccessibleValidation extends AccountingLineAccessibleValidation {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherAccountingLineAccessibleValidation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DisbursementVoucherAccountingLineAccessibleValidation.class);
 
     @Deprecated
     protected AccountingLine oldAccountingLineForValidation;

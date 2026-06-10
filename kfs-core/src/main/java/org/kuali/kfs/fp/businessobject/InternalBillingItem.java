@@ -23,20 +23,40 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
 
 /**
  * This class represents an Internal Billing Item business object.
  */
+@Entity
+@Table(name = "FP_INT_BILL_ITM_T")
+@IdClass(InternalBillingItemId.class)
 public class InternalBillingItem extends PersistableBusinessObjectBase {
 
     private static final long serialVersionUID = -2830091652446423539L;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_ITM_NBR")
     private Integer itemSequenceId;
+    @Column(name = "FDOC_ITM_STCK_NBR")
     private String itemStockNumber;
+    @Column(name = "FDOC_ITM_STCK_DESC")
     private String itemStockDescription;
+    @Column(name = "FDOC_ITM_SRVC_DT")
     private Timestamp itemServiceDate;
+    @Column(name = "FDOC_ITM_QTY")
     private Integer itemQuantity;
+    @Column(name = "FDOC_ITM_UNIT_AMT")
     private KualiDecimal itemUnitAmount;
+    @Column(name = "FDOC_UNIT_MSR_CD")
     private String unitOfMeasureCode;
 
     /**

@@ -19,12 +19,21 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
@@ -34,17 +43,38 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Business Object representing the account change details entity
  */
+@Entity
+@Table(name = "CA_ACCT_CHG_DTL_T")
+@IdClass(AccountGlobalDetailId.class)
+
 public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
 
     private static final long serialVersionUID = -6329389744704772474L;
-    private static final Logger LOG = Logger.getLogger(AccountGlobalDetail.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountGlobalDetail.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
+    private String documentNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
 
     // jkeller: made these transient to prevent post processor serialization errors
     transient private Chart chartOfAccounts;
     transient private Account account;
+
+    @Override
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    @Override
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 
     /**
      * Default constructor.
@@ -97,7 +127,6 @@ public class AccountGlobalDetail extends GlobalBusinessObjectDetailBase {
     public void setChartOfAccountsCode(String chartOfAccountsCode) {
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
-
 
     /**
      * Gets the accountNumber attribute.

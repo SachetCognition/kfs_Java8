@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.document.validation.impl;
 import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionGlobal;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionGlobalDetail;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class implements the business rules for {@link OrganizationReversionGlobal}
  */
 public class OrganizationReversionGlobalRule extends GlobalDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalRule.class);
     protected OrganizationReversionGlobal globalOrganizationReversion;
     protected OrganizationReversionService organizationReversionService;
     protected ObjectCodeService objectCodeService;

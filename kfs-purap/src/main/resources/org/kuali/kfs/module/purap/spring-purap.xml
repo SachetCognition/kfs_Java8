@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED: Migrating to Java @Configuration. See org.kuali.kfs.module.purap.context.*Config -->
 <!--
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
@@ -52,13 +53,7 @@
             <list>
                 <value>org/kuali/kfs/module/purap/dwr-purap.xml</value>
             </list>
-        </property>		
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/purap/ojb-purap.xml</value>
-			</list>
-		</property>
-		<property name="jobNames">
+        </property>		<property name="jobNames">
 			<list>
 				<value>autoApprovePaymentRequestsJob</value>
 				<value>purchasingPreDisbursementImmediatesExtractJob</value>
@@ -606,7 +601,6 @@
 		</property>
 	</bean>
 
-	<bean id="purApOjbCollectionHelper" class="org.kuali.kfs.module.purap.util.PurApOjbCollectionHelper" />
 	<bean id="faxBatchDocumentsService" parent="faxBatchDocumentsService-parentBean"/>
 	
 	<bean id="faxBatchDocumentsService-parentBean" class="org.kuali.kfs.module.purap.document.service.impl.FaxBatchDocumentsServiceImpl" abstract="true">

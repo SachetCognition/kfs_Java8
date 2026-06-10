@@ -19,6 +19,14 @@
 package org.kuali.kfs.fp.businessobject;
 
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  *
@@ -26,6 +34,9 @@ import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
  * This class is defined to make sure "referenceNumber", a required attribute in IAA, is validated for required-ness only in
  * case of an IAA document.
  */
+@Entity
+@Table(name = "FP_ACCT_LINES_T")
+@IdClass(IntraAccountAdjustmentSourceAccountingLineId.class)
 public class IntraAccountAdjustmentSourceAccountingLine extends SourceAccountingLine {
 
 }

@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.gl.service.EncumbranceService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -35,7 +37,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * A step to remove old encumbrances from the database.
  */
 public class PurgeEncumbranceStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurgeEncumbranceStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurgeEncumbranceStep.class);
     private ChartService chartService;
     private EncumbranceService encumbranceService;
 

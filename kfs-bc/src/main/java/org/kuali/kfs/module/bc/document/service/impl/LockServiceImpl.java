@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCConstants.LockStatus;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionFundingLock;
@@ -60,7 +62,7 @@ import org.springframework.transaction.annotation.Transactional;
  * of the accounting line update.
  */
 public class LockServiceImpl implements LockService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LockServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LockServiceImpl.class);
 
     protected BudgetConstructionDao budgetConstructionDao;
     protected BudgetConstructionLockDao budgetConstructionLockDao;

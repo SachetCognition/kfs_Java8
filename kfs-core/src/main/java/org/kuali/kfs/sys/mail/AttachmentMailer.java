@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.sys.mail;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import org.kuali.rice.core.api.mail.Mailer;
 

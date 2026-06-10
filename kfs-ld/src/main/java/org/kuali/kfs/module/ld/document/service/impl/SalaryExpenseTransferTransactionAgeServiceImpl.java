@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.ld.document.validation.impl.SalaryExpenseTransferDocumentRuleConstants.ERROR_CERTIFICATION_DEFAULT_OVERRIDE_BY_SUB_FUND;
 
 import java.util.List;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.module.ld.document.service.SalaryExpenseTransferTransactionAgeService
  */
 public class SalaryExpenseTransferTransactionAgeServiceImpl implements SalaryExpenseTransferTransactionAgeService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalaryExpenseTransferTransactionAgeServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(SalaryExpenseTransferTransactionAgeServiceImpl.class);
 
     protected static UniversityDateService universityDateService;
     protected static ParameterService parameterService;

@@ -22,12 +22,34 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+
+
+@Entity
+@Table(name = "PUR_SNSTV_DTA_ASGN_DTL_T")
+@IdClass(SensitiveDataAssignmentDetailId.class)
 public class SensitiveDataAssignmentDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "SNSTV_DTA_ASGN_ID")
     private  Integer sensitiveDataAssignmentIdentifier;
+    @Id
+    @Column(name = "SNSTV_DTA_CD")
     private  String sensitiveDataCode;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SNSTV_DTA_ASGN_ID", insertable = false, updatable = false)
     private SensitiveDataAssignment sensitiveDataAssignment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SNSTV_DTA_CD", insertable = false, updatable = false)
     private SensitiveData sensitiveData;
     
     public SensitiveDataAssignmentDetail() {

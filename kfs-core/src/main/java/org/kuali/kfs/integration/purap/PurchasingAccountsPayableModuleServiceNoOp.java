@@ -22,12 +22,13 @@ import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 public class PurchasingAccountsPayableModuleServiceNoOp implements PurchasingAccountsPayableModuleService {
 
-    private Logger LOG = Logger.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
     @Override
     public void addAssignedAssetNumbers(Integer purchaseOrderNumber, String authorId, String noteText) {

@@ -36,6 +36,8 @@ import java.util.concurrent.Callable;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
 import org.kuali.kfs.coa.service.AccountService;
@@ -125,7 +127,7 @@ import com.lowagie.text.DocumentException;
  */
 @Transactional
 public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrantsInvoiceDocumentService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceDocumentServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceDocumentServiceImpl.class);
 
     protected AccountsReceivablePendingEntryService accountsReceivablePendingEntryService;
     protected AccountService accountService;
@@ -410,7 +412,6 @@ public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrant
 
             // update source accounting lines
             updateInvoiceSourceAccountingLines(contractsGrantsInvoiceDocument.getAccountDetails(), contractsGrantsInvoiceDocument.getSourceAccountingLines());
-
 
         }
 
@@ -911,7 +912,6 @@ public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrant
         List<Integer> fiscalYears = new ArrayList<Integer>();
         Calendar c = Calendar.getInstance();
 
-
         Integer fiscalYear = universityDateService.getFiscalYear(awardBeginningDate);
 
         for (Integer i = fiscalYear; i <= currentYear; i++) {
@@ -1011,7 +1011,6 @@ public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrant
 
         return null;
     }
-
 
     /**
      * @see org.kuali.kfs.module.ar.document.service.ContractsGrantsInvoiceDocumentService#getContractControlAccounts(org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward)
@@ -1543,7 +1542,6 @@ public class ContractsGrantsInvoiceDocumentServiceImpl implements ContractsGrant
             getBusinessObjectService().save(bills);
         }
     }
-
 
     /**
      * This method updates the ContractsAndGrantsBillingAwardAccount object's FinalBilled Variable with the value provided

@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.BusinessObject;
 import org.kuali.rice.krad.datadictionary.InactivationBlockingMetadata;
@@ -36,7 +38,7 @@ import org.kuali.rice.krad.service.impl.InactivationBlockingDetectionServiceImpl
  * of that BO, without regard to active status, because the OD bo does not have an active status on it.
  */
 public class OffsetDefinitionInactivationBlockingDetectionServiceImpl extends InactivationBlockingDetectionServiceImpl {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OffsetDefinitionInactivationBlockingDetectionServiceImpl.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(OffsetDefinitionInactivationBlockingDetectionServiceImpl.class);
     /**
      * Overriding to let blocking records through
      * @see org.kuali.rice.krad.service.impl.InactivationBlockingDetectionServiceImpl#listAllBlockerRecords(org.kuali.rice.krad.bo.BusinessObject, org.kuali.rice.krad.datadictionary.InactivationBlockingMetadata)

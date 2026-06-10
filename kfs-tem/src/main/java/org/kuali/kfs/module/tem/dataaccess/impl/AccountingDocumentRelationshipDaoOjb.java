@@ -20,10 +20,11 @@ package org.kuali.kfs.module.tem.dataaccess.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.AccountingDocumentRelationship;
 import org.kuali.kfs.module.tem.dataaccess.AccountingDocumentRelationshipDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
@@ -33,7 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AccountingDocumentRelationshipDaoOjb extends PlatformAwareDaoBaseOjb implements AccountingDocumentRelationshipDao, OjbCollectionAware {
 
-    private static final Logger LOG = Logger.getLogger(AccountingDocumentRelationshipDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingDocumentRelationshipDaoOjb.class);
 
     @Override
     public List<AccountingDocumentRelationship> findAccountingDocumentRelationshipByDocumentNumber(String value) {

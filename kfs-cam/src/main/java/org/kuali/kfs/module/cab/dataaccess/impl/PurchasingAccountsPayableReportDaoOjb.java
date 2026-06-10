@@ -29,6 +29,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
@@ -39,7 +41,7 @@ import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
 public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseOjb implements PurchasingAccountsPayableReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingAccountsPayableReportDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableReportDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.cab.dataaccess.PurchasingAccountsPayableReportDao#findPurchasingAccountsPayableDocuments(java.util.Map)
@@ -50,7 +52,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
         QueryByCriteria query = QueryFactory.newQuery(PurchasingAccountsPayableDocument.class, criteria);
         return getPersistenceBrokerTemplate().getCollectionByQuery(query);
     }
-
 
     /**
      * @see org.kuali.kfs.module.cab.dataaccess.PurchasingAccountsPayableReportDao#findGeneralLedgers(java.util.Map)
@@ -92,7 +93,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
         return query;
     }
 
-
     /**
      * Get activity_statu_code
      *
@@ -113,7 +113,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
         }
         return activityStatusCodes;
     }
-
 
     /**
      * Get Document type code selection
@@ -139,7 +138,6 @@ public class PurchasingAccountsPayableReportDaoOjb extends PlatformAwareDaoBaseO
 
         return docTypeCodes;
     }
-
 
     /**
      * Build attribute list for select clause.

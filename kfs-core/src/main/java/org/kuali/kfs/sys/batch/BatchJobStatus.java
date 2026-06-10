@@ -23,6 +23,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.service.SchedulerService;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
@@ -30,7 +32,7 @@ import org.quartz.JobDetail;
 
 public class BatchJobStatus extends TransientBusinessObjectBase {
 
-    // private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchJobStatus.class);
+    // private static final Logger LOG = LoggerFactory.getLogger(BatchJobStatus.class);
 
     private JobDescriptor jobDescriptor;
 
@@ -55,15 +57,15 @@ public class BatchJobStatus extends TransientBusinessObjectBase {
     }
 
     public String getName() {
-        return jobDetail.getName();
+        return jobDetail.getKey().getName();
     }
 
     public String getGroup() {
-        return jobDetail.getGroup();
+        return jobDetail.getKey().getGroup();
     }
 
     public String getFullName() {
-        return jobDetail.getGroup() + "." + jobDetail.getName();
+        return jobDetail.getKey().getGroup() + "." + jobDetail.getKey().getName();
     }
 
     public String getNamespaceCode() {

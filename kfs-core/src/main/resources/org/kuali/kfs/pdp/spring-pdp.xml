@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED: Migrating to Java @Configuration. See org.kuali.kfs.pdp.context.*Config -->
 <!--
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
@@ -44,13 +45,7 @@
 				<value>classpath:org/kuali/kfs/pdp/businessobject/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/pdp/document/datadictionary/*.xml</value>
 			</list>
-		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/pdp/ojb-pdp.xml</value>
-			</list>
-		</property>
-		<property name="scriptConfigurationFilePaths">
+		</property>		<property name="scriptConfigurationFilePaths">
 			<list>
 				<value>org/kuali/kfs/pdp/dwr-pdp.xml</value>
 			</list>

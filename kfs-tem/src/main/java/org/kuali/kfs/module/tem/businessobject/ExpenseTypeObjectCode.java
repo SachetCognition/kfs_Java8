@@ -18,7 +18,7 @@
  */
 package org.kuali.kfs.module.tem.businessobject;
 
-import javax.persistence.Transient;
+import jakarta.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.KFSConstants;

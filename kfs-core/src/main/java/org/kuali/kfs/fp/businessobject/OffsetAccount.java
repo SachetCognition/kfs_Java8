@@ -26,23 +26,62 @@ import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
 
 /**
  * This class represents an offset account business object.
  */
+@Entity
+@Table(name = "FP_OFST_ACCT_T")
+@IdClass(OffsetAccountId.class)
 public class OffsetAccount extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FIN_OFST_OBJ_CD")
     private String financialOffsetObjectCode;
+    @Column(name = "FIN_OFST_COA_CD")
     private String financialOffsetChartOfAccountCode;
+    @Column(name = "FIN_OFST_ACCT_NBR")
     private String financialOffsetAccountNumber;
+    @Column(name = "ROW_ACTV_IND")
     private boolean active;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chart;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+
+        @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
+
+    })
     private Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OFST_COA_CD", insertable = false, updatable = false)
     private Chart financialOffsetChartOfAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OFST_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "FIN_OFST_ACCT_NBR", insertable = false, updatable = false)
     private Account financialOffsetAccount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_OFST_COA_CD", insertable = false, updatable = false)
+    @JoinColumn(name = "FIN_OFST_OBJ_CD", insertable = false, updatable = false)
     private ObjectCodeCurrent objectCodeCurrent;
 
     /**

@@ -34,25 +34,54 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 import org.kuali.rice.location.framework.state.StateEbo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  *
  */
+@Entity
+@Table(name = "SH_BUILDING_T")
+@IdClass(BuildingId.class)
 public class Building extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CAMPUS_CD")
     protected String campusCode;
+    @Id
+    @Column(name = "BLDG_CD")
     protected String buildingCode;
+    @Column(name = "BLDG_NM")
     protected String buildingName;
+    @Column(name = "BLDG_STR_ADDR")
     protected String buildingStreetAddress;
+    @Column(name = "BLDG_ADDR_CTY_NM")
     protected String buildingAddressCityName;
+    @Column(name = "BLDG_ADDR_ST_CD")
     protected String buildingAddressStateCode;
+    @Column(name = "BLDG_ADDR_ZIP_CD")
     protected String buildingAddressZipCode;
+    @Column(name = "ALTRNT_BLDG_CD")
     protected String alternateBuildingCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
+    @Column(name = "BLDG_ADDR_CNTRY_CD")
     protected String buildingAddressCountryCode;
 
+    @Transient
     protected CampusEbo campus;
+    @Transient
     protected StateEbo buildingAddressState;
+    @Transient
     protected PostalCodeEbo buildingAddressZip;
+    @Transient
     protected CountryEbo buildingAddressCountry;
 
     /**

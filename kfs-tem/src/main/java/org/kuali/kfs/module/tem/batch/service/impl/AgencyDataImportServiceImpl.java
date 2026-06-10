@@ -18,8 +18,6 @@
  */
 package org.kuali.kfs.module.tem.batch.service.impl;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -33,6 +31,8 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemConstants.ExpenseImport;
@@ -61,7 +61,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 public class AgencyDataImportServiceImpl implements AgencyDataImportService {
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AgencyDataImportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(AgencyDataImportServiceImpl.class);
 
     public final static String REPORT_FILE_NAME_PATTERN = "{0}/{1}_{2}{3}";
 
@@ -143,7 +143,6 @@ public class AgencyDataImportServiceImpl implements AgencyDataImportService {
         return true;
     }
 
-
     public void moveErrorFile(String dataFileName, String agencyDataFileErrordirectory) {
         File dataFile = new File(dataFileName);
 
@@ -198,7 +197,6 @@ public class AgencyDataImportServiceImpl implements AgencyDataImportService {
                 importedAgencyStagingData.setStagingFileName(StringUtils.substringAfterLast(dataFileName, File.separator));
                 importedAgencyStagingData.setCreationTimestamp(getDateTimeService().getCurrentTimestamp());
 
-
                 String itineraryData = importedAgencyStagingData.getItineraryDataString();
 
                 AgencyStagingData validAgencyStagingData = null;
@@ -206,7 +204,6 @@ public class AgencyDataImportServiceImpl implements AgencyDataImportService {
 
                 // validate by Traveler ID
                 if (importedAgencyStagingData.getExpenseImport() == ExpenseImport.traveler) {
-
 
                      key = importedAgencyStagingData.getTravelerId() + "~" + itineraryData + "~" +
                          importedAgencyStagingData.getCreditCardOrAgencyCode() + "~" + importedAgencyStagingData.getTransactionPostingDate() + "~" +
@@ -295,7 +292,6 @@ public class AgencyDataImportServiceImpl implements AgencyDataImportService {
 
         return validAgencyRecords;
     }
-
 
     /**
      * @see org.kuali.kfs.module.tem.batch.service.AgencyDataImportService#moveAgencyDataToHistoricalExpenseTable()

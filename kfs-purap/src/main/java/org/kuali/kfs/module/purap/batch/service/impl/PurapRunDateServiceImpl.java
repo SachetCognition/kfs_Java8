@@ -23,13 +23,15 @@ import java.util.Date;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.batch.service.PurapRunDateService;
 import org.kuali.kfs.sys.service.impl.KfsParameterConstants.PURCHASING_BATCH;
 import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 
 public class PurapRunDateServiceImpl implements PurapRunDateService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurapRunDateServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurapRunDateServiceImpl.class);
 
     private ParameterService parameterService;
     

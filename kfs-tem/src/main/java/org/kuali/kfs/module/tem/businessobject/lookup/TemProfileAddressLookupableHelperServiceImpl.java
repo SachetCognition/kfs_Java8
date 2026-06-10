@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.tem.businessobject.lookup;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -55,7 +56,7 @@ import java.util.Map.Entry;
 
 public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    public static Logger LOG = Logger.getLogger(TemProfileAddressLookupableHelperServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TemProfileAddressLookupableHelperServiceImpl.class);
 
     /**
 	 * Comment for <code>serialVersionUID</code>
@@ -80,7 +81,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
         return super.performLookup(lookupForm, resultTable, bounded);
     }
 
-
 	/**
 	 * @see org.kuali.rice.kns.lookup.AbstractLookupableHelperServiceImpl#performClear(org.kuali.rice.kns.web.struts.form.LookupForm)
 	 */
@@ -103,7 +103,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 			}
 		 }
 	}
-
 
     /**
      * @see org.kuali.rice.kns.lookup.KualiLookupableHelperServiceImpl#getSearchResults(java.util.Map)
@@ -205,7 +204,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
         return kimFieldValues;
     }
 
-
 	/**
 	 * Sets the travelerDao attribute value.
 	 * @param travelerDao The travelerDao to set.
@@ -213,7 +211,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 	public void setTravelerDao(TravelerDao travelerDao) {
 		this.travelerDao = travelerDao;
 	}
-
 
 	/**
 	 * Gets the travelerDao attribute.
@@ -223,7 +220,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 		return travelerDao;
 	}
 
-
 	/**
 	 * Sets the travelerService attribute value.
 	 * @param travelerService The travelerService to set.
@@ -231,7 +227,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 	public void setTravelerService(TravelerService travelerService) {
 		this.travelerService = travelerService;
 	}
-
 
 	/**
 	 * Gets the travelerService attribute.
@@ -241,7 +236,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 		return travelerService;
 	}
 
-
 	/**
 	 * Gets the temProfileAddressToKimAddress attribute.
 	 * @return Returns the temProfileAddressToKimAddress.
@@ -249,7 +243,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 	public Map<String, String> getTemProfileAddressToKimAddress() {
 		return temProfileAddressToKimAddress;
 	}
-
 
 	/**
 	 * Sets the temProfileAddressToKimAddress attribute value.
@@ -260,7 +253,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 		this.temProfileAddressToKimAddress = temProfileAddressToKimAddress;
 	}
 
-
 	/**
 	 * Gets the temProfileAddressToCustomerAddress attribute.
 	 * @return Returns the temProfileAddressToCustomerAddress.
@@ -268,7 +260,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
 	public Map<String, String> getTemProfileAddressToCustomerAddress() {
 		return temProfileAddressToCustomerAddress;
 	}
-
 
 	/**
 	 * Sets the temProfileAddressToCustomerAddress attribute value.
@@ -285,7 +276,6 @@ public class TemProfileAddressLookupableHelperServiceImpl extends KualiLookupabl
         }
         return identityService;
 	}
-
 
     protected AccountsReceivableModuleService getAccountsReceivableModuleService() {
         if (accountsReceivableModuleService == null) {

@@ -18,12 +18,13 @@
  */
 package org.kuali.kfs.module.cam.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.cam.CamsPropertyConstants.Asset.CAPITAL_ASSET_NUMBER;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -45,7 +46,7 @@ import org.kuali.rice.krad.util.ErrorMessage;
 import org.kuali.rice.krad.util.MessageMap;
 
 public class AssetTransferAction extends FinancialSystemTransactionalDocumentActionBase {
-    protected static final Logger LOG = Logger.getLogger(AssetTransferAction.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AssetTransferAction.class);
 
     /**
      * This method had to override because asset information has to be refreshed before display
@@ -122,7 +123,6 @@ public class AssetTransferAction extends FinancialSystemTransactionalDocumentAct
         }
     }
 
-
     /**
      * Since the organization fields are view only we need to make sure they are in sync with the data entry fields.
      * 
@@ -141,7 +141,6 @@ public class AssetTransferAction extends FinancialSystemTransactionalDocumentAct
 
         return actionForward;
     }
-
 
     /**
      * Route the document

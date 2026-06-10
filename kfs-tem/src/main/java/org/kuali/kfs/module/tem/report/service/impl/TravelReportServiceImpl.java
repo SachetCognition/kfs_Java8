@@ -37,7 +37,8 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.report.DetailedReport;
 import org.kuali.kfs.module.tem.report.annotations.ReportStyle;
 import org.kuali.kfs.module.tem.report.service.TravelReportFactoryService;
@@ -53,7 +54,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TravelReportServiceImpl implements TravelReportService {
 
-    public static Logger LOG = Logger.getLogger(TravelReportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelReportServiceImpl.class);
 
     protected ReportGenerationService reportGenerationService;
     protected TravelReportFactoryService reportFactoryService;
@@ -112,8 +113,6 @@ public class TravelReportServiceImpl implements TravelReportService {
             }
             i++;
         }
-
-
 
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final JRPdfExporter exporter = new JRPdfExporter();

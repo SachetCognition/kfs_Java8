@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.config.module.RunMode;
 import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.core.framework.config.module.ModuleConfigurer;
@@ -30,7 +32,7 @@ import org.kuali.rice.core.framework.config.module.WebModuleConfiguration;
 import org.springframework.beans.factory.InitializingBean;
 
 public class KFSConfigurer extends ModuleConfigurer implements InitializingBean {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KFSConfigurer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KFSConfigurer.class);
 
     protected boolean testMode = false;
 

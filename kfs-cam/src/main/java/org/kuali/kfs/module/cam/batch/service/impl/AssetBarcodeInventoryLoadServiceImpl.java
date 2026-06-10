@@ -32,6 +32,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.impl.StringHelper;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -64,7 +66,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * inventory files.
  */
 public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInventoryLoadService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetBarcodeInventoryLoadServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetBarcodeInventoryLoadServiceImpl.class);
 
     public static final String MESSAGE_NO_DOCUMENT_CREATED = "NO barcode inventory error document was created.";
     public static final String DOCUMENTS_MSG = "The following barcode inventory error document were created";
@@ -152,7 +154,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
             input = new BufferedReader(new FileReader(file));
             String line = null;
 
-
             while ((line = input.readLine()) != null) {
                 recordCount++;
                 errorMsg = "";
@@ -214,14 +215,12 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
                         errorMsg += ", " + InventoryDateLabel + " is invalid";
                     }
 
-
-
                 }
                 if (!StringUtils.isBlank(errorMsg)) {
                     errorMsg = "Error on record number " + recordCount + ": " + errorMsg.substring(2) + "\n";
                     GlobalVariables.getMessageMap().putError(KFSConstants.GLOBAL_ERRORS, KFSKeyConstants.ERROR_CUSTOM, errorMsg);
                     errorMessage += errorMsg;
-                    LOG.error(errorMsg);
+                    LOG.error("{}", errorMsg);
                 }
                 if (!proceed)
                     break;
@@ -426,7 +425,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
         form.getMessages().add(TOTAL_RECORDS_IN_ERROR_MSG + ": " + StringUtils.rightPad(Integer.toString(errorRecCount), 5, " "));
     }
 
-
     /**
      * This method...
      * 
@@ -480,7 +478,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
         }
         return documentsCreated;
     }
-
 
     /**
      * This method updates the asset information particularly the building code, bulding room, building subrool, campus code, and
@@ -546,7 +543,6 @@ public class AssetBarcodeInventoryLoadServiceImpl implements AssetBarcodeInvento
 
         return document;
     }
-
 
     /**
      * saves the barcode inventory document

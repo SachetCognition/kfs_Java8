@@ -29,6 +29,8 @@ import java.util.ListIterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.SubAccount;
@@ -95,7 +97,7 @@ import org.springframework.transaction.annotation.Transactional;
  * such as BudgetConstructionHeader
  */
 public class BudgetDocumentServiceImpl implements BudgetDocumentService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetDocumentServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetDocumentServiceImpl.class);
 
     protected BudgetConstructionDao budgetConstructionDao;
     protected DocumentDao documentDao;
@@ -368,7 +370,6 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
         }
 
         document.postProcessSave(event);
-
 
     }
 
@@ -952,7 +953,6 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
         return true;
     }
 
-
     /**
      * get a pending budget construction GL record, and set its to the given update amount if it exists in database; otherwise,
      * create it with the given information
@@ -1176,7 +1176,6 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
         this.documentDao = documentDao;
     }
 
-
     /**
      * Sets the benefitsCalculationService attribute value.
      * 
@@ -1186,7 +1185,6 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
     public void setBenefitsCalculationService(BenefitsCalculationService benefitsCalculationService) {
         this.benefitsCalculationService = benefitsCalculationService;
     }
-
 
     /**
      * Sets the businessObjectService attribute value.
@@ -1228,7 +1226,6 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
         this.fiscalYearFunctionControlService = fiscalYearFunctionControlService;
     }
 
-
     /**
      * Sets the optionsService attribute value.
      * 
@@ -1238,7 +1235,6 @@ public class BudgetDocumentServiceImpl implements BudgetDocumentService {
     public void setOptionsService(OptionsService optionsService) {
         this.optionsService = optionsService;
     }
-
 
     /**
      * Gets the persistenceService attribute.

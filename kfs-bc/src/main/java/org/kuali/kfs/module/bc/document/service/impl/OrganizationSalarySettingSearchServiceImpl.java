@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.service.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.document.dataaccess.OrganizationSalarySettingSearchDao;
 import org.kuali.kfs.module.bc.document.service.OrganizationSalarySettingSearchService;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class OrganizationSalarySettingSearchServiceImpl implements OrganizationSalarySettingSearchService {
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationSalarySettingSearchServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationSalarySettingSearchServiceImpl.class);
 
     protected OrganizationSalarySettingSearchDao organizationSalarySettingSearchDao;
 

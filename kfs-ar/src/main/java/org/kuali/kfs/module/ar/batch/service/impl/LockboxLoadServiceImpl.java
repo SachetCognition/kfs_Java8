@@ -30,6 +30,8 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.batch.LockboxLoadStep;
 import org.kuali.kfs.module.ar.batch.service.LockboxLoadService;
@@ -58,7 +60,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LockboxLoadServiceImpl implements LockboxLoadService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LockboxLoadServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LockboxLoadServiceImpl.class);
 
     private BatchInputFileType batchInputFileType;
     private String reportsDirectory;
@@ -67,8 +69,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
     private DateTimeService dateTimeService;
     private MailService mailService;
     private ParameterService parameterService;
-
-
 
     @Override
     public boolean loadFile() {
@@ -141,7 +141,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
 
     }
 
-
     @Override
     public boolean validate(Object parsedFileContents) {
         // compare header with detail record
@@ -156,8 +155,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
 
         return valid;
     }
-
-
 
     /**
      * No processing
@@ -176,8 +173,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
             totalDetailRecords++;
         }
 
-
-
         if (headerTransBatchTotal.compareTo(detailInvPaidTotal)== 0
                 && headerTransBatchCount.compareTo(totalDetailRecords) == 0) {
 
@@ -188,7 +183,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
             GlobalVariables.getMessageMap().putInfo(KFSConstants.GLOBAL_ERRORS,KFSKeyConstants.ERROR_CUSTOM, message);
 
         }
-
 
         if (headerTransBatchTotal.compareTo(detailInvPaidTotal)!= 0) {
             String message = "Bad Transmmission for lock box number " + lockbox.getLockboxNumber() + "."
@@ -210,11 +204,9 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
             isHeaderMatchedDetails  = false;
         }
 
-
         return isHeaderMatchedDetails;
 
     }
-
 
     /**
      * Send load lockbox file validation
@@ -227,10 +219,8 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
         }
     }
 
-
     public void sendEmail(FlatFileInformation flatFileInformation) {
         LOG.debug("sendEmail() starting");
-
 
         MailMessage message = new MailMessage();
 
@@ -274,7 +264,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
             }
         }
 
-
         for(String[] resultMessage : flatFileInformation.getMessages()) {
             body.append(resultMessage[1]);
             body.append("\n");
@@ -282,9 +271,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
 
         return body.toString();
     }
-
-
-
 
     protected List<String> getListOfFilesToProcess() {
 
@@ -349,9 +335,7 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
         // save lockbox data in AR_LOCKBOX_T
         businessObjectService.save(loadLockboxList);
 
-
     }
-
 
     /**
      * Clears out associated .done files for the processed data files.
@@ -365,9 +349,7 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
         }
     }
 
-
     protected void setLockboxToLoad(List loadLockboxList ,Lockbox lockbox, int batchSequenceNumber ) {
-
 
         for (LockboxDetail detail : lockbox.getLockboxDetails()) {
             Lockbox lockboxToLoad = new Lockbox();
@@ -383,7 +365,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
             lockboxToLoad.setCustomerPaymentMediumCode(detail.getCustomerPaymentMediumCode());
             loadLockboxList.add(lockboxToLoad);
         }
-
 
     }
 
@@ -417,7 +398,6 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
         this.batchInputFileService = batchInputFileService;
     }
 
-
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
@@ -426,10 +406,8 @@ public class LockboxLoadServiceImpl implements LockboxLoadService {
         this.mailService = mailService;
     }
 
-
     public void setParameterService(ParameterService parameterService) {
         this.parameterService = parameterService;
     }
-
 
 }

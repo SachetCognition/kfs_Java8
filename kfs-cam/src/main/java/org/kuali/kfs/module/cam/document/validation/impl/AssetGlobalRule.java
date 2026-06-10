@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
@@ -85,7 +87,7 @@ import org.kuali.rice.location.api.campus.CampusService;
  * Rule implementation for Asset Global document.
  */
 public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetGlobalRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetGlobalRule.class);
     protected static final Map<LocationField, String> LOCATION_FIELD_MAP = new HashMap<LocationField, String>();
     static {
         LOCATION_FIELD_MAP.put(LocationField.CAMPUS_CODE, CamsPropertyConstants.AssetGlobalDetail.CAMPUS_CODE);
@@ -300,7 +302,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
         return valid;
     }
 
-
     protected boolean isCapitalStatus(AssetGlobal assetGlobal) {
         return getParameterService().getParameterValuesAsString(Asset.class, CamsConstants.Parameters.CAPITAL_ASSET_STATUS_CODES).contains(assetGlobal.getInventoryStatusCode());
     }
@@ -343,7 +344,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
                 success &= checkNegativeOrZeroPayment(document, assetPaymentDetail);
             }
         }
-
 
         // only for "Asset Separate" document
         if (getAssetGlobalService().isAssetSeparate(assetGlobal)) {
@@ -447,7 +447,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
 
         assetPaymentDetail.refreshReferenceObject(KFSPropertyConstants.OBJECT_CODE);
         success &= validateObjectCode(assetPaymentDetail.getObjectCode(), assetGlobal);
-
 
         return success;
     }
@@ -652,7 +651,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
         success &= validateTagDuplication(assetSharedDetails);
         return success;
     }
-
 
     /**
      * Validate all separate source amount is above the capital asset threshold amount.
@@ -1005,7 +1003,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
             index++;
         }
 
-
         // Creates locking representation for this global document. The locking is only applicable for assets that are being split.
         // The assets that are being created do not need to be locked since they don't exist yet.
         if (valid && getAssetGlobalService().isAssetSeparate(assetGlobal)) {
@@ -1036,7 +1033,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
         }
         return success;
     }
-
 
     /**
      * Check if organization owner account is set from CAB. We honor all accounting lines from CAB are valid payments even thougth
@@ -1191,7 +1187,6 @@ public class AssetGlobalRule extends MaintenanceDocumentRuleBase {
 
         return true;
     }
-
 
     /**
      *

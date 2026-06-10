@@ -27,17 +27,46 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Represents a relationship between a {@link Proposal} and an {@Org}.
  */
+@Entity
+@Table(name = "CG_PRPSL_ORG_T")
+@IdClass(ProposalOrganization.ProposalOrganizationId.class)
 public class ProposalOrganization extends PersistableBusinessObjectBase implements Primaryable, MutableInactivatable {
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGPRPSL_PRMORG_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean proposalPrimaryOrganizationIndicator;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @Transient
     private Organization organization;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
     private Chart chartOfAccounts;
 
     /**
@@ -200,6 +229,29 @@ public class ProposalOrganization extends PersistableBusinessObjectBase implemen
     public String toString() {
         // todo: get "primary" and "secondary" from ApplicationResources.properties via KFSKeyConstants?
         return getChartOfAccountsCode() + "-" + getOrganizationCode() + " " + (isProposalPrimaryOrganizationIndicator() ? "primary" : "secondary");
+    }
+
+
+    public static class ProposalOrganizationId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String chartOfAccountsCode;
+        private String organizationCode;
+        private Long proposalNumber;
+
+        public ProposalOrganizationId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ProposalOrganizationId that = (ProposalOrganizationId) o;
+            return java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(organizationCode, that.organizationCode) && java.util.Objects.equals(proposalNumber, that.proposalNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(chartOfAccountsCode, organizationCode, proposalNumber);
+        }
     }
 
 }

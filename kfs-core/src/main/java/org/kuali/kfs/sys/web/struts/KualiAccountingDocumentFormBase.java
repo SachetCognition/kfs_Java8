@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.upload.FormFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.businessobject.SubAccount;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class is the base action form for all financial documents.
  */
 public class KualiAccountingDocumentFormBase extends FinancialSystemTransactionalDocumentFormBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KualiAccountingDocumentFormBase.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(KualiAccountingDocumentFormBase.class);
 
     protected SourceAccountingLine newSourceLine;
     protected TargetAccountingLine newTargetLine;
@@ -78,7 +80,6 @@ public class KualiAccountingDocumentFormBase extends FinancialSystemTransactiona
         forcedReadOnlyFields = new HashMap();
         forcedLookupOptionalFields = new HashMap();
     }
-
 
     /**
      * Overrides the parent to call super.populate and then to call the accounting lines populate method that is specific to loading
@@ -304,7 +305,6 @@ public class KualiAccountingDocumentFormBase extends FinancialSystemTransactiona
     public void setTargetFile(FormFile targetFile) {
         this.targetFile = targetFile;
     }
-
 
     /**
      * @return current Map of editableAccounts

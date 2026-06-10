@@ -24,14 +24,34 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Vendor Stipulation Business Object.
  */
+@Entity
+@Table(name = "PUR_VNDR_STPLTN_T")
 public class VendorStipulation extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_STPLTN_ID")
     private Integer vendorStipulationIdentifier;
+    @Column(name = "VNDR_STPLTN_NM")
     private String vendorStipulationName;
+    @Column(name = "VNDR_STPLTN_DESC")
     private String vendorStipulationDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

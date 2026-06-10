@@ -26,6 +26,8 @@ import java.sql.Date;
 import java.text.MessageFormat;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.report.LedgerSummaryReport;
 import org.kuali.kfs.gl.service.OriginEntryGroupService;
@@ -41,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ExtractTransactionsServiceImpl implements ExtractTransactionsService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExtractTransactionsServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExtractTransactionsServiceImpl.class);
 
     private PendingTransactionService glPendingTransactionService;
     private OriginEntryGroupService originEntryGroupService;
@@ -73,7 +75,6 @@ public class ExtractTransactionsServiceImpl implements ExtractTransactionsServic
         catch (FileNotFoundException e) {
             throw new RuntimeException("extract transaction file doesn't exist " + extractTGlTransactionFileName);
         }
-
 
         Iterator transactions = glPendingTransactionService.getUnextractedTransactions();
         LedgerSummaryReport extractGlSummaryReport = new LedgerSummaryReport();

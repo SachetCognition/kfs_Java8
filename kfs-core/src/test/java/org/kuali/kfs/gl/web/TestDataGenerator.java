@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.web;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.gl.businessobject.lookup.BusinessObjectFieldConverter;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -38,7 +40,7 @@ import java.util.*;
  * a business object with those properties
  */
 public class TestDataGenerator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TestDataGenerator.class);
+    private static Logger LOG = LoggerFactory.getLogger(TestDataGenerator.class);
 
     private String propertiesFileName;
     private Properties properties;
@@ -70,7 +72,6 @@ public class TestDataGenerator {
         properties = loadProperties(propertiesFileName);
         message = loadProperties(messageFileName);
     }
-
 
     /**
      * Generates transaction data for a business object from properties

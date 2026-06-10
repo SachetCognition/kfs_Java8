@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.context.KualiTestBase;
 import org.kuali.kfs.sys.context.TestUtils;
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.context.TestUtils;
  */
 @ConfigureContext
 public class OriginEntryTest extends KualiTestBase {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryTest.class);
+    private Logger LOG = LoggerFactory.getLogger(OriginEntryTest.class);
 
     /**
      * Constructs a OriginEntryTest instance

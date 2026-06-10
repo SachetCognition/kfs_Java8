@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.sys.document.validation.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class contains a helper method used to implement a rule for the CashManagementDocument (a FinancialDocument) as well as to
@@ -28,7 +29,7 @@ public class GeneralLedgerPostingDocumentRuleBase extends LedgerPostingDocumentR
     /**
      * Logger for this class
      */
-    private static final Logger LOG = Logger.getLogger(GeneralLedgerPostingDocumentRuleBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GeneralLedgerPostingDocumentRuleBase.class);
 
     
 }

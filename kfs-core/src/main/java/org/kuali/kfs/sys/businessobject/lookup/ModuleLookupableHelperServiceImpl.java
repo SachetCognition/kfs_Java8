@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.KualiModuleBO;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -35,7 +37,7 @@ import org.kuali.rice.krad.service.ModuleService;
 
 public class ModuleLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchJobStatusLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchJobStatusLookupableHelperServiceImpl.class);
 
     private ConfigurationService configService;
     private Map fieldConversions;
@@ -63,7 +65,6 @@ public class ModuleLookupableHelperServiceImpl extends KualiLookupableHelperServ
         return boModules;
     }
 
-
     public void setConfigService(ConfigurationService configService) {
         this.configService = configService;
     }
@@ -84,6 +85,5 @@ public class ModuleLookupableHelperServiceImpl extends KualiLookupableHelperServ
     public void setFieldConversions(Map fieldConversions) {
         this.fieldConversions = fieldConversions;
     }
-
 
 }

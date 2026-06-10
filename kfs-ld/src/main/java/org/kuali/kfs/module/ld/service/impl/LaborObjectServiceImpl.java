@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.businessobject.LaborObject;
 import org.kuali.kfs.module.ld.dataaccess.LaborObjectDao;
 import org.kuali.kfs.module.ld.service.LaborObjectService;
@@ -34,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborObjectServiceImpl implements LaborObjectService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborObjectServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborObjectServiceImpl.class);
 
     private LaborObjectDao laborObjectDao;
 

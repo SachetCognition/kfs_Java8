@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kns.service.DataDictionaryService;
 import org.kuali.rice.krad.bo.BusinessObject;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.datadictionary.AttributeDefinition;
  * An abstract class which provides help in determining field lengths of business objects being parsed from Strings
  */
 public abstract class BusinessObjectStringParserFieldUtils {
-    protected org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(getClass());
+    protected Logger LOG = LoggerFactory.getLogger(getClass());
     private Map<String, Integer> fieldLengthMap;
     private Map<String, Integer> fieldBeginningPositionMap;
     

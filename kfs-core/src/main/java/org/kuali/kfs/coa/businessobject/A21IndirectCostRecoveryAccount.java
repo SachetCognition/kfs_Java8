@@ -19,20 +19,29 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.LinkedHashMap;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * IndirectCostRecoveryAccount for A21SubAccount
  */
-public class A21IndirectCostRecoveryAccount extends IndirectCostRecoveryAccount {
-    private static Logger LOG = Logger.getLogger(A21IndirectCostRecoveryAccount.class);
+@Entity
+@Table(name = "CA_A21_ICR_ACCT_T")
+@AttributeOverride(name = "indirectCostRecoveryAccountGeneratedIdentifier", column = @Column(name = "CA_A21_ICR_ACCT_GNRTD_ID"))
 
-    private Integer a21IndirectCostRecoveryAccountGeneratedIdentifier;
-    
+public class A21IndirectCostRecoveryAccount extends IndirectCostRecoveryAccount {
+    private static Logger LOG = LoggerFactory.getLogger(A21IndirectCostRecoveryAccount.class);
+
     //additional foreign keys to SubAccount
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
     
     /**
@@ -61,11 +70,11 @@ public class A21IndirectCostRecoveryAccount extends IndirectCostRecoveryAccount 
     }
 
     public Integer getA21IndirectCostRecoveryAccountGeneratedIdentifier() {
-        return a21IndirectCostRecoveryAccountGeneratedIdentifier;
+        return getIndirectCostRecoveryAccountGeneratedIdentifier();
     }
 
     public void setA21IndirectCostRecoveryAccountGeneratedIdentifier(Integer a21IndirectCostRecoveryAccountGeneratedIdentifier) {
-        this.a21IndirectCostRecoveryAccountGeneratedIdentifier = a21IndirectCostRecoveryAccountGeneratedIdentifier;
+        setIndirectCostRecoveryAccountGeneratedIdentifier(a21IndirectCostRecoveryAccountGeneratedIdentifier);
     }
 
     public String getSubAccountNumber() {
@@ -81,8 +90,8 @@ public class A21IndirectCostRecoveryAccount extends IndirectCostRecoveryAccount 
      */
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap<String, String> m = new LinkedHashMap<String, String>();
-        if (this.a21IndirectCostRecoveryAccountGeneratedIdentifier != null) {
-            m.put("a21IndirectCostRecoveryAccountGeneratedIdentifier", this.a21IndirectCostRecoveryAccountGeneratedIdentifier.toString());
+        if (this.getA21IndirectCostRecoveryAccountGeneratedIdentifier() != null) {
+            m.put("a21IndirectCostRecoveryAccountGeneratedIdentifier", this.getA21IndirectCostRecoveryAccountGeneratedIdentifier().toString());
         }
         return m;
     }

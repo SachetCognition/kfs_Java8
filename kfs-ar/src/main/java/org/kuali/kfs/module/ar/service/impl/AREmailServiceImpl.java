@@ -32,6 +32,8 @@ import javax.mail.Session;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -64,12 +66,11 @@ import org.kuali.rice.krad.service.NoteService;
 import org.kuali.rice.krad.service.impl.MailServiceImpl;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
 /**
  * Defines methods for sending AR emails.
  */
 public class AREmailServiceImpl implements AREmailService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AREmailServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AREmailServiceImpl.class);
 
     protected AttachmentMailService mailService;
     protected ParameterService parameterService;

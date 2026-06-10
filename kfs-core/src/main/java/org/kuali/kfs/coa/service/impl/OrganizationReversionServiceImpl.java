@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversion;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionCategory;
 import org.kuali.kfs.coa.service.OrganizationReversionService;
@@ -44,7 +46,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 
 @NonTransactional
 public class OrganizationReversionServiceImpl implements OrganizationReversionService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReversionServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected ParameterService parameterService;
@@ -105,7 +107,6 @@ public class OrganizationReversionServiceImpl implements OrganizationReversionSe
                 );
     }
 
-
     /**
      * @see org.kuali.kfs.coa.service.OrganizationReversionService#getOrganizationReversionDetaiFromSystemParameters()
      */
@@ -113,7 +114,6 @@ public class OrganizationReversionServiceImpl implements OrganizationReversionSe
     public String getOrganizationReversionDetaiFromSystemParameters() {
         return parameterService.getParameterValueAsString(OrganizationReversion.class, GeneralLedgerConstants.OrganizationReversionProcess.UNALLOC_OBJECT_CODE_PARM);
     }
-
 
     /**
      * @see org.kuali.kfs.coa.service.OrganizationReversionService#isCategoryActive(java.lang.String)

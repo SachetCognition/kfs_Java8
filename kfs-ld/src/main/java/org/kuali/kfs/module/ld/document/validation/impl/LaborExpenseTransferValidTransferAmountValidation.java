@@ -26,6 +26,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.LaborKeyConstants;
 import org.kuali.kfs.module.ld.LaborPropertyConstants;
 import org.kuali.kfs.module.ld.businessobject.ExpenseTransferAccountingLine;
@@ -53,7 +55,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * @return true if the given accounting lines in source and target match by pay fy and pp
  */
 public class LaborExpenseTransferValidTransferAmountValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborExpenseTransferValidTransferAmountValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborExpenseTransferValidTransferAmountValidation.class);
     
     private Document documentForValidation;  
     

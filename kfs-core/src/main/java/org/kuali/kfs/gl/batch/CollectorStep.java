@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.batch;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.CollectorReportService;
 import org.kuali.kfs.gl.batch.service.CollectorService;
 import org.kuali.kfs.gl.report.CollectorReportData;
@@ -33,7 +35,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  * batch file header with process results 6) Cleans up .done files
  */
 public class CollectorStep extends AbstractWrappedBatchStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectorStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(CollectorStep.class);
 
     private CollectorService collectorService;
     private CollectorReportService collectorReportService;

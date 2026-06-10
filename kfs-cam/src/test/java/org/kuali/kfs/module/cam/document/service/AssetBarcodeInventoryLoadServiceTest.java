@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
 import org.kuali.kfs.module.cam.batch.service.AssetBarcodeInventoryLoadService;
@@ -44,7 +45,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 // @ConfigureContext(session = UserNameFixture.kfs)
 @ConfigureContext(session = UserNameFixture.bomiddle)
 public class AssetBarcodeInventoryLoadServiceTest extends KualiTestBase {
-    private static Logger LOG = Logger.getLogger(AssetBarcodeInventoryLoadServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetBarcodeInventoryLoadServiceTest.class);
 
     private DateTimeService dateTimeService;
     private AssetBarcodeInventoryLoadService assetBarcodeInventoryLoadService;

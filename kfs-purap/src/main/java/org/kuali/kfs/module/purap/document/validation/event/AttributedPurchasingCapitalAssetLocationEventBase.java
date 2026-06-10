@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.purap.document.validation.event;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.CapitalAssetLocation;
 import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEventBase;
 import org.kuali.rice.krad.document.Document;
@@ -30,8 +31,7 @@ import org.kuali.rice.krad.document.Document;
  * contains the base methods for item events
  */
 public abstract class AttributedPurchasingCapitalAssetLocationEventBase extends AttributedDocumentEventBase implements AttributedPurchasingCapitalAssetLocationEvent {
-    private static final Logger LOG = Logger.getLogger(AttributedPurchasingCapitalAssetLocationEventBase.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(AttributedPurchasingCapitalAssetLocationEventBase.class);
 
     private final CapitalAssetLocation capitalAssetLocation;
 
@@ -84,6 +84,6 @@ public abstract class AttributedPurchasingCapitalAssetLocationEventBase extends 
             logMessage.append(capitalAssetLocation.getCapitalAssetLocationIdentifier());
         }
 
-        LOG.debug(logMessage);
+        LOG.debug("{}", logMessage);
     }
 }

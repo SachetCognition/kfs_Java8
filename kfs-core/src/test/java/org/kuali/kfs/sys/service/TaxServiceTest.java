@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.math.BigDecimal;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 @ConfigureContext(session = khuntley)
 public class TaxServiceTest extends KualiTestBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TaxServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TaxServiceTest.class);
 
     protected TaxService taxService;
     protected DateTimeService dateTimeService;
@@ -159,7 +161,6 @@ public class TaxServiceTest extends KualiTestBase {
             this.taxRegionUseTaxIndicator = taxRegionUseTaxIndicator;
             this.active = active;
         }
-
 
         public TaxRegion createTaxRegion(TaxRegionRateFixture[] taxRegionRateFixtures, TaxRegionPostalCodeFixture[] taxRegionPostalCodeFixtures, TaxRegionStateFixture[] taxRegionStateFixtures) throws Exception {
             TaxRegion taxRegion = new TaxRegion();

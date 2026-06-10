@@ -29,6 +29,8 @@ import java.util.List;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.EnterpriseFeederNotificationService;
 import org.kuali.kfs.gl.batch.service.impl.RequiredFilesMissingStatus;
 import org.kuali.kfs.gl.report.LedgerSummaryReport;
@@ -52,7 +54,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  * transaction.
  */
 public class FileEnterpriseFeederServiceImpl extends InitiateDirectoryBase implements EnterpriseFeederService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileEnterpriseFeederServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileEnterpriseFeederServiceImpl.class);
 
     protected String directoryName;
     protected String laborOriginEntryDirectoryName;
@@ -289,8 +291,6 @@ public class FileEnterpriseFeederServiceImpl extends InitiateDirectoryBase imple
     public void setDirectoryName(String directoryName) {
         this.directoryName = directoryName;
     }
-
-
 
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;

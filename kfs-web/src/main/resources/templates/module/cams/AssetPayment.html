@@ -1,0 +1,72 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Asset Payment</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+<div class="document-page" data-document-type="AssetPaymentDocument" data-form-action="camsAssetPayment" data-show-document-info="true">
+<form th:action="@{camsAssetPayment}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+	<input type="hidden" th:field="*{document.capitalAssetNumber}" />
+	
+	<div th:replace="~{fragments/cams/assetPaymentAllocation :: assetPaymentAllocation}"></div>
+	<div th:replace="~{fragments/cams/assetPayments :: assetPayments}"></div>
+
+	<div class="tab-container" th:data-tab-title="Accounting Lines">
+    <h3 th:text="Accounting Lines">Accounting Lines</h3>
+		<th:block th:switch="${true}">
+			<th:block th:case="${KualiForm.document.capitalAssetBuilderOriginIndicator }">
+				<sys-java:accountingLines>
+					<sys-java:accountingLineGroup
+						collectionPropertyName="document.sourceAccountingLines"
+						collectionItemPropertyName="document.sourceAccountingLines"
+						attributeGroupName="source" />
+				</sys-java:accountingLines>
+			</th:block>
+			<th:block th:case="*">
+				<sys-java:accountingLines>
+					<sys-java:accountingLineGroup newLinePropertyName="newSourceLine"
+						collectionPropertyName="document.sourceAccountingLines"
+						collectionItemPropertyName="document.sourceAccountingLines"
+						attributeGroupName="source" />
+				</sys-java:accountingLines>
+			</th:block>
+		</th:block>
+	</div>
+	<div th:replace="~{fragments/cams/viewPaymentInProcessByAsset :: viewPaymentInProcessByAsset}" th:with="assetPaymentAssetDetail=${KualiForm.document.assetPaymentAssetDetail},assetPaymentDetail=${KualiForm.document.sourceAccountingLines},assetPaymentDistribution=${KualiForm.document.assetPaymentDistributor.assetPaymentDistributions}"></div>
+
+	<div th:replace="~{fragments/notes :: notes}"></div>
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.report.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.FAX_NUMBER;
 import static org.kuali.kfs.sys.KFSConstants.ReportGeneration.PDF_FILE_EXTENSION;
 
@@ -30,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.module.tem.TemKeyConstants;
@@ -59,7 +60,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class NonEmployeeCertificationReportServiceImpl implements NonEmployeeCertificationReportService{
 
-    public static Logger LOG = Logger.getLogger(NonEmployeeCertificationReportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(NonEmployeeCertificationReportServiceImpl.class);
 
     protected ParameterService parameterService;
     protected ReportInfo reportInfo;

@@ -20,6 +20,8 @@ package org.kuali.kfs.gl.report;
 
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.CorrectionChange;
 import org.kuali.kfs.gl.businessobject.CorrectionChangeGroup;
 import org.kuali.kfs.gl.businessobject.CorrectionCriteria;
@@ -33,7 +35,7 @@ import org.kuali.kfs.sys.service.DocumentNumberAwareReportWriterService;
  * Generates a text file report for the GLCP and LLCP listing out chosen document parameters
  */
 public class CorrectionDocumentReport {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CorrectionDocumentReport.class);
+    private static Logger LOG = LoggerFactory.getLogger(CorrectionDocumentReport.class);
     
     /**
      * Initializes report, writes out summary lines, and finalizes

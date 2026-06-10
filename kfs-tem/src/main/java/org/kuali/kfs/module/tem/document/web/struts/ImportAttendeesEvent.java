@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.NEW_ATTENDEE_LINE;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.AttendeeProperties.ATTENDEE_TYPE;
 import static org.kuali.kfs.module.tem.TemPropertyConstants.AttendeeProperties.COMPANY;
@@ -31,7 +33,6 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.businessobject.Attendee;
 import org.kuali.kfs.module.tem.businessobject.options.AttendeeTypeValuesFinder;
 import org.kuali.kfs.module.tem.document.TravelEntertainmentDocument;
@@ -49,7 +50,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  */
 public class ImportAttendeesEvent implements Observer {
 
-    public static Logger LOG = Logger.getLogger(ImportAttendeesEvent.class);
+    public static Logger LOG = LoggerFactory.getLogger(ImportAttendeesEvent.class);
 
     private static final int WRAPPER_ARG_IDX = 0;
     private static final int FILE_CONTENTS_ARG_IDX = 1;
@@ -65,7 +66,7 @@ public class ImportAttendeesEvent implements Observer {
     public void update(final Observable observable, Object arg) {
 
         final Object[] args = (Object[]) arg;
-        LOG.debug(args[WRAPPER_ARG_IDX]);
+        LOG.debug("{}", args[WRAPPER_ARG_IDX]);
         if (!(args[WRAPPER_ARG_IDX] instanceof TravelEntertainmentMvcWrapperBean)) {
             return;
         }

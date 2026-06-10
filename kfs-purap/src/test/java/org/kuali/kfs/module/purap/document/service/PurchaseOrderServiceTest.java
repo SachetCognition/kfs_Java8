@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.appleton;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
 
@@ -62,7 +64,7 @@ import org.kuali.rice.krad.service.SequenceAccessorService;
 
 @ConfigureContext(session = parke, shouldCommitTransactions=true)
 public class PurchaseOrderServiceTest extends KualiTestBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseOrderServiceTest.class);
 
     protected DocumentService docService;
     protected PurchaseOrderService poService;
@@ -140,7 +142,6 @@ public class PurchaseOrderServiceTest extends KualiTestBase {
             }
         }
     }
-
 
     public final void testGetInternalPurchasingDollarLimit() {
         PurchaseOrderDocument po = PurchaseOrderDocumentFixture.PO_WITH_VENDOR_CONTRACT.createPurchaseOrderDocument();
@@ -590,7 +591,6 @@ public class PurchaseOrderServiceTest extends KualiTestBase {
         assertTrue(purchaseOrderDocument.isPurchaseOrderCurrentIndicator());
         assertNotNull(purchaseOrderDocument.getPurchaseOrderInitialOpenTimestamp());
     }
-
 
     /**
      * This is not quite ready yet. Got some XML parsing error.

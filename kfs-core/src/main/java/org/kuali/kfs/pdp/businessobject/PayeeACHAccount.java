@@ -22,6 +22,15 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.kuali.kfs.pdp.PdpConstants.PayeeIdTypeCodes;
@@ -43,23 +52,51 @@ import org.kuali.rice.krad.datadictionary.AttributeSecurity;
 import org.kuali.rice.krad.service.DataDictionaryService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+@Entity
+@Table(name = "PDP_PAYEE_ACH_ACCT_T")
 public class PayeeACHAccount extends TimestampedBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "ACH_ACCT_GNRTD_ID")
     private KualiInteger achAccountGeneratedIdentifier;
+
+    @Column(name = "BNK_RTNG_NBR")
     private String bankRoutingNumber;
+
+    @Column(name = "BNK_ACCT_NBR")
     private String bankAccountNumber;
+
+    @Column(name = "PAYEE_ID_NBR")
     private String payeeIdNumber;
+
+    @Column(name = "PAYEE_NM")
     private String payeeName;
+
+    @Column(name = "PAYEE_EMAIL_ADDR")
     private String payeeEmailAddress;
+
+    @Column(name = "PAYEE_ID_TYP_CD")
     private String payeeIdentifierTypeCode;
+
+    @Column(name = "ACH_TRANS_TYP")
     private String achTransactionType;
+
+    @Column(name = "BNK_ACCT_TYP_CD")
     private String bankAccountTypeCode;
+
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+
+    @Column(name = "AUTO_INACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean autoInactivationIndicator;
 
-
+    @Transient
     private ACHBank bankRouting;
+    @Transient
     private ACHTransactionType transactionType;
+    @Transient
     private ACHPayee achPayee;
 
     /**

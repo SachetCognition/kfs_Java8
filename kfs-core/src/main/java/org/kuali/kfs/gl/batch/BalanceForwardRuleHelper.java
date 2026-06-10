@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.PriorYearAccount;
 import org.kuali.kfs.coa.service.BalanceTypeService;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * A class to hold significant state for a balance forward job; it also has the methods that actually accomplish the job
  */
 public class BalanceForwardRuleHelper {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceForwardRuleHelper.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalanceForwardRuleHelper.class);
     private FlexibleOffsetAccountService flexibleOffsetAccountService;
 
     /**
@@ -198,7 +200,6 @@ public class BalanceForwardRuleHelper {
             LOG.info("BalanceForwardJob ANNUAL_CLOSING_CHARTS parameter value = " + annualClosingCharts.toString());
         }
 
-
     }
 
     /**
@@ -254,7 +255,6 @@ public class BalanceForwardRuleHelper {
             balanceTypeEncumbranceIndicators.put(balanceType.getCode(), (balanceType.isFinBalanceTypeEncumIndicator() ? Boolean.TRUE : Boolean.FALSE));
         }
     }
-
 
     /**
      * The balance to create a general balance forward origin entry for

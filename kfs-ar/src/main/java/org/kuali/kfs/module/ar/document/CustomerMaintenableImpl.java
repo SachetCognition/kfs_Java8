@@ -25,6 +25,8 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.ARCollector;
@@ -51,7 +53,7 @@ import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CustomerMaintenableImpl extends FinancialSystemMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerMaintenableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerMaintenableImpl.class);
 
     private static final String REQUIRES_APPROVAL_NODE = "RequiresApproval";
     private static final String BO_NOTES = "boNotes";
@@ -143,7 +145,6 @@ public class CustomerMaintenableImpl extends FinancialSystemMaintainable {
             newCustomer.setCustomerLastActivityDate(currentDate);
         }
     }
-
 
     @Override
     public PersistableBusinessObject initNewCollectionLine(String collectionName) {
@@ -302,7 +303,6 @@ public class CustomerMaintenableImpl extends FinancialSystemMaintainable {
             if (oldCollection.length != newCollection.length) {
                 return false;
             }
-
 
             for (int i = 0; i < oldCollection.length; i++) {
                 if (!oldAndNewObjectIsEqual("COLLECTION: " + propName, oldCollection[i], newCollection[i])) {

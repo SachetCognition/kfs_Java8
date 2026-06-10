@@ -18,13 +18,14 @@
  */
 package org.kuali.kfs.module.purap.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
 import org.kuali.kfs.module.purap.document.PurchaseOrderDocument;
 import org.kuali.kfs.module.purap.fixture.PurchaseOrderDocumentFixture;
@@ -42,7 +43,7 @@ import org.kuali.rice.krad.service.DocumentService;
 
 public class ThresholdTest extends KualiTestBase {
 
-    private static Logger LOG = Logger.getLogger(ThresholdTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ThresholdTest.class);
 
     private UnitTestSqlDao unitTestSqlDao;
 

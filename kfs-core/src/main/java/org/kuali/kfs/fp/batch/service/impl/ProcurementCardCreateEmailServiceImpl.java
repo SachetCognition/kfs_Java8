@@ -20,6 +20,8 @@ package org.kuali.kfs.fp.batch.service.impl;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.service.VelocityEmailService;
 import org.kuali.kfs.sys.service.impl.VelocityEmailServiceBase;
@@ -28,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ProcurementCardCreateEmailServiceImpl extends VelocityEmailServiceBase implements VelocityEmailService{
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardCreateEmailServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcurementCardCreateEmailServiceImpl.class);
     private String templateUrl;
 
     @Override

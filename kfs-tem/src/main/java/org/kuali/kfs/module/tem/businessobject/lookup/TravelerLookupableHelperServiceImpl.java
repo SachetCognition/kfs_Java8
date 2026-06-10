@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelParameters.EMPLOYEE_TRAVELER_TYPE_CODES;
 import static org.kuali.kfs.module.tem.TemConstants.TravelParameters.NON_EMPLOYEE_TRAVELER_TYPE_CODES;
 import static org.kuali.kfs.module.tem.TemKeyConstants.ERROR_TRAVELER_TYPES_NOT_CONFIGURED;
@@ -31,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerType;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
@@ -65,7 +66,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 @SuppressWarnings("deprecation")
 public class TravelerLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    public static Logger LOG = Logger.getLogger(TravelerLookupableHelperServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelerLookupableHelperServiceImpl.class);
 
     private BusinessObjectService businessObjectService;
     private ParameterService parameterService;

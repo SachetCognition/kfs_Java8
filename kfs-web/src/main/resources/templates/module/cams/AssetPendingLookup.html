@@ -1,0 +1,71 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Asset Pending Lookup</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="preqLockingList=${KualiForm.document.newMaintainableObject.preqLinks}" -->
+<!-- th:with="linkedDocumentNames=${KualiForm.document.newMaintainableObject.fpLinkedDocumentInfo}" -->
+<!-- th:with="fabricationOn=${KualiForm.document.newMaintainableObject.fabricationOn}" -->
+
+<th:block th:if="${!fabricationOn }">
+<div class="tab-container" th:data-tab-title="View Purchasing/Financial Asset Documents">
+    <h3 th:text="View Purchasing/Financial Asset Documents">View Purchasing/Financial Asset Documents</h3>
+	<div class="tab-container" align=center>
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="view/edit pending entries">
+    	<th:block th:if="${!empty linkedDocumentNames }">
+			<logic:iterate id="fpLinkedDocumentInfo" name="KualiForm" property="document.newMaintainableObject.fpLinkedDocumentInfo" indexId="ctr">
+				<tr>
+					<!-- th:with="documentName=${fn:substringBefore(KualiForm.document.newMaintainableObject.fpLinkedDocumentInfo[ctr], '-')}" -->
+					<!-- th:with="documentNumber=${fn:substringAfter(KualiForm.document.newMaintainableObject.fpLinkedDocumentInfo[ctr], '-')}" -->
+					<td class="infoline" align="center">${documentName} - 
+						<a href="${ConfigProperties.kew.url}/${T(org.kuali.kfs.sys.KFSConstants).DOC_HANDLER_ACTION}?command=displayDocSearchView&docId=${documentNumber}"  target="_blank">
+							${documentNumber}
+						</a>&nbsp;
+					</td>
+				</tr>
+			</logic:iterate>
+		</th:block>
+		</table>
+		<br/>
+		
+		<table cellpadding="0" cellspacing="0" class="datatable" summary="view/edit pending entries">
+		<th:block th:if="${!empty preqLockingList}">
+			<logic:iterate id="preqLinks" name="KualiForm" property="document.newMaintainableObject.preqLinks" indexId="ctr">
+				<tr>
+					<td class="infoline" align="center">Payment Request - 
+						<a href="${ConfigProperties.kew.url}/${T(org.kuali.kfs.sys.KFSConstants).DOC_HANDLER_ACTION}?command=displayDocSearchView&docId=${KualiForm.document.newMaintainableObject.preqLinks[ctr]}"  target="_blank">
+							${KualiForm.document.newMaintainableObject.preqLinks[ctr]}
+						</a>&nbsp;
+					</td>
+				</tr>
+			</logic:iterate>
+		</th:block>
+		</table>
+	</div>
+</div>
+</th:block>
+</div>
+</body>
+</html>

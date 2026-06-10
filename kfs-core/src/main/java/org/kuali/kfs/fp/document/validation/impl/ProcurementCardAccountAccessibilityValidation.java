@@ -18,12 +18,14 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.document.validation.impl.AccountingLineAccessibleValidation;
 import org.kuali.rice.krad.util.GlobalVariables;
 
 public class ProcurementCardAccountAccessibilityValidation extends AccountingLineAccessibleValidation {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardAccountAccessibilityValidation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProcurementCardAccountAccessibilityValidation.class);
 
     /**
      * KFSCNTRB-1677

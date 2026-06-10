@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.EnterpriseFeedStep;
 import org.kuali.kfs.gl.batch.service.EnterpriseFeederNotificationService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -41,7 +43,7 @@ import org.kuali.rice.krad.service.MailService;
  * The base implementation of EnterpriseFeederNotificationService; performs email-based notifications
  */
 public class EnterpriseFeederNotificationServiceImpl implements EnterpriseFeederNotificationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EnterpriseFeederNotificationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(EnterpriseFeederNotificationServiceImpl.class);
 
     private ParameterService parameterService;
     private ConfigurationService configurationService;
@@ -273,7 +275,6 @@ public class EnterpriseFeederNotificationServiceImpl implements EnterpriseFeeder
         }
         return true;
     }
-
 
     /**
      * Sets the mailService attribute value.

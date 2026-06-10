@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+   - DEPRECATED: This XML configuration is retained for backward compatibility during the
+   - Spring Boot migration. Bean definitions are being migrated to
+   - org.kuali.kfs.sys.context.SysConfig (Java @Configuration).
+   - This file is loaded via @ImportResource and will be removed once all beans
+   - are fully migrated to Java configuration.
+   -
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
    - Copyright 2005-2014 The Kuali Foundation
@@ -39,13 +45,7 @@
 				<value>classpath:org/kuali/kfs/sys/businessobject/datadictionary/*.xml</value>
 				<value>classpath:org/kuali/kfs/sys/document/datadictionary/*.xml</value>
             </list>
-        </property>
-        <property name="databaseRepositoryFilePaths">
-            <list>
-                <value>org/kuali/kfs/sys/ojb-sys.xml</value>
-            </list>
-        </property>
-        <property name="scriptConfigurationFilePaths">
+        </property>        <property name="scriptConfigurationFilePaths">
             <list>
                 <value>org/kuali/kfs/sys/dwr-sys.xml</value>
             </list>
@@ -517,7 +517,7 @@
 	
 	<bean id="homeOriginationService" parent="homeOriginationService-parentBean"/>
 	<bean id="homeOriginationService-parentBean" class="org.kuali.kfs.sys.service.impl.HomeOriginationServiceImpl" abstract="true">
-		<property name="businessObjectService" ref="businessObjectService" />
+		<property name="businessObjectService" ref="kfsBusinessObjectService" />
 	</bean>
 	
 	<bean id="originationCodeService" parent="originationCodeService-parentBean"/>
@@ -744,7 +744,7 @@
     
     <bean id="reportGenerationService-parentBean" class="org.kuali.kfs.sys.service.impl.ReportGenerationServiceImpl" abstract="true">
         <property name="dateTimeService">
-            <ref bean="dateTimeService"/>
+            <ref bean="kfsDateTimeService"/>
         </property>
     </bean>
 	<bean id="reportAggregatorService" parent="reportAggregatorService-parentBean"/>

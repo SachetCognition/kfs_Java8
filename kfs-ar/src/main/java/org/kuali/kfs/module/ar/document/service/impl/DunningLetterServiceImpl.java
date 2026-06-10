@@ -38,6 +38,8 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
@@ -79,7 +81,7 @@ import com.lowagie.text.pdf.PdfReader;
  */
 @Transactional
 public class DunningLetterServiceImpl implements DunningLetterService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DunningLetterServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DunningLetterServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected ContractsGrantsInvoiceDocumentDao contractsGrantsInvoiceDocumentDao;

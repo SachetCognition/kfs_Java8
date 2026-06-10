@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.SortedSet;
@@ -25,6 +33,8 @@ import java.util.TreeSet;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -36,14 +46,25 @@ import org.kuali.rice.krad.bo.GlobalBusinessObjectDetailBase;
  * OrganizationReversionDetail lists Organization as a primary key and Global Organization Reversions deal with several
  * Organizations, that class could not be re-used for Globals.
  */
-public class OrganizationReversionGlobalDetail extends GlobalBusinessObjectDetailBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalDetail.class);
+@Entity
+@Table(name = "CA_ORG_RVRSN_CHG_DTL_T")
+@IdClass(OrganizationReversionGlobalDetailId.class)
 
+public class OrganizationReversionGlobalDetail extends GlobalBusinessObjectDetailBase {
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalDetail.class);
+
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String organizationReversionCategoryCode;
+    @Column(name = "ORG_RVRSN_OBJ_CD")
     private String organizationReversionObjectCode;
+    @Column(name = "ORG_RVRSN_CD")
     private String organizationReversionCode;
 
+    @Transient
     private OrganizationReversionCategory organizationReversionCategory;
     private OrganizationReversionGlobal parentGlobalOrganizationReversion;
     private ObjectCode organizationReversionObject;

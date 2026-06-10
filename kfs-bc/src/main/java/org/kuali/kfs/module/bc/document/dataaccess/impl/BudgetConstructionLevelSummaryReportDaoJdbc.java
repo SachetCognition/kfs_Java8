@@ -21,6 +21,8 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.batch.dataaccess.impl.SQLForStep;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionLevelSummaryReportDao;
@@ -30,11 +32,10 @@ import org.kuali.kfs.module.bc.document.dataaccess.BudgetConstructionLevelSummar
  */
 
 public class BudgetConstructionLevelSummaryReportDaoJdbc extends BudgetConstructionDaoJdbcBase implements BudgetConstructionLevelSummaryReportDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionLevelSummaryReportDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionLevelSummaryReportDaoJdbc.class);
 
     protected static ArrayList<SQLForStep> updateReportsLevelSummaryTable = new ArrayList<SQLForStep>(7);
     protected ArrayList<Integer> insertionPoints = new ArrayList<Integer>(10);
-
 
     public BudgetConstructionLevelSummaryReportDaoJdbc() {
 

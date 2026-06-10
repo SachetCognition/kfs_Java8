@@ -18,13 +18,15 @@
  */
 package org.kuali.kfs.sys.document.validation;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent;
 
 /**
  * An interface that represents a generic validation.
  */
 public abstract class GenericValidation extends ParameterizedValidation implements Validation {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GenericValidation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GenericValidation.class);
     private boolean quitOnFail = false;
     
     /**

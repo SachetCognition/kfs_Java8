@@ -20,13 +20,36 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  * 
  * This class represents a payment type code
  */
+@Entity
+@Table(name = "PDP_PMT_TYP_T")
 public class PaymentType extends KualiCodeBase {
     
     public PaymentType() {
         
     }
+
+    @Override
+    @Id
+    @Column(name = "PMT_TYP_CD")
+    @jakarta.persistence.Access(jakarta.persistence.AccessType.PROPERTY)
+    public String getCode() {
+        return super.getCode();
+    }
+
+    @Override
+    @Column(name = "PMT_TYP_DESC")
+    @jakarta.persistence.Access(jakarta.persistence.AccessType.PROPERTY)
+    public String getName() {
+        return super.getName();
+    }
+
 }

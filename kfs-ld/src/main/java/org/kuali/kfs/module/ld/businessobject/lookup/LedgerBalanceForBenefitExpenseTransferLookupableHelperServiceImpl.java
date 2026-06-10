@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.gl.OJBUtility;
@@ -43,10 +45,9 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * The class is the front-end for the balance inquiry of Ledger Balance For Benefit Expense Transfer processing.
  */
 public class LedgerBalanceForBenefitExpenseTransferLookupableHelperServiceImpl extends LedgerBalanceForExpenseTransferLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LedgerBalanceForBenefitExpenseTransferLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LedgerBalanceForBenefitExpenseTransferLookupableHelperServiceImpl.class);
     private static final String CHART_OF_ACCOUNTS_CODE = "chartOfAccountsCode";
     private OptionsService optionsService;
-
 
     /**
      * @see org.kuali.rice.kns.lookup.Lookupable#getSearchResults(java.util.Map)

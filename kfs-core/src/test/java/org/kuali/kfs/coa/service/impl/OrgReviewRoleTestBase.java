@@ -22,8 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.kuali.kfs.coa.identity.KfsKimDocDelegateMember;
 import org.kuali.kfs.coa.identity.OrgReviewRole;
 import org.kuali.kfs.sys.KFSConstants;
@@ -81,7 +83,7 @@ public class OrgReviewRoleTestBase extends KualiTestBase {
         dateTimeService = CoreApiServiceLocator.getDateTimeService();
         orgHierRole = roleService.getRoleByNamespaceCodeAndName(KFSConstants.SysKimApiConstants.ORGANIZATION_REVIEWER_ROLE_NAMESPACECODE, KFSConstants.SysKimApiConstants.ORGANIZATION_REVIEWER_ROLE_NAME);
         acctHierRole = roleService.getRoleByNamespaceCodeAndName(KFSConstants.SysKimApiConstants.ORGANIZATION_REVIEWER_ROLE_NAMESPACECODE, KFSConstants.SysKimApiConstants.ACCOUNTING_REVIEWER_ROLE_NAME);
-        Logger.getLogger(OrgReviewRoleServiceImpl.class).setLevel(Level.DEBUG);
+        Configurator.setLevel(OrgReviewRoleServiceImpl.class.getName(), Level.DEBUG);
     }
 
     protected OrgReviewRole buildOrgHierData() {

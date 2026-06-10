@@ -24,6 +24,8 @@ import java.util.Iterator;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.PosterEntriesStep;
 import org.kuali.kfs.gl.batch.service.AccountingCycleCachingService;
@@ -44,7 +46,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PostEncumbrance implements PostTransaction, EncumbranceCalculator {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PostEncumbrance.class);
+    private static Logger LOG = LoggerFactory.getLogger(PostEncumbrance.class);
 
     private AccountingCycleCachingService accountingCycleCachingService;
     private DateTimeService dateTimeService;
@@ -194,7 +196,6 @@ public class PostEncumbrance implements PostTransaction, EncumbranceCalculator {
     public String getDestinationName() {
         return persistenceStructureService.getTableName(Encumbrance.class);
     }
-
 
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;

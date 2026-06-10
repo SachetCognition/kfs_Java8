@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,25 +42,46 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_ORG_REVERSION_T")
+@IdClass(OrganizationReversionId.class)
+
 public class OrganizationReversion extends PersistableBusinessObjectBase implements MutableInactivatable, CarryForwardReversionProcessOrganizationInfo, FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Column(name = "BDGT_RVRSN_COA_CD")
     private String budgetReversionChartOfAccountsCode;
+    @Column(name = "BDGT_RVRSNACCT_NBR")
     private String budgetReversionAccountNumber;
+    @Column(name = "CF_BY_OBJ_CD_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean carryForwardByObjectCodeIndicator;
+    @Column(name = "CSH_RVRSNFINCOA_CD")
     private String cashReversionFinancialChartOfAccountsCode;
+    @Column(name = "CSH_RVRSN_ACCT_NBR")
     private String cashReversionAccountNumber;
+    @Transient
     private Chart chartOfAccounts;
     private Account cashReversionAccount;
     private Account budgetReversionAccount;
+    @Transient
     private Chart budgetReversionChartOfAccounts;
     private Chart cashReversionFinancialChartOfAccounts;
     private SystemOptions universityFiscal;
+    @Transient
     private Organization organization;
     private List<Organization> organizations; // This is only used by the "global" document
     private List<OrganizationReversionDetail> organizationReversionDetail;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

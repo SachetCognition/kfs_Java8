@@ -23,10 +23,14 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.NDC;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.BatchSpringContext;
 import org.kuali.kfs.sys.batch.Job;
@@ -38,7 +42,7 @@ import org.kuali.rice.krad.service.KualiModuleService;
 import org.kuali.rice.krad.service.ModuleService;
 
 public class BatchStepRunner {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchStepRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchStepRunner.class);
 
     public static void main(String[] args) {
         if (args.length < 1) {
@@ -75,10 +79,22 @@ public class BatchStepRunner {
                             + "-" + dateTimeService.toDateTimeStringForFilename(dateTimeService.getCurrentDate());
                     boolean ndcSet = false;
                     try {
-                        ndcAppender = new FileAppender(Logger.getRootLogger().getAppender("StdOut").getLayout(), getLogFileName(nestedDiagnosticContext));
-                        ndcAppender.addFilter(new NDCFilter(nestedDiagnosticContext));
-                        Logger.getRootLogger().addAppender(ndcAppender);
-                        NDC.push(nestedDiagnosticContext);
+                        LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+                        Configuration config = ctx.getConfiguration();
+                        Appender stdOutAppender = config.getAppender("StdOut");
+
+                        FileAppender fileAppender = FileAppender.newBuilder()
+                            .setName("ndcAppender-" + nestedDiagnosticContext)
+                            .withFileName(getLogFileName(nestedDiagnosticContext))
+                            .setLayout(stdOutAppender != null ? stdOutAppender.getLayout() : KFSConstants.BATCH_LOGGER_DEFAULT_PATTERN_LAYOUT)
+                            .setFilter(new NDCFilter(nestedDiagnosticContext))
+                            .build();
+                        fileAppender.start();
+
+                        ndcAppender = fileAppender;
+                        config.getRootLogger().addAppender(fileAppender, null, null);
+                        ctx.updateLoggers();
+                        ThreadContext.push(nestedDiagnosticContext);
                         ndcSet = true;
                     } catch (Exception ex) {
                         LOG.warn("Could not initialize custom logging for step: " + step.getName(), ex);
@@ -92,10 +108,12 @@ public class BatchStepRunner {
                     } finally {
                         if ( ndcSet ) {
                             if (ndcAppender != null) {
-                                ndcAppender.close();
+                                ndcAppender.stop();
+                                LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+                                ctx.getConfiguration().getRootLogger().removeAppender(ndcAppender.getName());
+                                ctx.updateLoggers();
                             }
-                            Logger.getRootLogger().removeAppender(ndcAppender);
-                            NDC.pop();
+                            ThreadContext.pop();
                         }
                     }
                 } else {

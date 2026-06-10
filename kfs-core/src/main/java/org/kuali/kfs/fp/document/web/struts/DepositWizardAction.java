@@ -34,6 +34,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CashDrawer;
 import org.kuali.kfs.fp.businessobject.CashieringTransaction;
 import org.kuali.kfs.fp.businessobject.Check;
@@ -81,7 +83,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * documents.
  */
 public class DepositWizardAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DepositWizardAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DepositWizardAction.class);
     private static final String CASH_MANAGEMENT_STATUS_PAGE = "/cashManagementStatus.do";
 
     /**
@@ -764,7 +766,6 @@ public class DepositWizardAction extends KualiAction {
         return success;
     }
 
-
     /**
      * This method handles canceling (closing) the deposit wizard.
      *
@@ -781,7 +782,6 @@ public class DepositWizardAction extends KualiAction {
         ActionForward dest = returnToSender(dform.getCashManagementDocId());
         return dest;
     }
-
 
     /**
      * @param cmDocId

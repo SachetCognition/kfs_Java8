@@ -28,6 +28,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
@@ -55,7 +57,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * The default implementation of AccountingLineAuthorizer
  */
 public class AccountingLineAuthorizerBase implements AccountingLineAuthorizer {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingLineAuthorizerBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingLineAuthorizerBase.class);
 
     private static ConfigurationService kualiConfigurationService;
     protected static String riceImagePath;

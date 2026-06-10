@@ -20,6 +20,15 @@ package org.kuali.kfs.coa.businessobject;
 
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -30,43 +39,94 @@ import org.kuali.rice.krad.bo.KualiCode;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
- * 
+ * Chart of Accounts business object.
+ *
+ * <p>Mapped via JPA annotations to the {@code CA_CHART_T} table.</p>
  */
+@Entity
+@Table(name = "CA_CHART_T")
 public class Chart extends PersistableBusinessObjectBase implements KualiCode {
 
     private static final long serialVersionUID = 4129020803214027609L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Chart";
     
+    @Column(name = "FIN_COA_DESC")
     protected String finChartOfAccountDescription;
+
+    @Column(name = "FIN_COA_ACTIVE_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
+
+    @Transient
     protected String finCoaManagerPrincipalId;
+
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+
+    @Column(name = "FIN_AP_OBJ_CD")
     protected String finAccountsPayableObjectCode;
+
+    @Column(name = "FIN_EXT_ENC_OBJ_CD")
     protected String finExternalEncumbranceObjCd;
+
+    @Column(name = "FIN_PRE_ENC_OBJ_CD")
     protected String finPreEncumbranceObjectCode;
+
+    @Column(name = "FIN_CASH_OBJ_CD")
     protected String financialCashObjectCode;
+
+    @Column(name = "ICR_INC_FIN_OBJ_CD")
     protected String icrIncomeFinancialObjectCode;
+
+    @Column(name = "FIN_AR_OBJ_CD")
     protected String finAccountsReceivableObjCode;
+
+    @Column(name = "FIN_INT_ENC_OBJ_CD")
     protected String finInternalEncumbranceObjCd;
+
+    @Column(name = "ICR_EXP_FIN_OBJ_CD")
     protected String icrExpenseFinancialObjectCd;
+
+    @Column(name = "INCBDGT_ELIMOBJ_CD")
     protected String incBdgtEliminationsFinObjCd;
+
+    @Column(name = "EXPBDGT_ELIMOBJ_CD")
     protected String expBdgtEliminationsFinObjCd;
+
+    @Column(name = "FND_BAL_OBJ_CD")
     protected String fundBalanceObjectCode;
 
+    // OJB reference associations – will be converted to @ManyToOne in per-module sessions
+    @Transient
     protected ObjectCode incBdgtEliminationsFinObj;
+    @Transient
     protected ObjectCode expBdgtEliminationsFinObj;
+    @Transient
     protected ObjectCode finAccountsPayableObject;
+    @Transient
     protected ObjectCode finExternalEncumbranceObj;
+    @Transient
     protected ObjectCode finPreEncumbranceObject;
+    @Transient
     protected ObjectCode financialCashObject;
+    @Transient
     protected ObjectCode icrIncomeFinancialObject;
+    @Transient
     protected ObjectCode finAccountsReceivableObj;
+    @Transient
     protected ObjectCode finInternalEncumbranceObj;
+    @Transient
     protected ObjectCode icrExpenseFinancialObject;
+    @Transient
     protected ObjectCode fundBalanceObject;
+    @Transient
     protected Person finCoaManager;
+    @Transient
     protected Chart reportsToChartOfAccounts;
 
     private static transient ChartService chartService;

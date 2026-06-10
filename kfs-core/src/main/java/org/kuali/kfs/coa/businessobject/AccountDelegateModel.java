@@ -19,11 +19,22 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
@@ -32,15 +43,29 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 /**
  * 
  */
-public class AccountDelegateModel extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static final Logger LOG = Logger.getLogger(AccountDelegateModel.class);
+@Entity
+@Table(name = "CA_ORG_RTNG_MDL_NM_T")
+@IdClass(AccountDelegateModelId.class)
 
+public class AccountDelegateModel extends PersistableBusinessObjectBase implements MutableInactivatable {
+    private static final Logger LOG = LoggerFactory.getLogger(AccountDelegateModel.class);
+
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     private String organizationCode;
+    @Id
+    @Column(name = "ORG_RTNG_MDL_NM")
     private String accountDelegateModelName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Transient
     private List<AccountDelegateModelDetail> accountDelegateModelDetails;
 
+    @Transient
     private Organization organization;
     private Chart chartOfAccounts;
 
@@ -69,7 +94,6 @@ public class AccountDelegateModel extends PersistableBusinessObjectBase implemen
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
 
-
     /**
      * Gets the organizationCode attribute.
      * 
@@ -88,7 +112,6 @@ public class AccountDelegateModel extends PersistableBusinessObjectBase implemen
         this.organizationCode = organizationCode;
     }
 
-
     /**
      * Gets the accountDelegateModelName attribute.
      * 
@@ -106,7 +129,6 @@ public class AccountDelegateModel extends PersistableBusinessObjectBase implemen
     public void setAccountDelegateModelName(String organizationRoutingModelName) {
         this.accountDelegateModelName = organizationRoutingModelName;
     }
-
 
     /**
      * Gets the organization attribute.

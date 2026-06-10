@@ -20,6 +20,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.sql.Timestamp;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -28,16 +35,27 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Base class containing fields and methods that are common among templates.
  */
+@MappedSuperclass
 public abstract class TemplateBase extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Column(name = "BILL_BY_COA_CD")
     protected String billByChartOfAccountCode;
+    @Column(name = "BILL_BY_ORG_CD")
     protected String billedByOrganizationCode;
+    @Transient
     protected Chart billByChartOfAccount;
+    @Transient
     protected Organization billedByOrganization;
+    @Column(name = "RSTRC_USE_BY_COA_ORG_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean restrictUseByChartOrg;
+    @Column(name = "FILE_NM")
     protected String filename;
+    @Column(name = "UPLOAD_DT")
     protected Timestamp uploadDate;
 
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
     /**

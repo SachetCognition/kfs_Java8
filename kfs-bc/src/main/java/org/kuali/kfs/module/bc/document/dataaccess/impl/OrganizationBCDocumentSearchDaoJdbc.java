@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.document.dataaccess.OrganizationBCDocumentSearchDao;
 import org.kuali.kfs.sys.KFSConstants;
@@ -26,7 +28,7 @@ import org.kuali.kfs.sys.KFSConstants;
  * This class...
  */
 public class OrganizationBCDocumentSearchDaoJdbc extends BudgetConstructionDaoJdbcBase implements OrganizationBCDocumentSearchDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationBCDocumentSearchDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationBCDocumentSearchDaoJdbc.class);
 
     protected static String[] buildAccountSelectPullListTemplates = new String[1];
     protected static String[] buildBudgetedAccountsAbovePointsOfView = new String[1];

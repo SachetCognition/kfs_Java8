@@ -24,13 +24,28 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 /**
  * Tax District Rate business object.
  */
+@Entity
+@Table(name = "FS_TAX_REGION_RATE_T")
+@IdClass(TaxRegionRateId.class)
 public class TaxRegionRate extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "TAX_REGION_CD")
     private String taxRegionCode;
+    @Id
+    @Column(name = "TAX_RATE_EFFECTIVE_DT")
     private Date effectiveDate;
+    @Column(name = "TAX_RATE")
     private BigDecimal taxRate;
 
     public Date getEffectiveDate() {

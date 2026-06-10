@@ -26,7 +26,18 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerAddress;
@@ -72,65 +83,123 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+@Entity
+@Table(name = "AR_INV_DOC_T")
 public class CustomerInvoiceDocument extends AccountingDocumentBase implements AmountTotaling, Copyable, Correctable, Comparable<CustomerInvoiceDocument>, AccountsReceivableCustomerInvoice {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocument.class);
 
     protected static final String HAS_RECCURENCE_NODE = "HasReccurence";
     protected static final String BATCH_GENERATED_NODE = "BatchGenerated";
 
+    @Column(name = "AR_INV_HDR_TXT")
     protected String invoiceHeaderText;
+    @Column(name = "AR_INV_ATTN_LN_TXT")
     protected String invoiceAttentionLineText;
+    @Column(name = "AR_INV_DUE_DT")
     protected Date invoiceDueDate;
+    @Column(name = "AR_BILLING_DT")
     protected Date billingDate;
+    @Column(name = "AR_INV_CLOSE_DT")
     protected Date closedDate;
+    @Transient
     protected Date billingDateForDisplay;
+    @Column(name = "AR_INV_TERMS_TXT")
     protected String invoiceTermsText;
+    @Column(name = "ORG_INV_NBR")
     protected String organizationInvoiceNumber;
+    @Column(name = "CUST_PO_NBR")
     protected String customerPurchaseOrderNumber;
+    @Column(name = "AR_PRN_INV_IND")
     protected String printInvoiceIndicator;
+    @Column(name = "CUST_PO_DT")
     protected Date customerPurchaseOrderDate;
+    @Column(name = "AR_BILL_BY_COA_CD")
     protected String billByChartOfAccountCode;
+    @Column(name = "AR_BILL_BY_ORG_CD")
     protected String billedByOrganizationCode;
+    @Column(name = "CUST_SHIP_ADDR_ID")
     protected Integer customerShipToAddressIdentifier;
+    @Column(name = "CUST_BILL_ADDR_ID")
     protected Integer customerBillToAddressIdentifier;
+    @Column(name = "CUST_SPCL_PRCS_CD")
     protected String customerSpecialProcessingCode;
+    @Column(name = "CUST_REC_ATT_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean customerRecordAttachmentIndicator;
+    @Column(name = "AR_OPEN_INV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean openInvoiceIndicator;
+    @Column(name = "AR_PRNT_DT")
     protected Date printDate;
+    @Transient
     protected Integer age;
+    @Column(name = "CUST_NM")
     protected String customerName;
+    @Column(name = "BILL_ADDR_NM")
     protected String billingAddressName;
+    @Column(name = "BILL_CITY_NM")
     protected String billingCityName;
+    @Column(name = "BILL_STATE_CD")
     protected String billingStateCode;
+    @Column(name = "BILL_ZIP_CD")
     protected String billingZipCode;
+    @Column(name = "BILL_CNTRY_CD")
     protected String billingCountryCode;
+    @Column(name = "BILL_ADDR_INTL_PROV_NM")
     protected String billingAddressInternationalProvinceName;
+    @Column(name = "BILL_INTL_MAIL_CD")
     protected String billingInternationalMailCode;
+    @Column(name = "BILL_EMAIL_ADDR")
     protected String billingEmailAddress;
+    @Column(name = "BILL_ADDR_TYPE_CD")
     protected String billingAddressTypeCode;
+    @Column(name = "BILL_LINE_1_ADDR")
     protected String billingLine1StreetAddress;
+    @Column(name = "BILL_LINE_2_ADDR")
     protected String billingLine2StreetAddress;
+    @Column(name = "SHIP_LINE_1_ADDR")
     protected String shippingLine1StreetAddress;
+    @Column(name = "SHIP_LINE_2_ADDR")
     protected String shippingLine2StreetAddress;
+    @Column(name = "SHIP_ADDR_NM")
     protected String shippingAddressName;
+    @Column(name = "SHIP_CITY_NM")
     protected String shippingCityName;
+    @Column(name = "SHIP_STATE_CD")
     protected String shippingStateCode;
+    @Column(name = "SHIP_ZIP_CD")
     protected String shippingZipCode;
+    @Column(name = "SHIP_CNTRY_CD")
     protected String shippingCountryCode;
+    @Column(name = "SHIP_ADDR_INTL_PROV_NM")
     protected String shippingAddressInternationalProvinceName;
+    @Column(name = "SHIP_INTL_MAIL_CD")
     protected String shippingInternationalMailCode;
+    @Column(name = "SHIP_EMAIL_ADDR")
     protected String shippingEmailAddress;
+    @Column(name = "SHIP_ADDR_TYPE_CD")
     protected String shippingAddressTypeCode;
+    @Column(name = "RECURRED_INV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean recurredInvoiceIndicator;
+    @Column(name = "REPORTED_DT")
     protected Date reportedDate;
 
+    @Transient
     protected AccountsReceivableDocumentHeader accountsReceivableDocumentHeader;
+    @Transient
     protected Chart billByChartOfAccount;
+    @Transient
     protected Organization billedByOrganization;
+    @Transient
     protected CustomerProcessingType customerSpecialProcessing;
+    @Transient
     protected PrintInvoiceOptions printInvoiceOption;
+    @Transient
     protected CustomerAddress customerShipToAddress;
+    @Transient
     protected CustomerAddress customerBillToAddress;
+    @Transient
     protected CustomerInvoiceRecurrenceDetails customerInvoiceRecurrenceDetails;
 
     /**
@@ -170,7 +239,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the invoiceHeaderText attribute.
      *
@@ -188,7 +256,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setInvoiceHeaderText(String invoiceHeaderText) {
         this.invoiceHeaderText = invoiceHeaderText;
     }
-
 
     /**
      * Gets the invoiceAttentionLineText attribute.
@@ -209,7 +276,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.invoiceAttentionLineText = invoiceAttentionLineText;
     }
 
-
     /**
      * Gets the invoiceDueDate attribute.
      *
@@ -229,7 +295,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setInvoiceDueDate(Date invoiceDueDate) {
         this.invoiceDueDate = invoiceDueDate;
     }
-
 
     /**
      * Gets the billingDate attribute.
@@ -269,7 +334,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.billingDate = billingDate;
     }
 
-
     /**
      * Gets the invoiceTermsText attribute.
      *
@@ -289,7 +353,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setInvoiceTermsText(String invoiceTermsText) {
         this.invoiceTermsText = invoiceTermsText;
     }
-
 
     /**
      * Gets the organizationInvoiceNumber attribute.
@@ -365,7 +428,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerPurchaseOrderDate = customerPurchaseOrderDate;
     }
 
-
     /**
      * Gets the billByChartOfAccountCode attribute.
      *
@@ -424,7 +486,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerShipToAddressIdentifier = customerShipToAddressIdentifier;
     }
 
-
     /**
      * Gets the customerBillToAddressIdentifier attribute.
      *
@@ -444,7 +505,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerBillToAddressIdentifier = customerBillToAddressIdentifier;
     }
 
-
     /**
      * Gets the customerSpecialProcessingCode attribute.
      *
@@ -463,7 +523,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.customerSpecialProcessingCode = customerSpecialProcessingCode;
     }
 
-
     /**
      * Gets the customerRecordAttachmentIndicator attribute.
      *
@@ -481,7 +540,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
     public void setCustomerRecordAttachmentIndicator(boolean customerRecordAttachmentIndicator) {
         this.customerRecordAttachmentIndicator = customerRecordAttachmentIndicator;
     }
-
 
     /**
      * Gets the openInvoiceIndicator attribute.
@@ -719,10 +777,8 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
             addSalesTaxGLPEs(sequenceHelper, glpeSourceDetail);
         }
 
-
         return true;
     }
-
 
     /**
      * This method creates the receivable GLPEs for each invoice detail line.
@@ -1091,7 +1147,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         }
     }
 
-
     /**
      * This method...
      */
@@ -1176,7 +1231,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         }
         return null;
     }
-
 
     /**
      * This method is called on CustomerInvoiceDocumentAction.execute() to set isDiscount to true if it truly is a discount line
@@ -1714,7 +1768,6 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
 //        this.quickApply = quickApply;
 //    }
 
-
     /**
      * Answers true when invoice recurrence details are provided by the user
      *
@@ -1769,6 +1822,7 @@ public class CustomerInvoiceDocument extends AccountingDocumentBase implements A
         this.accountsReceivableDocumentHeader = (org.kuali.kfs.module.ar.businessobject.AccountsReceivableDocumentHeader)accountsReceivableDocumentHeader;
     }
 
+    @Column(name = "AGING_RPT_SENT_TM")
     private Timestamp agingReportSentTime;
 
     /**

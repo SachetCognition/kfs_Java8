@@ -19,7 +19,8 @@
 package org.kuali.kfs.module.ar.document.validation.event;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.CashControlDetail;
 import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEventBase;
@@ -27,8 +28,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public abstract class CashControlDetailEventBase extends KualiDocumentEventBase implements CashControlDetailEvent {
 
-    private static final Logger LOG = Logger.getLogger(CashControlDetailEventBase.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(CashControlDetailEventBase.class);
 
     private final CashControlDetail cashControlDetail;
 
@@ -50,14 +50,12 @@ public abstract class CashControlDetailEventBase extends KualiDocumentEventBase 
         logEvent();
     }
 
-
     /**
      * @see org.kuali.kfs.module.ar.document.validation.event.CustomerInvoiceDetailEvent#getCustomerInvoiceDetail()
      */
     public CashControlDetail getCashControlDetail() {
         return cashControlDetail;
     }
-
 
     /**
      * @see org.kuali.rice.krad.rule.event.KualiDocumentEvent#validate()
@@ -85,6 +83,6 @@ public abstract class CashControlDetailEventBase extends KualiDocumentEventBase 
             logMessage.append(cashControlDetail.getDocumentNumber());
         }
 
-        LOG.debug(logMessage);
+        LOG.debug("{}", logMessage);
     }
 }

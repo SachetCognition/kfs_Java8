@@ -22,7 +22,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -47,7 +48,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class is a KFS specific TransactionalDocumentBase class
  */
 public class FinancialSystemTransactionalDocumentBase extends TransactionalDocumentBase implements FinancialSystemTransactionalDocument {
-    private static final Logger LOG = Logger.getLogger(FinancialSystemTransactionalDocumentBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FinancialSystemTransactionalDocumentBase.class);
 
     protected static final String UPDATE_TOTAL_AMOUNT_IN_POST_PROCESSING_PARAMETER_NAME = "UPDATE_TOTAL_AMOUNT_IN_POST_PROCESSING_IND";
 

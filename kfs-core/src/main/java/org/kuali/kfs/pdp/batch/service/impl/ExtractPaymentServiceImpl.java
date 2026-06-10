@@ -37,6 +37,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.batch.service.ExtractPaymentService;
@@ -69,10 +71,9 @@ import org.kuali.rice.location.api.country.CountryService;
 import org.springframework.transaction.annotation.Transactional;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
-
 @Transactional
 public class ExtractPaymentServiceImpl extends InitiateDirectoryBase implements ExtractPaymentService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExtractPaymentServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExtractPaymentServiceImpl.class);
 
     protected String directoryName;
 
@@ -627,7 +628,6 @@ public class ExtractPaymentServiceImpl extends InitiateDirectoryBase implements 
         }
     }
 
-
     protected String escapeString(String input) {
         String output = input.replaceAll("\\&", "&amp;");
         output = output.replaceAll("\"", "&quot;");
@@ -645,7 +645,6 @@ public class ExtractPaymentServiceImpl extends InitiateDirectoryBase implements 
     public void setDirectoryName(String directoryName) {
         this.directoryName = directoryName;
     }
-
 
     /**
      * Sets the dateTimeService attribute value.

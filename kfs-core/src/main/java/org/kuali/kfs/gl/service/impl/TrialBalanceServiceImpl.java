@@ -27,6 +27,8 @@ import java.util.ResourceBundle;
 import net.sf.jasperreports.engine.JRParameter;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.dataaccess.TrialBalanceDao;
 import org.kuali.kfs.gl.service.TrialBalanceService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -41,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class TrialBalanceServiceImpl implements TrialBalanceService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TrialBalanceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(TrialBalanceServiceImpl.class);
 
     private String msuLogoPath;
     private String ebsLogoPath;
@@ -50,7 +52,6 @@ public class TrialBalanceServiceImpl implements TrialBalanceService {
     protected ReportInfo glTrialBalanceReportInfo;
     protected ReportGenerationService reportGenerationService;
     protected DateTimeService dateTimeService;
-
 
     @Override
     public List findTrialBalance(String selectedFiscalYear, String chartCode, String periodCode) {
@@ -208,6 +209,5 @@ public class TrialBalanceServiceImpl implements TrialBalanceService {
     public void setEbsLogoPath(String ebsLogoPath) {
         this.ebsLogoPath = ebsLogoPath;
     }
-
 
 }

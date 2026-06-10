@@ -31,16 +31,41 @@ import org.kuali.rice.location.api.LocationConstants;
 import org.kuali.rice.location.framework.country.CountryEbo;
 import org.kuali.rice.location.framework.county.CountyEbo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "FS_TAX_COUNTY_T")
+@IdClass(TaxRegionCountyId.class)
 public class TaxRegionCounty extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "POSTAL_CNTRY_CD")
     protected String postalCountryCode;
+	@Id
+	@Column(name = "COUNTY_CD")
 	protected String countyCode;
+	@Id
+	@Column(name = "STATE_CD")
 	protected String stateCode;
+	@Id
+	@Column(name = "TAX_REGION_CD")
 	protected String taxRegionCode;
+	@Column(name = "ACTV_IND")
+	@Convert(converter = YesNoConverter.class)
 	protected boolean active;
 
+	@Transient
 	protected CountryEbo country;
+	@Transient
 	protected CountyEbo county;
+	@Transient
 	protected TaxRegion taxRegion;
 
 	public String getCountyCode() {

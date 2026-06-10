@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.businessobject.lookup;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.wklykins;
 
 import java.sql.Date;
@@ -70,7 +72,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 @ConfigureContext(session = wklykins)
 public class DunningLetterDistributionLookupableHelperServiceImplTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DunningLetterDistributionLookupableHelperServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(DunningLetterDistributionLookupableHelperServiceImplTest.class);
 
     private GenerateDunningLettersLookupableHelperServiceImpl generateDunningLettersLookupableHelperServiceImpl;
     private GenerateDunningLettersLookupForm generateDunningLettersLookupForm;
@@ -107,7 +109,6 @@ public class DunningLetterDistributionLookupableHelperServiceImplTest extends Ku
         award.getActiveAwardAccounts().add(awardAccount_1);
         award = ARAwardFixture.CG_AWARD_MONTHLY_BILLED_DATE_NULL.setAgencyFromFixture((Award) award);
         // To add data for OrganizationOptions as fixture.
-
 
         OrganizationOptions organizationOptions = new OrganizationOptions();
 

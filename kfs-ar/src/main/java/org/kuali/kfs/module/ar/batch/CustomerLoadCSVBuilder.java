@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.batch.vo.CustomerAddressCSV;
 import org.kuali.kfs.module.ar.batch.vo.CustomerAddressDigesterVO;
 import org.kuali.kfs.module.ar.batch.vo.CustomerDigesterVO;
@@ -33,7 +35,7 @@ import org.kuali.kfs.module.ar.batch.vo.CustomerDigesterVO;
  * 
  */
 public class CustomerLoadCSVBuilder {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerLoadCSVBuilder.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerLoadCSVBuilder.class);
 
     /**
      * Convert the parseData object into CustomerDigesterVO 

@@ -31,6 +31,8 @@ import org.apache.commons.lang.math.RandomUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.businessobject.PurchaseOrderItem;
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.util.KRADUtils;
  * Struts Action for printing Purap documents outside of a document action
  */
 public class ElectronicInvoiceTestAction extends KualiAction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceTestAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceTestAction.class);
     
     private static final String AREA_C0DE = "areaCode";
     private static final String PHONE_NUMBER = "phoneNumber";

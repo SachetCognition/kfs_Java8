@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.module.tem.TemConstants.ExpenseType;
@@ -62,7 +63,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 public class AccountingDistributionServiceImpl implements AccountingDistributionService {
 
-    protected static Logger LOG = Logger.getLogger(AccountingDistributionServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountingDistributionServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected ObjectCodeService objectCodeService;

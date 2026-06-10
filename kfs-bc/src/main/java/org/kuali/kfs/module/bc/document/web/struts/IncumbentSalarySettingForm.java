@@ -22,14 +22,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionIntendedIncumbent;
 import org.kuali.kfs.module.bc.businessobject.PendingBudgetConstructionAppointmentFunding;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 
-
 public class IncumbentSalarySettingForm extends DetailSalarySettingForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IncumbentSalarySettingForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IncumbentSalarySettingForm.class);
 
     private boolean refreshIncumbentBeforeSalarySetting;
 

@@ -1,0 +1,106 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Close</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+<div class="kfs-page" data-header-title="" data-doc-title="Proposal/Award Close">
+<h1></h1>
+<form th:action="@{cgClose}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+
+    <sys:hiddenDocumentFields isFinancialDocument="false" />
+    <div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+    <div class="tab-container" th:data-tab-title="Close">
+    <h3 th:text="Close">Close</h3>
+        <!-- th:with="closeAttributes=${DataDictionary.ProposalAwardCloseDocument.attributes}" -->
+
+         <div class="tab-container" align="center">
+
+            <fieldset>
+                <legend><b>Perform Close</b></legend>
+                <table>
+                    <tr>
+                        <th style="text-align: right;"><label th:text="${closeAttributes.userInitiatedCloseDate.label}"></label></th>
+                       	 <th:block th:if="${readOnly}">
+                        <td style="width:50%">
+                            	${KualiForm.document.userInitiatedCloseDate}&nbsp;
+                        	</td>
+						</th:block>
+						<th:block th:if="${!readOnly}">
+							<td style="width:50%">
+                            <kul:dateInputNoAttributeEntry property="document.userInitiatedCloseDate" maxLength="10" size="10" />
+                        </td>
+                       	</th:block>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right;"><label th:text="${closeAttributes.closeOnOrBeforeDate.label}"></label></th>
+                       		<th:block th:if="${readOnly}">
+                       	 		<td style="width:50%">
+                            		${KualiForm.document.closeOnOrBeforeDate}&nbsp;
+                        		</td>
+							</th:block>
+							<th:block th:if="${!readOnly}">
+                        <td style="width:50%">
+                            <kul:dateInputNoAttributeEntry property="document.closeOnOrBeforeDate"  maxLength="10" size="10" />
+                        </td>
+                     	  	</th:block>
+                     
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend><b>Close Information</b></legend>
+                <table>
+                    <tr>
+                        <th style="text-align: right;">Date of Last Close:</th>
+                        <td style="width:50%">${KualiForm.mostRecentClose.userInitiatedCloseDate}&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right;">Award Records Closed:</th>
+                        <td style="width:50%">${KualiForm.mostRecentClose.awardClosedCount}&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th style="text-align: right;">Proposal Records Closed:</th>
+                        <td style="width:50%">${KualiForm.mostRecentClose.proposalClosedCount}&nbsp;</td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+    <div th:replace="~{fragments/notes :: notes}"></div>
+    <div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+    <div th:replace="~{fragments/routeLog :: routeLog}"></div>
+    <div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+    <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+    <div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

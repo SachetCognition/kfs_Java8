@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.sys.batch.AbstractStep;
@@ -32,7 +34,7 @@ import org.springframework.util.StopWatch;
  * A step to run the scrubber process.
  */
 public class LaborFileRenameStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborFileRenameStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborFileRenameStep.class);
     private String batchFileDirectoryName;
     
     public boolean execute(String jobName, Date jobRunDate) {

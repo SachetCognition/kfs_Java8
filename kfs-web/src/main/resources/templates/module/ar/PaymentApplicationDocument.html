@@ -1,0 +1,102 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Payment Application Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+<script type='text/javascript'>
+function toggle(id) {
+  var v=document.getElementById(id); 
+  if('none' != v.style.display) {
+    v.style.display='none';
+  } else {
+    v.style.display='';
+  }
+}
+</script>
+<th:block th:if="${!accountingLineScriptsLoaded}">
+	<script type='text/javascript' src="dwr/interface/ChartService.js"></script>
+	<script type='text/javascript' src="dwr/interface/AccountService.js"></script>
+	<script type='text/javascript' src="dwr/interface/SubAccountService.js"></script>
+	<script type='text/javascript' src="dwr/interface/ObjectCodeService.js"></script>
+	<script type='text/javascript' src="dwr/interface/ObjectTypeService.js"></script>
+	<script type='text/javascript'
+		src="dwr/interface/SubObjectCodeService.js"></script>
+	<script type='text/javascript'
+		src="dwr/interface/ProjectCodeService.js"></script>
+	<script type='text/javascript'
+		src="dwr/interface/OriginationCodeService.js"></script>
+	<script language="JavaScript" type="text/javascript"
+		src="scripts/sys/objectInfo.js"></script>
+	<c:set var="accountingLineScriptsLoaded" value="true" scope="request" />
+</th:block>
+
+<c:set var="accountsCanCrossCharts" value="<span th:text="${SpringContext.getBean(AccountService.class).accountsCanCrossCharts()}"></span>" />
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+<!-- th:with="paymentApplicationDocumentAttributes=${DataDictionary['PaymentApplicationDocument'].attributes}" -->
+<!-- th:with="invoiceAttributes=${DataDictionary['CustomerInvoiceDocument'].attributes}" -->
+<!-- th:with="invoicePaidAppliedAttributes=${DataDictionary['InvoicePaidApplied'].attributes}" -->
+<!-- th:with="customerAttributes=${DataDictionary['Customer'].attributes}" -->
+<!-- th:with="customerInvoiceDetailAttributes=${DataDictionary['CustomerInvoiceDetail'].attributes}" -->
+<!-- th:with="hasRelatedCashControlDocument=${null != KualiForm.cashControlDocument}" -->
+<!-- th:with="isCustomerSelected=${!empty KualiForm.document.accountsReceivableDocumentHeader.customerNumber}" -->
+<!-- th:with="invoiceApplications=${KualiForm.invoiceApplications}" -->
+
+<div class="document-page" data-document-type="PaymentApplicationDocument" data-form-action="arPaymentApplicationDocument" data-show-document-info="true">
+<form th:action="@{arPaymentApplicationDocument}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+	<sys:hiddenDocumentFields isFinancialDocument="false" />
+
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+
+	<div th:replace="~{fragments/ar/paymentApplicationControlInformation :: paymentApplicationControlInformation}" th:with="isCustomerSelected=${isCustomerSelected},hasRelatedCashControlDocument=${hasRelatedCashControlDocument},customerAttributes=${customerAttributes},customerInvoiceDetailAttributes=${customerInvoiceDetailAttributes},invoiceAttributes=${invoiceAttributes},readOnly=${readOnly}"></div>
+
+	<div th:replace="~{fragments/ar/paymentApplicationSummaryOfAppliedFunds :: paymentApplicationSummaryOfAppliedFunds}" th:with="isCustomerSelected=${isCustomerSelected},hasRelatedCashControlDocument=${hasRelatedCashControlDocument},readOnly=${readOnly}"></div>
+
+	<div th:replace="~{fragments/ar/paymentApplicationQuickApplyToInvoice :: paymentApplicationQuickApplyToInvoice}" th:with="isCustomerSelected=${isCustomerSelected},hasRelatedCashControlDocument=${hasRelatedCashControlDocument},readOnly=${readOnly},customerInvoiceDetailAttributes=${customerInvoiceDetailAttributes},invoiceAttributes=${invoiceAttributes}"></div>
+
+	<div th:replace="~{fragments/ar/paymentApplicationApplyToInvoiceDetail :: paymentApplicationApplyToInvoiceDetail}" th:with="customerAttributes=${customerAttributes},customerInvoiceDetailAttributes=${customerInvoiceDetailAttributes},invoiceAttributes=${invoiceAttributes},readOnly=${readOnly}"></div>
+
+	<div th:replace="~{fragments/ar/paymentApplicationNonAr :: paymentApplicationNonAr}" th:with="customerAttributes=${customerAttributes},isCustomerSelected=${isCustomerSelected},hasRelatedCashControlDocument=${hasRelatedCashControlDocument},readOnly=${readOnly},accountsCanCrossCharts=${accountsCanCrossCharts}"></div>
+	<div th:replace="~{fragments/ar/paymentApplicationUnappliedTab :: paymentApplicationUnappliedTab}" th:with="isCustomerSelected=${isCustomerSelected},readOnly=${readOnly},hasRelatedCashControlDocument=${hasRelatedCashControlDocument}"></div>
+
+	<div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+
+	<div th:replace="~{fragments/notes :: notes}"></div>
+
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+	
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+</div>
+</div>
+</div>
+</body>
+</html>

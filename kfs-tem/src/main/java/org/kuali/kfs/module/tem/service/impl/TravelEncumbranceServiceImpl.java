@@ -31,7 +31,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.OffsetDefinition;
@@ -87,7 +88,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class TravelEncumbranceServiceImpl implements TravelEncumbranceService {
 
-    protected static Logger LOG = Logger.getLogger(TravelEncumbranceServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelEncumbranceServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected TravelDocumentService travelDocumentService;
@@ -567,7 +568,6 @@ public class TravelEncumbranceServiceImpl implements TravelEncumbranceService {
         for (Document document : relatedDocs) {
             TravelAuthorizationDocument authorizationDocument = (TravelAuthorizationDocument)document;
 
-
             String docType = document instanceof TravelAuthorizationDocument ? TravelDocTypes.TRAVEL_AUTHORIZATION_DOCUMENT
                     : TravelDocTypes.TRAVEL_AUTHORIZATION_AMEND_DOCUMENT;
 
@@ -702,7 +702,6 @@ public class TravelEncumbranceServiceImpl implements TravelEncumbranceService {
 
         return offsetEntry;
     }
-
 
     /**
      * @see org.kuali.kfs.module.tem.document.service.TravelDocumentService#convertTo(Encumbrance)
@@ -1090,7 +1089,6 @@ public class TravelEncumbranceServiceImpl implements TravelEncumbranceService {
         } catch (ParseException pe) {
             LOG.error("error while parsing date " + pe);
         }
-
 
         final boolean holdEncumbrance = tripEndFiscalYear == null || options == null || accountingPeriod == null || matchingCount == 0;
         return holdEncumbrance;

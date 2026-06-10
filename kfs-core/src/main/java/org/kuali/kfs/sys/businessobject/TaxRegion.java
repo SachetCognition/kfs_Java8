@@ -29,25 +29,54 @@ import org.kuali.kfs.coa.businessobject.ObjectCodeCurrent;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
+@Entity
+@Table(name = "FS_TAX_REGION_T")
 public class TaxRegion extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "TAX_REGION_CD")
     protected String taxRegionCode; // (e.g., state code or district code)
+    @Column(name = "TAX_REGION_NM")
     protected String taxRegionName; // (e.g., state name or tax district name)
+    @Column(name = "TAX_REGION_TYP_CD")
     protected String taxRegionTypeCode;
+    @Column(name = "LIAB_ACCT_FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "LIAB_ACCT_ACCT_NBR")
     protected String accountNumber;
+    @Column(name = "LIAB_ACCT_FIN_OBJECT_CD")
     protected String financialObjectCode;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
+    @Column(name = "TAX_REGION_USE_TAX_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean taxRegionUseTaxIndicator;
 
+    @Transient
     protected Chart chartOfAccounts;
+    @Transient
     protected Account account;
+    @Transient
     protected ObjectCodeCurrent objectCode;
+    @Transient
     protected TaxRegionType taxRegionType;
 
+    @Transient
     protected List<TaxRegionRate> taxRegionRates = new ArrayList<TaxRegionRate>();
+    @Transient
     protected List<TaxRegionState> taxRegionStates = new ArrayList<TaxRegionState>();
+    @Transient
     protected List<TaxRegionCounty> taxRegionCounties = new ArrayList<TaxRegionCounty>();
+    @Transient
     protected List<TaxRegionPostalCode> taxRegionPostalCodes = new ArrayList<TaxRegionPostalCode>();
 
     public List<TaxRegionRate> getTaxRegionRates() {
@@ -141,6 +170,7 @@ public class TaxRegion extends PersistableBusinessObjectBase implements MutableI
     }
 
 
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         // TODO Auto-generated method stub
         return null;

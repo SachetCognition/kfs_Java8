@@ -18,8 +18,20 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.SufficientFundRebuild;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -29,20 +41,34 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 /**
  * 
  */
-public class ObjectLevel extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ObjectLevel.class);
+@Entity
+@Table(name = "CA_OBJ_LEVEL_T")
+@IdClass(ObjectLevelId.class)
 
+public class ObjectLevel extends PersistableBusinessObjectBase implements MutableInactivatable {
+    private static Logger LOG = LoggerFactory.getLogger(ObjectLevel.class);
+
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_LEVEL_CD")
     private String financialObjectLevelCode;
+    @Column(name = "FIN_OBJ_LEVEL_NM")
     private String financialObjectLevelName;
+    @Column(name = "FIN_OBJLVL_SHRT_NM")
     private String financialObjectLevelShortNm;
+    @Column(name = "FIN_OBJLVL_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "FIN_REPORT_SORT_CD")
     private String financialReportingSortCode;
+    @Column(name = "FIN_CONS_OBJ_CD")
     private String financialConsolidationObjectCode;
 
+    @Transient
     private ObjectConsolidation financialConsolidationObject;
     private Chart chartOfAccounts;
-
 
     /**
      * Constructs a ObjLevel.java.
@@ -142,7 +168,6 @@ public class ObjectLevel extends PersistableBusinessObjectBase implements Mutabl
         this.financialReportingSortCode = financialReportingSortCode;
     }
 
-
     public String getConsolidatedObjectCode() {
         return financialConsolidationObject.getFinancialReportingSortCode();
     }
@@ -187,7 +212,6 @@ public class ObjectLevel extends PersistableBusinessObjectBase implements Mutabl
     public void setChartOfAccounts(Chart chartOfAccounts) {
         this.chartOfAccounts = chartOfAccounts;
     }
-
 
     /**
      * @return Returns the financialConsolidationObjectCode.

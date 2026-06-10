@@ -28,8 +28,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.core.Appender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.service.SchedulerService;
 import org.kuali.kfs.sys.context.ProxyUtils;
@@ -42,15 +43,18 @@ import org.kuali.rice.kew.api.exception.WorkflowException;
 import org.kuali.rice.krad.UserSession;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.InterruptableJob;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.StatefulJob;
+import org.quartz.PersistJobDataAfterExecution;
 import org.quartz.UnableToInterruptJobException;
 import org.springframework.util.StopWatch;
 
-public class Job implements StatefulJob, InterruptableJob {
+@DisallowConcurrentExecution
+@PersistJobDataAfterExecution
+public class Job implements InterruptableJob {
 
     public static final String JOB_RUN_START_STEP = "JOB_RUN_START_STEP";
     public static final String JOB_RUN_END_STEP = "JOB_RUN_END_STEP";
@@ -59,7 +63,7 @@ public class Job implements StatefulJob, InterruptableJob {
     public static final String STEP_RUN_ON_DATE_PARM_NM = "RUN_DATE";
     public static final String STEP_USER_PARM_NM = "USER";
     public static final String RUN_DATE_CUTOFF_PARM_NM = "RUN_DATE_CUTOFF_TIME";
-    private static final Logger LOG = Logger.getLogger(Job.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Job.class);
     private SchedulerService schedulerService;
     private ParameterService parameterService;
     private DateTimeService dateTimeService;
@@ -77,7 +81,7 @@ public class Job implements StatefulJob, InterruptableJob {
         workerThread = Thread.currentThread();
         if (isNotRunnable()) {
             if (LOG.isInfoEnabled()) {
-                LOG.info("Skipping job because doNotRun is true: " + jobExecutionContext.getJobDetail().getName());
+                LOG.info("Skipping job because doNotRun is true: " + jobExecutionContext.getJobDetail().getKey().getName());
             }
             return;
         }
@@ -121,7 +125,7 @@ public class Job implements StatefulJob, InterruptableJob {
                 }
                 step.setInterrupted(false);
                 try {
-                    if (!runStep(parameterService, jobExecutionContext.getJobDetail().getFullName(), currentStepNumber, step, jobRunDate)) {
+                    if (!runStep(parameterService, jobExecutionContext.getJobDetail().getKey().toString(), currentStepNumber, step, jobRunDate)) {
                         break;
                     }
                 }
@@ -140,19 +144,19 @@ public class Job implements StatefulJob, InterruptableJob {
         }
         catch (Exception e) {
             schedulerService.updateStatus(jobExecutionContext.getJobDetail(), SchedulerService.FAILED_JOB_STATUS_CODE);
-            throw new JobExecutionException("Caught exception in " + jobExecutionContext.getJobDetail().getName(), e, false);
+            throw new JobExecutionException("Caught exception in " + jobExecutionContext.getJobDetail().getKey().getName(), e);
         }
-        LOG.info("Finished executing job: " + jobExecutionContext.getJobDetail().getName());
+        LOG.info("Finished executing job: " + jobExecutionContext.getJobDetail().getKey().getName());
         schedulerService.updateStatus(jobExecutionContext.getJobDetail(), SchedulerService.SUCCEEDED_JOB_STATUS_CODE);
     }
 
     public static boolean runStep(ParameterService parameterService, String jobName, int currentStepNumber, Step step, Date jobRunDate) throws InterruptedException, WorkflowException {
         boolean continueJob = true;
         if (GlobalVariables.getUserSession() == null) {
-            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user <unknown>"));
+            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user <unknown>").toString());
         }
         else {
-            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user ").append(GlobalVariables.getUserSession().getPrincipalName()));
+            LOG.info(new StringBuffer("Started processing step: ").append(currentStepNumber).append("=").append(step.getName()).append(" for user ").append(GlobalVariables.getUserSession().getPrincipalName()).toString());
         }
 
         if (!skipStep(parameterService, step, jobRunDate)) {
@@ -166,11 +170,11 @@ public class Job implements StatefulJob, InterruptableJob {
                 stepUserName = parameterService.getParameterValueAsString(stepClass, STEP_USER_PARM_NM);
             }
             if (LOG.isInfoEnabled()) {
-                LOG.info(new StringBuffer("Creating user session for step: ").append(step.getName()).append("=").append(stepUserName));
+                LOG.info(new StringBuffer("Creating user session for step: ").append(step.getName()).append("=").append(stepUserName).toString());
             }
             GlobalVariables.setUserSession(new UserSession(stepUserName));
             if (LOG.isInfoEnabled()) {
-                LOG.info(new StringBuffer("Executing step: ").append(step.getName()).append("=").append(stepClass));
+                LOG.info(new StringBuffer("Executing step: ").append(step.getName()).append("=").append(stepClass).toString());
             }
             StopWatch stopWatch = new StopWatch();
             stopWatch.start(jobName);
@@ -191,7 +195,7 @@ public class Job implements StatefulJob, InterruptableJob {
                 LOG.info("Stopping job after successful step execution");
             }
         }
-        LOG.info(new StringBuffer("Finished processing step ").append(currentStepNumber).append(": ").append(step.getName()));
+        LOG.info(new StringBuffer("Finished processing step ").append(currentStepNumber).append(": ").append(step.getName()).toString());
         return continueJob;
     }
 

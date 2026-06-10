@@ -27,7 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -44,7 +45,6 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.kew.api.WorkflowDocument;
 import org.kuali.rice.kim.api.identity.Person;
 
-
 import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.kns.rule.event.PromptBeforeValidationEvent;
 import org.kuali.rice.kns.rules.PromptBeforeValidationBase;
@@ -53,18 +53,14 @@ import org.kuali.rice.kns.service.DataDictionaryService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.ObjectUtils;
 
-
-
 import org.kuali.kfs.fp.service.AccountingDocumentPreRuleService;
-
-
 
 /**
  * This service interface defines methods that a AccountingDocumentPreRuleService implementation must provide.
  */
 
 public class AccountingDocumentPreRuleServiceImpl implements AccountingDocumentPreRuleService {
-    protected static Logger LOG = Logger.getLogger(AccountingDocumentPreRuleServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountingDocumentPreRuleServiceImpl.class);
 
     /**
      * Access the account override question for all accounting document
@@ -154,7 +150,6 @@ public class AccountingDocumentPreRuleServiceImpl implements AccountingDocumentP
                 accountLinesFromDoc.addAll(acctDoc.getTargetAccountingLines());
 
                 Map<String, AccountingLineAuthorizer> authorizerMap = new HashMap<String, AccountingLineAuthorizer>();
-
 
                 for (Iterator iter = accountLinesFromDoc.iterator(); iter.hasNext();) {
                     AccountingLine currentLine = (AccountingLine) iter.next();

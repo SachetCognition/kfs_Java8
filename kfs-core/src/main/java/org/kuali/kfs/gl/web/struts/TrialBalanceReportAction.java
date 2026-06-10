@@ -30,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.service.TrialBalanceService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -53,10 +55,9 @@ import com.lowagie.text.pdf.PdfReader;
  */
 
 public class TrialBalanceReportAction extends KualiLookupAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TrialBalanceReportAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TrialBalanceReportAction.class);
 
     private static final String TOTALS_TABLE_KEY = "totalsTable";
-
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiLookupAction#search(org.apache.struts.action.ActionMapping,
@@ -176,7 +177,6 @@ public class TrialBalanceReportAction extends KualiLookupAction {
             return mapping.findForward(KFSConstants.MAPPING_BASIC);
         }
     }
-
 
     /**
      * Generate pdf for sending response using itext

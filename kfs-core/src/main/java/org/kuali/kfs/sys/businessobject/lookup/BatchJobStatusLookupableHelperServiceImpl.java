@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.BatchJobStatus;
 import org.kuali.kfs.sys.batch.service.SchedulerService;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 
 public class BatchJobStatusLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchJobStatusLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BatchJobStatusLookupableHelperServiceImpl.class);
 
     private SchedulerService schedulerService;
     private ConfigurationService configurationService;

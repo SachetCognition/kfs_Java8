@@ -1,0 +1,124 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Kuali Balance Inquiry Report Menu</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="kfs-page" data-header-title="Balance Inquiry Report Menu" data-doc-title="">
+<h1>Balance Inquiry Report Menu</h1>
+<form th:action="@{${T(org.kuali.kfs.sys.KFSConstants).MAPPING_BALANCE_INQUIRY_REPORT_MENU}}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+	<input type="hidden" th:field="*{backLocation}" write="false" />
+	<input type="hidden" th:field="*{docFormKey}" write="false" />
+	<input type="hidden" th:field="*{balanceInquiryReportMenuCallerDocFormKey}"
+		write="false" />
+	<input type="hidden" th:field="*{chartOfAccountsCode}" write="false" />
+	<input type="hidden" th:field="*{universityFiscalYear}" write="false" />
+	<input type="hidden" th:field="*{accountNumber}" write="false" />
+	<input type="hidden" th:field="*{subAccountNumber}" write="false" />
+	<input type="hidden" th:field="*{financialObjectCode}" write="false" />
+	<input type="hidden" th:field="*{financialSubObjectCode}" write="false" />
+	<input type="hidden" th:field="*{objectTypeCode}" write="false" />
+	<input type="hidden" th:field="*{debitCreditCode}" write="false" />
+	<input type="hidden" th:field="*{referenceOriginCode}" write="false" />
+	<input type="hidden" th:field="*{referenceTypeCode}" write="false" />
+	<input type="hidden" th:field="*{referenceNumber}" write="false" />
+	<input type="hidden" th:field="*{projectCode}" write="false" />
+	<div class="topblurb">
+	<div align="center"><b><font size="+1">Balance Inquiry Report Menu</font></b>
+	<br />
+	<br />
+	<br />
+	<table cellpadding=0 class="container2">
+		<tr>
+			<td><b>Available Balances</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.gl.businessobject.AccountBalance"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_MODIFIED_INQUIRY_ACTION}"
+				lookupParameters="${KualiForm.availableBalancesBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td><b>Balances by Consolidation</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.gl.businessobject.AccountBalanceByConsolidation"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_ACCOUNT_BALANCE_BY_CONSOLIDATION_LOOKUP_ACTION}"
+				lookupParameters="${KualiForm.balancesByConsolidationBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td><b>Cash Balances</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.gl.businessobject.CashBalance"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_MODIFIED_INQUIRY_ACTION}"
+				lookupParameters="${KualiForm.cashBalancesBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td><b>General Ledger Balance</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.gl.businessobject.Balance"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_BALANCE_INQUIRY_ACTION}"
+				lookupParameters="${KualiForm.generalLedgerBalanceBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td><b>General Ledger Entry</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.gl.businessobject.Entry"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_MODIFIED_INQUIRY_ACTION}"
+				lookupParameters="${KualiForm.generalLedgerEntryBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td><b>General Ledger Pending Entry</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.sys.businessobject.GeneralLedgerPendingEntry"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_MODIFIED_INQUIRY_ACTION}"
+				lookupParameters="${KualiForm.generalLedgerPendingEntryBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td><b>Open Encumbrances</b>&nbsp;</td>
+			<td><gl:balanceInquiryLookup
+				boClassName="org.kuali.kfs.gl.businessobject.Encumbrance"
+				actionPath="${T(org.kuali.kfs.sys.KFSConstants).GL_MODIFIED_INQUIRY_ACTION}"
+				lookupParameters="${KualiForm.openEncumbrancesBalanceInquiryLookupParameters}"
+				hideReturnLink="true" /></td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2"><input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif}" styleClass="globalbuttons"
+				property="methodToCall.cancel" alt="cancel" title="cancel" /></td>
+		</tr>
+	</table>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>

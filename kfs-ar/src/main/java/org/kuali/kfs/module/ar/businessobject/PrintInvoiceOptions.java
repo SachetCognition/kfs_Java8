@@ -20,6 +20,14 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
@@ -27,10 +35,17 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
 
+@Entity
+@Table(name = "AR_PRN_INV_OPTN_T")
 public class PrintInvoiceOptions extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "AR_PRN_INV_IND")
 	private String printInvoiceIndicator;
+    @Column(name = "AR_PRN_INV_DESC")
 	private String printInvoiceDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
 	private boolean active;
 
 	/**

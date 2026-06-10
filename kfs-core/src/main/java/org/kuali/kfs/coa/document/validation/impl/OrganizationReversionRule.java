@@ -20,6 +20,8 @@ package org.kuali.kfs.coa.document.validation.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversion;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionDetail;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -33,7 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class OrganizationReversionRule extends MaintenanceDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionRule.class);
 
     protected OrganizationReversion oldOrgReversion;
     protected OrganizationReversion newOrgReversion;

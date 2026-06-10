@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.document.dataaccess.OrganizationSalarySettingSearchDao;
 
 /**
@@ -26,7 +28,7 @@ import org.kuali.kfs.module.bc.document.dataaccess.OrganizationSalarySettingSear
  */
 public class OrganizationSalarySettingSearchDaoJdbc extends BudgetConstructionDaoJdbcBase implements OrganizationSalarySettingSearchDao {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationSalarySettingSearchDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationSalarySettingSearchDaoJdbc.class);
 
     protected static final int MAXLEVEL = 50;
     protected static String[] buildIntendedIncumbentSelectTemplates = new String[1];

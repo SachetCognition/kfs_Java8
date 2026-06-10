@@ -21,6 +21,13 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
@@ -29,19 +36,35 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class is used to represent an invoice agency address detail business object.
  */
+@Entity
+@Table(name = "AR_INV_ACCT_DTL_T")
 public class InvoiceAccountDetail extends PersistableBusinessObjectBase {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceAccountDetail.class);
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "CONTR_CTRLACCT_NBR")
     private String contractControlAccountNumber;
+    @Column(name = "TOT_BDGT_AMT")
     private KualiDecimal totalBudget = KualiDecimal.ZERO;
+    @Column(name = "INV_AMT")
     private KualiDecimal invoiceAmount = KualiDecimal.ZERO;
+    @Column(name = "CUM_EXPND_AMT")
     private KualiDecimal cumulativeExpenditures = KualiDecimal.ZERO;
+    @Column(name = "TOT_PREV_BILLED_AMT")
     private KualiDecimal totalPreviouslyBilled = KualiDecimal.ZERO;
 
+    @Transient
     private ContractsGrantsInvoiceDocument invoiceDocument;
 
     /**

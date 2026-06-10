@@ -22,6 +22,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
@@ -39,7 +41,7 @@ import java.util.Map;
  * @see org.kuali.kfs.module.cab.dataaccess.impl.ReconciliationDaoOjb
  */
 public class ReconciliationDaoOjb extends PlatformAwareDaoBaseOjb implements ReconciliationDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReconciliationDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReconciliationDaoOjb.class);
 
    
     public boolean isDuplicateEntry(Entry glEntry) {

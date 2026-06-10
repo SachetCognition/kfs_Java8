@@ -48,14 +48,34 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.service.NoteService;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.sys.persistence.KualiDecimalConverter;
+
 /**
  * Defines a financial award object.
  */
+@Entity
+@Table(name = "CG_AWD_T")
 public class Award extends PersistableBusinessObjectBase implements MutableInactivatable, ContractsAndGrantsBillingAward {
     private static final String AWARD_INQUIRY_TITLE_PROPERTY = "message.inquiry.award.title";
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Column(name = "CGAWD_BEG_DT")
     private Date awardBeginningDate;
+    @Column(name = "CGAWD_END_DT")
     private Date awardEndingDate;
+    @Transient
     private Date lastBilledDate;
 
     /**
@@ -65,85 +85,183 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
      * @see #getAwardTotalAmount
      * @see #setAwardTotalAmount
      */
+    @Column(name = "CGAWD_TOT_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     protected KualiDecimal awardTotalAmount;
 
+    @Column(name = "CGAWD_ADDENDUM_NBR")
     private String awardAddendumNumber;
+    @Column(name = "CGAWD_ALOC_UCS_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal awardAllocatedUniversityComputingServicesAmount;
+    @Column(name = "CG_FEDPT_FND_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal federalPassThroughFundedAmount;
+    @Column(name = "CGAWD_ENTRY_DT")
     private Date awardEntryDate;
+    @Column(name = "CG_AGENCY_FUT1_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal agencyFuture1Amount;
+    @Column(name = "CG_AGENCY_FUT2_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal agencyFuture2Amount;
+    @Column(name = "CG_AGENCY_FUT3_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal agencyFuture3Amount;
+    @Column(name = "CGAWD_DOC_NBR")
     private String awardDocumentNumber;
+    @Column(name = "CGAWD_LST_UPDT_DT")
     private Timestamp awardLastUpdateDate;
+    @Column(name = "CG_FEDPT_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean federalPassThroughIndicator;
+    @Column(name = "CG_OLD_PRPSL_NBR")
     private String oldProposalNumber;
+    @Column(name = "CGAWD_DRCT_CST_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal awardDirectCostAmount;
+    @Column(name = "CGAWD_INDR_CST_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal awardIndirectCostAmount;
+    @Column(name = "CG_FED_FNDED_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal federalFundedAmount;
+    @Column(name = "CGAWD_CREATE_TS")
     private Timestamp awardCreateTimestamp;
+    @Column(name = "CGAWD_CLOSING_DT")
     private Date awardClosingDate;
+    @Column(name = "CGPRPSL_AWD_TYP_CD")
     private String proposalAwardTypeCode;
+    @Column(name = "CGAWD_STAT_CD")
     private String awardStatusCode;
+    @Column(name = "CG_LTRCR_FND_CD")
     private String letterOfCreditFundCode;
+    @Column(name = "CG_GRANT_DESC_CD")
     private String grantDescriptionCode;
+    @Column(name = "CG_AGENCY_NBR")
     private String agencyNumber;
+    @Column(name = "CG_FEDPT_AGNCY_NBR")
     private String federalPassThroughAgencyNumber;
+    @Column(name = "CG_AGNCY_ANALST_NM")
     private String agencyAnalystName;
+    @Column(name = "CG_ANALYST_PHN_NBR")
     private String analystTelephoneNumber;
+    @Column(name = "BILL_FREQ_CD")
     private String billingFrequencyCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BILL_FREQ_CD", insertable = false, updatable = false)
     private BillingFrequency billingFrequency;
+    @Column(name = "CGAWD_PROJ_TTL")
     private String awardProjectTitle;
+    @Column(name = "CGAWD_PURPOSE_CD")
     private String awardPurposeCode;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Transient
     private String kimGroupNames;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardProjectDirector> awardProjectDirectors;
+    @Transient
     private AwardProjectDirector awardPrimaryProjectDirector;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardFundManager> awardFundManagers;
+    @Transient
     private AwardFundManager awardPrimaryFundManager;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardAccount> awardAccounts;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardSubcontractor> awardSubcontractors;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR")
     private List<AwardOrganization> awardOrganizations;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_NBR", insertable = false, updatable = false)
     private Proposal proposal;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGPRPSL_AWD_TYP_CD", insertable = false, updatable = false)
     private ProposalAwardType proposalAwardType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGAWD_STAT_CD", insertable = false, updatable = false)
     private AwardStatus awardStatus;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = LetterOfCreditFund.class)
+    @JoinColumn(name = "CG_LTRCR_FND_CD", insertable = false, updatable = false)
     protected ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_GRANT_DESC_CD", insertable = false, updatable = false)
     private GrantDescription grantDescription;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_AGENCY_NBR", insertable = false, updatable = false)
     private Agency agency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_FEDPT_AGNCY_NBR", insertable = false, updatable = false)
     private Agency federalPassThroughAgency;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CGAWD_PURPOSE_CD", insertable = false, updatable = false)
     private ProposalPurpose awardPurpose;
+    @Transient
     private AwardOrganization primaryAwardOrganization;
+    @Transient
     private String routingOrg;
+    @Transient
     private String routingChart;
 
+    @Column(name = "STATE_TRNSFR_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean stateTransferIndicator;
+    @Column(name = "EXCL_FRM_INV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean excludedFromInvoicing;
+    @Column(name = "ADDL_FRMS_REQ_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean additionalFormsRequiredIndicator;
+    @Column(name = "ADDL_FRMS_DESC")
     private String additionalFormsDescription;
+    @Column(name = "EXCL_FRM_INV_REASON_TXT")
     private String excludedFromInvoicingReason;
+    @Column(name = "INSTRMNT_TYP_CD")
     private String instrumentTypeCode;
+    @Column(name = "INV_OPT_CD")
     private String invoicingOptionCode;
 
+    @Column(name = "MIN_INV_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal minInvoiceAmount = KualiDecimal.ZERO;
 
+    @Column(name = "AUTO_APPROVE_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean autoApproveIndicator;
 
+    @Transient
     private AccountsReceivableMilestoneSchedule milestoneSchedule;
+    @Transient
     private AccountsReceivablePredeterminedBillingSchedule predeterminedBillingSchedule;
 
+    @Column(name = "FUNDING_EXP_DT")
     private Date fundingExpirationDate;
+    @Column(name = "CMPGN_ID")
     private String dunningCampaign;
+    @Column(name = "STOP_WRK_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean stopWorkIndicator;
+    @Column(name = "STOP_WRK_REASON_TXT")
     private String stopWorkReason;
 
+    @Transient
     private List<Note> boNotes;
 
     /** Dummy value used to facilitate lookups */
     private transient String lookupPersonUniversalIdentifier;
     private transient Person lookupPerson;
 
+    @Transient
     private final String userLookupRoleNamespaceCode = KFSConstants.ParameterNamespaces.KFS;
+    @Transient
     private final String userLookupRoleName = KFSConstants.SysKimApiConstants.CONTRACTS_AND_GRANTS_PROJECT_DIRECTOR;
 
     private transient String lookupFundMgrPersonUniversalIdentifier;

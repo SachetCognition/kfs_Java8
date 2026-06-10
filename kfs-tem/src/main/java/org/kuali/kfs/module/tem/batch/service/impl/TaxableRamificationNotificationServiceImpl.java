@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemParameterConstants;
 import org.kuali.kfs.module.tem.batch.TaxableRamificationNotificationStep;
@@ -45,7 +47,7 @@ import org.springframework.transaction.annotation.Transactional;
  * implement the taxable ramification notification service, which also generates taxable ramification document
  */
 public class TaxableRamificationNotificationServiceImpl implements TaxableRamificationNotificationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TaxableRamificationNotificationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(TaxableRamificationNotificationServiceImpl.class);
 
     private String notificationTemplate;
     private BusinessObjectService businessObjectService;

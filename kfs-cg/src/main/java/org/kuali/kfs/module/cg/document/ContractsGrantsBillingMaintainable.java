@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.document.FinancialSystemMaintainable;
 import org.kuali.rice.kns.datadictionary.MaintainableFieldDefinition;
 import org.kuali.rice.kns.datadictionary.MaintainableItemDefinition;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  */
 public abstract class ContractsGrantsBillingMaintainable extends FinancialSystemMaintainable {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsBillingMaintainable.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsBillingMaintainable.class);
 
     /**
      * Essentially a copy of the overridden method with the addition of a call to getSectionIdsToIgnore, which is currently

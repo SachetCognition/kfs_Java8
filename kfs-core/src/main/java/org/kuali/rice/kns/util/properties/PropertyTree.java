@@ -29,7 +29,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a Recursive container for single- and multi-level key,value pairs. It relies on the assumption that the consumer
@@ -44,7 +45,7 @@ import org.apache.log4j.Logger;
  * 
  */
 public class PropertyTree implements Map {
-    private static Logger LOG = Logger.getLogger(PropertyTree.class);
+    private static Logger LOG = LoggerFactory.getLogger(PropertyTree.class);
 
     final boolean flat;
     final PropertyTree parent;
@@ -181,7 +182,6 @@ public class PropertyTree implements Map {
         return returnValue;
     }
 
-
     /**
      * @param key
      * @return the directValue of the PropertyTree associated with the given key, or null if there is none
@@ -197,14 +197,12 @@ public class PropertyTree implements Map {
         return propertyValue;
     }
 
-
     /**
      * @return an unmodifiable copy of the direct children of this PropertyTree
      */
     public Map getDirectChildren() {
         return Collections.unmodifiableMap(this.children);
     }
-
 
     /**
      * Returns the directValue of this PropertyTree, or null if there is none.
@@ -293,7 +291,6 @@ public class PropertyTree implements Map {
             throw new IllegalArgumentException("invalid (null) value");
         }
     }
-
 
     // Map methods
     /**
@@ -439,7 +436,6 @@ public class PropertyTree implements Map {
 
         return getSubtree((String) key);
     }
-
 
     // unsupported operations
     /**

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.businessobject.AccountDelegateGlobal;
 import org.kuali.kfs.coa.service.AccountDelegateService;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * default Start Date on edits and copies, ala JIRA #KULRNE-62.
  */
 public class AccountDelegateMaintainableImpl extends FinancialSystemMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDelegateMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountDelegateMaintainableImpl.class);
 
     /**
      * This method will reset AccountDelegate's Start Date to the current timestamp on edits and copies
@@ -143,7 +145,6 @@ public class AccountDelegateMaintainableImpl extends FinancialSystemMaintainable
             }
             count += 1;
         }
-
 
         return lockRepresentation.toString();
     }

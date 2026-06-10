@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.web.struts;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.LWPA;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.LWPF;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.NONE;
@@ -61,7 +63,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * the base struts action for the detail salary setting
  */
 public abstract class DetailSalarySettingAction extends SalarySettingBaseAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DetailSalarySettingAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DetailSalarySettingAction.class);
 
     private SalarySettingService salarySettingService = SpringContext.getBean(SalarySettingService.class);
     private BudgetDocumentService budgetDocumentService = SpringContext.getBean(BudgetDocumentService.class);
@@ -86,7 +88,7 @@ public abstract class DetailSalarySettingAction extends SalarySettingBaseAction 
                 salarySettingForm.releasePositionAndFundingLocks();
             }
 
-            LOG.fatal("Unexpected errors occurred.", e);
+            LOG.error("Unexpected errors occurred.", e);
 
             // re-throw the exception
             throw new ServletException(e);

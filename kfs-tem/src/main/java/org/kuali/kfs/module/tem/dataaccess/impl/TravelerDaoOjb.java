@@ -21,10 +21,11 @@ package org.kuali.kfs.module.tem.dataaccess.impl;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
 import org.kuali.kfs.module.tem.dataaccess.TravelerDao;
@@ -40,7 +41,7 @@ import org.kuali.rice.krad.util.OjbCollectionAware;
  */
 public class TravelerDaoOjb extends PlatformAwareDaoBaseOjb implements TravelerDao, OjbCollectionAware{
 
-    public static Logger LOG = Logger.getLogger(TravelerDaoOjb.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelerDaoOjb.class);
 
     private static final String CUSTOMER_ADDRESSES_ATTR_PREFIX = "customerAddresses.";
 

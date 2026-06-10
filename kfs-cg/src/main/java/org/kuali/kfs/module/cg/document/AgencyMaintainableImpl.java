@@ -26,6 +26,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
@@ -56,7 +58,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AgencyMaintainableImpl extends ContractsGrantsBillingMaintainable {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AgencyMaintainableImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AgencyMaintainableImpl.class);
 
     private static final String CREATED_BY_AGENCY_DOC = "message.ar.createdByAgencyDocument";
     private static volatile AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
@@ -232,7 +234,6 @@ public class AgencyMaintainableImpl extends ContractsGrantsBillingMaintainable {
         }
         super.refresh(refreshCaller, fieldValues, document);
     }
-
 
     /**
      * Overridden to set the default values on the Agency document.

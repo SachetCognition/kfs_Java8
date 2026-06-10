@@ -22,6 +22,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.PosterBalancingStep;
 import org.kuali.kfs.gl.businessobject.AccountBalance;
@@ -45,13 +47,12 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.context.TestUtils;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
-
 /**
  * GL BalancingServiceImpl test cases
  */
 @ConfigureContext
 public class BalancingServiceImplTest extends BalancingServiceImplTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalancingServiceImplTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalancingServiceImplTest.class);
     
     protected BalancingDao balancingDao;
     protected AccountBalanceDao accountBalanceDao;

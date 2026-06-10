@@ -22,11 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Layout;
-import org.apache.log4j.PatternLayout;
+import org.apache.logging.log4j.core.Layout;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.sys.KfsAuthorizationConstants.DisbursementVoucherEditMode;
 import org.kuali.kfs.sys.context.SpringContext;
+import org.kuali.kfs.sys.rice.KfsKewConstants;
+import org.kuali.kfs.sys.rice.KfsKimConstants;
+import org.kuali.kfs.sys.rice.KfsRiceConstants;
 import org.kuali.rice.core.api.config.property.Config;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.core.api.util.type.KualiInteger;
@@ -1455,7 +1458,7 @@ public class KFSConstants {
         public static final String PCARD_BATCH_CREATE_DOC_STEP="ProcurementCardCreateDocumentsStep";
     }
     public static final String BATCH_LOGGER_DEFAULT_CONVERSION_PATTERN = "%d [%t] u:%X{user}/d:%X{docId} %-5p %c :: %m%n";
-    public static final Layout BATCH_LOGGER_DEFAULT_PATTERN_LAYOUT = new PatternLayout(BATCH_LOGGER_DEFAULT_CONVERSION_PATTERN);
+    public static final Layout<?> BATCH_LOGGER_DEFAULT_PATTERN_LAYOUT = PatternLayout.newBuilder().withPattern(BATCH_LOGGER_DEFAULT_CONVERSION_PATTERN).build();
 
 	    public static final String MONTH_DAY_YEAR_DATE_FORMAT = "MM/dd/yyyy";
 

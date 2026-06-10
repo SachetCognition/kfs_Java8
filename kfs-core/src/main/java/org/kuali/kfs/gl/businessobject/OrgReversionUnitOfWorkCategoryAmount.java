@@ -18,6 +18,19 @@
  */
 package org.kuali.kfs.gl.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.kfs.coa.businessobject.Account;
@@ -30,21 +43,47 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents a organization reversion unit of work category amount
  */
+@Entity
+@Table(name = "GL_ORG_RVRSN_CTGRY_AMT_T")
+@IdClass(OrgReversionUnitOfWorkCategoryAmount.PK.class)
 public class OrgReversionUnitOfWorkCategoryAmount extends PersistableBusinessObjectBase {
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "SUB_ACCT_NBR")
     private String subAccountNumber;
+    @Id
+    @Column(name = "ORG_RVRSN_CTGRY_CD")
     private String categoryCode;
+    @Column(name = "ORG_TOT_ACTL_AMT")
     private KualiDecimal actual = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_BDGT_AMT")
     private KualiDecimal budget = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_ENCUM_AMT")
     private KualiDecimal encumbrance = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_CF_AMT")
     private KualiDecimal carryForward = KualiDecimal.ZERO;
+    @Column(name = "ORG_TOT_AVAIL_AMT")
     private KualiDecimal available = KualiDecimal.ZERO;
 
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private Account account;
+    @Transient
     private SubAccount subAccount;
+    @Transient
     private OrganizationReversionCategory organizationReversionCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false),
+        @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false),
+        @JoinColumn(name = "SUB_ACCT_NBR", insertable = false, updatable = false)
+    })
     private OrgReversionUnitOfWork organizationReversionUnitOfWork;
 
     public OrgReversionUnitOfWorkCategoryAmount(String cat) {
@@ -283,4 +322,27 @@ public class OrgReversionUnitOfWorkCategoryAmount extends PersistableBusinessObj
         return pkMap;
     }
 
+
+    public static class PK implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
+        private String chartOfAccountsCode;
+        private String accountNumber;
+        private String subAccountNumber;
+        private String categoryCode;
+
+        public PK() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PK)) return false;
+            PK that = (PK) o;
+            return java.util.Objects.equals(chartOfAccountsCode, that.chartOfAccountsCode) && java.util.Objects.equals(accountNumber, that.accountNumber) && java.util.Objects.equals(subAccountNumber, that.subAccountNumber) && java.util.Objects.equals(categoryCode, that.categoryCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(chartOfAccountsCode, accountNumber, subAccountNumber, categoryCode);
+        }
+    }
 }

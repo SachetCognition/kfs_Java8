@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.A21SubAccount;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -34,10 +35,9 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * validate the sub accounts which have values in CS and ICR sections
  */
 public class IntraAccountAdjustmentSubAccountValidation extends GenericValidation {
-    private Logger logger = Logger.getLogger(IntraAccountAdjustmentSubAccountValidation.class);
+    private Logger logger = LoggerFactory.getLogger(IntraAccountAdjustmentSubAccountValidation.class);
     private AccountingDocument accountingDocumentForValidation;
     private AccountingLine accountingLineForValidation;
-
 
     @Override
     public boolean validate(AttributedDocumentEvent event) {
@@ -56,25 +56,20 @@ public class IntraAccountAdjustmentSubAccountValidation extends GenericValidatio
        return true;
     }
 
-
     public AccountingDocument getAccountingDocumentForValidation() {
         return accountingDocumentForValidation;
     }
-
 
     public void setAccountingDocumentForValidation(AccountingDocument accountingDocumentForValidation) {
         this.accountingDocumentForValidation = accountingDocumentForValidation;
     }
 
-
     public AccountingLine getAccountingLineForValidation() {
         return accountingLineForValidation;
     }
 
-
     public void setAccountingLineForValidation(AccountingLine accountingLineForValidation) {
         this.accountingLineForValidation = accountingLineForValidation;
     }
-
 
 }

@@ -29,6 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.Transaction;
 import org.kuali.kfs.sys.Message;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -53,7 +55,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * 
  */
 public class TransactionReport {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TransactionReport.class);
+    private static Logger LOG = LoggerFactory.getLogger(TransactionReport.class);
 
     static public class PageHelper extends PdfPageEventHelper {
         public Date runDate;
@@ -96,7 +98,6 @@ public class TransactionReport {
     public TransactionReport() {
         super();
     }
-
 
     /**
      * Generates transaction report

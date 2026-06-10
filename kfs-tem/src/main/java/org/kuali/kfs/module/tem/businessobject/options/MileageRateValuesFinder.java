@@ -25,7 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
 import org.kuali.kfs.module.tem.document.TravelDocument;
 import org.kuali.kfs.module.tem.document.service.TravelDocumentService;
@@ -38,7 +39,7 @@ import org.kuali.rice.kns.web.struts.form.KualiForm;
 import org.kuali.rice.krad.keyvalues.KeyValuesBase;
 
 public class MileageRateValuesFinder extends KeyValuesBase {
-   protected static Logger LOG = Logger.getLogger(MileageRateValuesFinder.class);
+   protected static Logger LOG = LoggerFactory.getLogger(MileageRateValuesFinder.class);
 
    private String queryDate;
 

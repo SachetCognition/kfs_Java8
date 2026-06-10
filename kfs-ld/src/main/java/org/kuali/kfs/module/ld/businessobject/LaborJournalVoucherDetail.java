@@ -21,6 +21,8 @@ package org.kuali.kfs.module.ld.businessobject;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.fp.businessobject.VoucherSourceAccountingLine;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
@@ -29,7 +31,7 @@ import org.kuali.kfs.sys.businessobject.SystemOptions;
  * Labor Journal Voucher Detail Business Object.
  */
 public class LaborJournalVoucherDetail extends VoucherSourceAccountingLine {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborJournalVoucherDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborJournalVoucherDetail.class);
     private String positionNumber;
     private Date payPeriodEndDate;
     private BigDecimal transactionTotalHours;

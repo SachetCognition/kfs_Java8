@@ -21,6 +21,8 @@ package org.kuali.kfs.coa.dataaccess.impl;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.IndirectCostRecoveryType;
 import org.kuali.kfs.coa.dataaccess.IndirectCostRecoveryTypeDao;
 import org.kuali.kfs.sys.KFSPropertyConstants;
@@ -30,7 +32,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * This class implements the {@link IndirectCostRecoveryExclusionTypeDao} data access methods using Ojb
  */
 public class IndirectCostRecoveryTypeDaoOjb extends PlatformAwareDaoBaseOjb implements IndirectCostRecoveryTypeDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(IndirectCostRecoveryTypeDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(IndirectCostRecoveryTypeDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.IndirectCostRecoveryTypeDao#getByPrimaryKey(java.lang.String)

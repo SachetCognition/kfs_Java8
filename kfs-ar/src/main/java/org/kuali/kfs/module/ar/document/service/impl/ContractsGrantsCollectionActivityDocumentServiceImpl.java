@@ -24,6 +24,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.module.ar.businessobject.CollectionEvent;
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsCollectionActivityInvoiceDetail;
@@ -51,7 +53,7 @@ import org.springframework.util.CollectionUtils;
  * Implementation class for Collection Activity Document.
  */
 public class ContractsGrantsCollectionActivityDocumentServiceImpl implements ContractsGrantsCollectionActivityDocumentService {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsCollectionActivityDocumentServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(ContractsGrantsCollectionActivityDocumentServiceImpl.class);
 
     protected ContractsGrantsInvoiceDocumentDao contractsGrantsInvoiceDocumentDao;
     protected DocumentService documentService;

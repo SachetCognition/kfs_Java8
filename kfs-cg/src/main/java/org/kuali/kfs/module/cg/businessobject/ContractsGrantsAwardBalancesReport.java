@@ -22,6 +22,8 @@ package org.kuali.kfs.module.cg.businessobject;
 import java.sql.Date;
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.bo.TransientBusinessObjectBase;
  */
 public class ContractsGrantsAwardBalancesReport extends TransientBusinessObjectBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAwardBalancesReport.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsAwardBalancesReport.class);
 
     private String awardPrimaryProjectDirectorName;
     private String awardPrimaryFundManagerName;
@@ -55,7 +57,6 @@ public class ContractsGrantsAwardBalancesReport extends TransientBusinessObjectB
     private Proposal proposal;
 
     private Agency agency;
-
 
     /**
      * @return

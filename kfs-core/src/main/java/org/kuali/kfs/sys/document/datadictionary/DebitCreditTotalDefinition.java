@@ -19,7 +19,8 @@
 package org.kuali.kfs.sys.document.datadictionary;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.document.web.renderers.DebitCreditTotalRenderer;
 import org.kuali.kfs.sys.document.web.renderers.Renderer;
 import org.kuali.rice.krad.datadictionary.exception.AttributeValidationException;
@@ -28,7 +29,7 @@ import org.kuali.rice.krad.datadictionary.exception.AttributeValidationException
  * Metadata that instructs the accounting line tags how to render debit/credit totals used in voucher documents
  */
 public class DebitCreditTotalDefinition extends TotalDefinition {
-    private static Logger LOG = Logger.getLogger(DebitCreditTotalDefinition.class);
+    private static Logger LOG = LoggerFactory.getLogger(DebitCreditTotalDefinition.class);
 
     private String debitTotalProperty;
     private String creditTotalProperty;

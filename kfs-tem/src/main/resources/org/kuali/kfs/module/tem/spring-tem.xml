@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DEPRECATED: Migrating to Java @Configuration. See org.kuali.kfs.module.tem.context.*Config -->
 <!--
    - The Kuali Financial System, a comprehensive financial management system for higher education.
    - 
@@ -47,13 +48,7 @@
 			<list>
 				<value>org/kuali/kfs/module/tem/dwr-tem.xml</value>
 			</list>
-		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/tem/ojb-tem.xml</value>
-			</list>
-		</property>
-		<property name="jobNames">
+		</property>		<property name="jobNames">
 			<list>
 			  	<value>perDiemLoadJob</value>
 			  	<value>taxableRamificationNotificationJob</value>

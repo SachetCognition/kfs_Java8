@@ -34,6 +34,8 @@ import javax.xml.validation.Validator;
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.Rules;
 import org.apache.commons.digester.xmlrules.DigesterLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.exception.ParseException;
 import org.kuali.kfs.sys.exception.XmlErrorHandler;
@@ -41,13 +43,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.xml.sax.SAXException;
 
-
-
 /**
  * Base class for BatchInputFileType implementations that validate using an XSD schema and parse using a digester file
  */
 public abstract class XmlBatchInputFileTypeBase extends BatchInputFileTypeBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(XmlBatchInputFileTypeBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(XmlBatchInputFileTypeBase.class);
 
     protected String digestorRulesFileName;
     protected String schemaLocation;

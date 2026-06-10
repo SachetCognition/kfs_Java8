@@ -18,7 +18,6 @@
  */
 package org.kuali.kfs.module.cab.document.web.struts;
 
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.CabConstants;
 import org.kuali.kfs.module.cab.CabKeyConstants;
 import org.kuali.kfs.module.cab.CabPropertyConstants;
@@ -61,7 +61,7 @@ import org.kuali.rice.krad.util.KRADUtils;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class PurApLineAction extends CabActionBase {
-    private static final Logger LOG = Logger.getLogger(PurApLineAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurApLineAction.class);
     PurApLineService purApLineService = SpringContext.getBean(PurApLineService.class);
     PurApInfoService purApInfoService = SpringContext.getBean(PurApInfoService.class);
     PurApLineDocumentService purApLineDocumentService = SpringContext.getBean(PurApLineDocumentService.class);
@@ -231,7 +231,6 @@ public class PurApLineAction extends CabActionBase {
         GlobalVariables.getUserSession().removeObject(CabConstants.CAB_PURAP_SESSION.concat(purchaseOrderIdentifier.toString()));
     }
 
-
     /**
      * This method handles split action. Create one item with split quantity
      * 
@@ -366,7 +365,6 @@ public class PurApLineAction extends CabActionBase {
 
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     /**
      * Generate the question string for different object sub type codes.
@@ -515,7 +513,6 @@ public class PurApLineAction extends CabActionBase {
         }
     }
 
-
     /**
      * Check the required fields entered for merge.
      */
@@ -528,7 +525,6 @@ public class PurApLineAction extends CabActionBase {
             GlobalVariables.getMessageMap().putError(CabPropertyConstants.PurApLineForm.MERGE_DESC, CabKeyConstants.ERROR_MERGE_DESCRIPTION_EMPTY);
         }
     }
-
 
     /**
      * Update the item quantity value from a decimal(less than 1) to 1.
@@ -682,7 +678,6 @@ public class PurApLineAction extends CabActionBase {
         }
         return selectedItem;
     }
-
 
     /**
      * Get the user selected document.

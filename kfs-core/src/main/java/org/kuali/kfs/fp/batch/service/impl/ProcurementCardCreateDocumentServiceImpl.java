@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.fp.document.validation.impl.ProcurementCardDocumentRuleConstants.AUTO_APPROVE_DOCUMENTS_IND;
 import static org.kuali.kfs.fp.document.validation.impl.ProcurementCardDocumentRuleConstants.AUTO_APPROVE_NUMBER_OF_DAYS;
 import static org.kuali.kfs.fp.document.validation.impl.ProcurementCardDocumentRuleConstants.DEFAULT_TRANS_ACCOUNT_PARM_NM;
@@ -95,8 +97,6 @@ import org.kuali.rice.krad.util.ObjectUtils;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
 /**
  * This is the default implementation of the ProcurementCardCreateDocumentService interface.
  *
@@ -104,7 +104,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCardCreateDocumentService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardCreateDocumentServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ProcurementCardCreateDocumentServiceImpl.class);
 
     protected static final String WORKFLOW_SEARCH_RESULT_KEY = "routeHeaderId";
 
@@ -311,7 +311,6 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         return summaryList;
     }
 
-
     /**
      * Sorting the report summary list by transaction posting date
      *
@@ -450,7 +449,6 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         return true;
     }
 
-
     /**
      * This method retrieves a list of transactions from a temporary table, and groups them into document lists, based on
      * single transaction indicator or a grouping by card.
@@ -493,7 +491,6 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
 
         return groupedTransactions;
     }
-
 
     /**
      * Creates a ProcurementCardDocument from the List of transactions given.
@@ -689,7 +686,6 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         return createAndValidateAccountingLines(pcardDocument, transaction, transactionDetail);
     }
 
-
     /**
      * Creates a transaction vendor detail record and adds it to the transaction detail.
      *
@@ -825,7 +821,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         if (!accountingLineRuleUtil.isValidChart("", targetLine.getChart(), dataDictionaryService.getDataDictionary())) {
             String tempErrorText = "Target Accounting Line "+lineNumber+" Chart " + targetLine.getChartOfAccountsCode() + " is invalid; using error Chart Code.";
             if ( LOG.isInfoEnabled() ) {
-                LOG.info(tempErrorText);
+                LOG.info("{}", tempErrorText);
             }
             errorText += " " + tempErrorText;
 
@@ -836,7 +832,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         if (!accountingLineRuleUtil.isValidAccount("", targetLine.getAccount(), dataDictionaryService.getDataDictionary()) || targetLine.getAccount().isExpired()) {
             String tempErrorText = "Target Accounting Line "+lineNumber+" Chart " + targetLine.getChartOfAccountsCode() + " Account " + targetLine.getAccountNumber() + " is invalid; using error account.";
             if ( LOG.isInfoEnabled() ) {
-                LOG.info(tempErrorText);
+                LOG.info("{}", tempErrorText);
             }
             errorText += " " + tempErrorText;
 
@@ -848,7 +844,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         if (!accountingLineRuleUtil.isValidObjectCode("", targetLine.getObjectCode(), dataDictionaryService.getDataDictionary())) {
             String tempErrorText = "Target Accounting Line "+lineNumber+" Chart " + targetLine.getChartOfAccountsCode() + " Object Code " + targetLine.getFinancialObjectCode() + " is invalid; using default Object Code.";
             if ( LOG.isInfoEnabled() ) {
-                LOG.info(tempErrorText);
+                LOG.info("{}", tempErrorText);
             }
             errorText += " " + tempErrorText;
 
@@ -859,7 +855,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         if (StringUtils.isNotBlank(targetLine.getSubAccountNumber()) && !accountingLineRuleUtil.isValidSubAccount("", targetLine.getSubAccount(), dataDictionaryService.getDataDictionary())) {
             String tempErrorText = "Target Accounting Line "+lineNumber+" Chart " + targetLine.getChartOfAccountsCode() + " Account " + targetLine.getAccountNumber() + " Sub Account " + targetLine.getSubAccountNumber() + " is invalid; Setting Sub Account to blank.";
             if ( LOG.isInfoEnabled() ) {
-                LOG.info(tempErrorText);
+                LOG.info("{}", tempErrorText);
             }
             errorText += " " + tempErrorText;
 
@@ -869,7 +865,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         if (StringUtils.isNotBlank(targetLine.getFinancialSubObjectCode()) && !accountingLineRuleUtil.isValidSubObjectCode("", targetLine.getSubObjectCode(), dataDictionaryService.getDataDictionary())) {
             String tempErrorText = "Target Accounting Line "+lineNumber+" Chart " + targetLine.getChartOfAccountsCode() + " Account " + targetLine.getAccountNumber() + " Object Code " + targetLine.getFinancialObjectCode() + " Sub Object Code " + targetLine.getFinancialSubObjectCode() + " is invalid; setting Sub Object to blank.";
             if ( LOG.isInfoEnabled() ) {
-                LOG.info(tempErrorText);
+                LOG.info("{}", tempErrorText);
             }
             errorText += " " + tempErrorText;
 
@@ -907,7 +903,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
             if (ObjectUtils.isNull(procurementCardDefault)) {
                 final String tempErrorText = "Procurement Card Accounting Line Defaults are turned on but no Procurement Card Default record could be retrieved for transaction: "+transaction.getTransactionReferenceNumber() + " by card number.";
                 if ( LOG.isInfoEnabled() ) {
-                    LOG.info(tempErrorText);
+                    LOG.info("{}", tempErrorText);
                 }
                 errorText += " " + tempErrorText;
             }
@@ -919,7 +915,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
             if (transaction.getChartOfAccountsCode() == null || ObjectUtils.isNull(chartService.getByPrimaryId(transaction.getChartOfAccountsCode()))) {
                 String tempErrorText = "Transaction "+lineNumber+" Chart " + transaction.getChartOfAccountsCode() + " is invalid; using error Chart Code.";
                 if ( LOG.isInfoEnabled() ) {
-                    LOG.info(tempErrorText);
+                    LOG.info("{}", tempErrorText);
                 }
                 errorText += " " + tempErrorText;
                 transaction.setChartOfAccountsCode(getErrorChartCode());
@@ -930,7 +926,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
             if (transaction.getAccountNumber() == null || ObjectUtils.isNull(accountService.getByPrimaryIdWithCaching(transaction.getChartOfAccountsCode(), transaction.getAccountNumber())) || accountService.getByPrimaryIdWithCaching(transaction.getChartOfAccountsCode(), transaction.getAccountNumber()).isExpired()) {
                 String tempErrorText = "Transaction "+lineNumber+" Chart " + transaction.getChartOfAccountsCode() + " Account " + transaction.getAccountNumber() + " is invalid; using error account.";
                 if ( LOG.isInfoEnabled() ) {
-                    LOG.info(tempErrorText);
+                    LOG.info("{}", tempErrorText);
                 }
                 errorText += " " + tempErrorText;
                 transaction.setChartOfAccountsCode(getErrorChartCode());
@@ -943,7 +939,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
             if (transaction.getFinancialObjectCode() == null || ObjectUtils.isNull(ocs.getByPrimaryIdWithCaching(uds.getCurrentFiscalYear(), transaction.getChartOfAccountsCode(), transaction.getFinancialObjectCode()))) {
                 String tempErrorText = "Transaction "+lineNumber+" Chart " + transaction.getChartOfAccountsCode() + " Object Code " + transaction.getFinancialObjectCode() + " is invalid; using default Object Code.";
                 if ( LOG.isInfoEnabled() ) {
-                    LOG.info(tempErrorText);
+                    LOG.info("{}", tempErrorText);
                 }
                 errorText += " " + tempErrorText;
 
@@ -958,7 +954,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
                 if (ObjectUtils.isNull(subAccount)) {
                     String tempErrorText = "Transaction "+lineNumber+" Chart " + transaction.getChartOfAccountsCode() + " Account " + transaction.getAccountNumber() + " Sub Account " + transaction.getSubAccountNumber() + " is invalid; Setting Sub Account to blank.";
                     if ( LOG.isInfoEnabled() ) {
-                        LOG.info(tempErrorText);
+                        LOG.info("{}", tempErrorText);
                     }
                     errorText += " " + tempErrorText;
 
@@ -974,7 +970,7 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
                 if (ObjectUtils.isNull(soc)) {
                     String tempErrorText = "Transaction "+lineNumber+" Chart " + transaction.getChartOfAccountsCode() + " Account " + transaction.getAccountNumber() + " Object Code " + transaction.getFinancialObjectCode() + " Sub Object Code " + transaction.getFinancialSubObjectCode() + " is invalid; setting Sub Object to blank.";
                     if ( LOG.isInfoEnabled() ) {
-                        LOG.info(tempErrorText);
+                        LOG.info("{}", tempErrorText);
                     }
                     errorText += " " + tempErrorText;
 
@@ -1147,7 +1143,6 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
         this.dataDictionaryService = dataDictionaryService;
     }
 
-
     /**
      * Gets the dateTimeService attribute.
      * @return Returns the dateTimeService.
@@ -1206,6 +1201,5 @@ public class ProcurementCardCreateDocumentServiceImpl implements ProcurementCard
     public void setFinancialSystemDocumentService(FinancialSystemDocumentService financialSystemDocumentService) {
         this.financialSystemDocumentService = financialSystemDocumentService;
     }
-
 
 }

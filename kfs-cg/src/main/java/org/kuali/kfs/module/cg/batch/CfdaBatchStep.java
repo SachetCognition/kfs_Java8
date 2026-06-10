@@ -24,7 +24,8 @@ import java.util.Date;
 
 import javax.mail.MessagingException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cg.businessobject.CfdaUpdateResults;
 import org.kuali.kfs.module.cg.service.CfdaService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -43,7 +44,7 @@ import org.kuali.rice.krad.service.MailService;
  */
 public class CfdaBatchStep extends AbstractStep {
 
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(CfdaBatchStep.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CfdaBatchStep.class);
 
     protected CfdaService cfdaService;
     protected MailService mailService;
@@ -95,7 +96,7 @@ public class CfdaBatchStep extends AbstractStep {
 
             Collection<String> listservAddresses = parameterService.getParameterValuesAsString(CfdaBatchStep.class, KFSConstants.RESULT_SUMMARY_TO_EMAIL_ADDRESSES);
             if (listservAddresses.isEmpty()) {
-                LOG.fatal("No addresses for notification to in " + KFSConstants.RESULT_SUMMARY_TO_EMAIL_ADDRESSES + " parameter.  Aborting Email.");
+                LOG.error("No addresses for notification to in " + KFSConstants.RESULT_SUMMARY_TO_EMAIL_ADDRESSES + " parameter.  Aborting Email.");
                 return true;
             }
 
@@ -107,7 +108,6 @@ public class CfdaBatchStep extends AbstractStep {
             }
 
             message.setFromAddress(listservAddresses.iterator().next() );
-
 
             message.setSubject(getConfigurationService().getPropertyValueAsString(KFSKeyConstants.CFDA_UPDATE_EMAIL_SUBJECT_LINE));
             message.setMessage(builder.toString());

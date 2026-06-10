@@ -18,15 +18,15 @@
  */
 package org.kuali.kfs.module.tem.batch;
 
-
-
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.batch.service.TemProfileExportService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
 public class TemProfileExportStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TemProfileExportStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(TemProfileExportStep.class);
     protected TemProfileExportService temProfileExportService;
 
 	@Override
@@ -38,12 +38,5 @@ public class TemProfileExportStep extends AbstractStep {
     public void setTemProfileExportService(TemProfileExportService temProfileExportService) {
         this.temProfileExportService = temProfileExportService;
     }
-
-
-
-
-
-
-
 
 }

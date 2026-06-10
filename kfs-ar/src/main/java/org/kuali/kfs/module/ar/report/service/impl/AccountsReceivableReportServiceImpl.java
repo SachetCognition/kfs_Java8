@@ -33,6 +33,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.module.ar.ArConstants;
@@ -90,10 +92,9 @@ import org.kuali.rice.location.api.country.Country;
 import org.kuali.rice.location.api.country.CountryService;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 public class AccountsReceivableReportServiceImpl implements AccountsReceivableReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountsReceivableReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountsReceivableReportServiceImpl.class);
 
     protected DateTimeService dateTimeService;
     protected DocumentService documentService;
@@ -295,7 +296,6 @@ public class AccountsReceivableReportServiceImpl implements AccountsReceivableRe
         String initiatorID = invoice.getDocumentHeader().getWorkflowDocument().getInitiatorPrincipalId();
         Entity user = KimApiServiceLocator.getIdentityService().getEntityByPrincipalId(initiatorID);
 
-
         if (user == null) {
             throw new RuntimeException("User '" + initiatorID + "' could not be retrieved.");
         }
@@ -429,7 +429,6 @@ public class AccountsReceivableReportServiceImpl implements AccountsReceivableRe
         invoiceMap.put("previousBalance", currencyFormatter.format(previousBalance).toString());
         invoiceMap.put("lastReportedDate", lastReportedDate);
 
-
         for (CustomerStatementDetailReportDataHolder data : details) {
             if (data.getFinancialDocumentTotalAmountCharge() != null) {
                 amountDue = amountDue.add(data.getFinancialDocumentTotalAmountCharge());
@@ -492,7 +491,6 @@ public class AccountsReceivableReportServiceImpl implements AccountsReceivableRe
         File f = customerStatementReportService.generateReport(reportDataHolder, runDate, statementFormat);
         return f;
     }
-
 
     /**
      * @see org.kuali.kfs.module.ar.report.service.AccountsReceivableReportService#generateInvoicesByBillingOrg(java.lang.String,
@@ -651,7 +649,6 @@ public class AccountsReceivableReportServiceImpl implements AccountsReceivableRe
         }
     }
 
-
     protected KualiDecimal creditTotalInList(Collection<CustomerStatementDetailReportDataHolder> holderList) {
         KualiDecimal totalCredit = KualiDecimal.ZERO;
          for (CustomerStatementDetailReportDataHolder holder : holderList) {
@@ -682,7 +679,6 @@ public class AccountsReceivableReportServiceImpl implements AccountsReceivableRe
         }
         return returnList;
     }
-
 
     protected Collection<CustomerStatementDetailReportDataHolder> paymentsForInvoice(CustomerInvoiceDocument invoice) {
 

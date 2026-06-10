@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementAsset;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -56,7 +58,7 @@ import org.kuali.rice.krad.util.UrlFactory;
  * This class overrids the base getActionUrls method
  */
 public class AssetLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetLookupableHelperServiceImpl.class);
 
     protected AssetService assetService;
 
@@ -114,7 +116,6 @@ public class AssetLookupableHelperServiceImpl extends KualiLookupableHelperServi
             parameters.put(CamsPropertyConstants.AssetRetirementGlobal.RETIREMENT_REASON_CODE, CamsConstants.AssetRetirementReasonCode.MERGED);
             parameters.put(KFSConstants.REFRESH_CALLER, CamsPropertyConstants.AssetRetirementGlobal.RETIREMENT_REASON_CODE + "::" + CamsConstants.AssetRetirementReasonCode.MERGED);
 
-
             String href = UrlFactory.parameterizeUrl(KFSConstants.MAINTENANCE_ACTION, parameters);
 
             return new AnchorHtmlData(href, CamsConstants.AssetActions.MERGE, CamsConstants.AssetActions.MERGE);
@@ -131,7 +132,6 @@ public class AssetLookupableHelperServiceImpl extends KualiLookupableHelperServi
         return href;
 
     }
-
 
     protected HtmlData getLoanUrl(Asset asset) {
         AnchorHtmlData anchorHtmlData = null;
@@ -250,7 +250,6 @@ public class AssetLookupableHelperServiceImpl extends KualiLookupableHelperServi
     public void setAssetService(AssetService assetService) {
         this.assetService = assetService;
     }
-
 
     /**
      * Overridden to fix a field conversion

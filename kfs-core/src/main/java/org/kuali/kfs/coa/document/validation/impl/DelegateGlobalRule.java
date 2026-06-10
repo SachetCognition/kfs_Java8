@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountDelegateGlobal;
 import org.kuali.kfs.coa.businessobject.AccountDelegateGlobalDetail;
 import org.kuali.kfs.coa.businessobject.AccountGlobalDetail;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class DelegateGlobalRule extends GlobalDocumentRuleBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DelegateGlobalRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DelegateGlobalRule.class);
 
     protected static final KualiDecimal ZERO = KualiDecimal.ZERO;
     protected AccountDelegateGlobal newDelegateGlobal;
@@ -258,7 +260,6 @@ public class DelegateGlobalRule extends GlobalDocumentRuleBase {
         }
         return success;
     }
-
 
     /**
      * This method will check through each delegate referenced in the DelegateGlobal to ensure that there is one and only primary

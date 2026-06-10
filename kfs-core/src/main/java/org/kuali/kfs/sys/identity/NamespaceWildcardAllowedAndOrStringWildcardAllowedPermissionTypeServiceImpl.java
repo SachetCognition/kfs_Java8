@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.kim.api.KimConstants;
 import org.kuali.rice.kim.api.permission.Permission;
 import org.kuali.rice.krad.kim.NamespaceWildcardAllowedAndOrStringExactMatchPermissionTypeServiceImpl;
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.kim.NamespaceWildcardAllowedAndOrStringExactMatchPerm
  */
 public class NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeServiceImpl
 		extends NamespaceWildcardAllowedAndOrStringExactMatchPermissionTypeServiceImpl {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeServiceImpl.class);
+    Logger LOG = LoggerFactory.getLogger(NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeServiceImpl.class);
 	protected static final String NAMESPACE_CODE = KimConstants.AttributeConstants.NAMESPACE_CODE;
 
 	protected boolean namespaceRequiredOnStoredAttributeSet;
@@ -73,7 +75,6 @@ public class NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeSer
         List<Permission> blankNamespacePermissions = new ArrayList<Permission>();
 
 	    String requestedNamespaceAttributeValue = requestedDetails.get(NAMESPACE_CODE);
-
 
 	    for ( Permission kpi : permissionsList ) {
 	        String permissionNamespaceAttributeValue = kpi.getAttributes().get(NAMESPACE_CODE);
@@ -187,7 +188,6 @@ public class NamespaceWildcardAllowedAndOrStringWildcardAllowedPermissionTypeSer
 
 	    return exactMatchingPermissions; // empty list
 	}
-
 
 	/**
 	 * Returns true if the attributes match exactly

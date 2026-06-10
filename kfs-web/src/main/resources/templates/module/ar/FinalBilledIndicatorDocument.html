@@ -1,0 +1,52 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Final Billed Indicator Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="document-page" data-document-type="FBI" data-form-action="arFinalBilledIndicatorDocument" data-show-document-info="true">
+<form th:action="@{arFinalBilledIndicatorDocument}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+	<kul:documentOverview editingMode="${KualiForm.editingMode}" />
+
+	<div th:replace="~{fragments/ar/finalBilledIndicatorEntries :: finalBilledIndicatorEntries}" th:with="editingMode=${KualiForm.editingMode}"></div>
+
+	<div th:replace="~{fragments/notes :: notes}"></div>
+
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+	<kul:documentControls transactionalDocument="true" />
+
+</div>
+</div>
+</div>
+</body>
+</html>

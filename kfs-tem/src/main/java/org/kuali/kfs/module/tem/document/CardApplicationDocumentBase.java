@@ -21,7 +21,8 @@ package org.kuali.kfs.module.tem.document;
 import java.util.ArrayList;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemWorkflowConstants;
 import org.kuali.kfs.module.tem.businessobject.TemProfile;
 import org.kuali.kfs.module.tem.document.service.TravelDocumentService;
@@ -38,7 +39,7 @@ import org.kuali.rice.krad.service.SequenceAccessorService;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
 public abstract class CardApplicationDocumentBase extends FinancialSystemTransactionalDocumentBase implements CardApplicationDocument {
-    protected static Logger LOG = Logger.getLogger(CardApplicationDocumentBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CardApplicationDocumentBase.class);
     protected TemProfile temProfile;
     protected Integer temProfileId;
     protected boolean userAgreement;

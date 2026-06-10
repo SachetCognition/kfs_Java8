@@ -33,7 +33,8 @@ import java.util.TreeSet;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.document.datadictionary.FinancialSystemMaintenanceDocumentEntry;
 import org.kuali.kfs.sys.suite.AnnotationTestSuite;
@@ -55,7 +56,7 @@ import org.springframework.beans.factory.support.KualiDefaultListableBeanFactory
 @AnnotationTestSuite(PreCommitSuite.class)
 @ConfigureContext
 public class DataDictionaryConfigurationTest extends KualiTestBase {
-    private static final Logger LOG = Logger.getLogger(DataDictionaryConfigurationTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DataDictionaryConfigurationTest.class);
     private DataDictionary dataDictionary;
 
     public final static String KFS_PACKAGE_NAME_PREFIX = "org.kuali.kfs";

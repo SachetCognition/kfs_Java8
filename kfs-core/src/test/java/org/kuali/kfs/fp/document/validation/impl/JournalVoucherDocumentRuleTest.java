@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.GL_CREDIT_CODE;
 import static org.kuali.kfs.sys.KFSConstants.GL_DEBIT_CODE;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertGlobalMessageMapContains;
@@ -43,7 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.kuali.kfs.fp.businessobject.VoucherSourceAccountingLine;
 import org.kuali.kfs.fp.document.JournalVoucherDocument;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -69,7 +70,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 @ConfigureContext(session = dfogle)
 public class JournalVoucherDocumentRuleTest extends KualiTestBase {
-    private static final Logger LOG = Logger.getLogger(JournalVoucherDocumentRuleTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JournalVoucherDocumentRuleTest.class);
 
     public static final Class<JournalVoucherDocument> DOCUMENT_CLASS = JournalVoucherDocument.class;
 
@@ -129,7 +130,6 @@ public class JournalVoucherDocumentRuleTest extends KualiTestBase {
             assertEquals("wasValid " + line, false, wasValid);
         }
     }
-
 
     public void testIsDebit_debitCode() throws Exception {
         AccountingDocument accountingDocument = IsDebitTestUtils.getDocument(SpringContext.getBean(DocumentService.class), JournalVoucherDocument.class);

@@ -28,6 +28,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationReversionService;
 import org.kuali.kfs.coa.service.PriorYearAccountService;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
@@ -58,7 +60,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 @ConfigureContext
 public class OrganizationReversionLogicTest extends OriginEntryTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionLogicTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(OrganizationReversionLogicTest.class);
 
     public static final String DEFAULT_BALANCE_CHART = "BL";
     public static final String DEFAULT_BALANCE_ACCOUNT_NBR = "1031400";
@@ -107,7 +109,7 @@ public class OrganizationReversionLogicTest extends OriginEntryTestBase {
         private KualiDecimal amount;
         private Date timestamp;
         private static final String DATE_FORMAT = "yyyy-MM-dd";
-        private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BALANCE_FIXTURE.class);
+        private static Logger LOG = LoggerFactory.getLogger(BALANCE_FIXTURE.class);
 
         /**
          * Constructs a OrganizationReversionLogicTest.BALANCE_FIXTURE instance

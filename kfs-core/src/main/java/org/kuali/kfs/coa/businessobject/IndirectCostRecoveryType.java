@@ -18,6 +18,15 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +36,20 @@ import org.kuali.rice.krad.bo.KualiCodeBase;
 /**
  * This class...
  */
+@Entity
+@Table(name = "CA_ICR_TYPE_T")
+
 public class IndirectCostRecoveryType extends KualiCodeBase implements MutableInactivatable {
     
+    @Id
+    @Column(name = "ACCT_ICR_TYP_CD")
     private String code;
+    @Column(name = "ACCT_ICR_TYP_DESC")
     private String name;
+    @Column(name = "ACCT_ICR_TYP_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Transient
     private List indirectCostRecoveryExclusionTypeDetails;
 
     public IndirectCostRecoveryType () {

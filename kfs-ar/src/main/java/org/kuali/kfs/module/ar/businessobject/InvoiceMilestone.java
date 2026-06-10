@@ -20,14 +20,24 @@ package org.kuali.kfs.module.ar.businessobject;
 
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 
 
 /**
  * This class represents a point in time snapshot of a Milestone associated with a Contracts & Grants Invoice Document.
  */
+@Entity
+@Table(name = "AR_INV_MLSTN_T")
 public class InvoiceMilestone extends MilestoneBase  {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
 
     /**

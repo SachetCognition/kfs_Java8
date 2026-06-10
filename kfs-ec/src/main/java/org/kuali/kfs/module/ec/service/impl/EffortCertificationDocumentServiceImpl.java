@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleService;
 import org.kuali.kfs.integration.ld.LaborLedgerExpenseTransferAccountingLine;
@@ -71,7 +73,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class EffortCertificationDocumentServiceImpl implements EffortCertificationDocumentService {
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocumentServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(EffortCertificationDocumentServiceImpl.class);
 
     private LaborModuleService laborModuleService;
     private KualiModuleService kualiModuleService;

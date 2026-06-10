@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.kfs;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
@@ -54,7 +56,7 @@ import org.kuali.rice.krad.service.DocumentService;
 @ConfigureContext
 public class ElectronicInvoiceHelperServiceTest extends KualiTestBase {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceHelperServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceHelperServiceTest.class);
     private ElectronicInvoiceInputFileType electronicInvoiceInputFileType;
     private UnitTestSqlDao unitTestSqlDao;
 

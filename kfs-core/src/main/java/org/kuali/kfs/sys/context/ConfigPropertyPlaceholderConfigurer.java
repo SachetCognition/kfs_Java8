@@ -21,6 +21,8 @@ package org.kuali.kfs.sys.context;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.config.property.Config;
 import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.core.impl.config.property.ConfigLogger;
@@ -32,7 +34,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  * @author Kuali Rice Team (rice.collab@kuali.org)
  */
 public class ConfigPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ConfigPropertyPlaceholderConfigurer.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(ConfigPropertyPlaceholderConfigurer.class);
 
     public ConfigPropertyPlaceholderConfigurer() {
         setSystemPropertiesMode(PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE);

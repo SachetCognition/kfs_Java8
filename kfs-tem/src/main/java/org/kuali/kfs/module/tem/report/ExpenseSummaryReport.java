@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.report;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.Report.TEMPLATE_CLASSPATH;
 import static org.kuali.kfs.sys.KFSConstants.ReportGeneration.PDF_FILE_EXTENSION;
 import static org.springframework.ui.jasperreports.JasperReportsUtils.convertReportData;
@@ -29,7 +31,6 @@ import java.util.Date;
 
 import net.sf.jasperreports.engine.JRDataSource;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.report.annotations.DetailSection;
 import org.kuali.kfs.module.tem.report.annotations.Group;
 import org.kuali.kfs.module.tem.report.annotations.JasperReport;
@@ -49,7 +50,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 @TitleStyle("standard")
 public class ExpenseSummaryReport extends ReportInfoHolder implements DetailedReport {
 
-    public static Logger LOG = Logger.getLogger(ExpenseSummaryReport.class);
+    public static Logger LOG = LoggerFactory.getLogger(ExpenseSummaryReport.class);
 
     private String traveler;
     private String initiator;
@@ -237,7 +238,6 @@ public class ExpenseSummaryReport extends ReportInfoHolder implements DetailedRe
     public void setPurpose(final String argPurpose) {
         this.purpose = argPurpose;
     }
-
 
     /**
      * Gets the value of Data

@@ -27,7 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.batch.service.InvoiceRecurrenceService;
 import org.kuali.kfs.module.ar.businessobject.InvoiceRecurrence;
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
@@ -60,7 +61,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class InvoiceRecurrenceServiceImpl implements InvoiceRecurrenceService {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(InvoiceRecurrenceServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(InvoiceRecurrenceServiceImpl.class);
     private DocumentService documentService;
     private DateTimeService dateTimeService;
     private BusinessObjectService boService;
@@ -109,7 +110,6 @@ public class InvoiceRecurrenceServiceImpl implements InvoiceRecurrenceService {
             Date lastCreateDate = invoiceRecurrence.getDocumentLastCreateDate();
             String intervalCode = invoiceRecurrence.getDocumentRecurrenceIntervalCode();
             Integer totalRecurrenceNumber = invoiceRecurrence.getDocumentTotalRecurrenceNumber();
-
 
             /* Calculate currentMonthProcessDate*/
             currentMonthProcessCalendar = currentCalendar;

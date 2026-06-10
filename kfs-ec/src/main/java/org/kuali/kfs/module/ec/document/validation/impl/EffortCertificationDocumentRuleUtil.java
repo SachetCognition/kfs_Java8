@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ec.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.CurrencyTypeAmounts.HUNDRED_DOLLAR_AMOUNT;
 import static org.kuali.kfs.sys.businessobject.AccountingLineOverride.CODE.EXPIRED_ACCOUNT;
 import static org.kuali.kfs.sys.businessobject.AccountingLineOverride.CODE.EXPIRED_ACCOUNT_AND_NON_FRINGE_ACCOUNT_USED;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * the specified requirements.
  */
 public class EffortCertificationDocumentRuleUtil {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationDocumentRuleUtil.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationDocumentRuleUtil.class);
 
     /**
      * reset the attribute with the blank value to the default values

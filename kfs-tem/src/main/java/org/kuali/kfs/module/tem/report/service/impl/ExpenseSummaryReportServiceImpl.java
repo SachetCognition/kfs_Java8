@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.tem.report.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.DISPLAY_TRAVEL_AUTHORIZATION_ESTIMATE_IN_SUMMARY_REPORT_IND;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.LODGING_TYPE_CODES;
 import static org.kuali.kfs.module.tem.TemConstants.TravelReimbursementParameters.TRANSPORTATION_TYPE_CODES;
@@ -28,7 +30,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.businessobject.AccountingDistribution;
@@ -58,7 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ExpenseSummaryReportServiceImpl implements ExpenseSummaryReportService {
 
-    public static Logger LOG = Logger.getLogger(ExpenseSummaryReportServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(ExpenseSummaryReportServiceImpl.class);
 
     protected ConfigurationService configurationService;
     protected ParameterService parameterService;
@@ -178,8 +179,6 @@ public class ExpenseSummaryReportServiceImpl implements ExpenseSummaryReportServ
         final KualiDecimal maxExpense =  travelDocument.getReimbursableTotal();
         String totalExpenseName = "Owed to Payee";
         KualiDecimal owed = maxExpense;
-
-
 
         boolean isTR = travelDocument.getDocumentHeader().getWorkflowDocument().getDocumentTypeName().equals(TemConstants.TravelDocTypes.TRAVEL_REIMBURSEMENT_DOCUMENT);
 

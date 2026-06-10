@@ -25,6 +25,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.app.VelocityEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.ObjectUtil;
 import org.kuali.kfs.sys.service.KfsNotificationService;
@@ -37,7 +39,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
  * implement the service methods defined in KFS notification service
  */
 public class KfsNotificationServiceImpl implements KfsNotificationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KfsNotificationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(KfsNotificationServiceImpl.class);
 
     public final String TO_ADDRESSES = "toAddresses";
     public final String FROM_ADDRESS = "fromAddress";

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.service.AutoDisapproveDocumentsService;
 import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchExecutor;
 
@@ -26,7 +28,7 @@ import org.kuali.kfs.sys.batch.service.WrappedBatchExecutorService.CustomBatchEx
  */
 public class AutoDisapproveDocumentsStep extends AbstractWrappedBatchStep {
     private AutoDisapproveDocumentsService autoDisapproveDocumentsService;
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AutoDisapproveDocumentsStep.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AutoDisapproveDocumentsStep.class);
     private String batchFileDirectoryName;
     /**
      * Overridden to run the auto disapprove process.

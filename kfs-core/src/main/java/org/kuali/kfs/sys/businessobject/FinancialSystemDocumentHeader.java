@@ -32,19 +32,46 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.workflow.service.WorkflowDocumentService;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 /**
  * This class is a custom {@link DocumentHeader} class used by KFS to facilitate custom data fields and a few UI fields
  */
+@Entity
+@Table(name = "FS_DOC_HEADER_T")
 public class FinancialSystemDocumentHeader extends DocumentHeader {
 
+    @Id
+    @Access(AccessType.PROPERTY)
+    @Column(name = "FDOC_NBR")
+    @Override
+    public String getDocumentNumber() {
+        return super.getDocumentNumber();
+    }
+
+    @Column(name = "FDOC_TOTAL_AMT")
     protected KualiDecimal financialDocumentTotalAmount;
+    @Transient
     protected String correctedByDocumentId;
+    @Column(name = "FDOC_IN_ERR_NBR")
     protected String financialDocumentInErrorNumber;
+    @Column(name = "FDOC_STATUS_CD")
     protected String financialDocumentStatusCode;
+    @Column(name = "FDOC_HDR_STAT_CD")
     protected String workflowDocumentStatusCode;
+    @Column(name = "APP_DOC_STAT")
     protected String applicationDocumentStatus;
+    @Column(name = "INITR_PRNCPL_ID")
     protected String initiatorPrincipalId;
+    @Column(name = "FDOC_TYP_NM")
     protected String workflowDocumentTypeName;
+    @Column(name = "FDOC_CRTE_DT")
     protected Timestamp workflowCreateDate;
 
     /**

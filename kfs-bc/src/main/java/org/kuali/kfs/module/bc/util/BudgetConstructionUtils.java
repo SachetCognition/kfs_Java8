@@ -21,7 +21,8 @@ package org.kuali.kfs.module.bc.util;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCParameterKeyConstants;
 import org.kuali.kfs.module.bc.document.BudgetConstructionDocument;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -29,7 +30,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
 
 public class BudgetConstructionUtils {
     private static ParameterService parameterService = SpringContext.getBean(ParameterService.class);
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionUtils.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionUtils.class);
     /**
      * 
      * return a SQL IN list containing the budget construction expenditure object types

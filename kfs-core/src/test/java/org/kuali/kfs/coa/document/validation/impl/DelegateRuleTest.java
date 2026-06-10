@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.coa.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertGlobalMessageMapContains;
 import static org.kuali.kfs.sys.KualiTestAssertionUtils.assertGlobalMessageMapEmpty;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
@@ -40,7 +42,7 @@ import org.kuali.rice.kns.document.MaintenanceDocument;
 @ConfigureContext(session = khuntley)
 public class DelegateRuleTest extends ChartRuleTestBase {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DelegateRuleTest.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DelegateRuleTest.class);
     private static final String ERROR_PREFIX = "document.newMaintainableObject.";
     private static final String CHART_GOOD_1 = "UA";
     private static final String ACCOUNT_GOOD_1 = "1912201";
@@ -50,7 +52,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
     private static final int GOOD_FROM_AMT = 25;
     private static final int GOOD_TO_AMT = 25;
     private static final int BAD_TO_AMT_LESS_THAN = 5;
-
 
     // delegate user's - need four
     // one that is good - has both A for status and P for type
@@ -293,7 +294,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         // delegate values
         rule.setupConvenienceObjects(maintDoc);
 
-
         // confirm that there are no errors to begin with
         assertGlobalMessageMapEmpty();
 
@@ -320,7 +320,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         // delegate values
         rule.setupConvenienceObjects(maintDoc);
 
-
         // confirm that there are no errors to begin with
         assertGlobalMessageMapEmpty();
 
@@ -346,7 +345,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         // delegate values
         rule.setupConvenienceObjects(maintDoc);
 
-
         // confirm that there are no errors to begin with
         assertGlobalMessageMapEmpty();
 
@@ -366,7 +364,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         // now we need to setup the convenience objects so that the rule has the right
         // delegate values
         rule.setupConvenienceObjects(maintDoc);
-
 
         // confirm that there are no errors to begin with
         assertGlobalMessageMapEmpty();
@@ -388,7 +385,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         // delegate values
         rule.setupConvenienceObjects(maintDoc);
 
-
         // confirm that there are no errors to begin with
         assertGlobalMessageMapEmpty();
 
@@ -409,7 +405,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         // delegate values
         rule.setupConvenienceObjects(maintDoc);
 
-
         // confirm that there are no errors to begin with
         assertGlobalMessageMapEmpty();
 
@@ -417,7 +412,6 @@ public class DelegateRuleTest extends ChartRuleTestBase {
         rule.checkSimpleRules();
         assertGlobalMessageMapContains(ERROR_PREFIX + "finDocApprovalToThisAmount", KFSKeyConstants.ERROR_DOCUMENT_ACCTDELEGATEMAINT_TO_AMOUNT_MORE_THAN_FROM_OR_ZERO);
     }
-
 
     /**
      * This test makes sure that a good user delegate passes the Delegate User Rules

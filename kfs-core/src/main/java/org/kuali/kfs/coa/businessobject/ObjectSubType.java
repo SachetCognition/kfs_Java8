@@ -18,12 +18,23 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
 /**
  * 
  */
+@Entity
+@Table(name = "CA_OBJ_SUB_TYPE_T")
+
 public class ObjectSubType extends KualiCodeBase implements MutableInactivatable {
 
     /**

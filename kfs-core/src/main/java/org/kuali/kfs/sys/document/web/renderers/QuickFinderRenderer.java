@@ -26,6 +26,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSKeyConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.web.util.RendererUtil;
@@ -36,7 +38,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * Renders a quick field for an element
  */
 public class QuickFinderRenderer extends FieldRendererBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(QuickFinderRenderer.class);
+    private static Logger LOG = LoggerFactory.getLogger(QuickFinderRenderer.class);
     
     private int tabIndex = -1;
     

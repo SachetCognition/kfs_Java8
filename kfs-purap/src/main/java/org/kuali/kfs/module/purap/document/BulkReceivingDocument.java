@@ -22,7 +22,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.document.service.BulkReceivingService;
 import org.kuali.kfs.module.purap.document.service.RequisitionService;
@@ -46,7 +47,7 @@ import org.kuali.rice.location.api.country.CountryService;
 
 public class BulkReceivingDocument extends ReceivingDocumentBase{
 
-    protected static final Logger LOG = Logger.getLogger(BulkReceivingDocument.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BulkReceivingDocument.class);
 
     protected String shipmentWeight;
     protected Integer noOfCartons;
@@ -241,7 +242,6 @@ public class BulkReceivingDocument extends ReceivingDocumentBase{
         setShipmentBillOfLadingNumber(null);
         setCarrierCode(null);
     }
-
 
     @Override
     public void processAfterRetrieve() {

@@ -20,11 +20,13 @@ package org.kuali.kfs.pdp.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.batch.service.ExtractPaymentService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
 public class ExtractChecksStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ExtractChecksStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExtractChecksStep.class);
 
     public ExtractPaymentService extractPaymentService;
 

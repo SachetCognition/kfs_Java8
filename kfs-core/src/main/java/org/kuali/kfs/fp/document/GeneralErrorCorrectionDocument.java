@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.FROM;
 import static org.kuali.kfs.sys.KFSConstants.TO;
 
@@ -37,14 +39,13 @@ import org.kuali.rice.krad.document.Copyable;
 import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
 import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
 
-
 /**
  * This is the business object that represents the GeneralErrorCorrectionDocument in Kuali. This is a transactional document that
  * will eventually post transactions to the G/L. It integrates with workflow and also contains two groupings of accounting lines:
  * from and to. From lines are the source lines, to lines are the target lines.
  */
 public class GeneralErrorCorrectionDocument extends CapitalAccountingLinesDocumentBase implements Copyable, Correctable, AmountTotaling, CapitalAssetEditable {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GeneralErrorCorrectionDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(GeneralErrorCorrectionDocument.class);
 
     protected transient CapitalAssetManagementModuleService capitalAssetManagementModuleService;
 
@@ -146,7 +147,6 @@ public class GeneralErrorCorrectionDocument extends CapitalAccountingLinesDocume
         super.doRouteStatusChange(statusChangeEvent);
         this.getCapitalAssetManagementModuleService().deleteDocumentAssetLocks(this);
     }
-
 
     /**
      * @see org.kuali.rice.krad.document.DocumentBase#postProcessSave(org.kuali.rice.krad.rule.event.KualiDocumentEvent)

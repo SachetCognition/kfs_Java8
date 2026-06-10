@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ld.businessobject.inquiry.AbstractPositionDataDetailsInquirableImpl;
 import org.kuali.kfs.module.ld.businessobject.LaborCalculatedSalaryFoundationTracker;
 import org.kuali.kfs.module.ld.businessobject.inquiry.LaborCalculatedSalaryFoundationTrackerInquirableImpl;
@@ -44,7 +46,7 @@ import org.kuali.rice.krad.util.BeanPropertyComparator;
  */
 
 public class LaborCalculatedSalaryFoundationTrackerLookupableHelperServiceImpl extends AbstractLookupableHelperServiceImpl {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborCalculatedSalaryFoundationTrackerLookupableHelperServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborCalculatedSalaryFoundationTrackerLookupableHelperServiceImpl.class);
 
     private LaborCalculatedSalaryFoundationTrackerService laborCalculatedSalaryFoundationTrackerService;
 

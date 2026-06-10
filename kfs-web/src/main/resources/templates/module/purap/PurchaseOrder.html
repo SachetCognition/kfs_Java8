@@ -1,0 +1,156 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Purchase Order</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="camsFullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT] && (empty KualiForm.editingMode['restrictFiscalEntry'])}" -->
+
+<div class="document-page" data-document-type="PurchaseOrderDocument" data-form-action="purapPurchaseOrder" data-show-document-info="true">
+<form th:action="@{purapPurchaseOrder}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+    <!-- th:with="fullEntryMode=${KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+	<th:block th:if="${!empty KualiForm.editingMode['amendmentEntry']}">
+		<c:set var="amendmentEntry" value="true" scope="request" />
+	</th:block>
+
+    <th:block th:if="${!empty KualiForm.editingMode['lockB2BEntry']}">
+        <c:set var="lockB2BEntry" value="true" scope="request" />
+    </th:block>
+
+	<th:block th:if="${!empty KualiForm.editingMode['preRoute']}">
+		<c:set var="preRouteChangeMode" value="true" scope="request" />
+	</th:block>
+
+	<th:block th:if="${((KualiForm.editingMode['displayRetransmitTab']))}">
+        <c:set var="retransmitMode" value="true" scope="request" />
+    </th:block>
+
+    <th:block th:if="${!empty KualiForm.editingMode['splittingItemSelection']}">
+    	<c:set var="splittingItemSelectionMode" value="true" scope="request"/>
+    </th:block>
+
+    <th:block th:if="${KualiForm.document.needWarning}">
+    	<font color="black"><span th:text="#{${PurapConstants.WARNING_PURCHASEORDER_NUMBER_DONT_DISCLOSE}}"></span></font>
+    	<br><br>
+    </th:block>
+
+    <th:block th:switch="${true}"> 
+	<th:block th:case="${KualiForm.document.assigningSensitiveData}">
+		<div th:replace="~{fragments/purap/assignSensitiveData :: assignSensitiveData}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},itemAttributes=${DataDictionary.PurchaseOrderItem.attributes},poSensitiveDataAttributes=${DataDictionary.PurchaseOrderSensitiveData.attributes},sensitiveDataAssignAttributes=${DataDictionary.SensitiveDataAssignment.attributes}"></div>
+    </th:block>
+
+	<th:block th:case="${splittingItemSelectionMode}">
+		<div th:replace="~{fragments/purap/splitPurchaseOrder :: splitPurchaseOrder}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},itemAttributes=${DataDictionary.PurchaseOrderItem.attributes}"></div>
+    </th:block>
+
+    <th:block th:case="*">
+		<th:block th:if="${empty KualiForm.editingMode['amendmentEntry']}">
+			<sys:documentOverview editingMode="${KualiForm.editingMode}"
+		    	includePostingYear="true"
+                fiscalYearReadOnly="${not KualiForm.editingMode['allowPostingYearEntry']}"
+		        postingYearAttributes="${DataDictionary.PurchaseOrderDocument.attributes}" >
+		        <div th:replace="~{fragments/purap/purapDocumentDetail :: purapDocumentDetail}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},purchaseOrder='true',detailSectionLabel='Purchase Order Detail',editableAccountDistributionMethod=${KualiForm.readOnlyAccountDistributionMethod},tabErrorKey=${PurapConstants.DETAIL_TAB_ERRORS}"></div>
+		    </sys:documentOverview>
+		</th:block>
+
+		<!--  TODO maybe we ought to rename the accountingLineEditingMode to something more generic -->
+		<th:block th:if="${! empty KualiForm.editingMode['amendmentEntry']}">
+		 	<c:set target="${KualiForm.accountingLineEditingMode}" property="fullEntry" value="true" />
+		    <sys:documentOverview editingMode="${KualiForm.accountingLineEditingMode}"
+		    	includePostingYear="true"
+		        fiscalYearReadOnly="true"
+		        postingYearAttributes="${DataDictionary.PurchaseOrderDocument.attributes}" >
+
+		        <div th:replace="~{fragments/purap/purapDocumentDetail :: purapDocumentDetail}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},purchaseOrder='true',editableAccountDistributionMethod=${KualiForm.readOnlyAccountDistributionMethod},detailSectionLabel='Purchase Order Detail'"></div>
+		    </sys:documentOverview>
+		</th:block>
+
+		<th:block th:if="${retransmitMode}">
+			<div th:replace="~{fragments/purap/purchaseOrderRetransmit :: purchaseOrderRetransmit}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},itemAttributes=${DataDictionary.PurchaseOrderItem.attributes},displayPurchaseOrderFields='true'"></div>
+		</th:block>
+
+		<th:block th:if="${not retransmitMode}">
+            <div th:replace="~{fragments/purap/delivery :: delivery}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},showDefaultBuildingOption='false'"></div>
+
+		    <div th:replace="~{fragments/purap/vendor :: vendor}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},displayPurchaseOrderFields='true',purchaseOrderAwarded=${KualiForm.document.purchaseOrderAwarded}"></div>
+
+		    <th:block th:if="${!lockB2BEntry}">
+		        <div th:replace="~{fragments/purap/stipulationsAndInfo :: stipulationsAndInfo}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes}"></div>
+		    </th:block>
+
+		    <div th:replace="~{fragments/purap/puritems :: puritems}" th:with="itemAttributes=${DataDictionary.PurchaseOrderItem.attributes},accountingLineAttributes=${DataDictionary.PurchaseOrderAccount.attributes},extraHiddenItemFields='documentNumber'"></div> 
+
+			<div th:replace="~{fragments/purap/purCams :: purCams}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},itemAttributes=${DataDictionary.PurchaseOrderItem.attributes},camsItemAttributes=${DataDictionary.PurchaseOrderCapitalAssetItem.attributes},camsSystemAttributes=${DataDictionary.PurchaseOrderCapitalAssetSystem.attributes},camsAssetAttributes=${DataDictionary.PurchaseOrderItemCapitalAsset.attributes},camsLocationAttributes=${DataDictionary.PurchaseOrderCapitalAssetLocation.attributes},isPurchaseOrder='true',fullEntryMode=${camsFullEntryMode}"></div>
+
+		    <div th:replace="~{fragments/purap/paymentinfo :: paymentinfo}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},displayPurchaseOrderFields='true'"></div>
+
+		    <div th:replace="~{fragments/purap/additional :: additional}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes}"></div>
+
+            <th:block th:if="${!lockB2BEntry}">
+                <div th:replace="~{fragments/purap/quotes :: quotes}" th:with="documentAttributes=${DataDictionary.PurchaseOrderDocument.attributes},vendorQuoteAttributes=${DataDictionary.PurchaseOrderVendorQuote.attributes},isPurchaseOrderAwarded=${KualiForm.document.purchaseOrderAwarded}"></div>
+            </th:block>
+
+            <div th:replace="~{fragments/purap/summaryaccounts :: summaryaccounts}" th:with="itemAttributes=${DataDictionary.PurchaseOrderItem.attributes},documentAttributes=${DataDictionary.SourceAccountingLine.attributes}"></div>  
+
+		    <div th:replace="~{fragments/purap/customRelatedDocuments :: customRelatedDocuments}" th:with="documentAttributes=${DataDictionary.RelatedDocuments.attributes}"></div>
+
+		    <div th:replace="~{fragments/purap/customPaymentHistory :: customPaymentHistory}" th:with="documentAttributes=${DataDictionary.RelatedDocuments.attributes}"></div>
+
+		    <div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+
+			<kul:notes attachmentTypesValuesFinderClass="${documentEntry.attachmentTypesValuesFinderClass}" >
+		        <html:messages id="warnings" property="noteWarning" message="true">
+		            &nbsp;&nbsp;&nbsp;<bean:write name="warnings"/><br><br>
+		        </html:messages>
+		    </kul:notes>
+
+		    <div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+
+		    <div th:replace="~{fragments/routeLog :: routeLog}"></div>
+
+		    <div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+
+		</th:block>
+	</th:block>
+	</th:block>
+
+    <div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+	<th:block th:switch="${true}">
+		<th:block th:case="${KualiForm.document.assigningSensitiveData}">
+    		<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+		</th:block>
+		<th:block th:case="*">
+    		<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+		</th:block>
+	</th:block>
+
+</div>
+</div>
+</div>
+</body>
+</html>

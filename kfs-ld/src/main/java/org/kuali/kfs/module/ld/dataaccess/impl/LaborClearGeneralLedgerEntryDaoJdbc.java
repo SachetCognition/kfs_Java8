@@ -18,11 +18,13 @@
  */
 package org.kuali.kfs.module.ld.dataaccess.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ld.dataaccess.LaborClearGeneralLedgerEntryDao;
 import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJdbc;
 
 public class LaborClearGeneralLedgerEntryDaoJdbc extends PlatformAwareDaoBaseJdbc implements LaborClearGeneralLedgerEntryDao {
-    org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(getClass());
+    Logger LOG = LoggerFactory.getLogger(getClass());
     
     /**
      * @see org.kuali.kfs.module.ld.dataaccess.LaborClearGeneralLedgerEntryDao#deleteCopiedLaborGenerealLedgerEntries()

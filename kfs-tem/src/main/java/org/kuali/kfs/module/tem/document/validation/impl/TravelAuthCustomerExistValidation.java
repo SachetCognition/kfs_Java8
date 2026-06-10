@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.module.tem.document.validation.impl;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemKeyConstants;
 import org.kuali.kfs.module.tem.TemParameterConstants;
@@ -32,7 +33,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 public class TravelAuthCustomerExistValidation extends GenericValidation {
 
-    public static Logger LOG = Logger.getLogger(TravelAuthCustomerExistValidation.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelAuthCustomerExistValidation.class);
 
     protected ParameterService parameterService;
 

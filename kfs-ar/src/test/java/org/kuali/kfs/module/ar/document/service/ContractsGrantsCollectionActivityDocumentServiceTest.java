@@ -18,9 +18,10 @@
  */
 package org.kuali.kfs.module.ar.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.wklykins;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.module.ar.fixture.ARAwardFixture;
 import org.kuali.kfs.module.cg.businessobject.Award;
@@ -35,7 +36,7 @@ import org.kuali.rice.krad.service.DocumentService;
 @ConfigureContext(session = wklykins)
 public class ContractsGrantsCollectionActivityDocumentServiceTest extends KualiTestBase {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsCollectionActivityDocumentServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsCollectionActivityDocumentServiceTest.class);
 
     private static final Long PROPOSAL_NUMBER = 80472L;
     private static final String AGENCY_NUMBER = "12851";

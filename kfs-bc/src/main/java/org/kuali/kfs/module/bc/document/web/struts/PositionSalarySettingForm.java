@@ -22,18 +22,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.businessobject.BudgetConstructionPosition;
 import org.kuali.kfs.module.bc.businessobject.PendingBudgetConstructionAppointmentFunding;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 
 public class PositionSalarySettingForm extends DetailSalarySettingForm {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PositionSalarySettingForm.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PositionSalarySettingForm.class);
 
     private boolean refreshPositionBeforeSalarySetting;
 
     private BudgetConstructionPosition budgetConstructionPosition;
-
 
     /**
      * Constructs a PositionSalarySettingForm.java.

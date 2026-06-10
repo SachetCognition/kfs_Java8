@@ -25,15 +25,30 @@ package org.kuali.kfs.pdp.businessobject;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 
+@Entity
+@Table(name = "PDP_FMT_PROC_T")
 public class FormatProcess extends TimestampedBusinessObjectBase {
 
-    private String physicalCampusProcessCode; // PHYS_CMP_PROC_CD
-    private Timestamp beginFormat; // BEG_FMT_TS
+    @Id
+    @Column(name = "PHYS_CMP_PROC_CD")
+    private String physicalCampusProcessCode;
+
+    @Column(name = "BEG_PROC_TS")
+    private Timestamp beginFormat;
+
+    @Column(name = "PMT_PROC_ID")
     private int paymentProcIdentifier;
-    
+
+    @Transient
     private PaymentProcess paymentProcess;
 
     public PaymentProcess getPaymentProcess() {

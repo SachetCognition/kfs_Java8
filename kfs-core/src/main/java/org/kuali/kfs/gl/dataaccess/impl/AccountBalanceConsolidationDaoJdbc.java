@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.dataaccess.AccountBalanceConsolidationDao;
 import org.kuali.kfs.gl.service.AccountBalanceService;
@@ -37,7 +39,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
  * A class to do the database queries needed to calculate Balance By Consolidation Balance Inquiry Screen
  */
 public class AccountBalanceConsolidationDaoJdbc extends AccountBalanceDaoJdbcBase implements AccountBalanceConsolidationDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountBalanceConsolidationDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountBalanceConsolidationDaoJdbc.class);
 
     /**
      * Returns account balance information that qualifies, based on the inquiry formed out of the parameters

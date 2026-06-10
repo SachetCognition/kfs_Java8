@@ -1,0 +1,41 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Session Expiration</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="kfs-page" data-header-title="KFS - Session Timeout" data-doc-title="KFS - Session Timeout">
+<h1>KFS - Session Timeout</h1>
+<form th:action="@{SessionInvalidateAction}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+
+    <div style="margin-top: 10px; text-align: center; font-size: 1.2em;">
+	    <strong>Your session has timed out.</strong><br/>
+	    <a href="${T(org.kuali.rice.krad.util.KRADConstants).PORTAL_ACTION}">Return to Main Page</a>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>

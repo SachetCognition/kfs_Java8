@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.service.impl;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
 import org.kuali.kfs.gl.businessobject.LedgerEntryForReporting;
 import org.kuali.kfs.gl.businessobject.LedgerEntryHolder;
@@ -41,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ReversalServiceImpl implements ReversalService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReversalServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReversalServiceImpl.class);
 
     private ReversalDao reversalDao;
     private AccountingPeriodService accountingPeriodService;

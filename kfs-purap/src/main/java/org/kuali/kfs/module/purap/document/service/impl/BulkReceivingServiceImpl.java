@@ -25,7 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
 import org.kuali.kfs.module.purap.document.BulkReceivingDocument;
@@ -50,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BulkReceivingServiceImpl implements BulkReceivingService {
 
-    private static final Logger LOG = Logger.getLogger(BulkReceivingServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BulkReceivingServiceImpl.class);
     
     protected PurchaseOrderService purchaseOrderService;
     protected BulkReceivingDao bulkReceivingDao;

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.fp.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.BALANCE_TYPE_PRE_ENCUMBRANCE;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ import org.kuali.rice.krad.document.Copyable;
  * have already been made.
  */
 public class PreEncumbranceDocument extends AccountingDocumentBase implements Copyable, AmountTotaling {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PreEncumbranceDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PreEncumbranceDocument.class);
 
     protected java.sql.Date reversalDate;
 
@@ -64,7 +66,6 @@ public class PreEncumbranceDocument extends AccountingDocumentBase implements Co
         // This document does not do sufficient funds checking
         return new ArrayList<SufficientFundsItem>();
     }
-
 
     /**
      * @return Timestamp
@@ -119,7 +120,6 @@ public class PreEncumbranceDocument extends AccountingDocumentBase implements Co
         AccountingLine accountingLine = (AccountingLine)postable;
 
         DebitDeterminerService isDebitUtils = SpringContext.getBean(DebitDeterminerService.class);
-
 
         if (isDebitUtils.isErrorCorrection(this) == accountingLine.getAmount().isPositive()) {
             throw new IllegalStateException(isDebitUtils.getDebitCalculationIllegalStateExceptionMessage());

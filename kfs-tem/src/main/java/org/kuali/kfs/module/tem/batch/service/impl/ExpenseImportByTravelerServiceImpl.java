@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.coa.service.ObjectCodeService;
 import org.kuali.kfs.coa.service.ProjectCodeService;
@@ -55,7 +56,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class ExpenseImportByTravelerServiceImpl extends ExpenseImportServiceBase implements ExpenseImportByTravelerService {
 
-    public static Logger LOG = Logger.getLogger(ExpenseImportByTravelerServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(ExpenseImportByTravelerServiceImpl.class);
 
     private TemProfileService temProfileService;
     private AccountService accountService;
@@ -203,7 +204,6 @@ public class ExpenseImportByTravelerServiceImpl extends ExpenseImportServiceBase
         return null;
     }
 
-
     /**
      *
      * @see org.kuali.kfs.module.tem.batch.service.ExpenseImportByTravelerService#validateAccountingInfo(org.kuali.kfs.module.tem.businessobject.TemProfile, org.kuali.kfs.module.tem.businessobject.AgencyStagingData)
@@ -321,7 +321,7 @@ public class ExpenseImportByTravelerServiceImpl extends ExpenseImportServiceBase
                 }
             }
             if (isDuplicate) {
-                LOG.error(errorMessage);
+                LOG.error("{}", errorMessage);
 
                 ErrorMessage error = new ErrorMessage(TemKeyConstants.MESSAGE_AGENCY_DATA_TRAVELER_DUPLICATE_RECORD,
                     agencyData.getTravelerId(), agencyData.getItineraryDataString(), agencyData.getCreditCardOrAgencyCode(),
@@ -417,7 +417,6 @@ public class ExpenseImportByTravelerServiceImpl extends ExpenseImportServiceBase
         LOG.info("Finished distributing expense for agency data: "+ agencyData.getId() +". Agency data "+ (errors.isEmpty() ? "was":"was not") +" distributed.");
         return errors;
     }
-
 
     /**
      * Gets the temProfileService attribute.

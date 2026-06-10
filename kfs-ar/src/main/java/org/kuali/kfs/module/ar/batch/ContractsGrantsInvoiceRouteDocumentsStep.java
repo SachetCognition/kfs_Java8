@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ar.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.ar.service.ContractsGrantsInvoiceCreateDocumentService;
 import org.kuali.kfs.sys.batch.AbstractStep;
@@ -28,7 +30,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * This step will call a service method to route cgin documents that are in 'I' status.
  */
 public class ContractsGrantsInvoiceRouteDocumentsStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsInvoiceRouteDocumentsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ContractsGrantsInvoiceRouteDocumentsStep.class);
     protected AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
     protected ContractsGrantsInvoiceCreateDocumentService cgInvoiceDocumentCreateService;
 
@@ -69,6 +71,5 @@ public class ContractsGrantsInvoiceRouteDocumentsStep extends AbstractStep {
     public void setCgInvoiceDocumentCreateService(ContractsGrantsInvoiceCreateDocumentService cgInvoiceDocumentCreateService) {
         this.cgInvoiceDocumentCreateService = cgInvoiceDocumentCreateService;
     }
-
 
 }

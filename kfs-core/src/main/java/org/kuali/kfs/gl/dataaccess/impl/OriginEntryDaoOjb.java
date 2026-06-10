@@ -29,6 +29,8 @@ import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
 import org.kuali.kfs.gl.businessobject.OriginEntryGroup;
 import org.kuali.kfs.gl.businessobject.OriginEntryInformation;
@@ -43,7 +45,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * An OJB implementation of the OriginEntryDao
  */
 public class OriginEntryDaoOjb extends PlatformAwareDaoBaseOjb implements OriginEntryDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OriginEntryDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(OriginEntryDaoOjb.class);
 
     private static final String ENTRY_GROUP_ID = "entryGroupId";
     private static final String ENTRY_ID = "entryId";

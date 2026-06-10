@@ -19,6 +19,8 @@
 package org.kuali.kfs.fp.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherPayeeDetail;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -34,7 +36,7 @@ import org.kuali.rice.location.api.state.State;
 import org.kuali.rice.location.api.state.StateService;
 
 public class DisbursementVoucherPayeeStateCodeValidation extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherPayeeStateCodeValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherPayeeStateCodeValidation.class);
 
     private AccountingDocument accountingDocumentForValidation;
 
@@ -83,7 +85,6 @@ public class DisbursementVoucherPayeeStateCodeValidation extends GenericValidati
         return isValid;
     }
 
-
     /**
      * Gets the accountingDocumentForValidation attribute.
      * 
@@ -92,7 +93,6 @@ public class DisbursementVoucherPayeeStateCodeValidation extends GenericValidati
     public AccountingDocument getAccountingDocumentForValidation() {
         return accountingDocumentForValidation;
     }
-
 
     /**
      * Sets the accountingDocumentForValidation attribute value.

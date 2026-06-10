@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.dataaccess.OrganizationReversionUnitOfWorkDao;
 import org.kuali.kfs.gl.batch.service.OrganizationReversionUnitOfWorkService;
 import org.kuali.kfs.gl.businessobject.OrgReversionUnitOfWork;
@@ -34,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class OrganizationReversionUnitOfWorkServiceImpl implements OrganizationReversionUnitOfWorkService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionUnitOfWorkServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReversionUnitOfWorkServiceImpl.class);
     
     protected BusinessObjectService businessObjectService;
     protected OrganizationReversionUnitOfWorkDao orgReversionUnitOfWorkDao;

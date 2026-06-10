@@ -29,6 +29,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Action class for the asset barcode inventory error document
  */
 public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDocumentActionBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BarcodeInventoryErrorAction.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(BarcodeInventoryErrorAction.class);
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiDocumentActionBase#sendAdHocRequests(org.apache.struts.action.ActionMapping,
@@ -158,7 +160,6 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * Validates all the selected records and saves them
      * 
@@ -226,7 +227,6 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
 
-
     /**
      * Deletes selected lines from the document
      * 
@@ -272,7 +272,6 @@ public class BarcodeInventoryErrorAction extends FinancialSystemTransactionalDoc
         this.loadDocument((KualiDocumentFormBase) form);
         return mapping.findForward(KFSConstants.MAPPING_BASIC);
     }
-
 
     protected boolean validateGlobalReplaceFields(BarcodeInventoryErrorDocument document) {
         if (StringUtils.isBlank(document.getCurrentScanCode()) && StringUtils.isBlank(document.getCurrentCampusCode()) && StringUtils.isBlank(document.getCurrentBuildingNumber()) && StringUtils.isBlank(document.getCurrentRoom()) && StringUtils.isBlank(document.getCurrentSubroom()) && StringUtils.isBlank(document.getCurrentConditionCode()) && StringUtils.isBlank(document.getCurrentTagNumber())) {

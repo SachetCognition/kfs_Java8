@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpConstants.PayeeIdTypeCodes;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
@@ -39,7 +41,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Performs business rules for the Payee ACH Account maintenance document
  */
 public class PayeeAchAccountRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PayeeACHAccount.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PayeeACHAccount.class);
 
     protected PayeeACHAccount oldPayeeAchAccount;
     protected PayeeACHAccount newPayeeAchAccount;

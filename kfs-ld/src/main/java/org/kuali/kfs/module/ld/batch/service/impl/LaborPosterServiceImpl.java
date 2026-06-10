@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ld.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.ld.LaborConstants.DestinationNames.ORIGN_ENTRY;
 
 import java.io.BufferedReader;
@@ -67,7 +69,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class LaborPosterServiceImpl implements LaborPosterService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborPosterServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborPosterServiceImpl.class);
 
     private LaborOriginEntryService laborOriginEntryService;
     private OriginEntryGroupService originEntryGroupService;
@@ -429,7 +431,6 @@ public class LaborPosterServiceImpl implements LaborPosterService {
     public void setDateTimeService(DateTimeService dateTimeService) {
         this.dateTimeService = dateTimeService;
     }
-
 
     /**
      * Sets the laborLedgerBalancePoster attribute value.

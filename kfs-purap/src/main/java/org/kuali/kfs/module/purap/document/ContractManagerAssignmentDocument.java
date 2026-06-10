@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapParameterConstants;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.PurapWorkflowConstants;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.krad.service.DocumentService;
 
 public class ContractManagerAssignmentDocument extends FinancialSystemTransactionalDocumentBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractManagerAssignmentDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractManagerAssignmentDocument.class);
 
     protected List<ContractManagerAssignmentDetail> contractManagerAssignmentDetails = new ArrayList<ContractManagerAssignmentDetail>();
 
@@ -57,7 +59,6 @@ public class ContractManagerAssignmentDocument extends FinancialSystemTransactio
     protected String firstItemCommodityCode;
     protected String firstObjectCode;
     protected String universityFiscalYear;
-
 
     /**
      * Default constructor.

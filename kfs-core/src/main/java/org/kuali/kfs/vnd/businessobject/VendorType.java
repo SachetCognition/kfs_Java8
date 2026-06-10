@@ -24,23 +24,54 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Major classification of Vendors according to whether they are sufficiently set up to provide for an interaction via Purchase
  * Orders.
  */
+@Entity
+@Table(name = "PUR_VNDR_TYP_T")
 public class VendorType extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "VNDR_TYP_CD")
     private String vendorTypeCode;
+    @Column(name = "VNDR_TYP_DESC")
     private String vendorTypeDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
+    @Column(name = "VNDR_TAX_NBR_REQ_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorTaxNumberRequiredIndicator;
+    @Column(name = "VNDR_TYP_CHG_ALLW_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorTypeChangeAllowedIndicator;
+    @Column(name = "VNDR_ADDR_TYP_REQ_CD")
     private String vendorAddressTypeRequiredCode;
+    @Column(name = "VNDR_CONTR_ALLW_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorContractAllowedIndicator;
+    @Column(name = "VNDR_SHOW_RVW_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean vendorShowReviewIndicator;
+    @Column(name = "VNDR_RVW_TXT")
     private String vendorReviewText;
+    @Column(name = "PUR_COMM_REQ_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean commodityRequiredIndicator;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_ADDR_TYP_REQ_CD", insertable = false, updatable = false)
     private AddressType addressType;
 
     /**

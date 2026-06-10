@@ -28,6 +28,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.identity.KfsKimDocDelegateMember;
 import org.kuali.kfs.coa.identity.KfsKimDocRoleMember;
 import org.kuali.kfs.coa.identity.KfsKimDocumentAttributeData;
@@ -62,7 +64,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 import org.springframework.cache.annotation.Cacheable;
 
 public class OrgReviewRoleServiceImpl implements OrgReviewRoleService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrgReviewRoleServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrgReviewRoleServiceImpl.class);
 
     // note: this assumes that all use the KFS-SYS namespace
     protected static final Map<String,Role> ROLE_CACHE = new HashMap<String, Role>();
@@ -579,7 +581,6 @@ public class OrgReviewRoleServiceImpl implements OrgReviewRoleService {
         }
         return null;
     }
-
 
     protected DocumentTypeService getDocumentTypeService() {
         if ( documentTypeService == null ) {

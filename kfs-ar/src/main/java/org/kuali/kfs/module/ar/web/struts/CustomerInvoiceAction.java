@@ -31,6 +31,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.report.service.AccountsReceivableReportService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -48,7 +50,7 @@ import com.lowagie.text.pdf.SimpleBookmark;
  */
 
 public class CustomerInvoiceAction extends KualiAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerInvoiceAction.class);
 
     /**
      *
@@ -186,7 +188,6 @@ public class CustomerInvoiceAction extends KualiAction {
             document.close();
 
             fileName.append("-InvoiceBatchPDFs.pdf");
-
 
             WebUtils.saveMimeOutputStreamAsFile(response, "application/pdf", baos, fileName.toString());
             ciForm.setMessage(reports.size()+" Reports Generated");

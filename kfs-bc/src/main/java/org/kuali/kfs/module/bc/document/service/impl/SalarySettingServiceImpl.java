@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.module.bc.BCConstants.AppointmentFundingDurationCodes.NONE;
 
 import java.math.BigDecimal;
@@ -74,7 +76,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class SalarySettingServiceImpl implements SalarySettingService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalarySettingServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SalarySettingServiceImpl.class);
 
     protected ConfigurationService kualiConfigurationService;
     protected BusinessObjectService businessObjectService;

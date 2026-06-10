@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.document.validation.event.AttributedDocumentEvent;
 import org.kuali.rice.kew.api.WorkflowDocument;
 
@@ -30,7 +32,7 @@ import org.kuali.rice.kew.api.WorkflowDocument;
  * extenders set a validRouteNodeNames - a list of all valid route nodes to perform the validation.
  */
 public abstract class RouteNodeValidation extends GenericValidation {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(RouteNodeValidation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RouteNodeValidation.class);
 
     protected List<String> validRouteNodeNames;
 
@@ -59,12 +61,7 @@ public abstract class RouteNodeValidation extends GenericValidation {
 
         return valid;
 
-
     }
-
-
-
-
 
     public void setValidRouteNodeNames(List<String> validRouteNodeNames) {
         this.validRouteNodeNames = validRouteNodeNames;
@@ -76,9 +73,5 @@ public abstract class RouteNodeValidation extends GenericValidation {
     public List<String> getValidRouteNodeNames() {
         return validRouteNodeNames;
     }
-
-
-
-
 
 }

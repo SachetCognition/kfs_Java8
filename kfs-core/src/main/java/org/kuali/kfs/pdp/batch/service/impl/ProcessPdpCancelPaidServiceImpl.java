@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.purap.PurchasingAccountsPayableModuleService;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.batch.service.ProcessPdpCancelPaidService;
@@ -49,7 +51,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ProcessPdpCancelPaidServiceImpl implements ProcessPdpCancelPaidService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcessPdpCancelPaidServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcessPdpCancelPaidServiceImpl.class);
 
     protected PaymentGroupService paymentGroupService;
     protected PaymentDetailService paymentDetailService;

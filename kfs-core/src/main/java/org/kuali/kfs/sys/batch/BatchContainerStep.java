@@ -30,6 +30,8 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.BatchContainerDirectory;
 import org.kuali.kfs.sys.context.BatchStepExecutor;
@@ -49,7 +51,7 @@ import org.kuali.rice.coreservice.framework.parameter.ParameterService;
  *
  */
 public class BatchContainerStep extends AbstractStep implements ContainerStepListener {
-    static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BatchContainerStep.class);
+    static Logger LOG = LoggerFactory.getLogger(BatchContainerStep.class);
 
     protected String batchContainerDirectory;
     protected Step batchContainerStopStep;
@@ -249,8 +251,6 @@ public class BatchContainerStep extends AbstractStep implements ContainerStepLis
         return false;
     }
 
-
-
     /**
      * Sleep for a specified amount of time before looking for more semaphore files to process
      */
@@ -356,7 +356,7 @@ public class BatchContainerStep extends AbstractStep implements ContainerStepLis
             containerResults.append(batchStepFile +"; S:"+ startedDate +"\n");
         }
 
-        LOG.info(containerResults);
+        LOG.info("{}", containerResults);
     }
 
     /**

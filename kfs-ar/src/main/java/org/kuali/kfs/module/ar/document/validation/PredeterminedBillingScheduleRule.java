@@ -22,7 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -41,7 +42,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Rules for the PredeterminedBillingSchedule maintenance document.
  */
 public class PredeterminedBillingScheduleRule extends KfsMaintenanceDocumentRuleBase {
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(PredeterminedBillingScheduleRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(PredeterminedBillingScheduleRule.class);
     protected PredeterminedBillingSchedule newPredeterminedBillingScheduleCopy;
 
     private static volatile PredeterminedBillingScheduleMaintenanceService predeterminedBillingScheduleMaintenanceService;

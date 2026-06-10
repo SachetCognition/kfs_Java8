@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The Kuali Financial System, a comprehensive financial management system for higher education.
+
+  Copyright 2005-2014 The Kuali Foundation
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Affero General Public License as
+  published by the Free Software Foundation, either version 3 of the
+  License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<Configuration status="WARN" monitorInterval="300">
+
+    <Properties>
+        <Property name="LOG_PATTERN">%d [%t] u:%X{user}/d:%X{docId} %-5p %c :: %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="StdOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- p6spy -->
+        <Logger name="p6spy" level="WARN" additivity="false">
+            <AppenderRef ref="StdOut" />
+        </Logger>
+
+        <!-- Quiet Down Application Startup -->
+        <Logger name="org.kuali.kfs.sys.context.Log4jConfigurer" level="WARN" />
+        <Logger name="org.kuali.rice.core.framework.resourceloader.BaseResourceLoader" level="WARN" />
+        <Logger name="org.kuali.rice.kew.util.PerformanceLogger" level="WARN" />
+        <Logger name="org.kuali.rice.core.impl.config.property.JAXBConfigImpl" level="ERROR" />
+        <Logger name="org.kuali.rice.krad.datadictionary.DataDictionary" level="WARN" />
+        <Logger name="org.kuali.rice.core.api.resourceloader.GlobalResourceLoader" level="WARN" />
+        <Logger name="org.springframework.aop.framework.Cglib2AopProxy" level="ERROR" />
+        <Logger name="org.springframework.beans.factory.xml.XmlBeanDefinitionReader" level="WARN" />
+        <Logger name="org.springframework.beans.factory.support.KualiDefaultListableBeanFactory" level="WARN" />
+        <Logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="WARN" />
+
+        <!-- OJB -->
+        <Logger name="org.apache.ojb.broker" level="ERROR" />
+        <Logger name="org.apache.ojb.broker.metadata" level="WARN" />
+        <Logger name="org.apache.ojb.broker.core.proxy" level="WARN" />
+        <Logger name="org.apache.ojb.broker.core.proxy.IndirectionHandler" level="ERROR" />
+        <Logger name="org.apache.ojb.broker.core.PersistenceBrokerImpl" level="WARN" />
+
+        <!-- Spring Framework -->
+        <Logger name="org.springframework.beans.factory" level="ERROR" />
+        <Logger name="org.springframework.context.support.ClassPathXmlApplicationContext" level="WARN" />
+
+        <!-- DWR -->
+        <Logger name="org.directwebremoting" level="WARN" />
+        <Logger name="org.directwebremoting.impl.DefaultConverterManager" level="ERROR" />
+        <Logger name="org.directwebremoting.convert.BeanConverter" level="ERROR" />
+        <Logger name="org.directwebremoting.impl.DTDEntityResolver" level="ERROR" />
+        <Logger name="org.directwebremoting.log.startup" level="ERROR" />
+
+        <!-- KSB -->
+        <Logger name="org.kuali.rice.ksb.messaging.serviceexporters" level="WARN" />
+        <Logger name="org.kuali.rice.ksb.messaging.BusClientFailureProxy" level="WARN" />
+
+        <!-- KFS : Quiet Down Standard Messages -->
+        <Logger name="org.kuali.rice.kew.impl.rule.RuleServiceImpl" level="WARN" />
+        <Logger name="org.kuali.kfs.coa.document.validation.impl" level="WARN" />
+        <Logger name="org.kuali.kfs.module.cg.document.validation.impl" level="WARN" />
+        <Logger name="org.kuali.rice.krad.document.DocumentBase" level="WARN" />
+        <Logger name="org.kuali.rice.kns.web.struts.form.pojo.PojoPropertyUtilsBean" level="ERROR" />
+        <Logger name="org.kuali.rice.krad.bo.PersistableBusinessObjectBase" level="ERROR" />
+        <Logger name="org.kuali.kfs.integration" level="ERROR" />
+        <Logger name="org.kuali.rice.kim.service.impl.PersonServiceImpl" level="ERROR" />
+        <Logger name="org.displaytag" level="ERROR" />
+        <Logger name="org.kuali.rice.kns.web.struts.action.KualiAction" level="ERROR" />
+        <Logger name="org.kuali.rice.ksb.messaging.serviceproxies.MessageSendingTransactionSynchronization" level="WARN" />
+        <Logger name="org.apache.struts.util.PropertyMessageResources" level="ERROR" />
+
+        <!-- Some logging in this service should only have been at WARN level
+             but nothing important for KFS is logged from these services -->
+        <Logger name="org.kuali.rice.kim.service.impl.ResponsibilityServiceImpl" level="FATAL" />
+        <Logger name="org.kuali.rice.kns.web.struts.action.KualiInquiryAction" level="FATAL" />
+
+        <Logger name="org.apache.ws" level="ERROR" />
+        <Logger name="org.apache.xml" level="ERROR" />
+        <Logger name="org.quartz" level="WARN" />
+        <Logger name="org.apache.cxf" level="WARN" />
+
+        <!-- KIM Debugging Loggers (uncomment as needed)
+        <Logger name="org.kuali.rice.kim.impl.identity.PersonServiceImpl" level="DEBUG" />
+        <Logger name="org.kuali.rice.kim.impl.group.GroupServiceImpl" level="DEBUG" />
+        <Logger name="org.kuali.rice.kim.impl.role.RoleServiceImpl" level="DEBUG" />
+        <Logger name="org.kuali.rice.kim.impl.permission.PermissionServiceImpl" level="DEBUG" />
+        -->
+
+        <!-- KEW Debugging Loggers (uncomment as needed)
+        <Logger name="org.kuali.rice.kim.impl.responsibility.ResponsibilityServiceImpl" level="DEBUG" />
+        <Logger name="org.kuali.rice.kew.engine.StandardWorkflowEngine" level="DEBUG" />
+        <Logger name="org.kuali.rice.kew.engine.node.RoleNode" level="DEBUG" />
+        <Logger name="org.kuali.rice.kew.engine.node.RequestsNode" level="DEBUG" />
+        <Logger name="org.kuali.rice.kew.role.RoleRouteModule" level="DEBUG" />
+        -->
+
+        <Root level="INFO">
+            <AppenderRef ref="StdOut" />
+        </Root>
+    </Loggers>
+
+</Configuration>

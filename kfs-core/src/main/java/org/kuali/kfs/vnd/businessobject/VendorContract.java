@@ -25,7 +25,8 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.vnd.document.service.VendorService;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -33,39 +34,96 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Purchasing Contracts with specific Vendors.
  */
+@Entity
+@Table(name = "PUR_VNDR_CONTR_T")
 public class VendorContract extends PersistableBusinessObjectBase implements VendorRoutingComparable, MutableInactivatable {
-    protected static final Logger LOG = Logger.getLogger(VendorContract.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(VendorContract.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "VNDR_CONTR_GNRTD_ID")
     protected Integer vendorContractGeneratedIdentifier;
+    @Column(name = "VNDR_HDR_GNRTD_ID")
     protected Integer vendorHeaderGeneratedIdentifier;
+    @Column(name = "VNDR_DTL_ASND_ID")
     protected Integer vendorDetailAssignedIdentifier;
+    @Transient
     protected String vendorNumber; // not persisted in db, only for lookup page
+    @Column(name = "VNDR_CONTR_NM")
     protected String vendorContractName;
+    @Column(name = "VNDR_CONTR_DESC")
     protected String vendorContractDescription;
+    @Column(name = "VNDR_CMP_CD")
     protected String vendorCampusCode;
+    @Column(name = "VNDR_CONTR_BEG_DT")
     protected Date vendorContractBeginningDate;
+    @Column(name = "VNDR_CONTR_END_DT")
     protected Date vendorContractEndDate;
+    @Column(name = "CONTR_MGR_CD")
     protected Integer contractManagerCode;
+    @Column(name = "PO_CST_SRC_CD")
     protected String purchaseOrderCostSourceCode;
+    @Column(name = "VNDR_PMT_TERM_CD")
     protected String vendorPaymentTermsCode;
+    @Column(name = "VNDR_SHP_PMT_TERM_CD")
     protected String vendorShippingPaymentTermsCode;
+    @Column(name = "VNDR_SHP_TTL_CD")
     protected String vendorShippingTitleCode;
+    @Column(name = "VNDR_CONTR_EXTNS_DT")
     protected Date vendorContractExtensionDate;
+    @Column(name = "VNDR_B2B_IND")
+    @Convert(converter = YesNoConverter.class)
     protected Boolean vendorB2bIndicator;
+    @Column(name = "ORG_AUTO_PO_LMT")
     protected KualiDecimal organizationAutomaticPurchaseOrderLimit;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @OneToMany(mappedBy = "vendorContract", fetch = FetchType.LAZY)
     protected List<VendorContractOrganization> vendorContractOrganizations;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "VNDR_HDR_GNRTD_ID", referencedColumnName = "VNDR_HDR_GNRTD_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "VNDR_DTL_ASND_ID", referencedColumnName = "VNDR_DTL_ASND_ID", insertable = false, updatable = false)
+    })
     protected VendorDetail vendorDetail;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_CMP_CD", insertable = false, updatable = false)
     protected CampusParameter vendorCampus;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     protected ContractManager contractManager;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PO_CST_SRC_CD", insertable = false, updatable = false)
     protected PurchaseOrderCostSource purchaseOrderCostSource;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_PMT_TERM_CD", insertable = false, updatable = false)
     protected PaymentTermType vendorPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_PMT_TERM_CD", insertable = false, updatable = false)
     protected ShippingPaymentTerms vendorShippingPaymentTerms;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VNDR_SHP_TTL_CD", insertable = false, updatable = false)
     protected ShippingTitle vendorShippingTitle;
 
     /**
@@ -244,7 +302,6 @@ public class VendorContract extends PersistableBusinessObjectBase implements Ven
     public void setVendorDetail(VendorDetail vendorDetail) {
         this.vendorDetail = vendorDetail;
     }
-
 
     public CampusParameter getVendorCampus() {
         return vendorCampus;

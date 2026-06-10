@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.document.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.khuntley;
 
 import java.sql.Date;
@@ -25,7 +27,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.kuali.kfs.module.purap.businessobject.PurApItemUseTax;
 import org.kuali.kfs.module.purap.document.RequisitionDocument;
 import org.kuali.kfs.module.purap.fixture.RequisitionDocumentFixture;
@@ -44,7 +45,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 
 @ConfigureContext(session = khuntley)
 public class PurapServiceTest extends KualiTestBase {
-    private static final Logger LOG = Logger.getLogger(PurapServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurapServiceTest.class);
 
     private Date currentDate;
     private Date compareDate;

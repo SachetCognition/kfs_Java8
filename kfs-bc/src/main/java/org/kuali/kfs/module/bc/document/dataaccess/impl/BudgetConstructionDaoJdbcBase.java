@@ -20,16 +20,16 @@ package org.kuali.kfs.module.bc.document.dataaccess.impl;
 
 import java.sql.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJdbc;
-
 
 /**
  * create methods for building SQL useful to all extenders
  */
 public class BudgetConstructionDaoJdbcBase extends PlatformAwareDaoBaseJdbc {
 
-    private static Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionDaoJdbcBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetConstructionDaoJdbcBase.class);
 
     private String ojbPlatform;
     private String ojbOraclePlatform;
@@ -46,7 +46,6 @@ public class BudgetConstructionDaoJdbcBase extends PlatformAwareDaoBaseJdbc {
         getSimpleJdbcTemplate().update("DELETE from " + tableName + " WHERE " + SesIdColumn + " = ?", sessionId);
     }
 
-
     /**
      * given a fiscal year, get the first day of that fiscal year
      * 
@@ -56,7 +55,6 @@ public class BudgetConstructionDaoJdbcBase extends PlatformAwareDaoBaseJdbc {
     protected Date getFiscalYearStartDate(Integer universityFiscalYear) {
         return getSimpleJdbcTemplate().queryForObject(dateFetcher, Date.class, universityFiscalYear);
     }
-
 
     /**
      * return a substring function that is Oracle-specific if the DB Platform is Oracle, and an ANSI-92 compliant function otherwise
@@ -92,7 +90,6 @@ public class BudgetConstructionDaoJdbcBase extends PlatformAwareDaoBaseJdbc {
         }
         return subStringer;
     }
-
 
     public void setOjbPlatform(String ojbPlatform) {
         this.ojbPlatform = ojbPlatform;

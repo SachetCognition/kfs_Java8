@@ -1,0 +1,95 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Organization Selection Tree</title>
+</head>
+<body>
+<div layout:fragment="content">
+<script language="JavaScript" type="text/javascript" src="scripts/module/bc/organizationSelectionTree.js"></script>
+
+<!-- th:with="pointOfViewOrgAttributes=${DataDictionary.BudgetConstructionOrganizationReports.attributes}" -->
+<!-- th:with="pullupOrgAttributes=${DataDictionary.BudgetConstructionPullup.attributes}" -->
+<!-- th:with="organizationAttributes=${DataDictionary.Organization.attributes}" -->
+
+<div class="kfs-page" data-header-title="" data-doc-title="Organization Selection">
+<h1></h1>
+<form th:action="@{budgetOrganizationSelectionTree}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+    
+    <!--[if IE]> 
+      <style>
+        #workarea div.tab-container {
+          width:100%;
+        }
+      </style> 
+    <![endif]-->
+    	    
+    <kul:errors keyMatch="pointOfViewOrg" errorTitle="Errors found in Organization Selection:" />
+    <th:block th:each="message : ${KualiForm.messages}">
+	   ${message}
+	</th:block>
+
+	<br/><br/>	
+
+	<kul:tabTop tabTitle="${KualiForm.operatingModeTitle}" defaultOpen="true" tabErrorKey="orgSel,selectionSubTreeOrgs">
+	<div class="tab-container" align=center>
+		<div th:replace="~{fragments/bc/budgetConstructionOrgSelection :: budgetConstructionOrgSelection}"></div>
+	</div>
+	</kul:tabTop>
+	
+	<th:block th:if="${!empty KualiForm.selectionSubTreeOrgs}">		
+		<th:block th:if="${KualiForm.operatingMode == BCConstants.OrgSelOpMode.REPORTS}">
+			<div th:replace="~{fragments/bc/budgetConstructionOrgSelectionReport :: budgetConstructionOrgSelectionReport}"></div>
+		</th:block>
+		
+	    <th:block th:if="${KualiForm.operatingMode == BCConstants.OrgSelOpMode.ACCOUNT}">
+			<div th:replace="~{fragments/bc/budgetConstructionOrgSelectionAccount :: budgetConstructionOrgSelectionAccount}"></div>
+		</th:block>
+		
+	    <th:block th:if="${KualiForm.operatingMode == BCConstants.OrgSelOpMode.SALSET}">
+			<div th:replace="~{fragments/bc/budgetConstructionOrgSelectionSalset :: budgetConstructionOrgSelectionSalset}"></div>
+		</th:block>
+		
+		<th:block th:if="${KualiForm.operatingMode == BCConstants.OrgSelOpMode.PULLUP or KualiForm.operatingMode == BCConstants.OrgSelOpMode.PUSHDOWN}">    
+			<div th:replace="~{fragments/bc/budgetConstructionOrgSelectionPushOrPull :: budgetConstructionOrgSelectionPushOrPull}"></div>     
+		</th:block>       
+    </th:block>
+
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	
+    <div id="globalbuttons" class="globalbuttons">
+        <th:block th:if="${!empty KualiForm.selectionSubTreeOrgs && KualiForm.operatingMode == BCConstants.OrgSelOpMode.PULLUP}">
+             <html:image property="methodToCall.performPullUp" src="${ConfigProperties.externalizable.images.url}buttonsmall_pullup.gif" title="Perform Pullup" alt="Perform Pullup" styleClass="globalbuttons" />
+        </th:block>
+        
+        <th:block th:if="${!empty KualiForm.selectionSubTreeOrgs && KualiForm.operatingMode == BCConstants.OrgSelOpMode.PUSHDOWN}">
+             <html:image property="methodToCall.performPushDown" src="${ConfigProperties.externalizable.images.url}buttonsmall_pushdown.gif" title="Perform Pushdown" alt="Perform Pushdown" styleClass="globalbuttons" />
+        </th:block>
+        
+        <input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_close.gif}" styleClass="globalbuttons" property="methodToCall.returnToCaller" title="close" alt="close"/>
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>

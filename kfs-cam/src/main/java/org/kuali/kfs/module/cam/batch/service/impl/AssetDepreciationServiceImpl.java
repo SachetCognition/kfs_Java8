@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cam.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSConstants.BALANCE_TYPE_ACTUAL;
 
 import java.math.BigDecimal;
@@ -100,7 +102,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class AssetDepreciationServiceImpl implements AssetDepreciationService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetDepreciationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AssetDepreciationServiceImpl.class);
     protected ParameterService parameterService;
     protected AssetService assetService;
     protected ReportService reportService;
@@ -327,7 +329,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
             LOG.error("YEAR END DEPRECIATION - **************************************************************************");
             LOG.error("YEAR END DEPRECIATION - AN ERROR HAS OCCURRED! - ERROR: " + e.getClass().getName() + " : " + e.getMessage());
             LOG.error("YEAR END DEPRECIATION - **************************************************************************");
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
             hasErrors = true;
             errorMsg = "YEAR END DEPRECIATION -  process ran unsucessfuly.\nReason:" + e.getMessage();
         } finally {
@@ -392,14 +394,14 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                         String message =  "BLANK_OUT_PERIOD_RUN_DATE: " + blankOutPeriodrunDate + " is not in the blank out period range." + "Blank out period range is [ " +
                         blankOutBegin + "-" + blankOutEnd + " ] ." ;
                         errorMessages.add(message);
-                        LOG.info(message);
+                        LOG.info("{}", message);
                     }
                 }
                 else {
                     String message = "Parameter BLANK_OUT_PERIOD_RUN_DATE (component: Asset Depreciation Step) is not set" +
                     " Please set the date correctly to run the job.";
                     errorMessages.add(message);
-                    LOG.info(message);
+                    LOG.info("{}", message);
                 }
         }
         else {
@@ -431,7 +433,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
             " - " + blankOutEnd + " range .";
 
             errorMessages.add(message);
-            LOG.info(message);
+            LOG.info("{}", message);
         }
 
         return false;
@@ -457,7 +459,7 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
 
             String message  = "Parameter BLANK_OUT_END_MMDD (component:Asset Depreciation Step) is not set." ;
             errorMessages.add(message);
-            LOG.info(message);
+            LOG.info("{}", message);
 
         }
 
@@ -484,10 +486,9 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         else {
             String message  = "Parameter BLANK_OUT_BEGIN_MMDD (component:Asset Depreciation Step) is not set.";
             errorMessages.add(message);
-            LOG.info(message);
+            LOG.info("{}", message);
 
         }
-
 
        return null;
     }
@@ -498,7 +499,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         return dateFormat.parse(date);
 
     }
-
 
     /**
      * This method calculates the depreciation of each asset payment, creates the depreciation transactions that will be stored in
@@ -652,7 +652,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         }
     }
 
-
     /**
      * This method stores in a collection of business objects the depreciation transaction that later on will be passed to the
      * processGeneralLedgerPendingEntry method in order to store the records in gl pending entry table
@@ -770,7 +769,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         LOG.debug("populateExplicitGeneralLedgerPendingEntry(AccountingDocument, AccountingLine, GeneralLedgerPendingEntrySequenceHelper, GeneralLedgerPendingEntry) - end");
     }
 
-
     protected String createNewDepreciationDocument(List<String> documentNos) throws WorkflowException {
         WorkflowDocument workflowDocument = getWorkflowDocumentService().createWorkflowDocument(CamsConstants.DocumentTypeName.ASSET_DEPRECIATION, GlobalVariables.getUserSession().getPerson());
         // **************************************************************************************************
@@ -796,7 +794,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         LOG.debug(CamsConstants.Depreciation.DEPRECIATION_BATCH + "Document Number Created: " + documentNumber);
         return documentNumber;
     }
-
 
     /**
      * Depreciation object code is returned from cache or from DB
@@ -848,7 +845,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         message.setSubject(subject);
         Collection<String> toAddresses =  parameterService.getParameterValuesAsString(AssetDepreciationStep.class, CamsConstants.Parameters.RUN_DATE_NOTIFICATION_EMAIL_ADDRESSES);
         message.getToAddresses().add(toAddresses);
-
 
         StringBuffer sb = new StringBuffer();
         sb.append("Unable to run Depreciation process.Reason:\n");
@@ -913,7 +909,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         //  LOG.info("populateYearEndDepreciationTransaction(AssetDepreciationTransaction depreciationTransaction, AssetPayment assetPayment, String transactionType, KualiDecimal transactionAmount, String plantCOA, String plantAccount, String accumulatedDepreciationFinancialObjectCode, String depreciationExpenseFinancialObjectCode, ObjectCode financialObject, SortedMap<String, AssetDepreciationTransaction> depreciationTransactionSummary) -  ended");
     }
 
-
     protected SortedMap<String, AssetDepreciationTransaction> calculateYearEndDepreciation(Collection<AssetPaymentInfo> depreciableAssetsCollection, Calendar depreciationDate, Integer fiscalYearToDepreciate, Integer fiscalYear, Integer fiscalMonth, Collection<AssetObjectCode> assetObjectCodes) {
         LOG.info("calculateDepreciation() - start");
 
@@ -959,7 +954,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                         LOG.info("asset#" + assetNumber + "   asset_is_retired = " + asset_is_retired);
                     }
                 }
-
 
                 AssetObjectCode assetObjectCode = assetObjectCodeMap.get(assetPaymentInfo.getChartOfAccountsCode() + "-" + assetPaymentInfo.getFinancialObjectCode());
                 if (assetObjectCode == null) {
@@ -1056,7 +1050,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                     }
                 }
 
-
                 String transactionType = KFSConstants.GL_DEBIT_CODE;
                 if (transactionAmount.isNegative()) {
                     transactionType = KFSConstants.GL_CREDIT_CODE;
@@ -1100,10 +1093,6 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
                     this.populateYearEndDepreciationTransaction(assetPaymentInfo, transactionType, plantCOA, plantAccount, depreciationExpenseFinancialObject, depreciationTransactionSummary);
                     transactionType = (transactionType.equals(KFSConstants.GL_DEBIT_CODE) ? KFSConstants.GL_CREDIT_CODE : KFSConstants.GL_DEBIT_CODE);
                     this.populateYearEndDepreciationTransaction(assetPaymentInfo, transactionType, plantCOA, plantAccount, accumulatedDepreciationFinancialObject, depreciationTransactionSummary);
-
-
-
-
 
                     if (asset_is_retired) {
                         this.populateYearEndDepreciationTransaction(assetPaymentInfo, transactionType, plantCOA, plantAccount, depreciationYearEndExpenseFinancialObject, depreciationTransactionSummary);
@@ -1238,11 +1227,9 @@ public class AssetDepreciationServiceImpl implements AssetDepreciationService {
         this.depreciationBatchDao = depreciationBatchDao;
     }
 
-
     public void setCronExpression(String cronExpression) {
         this.cronExpression = cronExpression;
     }
-
 
     public void setMailService(MailService mailService) {
         this.mailService = mailService;

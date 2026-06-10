@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.batch.DvToPdpExtractStep;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeExpense;
 import org.kuali.kfs.fp.businessobject.DisbursementVoucherNonEmployeeTravel;
@@ -66,7 +68,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class DisbursementVoucherExtractionHelperServiceImpl implements PaymentSourceToExtractService<DisbursementVoucherDocument> {
-    static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementVoucherExtractionHelperServiceImpl.class);
+    static Logger LOG = LoggerFactory.getLogger(DisbursementVoucherExtractionHelperServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected DocumentService documentService;
@@ -482,7 +484,6 @@ public class DisbursementVoucherExtractionHelperServiceImpl implements PaymentSo
         final String unit = getParameterService().getParameterValueAsString(DisbursementVoucherDocument.class, KFSParameterKeyConstants.PdpExtractBatchParameters.PDP_ORG_CODE);
         return unit;
     }
-
 
     /**
      * Uses the value in the KFS-FP / DisbursementVoucher / PRE_DISBURSEMENT_EXTRACT_SUB_UNIT

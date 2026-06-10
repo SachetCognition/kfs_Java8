@@ -24,13 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * Possible reasons why a Vendor may become inactivated.
  */
+@Entity
+@Table(name = "PUR_VNDR_INACTV_REAS_T")
 public class VendorInactiveReason extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "VNDR_INACTV_REAS_CD")
     private String vendorInactiveReasonCode;
+    @Column(name = "VNDR_INACTV_REAS_DESC")
     private String vendorInactiveReasonDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

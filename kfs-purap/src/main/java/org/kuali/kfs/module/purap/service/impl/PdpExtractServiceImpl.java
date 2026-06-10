@@ -31,6 +31,8 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.batch.service.PurapRunDateService;
 import org.kuali.kfs.module.purap.businessobject.CreditMemoItem;
@@ -85,7 +87,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class PdpExtractServiceImpl implements PdpExtractService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PdpExtractServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PdpExtractServiceImpl.class);
 
     private PaymentRequestService paymentRequestService;
     private BusinessObjectService businessObjectService;
@@ -270,8 +272,6 @@ public class PdpExtractServiceImpl implements PdpExtractService {
             }
         }
 
-
-
         LOG.debug("END - extractRegularPaymentsForChart()");
         return totals;
     }
@@ -387,7 +387,6 @@ public class PdpExtractServiceImpl implements PdpExtractService {
 
         return totals;
     }
-
 
     /**
      * Mark a credit memo as extracted
@@ -812,8 +811,6 @@ public class PdpExtractServiceImpl implements PdpExtractService {
         paymentGroup.setPayeeId(paymentRequestDocument.getVendorHeaderGeneratedIdentifier() + "-" + paymentRequestDocument.getVendorDetailAssignedIdentifier());
         paymentGroup.setPayeeIdTypeCd(PdpConstants.PayeeIdTypeCodes.VENDOR_ID);
 
-
-
         if (paymentRequestDocument.getVendorDetail().getVendorHeader().getVendorOwnershipCode() != null) {
                   paymentGroup.setPayeeOwnerCd(paymentRequestDocument.getVendorDetail().getVendorHeader().getVendorOwnershipCode());
 
@@ -971,7 +968,6 @@ public class PdpExtractServiceImpl implements PdpExtractService {
 
         return output;
     }
-
 
     /**
      * Holds total count and amount for extract
@@ -1234,7 +1230,5 @@ public class PdpExtractServiceImpl implements PdpExtractService {
     public void setLockedDocuments(List<String> lockedDocuments) {
         this.lockedDocuments = lockedDocuments;
     }
-
-
 
 }

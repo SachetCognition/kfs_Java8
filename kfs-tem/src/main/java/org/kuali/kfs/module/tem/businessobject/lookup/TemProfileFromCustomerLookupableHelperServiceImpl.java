@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomer;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerType;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
@@ -53,7 +54,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 
 public class TemProfileFromCustomerLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    public static Logger LOG = Logger.getLogger(TemProfileFromCustomerLookupableHelperServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TemProfileFromCustomerLookupableHelperServiceImpl.class);
 
     private TravelerService travelerService;
     private TravelerDao travelerDao;
@@ -194,7 +195,6 @@ public class TemProfileFromCustomerLookupableHelperServiceImpl extends KualiLook
         parameters.put(KFSConstants.OVERRIDE_KEYS, "customerNumber");
         parameters.put(KFSConstants.REFRESH_CALLER, "customerNumber" + "::" + customerNumber);
         parameters.put("customerNumber", customerNumber);
-
 
         Map<String,String> criteria = new HashMap<String,String>(2);
         criteria.put("customerNumber", customerNumber);

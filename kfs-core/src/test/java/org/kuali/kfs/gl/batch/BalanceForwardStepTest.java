@@ -19,6 +19,8 @@
 
 package org.kuali.kfs.gl.batch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.OriginEntryTestBase;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -34,7 +36,7 @@ import org.kuali.kfs.sys.service.impl.KfsParameterConstants;
 // @RelatesTo(RelatesTo.JiraIssue.KULRNE5916)
 public class BalanceForwardStepTest extends OriginEntryTestBase {
     // IF THIS TEST FAILS, READ KULRNE-34 regarding reference numbers
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalanceForwardStepTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalanceForwardStepTest.class);
 
     /**
      * Constructs a BalanceForwardStepTest instance
@@ -138,7 +140,6 @@ public class BalanceForwardStepTest extends OriginEntryTestBase {
 //        assertTrue("FIS generated entries that Kuali did not generate (see KULRNE-34 for possible cause):", fisGenerated.isEmpty());
 
     }
-
 
     /**
      * This method resets the application params to values that are appropriate for year end dates

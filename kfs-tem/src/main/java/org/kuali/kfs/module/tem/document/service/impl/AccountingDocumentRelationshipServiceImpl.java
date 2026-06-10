@@ -25,7 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
 import org.kuali.kfs.module.tem.businessobject.AccountingDocumentRelationship;
 import org.kuali.kfs.module.tem.dataaccess.AccountingDocumentRelationshipDao;
@@ -43,7 +44,7 @@ public class AccountingDocumentRelationshipServiceImpl implements AccountingDocu
     protected BusinessObjectService businessObjectService;
     protected IdentityService identityService;
 
-    private static final Logger LOG = Logger.getLogger(AccountingDocumentRelationshipServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingDocumentRelationshipServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.tem.document.service.AccountingDocumentRelationshipService#getRelatedDocumentNumbers(java.lang.String)

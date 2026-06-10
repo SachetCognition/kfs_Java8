@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.cg.document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.KFSPropertyConstants.AWARD_ACCOUNTS;
 import static org.kuali.kfs.sys.KFSPropertyConstants.AWARD_FUND_MANAGERS;
 import static org.kuali.kfs.sys.KFSPropertyConstants.AWARD_PROJECT_DIRECTORS;
@@ -69,7 +71,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Methods for the Award maintenance document UI.
  */
 public class AwardMaintainableImpl extends ContractsGrantsBillingMaintainable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AwardMaintainableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AwardMaintainableImpl.class);
 
     private static volatile AccountsReceivableModuleBillingService accountsReceivableModuleBillingService;
     /**

@@ -26,12 +26,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.dataaccess.PreparedStatementCachingDao;
 import org.kuali.rice.core.framework.persistence.jdbc.dao.PlatformAwareDaoBaseJdbc;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public abstract class AbstractPreparedStatementCachingDaoJdbc extends PlatformAwareDaoBaseJdbc implements PreparedStatementCachingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractPreparedStatementCachingDaoJdbc.class);
+    private static Logger LOG = LoggerFactory.getLogger(AbstractPreparedStatementCachingDaoJdbc.class);
 
     protected static final String RETRIEVE_PREFIX = "retrieve-";
     protected static final String INSERT_PREFIX = "insert-";

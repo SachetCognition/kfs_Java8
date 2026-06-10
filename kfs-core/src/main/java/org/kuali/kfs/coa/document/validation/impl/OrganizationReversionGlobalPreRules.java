@@ -19,6 +19,8 @@
 package org.kuali.kfs.coa.document.validation.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionGlobal;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionGlobalDetail;
@@ -31,7 +33,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * PreRules checks for the {@link OrganizationReversionGlobal} that needs to occur while still in the Struts processing. This includes defaults
  */
 public class OrganizationReversionGlobalPreRules extends MaintenancePreRulesBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(OrganizationReversionGlobalPreRules.class);
+    protected static Logger LOG = LoggerFactory.getLogger(OrganizationReversionGlobalPreRules.class);
 
     /**
      * This is the hook method for the {@link MaintenancePreRulesBase} to call. It calls

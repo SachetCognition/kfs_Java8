@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemConstants.TravelDocTypes;
 import org.kuali.kfs.module.tem.TemPropertyConstants;
@@ -49,7 +50,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class TemRoleServiceImpl implements TemRoleService{
 
-    public static Logger LOG = Logger.getLogger(TemRoleServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TemRoleServiceImpl.class);
 
     protected RoleService roleService;
     protected BusinessObjectService businessObjectService;
@@ -235,7 +236,7 @@ public class TemRoleServiceImpl implements TemRoleService{
             return roleService.principalHasRole(user.getPrincipalId(), roleIds, qualification);
         }
         catch (NullPointerException e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
         return false;
     }
@@ -272,7 +273,7 @@ public class TemRoleServiceImpl implements TemRoleService{
             }
         }
         catch (NullPointerException e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
         return false;
     }
@@ -307,6 +308,5 @@ public class TemRoleServiceImpl implements TemRoleService{
     public void setArrangerDocumentService(TravelArrangerDocumentService travelArrangerDocumentService) {
         this.arrangerDocumentService = travelArrangerDocumentService;
     }
-
 
 }

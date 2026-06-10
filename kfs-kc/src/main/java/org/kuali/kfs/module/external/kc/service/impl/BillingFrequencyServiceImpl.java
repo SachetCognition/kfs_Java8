@@ -27,6 +27,8 @@ import java.util.Map;
 
 import javax.xml.ws.WebServiceException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.external.kc.KcConstants;
 import org.kuali.kfs.module.external.kc.businessobject.BillingFrequency;
 import org.kuali.kfs.module.external.kc.businessobject.BillingFrequencyMapping;
@@ -50,7 +52,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 
 public class BillingFrequencyServiceImpl implements ExternalizableBusinessObjectService, BillingFrequencyService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BillingFrequencyServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(BillingFrequencyServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected ConfigurationService configurationService;

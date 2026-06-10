@@ -24,12 +24,27 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * The type of {@link Award} associated with a {@link Proposal} instance.
  */
+@Entity
+@Table(name = "CG_PRPSL_AWD_TYP_T")
 public class ProposalAwardType extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CGPRPSL_AWD_TYP_CD")
     private String proposalAwardTypeCode;
+    @Column(name = "PRPSL_AWD_TYP_DESC")
     private String proposalAwardTypeDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

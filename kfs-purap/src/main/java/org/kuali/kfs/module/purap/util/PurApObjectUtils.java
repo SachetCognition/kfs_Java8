@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.web.format.FormatException;
@@ -46,7 +48,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * BusinessObjects that are passed in.
  */
 public class PurApObjectUtils {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurApObjectUtils.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurApObjectUtils.class);
 
     /**
      *
@@ -60,7 +62,6 @@ public class PurApObjectUtils {
     public static void populateFromBaseClass(Class base, BusinessObject src, BusinessObject target, Map supplementalUncopyable) {
         List<String> fieldNames = new ArrayList<String>();
         Field[] fields = base.getDeclaredFields();
-
 
         for (Field field : fields) {
             if (!Modifier.isTransient(field.getModifiers())) {
@@ -171,8 +172,6 @@ public class PurApObjectUtils {
                 }
                 listToSet = new ArrayList<T>();
             }
-
-
 
         for (Iterator iterator = sourceList.iterator(); iterator.hasNext();) {
             BusinessObject sourceCollectionObject = (BusinessObject) iterator.next();
@@ -313,7 +312,6 @@ public class PurApObjectUtils {
                 }
             }
         }
-
 
         return equal;
     }

@@ -27,23 +27,44 @@ import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 /**
  * This class is used to represent a Wire Charge business object, which is a method of payment to an institution.
  */
+@Entity
+@Table(name = "FS_WIRE_CHRG_T")
 public class WireCharge extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Column(name = "INC_FIN_OBJ_CD")
     private String incomeFinancialObjectCode;
+    @Column(name = "EXP_FIN_OBJ_CD")
     private String expenseFinancialObjectCode;
+    @Column(name = "DOMSTC_CHG_AMT")
     private KualiDecimal domesticChargeAmt;
+    @Column(name = "FRGN_CHRG_AMT")
     private KualiDecimal foreignChargeAmt;
 
+    @Transient
     private SystemOptions fiscalYear;
+    @Transient
     private Chart chartOfAccounts;
+    @Transient
     private ObjectCode incomeFinancialObject;
+    @Transient
     private ObjectCode expenseFinancialObject;
+    @Transient
     private Account account;
 
     /**
@@ -294,6 +315,7 @@ public class WireCharge extends PersistableBusinessObjectBase implements FiscalY
     /**
      * @see org.kuali.rice.krad.bo.BusinessObjectBase#toStringMapper()
      */
+    @Transient
     protected LinkedHashMap toStringMapper_RICE20_REFACTORME() {
         LinkedHashMap m = new LinkedHashMap();
         m.put("universityFiscalYear", getUniversityFiscalYear());

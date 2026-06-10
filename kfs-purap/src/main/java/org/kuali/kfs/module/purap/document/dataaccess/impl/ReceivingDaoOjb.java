@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapPropertyConstants;
 import org.kuali.kfs.module.purap.document.CorrectionReceivingDocument;
 import org.kuali.kfs.module.purap.document.LineItemReceivingDocument;
@@ -37,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ReceivingDaoOjb extends PlatformAwareDaoBaseOjb implements ReceivingDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReceivingDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReceivingDaoOjb.class);
 
     public List<String> getDocumentNumbersByPurchaseOrderId(Integer id) {        
         Criteria criteria = new Criteria();

@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
@@ -62,7 +64,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 public class ScrubberServiceTest extends OriginEntryTestBase {
     protected static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ScrubberServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScrubberServiceTest.class);
 
     protected ScrubberService scrubberService = null;
     protected BusinessObjectService businessObjectService;
@@ -75,7 +77,6 @@ public class ScrubberServiceTest extends OriginEntryTestBase {
 
         scrubberService = SpringContext.getBean(ScrubberService.class);
         businessObjectService = SpringContext.getBean(BusinessObjectService.class);
-
 
         // Get the test date time service so we can specify the date/time of the run
         Calendar c = Calendar.getInstance();

@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.uif.RemotableAttributeError;
 import org.kuali.rice.core.api.uif.RemotableAttributeField;
 import org.kuali.rice.kew.api.document.DocumentWithContent;
@@ -39,7 +41,7 @@ import org.kuali.rice.kew.framework.document.search.DocumentSearchResultValues;
 import org.kuali.rice.kew.framework.document.search.StandardResultField;
 
 public class KFSDocumentSearchCustomizer implements SearchableAttribute, DocumentSearchCustomizer {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(KFSDocumentSearchCustomizer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(KFSDocumentSearchCustomizer.class);
 
     protected SearchableAttribute searchableAttribute;
 
@@ -182,6 +184,5 @@ public class KFSDocumentSearchCustomizer implements SearchableAttribute, Documen
     public boolean isCustomizeResultSetFieldsEnabled(String documentTypeName) {
         return true;
     }
-
 
 }

@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.fp.document.CapitalAssetEditable;
 import org.kuali.kfs.fp.document.CapitalAssetInformationDocumentBase;
@@ -45,7 +47,7 @@ import org.kuali.rice.krad.exception.ValidationException;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class CapitalAssetManagementModuleServiceImpl implements CapitalAssetManagementModuleService {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAssetManagementModuleServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(CapitalAssetManagementModuleServiceImpl.class);
 
     protected CapitalAssetBuilderModuleService capitalAssetBuilderModuleService;
 
@@ -206,7 +208,6 @@ public class CapitalAssetManagementModuleServiceImpl implements CapitalAssetMana
 
         return true;
     }
-
 
     /**
      * Remove asset locks if document won't move towards Final status.

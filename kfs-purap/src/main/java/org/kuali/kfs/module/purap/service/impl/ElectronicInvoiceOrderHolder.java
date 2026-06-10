@@ -29,7 +29,8 @@ import java.util.Map;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoice;
 import org.kuali.kfs.module.purap.businessobject.ElectronicInvoiceItem;
@@ -56,7 +57,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 public class ElectronicInvoiceOrderHolder {
     
-    private final static Logger LOG = Logger.getLogger(ElectronicInvoiceOrderHolder.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceOrderHolder.class);
     
     private ElectronicInvoiceRejectDocument rejectDocument;
     private ElectronicInvoiceOrder invoiceOrder;

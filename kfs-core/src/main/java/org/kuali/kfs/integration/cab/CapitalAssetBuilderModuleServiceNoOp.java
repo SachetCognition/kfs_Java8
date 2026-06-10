@@ -22,7 +22,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.integration.purap.ExternalPurApItem;
 import org.kuali.kfs.integration.purap.ItemCapitalAsset;
@@ -32,7 +33,7 @@ import org.kuali.rice.krad.bo.DocumentHeader;
 
 public class CapitalAssetBuilderModuleServiceNoOp implements CapitalAssetBuilderModuleService {
 
-    private Logger LOG = Logger.getLogger(getClass());
+    private Logger LOG = LoggerFactory.getLogger(getClass());
 
     @Override
     public boolean doesAccountingLineFailAutomaticPurchaseOrderRules(AccountingLine accountingLine) {
@@ -178,7 +179,6 @@ public class CapitalAssetBuilderModuleServiceNoOp implements CapitalAssetBuilder
         return true;
     }
 
-
     public boolean isDocumentEligibleForCABBatch(String documentType) {
         LOG.warn("Using No-Op " + getClass().getSimpleName() + " service.");
         return true;
@@ -206,7 +206,6 @@ public class CapitalAssetBuilderModuleServiceNoOp implements CapitalAssetBuilder
         LOG.warn("Using No-Op " + getClass().getSimpleName() + " service.");
         return new ArrayList<String>();
     }
-
 
     @Override
     public void reactivatePretagDetails(String campusTagNumber) {

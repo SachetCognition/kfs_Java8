@@ -29,6 +29,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.service.FiscalYearFunctionControlService;
 import org.kuali.kfs.module.bc.BCConstants;
 import org.kuali.kfs.module.bc.BCKeyConstants;
@@ -60,7 +62,7 @@ import org.kuali.rice.krad.util.KRADConstants;
  * the base action class for salary setting, which provides the implementations of common actions of the salary setting screens
  */
 public abstract class SalarySettingBaseAction extends BudgetExpansionAction {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SalarySettingBaseAction.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SalarySettingBaseAction.class);
 
     protected SalarySettingService salarySettingService = SpringContext.getBean(SalarySettingService.class);
     protected BusinessObjectService businessObjectService = SpringContext.getBean(BusinessObjectService.class);

@@ -20,6 +20,8 @@ package org.kuali.kfs.fp.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.batch.service.ProcurementCardCreateDocumentService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * This step will call a service method to create the procurement card documents from the loaded transaction table.
  */
 public class ProcurementCardCreateDocumentsStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardCreateDocumentsStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(ProcurementCardCreateDocumentsStep.class);
     private ProcurementCardCreateDocumentService procurementCardDocumentService;
     
     /**

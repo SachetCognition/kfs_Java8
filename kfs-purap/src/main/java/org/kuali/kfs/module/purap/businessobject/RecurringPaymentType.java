@@ -24,13 +24,29 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Recurring Payment Type Business Object.
  */
+@Entity
+@Table(name = "PUR_AP_RECUR_PMT_TYP_T")
 public class RecurringPaymentType extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "RECUR_PMT_TYP_CD")
     private String recurringPaymentTypeCode;
+    @Column(name = "RECUR_PMT_TYP_DESC")
     private String recurringPaymentTypeDescription;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

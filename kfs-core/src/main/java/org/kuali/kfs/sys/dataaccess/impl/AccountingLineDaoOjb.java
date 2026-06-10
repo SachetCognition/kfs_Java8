@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.metadata.MetadataManager;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.businessobject.SourceAccountingLine;
@@ -41,7 +42,7 @@ import org.springframework.dao.DataAccessException;
  */
 
 public class AccountingLineDaoOjb extends PlatformAwareDaoBaseOjb implements AccountingLineDao {
-    private static final Logger LOG = Logger.getLogger(AccountingLineDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingLineDaoOjb.class);
 
     /**
      * Deletes an accounting line from the DB using OJB.
@@ -76,7 +77,6 @@ public class AccountingLineDaoOjb extends PlatformAwareDaoBaseOjb implements Acc
 
         return new ArrayList(lines);
     }
-
 
     /**
      * Retrieves accounting lines associated with the given document header ID and line type code

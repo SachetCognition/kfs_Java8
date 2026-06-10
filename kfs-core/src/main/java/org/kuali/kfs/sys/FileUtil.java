@@ -27,12 +27,14 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class provides a set of facilities that can be used to work with files
  */
 public class FileUtil {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FileUtil.class);
+    private static Logger LOG = LoggerFactory.getLogger(FileUtil.class);
 
     private static Set<String> createdDirectory = new TreeSet<String>();
     

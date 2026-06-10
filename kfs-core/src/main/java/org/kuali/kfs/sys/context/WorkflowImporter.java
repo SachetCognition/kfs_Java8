@@ -27,15 +27,17 @@ import java.nio.channels.FileChannel;
 import java.util.Arrays;
 import java.util.Properties;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.core.impl.config.property.JAXBConfigImpl;
 import org.kuali.rice.kew.batch.XmlPollerServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class WorkflowImporter {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(WorkflowImporter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorkflowImporter.class);
 
     private static ClassPathXmlApplicationContext context;
 
@@ -63,10 +65,10 @@ public class WorkflowImporter {
             System.exit(-1);
         }
         Log4jConfigurer.configureLogging(true);
-        Logger.getRootLogger().setLevel(Level.WARN);
-        Logger.getLogger("org.kuali.rice.kew.doctype.service.impl.DocumentTypeServiceImpl").setLevel(Level.INFO);
-        Logger.getLogger(XmlPollerServiceImpl.class).setLevel(Level.INFO);
-        Logger.getLogger(WorkflowImporter.class).setLevel(Level.INFO);
+        Configurator.setRootLevel(Level.WARN);
+        Configurator.setLevel("org.kuali.rice.kew.doctype.service.impl.DocumentTypeServiceImpl", Level.INFO);
+        Configurator.setLevel(XmlPollerServiceImpl.class.getName(), Level.INFO);
+        Configurator.setLevel(WorkflowImporter.class.getName(), Level.INFO);
         try {
             LOG.info( "Initializing Web Context" );
             LOG.info( "Calling KualiInitializeListener.contextInitialized" );

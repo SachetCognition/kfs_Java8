@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.ar.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArKeyConstants;
 import org.kuali.kfs.module.ar.document.PaymentApplicationDocument;
 import org.kuali.kfs.sys.document.validation.GenericValidation;
@@ -29,7 +31,7 @@ import org.kuali.rice.krad.util.MessageMap;
 
 public class PaymentApplicationIsFullBalanceAppliedValidation extends GenericValidation {
 
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PaymentApplicationIsFullBalanceAppliedValidation.class);
+    private static Logger LOG = LoggerFactory.getLogger(PaymentApplicationIsFullBalanceAppliedValidation.class);
     private PaymentApplicationDocument document;
     
     public boolean validate(AttributedDocumentEvent event) {

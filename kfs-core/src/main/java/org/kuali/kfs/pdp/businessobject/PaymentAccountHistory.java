@@ -25,24 +25,47 @@ package org.kuali.kfs.pdp.businessobject;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.TimestampedBusinessObjectBase;
 import org.kuali.rice.core.api.util.type.KualiInteger;
 
+@Entity
+@Table(name = "PDP_PMT_ACCT_HIST_T")
 public class PaymentAccountHistory extends TimestampedBusinessObjectBase {
 
-    private KualiInteger id; // PMT_ACCT_HIST_ID
+    @Id
+    @Column(name = "PMT_ACCT_HIST_ID")
+    private KualiInteger id;
 
+    @Column(name = "ACCTG_CHG_CD")
     private String accountingChangeCode;
-    private AccountingChangeCode accountingChange; // ACCTG_CHG_CD
 
-    private String acctAttributeName; // ACCT_ATTRIB_NM
-    private String acctAttributeOrigValue; // ACCT_ATTRIB_ORIG_VAL
-    private String acctAttributeNewValue; // ACCT_ATTRIB_NEW_VAL
-    private Timestamp acctChangeDate; // ACCT_CHG_TS
-    
+    @Transient
+    private AccountingChangeCode accountingChange;
+
+    @Column(name = "ACCT_ATTRIB_NM")
+    private String acctAttributeName;
+
+    @Column(name = "ACCT_ATTRIB_ORIG_VAL")
+    private String acctAttributeOrigValue;
+
+    @Column(name = "ACCT_ATTRIB_NEW_VAL")
+    private String acctAttributeNewValue;
+
+    @Column(name = "ACCT_CHG_TS")
+    private Timestamp acctChangeDate;
+
+    @Column(name = "PMT_ACCT_DTL_ID")
     private KualiInteger paymentAccountDetailId;
-    private PaymentAccountDetail paymentAccountDetail; // PMT_ACCT_DTL_ID
+
+    @Transient
+    private PaymentAccountDetail paymentAccountDetail;
 
     public PaymentAccountHistory() {
         super();

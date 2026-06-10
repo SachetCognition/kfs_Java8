@@ -18,6 +18,16 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -26,7 +36,8 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OrganizationService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -45,45 +56,76 @@ import org.kuali.rice.location.framework.postalcode.PostalCodeEbo;
 /**
  *
  */
+@Entity
+@Table(name = "CA_ORG_T")
+@IdClass(OrganizationId.class)
+
 public class Organization extends PersistableBusinessObjectBase implements MutableInactivatable {
-    private static final Logger LOG = Logger.getLogger(Organization.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Organization.class);
 
     private static final long serialVersionUID = 121873645110037203L;
 
     public static final String CACHE_NAME = KFSConstants.APPLICATION_NAMESPACE_CODE + "/" + "Organization";
 
+    @Id
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "ORG_NM")
     protected String organizationName;
+    @Column(name = "ORG_CITY_NM")
     protected String organizationCityName;
+    @Column(name = "ORG_STATE_CD")
     protected String organizationStateCode;
+    @Column(name = "ORG_ZIP_CD")
     protected String organizationZipCode;
+    @Column(name = "ORG_BEGIN_DT")
     protected Date organizationBeginDate;
+    @Column(name = "ORG_END_DT")
     protected Date organizationEndDate;
+    @Column(name = "ORG_IN_FP_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean organizationInFinancialProcessingIndicator = false;
+    @Column(name = "ORG_MGR_UNVL_ID")
     protected String organizationManagerUniversalId;
+    @Column(name = "RC_CD")
     protected String responsibilityCenterCode;
+    @Column(name = "ORG_PHYS_CMP_CD")
     protected String organizationPhysicalCampusCode;
+    @Column(name = "ORG_TYP_CD")
     protected String organizationTypeCode;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ORG_CD")
     protected String reportsToOrganizationCode;
+    @Column(name = "ORG_PLNT_ACCT_NBR")
     protected String organizationPlantAccountNumber;
+    @Column(name = "CMP_PLNT_ACCT_NBR")
     protected String campusPlantAccountNumber;
+    @Column(name = "ORG_PLNT_COA_CD")
     protected String organizationPlantChartCode;
+    @Column(name = "CMP_PLNT_COA_CD")
     protected String campusPlantChartCode;
+    @Column(name = "ORG_CNTRY_CD")
     protected String organizationCountryCode;
+    @Column(name = "ORG_LN1_ADDR")
     protected String organizationLine1Address;
+    @Column(name = "ORG_LN2_ADDR")
     protected String organizationLine2Address;
 
+    @Transient
     protected Chart chartOfAccounts;
     protected Organization hrisOrganization;
     protected Account organizationDefaultAccount;
     protected Person organizationManagerUniversal;
+    @Transient
     protected ResponsibilityCenter responsibilityCenter;
     protected CampusEbo organizationPhysicalCampus;
     protected OrganizationType organizationType;
+    @Transient
     protected Organization reportsToOrganization;
     protected Chart reportsToChartOfAccounts;
     protected Account organizationPlantAccount;
+    @Transient
     protected Account campusPlantAccount;
     protected Chart organizationPlantChart;
     protected Chart campusPlantChart;
@@ -91,18 +133,24 @@ public class Organization extends PersistableBusinessObjectBase implements Mutab
     protected CountryEbo organizationCountry;
 
     // HRMS Org fields
+    @Transient
     protected OrganizationExtension organizationExtension;
     protected String editHrmsUnitSectionBlank;
     protected String editHrmsUnitSection;
 
     // fields for mixed anonymous keys
+    @Column(name = "ORG_DFLT_ACCT_NBR")
     protected String organizationDefaultAccountNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
 
     // Several kinds of Dummy Attributes for dividing sections on Inquiry page
     protected String editPlantAccountsSectionBlank;
     protected String editPlantAccountsSection;
 
+    @Column(name = "ORG_ACTIVE_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active = true;
 
     /**

@@ -26,7 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversion;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionCategory;
 import org.kuali.kfs.coa.businessobject.OrganizationReversionDetail;
@@ -46,7 +47,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * The default implementation of the OrganizationReversionDetailTrickleDownService
  */
 public class OrganizationReversionDetailTrickleDownInactivationServiceImpl implements OrganizationReversionDetailTrickleDownInactivationService {
-    private static final Logger LOG = Logger.getLogger(OrganizationReversionDetailTrickleDownInactivationServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrganizationReversionDetailTrickleDownInactivationServiceImpl.class);
     protected NoteService noteService;
     protected ConfigurationService kualiConfigurationService;
     protected BusinessObjectService businessObjectService;

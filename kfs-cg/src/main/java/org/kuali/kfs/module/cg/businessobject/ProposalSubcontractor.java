@@ -27,17 +27,47 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import java.io.Serializable;
+import org.hibernate.type.YesNoConverter;
+import org.kuali.kfs.sys.persistence.KualiDecimalConverter;
+
 /**
  *
  */
+@Entity
+@Table(name = "CG_PRPSL_SUBCN_T")
+@IdClass(ProposalSubcontractor.ProposalSubcontractorId.class)
 public class ProposalSubcontractor extends PersistableBusinessObjectBase implements MutableInactivatable {
+    @Id
+    @Column(name = "CGPRPSL_SUBCN_NBR")
     private String proposalSubcontractorNumber;
+    @Id
+    @Column(name = "CGPRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "CG_SUBCNR_NBR")
     private String subcontractorNumber;
+    @Column(name = "CGPRPSL_SUBCN_AMT")
+    @Convert(converter = KualiDecimalConverter.class)
     private KualiDecimal proposalSubcontractorAmount;
+    @Column(name = "CGPRPSL_SUBCN_DESC")
     private String proposalSubcontractorDescription;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active = true;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CG_SUBCNR_NBR", insertable = false, updatable = false)
     private SubContractor subcontractor;
 
     /**
@@ -194,4 +224,27 @@ public class ProposalSubcontractor extends PersistableBusinessObjectBase impleme
         String description = getProposalSubcontractorDescription() == null ? "" : " " + getProposalSubcontractorDescription();
         return name + " " + getProposalSubcontractorAmount() + description;
     }
+
+    public static class ProposalSubcontractorId implements Serializable {
+        private static final long serialVersionUID = 1L;
+        private String proposalSubcontractorNumber;
+        private Long proposalNumber;
+        private String subcontractorNumber;
+
+        public ProposalSubcontractorId() {}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ProposalSubcontractorId that = (ProposalSubcontractorId) o;
+            return java.util.Objects.equals(proposalSubcontractorNumber, that.proposalSubcontractorNumber) && java.util.Objects.equals(proposalNumber, that.proposalNumber) && java.util.Objects.equals(subcontractorNumber, that.subcontractorNumber);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(proposalSubcontractorNumber, proposalNumber, subcontractorNumber);
+        }
+    }
+
 }

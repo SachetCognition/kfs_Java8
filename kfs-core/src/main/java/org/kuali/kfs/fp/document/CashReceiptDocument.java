@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.Check;
 import org.kuali.kfs.fp.businessobject.CheckBase;
 import org.kuali.kfs.fp.businessobject.CoinDetail;
@@ -68,7 +70,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * only.
  */
 public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyable, AmountTotaling, CapitalAssetEditable {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CashReceiptDocument.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CashReceiptDocument.class);
 
     public static final String CHECK_ENTRY_DETAIL = "individual";
     public static final String CHECK_ENTRY_TOTAL = "totals";
@@ -233,7 +235,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
         return (String) new CurrencyFormatter().format(getTotalCurrencyAmount());
     }
 
-
     public String getCurrencyFormattedTotalConfirmedCurrencyAmount() {
         return (String) new CurrencyFormatter().format(getTotalConfirmedCurrencyAmount());
     }
@@ -256,7 +257,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
         this.totalConfirmedCurrencyAmount = totalConfirmedCurrencyAmount;
     }
 
-
     /**
      * @param checkEntryMode
      */
@@ -270,7 +270,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
     public String getCheckEntryMode() {
         return checkEntryMode;
     }
-
 
     /**
      * Gets the checks attribute.
@@ -334,7 +333,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
         return count;
     }
 
-
     /**
      * Adds a new check to the list.
      *
@@ -391,7 +389,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
         return confirmedChecks.get(index);
     }
 
-
     /**
      * @see org.kuali.kfs.sys.document.AccountingDocumentBase#checkSufficientFunds()
      */
@@ -402,7 +399,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
         // This document does not do sufficient funds checking
         return new ArrayList<SufficientFundsItem>();
     }
-
 
     /**
      * This method removes a check from the list and updates the total appropriately.
@@ -599,7 +595,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
     public KualiDecimal getGrandTotalConfirmedCashAmount() {
         return getTotalConfirmedNetAmount();
     }
-
 
     /**
      * returns (confirmed currency + confirmed coin - change amount) as a currency formatted string
@@ -815,7 +810,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
         }
         return total;
     }
-
 
     /**
      * @see org.kuali.rice.kns.document.DocumentBase#prepareForSave()
@@ -1244,7 +1238,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
             deleteEvents.add(deleteEvent);
         }
 
-
         //
         // merge the lists
         List lineEvents = new ArrayList();
@@ -1254,7 +1247,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
 
         return lineEvents;
     }
-
 
     /**
      * @param checks
@@ -1381,7 +1373,6 @@ public class CashReceiptDocument extends CashReceiptFamilyBase implements Copyab
     public void setSumTotalAmount(KualiDecimal sumTotalAmount) {
         this.sumTotalAmount = sumTotalAmount;
     }
-
 
     public CurrencyDetail getConfirmedChangeCurrencyDetail() {
         return confirmedChangeCurrencyDetail;

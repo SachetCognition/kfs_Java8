@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document.validation.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.ProcurementCardTargetAccountingLine;
 import org.kuali.kfs.fp.businessobject.ProcurementCardTransactionDetail;
 import org.kuali.kfs.fp.document.ProcurementCardDocument;
@@ -34,7 +36,7 @@ import org.kuali.rice.krad.util.MessageMap;
  * This class...
  */
 public class ProcurementCardErrorPathUtil {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ProcurementCardErrorPathUtil.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ProcurementCardErrorPathUtil.class);
     
     /**
      * Fix the GlobalVariables.getMessageMap errorPath for how procurement card documents needs them in order 

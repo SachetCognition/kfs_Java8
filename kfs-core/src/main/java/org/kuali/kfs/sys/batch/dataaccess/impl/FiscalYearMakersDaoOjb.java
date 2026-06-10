@@ -28,10 +28,11 @@ import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
 import org.apache.ojb.broker.util.ObjectModification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.batch.dataaccess.FiscalYearMaker;
 import org.kuali.kfs.sys.batch.dataaccess.FiscalYearMakersDao;
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
@@ -43,7 +44,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * @see org.kuali.kfs.coa.batch.dataaccess.FiscalYearMakersDao
  */
 public class FiscalYearMakersDaoOjb extends PlatformAwareDaoBaseOjb implements FiscalYearMakersDao {
-    private static final Logger LOG = org.apache.log4j.Logger.getLogger(FiscalYearMakersDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FiscalYearMakersDaoOjb.class);
     
     protected static final String KEY_STRING_DELIMITER = "|";
 

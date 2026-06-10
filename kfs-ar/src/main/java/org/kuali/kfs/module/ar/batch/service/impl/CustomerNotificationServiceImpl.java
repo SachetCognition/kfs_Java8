@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.ArParameterKeyConstants;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
@@ -52,7 +54,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CustomerNotificationServiceImpl implements CustomerNotificationService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerNotificationServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerNotificationServiceImpl.class);
 
     private String agingReportTemplate;
     private BusinessObjectService businessObjectService;

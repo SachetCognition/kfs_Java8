@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.SalesTax;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
@@ -58,7 +60,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Base implementation class for financial edocs.
  */
 public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumentBase implements AccountingDocument, GeneralLedgerPendingEntrySource {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingDocumentBase.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountingDocumentBase.class);
 
     protected Integer nextSourceLineNumber;
     protected Integer nextTargetLineNumber;
@@ -629,7 +631,6 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
             deleteEvents.add(deleteEvent);
         }
 
-
         //
         // merge the lists
         List lineEvents = new ArrayList();
@@ -640,7 +641,6 @@ public abstract class AccountingDocumentBase extends GeneralLedgerPostingDocumen
 
         return lineEvents;
     }
-
 
     /**
      * @param accountingLines

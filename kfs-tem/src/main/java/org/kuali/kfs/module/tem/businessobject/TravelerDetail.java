@@ -21,9 +21,9 @@ package org.kuali.kfs.module.tem.businessobject;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  * This class stores the Traveler information for Travel Request/Reimbursement

@@ -27,6 +27,8 @@ import java.util.List;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryFactory;
 import org.apache.ojb.broker.query.ReportQueryByCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.dataaccess.AccountDao;
@@ -42,7 +44,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * This class is the OJB implementation of the AccountDao interface.
  */
 public class AccountDaoOjb extends PlatformAwareDaoBaseOjb implements AccountDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(AccountDaoOjb.class);
 
     /**
      * Retrieves account business object by primary key
@@ -393,7 +395,6 @@ public class AccountDaoOjb extends PlatformAwareDaoBaseOjb implements AccountDao
         }
         return resultCount > 0;
     }
-
 
     /**
      * @see org.kuali.kfs.coa.dataaccess.AccountDao#isPrincipalInAnyWayShapeOrFormAccountSupervisor(java.lang.String)

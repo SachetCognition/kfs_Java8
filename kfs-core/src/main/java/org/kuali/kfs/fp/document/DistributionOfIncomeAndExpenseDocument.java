@@ -21,6 +21,8 @@ package org.kuali.kfs.fp.document;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cam.CapitalAssetManagementModuleService;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.businessobject.ElectronicPaymentClaim;
@@ -40,7 +42,7 @@ import org.kuali.rice.krad.rules.rule.event.SaveDocumentEvent;
  * being distributed are usually the result of an accumulation of transactions that need to be divided up between various accounts.
  */
 public class DistributionOfIncomeAndExpenseDocument extends CapitalAccountingLinesDocumentBase implements Copyable, Correctable, AmountTotaling, ElectronicPaymentClaiming {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DistributionOfIncomeAndExpenseDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DistributionOfIncomeAndExpenseDocument.class);
 
     protected List<ElectronicPaymentClaim> electronicPaymentClaims;
     protected transient CapitalAssetManagementModuleService capitalAssetManagementModuleService;
@@ -67,7 +69,6 @@ public class DistributionOfIncomeAndExpenseDocument extends CapitalAccountingLin
     public String getTargetAccountingLinesSectionTitle() {
         return KFSConstants.TO;
     }
-
 
     /**
      * @see org.kuali.kfs.sys.document.ElectronicPaymentClaiming#declaimElectronicPaymentClaims()

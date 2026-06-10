@@ -19,13 +19,14 @@
 package org.kuali.kfs.sys.batch;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The specification for lines which are split by delimiters before being populated into objects
  */
 public class DelimitedFlatFileSpecification extends AbstractFlatFilePrefixSpecificationBase {
-    private static final Logger LOG = Logger.getLogger(DelimitedFlatFileSpecification.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DelimitedFlatFileSpecification.class);
     protected String delimiter;
 
     /**

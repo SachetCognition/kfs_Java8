@@ -27,6 +27,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableCustomerInvoice;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleService;
 import org.kuali.kfs.module.tem.TemConstants;
@@ -57,7 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
  * implement the service calls and operations on tax ramification document
  */
 public class TaxableRamificationDocumentServiceImpl implements TaxableRamificationDocumentService {
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TaxableRamificationDocumentServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TaxableRamificationDocumentServiceImpl.class);
 
     private DocumentService documentService;
     private ParameterService parameterService;
@@ -151,7 +153,7 @@ public class TaxableRamificationDocumentServiceImpl implements TaxableRamificati
             return taxRamificationDocument;
         }
         catch (WorkflowException we) {
-            LOG.error(we);
+            LOG.error(we.getMessage(), we);
             throw new RuntimeException(we);
         }
     }
@@ -261,7 +263,6 @@ public class TaxableRamificationDocumentServiceImpl implements TaxableRamificati
     protected String getNotificationText() {
         return this.getParameterService().getParameterValueAsString(TaxableRamificationNotificationStep.class, TemConstants.TaxRamificationParameter.NOTIFICATION_TEXT_PARAM_NAME);
     }
-
 
     /**
      * get the notification subject

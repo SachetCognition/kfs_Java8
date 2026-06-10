@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.coa.service.AccountingPeriodService;
 import org.kuali.kfs.sys.KFSConstants;
@@ -40,7 +42,7 @@ import org.springframework.cache.annotation.Cacheable;
  */
 public class AccountingPeriodServiceImpl implements AccountingPeriodService {
     // member data
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountingPeriodServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingPeriodServiceImpl.class);
     protected BusinessObjectService businessObjectService;
     protected DateTimeService dateTimeService;
 

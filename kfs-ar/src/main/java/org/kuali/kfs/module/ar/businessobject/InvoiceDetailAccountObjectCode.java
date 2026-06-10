@@ -21,6 +21,13 @@ package org.kuali.kfs.module.ar.businessobject;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -32,19 +39,37 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * This class represents a invoice detail on the customer invoice document.
  */
+@Entity
+@Table(name = "AR_INV_DTL_ACCT_OBJ_CD_T")
 public class InvoiceDetailAccountObjectCode extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
+    @Id
+    @Column(name = "ACCOUNT_NBR")
     private String accountNumber;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Id
+    @Column(name = "FIN_OBJ_CD")
     private String financialObjectCode;
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Column(name = "CURR_EXPND_AMT")
     private KualiDecimal currentExpenditures = KualiDecimal.ZERO;;
+    @Column(name = "CUM_EXPND_AMT")
     private KualiDecimal cumulativeExpenditures = KualiDecimal.ZERO;;
+    @Column(name = "TOT_BILLED_AMT")
     private KualiDecimal totalBilled = KualiDecimal.ZERO;;
 
+    @Transient
     private Account account;
+    @Transient
     private Chart chartOfAccounts;
 
     /**

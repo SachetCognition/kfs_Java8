@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountGuideline;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -68,7 +70,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class AccountCreationServiceImpl implements AccountCreationService {
 
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AccountCreationServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AccountCreationServiceImpl.class);
 
     protected static final String ACCT_PREFIX_RESTRICTION = "PREFIXES";
 
@@ -105,7 +107,6 @@ public class AccountCreationServiceImpl implements AccountCreationService {
             this.setFailStatus(accountCreationStatus, KcUtils.getErrorMessage(KcConstants.AccountCreationService.ERROR_KC_DOCUMENT_INVALID_USER, new String[]{principalId}));
             return accountCreationStatus;
         }
-
 
         // get the defaults table
         String unitNumber = accountParameters.getUnit();
@@ -467,8 +468,6 @@ public class AccountCreationServiceImpl implements AccountCreationService {
         }
     }
 
-
-
     /**
      * Check to see if the main link between KFS and KC is valid, namely the chart and account number.
      * If these two values have some kind of error, then we don't want to generate an Account document
@@ -545,7 +544,6 @@ public class AccountCreationServiceImpl implements AccountCreationService {
         Chart chart = chartService.getByPrimaryId(chartOfAccountsCode);
         return (chart != null);
     }
-
 
     @Override
     public boolean isValidChartAccount(String chartOfAccountsCode, String accountNumber) {

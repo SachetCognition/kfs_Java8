@@ -25,6 +25,8 @@ import java.util.ResourceBundle;
 
 import net.sf.jasperreports.engine.JRParameter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.ArConstants;
 import org.kuali.kfs.module.ar.report.service.CustomerInvoiceReportService;
 import org.kuali.kfs.module.ar.report.util.CustomerInvoiceReportDataHolder;
@@ -39,13 +41,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class CustomerInvoiceReportServiceImpl implements CustomerInvoiceReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceReportServiceImpl.class);
 
     private ReportGenerationService reportGenerationService;
     private ParameterService parameterService;
     private ReportInfo customerInvoiceReportInfo;
     private ReportInfo customerInvoiceReportInfoNoTax;
-
 
     /**
      * @see org.kuali.module.effort.service.EffortCertificationReportService#generateReportForExtractProcess(org.kuali.module.effort.util.ExtractProcessReportDataHolder, java.util.Date)

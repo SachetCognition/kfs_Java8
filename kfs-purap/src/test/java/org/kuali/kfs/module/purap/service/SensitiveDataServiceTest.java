@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.purap.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import static org.kuali.kfs.sys.fixture.UserNameFixture.parke;
 
 import java.sql.Date;
@@ -42,7 +44,7 @@ import org.kuali.rice.core.api.datetime.DateTimeService;
 import org.kuali.rice.krad.service.BusinessObjectService;
 
 public class SensitiveDataServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SensitiveDataServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(SensitiveDataServiceTest.class);
     
     protected BusinessObjectService boService;    
     protected SensitiveDataService sdService;

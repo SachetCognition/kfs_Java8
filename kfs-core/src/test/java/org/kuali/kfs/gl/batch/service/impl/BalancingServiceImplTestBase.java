@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.gl.businessobject.Balance;
 import org.kuali.kfs.gl.businessobject.BalanceHistory;
@@ -47,7 +49,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Is a Base class for GL and LD BalancingService test cases
  */
 public abstract class BalancingServiceImplTestBase extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BalancingServiceImplTestBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(BalancingServiceImplTestBase.class);
     
     protected static final String CHART_OF_ACCOUNTS_CODE = "BL";
     protected static final String FINANCIAL_OBJECT_CODE = "5772";

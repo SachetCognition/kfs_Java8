@@ -23,21 +23,45 @@ import org.kuali.kfs.vnd.businessobject.CampusParameter;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
+
 /**
  * Billing Address Business Object.
  */
+@Entity
+@Table(name = "PUR_BILL_ADDR_T")
 public class BillingAddress extends PersistableBusinessObjectBase implements MutableInactivatable{
 
+    @Id
+    @Column(name = "BILL_CMP_CD")
     protected String billingCampusCode;
+    @Column(name = "BILL_NM")
     protected String billingName;
+    @Column(name = "BILL_LN1_ADDR")
     protected String billingLine1Address;
+    @Column(name = "BILL_LN2_ADDR")
     protected String billingLine2Address;
+    @Column(name = "BILL_CTY_NM")
     protected String billingCityName;
+    @Column(name = "BILL_ST_CD")
     protected String billingStateCode;
+    @Column(name = "BILL_PSTL_CD")
     protected String billingPostalCode;
+    @Column(name = "BILL_CNTRY_CD")
     protected String billingCountryCode;
+    @Column(name = "BILL_PHN_NBR")
     protected String billingPhoneNumber;
+    @Column(name = "BILL_EMAIL_ADDR")
     protected String billingEmailAddress;
+    @Column(name = "DOBJ_MAINT_CD_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
     protected CampusParameter billingCampus;

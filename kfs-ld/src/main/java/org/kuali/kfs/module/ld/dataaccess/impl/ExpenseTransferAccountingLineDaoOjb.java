@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.Query;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.AccountingLine;
 import org.kuali.kfs.sys.dataaccess.AccountingLineDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
@@ -37,7 +38,7 @@ import org.springframework.dao.DataAccessException;
  */
 
 public class ExpenseTransferAccountingLineDaoOjb extends PlatformAwareDaoBaseOjb implements AccountingLineDao {
-    private static Logger LOG = Logger.getLogger(ExpenseTransferAccountingLineDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(ExpenseTransferAccountingLineDaoOjb.class);
 
     /**
      * Default constructor.

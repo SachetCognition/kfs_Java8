@@ -19,6 +19,15 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,49 +57,82 @@ import org.kuali.rice.location.framework.state.StateEbo;
 /**
  *
  */
+@Entity
+@Table(name = "CA_ACCT_CHG_DOC_T")
+
 public class AccountGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "ACCT_FSC_OFC_UID")
     protected String accountFiscalOfficerSystemIdentifier;
+    @Column(name = "ACCT_SPVSR_UNVL_ID")
     protected String accountsSupervisorySystemsIdentifier;
+    @Column(name = "ACCT_MGR_UNVL_ID")
     protected String accountManagerSystemIdentifier;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "SUB_FUND_GRP_CD")
     protected String subFundGroupCode;
+    @Column(name = "ACCT_CITY_NM")
     protected String accountCityName;
+    @Column(name = "ACCT_STATE_CD")
     protected String accountStateCode;
+    @Column(name = "ACCT_STREET_ADDR")
     protected String accountStreetAddress;
+    @Column(name = "ACCT_ZIP_CD")
     protected String accountZipCode;
+    @Column(name = "ACCT_EXPIRATION_DT")
     protected Date accountExpirationDate;
+    @Column(name = "CONT_FIN_COA_CD")
     protected String continuationFinChrtOfAcctCd;
+    @Column(name = "CONT_ACCOUNT_NBR")
     protected String continuationAccountNumber;
+    @Column(name = "INCOME_FIN_COA_CD")
     protected String incomeStreamFinancialCoaCode;
+    @Column(name = "INCOME_ACCOUNT_NBR")
     protected String incomeStreamAccountNumber;
+    @Column(name = "CG_CFDA_NBR")
     protected String accountCfdaNumber;
+    @Column(name = "FIN_HGH_ED_FUNC_CD")
     protected String financialHigherEdFunctionCd;
+    @Column(name = "ACCT_SF_CD")
     protected String accountSufficientFundsCode;
+    @Column(name = "ACCT_PND_SF_CD")
+    @Convert(converter = YesNoConverter.class)
     protected Boolean pendingAcctSufficientFundsIndicator;
+    @Column(name = "ACCT_SRCH_CRTA_TXT")
     protected String accountSearchCriteriaTxt;
+    @Transient
     protected List<AccountGlobalDetail> accountGlobalDetails;
 
+    @Transient
     protected DocumentHeader financialDocument;
     protected Person accountFiscalOfficerUser;
     protected Person accountSupervisoryUser;
     protected Person accountManagerUser;
+    @Transient
     protected Chart continuationFinChrtOfAcct;
     protected Account continuationAccount;
     protected Account incomeStreamAccount;
+    @Transient
     protected Chart incomeStreamFinancialCoa;
+    @Transient
     protected Chart chartOfAccounts;
     protected Organization organization;
     protected SubFundGroup subFundGroup;
     protected StateEbo accountState;
+    @Transient
     protected HigherEducationFunction financialHigherEdFunction;
     protected PostalCodeEbo postalZipCode;
     protected SufficientFundsCode sufficientFundsCode;
     protected ContractsAndGrantsCfda cfda;
 
     // added for the employee labor benefit calculation
+    @Column(name = "LBR_BEN_RT_CAT_CD")
     protected String laborBenefitRateCategoryCode;
     protected LaborBenefitRateCategory laborBenefitRateCategory;
 

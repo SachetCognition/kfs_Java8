@@ -20,12 +20,23 @@ package org.kuali.kfs.pdp.businessobject;
 
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Convert;
+import org.hibernate.type.YesNoConverter;
+
 /**
  * 
  * Represents a payment type code
  */
+@Entity
+@Table(name = "PDP_PAYEE_TYP_T")
 public class PayeeType extends KualiCodeBase {
 
+    @Column(name = "ACH_ELGBL_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean achEligible;
     
     public PayeeType() {
@@ -39,4 +50,20 @@ public class PayeeType extends KualiCodeBase {
         this.achEligible = achEligible;
     }
     
+
+    @Override
+    @Id
+    @Column(name = "PAYEE_TYP_CD")
+    @jakarta.persistence.Access(jakarta.persistence.AccessType.PROPERTY)
+    public String getCode() {
+        return super.getCode();
+    }
+
+    @Override
+    @Column(name = "PAYEE_TYP_DESC")
+    @jakarta.persistence.Access(jakarta.persistence.AccessType.PROPERTY)
+    public String getName() {
+        return super.getName();
+    }
+
 }

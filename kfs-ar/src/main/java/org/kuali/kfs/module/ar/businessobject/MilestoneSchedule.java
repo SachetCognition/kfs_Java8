@@ -22,6 +22,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
 import org.kuali.kfs.integration.ar.AccountsReceivableMilestoneSchedule;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -37,16 +44,23 @@ import org.kuali.rice.krad.util.ObjectUtils;
 /**
  * Created a Milestone Schedule maintenance Document parameter
  */
+@Entity
+@Table(name = "AR_MLSTN_SCHDL_T")
 public class MilestoneSchedule extends PersistableBusinessObjectBase implements AccountsReceivableMilestoneSchedule {
 
     protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(MilestoneSchedule.class);
 
     private static final String MILESTONE_SCHEDULE_INQUIRY_TITLE_PROPERTY = "message.inquiry.milestone.schedule.title";
+    @Id
+    @Column(name = "PRPSL_NBR")
     private Long proposalNumber;
 
+    @Transient
     private String milestoneScheduleInquiryTitle;
 
+    @Transient
     private List<Milestone> milestones;
+    @Transient
     private ContractsAndGrantsBillingAward award;
 
     public MilestoneSchedule() {

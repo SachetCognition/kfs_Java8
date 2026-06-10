@@ -10,81 +10,42 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>kfs-web</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <name>Kuali Financial Web Application</name>
 
-  <!--
-        Using dependency unpack as opposed to war overlay for a number of reasons
-        1) overlay requires the packaging phase - tomcat plugin run goal does not work with overlays.
-        2) overlayed resources are not placed in a directory (like generated code) making
-           it difficult for developers to look at the overlayed resources
-       -->
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
         <executions>
           <execution>
-            <id>unpack-rice-web-sources</id>
-            <phase>generate-sources</phase>
             <goals>
-              <goal>unpack</goal>
+              <goal>repackage</goal>
             </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.kuali.rice</groupId>
-                  <artifactId>rice-standalone</artifactId>
-                  <version>${rice.version}</version>
-                  <type>war</type>
-                  <overWrite>false</overWrite>
-                  <outputDirectory>${rice.web.sources}</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-              <includes>*/**</includes>
-              <excludes>${rice.web.excludes}</excludes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>unpack-help</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.kuali.kfs</groupId>
-                  <artifactId>kfs-help</artifactId>
-                  <version>${kfs.help.version}</version>
-                  <type>jar</type>
-                  <overWrite>false</overWrite>
-                  <outputDirectory>${help.web.sources}/static/help</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-              <includes>*/**</includes>
-            </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
         <configuration>
-          <webResources>
-            <resource>
-              <directory>${rice.web.sources}</directory>
-            </resource>
-            <resource>
-              <directory>${help.web.sources}</directory>
-            </resource>
-          </webResources>
+          <mainClass>org.kuali.kfs.KfsApplication</mainClass>
         </configuration>
       </plugin>
     </plugins>
   </build>
 
   <dependencies>
+    <!-- Thymeleaf 3.1 with Spring Boot integration (S-4B migration) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>nz.net.ultraq.thymeleaf</groupId>
+      <artifactId>thymeleaf-layout-dialect</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+
     <dependency>
       <groupId>org.kuali.kfs</groupId>
       <artifactId>kfs-core</artifactId>
@@ -134,6 +95,23 @@
       <groupId>org.kuali.kfs</groupId>
       <artifactId>kfs-tem</artifactId>
       <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${db.groupId}</groupId>
+      <artifactId>${db.artifactId}</artifactId>
+      <version>${db.version}</version>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 

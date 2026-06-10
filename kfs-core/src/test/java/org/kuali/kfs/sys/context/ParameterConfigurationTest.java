@@ -22,7 +22,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.UnimplementedKfsModuleServiceImpl;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.KFSConstants;
@@ -40,7 +41,7 @@ import org.kuali.rice.krad.service.ModuleService;
 @ConfigureContext(shouldCommitTransactions=true)
 @AnnotationTestSuite(PreCommitSuite.class)
 public class ParameterConfigurationTest extends KualiTestBase {
-    private static final Logger LOG = Logger.getLogger(ParameterConfigurationTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ParameterConfigurationTest.class);
 
     /**
      * 

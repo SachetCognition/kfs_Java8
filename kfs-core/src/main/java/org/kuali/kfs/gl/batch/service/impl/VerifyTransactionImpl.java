@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.batch.service.VerifyTransaction;
 import org.kuali.kfs.gl.businessobject.Transaction;
@@ -34,7 +36,7 @@ import org.kuali.rice.core.api.config.property.ConfigurationService;
  * A general use implementation of VerifyTransaction
  */
 public class VerifyTransactionImpl implements VerifyTransaction {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VerifyTransactionImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(VerifyTransactionImpl.class);
     private ConfigurationService kualiConfigurationService;
 
     /**

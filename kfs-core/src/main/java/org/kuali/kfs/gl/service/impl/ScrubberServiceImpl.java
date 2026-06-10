@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.gl.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.CollectorBatch;
 import org.kuali.kfs.gl.batch.service.ScrubberProcess;
 import org.kuali.kfs.gl.report.CollectorReportData;
@@ -30,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class ScrubberServiceImpl implements ScrubberService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ScrubberServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(ScrubberServiceImpl.class);
 
     private ScrubberProcess reportOnlyScrubberProcess;
     private ScrubberProcess scrubberProcess;

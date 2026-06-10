@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 
 import net.sf.jasperreports.engine.JRParameter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.SubAccount;
 import org.kuali.kfs.sys.ConfigureContext;
@@ -38,7 +40,7 @@ import org.kuali.kfs.sys.report.ReportInfo;
 
 @ConfigureContext
 public class ReportGenerationServiceTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportGenerationServiceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReportGenerationServiceTest.class);
 
     private ReportGenerationService reportGenerationService;
     private ReportInfo infoForParameterMapReport;

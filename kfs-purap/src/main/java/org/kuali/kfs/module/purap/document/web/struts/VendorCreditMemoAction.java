@@ -29,6 +29,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.PurapConstants;
 import org.kuali.kfs.module.purap.PurapConstants.CMDocumentsStrings;
 import org.kuali.kfs.module.purap.PurapKeyConstants;
@@ -69,7 +71,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Struts Action for Credit Memo document.
  */
 public class VendorCreditMemoAction extends AccountsPayableActionBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(VendorCreditMemoAction.class);
+    protected static Logger LOG = LoggerFactory.getLogger(VendorCreditMemoAction.class);
 
     /**
      * Do initialization for a new credit memo.

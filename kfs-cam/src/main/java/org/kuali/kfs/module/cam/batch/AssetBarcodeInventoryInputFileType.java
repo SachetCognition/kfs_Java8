@@ -32,6 +32,8 @@ import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
 import org.kuali.kfs.module.cam.batch.service.AssetBarcodeInventoryLoadService;
@@ -46,7 +48,7 @@ import org.kuali.rice.kim.api.identity.Person;
  * Batch input type for the barcode inventory document.
  */
 public class AssetBarcodeInventoryInputFileType implements BatchInputFileSetType {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetBarcodeInventoryInputFileType.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetBarcodeInventoryInputFileType.class);
 
     private String directoryPath; 
     private static final String FILE_NAME_PREFIX = "barcode_inv";
@@ -265,7 +267,6 @@ public class AssetBarcodeInventoryInputFileType implements BatchInputFileSetType
     public String generateFileName(String fileType, String principalName, String fileUserIdentifer) {
         return null;
     }
-
 
     public String getFileExtension(String fileType) {
         return "." + fileType;

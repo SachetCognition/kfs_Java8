@@ -23,6 +23,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.businessobject.FinancialSystemDocumentHeader;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.kew.api.KewApiConstants;
@@ -38,21 +40,37 @@ import org.kuali.rice.krad.service.DocumentService;
 import org.kuali.rice.krad.service.NoteService;
 import org.kuali.rice.krad.util.KRADConstants;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+
 /**
  * Base class for Related View Business Objects.
  */
+@MappedSuperclass
 public abstract class AbstractRelatedView extends PersistableBusinessObjectBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractRelatedView.class);
+    private static Logger LOG = LoggerFactory.getLogger(AbstractRelatedView.class);
 
+    @Id
+    @Column(name = "AP_PUR_DOC_LNK_ID")
     private Integer accountsPayablePurchasingDocumentLinkIdentifier;
+    @Transient
     private Integer purapDocumentIdentifier;
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Transient
     private String poNumberMasked;
 
-    //create date from the workflow document header...
+    @Transient
     private DateTime createDate;
 
-    // REFERENCE OBJECTS
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
     protected FinancialSystemDocumentHeader documentHeader;
 
     public Integer getAccountsPayablePurchasingDocumentLinkIdentifier() {

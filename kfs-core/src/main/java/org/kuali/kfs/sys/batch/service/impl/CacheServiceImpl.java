@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.sys.batch.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.service.CacheService;
 import org.kuali.kfs.sys.service.NonTransactional;
@@ -31,7 +33,7 @@ import org.springframework.cache.CacheManager;
  */
 @NonTransactional
 public class CacheServiceImpl implements CacheService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CacheServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CacheServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.sys.batch.service.CacheService#clearSystemCache()

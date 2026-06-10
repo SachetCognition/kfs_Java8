@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Kuali Financial System</title>
+    <link rel="stylesheet" th:href="@{/css/kuali.css}"/>
+    <link rel="stylesheet" th:href="@{/css/kfs.css}"/>
+    <script th:src="@{/scripts/dwr/interface/Constants.js}"></script>
+    <script th:src="@{/scripts/kfs.js}"></script>
+    <th:block layout:fragment="head-extra"></th:block>
+</head>
+<body>
+    <!-- Header -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <!-- Navigation -->
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+
+    <!-- Main Content -->
+    <div id="content" class="content">
+        <div layout:fragment="content"></div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <th:block layout:fragment="scripts-extra"></th:block>
+</body>
+</html>

@@ -20,6 +20,8 @@ package org.kuali.kfs.module.tem.document.workflow;
 
 import java.util.concurrent.Callable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.document.TravelDocument;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.document.workflow.SensitiveDataSecurityAttribute;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * TEM Security Attribute restrict doc search results and view route log
  */
 public class TEMSecurityAttribute extends SensitiveDataSecurityAttribute {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(TEMSecurityAttribute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TEMSecurityAttribute.class);
 
     private DocumentHelperService documentHelperService;
     private DocumentService documentService;

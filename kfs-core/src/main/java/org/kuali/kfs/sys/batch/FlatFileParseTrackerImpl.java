@@ -26,13 +26,14 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class which tracks the current state of parsing - particularly which object should currently be parsed into
  */
 public class FlatFileParseTrackerImpl implements FlatFileParseTracker {
-	static Logger LOG = Logger.getLogger(FlatFileParseTrackerImpl.class);
+	static Logger LOG = LoggerFactory.getLogger(FlatFileParseTrackerImpl.class);
 	protected FlatFileSpecification classIdentifier;
 	protected Stack<Object> parseStack;
 	protected List<Object> parsedParentObjects;

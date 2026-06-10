@@ -28,13 +28,14 @@ import org.kuali.rice.ksb.messaging.quartz.MessageServiceExecutorJobListener;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
+import org.quartz.impl.matchers.EverythingMatcher;
 
 /**
  * This class wraps the spring version to allow deploy time determination of whether to actually create a scheduler and whether to
  * use the jdbc or ram job store.
  */
 public class SchedulerFactoryBean extends org.springframework.scheduling.quartz.SchedulerFactoryBean {
-    private static final Scheduler SCHEDULER_DUMMY = new SchedulerDummy();
+    private static final Scheduler SCHEDULER_DUMMY = SchedulerDummy.getInstance();
     private boolean useQuartzScheduling;
     private boolean useJdbcJobstore;
     private Properties quartzPropertiesReference;
@@ -74,7 +75,8 @@ public class SchedulerFactoryBean extends org.springframework.scheduling.quartz.
     @Override
     protected Scheduler createScheduler(SchedulerFactory schedulerFactory, String schedulerName) throws SchedulerException {
         Scheduler scheduler = super.createScheduler(schedulerFactory, schedulerName);
-        scheduler.addJobListener(new MessageServiceExecutorJobListener());
+        scheduler.getListenerManager().addJobListener(
+                new MessageServiceExecutorJobListener(), EverythingMatcher.allJobs());
         return scheduler;
     }
 

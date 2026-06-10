@@ -22,7 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.coa.service.ObjectCodeService;
@@ -38,7 +39,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
 
 public class IntraAccountAdjustmentAmountBalancedValidation extends GenericValidation {
 
-    private static Logger logger = Logger.getLogger(IntraAccountAdjustmentAmountBalancedValidation.class);
+    private static Logger logger = LoggerFactory.getLogger(IntraAccountAdjustmentAmountBalancedValidation.class);
 
     @Override
     public boolean validate(AttributedDocumentEvent event) {
@@ -97,10 +98,6 @@ public class IntraAccountAdjustmentAmountBalancedValidation extends GenericValid
         }
         return accountObjectCodeAmountMap;
     }
-
-
-
-
 
   class AccountObjectCodeVO {
     private String chartCode, accountNumber,objectCode;

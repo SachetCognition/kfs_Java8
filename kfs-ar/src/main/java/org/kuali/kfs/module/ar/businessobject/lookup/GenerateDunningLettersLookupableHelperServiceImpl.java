@@ -30,6 +30,8 @@ import java.util.Map;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.service.AccountService;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAgency;
@@ -70,7 +72,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Defines a lookupable helper service class for Generate Dunning Letters.
  */
 public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsReceivableLookupableHelperServiceImplBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(GenerateDunningLettersLookupableHelperServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GenerateDunningLettersLookupableHelperServiceImpl.class);
     protected ContractsGrantsInvoiceDocumentService contractsGrantsInvoiceDocumentService;
     protected AccountService accountService;
     protected ContractsAndGrantsModuleBillingService contractsAndGrantsModuleBillingService;
@@ -526,7 +528,6 @@ public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsR
 
         col.setPropertyName(attributeName);
 
-
         String columnTitle = getDataDictionaryService().getAttributeLabel(element.getClass(), attributeName);
         if (StringUtils.isBlank(columnTitle)) {
             columnTitle = getDataDictionaryService().getCollectionLabel(element.getClass(), attributeName);
@@ -576,7 +577,6 @@ public class GenerateDunningLettersLookupableHelperServiceImpl extends AccountsR
         }
         return col;
     }
-
 
     /**
      * Constructs the list of columns for the search results. All properties for the column objects come from the DataDictionary.

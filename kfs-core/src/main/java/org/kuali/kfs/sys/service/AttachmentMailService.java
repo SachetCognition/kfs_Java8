@@ -18,8 +18,6 @@
  */
 package org.kuali.kfs.sys.service;
 
-import javax.mail.MessagingException;
-
 import org.kuali.kfs.sys.mail.AttachmentMailMessage;
 import org.kuali.rice.krad.exception.InvalidAddressException;
 
@@ -33,8 +31,7 @@ public interface AttachmentMailService extends org.kuali.rice.krad.service.MailS
      *
      * @param message
      * @throws InvalidAddressException
-     * @throws MessagingException
      */
-    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException, MessagingException;
+    public void sendMessage(AttachmentMailMessage message) throws InvalidAddressException;
 
 }

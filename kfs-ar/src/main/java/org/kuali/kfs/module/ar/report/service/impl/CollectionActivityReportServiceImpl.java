@@ -29,6 +29,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAward;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsModuleBillingService;
@@ -62,7 +64,7 @@ public class CollectionActivityReportServiceImpl implements CollectionActivityRe
     protected DateTimeService dateTimeService;
     protected FinancialSystemDocumentService financialSystemDocumentService;
     protected PersonService personService;
-    private final static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectionActivityReportServiceImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(CollectionActivityReportServiceImpl.class);
 
     /**
      * @see org.kuali.kfs.module.ar.report.service.ContractsGrantsAgingReportService#filterContractsGrantsAgingReport(java.util.Map)
@@ -98,8 +100,6 @@ public class CollectionActivityReportServiceImpl implements CollectionActivityRe
         if (!StringUtils.isBlank(accountNumber)) {
             fieldValues.put(ArPropertyConstants.CustomerInvoiceDocumentFields.ACCOUNT_NUMBER, accountNumber);
         }
-
-
 
         // Filter Invoice docs according to criteria.
         Collection<ContractsGrantsInvoiceDocument> contractsGrantsInvoiceDocs = contractsGrantsInvoiceDocumentService.retrieveAllCGInvoicesByCriteria(fieldValues);

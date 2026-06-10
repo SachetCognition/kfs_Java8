@@ -18,10 +18,58 @@
  */
 package org.kuali.kfs.sys.batch;
 
-import org.quartz.impl.StdScheduler;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
-public class SchedulerDummy extends StdScheduler {
-    public SchedulerDummy() {
-        super(null, null);
+import org.quartz.ListenerManager;
+import org.quartz.Scheduler;
+
+/**
+ * No-op Scheduler proxy for use when use.quartz.scheduling=false.
+ * Returns safe defaults for all Scheduler interface methods.
+ * Updated for Quartz 2.x API (S-4A migration).
+ */
+public class SchedulerDummy {
+
+    private static final Scheduler INSTANCE = createNoOpScheduler();
+
+    public static Scheduler getInstance() {
+        return INSTANCE;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Scheduler createNoOpScheduler() {
+        return (Scheduler) Proxy.newProxyInstance(
+                Scheduler.class.getClassLoader(),
+                new Class<?>[]{Scheduler.class},
+                new InvocationHandler() {
+                    private final ListenerManager listenerManager = createNoOpListenerManager();
+
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        String name = method.getName();
+                        if ("getListenerManager".equals(name)) {
+                            return listenerManager;
+                        }
+                        Class<?> returnType = method.getReturnType();
+                        if (returnType == boolean.class) return false;
+                        if (returnType == int.class) return 0;
+                        if (returnType == List.class) return Collections.emptyList();
+                        if (returnType == Set.class) return Collections.emptySet();
+                        if (returnType == String.class && "getSchedulerName".equals(name)) return "NoOpScheduler";
+                        return null;
+                    }
+                });
+    }
+
+    private static ListenerManager createNoOpListenerManager() {
+        return (ListenerManager) Proxy.newProxyInstance(
+                ListenerManager.class.getClassLoader(),
+                new Class<?>[]{ListenerManager.class},
+                (proxy, method, args) -> null);
     }
 }

@@ -22,13 +22,15 @@ import java.io.File;
 import java.util.Comparator;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.BatchSortUtil;
 
 /**
  * General purpose sort step which can be configured with any Comparator class.
  */
 public class FlatFileSortStep extends AbstractStep {
-	private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(FlatFileSortStep.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FlatFileSortStep.class);
 	protected String inputFileName;
 	protected String outputFileName;
 	protected Class<? extends Comparator<String>> lineComparatorClass;

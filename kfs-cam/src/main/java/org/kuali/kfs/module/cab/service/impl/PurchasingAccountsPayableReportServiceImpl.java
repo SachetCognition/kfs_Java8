@@ -22,13 +22,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.cab.dataaccess.PurchasingAccountsPayableReportDao;
 import org.kuali.kfs.module.cab.service.PurchasingAccountsPayableReportService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class PurchasingAccountsPayableReportServiceImpl implements PurchasingAccountsPayableReportService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchasingAccountsPayableReportServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurchasingAccountsPayableReportServiceImpl.class);
     protected PurchasingAccountsPayableReportDao purApReportDao;
 
     /**
@@ -66,6 +68,5 @@ public class PurchasingAccountsPayableReportServiceImpl implements PurchasingAcc
     public void setPurApReportDao(PurchasingAccountsPayableReportDao purchasingAccountsPayableReportDao) {
         this.purApReportDao = purchasingAccountsPayableReportDao;
     }
-
 
 }

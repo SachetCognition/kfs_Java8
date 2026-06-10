@@ -1,0 +1,59 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Generate Dunning Letters Summary</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="kfs-page" data-header-title="Generate Dunning Letters Summary" data-doc-title="Generate Dunning Letters Summary">
+<h1>Generate Dunning Letters Summary</h1>
+<form th:action="@{arGenerateDunningLettersSummary}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+
+	<div id="globalbuttons" class="globalbuttons">
+		<th:block th:switch="${true}">
+			<c:when test ="${KualiForm.dunningLettersGenerated}">
+				<input type="image" th:src="@{${ConfigProperties.externalizable.images.url}buttonsmall_return.gif}"
+					styleClass="globalbuttons" property="methodToCall.cancel"
+					title="return" alt="return" />
+			</th:block>
+			<th:block th:case="*">
+				<div th:include="~{fragments/ar/documentSummaryResults :: documentSummaryResults}" th:with="lookupResultsProperty='generateDunningLettersLookupResults',lookupResultTitleProperties='proposalNumber',tabTitleName='Award'">
+					<div th:replace="~{fragments/ar/generateDunningLettersSummaryResultContent :: generateDunningLettersSummaryResultContent}"></div>
+				</div><!-- end ar:documentSummaryResults -->
+				<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+				<input type="image" th:src="@{${ConfigProperties.externalizable.images.url}buttonsmall_create.gif}"
+					styleClass="globalbuttons"
+					property="methodToCall.generateDunningLetters.number${KualiForm.lookupResultsSequenceNumber}"
+					title="generate_DunningLetters" alt="generate_DunningLetters" onclick="excludeSubmitRestriction=true"/>
+				<input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif}"
+					styleClass="globalbuttons" property="methodToCall.cancel"
+					title="cancel" alt="cancel" />
+			</th:block>
+		</th:block>
+	</div>
+</div>
+</div>
+</div>
+</body>
+</html>

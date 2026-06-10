@@ -21,6 +21,8 @@ package org.kuali.kfs.module.cam.document.validation.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.document.validation.impl.MaintenancePreRulesBase;
 import org.kuali.kfs.module.cam.CamsConstants;
 import org.kuali.kfs.module.cam.CamsKeyConstants;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.service.KRADServiceLocatorWeb;
 import org.kuali.rice.krad.util.ObjectUtils;
 
 public class AssetGlobalPreRules extends MaintenancePreRulesBase {
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AssetGlobalPreRules.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(AssetGlobalPreRules.class);
 
     /**
      * Sets up a convenience object and few other Asset attributes
@@ -54,7 +56,6 @@ public class AssetGlobalPreRules extends MaintenancePreRulesBase {
         }
         return true;
     }
-
 
     /**
      * Validate all object sub type codes are from the same group.
@@ -80,7 +81,6 @@ public class AssetGlobalPreRules extends MaintenancePreRulesBase {
         }
         return invalid;
     }
-
 
     protected boolean isOkHavingDifferentObjectSubTypes() {
         String parameterDetail = "(module:" + KRADServiceLocatorWeb.getKualiModuleService().getNamespaceCode(AssetGlobal.class) + "/component:" + AssetGlobal.class.getSimpleName() + ")";

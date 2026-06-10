@@ -29,6 +29,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.GeneralLedgerConstants;
 import org.kuali.kfs.gl.businessobject.Entry;
 import org.kuali.kfs.gl.businessobject.OriginEntryFull;
@@ -54,7 +56,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class NightlyOutServiceImpl implements NightlyOutService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(NightlyOutServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(NightlyOutServiceImpl.class);
 
     private GeneralLedgerPendingEntryService generalLedgerPendingEntryService;
     private OriginEntryService originEntryService;

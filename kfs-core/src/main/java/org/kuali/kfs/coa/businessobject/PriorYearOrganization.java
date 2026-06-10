@@ -19,6 +19,16 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,40 +46,73 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 /**
  *
  */
+@Entity
+@Table(name = "CA_PRIOR_YR_ORG_T")
+@IdClass(PriorYearOrganizationId.class)
+
 public class PriorYearOrganization extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Id
+    @Column(name = "ORG_CD")
     protected String organizationCode;
+    @Column(name = "ORG_MGR_UNVL_ID")
     protected String organizationManagerUniversalId;
+    @Column(name = "ORG_NM")
     protected String organizationName;
+    @Column(name = "RC_CD")
     protected String responsibilityCenterCode;
+    @Column(name = "ORG_PHYS_CMP_CD")
     protected String organizationPhysicalCampusCode;
+    @Column(name = "ORG_TYP_CD")
     protected String organizationTypeCode;
+    @Column(name = "ORG_DFLT_ACCT_NBR")
     protected String organizationDefaultAccountNumber;
+    @Column(name = "ORG_CITY_NM")
     protected String organizationCityName;
+    @Column(name = "ORG_STATE_CD")
     protected String organizationStateCode;
+    @Column(name = "ORG_ZIP_CD")
     protected String organizationZipCode;
+    @Column(name = "ORG_BEGIN_DT")
     protected Date organizationBeginDate;
+    @Column(name = "ORG_END_DT")
     protected Date organizationEndDate;
+    @Column(name = "RPTS_TO_FIN_COA_CD")
     protected String reportsToChartOfAccountsCode;
+    @Column(name = "RPTS_TO_ORG_CD")
     protected String reportsToOrganizationCode;
     protected boolean active;
+    @Column(name = "ORG_IN_FP_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean organizationInFinancialProcessingIndicator;
+    @Column(name = "ORG_PLNT_ACCT_NBR")
     protected String organizationPlantAccountNumber;
+    @Column(name = "CMP_PLNT_ACCT_NBR")
     protected String campusPlantAccountNumber;
+    @Column(name = "ORG_PLNT_COA_CD")
     protected String organizationPlantChartCode;
+    @Column(name = "CMP_PLNT_COA_CD")
     protected String campusPlantChartCode;
+    @Column(name = "ORG_CNTRY_CD")
     protected String organizationCountryCode;
+    @Column(name = "ORG_LN1_ADDR")
     protected String organizationLine1Address;
+    @Column(name = "ORG_LN2_ADDR")
     protected String organizationLine2Address;
 
+    @Transient
     protected Chart chartOfAccounts;
     protected Account organizationDefaultAccount;
     protected Organization organization;
     protected CampusEbo organizationPhysicalCampus;
+    @Transient
     protected Organization reportsToOrganization;
     protected Chart reportsToChartOfAccounts;
     protected Account organizationPlantAccount;
+    @Transient
     protected Account campusPlantAccount;
     protected Chart organizationPlantChart;
     protected Chart campusPlantChart;

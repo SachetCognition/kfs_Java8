@@ -26,7 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableOrganizationOptions;
 import org.kuali.kfs.module.tem.businessobject.ActualExpense;
 import org.kuali.kfs.module.tem.businessobject.ExpenseTypeAware;
@@ -53,13 +54,12 @@ import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.document.Document;
 import org.kuali.rice.krad.uif.field.LinkField;
 
-
 /**
  * Mock Travel Document Service Implementation
  */
 public class MockTravelDocumentServiceImpl implements TravelDocumentService {
 
-    protected static Logger LOG = Logger.getLogger(MockTravelDocumentServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(MockTravelDocumentServiceImpl.class);
 
     protected TravelDocumentService realTravelDocumentService;
     protected DateTimeService dateTimeService;

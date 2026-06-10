@@ -25,6 +25,8 @@ import java.util.Map;
 import org.apache.ojb.broker.query.Criteria;
 import org.apache.ojb.broker.query.QueryByCriteria;
 import org.apache.ojb.broker.query.QueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.OJBUtility;
 import org.kuali.kfs.module.ld.businessobject.LaborObject;
 import org.kuali.kfs.module.ld.dataaccess.LaborObjectDao;
@@ -37,7 +39,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * @see org.kuali.kfs.module.ld.businessobject.LaborObject
  */
 public class LaborObjectDaoOjb extends PlatformAwareDaoBaseOjb implements LaborObjectDao {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborObjectDaoOjb.class);
+    private static Logger LOG = LoggerFactory.getLogger(LaborObjectDaoOjb.class);
 
     /**
      * @see org.kuali.kfs.module.ld.dataaccess.LaborObjectDao#findAllLaborObjectInPositionGroups(java.util.Map, java.util.List)

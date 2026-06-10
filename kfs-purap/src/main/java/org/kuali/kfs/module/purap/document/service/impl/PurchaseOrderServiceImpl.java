@@ -34,6 +34,8 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountDelegate;
 import org.kuali.kfs.coa.service.AccountService;
@@ -137,10 +139,9 @@ import org.kuali.rice.krad.util.MessageMap;
 import org.kuali.rice.krad.util.ObjectUtils;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Transactional
 public class PurchaseOrderServiceImpl implements PurchaseOrderService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurchaseOrderServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseOrderServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected DateTimeService dateTimeService;
@@ -162,7 +163,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     protected B2BPurchaseOrderService b2bPurchaseOrderService;
     protected DataDictionaryService dataDictionaryService;
     protected FinancialSystemDocumentService financialSystemDocumentService;
-
 
     @Override
     public boolean isPurchaseOrderOpenForProcessing(Integer poId) {
@@ -430,7 +430,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         }
         else {
             String errorMsg = "No internal purchase order dollar limit found for purchase order '" + document.getPurapDocumentIdentifier() + "'.";
-            LOG.warn(errorMsg);
+            LOG.warn("{}", errorMsg);
             return null;
         }
     }
@@ -449,7 +449,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
         }
     }
-
 
     /**
      * TODO RELEASE 3 - QUOTE
@@ -508,7 +507,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         if (ObjectUtils.isNotNull(po.getPurchaseOrderFirstTransmissionTimestamp())) {
             // should not call this method for first transmission if document has already been transmitted
             String errorMsg = "Method to perform first transmit was called on document (doc id " + documentNumber + ") with already filled in 'first transmit date'";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
         Timestamp currentDate = dateTimeService.getCurrentTimestamp();
@@ -542,7 +541,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         }
         return !excludeList.contains(reqSourceCode);
     }
-
 
     /**
      * @see org.kuali.kfs.module.purap.document.service.PurchaseOrderService#performPurchaseOrderPreviewPrinting(java.lang.String,
@@ -607,7 +605,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     protected PurchaseOrderDocument createPurchaseOrderDocumentFromSourceDocument(PurchaseOrderDocument sourceDocument, String docType) throws WorkflowException {
         if (ObjectUtils.isNull(sourceDocument)) {
             String errorMsg = "Attempting to create new PO of type '" + docType + "' from source PO doc that is null";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
 
@@ -692,7 +690,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
             else {
                 String errorMsg = "Attempting to create new PO of type '" + docType + "' from source PO doc id " + documentNumber + " returned null for new document";
-                LOG.error(errorMsg);
+                LOG.error("{}", errorMsg);
                 throw new RuntimeException(errorMsg);
             }
         }
@@ -741,7 +739,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
             else {
                 String errorMsg = "Attempting to create new PO of type '" + docType + "' from source PO doc id " + documentNumber + " returned null for new document";
-                LOG.error(errorMsg);
+                LOG.error("{}", errorMsg);
                 throw new RuntimeException(errorMsg);
             }
         }
@@ -761,7 +759,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
         if (ObjectUtils.isNull(currentDocument)) {
             String errorMsg = "Attempting to create new PO of type PurchaseOrderSplitDocument from source PO doc that is null";
-            LOG.error(errorMsg);
+            LOG.error("{}", errorMsg);
             throw new RuntimeException(errorMsg);
         }
         String documentNumber = currentDocument.getDocumentNumber();
@@ -835,7 +833,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
             }
             else {
                 String errorMsg = "Attempting to create new PO of type 'PurchaseOrderSplitDocument' from source PO doc id " + documentNumber + " returned null for new document";
-                LOG.error(errorMsg);
+                LOG.error("{}", errorMsg);
                 throw new RuntimeException(errorMsg);
             }
         }
@@ -1622,7 +1620,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         return adHocRoutePersons;
     }
 
-
     /**
      * Sends an FYI to fiscal officers for general ledger entries created for amend purchase order
      *
@@ -1689,11 +1686,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                             po.appSpecificRouteDocumentToUser(po.getDocumentHeader().getWorkflowDocument(), principalId, annotationText, "Fiscal Officer Notification");
                         }
 
-
                     }
                 }
             }
-
 
         }
         catch (WorkflowException ex) {
@@ -2106,7 +2101,6 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
         return document;
     }
-
 
     /**
      * Creates and returns a Calendar object of today minus three months.

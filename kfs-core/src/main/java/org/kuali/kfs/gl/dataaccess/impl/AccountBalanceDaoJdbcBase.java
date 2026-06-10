@@ -63,7 +63,7 @@ public class AccountBalanceDaoJdbcBase extends PlatformAwareDaoBaseJdbc {
      * @return true if this inquiring user has temporary pending entries, false otherwise
      */
     protected boolean hasEntriesInPendingTable(String sessionId) {
-        return getSimpleJdbcTemplate().queryForInt("select count(*) as COUNT from GL_PENDING_ENTRY_MT WHERE sesid = ?", sessionId) != 0;
+        return getSimpleJdbcTemplate().queryForObject("select count(*) as COUNT from GL_PENDING_ENTRY_MT WHERE sesid = ?", Integer.class, sessionId) != 0;
     }
 
     /**

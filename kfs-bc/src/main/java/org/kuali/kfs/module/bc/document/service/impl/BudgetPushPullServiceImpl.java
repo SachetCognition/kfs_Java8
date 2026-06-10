@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.bc.document.dataaccess.BudgetOrganizationPushPullDao;
 import org.kuali.kfs.module.bc.document.service.BudgetPushPullService;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class BudgetPushPullServiceImpl implements BudgetPushPullService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetPushPullServiceImpl.class);
+    private static Logger LOG = LoggerFactory.getLogger(BudgetPushPullServiceImpl.class);
     
     protected BudgetOrganizationPushPullDao budgetOrganizationPushPullDao;
 

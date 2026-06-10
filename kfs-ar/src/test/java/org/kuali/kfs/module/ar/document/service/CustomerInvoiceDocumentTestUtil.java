@@ -23,6 +23,8 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.document.CustomerInvoiceDocument;
 import org.kuali.kfs.module.ar.fixture.CustomerFixture;
 import org.kuali.kfs.module.ar.fixture.CustomerInvoiceDetailFixture;
@@ -42,7 +44,7 @@ public class CustomerInvoiceDocumentTestUtil {
 
     public static final String CUSTOMER_MAINT_DOC_NAME = "CUS";
 
-    public static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CustomerInvoiceDocumentTestUtil.class);
+    public static Logger LOG = LoggerFactory.getLogger(CustomerInvoiceDocumentTestUtil.class);
 
     /**
      * This method saves a customer BO based on the passed in customer fixture
@@ -72,7 +74,7 @@ public class CustomerInvoiceDocumentTestUtil {
         try {
             SpringContext.getBean(DocumentService.class).saveDocument(document, DocumentSystemSaveEvent.class);
         } catch (Exception e){
-            LOG.fatal("The Customer Invoice Document was not routed, and is not available for testing.",e);
+            LOG.error("The Customer Invoice Document was not routed, and is not available for testing.",e);
             Assert.fail("The Customer Invoice Document was not routed, and is not available for testing." + e.getClass().getName() + " : " + e.getMessage());
         }
         savedDocument = SpringContext.getBean(DocumentService.class).getByDocumentHeaderId(document.getDocumentNumber());
@@ -99,7 +101,7 @@ public class CustomerInvoiceDocumentTestUtil {
         try {
             SpringContext.getBean(DocumentService.class).routeDocument(document, "TESTING", new ArrayList());
         } catch (Exception e){
-            LOG.fatal("The Customer Invoice Document was not routed, and is not available for testing.",e);
+            LOG.error("The Customer Invoice Document was not routed, and is not available for testing.",e);
             Assert.fail("The Customer Invoice Document was not routed, and is not available for testing." + e.getClass().getName() + " : " + e.getMessage());
         }
         routedDocument = SpringContext.getBean(DocumentService.class).getByDocumentHeaderId(document.getDocumentNumber());
@@ -125,7 +127,7 @@ public class CustomerInvoiceDocumentTestUtil {
         try {
             SpringContext.getBean(DocumentService.class).routeDocument(document, "TESTING", new ArrayList<AdHocRouteRecipient>());
         } catch (Exception e){
-            LOG.fatal("The Customer Invoice Document was not routed, and is not available for testing.",e);
+            LOG.error("The Customer Invoice Document was not routed, and is not available for testing.",e);
             Assert.fail("The Customer Invoice Document was not routed, and is not available for testing." + e.getClass().getName() + " : " + e.getMessage() + "\n" + dumpMessageMapErrors() + "\n" + document);
         }
         routedDocument = SpringContext.getBean(DocumentService.class).getByDocumentHeaderId(document.getDocumentNumber());

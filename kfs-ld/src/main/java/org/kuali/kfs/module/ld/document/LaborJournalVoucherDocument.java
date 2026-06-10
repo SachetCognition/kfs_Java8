@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.JournalVoucherDocument;
 import org.kuali.kfs.module.ld.LaborConstants;
 import org.kuali.kfs.module.ld.LaborConstants.JournalVoucherOffsetType;
@@ -52,7 +54,7 @@ import org.kuali.rice.krad.rules.rule.event.KualiDocumentEvent;
  */
 public class LaborJournalVoucherDocument extends JournalVoucherDocument implements LaborLedgerPostingDocument, AmountTotaling {
     // @latex.ClassSignatureStop
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(LaborJournalVoucherDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(LaborJournalVoucherDocument.class);
     protected String offsetTypeCode = JournalVoucherOffsetType.NO_OFFSET.typeCode;
     protected List<LaborLedgerPendingEntry> laborLedgerPendingEntries;
     protected DocumentTypeEBO financialSystemDocumentTypeCode;

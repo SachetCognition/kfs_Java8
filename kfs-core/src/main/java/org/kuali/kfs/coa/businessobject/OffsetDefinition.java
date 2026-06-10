@@ -18,6 +18,14 @@
  */
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kfs.sys.businessobject.FiscalYearBasedBusinessObject;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
@@ -30,19 +38,34 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  *
  */
+@Entity
+@Table(name = "GL_OFFSET_DEFN_T")
+@IdClass(OffsetDefinitionId.class)
+
 public class OffsetDefinition extends PersistableBusinessObjectBase implements FiscalYearBasedBusinessObject {
 
     private static final long serialVersionUID = -6150010338773403021L;
 
+    @Id
+    @Column(name = "UNIV_FISCAL_YR")
     private Integer universityFiscalYear;
+    @Id
+    @Column(name = "FDOC_TYP_CD")
     private String financialDocumentTypeCode;
+    @Id
+    @Column(name = "FIN_BALANCE_TYP_CD")
     private String financialBalanceTypeCode;
+    @Id
+    @Column(name = "FIN_COA_CD")
     private String chartOfAccountsCode;
+    @Column(name = "FIN_OBJECT_CD")
     private String financialObjectCode;
 
+    @Transient
     private SystemOptions universityFiscal;
     private ObjectCode financialObject;
     private Chart chartOfAccounts;
+    @Transient
     private BalanceType financialBalanceType;
     private DocumentTypeEBO financialSystemDocumentTypeCode;
 

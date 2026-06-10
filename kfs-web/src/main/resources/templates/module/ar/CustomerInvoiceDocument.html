@@ -1,0 +1,87 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Customer Invoice Document</title>
+</head>
+<body>
+<div layout:fragment="content">
+<th:block th:if="${!accountingLineScriptsLoaded}">
+       <script type='text/javascript' src="dwr/interface/ChartService.js"></script>
+       <script type='text/javascript' src="dwr/interface/AccountService.js"></script>
+       <script type='text/javascript' src="dwr/interface/SubAccountService.js"></script>
+       <script type='text/javascript' src="dwr/interface/ObjectCodeService.js"></script>
+       <script type='text/javascript' src="dwr/interface/ObjectTypeService.js"></script>
+       <script type='text/javascript' src="dwr/interface/SubObjectCodeService.js"></script>
+       <script type='text/javascript' src="dwr/interface/ProjectCodeService.js"></script>
+       <script type='text/javascript' src="dwr/interface/OriginationCodeService.js"></script>
+       <script language="JavaScript" type="text/javascript" src="scripts/sys/objectInfo.js"></script>
+       <c:set var="accountingLineScriptsLoaded" value="true" scope="request" />
+</th:block>     
+       
+<c:set var="accountsCanCrossCharts" value="<span th:text="${SpringContext.getBean(AccountService.class).accountsCanCrossCharts()}"></span>" />       
+<!-- th:with="readOnly=${!KualiForm.documentActions[Constants.KUALI_ACTION_CAN_EDIT]}" -->
+
+<div class="document-page" data-document-type="CustomerInvoiceDocument" data-form-action="arCustomerInvoiceDocument" data-show-document-info="true">
+<form th:action="@{arCustomerInvoiceDocument}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="document-body">
+
+	<div th:replace="~{fragments/hiddenDocumentFields :: hiddenDocumentFields}"></div>
+
+	<div th:replace="~{fragments/documentOverview :: documentOverview(${{KualiForm.editingMode}})}"></div>
+	
+    <div th:replace="~{fragments/ar/customerInvoiceOrganization :: customerInvoiceOrganization}" th:with="documentAttributes=${DataDictionary.CustomerInvoiceDocument.attributes},readOnly=${readOnly}"></div>	
+	
+    <div th:replace="~{fragments/ar/customerInvoiceRecurrenceDetails :: customerInvoiceRecurrenceDetails}" th:with="documentAttributes=${DataDictionary.CustomerInvoiceDocument.attributes},readOnly=${readOnly}"></div>
+        
+    <div th:replace="~{fragments/ar/customerInvoiceGeneral :: customerInvoiceGeneral}" th:with="documentAttributes=${DataDictionary.CustomerInvoiceDocument.attributes},readOnly=${readOnly}"></div>
+        
+    <div th:replace="~{fragments/ar/customerInvoiceAddresses :: customerInvoiceAddresses}" th:with="documentAttributes=${DataDictionary.CustomerInvoiceDocument.attributes},readOnly=${readOnly}"></div>
+     
+	<div class="tab-container" th:data-tab-title="Accounting Lines">
+    <h3 th:text="Accounting Lines">Accounting Lines</h3>
+		<sys-java:accountingLines>
+			<sys-java:accountingLineGroup newLinePropertyName="newSourceLine" collectionPropertyName="document.sourceAccountingLines" collectionItemPropertyName="document.sourceAccountingLine" attributeGroupName="source" />
+		</sys-java:accountingLines>
+	</div>
+	    
+	<div th:replace="~{fragments/generalLedgerPendingEntries :: glpe}"></div>
+		            
+	<div th:replace="~{fragments/notes :: notes}"></div> 
+
+	<div th:replace="~{fragments/adHocRecipients :: adHocRecipients}"></div>
+
+	<div th:replace="~{fragments/routeLog :: routeLog}"></div>
+
+	<div th:replace="~{fragments/superUserActions :: superUserActions}"></div>
+
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+
+	<c:set var="extraButtons" value="${KualiForm.extraButtons}" scope="request"/>
+	
+	<div th:replace="~{fragments/documentControls :: documentControls(${documentEntry.transactionalDocument}, ${KualiForm.extraButtons})}"></div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

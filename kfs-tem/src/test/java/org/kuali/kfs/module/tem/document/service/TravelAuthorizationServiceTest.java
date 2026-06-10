@@ -20,10 +20,11 @@ package org.kuali.kfs.module.tem.document.service;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.businessobject.TravelerDetail;
 import org.kuali.kfs.module.tem.document.TravelAuthorizationAmendmentDocument;
@@ -48,7 +49,7 @@ public class TravelAuthorizationServiceTest extends KualiTestBase {
     private TravelerDetail traveler = null;
     private FinancialSystemDocumentHeader documentHeader = null;
 
-    private static final Logger LOG = Logger.getLogger(TravelAuthorizationServiceTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TravelAuthorizationServiceTest.class);
 
     @Override
     @Before

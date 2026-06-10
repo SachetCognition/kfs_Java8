@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="documentControls(transactionalDocument, extraButtons)" id="globalbuttons" class="globalbuttons">
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_save.gif'}"
+           name="methodToCall.save" title="save" alt="save" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canSave')}"/>
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_submit.gif'}"
+           name="methodToCall.route" title="submit" alt="submit" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canRoute')}"/>
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_blanketapp.gif'}"
+           name="methodToCall.blanketApprove" title="blanket approve" alt="blanket approve" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canBlanketApprove')}"/>
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_approve.gif'}"
+           name="methodToCall.approve" title="approve" alt="approve" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canApprove')}"/>
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_disapprove.gif'}"
+           name="methodToCall.disapprove" title="disapprove" alt="disapprove" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canDisapprove')}"/>
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_cancel.gif'}"
+           name="methodToCall.cancel" title="cancel" alt="cancel" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canCancel')}"/>
+    <input type="image" th:src="@{${ConfigProperties['kr.externalizable.images.url']}+'buttonsmall_close.gif'}"
+           name="methodToCall.close" title="close" alt="close" class="globalbuttons"
+           th:if="${KualiForm.documentActions != null and KualiForm.documentActions.containsKey('canClose')}"/>
+    <!-- Extra buttons -->
+    <th:block th:if="${extraButtons != null}" th:each="btn : ${extraButtons}">
+        <input type="image" th:src="${btn.extraButtonSource}" th:name="'methodToCall.' + ${btn.extraButtonProperty}"
+               th:title="${btn.extraButtonAltText}" th:alt="${btn.extraButtonAltText}" class="globalbuttons"/>
+    </th:block>
+</div>
+</body>
+</html>

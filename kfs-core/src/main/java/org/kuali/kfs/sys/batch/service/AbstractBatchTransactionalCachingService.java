@@ -23,6 +23,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.rice.krad.bo.BusinessObject;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import org.kuali.rice.krad.util.ObjectUtils;
@@ -34,7 +36,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public abstract class AbstractBatchTransactionalCachingService implements WrappingBatchService {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(AbstractBatchTransactionalCachingService.class);
+    private static Logger LOG = LoggerFactory.getLogger(AbstractBatchTransactionalCachingService.class);
 
     protected Map<String,BusinessObject> referenceValueCache;
     protected Map<Class,PreviousValueReference> previousValueCache;

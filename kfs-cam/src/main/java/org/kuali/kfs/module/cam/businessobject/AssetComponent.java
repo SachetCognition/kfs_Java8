@@ -24,37 +24,74 @@ import java.util.LinkedHashMap;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
 
 /**
  * @author Kuali Nervous System Team (kualidev@oncourse.iu.edu)
  */
+@Entity
+@Table(name = "CM_AST_COMPONENT_T")
 public class AssetComponent extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CPTLAST_NBR")
     private Long capitalAssetNumber;
+    @Id
+    @Column(name = "CACMP_NBR")
     private Integer componentNumber;
+    @Column(name = "CACMP_DESC")
     private String componentDescription;
+    @Column(name = "CACMP_CNTCTPHN_NBR")
     private String componentContactPhoneNumber;
+    @Column(name = "CACMP_COND_CD")
     private String componentConditionCode;
+    @Column(name = "CACMP_EST_LFTM_LMT")
     private Integer componentEstimatedLifetimeLimit;
+    @Column(name = "CACMP_MFR_NM")
     private String componentManufacturerName;
+    @Column(name = "CACMP_MFR_MDL_NBR")
     private String componentManufacturerModelNumber;
+    @Column(name = "CACMP_SERIAL_NBR")
     private String componentSerialNumber;
+    @Column(name = "CACMP_ORG_TAG_NBR")
     private String componentOrganizationTagNumber;
+    @Column(name = "CACMP_ORG_TXT")
     private String componentOrganizationText;
+    @Column(name = "CACMP_REPLACE_AMT")
     private KualiDecimal componentReplacementAmount;
+    @Column(name = "CACMP_VENDOR_NM")
     private String componentVendorName;
+    @Column(name = "CACMP_WRNTY_NBR")
     private String componentWarrantyNumber;
+    @Column(name = "CACMP_WRNTYPHN_NBR")
     private String componentWarrantyPhoneNumber;
+    @Column(name = "CACMP_WRNTYCNTC_NM")
     private String componentWarrantyContactName;
+    @Column(name = "CACMP_WRNTY_PO_NBR")
     private String componentWarrantyPurchaseOrderNumber;
+    @Column(name = "CACMP_WRNTY_BEG_DT")
     private Date componentWarrantyBeginningDate;
+    @Column(name = "CACMP_WRNTY_END_DT")
     private Date componentWarrantyEndingDate;
+    @Column(name = "CACMP_WRNTY_TXT")
     private String componentWarrantyText;
+    @Column(name = "CPTL_AST_GOV_TAG_NBR")
     private String governmentTagNumber;
+    @Column(name = "CPTL_AST_NTL_STOCK_NBR")
     private String nationalStockNumber;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private Asset asset;
+    @Transient
     private AssetCondition componentCondition;
 
     /**

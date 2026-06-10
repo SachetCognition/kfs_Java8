@@ -23,12 +23,13 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.CashManagementDocument;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.KFSKeyConstants;
@@ -37,19 +38,17 @@ import org.kuali.rice.kns.service.DataDictionaryService;
 import org.kuali.rice.kns.web.struts.action.KualiAction;
 import org.kuali.rice.krad.util.UrlFactory;
 
-
 /**
  * Action class for CashManagementStatusForm
  */
 public class CashManagementStatusAction extends KualiAction {
-    private static Logger LOG = Logger.getLogger(CashManagementStatusAction.class);
+    private static Logger LOG = LoggerFactory.getLogger(CashManagementStatusAction.class);
 
     /**
      * Default constructor
      */
     public CashManagementStatusAction() {
     }
-
 
     /**
      * @see org.kuali.rice.kns.web.struts.action.KualiAction#execute(org.apache.struts.action.ActionMapping,
@@ -102,7 +101,6 @@ public class CashManagementStatusAction extends KualiAction {
         return mapping.findForward(KFSConstants.MAPPING_CLOSE);
     }
 
-
     /**
      * Sends the user to the existing CashManagementDocument.
      * 
@@ -121,7 +119,6 @@ public class CashManagementStatusAction extends KualiAction {
         params.setProperty("methodToCall", "docHandler");
         params.setProperty("command", "displayDocSearchView");
         params.setProperty("docId", cform.getControllingDocumentId());
-
 
         String cmActionUrl = UrlFactory.parameterizeUrl(KFSConstants.CASH_MANAGEMENT_DOCUMENT_ACTION, params);
 

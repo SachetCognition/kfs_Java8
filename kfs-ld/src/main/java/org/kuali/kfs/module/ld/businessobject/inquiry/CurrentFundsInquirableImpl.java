@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.Constant;
 import org.kuali.kfs.module.ld.LaborPropertyConstants;
 import org.kuali.kfs.module.ld.businessobject.LedgerBalance;
@@ -35,7 +37,7 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
  * KualiInquirableImpl class, so it covers both the default implementation and customized implemetnation.
  */
 public class CurrentFundsInquirableImpl extends AbstractLaborInquirableImpl {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CurrentFundsInquirableImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CurrentFundsInquirableImpl.class);
 
     /**
      * @see org.kuali.kfs.module.ld.businessobject.inquiry.AbstractLaborInquirableImpl#buildUserDefinedAttributeKeyList()

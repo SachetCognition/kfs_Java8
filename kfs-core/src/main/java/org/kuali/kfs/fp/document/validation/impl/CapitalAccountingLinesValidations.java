@@ -20,6 +20,8 @@ package org.kuali.kfs.fp.document.validation.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.businessobject.CapitalAccountingLines;
 import org.kuali.kfs.fp.businessobject.CapitalAssetInformation;
 import org.kuali.kfs.fp.document.CapitalAccountingLinesDocumentBase;
@@ -37,7 +39,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * validate the capital accounting lines associated with the accounting document for validation
  */
 public class CapitalAccountingLinesValidations extends GenericValidation {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CapitalAccountingLinesValidations.class);
+    private static Logger LOG = LoggerFactory.getLogger(CapitalAccountingLinesValidations.class);
 
     private AccountingDocument accountingDocumentForValidation;
 

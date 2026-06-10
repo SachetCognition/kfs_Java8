@@ -19,6 +19,14 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
@@ -27,10 +35,18 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 /**
  * Business object for American Institute of Certified Public Accountants (AICPA) function
  */
+@Entity
+@Table(name = "CA_AICPA_FUNC_T")
+
 public class AICPAFunction extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "FIN_AICPA_FUNC_CD")
     private String financialAicpaFunctionCode;
+    @Column(name = "FIN_AICPA_FUNC_NM")
     private String financialAicpaFunctionName;
+    @Column(name = "ROW_ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
     /**

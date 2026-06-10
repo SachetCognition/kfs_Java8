@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Chart;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.ChartService;
@@ -47,7 +49,7 @@ import org.springframework.cache.annotation.Cacheable;
  */
 @NonTransactional
 public class ChartServiceImpl implements ChartService {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ChartServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ChartServiceImpl.class);
 
     protected BusinessObjectService businessObjectService;
     protected RoleService roleService;

@@ -20,6 +20,8 @@ package org.kuali.kfs.module.ec.batch;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ec.batch.service.EffortCertificationCreateService;
 import org.kuali.kfs.sys.batch.AbstractStep;
 
@@ -27,7 +29,7 @@ import org.kuali.kfs.sys.batch.AbstractStep;
  * Batch Step that executes the Effort Certification Extract Process.
  */
 public class EffortCertificationCreateStep extends AbstractStep {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(EffortCertificationCreateStep.class);
+    private static Logger LOG = LoggerFactory.getLogger(EffortCertificationCreateStep.class);
 
     private EffortCertificationCreateService effortCertificationCreateService;
 

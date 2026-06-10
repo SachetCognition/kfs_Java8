@@ -24,7 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.TemConstants;
 import org.kuali.kfs.module.tem.TemWorkflowConstants;
 import org.kuali.kfs.module.tem.batch.TaxableRamificationNotificationStep;
@@ -42,7 +43,7 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  * income of travelers/hosts.
  */
 public class TaxableRamificationDocument extends FinancialSystemTransactionalDocumentBase {
-    private final static Logger LOG = Logger.getLogger(TaxableRamificationDocument.class);
+    private final static Logger LOG = LoggerFactory.getLogger(TaxableRamificationDocument.class);
 
     private String arInvoiceDocNumber;
     private Date dueDate;

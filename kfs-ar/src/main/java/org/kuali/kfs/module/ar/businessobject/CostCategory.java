@@ -22,21 +22,42 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.hibernate.type.YesNoConverter;
+
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 /**
  * Defines a Category on Contracts & Grants Invoices.
  */
+@Entity
+@Table(name = "AR_CST_CTGRY_T")
 public class CostCategory extends PersistableBusinessObjectBase implements MutableInactivatable {
 
+    @Id
+    @Column(name = "CTGRY_CD")
     private String categoryCode;
+    @Column(name = "CTGRY_NM")
     private String categoryName;
+    @Column(name = "IND_CST_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean indirectCostIndicator;
+    @Column(name = "ACTV_IND")
+    @Convert(converter = YesNoConverter.class)
     private boolean active;
 
+    @Transient
     private List<CostCategoryObjectCode> objectCodes = new ArrayList<>();
+    @Transient
     private List<CostCategoryObjectLevel> objectLevels = new ArrayList<>();
+    @Transient
     private List<CostCategoryObjectConsolidation> objectConsolidations = new ArrayList<>();
 
     /**

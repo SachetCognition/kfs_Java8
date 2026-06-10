@@ -19,6 +19,15 @@
 
 package org.kuali.kfs.coa.businessobject;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Version;
+import org.hibernate.type.YesNoConverter;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,6 +35,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.SystemOptions;
 import org.kuali.kfs.sys.context.SpringContext;
@@ -40,30 +51,44 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 /**
  * 
  */
+@Entity
+@Table(name = "CA_SUB_OBJ_CD_CHG_DOC_T")
+
 public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implements GlobalBusinessObject, MutableInactivatable {
 
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SubObjectCodeGlobal.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SubObjectCodeGlobal.class);
 
+    @Id
+    @Column(name = "FDOC_NBR")
     protected String documentNumber;
+    @Column(name = "UNIV_FISCAL_YR")
     protected Integer universityFiscalYear;
+    @Column(name = "FIN_COA_CD")
     protected String chartOfAccountsCode;
+    @Column(name = "FIN_SUB_OBJ_CD")
     protected String financialSubObjectCode;
+    @Column(name = "FIN_SUB_OBJ_CD_NM")
     protected String financialSubObjectCodeName;
+    @Column(name = "FIN_SUBOBJ_SHRT_NM")
     protected String financialSubObjectCodeShortName;
+    @Column(name = "FIN_SUBOBJ_ACTV_CD")
+    @Convert(converter = YesNoConverter.class)
     protected boolean active;
 
+    @Transient
     protected DocumentHeader financialDocument;
     protected SystemOptions universityFiscal;
     protected Chart chartOfAccounts;
 
+    @Transient
     protected List<SubObjectCodeGlobalDetail> subObjCdGlobalDetails;
+    @Transient
     protected List<AccountGlobalDetail> accountGlobalDetails;
 
     /**
      * Default constructor.
      */
     public SubObjectCodeGlobal() {
-
 
         subObjCdGlobalDetails = new ArrayList<SubObjectCodeGlobalDetail>();
         accountGlobalDetails = new ArrayList<AccountGlobalDetail>();
@@ -88,7 +113,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.documentNumber = documentNumber;
     }
 
-
     /**
      * Gets the universityFiscalYear attribute.
      * 
@@ -106,7 +130,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     public void setUniversityFiscalYear(Integer universityFiscalYear) {
         this.universityFiscalYear = universityFiscalYear;
     }
-
 
     /**
      * Gets the chartOfAccountsCode attribute.
@@ -126,7 +149,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.chartOfAccountsCode = chartOfAccountsCode;
     }
 
-
     /**
      * Gets the financialSubObjectCode attribute.
      * 
@@ -144,7 +166,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     public void setFinancialSubObjectCode(String financialSubObjectCode) {
         this.financialSubObjectCode = financialSubObjectCode;
     }
-
 
     /**
      * Gets the financialSubObjectCodeName attribute.
@@ -164,7 +185,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.financialSubObjectCodeName = financialSubObjectCodeName;
     }
 
-
     /**
      * Gets the financialSubObjectCodeShortName attribute.
      * 
@@ -183,7 +203,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         this.financialSubObjectCodeShortName = financialSubObjectCdshortNm;
     }
 
-
     /**
      * Gets the active attribute.
      * 
@@ -193,7 +212,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         return active;
     }
 
-
     /**
      * Sets the active attribute.
      * 
@@ -202,7 +220,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     public void setActive(boolean active) {
         this.active = active;
     }
-
 
     /**
      * Gets the financialDocument attribute.
@@ -343,7 +360,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
         old.setActive(update(old.isActive(), active));
     }
 
-
     /**
      * This method returns newvalue iff it is not empty
      * 
@@ -361,7 +377,6 @@ public class SubObjectCodeGlobal extends PersistableBusinessObjectBase implement
     protected boolean update(boolean oldValue, boolean newValue) {
         return newValue;
     }
-
 
     public boolean isPersistable() {
         return true;

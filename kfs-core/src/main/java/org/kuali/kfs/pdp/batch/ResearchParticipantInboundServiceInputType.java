@@ -27,7 +27,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.CollectorBatch;
 import org.kuali.kfs.pdp.PdpConstants;
 import org.kuali.kfs.pdp.PdpKeyConstants;
@@ -61,7 +62,7 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
 // Created for Research Participant Upload
 public class ResearchParticipantInboundServiceInputType extends BatchInputFileTypeBase {
-    private static Logger LOG = Logger.getLogger(ResearchParticipantInboundServiceInputType.class);
+    private static Logger LOG = LoggerFactory.getLogger(ResearchParticipantInboundServiceInputType.class);
     private static final String FILE_NAME_PREFIX = "research_participant_";
     private static final String PAYMENT_HEADER = "Payment Header";
     private static final String ACCOUNTING_LINE = "Accounting Line";

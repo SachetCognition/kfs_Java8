@@ -23,6 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.ConfigureContext;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.kfs.sys.batch.BatchSpringContext;
@@ -40,7 +42,7 @@ import org.springframework.aop.support.AopUtils;
  */
 @ConfigureContext
 public class PurgeTest extends KualiTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PurgeTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(PurgeTest.class);
 
     private UnitTestSqlDao unitTestSqlDao;
     private DateTimeService dateTimeService;

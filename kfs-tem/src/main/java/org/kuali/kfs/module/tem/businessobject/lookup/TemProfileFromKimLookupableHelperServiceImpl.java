@@ -27,7 +27,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.tem.businessobject.TemProfile;
 import org.kuali.kfs.module.tem.businessobject.TemProfileFromKimPerson;
 import org.kuali.kfs.module.tem.service.TemProfileService;
@@ -54,7 +55,7 @@ import org.kuali.rice.krad.util.UrlFactory;
 @SuppressWarnings("rawtypes")
 public class TemProfileFromKimLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
 
-    public static Logger LOG = Logger.getLogger(TemProfileFromKimLookupableHelperServiceImpl.class);
+    public static Logger LOG = LoggerFactory.getLogger(TemProfileFromKimLookupableHelperServiceImpl.class);
 
     private TravelerService travelerService;
     private PersonService personService;
@@ -153,7 +154,6 @@ public class TemProfileFromKimLookupableHelperServiceImpl extends KualiLookupabl
     @Override
     public List<HtmlData> getCustomActionUrls(BusinessObject businessObject, List pkNames) {
         List<HtmlData> htmlDataList = super.getCustomActionUrls(businessObject, pkNames);
-
 
         TemRoleService temRoleService = SpringContext.getBean(TemRoleService.class);
         boolean profileAdmin = temRoleService.isProfileAdmin(GlobalVariables.getUserSession().getPerson(), ((TemProfileFromKimPerson)businessObject).getPrimaryDepartmentCode());

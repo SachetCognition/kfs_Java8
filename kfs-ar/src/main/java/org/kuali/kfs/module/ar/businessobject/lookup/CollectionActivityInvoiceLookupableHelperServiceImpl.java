@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.ar.businessobject.CollectionActivityInvoiceLookup;
 import org.kuali.kfs.module.ar.document.ContractsGrantsInvoiceDocument;
 import org.kuali.kfs.module.ar.document.service.ContractsGrantsCollectionActivityDocumentService;
@@ -49,7 +51,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  * Defines a lookupable helper service class for the Collection Activity Report.
  */
 public class CollectionActivityInvoiceLookupableHelperServiceImpl extends KualiLookupableHelperServiceImpl {
-    private org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(CollectionActivityInvoiceLookupableHelperServiceImpl.class);
+    private Logger LOG = LoggerFactory.getLogger(CollectionActivityInvoiceLookupableHelperServiceImpl.class);
     protected ContractsGrantsCollectionActivityDocumentService contractsGrantsCollectionActivityDocumentService;
     //protected ContractsGrantsInvoiceDocumentService contractsGrantsInvoiceDocumentService;
     protected ContractsGrantsReportHelperService contractsGrantsReportHelperService;

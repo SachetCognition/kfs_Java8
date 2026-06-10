@@ -26,6 +26,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.cg.ContractsAndGrantsBillingAgency;
 import org.kuali.kfs.module.ar.ArPropertyConstants;
 import org.kuali.kfs.module.ar.businessobject.ContractsGrantsAgingOpenInvoicesReport;
@@ -48,7 +50,7 @@ public class ContractsGrantsAgingOpenInvoicesReportServiceImpl implements Contra
     protected ContractsGrantsAgingReportService contractsGrantsAgingReportService;
     protected CustomerInvoiceDocumentService customerInvoiceDocumentService;
     protected DateTimeService dateTimeService;
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ContractsGrantsAgingOpenInvoicesReportServiceImpl.class);
+    protected static Logger LOG = LoggerFactory.getLogger(ContractsGrantsAgingOpenInvoicesReportServiceImpl.class);
     protected KualiModuleService kualiModuleService;
 
     /**

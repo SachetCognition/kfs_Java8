@@ -29,13 +29,14 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.service.OffsetDefinitionService;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.module.tem.TemConstants;
@@ -102,7 +103,7 @@ import org.springframework.beans.BeanUtils;
 @Table(name = "TEM_TRVL_AUTH_DOC_T")
 public class TravelAuthorizationDocument extends TravelDocumentBase implements PaymentSource, AmountTotaling {
 
-    protected static Logger LOG = Logger.getLogger(TravelAuthorizationDocument.class);
+    protected static Logger LOG = LoggerFactory.getLogger(TravelAuthorizationDocument.class);
 
     private KualiDecimal perDiemAdjustment;
 
@@ -196,7 +197,6 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
 
         return doc;
     }
-
 
     /**
      *
@@ -306,7 +306,6 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
         this.cellPhoneNumber = cellPhoneNumber;
     }
 
-
     /**
      * This method gets the traveler's familiarity with the region
      *
@@ -351,7 +350,6 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
         transportationModeDetail.setDocumentNumber(this.documentNumber);
         this.transportationModes.add(transportationModeDetail);
     }
-
 
     /**
      * This method populates the list of transportation modes from an array of strings
@@ -797,8 +795,6 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
         return false;
     }
 
-
-
     /**
      * Determines if the given general ledger pending entry represents an encumbrance entry
      * @param glpe pending entry to test
@@ -1188,7 +1184,6 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
         }
     }
 
-
     /**
      * For reimbursable documents, sets the proper payee type code and profile id after a profile lookup
      * @param document the reimbursable document to update
@@ -1421,9 +1416,6 @@ public class TravelAuthorizationDocument extends TravelDocumentBase implements P
         }
         return KFSConstants.EMPTY_STRING;
     }
-
-
-
 
     public void setHoldRequestorprincipalId(String holdRequestorprincipalId) {
         this.holdRequestorprincipalId = holdRequestorprincipalId;

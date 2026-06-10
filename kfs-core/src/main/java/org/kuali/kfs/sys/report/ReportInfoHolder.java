@@ -21,9 +21,11 @@ package org.kuali.kfs.sys.report;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReportInfoHolder implements ReportInfo {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ReportInfoHolder.class);
+    private static Logger LOG = LoggerFactory.getLogger(ReportInfoHolder.class);
 
     private String reportFileName;
     private String reportsDirectory;

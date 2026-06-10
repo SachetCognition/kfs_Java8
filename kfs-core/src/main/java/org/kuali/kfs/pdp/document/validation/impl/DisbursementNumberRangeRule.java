@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.pdp.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.pdp.PdpKeyConstants;
 import org.kuali.kfs.pdp.PdpPropertyConstants;
 import org.kuali.kfs.pdp.businessobject.DisbursementNumberRange;
@@ -30,7 +32,7 @@ import org.kuali.rice.krad.util.GlobalVariables;
  * Contains Business Rules for the Effort Certification Report Maintenance Document.
  */
 public class DisbursementNumberRangeRule extends MaintenanceDocumentRuleBase {
-    protected static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(DisbursementNumberRangeRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(DisbursementNumberRangeRule.class);
 
     /**
      * @see org.kuali.rice.kns.maintenance.rules.MaintenanceDocumentRuleBase#processCustomRouteDocumentBusinessRules(org.kuali.rice.kns.document.MaintenanceDocument)

@@ -18,6 +18,8 @@
  */
 package org.kuali.kfs.module.bc.document.validation.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Organization;
 import org.kuali.kfs.coa.service.ChartService;
 import org.kuali.kfs.coa.service.OrganizationService;
@@ -33,8 +35,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 public class BudgetConstructionOrganizationReportsRule extends MaintenanceDocumentRuleBase {
 
-    protected static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(BudgetConstructionOrganizationReportsRule.class);
-
+    protected static final Logger LOG = LoggerFactory.getLogger(BudgetConstructionOrganizationReportsRule.class);
 
     protected OrganizationService orgService;
     protected ChartService chartService;
@@ -43,10 +44,8 @@ public class BudgetConstructionOrganizationReportsRule extends MaintenanceDocume
     protected BudgetConstructionOrganizationReports oldBCOrgReports;
     protected BudgetConstructionOrganizationReports newBCOrgReports;
 
-
     public BudgetConstructionOrganizationReportsRule() {
         super();
-
 
         // Pseudo-inject some services.
         //
@@ -101,7 +100,6 @@ public class BudgetConstructionOrganizationReportsRule extends MaintenanceDocume
         
         return true;
     }
-
 
     protected boolean checkSimpleRules(MaintenanceDocument document) {
 

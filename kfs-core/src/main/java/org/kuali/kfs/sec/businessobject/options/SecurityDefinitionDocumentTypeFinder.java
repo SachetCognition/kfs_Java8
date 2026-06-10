@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sec.SecConstants;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
@@ -32,12 +34,11 @@ import org.kuali.rice.kew.api.KewApiServiceLocator;
 import org.kuali.rice.kew.api.doctype.DocumentType;
 import org.kuali.rice.krad.keyvalues.KeyValuesBase;
 
-
 /**
  * Returns list of valid document type names for security definition
  */
 public class SecurityDefinitionDocumentTypeFinder extends KeyValuesBase {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(SecurityDefinitionDocumentTypeFinder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SecurityDefinitionDocumentTypeFinder.class);
 
     /**
      * @see org.kuali.keyvalues.KeyValuesFinder#getKeyValues()

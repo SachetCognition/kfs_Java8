@@ -23,21 +23,41 @@ import java.sql.Date;
 import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  *  This class represents customer credit card information
  */
+@Entity
+@Table(name = "FP_CUST_CC_INFO_T")
 public class CustomerCreditCardInformation extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "CUST_CCRD_NBR")
     private String customerCreditCardNumber;
+    @Column(name = "CUST_CCRD_HLDR_NM")
     private String customerCreditCardHolderName;
+    @Column(name = "CUST_CCRD_ISSR_NM")
     private String customerCreditCardIssuerName;
+    @Column(name = "FDOC_CCRD_TYPE_CD")
     private String financialDocumentCreditCardTypeCode;
+    @Column(name = "CUST_CCRD_EXP_DT")
     private Date customerCreditCardExpenditureDate;
+    @Column(name = "CUST_NBR")
     private String customerNumber;
+    @Column(name = "FIDOC_CCRD_VNDR_NBR")
     private String financialDocumentCreditCardVendorNumber;
+    @Column(name = "CUST_CCRD_NTE_TXT")
     private String customerCreditCardInformationNoteText;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FIDOC_CCRD_VNDR_NBR", insertable = false, updatable = false)
     private CreditCardVendor financialDocumentCreditCardVendor;
 
     /**

@@ -27,13 +27,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.fp.document.DisbursementVoucherDocument;
 import org.kuali.kfs.gl.businessobject.Encumbrance;
 import org.kuali.kfs.gl.service.EncumbranceService;
@@ -85,7 +86,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 @Table(name = "TEM_TRVL_REIMB_DOC_T")
 public class TravelReimbursementDocument extends TEMReimbursementDocument implements AmountTotaling {
 
-    public static Logger LOG = Logger.getLogger(TravelReimbursementDocument.class);
+    public static Logger LOG = LoggerFactory.getLogger(TravelReimbursementDocument.class);
     private volatile static IdentityService identityService;
 
     @Column(name = "final_reimb_ind", nullable = false, length = 1)

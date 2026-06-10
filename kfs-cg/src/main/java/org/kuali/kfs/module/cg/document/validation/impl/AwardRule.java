@@ -24,7 +24,8 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.integration.ar.AccountsReceivableModuleBillingService;
 import org.kuali.kfs.module.cg.CGConstants;
 import org.kuali.kfs.module.cg.CGKeyConstants;
@@ -52,7 +53,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
  */
 public class AwardRule extends CGMaintenanceDocumentRuleBase {
 
-    protected static Logger LOG = org.apache.log4j.Logger.getLogger(AwardRule.class);
+    protected static Logger LOG = LoggerFactory.getLogger(AwardRule.class);
     protected Award newAwardCopy;
     protected Award oldAwardCopy;
 
@@ -220,7 +221,6 @@ public class AwardRule extends CGMaintenanceDocumentRuleBase {
 
         return success;
     }
-
 
     /**
      * Overrides the method in MaintenanceDocumentRuleBase to give error message to the user when the user tries to add multiple

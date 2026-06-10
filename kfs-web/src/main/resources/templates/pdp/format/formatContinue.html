@@ -1,0 +1,58 @@
+<!--
+   The Kuali Financial System, a comprehensive financial management system for higher education.
+
+   Copyright 2005-2014 The Kuali Foundation
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>format Continue</title>
+</head>
+<body>
+<div layout:fragment="content">
+<!-- th:with="disbursementNumberRangeAttributes=${DataDictionary.DisbursementNumberRange.attributes}" -->
+<!-- th:with="formatResultAttributes=${DataDictionary.FormatResult.attributes}" -->
+<!-- th:with="customerProfileAttributes=${DataDictionary.CustomerProfile.attributes}" -->
+<!-- th:with="dummyAttributes=${DataDictionary.AttributeReferenceDummy.attributes}" -->
+
+<div class="kfs-page" data-header-title="Format Disbursement Summary" data-doc-title="Format Disbursement Summary">
+<h1>Format Disbursement Summary</h1>
+<form th:action="@{pdp/format}" method="post" enctype="multipart/form-data" id="kualiForm" name="KualiForm">
+<div class="page-body">
+	
+	<table width="100%" border="0"><tr><td>	
+	  <kul:errors keyMatch="${T(org.kuali.rice.krad.util.KRADConstants).GLOBAL_ERRORS}" errorTitle="Errors Found On Page:"/>
+	</td></tr></table>  
+	</br>
+	
+	<div th:replace="~{fragments/pdp/formatSelectedPayments :: formatSelectedPayments}" th:with="disbursementNumberRangeAttributes=${disbursementNumberRangeAttributes},customerProfileAttributes=${customerProfileAttributes},formatResultAttributes=${formatResultAttributes}"></div>
+	<div th:replace="~{fragments/panelFooter :: panelFooter}"></div>
+	<div id="globalbuttons" class="globalbuttons">
+		<input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_continue.gif}"
+			styleClass="globalbuttons" property="methodToCall.continueFormat"
+			title="begin format" alt="continue format" />
+		<input type="image" th:src="@{${ConfigProperties.kr.externalizable.images.url}buttonsmall_cancel.gif}"
+			styleClass="globalbuttons" property="methodToCall.cancel"
+			title="cancel" alt="cancel" />
+	</div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

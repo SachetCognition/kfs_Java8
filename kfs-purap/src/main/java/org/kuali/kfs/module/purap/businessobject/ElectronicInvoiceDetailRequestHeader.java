@@ -29,12 +29,14 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.module.purap.util.ElectronicInvoiceUtils;
 import org.kuali.kfs.module.purap.util.cxml.CxmlExtrinsic;
 import org.kuali.kfs.sys.util.KfsDateUtils;
 
 public class ElectronicInvoiceDetailRequestHeader {
-  private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ElectronicInvoiceDetailRequestHeader.class);
+  private static Logger LOG = LoggerFactory.getLogger(ElectronicInvoiceDetailRequestHeader.class);
   
   private String invoiceId;
   private String purpose = "standard";
@@ -500,8 +502,6 @@ public class ElectronicInvoiceDetailRequestHeader {
       
       return toString.toString();
   }
-
-
 
 }
 

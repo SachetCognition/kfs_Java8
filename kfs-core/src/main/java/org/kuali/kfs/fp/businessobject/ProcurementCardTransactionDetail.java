@@ -31,38 +31,98 @@ import org.kuali.kfs.sys.KFSPropertyConstants;
 import org.kuali.kfs.sys.businessobject.AccountingLineBase;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 /**
  * This class is used to represent a procurement card transaction detail business object.
  */
+@Entity
+@Table(name = "FP_PRCRMNT_TRN_DTL_T")
+@IdClass(ProcurementCardTransactionDetailId.class)
 public class ProcurementCardTransactionDetail extends PersistableBusinessObjectBase {
 
+    @Id
+    @Column(name = "FDOC_NBR")
     private String documentNumber;
+    @Id
+    @Column(name = "FDOC_TRN_LN_NBR")
     private Integer financialDocumentTransactionLineNumber;
+    @Column(name = "TRANSACTION_DT")
     private Date transactionDate;
+    @Column(name = "TRN_REF_NBR")
     private String transactionReferenceNumber;
+    @Column(name = "TRN_POST_DT")
     private Date transactionPostingDate;
+    @Column(name = "TRN_ORIG_CRNCY_CD")
     private String transactionOriginalCurrencyCode;
+    @Column(name = "TRN_BILL_CRNCY_CD")
     private String transactionBillingCurrencyCode;
+    @Column(name = "TRN_ORIG_CRNCY_AMT")
     private KualiDecimal transactionOriginalCurrencyAmount;
+    @Column(name = "TRN_CRNCY_EXCH_RT")
     private BigDecimal transactionCurrencyExchangeRate;
+    @Column(name = "TRN_STLMNT_AMT")
     private KualiDecimal transactionSettlementAmount;
+    @Column(name = "TRN_SALES_TAX_AMT")
     private KualiDecimal transactionSalesTaxAmount;
+    @Column(name = "TRN_TAX_EXMPT_IND")
     private boolean transactionTaxExemptIndicator;
+    @Column(name = "TRN_PURCH_ID_IND")
     private boolean transactionPurchaseIdentifierIndicator;
+    @Column(name = "TRN_PURCH_ID_DESC")
     private String transactionPurchaseIdentifierDescription;
+    @Column(name = "TRN_UNIT_CNTCT_NM")
     private String transactionUnitContactName;
+    @Column(name = "TRN_TRVL_AUTH_CD")
     private String transactionTravelAuthorizationCode;
+    @Column(name = "TRN_PT_OF_SALE_CD")
     private String transactionPointOfSaleCode;
+    @Column(name = "TRN_CYCLE_STRT_DT")
     private Date transactionCycleStartDate;
+    @Column(name = "TRN_CYCLE_END_DT")
     private Date transactionCycleEndDate;
+    @Column(name = "TRN_TOT_AMT")
     private KualiDecimal transactionTotalAmount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumns({
+
+
+        @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false),
+
+
+        @JoinColumn(name = "FDOC_TRN_LN_NBR", insertable = false, updatable = false)
+
+
+    })
     private ProcurementCardVendor procurementCardVendor;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumns({
+        @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR"),
+        @JoinColumn(name = "FDOC_TRN_LN_NBR", referencedColumnName = "FDOC_TRN_LN_NBR")
+    })
     private List sourceAccountingLines;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumns({
+        @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR"),
+        @JoinColumn(name = "FDOC_TRN_LN_NBR", referencedColumnName = "FDOC_TRN_LN_NBR")
+    })
     private List targetAccountingLines;
 
+    @Transient
     protected FormFile targetFile;
     /**
      * Default constructor.

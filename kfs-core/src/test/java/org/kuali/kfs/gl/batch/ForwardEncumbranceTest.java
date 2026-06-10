@@ -21,6 +21,8 @@ package org.kuali.kfs.gl.batch;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.gl.batch.service.EncumbranceClosingOriginEntryGenerationService;
 import org.kuali.kfs.gl.batch.service.impl.OriginEntryOffsetPair;
 import org.kuali.kfs.gl.businessobject.Encumbrance;
@@ -36,7 +38,7 @@ import org.kuali.rice.core.api.util.type.KualiDecimal;
  */
 @ConfigureContext
 public class ForwardEncumbranceTest extends OriginEntryTestBase {
-    private static org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(ForwardEncumbranceTest.class);
+    private static Logger LOG = LoggerFactory.getLogger(ForwardEncumbranceTest.class);
 
     /**
      * An enum with a set of encumbrances to test; here, we've only got one encumbrance, an encumbrance

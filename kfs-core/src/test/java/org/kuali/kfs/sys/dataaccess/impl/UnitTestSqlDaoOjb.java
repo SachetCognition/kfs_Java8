@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.dataaccess.UnitTestSqlDao;
 import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb;
 
@@ -33,7 +35,7 @@ import org.kuali.rice.core.framework.persistence.ojb.dao.PlatformAwareDaoBaseOjb
  * NOTE: Do NOT use this code in production. It is only there for testing purposes.
  */
 public class UnitTestSqlDaoOjb extends PlatformAwareDaoBaseOjb implements UnitTestSqlDao {
-    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UnitTestSqlDaoOjb.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UnitTestSqlDaoOjb.class);
 
     /*
      * (non-Javadoc)
