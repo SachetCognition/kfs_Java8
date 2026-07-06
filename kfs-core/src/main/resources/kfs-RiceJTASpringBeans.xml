@@ -29,9 +29,8 @@
                            http://www.springframework.org/schema/aop
                            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-  <bean id="transactionManagerXAPool" class="org.springframework.transaction.jta.JotmFactoryBean" lazy-init="true">
-    <property name="defaultTimeout" value="${transaction.timeout}"/>
-  </bean>
+  <!-- transactionManagerXAPool (JOTM) removed: JOTM requires javax.rmi.PortableRemoteObject,
+       which was removed from the JDK in Java 11+. Bitronix is the supported JTA manager. -->
   <bean id="btmConfig" factory-method="getConfiguration" class="bitronix.tm.TransactionManagerServices" lazy-init="true" />
 
   <bean id="transactionManagerBitronix" class="bitronix.tm.TransactionManagerServices"

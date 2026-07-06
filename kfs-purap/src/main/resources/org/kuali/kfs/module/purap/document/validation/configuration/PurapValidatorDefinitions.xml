@@ -626,14 +626,7 @@
 
 	<bean id="VendorCreditMemo-totalOverZeroValidation" class="org.kuali.kfs.module.purap.document.validation.impl.VendorCreditMemoTotalOverZeroValidation" abstract="true"/>
 
-	<bean id="VendorCreditMemo-processItemValidation" class="org.kuali.kfs.module.purap.document.validation.impl.VendorCreditMemoProcessItemValidation" abstract="true">
-		<property name="parameterService" ref="parameterService" />
-		
-		<property name="itemQuantityValidation" ref="VendorCreditMemo-itemQuantityValidation" />
-		<property name="itemUnitPriceValidation" ref="VendorCreditMemo-itemUnitPriceValidation" />
-		<property name="itemExtendedPriceValidation" ref="VendorCreditMemo-itemExtendedPriceValidation" />
-		<property name="processAccountValidation" ref="PurchasingAccountsPayable-processAccountValidation" />
-	</bean>
+<!-- VendorCreditMemo-processItemValidation removed: target class org.kuali.kfs.module.purap.document.validation.impl.VendorCreditMemoProcessItemValidation does not exist in the codebase (dangling definition inherited from pre-migration) -->
 
 	<bean id="VendorCreditMemo-accountPercentBetween0And100Validation" class="org.kuali.kfs.module.purap.document.validation.impl.VendorCreditMemoAccountPercentBetween0And100Validation" abstract="true">
 		<property name="dataDictionaryService" ref="dataDictionaryService" />	

@@ -117,7 +117,7 @@
     <bean id="reconciliationDao" parent="platformAwareDao"
         class="org.kuali.kfs.module.cab.dataaccess.impl.ReconciliationDaoOjb" />
 	
-	<bean id="reconciliationService"  parent="reconciliationService-parentBean" singleton="false"/>
+	<bean id="reconciliationService"  parent="reconciliationService-parentBean" scope="prototype"/>
 	<bean id="reconciliationService-parentBean" class="org.kuali.kfs.module.cab.batch.service.impl.ReconciliationServiceImpl" abstract="true">
 		<property name="businessObjectService" ref="businessObjectService" />
 		<property name="reconciliationDao" ref="reconciliationDao" />
@@ -197,24 +197,24 @@
 	<!-- END Pre-Asset tagging extract job beans -->
 	
 <!-- **** Begin of Lookupable beans **** -->
-	<bean id="purApReportLookupableHelperService" singleton="false" parent="purApReportLookupableHelperService-parentBean"/>
-    <bean id="purApReportLookupableHelperService-parentBean" abstract="true"  class="org.kuali.kfs.module.cab.businessobject.lookup.PurApReportLookupableHelperServiceImpl" singleton="false" parent="lookupableHelperService">
+	<bean id="purApReportLookupableHelperService" scope="prototype" parent="purApReportLookupableHelperService-parentBean"/>
+    <bean id="purApReportLookupableHelperService-parentBean" abstract="true"  class="org.kuali.kfs.module.cab.businessobject.lookup.PurApReportLookupableHelperServiceImpl" scope="prototype" parent="lookupableHelperService">
         <property name="purApReportService">
             <ref bean="purchasingAccountsPayableReportService" />
         </property>
     </bean>
-    <bean id="cabPurApReportLookupable" class="org.kuali.rice.kns.lookup.KualiLookupableImpl" singleton="false">
+    <bean id="cabPurApReportLookupable" class="org.kuali.rice.kns.lookup.KualiLookupableImpl" scope="prototype">
         <property name="lookupableHelperService">
             <ref bean="purApReportLookupableHelperService" />
         </property>
     </bean>
     
-   	<bean id="generalLedgerEntryLookupableHelperService" singleton="false"  parent="generalLedgerEntryLookupableHelperService-parentBean"/>
-	<bean id="generalLedgerEntryLookupableHelperService-parentBean" abstract="true"  class="org.kuali.kfs.module.cab.businessobject.lookup.GeneralLedgerEntryLookupableHelperServiceImpl" singleton="false"  parent="lookupableHelperService">
+   	<bean id="generalLedgerEntryLookupableHelperService" scope="prototype"  parent="generalLedgerEntryLookupableHelperService-parentBean"/>
+	<bean id="generalLedgerEntryLookupableHelperService-parentBean" abstract="true"  class="org.kuali.kfs.module.cab.businessobject.lookup.GeneralLedgerEntryLookupableHelperServiceImpl" scope="prototype"  parent="lookupableHelperService">
 		<property name="businessObjectService" ref="businessObjectService" />
     </bean>
 
-    <bean id="cabGlEntryLookupable"  parent="cabGlEntryLookupable-parentBean" singleton="false"/>
+    <bean id="cabGlEntryLookupable"  parent="cabGlEntryLookupable-parentBean" scope="prototype"/>
     <bean id="cabGlEntryLookupable-parentBean" class="org.kuali.rice.kns.lookup.KualiLookupableImpl" abstract="true">
         <property name="lookupableHelperService">
             <ref bean="generalLedgerEntryLookupableHelperService" />

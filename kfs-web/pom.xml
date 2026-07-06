@@ -28,6 +28,28 @@
         </executions>
         <configuration>
           <mainClass>org.kuali.kfs.KfsApplication</mainClass>
+          <excludes>
+            <exclude>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-reload4j</artifactId>
+            </exclude>
+            <exclude>
+              <groupId>ch.qos.reload4j</groupId>
+              <artifactId>reload4j</artifactId>
+            </exclude>
+            <exclude>
+              <groupId>ch.qos.logback</groupId>
+              <artifactId>logback-classic</artifactId>
+            </exclude>
+            <exclude>
+              <groupId>ch.qos.logback</groupId>
+              <artifactId>logback-core</artifactId>
+            </exclude>
+            <exclude>
+              <groupId>org.apache.logging.log4j</groupId>
+              <artifactId>log4j-to-slf4j</artifactId>
+            </exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>

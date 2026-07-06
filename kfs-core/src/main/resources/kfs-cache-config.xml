@@ -36,11 +36,8 @@
 	<bean id="kfs.core.CacheAdminService" class="org.kuali.rice.core.impl.cache.CacheAdminServiceImpl"
 		p:cacheManager-ref="kfs.core.LocalCacheManager" />
 
-	<bean id="kfs.core.LocalCacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-		<property name="cacheManager">
-			<bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="${kfs.ehcache.config.location}" />
-		</property>
-	</bean>
+	<!-- EhCache 2.x Spring support was removed in Spring Framework 6; use an in-memory cache manager -->
+	<bean id="kfs.core.LocalCacheManager" class="org.springframework.cache.concurrent.ConcurrentMapCacheManager" />
 
 	<!-- the distributed cache manager that calls into the CacheAdminService on the ksb -->
 	<bean id="kfs.core.DistributedCacheManager" class="org.kuali.rice.core.impl.cache.DistributedCacheManagerDecorator">

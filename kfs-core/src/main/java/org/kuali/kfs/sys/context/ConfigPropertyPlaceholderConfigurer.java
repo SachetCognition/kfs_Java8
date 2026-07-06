@@ -45,7 +45,9 @@ public class ConfigPropertyPlaceholderConfigurer extends PropertyPlaceholderConf
         // perform standard property resource file loading
         super.loadProperties(props);
         // put the properties into the Rice configuration context
-        ConfigContext.getCurrentContextConfig().putProperties(props);
+        if (ConfigContext.getCurrentContextConfig() != null) {
+            ConfigContext.getCurrentContextConfig().putProperties(props);
+        }
         // load the Rice properties
         if ( LOG.isDebugEnabled() ) {
             Config config = ConfigContext.getCurrentContextConfig();
