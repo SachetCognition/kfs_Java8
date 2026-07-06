@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFS Reverse Engineering Specification</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --fg: #1a1a2e;
+            --accent: #0f3460;
+            --accent2: #16213e;
+            --border: #e0e0e0;
+            --code-bg: #f5f5f5;
+            --nav-bg: #16213e;
+            --nav-fg: #e0e0e0;
+            --nav-active: #e94560;
+            --table-stripe: #f9f9fb;
+            --link: #0f3460;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--fg);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+        .layout { display: flex; min-height: 100vh; }
+        nav {
+            width: 300px;
+            min-width: 300px;
+            background: var(--nav-bg);
+            color: var(--nav-fg);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+        nav .logo {
+            padding: 0 1.5rem 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1rem;
+        }
+        nav a {
+            display: block;
+            padding: 0.4rem 1.5rem;
+            color: var(--nav-fg);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+        }
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.05);
+            border-left-color: var(--nav-active);
+            color: #fff;
+        }
+        nav a.sub { padding-left: 2.5rem; font-size: 0.85rem; opacity: 0.8; }
+        main {
+            flex: 1;
+            padding: 2rem 3rem;
+            max-width: 1100px;
+        }
+        h1 { font-size: 2rem; margin: 0 0 1rem; color: var(--accent2); border-bottom: 3px solid var(--accent); padding-bottom: 0.5rem; }
+        h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; color: var(--accent); border-bottom: 2px solid var(--border); padding-bottom: 0.3rem; }
+        h3 { font-size: 1.25rem; margin: 2rem 0 0.8rem; color: var(--accent2); }
+        h4 { font-size: 1.05rem; margin: 1.5rem 0 0.6rem; }
+        p { margin: 0.6rem 0; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+        th, td { padding: 0.6rem 0.8rem; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+        th { background: var(--accent2); color: #fff; font-weight: 600; }
+        tr:nth-child(even) { background: var(--table-stripe); }
+        code { background: var(--code-bg); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.88em; }
+        pre { background: var(--code-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        blockquote { border-left: 4px solid var(--accent); padding: 0.5rem 1rem; margin: 1rem 0; background: var(--table-stripe); }
+        ul, ol { margin: 0.5rem 0 0.5rem 1.5rem; }
+        li { margin: 0.2rem 0; }
+        a { color: var(--link); }
+        hr { border: none; border-top: 2px solid var(--border); margin: 2rem 0; }
+        .mermaid { margin: 1.5rem 0; text-align: center; }
+        .section { margin-bottom: 3rem; }
+        .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.8rem; font-weight: 600; }
+        .badge-info { background: #e3f2fd; color: #1565c0; }
+        .badge-warn { background: #fff3e0; color: #e65100; }
+        .badge-critical { background: #fce4ec; color: #c62828; }
+        @media (max-width: 900px) {
+            .layout { flex-direction: column; }
+            nav { width: 100%; min-width: unset; height: auto; position: relative; }
+            main { padding: 1rem; }
+        }
+        .print-only { display: none; }
+        @media print {
+            nav { display: none; }
+            .print-only { display: block; }
+            main { max-width: 100%; padding: 0.5cm; }
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+<nav id="sidebar">
+    <div class="logo">KFS Reverse Engineering</div>
+    <a href="#section-1">1. System Overview &amp; Context</a>
+    <a href="#section-1-1" class="sub">1.1 Purpose</a>
+    <a href="#section-1-2" class="sub">1.2 User Personas</a>
+    <a href="#section-1-3" class="sub">1.3 Capability Map</a>
+    <a href="#section-1-4" class="sub">1.4 Context Diagram</a>
+    <a href="#section-2">2. Business Capability &amp; Domain Model</a>
+    <a href="#section-2-1" class="sub">2.1 Per-Module Domain</a>
+    <a href="#section-2-2" class="sub">2.2 Conceptual Data Model</a>
+    <a href="#section-2-3" class="sub">2.3 Composite Keys</a>
+    <a href="#section-2-4" class="sub">2.4 Glossary</a>
+    <a href="#section-3">3. Document Catalog</a>
+    <a href="#section-3-1" class="sub">3.1 Type Hierarchy</a>
+    <a href="#section-3-2" class="sub">3.2 Complete Enumeration</a>
+    <a href="#section-4">4. User Journeys &amp; Process Flows</a>
+    <a href="#section-4-1" class="sub">4.1 Disbursement Voucher</a>
+    <a href="#section-4-2" class="sub">4.2 Requisition to PO</a>
+    <a href="#section-4-3" class="sub">4.3 Travel Authorization</a>
+    <a href="#section-4-4" class="sub">4.4 GL Batch Pipeline</a>
+    <a href="#section-4-5" class="sub">4.5 PDP Payment Flow</a>
+    <a href="#section-5">5. Business Rules Catalog</a>
+    <a href="#section-5-1" class="sub">5.1 Validation Architecture</a>
+    <a href="#section-5-2" class="sub">5.2 Core Validators</a>
+    <a href="#section-5-3" class="sub">5.3 DV Validation Chain</a>
+    <a href="#section-5-4" class="sub">5.4 Parameters</a>
+    <a href="#section-6">6. Batch Processing Spec</a>
+    <a href="#section-6-1" class="sub">6.1 GL Jobs</a>
+    <a href="#section-6-2" class="sub">6.2 PDP Jobs</a>
+    <a href="#section-6-3" class="sub">6.3 Other Module Jobs</a>
+    <a href="#section-7">7. Integration Spec</a>
+    <a href="#section-7-1" class="sub">7.1 Cross-Module Pattern</a>
+    <a href="#section-7-2" class="sub">7.2 External Systems</a>
+    <a href="#section-8">8. Security &amp; Non-Functional</a>
+    <a href="#section-8-1" class="sub">8.1 Authorization Model</a>
+    <a href="#section-8-2" class="sub">8.2 Audit &amp; Notes</a>
+    <a href="#section-8-3" class="sub">8.3 Reporting</a>
+    <a href="#section-9">9. Architecture &amp; Modernization</a>
+    <a href="#section-9-1" class="sub">9.1 As-Is Architecture</a>
+    <a href="#section-9-2" class="sub">9.2 Modernization Mapping</a>
+    <a href="#section-9-3" class="sub">9.3 Critical Preservation</a>
+    <a href="#section-9-4" class="sub">9.4 Open Questions</a>
+</nav>
+<main id="content"></main>
+</div>
+
+<script>
+const MD = `
+# Kuali Financial System (KFS) - Reverse Engineering Specification
+
+> Complete reverse-engineering artifacts for rebuilding KFS on a modern Java stack (Java 21 LTS / Spring Boot 3).
+> Generated from source code analysis of KFS 6.0.1-SNAPSHOT (~1.75M LOC, 5,716 Java files).
+
+---
+
+<h2 id="section-1">1. System Overview & Context</h2>
+
+<h3 id="section-1-1">1.1 Purpose</h3>
+
+KFS (Kuali Financial System) is an open-source, enterprise-grade financial ERP system designed for higher education institutions. It manages the complete financial lifecycle: accounting, procurement, travel & entertainment, capital assets, grants & contracts, labor distribution, effort certification, budgeting, and disbursements.
+
+**Source**: \`pom.xml:44\`, \`DEVELOPER_GUIDE.md:9\`
+
+| Property | Value |
+|---|---|
+| **Version** | \`6.0.1-SNAPSHOT\` |
+| **GroupId** | \`org.kuali.kfs\` |
+| **License** | GNU AGPLv3 |
+| **LOC** | ~1,752,000 |
+| **Java Files** | 5,716 |
+| **XML Config Files** | 2,899 |
+| **JSP Files** | 624 |
+
+<h3 id="section-1-2">1.2 User Personas & Roles</h3>
+
+| Persona | KIM Role(s) | Primary Activities |
+|---|---|---|
+| **Fiscal Officer** | \`KFS-SYS Fiscal Officer\` | Approve accounting documents, manage account budgets |
+| **Account Supervisor** | \`KFS-SYS Account Supervisor\` | Approve documents up the org hierarchy |
+| **Departmental Approver** | \`KFS-COA Organization Reviewer\` | Content/org-level approval routing |
+| **Purchasing Agent** | \`KFS-PURAP Purchasing Processor\` | Create POs, process requisitions |
+| **Accounts Payable Clerk** | \`KFS-PURAP AP Processor\` | Process payment requests, credit memos |
+| **Travel Manager** | \`KFS-TEM Travel Manager\` | Approve travel documents, manage advances |
+| **Traveler** | \`KFS-TEM Traveler\` | Initiate travel authorizations & reimbursements |
+| **Asset Manager** | \`KFS-CAM Processor\` | Manage capital assets, depreciation |
+| **Grant Administrator** | \`KFS-CG Awards Processor\` | Manage awards, proposals, C&G billing |
+| **Budget Analyst** | \`KFS-BC Processor\` | Construct annual budgets, salary settings |
+| **Effort Coordinator** | \`KFS-EC Effort Certification Initiator\` | Create/route effort certification reports |
+| **Labor Distribution Analyst** | \`KFS-LD Processor\` | Process salary/benefit expense transfers |
+| **PDP Administrator** | \`KFS-PDP Processor\` | Manage payment disbursements (ACH/check) |
+| **Tax Manager** | \`KFS-FP Tax Manager\` | Review disbursements for tax compliance |
+| **System Administrator** | \`KFS-SYS Manager\` | Batch scheduling, parameter config, module locking |
+
+<h3 id="section-1-3">1.3 Capability Map by Module</h3>
+
+| Module | Artifact | Namespace | Capabilities |
+|---|---|---|---|
+| **SYS** | \`kfs-core\` | \`KFS-SYS\` | Batch scheduling, parameter management, fiscal year maker, purge, email, module lock/unlock |
+| **COA** | \`kfs-core\` | \`KFS-COA\` | Charts, accounts, sub-accounts, object codes, organizations, project codes |
+| **GL** | \`kfs-core\` | \`KFS-GL\` | Scrubber, poster, nightly out, balance forward, encumbrance forward, collector, enterprise feed |
+| **FP** | \`kfs-core\` | \`KFS-FP\` | DV, JV, BA, TF, DI, GEC, ICA, CR, CCR, AD, AV, PE, IB, ND, SB, PCDO, IAA + year-end variants |
+| **PDP** | \`kfs-core\` | \`KFS-PDP\` | Payment loading, ACH/check extraction, GL transaction extraction |
+| **VND** | \`kfs-core\` | \`KFS-VND\` | Vendor maintenance, vendor matching, EPLS |
+| **SEC** | \`kfs-core\` | \`KFS-SEC\` | Document-level security, field masking |
+| **AR** | \`kfs-ar\` | \`KFS-AR\` | Customer invoicing, payment application, C&G billing, LOC, lockbox |
+| **PURAP** | \`kfs-purap\` | \`KFS-PURAP\` | Requisitions, POs, payment requests, vendor credit memos, e-invoicing |
+| **TEM** | \`kfs-tem\` | \`KFS-TEM\` | Travel auth/amend/close, reimbursement, relocation, entertainment |
+| **CAM** | \`kfs-cam\` | \`KFS-CAM\` | Asset creation, transfer, retirement, depreciation |
+| **BC** | \`kfs-bc\` | \`KFS-BC\` | Annual budget documents, salary setting |
+| **CG** | \`kfs-cg\` | \`KFS-CG\` | Awards, proposals, agencies, CFDA |
+| **KC** | \`kfs-kc\` | \`KFS-KC\` | External research admin integration |
+| **LD** | \`kfs-ld\` | \`KFS-LD\` | Labor ledger, salary/benefit expense transfers |
+| **EC** | \`kfs-ec\` | \`KFS-EC\` | Effort certification |
+
+<h3 id="section-1-4">1.4 Context Diagram</h3>
+
+\`\`\`mermaid
+graph LR
+    subgraph KFS System
+        KFS[Kuali Financial System]
+    end
+    RICE[Kuali Rice 2.1.9] --> KFS
+    KFS --> BANK[Banks / ACH]
+    KFS --> HR[HR / Payroll]
+    KFS --> VENDOR[Procurement Vendors]
+    KFS --> GLCONS[GL / Reporting Consumers]
+    KFS --> IDP[Identity Provider]
+    KFS --> KC[Kuali Coeus]
+    KFS --> CFDA[CFDA.gov]
+    KFS --> EPLS[SAM.gov / EPLS]
+    KFS --> AGENCY[Travel Agencies]
+    KFS --> CCARD[Credit Card Processors]
+    BANK --> KFS
+    HR --> KFS
+    AGENCY --> KFS
+    CCARD --> KFS
+\`\`\`
+
+---
+
+<h2 id="section-2">2. Business Capability & Domain Model</h2>
+
+<h3 id="section-2-1">2.1 Per-Module Domain</h3>
+
+#### COA (Chart of Accounts) - Foundation
+
+| Business Object | Composite Key | Purpose |
+|---|---|---|
+| \`Chart\` | \`chartOfAccountsCode\` | Top-level organizational chart |
+| \`Account\` | \`chartOfAccountsCode\` + \`accountNumber\` | Primary accounting unit |
+| \`SubAccount\` | Chart + Account + \`subAccountNumber\` | Sub-division of an account |
+| \`ObjectCode\` | Year + Chart + \`financialObjectCode\` | Transaction classification |
+| \`SubObjectCode\` | Year + Chart + Account + Obj + \`financialSubObjectCode\` | Further classification |
+| \`Organization\` | Chart + \`organizationCode\` | Administrative unit |
+| \`ProjectCode\` | \`projectCode\` | Cross-account project tracking |
+| \`BalanceType\` | \`financialBalanceTypeCode\` | Actual, budget, encumbrance |
+| \`AccountingPeriod\` | Year + Period | Fiscal periods 01-13 |
+
+#### GL (General Ledger) - Transaction Engine
+
+| Business Object | Key | Purpose |
+|---|---|---|
+| \`GeneralLedgerPendingEntry\` | Sequence number | Unposted transaction |
+| \`Entry\` | Composite (15 fields) | Posted GL entry |
+| \`Balance\` | Year+Chart+Account+SubAcct+Obj+SubObj+BalTyp+ObjTyp | Accumulated balance |
+| \`Encumbrance\` | Composite | Open encumbrance |
+| \`SufficientFundBalances\` | Year+Chart+Account+ObjCode | Sufficient fund checking |
+
+#### PDP (Pre-Disbursement Processor)
+
+| Business Object | Key | Purpose |
+|---|---|---|
+| \`PaymentGroup\` | \`paymentGroupId\` | Payment group for same payee |
+| \`PaymentDetail\` | \`paymentDetailId\` | Individual payment line |
+| \`PayeeAchAccount\` | Generated | ACH bank details |
+| \`AchBank\` | \`bankRoutingNumber\` | Federal Reserve bank data |
+
+<h3 id="section-2-2">2.2 Conceptual Data Model</h3>
+
+\`\`\`mermaid
+erDiagram
+    Chart ||--o{ Account : contains
+    Chart ||--o{ ObjectCode : defines
+    Chart ||--o{ Organization : structures
+    Account ||--o{ SubAccount : subdivides
+    ObjectCode ||--o{ SubObjectCode : refines
+    Account }o--|| SubFundGroup : belongs-to
+    SubFundGroup }o--|| FundGroup : grouped-by
+    Document ||--o{ AccountingLine : contains
+    Document ||--o{ GLPE : generates
+    AccountingLine }o--|| Account : references
+    AccountingLine }o--|| ObjectCode : uses
+    GLPE ||--o{ Entry : posted-to
+    Entry ||--o{ Balance : aggregated-into
+    Customer ||--o{ CustomerInvoice : billed-via
+    Vendor ||--o{ PurchaseOrder : supplies
+    PurchaseOrder ||--o{ PaymentRequest : paid-via
+    PaymentRequest ||--o{ PaymentGroup : sent-to-PDP
+    Award ||--o{ Account : funds
+    Award ||--|| Agency : sponsored-by
+    Asset ||--o{ AssetPayment : funded-by
+\`\`\`
+
+<h3 id="section-2-3">2.3 Key Composite Keys</h3>
+
+| Composite Key | Components | Usage |
+|---|---|---|
+| **FAU** | Chart + Account + Object Code | Every accounting line, GL entry |
+| **Full Accounting String** | FAU + SubAccount + SubObjectCode + ProjectCode + OrgRefId | Complete transaction classification |
+| **GL Entry Key** | 15 fields (Year through SeqNbr) | Unique GL entry identifier |
+| **Balance Key** | Year+Chart+Account+SubAcct+Obj+SubObj+BalTyp+ObjTyp | Aggregated balance record |
+
+<h3 id="section-2-4">2.4 Glossary</h3>
+
+| Term | Definition |
+|---|---|
+| **Document** | Central unit of work; every transaction flows through KEW workflow |
+| **GLPE** | General Ledger Pending Entry; unposted transaction |
+| **PDP** | Pre-Disbursement Processor; payment execution (ACH/checks) |
+| **FAU** | Financial Accounting Unit; Chart + Account + Object Code |
+| **Period 13** | Post-close fiscal year-end adjustment period |
+| **Fiscal Year Maker** | Batch copying config forward to next FY |
+| **KualiDecimal** | BigDecimal wrapper with 2-decimal precision; ALL monetary math |
+| **Scrubber** | GL batch validating entries against COA |
+| **Poster** | GL batch posting valid entries to Balance/Entry/Encumbrance |
+| **Demerger** | GL batch separating valid and error entries |
+| **Collector** | GL batch importing external origin entries |
+| **Enterprise Feed** | GL high-volume external entry import |
+| **Nightly Out** | GL batch extracting approved GLPEs |
+| **Lockbox** | AR batch importing bank payment files |
+| **ICR** | Indirect Cost Recovery; overhead charges |
+| **CFDA** | Catalog of Federal Domestic Assistance |
+| **cXML** | Commerce XML; electronic PO format |
+| **Encumbrance** | Reserved/committed funds not yet spent |
+
+---
+
+<h2 id="section-3">3. Document Catalog</h2>
+
+<h3 id="section-3-1">3.1 Document Type Hierarchy</h3>
+
+\`\`\`mermaid
+graph TD
+    KFS[KFS root] --> FSSM[FSSM - Simple Maintenance]
+    KFS --> KFSM[KFSM - Complex Maintenance]
+    KFS --> KFST[KFST - Transactional]
+    KFS --> FSLO[FSLO - Ledger Only]
+    KFST --> FP[FP - Financial Processing]
+    KFST --> GL[GL - General Ledger]
+    KFST --> ART[AR - Accounts Receivable]
+    KFST --> PURT[PURAP - Purchasing/AP]
+    KFST --> TEMT[TEM - Travel]
+    KFST --> CAMT[CAM - Capital Assets]
+    KFST --> LDT[LD - Labor Distribution]
+    FP --> DV[DV - Disbursement Voucher]
+    FP --> JV[JV - Journal Voucher]
+    FP --> BA[BA - Budget Adjustment]
+    FP --> TF[TF - Transfer of Funds]
+    FP --> DI[DI - Distribution of I and E]
+    FP --> GEC[GEC - General Error Correction]
+    FP --> CR[CR - Cash Receipt]
+    FP --> PE[PE - Pre-Encumbrance]
+    FP --> PCDO[PCDO - Procurement Card]
+\`\`\`
+
+<h3 id="section-3-2">3.2 Complete Document Enumeration</h3>
+
+#### Financial Processing (FP) - 20+ Document Types
+
+| Doc Type | Label | Route Path | GL Entries | Purpose |
+|---|---|---|---|---|
+| **DV** | Disbursement Voucher | Complex (4 splits) | Yes | General-purpose payment |
+| **JV** | Journal Voucher | AdHoc only | Yes | Manual GL entries |
+| **BA** | Budget Adjustment | RequiresFullApproval split | Yes (BB) | Adjust budget allocations |
+| **TF** | Transfer of Funds | Standard accounting | Yes | Move funds between accounts |
+| **DI** | Distribution of I&E | Standard accounting | Yes | Distribute income/expenses |
+| **GEC** | General Error Correction | Standard accounting | Yes | Fix posted GL errors |
+| **ICA** | Indirect Cost Adjustment | Standard accounting | Yes | Adjust ICR entries |
+| **CR** | Cash Receipt | CashManagement node | Yes | Record cash/check deposits |
+| **CCR** | Credit Card Receipt | AdHoc | Yes | Record credit card receipts |
+| **AD** | Advance Deposit | AdHoc | Yes | Record bank deposits |
+| **AV** | Auxiliary Voucher | Standard accounting | Yes | Accruals/adjustments |
+| **PE** | Pre-Encumbrance | Standard accounting | Yes | Reserve funds |
+| **PCDO** | Procurement Card | Complex routing | Yes | Corporate card transactions |
+| **IB** | Internal Billing | Standard accounting | Yes | Inter-dept billing |
+| **SB** | Service Billing | AdHoc | Yes | Simplified billing |
+| **ND** | Non-Check Disbursement | Standard accounting | Yes | Non-check payments |
+| **IAA** | Intra-Account Adjustment | Account only | Yes | Within-account moves |
+| **YEBA** | Year End Budget Adj | Period 13 | Yes | Year-end budget |
+| **YEDI** | Year End Dist of I&E | Period 13 | Yes | Year-end distribution |
+| **YEGE** | Year End Gen Error Corr | Period 13 | Yes | Year-end corrections |
+| **YETF** | Year End Transfer | Period 13 | Yes | Year-end transfers |
+
+#### Purchasing & AP (PURAP) - 10+ Document Types
+
+| Doc Type | Label | Route Path | Purpose |
+|---|---|---|---|
+| **REQS** | Requisition | Org -> Account -> OrgHierarchy -> Commodity -> SoD | Request purchase |
+| **PO** | Purchase Order | ContractMgmt -> Commodity -> Award -> Budget -> VendorCheck | Order to vendor |
+| **POA** | PO Amendment | PO route | Modify existing PO |
+| **ACM** | Contract Manager Assignment | AdHoc | Assign contract manager |
+| **PREQ** | Payment Request | Complex AP route | Process vendor invoices |
+| **CM** | Vendor Credit Memo | Complex AP route | Credit from vendor |
+| **RCVL** | Line Item Receiving | Receiving route | Record received goods |
+| **RCVB** | Bulk Receiving | Receiving route | Bulk goods receipt |
+
+#### AR, TEM, CAM, LD Documents
+
+| Doc Type | Module | Purpose |
+|---|---|---|
+| **INV** | AR | Customer Invoice |
+| **CRM** | AR | Customer Credit Memo |
+| **INVW** | AR | Invoice Writeoff |
+| **CTRL** | AR | Cash Control |
+| **APP** | AR | Payment Application |
+| **CINV** | AR | C&G Invoice |
+| **LCR** | AR | LOC Review |
+| **TA** | TEM | Travel Authorization (12+ splits) |
+| **TAA** | TEM | Travel Auth Amendment |
+| **TR** | TEM | Travel Reimbursement |
+| **ENT** | TEM | Entertainment |
+| **RELO** | TEM | Relocation |
+| **AA** | CAM | Asset Global (Add) |
+| **ARG** | CAM | Asset Retirement Global |
+| **FR** | CAM | Asset Fabrication |
+| **MPAY** | CAM | Asset Payment |
+| **ST** | LD | Salary Expense Transfer |
+| **BT** | LD | Benefit Expense Transfer |
+| **LLJV** | LD | Labor Journal Voucher |
+
+---
+
+<h2 id="section-4">4. User Journeys & Process Flows</h2>
+
+<h3 id="section-4-1">4.1 Disbursement Voucher (DV) Journey</h3>
+
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Initiated
+    Initiated --> Saved : Save
+    Saved --> Enroute : Submit
+    Enroute --> PayeeCheck : Route begins
+    PayeeCheck --> PurchasingReview : payee is PO vendor
+    PayeeCheck --> AccountReview : payee NOT PO vendor
+    PurchasingReview --> AccountReview : Approved
+    AccountReview --> OrgHierarchy : Approved
+    OrgHierarchy --> TaxCheck : Approved
+    TaxCheck --> TaxReview : requires tax review
+    TaxCheck --> AwardReview : no tax review
+    TaxReview --> AwardReview : Approved
+    AwardReview --> TravelCheck : Approved
+    TravelCheck --> TravelReview : requires travel review
+    TravelCheck --> CampusReview : no travel review
+    TravelReview --> CampusReview : Approved
+    CampusReview --> PaymentMethod : Approved
+    PaymentMethod --> SoDCheck : Approved
+    SoDCheck --> SoDReview : requires SoD
+    SoDCheck --> Processed : no SoD needed
+    SoDReview --> Processed : Approved
+    Processed --> [*]
+    Enroute --> Disapproved : Disapproved
+    Enroute --> Cancelled : Cancelled
+\`\`\`
+
+**Split Conditions:**
+- \`PayeeIsPurchaseOrderVendor\`: payee is vendor with active PO
+- \`RequiresTaxReview\`: payee is non-resident alien or tax-related payment reason
+- \`RequiresTravelReview\`: travel-related payment reason
+- \`RequiresSeparationOfDutiesReview\`: initiator is fiscal officer on debit account (param: \`SEPARATION_OF_DUTIES_REQUIRED_IND\`)
+
+<h3 id="section-4-2">4.2 Requisition to Purchase Order</h3>
+
+\`\`\`mermaid
+sequenceDiagram
+    actor Requester
+    actor FiscalOfficer
+    actor OrgReviewer
+    actor ContractMgr
+    participant REQS as Requisition
+    participant PO as Purchase Order
+    participant Vendor
+
+    Requester->>REQS: Initiate
+    Requester->>REQS: Submit
+    REQS->>REQS: Org Content Review
+    REQS->>FiscalOfficer: Account Review
+    FiscalOfficer->>REQS: Approve
+    REQS->>OrgReviewer: Org Hierarchy Review
+    OrgReviewer->>REQS: Approve
+    REQS->>REQS: Commodity Review
+    REQS->>REQS: SoD Check
+    REQS->>REQS: Awaiting Contract Mgr
+    ContractMgr->>PO: Create PO from REQS
+    PO->>PO: Route through PO approval
+    PO->>Vendor: Transmit
+\`\`\`
+
+<h3 id="section-4-3">4.3 Travel Authorization Journey</h3>
+
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> InProcess
+    InProcess --> TravelerReview : Submit
+    TravelerReview --> AccountReview : Approved
+    AccountReview --> OrgReview : Approved
+    OrgReview --> DivisionCheck : Approved
+    DivisionCheck --> DivisionReview : requires division
+    DivisionCheck --> SpecialReqCheck : no division
+    DivisionReview --> SpecialReqCheck : Approved
+    SpecialReqCheck --> SpecialReq : has special request
+    SpecialReqCheck --> RiskCheck : no special request
+    SpecialReq --> RiskCheck : Approved
+    RiskCheck --> RiskMgmt : needs risk mgmt
+    RiskCheck --> IntlCheck : no risk mgmt
+    RiskMgmt --> IntlCheck : Approved
+    IntlCheck --> IntlReview : international travel
+    IntlCheck --> SubFund : domestic
+    IntlReview --> SubFund : Approved
+    SubFund --> Award : Approved
+    Award --> BudgetCheck : Approved
+    BudgetCheck --> Budget : requires budget
+    BudgetCheck --> SoDCheck : no budget
+    Budget --> SoDCheck : Approved
+    SoDCheck --> SoD : requires SoD
+    SoDCheck --> AdvanceCheck : no SoD
+    SoD --> AdvanceCheck : Approved
+    AdvanceCheck --> TravelMgr : advance requested
+    AdvanceCheck --> Open : no advance
+    TravelMgr --> Open : Approved
+    Open --> [*]
+\`\`\`
+
+<h3 id="section-4-4">4.4 GL Batch Pipeline</h3>
+
+\`\`\`mermaid
+sequenceDiagram
+    participant Docs as Approved Documents
+    participant NightlyOut as Nightly Out
+    participant Scrubber
+    participant Demerger
+    participant Poster
+    participant Balance as GL Tables
+
+    Docs->>NightlyOut: Extract GLPEs
+    NightlyOut->>Scrubber: Origin entry files
+    Scrubber->>Scrubber: Validate vs COA
+    Scrubber->>Scrubber: Generate offsets
+    Scrubber->>Demerger: Valid + Error entries
+    Demerger->>Poster: Valid entries only
+    Poster->>Balance: Post to Entry table
+    Poster->>Balance: Update Balance records
+    Poster->>Balance: Update Encumbrance
+\`\`\`
+
+<h3 id="section-4-5">4.5 PDP Payment Flow</h3>
+
+\`\`\`mermaid
+sequenceDiagram
+    participant Source as DV/PREQ Sources
+    participant Load as pdpLoadPayments
+    participant Format as Format Process
+    participant Extract as Extract ACH/Checks
+    participant Bank as Bank
+    participant GLExtract as GL Extract
+
+    Source->>Load: Payment XML files
+    Load->>Format: Validated payments
+    Format->>Format: Group by payee
+    Format->>Extract: Formatted groups
+    Extract->>Bank: ACH/Check files
+    Extract->>GLExtract: Trigger GL extract
+    GLExtract->>GLExtract: Generate GL entries
+\`\`\`
+
+---
+
+<h2 id="section-5">5. Business Rules Catalog</h2>
+
+<h3 id="section-5-1">5.1 Validation Architecture</h3>
+
+Three layers of validation:
+1. **Data Dictionary** (XML): field-level constraints (required, length, patterns)
+2. **Spring CompositeValidation** (XML): document-event chains in \`*Validation.xml\`
+3. **Java Rule Classes**: \`*Rule.java\` with \`processCustom*BusinessRules()\` methods
+
+<h3 id="section-5-2">5.2 Core System Validators</h3>
+
+| Validator | Trigger | Logic |
+|---|---|---|
+| \`AccountingLineAmountPositiveValidation\` | Add/Update line | Amount > 0 |
+| \`DebitsAndCreditsBalanceValidation\` | Route | Debits = Credits |
+| \`RequiredAccountingLinesCountValidation\` | Route | Min required lines both sides |
+| \`OneSidedRequiredAccountingLinesCountValidation\` | Route | Min required lines one side |
+| \`AccountingLineAccessibleValidation\` | Add/Update | User has account permission |
+| \`AccountingLineDataDictionaryValidation\` | Add/Update | Data dictionary constraints |
+| \`AccountingLineValueAllowedValidation\` | Add/Update | Object code/type/sub-type/fund group allowed |
+| \`ReferenceExistsValidation\` | Various | Referenced entity exists |
+| \`BusinessObjectDataDictionaryValidation\` | Various | Full DD validation on BO |
+
+<h3 id="section-5-3">5.3 DV Validation Chain (Route Event)</h3>
+
+| # | Validation | Logic |
+|---|---|---|
+| 1 | Required accounting lines | >= 1 line required |
+| 2 | Document field validation | Contact, check amount, due date |
+| 3 | Bank code validation | Valid bank code |
+| 4 | Payment reason validation | Valid for payee type |
+| 5 | Payee/initiator validation | Payee != initiator |
+| 6 | Vendor information | Active, not debarred |
+| 7 | Payee state code | Valid state |
+| 8 | Employee information | Active employee status |
+| 9 | Wire transfer validation | Wire fields if wire payment |
+| 10 | Foreign draft validation | Draft fields if foreign draft |
+| 11 | Non-employee travel | Travel fields if travel reason |
+| 12 | NRA tax validation | Tax fields if non-resident alien |
+| 13 | Per-line validations | Object code, amount, access |
+
+<h3 id="section-5-4">5.4 Key Parameters Controlling Rules</h3>
+
+| Parameter | Namespace | Default | Controls |
+|---|---|---|---|
+| \`SEPARATION_OF_DUTIES_REQUIRED_IND\` | KFS-FP | Y | SoD routing on DV |
+| \`TAX_REVIEW_REQUIRED_IND\` | KFS-FP | Y | Tax routing on DV |
+| \`TRAVEL_REVIEW_REQUIRED_IND\` | KFS-FP | Y | Travel routing on DV |
+| \`AUTO_APPROVE_IND\` | KFS-PURAP | Y | PREQ auto-approval |
+| \`OBJECT_CODES\` | Per doc | Varies | Allowed object codes |
+| \`OBJECT_TYPES\` | Per doc | Varies | Allowed object types |
+| \`FUND_GROUPS\` | Per doc | Varies | Allowed fund groups |
+| \`SUB_FUND_GROUPS\` | Per doc | Varies | Allowed sub-fund groups |
+
+---
+
+<h2 id="section-6">6. Batch / Scheduled Processing Spec</h2>
+
+<h3 id="section-6-1">6.1 GL Module Jobs (15)</h3>
+
+| Job | Steps | Dependencies | Purpose |
+|---|---|---|---|
+| \`nightlyOutJob\` | NightlyOutStep | None | Extract approved GLPEs |
+| \`scrubberJob\` | CreateBackup, Scrubber, Demerger | nightlyOut | Validate entries |
+| \`posterJob\` | Poster, FileRename | scrubber | Post to GL tables |
+| \`posterBalancingJob\` | PosterBalancing | poster | Verify posting balance |
+| \`collectorJob\` | Collector | None | Import external entries |
+| \`enterpriseFeedJob\` | EnterpriseFeed | None | High-volume external import |
+| \`clearPendingEntriesJob\` | ClearPending | poster | Remove posted GLPEs |
+| \`sufficientFundsAccountUpdateJob\` | SFAccountUpdate | poster | Rebuild SF cache |
+| \`balanceForwardJob\` | BalanceForward, NominalClose | Year-end | Forward balances |
+| \`encumbranceForwardJob\` | EncumbranceForward | Year-end | Forward encumbrances |
+| \`organizationReversionJob\` | OrgReversion | Year-end | Revert unspent balances |
+
+<h3 id="section-6-2">6.2 PDP Module Jobs (12)</h3>
+
+| Job | Purpose |
+|---|---|
+| \`pdpLoadPaymentsJob\` | Import payment XML |
+| \`pdpNightlyLoadPaymentsJob\` | Scheduled overnight loading |
+| \`pdpExtractChecksJob\` | Extract check files |
+| \`pdpExtractAchPaymentsJob\` | Extract ACH files |
+| \`pdpExtractCanceledChecksJob\` | Extract canceled checks |
+| \`pdpExtractGlTransactionsStepJob\` | Generate GL entries from PDP |
+| \`pdpDailyReportJob\` | Daily summary report |
+| \`pdpClearPendingTransactionsJob\` | Clear processed transactions |
+| \`pdpLoadFederalReserveBankDataJob\` | Load bank routing data |
+| \`pdpInactivatePayeeAchAccountsJob\` | Deactivate stale ACH accounts |
+| \`processPdpCancelsAndPaidJob\` | Process cancellation updates |
+| \`pdpSendAchAdviceNotificationsJob\` | Send ACH advice emails |
+
+<h3 id="section-6-3">6.3 Other Module Jobs</h3>
+
+| Module | Key Jobs |
+|---|---|
+| **FP** | dvToPdpExtract, procurementCardLoad/Create/Route/AutoApprove |
+| **AR** | lockbox, customerLoad, contractsGrantsInvoiceBatch, letterOfCredit, invoiceRecurrence |
+| **PURAP** | autoApprovePaymentRequests, electronicInvoice, autoClosePurchaseOrders, extractPdp |
+| **TEM** | agencyDataImport, creditCardDataImport, perDiemLoad, temProfileExport |
+| **CAM** | assetDepreciation, assetYearEndDepreciation, cabExtract |
+| **CG** | cfdaBatch, closeBatch |
+| **LD** | laborScrubber, laborPoster, laborNightlyOut, laborFeed, laborBalanceForward |
+| **EC** | effortCertificationCreate, effortCertificationExtract |
+| **VND** | loadEplsFile, vendorMatch |
+| **BC** | budgetConstructionGenesis, budgetConstructionGLLoad |
+| **SYS** | schedule, purge, fiscalYearMaker, autoDisapprove, dailyEmail, weeklyEmail |
+
+**Total: 147 batch step classes across all modules**
+
+---
+
+<h2 id="section-7">7. Integration Spec</h2>
+
+<h3 id="section-7-1">7.1 Cross-Module Integration Pattern</h3>
+
+KFS uses **Externalizable Business Objects** for loose coupling:
+1. \`kfs-core\` defines interfaces in \`org.kuali.kfs.integration.*\`
+2. Modules map interfaces to implementations via \`externalizableBusinessObjectImplementations\`
+3. Each package has a \`*NoOp\` implementation for when the module is not installed
+
+| Package | Module | Key Interfaces |
+|---|---|---|
+| \`integration.ar\` | AR | \`AccountsReceivableCustomer\`, \`AccountsReceivableModuleBillingService\` |
+| \`integration.cam\` | CAM | \`CapitalAssetManagementModuleService\`, \`CapitalAssetManagementAsset\` |
+| \`integration.cg\` | CG | \`ContractsAndGrantsModuleService\`, \`ContractsAndGrantsAward\` |
+| \`integration.ld\` | LD | \`LaborModuleService\`, \`LaborLedgerEntry\`, \`LaborLedgerBalance\` |
+| \`integration.purap\` | PURAP | \`PurchasingAccountsPayableModuleService\` |
+| \`integration.bc\` | BC | \`BudgetConstructionModuleService\` |
+| \`integration.cab\` | CAB | \`CapitalAssetBuilderModuleService\` |
+| \`integration.ec\` | EC | \`EffortCertificationModuleService\` |
+
+<h3 id="section-7-2">7.2 External System Integrations</h3>
+
+| Integration | Direction | Format | Purpose |
+|---|---|---|---|
+| **ACH Payment** | KFS -> Bank | NACHA format | Electronic payments |
+| **Check Extract** | KFS -> Printer | Check file | Physical checks |
+| **Fed Reserve Data** | Bank -> KFS | Routing data | Bank routing info |
+| **Lockbox Import** | Bank -> KFS | Flat file | Cash receipt import |
+| **Labor Feed** | HR -> KFS | Origin entry format | Labor transactions |
+| **cXML PO** | KFS -> Vendor | cXML | Electronic POs |
+| **Electronic Invoice** | Vendor -> KFS | cXML | E-invoices |
+| **EPLS/SAM.gov** | SAM -> KFS | CSV/XML | Vendor debarment |
+| **CFDA** | CFDA.gov -> KFS | Download | Federal program catalog |
+| **Travel Agency** | Agency -> KFS | Flat file | Travel data |
+| **Credit Card** | Processor -> KFS | Flat file | Card transactions |
+| **Procurement Card** | Processor -> KFS | Flat file | P-card transactions |
+| **GL Enterprise Feed** | External -> KFS | Origin entry | GL entries |
+| **Collector Feed** | External -> KFS | Collector XML | GL entries |
+| **Email (SMTP)** | KFS -> Mail | SMTP | Notifications |
+| **Kuali Coeus** | KC <-> KFS | KSB Web Services | Research admin |
+
+---
+
+<h2 id="section-8">8. Non-Functional & Security Requirements</h2>
+
+<h3 id="section-8-1">8.1 Authorization Model</h3>
+
+#### KIM Role Type Services (30+)
+
+| Role Type Service | Purpose |
+|---|---|
+| \`AccountDerivedRoleTypeServiceImpl\` | Derive account-based roles (FO, supervisor) |
+| \`AccountingOrganizationHierarchyReviewRoleTypeServiceImpl\` | Org hierarchy routing |
+| \`ChartDerivedRoleTypeServiceImpl\` | Chart manager roles |
+| \`OrganizationHierarchyReviewRoleTypeServiceImpl\` | Organization review routing |
+| \`SubAccountReviewRoleTypeServiceImpl\` | Sub-account approval |
+| \`SubFundReviewRoleTypeServiceImpl\` | Sub-fund group approval |
+| \`FinancialSystemUserRoleTypeServiceImpl\` | KFS user role |
+| \`ExcludeSingleActorSeparationOfDutiesRoleTypeService\` | SoD enforcement |
+| \`SecurityAttributeRoleTypeServiceImpl\` | Access security |
+
+#### Document Authorizers (30+)
+
+Control edit modes, actions, and field-level security per document type. Key base class: \`AccountingDocumentAuthorizerBase\`.
+
+#### Access Security (SEC Module)
+
+Attribute-based restrictions on account, org, chart, object code, project code, sub-fund.
+
+<h3 id="section-8-2">8.2 Audit, Notes & Attachments</h3>
+
+- Document notes and attachments via Rice framework
+- KEW workflow audit trail (complete action history)
+- Maintenance doc field-level change tracking
+- GL audit via origin entry backup groups
+
+<h3 id="section-8-3">8.3 Reporting & PDF Outputs</h3>
+
+| Report | Module | Technology |
+|---|---|---|
+| PDP Daily Report | PDP | JasperReports 2.0.4 |
+| GL Scrubber/Poster Report | GL | Text file |
+| Customer Aging | AR | JasperReports |
+| Dunning Letters | AR | JasperReports/iText |
+| C&G Invoice | AR | iText 1.4.8 PDF |
+| Purchase Order | PURAP | PDF |
+| Travel Docs | TEM | PDF |
+
+---
+
+<h2 id="section-9">9. Technical Architecture (As-Is) & Modernization Mapping</h2>
+
+<h3 id="section-9-1">9.1 As-Is Architecture</h3>
+
+\`\`\`mermaid
+graph TD
+    subgraph Presentation
+        JSP[JSP / Tiles]
+        Struts[Struts 1]
+        KNS[Rice KNS/KRAD]
+    end
+    subgraph Service
+        Spring[Spring XML]
+        DocSvc[Document Services]
+        Rules[Business Rules]
+        KEW[Rice KEW Workflow]
+        KIM[Rice KIM Identity]
+    end
+    subgraph Data
+        OJB[Apache OJB]
+        DB[(MySQL / Oracle)]
+    end
+    subgraph Batch
+        Quartz[Quartz Scheduler]
+        Steps[Batch Steps]
+    end
+    JSP --> Struts --> KNS --> Spring
+    Spring --> DocSvc --> KEW
+    Spring --> Rules
+    Spring --> KIM
+    Spring --> OJB --> DB
+    Quartz --> Steps --> Spring
+\`\`\`
+
+<h3 id="section-9-2">9.2 Modernization Mapping</h3>
+
+| # | Legacy | Target | Risks | Must Preserve |
+|---|---|---|---|---|
+| 1 | Struts 1 + JSP/KNS | Spring Boot 3 REST + SPA | 624 JSPs; KNS patterns | URL structure; validations; edit modes |
+| 2 | Apache OJB | JPA/Hibernate or jOOQ | 100+ OJB mappings; composite keys | Entity relationships; field conversions |
+| 3 | Spring XML | Spring Boot auto-config | 50+ XML files; parent-bean patterns | Module registration; prototype scope |
+| 4 | KEW Workflow | Flowable/Camunda BPMN | 60+ doc types; split nodes | Every route node; split conditions; ad-hoc routing |
+| 5 | KIM Identity | Spring Security + OIDC | 30+ role type services; derived roles | Role derivation; delegation; SoD |
+| 6 | KSB | REST / Messaging | Service discovery | Service contracts; transactions |
+| 7 | Quartz Batch | Spring Batch + Scheduler | 147 step classes; job chains | Job sequencing; file formats; error handling |
+| 8 | Java 8 | Java 21 LTS | javax -> jakarta | KualiDecimal; monetary arithmetic |
+| 9 | JasperReports 2.0.4 | JasperReports 6.x / OpenPDF | Template format changes | All report layouts |
+| 10 | MySQL 5.1 / Oracle 11g | PostgreSQL / MySQL 8 | Dual-dialect SQL | All table structures |
+
+<h3 id="section-9-3">9.3 Critical Preservation Requirements</h3>
+
+**GL Posting Logic** - The scrubber/poster pipeline is the heart of KFS. Must preserve: offset generation, ICR entry generation, sufficient funds checking, debit/credit balancing, Period 13 handling.
+
+**Approval Routing** - Every document's approval chain must be preserved: org hierarchy, account delegates, split nodes, separation of duties, ad-hoc routing.
+
+**Money & Rounding (KualiDecimal)** - ALL monetary values use BigDecimal with scale=2, ROUND_HALF_UP. NEVER use double/float for money.
+
+**Fiscal Year & Period Model** - 12 regular periods + Period 13 (year-end). FiscalYearMaker copies config forward.
+
+<h3 id="section-9-4">9.4 Open Questions</h3>
+
+| # | Question |
+|---|---|
+| 1 | Exact cron schedules for each batch trigger (may be institution-overridden) |
+| 2 | Complete ParameterService parameter set (loaded from DB at runtime) |
+| 3 | Stored procedures or DB triggers in Liquibase migrations |
+| 4 | Exact flat file formats for PDP, lockbox, labor feeds |
+| 5 | MySQL vs Oracle DAO SQL differences |
+| 6 | Dead/unused document types in workflow XML |
+| 7 | Complete KIM permission/responsibility definitions (SQL seed data) |
+
+---
+
+**End of Specification**
+
+*Generated from analysis of KFS 6.0.1-SNAPSHOT codebase. Source: \`SachetCognition/kfs_Java8\` (master branch).*
+`;
+
+// Initialize mermaid
+mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
+
+// Custom marked renderer
+const renderer = new marked.Renderer();
+renderer.code = function(obj) {
+    const code = typeof obj === 'object' ? obj.text : obj;
+    const lang = typeof obj === 'object' ? obj.lang : arguments[1];
+    if (lang === 'mermaid') {
+        return '<div class="mermaid">' + code + '</div>';
+    }
+    return '<pre><code>' + code + '</code></pre>';
+};
+
+marked.setOptions({ renderer: renderer, gfm: true, breaks: false });
+
+document.getElementById('content').innerHTML = marked.parse(MD);
+
+// Render mermaid diagrams
+mermaid.run();
+
+// Navigation highlight on scroll
+const sections = document.querySelectorAll('[id^="section-"]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+        if (s.getBoundingClientRect().top <= 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+});
+</script>
+</body>
+</html>
