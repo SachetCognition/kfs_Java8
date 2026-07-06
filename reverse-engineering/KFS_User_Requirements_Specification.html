@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KFS — User Requirements Specification</title>
+<style>
+:root{--bg:#0f172a;--panel:#ffffff;--ink:#1e293b;--muted:#64748b;--accent:#2563eb;--accent2:#7c3aed;--border:#e2e8f0;--code:#f1f5f9;--th:#f8fafc;}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#eef2f7;line-height:1.6}
+header.hero{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;padding:2.4rem 2rem;box-shadow:0 4px 18px rgba(0,0,0,.15)}
+header.hero h1{margin:0;font-size:1.9rem;font-weight:700}
+header.hero p{margin:.5rem 0 0;opacity:.9;font-size:.95rem}
+.wrap{max-width:1100px;margin:2rem auto;padding:0 1.2rem}
+.content{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:2.2rem 2.6rem;box-shadow:0 2px 12px rgba(15,23,42,.06)}
+h1,h2,h3,h4{color:#0f172a;line-height:1.25}
+h2{margin-top:2.2rem;padding-bottom:.35rem;border-bottom:2px solid var(--border)}
+h3{margin-top:1.6rem;color:#1d4ed8}
+h4{margin-top:1.2rem;color:#334155}
+code{background:var(--code);padding:.12rem .38rem;border-radius:5px;font-size:.86em;font-family:"SF Mono",Menlo,Consolas,monospace;color:#b91c1c}
+pre{background:#0f172a;color:#e2e8f0;padding:1rem;border-radius:10px;overflow:auto}
+pre code{background:transparent;color:inherit;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:.5rem .7rem;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:#eff6ff;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;color:#334155}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.footer{max-width:1100px;margin:1rem auto 3rem;padding:0 1.2rem;color:var(--muted);font-size:.82rem;text-align:center}
+ul li{margin:.2rem 0}
+</style></head>
+<body>
+<header class="hero"><h1>KFS — User Requirements Specification</h1><p>Kuali Financial System &middot; code-grounded reverse-engineering artifact &middot; generated 2026-07-06</p></header>
+<div class="wrap"><div class="content"><h1 id="kuali-financial-system-kfs-user-requirements-specification-urs">Kuali Financial System (KFS) — User Requirements Specification (URS)</h1>
+<blockquote>
+<p>Grounded reverse-engineering artifact for rebuilding KFS on a modern Java stack (Java 21 LTS / Spring Boot 3). Every requirement cites the exact source file and line range it was derived from. This URS is a companion to <code>reverse-engineering/KFS_Reverse_Engineering_Specification.md</code> and to <code>reverse-engineering/KFS_E2E_Test_Specifications.md</code>.</p>
+</blockquote>
+<hr />
+<h2 id="document-control">Document Control</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Title</strong></td>
+<td>KFS User Requirements Specification</td>
+</tr>
+<tr>
+<td><strong>Version</strong></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Draft for review</td>
+</tr>
+<tr>
+<td><strong>Author</strong></td>
+<td>Reverse-engineering effort (automated, code-grounded)</td>
+</tr>
+<tr>
+<td><strong>Date</strong></td>
+<td>2026-07-06</td>
+</tr>
+<tr>
+<td><strong>Source system</strong></td>
+<td>Kuali Financial System 6.0.1-SNAPSHOT (<code>pom.xml:43</code>), Java 8, Kuali Rice 2.1.9</td>
+</tr>
+<tr>
+<td><strong>Target system</strong></td>
+<td>Java 21 LTS / Spring Boot 3, JPA, pluggable workflow engine</td>
+</tr>
+<tr>
+<td><strong>Scope</strong></td>
+<td><code>kfs-core</code> (SYS/COA/GL/FP/PDP/VND/SEC) foundational document lifecycle, accounting-line entry &amp; balancing, conditional approval routing, allowed-value enforcement, authorization, batch/GL posting, reporting; representative depth into <code>kfs-ar</code> and <code>kfs-tem</code>.</td>
+</tr>
+<tr>
+<td><strong>Method</strong></td>
+<td>Direct filesystem reading of KEW workflow XML, Spring validation configuration XML, and <code>*Validation</code>/<code>*Document</code>/service Java classes. No reliance on partial index content.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="references-to-source-artifacts">References to source artifacts</h3>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>Artifact</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>Reverse Engineering Specification</td>
+<td><code>reverse-engineering/KFS_Reverse_Engineering_Specification.md</code> (branch <code>devin/1783373876-reverse-engineering-artifacts</code>)</td>
+</tr>
+<tr>
+<td>R2</td>
+<td>Developer Guide</td>
+<td><code>DEVELOPER_GUIDE.md</code></td>
+</tr>
+<tr>
+<td>R3</td>
+<td>FP transactional workflow</td>
+<td><code>kfs-core/src/main/config/workflow/003_kfs_core_module_docs/FinancialProcessingTransactionalDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R4</td>
+<td>Chart maintenance workflow</td>
+<td><code>kfs-core/src/main/config/workflow/003_kfs_core_module_docs/ChartMaintenanceDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R5</td>
+<td>AR transactional workflow</td>
+<td><code>kfs-core/src/main/config/workflow/010_accounts_receivable/AccountsReceivableTransactionalDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R6</td>
+<td>TEM transactional workflow</td>
+<td><code>kfs-core/src/main/config/workflow/120_travel_and_entertainment/TemTransactionalDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R7</td>
+<td>Core validators</td>
+<td><code>kfs-core/src/main/resources/org/kuali/kfs/sys/document/validation/configuration/FinancialSystemValidators.xml</code></td>
+</tr>
+<tr>
+<td>R8</td>
+<td>Debit/credit service</td>
+<td><code>kfs-core/src/main/java/org/kuali/kfs/sys/document/service/impl/DebitDeterminerServiceImpl.java</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-introduction">1. Introduction</h2>
+<h3 id="11-purpose">1.1 Purpose</h3>
+<p>This URS captures <strong>what users need the system to do</strong>, expressed as numbered, traceable requirements derived from the as-is KFS implementation. It is written so that a modernization team can rebuild equivalent behavior on Spring Boot 3 without access to the running legacy system, and so that the companion E2E test specification can verify each requirement.</p>
+<h3 id="12-system-context">1.2 System context</h3>
+<p>KFS is a document-centric financial ERP for higher education. Every financial or maintenance action is a <strong>Document</strong> that is created, saved, routed through <strong>Kuali Enterprise Workflow (KEW)</strong>, approved by roles resolved through <strong>Kuali Identity Management (KIM)</strong>, and — for financial documents — posted to the <strong>General Ledger</strong> as balanced pending entries (GLPEs). The prior reverse-engineering spec (R1) documents the full architecture; this URS focuses on user-facing requirements.</p>
+<h3 id="13-moscow-priority-key">1.3 MoSCoW priority key</h3>
+<ul>
+<li><strong>M</strong> — Must have (core, non-negotiable behavior present in the legacy system)</li>
+<li><strong>S</strong> — Should have (important, strongly implied by the code)</li>
+<li><strong>C</strong> — Could have (config-driven or optional behavior)</li>
+<li><strong>W</strong> — Won't have this release (explicitly out of scope / legacy-only)</li>
+</ul>
+<hr />
+<h2 id="2-user-personas-roles">2. User Personas / Roles</h2>
+<p>Roles are derived from KEW <code>&lt;role&gt;</code> route nodes in the workflow XML (qualifier resolution via <code>org.kuali.rice.krad.workflow.attribute.DataDictionaryQualifierResolver</code>) and from KIM role services.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Persona</th>
+<th>Derived from (role node / source)</th>
+<th>Primary responsibilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td><strong>Initiator / Fiscal Officer</strong></td>
+<td><code>Account</code> role node — R3:317, R3:401, R3:468, R3:819; R4:538</td>
+<td>Create/save documents; first approval at the account/fiscal-officer node</td>
+</tr>
+<tr>
+<td>P2</td>
+<td><strong>Organization Reviewer</strong></td>
+<td><code>AccountingOrganizationHierarchy</code> / <code>OrganizationHierarchy</code> — R3:318, R3:402, R4:509, R4:555</td>
+<td>Org-hierarchy content approval</td>
+</tr>
+<tr>
+<td>P3</td>
+<td><strong>Sub-Fund Reviewer</strong></td>
+<td><code>SubFund</code> role node — R3:319, R3:403, R4:539</td>
+<td>Sub-fund-group-level approval</td>
+</tr>
+<tr>
+<td>P4</td>
+<td><strong>Award / Funds Manager</strong></td>
+<td><code>Award</code> role node — R3:320, R3:404; <code>FundsManager</code> — R5:361, R5:377</td>
+<td>Award/grant approval; C&amp;G invoice approval</td>
+</tr>
+<tr>
+<td>P5</td>
+<td><strong>Chart Manager</strong></td>
+<td><code>Chart</code> role node — R4:541, R4:579</td>
+<td>Final chart-level approval on Account maintenance</td>
+</tr>
+<tr>
+<td>P6</td>
+<td><strong>Traveler</strong></td>
+<td><code>Traveler</code> role node — R6:144, R6:230</td>
+<td>Initiate/attest travel documents</td>
+</tr>
+<tr>
+<td>P7</td>
+<td><strong>Tax / Travel Manager</strong></td>
+<td><code>Travel</code> role node — R6:211; TEM <code>answerSplitNodeQuestion</code> — <code>kfs-tem/.../TravelRelocationDocument.java:301</code></td>
+<td>Tax/travel-manager review of disbursements</td>
+</tr>
+<tr>
+<td>P8</td>
+<td><strong>Approver (generic)</strong></td>
+<td>any <code>&lt;role&gt;</code>/<code>&lt;split&gt;</code> branch requiring action</td>
+<td>Approve/disapprove at an assigned route node</td>
+</tr>
+<tr>
+<td>P9</td>
+<td><strong>Auto-Approve / Electronic-Payment agent</strong></td>
+<td><code>AutoApprove</code> — R3:754; <code>ElectronicPayment</code> — R5:78</td>
+<td>System-routed conditional nodes</td>
+</tr>
+<tr>
+<td>P10</td>
+<td><strong>System / Batch operator</strong></td>
+<td>GL scrubber/poster &amp; batch jobs (R1 §6)</td>
+<td>Run scheduled GL/PDP batch, parameter config</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-user-requirements">3. User Requirements</h2>
+<p>Requirement fields: <strong>Statement</strong>, <strong>Rationale</strong>, <strong>Source</strong> (file:line), <strong>Priority</strong> (MoSCoW), <strong>Preconditions</strong>.</p>
+<h3 id="31-document-lifecycle-initiate-save-route-approve">3.1 Document lifecycle (initiate / save / route / approve)</h3>
+<h4 id="urs-001-initiate-a-financial-document">URS-001 — Initiate a financial document</h4>
+<ul>
+<li><strong>Statement:</strong> A user in an initiator-capable role shall be able to create a new instance of any active document type and receive a system-assigned document number in <code>SAVED</code>/<code>INITIATED</code> state.</li>
+<li><strong>Rationale:</strong> Every workflow <code>routePath</code> begins at <code>&lt;start name="AdHoc" …&gt;</code> — R3:314, R5:50, R6:141.</li>
+<li><strong>Source:</strong> R3:312-314; R6:139-141.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> Document type <code>&lt;active&gt;true&lt;/active&gt;</code> (e.g. R3:306-308).</li>
+</ul>
+<h4 id="urs-002-save-a-document-without-routing">URS-002 — Save a document without routing</h4>
+<ul>
+<li><strong>Statement:</strong> A user shall be able to save an in-progress document; on save the system shall run save-scoped validation only (accounting-line group totals unchanged), not full route validation.</li>
+<li><strong>Rationale:</strong> <code>AccountingDocument-SaveDocument-DefaultValidation</code> contains only <code>accountingLineGroupTotalsUnchangedValidation</code>.</li>
+<li><strong>Source:</strong> R7:202-214.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> Document exists.</li>
+</ul>
+<h4 id="urs-003-route-a-document-for-approval">URS-003 — Route a document for approval</h4>
+<ul>
+<li><strong>Statement:</strong> On submit/route, the system shall execute the route-scoped validation composite (≥1 source line, ≥1 target line, debit/credit balance) and then drive the document through its KEW <code>routePath</code>.</li>
+<li><strong>Rationale:</strong> <code>AccountingDocument-RouteDocument-DefaultValidation</code> requires source ≥1, target ≥1, and debit/credit balance.</li>
+<li><strong>Source:</strong> R7:148-178.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> URS-001 satisfied.</li>
+</ul>
+<h4 id="urs-004-sequential-role-node-approval">URS-004 — Sequential role-node approval</h4>
+<ul>
+<li><strong>Statement:</strong> A routed document shall visit its role nodes in the declared order, requiring approval at each active node before advancing.</li>
+<li><strong>Rationale:</strong> e.g. DI routes <code>Account → AccountingOrganizationHierarchy → SubFund → Award</code>.</li>
+<li><strong>Source:</strong> R3:398-405 (DI); R3:816-823 (TF); R4:535-543 (ACCT).</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> URS-003 satisfied.</li>
+</ul>
+<h4 id="urs-005-blanket-approval">URS-005 — Blanket approval</h4>
+<ul>
+<li><strong>Statement:</strong> An authorized user shall be able to blanket-approve a document, bypassing intermediate node validation.</li>
+<li><strong>Rationale:</strong> <code>AccountingDocument-BlanketApproveDocument-DefaultValidation</code> has an empty validation list (<code>&lt;!-- NO EXTRA VALIDATIONS --&gt;</code>).</li>
+<li><strong>Source:</strong> R7:230-235.</li>
+<li><strong>Priority:</strong> S</li>
+<li><strong>Preconditions:</strong> User holds blanket-approve permission.</li>
+</ul>
+<h4 id="urs-006-exception-actions-disapprove-cancel-recall-ad-hoc">URS-006 — Exception actions (disapprove / cancel / recall / ad-hoc)</h4>
+<ul>
+<li><strong>Statement:</strong> Users shall be able to disapprove, cancel, recall, and ad-hoc-route documents; every route path exposes an <code>AdHoc</code> start node for ad-hoc recipients.</li>
+<li><strong>Rationale:</strong> <code>&lt;start name="AdHoc"/&gt;</code> present on every document type; KEW standard actions.</li>
+<li><strong>Source:</strong> R3:330; R5:64; R6:222.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> Document in an actionable state.</li>
+</ul>
+<h3 id="32-accounting-line-entry-balancing">3.2 Accounting-line entry &amp; balancing</h3>
+<h4 id="urs-010-add-accounting-lines">URS-010 — Add accounting lines</h4>
+<ul>
+<li><strong>Statement:</strong> Users shall be able to add source and target accounting lines; each added line is validated (data dictionary, positive amount, allowed values, accessibility) before acceptance.</li>
+<li><strong>Rationale:</strong> <code>AddAccountingLine</code> composite chains business-object DD validation, positive-amount, allowed-values, and accessibility validations.</li>
+<li><strong>Source:</strong> R7:237-288.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> URS-001.</li>
+</ul>
+<h4 id="urs-011-require-at-least-one-source-and-one-target-line">URS-011 — Require at least one source and one target line</h4>
+<ul>
+<li><strong>Statement:</strong> On route, a standard accounting document shall have at least one source line and at least one target line.</li>
+<li><strong>Rationale:</strong> two <code>requiredAccountingLinesCountValidation</code> beans, each <code>minimumNumber=1</code>, on source and target.</li>
+<li><strong>Source:</strong> R7:151-168.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> URS-003.</li>
+<li><strong>Note:</strong> One-sided documents (e.g. Auxiliary Voucher) instead use <code>oneSidedRequiredAccountingLinesCountValidation</code> with <code>requiredMinimumCount=1</code> — <code>AuxiliaryVoucherValidation.xml:36-43</code>.</li>
+</ul>
+<h4 id="urs-012-debits-must-equal-credits-balance-to-the-cent">URS-012 — Debits must equal credits (balance to the cent)</h4>
+<ul>
+<li><strong>Statement:</strong> On route, the sum of debit GLPE amounts shall equal the sum of credit GLPE amounts; otherwise the route is rejected with error <code>ERROR_DOCUMENT_BALANCE</code>.</li>
+<li><strong>Rationale:</strong> <code>DebitsAndCreditsBalanceValidation</code> generates GLPEs, sums debit vs credit via <code>KualiDecimal</code>, and errors if <code>debitAmount.compareTo(creditAmount) != 0</code>.</li>
+<li><strong>Source:</strong> <code>DebitsAndCreditsBalanceValidation.java:57-81</code> (error key at :78).</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> GLPE generation succeeds (:53-55).</li>
+</ul>
+<h4 id="urs-013-auxiliary-voucher-must-balance-credits-vs-debits">URS-013 — Auxiliary Voucher must balance credits vs debits</h4>
+<ul>
+<li><strong>Statement:</strong> An Auxiliary Voucher shall balance its credit total against its debit total; otherwise error <code>ERROR_DOCUMENT_BALANCE_CONSIDERING_CREDIT_AND_DEBIT_AMOUNTS</code> (with credit/debit params).</li>
+<li><strong>Rationale:</strong> <code>AuxiliaryVoucherAccountingLinesBalanceValidation</code> compares <code>getCreditTotal()</code> vs <code>getDebitTotal()</code>.</li>
+<li><strong>Source:</strong> <code>AuxiliaryVoucherAccountingLinesBalanceValidation.java:41-50</code>.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> AV route.</li>
+</ul>
+<h4 id="urs-014-journal-voucher-amount-rules">URS-014 — Journal Voucher amount rules</h4>
+<ul>
+<li><strong>Statement:</strong> Journal Voucher accounting lines shall be non-zero; when the balance type generates GL offsets, negative amounts are rejected; otherwise negatives are allowed only for budget balance types.</li>
+<li><strong>Rationale:</strong> <code>JournalVoucherAccountingLineAmountValidation</code> errors <code>ERROR_ZERO_OR_NEGATIVE_AMOUNT</code> / <code>ERROR_ZERO_AMOUNT</code> / <code>ERROR_NEGATIVE_NON_BUDGET_AMOUNTS</code> based on balance type; negatives allowed only when balance type ∈ parameter <code>FP_BUDGET_BALANCE_TYPES</code>.</li>
+<li><strong>Source:</strong> <code>JournalVoucherAccountingLineAmountValidation.java:64-116</code> (parameter at :114).</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Controlling parameter:</strong> <code>FP_BUDGET_BALANCE_TYPES</code> (component <code>JournalVoucherDocument</code>).</li>
+<li><strong>Preconditions:</strong> JV route.</li>
+</ul>
+<h4 id="urs-015-correct-debitcredit-determination-by-object-type-section">URS-015 — Correct debit/credit determination by object type &amp; section</h4>
+<ul>
+<li><strong>Statement:</strong> The system shall determine whether an accounting line posts as a debit or credit based on object type (income/liability vs expense/asset) and the source/target section, per the sign rules in <code>DebitDeterminerService</code>.</li>
+<li><strong>Rationale:</strong> <code>isDebitConsideringSection</code>: source line debit = amount not positive for income/liability/expense/asset; target line debit = amount positive. <code>isDebitConsideringSectionAndTypePositiveOnly</code>: source positive → debit iff income/liability; target positive → debit iff expense/asset. Zero amount throws <code>IllegalStateException</code>.</li>
+<li><strong>Source:</strong> <code>DebitDeterminerServiceImpl.java:141-178</code> and <code>:183-219</code> (zero-amount guard at :146-148).</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> Object code resolves to a known object type.</li>
+</ul>
+<h4 id="urs-016-error-correction-sign-handling">URS-016 — Error-correction sign handling</h4>
+<ul>
+<li><strong>Statement:</strong> For error-correction documents the system shall relax the positive-amount rule (negatives permitted) but shall block error-correction where disallowed.</li>
+<li><strong>Rationale:</strong> <code>isDebitConsideringNothingPositiveOnly</code> / <code>…PositiveOnly</code> throw only for non-error-correction documents; <code>disallowErrorCorrectionDocumentCheck</code> throws when error correction is not allowed.</li>
+<li><strong>Source:</strong> <code>DebitDeterminerServiceImpl.java:50-59</code>, <code>:104-113</code>, <code>:190-193</code>.</li>
+<li><strong>Priority:</strong> S</li>
+<li><strong>Preconditions:</strong> Document is an error-correction of a posted document.</li>
+</ul>
+<h3 id="33-conditional-approval-routing">3.3 Conditional approval routing</h3>
+<h4 id="urs-020-budget-adjustment-full-approval-branch">URS-020 — Budget Adjustment full-approval branch</h4>
+<ul>
+<li><strong>Statement:</strong> A Budget Adjustment shall route through the full approval chain (Account → Org Hierarchy → SubFund → Award) only when full approval is required; otherwise it shall bypass to the join.</li>
+<li><strong>Rationale:</strong> <code>RequiresFullApproval</code> split (<code>SimpleBooleanSplitNode</code>) with True branch (roles) / False branch (<code>Do Nothing</code> NoOp). <code>answerSplitNodeQuestion</code> delegates to <code>requiresFullApproval()</code> (returns true if any base-budget amount is non-zero, or multiple accounts/objects, etc.).</li>
+<li><strong>Source:</strong> R3:315-374; <code>BudgetAdjustmentDocument.java:73,920-925,933-949</code>.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> BA routed.</li>
+</ul>
+<h4 id="urs-021-procurement-card-auto-approval-branch">URS-021 — Procurement Card auto-approval branch</h4>
+<ul>
+<li><strong>Statement:</strong> A Procurement Card document shall route to the <code>AutoApprove</code> role node when auto-approval applies, else to a NoOp.</li>
+<li><strong>Rationale:</strong> <code>RequiresAutoApprovalNotification</code> split; <code>answerSplitNodeQuestion</code> returns <code>isAutoApprovedIndicator()</code> for node <code>IS_DOCUMENT_AUTO_APPROVED</code> (= constant value <code>"RequiresAutoApprovalNotification"</code>).</li>
+<li><strong>Source:</strong> R3:730-767; <code>ProcurementCardDocument.java:277-282,299-302</code>; <code>KFSConstants.java:628</code>.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> PCDO routed.</li>
+</ul>
+<h4 id="urs-022-ar-conditional-routing-branches">URS-022 — AR conditional routing branches</h4>
+<ul>
+<li><strong>Statement:</strong> AR documents shall take conditional branches: Cash Control routes to <code>ElectronicPayment</code> only when associated with an electronic payment; Customer Invoice Writeoff routes to <code>Account</code> only when approval required; Customer Invoice routes to <code>Recurrence</code> only when recurring; C&amp;G Invoice routes to <code>FundsManager</code> only when approval required.</li>
+<li><strong>Rationale:</strong> four <code>SimpleBooleanSplitNode</code> splits: <code>AssociatedWithElectronicPayment</code>, <code>RequiresApproval</code>, <code>HasReccurence</code>, <code>RequiresApprovalSplit</code>.</li>
+<li><strong>Source:</strong> R5:52-88 (CTRL), R5:179-211 (INVW), R5:285-326 (INV), R5:359-388 (CINV).</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> respective AR document routed.</li>
+</ul>
+<h4 id="urs-023-travel-authorization-multi-branch-routing-with-status-transitions">URS-023 — Travel Authorization multi-branch routing with status transitions</h4>
+<ul>
+<li><strong>Statement:</strong> A Travel Authorization shall route through up to eight conditional review branches (Traveler, Division, Special Request, Risk Management, International, Budget, Separation of Duties, Advance Requested), advancing <code>nextAppDocStatus</code> at each branch, and each condition shall be answered by the document's <code>answerSplitNodeQuestion</code>.</li>
+<li><strong>Rationale:</strong> TA route path declares splits with explicit <code>nextAppDocStatus</code> (e.g. <code>Awaiting Traveler Review</code> → <code>Awaiting Fiscal Officer Review</code> → … → <code>Open For Reimbursement</code>); TEM <code>answerSplitNodeQuestion</code> maps node names to boolean methods.</li>
+<li><strong>Source:</strong> R6:141-218; <code>TravelRelocationDocument.java:294-311</code>.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> TA routed.</li>
+</ul>
+<h3 id="34-allowed-value-enforcement-parameter-gated">3.4 Allowed-value enforcement (parameter-gated)</h3>
+<h4 id="urs-030-object-code-type-fund-group-sub-fund-group-allowed-value-checks">URS-030 — Object code / type / fund group / sub-fund group allowed-value checks</h4>
+<ul>
+<li><strong>Statement:</strong> On add/route the system shall reject accounting lines whose object code, object type, fund group, or sub-fund group is not permitted for the document type, per configurable parameters.</li>
+<li><strong>Rationale:</strong> <code>accountingLineValueAllowedValidation</code> beans check <code>financialObjectCode</code>, <code>objectCode.financialObjectTypeCode</code>, <code>account.subFundGroup.fundGroupCode</code>, <code>account.subFundGroupCode</code> against parameters <code>OBJECT_CODES</code>, <code>OBJECT_TYPES</code>, <code>FUND_GROUPS</code>, <code>SUB_FUND_GROUPS</code>.</li>
+<li><strong>Source:</strong> R7:96-118 (bundled in the <code>defaultAccountingLineValuesAllowedValidation</code> hutch at R7:138-146).</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Controlling parameters:</strong> <code>OBJECT_CODES</code>, <code>OBJECT_TYPES</code>, <code>FUND_GROUPS</code>, <code>SUB_FUND_GROUPS</code> (plus <code>OBJECT_SUB_TYPES</code>, <code>OBJECT_LEVELS</code>, <code>OBJECT_CONSOLIDATIONS</code> — R7:120-136).</li>
+<li><strong>Preconditions:</strong> Parameters configured per document type.</li>
+</ul>
+<h4 id="urs-031-positive-amount-enforcement-on-line-entry">URS-031 — Positive-amount enforcement on line entry</h4>
+<ul>
+<li><strong>Statement:</strong> When adding/reviewing an accounting line, the amount shall be positive (except where a document permits error-correction negatives).</li>
+<li><strong>Rationale:</strong> <code>accountingLineAmountPositiveValidation</code> with <code>quitOnFail=true</code> in the add/review chains.</li>
+<li><strong>Source:</strong> R7:249-257, R7:308-315.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> URS-010.</li>
+</ul>
+<h3 id="35-authorization-security">3.5 Authorization &amp; security</h3>
+<h4 id="urs-040-role-qualified-node-authorization">URS-040 — Role-qualified node authorization</h4>
+<ul>
+<li><strong>Statement:</strong> Approval at a role node shall be restricted to users whose KIM qualifiers (chart/account/org) match the document, resolved via <code>DataDictionaryQualifierResolver</code>.</li>
+<li><strong>Rationale:</strong> every <code>&lt;role&gt;</code> node names this resolver class.</li>
+<li><strong>Source:</strong> R3:337-339; R4:548-550; R6 role nodes.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> KIM role membership configured.</li>
+</ul>
+<h4 id="urs-041-document-type-authorizers">URS-041 — Document-type authorizers</h4>
+<ul>
+<li><strong>Statement:</strong> Specific document types shall enforce a custom workflow authorizer restricting who can act/edit.</li>
+<li><strong>Rationale:</strong> CINV declares <code>&lt;authorizer&gt;…ContractsGrantsInvoiceWorkflowDocumentAuthorizer&lt;/authorizer&gt;</code>; TEM uses <code>TravelWorkflowDocumentAuthorizer</code>.</li>
+<li><strong>Source:</strong> R5:353-355.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> Authorizer class registered.</li>
+</ul>
+<h4 id="urs-042-field-level-edit-modes-masking">URS-042 — Field-level edit modes &amp; masking</h4>
+<ul>
+<li><strong>Statement:</strong> The UI shall honor state-driven edit modes and access-security field masking so unauthorized users cannot view/edit protected fields.</li>
+<li><strong>Rationale:</strong> KFS-SEC access-security model; PCDO uses an <code>AccountFullEdit</code> role node gating edit scope.</li>
+<li><strong>Source:</strong> R3:726-727,744-748; R1 §8.1.</li>
+<li><strong>Priority:</strong> S</li>
+<li><strong>Preconditions:</strong> Access-security definitions configured.</li>
+</ul>
+<h3 id="36-batch-gl-posting-reporting">3.6 Batch / GL posting &amp; reporting</h3>
+<h4 id="urs-050-gl-pending-entries-generation-posting">URS-050 — GL pending entries generation &amp; posting</h4>
+<ul>
+<li><strong>Statement:</strong> Approved financial documents shall generate balanced GLPEs that the GL batch pipeline (scrubber → poster) posts to the ledger.</li>
+<li><strong>Rationale:</strong> GLPE generation is invoked during balance validation and by the GL batch jobs.</li>
+<li><strong>Source:</strong> <code>DebitsAndCreditsBalanceValidation.java:52-61</code>; R1 §6.1.</li>
+<li><strong>Priority:</strong> M</li>
+<li><strong>Preconditions:</strong> Document approved/processed.</li>
+</ul>
+<h4 id="urs-051-reporting-pdf-output">URS-051 — Reporting / PDF output</h4>
+<ul>
+<li><strong>Statement:</strong> The system shall produce PDF outputs (e.g. invoices, disbursement documents) via the reporting subsystem.</li>
+<li><strong>Rationale:</strong> JasperReports/iText reporting (R1 §8.5).</li>
+<li><strong>Source:</strong> R1 §8.5.</li>
+<li><strong>Priority:</strong> S</li>
+<li><strong>Preconditions:</strong> Report templates available.</li>
+</ul>
+<hr />
+<h2 id="4-traceability-urs-source-target-state-component">4. Traceability: URS → Source → Target-state component</h2>
+<table>
+<thead>
+<tr>
+<th>URS</th>
+<th>Source file(s) (file:line)</th>
+<th>Target-state component (Spring Boot 3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URS-001..006</td>
+<td>R3:312-330; R7:202-235</td>
+<td>Document lifecycle service + workflow engine adapter</td>
+</tr>
+<tr>
+<td>URS-010..016</td>
+<td>R7:148-388; <code>DebitsAndCreditsBalanceValidation.java</code>; <code>AuxiliaryVoucherAccountingLinesBalanceValidation.java</code>; <code>JournalVoucherAccountingLineAmountValidation.java</code>; <code>DebitDeterminerServiceImpl.java</code></td>
+<td><code>AccountingLineValidationService</code>, <code>DebitDeterminerService</code> (domain service), <code>BigDecimal</code>/money type</td>
+</tr>
+<tr>
+<td>URS-020..023</td>
+<td>R3:315-374,730-767; R5:52-388; R6:141-218; <code>BudgetAdjustmentDocument.java</code>, <code>ProcurementCardDocument.java</code>, <code>TravelRelocationDocument.java</code></td>
+<td>Conditional routing predicates (<code>RoutingDecisionService</code>) + workflow definitions</td>
+</tr>
+<tr>
+<td>URS-030..031</td>
+<td>R7:96-146,249-315</td>
+<td><code>AllowedValueService</code> reading config parameters (externalized config)</td>
+</tr>
+<tr>
+<td>URS-040..042</td>
+<td>R3:337-339; R5:353-355; R4:548-550</td>
+<td>Spring Security + method-level authorization + field masking aspect</td>
+</tr>
+<tr>
+<td>URS-050..051</td>
+<td><code>DebitsAndCreditsBalanceValidation.java:52-61</code>; R1 §6,§8.5</td>
+<td>Batch (Spring Batch) GL pipeline + reporting service</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-open-questions">5. OPEN QUESTIONS</h2>
+<ul>
+<li><strong>OQ-1 (JIRA sub-board):</strong> <code>Sach_Sales</code> (key <code>SS</code>) is a team-managed <em>business</em> project whose issue types are Workstream/Task/Sub-task (no Epic/Story/Test) and the JIRA MCP integration cannot create new projects/boards. The requested "new Scrum/Kanban board backed by a new project" cannot be created programmatically; a Workstream container inside <code>SS</code> is used as the sub-board equivalent unless a new empty project key is supplied.</li>
+<li><strong>OQ-2 (Confluence):</strong> Whether these artifacts should also be published to Confluence (as in the prior task) was left unanswered.</li>
+<li><strong>OQ-3 (PCDO split naming):</strong> The workflow split node is named <code>RequiresAutoApprovalNotification</code> while <code>ProcurementCardDocument.answerSplitNodeQuestion</code> matches constant <code>IS_DOCUMENT_AUTO_APPROVED</code>; these resolve to the same string (<code>KFSConstants.java:628</code>) but the naming is inconsistent and should be normalized on rebuild.</li>
+<li><strong>OQ-4 (auto-approval predicate details):</strong> <code>BudgetAdjustmentDocument.requiresFullApproval()</code> documents five auto-approval conditions in its Javadoc (<code>:927-932</code>); the full boolean beyond the base-amount short-circuit (<code>:944-946</code>) should be re-validated against business intent during rebuild.</li>
+</ul></div></div>
+<div class="footer">Generated from KFS_User_Requirements_Specification.md &middot; every requirement/criterion cites source file:line</div>
+</body></html>
