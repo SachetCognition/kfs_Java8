@@ -29,6 +29,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -55,8 +56,7 @@ public class ElectronicInvoiceRejectReason extends PersistableBusinessObjectBase
   private String invoiceRejectReasonTypeCode;
   @Column(name = "INV_RJT_REAS_DESC")
   private String invoiceRejectReasonDescription;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "INV_RJT_ID", insertable = false, updatable = false)
+  @Transient
   private ElectronicInvoiceRejectDocument electronicInvoiceRejectDocument;
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "INV_RJT_REAS_TYP_CD", insertable = false, updatable = false)

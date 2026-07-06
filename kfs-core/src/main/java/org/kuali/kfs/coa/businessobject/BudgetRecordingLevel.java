@@ -28,9 +28,16 @@ import org.hibernate.type.YesNoConverter;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 @Entity
 @Table(name = "CA_BDGT_REC_LVL_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "BDGT_REC_LVL_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "BDGT_REC_LVL_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 
 public class BudgetRecordingLevel extends KualiCodeBase implements MutableInactivatable {
 

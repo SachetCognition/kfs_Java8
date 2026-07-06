@@ -25,12 +25,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * This class is used to represent a tax income class code business object.
  */
 @Entity
 @Table(name = "FP_INC_CLS_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "INC_CLS_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "INC_CLS_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 public class TaxIncomeClassCode extends KualiCodeBase implements MutableInactivatable {
 
     /**

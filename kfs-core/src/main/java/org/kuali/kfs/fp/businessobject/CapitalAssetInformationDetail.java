@@ -87,10 +87,11 @@ public class CapitalAssetInformationDetail extends PersistableBusinessObjectBase
 
         @JoinColumn(name = "CAMPUS_CD", insertable = false, updatable = false),
 
-        @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false)
+        @JoinColumn(name = "BLDG_CD", insertable = false, updatable = false),
+
+        @JoinColumn(name = "BLDG_ROOM_NBR", insertable = false, updatable = false)
 
     })
-    @JoinColumn(name = "BLDG_ROOM_NBR", insertable = false, updatable = false)
     protected Room room;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)

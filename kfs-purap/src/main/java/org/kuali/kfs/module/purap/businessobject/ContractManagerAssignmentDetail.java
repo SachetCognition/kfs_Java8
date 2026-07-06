@@ -37,6 +37,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -65,14 +66,12 @@ public class ContractManagerAssignmentDetail extends PersistableBusinessObjectBa
     private String deliveryCampusCode;
     private String vendorName;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REQS_ID", insertable = false, updatable = false)
+    @Transient
     private RequisitionDocument requisition;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTR_MGR_CD", insertable = false, updatable = false)
     private ContractManager contractManager;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+    @Transient
     private ContractManagerAssignmentDocument contractManagerAssignmentDocument;
     
     private String createDate;

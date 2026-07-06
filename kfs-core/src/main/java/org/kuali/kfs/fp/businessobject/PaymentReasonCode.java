@@ -25,12 +25,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * This class is used to represent a payment reason code.
  */
 @Entity
 @Table(name = "FP_DV_PMT_REAS_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "DV_PMT_REAS_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "DV_PMT_REAS_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "DV_PMT_REAS_ACTV_IND"))
+})
 public class PaymentReasonCode extends KualiCodeBase implements MutableInactivatable {
 
     @Column(name = "DV_PMT_REAS_DESC")

@@ -28,9 +28,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 @Entity
 @Table(name = "PDP_DISB_TYP_CD_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "DISB_TYP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "DISB_TYP_DESC"))
+})
 public class DisbursementType extends KualiCodeBase {
     
     public DisbursementType() {

@@ -37,6 +37,7 @@ import org.kuali.rice.location.framework.country.CountryEbo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -102,8 +103,7 @@ public class PurchaseOrderVendorQuote extends PersistableBusinessObjectBase {
     private String vendorAddressInternationalProvinceName;
     private boolean isTransmitPrintDisplayed = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+    @Transient
     private PurchaseOrderDocument purchaseOrder;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PO_QT_STAT_CD", insertable = false, updatable = false)

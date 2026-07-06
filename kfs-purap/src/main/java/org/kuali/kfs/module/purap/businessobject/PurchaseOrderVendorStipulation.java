@@ -27,6 +27,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -57,8 +58,7 @@ public class PurchaseOrderVendorStipulation extends PersistableBusinessObjectBas
     @Column(name = "VNDR_STPLTN_CRTE_DT")
     private Date vendorStipulationCreateDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+    @Transient
     private PurchaseOrderDocument purchaseOrder;
 
     public PurchaseOrderVendorStipulation() {

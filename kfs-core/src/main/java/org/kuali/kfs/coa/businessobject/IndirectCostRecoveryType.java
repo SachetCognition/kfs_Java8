@@ -32,12 +32,19 @@ import java.util.List;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * This class...
  */
 @Entity
 @Table(name = "CA_ICR_TYPE_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "ACCT_ICR_TYP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "ACCT_ICR_TYP_DESC")),
+    @AttributeOverride(name = "active", column = @Column(name = "ACCT_ICR_TYP_ACTV_IND"))
+})
 
 public class IndirectCostRecoveryType extends KualiCodeBase implements MutableInactivatable {
     

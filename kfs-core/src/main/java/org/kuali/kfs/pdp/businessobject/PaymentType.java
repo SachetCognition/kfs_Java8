@@ -24,6 +24,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * 
@@ -31,6 +33,10 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "PDP_PMT_TYP_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "PMT_TYP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "PMT_TYP_DESC"))
+})
 public class PaymentType extends KualiCodeBase {
     
     public PaymentType() {

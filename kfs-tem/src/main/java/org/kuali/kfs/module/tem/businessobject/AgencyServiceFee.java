@@ -30,9 +30,16 @@ import org.kuali.kfs.coa.businessobject.ObjectCode;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 @Entity
 @Table(name = "TEM_AGENCY_SRVC_FEE_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "DIST_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "DIST_DESC")),
+    @AttributeOverride(name = "active", column = @Column(name = "ACTV_IND"))
+})
 public class AgencyServiceFee extends KualiCodeBase implements MutableInactivatable {
 
     private String creditChartCode;

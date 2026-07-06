@@ -22,6 +22,7 @@ import org.kuali.kfs.module.purap.document.CorrectionReceivingDocument;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,8 +40,7 @@ import jakarta.persistence.Version;
 @Table(name = "PUR_RCVNG_COR_ITM_T")
 public class CorrectionReceivingItem extends ReceivingItemBase {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+	@Transient
 	private CorrectionReceivingDocument correctionReceivingDocument;
     
 	/**

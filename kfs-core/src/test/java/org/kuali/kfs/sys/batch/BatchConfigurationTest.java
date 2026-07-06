@@ -101,14 +101,14 @@ public class BatchConfigurationTest extends KualiTestBase {
         for (JobDescriptor jobDescriptor : SpringContext.getBeansOfType(JobDescriptor.class).values()) {
             boolean isRegistered = false;
             for (ModuleService module : moduleServices) {
-                if (module.getModuleConfiguration().getJobNames().contains(jobDescriptor.getJobDetail().getName())) {
+                if (module.getModuleConfiguration().getJobNames().contains(jobDescriptor.getJobDetail().getKey().getName())) {
                     isRegistered = true;
                     break;
                 }
             }
             if (!isRegistered) {
-                unregisteredJobNames.add(jobDescriptor.getJobDetail().getName());
-                errorMessage.append("\n\t").append(jobDescriptor.getJobDetail().getFullName());
+                unregisteredJobNames.add(jobDescriptor.getJobDetail().getKey().getName());
+                errorMessage.append("\n\t").append(jobDescriptor.getJobDetail().getKey().toString());
             }
         }
         assertTrue(errorMessage.toString(), unregisteredJobNames.isEmpty());
@@ -123,14 +123,14 @@ public class BatchConfigurationTest extends KualiTestBase {
         for (TriggerDescriptor triggerDescriptor : SpringContext.getBeansOfType(TriggerDescriptor.class).values()) {
             boolean isRegistered = false;
             for (ModuleService module : moduleServices) {
-                if (module.getModuleConfiguration().getTriggerNames().contains(triggerDescriptor.getTrigger().getName())) {
+                if (module.getModuleConfiguration().getTriggerNames().contains(triggerDescriptor.getTrigger().getKey().getName())) {
                     isRegistered = true;
                     break;
                 }
             }
             if (!isRegistered) {
-                unregisteredTriggerNames.add(triggerDescriptor.getTrigger().getName());
-                errorMessage.append("\n\t").append(triggerDescriptor.getTrigger().getFullName());
+                unregisteredTriggerNames.add(triggerDescriptor.getTrigger().getKey().getName());
+                errorMessage.append("\n\t").append(triggerDescriptor.getTrigger().getKey().toString());
             }
         }
         assertTrue(errorMessage.toString(), unregisteredTriggerNames.isEmpty());
@@ -149,7 +149,7 @@ public class BatchConfigurationTest extends KualiTestBase {
                 }
                 catch (NoSuchBeanDefinitionException e) {
                     nonExistentDependencies.add(dependencyJobName);
-                    errorMessage.append("\n\t").append(jobDescriptor.getJobDetail().getFullName()).append("depends on: ").append(dependencyJobName);
+                    errorMessage.append("\n\t").append(jobDescriptor.getJobDetail().getKey().toString()).append("depends on: ").append(dependencyJobName);
                 }
             }
         }

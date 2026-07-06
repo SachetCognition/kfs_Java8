@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -43,8 +44,7 @@ public class PrimaryDestination extends PersistableBusinessObjectBase implements
     @Column(name="id",nullable=false)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name="REGION_CD")
+    @Transient
     private TemRegion region;
 
     @Column(name="REGION_CD",length=100, nullable=false)

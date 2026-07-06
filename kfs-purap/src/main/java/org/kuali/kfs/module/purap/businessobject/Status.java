@@ -24,13 +24,21 @@ import java.util.LinkedHashMap;
 
 import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+
 /**
  * Status Business Object.
  */
+@MappedSuperclass
 public class Status extends PersistableBusinessObjectBase implements Comparator<Status>{
 
+    @Id
     private String statusCode;
+    @Transient
     private String statusDescription;
+    @Transient
     protected String ojbConcreteClass; // attribute needed for OJB polymorphism - do not alter!
 
     /**

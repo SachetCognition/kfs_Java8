@@ -25,12 +25,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * This class is used to represent a travel expense type code business object.
  */
 @Entity
 @Table(name = "FP_DV_EXP_TYP_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "DV_EXP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "DV_EXP_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 public class TravelExpenseTypeCode extends KualiCodeBase implements MutableInactivatable {
     boolean prepaidExpense;
 
