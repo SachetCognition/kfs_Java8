@@ -1,12 +1,15 @@
 #!/bin/bash
 # Extends KFS demo fiscal-year reference data forward from the last seeded year (2017)
 # so the application works with the current system date.
-# Usage: ./extend-fiscal-years.sh [db] [last_year]
+# Usage: [DB_USER=... DB_PASS=... DB_HOST=...] ./extend-fiscal-years.sh [db] [last_year]
 set -e
 DB="${1:-kuldev}"
-SRC_YEAR=2017
 END_YEAR="${2:-2028}"
-MYSQL="mysql -ukuldev -pkuldev -h127.0.0.1 -N $DB"
+DB_USER="${DB_USER:-kuldev}"
+DB_HOST="${DB_HOST:-127.0.0.1}"
+export MYSQL_PWD="${DB_PASS:-kuldev}"
+MYSQL="mysql -u$DB_USER -h$DB_HOST -N $DB"
+SRC_YEAR=2017
 
 TABLES="ar_org_acctgdflt_t ar_sys_info_t ca_icr_auto_entr_t ca_icr_rate_t ca_object_code_t ca_org_reversion_t ca_org_rvrsn_dtl_t ca_sub_object_cd_t cm_cptlast_obj_t fp_dv_diem_t fp_fscl_yr_ctrl_t fs_option_t fs_wire_chrg_t gl_offset_defn_t ld_benefits_calc_t ld_labor_obj_t ld_lbr_obj_bene_t"
 
