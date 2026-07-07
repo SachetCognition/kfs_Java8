@@ -28,6 +28,8 @@ import org.hibernate.type.YesNoConverter;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 
 /**
@@ -35,6 +37,11 @@ import org.kuali.rice.krad.bo.KualiCodeBase;
  */
 @Entity
 @Table(name = "CA_BDGT_AGGR_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "FOBJ_BDGT_AGGR_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "FOBJ_BDGT_AGGR_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 
 public class BudgetAggregationCode extends KualiCodeBase implements MutableInactivatable {
 

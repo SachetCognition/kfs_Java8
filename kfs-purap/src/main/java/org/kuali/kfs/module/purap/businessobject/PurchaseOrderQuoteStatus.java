@@ -21,6 +21,8 @@ package org.kuali.kfs.module.purap.businessobject;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -37,6 +39,9 @@ import org.hibernate.type.YesNoConverter;
  */
 @Entity
 @Table(name = "PUR_PO_QT_STAT_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "statusCode", column = @Column(name = "PO_QT_STAT_CD"))
+})
 public class PurchaseOrderQuoteStatus extends Status implements MutableInactivatable{
 
     @Column(name = "DOBJ_MAINT_CD_ACTV_IND")

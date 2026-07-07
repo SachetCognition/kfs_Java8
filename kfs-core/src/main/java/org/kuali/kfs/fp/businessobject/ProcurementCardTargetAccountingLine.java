@@ -22,8 +22,6 @@ import org.kuali.kfs.sys.businessobject.TargetAccountingLine;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -35,9 +33,7 @@ import jakarta.persistence.Transient;
  */
 @Entity
 @Table(name = "FP_PRCRMNT_ACCT_LINES_T")
-@IdClass(ProcurementCardTargetAccountingLineId.class)
 public class ProcurementCardTargetAccountingLine extends TargetAccountingLine {
-    @Id
     @Column(name = "FDOC_TRN_LN_NBR")
     private Integer financialDocumentTransactionLineNumber;
     @Transient

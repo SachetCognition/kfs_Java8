@@ -44,11 +44,6 @@
 				<value>classpath:org/kuali/kfs/module/bc/document/datadictionary/*.xml</value>
 			</list>
 		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/module/bc/ojb-bc.xml</value>
-			</list>
-		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>
 				<value>org/kuali/kfs/module/bc/dwr-bc.xml</value>

@@ -29,6 +29,8 @@ import org.hibernate.type.YesNoConverter;
 import org.kuali.kfs.sys.KFSConstants;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 
 /**
@@ -36,6 +38,11 @@ import org.kuali.rice.krad.bo.KualiCodeBase;
  */
 @Entity
 @Table(name = "CA_BALANCE_TYPE_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "FIN_BALANCE_TYP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "FIN_BALANCE_TYP_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 
 public class BalanceType extends KualiCodeBase implements MutableInactivatable {
 

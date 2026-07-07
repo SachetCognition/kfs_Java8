@@ -61,7 +61,7 @@ public class DisbursementVoucherPreConferenceDetail extends PersistableBusinessO
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "FDOC_NBR", referencedColumnName = "FDOC_NBR")
-    private List dvPreConferenceRegistrants;
+    private List<DisbursementVoucherPreConferenceRegistrant> dvPreConferenceRegistrants;
 
     /**
      * Default no-arg constructor.

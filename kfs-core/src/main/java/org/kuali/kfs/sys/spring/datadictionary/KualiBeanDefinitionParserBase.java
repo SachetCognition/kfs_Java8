@@ -18,7 +18,8 @@
  */
 package org.kuali.kfs.sys.spring.datadictionary;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.AbstractBeanDefinitionParser;
@@ -30,7 +31,7 @@ import org.w3c.dom.NodeList;
 
 public abstract class KualiBeanDefinitionParserBase extends AbstractBeanDefinitionParser {
 
-    private static Logger LOG = Logger.getLogger(KualiBeanDefinitionParserBase.class);
+    private static Logger LOG = LoggerFactory.getLogger(KualiBeanDefinitionParserBase.class);
     
     protected void parseEmbeddedPropertyElements(Element element, BeanDefinitionBuilder bean) {
         NodeList children = element.getChildNodes();
@@ -79,7 +80,7 @@ public abstract class KualiBeanDefinitionParserBase extends AbstractBeanDefiniti
             try {
                 builder = BeanDefinitionBuilder.rootBeanDefinition(Class.forName(beanClass));
             } catch (Exception ex) {
-                LOG.fatal( "Unable to resolve class given in class element of a " + element.getLocalName() + " element with id " + element.getAttribute("id"), ex );
+                LOG.error( "Unable to resolve class given in class element of a " + element.getLocalName() + " element with id " + element.getAttribute("id"), ex );
                 throw new RuntimeException(ex);
             }
         } else  if ( StringUtils.hasText(parent)) {

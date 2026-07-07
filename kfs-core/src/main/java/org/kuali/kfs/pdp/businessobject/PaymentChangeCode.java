@@ -28,9 +28,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 @Entity
 @Table(name = "PDP_PMT_CHG_CD_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "PMT_CHG_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "PMT_CHG_CD_DESC"))
+})
 public class PaymentChangeCode extends KualiCodeBase {
     
     public PaymentChangeCode() {

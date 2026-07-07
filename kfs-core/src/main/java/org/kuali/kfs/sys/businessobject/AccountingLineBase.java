@@ -27,7 +27,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.BalanceType;
 import org.kuali.kfs.coa.businessobject.Chart;
@@ -59,7 +60,7 @@ import jakarta.persistence.Transient;
  */
 @MappedSuperclass
 public abstract class AccountingLineBase extends PersistableBusinessObjectBase implements Serializable, AccountingLine, GeneralLedgerPendingEntrySourceDetail {
-    private static final Logger LOG = Logger.getLogger(AccountingLineBase.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccountingLineBase.class);
 
     @Id
     @Column(name = "FDOC_NBR")

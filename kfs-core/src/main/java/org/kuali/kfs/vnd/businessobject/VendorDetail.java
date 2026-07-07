@@ -28,7 +28,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.vnd.VendorPropertyConstants;
 import org.kuali.kfs.vnd.document.service.VendorService;
@@ -63,7 +64,7 @@ import org.hibernate.type.YesNoConverter;
 @Table(name = "PUR_VNDR_DTL_T")
 @IdClass(VendorDetailId.class)
 public class VendorDetail extends PersistableBusinessObjectBase implements VendorRoutingComparable {
-    private static Logger LOG = Logger.getLogger(VendorDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(VendorDetail.class);
 
     @Id
     @Column(name = "VNDR_HDR_GNRTD_ID")

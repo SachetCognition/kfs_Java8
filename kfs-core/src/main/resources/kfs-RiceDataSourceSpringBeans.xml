@@ -55,7 +55,8 @@
     </bean>
      -->
 
-	<bean id="kfsDataSourceXAPool" class="org.kuali.rice.core.framework.persistence.jdbc.datasource.XAPoolDataSource">
+	<!-- XAPool datasources require the removed JOTM transaction manager; kept lazy for reference only -->
+	<bean id="kfsDataSourceXAPool" class="org.kuali.rice.core.framework.persistence.jdbc.datasource.XAPoolDataSource" lazy-init="true">
 		<property name="transactionManager" ref="transactionManagerXAPool" />
 		<property name="driverClassName" value="${kfs.datasource.driver.name}" />
 		<property name="url" value="${kfs.datasource.url}" />
@@ -67,7 +68,7 @@
 		<property name="password" value="${kfs.datasource.password}" />
 	</bean>
 
-	<bean id="riceDataSourceXAPool" class="org.kuali.rice.core.framework.persistence.jdbc.datasource.XAPoolDataSource">
+	<bean id="riceDataSourceXAPool" class="org.kuali.rice.core.framework.persistence.jdbc.datasource.XAPoolDataSource" lazy-init="true">
 		<property name="transactionManager" ref="transactionManagerXAPool" />
 		<property name="driverClassName" value="${rice.datasource.driver.name}" />
 		<property name="url" value="${rice.datasource.url}" />

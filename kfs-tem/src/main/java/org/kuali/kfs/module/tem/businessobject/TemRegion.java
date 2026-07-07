@@ -19,6 +19,7 @@
 package org.kuali.kfs.module.tem.businessobject;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
@@ -29,6 +30,8 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 @Table(name="TEM_PER_DIEM_REGION_T")
 public class TemRegion extends PersistableBusinessObjectBase implements MutableInactivatable, Comparable<TemRegion> {
 
+    @Id
+    @Column(name = "REGION_CD")
     private String regionCode;
     private String regionName;
     private String tripTypeCode;

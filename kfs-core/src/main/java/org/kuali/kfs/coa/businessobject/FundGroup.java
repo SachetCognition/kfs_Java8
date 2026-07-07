@@ -29,12 +29,19 @@ import org.hibernate.type.YesNoConverter;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * Fund Group Business Object
  */
 @Entity
 @Table(name = "CA_FUND_GRP_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "FUND_GRP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "FUND_GRP_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "DOBJ_MAINT_CD_ACTV_IND"))
+})
 
 public class FundGroup extends KualiCodeBase implements MutableInactivatable {
     private static final long serialVersionUID = 6940405128416948259L;

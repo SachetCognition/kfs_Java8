@@ -93,7 +93,9 @@ public class PropertyLoadingFactoryBean implements FactoryBean<Properties> {
 
     private static void loadPropertyList(Properties props, String listPropertyName) {
         for (String propertyFileName : getBaseListProperty(listPropertyName)) {
-            loadProperties(props,propertyFileName);
+            if (StringUtils.isNotBlank(propertyFileName)) {
+                loadProperties(props,propertyFileName);
+            }
         }
     }
 

@@ -26,6 +26,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Convert;
 import org.hibernate.type.YesNoConverter;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * 
@@ -33,6 +35,10 @@ import org.hibernate.type.YesNoConverter;
  */
 @Entity
 @Table(name = "PDP_PAYEE_TYP_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "PAYEE_TYP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "PAYEE_TYP_DESC"))
+})
 public class PayeeType extends KualiCodeBase {
 
     @Column(name = "ACH_ELGBL_IND")

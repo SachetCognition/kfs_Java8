@@ -33,14 +33,14 @@ class SimpleTriggerDescriptorTest extends KfsUnitTestBase {
     void getTrigger_setsJobName() {
         SimpleTriggerDescriptor descriptor = createDescriptor();
         Trigger trigger = descriptor.getTrigger();
-        assertThat(trigger.getJobName()).isEqualTo("testJob");
+        assertThat(trigger.getJobKey().getName()).isEqualTo("testJob");
     }
 
     @Test
     void getTrigger_setsJobGroup() {
         SimpleTriggerDescriptor descriptor = createDescriptor();
         Trigger trigger = descriptor.getTrigger();
-        assertThat(trigger.getJobGroup()).isEqualTo("testGroup");
+        assertThat(trigger.getJobKey().getGroup()).isEqualTo("testGroup");
     }
 
     @Test

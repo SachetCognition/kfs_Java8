@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2005-2015 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:p="http://www.springframework.org/schema/p" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	<!-- CXF 2.x spring namespace handlers use Spring APIs removed in Spring 6;
+	     define the bus directly instead of via the cxf: namespace -->
+	<bean id="cxf" class="org.apache.cxf.bus.spring.SpringBus" destroy-method="shutdown" lazy-init="true"/>
+
+  
+
+	<bean id="rice.core.config.propertyPlaceholderConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		    p:properties="#{T(org.kuali.rice.core.api.config.property.ConfigContext).getCurrentContextConfig().getProperties()}" />
+
+	<bean id="rice.ksb.threadPool" class="org.kuali.rice.ksb.messaging.threadpool.KSBThreadPoolImpl" lazy-init="true" />
+	
+	<bean id="rice.ksb.scheduledThreadPool"
+        class="org.kuali.rice.ksb.messaging.threadpool.KSBScheduledThreadPoolExecutor"
+        lazy-init="true" />
+
+	<bean id="rice.ksb.instanceId" class="org.kuali.rice.ksb.impl.bus.InstanceIdFactoryBean"/>
+
+	<bean id="rice.ksb.serviceRegistry"
+        class="org.kuali.rice.ksb.impl.bus.LazyRemoteServiceRegistryConnector"
+        lazy-init="true"
+        p:cxfBus-ref="cxf" />
+	
+	<bean id="rice.ksb.diffCalculator"
+        class="org.kuali.rice.ksb.impl.bus.diff.ServiceRegistryDiffCalculatorImpl"
+        p:serviceRegistry-ref="rice.ksb.serviceRegistry" />
+
+	<bean id="rice.ksb.serviceBus"
+        class="org.kuali.rice.ksb.impl.bus.ServiceBusImpl"
+        lazy-init="true"
+        p:instanceId-ref="rice.ksb.instanceId"
+        p:diffCalculator-ref="rice.ksb.diffCalculator"
+        p:serviceRegistry-ref="rice.ksb.serviceRegistry"
+        p:serviceExportManager-ref="rice.ksb.serviceExportManager"
+        p:scheduledPool-ref="rice.ksb.scheduledThreadPool" />
+
+	<bean id="rice.ksb.serviceExportManager"
+        class="org.kuali.rice.ksb.messaging.serviceexporters.ServiceExportManagerImpl"
+        lazy-init="true"
+        p:cxfBus-ref="cxf"/>
+
+	<bean id="rice.ksb.javaSecurityManagementService"
+        class="org.kuali.rice.ksb.security.admin.service.impl.JavaSecurityManagementServiceImpl"
+        lazy-init="true" />
+
+	<bean id="rice.ksb.digitalSignatureService"
+        class="org.kuali.rice.ksb.security.service.impl.DigitalSignatureServiceImpl"
+        lazy-init="true" />
+
+</beans>

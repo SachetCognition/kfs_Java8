@@ -32,12 +32,19 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * 
  */
 @Entity
 @Table(name = "CA_PROJECT_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "PROJECT_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "PROJECT_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "PROJ_ACTIVE_CD"))
+})
 
 public class ProjectCode extends KualiCodeBase implements MutableInactivatable {
 

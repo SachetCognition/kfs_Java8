@@ -28,12 +28,19 @@ import org.hibernate.type.YesNoConverter;
 
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * Federal Funded Code Business Object
  */
 @Entity
 @Table(name = "CA_FED_FND_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "FIN_FED_FUNDED_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "FIN_FED_FND_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "DOBJ_MAINT_CD_ACTV_IND"))
+})
 
 public class FederalFundedCode extends KualiCodeBase implements MutableInactivatable {
 

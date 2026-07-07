@@ -32,6 +32,7 @@ import org.kuali.rice.krad.util.ObjectUtils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -56,8 +57,7 @@ public class LineItemReceivingItem extends ReceivingItemBase {
     private KualiDecimal itemReceivedPriorQuantity;
     private KualiDecimal itemReceivedToBeQuantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FDOC_NBR", insertable = false, updatable = false)
+    @Transient
     private LineItemReceivingDocument lineItemReceivingDocument;
 
     private static Logger LOG = LoggerFactory.getLogger(AccountsPayableDocumentBase.class);

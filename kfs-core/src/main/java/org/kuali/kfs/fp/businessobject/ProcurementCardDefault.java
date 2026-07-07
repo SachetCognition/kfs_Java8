@@ -36,6 +36,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumns;
 
@@ -116,15 +117,9 @@ public class ProcurementCardDefault extends PersistableBusinessObjectBase implem
     @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
     @JoinColumn(name = "SUB_ACCT_NBR", insertable = false, updatable = false)
     private SubAccount subAccount;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "FIN_OBJECT_CD", insertable = false, updatable = false)
+    @Transient
     private ObjectCode objectCode;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "ACCOUNT_NBR", insertable = false, updatable = false)
-    @JoinColumn(name = "FIN_OBJECT_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "FIN_SUB_OBJ_CD", insertable = false, updatable = false)
+    @Transient
     private SubObjectCode subObjectCode;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROJECT_CD", insertable = false, updatable = false)

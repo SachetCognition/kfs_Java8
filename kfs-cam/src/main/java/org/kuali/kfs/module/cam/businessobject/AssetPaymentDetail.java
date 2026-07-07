@@ -25,7 +25,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.kuali.kfs.coa.businessobject.Account;
 import org.kuali.kfs.coa.businessobject.AccountingPeriod;
 import org.kuali.kfs.module.cam.CamsPropertyConstants;
@@ -48,7 +49,7 @@ import org.hibernate.type.YesNoConverter;
  * documentation for when the parent hierarchy is migrated.
  */
 public class AssetPaymentDetail extends SourceAccountingLine {
-    private static Logger LOG = Logger.getLogger(AssetPaymentDetail.class);
+    private static Logger LOG = LoggerFactory.getLogger(AssetPaymentDetail.class);
 
     @Column(name = "EXPND_FS_ORIGIN_CD")
     private String expenditureFinancialSystemOriginationCode;

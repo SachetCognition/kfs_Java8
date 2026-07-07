@@ -51,7 +51,7 @@ public class IndirectCostRecoveryAccount extends PersistableBusinessObjectBase i
     private static Logger LOG = LoggerFactory.getLogger(IndirectCostRecoveryAccount.class);
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "CA_ICR_ACCT_GNRTD_ID")
     private Integer indirectCostRecoveryAccountGeneratedIdentifier;
 

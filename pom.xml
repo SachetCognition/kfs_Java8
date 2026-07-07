@@ -68,6 +68,9 @@
 
     <!-- Default empty argLine so ${argLine} resolves when JaCoCo is skipped -->
     <argLine></argLine>
+
+    <!-- Filterable alias: ${maven.build.timestamp} cannot be filtered directly (MRESOURCES-99) -->
+    <build.timestamp>${maven.build.timestamp}</build.timestamp>
     <!-- Shared JVM flags for surefire: add-opens for OJB CGLIB on Java 21 -->
     <surefire.jvm.args>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED</surefire.jvm.args>
 
@@ -418,6 +421,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -425,6 +436,14 @@
       <artifactId>rice-core-impl</artifactId>
       <version>${rice.version}</version>
       <exclusions>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>org.igniterealtime</groupId>
           <artifactId>smack</artifactId>
@@ -492,6 +511,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -515,6 +542,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -525,6 +560,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -538,6 +581,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -548,6 +599,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -561,6 +620,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <!-- rice-kew dependencies. -->
@@ -573,6 +640,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -583,6 +658,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -595,6 +678,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -605,6 +696,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -617,6 +716,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -627,6 +734,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -639,6 +754,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -650,6 +773,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -660,6 +791,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -687,6 +826,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -710,6 +857,14 @@
       <version>${rice.version}</version>
       <exclusions>
         <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
+        <exclusion>
           <groupId>javax.transaction</groupId>
           <artifactId>jta</artifactId>
         </exclusion>
@@ -732,6 +887,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -742,6 +905,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -754,6 +925,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -764,6 +943,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -776,6 +963,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -786,6 +981,14 @@
         <exclusion>
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -798,6 +1001,14 @@
           <groupId>xapool</groupId>
           <artifactId>xapool</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -805,6 +1016,14 @@
       <artifactId>rice-impl</artifactId>
       <version>${rice.version}</version>
       <exclusions>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-entitymanager</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>javax.resource</groupId>
           <artifactId>connector-api</artifactId>
@@ -1170,6 +1389,12 @@
       <groupId>jakarta.persistence</groupId>
       <artifactId>jakarta.persistence-api</artifactId>
       <version>${jakarta.persistence.version}</version>
+    </dependency>
+    <dependency>
+      <!-- javax JTA API: still required by Rice 2.1.10 / Bitronix; bridged to jakarta via JakartaJtaAdapter -->
+      <groupId>javax.transaction</groupId>
+      <artifactId>jta</artifactId>
+      <version>1.1</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate.orm</groupId>

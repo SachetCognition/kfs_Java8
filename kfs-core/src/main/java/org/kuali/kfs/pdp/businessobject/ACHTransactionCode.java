@@ -24,9 +24,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 @Entity
 @Table(name = "PDP_ACH_TRANS_CD_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "TRANS_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "TRANS_DESC"))
+})
 public class ACHTransactionCode extends KualiCodeBase {
     
     /**

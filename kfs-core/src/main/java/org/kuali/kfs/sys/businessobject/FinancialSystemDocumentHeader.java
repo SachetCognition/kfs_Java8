@@ -175,6 +175,7 @@ public class FinancialSystemDocumentHeader extends DocumentHeader {
      * Gets the documentFinalDate attribute.
      * @return Returns the documentFinalDate.
      */
+    @Transient
     public Date getDocumentFinalDate() {
         WorkflowDocument workflowDoc = this.getWorkflowDocument();
         if (workflowDoc == null || (workflowDoc.getDateFinalized() == null)) {
@@ -210,6 +211,7 @@ public class FinancialSystemDocumentHeader extends DocumentHeader {
      *
      * @return workflowDocument
      */
+    @Transient
     @Override
     public WorkflowDocument getWorkflowDocument() {
 

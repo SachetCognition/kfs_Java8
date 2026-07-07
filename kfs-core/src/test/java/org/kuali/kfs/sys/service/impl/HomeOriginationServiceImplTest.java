@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.kuali.kfs.sys.businessobject.HomeOrigination;
 import org.kuali.kfs.sys.context.KfsUnitTestBase;
-import org.kuali.rice.krad.service.BusinessObjectService;
+import org.kuali.kfs.sys.rice.KfsBusinessObjectService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 class HomeOriginationServiceImplTest extends KfsUnitTestBase {
 
     @Mock
-    private BusinessObjectService businessObjectService;
+    private KfsBusinessObjectService businessObjectService;
 
     @InjectMocks
     private HomeOriginationServiceImpl homeOriginationService;

@@ -29,12 +29,19 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * This class is used to represent a travel company code business object.
  */
 @Entity
 @Table(name = "FP_DV_TRVL_CO_NM_T")
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "DV_EXP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "DV_EXP_CO_NM")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 @IdClass(TravelCompanyCodeId.class)
 public class TravelCompanyCode extends KualiCodeBase implements MutableInactivatable {
     @ManyToOne(fetch = FetchType.LAZY)

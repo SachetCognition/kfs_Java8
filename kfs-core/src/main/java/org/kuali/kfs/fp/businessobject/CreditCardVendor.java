@@ -35,7 +35,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.JoinColumns;
+import jakarta.persistence.Transient;
 
 /**
  * 
@@ -77,14 +77,7 @@ public class CreditCardVendor extends PersistableBusinessObjectBase implements M
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
     private Chart incomeFinancialChartOfAccounts;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-
-        @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false),
-
-        @JoinColumn(name = "INC_FIN_OBJ_CD", insertable = false, updatable = false)
-
-    })
+    @Transient
     private ObjectCodeCurrent incomeFinancialObject;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
@@ -93,9 +86,7 @@ public class CreditCardVendor extends PersistableBusinessObjectBase implements M
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
     private Chart expenseFinancialChartOfAccounts;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "EXP_FIN_OBJ_CD", insertable = false, updatable = false)
+    @Transient
     private ObjectCodeCurrent expenseFinancialObject;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
@@ -114,17 +105,9 @@ public class CreditCardVendor extends PersistableBusinessObjectBase implements M
     @JoinColumn(name = "EXP_ACCT_NBR", insertable = false, updatable = false)
     @JoinColumn(name = "EXP_SUB_ACCT_NBR", insertable = false, updatable = false)
     private SubAccount expenseSubAccount;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INC_FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "INC_ACCT_NBR", insertable = false, updatable = false)
-    @JoinColumn(name = "INC_FIN_OBJ_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "INC_FIN_SUB_OBJ_CD", insertable = false, updatable = false)
+    @Transient
     private SubObjectCodeCurrent incomeFinancialSubObject;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EXP_FIN_COA_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "EXP_ACCT_NBR", insertable = false, updatable = false)
-    @JoinColumn(name = "EXP_FIN_OBJ_CD", insertable = false, updatable = false)
-    @JoinColumn(name = "EXP_FIN_SUB_OBJ_CD", insertable = false, updatable = false)
+    @Transient
     private SubObjectCodeCurrent expenseFinancialSubObject;
 
 

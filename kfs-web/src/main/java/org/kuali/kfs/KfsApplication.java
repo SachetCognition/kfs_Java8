@@ -18,13 +18,22 @@
  */
 package org.kuali.kfs;
 
+import org.kuali.kfs.sys.context.SpringContextForBatchRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = "org.kuali.kfs")
+/**
+ * Spring Boot entry point. Rice and the KFS service context are bootstrapped
+ * first (two-phase startup, mirroring the legacy KFSInitializeListener):
+ * kfs-startup.xml starts the Rice module configurers, which load the KFS
+ * spring files into the Rice-managed context accessible via SpringContext.
+ * The Boot context itself only hosts the web layer (controllers, Thymeleaf).
+ */
+@SpringBootApplication(scanBasePackages = "org.kuali.kfs.web")
 public class KfsApplication {
 
     public static void main(String[] args) {
+        SpringContextForBatchRunner.initializeKfs();
         SpringApplication.run(KfsApplication.class, args);
     }
 }

@@ -37,7 +37,6 @@ import org.kuali.kfs.sys.context.SpringContext;
 import org.kuali.kfs.sys.fixture.UserNameFixture;
 import org.kuali.rice.core.api.config.property.ConfigurationService;
 import org.kuali.rice.core.api.datetime.DateTimeService;
-import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -194,12 +193,9 @@ public class SchedulerServiceImplTest extends KualiTestBase {
     protected void scheduleJob(String groupName, String jobName, int startStep, int endStep, Date startTime, String requestorEmailAddress, Map<String,String> additionalJobData ) {
         Scheduler scheduler = (Scheduler) SpringContext.getService("scheduler");
         try {
-            JobDetail jobDetail = scheduler.getJobDetail(jobName, groupName);
+            JobDetail jobDetail = scheduler.getJobDetail(org.quartz.JobKey.jobKey(jobName, groupName));
             if ( jobDetail == null ) {
                 fail( "Unable to retrieve JobDetail object for " + groupName + " : " + jobName );
-            }
-            if ( jobDetail.getJobDataMap() == null ) {
-                jobDetail.setJobDataMap( new JobDataMap() );
             }
             jobDetail.getJobDataMap().put(SchedulerService.JOB_STATUS_PARAMETER, SchedulerService.SCHEDULED_JOB_STATUS_CODE);
             scheduler.addJob(jobDetail, true);

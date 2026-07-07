@@ -31,6 +31,7 @@ import org.kuali.rice.krad.bo.PersistableBusinessObjectBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -128,8 +129,7 @@ public class ElectronicInvoiceRejectItem extends PersistableBusinessObjectBase {
     @Convert(converter = YesNoConverter.class)
     private boolean catalogNumberAcceptIndicator = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INV_RJT_ID", insertable = false, updatable = false)
+    @Transient
     private ElectronicInvoiceRejectDocument electronicInvoiceRejectDocument;
 
 

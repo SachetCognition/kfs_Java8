@@ -189,8 +189,7 @@ public class Award extends PersistableBusinessObjectBase implements MutableInact
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CGAWD_STAT_CD", insertable = false, updatable = false)
     private AwardStatus awardStatus;
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = LetterOfCreditFund.class)
-    @JoinColumn(name = "CG_LTRCR_FND_CD", insertable = false, updatable = false)
+    @Transient
     protected ContractsAndGrantsLetterOfCreditFund letterOfCreditFund;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CG_GRANT_DESC_CD", insertable = false, updatable = false)

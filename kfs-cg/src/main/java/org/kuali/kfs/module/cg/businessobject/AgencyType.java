@@ -22,38 +22,34 @@ package org.kuali.kfs.module.cg.businessobject;
 import org.kuali.rice.core.api.mo.common.active.MutableInactivatable;
 import org.kuali.rice.krad.bo.KualiCodeBase;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.type.YesNoConverter;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 
 /**
  * Extends KualiCodeBase with no changes.
  */
 @Entity
 @Table(name = "CG_AGENCY_TYP_T")
-@Access(AccessType.PROPERTY)
+@AttributeOverrides({
+    @AttributeOverride(name = "code", column = @Column(name = "CG_AGENCY_TYP_CD")),
+    @AttributeOverride(name = "name", column = @Column(name = "CG_AGENCY_TYP_DESC")),
+    @AttributeOverride(name = "active", column = @Column(name = "ROW_ACTV_IND"))
+})
 public class AgencyType extends KualiCodeBase implements MutableInactivatable {
 
-    @Id
-    @Column(name = "CG_AGENCY_TYP_CD")
     @Override
     public String getCode() {
         return super.getCode();
     }
 
-    @Column(name = "CG_AGENCY_TYP_DESC")
     @Override
     public String getName() {
         return super.getName();
     }
 
-    @Column(name = "ROW_ACTV_IND")
-    @Convert(converter = YesNoConverter.class)
     @Override
     public boolean isActive() {
         return super.isActive();
