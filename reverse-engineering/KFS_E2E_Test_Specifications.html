@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KFS — E2E Test Specifications</title>
+<style>
+:root{--bg:#0f172a;--panel:#ffffff;--ink:#1e293b;--muted:#64748b;--accent:#2563eb;--accent2:#7c3aed;--border:#e2e8f0;--code:#f1f5f9;--th:#f8fafc;}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#eef2f7;line-height:1.6}
+header.hero{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#fff;padding:2.4rem 2rem;box-shadow:0 4px 18px rgba(0,0,0,.15)}
+header.hero h1{margin:0;font-size:1.9rem;font-weight:700}
+header.hero p{margin:.5rem 0 0;opacity:.9;font-size:.95rem}
+.wrap{max-width:1100px;margin:2rem auto;padding:0 1.2rem}
+.content{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:2.2rem 2.6rem;box-shadow:0 2px 12px rgba(15,23,42,.06)}
+h1,h2,h3,h4{color:#0f172a;line-height:1.25}
+h2{margin-top:2.2rem;padding-bottom:.35rem;border-bottom:2px solid var(--border)}
+h3{margin-top:1.6rem;color:#1d4ed8}
+h4{margin-top:1.2rem;color:#334155}
+code{background:var(--code);padding:.12rem .38rem;border-radius:5px;font-size:.86em;font-family:"SF Mono",Menlo,Consolas,monospace;color:#b91c1c}
+pre{background:#0f172a;color:#e2e8f0;padding:1rem;border-radius:10px;overflow:auto}
+pre code{background:transparent;color:inherit;padding:0}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.9rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:.5rem .7rem;text-align:left;vertical-align:top}
+th{background:var(--th);font-weight:600}
+tr:nth-child(even) td{background:#fafbfc}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:#eff6ff;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;color:#334155}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+.footer{max-width:1100px;margin:1rem auto 3rem;padding:0 1.2rem;color:var(--muted);font-size:.82rem;text-align:center}
+ul li{margin:.2rem 0}
+</style></head>
+<body>
+<header class="hero"><h1>KFS — E2E Test Specifications</h1><p>Kuali Financial System &middot; code-grounded reverse-engineering artifact &middot; generated 2026-07-07</p></header>
+<div class="wrap"><div class="content"><h1 id="kuali-financial-system-kfs-end-to-end-e2e-test-specifications">Kuali Financial System (KFS) — End-to-End (E2E) Test Specifications</h1>
+<blockquote>
+<p>Code-grounded E2E test suites with explicit, verifiable Given/When/Then acceptance criteria. Companion to <code>reverse-engineering/KFS_User_Requirements_Specification.md</code> (URS-###). Every acceptance criterion cites the source file and line range it verifies.</p>
+</blockquote>
+<hr />
+<h2 id="document-control">Document Control</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Title</strong></td>
+<td>KFS E2E Test Specifications with Acceptance Criteria</td>
+</tr>
+<tr>
+<td><strong>Version</strong></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><strong>Status</strong></td>
+<td>Draft for review</td>
+</tr>
+<tr>
+<td><strong>Date</strong></td>
+<td>2026-07-06</td>
+</tr>
+<tr>
+<td><strong>Scope</strong></td>
+<td>Financial document lifecycle, accounting-line balancing, conditional routing, allowed-value enforcement, authorization, financial correctness, exception paths.</td>
+</tr>
+<tr>
+<td><strong>Convention</strong></td>
+<td>Test IDs <code>TC-###</code>; each links URS ID(s); acceptance criteria in Given/When/Then. <code>nextAppDocStatus</code> values are the literal strings from the workflow XML.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="source-key-fileline-references">Source key (file:line references)</h3>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R3</td>
+<td><code>kfs-core/src/main/config/workflow/003_kfs_core_module_docs/FinancialProcessingTransactionalDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R4</td>
+<td><code>kfs-core/src/main/config/workflow/003_kfs_core_module_docs/ChartMaintenanceDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R5</td>
+<td><code>kfs-core/src/main/config/workflow/010_accounts_receivable/AccountsReceivableTransactionalDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R6</td>
+<td><code>kfs-core/src/main/config/workflow/120_travel_and_entertainment/TemTransactionalDocuments.xml</code></td>
+</tr>
+<tr>
+<td>R7</td>
+<td><code>kfs-core/src/main/resources/org/kuali/kfs/sys/document/validation/configuration/FinancialSystemValidators.xml</code></td>
+</tr>
+<tr>
+<td>DCB</td>
+<td><code>kfs-core/src/main/java/org/kuali/kfs/sys/document/validation/impl/DebitsAndCreditsBalanceValidation.java</code></td>
+</tr>
+<tr>
+<td>AVB</td>
+<td><code>kfs-core/src/main/java/org/kuali/kfs/fp/document/validation/impl/AuxiliaryVoucherAccountingLinesBalanceValidation.java</code></td>
+</tr>
+<tr>
+<td>JVA</td>
+<td><code>kfs-core/src/main/java/org/kuali/kfs/fp/document/validation/impl/JournalVoucherAccountingLineAmountValidation.java</code></td>
+</tr>
+<tr>
+<td>DDS</td>
+<td><code>kfs-core/src/main/java/org/kuali/kfs/sys/document/service/impl/DebitDeterminerServiceImpl.java</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="suite-a-financial-processing-document-lifecycle-routing">Suite A — Financial Processing document lifecycle &amp; routing</h2>
+<h3 id="tc-001-transfer-of-funds-tf-happy-path-lifecycle">TC-001 — Transfer of Funds (TF) happy-path lifecycle</h3>
+<ul>
+<li><strong>URS:</strong> URS-001, URS-003, URS-004, URS-011, URS-012</li>
+<li><strong>Preconditions:</strong> User is Fiscal Officer for the accounts used; TF is active (R3:810-811).</li>
+<li><strong>Test data:</strong> Balanced source/target lines (e.g. source $100.00 credit, target $100.00 debit) with allowed object codes.</li>
+<li><strong>Steps:</strong> initiate TF → add 1 source + 1 target line → save → route → approve at <code>Account</code> → <code>AccountingOrganizationHierarchy</code> → <code>SubFund</code> → <code>Award</code>.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a saved TF with ≥1 source and ≥1 target line, <strong>When</strong> routed, <strong>Then</strong> route validation passes (R7:151-168) and the document enters the <code>Account</code> node (R3:818-819).</li>
+<li><strong>Given</strong> approval at each role node in order, <strong>When</strong> the acting approver approves, <strong>Then</strong> the document advances <code>Account → AccountingOrganizationHierarchy → SubFund → Award</code> (R3:816-823) and finally reaches <code>PROCESSED</code>/<code>FINAL</code>.</li>
+<li><strong>Given</strong> balanced debits/credits, <strong>When</strong> routed, <strong>Then</strong> no <code>ERROR_DOCUMENT_BALANCE</code> is raised (DCB:75-79).</li>
+</ul>
+<h3 id="tc-002-distribution-of-income-expense-di-happy-path">TC-002 — Distribution of Income &amp; Expense (DI) happy path</h3>
+<ul>
+<li><strong>URS:</strong> URS-004, URS-011, URS-012</li>
+<li><strong>Preconditions:</strong> DI active (R3:392-393).</li>
+<li><strong>Steps:</strong> initiate → add balanced lines → route → approve <code>Account → AccountingOrganizationHierarchy → SubFund → Award</code>.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a balanced DI, <strong>When</strong> routed, <strong>Then</strong> node sequence equals R3:398-405 and final state is <code>FINAL</code>.</li>
+</ul>
+<h3 id="tc-003-budget-adjustment-ba-full-approval-branch-true">TC-003 — Budget Adjustment (BA) full-approval branch (TRUE)</h3>
+<ul>
+<li><strong>URS:</strong> URS-020</li>
+<li><strong>Preconditions:</strong> BA active (R3:306-308); accounting line has a non-zero base-budget amount.</li>
+<li><strong>Steps:</strong> initiate BA → add line with non-zero base amount → route.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a BA where <code>requiresFullApproval()</code> returns true (any non-zero base-budget amount — <code>BudgetAdjustmentDocument.java:944-946</code>), <strong>When</strong> the <code>RequiresFullApproval</code> split evaluates (R3:315), <strong>Then</strong> the <strong>True</strong> branch is taken and the document routes <code>Account → AccountingOrganizationHierarchy → SubFund → Award → JoinRequiresFullApproval</code> (R3:316-321).</li>
+<li><strong>Given</strong> node <code>RequiresFullApproval</code>, <strong>When</strong> <code>answerSplitNodeQuestion</code> is called, <strong>Then</strong> it delegates to <code>requiresFullApproval()</code> (<code>BudgetAdjustmentDocument.java:920-925</code>).</li>
+</ul>
+<h3 id="tc-004-budget-adjustment-ba-auto-approval-branch-false">TC-004 — Budget Adjustment (BA) auto-approval branch (FALSE)</h3>
+<ul>
+<li><strong>URS:</strong> URS-020</li>
+<li><strong>Preconditions:</strong> Single account, only current adjustments, non-C&amp;G fund, balanced current increase/decrease (per Javadoc <code>BudgetAdjustmentDocument.java:927-932</code>).</li>
+<li><strong>Steps:</strong> initiate BA meeting all auto-approval conditions → route.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> <code>requiresFullApproval()</code> returns false, <strong>When</strong> the split evaluates, <strong>Then</strong> the <strong>False</strong> branch (<code>Do Nothing</code> NoOp) is taken to <code>JoinRequiresFullApproval</code> (R3:322-325) and the document auto-approves without visiting role nodes.</li>
+</ul>
+<h3 id="tc-005-procurement-card-pcdo-auto-approval-branch">TC-005 — Procurement Card (PCDO) auto-approval branch</h3>
+<ul>
+<li><strong>URS:</strong> URS-021</li>
+<li><strong>Preconditions:</strong> PCDO active (R3:718-719).</li>
+<li><strong>Steps:</strong> initiate PCDO → route through <code>AccountFullEdit → Account → AccountingOrganizationHierarchy → SubFund → RequiresAutoApprovalNotification</code>.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> <code>isAutoApprovedIndicator()</code> is true, <strong>When</strong> the <code>RequiresAutoApprovalNotification</code> split evaluates (R3:731), <strong>Then</strong> the <strong>True</strong> branch routes to the <code>AutoApprove</code> role node then <code>joinOnAutoApproval</code> (R3:732-738).</li>
+<li><strong>Given</strong> <code>isAutoApprovedIndicator()</code> is false, <strong>When</strong> the split evaluates, <strong>Then</strong> the <strong>False</strong> branch (<code>NoOpAutoApproval</code>) is taken (R3:735-737).</li>
+<li><strong>Given</strong> split node name resolution, <strong>Then</strong> <code>answerSplitNodeQuestion</code> matches constant <code>IS_DOCUMENT_AUTO_APPROVED</code> = <code>"RequiresAutoApprovalNotification"</code> (<code>ProcurementCardDocument.java:277-280</code>, <code>KFSConstants.java:628</code>).</li>
+</ul>
+<hr />
+<h2 id="suite-b-negative-validation-cases">Suite B — Negative / validation cases</h2>
+<h3 id="tc-010-unbalanced-debitscredits-rejected-at-route">TC-010 — Unbalanced debits/credits rejected at route</h3>
+<ul>
+<li><strong>URS:</strong> URS-012</li>
+<li><strong>Preconditions:</strong> Standard accounting document (e.g. TF).</li>
+<li><strong>Test data:</strong> source $100.00, target $90.00 (unbalanced).</li>
+<li><strong>Steps:</strong> initiate → add unbalanced lines → route.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> debit total ≠ credit total, <strong>When</strong> routed, <strong>Then</strong> <code>DebitsAndCreditsBalanceValidation.validate</code> returns false and puts error <code>KFSKeyConstants.ERROR_DOCUMENT_BALANCE</code> on <code>ACCOUNTING_LINE_ERRORS</code> (DCB:75-79); the route is blocked.</li>
+<li><strong>Given</strong> offset entries, <strong>When</strong> balancing, <strong>Then</strong> entries with <code>isTransactionEntryOffsetIndicator()</code> are excluded from the sums (DCB:63-65).</li>
+</ul>
+<h3 id="tc-011-missing-required-sourcetarget-line-rejected">TC-011 — Missing required source/target line rejected</h3>
+<ul>
+<li><strong>URS:</strong> URS-011</li>
+<li><strong>Steps:</strong> initiate → add only a source line (no target) → route.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> zero target lines, <strong>When</strong> routed, <strong>Then</strong> the target <code>requiredAccountingLinesCountValidation</code> (minimumNumber=1) fails (R7:160-168) and the route is blocked.</li>
+</ul>
+<h3 id="tc-012-disallowed-object-code-type-fund-group-rejected-parameter-gated">TC-012 — Disallowed object code / type / fund group rejected (parameter-gated)</h3>
+<ul>
+<li><strong>URS:</strong> URS-030</li>
+<li><strong>Controlling parameters:</strong> <code>OBJECT_CODES</code>, <code>OBJECT_TYPES</code>, <code>FUND_GROUPS</code>, <code>SUB_FUND_GROUPS</code>.</li>
+<li><strong>Steps:</strong> add a line whose object code is excluded by the <code>OBJECT_CODES</code> parameter for that doc type → attempt add/route.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> an object code not permitted by parameter <code>OBJECT_CODES</code>, <strong>When</strong> the line is validated, <strong>Then</strong> <code>AccountingDocument-IsObjectCodeAllowed-DefaultValidation</code> fails (R7:96-100).</li>
+<li><strong>Given</strong> a fund group excluded by <code>FUND_GROUPS</code>, <strong>Then</strong> <code>IsFundGroupAllowed</code> fails checking <code>account.subFundGroup.fundGroupCode</code> (R7:108-112).</li>
+</ul>
+<h3 id="tc-013-auxiliary-voucher-zerounbalanced-amounts-rejected">TC-013 — Auxiliary Voucher zero/unbalanced amounts rejected</h3>
+<ul>
+<li><strong>URS:</strong> URS-013</li>
+<li><strong>Steps:</strong> initiate AV → add lines whose credit total ≠ debit total → route.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> AV credit total ≠ debit total, <strong>When</strong> routed, <strong>Then</strong> <code>AuxiliaryVoucherAccountingLinesBalanceValidation</code> returns false and raises <code>ERROR_DOCUMENT_BALANCE_CONSIDERING_CREDIT_AND_DEBIT_AMOUNTS</code> with <code>[credit, debit]</code> params (AVB:45-49).</li>
+<li><strong>Given</strong> AV, <strong>When</strong> routed, <strong>Then</strong> it uses one-sided line-count validation <code>requiredMinimumCount=1</code> (<code>AuxiliaryVoucherValidation.xml:36-43</code>).</li>
+</ul>
+<h3 id="tc-014-journal-voucher-zero-amount-rejected">TC-014 — Journal Voucher zero amount rejected</h3>
+<ul>
+<li><strong>URS:</strong> URS-014</li>
+<li><strong>Controlling parameter:</strong> <code>FP_BUDGET_BALANCE_TYPES</code>.</li>
+<li><strong>Steps:</strong> initiate JV → add a $0.00 line → validate.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> balance type with offset generation and a $0.00 amount, <strong>When</strong> validated, <strong>Then</strong> <code>ERROR_ZERO_OR_NEGATIVE_AMOUNT</code> is raised on both debit and credit paths (JVA:72-77).</li>
+<li><strong>Given</strong> a non-offset balance type and a $0.00 amount, <strong>Then</strong> <code>ERROR_ZERO_AMOUNT</code> is raised (JVA:92-94).</li>
+<li><strong>Given</strong> a negative amount and a non-budget balance type (not in <code>FP_BUDGET_BALANCE_TYPES</code>), <strong>Then</strong> <code>ERROR_NEGATIVE_NON_BUDGET_AMOUNTS</code> is raised (JVA:96-100, :113-116).</li>
+</ul>
+<h3 id="tc-015-journal-voucher-negative-amount-with-offset-balance-type-rejected">TC-015 — Journal Voucher negative amount with offset balance type rejected</h3>
+<ul>
+<li><strong>URS:</strong> URS-014</li>
+<li><strong>Steps:</strong> balance type generates offsets → add a negative line → validate.</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> <code>isFinancialOffsetGenerationIndicator()</code> true and a negative amount, <strong>When</strong> validated, <strong>Then</strong> <code>ERROR_ZERO_OR_NEGATIVE_AMOUNT</code> is raised against the debit or credit field based on debit/credit code (JVA:78-88).</li>
+</ul>
+<hr />
+<h2 id="suite-c-financial-correctness-debitcredit-determination">Suite C — Financial correctness (debit/credit determination)</h2>
+<h3 id="tc-020-debitcredit-by-object-type-and-section">TC-020 — Debit/credit by object type and section</h3>
+<ul>
+<li><strong>URS:</strong> URS-015</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a positive-amount <strong>source</strong> line of income/liability OR expense/asset type, <strong>When</strong> <code>isDebitConsideringSection</code> runs, <strong>Then</strong> the line is a <strong>credit</strong> (<code>isDebit = !isPositiveAmount</code>) (DDS:150-160).</li>
+<li><strong>Given</strong> a positive-amount <strong>target</strong> line, <strong>Then</strong> the line is a <strong>debit</strong> (<code>isDebit = isPositiveAmount</code>) (DDS:162-170).</li>
+<li><strong>Given</strong> a zero amount, <strong>Then</strong> <code>IllegalStateException</code> is thrown (DDS:146-148).</li>
+</ul>
+<h3 id="tc-021-positive-only-sectiontype-debit-rule">TC-021 — Positive-only section+type debit rule</h3>
+<ul>
+<li><strong>URS:</strong> URS-015</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a positive <strong>source</strong> line, <strong>Then</strong> debit iff income/liability (DDS:198-200).</li>
+<li><strong>Given</strong> a positive <strong>target</strong> line, <strong>Then</strong> debit iff expense/asset (DDS:208-210).</li>
+<li><strong>Given</strong> a non-positive amount on a non-error-correction document, <strong>Then</strong> <code>IllegalStateException</code> (DDS:190-193).</li>
+</ul>
+<h3 id="tc-022-gl-pending-entries-balance-to-the-cent">TC-022 — GL pending entries balance to the cent</h3>
+<ul>
+<li><strong>URS:</strong> URS-012, URS-050</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> an approved balanced document, <strong>When</strong> GLPEs are generated, <strong>Then</strong> <code>sum(debit) == sum(credit)</code> compared as <code>KualiDecimal</code> with <code>compareTo == 0</code> (DCB:58-75) — exact-to-the-cent equality, no floating error.</li>
+</ul>
+<h3 id="tc-023-error-correction-negative-amounts-permitted">TC-023 — Error-correction negative amounts permitted</h3>
+<ul>
+<li><strong>URS:</strong> URS-016</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> an error-correction document, <strong>When</strong> debit determination runs with a non-positive amount, <strong>Then</strong> no <code>IllegalStateException</code> is thrown (guard skipped — DDS:107, :191).</li>
+<li><strong>Given</strong> a document where error correction is disallowed, <strong>When</strong> <code>disallowErrorCorrectionDocumentCheck</code> runs on an error-correction, <strong>Then</strong> <code>IllegalStateException</code> is thrown (DDS:54-56).</li>
+</ul>
+<hr />
+<h2 id="suite-d-accounts-receivable-conditional-routing">Suite D — Accounts Receivable conditional routing</h2>
+<h3 id="tc-030-cash-control-electronic-payment-branch">TC-030 — Cash Control electronic-payment branch</h3>
+<ul>
+<li><strong>URS:</strong> URS-022</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a Cash Control (CTRL) associated with an electronic payment, <strong>When</strong> the <code>AssociatedWithElectronicPayment</code> split evaluates (R5:73-77), <strong>Then</strong> the <strong>True</strong> branch routes to the <code>ElectronicPayment</code> role node then <code>Join</code> (R5:53-59); the <code>Lockbox</code> node is <code>mandatoryRoute</code> (R5:69-71).</li>
+<li><strong>Given</strong> no electronic payment, <strong>Then</strong> the <strong>False</strong> branch (<code>NoOp</code>) is taken (R5:56-58).</li>
+</ul>
+<h3 id="tc-031-customer-invoice-writeoff-requires-approval-branch">TC-031 — Customer Invoice Writeoff requires-approval branch</h3>
+<ul>
+<li><strong>URS:</strong> URS-022</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> an INVW requiring approval, <strong>When</strong> the <code>RequiresApproval</code> split evaluates (R5:192-195), <strong>Then</strong> the <strong>True</strong> branch routes to the <code>Account</code> role node (R5:180-182); else <code>NoOp</code> (R5:183-185).</li>
+</ul>
+<h3 id="tc-032-customer-invoice-recurrence-branch">TC-032 — Customer Invoice recurrence branch</h3>
+<ul>
+<li><strong>URS:</strong> URS-022</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a recurring INV, <strong>When</strong> the <code>HasReccurence</code> split evaluates (R5:299-302), <strong>Then</strong> the <strong>True</strong> branch routes <code>Account → Recurrence → Join</code> (R5:286-289); else <code>NoOp</code> (R5:290-292).</li>
+</ul>
+<h3 id="tc-033-contracts-grants-invoice-funds-manager-branch-authorizer">TC-033 — Contracts &amp; Grants Invoice funds-manager branch + authorizer</h3>
+<ul>
+<li><strong>URS:</strong> URS-022, URS-041</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a CINV requiring approval, <strong>When</strong> the <code>RequiresApprovalSplit</code> evaluates (R5:372-375), <strong>Then</strong> the <strong>True</strong> branch routes to the <code>FundsManager</code> role node then <code>RequiresApprovalJoin</code> (R5:360-366); else <code>NoOpNode</code> (R5:363-365).</li>
+<li><strong>Given</strong> any CINV action, <strong>Then</strong> authorization is enforced by <code>ContractsGrantsInvoiceWorkflowDocumentAuthorizer</code> (R5:353-355).</li>
+</ul>
+<hr />
+<h2 id="suite-e-travel-authorization-multi-branch-routing-statuses">Suite E — Travel Authorization multi-branch routing &amp; statuses</h2>
+<h3 id="tc-040-ta-happy-path-with-full-status-transitions">TC-040 — TA happy path with full status transitions</h3>
+<ul>
+<li><strong>URS:</strong> URS-023</li>
+<li><strong>Acceptance criteria (status sequence, all from R6):</strong></li>
+<li><strong>Given</strong> a routed TA, <strong>Then</strong> initial status is <code>Awaiting Traveler Review</code> (R6:141-142).</li>
+<li><strong>When</strong> traveler review required is true, <strong>Then</strong> <code>Traveler</code> node → <code>Awaiting Fiscal Officer Review</code> (R6:144); else NoOp → same status (R6:147).</li>
+<li><strong>Then</strong> <code>Account</code> → <code>Awaiting Organization Review</code> (R6:151); Division split → <code>Awaiting Division Review</code> (R6:153).</li>
+<li><strong>Then</strong> Special Request → <code>Awaiting Special Request Review</code> / <code>Awaiting Risk Management Review</code> (R6:162-164); Risk Management → <code>Awaiting International Travel Review</code> (R6:171-173); International → <code>Awaiting Sub-Fund Review</code> (R6:180-182).</li>
+<li><strong>Then</strong> <code>SubFund</code> → <code>Awaiting Award Review</code> (R6:189); <code>Award</code> → <code>Awaiting Budget Review</code> (R6:190); Budget split → <code>Awaiting Separation Of Duties Review</code> (R6:191-193).</li>
+<li><strong>Then</strong> Separation of Duties → <code>Awaiting Travel Manager Review</code> (R6:200-202); Advance Requested True → <code>Travel</code>/<code>PaymentMethod</code> → <code>Awaiting Disbursement Method Review</code> → <code>Open For Reimbursement</code> (R6:209-215).</li>
+</ul>
+<h3 id="tc-041-ta-split-node-predicates">TC-041 — TA split-node predicates</h3>
+<ul>
+<li><strong>URS:</strong> URS-023</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> node <code>REQUIRES_TRAVELER_REVIEW</code>, <strong>Then</strong> <code>answerSplitNodeQuestion</code> returns <code>requiresTravelerApprovalRouting()</code> (<code>TravelRelocationDocument.java:295-296</code>).</li>
+<li><strong>Given</strong> node <code>SPECIAL_REQUEST</code> / <code>TAX_MANAGER_APPROVAL_REQUIRED</code> / <code>REQUIRES_BUDGET_REVIEW</code> / <code>SEPARATION_OF_DUTIES</code>, <strong>Then</strong> the corresponding boolean method is returned (<code>:298-308</code>).</li>
+<li><strong>Given</strong> an unknown node name, <strong>Then</strong> <code>UnsupportedOperationException</code> is thrown (<code>:310</code>).</li>
+</ul>
+<hr />
+<h2 id="suite-f-chart-maintenance-authorization">Suite F — Chart maintenance &amp; authorization</h2>
+<h3 id="tc-050-account-acct-maintenance-routing">TC-050 — Account (ACCT) maintenance routing</h3>
+<ul>
+<li><strong>URS:</strong> URS-004, URS-005, URS-040</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a routed ACCT maintenance document, <strong>Then</strong> it routes <code>Account → OrganizationHierarchy → SubFund → Award → Chart</code> (R4:535-543) with each node using <code>DataDictionaryQualifierResolver</code> (R4:548-586).</li>
+</ul>
+<h3 id="tc-051-unauthorized-approval-blocked-at-role-node">TC-051 — Unauthorized approval blocked at role node</h3>
+<ul>
+<li><strong>URS:</strong> URS-040</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a user whose KIM qualifiers do not match the document's chart/account/org, <strong>When</strong> they attempt to approve at a role node, <strong>Then</strong> the action is denied (qualifier resolution via <code>DataDictionaryQualifierResolver</code>, R3:337-339 / R4:548-550).</li>
+</ul>
+<h3 id="tc-052-field-level-edit-mode-masking-honored">TC-052 — Field-level edit mode / masking honored</h3>
+<ul>
+<li><strong>URS:</strong> URS-042</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a PCDO at a node other than <code>AccountFullEdit</code>, <strong>When</strong> a non-privileged user views the document, <strong>Then</strong> only permitted fields are editable (edit-mode gating via the <code>AccountFullEdit</code> role node, R3:726-727,744-748).</li>
+</ul>
+<hr />
+<h2 id="suite-g-exception-paths">Suite G — Exception paths</h2>
+<h3 id="tc-060-blanket-approval-bypasses-intermediate-validation">TC-060 — Blanket approval bypasses intermediate validation</h3>
+<ul>
+<li><strong>URS:</strong> URS-005</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> an authorized blanket-approver, <strong>When</strong> blanket approve is invoked, <strong>Then</strong> the blanket-approve validation composite runs no extra validations (R7:230-235) and the document reaches <code>FINAL</code>.</li>
+</ul>
+<h3 id="tc-061-disapprove-cancel-recall-ad-hoc">TC-061 — Disapprove / cancel / recall / ad-hoc</h3>
+<ul>
+<li><strong>URS:</strong> URS-006</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> a document in a routable state, <strong>When</strong> an approver disapproves, <strong>Then</strong> the document goes to <code>DISAPPROVED</code> and no GLPEs post.</li>
+<li><strong>Given</strong> an initiator, <strong>When</strong> they cancel a saved document, <strong>Then</strong> it goes to <code>CANCELED</code>.</li>
+<li><strong>Given</strong> an ad-hoc recipient added at the <code>AdHoc</code> node (present on all types, e.g. R3:330, R5:64, R6:222), <strong>Then</strong> the recipient receives an action request.</li>
+</ul>
+<h3 id="tc-062-save-runs-only-save-scoped-validation">TC-062 — Save runs only save-scoped validation</h3>
+<ul>
+<li><strong>URS:</strong> URS-002</li>
+<li><strong>Acceptance criteria:</strong></li>
+<li><strong>Given</strong> an in-progress document, <strong>When</strong> saved, <strong>Then</strong> only <code>accountingLineGroupTotalsUnchangedValidation</code> runs (R7:202-214) — balance/line-count are NOT enforced on save.</li>
+</ul>
+<hr />
+<h2 id="requirements-traceability-matrix-urs-tc-source">Requirements Traceability Matrix (URS ↔ TC ↔ source)</h2>
+<table>
+<thead>
+<tr>
+<th>URS</th>
+<th>Test cases</th>
+<th>Primary source (file:line)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URS-001</td>
+<td>TC-001</td>
+<td>R3:312-314</td>
+</tr>
+<tr>
+<td>URS-002</td>
+<td>TC-062</td>
+<td>R7:202-214</td>
+</tr>
+<tr>
+<td>URS-003</td>
+<td>TC-001, TC-010, TC-011</td>
+<td>R7:148-178</td>
+</tr>
+<tr>
+<td>URS-004</td>
+<td>TC-001, TC-002, TC-050</td>
+<td>R3:398-405; R4:535-543</td>
+</tr>
+<tr>
+<td>URS-005</td>
+<td>TC-060</td>
+<td>R7:230-235</td>
+</tr>
+<tr>
+<td>URS-006</td>
+<td>TC-061</td>
+<td>R3:330; R5:64; R6:222</td>
+</tr>
+<tr>
+<td>URS-010</td>
+<td>TC-012</td>
+<td>R7:237-288</td>
+</tr>
+<tr>
+<td>URS-011</td>
+<td>TC-001, TC-011</td>
+<td>R7:151-168</td>
+</tr>
+<tr>
+<td>URS-012</td>
+<td>TC-001, TC-010, TC-022</td>
+<td>DCB:57-81</td>
+</tr>
+<tr>
+<td>URS-013</td>
+<td>TC-013</td>
+<td>AVB:41-50</td>
+</tr>
+<tr>
+<td>URS-014</td>
+<td>TC-014, TC-015</td>
+<td>JVA:64-116</td>
+</tr>
+<tr>
+<td>URS-015</td>
+<td>TC-020, TC-021</td>
+<td>DDS:141-219</td>
+</tr>
+<tr>
+<td>URS-016</td>
+<td>TC-023</td>
+<td>DDS:50-59,104-113,190-193</td>
+</tr>
+<tr>
+<td>URS-020</td>
+<td>TC-003, TC-004</td>
+<td>R3:315-374; <code>BudgetAdjustmentDocument.java:920-949</code></td>
+</tr>
+<tr>
+<td>URS-021</td>
+<td>TC-005</td>
+<td>R3:730-767; <code>ProcurementCardDocument.java:277-302</code></td>
+</tr>
+<tr>
+<td>URS-022</td>
+<td>TC-030..033</td>
+<td>R5:52-388</td>
+</tr>
+<tr>
+<td>URS-023</td>
+<td>TC-040, TC-041</td>
+<td>R6:141-218; <code>TravelRelocationDocument.java:294-311</code></td>
+</tr>
+<tr>
+<td>URS-030</td>
+<td>TC-012</td>
+<td>R7:96-146</td>
+</tr>
+<tr>
+<td>URS-031</td>
+<td>TC-012</td>
+<td>R7:249-315</td>
+</tr>
+<tr>
+<td>URS-040</td>
+<td>TC-051, TC-050</td>
+<td>R3:337-339; R4:548-550</td>
+</tr>
+<tr>
+<td>URS-041</td>
+<td>TC-033</td>
+<td>R5:353-355</td>
+</tr>
+<tr>
+<td>URS-042</td>
+<td>TC-052</td>
+<td>R3:726-748</td>
+</tr>
+<tr>
+<td>URS-050</td>
+<td>TC-022</td>
+<td>DCB:52-61</td>
+</tr>
+<tr>
+<td>URS-051</td>
+<td>— (manual/report suite)</td>
+<td>R1 §8.5</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="open-questions">OPEN QUESTIONS</h2>
+<ul>
+<li><strong>OQ-1:</strong> Exact final <code>nextAppDocStatus</code>/<code>FINAL</code> string for FP documents (BA/TF/DI/PCDO) is not declared inline in R3 (only TEM declares <code>nextAppDocStatus</code> on nodes); confirm the terminal status names during rebuild.</li>
+<li><strong>OQ-2:</strong> <code>answerSplitNodeQuestion</code> for TA is implemented in <code>TravelRelocationDocument.java</code>; verify the <code>TravelAuthorizationDocument</code> override chain uses the same node constants for all eight TA splits (R6) before finalizing TC-040/041 assertions.</li>
+<li><strong>OQ-3:</strong> Some AR documents (APP, CCA, LCR, FBI) have trivial single-node route paths (R5:113-116,136-149,409-416,435-442); confirm whether these are intentionally auto-final or awaiting workflow that was never authored (possible dead config).</li>
+</ul></div></div>
+<div class="footer">Generated from KFS_E2E_Test_Specifications.md &middot; every requirement/criterion cites source file:line</div>
+</body></html>
