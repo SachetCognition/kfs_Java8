@@ -46,11 +46,6 @@
 				<value>classpath:org/kuali/kfs/coa/document/datadictionary/*.xml</value>
 			</list>
 		</property>
-		<property name="databaseRepositoryFilePaths">
-			<list>
-				<value>org/kuali/kfs/coa/ojb-coa.xml</value>
-			</list>
-		</property>
 		<property name="scriptConfigurationFilePaths">
 			<list>
 				<value>org/kuali/kfs/coa/dwr-coa.xml</value>

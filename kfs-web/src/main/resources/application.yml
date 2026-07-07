@@ -35,9 +35,18 @@ spring:
         order_inserts: true
         order_updates: true
 
+  liquibase:
+    enabled: false
+
+  quartz:
+    auto-startup: false
+
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration
+      - org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration
+      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
 
 management:
   endpoints:
