@@ -1,0 +1,121 @@
+/*
+ * The Kuali Financial System, a comprehensive financial management system for higher education.
+ *
+ * Copyright 2005-2014 The Kuali Foundation
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* ==========================================================================
+   KFS Rabobank-style inner screen theme.
+   Loaded after kr/css/kuali.css on document, lookup and inquiry screens.
+   Conservative, colour/typography-level overrides only: nothing is hidden
+   or repositioned, and all functional elements keep their behaviour.
+   ========================================================================== */
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	background-color: #f4f5f9;
+	color: #1a1a2e;
+}
+
+td, th, div, span, li, input, select, textarea {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+a, a:link, a:visited { color: #000066; }
+
+a:hover, a:active { color: #fd6400; }
+
+/* Screen title / header area */
+.headerarea, .headerarea-small {
+	background-color: #ffffff;
+	background-image: none;
+	border-bottom: 3px solid #fd6400;
+}
+
+#headerarea h1, #headerarea-small h1,
+.headerarea h1, .headerarea-small h1 {
+	color: #000066;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-weight: 700;
+}
+
+/* Tab headers on documents */
+.tabtable, .tab-container {
+	border-color: #e6e6ee;
+}
+
+td.tabtitle, .tabtitle {
+	background-color: #f4f5f9;
+}
+
+/* Data tables (lookup results, document tables) */
+table.datatable, .datatable, .datatable-100, .datatable-80 {
+	border-color: #e6e6ee;
+	background-color: #ffffff;
+}
+
+table.datatable th, .datatable th, th.sortable {
+	background-color: #000066;
+	background-image: none;
+	color: #ffffff;
+	border-color: #12026d;
+	font-weight: 600;
+}
+
+table.datatable th a, .datatable th a,
+table.datatable th a:link, .datatable th a:link,
+table.datatable th a:visited, .datatable th a:visited {
+	color: #ffffff;
+}
+
+table.datatable th a:hover, .datatable th a:hover { color: #ffd9bf; }
+
+table.datatable td, .datatable td {
+	border-color: #eeeef4;
+}
+
+/* Info lines and grid rows */
+td.infoline, #workarea td.infoline {
+	background-color: #fff1e8;
+	border-color: #f5d8c4;
+}
+
+/* Highlighted / alternating rows keep subtle neutral tones */
+tr.highlight td { background-color: #fff1e8; }
+
+/* Buttons rendered as plain inputs */
+input[type="submit"], input[type="button"] {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Text inputs and selects */
+input[type="text"], input[type="password"], select, textarea {
+	border: 1px solid #c9c9dc;
+	border-radius: 4px;
+	background-color: #ffffff;
+}
+
+input[type="text"]:focus, input[type="password"]:focus,
+select:focus, textarea:focus {
+	outline: none;
+	border-color: #fd6400;
+}
+
+/* Error and message areas keep their semantics, just cleaner tones */
+div.error, .errormessage { color: #b3261e; }
+
+/* Lookup / inquiry framing */
+#lookup, #inquiry { background-color: #f4f5f9; }
