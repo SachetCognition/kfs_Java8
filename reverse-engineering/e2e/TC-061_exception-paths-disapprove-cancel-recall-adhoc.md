@@ -233,6 +233,11 @@ happy-path route validation passes before we drive it into an exception state.
   `debitSum.compareTo(creditSum) == 0`.
 
 ### 6.2 Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
+- **Java 25 test-runtime specifics:**
+  - Toolchain: JUnit 5 (Jupiter) on JDK 25; Mockito 5.x with ByteBuddy ≥ 1.15 (class-file major version 69); Testcontainers ≥ 1.20; build on Gradle 9 / recent Maven compiler plugin with `--release 25`.
+  - Launch the test JVM with `--enable-native-access=ALL-UNNAMED` (plus any `--add-opens` still required by retained Rice/OJB code); the Security Manager is removed, so drop any `-Djava.security.manager` test config.
+  - Prefer virtual-thread executors for concurrent disapprove/cancel/recall/ad-hoc transitions; avoid `synchronized` around blocking calls to prevent carrier-thread pinning.
+  - Use records for fixtures and pattern-matching `switch` over sealed action-request / route-status types when asserting each exception transition.
 - Model the document lifecycle as a service-layer state machine; back GLPEs with a JPA entity
   and repository. Reproduce the invariant in a `@Transactional` `@SpringBootTest` slice:
   - a `WorkflowService.disapprove/cancel/recall` transition method mirroring

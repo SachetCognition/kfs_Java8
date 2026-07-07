@@ -261,6 +261,12 @@ public class TC060_BlanketApprovalBypassTest extends KualiTestBase {
 
 ### Modernization Target (Java 25 LTS / Spring Boot 4 / JPA)
 
+**Java 25 test-runtime specifics:**
+- Toolchain: JUnit 5 (Jupiter) on JDK 25; Mockito 5.x with ByteBuddy ≥ 1.15 (class-file major version 69); Testcontainers ≥ 1.20; build on Gradle 9 / recent Maven compiler plugin with `--release 25`.
+- Launch the test JVM with `--enable-native-access=ALL-UNNAMED` (plus any `--add-opens` still required by retained Rice/OJB code); the Security Manager is removed, so drop any `-Djava.security.manager` test config.
+- Prefer virtual-thread executors for concurrent route/approve steps; avoid `synchronized` around blocking calls to prevent carrier-thread pinning.
+- Use records for fixtures and pattern-matching `switch` over sealed document/route-node types when asserting node bypass.
+
 ```java
 @SpringBootTest
 @Transactional

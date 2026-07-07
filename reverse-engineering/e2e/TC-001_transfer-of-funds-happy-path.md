@@ -186,6 +186,11 @@ These are not the happy path but are gated by the same validators; include them 
 - **Negative tests:** build an unbalanced doc and assert `routeDocument` throws `ValidationException` / the MessageMap contains `ERROR_DOCUMENT_BALANCE`; build a source-only doc and assert `error.document.targetSectionNoAccountingLines`.
 
 ### 6b. Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
+- **Java 25 test-runtime specifics:**
+  - Toolchain: JUnit 5 (Jupiter) on JDK 25; Mockito 5.x with ByteBuddy ≥ 1.15 (must emit/consume class-file major version 69); Testcontainers ≥ 1.20 for the DB slice; build on Gradle 9 / recent Maven compiler plugin with `--release 25`.
+  - Launch the test JVM with `--enable-native-access=ALL-UNNAMED` (plus any `--add-opens` still required by retained Rice/OJB code) to avoid restricted native-access failures; the Security Manager is removed, so drop any `-Djava.security.manager` test config.
+  - Prefer virtual-thread executors (`Executors.newVirtualThreadPerTaskExecutor()`) when exercising concurrent route/approve steps; avoid `synchronized` around blocking calls to prevent carrier-thread pinning.
+  - Use records for fixtures (accounting-line / GLPE DTOs) and pattern-matching `switch` over sealed document/route-node types when asserting the node sequence.
 - Replace `KualiTestBase` with `@SpringBootTest` + Testcontainers (MySQL/Postgres); replace OJB BOs with JPA entities for `AccountingLine` / `GeneralLedgerPendingEntry`.
 - Model the route path as an explicit state machine / workflow service; assert the ordered transitions `Account → AccountingOrganizationHierarchy → SubFund → Award → FINAL` as enum states.
 - Port `DebitsAndCreditsBalanceValidation` as a `Validator` bean returning a typed `ValidationResult`; keep `KualiDecimal` semantics using `BigDecimal` with scale 2 and `compareTo(...) == 0` (never `equals`, to avoid scale mismatch false-negatives).

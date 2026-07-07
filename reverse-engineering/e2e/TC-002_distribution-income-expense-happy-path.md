@@ -279,6 +279,11 @@ Each step names the acting role and the exact `routeNode` (KEW node name) in eff
   `WorkflowDocumentService`/route-node history equals the AC-1 sequence.
 
 ### 7.2 Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
+- **Java 25 test-runtime specifics:**
+  - Toolchain: JUnit 5 (Jupiter) on JDK 25; Mockito 5.x with ByteBuddy ≥ 1.15 (class-file major version 69); Testcontainers ≥ 1.20; build on Gradle 9 / recent Maven compiler plugin with `--release 25`.
+  - Launch the test JVM with `--enable-native-access=ALL-UNNAMED` (plus any `--add-opens` still required by retained Rice/OJB code); the Security Manager is removed, so drop any `-Djava.security.manager` test config.
+  - Prefer virtual-thread executors (`Executors.newVirtualThreadPerTaskExecutor()`) for concurrent route/approve steps; avoid `synchronized` around blocking calls to prevent carrier-thread pinning.
+  - Use records for fixtures (accounting-line / GLPE DTOs) and pattern-matching `switch` over sealed document/route-node types when asserting the node sequence.
 - Replace `KualiTestBase` with `@SpringBootTest` + `@Transactional`; seed BOs via JPA repositories / Testcontainers.
 - Re-express the composite validation chain as an ordered list of validator beans (or a Spring
   `Validator` pipeline) that yields a structured error collection; the oracle asserts an error code
