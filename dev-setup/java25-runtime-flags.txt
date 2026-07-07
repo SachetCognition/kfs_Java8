@@ -1,0 +1,44 @@
+# JVM flags required to run KFS (WAR) on JDK 25
+#
+# The javax.*/legacy stack in KFS (Spring 3.1, Apache OJB, CGLIB, JOTM/CAROL,
+# XAPool, Quartz, JAXB) performs deep reflection and extends JDK-internal
+# classes that the module system closed off in JDK 9+. The flags below open
+# the required packages to the unnamed module (i.e. the webapp classpath).
+#
+# Usage:
+#   - tomcat7-maven-plugin (mvn tomcat7:run-war): export these via MAVEN_OPTS,
+#     since the plugin runs Tomcat inside the Maven JVM.
+#   - standalone Tomcat: add them to CATALINA_OPTS (bin/setenv.sh).
+#
+# Verified with: /usr/lib/jvm/java-25-openjdk-amd64 (OpenJDK 25.0.3)
+#
+# The flag set is identical to java21-runtime-flags.txt — no flags needed to be
+# added or removed for JDK 25.
+
+--add-opens java.base/java.lang=ALL-UNNAMED
+--add-opens java.base/java.lang.reflect=ALL-UNNAMED
+--add-opens java.base/java.lang.invoke=ALL-UNNAMED
+--add-opens java.base/java.util=ALL-UNNAMED
+--add-opens java.base/java.util.concurrent=ALL-UNNAMED
+--add-opens java.base/java.text=ALL-UNNAMED
+--add-opens java.base/java.math=ALL-UNNAMED
+--add-opens java.base/java.net=ALL-UNNAMED
+--add-opens java.base/java.io=ALL-UNNAMED
+--add-opens java.base/java.security=ALL-UNNAMED
+--add-opens java.base/sun.util.calendar=ALL-UNNAMED
+--add-opens java.sql/java.sql=ALL-UNNAMED
+--add-opens java.desktop/java.awt.font=ALL-UNNAMED
+--add-exports java.rmi/sun.rmi.server=ALL-UNNAMED
+--add-opens java.rmi/sun.rmi.server=ALL-UNNAMED
+--add-opens java.rmi/sun.rmi.transport=ALL-UNNAMED
+
+# Notes:
+# - The java.rmi flags are required by JOTM/CAROL (JUnicastServerRef extends
+#   sun.rmi.server.UnicastServerRef) used by the transactionManagerXAPool bean.
+# - -Djava.locale.providers=COMPAT is NOT available (the COMPAT locale
+#   provider was removed in JDK 21). Pass -Duser.language=en -Duser.country=US
+#   so CLDR locale resolution matches the formats KFS expects.
+# - JDK 25 removed the Security Manager (JEP 486): System.getSecurityManager()
+#   now always returns null and AccessController methods are no-op stubs.
+#   Rice/Tomcat 7/Quartz only ever query the Security Manager (they do not
+#   install one), so no changes or flags are required for it.
