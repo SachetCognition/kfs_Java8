@@ -19,10 +19,21 @@
 
 /* ==========================================================================
    KFS Rabobank-style inner screen theme.
-   Loaded after kr/css/kuali.css on document, lookup and inquiry screens.
-   Conservative, colour/typography-level overrides only: nothing is hidden
-   or repositioned, and all functional elements keep their behaviour.
+   Loaded after kr/css/kuali.css on every KNS screen (lookups, inquiries,
+   documents, maintenance, document search, action list).
+   Pure CSS overrides: no markup, ids, names or behaviour are changed.
+
+   Palette:
+     orange       #fd6400   (accents, primary actions, focus)
+     dark blue    #000066 / #12026d   (headings, table headers)
+     ink          #1a1a2e   body text
+     background   #f4f5f9
+     line         #e6e6ee / #eeeef4
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Base typography and canvas
+   -------------------------------------------------------------------------- */
 
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -30,19 +41,23 @@ body {
 	color: #1a1a2e;
 }
 
-td, th, div, span, li, input, select, textarea {
+li, td, div, th, table, span, pre, input, select, textarea, button {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-a, a:link, a:visited { color: #000066; }
+a, a:link { color: #000066; text-decoration: none; }
+a:visited { color: #12026d; text-decoration: none; }
+a:hover, a:active { color: #fd6400; text-decoration: underline; }
 
-a:hover, a:active { color: #fd6400; }
+/* --------------------------------------------------------------------------
+   2. Screen title / header area
+   -------------------------------------------------------------------------- */
 
-/* Screen title / header area */
 .headerarea, .headerarea-small {
 	background-color: #ffffff;
 	background-image: none;
 	border-bottom: 3px solid #fd6400;
+	box-shadow: 0 2px 8px rgba(18, 2, 109, 0.06);
 }
 
 #headerarea h1, #headerarea-small h1,
@@ -50,72 +65,470 @@ a:hover, a:active { color: #fd6400; }
 	color: #000066;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	font-weight: 700;
+	letter-spacing: 0.2px;
 }
 
-/* Tab headers on documents */
-.tabtable, .tab-container {
-	border-color: #e6e6ee;
+/* Document number / status / initiator grid in the header */
+#headerarea table {
+	height: auto;
+	border: none;
+	border-left: 1px solid #e6e6ee;
 }
 
-td.tabtitle, .tabtitle {
+#headerarea th {
 	background-color: #f4f5f9;
-}
-
-/* Data tables (lookup results, document tables) */
-table.datatable, .datatable, .datatable-100, .datatable-80 {
-	border-color: #e6e6ee;
-	background-color: #ffffff;
-}
-
-table.datatable th, .datatable th, th.sortable {
-	background-color: #000066;
 	background-image: none;
-	color: #ffffff;
-	border-color: #12026d;
+	color: #5c5c70;
 	font-weight: 600;
+	border-top: 1px solid #e6e6ee;
+	border-right: 1px solid #e6e6ee;
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
-table.datatable th a, .datatable th a,
-table.datatable th a:link, .datatable th a:link,
-table.datatable th a:visited, .datatable th a:visited {
-	color: #ffffff;
-}
-
-table.datatable th a:hover, .datatable th a:hover { color: #ffd9bf; }
-
-table.datatable td, .datatable td {
-	border-color: #eeeef4;
-}
-
-/* Info lines and grid rows */
-td.infoline, #workarea td.infoline {
-	background-color: #fff1e8;
-	border-color: #f5d8c4;
-}
-
-/* Highlighted / alternating rows keep subtle neutral tones */
-tr.highlight td { background-color: #fff1e8; }
-
-/* Buttons rendered as plain inputs */
-input[type="submit"], input[type="button"] {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-
-/* Text inputs and selects */
-input[type="text"], input[type="password"], select, textarea {
-	border: 1px solid #c9c9dc;
-	border-radius: 4px;
+#headerarea td {
 	background-color: #ffffff;
+	color: #1a1a2e;
+	border-top: 1px solid #e6e6ee;
+	border-right: 1px solid #e6e6ee;
+	padding: 4px 8px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Buttons
+   The KNS renders buttons as <input type="image"> gif images with a maroon
+   colour scheme. They cannot be replaced without markup changes, so they are
+   re-tinted towards the Rabobank orange with CSS filters and given a modern
+   pill silhouette. Hidden 0x0 "default action" pixels are unaffected.
+   -------------------------------------------------------------------------- */
+
+input[type="image"] {
+	filter: hue-rotate(24deg) saturate(2.4) contrast(0.95);
+	border-radius: 999px;
+	transition: filter 0.12s ease, box-shadow 0.12s ease, transform 0.06s ease;
+}
+
+input[type="image"]:hover {
+	filter: hue-rotate(24deg) saturate(3) brightness(1.06);
+	box-shadow: 0 2px 8px rgba(253, 100, 0, 0.25);
+}
+
+input[type="image"]:active { transform: translateY(1px); }
+
+/* lookup magnifier icons: keep them compact, no pill shadow */
+input[type="image"].tinybutton:hover { box-shadow: none; }
+
+/* Plain text buttons (rare) */
+input[type="submit"], input[type="button"], button {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	background-color: #ffffff;
+	color: #000066;
+	border: 1px solid #c9c9dc;
+	border-radius: 999px;
+	padding: 3px 12px;
+	cursor: pointer;
+	transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover, button:hover {
+	background-color: #fff1e8;
+	color: #e05800;
+	border-color: #fd6400;
+}
+
+/* --------------------------------------------------------------------------
+   4. Form inputs
+   -------------------------------------------------------------------------- */
+
+input[type="text"], input[type="password"], input[type="file"],
+select, textarea {
+	border: 1px solid #c9c9dc;
+	border-radius: 6px;
+	background-color: #ffffff;
+	color: #1a1a2e;
+	padding: 3px 6px;
+	transition: border-color 0.12s ease, box-shadow 0.12s ease;
 }
 
 input[type="text"]:focus, input[type="password"]:focus,
 select:focus, textarea:focus {
 	outline: none;
 	border-color: #fd6400;
+	box-shadow: 0 0 0 3px rgba(253, 100, 0, 0.15);
 }
 
-/* Error and message areas keep their semantics, just cleaner tones */
-div.error, .errormessage { color: #b3261e; }
+input[type="checkbox"], input[type="radio"] { accent-color: #fd6400; }
 
-/* Lookup / inquiry framing */
+/* --------------------------------------------------------------------------
+   5. Lookup and inquiry screens
+   -------------------------------------------------------------------------- */
+
 #lookup, #inquiry { background-color: #f4f5f9; }
+
+#lookup table {
+	border: 1px solid #e6e6ee;
+	border-radius: 10px;
+	border-collapse: separate;
+	border-spacing: 0;
+	overflow: hidden;
+	background-color: #ffffff;
+	box-shadow: 0 1px 2px rgba(18, 2, 109, 0.05), 0 4px 14px rgba(18, 2, 109, 0.06);
+}
+
+#lookup th {
+	background-color: #f8f9fc;
+	background-image: none;
+	color: #12026d;
+	font-weight: 600;
+	border-bottom: 1px solid #eeeef4;
+	border-left: none;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+#lookup td {
+	background-color: #ffffff;
+	border-bottom: 1px solid #eeeef4;
+	border-left: none;
+	padding: 5px 8px;
+}
+
+#lookup td.subhead, #workarea td.subhead {
+	background-color: #000066;
+	color: #ffffff;
+	font-weight: 600;
+	border: none;
+	letter-spacing: 0.3px;
+	padding: 5px 10px;
+}
+
+div.lookupcreatenew { padding-top: 14px; }
+
+/* --------------------------------------------------------------------------
+   6. Result tables (lookup results, doc search results)
+   -------------------------------------------------------------------------- */
+
+#row table, .result-table {
+	border: 1px solid #e6e6ee;
+	border-radius: 10px;
+	border-collapse: separate;
+	border-spacing: 0;
+	overflow: hidden;
+	background-color: #ffffff;
+	box-shadow: 0 1px 2px rgba(18, 2, 109, 0.05), 0 4px 14px rgba(18, 2, 109, 0.06);
+}
+
+#row th, #row th.sortable {
+	background-color: #000066;
+	background-image: none;
+	color: #ffffff;
+	font-weight: 600;
+	border-left: none;
+	border-bottom: 1px solid #12026d;
+	padding: 6px 8px;
+	white-space: nowrap;
+}
+
+#row th a, #row th a:link, #row th a:visited,
+#row th.sortable a, #row th.sortable a:link, #row th.sortable a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#row th a:hover, #row th.sortable a:hover { color: #ffd9bf; }
+
+/* keep the sort arrows visible on the dark header */
+#row th img { filter: brightness(10); }
+
+#row td {
+	border-left: none;
+	border-bottom: 1px solid #eeeef4;
+	padding: 5px 8px;
+}
+
+#row tr.odd { background-color: #ffffff; }
+#row tr.even { background-color: #f8f9fc; }
+#row tr.odd:hover, #row tr.even:hover, tbody.over td { background-color: #fff1e8; }
+
+td.infocell {
+	border-left: none;
+	border-bottom: 1px solid #eeeef4;
+	padding: 5px 8px;
+}
+
+td.numbercell {
+	border-left: none;
+	border-bottom: 1px solid #eeeef4;
+	padding: 5px 8px;
+}
+
+td.infoline, #workarea td.infoline {
+	background-image: none;
+	background-color: #f8f9fc;
+	border-left: none;
+	border-bottom: 1px solid #e6e6ee;
+	color: #12026d;
+	font-weight: 600;
+	padding: 5px 8px;
+}
+
+tr.highlight td { background-color: #fff1e8; }
+
+/* --------------------------------------------------------------------------
+   7. Document pages: tab containers
+   -------------------------------------------------------------------------- */
+
+/* tab title strips (Document Overview, Accounting Lines, Notes, ...) */
+#workarea td.tabtable1-left, #workarea td.tabtable1-left-colspan,
+#workarea td.tabtable2-left {
+	background-image: none;
+	background-color: #ffffff;
+	color: #000066;
+	font-weight: 700;
+	border-top: 1px solid #e6e6ee;
+	border-left: 4px solid #fd6400;
+	padding-left: 10px;
+}
+
+#workarea td.tabtable1-mid, #workarea td.tabtable1-mid1,
+#workarea td.tabtable2-mid {
+	background-image: none;
+	background-color: #ffffff;
+	color: #5c5c70;
+	border-top: 1px solid #e6e6ee;
+}
+
+#workarea td.tabtable1-right, #workarea td.tabtable2-right {
+	background-image: none;
+	background-color: #ffffff;
+	border-top: 1px solid #e6e6ee;
+	border-right: 1px solid #e6e6ee;
+	padding-right: 8px;
+}
+
+/* decorative bevel corner gifs on tab strips */
+#workarea td[class^="tabtable"] img { display: none; }
+
+/* tab body */
+#workarea div.tab-container, #workarea div.tab-container-error {
+	background-color: #ffffff;
+	background-image: none;
+	border-left: 1px solid #e6e6ee;
+	border-right: 1px solid #e6e6ee;
+	box-shadow: 0 4px 12px rgba(18, 2, 109, 0.04);
+}
+
+#workarea div.tab-container h3 {
+	background-color: #000066;
+	border-top: none;
+	border-bottom: none;
+	color: #ffffff;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	height: auto;
+	padding: 5px 0 5px 10px;
+	border-radius: 6px 6px 0 0;
+}
+
+#workarea td.tab-subhead, #workarea td.tab-subhead-import {
+	background-color: #eef0f8;
+	color: #12026d;
+	font-weight: 600;
+	border-bottom: 1px solid #e6e6ee;
+	border-left: none;
+	height: auto;
+	padding: 5px 8px;
+}
+
+div.innerTab-head {
+	background-color: #12026d;
+	border-bottom: none;
+	color: #ffffff;
+	font-weight: 600;
+	padding-top: 3px;
+}
+
+div.innerTab-container {
+	background-color: #ffffff;
+	background-image: none;
+}
+
+div.inner-subhead {
+	background-color: #eef0f8;
+	color: #12026d;
+	font-weight: 600;
+}
+
+/* tab footer strips (bevelled gif images) */
+#workarea table.b3, #workarea td.footer, #workarea td.footer-right {
+	background-image: none;
+	background-color: #f8f9fc;
+	border-bottom: 1px solid #e6e6ee;
+}
+
+.bl3, .br3, .t3, .tl3, .tr3 { background-image: none; background-color: transparent; }
+
+/* --------------------------------------------------------------------------
+   8. Document data grids (accounting lines and field tables)
+   -------------------------------------------------------------------------- */
+
+#workarea th, th.grid {
+	background-color: #f8f9fc;
+	background-image: none;
+	color: #12026d;
+	font-weight: 600;
+	border-bottom: 1px solid #e6e6ee;
+	border-left: 1px solid #eeeef4;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#workarea td, td.grid {
+	border-bottom: 1px solid #eeeef4;
+	border-left: 1px solid #f2f2f7;
+	padding: 4px;
+}
+
+#workarea table, table.grid, .datatable-100, .datatable-80, .datatable-center {
+	border-top: 1px solid #e6e6ee;
+	border-right: 1px solid #e6e6ee;
+	border-color: #e6e6ee;
+}
+
+#workarea td.total-line {
+	background-image: none;
+	background-color: #eef0f8;
+	color: #12026d;
+	border-bottom: 1px solid #e6e6ee;
+	border-left: none;
+}
+
+#workarea h2 { color: #000066; }
+
+#workarea td.error {
+	background-color: #fdecea;
+	border-left: 1px solid #f5c6c0;
+}
+
+/* --------------------------------------------------------------------------
+   9. Messages, errors and info banners
+   -------------------------------------------------------------------------- */
+
+.error { color: #b3261e; }
+
+div.error, .errormessage {
+	color: #b3261e;
+	background-color: #fdecea;
+	border: 1px solid #f5c6c0;
+	border-radius: 8px;
+	padding: 6px 12px;
+	display: inline-block;
+	margin: 2px 0;
+}
+
+.left-errmsg, .left-errmsg-tab { color: #b3261e; }
+
+#workarea div.message-container { color: #5c5c70; }
+
+/* --------------------------------------------------------------------------
+   10. Page tabs (document search tabs) and horizontal nav links
+   -------------------------------------------------------------------------- */
+
+#tabs dt {
+	background: none;
+	border-bottom: none;
+	margin-right: 6px;
+}
+
+#tabs dt.licurrent { background: none; border-bottom: none; }
+
+#tabs .tabright, #tabs .tabcurrent { background: none; }
+
+#tabs input {
+	background-color: #ffffff;
+	border: 1px solid #e6e6ee;
+	border-radius: 999px;
+	color: #000066;
+	font-weight: 600;
+	height: auto;
+	padding: 4px 14px;
+}
+
+#tabs dt.licurrent input, #tabs input.tabcurrent {
+	background-color: #000066;
+	color: #ffffff;
+	border-color: #000066;
+}
+
+#tabs input:hover {
+	color: #fd6400;
+	border-color: #fd6400;
+	background-color: #fff1e8;
+}
+
+.horz-links-bkgrnd {
+	background-color: transparent;
+	border-bottom: 1px solid #e6e6ee;
+	height: auto;
+	padding-bottom: 6px;
+}
+
+#horz-links input {
+	background-image: none;
+	background-color: #ffffff;
+	border: 1px solid #e6e6ee;
+	border-radius: 999px;
+	height: auto;
+	padding: 4px 14px;
+	margin-right: 4px;
+	color: #000066;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+#horz-links input:hover {
+	background-image: none;
+	background-color: #fff1e8;
+	color: #fd6400;
+	border-color: #fd6400;
+}
+
+#horz-links input.selected {
+	background-image: none;
+	background-color: #000066;
+	color: #ffffff;
+	border-color: #000066;
+}
+
+/* --------------------------------------------------------------------------
+   11. Misc: annotations, questions, backdoor, fine print
+   -------------------------------------------------------------------------- */
+
+td.annotate-t, td.annotate-b {
+	background-image: none;
+	background-color: #f8f9fc;
+	color: #12026d;
+}
+
+div.annotate-container {
+	background-image: none;
+	border-left: 1px solid #e6e6ee;
+}
+
+td.leftTd, td.rightTd {
+	border-color: #e6e6ee;
+	padding: 6px;
+}
+
+div.backdoor {
+	background-color: #fd6400;
+	border: none;
+	border-radius: 0 0 8px 8px;
+}
+
+.fineprint, a.fineprint:link, a.fineprint:visited { color: #8a8aa0; }
+
+span.subhead-right {
+	background-color: transparent;
+	color: #c9c9dc;
+}
