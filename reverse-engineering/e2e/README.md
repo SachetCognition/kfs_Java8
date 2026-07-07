@@ -1,6 +1,6 @@
 # KFS E2E Test Designs — URS Group 1 (Document Lifecycle)
 
-Implementation-ready, code-grounded E2E test-design documents for URS Group 1 (URS-001..006), expanded from the E2E Test Specification (`../KFS_E2E_Test_Specifications.md`). Each doc verifies its acceptance criteria against exact source `file:line` on `master` and includes legacy (`KualiTestBase`) and Spring Boot 3 / JPA automation notes.
+Implementation-ready, code-grounded E2E test-design documents for URS Group 1 (URS-001..006), expanded from the E2E Test Specification (`../KFS_E2E_Test_Specifications.md`). Each doc verifies its acceptance criteria against exact source `file:line` on `master` and includes legacy (`KualiTestBase`) and Java 25 LTS / Spring Boot 4 (Spring Framework 7) / JPA automation notes.
 
 | Test case | Document / concern | JIRA sub-task | File |
 |---|---|---|---|

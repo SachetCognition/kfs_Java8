@@ -219,7 +219,7 @@ All role nodes use `DataDictionaryQualifierResolver` with pre-approval activatio
   - For balance, also assert the GLPE oracle directly: sum non-offset `GL_CREDIT_CODE` vs debit `transactionLedgerEntryAmount` and compare with `KualiDecimal.compareTo`.
 - **AC-6**: drive `WorkflowDocument` approvals via test users at each node and assert `getRouteHeader().getDocRouteStatus()` transitions to `PROCESSED`/`FINAL`.
 
-### 8.2 Modernization target (Spring Boot 3 / JPA)
+### 8.2 Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
 - Model the chain as an ordered list of `Validation` beans keyed by a `DocumentEvent` enum (mirrors the DD `validationMap`), so the Save vs Route difference stays declarative and unit-testable.
 - Tests:
   - `@SpringBootTest` slice asserting `saveChain == [TotalsUnchangedValidation]`.

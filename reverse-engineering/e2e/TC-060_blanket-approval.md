@@ -259,7 +259,7 @@ public class TC060_BlanketApprovalBypassTest extends KualiTestBase {
 - Route log does NOT contain action requests for `Account`, `AccountingOrganizationHierarchy`, `SubFund`, `Award` nodes (can query via `KEWServiceLocator.getActionRequestService()`)
 - GLPE sums: `debitAmount.compareTo(creditAmount) == 0` (verified pre-blanket-approve)
 
-### Modernization Target (Spring Boot 3 / JPA)
+### Modernization Target (Java 25 LTS / Spring Boot 4 / JPA)
 
 ```java
 @SpringBootTest

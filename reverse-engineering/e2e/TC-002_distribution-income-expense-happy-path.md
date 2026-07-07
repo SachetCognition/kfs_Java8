@@ -278,7 +278,7 @@ Each step names the acting role and the exact `routeNode` (KEW node name) in eff
   `doc.getDocumentHeader().getWorkflowDocument().isFinal()`. Optionally assert node progression via
   `WorkflowDocumentService`/route-node history equals the AC-1 sequence.
 
-### 7.2 Modernization target (Spring Boot 3 / JPA)
+### 7.2 Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
 - Replace `KualiTestBase` with `@SpringBootTest` + `@Transactional`; seed BOs via JPA repositories / Testcontainers.
 - Re-express the composite validation chain as an ordered list of validator beans (or a Spring
   `Validator` pipeline) that yields a structured error collection; the oracle asserts an error code

@@ -54,7 +54,7 @@ PE, AV, DV, JV, AD, CR, CCR, CMD, FPYE).
 - KFS running against a populated Rice (KEW/KIM/KNS) + KFS schema (COA, object codes,
   parameters, KIM roles/responsibilities loaded).
 - Legacy integration harness: `KualiTestBase` (transactional, rolls back per test) plus the FP
-  document test utilities. The modernization target substitutes a Spring Boot 3 + JPA slice.
+  document test utilities. The modernization target substitutes a Java 25 LTS / Spring Boot 4 (Spring Framework 7) + JPA slice.
 
 ### 2.2 Representative document under test
 Primary happy-then-disapprove flow uses a **Transfer of Funds (TF)** document because it is a
@@ -232,7 +232,7 @@ happy-path route validation passes before we drive it into an exception state.
   entries, `DebitsAndCreditsBalanceValidation.java:63`) and assert
   `debitSum.compareTo(creditSum) == 0`.
 
-### 6.2 Modernization target (Spring Boot 3 / JPA)
+### 6.2 Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
 - Model the document lifecycle as a service-layer state machine; back GLPEs with a JPA entity
   and repository. Reproduce the invariant in a `@Transactional` `@SpringBootTest` slice:
   - a `WorkflowService.disapprove/cancel/recall` transition method mirroring

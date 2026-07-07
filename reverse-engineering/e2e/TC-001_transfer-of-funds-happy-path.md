@@ -185,7 +185,7 @@ These are not the happy path but are gated by the same validators; include them 
   - **GLPE debit vs credit:** call `GeneralLedgerPendingEntryService.generateGeneralLedgerPendingEntries(doc)` then sum `doc.getGeneralLedgerPendingEntries()` — skip offset entries (`isTransactionEntryOffsetIndicator()`), bucket by `GL_CREDIT_CODE`, assert `debitTotal.compareTo(creditTotal) == 0` (mirrors `DebitsAndCreditsBalanceValidation.java:62-75`).
 - **Negative tests:** build an unbalanced doc and assert `routeDocument` throws `ValidationException` / the MessageMap contains `ERROR_DOCUMENT_BALANCE`; build a source-only doc and assert `error.document.targetSectionNoAccountingLines`.
 
-### 6b. Modernization target (Spring Boot 3 / JPA)
+### 6b. Modernization target (Java 25 LTS / Spring Boot 4 / JPA)
 - Replace `KualiTestBase` with `@SpringBootTest` + Testcontainers (MySQL/Postgres); replace OJB BOs with JPA entities for `AccountingLine` / `GeneralLedgerPendingEntry`.
 - Model the route path as an explicit state machine / workflow service; assert the ordered transitions `Account → AccountingOrganizationHierarchy → SubFund → Award → FINAL` as enum states.
 - Port `DebitsAndCreditsBalanceValidation` as a `Validator` bean returning a typed `ValidationResult`; keep `KualiDecimal` semantics using `BigDecimal` with scale 2 and `compareTo(...) == 0` (never `equals`, to avoid scale mismatch false-negatives).
