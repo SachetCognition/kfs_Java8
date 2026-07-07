@@ -1,6 +1,6 @@
 # Kuali Financial System (KFS) — User Requirements Specification (URS)
 
-> Grounded reverse-engineering artifact for rebuilding KFS on a modern Java stack (Java 21 LTS / Spring Boot 3). Every requirement cites the exact source file and line range it was derived from. This URS is a companion to `reverse-engineering/KFS_Reverse_Engineering_Specification.md` and to `reverse-engineering/KFS_E2E_Test_Specifications.md`.
+> Grounded reverse-engineering artifact for rebuilding KFS on a modern Java stack (Java 25 LTS / Spring Boot 4 / Spring Framework 7). Every requirement cites the exact source file and line range it was derived from. This URS is a companion to `reverse-engineering/KFS_Reverse_Engineering_Specification.md` and to `reverse-engineering/KFS_E2E_Test_Specifications.md`.
 
 ---
 
@@ -14,7 +14,7 @@
 | **Author** | Reverse-engineering effort (automated, code-grounded) |
 | **Date** | 2026-07-06 |
 | **Source system** | Kuali Financial System 6.0.1-SNAPSHOT (`pom.xml:43`), Java 8, Kuali Rice 2.1.9 |
-| **Target system** | Java 21 LTS / Spring Boot 3, JPA, pluggable workflow engine |
+| **Target system** | Java 25 LTS / Spring Boot 4 (Spring Framework 7), JPA (Hibernate ORM 7 / Jakarta EE 11), pluggable workflow engine |
 | **Scope** | `kfs-core` (SYS/COA/GL/FP/PDP/VND/SEC) foundational document lifecycle, accounting-line entry & balancing, conditional approval routing, allowed-value enforcement, authorization, batch/GL posting, reporting; representative depth into `kfs-ar` and `kfs-tem`. |
 | **Method** | Direct filesystem reading of KEW workflow XML, Spring validation configuration XML, and `*Validation`/`*Document`/service Java classes. No reliance on partial index content. |
 
@@ -37,7 +37,7 @@
 
 ### 1.1 Purpose
 
-This URS captures **what users need the system to do**, expressed as numbered, traceable requirements derived from the as-is KFS implementation. It is written so that a modernization team can rebuild equivalent behavior on Spring Boot 3 without access to the running legacy system, and so that the companion E2E test specification can verify each requirement.
+This URS captures **what users need the system to do**, expressed as numbered, traceable requirements derived from the as-is KFS implementation. It is written so that a modernization team can rebuild equivalent behavior on Spring Boot 4 without access to the running legacy system, and so that the companion E2E test specification can verify each requirement.
 
 ### 1.2 System context
 
@@ -49,6 +49,17 @@ KFS is a document-centric financial ERP for higher education. Every financial or
 - **S** — Should have (important, strongly implied by the code)
 - **C** — Could have (config-driven or optional behavior)
 - **W** — Won't have this release (explicitly out of scope / legacy-only)
+
+### 1.4 Target-stack note (Java 25 LTS)
+
+The functional requirements in this document are **JVM-version-independent** — they describe business behavior (balancing, routing, allowed-value gating, authorization) derived from the legacy code, and are unaffected by the choice of target JDK. Only the *target-state* mapping changes when modernizing to **Java 25 LTS** rather than Java 21:
+
+- **Framework baseline:** Spring Boot 3.2 tops out at JDK 21 and 3.4/3.5 at JDK 23/24; full Java 25 support lands with **Spring Boot 4.0 / Spring Framework 7** (baseline JDK 17, tested on 25). Hence the target is Spring Boot 4, not a literal "Spring Boot 3" number bump. This cascades to **Hibernate ORM 7**, **Jakarta EE 11**, and JDK-25-capable build tooling (Gradle 9 / recent Maven compiler plugin; class-file major version 69).
+- **Legacy-library risk (the real migration hazard):** Apache OJB, CGLIB, and older ByteBuddy/Mockito/Kuali Rice lean on `sun.misc.Unsafe` (deprecated-for-removal in JDK 23+) and deep reflective access. The OJB→JPA rewrite removes most of this, but any retained dependency must have a JDK-25-capable release.
+- **Removed/disabled platform features:** the Security Manager is disabled/removed; finalization, dynamic agent loading, and unrestricted JNI now warn/fail (`--enable-native-access` required). Audit legacy code paths that rely on these.
+- **Runtime:** Generational ZGC is default — relevant to the batch/GL-posting performance profile.
+- **Additive opportunities (not requirements):** virtual threads for batch/GL and PDF generation; records for accounting-line/GLPE DTOs; sealed interfaces + pattern-matching `switch` to model document types and `SimpleBooleanSplitNode` branches; scoped values (finalized in JDK 25) for workflow/request context.
+- The `KualiDecimal → BigDecimal` (scale 2, `compareTo` never `equals`) money-correctness guidance is unchanged.
 
 ---
 
@@ -262,7 +273,7 @@ Requirement fields: **Statement**, **Rationale**, **Source** (file:line), **Prio
 
 ## 4. Traceability: URS → Source → Target-state component
 
-| URS | Source file(s) (file:line) | Target-state component (Spring Boot 3) |
+| URS | Source file(s) (file:line) | Target-state component (Spring Boot 4 / Spring Framework 7) |
 |---|---|---|
 | URS-001..006 | R3:312-330; R7:202-235 | Document lifecycle service + workflow engine adapter |
 | URS-010..016 | R7:148-388; `DebitsAndCreditsBalanceValidation.java`; `AuxiliaryVoucherAccountingLinesBalanceValidation.java`; `JournalVoucherAccountingLineAmountValidation.java`; `DebitDeterminerServiceImpl.java` | `AccountingLineValidationService`, `DebitDeterminerService` (domain service), `BigDecimal`/money type |
