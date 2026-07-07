@@ -2,7 +2,8 @@
 
 ## Building and running KFS
 
-KFS builds and runs on **Java 8** (the original path, unchanged) and on **JDK 21**.
+KFS builds and runs on **Java 8** (the original path, unchanged), on **JDK 21**,
+and on **JDK 25**.
 
 ### Java 8 (original path — unchanged)
 
@@ -72,3 +73,33 @@ For a standalone Tomcat deployment, put the same flags in
   schema. On JDK 21 the application initializes Spring, OJB, the JOTM/XAPool
   JTA stack and Quartz, and proceeds to the first database queries (e.g.
   `KRSB_SVC_DEF_T`), which is as far as startup can go without the schema.
+
+### JDK 25
+
+The JDK 21 setup works unchanged on JDK 25 (`/usr/lib/jvm/java-25-openjdk-amd64`,
+`openjdk-25-jdk` from apt). Build and run exactly as for JDK 21, but with
+`JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64` and the flags from
+[`java25-runtime-flags.txt`](java25-runtime-flags.txt) (same set as the JDK 21
+file):
+
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+mvn clean install -DskipTests -Denforcer.phase=none -Drice.version=2.1.10
+export MAVEN_OPTS="$(grep '^--' dev-setup/java25-runtime-flags.txt | tr '\n' ' ') -Duser.language=en -Duser.country=US"
+# plus e.g. -Dadditional.kfs.config.locations=$HOME/kfs-config/kfs-config.properties
+mvn tomcat7:run-war -pl kfs-web -Drice.version=2.1.10 -Denforcer.phase=none -DskipTests
+```
+
+JDK 25-specific notes:
+
+- No code or POM changes were needed beyond the JDK 21 work: javac 25 still
+  accepts `-source/-target 1.8` (with a deprecation warning), so bytecode stays
+  at 8 for the Spring 3.1/OJB ASM stack.
+- Security Manager removal (JEP 486) is harmless here: Rice/Tomcat 7/Quartz
+  only call `System.getSecurityManager()` (now always `null`) and never install
+  one.
+- Pass `-Duser.language=en -Duser.country=US` so CLDR locale resolution is
+  deterministic (the COMPAT provider is long gone).
+- Verified: portal loads and logs in `khuntley`, lookups return data
+  (OpenJDK 25.0.3, tomcat7-maven-plugin path).
