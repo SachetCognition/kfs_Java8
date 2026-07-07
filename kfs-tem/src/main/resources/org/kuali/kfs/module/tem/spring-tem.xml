@@ -855,8 +855,9 @@
 	</bean>
 	
 	<bean id="perDiemFieldsToPopulate" parent="perDiemFieldsToPopulate-parentBean"/>
-	<bean id="perDiemFieldsToPopulate-parentBean" abstract="true" class="java.util.ArrayList">
-		<constructor-arg>
+	<bean id="perDiemFieldsToPopulate-parentBean" abstract="true" class="org.springframework.beans.factory.config.ListFactoryBean">
+		<property name="targetListClass" value="java.util.ArrayList"/>
+		<property name="sourceList">
 			<list>
 				<value>primaryDestination.region.regionCode</value>
 				<value>primaryDestination.region.regionName</value>
@@ -885,7 +886,7 @@
 				<value>unusedValueHolder</value>
 				<value>unusedValueHolder</value>
 			</list>
-		</constructor-arg>
+		</property>
 	</bean>
 	
 	<bean id="taxableRamificationNotificationJob" parent="taxableRamificationNotificationJob-parentBean" />
@@ -1481,11 +1482,7 @@
     <!-- CSV Refactory Stuff -->
     <bean id="groupTravelerCsvRecordFactory" parent="groupTravelerCsvRecordFactory-parentBean" />
     <bean id="groupTravelerCsvRecordFactory-parentBean" abstract="true" class="org.kuali.kfs.module.tem.service.CsvRecordFactory">
-      <constructor-arg type="java.lang.Class">
-        <bean class="java.lang.Class" factory-method="forName">
-           <constructor-arg value="org.kuali.kfs.module.tem.businessobject.GroupTravelerCsvRecord"/>
-        </bean>
-      </constructor-arg>
+      <constructor-arg type="java.lang.Class" value="org.kuali.kfs.module.tem.businessobject.GroupTravelerCsvRecord"/>
       <property name="headerMap">
         <map>
             <entry key="groupTravelerType"    value="groupTravelerType" />

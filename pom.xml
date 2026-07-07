@@ -970,6 +970,13 @@
       <artifactId>javax.activation</artifactId>
       <version>${javax.activation.version}</version>
     </dependency>
+    <!-- Groovy 1.8 setAccessible on JDK dynamic proxy classes throws
+         InaccessibleObjectException on JDK 16+; 2.4.x skips inaccessible members -->
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.4.21</version>
+    </dependency>
     <!-- javax.rmi.PortableRemoteObject (CORBA, removed in JDK 11); required by JOTM -->
     <dependency>
       <groupId>org.glassfish.corba</groupId>
