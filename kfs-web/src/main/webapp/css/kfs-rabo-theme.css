@@ -1,0 +1,420 @@
+/*
+ * The Kuali Financial System, a comprehensive financial management system for higher education.
+ *
+ * Copyright 2005-2014 The Kuali Foundation
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* ==========================================================================
+   KFS Rabobank-style portal theme.
+   Loaded after portal.css; overrides the legacy portal shell styling only.
+   No functional markup, ids, names or URLs are affected.
+   ========================================================================== */
+
+:root {
+	--rabo-orange: #fd6400;
+	--rabo-orange-dark: #e05800;
+	--rabo-orange-soft: #fff1e8;
+	--rabo-blue: #000066;
+	--rabo-blue-deep: #12026d;
+	--rabo-ink: #1a1a2e;
+	--rabo-grey: #5c5c70;
+	--rabo-line: #e6e6ee;
+	--rabo-bg: #f4f5f9;
+	--rabo-card-shadow: 0 1px 2px rgba(18, 2, 109, 0.06), 0 4px 16px rgba(18, 2, 109, 0.08);
+	--rabo-radius: 12px;
+	--rabo-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+	background-color: #f4f5f9;
+	font-size: 78%;
+	color: #1a1a2e;
+}
+
+li, td, div, th, table, span, body, input, select, h1, h2, h3, a {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+a:link, a:visited {
+	color: #000066;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #fd6400;
+	text-decoration: underline;
+}
+
+a:active { color: #e05800; }
+
+/* --------------------------------------------------------------------------
+   Header / brand bar
+   -------------------------------------------------------------------------- */
+
+#header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	height: 64px;
+	background-color: #ffffff;
+	background-image: none;
+	border-bottom: 3px solid #fd6400;
+	box-shadow: 0 2px 8px rgba(18, 2, 109, 0.08);
+	color: #000066;
+	font-size: 1.45em;
+	font-weight: 700;
+	line-height: 64px;
+	padding-left: 24px;
+	letter-spacing: 0.2px;
+}
+
+/* legacy image logo replaced by the text brand */
+#header h1.kfs {
+	background-image: none;
+	position: static;
+	display: inline-block;
+	height: auto;
+	width: auto;
+}
+
+#header .brand-kfs {
+	display: inline;
+	color: #fd6400;
+	font-weight: 800;
+}
+
+#header .brand-divider {
+	display: inline;
+	color: #c9c9dc;
+	font-weight: 300;
+	padding: 0 10px;
+}
+
+#header .brand-name {
+	display: inline;
+	color: #000066;
+	font-weight: 700;
+}
+
+#feedback {
+	top: 12px;
+	right: 16px;
+	height: auto;
+	font-weight: 600;
+	z-index: 101;
+}
+
+#feedback a.portal_link,
+#feedback a.portal_link:link,
+#feedback a.portal_link:visited {
+	color: #5c5c70;
+	text-decoration: none;
+	font-size: 11px;
+	border: 1px solid #e6e6ee;
+	border-radius: 999px;
+	padding: 4px 12px;
+	background: #ffffff;
+}
+
+#feedback a.portal_link:hover {
+	color: #fd6400;
+	border-color: #fd6400;
+	background: #fff1e8;
+}
+
+#build {
+	top: 42px;
+	right: 16px;
+	height: auto;
+	color: #a5a5ba;
+	font-size: 10px;
+	z-index: 101;
+}
+
+/* --------------------------------------------------------------------------
+   Tab navigation (Main Menu / Maintenance / Administration)
+   -------------------------------------------------------------------------- */
+
+div.tabposition {
+	position: static;
+	width: auto;
+	padding: 14px 0 0 20px;
+	background: transparent;
+}
+
+#tabs {
+	float: none;
+	width: auto;
+	font-size: 100%;
+}
+
+#tabs ul {
+	display: block;
+	overflow: hidden;
+}
+
+#tabs li.red, #tabs li.green {
+	background: none;
+	margin: 0 6px 0 0;
+	padding: 0;
+	float: left;
+}
+
+#tabs a.red, #tabs a.green {
+	background: none;
+	float: left;
+	display: block;
+	padding: 8px 18px;
+	border-radius: 999px;
+	font-weight: 600;
+	font-size: 12px;
+	text-decoration: none;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* selected tab */
+#tabs a.red {
+	background-color: #000066;
+	color: #ffffff;
+}
+
+/* unselected tabs */
+#tabs a.green {
+	background-color: #ffffff;
+	color: #000066;
+	border: 1px solid #e6e6ee;
+}
+
+#tabs a:hover { text-decoration: none; }
+
+#tabs a.red:hover { background-color: #12026d; color: #ffffff; }
+
+#tabs a.green:hover {
+	background-color: #fff1e8;
+	border-color: #fd6400;
+	color: #fd6400;
+}
+
+/* --------------------------------------------------------------------------
+   Secondary bar: action list / doc search, login area
+   -------------------------------------------------------------------------- */
+
+div.header2 {
+	background-image: none;
+	background-color: transparent;
+	height: 30px;
+}
+
+div.header2-left, div.header2-left-focus {
+	background-image: none;
+	height: 30px;
+}
+
+div.breadcrumb-focus {
+	position: absolute;
+	left: auto;
+	right: 16px;
+	top: 76px;
+	z-index: 101;
+}
+
+div.breadcrumb-focus img {
+	border: 0;
+	vertical-align: middle;
+	opacity: 0.85;
+}
+
+div.breadcrumb-focus a:hover img { opacity: 1; }
+
+#login-info {
+	position: absolute;
+	top: 82px;
+	right: 230px;
+	height: auto;
+	color: #5c5c70;
+	font-size: 11px;
+	z-index: 101;
+}
+
+#login-info strong { font-weight: 600; }
+
+#search {
+	position: absolute;
+	top: 108px;
+	right: 16px;
+	height: auto;
+	background-image: none;
+	padding: 0;
+	color: #1a1a2e;
+	z-index: 101;
+}
+
+#search input.searchbox {
+	border: 1px solid #c9c9dc;
+	border-radius: 8px;
+	background-color: #ffffff;
+	font-size: 11px;
+	padding: 5px 10px;
+	color: #1a1a2e;
+}
+
+#search input.searchbox:focus {
+	outline: none;
+	border-color: #fd6400;
+	box-shadow: 0 0 0 3px rgba(253, 100, 0, 0.15);
+}
+
+#search input.go {
+	background-color: #fd6400;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 11px;
+	border: none;
+	border-radius: 999px;
+	padding: 6px 16px;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+#search input.go:hover { background-color: #e05800; }
+
+/* --------------------------------------------------------------------------
+   Content area: card-based menu groups
+   -------------------------------------------------------------------------- */
+
+#iframe_portlet_container_table {
+	background-color: #f4f5f9;
+	padding: 12px 8px;
+}
+
+#iframe_portlet_container_table tr { background-color: #f4f5f9 !important; }
+
+td.leftback-focus { background: transparent; }
+
+td.content {
+	padding: 6px 10px;
+	background: transparent;
+}
+
+.portlet {
+	background-color: #ffffff;
+	border: 1px solid #e6e6ee;
+	border-radius: 12px;
+	box-shadow: 0 1px 2px rgba(18, 2, 109, 0.06), 0 4px 16px rgba(18, 2, 109, 0.08);
+	margin-bottom: 18px;
+	overflow: hidden;
+}
+
+.portlet .header {
+	background: #ffffff;
+	border-bottom: 1px solid #e6e6ee;
+	border-left: 4px solid #fd6400;
+	padding: 12px 16px 10px 14px;
+}
+
+.portlet .header,
+.portlet .header h2,
+h2.portlet-title {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	color: #000066;
+	font-size: 14px;
+	font-weight: 700;
+	margin: 0;
+	letter-spacing: 0.2px;
+}
+
+.chan-contain { padding: 6px 16px 12px 16px; }
+
+.portlet div.body strong {
+	display: block;
+	color: #fd6400;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	margin: 12px 0 4px 0;
+}
+
+ul.chan {
+	list-style: none;
+	margin: 0 0 6px 0;
+	padding: 0;
+}
+
+ul.chan li {
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid #f2f2f7;
+}
+
+ul.chan li:last-child { border-bottom: none; }
+
+ul.chan li a.portal_link,
+ul.chan li a.portal_link:link,
+ul.chan li a.portal_link:visited {
+	display: block;
+	padding: 6px 8px;
+	border-radius: 6px;
+	color: #1a1a2e;
+	font-size: 12px;
+	text-decoration: none;
+	transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+ul.chan li a.portal_link:hover {
+	background-color: #fff1e8;
+	color: #e05800;
+	text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Iframe (portlet) container
+   -------------------------------------------------------------------------- */
+
+#iframe_portlet_container_div {
+	background-color: #f4f5f9;
+	padding: 12px 16px;
+}
+
+#embedded iframe {
+	background-color: #ffffff;
+	border: 1px solid #e6e6ee;
+	border-radius: 12px;
+	box-shadow: 0 1px 2px rgba(18, 2, 109, 0.06), 0 4px 16px rgba(18, 2, 109, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.footerbevel {
+	background-image: none;
+	height: 12px;
+	background-color: transparent;
+}
+
+#footer-copyright {
+	background-color: #000066;
+	background-image: none;
+	color: #c9c9dc;
+	font-size: 11px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+#footer-copyright a:link, #footer-copyright a:visited { color: #ffffff; }
+
+#footer-copyright a:hover { color: #fd6400; }

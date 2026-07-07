@@ -39,8 +39,8 @@ if (top.location != self.location) {
 </head>
 <body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
 
- <div id="header" title="Kuali Financial System"> 
-    <h1 class="kfs"></h1>Kuali Financial System
+ <div id="header" title="KFS Financial System"> 
+    <h1 class="kfs"></h1><span class="brand-kfs">KFS</span><span class="brand-divider">|</span><span class="brand-name">Financial System</span>
   </div>
   <div id="feedback">
   	<a class="portal_link" href="${ConfigProperties.feedback.link.url}" target="_blank" title="<bean:message key="app.feedback.linkText" />"><bean:message key="app.feedback.linkText" /></a>
